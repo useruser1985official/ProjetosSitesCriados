@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+
+<h2>Dicas com SQLite via Linha de Comando</h2>
+
+<p>Para criar um novo arquivo de banco de dados SQLite, digite isso:</p>
+
+<pre>
+<code>
+sqlite3 sistema.db3
+</code>
+</pre>
+
+<p>Para abrir o arquivo dentro do SQLite, faça assim:</p>
+
+<pre>
+<code>
+.open sistema.db3
+</code>
+</pre>
+
+<p>Depois, para criar tabelas via linha de comando, com esse arquivo aberto, dentro do SQLite, digite o código normalmente, por exemplo:</p>
+
+<pre>
+<code>
+create table contato (
+    id integer not null primary key autoincrement,
+    nome varchar(100) not null,
+    email varchar(70) unique not null,
+    mensagem text not null
+);
+</code>
+</pre>
+
+<p>Também podemos usar códigos insert, update e delete da mesma forma, no entanto os inserts pode ser colocados num arquivo SQL, por exemplo:</p>
+
+<pre>
+<code>
+-- Salve um arquivo com esse código
+insert into contato (nome, email, mensagem) values
+('Fulano', 'fulano@gmail.com', 'Exemplo de Mensagem'),
+('Beltrano', 'beltrano@gmail.com', 'Exemplo de Mensagem'),
+('Sicrano', 'sicrano@gmail.com', 'Exemplo de Mensagem');
+</code>
+</pre>
+
+<p>E depois, importar pra base de dados criada assim:</p>
+
+<pre>
+<code>
+sqlite3 sistema.db3 &lt; arquivo.sql
+</code>
+</pre>
+
+<p>Depois usamos o select normalmente, podemos fazer diretamente dentro do SQLite, ou usando o nome do arquivo assim:</p>
+
+<pre>
+<code>
+sqlite3 sistema.db3 "select * from contato"
+</code>
+</pre>
+
+<p>PS: Podemos usar outros comandos, como insert, update e delete também.</p>
+
+<p>Para exibir os nomes das colunas, dentro do SQLite, digite isso:</p>
+
+<pre>
+<code>
+.header on
+</code>
+</pre>
+
+<p>Para escrever a saída de dados num arquivo, dentro do SQLite, digite isso:</p>
+
+<pre>
+<code>
+.output resultado.txt
+
+select * from contato;
+</code>
+</pre>
+
+<p>Para fazer um backup dos dados, digite isso:</p>
+
+<pre>
+<code>
+sqlite3 sistema.db3 .dump &gt; backup.sql
+</code>
+</pre>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

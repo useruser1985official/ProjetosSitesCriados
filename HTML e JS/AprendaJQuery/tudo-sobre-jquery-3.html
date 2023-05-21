@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda JQuery</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda JQuery</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-jquery-1.html">Tudo sobre JQuery Parte 1!</a></li>
+                    <li><a href="tudo-sobre-jquery-2.html">Tudo sobre JQuery Parte 2!</a></li>
+                    <li><a href="tudo-sobre-jquery-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre JQuery Parte 3!</a></li>
+                    <li><a href="tudo-sobre-jquery-4.html">Tudo sobre JQuery Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre JQuery Parte 3</h2>
+
+<h3>Eventos de Teclado</h3>
+
+<p>Limpe a página anterior e o CSS dela, mantendo apenas a div com a class ex1, e nela crie um formulário, que terá três inputs de texto, cada um dentro de um label, um textarea também dentro de um label, e dois botões comuns com os nomes selecionar e enviar, dentro de um mesmo label.</p>
+
+<p>Coloque no CSS esse código:</p>
+
+<pre>
+<code>
+.ex1 {
+    width: 460px;
+    padding: 20px;
+    background-color: #1e90ff;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+}
+
+label {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f8f8ff;
+}
+
+input, textarea {
+    padding: 5px;
+    width: 450px;
+}
+</code>
+</pre>
+
+<p>Coloque uma classe com o nome place nos inputs e um title neles, para criarmos um placeholder via JQuery.</p>
+
+<p>O método each() pega o conteúdo do título e passa pro placeholder dos inputs, dessa forma:</p>
+
+<pre>
+<code>
+$(function() {
+    $(".place").each(function() {
+       var place = $(this).attr("title");
+       var input = $(this);
+       
+       input.val(place).css("background", "#fff").focus;
+    });
+});
+</code>
+</pre>
+
+<p>No caso acima, a variável place pegará o atributo selecionado do title, e a input pegará todos os dados do input, que serão setados pelo método val().</p>
+
+<p>Mas o código ainda não está completo, para funcionar corretamente, devemos fazer assim:</p>
+
+<pre>
+<code>
+$(function() {
+    $(".place").each(function() {
+        var place = $(this).attr("title");
+        var input = $(this);
+
+        input.val(place).css("color", "#888").focusin(function() {
+            input.css("color", "#000");
+            if(input.val() == place) {
+                input.val("");
+            }
+        }).focusout(function() {
+            if(input.val() == "") {
+                input.css("color", "#888");
+                input.val(place);
+            }
+        });
+    });
+});
+</code>
+</pre>
+
+<p>Agora, para verificar, use a tecla tab do teclado nos inputs.</p>
+
+<p>Agora, usaremos a keypress(), que dispara um evento ao pressionarmos uma tecla. Para isso, coloque a classe key no textarea (pode ser colocada mais de uma classe separada por espaço, seria algo tipo class="place key"), e ele pegará o que digitarmos nele e jogará na div, esse é o código JQuery:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    $(".key").keypress(function() {
+        ex.text($(this).val());
+    });
+});
+</code>
+</pre>
+
+<p>PS: Ele mostrará com uma tecla de atraso, já que são as teclas que disparam o evento, e não são todas as teclas que funcionam, como a Shift e a Ctrl. Nesse caso, substitua a keypress() por keydown().</p>
+
+<p>Para pegar o evento do teclado em tempo real, mude para keyup(), dessa forma:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    $(".key").keyup(function() {
+        ex.text($(this).val());
+    });
+});
+</code>
+</pre>
+
+<h3>Eventos de Formulário</h3>
+
+<p>Utilizando o mesmo formulário e os outros dados da aula anterior, vamos limpar também o javascript que estamos trabalhando.</p>
+
+<p>Coloque mais uma classe nos inputs e textarea chamadas ev1, ev2, ev3 e ev4, e no javascript, coloque esse código usando focus(), que fará  o title dos inputs seja escrito na nossa div criada, ao focar neles:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    $(".ev1").focus(function() {
+        ex.text($(this).attr("title"));
+    });
+});
+</code>
+</pre>
+
+<p>E podemos fazer com que ele automaticamente pule pro outro input, com o keyup(), ao escrever "pontocom", dessa forma</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    $(".ev1").focus(function() {
+        ex.text($(this).attr("title"));
+    }).keyup(function() {
+        if($(this).val() == "pontocom") {
+            $(".ev2").focus();
+        }
+    });
+});
+</code>
+</pre>
+
+<p>Para avisar quando saimos do campo (retiramos o foco), usamos o blur(), dessa forma:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    
+    $(".ev1").blur(function() {
+        ex.text("Saída do campo: " + $(this).attr("name"));
+    });
+});
+</code>
+</pre>
+
+<p>PS: Não esqueça de colocar os names em cada input e textarea.</p>
+
+<p>Temos também o método change(), que ao mudar alguma coisa no campo, disparará um evento. Esse é o código:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    
+    $(".ev1").change(function() {
+        ex.text("Campo alterado: " + $(this).val());
+    });
+});
+</code>
+</pre>
+
+<p>Para criarmos um botão que selecione o texto do textarea, vá no botão selecionar, coloque a classe selec, e no textarea coloque a class ev4, e no javascript coloque esse código, no qual usamos o select() para isso:</p>
+
+<pre>
+<code>
+$(function() {
+    $(".selec").click(function() {
+        $(".ev4").select();
+        $("form").submit(function() {
+            return false;
+        });
+    });
+});
+</code>
+</pre>
+
+<p>PS: No caso acima, o método submit() é pra bloquear o envio de formulário nesse botão.</p>
+
+<h3>Efeitos Básicos - Hide, Show, Toggle</h3>
+
+<p>Primeiro, como fizemos em outra aula, crie novamente a div com a class ex1 com o texto aguardando ação, mas faça os p escrito hide, show, toggle e o input text, com class ev1, ev2, ev3 e ev4, respectivamente. E com o mesmo CSS anterior (volte na aula Eventos de Mouse pra pegar).</p>
+
+<p>No javascript, vamos trabalhar primeiro com o hide(), que fará o texto aguardando ação desaparecer ao clicar, dessa forma:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    
+    $(".ev1").click(function() {
+        ex.hide("slow");
+    });
+});
+</code>
+</pre>
+
+<p>Para ele aparecer, trabalhamos da mesma forma com o show(), assim:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    
+    $(".ev1").click(function() {
+        ex.hide("slow");
+    });
+    
+    $(".ev2").click(function() {
+        ex.show("slow");
+    });
+});
+</code>
+</pre>
+
+<p>A função toggle() integra as duas acima, alternando entre as duas funções, dessa forma:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    
+    $(".ev1").click(function() {
+        ex.hide("slow");
+    });
+    
+    $(".ev2").click(function() {
+        ex.show("slow");
+    });
+    
+    $(".ev3").click(function() {
+        ex.toggle("slow");
+    });
+});
+</code>
+</pre>
+
+<p>PS: Podemos definir o tempo do hide(), do show() e do toggle() com slow, fast ou definir o tempo em milissegundos, sempre entre aspas.</p>
+
+<p>Podemos também usar o efeito animate(), ficando algo assim, assim:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    
+    $(".ev1").click(function() {
+        ex.hide("slow");
+    });
+    
+    $(".ev2").click(function() {
+        ex.show("slow");
+    });
+    
+    $(".ev3").click(function() {
+        ex.toggle("slow");
+    });
+    
+    $(".ev4").click(function() {
+        ex.animate({width: "-=50px", height: "+=250px"}, 2000);
+    });
+});
+</code>
+</pre>
+
+<p>Podemos usar o keyup() também, que pegará os dados que escrevermos no input, no caso, as palavras referentes as funções, assim:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    
+    $(".ev4").keyup(function() {
+        var texto = $(this).val();
+        
+        if(texto == "hide") {
+            ex.hide("slow");
+        }
+        else if(texto == "show") {
+            ex.show("slow");
+        }
+        else if(texto == "toggle") {
+            ex.toggle("slow");
+        }
+        else if(texto == "animate") {
+            ex.animate({width: "-=50px", height: "+=250px"}, 2000);
+        }
+    });
+});
+</code>
+</pre>
+
+<h3>Efeitos de Desvanecimento</h3>
+
+<p>No HTML, deixe só a div com class ex1, e crie um input do tipo button e nome botão com class ev1. No javascript coloque esse código:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    var button = $(":input.ev1");
+    
+    button.click(function() {
+        ex.fadeOut("slow");
+    });
+});
+</code>
+</pre>
+
+<p>O efeito acima, faz o texto desaparecer aos poucos, para ele aparecer novamente, podemos chamar outro evento integrado, assim:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    var button = $(":input.ev1");
+    
+    button.click(function() {
+        ex.fadeOut("slow");
+    }).dblclick(function() {
+        ex.fadeIn("slow");
+    });
+});
+</code>
+</pre>
+
+<p>Para trabalharmos com a opacidade do elemento, usaremos a função fadeTo(), junto com o número da opacidade, do 0 ao 1, dessa forma:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    var button = $(":input.ev1");
+    
+    button.click(function() {
+        ex.fadeTo("slow", 0.5);
+    });
+});
+</code>
+</pre>
+
+<p>Temos também o fadeToggle(), que alterna entre aparecer e desaparecer, dessa forma:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    var button = $(":input.ev1");
+    
+    button.click(function() {
+        ex.fadeToggle("slow");
+    });
+});
+</code>
+</pre>
+
+<p>Copie a div com os mesmos dados, só que com a classe ex2, e coloque no CSS a indicação dela também.</p>
+
+<p>O efeito que queremos fazer, é o botão disparar um evento na div ex1, e depois de terminar esse, dispare na div ex2, para isso, fazemos assim:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    var ex2 = $(".ex2");
+    var button = $(":input.ev1");
+    
+    button.click(function() {
+        ex.fadeTo(3000, 0.6, function() {
+            ex2.fadeTo("slow", 0.3);
+        });
+    });
+});
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-jquery-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-jquery-4.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

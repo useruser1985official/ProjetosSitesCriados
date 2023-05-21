@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Javascript</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Javascript</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-javascript-1.html">Tudo sobre Javascript Parte 1!</a></li>
+                    <li><a href="tudo-sobre-javascript-2.html">Tudo sobre Javascript Parte 2!</a></li>
+                    <li><a href="tudo-sobre-javascript-3.html">Tudo sobre Javascript Parte 3!</a></li>
+                    <li><a href="tudo-sobre-javascript-4.html">Tudo sobre Javascript Parte 4!</a></li>
+                    <li><a href="tudo-sobre-javascript-5.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Javascript Parte 5!</a></li>
+                    <li><a href="tudo-sobre-javascript-6.html">Tudo sobre Javascript Parte 6!</a></li>
+                    <li><a href="tudo-sobre-javascript-7.html">Tudo sobre Javascript Parte 7!</a></li>
+                    <li><a href="tudo-sobre-javascript-8.html">Tudo sobre Javascript Parte 8!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Javascript Parte 5</h2>
+
+<h3>Funções - Introdução</h3>
+
+<p>Funções são conjuntos de instruções que podem ser executadas como um único comando. Permitem reuso de código, o que poupa linhas de código no script. Podem receber parâmetros e retornar valores, ou executar uma tarefa.</p>
+
+<p>Para uma função ser utilizada, primeiro precisamos definir ela. Para criar uma função usamos o comando <code>function</code>, a função tem que se chamada para funcionar, como podem ver:</p>
+
+<pre>
+<code>
+function aviso() {
+    alert("Mensagem chamada em função!");
+}
+aviso();
+</code>
+</pre>
+
+<p>Veja outro exemplo:</p>
+
+<pre>
+<code>
+function saudacao(nome) {
+    alert("Bom dia, " + nome);
+}
+var cham = prompt("Digite seu nome na caixa abaixo!");
+saudacao(cham);
+</code>
+</pre>
+
+<p>Uma função também pode retornar um valor ao script, usamos a palavra-chave <code>return</code> para isso, como no exemplo:</p>
+
+<pre>
+<code>
+var tens = prompt("Entre com o valor da tensão!", "0");
+var resis = prompt("Entre com o valor da resistência!", "0");
+function calcula(t, r) {
+    let res = t / r;
+    return res;
+}
+var corr = calcula(tens, resis);
+document.write("O valor da corrente é " + corr + " A.");
+</code>
+</pre>
+
+<p>Invocações de funções em Javascript costumam ser muito utilizadas em eventos como o onclick.</p>
+
+<h3>Funções - Passagens de Parâmetros</h3>
+
+<p>Uma função pode se comunicar com o programa onde ela é executada por meio de argumentos passados a ela, assim com o valor retornado pela função.</p>
+
+<p>Argumentos são passados a uma função usando parâmetros, que são nomes declarados no cabecalho da função.</p>
+
+<p>Parâmetros de tipos primitivos, como strings, numéricos ou booleanos, são passados por valor, o que significa que se o argumento for dentro da funçãom essa alteração não se reflete na variável do programa original (fora da função).</p>
+
+<p>Objetos já são passados por referência, assim sendo, se a alteração for reakuzada no objeto dentro da função, a alteração irá se propagar para o objeto fora da função, no programa chamado.</p>
+
+<p>Veja um exemplo de passagem de parâmetros:</p>
+
+<pre>
+<code>
+function saudacao(nome) {
+    alert("Bom dia, " + nome);
+}
+var cham = prompt("Digite seu nome na caixa abaixo!");
+saudacao(cham);
+</code>
+</pre>
+
+<p>Na invocação pode ser usado qualquer tipo de dado, mesmo não sendo variável, por exemplo:</p>
+
+<pre>
+<code>
+function soma(x, y) {
+    let res = x + y;
+    alert("A soma é " + res);
+}
+soma(15, 10);
+</code>
+</pre>
+
+<p>PS: As funções também podem ser inicializadas dessa forma, que serão substituidas pelos dados passados pela invocação:</p>
+
+<pre>
+<code>
+function soma(x = 0, y = 0) {
+    let res = x + y;
+    alert("A soma é " + res);
+}
+soma(15, 10);
+soma(20);
+soma();
+</code>
+</pre>
+
+<p>As funções também podem ser chamadas mais de uma vez no mesmo script, com parâmetros diferentes ou mesmo sem eles.</p>
+
+<p>Nesse exemplo, a função recebe dois argumentos, uma string (tipo primitivo) e um array (objeto). Os valores são modificados dentro da função, e então verificamos se as variáveis originais também são modificadas ou não.</p>
+
+<pre>
+<code>
+function valorRef(strVar, arrVar) {
+    strVar = "String Modificada";
+    arrVar[0] = "Array Modificado";
+}
+var tex = "Valor Original";
+var vet = ["Valor Original"];
+document.write("String antes de chamar a função: " + tex + ".&lt;br/&gt;");
+document.write("Array antes de chamar a função: " + vet[0] + ".&lt;br/&gt;");
+// Chamando a função!
+valorRef(tex, vet);
+document.write("String após chamar a função: " + tex + ".&lt;br/&gt;");
+document.write("Array após chamar a função: " + vet[0] + ".&lt;br/&gt;");
+</code>
+</pre>
+
+<p>No código acima, apenas o array é alterado.</p>
+
+<p>Nesse exemplo, podemos ver que é possível passar múltiplos parâmetros:</p>
+
+<pre>
+<code>
+function saudacao(nome, sobrenome) {
+    alert("Bom dia, " + nome + " " + sobrenome);
+}
+var cham1 = prompt("Digite seu nome na caixa abaixo!");
+var cham2 = prompt("Digite seu sobrenome na caixa abaixo!");
+saudacao(cham1, cham2);
+</code>
+</pre>
+
+<p>PS: Nos parâmetros também podemos passar arrays, simplesmente passando a variável, algo tipo <code>funcao(vetorpassado)</code>.</p>
+
+<h3>Funções - Retornando Valores</h3>
+
+<p>Uma função pode ou não retornar um valor ao programa chamador da invocação. Caso seja retornado um valor, usamos a instrução <code>return</code> em um ponto apropriado do script.</p>
+
+<p>Quando a instrução returno é encontrada, o processamento do código da função para neste ponto, e retorna o valor (e o controle) para o chamador. Podemos ter mais de uma instrução return em uma função.</p>
+
+<p>Veja esse exemplo, que usamos pra calcular o quadrado de um número:</p>
+
+<pre>
+<code>
+function quadr(num) {
+    let q = num * num;
+    return q;
+}
+var n = prompt("Entre com um número pra definir o quadrado dele!", "0");
+document.write("O quadrado de " + n + " é " + quadr(n));
+</code>
+</pre>
+
+<p>Podemos usar também mais de uma declaração return, veja o exemplo acima com um if:</p>
+
+<pre>
+<code>
+function quadr(num) {
+    if(isNaN(num)) {
+        return "O valor digitado não é válido!";
+    }
+    let q = num * num;
+    return q;
+}
+var n = prompt("Entre com um número pra definir o quadrado dele!", "0");
+document.write(quadr(n));
+</code>
+</pre>
+
+<h3>Escopo de Variáveis</h3>
+
+<p>Quando você cria uma variável em Javascript, ela pode ter um escopo global ou local. Escopo é o local dentro do código onde essa variável é reconhecida e utilizada.</p>
+
+<p>Exemplo de variável global, que pode ser usada dentro ou fora de uma função, em qualquer ponto do script:</p>
+
+<pre>
+<code>
+var dinheiro = "moeda";
+function obterGrana() {
+    document.write(dinheiro + "&lt;br/&gt;");
+}
+obterGrana();
+document.write("Eu preciso de uma " + dinheiro);
+</code>
+</pre>
+
+<p>Esse é um exemplo de variável local, que só é válida dentro da função onde ela se encontra, o que estiver fora não está acessível:</p>
+
+<pre>
+<code>
+function obterGrana() {
+    var dinheiro = "moeda";
+    document.write(dinheiro + "&lt;br/&gt;");
+}
+obterGrana();
+document.write("Eu preciso de uma " + dinheiro);
+</code>
+</pre>
+
+<p>Mas se a variável for declarada dentro da função sem a declaração var, ela é considerada global (é como se fosse declarada antes da função), como podem ver:</p>
+
+<pre>
+<code>
+function obterGrana() {
+    dinheiro = "moeda";
+    document.write(dinheiro + "&lt;br/&gt;");
+}
+obterGrana();
+document.write("Eu preciso de uma " + dinheiro);
+</code>
+</pre>
+
+<p>Mas esse método anterior é bom ser evitado pra não criar erros.</p>
+
+<p>Também existe a opção let para declarar variáveis locais (inclusive é o recomendado pra funções):</p>
+
+<pre>
+<code>
+function obterGrana() {
+    let dinheiro = "moeda";
+    document.write(dinheiro + "&lt;br/&gt;");
+}
+obterGrana();
+document.write("Eu preciso de uma " + dinheiro);
+</code>
+</pre>
+
+<h3>Objeto Math</h3>
+
+<p>O objeto <code>Math</code> fornece propriedades e métodos matemáticos. Todas as suas propriedades e métodos são estáticos, significando que não criamos uma nova instânia de Math para utilizar sua funcionalidade, acessamos essas propriedades e métodos da próprio classe.</p>
+
+<p>Veja algumas das propriedades do objeto Math:</p>
+
+<table>
+    <tr>
+        <th>Propriedade</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>LN10</td>
+        <td>Logaritmo natural de 10</td>
+    </tr>
+    <tr>
+        <td>LN12</td>
+        <td>Logaritmo natural de 2</td>
+    </tr>
+    <tr>
+        <td>L0G10E</td>
+        <td>Logaritmo de base 10 de E</td>
+    </tr>
+    <tr>
+        <td>PI</td>
+        <td>Valor de Pi</td>
+    </tr>
+    <tr>
+        <td>SQRT2</td>
+        <td>Raiz quadrada de 2</td>
+    </tr>
+    <tr>
+        <td>SQRT1_2</td>
+        <td>Raiz quadrada de &frac12;</td>
+    </tr>
+</table>
+
+<p>Veja um exemplo de aplicação:</p>
+
+<pre>
+<code>
+document.write("Logaritmo natural de 10: " + Math.LN10 + "&lt;br/&gt;");
+document.write("Valor de PI: " + Math.PI + "&lt;br/&gt;");
+document.write("Raiz quadrada de 2: " + Math.SQRT2 + "&lt;br/&gt;");
+</code>
+</pre>
+
+<p>PS: O logaritmo de um número é o expoente a que outro valor fixo, a base, deve ser elevado para produzir este número.</p>
+
+<p>Todos os argumentos passados para os métodos (funções) do objeto Math são convertidos para números, primeiro (automaticamente, portanto, não é necessário efetuar conversões via código). Diversos métodos estão disponíveis no objeto Math, incluindo funções trigonométricas, geração de números aleatórios e exponenciação, entre outros.</p>
+
+<p>Veja uma pequena lista dos métodos do objeto Math:</p>
+
+<table>
+    <tr>
+        <th>Método</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>abs(x)</td>
+        <td>Retorna o valor absoluto de x</td>
+    </tr>
+    <tr>
+        <td>sqrt(x)</td>
+        <td>Retorna a raiz quadrada de x</td>
+    </tr>
+    <tr>
+        <td>cbrt(x)</td>
+        <td>Retorna a raiz cúbica de x</td>
+    </tr>
+    <tr>
+        <td>sin(x)</td>
+        <td>Seno de um ângulo específico x, em radianos</td>
+    </tr>
+    <tr>
+        <td>cos(x)</td>
+        <td>Cosseno de um ângulo específico x, em radianos</td>
+    </tr>
+    <tr>
+        <td>tan(x)</td>
+        <td>Tangente de um ângulo específico x, em radianos</td>
+    </tr>
+    <tr>
+        <td>ceil(x)</td>
+        <td>Arredonda x para o inteiro acima</td>
+    </tr>
+    <tr>
+        <td>floor(x)</td>
+        <td>Arredonda x para o inteiro abaixo</td>
+    </tr>
+    <tr>
+        <td>round(x)</td>
+        <td>Arredonda x para o inteiro mais próximo.</td>
+    </tr>
+    <tr>
+        <td>pow(x, y)</td>
+        <td>Retorna x elevado a y</td>
+    </tr>
+    <tr>
+        <td>min(x1, x2, x3, ...)</td>
+        <td>Compara os números e retorna o menor valor dos argumentos</td>
+    </tr>
+    <tr>
+        <td>max(x1, x2, x3, ...)</td>
+        <td>Compara os números e retorna o maior valor dos argumentos</td>
+    </tr>
+    <tr>
+        <td>random()</td>
+        <td>Gera um número entre 0 e 1, aleatoriamente</td>
+    </tr>
+</table>
+
+<p>Veja um exemplo de alguns desses métodos:</p>
+
+<pre>
+<code>
+var a = 4.89;
+var x = 7;
+var y = 6;
+document.write("Arredondando A para cima: " + Math.ceil(a) + "&lt;br/&gt;");
+document.write("X elevado a Y: " + Math.pow(x, y) + "&lt;br/&gt;");
+document.write("Menor valor dos três: " + Math.min(a, x, y) + "&lt;br/&gt;");
+document.write("Gera valor aleatório: " + Math.round(Math.random() * 10) + "&lt;br/&gt;");
+</code>
+</pre>
+
+<p>PS: Se quiser obter um valor maior, como entre 0 e 10, você pode simplesmente multiplicar o random, como no exemplo acima. Esse caso acima geraria números de 0 a 10.</p>
+
+<p>Veja um exemplo de um script que gera números aleatórios pra loterias, nesse caso, usamos apenas números arredondados pra inteiros e com um limite:</p>
+
+<pre>
+<code>            
+do {
+    var num1 = Math.round(Math.random() * (80 - 1) + 1);
+    var num2 = Math.round(Math.random() * (80 - 1) + 1);
+    var num3 = Math.round(Math.random() * (80 - 1) + 1);
+    var num4 = Math.round(Math.random() * (80 - 1) + 1);
+    var num5 = Math.round(Math.random() * (80 - 1) + 1);
+}
+while(num1 == num2 || num1 == num3 || num1 == num4 || num1 == num5 ||
+        num2 == num3 || num2 == num4 || num2 == num5 ||
+        num3 == num4 || num3 == num5 ||
+        num4 == num5);
+
+// No caso, o 80 é o número máximo, e 1, a contagem do qual se inicia.
+
+var quina = [num1, num2, num3, num4, num5];
+
+function ordenar(a, b) {
+    return a - b;
+}
+
+quina.sort(ordenar);
+
+document.write(quina + "&lt;br/&gt;");
+</code>
+</pre>
+
+<p>Como visto no exemplo acima, no caso de querer pegar valores entre um número mínimo e máximo, faça algo do tipo:</p>
+
+<pre>
+<code>
+var mini = 12;
+var maxi = 14;
+document.write(Math.round(Math.random() * (maxi - mini) + mini));
+</code>
+</pre>
+
+<!-- Curso extraído do Bóson Treinamentos.
+https://www.youtube.com/playlist?list=PLucm8g_ezqNrXkDWHtgvtU9RGuauEs_xz
+-->
+
+<h3>Chamando Eventos</h3>
+
+<p>Eventos são conjunto de ações que são realizadas em determinado elemento da web, principalmente em HTML (podem ser com textos, imagens, etc.). Muitas das interações do usuário no seu site podem ser consideradas eventos.</p>
+
+<p>Esses são alguns dos eventos mais utilizados:</p>
+
+<table>
+    <tr>
+        <th>Evento</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>onBlur</td>
+        <td>Remove o foco do elemento</td>
+    </tr>
+    <tr>
+        <td>onChange</td>
+        <td>Muda o valor do elemento</td>
+    </tr>
+    <tr>
+        <td>onClick</td>
+        <td>O elemento é clicado pelo usuário</td>
+    </tr>
+    <tr>
+        <td>onFocus</td>
+        <td>O elemento é focado</td>
+    </tr>
+    <tr>
+        <td>onKeyPress</td>
+        <td>O usuário pressiona uma tecla sobre o elemento</td>
+    </tr>
+    <tr>
+        <td>onLoad</td>
+        <td>Carrega o elemento por completo (só pode ter um evento load por página)</td>
+    </tr>
+    <tr>
+        <td>onMouseOver</td>
+        <td>Define ação quando o usuário passa o mouse sobre o elemento</td>
+    </tr>
+    <tr>
+        <td>onMouseOut</td>
+        <td>Define ação quando o usuário retira o mouse sobre o elemento</td>
+    </tr>
+    <tr>
+        <td>onSubmit</td>
+        <td>Define ação ao enviar um formulário</td>
+    </tr>
+    <tr>
+        <td>onInput</td>
+        <td>Define ação quando o usuário digita algo no input</td>
+    </tr>
+</table>
+
+<p>PS: Caso queira obter a tecla pressionada, use o evento onKeyDown e o código <code>String.fromCharCode(event.keyCode))</code> para pegar a tecla.</p>
+
+<ul>
+    <li><a href="tudo-sobre-javascript-4.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-javascript-6.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

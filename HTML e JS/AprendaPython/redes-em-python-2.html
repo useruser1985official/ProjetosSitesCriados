@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Python</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Python</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-python-1.html">Tudo sobre Python Parte 1!</a></li>
+                    <li><a href="tudo-sobre-python-2.html">Tudo sobre Python Parte 2!</a></li>
+                    <li><a href="tudo-sobre-python-3.html">Tudo sobre Python Parte 3!</a></li>
+                    <li><a href="tudo-sobre-python-4.html">Tudo sobre Python Parte 4!</a></li>
+                    <li><a href="tudo-sobre-python-5.html">Tudo sobre Python Parte 5!</a></li>
+                    <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
+                    <li><a href="tudo-sobre-python-7.html">Tudo sobre Python Parte 7!</a></li>
+                </menu>
+            </header>
+
+<h2>Redes em Python - Parte 2</h2>
+
+<h3>TCP Server</h3>
+
+<p>Você pode querer usar seu próprio servidor TCP ao escrever shells ou elaborar um proxy. Vamos criar um servidor TCP multi-rosca padrão, dessa forma:</p>
+
+<pre>
+<code>
+import socket
+import threading
+
+ip = "0.0.0.0"
+port = 9999
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# IP e porta que queremos que o servidor escute:
+server.bind((ip, port))
+
+# Atraso máximo de conexões:
+server.listen(5)
+
+print(f"Ouvir {ip}: {port}")
+
+# Segmento de tratamento de cliente:
+def lidarCliente(cliente):
+    # Imprimir o que o cliente envia:
+    pedido = cliente.recv(1024)
+
+    print(f"Recebida: {pedido.decode()}")
+
+    # Enviar de volta um pacote:
+    cliente.send(str.encode("ACK!"))
+
+    cliente.close()
+
+while True:
+    # Quando um cliente se conecta e nós recebemos o socket do cliente:
+    clie, addr = server.accept()
+
+    print(f"Conexão aceita a partir de: {addr[0]}: {addr[1]}")
+
+    # Girar o nosso segmento do cliente para lidar com dados de entrada:
+
+    # Criando objeto com nossa função como argumento, e iniciar o thread para lidar com nosso cliente:
+    lidClie = threading.Thread(target = lidarCliente, args = (clie,))
+
+    lidClie.start()
+</code>
+</pre>
+
+<p>Para começar, nós passamos o endereço IP e a porta que deseja que o servidor escute. Esse é o nosso cliente:</p>
+
+<pre>
+<code>
+import socket
+
+host = "127.0.0.1"
+port = 9999
+
+# Criando um objeto de socket com TCP:
+cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Conectando o cliente:
+cliente.connect((host, port))
+
+# Enviando dados
+cliente.send(str.encode("GET / HTTP / 1.1 \r \nHost: google.com \n\r\n"))
+
+# Receber alguns dados
+resposta = cliente.recv(4096)
+
+print(resposta.decode())
+</code>
+</pre>
+
+<p>Ele responderá por uma porta aleatória.</p>
+
+<p>PS: Caso dê erro na porta, troque ela.</p>
+
+<h3>Scanner de Redes</h3>
+
+<p>Podemos fazer um scanner de portas usando o módulo socket, por exemplo:</p>
+
+<pre>
+<code>
+import socket
+
+cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+cliente.connect(("www.google.com.br", 80))
+cliente.send("...\n\n".encode())
+
+resposta = cliente.recv(1024)
+
+print(resposta.decode())
+</code>
+</pre>
+
+<p>Podemos fazer ele retornar um código, onde 0 significa porta aberta e outro número fechada:</p>
+
+<pre>
+<code>
+import socket
+
+cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+cliente.settimeout(0.5) # Tempo de tentar conexão
+
+codigo = cliente.connect_ex(("www.google.com", 80))
+
+print(codigo)
+</code>
+</pre>
+
+<p>Com isso podemos melhorar mais:</p>
+
+<pre>
+<code>
+import socket
+
+serv = str(input("Digite o link ou IP do servidor: "))
+port = int(input("Digite a porta especificada: "))
+
+cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+cliente.settimeout(0.5) # Tempo de tentar conexão
+
+codigo = cliente.connect_ex((serv, port))
+
+if codigo == 0:
+    sit = "aberta"
+else:
+    sit = "fechada"
+
+print(f"A porta {port} de {serv} está {sit}.")
+</code>
+</pre>
+
+<p>Ou usando um for nas principais portas:</p>
+
+<pre>
+<code>
+import socket
+
+serv = str(input("Digite o link ou IP do servidor: "))
+
+portas = (20, 21, 22, 25, 43, 53, 80, 110, 143, 443, 465, 587, 993, 995)
+
+for p in portas:
+    cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    cliente.settimeout(0.5)  # Tempo de tentar conexão
+
+    codigo = cliente.connect_ex((serv, p))
+
+    if codigo == 0:
+        sit = "aberta"
+    else:
+        sit = "fechada"
+
+    print(f"A porta {p} de {serv} está {sit}.")
+</code>
+</pre>
+
+<h3>Biblioteca UrlLib</h3>
+
+<p>A biblioteca UrlLib permite lermos o conteúdo de uma página HTML de um site. Um exemplo seria acompanhar o preço de um produto em determinado site.</p>
+
+<p>Basicamente, usamos ela assim:</p>
+
+<pre>
+<code>
+import urllib.request
+
+pagina = urllib.request.urlopen("https://www.python.org/") # A página especificada
+texto = pagina.read()
+
+print(texto.decode())
+</code>
+</pre>
+
+<p>O código acima pegará todo o HTML da página especificada.</p>
+
+<p>Com isso, podemos recuperar as informações que nos interessa na página, dessa forma:</p>
+
+<pre>
+<code>
+import urllib.request
+
+pagina = urllib.request.urlopen("https://www.python.org/") # A página especificada
+texto = pagina.read()
+
+dado = texto[0:15]
+
+print(dado)
+</code>
+</pre>
+
+<p>Usando as técnicas de fatiamento de string, podemos pegar dados específicos de um site, por exemplo:</p>
+
+<pre>
+<code>
+import urllib.request
+
+pagina = urllib.request.urlopen("https://www.python.org/") # A página especificada
+texto = pagina.read()
+
+latest = texto.find(str.encode("Latest")) # Retornará a posição onde está o conteúdo especificado
+
+print(latest)
+</code>
+</pre>
+
+<p>No código acima, ele mostrará a posição onde encontrou a palavra especificada (no caso, 26663). Podemos contar em qual posição está o dado que queremos pegar (contando todos os caracteres incluindo o das tags HTML). Dessa forma:</p>
+
+<pre>
+<code>
+import urllib.request
+
+pagina = urllib.request.urlopen("https://www.python.org/") # A página especificada
+texto = pagina.read()
+
+latest = texto.find(str.encode("Latest")) # Retornará a posição onde está o conteúdo especificado
+versao = texto[latest + 56:latest + 56 + 5]
+
+print(f"Versão atual do Python: {versao.decode()}.")
+</code>
+</pre>
+
+<p>Podemos inclusive, converter valores numéricos para int ou float para fazermos operações.</p>
+
+<h3>Verificando Acesso à Sites</h3>
+
+<p>Como relembramos, fizemos esse código para acessarmos o site pudim:</p>
+
+<pre>
+<code>
+import urllib.request
+
+try:
+    site = urllib.request.urlopen("http://www.pudim.com.br")
+except urllib.error.URLError:
+    print("O site Pudim não está acessível no momento!")
+else:
+    print("Consegui acessar o site Pudim com sucesso!")
+    print(site.read().decode()) # Isso pega o conteúdo HTML do site
+</code>
+</pre>
+
+<p>No entanto, esse código pode ser melhorado para qualquer outro site:</p>
+
+<pre>
+<code>
+import urllib.request
+
+link = str(input("Coloque o link do site: "))
+
+try:
+    site = urllib.request.urlopen(link)
+except urllib.error.URLError:
+    print(f"O site {link} não está acessível no momento!")
+else:
+    print(f"Consegui acessar o site {link} com sucesso!")
+    print(site.read().decode()) # Isso pega o conteúdo HTML do site
+</code>
+</pre>
+
+<p>Podemos melhorar ainda mais:</p>
+
+<pre>
+<code>
+import urllib.request
+
+link = str(input("Coloque o link do site: "))
+
+try:
+    site = urllib.request.urlopen(link)
+except urllib.error.URLError:
+    print(f"O site {link} não está acessível no momento!")
+else:
+    print(f"Consegui acessar o site {link} com sucesso!")
+
+    perg = str(input("Deseja mostrar o HTML do site? [S/N] ")).strip().upper()[0]
+
+    if perg == "S":
+        print(site.read().decode()) # Isso pega o conteúdo HTML do site
+</code>
+</pre>
+
+<ul>
+    <li><a href="redes-em-python-1.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="redes-em-python-3.html">Continuação da Matéria!</a></li>-->
+</ul>
+
+        </div>
+    </body>
+</html>

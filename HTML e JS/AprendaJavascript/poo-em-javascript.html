@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Javascript</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Javascript</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-javascript-1.html">Tudo sobre Javascript Parte 1!</a></li>
+                    <li><a href="tudo-sobre-javascript-2.html">Tudo sobre Javascript Parte 2!</a></li>
+                    <li><a href="tudo-sobre-javascript-3.html">Tudo sobre Javascript Parte 3!</a></li>
+                    <li><a href="tudo-sobre-javascript-4.html">Tudo sobre Javascript Parte 4!</a></li>
+                    <li><a href="tudo-sobre-javascript-5.html">Tudo sobre Javascript Parte 5!</a></li>
+                    <li><a href="tudo-sobre-javascript-6.html">Tudo sobre Javascript Parte 6!</a></li>
+                    <li><a href="tudo-sobre-javascript-7.html">Tudo sobre Javascript Parte 7!</a></li>
+                    <li><a href="tudo-sobre-javascript-8.html">Tudo sobre Javascript Parte 8!</a></li>
+                </menu>
+            </header>
+                        
+<h2>Orientação a Objetos em Javascript</h2>
+
+<h3>Criando Classes e Objetos</h3>
+
+<p>Basicamente, criamos uma classe em Javascript assim:</p>
+
+<pre>
+<code>
+const Pessoa = function() {
+    // Se houvesse herança de uma classe com o nome Humano, ela seria assim, também serve pra chamar métodos da classe pai:
+    // Humano.call(this);
+
+    this.nome = "";
+    this.telefone = "";
+    this.cpf = "";
+
+    this.mostrar = function() {
+        alert("Nome: " + this.nome + "\nTelefone: " + this.telefone + "\nCPF: " + this.cpf);
+    };
+};
+</code>
+</pre>
+
+<p>No caso acima, todo método ou atributo com <code>this</code> (que é substituído pelo objeto) é público, para simular privados seria algo como <code>var nome = ""</code>.</p>
+
+<p>Note que não existia a palavra class para criar classes, por isso é usado uma função anônima para isso. As funções também são utilizadas com uma função anônima.</p>
+
+<p>Dessa forma basta criar os objetos assim:</p>
+
+<pre>
+<code>
+var c = new Pessoa(); // Criação do objeto
+
+// Atributos do objeto:
+c.nome = "Carlos";
+c.telefone = "1234-5678";
+c.cpf = "123.456.789-01";
+
+// Invocação do método:
+c.mostrar();
+</code>
+</pre>
+
+<p>Também podemos criar objetos atribuindo diretamente à variável ou constante, dessa forma:</p>
+
+<pre>
+<code>
+var c = {
+    nome: "Carlos",
+    telefone: "1234-5678",
+    cpf: "123.456.789-01",
+    mostrar: function() {
+        alert("Nome: " + this.nome + "\nTelefone: " + this.telefone + "\nCPF: " + this.cpf);
+    }
+};
+
+c.mostrar();
+</code>
+</pre>
+
+<p>Ou criando uma nova instância de Object (objeto padrão do Javascript) e adicionando os atributos e métodos, assim:</p>
+
+<pre>
+<code>
+var c = new Object();
+
+c.nome = "Carlos";
+c.telefone = "1234-5678";
+c.cpf = "123.456.789-01";
+
+c.mostrar = function() {
+    alert("Nome: " + this.nome + "\nTelefone: " + this.telefone + "\nCPF: " + this.cpf);
+};
+
+c.mostrar();
+</code>
+</pre>
+
+<p>No entanto, atualmente podemos criar classes em Javascript, o código reescrito ficaria assim:</p>
+
+<pre>
+<code>
+class Pessoa {
+    constructor() {
+        this.nome = "";
+        this.telefone = "";
+        this.cpf = "";
+    }
+
+    mostrar() {
+        alert("Nome: " + this.nome + "\nTelefone: " + this.telefone + "\nCPF: " + this.cpf);
+    }
+};
+
+var c = new Pessoa();
+
+c.nome = "Carlos";
+c.telefone = "1234-5678";
+c.cpf = "123.456.789-01";
+
+c.mostrar();
+</code>
+</pre>
+
+<p>Note que agora tivemos que criar um construtor com os atributos, e os métodos não utilizam "function" no começo.
+
+<p>PS: Para pegar o nome da classe, use <code>this.constructor.name</code>.</p>
+    
+<h3>Construtores</h3>
+
+<p>Podemos também criar construtores nas classes, dessa forma:</p>
+
+<pre>
+<code>
+class Pessoa {
+    constructor(nome, telefone, cpf) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.cpf = cpf;
+    }
+
+    mostrar() {
+        alert("Nome: " + this.nome + "\nTelefone: " + this.telefone + "\nCPF: " + this.cpf);
+    }
+};
+</code>
+</pre>
+
+<p>O this é o atributo da classe, e o que está a direita, o parâmetro do construtor.</p>
+
+<p>Aí, desse modo, temos que passar os parâmetros na criação do objeto:</p>
+
+<pre>
+<code>
+var c = new Pessoa("Carlos", "1234-5678", "123.456.789-01");
+
+c.mostrar();
+</code>
+</pre>
+
+<p>PS: Podemos também destruir os objetos usando delete, assim:</p>
+
+<pre>
+<code>
+var c = new Pessoa("Carlos", "1234-5678", "123.456.789-01");
+
+c.mostrar();
+
+delete c;
+</code>
+</pre>
+
+<p>PS: Caso num construtor precise inicializa um atributo como nulo, use <code>null</code>.</p>
+
+<h3>Métodos Estáticos</h3>
+
+<p>Também podemos usar métodos estáticos de classes em Javascript, sendo que nesse caso é atributo da classe, por exemplo:</p>
+
+<pre>
+<code>
+class Veiculo {
+    static verifCombustivel() {
+        alert("O combustível do veículo é gasolina!");
+    }
+};
+</code>
+</pre>
+
+<p>E para chamar, podemos chamar diretamente pela classe, sem criar um objeto, por exemplo:</p>
+
+<pre>
+<code>
+Veiculo.verifCombustivel();
+</code>
+</pre>
+
+<p>No entanto, não é possível criar atributos estáticos diretamente, apenas simulá-los, por exemplo:</p>
+
+<pre>
+<code>
+class Veiculo {
+    static verifCombustivel() {
+        alert("O combustível do veículo é " + Veiculo.combustivel + "!");
+    }
+};
+
+Veiculo.combustivel = "gasolina";
+
+Veiculo.verifCombustivel();
+</code>
+</pre>
+
+<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados, e nunca se deve utilizar o this neles.</p>
+
+<h3>Encapsulamento</h3>
+
+<p>Colocando this nos atributos ou métodos, mostra que ela é pública, para tornar ela privada, coloque um _ antes do nome do atributo, assim:</p>
+
+<pre>
+<code>
+class Media {
+    constructor() {
+        // Atributos públicos:
+        this.nota1 = 0;
+        this.nota2 = 0;
+
+        // Atributo supostamente privado:
+        this._med = (this.nota1 + this.nota2) / 2;
+    }
+};
+</code>
+</pre>
+
+<p>Na prática, não existe o encapsulamento real em Javascript, apenas uma forma de sinalizar quais atributos não devem ser acessados. Na forma antiga, usando functions no lugar das classes, definíamos o que era público com this e o que era privado sem ele e com o var na frente.</p>
+
+<p>PS: Recentemente podemos usar <code>#</code> ao invés do underline na frente do atributo pra indicar que ele é "privado", mas isso não funciona em todos os navegadores.</p>
+
+<p>Mas podemos criar métodos públicos para acessar essas variáveis "privadas", mesmo se todas as variáveis forem "privadas". Veja o código acima alterado:</p>
+
+<pre>
+<code>
+class Media {
+    constructor(n1, n2) {
+        // Atributos supostamente privados:
+        this._nota1 = n1;
+        this._nota2 = n2;
+
+        this._med = (this._nota1 + this._nota2) / 2;
+    }
+
+    // Método público que retorna a conta:
+    
+    get med() {
+        return this._med;
+    }
+
+    // Método público que muda a média diretamente:
+    
+    set med(value) {
+        this._med = value;
+    }
+};
+</code>
+</pre>
+
+<p>Podemos ver que os métodos getters e setters tem a indicação get e set antes da função.</p>
+
+<p>E na instância:</p>
+
+<pre>
+<code>
+var a = new Media(10, 5);
+
+alert("A média é " + a.med);
+</code>
+</pre>
+
+<p>PS: O uso e a a atribuição de métodos getters e setters são iguais às variáveis, pois são considerados propriedades, e não métodos, portanto, usar o setter do método criado ficaria assim:</p>
+
+<pre>
+<code>
+var a = new Media(10, 5);
+
+a.med = 10;
+
+alert("A média é " + a.med);
+</code>
+</pre>
+
+<h3>Herança</h3>
+
+<p>Primeiramente, crie uma classe genérica assim:</p>
+
+<pre>
+<code>
+class Animal {
+    vivo() {
+        alert("O Animal está Vivo!");
+    }
+};
+</code>
+</pre>
+
+<p>Para fazer a herança numa nova classe, usamos o <code>extends</code>, dessa forma:</p>
+
+<pre>
+<code>
+class Gato extends Animal {
+
+};
+</code>
+</pre>
+
+<p>PS: Isso é uma herança pobre, a classe herdeira pode ter novos atributos e métodos.</p>
+
+<p>Dessa forma, podemos chamar o método assim:</p>
+
+<pre>
+<code>
+var g = new Gato();
+
+g.vivo();
+</code>
+</pre>
+
+<p>PS: Javascript não permite herança múltipla. E caso use construtores, sempre chame a classe mãe com o método <code>super</code> dentro do construtor da classe filha, mesmo se não houver parâmetros.</p>
+
+<h3>Polimorfismo</h3>
+
+<p>Pegando o mesmo exemplo da classe anterior, podemos sobrepor o método da classe pai na classe filha, assim:</p>
+
+<pre>
+<code>
+class Gato extends Animal {
+    vivo() {
+        alert("O Gato está Vivo!");
+        super.vivo(); // Chamada do método da classe pai
+    }
+};
+</code>
+</pre>
+
+<p>E exibir assim:</p>
+
+<pre>
+<code>
+var g = new Gato();
+
+g.vivo();
+</code>
+</pre>
+
+<p>No Javascript podemos usar o polimorfismo de sobreposição, mas não o de sobrecarga.</p>
+
+<p>PS: Pode ser necessário chamar o construtor da classe pai com super, caso a classe herdeira tenha parâmetros, mesmo se a classe pai não tiver nenhum.</p>
+
+<h3>Métodos Abstratos</h3>
+
+<p>Na teoria, não existem métodos abstratos em Javascript, mas podemos simulá-los, criando uma exceção de erro nos métodos que queremos implementar, veja a alteração da classe anterior:</p>
+
+<pre>
+<code>
+class Animal {
+    // Simulação de método abstrato:
+    vivo() {
+        throw new Error("Implementação do método 'vivo' requerida");
+    }
+};
+</code>
+</pre>
+
+<p>E nas classes filhas que terão que implementar o método, basta fazer a implementação como achar necessário:</p>
+
+<pre>
+<code>
+class Gato extends Animal {
+    // Implementação do método:
+    vivo() {
+        alert("O Gato está Vivo!");
+    }
+};
+</code>
+</pre>
+
+<h3>Exercícios de POO</h3>
+
+<p>Crie uma classe com o nome Eletrodomestico que servirá de base para outras classes:</p>
+
+<pre>
+<code>
+class Eletrodomestico {
+    constructor(marca, ligado) {
+        this._marca = marca;
+        this._ligado = ligado;
+    }
+
+    usando() {
+        document.write("Estou utilizando o Eletrodoméstico!");
+    }
+
+    get marca() {
+        return this._marca;
+    }
+
+    set marca(value) {
+        this._marca = value;
+    }
+
+    get ligado() {
+        return this._ligado;
+    }
+
+    set ligado(value) {
+        this._ligado = value;
+    }
+};
+</code>
+</pre>
+
+<p>Baseado nessa classe, crie várias classes com eletrodomésticos diversos, fazendo a sobreposição do método funcionando, mas chamando também a função da classe pai, por exemplo:</p>
+
+<pre>
+<code>
+class Geladeira extends Eletrodomestico {
+    constructor(marca, ligado) {
+        // Chamada do construtor da classe pai:
+        super(marca, ligado);
+    }
+
+    usando() {
+        super.usando();
+        document.write(" E é uma geladeira!");
+    }
+};
+</code>
+</pre>
+
+<p>E na instância:</p>
+
+<pre>
+<code>
+var gelad = new Geladeira("Brastemp", true);
+
+gelad.usando();
+document.write("&lt;br/&gt;O Eletrodoméstico está ligado? " + gelad.ligado);
+</code>
+</pre>
+
+<p>Tente também colocar o método da classe Eletrodomestico como abstrato e implementar eles nas classes filhas.</p>
+
+<h3>Prototype</h3>
+
+<p>Em Javascript, podemos também criar atributos e métodos em classes por protótipos, como por exemplo:</p>
+
+<pre>
+<code>
+class Comida {
+
+};
+
+Comida.prototype.sabor = "salgado";
+
+Comida.prototype.verifSabor = function() {
+    document.write("O sabor da comida é " + this.sabor + ".&lt;br/&gt;");
+};
+</code>
+</pre>
+
+<p>Lembrando que todos os objetos criados terão os mesmos valores definidos nos protótipos, por exemplo:</p>
+
+<pre>
+<code>
+var arroz = new Comida();
+var feijao = new Comida();
+
+arroz.verifSabor();
+feijao.verifSabor();
+</code>
+</pre>    
+
+<p>PS: Não dá pra usar métodos estáticos como protótipos.</p>
+
+        </div>
+    </body>
+</html>

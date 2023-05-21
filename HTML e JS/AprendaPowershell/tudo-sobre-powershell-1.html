@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Powershell</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Powershell</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-powershell-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Powershell Parte 1!</a></li>
+                    <li><a href="tudo-sobre-powershell-2.html">Tudo sobre Powershell Parte 2!</a></li>
+                    <li><a href="tudo-sobre-powershell-3.html">Tudo sobre Powershell Parte 3!</a></li>
+                    <li><a href="tudo-sobre-powershell-4.html">Tudo sobre Powershell Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Powershell Parte 1</h2>
+
+<h3>O Shell Powershell</h3>
+
+<p>Apesar da linha de comando padrão do Windows ser o CMD, temos também no Windows 7 e posteriores, a opção de usar o PowerShell, que conta com outros comandos, especialmente para administradores de sistema.</p>
+
+<p>Esses são os comando mais comuns do Powershell:</p>
+
+<ul>
+    <li><code>Get-ChildItem</code> - Mostra o conteúdo do diretório atual.</li>
+    <li><code>Set-Location</code> - Move entre diretórios.</li>
+    <li><code>Get-Location</code> - Mostra diretório atual.</li>
+    <li><code>New-Item arquivo/pasta</code> - Cria um arquivo ou diretório (colocar <code>-Type Directory</code> para pastas).</li>
+    <li><code>Get-Content arquivo</code> - Lê o arquivo na linha de comando do Powershell.</li>
+    <li><code>Rename-Item</code> - Renomeia um arquivo ou diretório.</li>
+    <li><code>Select-String palavra</code> - Encontra uma linha num arquivo..</li>
+    <li><code>Move-Item arquivo C:\Users</code> - Move o arquivo para outro diretório especificado</li>
+    <li><code>Copy-Item arquivo C:\Users</code> - Copia o arquivo para outro diretório especificado</li>
+    <li><code>Remove-Item arquivo/pasta</code> - Remove o arquivo ou pasta especificado.</li>
+    <li><code>Get-History</code> - Mostra o histórico de comandos.</li>
+    <li><code>Write-Output</code> - Para escrever na tela (pode ser omitido usando somente o conteúdo).</li>
+    <li><code>Read-Host "Frase"</code> - Pede que o usuário digite um dado, para guardar numa variável.</li>
+    <li><code>#</code> - Para comentários.</li>
+    <li><code>Get-Help</code>  - Exibe a ajuda (para um comando, use <code>-?</code>).</li>
+    <li><code>Start-Sleep 60</code> - Pausa o Powershell por um tempo especificado, em segundos.</li>
+    <li><code>Clear-Host</code> - Limpa a tela.</li>
+    <li><code>Clear-History</code> - Limpa o histório de comandos.</li>
+    <li><code>Stop-Process 0000</code> - Encerra um processo baseado no seu PID, use o parâmetro <code>-Force</code> para forçar o encerramento (para obter, use <code>Get-Process</code>).</li>
+    <li><code>Get-Alias</code> - Exibe a lista de comandos do Powershell e seus alias.</li>
+    <li><code>Get-Host</code> - Exibe a versão do Powershell.</li>
+</ul>
+
+<p>É possível navegar pelas chaves do registro pelo Powershell digitando <code>Set-Location HKCU:</code> (pode ser HKCR, HKLM, HKU e HKCC), para voltar ao sistema de pastas, digite <code>Set-Location C:</code>.</p>
+
+<p>Para exibir os dados da BIOS do computador, digitamos <code>Get-WmiObject -Class Win32_BIOS -ComputerName $env:COMPUTERNAME</code>.</p>
+
+<p>Para vermos os processos que mais usam memória, usamos o comando <code>Get-Process | Sort-Object –p ws | Select-Object –Last 5</code>.</p>
+
+<p>Para listar os programas instalados no PC, usamos o comando <code>Get-WmiObject -Class Win32_Product | Select-Object -Property Name</code>.</p>
+
+<p>Para escrever um conteúdo no arquivo, fazemos igual no CMD, usando o Write-Output ou outro comando que imprima alguma saída. por exemplo <code>Get-ChildItem >> arquivo.txt</code> (pode ser necessário dar um espaço entre os comandos).</p>
+
+<p>PS: Usando dois >> ele adicionará uma nova linha no arquivo, caso exista, se usar um só > ele sobrescreverá o arquivo existente.</p>
+
+<p>Para criarmos variáveis, usamos o cifrão no começo delas, por exemplo:</p>
+
+<pre>
+<code>
+# Criando uma variável:
+
+$variavel
+
+# Atribuindo valor:
+
+$variavel = "Olá Mundo"
+
+# Exibindo:
+
+Write-Output $variavel
+</code>
+</pre>
+
+<p>Para usar as variáveis de ambiente do Windows em comandos, use o <code>$env:</code> antes dela, por exemplo:</p>
+
+<pre>
+<code>
+Write-Output $env:SystemRoot
+Set-Location $env:UserProfile
+</code>
+</pre>
+
+<p>É possível fazermos contas no Powershell também, digitando diretamente as contas (como <code>10 + 5</code>).</p>
+
+<p>PS: Muitos comandos do CMD funcionam também no Powershell, ou até mesmo alguns do Unix (para executar um arquivo, por exemplo, usamos algo como <code>./arquivo.exe</code>), esses são alias para os comandos mais longos.</p>
+
+<p>Para criar um arquivo de script powershell, basta salvar ele no formato ps1 e colocar os comandos, mas geralmente os sistemas são configurados para não rodar esse tipo de script, para desbloquear isso use o comando <code>Set-ExecutionPolicy RemoteSigned</code> no Powershell, executando como administrador, para bloquear novamente use <code>Set-ExecutionPolicy Restricted</code>.</p>
+
+<p>Para gerar hashs de arquivos pelo Powershell, use esses comandos:</p>
+
+<pre>
+<code>
+Get-FileHash nomedoarquivo.extensão -Algorithm md5 | Format-List
+</code>
+</pre>
+
+<p>Isso mostrará o hash no Powershell, de acordo com o algoritmo escolhido (MD5, SHA1, etc). Para salvá-lo em um arquivo de texto, faça o seguinte:</p>
+
+<pre>
+<code>
+Get-FileHash nomedoarquivo.extensão -Algorithm md5 | Format-List > arquivo.txt
+</code>
+</pre>
+
+<p>Essas são as variáveis do sistema (usadas com <code>$env:</code>):</p>
+
+<table>
+    <tr>
+        <th>Variável</th>
+        <th>Conteúdo Exibido</th>
+    </tr>
+    <tr>
+        <td>USERPROFILE</td>
+        <td>C:\Users\UsuarioAtual</td>
+    </tr>
+    <tr>
+        <td>PROGRAMDATA</td>
+        <td>C:\Programdata</td>
+    </tr>
+    <tr>
+        <td>ALLUSERSPROFILE</td>
+        <td>C:\Programdata</td>
+    </tr>
+    <tr>
+        <td>WINDIR</td>
+        <td>C:\Windows</td>
+    </tr>
+    <tr>
+        <td>SYSTEMROOT</td>
+        <td>C:\Windows</td>
+    </tr>
+    <tr>
+        <td>PROGRAMFILES</td>
+        <td>C:\Program Files</td>
+    </tr>
+    <tr>
+        <td>COMMONPROGRAMFILES</td>
+        <td>C:\Program Files\Common Files</td>
+    </tr>
+    <tr>
+        <td>USERNAME</td>
+        <td>"UsuarioAtual"</td>
+    </tr>
+    <tr>
+        <td>COMPUTERNAME</td>
+        <td>Nome do Computador</td>
+    </tr>
+    <tr>
+        <td>LOCALAPPDATA</td>
+        <td>C:\Users\Usuário Atual\AppData\Local</td>
+    </tr>
+    <tr>
+        <td>APPDATA</td>
+        <td>C:\Users\Usuário Atual\AppData\Roaming</td>
+    </tr>
+    <tr>
+        <td>USERDOMAIN</td>
+        <td>Nome do Computador</td>
+    </tr>
+    <tr>
+        <td>SYSTEMDRIVE</td>
+        <td>C:</td>
+    </tr>
+    <tr>
+        <td>HOMEDRIVE</td>
+        <td>C:</td>
+    </tr>
+    <tr>
+        <td>SYSTEMDIRECTORY</td>
+        <td>C:\Windows\System32</td>
+    </tr>
+    <tr>
+        <td>COMSPEC</td>
+        <td>C:\Windows\System32\cmd.exe</td>
+    </tr>
+    <tr>
+        <td>TEMP</td>
+        <td>C:\Users\Usuário Atual\AppData\Local\Temp</td>
+    </tr>
+    <tr>
+        <td>TMP</td>
+        <td>C:\Users\Usuário Atual\AppData\Local\Temp</td>
+    </tr>
+    <tr>
+        <td>HOMEPATH</td>
+        <td>\Users\Usuário Atual</td>
+    </tr>
+    <tr>
+        <td>PATH</td>
+        <td>Retorna o path do sistema</td>
+    </tr>
+    <tr>
+        <td>PATHEXT</td>
+        <td>Retorna as extensões de executáveis</td>
+    </tr>
+    <tr>
+        <td>OS</td>
+        <td>Retorna o nome do Sistema Operacional</td>
+    </tr>
+    <tr>
+        <td>PROCESSOR_IDENTIFIER</td>
+        <td>Retorna dados sobre o processador</td>
+    </tr>
+</table>
+
+<p>PS: Em sistemas 64 bits, a variável <code>PROGRAMFILES</code> é referente a pasta de aplicações 64 bits, para acessar a pasta de aplicações 32 bits, use <code>PROGRAMFILES(x86)</code>. O mesmo vale para a <code>COMMONPROGRAMFILES</code>, que em aplicativos de 32 bits é <code>COMMONPROGRAMFILES(x86)</code>. Nesses casos, coloque tudo entre aspas.</p>
+
+<p>Para "grudar" mais de um comando no Powershell, use o ponto-e-vírgula.</p>
+
+<h3>Tipos de Dados - Parte 1</h3>
+
+<p>O Powershell tem os tipos baseados no .NET, e são vários tipos, e todos eles são objetos, ou seja, eles tem propriedades e métodos.</p>
+
+<p>Digitando <code>Get-Item .\arquivo.txt</code> Podemos ver os dados do arquivo especificado. Ele cria um objeto no Powershell baseado nesse arquivo. Dessa forma, podemos atribuir a uma variável assim:</p>
+
+<pre>
+<code>
+$arq = Get-Item .\arquivo.txt
+
+# Visualizando métodos do arquivo:
+
+$arq | Get-Member -MemberType Methods
+
+# Visualizando propriedades do arquivo:
+
+$arq | Get-Member -MemberType Property
+
+# Nome do arquivo:
+
+$arq.Name
+
+# Extensão do arquivo:
+
+$arq.Extension
+
+# Nome simples do arquivo:
+
+$arq.Basename
+
+# Tipo do objeto:
+
+$arq.GetType()
+</code>
+</pre>
+
+<p>Isso aí acima, é pra acessar métodos e propriedades de um objeto. Para métodos e atributos estáticos, usamos <code>::</code>, por exemplo:</p>
+
+<pre>
+<code>
+[string]::Join("-", @("instituto", "de", "scripts"))
+
+[string]::Join("-", @("instituto", "de", "scripts")).GetType()
+
+[string]::Format("{0} {1} {2}", "instituto", "de", "scripts")
+</code>
+</pre>
+
+<p>PS: Para formatar valores float, faça assim, colocando a quantidade de casas com zeros:</p>
+
+<pre>
+<code>
+$real = 12345.6789
+
+Write-Host ([string]::Format("{0:0.00}", $real))
+</code>
+</pre>
+
+<p>PS: Quando usar numa exibição, coloque tudo entre parênteses para exibir.</p>
+
+<h3>Tipos de Dados - Parte 2</h3>
+
+<p>Podemos também usar os métodos diretamente na string, ao invés do objeto, por exemplo:</p>
+
+<pre>
+<code>
+"Instituto de Scripts".ToUpper()
+
+"Instituto de Scripts".ToLower()
+
+"Instituto de Scripts".Replace(" ", "-")
+
+"Instituto de Scripts".Length
+</code>
+</pre>
+
+<p>Os métodos são vários, além desses, por exemplo:</p>
+
+<pre>
+<code>
+[int]"1"
+
+([int]"1").GetType()
+</code>
+</pre>
+
+<p>Não dá para converter uma string para char, exceto quando for um array de char, por exemplo:</p>
+
+<pre>
+<code>
+[char[]]"HAL"
+
+([char[]]"HAL").GetType()
+
+# Isso mostra o número ASCII corresponde a mesma letra:
+
+[int[]][char[]]"HAL"
+</code>
+</pre>
+
+<p>Com um foreach incrementando:</p>
+
+<pre>
+<code>
+[int[]][char[]]"HAL" | foreach {
+    # Underline é o item atual:
+    
+    $_ + 1
+}
+</code>
+</pre>
+
+<p>Reconvertendo para char e depois string:</p>
+
+<pre>
+<code>
+[string][char[]]([int[]][char[]]"HAL" | foreach {
+    # Underline é o item atual:
+    
+    $_ + 1
+})
+</code>
+</pre>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+[string][char[]]([int[]][char[]]"VMS" | foreach {
+    # Underline é o item atual:
+    
+    $_ + 1
+})
+</code>
+</pre>
+
+<p>PS: Podemos alterar a variável do sistema <code>$ofs</code> para inserir algum conteúdo entre as letras, o padrão é o "".</p>
+
+<h3>Tipos de Dados - Parte 3</h3>
+
+<p>Podemos fazer contas com datas, por exemplo esta que mostra quantos dias faltam pro Natal:</p>
+
+<pre>
+<code>
+[Datetime]"12/25/2020" - [Datetime]::Now
+</code>
+</pre>
+
+<p>Os tipos primitivos mais comuns são <code>[int]</code>, <code>[single]</code> (equivalente ao float) e <code>[string]</code>, mas existem outros como já vistos. Os números de ponto flutuante são usados com pontos, como na maioria das linguagens.</p>
+
+<p>Geralmente os números de ponto flutuante são reconhecidos como double, por exemplo:</p>
+
+<pre>
+<code>
+(1.25).GetType()
+</code>
+</pre>
+
+<p>Isso acontece porque o double tem maior precisão de casas decimais que o single/float.</p>
+
+<h3>Manipulando Texto</h3>
+
+<p>Temos outras funções para trabalhar com strings, como a <code>Replace</code> (que substitui algo na string), e a <code>Concat</code> da classe String, que concatena algo. Veja o uso delas:</p>
+
+<pre>
+<code>
+$frase = "Isso é uma String"
+            
+Write-Host $frase.Replace("String", "Frase") # Substitui algo
+
+Write-Host ([string]::Concat($frase, " e ela foi concatenada!")) # Concatena com mais algo
+</code>
+</pre>
+
+<p>Para inverter strings, fazemos assim:</p>
+
+<pre>
+<code>
+$frase = "Isso é uma String"
+            
+$novo = [char[]]$frase
+
+[array]::Reverse($novo)
+
+$frase = [string]($novo -join '')
+
+Write-Host $frase
+</code>
+</pre>
+
+<p>Para remover espaços desnecessário de strings, basta usar o <code>Trim</code>, assim:</p>
+
+<pre>
+<code>
+$texto = "        Exemplo de String!          "
+
+Write-Host $texto.Trim()
+</code>
+</pre>
+
+<p>Para transformar todas as letras em maiúsculas e minúsculas, use os métodos <code>ToUpper()</code> e <code>ToLower()</code> do objeto, respectivamente:</p>
+
+<pre>
+<code>
+$frase = "Isso é uma String"
+            
+Write-Host $frase.ToUpper() # Converte pra maiúscula
+
+Write-Host $frase.ToLower() # Converte pra minúscula
+
+# Com char fazemos assim:
+
+Write-Host ([char]::ToUpper('s'))
+</code>
+</pre>
+
+<p>Para ver a quantidade de caracteres de uma string, use o atributo <code>Length</code> do objeto, assim:</p>
+
+<pre>
+<code>
+$frase = "Exemplo de String"
+            
+Write-Host -NoNewLine "Quantidade de caracteres: " $frase.Length "`n"
+</code>
+</pre>
+
+<p>PS: Note que o <code>-NoNewLine</code> faz o Write-Host não pular de linha.</p>
+
+<h3>Operadores</h3>
+
+<p>Basicamente, existem vários tipos de operadores no Powershell.</p>
+
+<p>Veja como é realizada uma contagem de 1 até 10 no Powershell:</p>
+
+<pre>
+<code>
+# Conta de 1 até 10:
+
+1..10
+</code>
+</pre>
+
+<p>Para substituir os nomes de um arquivo de texto por alguma palavra, podemos fazer assim:</p>
+
+<pre>
+<code>
+(Get-Content .\teste.txt) -replace "(pal1|pal2)", "SUBSTITUTO" > novo.txt 
+</code>
+</pre>
+
+<p>Podemos fazer um vetor com números de 1 a 10, assim:</p>
+
+<pre>
+<code>
+$vetor = 1..10
+
+$vetor
+</code>
+</pre>
+
+<p>E consequentemente, podemos verificar se um conteúdo está dentro do vetor ou não:</p>
+
+<pre>
+<code>
+$vetor = 1..10
+
+$vetor -contains 6
+
+$vetor -contains 11
+</code>
+</pre>
+
+<p>E também verificar se os dados é de um determinado tipo:</p>
+
+<pre>
+<code>
+"WPS" -is [int]
+
+"WPS" -is [string]
+</code>
+</pre>
+
+<p>E também converter dados:</p>
+
+<pre>
+<code>
+("07/08/2035").GetType()
+
+"07/08/2035" -as [Datetime]
+
+("07/08/2035" -as [Datetime]).GetType()
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-powershell-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

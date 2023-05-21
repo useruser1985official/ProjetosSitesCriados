@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda PHP Intermediário</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda PHP Intermediário</h1>
+                <menu>
+                    <li><a href="index.php">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-1.html">Tudo sobre PHP Intermediário Parte 1!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-2.html">Tudo sobre PHP Intermediário Parte 2!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-3.html">Tudo sobre PHP Intermediário Parte 3!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-4.html">Tudo sobre PHP Intermediário Parte 4!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-5.html">Tudo sobre PHP Intermediário Parte 5!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-6.html">Tudo sobre PHP Intermediário Parte 6!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-7.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre PHP Intermediário Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre PHP Intermediário Parte 7</h2>
+
+<h3>Mini Portal PHP - Prática da Função Excluir</h3>
+
+<p>Abra a página sites-relacionados para fazermos a opção exclusão, crie o arquivo PHP com o nome excluir-sites, dentro de uma pasta chamada excluir, dentro de admin.</p>
+
+<p>No arquivos sites-relacionados, em excluir coloque o caminho da imagem com o ID, assim:</p>
+
+<pre>
+<code>
+&lt;a href="excluir/excluir-sites.php?id=&lt;?php echo $consulta[$i]['id'] ?&gt;"&gt;Excluir&lt;/a&gt;
+</code>
+</pre>
+
+<p>Abaixo do primeiro endif, crie outro com o aviso da exclusão, mudando o conteúdo do if para "erase".</p>
+
+<p>Esse é o código do arquivo de exclusão, que deverá estar numa pasta excluir, em admin, com o nome excluir-sites:</p>
+
+<pre>
+<code>
+include "../funcao/funcao-deleta.php";
+
+$id = $_REQUEST["id"];
+
+deleta("sites_relacionados", "where id = '$id'");
+
+header("location: ../sites-relacionados.php?env=erase");
+</code>
+</pre>
+
+<p>Faça um arquivo na mesma pasta igual à esse, mas com o nome excluir-portfolio, substituindo o código por esse:</p>
+
+<pre>
+<code>
+include "../funcao/funcao-deleta.php";
+include "../funcao/funcao-select2.php";
+
+$id = $_REQUEST["id"];
+
+$consulta = select("portifolio", "img_destaque", "where id = '$id'");
+
+if($consulta == true) {
+    for($i = 0; $i < count($consulta); $i++) {
+        $excluir_img = $consulta[$i]["img_destaque"];
+    }
+    unlink("../../img/$excluir_img");
+}
+ 
+deleta("portifolio", "where id = '$id'");
+
+header("location: ../portifolio.php?env=erase");
+</code>
+</pre>
+
+<p>Agora, abra a página portifolio, e da mesma forma da página sites-relacionados, coloque o if para exibir a exclusão, pode até ser o mesmo. E da mesma forma, coloque o href para excluir-portifolio com a id.</p>
+
+<h3>Mini Portal PHP - Login Criptografado e Restrição de Acesso</h3>
+
+<p>Primeiro corrigiremos o index.html por index.php, pegue o arquivo (<a href="_media/index.zip">baixe clicando aqui</a>) e faça as correções no request e no formulário.</p>
+
+<p>Vamos criar em admin mesmo, um arquivo com o nome login.php, esse é o código:</p>
+
+<pre>
+<code>
+include "../conexao/conexao.php";
+include "../conexao/fecha-conexao.php";
+include "funcao/funcao-select2.php";
+
+$user = htmlspecialchars(trim(strip_tags($_REQUEST["login"])), ENT_QUOTES);
+$senha = htmlspecialchars(trim(strip_tags($_REQUEST["senha"])), ENT_QUOTES);
+
+// strip_tags() retira as tags (símbolo) de menor e maior.
+
+$consulta = select("user", "*", "where login = '$user'");
+
+if($consulta == true) {
+    for($i = 0; $i < count($consulta); $i++) {
+        // Compara as senhas, o crypt comparará mesmo com criptografia diferente
+        if(crypt($senha, $consulta[$i]["senha"]) == $consulta[$i]["senha"]) {
+            session_start();
+            $_SESSION["usuario"] = $user;
+            $_SESSION["logado"] = true;
+            header("location: sites-relacionados.php");
+        }
+        else {
+            header("location: index.php?erro=senha");
+        }
+    }
+}
+else {
+    header("location: index.php?erro=usuario");
+}
+</code>
+</pre>
+
+<p>PS: A função <code>strip_tags()</code> retirará qualquer &lt; e &gt; digitada (a fim de evitar injeção de códigos entre tags), mas muitas vezes só é necessário usar a filtragem com o htmlspecialchars() mesmo, que transformará esses e outros símnbolos em códigos HTML.</p>
+
+<p>Agora crie um arquivo, na mesma pasta, copiado do index.php, com o nome de restrito.php, mudando o nome para usuário logado na sessão do login, e tirando o formulário de senha, para vermos se existe login.</p>
+
+<p>Agora crie um novo arquivo com o nome restricao.php, com esse código:</p>
+
+<pre>
+<code>
+session_start();
+
+if(isset($_SESSION["logado"])) {
+    
+}
+else {
+    header("location: index.php?erro=negado");
+}
+</code>
+</pre>
+
+<p>E inclua ele em todos as páginas restritas, com o include, antes de tudo, como a restrito.php.</p>
+
+<ul>
+    <li><a href="tudo-sobre-php-intermediario-6.html">Parte Anterior da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

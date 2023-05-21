@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda JQuery</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda JQuery</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-jquery-1.html">Tudo sobre JQuery Parte 1!</a></li>
+                    <li><a href="tudo-sobre-jquery-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre JQuery Parte 2!</a></li>
+                    <li><a href="tudo-sobre-jquery-3.html">Tudo sobre JQuery Parte 3!</a></li>
+                    <li><a href="tudo-sobre-jquery-4.html">Tudo sobre JQuery Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre JQuery Parte 2</h2>
+
+<h3>Eventos de Navegador</h3>
+
+<p>Primeiro, coloque duas imagens, sendo uma para erro, na pasta img do site. Deixe a página limpa e retire inclusive a tag script, deixando apenas a tag que chama o JQuery.</p>
+
+<p>Agora, trabalharemos com um arquivo JS externo, então crie um, e chame ele no head também. Dessa forma o script já é inicializado automaticamente junto com o HTML, possibilitando a criação direta de código no Javascript.</p>
+
+<p>Crie uma estrutura básica no JS assim:</p>
+
+<pre>
+<code>
+$(function() {
+    
+});
+</code>
+</pre>
+
+<p>Agora coloque uma tag img um link de uma imagem inexistente, para dar um erro proposital, que mostra a "imagem quebrada", que nada mais é que a imagem de erro do próprio navegador.</p>
+
+<p>E vamos encapsular todas as tags img, colocando um método atrr(), que selecionará o atributo src e mudará o link da imagem para a selecionada no JQuery, dessa forma:</p>
+
+<pre>
+<code>
+$(function() {
+    $("img").attr("src", "_imagens/erro.png");
+});
+</code>
+</pre>
+
+<p>Dessa forma, todas as tags com img serão alteradas, tenham erro ou não mas no caso, não é o que a gente quer.</p>
+
+<p>Para alterar somente as imagens que derem erro mesmo, usamos um evento de navegador, com a função error, dessa forma:</p>
+
+<pre>
+<code>
+$(function() {
+    $("img").on("error", function() {
+        $(this).attr("src", "_imagens/erro.png");
+    });
+});
+</code>
+</pre>
+
+<p>Podemos também exibir um alerta, com uma variável, assim:</p>
+
+<pre>
+<code>
+$(function() {
+    $("img").on("error", function() {
+        var imagem = $(this).attr("src");
+        alert("Imagem Indisponível!");
+    });  
+});
+</code>
+</pre>
+
+<p>A variável acima foi criada para trabalharmos o caminho dela, que será exibido no alerta, para isso, fazemos dessa forma:</p>
+
+<pre>
+<code>
+$(function() {
+    $("img").on("error", function() {
+        var imagem = $(this).attr("src");
+        alert("Imagem \"" + imagem + "\" Indisponível!");
+        $(this).attr("src", "_imagens/erro.png");
+    });  
+});
+</code>
+</pre>
+
+<p>Isso é útil no momento que estamos criando sites, para sabermos se alguma imagem não foi carregada.</p>
+
+<p>Para pegar o valor da janela do navegador, fazemos assim:</p>
+
+<pre>
+<code>
+$(function() {
+    $("img").width($(window).width());
+});
+</code>
+</pre>
+
+<p>Para entendermos, o width setta o valor, e o (window).width() pega o valor da largura da janela. Ele não vai "acompanhar" o redimensionamento da janela, mas ao atualizar, ele pegará o tamanho atual da janela, caso esteja menor ou maior.</p>
+
+<p>Para pegarmos também a altura, fazemos assim:</p>
+
+<pre>
+<code>
+$(function() {
+    $("img")
+        .width($(window).width())
+        .height($(window).height());
+});
+</code>
+</pre>
+
+<p>Para ele "acompanhar" o redimensionamento da janela, coloque o método resize, assim:</p>
+
+<pre>
+<code>
+$(function() {
+    $(window).resize(function() {
+        $("img")
+        .width($(window).width())
+        .height($(window).height());
+    });
+});
+</code>
+</pre>
+
+<p>Para inicializar também ao atualizar, coloque também o encapsulamento fora da função resize, assim:</p>
+
+<pre>
+<code>
+$(function() {
+    $("img")
+        .width($(window).width())
+        .height($(window).height());
+
+    $(window).resize(function() {
+        $("img")
+        .width($(window).width())
+        .height($(window).height());
+    });
+});
+</code>
+</pre>
+
+<p>Para fazer sumir a imagem ao rolar a imagem, use o evento scroll(), junto com o fadeOut(), assim:</p>
+
+<pre>
+<code>
+$(function() {
+    $(window).scroll(function() {
+        $("img").fadeOut(1000);
+    });
+});
+</code>
+</pre>
+
+<p>Para ele sumir depois de determinado ponto do site, faça assim, usando o scrollTop():</p>
+
+<pre>
+<code>
+$(function() {
+    $(window).scroll(function() {
+        var topo = $(window).scrollTop();
+        alert(topo);
+    });
+});
+</code>
+</pre>
+
+<p>Dessa forma, dá pra entendermos como funciona o scrollTop(), para podemos trabalhar com ela, dessa forma:</p>
+
+<pre>
+<code>
+$(function() {
+    $(window).scroll(function() {
+        var topo = $(window).scrollTop();
+        
+        if(topo > 400) {
+            $("img").fadeOut(1000);
+        }
+        else {
+            $("img").fadeIn(1000);
+        }
+    });
+});
+</code>
+</pre>
+
+<p>Para entendermos, isso fará a imagem sumir após um ponto, com o método fadeOut(), e fará aparecer se voltar antes desse ponto com o fadeIn().</p>
+
+<p>Resumidamente, o fadeOut() desaparece com o elemento, e o fadeIn() aparece com ele.</p>
+
+<p>Podemos criar um formulário com dois inputs do tipo number e um input do tipo button, sem precisar colocar um action nem oninput e nem reset para trabalhar com os elementos dele, veja o código no qual mudamos em tempo real o tamanho de duas imagens:</p>
+
+<pre>
+<code>
+$(function() {            
+    $("#imagem1").height(300); // Id da imagem, inicializada com um tamanho padrão.
+    $("#imagem2").width(200); // Id da imagem, inicializaa com um tamanho padrão.
+
+    $("#form1").on("input", function() { // Id do formulário
+        var img1 = $("#num1").val(); // Id do input, puxando o valor dele
+        var img2 = $("#num2").val(); // Id do input, puxando o valor dele
+
+        $("#imagem1").height(img1); // Id da imagem
+        $("#imagem2").width(img2); // Id da imagem
+    });
+    
+    $("#resetar").click(function() {
+        $("#imagem1").height(300);
+        $("#imagem2").width(200);
+        $("#num1").val(300);
+        $("#num2").val(200);
+    });
+});
+</code>
+</pre>
+
+<h3>Eventos de Mouse</h3>
+
+<p>Limpe novamente a página, e crie um arquivo CSS e chame ela no head com a tag link.</p>
+
+<p>Não trabalharemos com inputs e botões porque eles já tem um evento padrão pelo HTML, vamos usar div (que é uma tag "vazia").</p>
+
+<p>Coloque uma div com a class ex1 com o texto aguardando ação, e uma p com a class ev1 escrito um clique. Esse é o CSS dele:</p>
+
+<pre>
+<code>
+.ex1 {
+    width: 460px;
+    padding: 20px;
+    background-color: #1e90ff;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+}
+
+p, input {
+    width: 480px;
+    padding: 5px;
+    background-color: #000;
+    text-shadow: 1px 1px 10px black;
+    margin: 0px auto 10px auto;
+    text-align: center;
+    color: #fff;
+    border: 5px solid #ccc;
+}
+
+input.ev3 {
+    margin-left: 397px;
+}
+</code>
+</pre>
+
+<p>Agora encapsularemos a classe ev1 no arquivo javascript do JQuery, para que ao clicar, com o evento click(), altere a cor do elemento, assim:</p>
+
+<pre>
+<code>
+$(function() {
+    $(".ev1").click(function() {
+        $(this).css("background", "#666");
+    });
+});
+</code>
+</pre>
+
+<p>Agora criaremos uma variável, fora da função de click, que também será usada em outras funções que criaremos para outros eventos, assim:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    
+    $(".ev1").click(function() {
+        $(this).css("background", "#666");
+    });
+});
+</code>
+</pre>
+
+<p>Para alterar a frase "aguardando ação" da div criada, fazemos assim, com o método text():</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    
+    $(".ev1").click(function() {
+        $(this).css("background", "#666");
+        ex.text("Você Clicou!");
+    });
+});
+</code>
+</pre>
+
+<p>Para trabalhar com clique duplo, usamos o método dblclick(), crie mais um p com a class ev2, e coloque no javascript o código assim, sem apagar o primeiro:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    
+    $(".ev1").click(function() {
+        $(this).css("background", "#666");
+        ex.text("Você Clicou!");
+    });
+    
+    $(".ev2").dblclick(function() {
+        $(this).css("background", "#666");
+        ex.text("Você deu Dois Cliques!");
+    });
+});
+</code>
+</pre>
+
+<p>Agora crie um input de text (esse é o único que será feito com um input) com a class ev3, para trabalharmos com o foco, usando focusin() e no javascript coloque esse código:</p>
+
+<pre>
+<code>
+$(".ev3").focusin(function() {
+    $(this).css("background", "#666");
+    ex.text("Você Focou no Elemento!");
+}).focusout(function() {
+    $(this).css("background", "#000");
+    ex.text("Você Tirou o Foco no Elemento!");
+});
+</code>
+</pre>
+
+<p>PS: Pode ver que ele tem junto, um método focusout() para retirar o foco do elemento.</p>
+
+<p>Crie mais uma tag p com classe ev4, para disparar um evento com o método hover(), e coloque esse código no javascript:</p>
+
+<pre>
+<code>
+$(".ev4").hover(function() {
+    $(this).css("background", "#666");
+    ex.text("Você Passou o Mouse!");
+});
+</code>
+</pre>
+
+<p>Crie uma tag p com classe ev5, que disparará o evento ao clicar e soltar (com mousedown() para quando clicar e mouseup() para quando soltar), e coloque esse código no javascript:</p>
+
+<pre>
+<code>
+$(".ev5").mousedown(function() {
+    $(this).css("background", "#666");
+    ex.text("Você Apertou o Botão do Mouse!");
+}).mouseup(function() {
+    $(this).css("background", "#000");
+    ex.text("Você Soltou o Botão do Mouse!");
+});
+</code>
+</pre>
+
+<p>Agora crie um p com classe ev6, que disparará um evento ao passar o mouse com mouseenter() e outro ao tirar com o mouseout(), dessa forma:</p>
+
+<pre>
+<code>
+var a = 0;
+$(".ev6").mouseenter(function() {
+    a += 1;
+    $(this).css("background", "#666");
+    ex.text("Entradas do Mouse: " + a);
+}).mouseout(function() {
+    $(this).css("background", "#000");
+    ex.text("Saída do Mouse!");
+});
+</code>
+</pre>
+
+<p>PS: Note que criamos uma variável para contar as vezes que a entrada ocorreu, e que esta é incrementada no evento.</p>
+
+<p>Note também que no mouseenter() e mouseout(), só funciona nos elementos especificados no HTML, nos filhos deles não funciona, como por exemplo, numa tag span dentro desse p.</p>
+
+<p>Para vermos a diferença, crie uma tag p com class ev7, que trabalharemos com passagem de mouse também, mas dessa vez com mouseover(), dessa forma:</p>
+
+<pre>
+<code>
+var b = 0;
+$(".ev7").mouseover(function() {
+    b += 1;
+    $(this).css("background", "#666");
+    ex.text("Entradas do Mouse: " + b);
+}).mouseleave(function() {
+    $(this).css("background", "#000");
+    ex.text("Saída do Mouse!");
+});
+</code>
+</pre>
+
+<p>No caso acima, as tags filhas não dão esse problema, só que ao passar nas filhas ele executa novamente, mesmo sem tirar o mouse do elemento pai.</p>
+
+<p>PS: No lugar do mouseout() pode ser usado mouseleave().</p>
+
+<p>Para finalizar, crie uma tag p com a class ev8 para registrarmos os movimentos de mouse, com o método mousemove(), que terá um parâmetro, esse é o código:</p>
+
+<pre>
+<code>
+$(".ev8").mousemove(function(move) {
+    var localx = move.pageX;
+    var localy = move.pageY;
+
+    ex.text("Movimento X: " + localx + " - Movimento Y: " + localy);
+});
+</code>
+</pre>
+
+<p>Código completo do JQuery abaixo:</p>
+
+<pre>
+<code>
+$(function() {
+    var ex = $(".ex1");
+    
+    $(".ev1").click(function() {
+        $(this).css("background", "#666");
+        ex.text("Você Clicou!");
+    });
+    
+    $(".ev2").dblclick(function() {
+        $(this).css("background", "#666");
+        ex.text("Você deu Dois Cliques!");
+    });
+    
+    $(".ev3").focusin(function() {
+        $(this).css("background", "#666");
+        ex.text("Você Focou no Elemento!");
+    }).focusout(function() {
+        $(this).css("background", "#000");
+        ex.text("Você Tirou o Foco no Elemento!");
+    });
+    
+    $(".ev4").hover(function() {
+        $(this).css("background", "#666");
+        ex.text("Você Passou o Mouse!");
+    });
+    
+    $(".ev5").mousedown(function() {
+        $(this).css("background", "#666");
+        ex.text("Você Apertou o Botão do Mouse!");
+    }).mouseup(function() {
+        $(this).css("background", "#000");
+        ex.text("Você Soltou o Botão do Mouse!");
+    });
+    
+    var a = 0;
+    $(".ev6").mouseenter(function() {
+        a += 1;
+        $(this).css("background", "#666");
+        ex.text("Entradas do Mouse: " + a);
+    }).mouseout(function() {
+        $(this).css("background", "#000");
+        ex.text("Saída do Mouse!");
+    });
+    
+    var b = 0;
+    $(".ev7").mouseover(function() {
+        b += 1;
+        $(this).css("background", "#666");
+        ex.text("Entradas do Mouse: " + b);
+    }).mouseleave(function() {
+        $(this).css("background", "#000");
+        ex.text("Leave do Mouse!");
+    });
+    
+    $(".ev8").mousemove(function(move) {
+        var localx = move.pageX;
+        var localy = move.pageY;
+        
+        ex.text("Movimento X: " + localx + " - Movimento Y: " + localy);
+    });
+});
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-jquery-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-jquery-3.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

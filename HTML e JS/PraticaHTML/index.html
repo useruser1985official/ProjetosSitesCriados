@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Título da Página em HTML</title>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div id="interface">
+            <section id="corpo">
+                <nav id="menu">
+                    <h1>Menu Principal</h1>
+                    <ul>
+                        <li><a href="index.html">P&aacute;gina Inicial</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                </nav>
+                
+                <noscript>
+                    Ative o Javascript do seu navegador!
+                </noscript>
+                <h1>Ol&aacute;, Mundo!</h1>
+                <h2>Primeiros passos em HTML5.</h2>
+
+                <p>PS: HTML <b>n&atilde;o</b> &eacute; linguagem de programa&ccedil;&atilde;o, nem CSS.</p>
+                
+                <script>
+                    document.write("Mas Javascript &eacute;!<br/>");
+                </script>
+
+                <p>A, E, I, O, U, sou do Curuz&uacute;... ♫♪</p>
+
+                <h3>&#x1F596;</h3>
+
+                <h3>&#x1F3B8;</h3>
+
+                <h3>&#x1FA98;</h3>
+
+                <a href="https://www.google.com.br/" target="_blank" rel="nofollow">Clique Aqui para Abrir o Google!</a>
+            
+                <br/>
+
+                <br/>
+
+                <img src="_imagens/gato-violao.gif" alt="Gato e Violão"/>
+
+                <br/>
+
+                <picture id="luta">
+                    <source media="(max-width: 480px)" srcset="_imagens/luta-peq.jpg" type="image/jpeg"/>
+                    <source media="(max-width: 960px)" srcset="_imagens/luta-med.jpg" type="image/jpeg"/>
+                    <img src="_imagens/luta-grd.jpg" alt="Luta"/>
+                </picture>
+
+                <br/>
+
+                <figure class="foto-leg">
+                    <img src="_imagens/farol.jpg" id="fig-ex"/>
+                    <figcaption>
+                        <h3>Farol da Barra</h3>
+                        <p>Salvador - BA</p>
+                    </figcaption>
+                </figure>
+            </section>
+            <aside id="lateral">
+                <h1>Isso ficará &agrave; direita!</h1>
+
+                <table id="tabela">
+                    <caption>Lista de Teste</caption>
+                    <thead>
+                        <tr>
+                            <th class="ce">Texto</th>
+                            <th class="cd">N&uacute;mero</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ce">Um</td>
+                            <td class="cd">1</td>
+                        </tr>
+                        <tr>
+                            <td class="ce">Dois</td>
+                            <td class="cd">2</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <article id="noticias">
+                    <h2>Isso será formatado!</h2>
+                    <p>Isso não.</p>
+                    <p>Nem isso.</p>
+                </article>
+
+                <iframe id="youtube" src="https://www.youtube.com/embed/WRcs8rebZtA"></iframe>
+
+                <br/>
+                <br/>
+            </aside>
+            <footer id="rodape">
+                <p>Isso ficar&aacute; embaixo pra n&atilde;o encavalar o layout do site.</p>
+            </footer>
+        </div>
+    </body>
+</html>

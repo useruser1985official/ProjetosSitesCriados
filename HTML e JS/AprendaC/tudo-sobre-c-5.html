@@ -1,0 +1,410 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda C</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-c-1.html">Tudo sobre C Parte 1!</a></li>
+                    <li><a href="tudo-sobre-c-2.html">Tudo sobre C Parte 2!</a></li>
+                    <li><a href="tudo-sobre-c-3.html">Tudo sobre C Parte 3!</a></li>
+                    <li><a href="tudo-sobre-c-4.html">Tudo sobre C Parte 4!</a></li>
+                    <li><a href="tudo-sobre-c-5.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C Parte 5!</a></li>
+                    <li><a href="tudo-sobre-c-6.html">Tudo sobre C Parte 6!</a></li>
+                    <li><a href="tudo-sobre-c-7.html">Tudo sobre C Parte 7!</a></li>
+                    <li><a href="tudo-sobre-c-8.html">Tudo sobre C Parte 8!</a></li>
+                    <li><a href="tudo-sobre-c-9.html">Tudo sobre C Parte 9!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C Parte 5</h2>
+
+<h3>Argumentos para main, argc e argv</h3>
+
+<p>Quando usamos passagem de parâmetros para a função main, podemos chamar um programa através do terminal pelo nome, podendo enviar um valor, que pode ser tratado dentro do programa através de dois parâmetros, <code>argc</code> e <code>argv</code>, na função main.</p>
+
+<p>A <code>int argc</code> guarda a quantidade de parâmetros informados (1, 2, 3, etc), e a <code>char *argv[]</code> é um array que serve como ponteiro para a matriz de caracteres que armazena os argumentos.</p>
+
+<p>Veja um exemplo de programa que receberá um parâmetro (rodando pelo terminal):</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;locale.h&gt;
+
+int main(int argc, char *argv[]) {
+    setlocale(LC_ALL,"portuguese");
+
+    int cont = 1;
+
+    printf("Argumentos: %d\n", argc);
+
+    while(cont < argc) {
+        printf("\nParâmetro Nº%d: %s", cont, argv[cont]);
+        cont++;
+    }
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: O primeiro argumento sempre é o nome do programa, que é exibido quando não é passado nenhum outro argumento.</p>
+
+<p>Assim podemos chamar o programa pelo terminal passando um parâmetro com o nome do programa, sem precisar o ".exe" no final (por exemplo aplicacaoc ao invés de aplicacaoc.exe). E podemos passar outros parâmetros junto com o programa. Isso é útil para programas como navegadores.</p>
+
+<h3>Manipulando Datas</h3>
+
+<p>Para manipular datas em C, podemos fazer assim (importe time.h):</p>
+
+<pre>
+<code>
+char data[9];
+
+printf("\n%s", _strdate(data));
+</code>
+</pre>
+
+<p>Caso deseje formatar datas e horas, faça isso:</p>
+
+<pre>
+<code>
+char* semana[7] = {"Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"};
+char sem[2];
+char data[20];
+char hora[20];
+
+struct tm *timeinfo;
+time_t hoje;
+
+time(&hoje);
+timeinfo = localtime(&hoje);
+
+strftime(sem, 2, "%w", timeinfo);
+
+strftime(data, 20, "%d/%m/%Y", timeinfo);
+
+strftime(hora, 20, "%H:%M:%S", timeinfo);
+
+int ds = strtol(sem, NULL, 10);
+
+printf("%s\n", semana[ds]);
+printf("%s\n", data);
+printf("%s\n", hora);
+</code>
+</pre>
+
+<h3>Enums em C</h3>
+
+<p>As enumerations definem um novo tipo de variável e limita desde logo os valores.</p>
+
+<p>Basicamente, um Enum se define assim:</p>
+
+<pre>
+<code>
+typedef enum {dom, seg, ter, qua, qui, sex, sab} semana;
+</code>
+</pre>
+
+<p>E podemos inicializar os valores, assim:</p>
+
+<pre>
+<code>
+typedef enum {dom = 1, seg, ter, qua, qui, sex, sab} semana;
+</code>
+</pre>
+
+<p>Da forma acima, os outros valores automaticamente serão atribuídos a 2, 3, 4, 5, 6 e 7. Se inicializar de outro número (como 10, ele irá pro 11, 12, etc.).</p>
+
+<p>Dessa forma, podemos verificar assim:</p>
+
+<pre>
+<code>
+typedef enum {dom = 1, seg, ter, qua, qui, sex, sab} semana;
+
+semana dias;
+
+printf("Digite o número do dia da semana: ");
+scanf("%d", &dias);
+
+printf("\n");
+
+if(dias >= dom && dias <= sab) {
+    switch(dias) {
+        case dom:
+            printf("%d - Domingo\n", dias);
+            break;
+        case seg:
+            printf("%d - Segunda\n", dias);
+            break;
+        case ter:
+            printf("%d - Terça\n", dias);
+            break;
+        case qua:
+            printf("%d - Quarta\n", dias);
+            break;
+        case qui:
+            printf("%d - Quinta\n", dias);
+            break;
+        case sex:
+            printf("%d - Sexta\n", dias);
+            break;
+        case sab:
+            printf("%d - Sábado\n", dias);
+            break;
+    }
+}
+else {
+    printf("Dia Inválido!\n");
+}
+</code>
+</pre>
+
+<p>Podemos também correr os dados de um enum num vetor, assim:</p>
+
+<pre>
+<code>
+semana dias = dom;
+
+for(int i = dias; i <= sab; i++) {
+    printf("%d\n", dias);
+    dias++;
+}
+</code>
+</pre>
+
+<h3>Como Criar Arquivos de Cabeçalho em C</h3>
+
+<p>Quando trabalhamos com projetos grandes, costumamos criar muitas funções para fazer inúmeras tarefas, o que deixa o código muito confuso, para isso podemos criar nosso próprios arquivos de cabeçalho. Assim como existem arquivos padrões como o stdio.h, podemos fazer nosso próprios para simplificar programas.</p>
+
+<p>Pra entendermos, abra um novo projeto em C primeiro. E em File, selecione File de novo pra esolher o arquivo header (H) e salve na pasta do projeto atual. O header no exemplo terá o nome calculos.h.</p>
+
+<p>Coloque esse código no calculos.h:</p>
+
+<pre>
+<code>
+#ifndef CALCULOS_H_INCLUDED
+#define CALCULOS_H_INCLUDED
+
+#define _PI 3.14159
+int quadrado(int x);
+int cubo(int x);
+
+#endif // CALCULOS_H_INCLUDED
+</code>
+</pre>
+
+<p>Agora criaremos um novo File da mesma forma, mas um C source com o nome calculos.c, nele será escrito esses códigos:</p>
+
+<pre>
+<code>
+#include "calculos.h"
+
+int quadrado(int x) {
+    return x * x;
+}
+
+int cubo(int x) {
+    return x * x * x;
+}
+</code>
+</pre>
+
+<p>E no main.c, colocamos o calculos.h incluído entre aspas, por estar na mesma pasta, dessa forma, veja o código completo abaixo:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "calculos.h"
+
+int main() {
+    printf("Usando headers:\n");
+    int y = 5;
+    int quadr = quadrado(y);
+    int cub = cubo(y);
+
+    printf("Quadrado de %d: %d\n", y, quadr);
+    printf("Cubo de %d: %d\n", y, cub);
+    printf("Valor da constante PI: %f\n", _PI);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: Em todos os arquivos, adicione o Debug e o Release.</p>
+
+<p>Ao incluir o include com aspas (tipo <code>#include "funcoes.h"</code>), como feito com os arquivos de cabeçalho, o compilador apenas procurará na mesma pasta onde está o código-fonte a ser compilado. Quando são usadas tags (como <code>#include &lt;stdlib.h&gt;</code>) ele procurará na pasta padrão do compilador (no caso do Linux, poderia ser em <code>/usr/include</code>, por exemplo).</p>
+
+<h3>Criar Makefile em Linux</h3>
+
+<p>Basicamente, podemos pegar os códigos-fontes anteriores e colocá-los numa mesma pasta. Nessa pasta crie também um arquivo com o nome makefile, sem extensão, e coloque esse código:</p>
+
+<pre>
+<code>
+contas: main.o calculos.o
+    gcc main.o calculos.o -o contas -no-pie
+
+main.o: main.c calculos.h
+    gcc -c main.c -o main.o
+
+calculos.o: calculos.c calculos.h
+    gcc -c calculos.c -o calculos.o
+
+clean:
+    rm -f *.o
+</code>
+</pre>
+
+<p>No caso ele executará de baixo pra cima, e não esqueça da tabulação. Para compilar basta digitar no terminal <code>make</code> e executar o arquivo digitando <code>./contas</code>.</p>
+
+<h3>Ponteiros - Introdução</h3>
+
+<p>Um ponteiro é uma variável especial que contém um endreço de memória armazenado, em vez de dados comuns. Esse endereço é, no geral, a posição na memória de uma outra variável. Dessa forma, a variável que contém esse endereço aponta para a outra variável. Daí o nome "ponteiro".</p>
+
+<p>O domínio e o emprego dos ponteiros é extremamente importante para que seja possível programar com eficiência e desenvoltura em C. Eles são úteis em inúmeros contextos como por exemplo, no suporte à rotinas de alocação dinâmica de memória e na construção ADTs (Abstract Data Types), como por exemplo, pilhas, listas e filas.</p>
+
+<p>A figura a seguir ilustra a ideia geral de funcionamento de um ponteiro:</p>
+
+<img src="_imagens/ponteiros.jpg" alt="Ponteiros"/>
+
+<p>Na figura, temos representados endereços na memória RAM do computador, e um conjunto de variáveis criadas nesses endereços, podemos ver que no endereço 5000 existe uma variável ponteiro, cujo conteúdo é o endereço de memória 5004, ou seja, esse ponteiro aponta para a variável que está localizada no endereço 5004 da memória RAM.</p>
+
+<p>Uma declaração de ponteiro consiste em um tipo, seguido do caracter <code>*</code> (operador de indireção ou de referência) e do nome que se deseja dar à variável. A sintaxe a seguir mostra a forma de se declarar um ponteiro:</p>
+
+<pre>
+<code>
+char *nome;
+</code>
+</pre>
+
+<p>O tipo pode ser qualquer um válido em C, define o tipo da variável que o ponteiro pode apontar. Só lembrando que os ponteiros e as variáveis que eles apontam devem ser do mesmo tipo.</p>
+
+<p>Veja o código de exemplo do uso deles:</p>
+
+<pre>
+<code>
+int main() {
+    int *x, valor, y;
+    valor = 35;
+    x = &amp;valor;
+    y = *x;
+
+    printf("Endereço da variável comum valor: %p\n", &amp;valor);
+    printf("Lendo o conteúdo do ponteiro x: %p\n", x);
+    printf("Endereço da variável ponteiro x: %p\n", &amp;x);
+    printf("Conteúdo da variável apontada por x: %d\n", *x);
+    printf("Conteúdo da variável comum y: %d\n", y);
+}
+</code>
+</pre>
+
+<p>No código acima, o <code>*x</code> é um ponteiro, as outras variáveis declaradas na mesma linha não são ponteiros, pra elas serem teriam que também ter o asterisco.</p>
+
+<p>Como o ponteiro armazena o endereço de memória (apenas o endereço, não armazena o conteúdo da variável apontada), ao colocarmos o <code>&amp;</code> em <code>&amp;valor</code>, o x pegará o endereço da memória, e não o conteúdo da variável valor. O &amp; indica o endereço da variável na memória.</p>
+
+<p>E o y pegará o valor que está sendo apontado para *x (o conteúdo, não o endereço).</p>
+
+<p>PS: Observe que no print formatado, usamos %p por se tratar de ponteiros. Observe também que os endereços de memória são exibidos em hexadecimal.</p>
+
+<p>Resumindo, o & pega o endereço de memória, ou envia conteúdos para ele. Para exibição usa a máscara %p.</p>
+
+<p>O * pega o conteúdo que está no endereço apontado, ou envia para o mesmo. Usa as máscaras do tipo do valor.</p>
+
+<p>Com isso, podemos manipular variáveis independente do escopo das mesmas, podendo fazer isso dentro ou fora da função e tudo mais, por mexer diretamente no endereço de memória, que sempre será o mesmo durante a execução do programa. Isso cria várias possibilidades de manipulação de variáveis nos programas futuros.</p>
+
+<p>Podemos fazer algo assim, por exemplo:</p>
+
+<pre>
+<code>
+*x = 20;
+</code>
+</pre>
+
+<p>PS: Devemos sempre colocar o endereço (&amp;) em variáveis criadas sem ponteiro para pegar o endereço da mesma. Em variáveis criadas com ponteiros só colocamos ele para pegar o endereço de memória do ponteiro (ele sem nada tem o endereço da outra variável armazenada). Veja o exemplo abaixo:</p>
+
+<pre>
+<code>
+int num = 50;
+int *pont;
+
+pont = &amp;num;
+
+printf("Endereço de num: %p\n", &num);
+printf("Conteúdo de num: %d\n", num);
+printf("Endereço de pont: %p\n", &pont);
+printf("Endereço apontado por pont: %p\n", pont);
+printf("Conteúdo apontado por pont: %d\n", *pont);
+</code>
+</pre>
+
+<p>PS: No final do programa, é recomendarmos usarmos o free para excluir o ponteiro, liberando memória, assim:</p>
+
+<pre>
+<code>
+free(pont);
+</code>
+</pre>
+
+<h3>Ponteiros - Indireção Múltipla</h3>
+
+<p>Podemos ter um ponteiro que aponte para um outro ponteiro, o qual por sua vez aponta para uma variável comum com um valor armazenado na memória.</p>
+
+<p>Chamamos a essa técnica de Indireção Múltipla, ou ainda Ponteiros para Ponteiros, em contraste com a Indireção Simples, que ocorre quando um ponteiro aponta para uma variável diretamente.</p>
+
+<p>Um ponteiro comum pode ser representado da seguinte forma:</p>
+
+<img src="_imagens/ponteiro-comum.jpg" alt="Ponteiro Comum"/>
+
+<p>Já um ponteiro para ponteiro pode ser representado assim:</p>
+
+<img src="_imagens/ponteiro-ponteiros.jpg" alt="Ponteiro de Ponteiros"/>
+
+<p>Um ponteiro para ponteiro deve ser declarado de forma especial. Para isso, adicionamos mais um caractere * na frente do nome da variável ponteiro em sua declaração. Por exemplo <code>int **valor;</code>.</p>
+
+<p>Essa declaração cria um ponteiro de nome valor, o qual irá apontar para outro ponteiro, o qual por sua vez aponta para uma variável do tipo int.</p>
+
+<p>PS: Neste exemplo, valor não é um ponteiro para um número inteiro, e sim um ponteiro para um ponteiro de inteiro.</p>
+
+<p>Veja um exemplo de uso abaixo:</p>
+
+<pre>
+<code>
+int main() {
+    int a = 40;
+    int *pont1; // Ponteiro normal.
+    int **pont2; // Ponteiro de ponteiros
+
+    pont1 = &amp;a; // Aponta para a.
+    pont2 = &amp;pont1; // Aponta para pont1, na prática aponta também pra a, mas ele não pode apontar diretamente pra a.
+
+    printf("O endereço da variável é: %p\n", &amp;a);
+    printf("O endereço do ponteiro pont1 é: %p\n", &amp;pont1);
+    printf("O endereço do ponteiro pont2 é: %p\n", &amp;pont2);
+    printf("O endereço apontado por pont1 é: %p\n", pont1);
+    printf("O endereço apontado por pont2 é: %p\n", pont2);
+    printf("E o valor armazenado em a é: %d\n", **pont2);
+}
+</code>
+</pre>
+
+<p>Caso precise declarar um ponteiro como nulo, use <code>NULL</code> e inclua a bibioteca <code>&lt;stddef.h&gt;</code>.</p>
+
+<ul>
+    <li><a href="tudo-sobre-c-4.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-c-6.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

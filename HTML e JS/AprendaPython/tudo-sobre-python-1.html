@@ -1,0 +1,495 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Python</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Python</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-python-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Python Parte 1!</a></li>
+                    <li><a href="tudo-sobre-python-2.html">Tudo sobre Python Parte 2!</a></li>
+                    <li><a href="tudo-sobre-python-3.html">Tudo sobre Python Parte 3!</a></li>
+                    <li><a href="tudo-sobre-python-4.html">Tudo sobre Python Parte 4!</a></li>
+                    <li><a href="tudo-sobre-python-5.html">Tudo sobre Python Parte 5!</a></li>
+                    <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
+                    <li><a href="tudo-sobre-python-7.html">Tudo sobre Python Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Python Parte 1</h2>
+            
+<h3>Primeiros Comandos em Python</h3>
+
+<p>Para abrir o Python em Windows, tenha previamente o interpretador Python instalado (Linux e Mac costumam ter ele instalado nativamente). Se tiver com a variável de ambiente instalada, basta apenas digitar <code>python</code>.</p>
+
+<p>O primeiro comando usado é o <code>print</code>, para escrever algo na tela, dessa forma:
+
+<pre>
+<code>
+print("Olá, Mundo")
+</code>
+</pre>
+
+<p>PS: No Python não se usa ponto e vírgula, diferente do que acontece em outras linguagens como Java, C++, PHP, C, Javascript e etc., o final de comando é dado com o enter do teclado. Também pode se usar variáveis acentuadas.</p>
+
+<p>Para exibir números para executar operações aritméticas, você pode fazer da mesma forma (sem as aspas, por não serem strings):</p>
+
+<pre>
+<code>
+print(7 + 4)
+</code>
+</pre>
+
+<p>O <code>+</code> também é usado como concatenação no Python, mas tem casos que concatenação com vírgula (<code>,</code>) funcionará melhor (como no caso de concatenar números e strings), tipo essa:</p>
+
+<pre>
+<code>
+print("Ano", 1998)
+</code>
+</pre>
+
+<p>PS: No caso de números, você pode fazer as operações aritméticas diretamente, simplesmente digitando eles sem nada, como <code>8 + 5</code> e confirmar (lembrando que isso só funciona trabalhando diretamente no terminal, em arquivos py use o print). Com strings, apesar de funcionar, exibirá as aspas, nesse caso, é preferível usar o comando print normalmente (evite espaços no final e início das aspas).</p>
+
+<p>Para usar variáveis em Python, é simples, como em qualquer linguagem de programação. Só lembre de concatenar variáveis com vírgulas. Veja um exemplo:</p>
+
+<pre>
+<code>
+nome = "Jorge"
+idade = 40
+peso = 82.6
+print(nome, idade, peso)
+</code>
+</pre>
+
+<p>Para fazer o mesmo script acima, mas podendo escolher os dados digitados, usamos o comando <code>input</code>, dessa forma:</p>
+
+<pre>
+<code>
+nome = input("Qual o seu nome?")
+idade = input("Qual é sua idade?")
+peso = input("Quanto você pesa?")
+print(nome, idade, peso)
+</code>
+</pre>
+
+<p>Para salvar um script Python, ele deverá ter a extensão py. Pra executar ele, abra o CMD, use e execute <code>python nomedoarquivo.py</code> (Só não esqueça de escolher a opção UTF-8 do editor para ler acentos, até mesmo se for no bloco de notas).</p>
+    
+<p>Agora vamos criar um script que leia o nome de uma pessoa e mostre uma mensagem, de acordo com o valor digitado. Dessa forma:</p>
+
+<pre>
+<code>
+nome = input("Qual o seu nome?")
+print("Olá,", nome, "! Prazer em te conhecer!")
+</code>
+</pre>
+
+<p>Vamos criar também um que leia o dia, o mês e ano digitado, e mostre uma mensagem com a data formatada, dessa forma:</p>
+
+<pre>
+<code>
+dia = input("Digite o dia desejado: ")
+mes = input("Digite o mês desejado: ")
+ano = input("Digite o ano desejado: ")
+print("A data digitada foi", dia , "de", mes, "de", ano)
+</code>
+</pre>
+
+<p>PS: Se quiser limpar o terminal Python, use Ctrl L.</p>
+
+<p>Criaremos um script que somará dois números também, dessa forma:</p>
+
+<pre>
+<code>
+num1 = int(input("Digite o primeiro número: "))
+num2 = int(input("Digite o segundo número: "))
+res = num1 + num2
+print("A soma é", res)
+</code>
+</pre>
+
+<p>Para escrever comentários em Python, basta colocar um <code>#</code> na frente do código para cada linha, e três aspas para tudo que vir depois delas virar comentário.</p>
+
+<pre>
+<code>
+# Exemplo de comentário em Python.
+
+print("Isso será executado normalmente")
+
+"""Tudo que vier daqui pra cá será comentário.
+Isso também virou comentário.
+Isso também."""
+</code>
+</pre>
+
+<p>PS: Em Linux é comum em scripts de várias linguagem ter o shell indicado no começo, por uma hashtag, e scripts Python também costumam ter o interpretador indicado, e o padrão é a versão 2 (no caso, <code>#!/usr/bin/env python</code>), para rodar scripts em Python 3, coloque <code>#!/usr/bin/env python3</code>. Isso será considerado comentário também caso rode o mesmo script num interpretador Python de outro sistema, como o Windows.</p>
+
+<h3>Tipos Primitivos e Saída de Dados</h3>
+
+<p>Como sabemos, se não colocarmos os tipos primitivos nas variáveis, costumam acontecer alguns erros, como no exemplo abaixo:</p>
+
+<pre>
+<code>
+num1 = input("Digite o primeiro número: ")
+num2 = input("Digite o segundo número: ")
+res = num1 + num2
+print(res)
+</code>
+</pre>
+
+<p>No código acima, as variáveis estão sendo identificadas como strings, se somássemsos um número qualquer ele os concatenaria (tipo 3 + 2 daria 32). Para resolver isso, basta declarar os tipos primitivos no input, assim:</p>
+
+<pre>
+<code>
+num1 = int(input("Digite o primeiro número: "))
+num2 = int(input("Digite o segundo número: "))
+res = num1 + num2
+print(res)
+</code>
+</pre>
+
+<p>No Python, os dados primitivos são identificados dessa forma:</p>
+
+<table>
+    <tr>
+        <th>Dado Primitido</th>
+        <th>Exemplos</th>
+    </tr>
+    <tr>
+        <td>int</td>
+        <td>90</td>
+    </tr>
+    <tr>
+        <td>float</td>
+        <td>10.9</td>
+    </tr>
+    <tr>
+        <td>bool</td>
+        <td>True</td>
+    </tr>
+    <tr>
+        <td>str</td>
+        <td>"Exemplo"</td>
+    </tr>
+</table>
+
+<p>Veja um exemplo de uso de tipos primitivos (strings podem estar em aspas duplas ou simples):</p>
+
+<pre>
+<code>
+num = 50
+real = 9.85
+frase = "Isso é uma String"
+logico = True
+</code>
+</pre>
+
+<p>Se quiser ver o tipo de variável no Python, basta usar o <code>type</code>, assim:</p>
+
+<pre>
+<code>
+num = "90"
+real = int(num)
+
+print(type(num))
+print(type(real))
+</code>
+</pre>
+
+<p>Normalmente, faríamos isso numa concatenação:</p>
+
+<pre>
+<code>
+n1 = int(input("Digite um valor: "))
+n2 = int(input("Digite outro: "))
+s = n1 + n2
+print("A soma entre", n1, "e", n2, "vale", s)
+</code>
+</pre>
+
+<p>Mas para evitar muitas aspas e vírgulas, podemos usar o parâmetro <code>.format</code> e colocar chaves dentro da string (máscaras no Python, que podem estar vazias ou com identificadores dentro). Veja um exemplo:</p>
+
+<pre>
+<code>
+n1 = int(input("Digite um valor: "))
+n2 = int(input("Digite outro: "))
+s = n1 + n2
+print("A soma entre {} e {} vale {}".format(n1, n2, s))
+</code>
+</pre>
+
+<p>Ao usar float com números, ele aparecerá sempre com ponto, mesmo não havendo frações, e se usar boolean, qualquer valor será identificado como true (o false aparece ao dar enter sem citar valores).</p>
+
+<p>Em versões mais antigas do Python podemos ver essa forma de formatação, bastante semelhante com o C (inclusive com as mesmas máscaras básicas):</p>
+
+<pre>
+<code>
+numero = 50
+real = 9.85
+frase = "Exemplo de string"
+
+print("Inteiro.: %d" % numero) # Atenção que é porcentagem, não vírgula, nesse caso.
+print("Real....: %.2f" % real)
+print("String..: %s" % frase)
+</code>
+</pre>
+
+<p>PS: No caso de usar mais de um valor num mesmo print, faça assim:</p>
+
+<pre>
+<code>
+print("Inteiro.: %d\nReal....: %.2f\nString..: %s" % (numero, real, frase))
+</code>
+</pre>
+
+<p>Podemos também mostrar com valores booleanos, se um valor recebido por variável é de um determinado tipo, veja um exemplo no qual usamos o <code>.isnumeric()</code> para mostrar se é número:</p>
+
+<pre>
+<code>
+n = input("Digite algo: ")
+print(n.isnumeric())
+</code>
+</pre>
+
+<p>Esse método acima é muito utilizado pra saber se é possível converter o valor de uma string para um numérico.</p>
+
+<p>Da mesma forma, também podemos identificar se um valor é alfabético (não confundir com string), com o <code>.isalpha()</code>. No caso de identificar a variável que tem letras e números, usamos <code>.isalnum()</code> (mas ele não considerará, por exemplo, espaços). Temos outros parâmetros, como o <code>.isupper()</code> (para identificar se todas as letras são em maiúsculas, e várias outras.</p>
+
+<p>Veja também um programa que lê algo pelo teclado e mostra na tela o seu tipo primitivo e todas as informações possíveis sobre ele:</p>
+
+<pre>
+<code>
+algo = input("Digite Algo! ")
+
+print("O conteúdo digitado ({}) é um número? {}".format(algo,algo.isnumeric()))
+print("O conteúdo digitado ({}) é alfabético? {}".format(algo,algo.isalpha()))
+print("O conteúdo digitado ({}) é alfanumérico? {}".format(algo,algo.isalnum()))
+</code>
+</pre>
+
+<p>Veja alguns desses métodos:</p>
+
+<table>
+    <tr>
+        <th>Método</th>
+        <th>Verifica se é</th>
+    </tr>
+    <tr>
+        <td>.isnumeric()</td>
+        <td>Numérico</td>
+    </tr>
+   <tr>
+        <td>.isalpha()</td>
+        <td>Alfabético</td>
+    </tr>
+   <tr>
+        <td>.isalnum()</td>
+        <td>Alfanumérico</td>
+    </tr>
+   <tr>
+        <td>.isspace()</td>
+        <td>Com Espaços</td>
+    </tr>
+   <tr>
+        <td>.isupper()</td>
+        <td>Só com Maiúsculas</td>
+    </tr>
+   <tr>
+        <td>.islower()</td>
+        <td>Só com Minúsculas</td>
+    </tr>
+   <tr>
+        <td>.istitle()</td>
+        <td>Só a 1ª Maiúscula</td>
+   </tr>
+</table>
+
+<h3>Operadores Aritméticos</h3>
+
+<p>Além dos operadores aritméticos tradicionais, temos também no Python os operadores <code>//</code> (divisão inteira), e <code>**</code> (potência). Por exemplo:</p>
+
+<pre>
+<code>
+num = 5 ** 2
+print(num) # Retornará 25.
+</code>
+</pre>
+
+<p>A divisão inteira geralmente é usada com o resto, dessa forma:</p>
+
+<pre>
+<code>
+num = 5 // 2
+res = 5 % 2
+print(num)
+print(res)
+</code>
+</pre>
+
+<p>Então a ordem completa dos operadores seria essa:</p>
+
+<table>
+    <tr>
+        <th>Ordem</th>
+        <th>Operador</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>()</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>**</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>* / // %</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>+ -</td>
+    </tr>
+</table>
+
+<p>Se colocar algo sem parênteses, ele seguirá a ordem de precedência.</p>
+
+<pre>
+<code>
+print(5 + 3 * 2) # Multiplicação é feita primeiro, retorna 11.
+print(3 * 5 + 4 ** 2) # Potência é feita primeiro, retorna 31.
+print(3 * (5 + 4) ** 2) # Soma nos parênteses é feita primeiro, retorna 243.
+</code>
+</pre>
+
+<p>PS: O Python não tem limite de tamanho pra números, diferente de outras linguagens (tente por exemplo, fazer 365 ** 522 nessa ou em qualquer outra linguagem para ver as diferenças).</p>
+
+<p>Lembrando também que o símbolo <code>=</code> é de atribuição, para igual usa-se dois iguais (<code>==</code>) e pra diferente é <code>!=</code> (mas se forem valores booleanos ou nulos, como True, False e None, use <code>is</code> e <code>is not</code>, assim como pra E e OU utilize literalmente <code>and</code> e <code>or</code> e não && e ||). Os operadores relacionais permanecem os mesmos de outras linguagens, como podem ver:</p>
+
+
+<table>
+    <tr>
+        <th>Operador Aritmético</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>==</td>
+        <td>Igualdade.</td>
+    </tr>
+    <tr>
+        <td>!=</td>
+        <td>Diferente.</td>
+    </tr>
+    <tr>
+        <td>&gt;</td>
+        <td>Maior.</td>
+    </tr>
+    <tr>
+        <td>&lt;</td>
+        <td>Menor.</td>
+    </tr>
+    <tr>
+        <td>&gt;=</td>
+        <td>Maior ou Igual.</td>
+    </tr>
+    <tr>
+        <td>&lt;=</td>
+        <td>Menor ou Igual.</td>
+    </tr>
+</table>
+
+<p>Como em outras linguagens, temos também as funções de operadores, como o <code>pow()</code>, mas nesse caso, se perde a ordem de precedência.</p>
+
+<p>PS: Podemos usar a potência também para tirar raizes, por exemplo:</p>
+
+<pre>
+<code>
+print(25 ** (1 / 2)) # Retorna raiz quadrada.
+print(127 ** (1 / 3)) # Retorna raiz cúbica.
+</code>
+</pre>
+
+<p>Alguns operadores podem ser usados em strings também, dessa forma:</p>
+
+<pre>
+<code>
+print("Teste" * 5)
+print("=" * 20)
+</code>
+</pre>
+
+<p>Podemos também colocar valores nas máscaras de formatação, dessa forma:</p>
+
+<pre>
+<code>
+nome = input("Qual é o seu Nome?\n")
+print("Prazer em te Conhecer {:20}!".format(nome))
+</code>
+</pre>
+
+<p>Esse código acima é para colocar uma string em espaços pré-definidos, os que sobrarem ficarão como espaços.</p>
+
+<p>Podemos inclusive, escolher o local do espaço, se colocarmos <code>&gt;</code> antes do número, os espaços ficarão do lado esquerdo (da mesma forma que o <code>&lt;</code> deixaria do lado direito, mas esse é padrão), veja um exemplo:</p>
+
+<pre>
+<code>
+print("Prazer em te Conhecer {:&gt;20}!".format(nome))
+</code>
+</pre>
+
+<p>E também podemos centralizar, com o <code>^</code>, dessa forma:</p>
+
+<pre>
+<code>
+print("Prazer em te Conhecer {:^20}!".format(nome))
+</code>
+</pre>
+
+<p>Se colocarmos um símbolo qualquer antes dos números ou operadores, ele substituirá os espaços restantes, por exemplo:</p>
+
+<pre>
+<code>
+print("Prazer em te Conhecer {:=^20}!".format(nome))
+</code>
+</pre>
+
+<p>O format também pode ser usado com operadores, assim:</p>
+
+<pre>
+<code>
+n1 = int(input("Um valor:\n"))
+n2 = int(input("Outro valor:\n"))
+print("A soma é {}".format(n1 + n2))
+</code>
+</pre>
+
+<p>Veja outro exemplo de formatação:</p>
+
+<pre>
+<code>
+n1 = int(input("Um valor:\n"))
+n2 = int(input("Outro valor:\n"))
+s = n1 + n2
+m = n1 * n2
+d = n1 / n2
+di = n1 // n2
+e = n1 ** n2
+print("A soma é {}, o produto é {} e a divisão é {:.3f}. ".format(s, m, d), end = "")
+print("Divisão inteira {} e potência {}.".format(di, e))
+</code>
+</pre>
+
+<p>Veja que no código acima, o <code>.3f</code> dentro da máscara é para formatar as casas de um número real, e o end no final com string vazia, é para não quebrar a linha ao entrar um novo print. Se quiser quebrar dentro de um mesmo print, use a sequência de escape <code>\n</code>.</p>
+
+<ul>
+    <li><a href="tudo-sobre-python-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

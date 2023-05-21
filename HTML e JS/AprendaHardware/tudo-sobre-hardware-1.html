@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Hardware</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Hardware</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-hardware-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Hardware Parte 1!</a></li>
+                    <li><a href="tudo-sobre-hardware-2.html">Tudo sobre Hardware Parte 2!</a></li>
+                    <li><a href="tudo-sobre-hardware-3.html">Tudo sobre Hardware Parte 3!</a></li>
+                    <li><a href="tudo-sobre-hardware-4.html">Tudo sobre Hardware Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Hardware Parte 1</h2>
+
+<h3>Notação Posicional</h3>
+
+<p>Vamos considerar um número genérico, como 3785, que lemos como três mil, setecentos e oitenta e cinco, esse sistema numérico é o decimal, que os humanos aprendem desde criança, até pelo fato do ser humano ter dez dedos, o que facilitou a aprendizagem da contagem desde o começo da humanidade.</p>
+
+<p>No número 3785, vamos considerar que temos quatro números, o 3 vale três mil, o 7 vale setecentos, o 8 vale oitenta e o 5 é o único que realmente vale 5, dessa forma, podemos escrever o mesmo número assim:</p>
+
+<pre>
+<code>
+3785:
+
+3 x 1000
+7 x 100
+8 x 10
+5 x 1
+</code>
+</pre>
+
+<p>A base decimal, obviamente, é representada pela base 10, e por isso podemos potências para definir um número, assim:</p>
+
+<pre>
+<code>
+3785:
+
+3 x 10<sup><small>3</small></sup>
+7 x 10<sup><small>2</small></sup>
+8 x 10<sup><small>1</small></sup>
+5 x 10<sup><small>0</small></sup>
+</code>
+</pre>
+
+<p>PS: Lembrando que por regra, qualquer número elevado à zero retorna 1.</p>
+
+<p>Ou seja, a soma do 3785 seria o mesmo que:</p>
+
+<pre>
+<code>
+3785:
+
+3000
+700
+80
+5
+</code>
+</pre>
+
+<p>No caso, o decimal é algo que nós identificamos naturalmente, mas o computador não trabalha só com esse sistema, por isso é importante identificar a base numérica.</p>
+
+<p>Lembrando a matemática básica, os números são trabalharamos com unidades, dezenas, centena, milhar, etc., isso é chamado de notação posicional, onde cada algarismo tem sua posição específica e um valor diferente dentro de um número (tipo o 3 em 3785 que representa 3000).</p>
+
+<p>PS: Esse negócio de unidade, dezena, centena, etc., só funciona em decimal.</p>
+
+<p>Pegando outro exemplo em decimal, 2004, separando o milhar, centena, dezena e unidade, dessa forma:</p>
+
+<pre>
+<code>
+2004:
+
+2 = 2 x 10<sup><small>3</small></sup> = 2 x 1000
+0 = 0 x 10<sup><small>2</small></sup> = 0 x 100
+0 = 0 x 10<sup><small>1</small></sup> = 0 x 10
+4 = 4 x 10<sup><small>0</small></sup> = 4 x 1
+</code>
+</pre>
+
+<p>Lembrando que as potências começam a ser contado do zero, pela unidade,</p>
+
+<p>Veja outro exemplo com 123:</p>
+
+<pre>
+<code>
+123:
+
+1 = 1 x 10<sup><small>2</small></sup> = 1 x 100
+2 = 2 x 10<sup><small>1</small></sup> = 2 x 10
+3 = 3 x 10<sup><small>0</small></sup> = 3 x 1
+</code>
+</pre>
+
+<p>Assim como sabemos, temos acima da casa de milhar, a dezena de milhar, centena de milhar, milhão, dezena de milhão, centena de milhão, bilhão, etc., quanto maior o número, mais casas decimais, obviamente.</p>
+
+<p>Vamos pegar um exemplo mais longo, por exemplo 134690:</p>
+
+<pre>
+<code>
+134690:
+
+1 = 1 x 10<sup><small>5</small></sup> = 1 x 100000
+3 = 3 x 10<sup><small>4</small></sup> = 3 x 10000
+4 = 4 x 10<sup><small>3</small></sup> = 4 x 1000
+6 = 6 x 10<sup><small>2</small></sup> = 6 x 100
+9 = 9 x 10<sup><small>1</small></sup> = 9 x 10
+0 = 0 x 10<sup><small>0</small></sup> = 0 x 1
+</code>
+</pre>
+
+<p>A potência começa do primeiro algarismo (unidade) com a potência 10<sup><small>0</small></sup>, depois a dezena com 10<sup><small>1</small></sup>, 10<sup><small>2</small></sup> e assim por diante, até infinitas combinações.</p>
+
+<p>Os números em decimal nós reconhecemos naturalmente (como o 3785), mas podemos reconhecê-lo também como (3785)<sub><small>10</small></sub>.</p>
+
+<p>Mas até aí, não vimos muita coisa de novo, já que o sistema decimal é o que os humanos entendem, já as máquinas (computador, televisão, celular, etc.) entendem o sistema binário.</p>
+
+<p>Basicamente, os sistemas agem assim:</p>
+
+<ul>
+    <li><b>Sistema Decimal: </b>0 1 2 3 4 5 6 7 8 9</li>
+    <li><b>Sistema Binário: </b>0 1</li>
+</ul>
+
+<p>No caso, nós teremos que criar uma relação entre os dois sistemas numéricos, para que humanos e máquinas possam interagir entre si.</p>
+
+<p>Vamos contar alguns números em decimal assim:</p>
+
+<pre>
+<code>
+0 1 2 3 4 5 6 7 8 9
+</code>
+</pre>
+
+<p>No caso acima, acabou as opções a serem usadas pela unidade, aí colocaremos o 1 na dezena e reiniciar na unidade assim:</p>
+
+<pre>
+<code>
+10 11 12 13 14 15 16 17 18 19
+</code>
+</pre>
+
+<p>E assim sucessivamente até chegar em 99, daí colocaremos 1 na centena e reiniciamos a dezena e unidade (100) até chegar as combinações possível (199), aí vamos pra 200 até 299 e sucessivamente até 999, e fazemos da mesma forma com 1000 até um número infinito.</p>
+
+<p>Em outras palavras, quando acaba a combinação entre os números de todas as casas, uma a esquerda é adicionada.</p>
+
+<p>Isso daí, pra qualquer um é bem óbvio, mas essa forma também é usada para outros sistemas, vamos contar em binário, que só tem dois dígitos:</p>
+
+<p>No caso, o binário, obviamente, usa a base 2, ficando assim:</p>
+
+<pre>
+<code>
+0 1
+</code>
+</pre>
+
+<p>Só nisso acima acabou as possiblidades da primeira casa, tendo que prosseguir colocando 1 na segunda casa:</p>
+
+<pre>
+<code>
+10 11
+</code>
+</pre>
+
+<p>PS:  No binário e em outras bases não existe nomenclaturas como unidade, dezena e etc., são identificados apenas como primeira casa, segunda casa e etc. (contando da direita pra esquerda), por isso também não leia 10 como "dez" ou 11 como "onze", em binário se lê "um-zero" e "um-um", respectivamente, isso vale pra qualquer número em binário.
+
+<p>Da mesma forma, a medida que for acabando as combinações, colocamos mais uma casa a esquerda, veja abaixo prosseguindo esse raciocínio:</p>
+
+<pre>
+<code>
+100 101 110 111
+</code>
+</pre>
+
+<p>E prosseguindo:</p>
+
+<pre>
+<code>
+1000 1001 1010 1011 1100 1101 1110 1111
+</code>
+</pre>
+
+<p>Da mesma forma:</p>
+
+<pre>
+<code>
+10000 10001 10010 10011 10100 10101 10110 10111 11000 11001 11010 11011 11100 11101 11110 11111
+</code>
+</pre>
+
+<p>E assim sucessivamente.</p>
+
+<p>Da mesma forma que fizemos com os decimais, podemos usar a base 2 para converter binários em decimais, assim:</p>
+
+<pre>
+<code>
+1011:
+
+1 = 1 x 2<sup><small>3</small></sup> = 1 x 8 = 8
+0 = 0 x 2<sup><small>2</small></sup> = 0 x 4 = 0
+1 = 1 x 2<sup><small>1</small></sup> = 1 x 2 = 2
+1 = 1 x 2<sup><small>0</small></sup> = 1 x 1 = 1
+
+8 + 0 + 2 + 1 = 11
+</code>
+</pre>
+
+<p>Dessa forma é fácil converter binário em decimal, sempre lembrando do resultado das potências pra cada casa, a posição onde encontra o 1 é somada, a posição onde encontra 0 é ignorada, e a soma de todos retorna o decimal.</p>
+
+<p>Da mesma forma:</p>
+
+<pre>
+<code>
+1001:
+
+1 = 1 x 2<sup><small>3</small></sup> = 1 x 8 = 8
+0 = 0 x 2<sup><small>2</small></sup> = 0 x 4 = 0
+0 = 0 x 2<sup><small>1</small></sup> = 0 x 2 = 0
+1 = 1 x 2<sup><small>0</small></sup> = 1 x 1 = 1
+
+8 + 0 + 0 + 1 = 9
+</code>
+</pre>
+
+<p>PS: Os números na base 2 são representados, por exemplo, como (1001)<sub><small>2</small></sub>.</p>
+
+<h3>Números Binários</h3>
+
+<p>Como sabemos, os aparelhos eletrônicos usam sistema binário, já que eles trabalham com pulsos elétricos, que justamente é representado por binário (que trabalha por padrões como ligado/desligado), e eles são convertidos para que a gente possa entender.</p>
+
+<p>Ramos como Hardware e Redes necessita muito de uso de sistemas numéricos diferente, como o binário e o hexadecimal.</p>
+
+<p>Como visto, existe uma ligação entre os sistemas numéricos decimal e binário, até porque a matemática é uma ciência exata.</p>
+
+<p>Veja um exemplo de conversão de binário para decimal:</p>
+
+<pre>
+<code>
+1101:
+
+1 = 1 x 2<sup><small>3</small></sup> = 1 x 8 = 8
+1 = 1 x 2<sup><small>2</small></sup> = 1 x 4 = 4
+0 = 0 x 2<sup><small>1</small></sup> = 0 x 2 = 0
+1 = 1 x 2<sup><small>0</small></sup> = 1 x 1 = 1
+
+8 + 4 + 0 + 1 = 13
+</code>
+</pre>
+
+<p>Isso já vimos anteriormente, é só pra relembrar.</p>
+
+<p>Mas temos um macete bem simples para converter binário em decimal facilmente, é só lembrar dos resultados das potências na ordem das casas numéricas, 1, 2, 4, 8, 16, 32, etc., por exemplo:</p>
+
+<table>
+    <tr>
+        <th>16</th>
+        <th>8</th>
+        <th>4</th>
+        <th>2</th>
+        <th>1</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+</table>
+
+<p>No caso acima, podemos simplesmente ignorar os resultados de potências que tem 0 e somar os que tem apenas 1, dessa forma, pro mesmo número acima:</p>
+
+<pre>
+<code>
+16 + 0 + 0 + 2 + 1 = 19
+</code>
+</pre>
+
+<p>Dessa forma, o número 10011 (não leia dez mil e onze, é um zero zero um um) convertido para decimal é igual a 19.</p>
+
+<p>Já o contrário, ou seja, converter em decimal pra binário (por exemplo, o 13 na base 10), é fazendo divisão inteira, dessa forma:</p>
+
+<pre>
+<code>
+Primeira casa:
+13 |<ins> 2 </ins>
+ 1   6
+
+Segunda casa:
+6 |<ins> 2 </ins>
+0   3
+
+Terceira casa:
+3 |<ins> 2 </ins>
+1   1
+
+Quarta casa:
+1 |<ins> 2 </ins>
+1   0
+</code>
+</pre>
+
+<p>Ou seja, vamos dividindo até não dar mais (ou seja, o resultado ser zero), no caso da divisão inteira, 1 dividido por 2 o resultado é zero e sobra 1 (até porque nesse caso não dá pra dividir um por 2), e 0 dividido por 2 é 0 e sobra 0. Essa regra existe sempre quando o numerador é menor que o denominador.</p>
+
+<p>Aí, pegamos o número de baixo pra cima, o primeiro resto é a primeira casa, e o último resto (quando o resultado é zero), é o último dígito. No caso, o 13 em binário é 1101.</p>
+
+<p>Temos também um macete para converter um número decimal em binário, usando cada casa com a potência numérica em cima também:</p>
+
+<table>
+    <tr>
+        <th>8</th>
+        <th>4</th>
+        <th>2</th>
+        <th>1</th>
+    </tr>
+</table>
+
+<p>No caso, basta somar os resultados das potências acima até ver se elas retornam o número, no caso, 8 + 4 + 1.</p>
+
+<p>Aí basta colocar o 1 onde tem os números somadas, e 0 onde não tem, assim:</p>
+
+<table>
+    <tr>
+        <th>8</th>
+        <th>4</th>
+        <th>2</th>
+        <th>1</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+    </tr>
+</table>
+
+<p>Veja outro exemplo com 40 na base 10:</p>
+
+<table>
+    <tr>
+        <th>32</th>
+        <th>16</th>
+        <th>8</th>
+        <th>4</th>
+        <th>2</th>
+        <th>1</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+    </tr>
+</table>
+
+<p>No caso, a soma de 32 + 8 retornou 40, que no decimal é 101000.</p>
+
+<p>Para provar, fazemos a reconversão de binário pra decimal:</p>
+
+<pre>
+<code>
+101000:
+
+1 = 1 x 2<sup><small>5</small></sup> = 1 x 32 = 32
+0 = 0 x 2<sup><small>4</small></sup> = 0 x 16 = 0
+1 = 1 x 2<sup><small>3</small></sup> = 1 x 8 = 8
+0 = 0 x 2<sup><small>2</small></sup> = 0 x 4 = 0
+0 = 0 x 2<sup><small>1</small></sup> = 0 x 2 = 0
+0 = 0 x 2<sup><small>0</small></sup> = 0 x 1 = 0
+
+32 + 0 + 8 + 0 + 0 + 0 = 40
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-hardware-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

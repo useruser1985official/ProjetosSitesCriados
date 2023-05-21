@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html">Tudo sobre Redes Parte 13!</a></li>
+                </menu>
+            </header>
+                           
+<h2>Cisco Packet Tracer - Parte 2</h2>
+
+<h3>Configurando Porta Trunk</h3>
+
+<p>Crie um novo projeto com três computadores, um switch 2950-24 do lado esquerdo, um switch 2960 do lado direito e mais três computadores do lado direito. Configure os computadores com os seguintes IPs:</p>
+
+<p>Lado esquerdo (portas 1, 2 e 11):</p>
+
+<ul>
+    <li>192.168.10.1</li>
+    <li>192.168.10.2</li>
+    <li>192.168.20.1</li>
+</ul>
+
+<p>Ligue com o cabo Through no primeiro switch.</p>
+
+<p>Lado direito (portas 1, 11 e 12):</p>
+
+<ul>
+    <li>192.168.10.3</li>
+    <li>192.168.20.2</li>
+    <li>192.168.20.3</li>
+</ul>
+
+<p>Ligue o mesmo tipo de cabo no segundo switch.</p>
+
+<p>Use o cabo Cross e ligue nas últimas portas de ambos os switches (porta 24).</p>
+
+<p>Na CLI do primeiro switch e do segundo switch, digite esses comandos:</p>
+
+<pre>
+<code>
+enable
+
+configure terminal
+
+vlan 10
+
+name lab-1
+
+exit
+
+vlan 20
+
+name lab-2
+
+exit
+
+interface range FastEthernet 0/1 - 10
+
+switchport mode access
+
+switchport access vlan 10
+
+no shutdown
+
+exit
+
+interface range FastEthernet 0/11 - 20
+
+switchport mode access
+
+switchport access vlan 20
+
+no shutdown
+
+exit
+
+exit
+
+show vlan brief
+
+copy running-config startup-config
+</code>
+</pre>
+
+<p>Para configurar a porta trunk (no caso, a 24), entre no primeiro switch e digite esses comandos, e faça o mesmo no segundo:</p>
+
+<pre>
+<code>
+enable
+
+conf t
+
+interface FastEthernet 0/24
+
+switchport mode trunk
+
+no shutdown
+
+exit
+
+exit
+
+show interface trunk
+
+copy running-config startup-config
+</code>
+</pre>
+
+<p>No último comando, veremos a porta truncada e as VLans habilitadas.</p>
+
+<p>Nesse caso, os computadores estão nas redes 192.168.10 e 192.168.20, mesmo que ambas estejam em switches diferentes, mas estão truncados.</p>
+
+<p>Pra testar, entre no prompt do PC 192.168.10.1 e dê um ping no PC 192.168.10.3, ele vai responder mesmo estando em switches diferentes.</p>
+
+<h3>Revisão e Configuração de Endereço IP em um Roteador</h3>
+
+<p>Num novo projeto, coloque um roteador 2621XM e coloque um módulo serial do tipo WIC-1T (desligue ele antes).</p>
+
+<p>Em CLI, coloque <q>n</q> na entrada da configuração do dialog e coloque esses comandos:</p>
+
+<pre>
+<code>
+enable
+
+show ip interface brief
+</code>
+</pre>
+
+<p>Ele mostrará as portas Ethernet, incluindo a placa serial que colocamos.</p>
+
+<p>Por padrão, diferente do switch, o roteador não vem com as portas habilitadas.</p>
+
+<p>Para ajustar a hora, faça assim:</p>
+
+<pre>
+<code>
+clock set ?
+
+clock set 22:40:00 ?
+
+clock set 22:40:00 2 ?
+
+clock set 22:40:00 2 FEB ?
+
+clock set 22:40:00 2 FEB 2015
+</code>
+</pre>
+
+<p>Para a configuração do host, faça assim:</p>
+
+<pre>
+<code>
+conf t
+
+hostname nomedohost
+
+line con 0
+
+password senha
+
+login
+
+exec-timeout 5
+
+exit
+</code>
+</pre>
+
+<p>No comando exec-timeout, ele pede a senha novamente depois de 5 minutos inativo.</p>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+line vty ?
+
+line vty 0 ?
+
+line vty 0 3
+
+password senha
+
+exit
+
+enable secret senha
+
+exit
+
+show running-config
+</code>
+</pre>
+
+<p>Para colocar os IPs, faça assim:</p>
+
+<pre>
+<code>
+conf t
+
+interface FastEthernet 0/0
+
+ip address 192.168.1.1 255.255.255.0
+
+do show ip interface brief
+
+no shutdown
+
+do show ip interface brief
+
+exit
+</code>
+</pre>
+
+<p>Para colocar a configuração via DHCP, fazemos assim:</p>
+
+<pre>
+<code>
+interface FastEthernet 0/1
+
+ip address 10.0.0.1 255.0.0.0
+
+no shutdown
+
+exit
+
+exit
+
+show ip interface brief
+
+copy running-config startup-config
+</code>
+</pre>
+
+<h3>Usando um Roteador</h3>
+
+<p>Primeiro, num novo projeto, coloque um PC (192.168.0.10) ligado a um switch (cabo Through). Ligue este a um segundo switch (cabo Cross), e ligue este segundo a dois PCs (192.168.0.20 e 10.1.1.10, cabo Through).</p>
+
+<p>Clique no PC 0 (192.168.0.10) e tente pingar o PC 1 (192.168.0.20) que responderá por estarem na mesma rede. No entanto não é possível com o PC 2 (10.1.1.10).</p>
+
+<p>Delete o cabo entre os dois switches e coloque um roteador 2621XM no meio e os ligue com o cabo through nas últimas portas dos switches. Ele vai ficar com os cabos vermelhos por não ter conexão.</p>
+
+<p>Um roteador interliga redes diferentes, nesse caso, para ele ligar o PC 192.168.0.10 ao 10.1.1.10, ele precisará trabalhar com dois IPs diferentes.</p>
+
+<p>No roteador, vamos colocar um IP compatível com a primeira rede, indo em CLI e digitando isso (marque <q>n</q> no dialog):</p>
+
+<pre>
+<code>
+enable
+
+show ip interface brief
+</code>
+</pre>
+
+<p>Aí vemos as interfaces das portas Ethernet sem IPs, se passarmos o mouse sobre as bolinhas/setas, veremos em quais interfaces os cabos estão ligados.</p>
+
+<p>Continue digitando isso pra colocar o IP nas interfaces:</p>
+
+<pre>
+<code>
+enable
+
+conf t
+
+interface FastEthernet 0/0
+
+ip address 192.168.0.1 255.255.255.0
+
+no shutdown
+
+exit
+
+exit
+
+show ip interface brief
+
+copy running-config startup-config
+</code>
+</pre>
+
+<p>Note que ele ficará verdinho. Faça o mesmo no roteador pro segundo:</p>
+
+<pre>
+<code>
+enable
+
+conf t
+
+interface FastEthernet 0/1
+
+ip address 10.1.1.1 255.0.0.0
+
+no shutdown
+
+exit
+
+exit
+
+show ip interface brief
+
+copy running-config startup-config
+</code>
+</pre>
+
+<p>Dessa forma ele ligará as duas redes distintas. Para isso ele terá dois ou mais IPs diferentes em classes diferentes.</p>
+
+<p>Abra o console do PC 0 e tente pingar o PC 2 da rede 10. Ele não responderá.</p>
+
+<p>Nós ainda precisamos <q>falar</q> para os computadores que tem um outro dispositivo ali no meio. Para o PC 0 se comunicar com outro computador na rede, ele manda um ARP num broadcast perguntando o endereço IP. No caso, o PC 0 tem que perguntar ao roteador se ele consegue levar ele ao endereço que o PC 0 está procurando. Esse endereço se chama Gateway Padrão.</p>
+
+<p>Para configurar o Gateway Padrão, vá na IP Configuration do PC 0 e coloque o roteador como Default Gateway (192.168.0.1), no caso, o endereço da interface Ethernet na qual ele está ligado (0/0). Faça o mesmo com a porta 0/1 do roteador no PC 2, com o IP (10.1.1.1).</p>
+
+<p>PS: Deixe a opção DNS Server vazia, sem 0 nem nada.</p>
+
+<h3>Configurando uma Rota Estática</h3>
+
+<p>Primeiro faça uma rede com esses itens na ordem:</p>
+
+<ul>
+    <li>PC - IP: 192.168.1.10 - Gateway: 192.168.1.1</li>
+    <li>Roteador 2621XM - IP: Configuraremos.</li>
+    <li>Roteador 2621XM - IP: Configuraremos.</li>
+    <li>PC - IP: 192.168.3.10 -  Gateway: 192.168.3.1</li>
+</ul>
+
+<p>PS: Coloque nas notas da rede, em cima dos cabos, do tipo Cross, na ordem: 192.168.1.0/24 192.168.2.0/24 e 192.168.3.0/24.</p>
+
+<p>Para colocar os IPs nos roteadores, faça assim no Roteador 1, para configurar as portas de comunicação:</p>
+
+<pre>
+<code>
+enable
+
+conf t
+
+interface FastEthernet 0/0
+
+ip address 192.168.1.1 255.255.255.0
+
+no shutdown
+
+exit
+
+interface FastEthernet 0/1
+
+ip address 192.168.2.1 255.255.255.0
+
+no shutdown
+
+exit
+
+exit
+
+copy running-config startup-config
+</code>
+</pre>
+
+<p>E assim no Roteador 2:</p>
+
+<pre>
+<code>
+enable
+
+conf t
+
+interface FastEthernet 0/1
+
+ip address 192.168.2.2 255.255.255.0
+
+no shutdown
+
+exit
+
+interface FastEthernet 0/0
+
+ip address 192.168.3.1 255.255.255.0
+
+no shutdown
+
+exit
+
+exit
+</code>
+</pre>
+
+<p>Para entendermos, o PC tá na rede 1 e conecta ao roteador, que está conectado ao outro roteador pela rede 2, e este segundo está conectado à rede 3 onde está o outro PC.</p>
+
+<p>No primeiro PC, podemos pingar o roteador 192.168.1.1. Da mesma forma, pingamos a porta 2 do roteador digitando 192.168.2.1 e ele responde, mas não conseguiremos pingar 192.168.2.2, por exemplo. Isso porque este roteador não foi configurado para transferir os pacotes do primeiro computador para fora da rede no qual está conectado (no caso a 1).</p>
+
+<p>No primeiro roteador, digite esses comandos no CLI:</p>
+
+<pre>
+<code>
+enable
+
+show ip interface brief
+
+show ip route
+</code>
+</pre>
+
+<p>O primeiro PC está conectado ao roteador pela rede 192.168.1.0 com o IP 192.168.1.10.</p>
+
+<p>No CLI, digite isso:</p>
+
+<pre>
+<code>
+ping 192.168.1.10
+
+ping 192.168.2.2
+
+ping 192.168.3.1
+</code>
+</pre>
+
+<p>Ele responderá normalmente na porta 192.168.2.2, esta é a porta do segundo roteador ligada no primeiro. Mas ele não conseguirá pingar a porta 192.168.3.1 do mesmo roteador (o segundo). Ele só pingará quem estiver ligado diretamente nele.<p>
+
+<p>Para traçar a rota do primeiro PC até o segundo, digite esses comandos no CLI do primeiro roteador:</p>
+
+<pre>
+<code>
+conf t
+
+ip route 192.168.3.0 255.255.255.0 192.168.2.2
+
+exit
+</code>
+</pre>
+
+<p>No comando acima, dizemos que queremos acessar a rede 192.168.3.0 através da conexão 192.168.2.2 (que nós já conseguimos acessar).</p>
+
+<p>Digite isso no mesmo CLI:</p>
+
+<pre>
+<code>
+show ip route
+
+copy running-config startup-config
+</code>
+</pre>
+
+<p>Agora podemos acessar a 192.168.3.0, como podemos ver.</p>
+
+<p>Pingue a porta do segundo roteador na rede 3 e depois a máquina nessa mesma rede, no mesmo CLI do primeiro roteador, assim:</p>
+
+<pre>
+<code>
+ping 192.168.3.1
+
+ping 192.168.3.10
+</code>
+</pre>
+
+<p>Abra o prompt do primeiro PC e pingue o segundo PC da rede 3, ele não conseguirá acessar porque o segundo roteador não foi configurado pra voltar com a rota.</p>
+
+<p>Entre no segundo roteador, no CLI e digite esses comandos:</p>
+
+<pre>
+<code>
+enable
+
+show ip interface brief
+
+ping 192.168.1.1
+</code>
+</pre>
+
+<p>Ele não acessará o IP descrito.</p>
+
+<p>Para configurar a rota, digite isso no mesmo CLI:</p>
+
+<pre>
+<code>
+show ip route
+
+conf t
+
+ip route 192.168.1.0 255.255.255.0 192.168.2.1
+
+exit
+
+copy running-config startup-config
+
+show ip route
+</code>
+</pre>
+
+<p>Agora ele fará a rota normalmente. Volte ao prompt do primeiro PC e pingue os IPs 192.168.3.1 (roteador) e 192.168.3.10 (segundo PC).</p>
+
+<p>Da mesma forma, podemos ir ao prompt do segundo PC e pingar a porta da rede 1 do roteador e do primeiro PC (192.168.1.1 e 192.168.1.10).</p>
+
+<p>Agora todo mundo tá vendo todo mundo. Volte ao prompt do primeiro PC e use o comando <code>tracert 192.168.3.10</code> para vermos a rota dele. Faça o mesmo no segundo PC com <code>tracert 192.168.1.10</code>. Dessa forma entendemos como funciona o traceroute, onde cada IP é um roteador onde passa para chegar ao endereço final.</p>
+
+<ul>
+    <li><a href="packet-tracer-1.html">Parte Anterior da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

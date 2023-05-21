@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Hacking</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Hacking</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-hacking-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Hacking Parte 1!</a></li>
+                    <li><a href="tudo-sobre-hacking-2.html">Tudo sobre Hacking Parte 2!</a></li>
+                    <li><a href="tudo-sobre-hacking-3.html">Tudo sobre Hacking Parte 3!</a></li>
+                    <li><a href="tudo-sobre-hacking-4.html">Tudo sobre Hacking Parte 4!</a></li>
+                    <li><a href="tudo-sobre-hacking-5.html">Tudo sobre Hacking Parte 5!</a></li>
+                    <li><a href="tudo-sobre-hacking-6.html">Tudo sobre Hacking Parte 6!</a></li>
+                    <li><a href="tudo-sobre-hacking-7.html">Tudo sobre Hacking Parte 7!</a></li>
+                    <li><a href="tudo-sobre-hacking-8.html">Tudo sobre Hacking Parte 8!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Hacking Parte 1</h2>
+
+<h3>Hackeando sem Ferramentas</h3>
+
+<p>Pra hackear não é preciso exatamente ter ferramentas, apenas uma mente hacker. Isso pode ser feito em qualquer sistema operacional e qualquer navegador, tendo acesso a internet. No caso abaixo, é bom tem conhecimento de HTML pelo menos.</p>
+
+<p>Ao entrar num site com área restrita, podemos tentar uma injeção SQL na senha (que será aprendida em aulas posteriores).</p>
+
+<p>Caso não dê certo, olhe o código-fonte da página que faz o login e procure um comando chamado action no form de login e veja a página para a qual é redirecionada (por exemplo, <code>restrito.php</code>). Coloque a página equivalente no navegador e veja se ela é exibida. Até aí entramos na área restrita.</p>
+
+<p>Veja se na página principal podemos ver outro conteúdo, tente entrar por exemplo, numa página onde o conteúdo para download é pago, mas tem alguma demo grátis, nesse caso conseguimos baixar porque o site permite, mas vamos supor que o nome do programa é <code>nomedoprogramademo.exe</code>, nesse caso copiamos o link do programa e colamos diretamente numa outra aba, removemos o demo (ou palavra equivalente) e deixamos apenas o <code>nomedoprograma.exe</code>, e veja se o download do programa completo é permitido. Nesse caso baixamos o programa completo sem ter que pagar nada.</p>
+
+<p>Numa outra situação, podemos tentar fazer o download e ele pedir um login e senha, tentamos colocar um e-mail válido e uma senha qualquer, não dará acesso, então iremos no código-fonte e procure a página do action. Vamos supor que o action seja algo como <code>download.php?acesso=sim</code>, nesse caso basta colocar o link diretamente no navegador, já que ele passará a página de acesso. Mas vamos supor que mesmo assim ele redirecione à uma página de bloqueio, e no navegador o parametro esteja <code>download.php?baixar=nao</code>, basta mudar o valor para sim (ou palavra equivalente), de forma que fique algo como <code>download.php?baixar=sim</code> e ver se conseguimos burlar isso. Nesse caso pode ser usadas palavras em inglês ou outros idiomas também.</p>
+
+<p>PS: Não baixe nenhum programa assim, isso é apenas para questão didática, até pra evitar coisas assim nos seus próprios sites. Essas falhas de sites mal-configurados devem ser corrigidas para evitar ataques piores.</p>
+
+<h3>Google Segredos</h3>
+
+<p>Não precisamos de ferramentas nessa parte também, apenas sabermos pesquisar no Google ou outra ferramenta de busca.</p>
+
+<p>Vamos procurar por exemplo no Google <code>senha filetype:mdb</code>, o parâmetro filetype procura um tipo de arquivo específico. No caso, estamos procurando banco de dados da Microsoft (MDB), no caso, os logins e senhas específicas. Esse tipo de arquivo geralmente só aparece no momento que os tais servidores e computadores estão ligados, pois o resultado sempre muda. E nem todos os links são aproveitáveis, geralmente são cerca de 50% deles. Costuma aparecer inclusive coisas como logins e senhas do Detran e Polícia Militar.</p>
+
+<p>No caso da Microsoft, podemos pesquisar também planilhas XLS, que são usadas também para guardar dados de bancos, da mesma forma pesquisamos <code>senha filetype:xls</code>. Da mesma forma, podemos tentar outras extensões como DBF, DOC (esses são mais difíceis de encontrar senhas, mas não impossível).</p>
+
+<p>Ao invés de senha, podemos pesquisar outras coisas como cadastro, da mesma forma, tipo <code>cadastro filetype:mdb</code> e <code>cadastro filetype:xls</code>, ou equivalentes, ou em outros idiomas (principalmente inglês).</p>
+
+<p>Podemos também procurar arquivos de senha de sites específicos da forma <code>senha site:www.nomedosite.com</code> ou <code>senha inurl:www.nomedosite.com</code> e ver se aparece algo do tipo (o parâmetro site procura resultados da URL ou domínio especificado, o inurl procura algo na URL dos sites). Pomemos exibir resultados de um site ou domínio específico, como por exemplo <code>site:.pt</code>.</p>
+
+<p>Podemos procurar também por recursos não indexados, dessa forma <code>"index of" inurl: /root</code> (não esqueça das aspas). Pode ser equivalentes como /admin ou wp-admin, por exemplo, mas o index of entre aspas não pode ser modificado.</p>
+
+<p>Outros recursos úteis do Google é usar a pesquisa entre aspas pra encontrar o texto literal (como <code>"Banco do Brasil"</code>), usar um asterisco de coringa a ser preenchido pelo Google (tipo <code>"José * dos Santos"</code>), excluir parâmetros colocando um menos antes da palavra a ser suprimida (como <code>senha -cartão</code>), procurar algo no título (como <code>intitle:cadastro</code>), no corpo do site (como <code>intext:senha</code>) e sites relacionados (tipo <code>related:nomedosite.com</code>), entre dois números (como por exemplo, anos, tipo <code>2005..2007</code>), etc., o que permite combinar, por exemplo, erros de SQL ou PHP nos sites. Além disso, pode ser usado para cálculos matemáticos (como colocar na pesquisa <code>(10 + 15) * 2</code> ou <code>40 polegadas em CM</code>) e também podemos colocar duas opções com "OR" (tipo <code>Facebook OR Twitter</code>).</p>
+
+<p>Além de inurl, intext, intitle, podemos usar <code>allinurl</code>, <code>allintext</code> e <code>allintitle</code>, como por exemplo <code>allintitle:cadastro de usuários</code>. Esses parâmetros com <q>all</q> fazem com que encontrem resultados com todas as palavras descritas, ao invés de uma só.</p>
+
+<p>PS: Isso é utilizado para quebrar uma senha de alguém que precise por exemplo recuperar uma conta dela mesma, não utilize para invasões.</p>
+
+<h3>Google Avatar</h3>
+
+<p>Um hacker não pode usar nomes ou fotos reais, até pra evitar ataques de outros hackers. Ela tem tudo, inclusive RG, Endereço, Nome, CPF e etc., para ser usado em sites não-confiáveis. O perigoso é usar dados de usuários existentes (os chamados laranjas), já que eles poderão responder por coisas que não fizeram.</p>
+
+<p>Para procurar dados de alguém existente não é difícil, um exemplo é procurar no Google currículos de alguma profissão, por exemplo, <code>currículo jornalista cpf</code>.</p>
+
+<p>Por isso mesmo, cada um deve ter cuidado onde e como se expõe na internet.</p>
+
+<p>Dessa forma, podemos por exemplo, procurar por currículos de professores e entrar num site que vende produtos com descontos para eles.</p>
+
+<h3>Google Ferramenta de Idiomas</h3>
+
+<p>Temos também o uso da ferramenta de idiomas do Google, que podemos usar para traduzirmos páginas que precisarmos acessar.</p>
+
+<p>PS: A tradução não é 100% precisa.</p>
+
+<h3>Google Buscando Imagens</h3>
+
+<p>Um recurso bastante usado é o de busca de imagens, vamos supor por exemplo que busquemos a imagem do banco Bradesco, que pode ser usadas em peças de scan (veremos isso mais pra frente). Podemos pesquisar por exemplo Bradesco Logo, por exemplo.</p>
+
+<p>É possível pesquisar também por imagem.</p>
+
+<h3>Google Buscando Serial e E-Mail</h3>
+
+<p>O Google também é usado para buscar informações sobre programas pagos, por exemplo, e a busca do serial podemos fazer por ele também.</p>
+
+<p>Vamos supor que vamos baixar o Winzip, que é um programa pago, podemos pesquisar <code>Winzip download</code> ou <code>"Winzip 8" download</code> para achar os links de download. Da mesma forma, buscamos o serial do programa assim, como <code>"Winzip 8" serial</code>, mas atenção, nem todos os links contém a chave, muitos deles redirecionam para páginas como as de pornografia ou de cassinos, ou mesmo com malwares.</p>
+
+<p>Podemos também procurar pelo e-mail de uma pessoa alguns detalhes sobre ela, digitando o endereço de e-mail diretamente na pesquisa. Podemos pesquisar nosso próprio e-mail para ver se ele não foi exposto ou usado indevidamente por terceiros.</p>
+
+<p>Podemos pesquisar sobre uma pessoa digitando um nome específico entre aspas, o estado e a profissão dele, por exemplo <code>"José dos Santos" Curitiba advogado casado</code> (mas também não é 100% preciso). Podemos usar vários outros filtros com dados pessoais dele.</p>
+
+<p>Outro dados como <code>"Sérgio Marinho" liberdade data</code> também podem ser pesquisados dessa forma, dentre várias outras combinações.</p>
+
+<h3>Senhas de E-mail</h3>
+
+<p>Sabemos que quebra de senha é crime e só deve ser usado em casos de recuperação dos próprios dados ou do verdadeiro dono da conta. A quebra de senhas é mais complexa e será especificada posteriormente.</p>
+
+<p>Podemos utilizar informações do próprio provedor, digitando o e-mail e uma senha qualquer, que claro, não será aceita. Nesse caso, podemos usar a recuperação de senha para verificar alguma dica de senha (que caso conhecemos a pessoa, podemos adivinhar o que é), também costuma aparecer outros tipos de recuperação como número de celular ou e-mail alternativo.</p>
+
+<p>Algumas dicas comuns de senhas são datas de nascimento, nome de algum parente ou amigo, algo que ela goste muito, entre outras. É possível fazer uma engenharia social para obter essas informações. Ou mesmo a dica pode ser a senha invertida ou sem alguma letra.</p>
+
+<p>PS: Dicas de senhas costumam ser coisas bem óbvias e também são muito repetidas, facilmente as piores senhas são coisas como qwertyuiop, 12345678, password e coisas do tipo. Quem conhece criptografia e hashs (o que será preciso em outros conteúdos pra frente) sabe como descobrir o hash de uma senha simples através de uma rainbow table.</p>
+
+<h3>Comando Ping</h3>
+
+<p>Uma coisa que o hacker deve saber, principalmente antes de começar uma invasão, é usar o comando ping. É bom ter algum conhecimento de redes nesssa parte.</p>
+
+<p>Basicamente, o ping envia um pacote de dados a um determinado servidor e mede o tempo para esse mesmo pacote ir e voltar. Isso é para ver se o servidor está ativo na internet ou rede (o servidor pode ser um site ou outro computador, pode ser o endereço ou o IP dele), dessa forma podemos ter certeza que o servidor está acessível.</p>
+
+<p>Abra o CMD ou terminal e digite <code>ping nomedosite.com.br</code> ou <code>ping 0.0.0.0</code>. Existem também outros parâmetros que podemos usar no ping.</p>
+
+<p>PS: Algumas empresas configuram o servidor para não responder o comando ping, nesse caso só podemos ver o IP, mas os pacotes não voltam e aparece o aviso de esgotamento de tempo, e por isso não conseguem fazer esse rastreamento.</p>
+
+<h3>Invasão Rápida</h3>
+
+<p>Podemos utilizar um programa como o GFI Languard ou o Nmap que busca a partir de um endereço especificado, as vulnerabilidades de um determinado computador. Baixe aqui o Nmap com Zenmap para Windows (em Linux podemos baixar pelos comandos do próprio SO): <a href="https://nmap.org/download.html" target="_blank">https://nmap.org/download.html</a></p>
+
+<p>Aqui nesse link temos vários truques nos quais podemos usar o Nmap: <a href="https://hackersec.com/truques-magicos-com-o-nmap/" target="_blank">https://hackersec.com/truques-magicos-com-o-nmap/</a></p>
+
+<p>No caso, podemos escanear um único IP (pode ser local ou não), uma rede específica de IPs (por exemplo, de 192.168.0.1 a 192.168.0.100), um site ou uma lista.</p>
+
+<p>Ele exibirá as informações do computador especificado, como nome de usuário, MAC Adress, sistema operacional, pastas compartilhadas, portas, serviços, alertas, etc. (nem sempre encontraremos compartilhamentos), o que você entenderá dependerá muito do seu conhecimento de hacking (que será aprendido com o tempo), redes e protocolos, principalmente TCP/IP. E também as vulnerabilidades existentes neles (mas não todas).</p>
+
+<p>Nessa situação já teríamos conseguido acessar o outro computador e ver todo seus conteúdos e pastas. Daí podemos por exemplo, copiar dados do Outlook pro seu computador, mudar alguma configuração, remover ou adicionar arquivos, por exemplo. Por isso é importante conhecer bem os diversos sistemas operacionais, seus comandos, suas pastas e arquivos essenciais e etc., principalmente no Windows (por ser o sistema mais usado) e o Linux (que é usado muito em servidores e também precisaremos mexer nele para ferramentas hackers).</p>
+
+<p>PS: Cuidado que invadir computadores sem o conhecimento do proprietário é crime, e atenção também que alguns programadores também costumam colocar armadilhas para invasores serem pegos (conhecidas como honeypot).</p>
+
+<h3>Languard com Range</h3>
+
+<p>Considerando uma busca dos IPs 200.222.60.1 até 200.222.60.255, não significa que tem 255 computadores na rede, podem ter alguns que não estão em uso, ou alguns que mesmo estando em uso, podem estar com o computador desligado, e também costuma ter outras coisas como roteadores, por exemplo.</p>
+
+<p>Lembrando que um servidor não é derrubado para sempre, caso derrubemos um servidor, o dono dele poderá devolver ele ao ar novamente, e provavelmente com a falha corrigida.</p>
+
+<p>Para compreender melhor isso, precisaremos de melhor conhecimento de redes e sistemas Windows e Linux.</p>
+
+<h3>FTP Relâmpago</h3>
+
+<p>Pode ocorrer de estarmos em uma empresa, um colega ou cliente e precisar pegar um arquivo desse computador sem despertar suspeitas e não termos como gravar num pen-drive ou CD. Para resolvermos isso, podemos upar ele num site e posteriormente baixar em outro dispositivo, através de um link recebido no nosso e-mail.</p>
+
+<p>Esse é um dos vários sites que podem ser usados: <a href="https://rapidshare.io/" target="_blank">https://rapidshare.io/</a></p>
+
+<p>Aí você pode enviar o link pro seu e-mail através desse site: <a href="http://emailanonimo.com.br/" target="_blank">http://emailanonimo.com.br/</a></p>
+
+<p>PS: Esse arquivo fica no servidor desse site por alguns dias, depois é removido automaticamente.</p>
+
+<h3>Obtendo Senhas</h3>
+
+<p>Existem vários métodos para obter senhas, entre eles o falso login, o grampo telefônico (método bastante antigo), o keyboard spy, força bruta (que tenta várias senhas até achar a certa) e o dicionário de senhas (uma lista com muitas prováveis senhas).</p>
+
+<p>O falso login é a substituição do programa executável por outro falso, com a mesma interface, mas que guarda a senha e envia para o hacker. Alguns exemplos são os programas imitando login de sistema e sites de phishing, imitando um site ou programa verdadeiro, que engana o usuário. Para isso é necessário ter um conhecimento considerável em programação e dados da plataforma da qual deseja criar isso (pra fazer um site fake o hacker deve saber, por exemplo, PHP, Javascript e ter conhecimentos em HTML, CSS e SQL, por exemplo).</p>
+
+<p>O telefone é muito mais violável do que a internet, por isso se usou muito o grampo telefônico, um acesso matinal ao extrato do banco por fax revelaria por exemplo, dados bancários (agência, conta, senha) e não deixa vestígio nem rastro, ao contrário da internet. Nem precisa de muito conhecimento, diferente de computadores que exigem muito conhecimento de programação e hacking. Muitas vezes alguns atendimentos eletrônicos de banco até falam os números digitados, e ainda existem os decodificadores de discagem, que decifram os tons de qualquer tecla digitada pelo usuário.</p>
+
+<p>O keyboard spy ou keylogger, substitui o driver de teclado por um programa com as mesmas funções, porém, tudo que é digitado fica registrado para o hacker. Pode apresentar mal funcionamento com teclados ABNT no idioma português (já que a maioria dos keylogger são em inglês, por isso se o teclado estiver com problemas, pode ser keylogger instalado), uma técnica conhecida é digitar alt 0153, caso retorne ™ ele está funcionando normalmente, se retornar outro símbolo pode estar infectado. A lentidão do sistema também indica presença deles.</p>
+
+<p>Um programa que podemos usar para isso é o Ardamax Keylogger. Ele registra não apenas o que é digitado, mas também coisas como os programas que foram usados no PC, sites que são acessados (incluindo arquivos do próprio site), além de tudo que é digitado e clicado, isso depende do keylogger. Outros que podem ser usado também são o Metasploit/Armitage (disponíveis no Kali) e o Revealer Keylogger, que podemos baixar aqui: <a href="https://www.logixoft.com/pt-br/index" target="_blank">https://www.logixoft.com/pt-br/index</a></p>
+
+<p>O método de força bruta (bruteforce) é um método abominado por muitos hackers profissionais por ser considerado ignorante e sem charme, mas funciona, só que requerer acesso de alta velocidade. Pode demorar poucos minutos ou muitos anos para conseguir quebrar a senha. Geralmente quebra mais facilmente senhas numéricas. Para isso podemos tentar programas como o Cain, Brutus e muitos outros. Baixe aqui o Brutus: <a href="https://www.darknet.org.uk/2006/09/brutus-password-cracker-download-brutus-aet2zip-aet2/" target="_blank">https://www.darknet.org.uk/2006/09/brutus-password-cracker-download-brutus-aet2zip-aet2/</a></p>
+
+<p>O dicionário, ao contrário da força bruta que tenta todas as combinações alfanuméricas, ele tenta usar palavras de um dicionário (wordlist). Esse dicionário pode ser obtido na internet ou criado com ferramentas avançadas (tem programas que pegam, por exemplo, um livro em PDF e cria um dicionário com essas palavras). Hackers profissionais possuem diversos dicionários com milhões de verbetes em diversos idiomas, inclusive podem criar os próprios para alguém especificado, por exemplo, se um usuário é árabe podemos tentar um com as palavras do Alcorão ou se ele tem filhos podemos tentar usar um com nomes próprios. Muitos programas de bruteforce também utilizam dicionários, inclusive o Brutus, e existem outros como o Hydra e o Unsecured. Aqui podemos baixar o Unsecured: <a href="https://mega.nz/#!GllDUaAJ!0vnrMTv4A3QwyH4UiclVNvbB4_-WlkTMIamr49fFwDU" target="_blank">https://mega.nz/#!GllDUaAJ!0vnrMTv4A3QwyH4UiclVNvbB4_-WlkTMIamr49fFwDU</a></p>
+
+<p>Por causa de métodos como o bruteforce e o dicionário que hackers costumam ter vários computadores tentando quebrar senhas simultaneamente. Geralmente é utilizado alguma distro Linux dedicada à isso, como o Kali Linux, que já vem com essas ferramentas pré-instaladas. Aqui podemos baixar alguns dicionários: <a href="http://mudameuser.blogspot.com/2016/01/wordlist-para-ataque-de-forca-bruta.html" target="_blank">http://mudameuser.blogspot.com/2016/01/wordlist-para-ataque-de-forca-bruta.html</a>, e aqui também: <a href="https://github.com/BRDumps/wordlists" target="_blank">https://github.com/BRDumps/wordlists</a>.</p>
+
+<p>Por isso, é importante em senhas evitar dados pessoais ou palavras conhecidas do nosso idioma, e misture caracteres e deixe a senha cada vez maior. Evitar também acessar senhas de outros computadores, principalmente de universidades e troque periodicamente a senha.</p>
+
+<p>Para remover keylogger do Ardamax Keylogger, baixe o arquivo de remoção do site oficial: <a href="https://www.ardamax.com/download.html" target="_blank">https://www.ardamax.com/download.html</a></p>
+
+<p>PS: Muitas vezes, os usuários administradores de um site ou sistema é definido com os logins <q>admin</q>, <q>administrator</q>, <q>root</q> e outros semelhantes. Sabendo disso, podemos usar um dos métodos acima para descobrir a senha.</p>
+
+<h3>Trojans</h3>
+
+<p>Os trojans (cavalo-de-tróia) são programas ou arquivos que contém um "inimigo" dentro, tipo algo como um cartão animado ou um joguinho, mas que tem dentro um programa que é um servidor trojan, que invade seu micro e faz com que o hacker tenha acesso ao seu PC.</p>
+
+<p>Um programa utilzado para controlar um computador remotamente é o Netbus, que tem vários comandos para controlar o mouse, o teclado e outros componentes do PC. No caso, enviamos um aplicativo desse programa para o computador que será a "vítima", e controlamos pelo programa no nosso PC, acessando pelo IP.</p>
+
+<p>O programa Cain tem um "parceiro", o Abel que também faz esse processo, e pode enviar senhas para o Cain. Esses dois são mais usados para descobrir senhas.</p>
+
+<p>Basicamente, todo trojan funciona assim, o software servidor fica no computador da vítima, e o software predador fica no seu PC.</p>
+
+<h3>Falsos Remetentes</h3>
+
+<p>Uma técnica muito comum de ser usada por hackers são os falsos remetentes, e muitos acreditam que esse e-mail realmente veio dessas pessoas, e os hackers sabem disso e falsificam remetentes para enganar as pessoas.</p>
+
+<p>E-mails podem ser enviados com remetente falso sem dificuldades, a segurança é ridícula. Decisões importantes são baseadas em e-mails.</p>
+
+<p>Nunca confie em correio eletrônico. Mesmo sem a senha é possível falsificar um e-mail (técnica conhecida como <q>spoofing</q>). Em muitos softwares de e-mail, o remetente é preenchido pelo próprio usuário.</p>
+
+<p>No programa do Outlook, por exemplo, podíamos colocar qualquer remetente com qualquer nome (por exemplo luizinaciolula@terra.com), e o nome de um servidor que exista mas tenha pouca segurança. Mas nesse software ainda tinha alguma segurança e ainda verifica a senha, mas mesmo assim tem algum bug que permite enviar e-mails com esse nome falso, ao fechar bruptamente o programa ao enviar. Isso já foi corrigido, mas antigamente era possível fazer isso no Outlook.</p>
+
+<p>Para enviar e-mails falsos em massa, podemos usar um programa como o Anonymail, onde colocamos o IP de um servidor de e-mail, um remetente (que no caso, será um remetente falso), o destinatário e a mensagem. Ele costuma enviar sem pedir senha nem nada. Inclusive, alguns programas permitem envio de e-mails assim para vários destinatários em massa, o que é muito usado para fazer spams, como os de propagandas.</p>
+
+<p>Por esse motivo, não dá pra confiar em e-mails.</p>
+
+<ul>
+    <li><a href="tudo-sobre-hacking-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

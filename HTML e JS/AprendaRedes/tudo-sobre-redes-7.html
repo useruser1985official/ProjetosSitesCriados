@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html">Tudo sobre Redes Parte 13!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Redes Parte 7</h2>
+
+<h3>Endereço IPv4 e Classes de Endereçamento</h3>
+
+<p>É um identificador exclusivo que identifica um computador em uma rede. Cada interface de rede possui seu próprio IP.</p>
+
+<p>Consiste em um conjunto de quatro números, que variam de 0 a 255. O IP identifica tanto a rede, quando o host (dispositivo), além de permitir a divisão em sub-redes.</p>
+
+<p>Em uma rede, cada dispositivo é identificado por um número chamado endereço IP, que contém:</p>
+
+<ul>
+    <li>4 octetos (grupos de 8 bits).</li>
+    <li>Representados em decimal, separados por um ponto.</li>
+    <li>32 bits no total</li>
+    <li>2<sup>32</sup> endereços possíveis = 4.294.967.296 endereços.</li>
+</ul>
+
+<p>O ID de rede é a parte do IP que identifica os hosts que estão localizados na mesma rede física. Essas são as regras:</p>
+
+<ul>
+    <li>O ID de rede deve ser único dentro da rede.</li>
+    <li>Não pode iniciar com o número 127 (loopback).</li>
+    <li>Não podemos ajustar todos os bits no ID de rede como 1, pois esse endereço é reservado para uso como endereço de broadcast.</li>
+    <li>Não podemos ajustar todos os bits no ID de rede como 0, pois esse endereço é usado para denotar um host específico na rede local, não roteado.</li>
+</ul>
+
+<p>O ID de host é a parte do IP que identifica um host localizado em uma rede. Combinado com o ID de rede, forma o endereço IP. Essas são as regras:</p>
+
+<ul>
+    <li>O ID de host deve ser único dentro de uma mesma rede (para um dado ID de rede).</li>
+    <li>Não é possível ajustar todos os bits em um ID de host como 1, pois esse endereço é reservado para broadcast da rede.</li>
+    <li>Não é possível ajustar todos os bits em um ID de host como 0, pois esse endereço é usado para identificar a rede (ID de rede).</li>
+</ul>
+
+<p>Esse é um exemplo de um endereço IPv4 típico: <code>185.45.123.55</code>. Esse endereço é composto por 4 octetos, separados por pontos. Cada número pode variar entre 0 e 255 (8 bits), e algumas regras de uso desses números são aplicadas.</p>
+
+<p>As classes de endereço IP são usadas para definir a divisão entre a identificação de rede a e de host. Esse método divide o espaço de endereçamento do protocolo IPv4 em cinco classes por faixas de endereços. As classes de endereçamento são A, B, C, D e E.</p>
+
+<p>A máscara de sub-rede, neste esquema, é implícita para cada classe, não necessitando ser especificada de forma separada. Esse esquema, na verdade, foi descontinuado com o advento do CIDR (Classless Inter-Domain Routing) em 1993. Ainda é encontrado em casos específicos, como configurações padrão de alguns componentes de hardware e software de redes. Especificação RFC 791.</p>
+
+<p>Essas são as aplicações das classes de rede:</p>
+
+<ul>
+    <li><b>Classe A: </b>Redes com o Nº de hosts muito grande.</li>
+    <li><b>Classe B: </b>Redes de médio a grande porte.</li>
+    <li><b>Classe C: </b>Rede pequenas, como LANs.</li>
+    <li><b>Classe D: </b>Endereço de multicast.</li>
+    <li><b>Classe E: </b>Endereços experimentais, reservados para uso futuro.</li>
+</ul>
+
+<p>Veja abaixo as classes e formatos de endereços IP:</p>
+
+<img src="_imagens/classes.jpg" alt="Classes"/>
+
+<p>Especificamos as classes de endereçamento de acordo com o valor do primeiro octeto do endereço, no esquema <code>w.x.y.z</code>. O primeiro octeto, representado por <code>w</code>, será o identificador da classe, tanto em decimal quanto em binário.</p>
+
+<p>Essa é a faixa de endereçamento IP das classes:</p>
+
+<img src="_imagens/enderecamento.jpg" alt="Endereçamento"/>
+
+<p>E essas são as faixas de endereçamento:</p>
+
+<img src="_imagens/faixa.jpg" alt="Faixa"/>
+
+<p>PS: Lembrando que o primeiro e o último número são excluídos dos utilizáveis.</p>
+
+<p>Veja os exemplos de endereços transformados em binários:</p>
+
+<img src="_imagens/exemplos.jpg" alt="Exemplos"/>
+
+<h3>O que é DNS?</h3>
+
+<p>DNS (porta 53) é uma sigla que significa Domain Name System, que traduz nomes legíveis por humanos em endereços IP, utliziados pelos computadores, assim só precisamos nos lembrar do endereço do site (por exemplo, https://www.google.com.br/) ao invés do IP do mesmo. Basicamente, é um banco de dados de informações sobre hosts.</p>
+
+<p>Essas são algumas das características do DNS:
+    
+<ul>
+    <li>É um sistema hierárquico.</li>
+    <li>Bancos de dados distribuído.</li>
+    <li>Muitos servidores DNS localizados por todo o mundo.</li>
+    <li>13 clusters de servidores-raiz (root servers), a partir de onde podemos encontrar quaisquer domínios no mundo.</li>
+    <li>Há centenas de domínios top-level genéricos (gTLDs), como .com, .org, .edu, etc.</li>
+    <li>Cerca de 275 domínios de nível superior para códigos de país (ccTLDs), como .br, .ar, .fr, .jp, etc.</li>
+</ul>
+
+<p>Veja abaixo a hierarquia do DNS:</p>
+
+<img src="_imagens/dns.jpg" alt="DNS"/>
+
+<p>Os servidores raiz (root) sabem onde estão os servidores de nomes autoritários para cada zona de nível superior. Existem 13 servidores raiz espalhados em diferentes partes da rede (clusters na verdade). Seus nomes são a.root-servers.net até m.root-servers.net.</p>
+
+<p>Um conceito muito importante também é o de FQDN (Fully Qualified Domain Name), que contém o nome completo de um domínio. Hierarquia completa de um dispositivo, como um servidor ou uma máquina cliente (em uma rede local). Sequência de rótulos de um nó até a raiz (root), separados por pontos.</p>
+
+<p>Veja um exemplo abaixo:</p>
+
+<img src="_imagens/fqdn.jpg" alt="FQDN"/>
+
+<p>O servidor DNS é chamado de nameservers (servidores de nomes), são programas que armazenam informações sobre o namespace do domínio. No geral, possuem informações completas sobre uma parte do namespace, chamada de zona, que é carregada a partir de um arquivo ou de outro nameserver. Um nameserver é autoritativo para essa zona.</p>
+
+<p>Veja como é o exemplo de uso de domínio DNS:</p>
+
+<img src="_imagens/dominio-dns.jpg" alt="Domínio DNS"/>
+
+<p>Na imagem acima, a parte referente à bosontreinamentos pra baixo é uma zona DNS, o de planetaunix é outra zona.</p>
+
+<p>Esse são os tipos de nameservers:</p>
+
+<ul>
+    <li><b>Primário: </b>Lê os dados de uma zona a partir de um arquivo em seu host.</li>
+    <li><b>Secundário: </b>Obtém os dados da zona a partir de outro servidor de nomes autoritativo para a zona, chamado de servidor mestre, que geralmente é o servidor primário (mas nem sempre).</li>
+</ul>
+
+<h3>Resolvedor DNS</h3>
+
+<p>DNS Resolver é o serviço cliente que acessa o servidor DNS. Responsável por iniciar e seguir as consultas que levam à resolução de nomes do recurso procurado. O resolver é responsável por executar uma consulta, interpretar as respostas e retornar a informação ao programa que a requisitou. As consultas DNS podem ser não-recursivas, recursivas, iterativas ou ainda uma combinação desses tipos.</p>
+
+<p>Veja abaixo o mecanismo de resolução de endereços:</p>
+
+<img src="_imagens/dns-resolucao.jpg" alt="DNS Resolução"/>
+
+<p>No caso, o resolvedor acessa um site (como o Google) pelo IP, quando digitamos o nome do site, e ele enviará ao servidor DNS Local (ou mais próximo), e se ele tiver a resposta, ele a envia para o resolvedor, senão ele consulta o servidor raiz, que "informa" que ele está no .com, o local volta e pergunta pro servidor .com, volta e ele procura o google.com e assim por diante.</p>
+
+<p>Existem três métodos de consulta que um resolver pode utilizar para executar uma query DNS: Consulta não-recursiva, consulta recursiva e consulta iterativa. Um resolvedor pode utilizar uma combinação dos métodos de consulta se for necessário.</p>
+
+<p>Na consulta não-recursiva, o cliente resolvedor DNS consulta um servidor DNS que fornece um registro para um domínio no qual ele é autoritativo, ou então fornce um resultado parcial sem consultar outros servidores. No caso de uso do Cache DNS, a consulta não-recursiva é feita sobre o cache DNS localda máquina e fornece um resultado sem a necessidade de realizar consultas repetidas a servidores DNS remotos, reduzindo assim a carga sobre esses servidores, durante um período de temp determinado.</p>
+
+<p>Na consulta recursiva, o cliente resolvedor DNS consulta um único servidor DNS, o qual então pode consultar, como se ele fosse um cliente, outros servidores DNS em nome do cliente em si. Um exemplo clássico é o de um roteador banda larga caseiro, que age como servidor DNS (stub resolver) para as máquinas na rede local, e realiza consultas recursivas ao servidor DNS do provedor de internet. Em uma consulta recursiva o servidor DNS fornece uma resposta completa, ou informa um erro, consultando outros servidores DNS conforme necessário.</p>
+
+<p>Na consulta iterativa, o cliente resolvedor DNS consulta uma cadeia de um ou mais servidores DNS. Cada servidor encaminha o cliente ao próximo servidor na cadeia, até que um servidor consiga efetuar a resolução de nomes de forma completa. Por exemplo, uma resolução do endereço https://www.google.com.br/ poderia ocorrer com uma consulta a um servidor raiz global (root), depois consulta a um servidor .br, depois a um servidor .com, até chegar ao servidor google.com.br.</p>
+
+<p>O cache DNS é uma técnica de redução da carga nos servidores DNS por meio do armazenamento local (ou em hosts intermediários) dos resultados das consultas, conhecido como "caching". Todo resultado de uma consulta DNS é associado a um TTL (Time To Live), uma data de expiração após a qual os resultados são descartados ou atualizados. Essa temportiação é configurada pelo admin no servidor autoritativo, e pode variar de segundos a semanas. Assim, alterações nos registros DNS não se propagam imediatamente pela rede, requerendo que os caches expirem e seja atualizados após o prazo do TTL.</p>
+
+<p>Para ver o cache DNS, abra o prompt de comando e digite <code>ipconfig /displaydns</code>. Ele mostrará vários sites visitados.</p>
+
+<p>Para ver dados sobre o servidor do site, usamos o comando <code>nslookup</code> assim: <code>nslookup -q=ns www.google.com.br</code></p>
+
+<p>E também podemos verificar online dados dos servidores, com esse site: <a href="https://www.whoishostingthis.com/" target="_blank">https://www.whoishostingthis.com/</a></p>
+
+<p>PS: Os métodos acima retornam dados diferentes.</p>
+
+<p>Podemos também usar o ApateDNS para vermos os domínos DNS abertos do nosso sistema, incluindo os suspeitos, ele não precisa ser instalado: <a href="https://www.fireeye.com/content/dam/fireeye-www/services/freeware/sdl-apatedns.zip" target="_blank">https://www.fireeye.com/content/dam/fireeye-www/services/freeware/sdl-apatedns.zip</a></p>
+
+<ul>
+    <li><a href="tudo-sobre-redes-6.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-redes-8.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

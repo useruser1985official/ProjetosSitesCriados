@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Objective-C</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Objective-C</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-objectivec-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Objective-C Parte 1!</a></li>
+                    <li><a href="tudo-sobre-objectivec-2.html">Tudo sobre Objective-C Parte 2!</a></li>
+                    <li><a href="tudo-sobre-objectivec-3.html">Tudo sobre Objective-C Parte 3!</a></li>
+                    <li><a href="tudo-sobre-objectivec-4.html">Tudo sobre Objective-C Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Objective-C Parte 1</h2>
+
+<h3>Primeiros Passos</h3>
+
+<p>O ideal para programar em Objective-C é usar o Mac e a IDE oficial XCode, mas podemos fazer programas em outros sistemas operacionais. Para usar no Linux, basta instalar o gcc, o gobjc e o gnustep-devel no sistema.</p>
+
+<p>Os programas em Objective-C são colocados em arquivos com a extensão .m, e arquivos de cabeçalho usam .h, assim como em C e C++.</p>
+
+<p>Esse é o olá mundo em Objective-C:</p>
+
+<pre>
+<code>
+#import &lt;Foundation/Foundation.h&gt; // Importação da biblioteca Foundation, necessária pros programas básicos em Objective-C
+
+int main(int argc, const char *argv[]) { // Método principal, com parâmetros que serão recebidos via linha de comando
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // Criação do objeto de liberação automática
+
+    NSLog(@"Olá, Mundo!"); // Método de saída
+
+    [pool drain]; // Liberação do receptor pool, usando o método drain do objeto
+
+    return 0; // Retorno do método main, 0 significa execução com sucesso
+}
+</code>
+</pre>
+
+<p>Para compilar, usamos esse comando (podemos colocar num makefile também):</p>
+
+<pre>
+<code>
+gcc olamundo.m -I /usr/include/GNUstep/ -L /usr/lib/GNUstep/ -l objc -lgnustep-base -fconstant-string-class=NSConstantString -lm -ldl -fobjc-exceptions -o olamundo -no-pie
+</code>
+</pre>
+
+<p>Os comentários são feitos da mesma forma que em C:</p>
+
+<pre>
+<code>
+// Comentário de uma linha
+
+/*
+Comentário
+de
+várias
+linhas
+*/
+</code>
+</pre>
+
+<h3>Variáveis</h3>
+
+<p>Os tipos primitivos Básicos consistem em tipos aritméticos inteiros e de ponto-flutuante. Veja abaixo os tipos:</p>
+
+<table>
+    <tr>
+        <th>Tipo</th>
+        <th>Tamanho</th>
+        <th>Faixa de Valores</th>
+    </tr>
+    <tr>
+        <td>char</td>
+        <td>1 byte</td>
+        <td>-128 a 127</td>
+    </tr>
+    <tr>
+        <td>unsigned char</td>
+        <td>1 byte</td>
+        <td>0 a 255</td>
+    </tr>
+    <tr>
+        <td>signed char</td>
+        <td>1 byte</td>
+        <td>-128 a 127</td>
+    </tr>
+    <tr>
+        <td>int</td>
+        <td>4 bytes</td>
+        <td>-2147483648 a 2147483647</td>
+    </tr>
+    <tr>
+        <td>unsigned int</td>
+        <td>4 bytes</td>
+        <td>0 a 4294967295</td>
+    </tr>
+    <tr>
+        <td>short</td>
+        <td>2 bytes</td>
+        <td>-32,768 a 32,767</td>
+    </tr>
+    <tr>
+        <td>unsigned short</td>
+        <td>2 bytes</td>
+        <td>0 a 65,535</td>
+    </tr>
+    <tr>
+        <td>long</td>
+        <td>4 bytes</td>
+        <td>-2147483648 a 2147483647</td>
+    </tr>
+    <tr>
+        <td>unsigned long</td>
+        <td>4 bytes</td>
+        <td>0 a 4294967295</td>
+    </tr>
+    <tr>
+        <td>float</td>
+        <td>4 bytes</td>
+        <td>3.4E-38 a 3.4E+38 (até 6 casas decimais)</td>
+    </tr>
+    <tr>
+        <td>double</td>
+        <td>8 bytes</td>
+        <td>1.7E-308 a 1.7E+308 (até 15 casas decimais)</td>
+    </tr>
+    <tr>
+        <td>long double</td>
+        <td>12 bytes</td>
+        <td>3.4E-4932 a 1.1E+4932 (até 19 casas decimais)</td>
+    </tr>
+    <tr>
+        <td>bool</td>
+        <td>1 byte</td>
+        <td>true/false</td>
+    </tr>
+    <tr>
+        <td>char[]</td>
+        <td>1 byte por caractere</td>
+        <td>Textos em Geral</td>
+    </tr>
+</table>
+
+<p>PS: Letras únicas em char se coloca entre aspas simples, cadeias de caracteres se coloca entre aspas duplas.</p>
+
+<p>Uma declaração simples de variáveis seria assim:</p>
+
+<pre>
+<code>
+#import &lt;Foundation/Foundation.h&gt;
+
+int main(int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    int numero = 50;
+    float real = 9.85;
+    char letra = 'A';
+    char* frase = "Isso é uma String!";
+    const bool LOGICO = true; // Constante, não pode ser alterada
+
+    // Formatações tipo o printf do C:
+    NSLog(@"%d", numero);
+    NSLog(@"%.2f", real);
+    NSLog(@"%c", letra);
+    NSLog(@"%s", frase);
+    NSLog(@"%s", LOGICO ? "true" : "false");
+
+    [pool drain];
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>As máscaras de formatação são as mesmas do C, <code>%s</code> para ponteiro de char, <code>%c</code> para char único, <code>%d</code> para inteiros, <code>%f</code> para reais e <code>%p</code> para ponteiros. As formatações usando eles também são os mesmos (tipo <code>%.1f</code>).</p>
+
+<p>PS: No caso de strings, é recomendável usar a classe NSString, assim:</p>
+
+<pre>
+<code>
+NSString *frase = @"Isso é uma String!";
+
+NSLog(@"%@", frase);
+</code>
+</pre>
+
+<p>Para ler dados do teclado, usamos os mesmos comandos em C:</p>
+
+<pre>
+<code>
+int main(int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    int numero;
+    float real;
+    char letra;
+    char frase[25];
+
+    // Inclua stdio.h igual se faz no C:
+    printf("Digite um número inteiro: "); // O printf não pula linha
+    scanf("%d", &numero);
+    printf("Digite um número real: ");
+    scanf("%f", &real);
+    fflush(stdin); // Limpeza buffer
+    printf("Digite uma única letra: ");
+    scanf("\n%c", &letra); // Pra evitar erros
+    fflush(stdin);
+    printf("Digite uma frase: ");
+    scanf("\n"); // Pra evitar erros
+    fgets(frase, 25, stdin);
+
+    system("clear"); // Inclua stdlib.h igual ao C
+
+    NSLog(@"%d", numero);
+    NSLog(@"%.2f", real);
+    NSLog(@"%c", letra);
+    NSLog(@"%s", frase);
+
+    [pool drain];
+
+    return 0;
+}
+</code>
+</pre>
+
+<h3>Operadores Aritméticos</h3>
+
+<p>Os operadores aritméticos em Objective-C são os mesmos do C e outras linguagens. Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+int main(int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    int n1, n2, soma, subs, mult, divi, rest;
+
+    printf("Digite um número: ");
+    scanf("%d", &n1);
+    printf("Digite outro número: ");
+    scanf("%d", &n2);
+
+    soma = n1 + n2;
+    subs = n1 - n2;
+    mult = n1 * n2;
+    divi = n1 / n2;
+    rest = n1 % n2;
+
+    system("clear");
+
+    NSLog(@"A soma entre %d e %d é igual a %d.", n1, n2, soma);
+    NSLog(@"A subtração entre %d e %d é igual a %d.", n1, n2, subs);
+    NSLog(@"A multiplicação entre %d e %d é igual a %d.", n1, n2, mult);
+    NSLog(@"A divisão entre %d e %d é igual a %d com resto de %d.", n1, n2, divi, rest);
+
+    [pool drain];
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Lembrando da ordem de precedência, que é a mesma de outras linguagens. Veja como exemplo um uso:</p>
+
+<pre>
+<code>
+int main(int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    float nota1, nota2, media;
+
+    printf("Digite a primeira nota: ");
+    scanf("%f", &amp;nota1);
+    printf("Digite a segunda nota: ");
+    scanf("%f", &amp;nota2);
+
+    media = (nota1 + nota2) / 2;
+
+    system("clear");
+
+    NSLog(@"A média das notas é de %.1f.", media);
+
+    [pool drain];
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Veja outro exemplo:</p>
+
+<pre>
+<code>
+int x, y, z, w;
+
+printf("Digite um número: ");
+scanf("%d", &x);
+printf("Digite o valor à somar: ");
+scanf("%d", &y);
+    
+z = x + y;
+w = pow(x, 3); // Adicione Biblioteca math.h
+
+NSLog(@"A soma de %d com %d equivale a %d.", x, y, z);
+NSLog(@"%d elevado ao cubo: %d.", x, w);
+</code>
+</pre>
+
+<p>PS: Para funções aritméricas, como o <code>pow()</code>, é necessário adicionar a biblioteca <code>math.h</code>.Veja algumas dessas funções abaixo:</p>
+
+<ul>
+    <li><code>abs()</code> para pegar o valor absoluto de um número.</li>
+    <li><code>pow()</code> para criar uma potencialização entre dois números.</li>
+    <li><code>sqrt()</code> para mostrar a raiz quadrada.</li>
+    <li><code>cbrt()</code> para mostrar a raiz cúbica.</li>
+    <li><code>round()</code> para mostrar o número arredondado para o inteiro mais próximo. Para cima se usa <code>ceil()</code> e para baixo <code>floor()</code>.</li>
+    <li><code>rand()</code> para gerar um número aleatório, definindo o mínimo e o máximo.</li>
+</ul>
+
+<h3>Manipulando NSStrings</h3>
+
+<p>O NSString são objetos, portanto, possuem métodos para os manipularem. Esses são os métodos mais usados:</p>
+
+<pre>
+<code>
+int main(int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    NSString *exemplo = @"Exemplo de String!";
+    const char *frase = "Isso é uma frase!";
+    NSString *comEsp = @"   Frase para fazer o \"trim\"!    ";
+
+    NSString *caixaAlta, *caixaBaixa, *concatenada, *subst, *novo, *extNum, *extReal, *extAlg, *semEsp;
+    const char* volta;
+    int tamanho;
+    bool compara;
+    int num, alg;
+    float real;
+
+    caixaAlta = [exemplo uppercaseString];
+    caixaBaixa = [exemplo lowercaseString];
+    concatenada = [exemplo stringByAppendingFormat: @" E mais alguma coisa!"];
+    subst = [exemplo stringByReplacingOccurrencesOfString: @"String" withString: @"Frase"];
+    novo = [[NSString alloc] initWithUTF8String: frase];
+    volta = [exemplo UTF8String];
+    tamanho = [exemplo length];
+    compara = [exemplo isEqualToString: caixaAlta];
+    semEsp = [comEsp stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
+
+    // Conversões:
+
+    extNum = @"50";
+    extReal = @"9.85";
+    alg = 15;
+    num = [extNum integerValue];
+    real = [extReal floatValue]; // também podemos usar doubleValue para valores double
+    extAlg = [NSString stringWithFormat: @"%d", alg];
+
+    NSLog(@"%@", caixaAlta);
+    NSLog(@"%@", caixaBaixa);
+    NSLog(@"%@", concatenada);
+    NSLog(@"%@", subst);
+    NSLog(@"%@", novo);
+    NSLog(@"%s", volta);
+    NSLog(@"%d", tamanho);
+    NSLog(@"%s", compara ? "igual" : "diferente");
+    NSLog(@"%@", semEsp);
+    NSLog(@"%d", num);
+    NSLog(@"%.2f", real);
+    NSLog(@"%@", extAlg);
+
+    [pool drain];
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Já variáveis char, são manipuladas da mesma forma que no C, como podem ver:</p>
+
+<pre>
+<code>
+const char* frase = "90"; // Inclua stdlib.h
+int novo = atoi(frase);
+
+NSLog(@"%d", novo);
+
+int numero = 50;
+char texto[10];
+
+sprintf(texto, "%i", numero); // Pode ser usado também pra concatenar variáveis de vários tipos
+
+NSLog(@"%s", texto);
+
+char letra = 'a'; // Inclua ctype.h
+char maiuscula = toupper(letra); // Pra minúscula use tolower
+
+NSLog(@"%c", maiuscula);
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-objectivec-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

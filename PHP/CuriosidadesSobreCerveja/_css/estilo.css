@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+body {
+    background: url("../_imagens/barris.jpg") center fixed repeat;
+    background-color: rgb(255,128,0);
+    color: white;
+    font-family: Arial, sans-serif;
+}
+div#interface {
+    background-color: rgba(60,36,0,0.75);
+    margin: -8px;
+    padding: 25px;
+    
+}
+header {
+    height: 120px;
+    border-bottom: 1px solid brown;
+}
+section#conteudo {   
+    min-height: 585px;
+}
+a {
+    color: goldenrod;
+    text-decoration: none;
+}
+a:hover {
+    color: gold;
+    text-decoration: underline;
+}
+p {
+    text-indent: 35px;
+    text-align: justify;
+}
+menu li {
+    list-style-type: square;
+}
+form {
+    padding: 10px;
+    margin: 0px auto;
+    width: 600px;
+}
+form fieldset {
+    border: 2px solid brown;
+}
+form fieldset#sexo {
+    width: 125px;
+}
+form p {
+    text-indent: 0px;
+}
+input, select, textarea {
+    font-family: Arial, sans-serif;
+    font-size: 12pt;
+    background-color: rgba(128,16,0,0.5);
+    color: white;
+}
+input:hover, select:hover, textarea:hover {
+    background-color: rgba(96,8,0,0.5);
+}
+form fieldset#botoes input {
+    padding: 10px;
+}
+
+form#fLogin {
+    width: 250px;
+}
+
+footer#rodape { 
+    height: 70px;
+    border-top: 1px solid brown;
+}

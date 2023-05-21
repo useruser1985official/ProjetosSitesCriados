@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Sistema de Loja de Instrumentos</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div id="interface">
+            <header id="cabecalho">
+                <h1><a href="index.html">Sistema de Loja de Instrumentos</a></h1>
+
+                <nav id="menu">
+                    <ul>
+                        <li><a href="cadastrar.html">Cadastrar Instrumento</a></li>
+                        <li><a href="catalogo.html">Catálogo de Instrumentos</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <h2>Cadastro</h2>
+            
+            <form method="post" action="javascript:void()">
+                <fieldset>
+                    <legend>Cadastro de Instrumentos</legend>
+                    <p><label for="cNom">Nome do Instrumento: </label><input type="text" name="tNom" id="cNom" size="35" maxlength="60" placeholder="Nome" required autofocus/></p>
+                    <p><label for="cMod">Modelo de Instrumento: </label><input type="text" name="tMod" id="cMod" size="35" maxlength="60" placeholder="Modelo" required/></p>
+                    <p><label for="cMar">Marca do Instrumento: </label><input type="text" name="tMar" id="cMar" size="35" maxlength="60" placeholder="Marca" required/></p>
+                    <p>
+                        <label for="cTip">Tipo de Instrumento</label>
+                        <select name="tTip" id="cTip">
+                            <option>Cordas</option>
+                            <option>Percussão</option>
+                            <option>Teclas</option>
+                            <option>Sopro</option>
+                        </select>
+                    </p>
+                    <p><label for="cQua">Quantidade: </label><input type="number" name="tQua" id="cQua" min="0" value="0" required/></p>
+                    <p><label for="cPre">Preço por Unidade: R$</label><input type="number" name="tPre" id="cPre" min="0" step="0.01" value="0" required/></p>
+                    <input type="submit" class="botao" value="Cadastrar"/>
+                </fieldset>
+            </form>
+        </div>
+    </body>
+</html>

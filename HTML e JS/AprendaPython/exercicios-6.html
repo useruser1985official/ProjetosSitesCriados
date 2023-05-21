@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Python</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Python</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-python-1.html">Tudo sobre Python Parte 1!</a></li>
+                    <li><a href="tudo-sobre-python-2.html">Tudo sobre Python Parte 2!</a></li>
+                    <li><a href="tudo-sobre-python-3.html">Tudo sobre Python Parte 3!</a></li>
+                    <li><a href="tudo-sobre-python-4.html">Tudo sobre Python Parte 4!</a></li>
+                    <li><a href="tudo-sobre-python-5.html">Tudo sobre Python Parte 5!</a></li>
+                    <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
+                    <li><a href="tudo-sobre-python-7.html">Tudo sobre Python Parte 7!</a></li>
+                </menu>
+            </header>
+
+<h2>Exercícios - Parte 6</h2>
+
+<p>Faça um programa que leia nome e média de um aluno, guardando também a situação em um dicionário. No final, mostre o conteúdo da estrutura na tela:</p>
+
+<pre>
+<code>
+aluno = dict()
+
+aluno["nome"] = str(input("Nome: "))
+aluno["media"] = float(input(f"Média de {aluno['nome']}: "))
+
+if aluno["media"] >= 7:
+    aluno["situacao"] = "Aprovado"
+elif 5 <= aluno["media"] < 7:
+    aluno["situacao"] = "Em Recuperação"
+else:
+    aluno["situacao"] = "Reprovado"
+
+for k, v in aluno.items():
+    print(f"- {k} é igual à {v}.")
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa onde 4 jogadores joguem um dado e tenham resultados aleatórios. Guarde esses resultados em um dicionário, no final, coloque esse dicionário em ordem, sabendo que o vencedor tirou o maior número no dado:</p>
+
+<pre>
+<code>
+from random import randint
+from time import sleep
+from operator import itemgetter
+
+jogo = {"Jogador 1": randint(1, 6),
+        "Jogador 2": randint(1, 6),
+        "Jogador 3": randint(1, 6),
+        "Jogador 4": randint(1, 6)}
+
+ranking = list()
+
+print("-=" * 18)
+print("Valores sorteados:\n")
+
+for k, v in jogo.items():
+    print(f"{k} tirou {v} no dado.")
+    sleep(1)
+
+print("-=" * 18)
+
+ranking = sorted(jogo.items(), key = itemgetter(1), reverse = True)
+
+print("=== RANKING DOS JOGADORES ===\n")
+
+for i, v in enumerate(ranking):
+    print(f"{i + 1}º lugar: {v[0]} com {v[1]}.")
+
+print("-=" * 18)
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia nome, ano de nascimento e carteira de trabalho e cadastre-os (com idade) em um dicionário, se por acaso a CTPS for diferente de zero, o dicionário receberá também o ano de contratação e o salário. Calcule e acrescente, além da idade, com quantos anos a pessoa vai se aposentar:</p>
+
+<pre>
+<code>
+from datetime import datetime
+
+dados = dict()
+dados["nome"] = str(input("Nome: "))
+nasc = int(input("Ano de Nascimento: "))
+dados["idade"] = datetime.now().year - nasc
+dados["ctps"] = int(input("Carteira de Trabalho (0 não tem): "))
+
+if dados["ctps"] != 0:
+    dados["contratacao"] = int(input("Ano de Contratação: "))
+    dados["salario"] = float(input("Salário: R$"))
+    dados["aposentadoria"] = dados["idade"] + ((dados["contratacao"] + 35) - datetime.now().year)
+
+print("-=" * 30)
+
+for k, v in dados.items():
+    print(f"- {k} tem o valor {v}.")
+
+print("-=" * 30)
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que gerencio o aproveitamento de um jogador de futebol. O programa vai ler o nome do jogador e quantas partidas ele jogou. Depois vai ler a quantidade de gols feitos em cada partida. No final, tudo isso será guardado em um dicionário, incluindo o total de gols feitos durante o campeonato:</p>
+
+<pre>
+<code>
+jogador = dict()
+partidas = list()
+
+jogador["nome"] = str(input("Nome do jogador? "))
+tot = int(input(f"Quantas partidas {jogador['nome']} jogou? "))
+
+for c in range(0, tot):
+    partidas.append(int(input(f"Quantos gols na partida {c + 1}? ")))
+
+jogador["gols"] = partidas[:]
+jogador["total"] = sum(partidas)
+
+print("-=" * 30)
+print(jogador)
+
+print("-=" * 30)
+for k, v in jogador.items():
+    print(f"O campo {k} tem o valor {v}.")
+
+print("-=" * 30)
+print(f"O jogador {jogador['nome']} jogou {len(jogador['gols'])} partidas.")
+
+for i, v in enumerate(jogador["gols"]):
+    print(f"    => Na partida {i + 1}, fez {v} gols.")
+
+print(f"Foi um total de {jogador['total']} gols.")
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia nome, sexo e idade de várias pessoas, guardando os dados de cada pessoa em um dicionário e todos os dicionários em uma lista. No final mostre quantas pessoas foram cadastradas, a média de idade do grupo, uma lista com todas as mulheres e uma lista com todas as pessoas com idade acima da média:</p>
+
+<pre>
+<code>
+galera = list()
+pessoa = dict()
+soma = media = 0
+
+while True:
+    pessoa.clear()
+    pessoa["nome"] = str(input("Nome: "))
+
+    while True:
+        pessoa["sexo"] = str(input("Sexo [M/F]: ")).upper()[0]
+
+        if pessoa["sexo"] in "MF":
+            break
+
+        print("ERRO! Por favor, digite apenas M ou F!")
+
+    pessoa["idade"] = int(input("Idade: "))
+    soma += pessoa["idade"]
+    galera.append(pessoa.copy())
+
+    while True:
+        resp = str(input("Quer Continuar? [S/N] ")).upper()[0]
+
+        if resp in "SN":
+            break
+
+        print("ERRO ! Responda apenas S ou N!")
+
+    if resp == "N":
+        break
+
+print("-=" * 30)
+print(f"A) Ao todo temos {len(galera)} pessoas cadastradas.")
+
+media = soma / len(galera)
+
+print(f"B) A média de idade é de {media:5.2f} anos.")
+
+print("C) As mulheres cadastradas foram ", end="")
+
+for p in galera:
+    if p["sexo"] == "F":
+        print(f"{p['nome']} ", end="")
+
+print("")
+
+print("D) Lista das pessoas que estão acima da média de idade:")
+
+for p in galera:
+    if p["idade"] >= media:
+        print("    ", end="")
+
+        for k, v in p.items():
+            print(f"{k} = {v}. ", end="")
+
+        print("")
+
+print("Encerrado")
+</code>
+</pre>
+
+<hr/>
+
+<p>Aprimore o desafio dos jogadores de futebol, para que funcione com vários jogadores, incluindo um sistema de visualização de detalhes do aproveitamento de cada jogador:</p>
+
+<pre>
+<code>
+jogador = dict()
+partidas = list()
+time = list()
+
+while True:
+    jogador.clear()
+    jogador["nome"] = str(input("Nome do jogador: "))
+    tot = int(input(f"Quantas partidas {jogador['nome']} jogou? "))
+    partidas.clear()
+
+    for c in range(0, tot):
+        partidas.append(int(input(f"Quantos gols na partida {c + 1}: ")))
+
+    jogador["gols"] = partidas[:]
+    jogador["total"] = sum(partidas)
+
+    time.append(jogador.copy())
+
+    while True:
+        resp = str(input("Quer continuar? [S/N] ")).upper()[0]
+
+        if resp in "SN":
+            break
+        print("ERRO! Responda apenas S ou N!")
+
+    if resp == "N":
+        break
+
+print("-=" * 30)
+print("cod ", end="")
+for i in jogador.keys():
+    print(f"{i:<15} ", end="")
+print("")
+print("-" * 40)
+
+for k, v in enumerate(time):
+    print(f"{k:>3} ", end="")
+
+    for d in v.values():
+        print(f"{str(d):<15} ", end="")
+    print("")
+
+print("-=" * 30)
+
+while True:
+    busca = int(input("Mostrar dados de qual jogador (999 para parar)? "))
+
+    if busca == 999:
+        break
+
+    if busca >= len(time):
+        print(f"ERRO! Não existe jogador com código {busca}!")
+    else:
+        print(f"--- LEVANTAMENTO DO JOGADOR {time[busca]['nome']}:")
+
+        for i, g in enumerate(time[busca]["gols"]):
+            print(f"    No jogo {i + 1} fez {g} gols.")
+
+    print("-=" * 30)
+
+print("=== VOLTE SEMPRE! ===")
+</code>
+</pre>
+
+<ul>
+    <li><a href="exercicios-5.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="exercicios-7.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

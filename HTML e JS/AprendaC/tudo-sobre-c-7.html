@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda C</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-c-1.html">Tudo sobre C Parte 1!</a></li>
+                    <li><a href="tudo-sobre-c-2.html">Tudo sobre C Parte 2!</a></li>
+                    <li><a href="tudo-sobre-c-3.html">Tudo sobre C Parte 3!</a></li>
+                    <li><a href="tudo-sobre-c-4.html">Tudo sobre C Parte 4!</a></li>
+                    <li><a href="tudo-sobre-c-5.html">Tudo sobre C Parte 5!</a></li>
+                    <li><a href="tudo-sobre-c-6.html">Tudo sobre C Parte 6!</a></li>
+                    <li><a href="tudo-sobre-c-7.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C Parte 7!</a></li>
+                    <li><a href="tudo-sobre-c-8.html">Tudo sobre C Parte 8!</a></li>
+                    <li><a href="tudo-sobre-c-9.html">Tudo sobre C Parte 9!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C Parte 7</h2>
+
+<h3>Estrutura - Definição e Atribuição</h3>
+
+<p>As estruturas são uma espécie de agrupamento de diversas variáveis distintas sob um nome comum. É um tipo de dados que o próprio programador define para usar no seu programa, existem outros tipos de dados que o usuário pode definir, mas aqui só falaremos de estruturas. As estruturas são usadas para criar um tipo de dado específico, composto ou complexo para usar no programa.</p>
+
+<p>Para utilizarmos uma estrutura, usamos a palavra-chave <code>struct</code>, dessa forma.</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+    struct endereco {
+        char rua[50];
+        char numero[5];
+        char cep[8];
+        char bairro[30];
+    };
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>No caso acima, as variáveis são chamadas de membros de estrutura. Podemos ter vários tipos de dados numa mesma estrutura.</p>
+
+<p>Veja outro exemplo, com vários tipos de dados:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+    struct livro {
+        char nome[30];
+        char autor[50];
+        int paginas;
+        float preco;
+    };
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Podemos usar o struct fora do método main, e chamando o mesmo dentro do main:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;locale.h&gt;
+
+struct livro {
+    char nome[30];
+    char autor[50];
+    int paginas;
+    float preco;
+};
+
+struct livro liv1; // O primeiro nome é o "tipo" e o segundo nome é a a variável.
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+
+    printf("Cadastrando livro!\n");
+    printf("\nDigite o nome do livro: ");
+    fgets(liv1.nome, 30, stdin);
+    printf("Digite o nome do autor: ");
+    fgets(liv1.autor, 50, stdin);
+    printf("Digite o número de páginas do livro: ");
+    scanf("%d", &liv1.paginas);
+    printf("Digite o preço do livro: ");
+    scanf("%f", &liv1.preco);
+
+
+    // Isso é pra remover a quebra de linha:
+    size_t len;
+    len = strlen(liv1.nome); // Inclua string.h
+
+    if(liv1.nome[len - 1] == '\n') liv1.nome[--len] = 0;
+
+    len = strlen(liv1.autor);
+
+    if(liv1.autor[len - 1] == '\n') liv1.autor[--len] = 0;
+
+    printf("\nO livro %s possuí %d páginas e custa R$%4.2f.\n", liv1.nome, liv1.paginas, liv1.preco);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: Note que usamos o fgets para pegar dados de livro, mas só funciona pra char, mas nada impede de usarmos também scanf para isso, desde que indiquemos corretamente.</p>
+
+<p>Podemos declarar o nome da variável diretamente no struct também, é recomendado quando usaremos apenas uma variável com esse struct, veja um exemplo:</p>
+
+<pre>
+<code>
+struct livro {
+    char nome[30];
+    char autor[50];
+    int paginas;
+    float preco;
+} liv1;
+</code>
+</pre>
+
+<p>PS: Pode colocar mais de uma variável declarada dessa forma, separando por vírgulas.</p>
+
+<p>Também podemos atribuir os dados de uma estrutura para outra, dessa forma:</p>
+
+<pre>
+<code>
+liv2 = liv1;
+</code>
+</pre>
+
+<p>PS: Não são permitidos métodos em estruturas em C.</p>
+
+<p>Caso as estruturas sejam ponteiros, use a seta (->) ao invés do ponto. Compare os dois exemplos abaixo.</p>
+
+<p>Exemplo sem ponteiros:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;locale.h&gt;
+
+struct livro {
+    char *nome; // Como atribuímos diretamente, não podemos usar arrays e sim ponteiros pra char
+    char *autor; // Idem
+    int paginas;
+    float preco;
+} liv1; // Atribuição direta a uma variável
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+    struct livro liv2; // Nova variável de estrutura
+
+    liv2.nome = "Tudo sobre Linguagem C";
+    liv2.autor = "Fulano da Silva";
+    liv2.paginas = 400;
+    liv2.preco = 49.99;
+
+    printf("O livro %s possuí %d páginas e custa R$%4.2f.", liv2.nome, liv2.paginas, liv2.preco);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Exemplo com ponteiros:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;locale.h&gt;
+
+struct livro {
+    char *nome; // Como atribuímos diretamente, não podemos usar arrays e sim ponteiros pra char
+    char *autor; // Idem
+    int paginas;
+    float preco;
+} liv1; // Atribuição direta a uma variável
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+    struct livro *liv2 = &amp;liv1; // Atribuindo ponteiro a endereço da outra variável
+
+    liv2->nome = "Tudo sobre Linguagem C";
+    liv2->autor = "Fulano da Silva";
+    liv2->paginas = 400;
+    liv2->preco = 49.99;
+
+    printf("O livro %s possuí %d páginas e custa R$%4.2f.", liv2->nome, liv2->paginas, liv2->preco);
+
+    free(liv2); // Excluindo ponteiro pra liberar memória
+
+    return 0;
+}
+</code>
+</pre>
+
+<h3>Unions</h3>
+
+<p>As unions se declaram de forma parecida com as structs, mas ela ocupa menos espaço na memória.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+union exemplo {
+    int inteiro;
+    char caractere;
+};
+</code>
+</pre>
+
+<p>As variáveis do unions ocupam o mesmo endereço de memória.</p>
+
+<p>Vamos comparar uma union e uma struct:</p>
+
+<pre>
+<code>
+union estrutura01 {
+    int inteiro;
+    char caractere;
+    float decimal;
+};
+
+struct estrutura02 {
+    int inteiro2;
+    char caractere2;
+    float decimal2;
+};
+</code>
+</pre>
+
+<p>E na função principal, faça isso:</p>
+
+<pre>
+<code>
+printf("União: %d\n", sizeof(union estrutura01));
+printf("Estrutura: %d\n", sizeof(struct estrutura02));
+</code>
+</pre>
+
+<p>Dessa forma vemos a comparação entre o tamanho da union e da struct.</p>
+
+<p>PS: As unions podem ser utilizadas dentro de structs ou de outras unions também.</p>
+
+<h3>Typedef em C</h3>
+
+<p>Como fizemos com as enuns, podemos criar nossos "tipos" próprio com qualquer tipo primitivo, struct, union, etc.</p>
+
+<p>Veja um exemplo de uso logo abaixo:</p>
+
+<pre>
+<code>
+typedef int inteiro;
+typedef float flutuante;
+typedef char caractere;
+typedef char* texto;
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+
+    inteiro num = 50;
+    flutuante real = 9.85;
+    caractere letra = 'A';
+    texto frase = "Introdução à Typedef em C";
+
+    printf("%d\n", num);
+    printf("%.2f\n", real);
+    printf("%c\n", letra);
+    printf("%s\n", frase);
+
+    return 0;
+}
+</code>
+</pre>
+
+<h3>Passando Estruturas para Funções</h3>
+
+<p>Podemos também passar estruturas para funções, veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+struct estrutura {
+    int a, b;
+    char c;
+};
+
+void imprimir(struct estrutura param);
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+
+    struct estrutura arg;
+
+    arg.a = 1200;
+    arg.b = 500;
+    arg.c = 'A';
+
+    imprimir(arg);
+
+    return 0;
+}
+
+void imprimir(struct estrutura param) {
+    printf("%d\n", param.a);
+    printf("%d\n", param.b);
+    printf("%c\n", param.c);
+}
+</code>
+</pre>
+
+<p>Dessa forma podemos usar métodos para manipular as estruturas.</p>
+
+<h3>Lendo Arquivos em C</h3>
+
+<p>Para lermos arquivos em C, podemos fazer assim:</p>
+
+<pre>
+<code>
+void lerArquivo();
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+
+    lerArquivo();
+
+    return 0;
+}
+
+void lerArquivo() {
+    FILE *arquivo;
+    unsigned char byte;
+
+    arquivo = fopen("C:\\Meus Projetos\\C\\NovosConteudos\\teste.txt", "r"); // Para leitura é r
+    
+    while(fread(&byte, sizeof(byte), 1, arquivo)) {
+        printf("%c", byte);
+    }
+
+    printf("\n");
+    fclose(arquivo);
+}
+</code>
+</pre>
+
+<p>PS: A função acima pode ser melhorada usando parâmetros na função lerArquivo e usando o chdir para procurar um arquivo.</p>
+
+<h3>Escrevendo em Arquivos em C</h3>
+
+<p>De forma parecida com a de leitura, para escrever podemos fazer assim:</p>
+
+<pre>
+<code>
+void escArquivo();
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+
+    escArquivo();
+
+    return 0;
+}
+
+void escArquivo() {
+    FILE *arquivo;
+    char *frase;
+    frase = (char*)malloc(sizeof(char));
+
+    printf("Digite a frase que deseja salvar no arquivo: ");
+    fgets(frase, sizeof(frase), stdin);
+
+    arquivo = fopen("C:\\Meus Projetos\\C\\NovosConteudos\\teste2.txt", "w"); // Para escrita é w, para adição é a
+
+    // Isso é pra remover a quebra de linha:
+    size_t len;
+    len = strlen(frase); // Inclua string.h
+
+    if(frase[len - 1] == '\n') frase[--len] = 0;
+
+    fwrite(frase, 1, strlen(frase), arquivo);
+
+    fclose(arquivo);
+}
+</code>
+</pre>
+
+<p>Se o arquivo não existir, ele será criado.</p>
+
+<p>PS: Essa função também pode ser melhorada.</p>
+
+<ul>
+    <li><a href="tudo-sobre-c-6.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-c-8.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

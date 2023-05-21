@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Engenharia Reversa</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Engenharia Reversa</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-engenharia-reversa-1.html">Tudo sobre Engenharia Reversa Parte 1!</a></li>
+                    <li><a href="tudo-sobre-engenharia-reversa-2.html">Tudo sobre Engenharia Reversa Parte 2!</a></li>
+                    <li><a href="tudo-sobre-engenharia-reversa-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Engenharia Reversa Parte 3!</a></li>
+                    <li><a href="tudo-sobre-engenharia-reversa-4.html">Tudo sobre Engenharia Reversa Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Engenharia Reversa Parte 3</h2>
+
+<h3>Executáveis ELF - Símbolos, PLT e GOT</h3>
+
+<p>Copie o repositório Git digitando <code>git clone https://github.com/mentebinaria/engrev.git</code>. Depois entre no diretório engrev e crc32, e compile o programa para 32 bits digitando <code>gcc -m32 *c -no-pie -o keygenme</code>.</p>
+
+<p>Digite no terminal <code>hte keygenme</code>, onde podemos ver os bytes e dados em geral do programa. Falamos dos headers anteriormente (no Windows costumamos chamar de segmentos, no Linux como sessões). Digite F6 para vermos as sessões do programa.</p>
+
+<p>O segmento do tipo phdr é onde está o program header (entry 0). Os mais importantes no momento é os segmentos do tipo load, que serão carregados (mapeados) na memória, e dentro deles.</p>
+
+<p>Podemos ver as sessões do Assembler do programa digitando F6 e section header.</p>
+
+<p>A sessão PLT é como se fosse o import table do PE, que é onde ficam as chamadas para funções externas (de bibliotecas).</p>
+
+<p>Vá na sessão .symtab, e depois na .dynsym (no F6, lá embaixo aparecerão), lá está as chamadas externas de funções, além de objetos e coisas de outros tipos. Algumas funções, como o printf e o puts, reconhecemos do C.</p>
+
+<p>Podemos olhar os códigos-fonte do programa em C. São os mesmos na sessão .symtab.</p>
+
+<p>Muitos das funções na .symtab são usados apenas para fins de debug, e são locais (mas tem alguns externos), enquanto na .dynsymm só teremos as funções externas. Podemos digitar no terminal <code>gdb -q ./keygenme</code> e digitar <code>break main</code> para colocar um breakpoint na função main do programa.</p>
+
+<p>Se dermos no terminal o comando <code>strip -s keygenme</code>, ele suprimirá a função main, e não irá aparecer mais a sessão .symtab no programa. Nesse caso, podemos usar o comando do gdb de novo e tentar dar um break no main, que dará erro por não estar mais no programa.</p>
+
+<p>Compile o programa novamente, pois corrompemos o mesmo.</p>
+
+<p>Volte aos sections headers e vá no .plt, que é onde estão os endereços das funções externas. Uma biblioteca dinâmica é carregada no sistema ao executar o programa, o printf por exemplo tá na lib.c. Digite o comando <code>nm keygenme | less</code> para vermos os símbolos do binário, onde veremos todas as bibliotecas das quais pertencem cada função.</p>
+
+<p>Digite <code>gdb -q ./keygenme</code> e dentro do programa, digite <code>disassemble main</code>, onde vemos o código assembler do main. Faça o mesmmo com printf e com o endereço do mesmo.</p>
+
+<p>Entre no hte novamente, clique F6 e vá em elf/image, onde está o programa desassemblado. Digitando F8 podemos ver as funções em assembler, incluindo o main. A sessão .got.plt é onde estará o endereço real da função printf.</p>
+
+<h3>Linux Syscalls</h3>
+
+<p>Syscalls no Linux são os equivalente as API do Windows, mas funcionam de forma parecida.</p>
+
+<p>Vamos usar o programa ltrace para nossas análises. Vamos supor esse programa em C:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+
+int main(int argc, char *argv[]) {
+    printf("O número é: %d\n", 255);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Dê um make no programa pra compilar ele.</p>
+
+<p>Quando um programa em C é executado, ele chama a função printf, que é nativa do C, presente em uma determinada biblioteca (podemos dar um ldd no programa pra ver elas), mas quem exibirá a mensagem mesmo é o kernel. Dê um <code>ltrace ./hello</code> para ver quais funções foram executadas.</p>
+
+<p>PS: O número 17 que aparecerá é o número de caracteres que o printf retorna. Para ver os retornos digite <code>man 3 printf</code>.</p>
+
+<p>Dê o comando <code>ltrace ls</code> para vermos as funções que o programa ls chama. Dê o comando <code>ltrace -S ./hello</code> para ver as syscalls que as funções em C chamam. Um exemplo é a <code>SYS_write()</code>, syscall chamada pelo printf.</p>
+
+<p>Resumindo, as syscalls são funções nativas do kernel.</p>
+
+<p>Vamos refazer o programa em C, chamando a função write ao invés do printf:</p>
+
+<pre>
+<code>
+#include &lt;unistd.h&gt;
+
+int main(int argc, char *argv[]) {
+    char* msg = "Oi\n";
+
+    write(STDOUT_FILENO, msg, 3);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Mesmo usando outra função (write()), ele chama a mesma syscall SYS_write(), até porque a linguagem permanece sendo a mesma (C).</p>
+
+<p>PS: Da mesma forma que acontece no Windows, ao usar uma linguagem como a Java (em qualquer sistema, Windows, Linux, Mac, BSD, etc.), por exemplo, a System.out.println() chama a printf do C que consequentemente chama a mesma syscall SYS_write.</p>
+
+<ul>
+    <li><a href="tudo-sobre-engenharia-reversa-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-engenharia-reversa-4.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

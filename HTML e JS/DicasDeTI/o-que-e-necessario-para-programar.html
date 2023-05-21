@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+        
+<h2>O que é Necessário Instalar para Programar?</h2>
+
+<p>Primeiramente, devemos ter uma máquina razoável, com RAM e espaço no HD suficiente para os software e programas.</p>
+
+<p>Veja abaixo algumas linguagens, requisitos e programas (lembrando que as instruções são para Windows, em outras plataformas como o Linux alguns são instalados pelo gerenciador de pacotes):</p>
+
+<h3>HTML, CSS e Javascript</h3>
+
+<p>Um editor de texto, pode ser até o Bloco de Notas, mas é preferível um editor melhor, como o Notepad++ ou o Sublime Text. Pode ser usado uma IDE mais robusta para isso, como o PHPStorm. O JQuery precisa ter um arquivo JS baixado para trabalhar com ele.</p>
+
+<menu>
+    <li><a href="https://notepad-plus-plus.org/download/v7.5.4.html" target="_blank">Download do Notepad++ - Windows</a></li>
+    <li><a href="https://www.sublimetext.com/3" target="_blank">Download do Sublime Text - Windows, Linux e Mac</a></li>
+    <li><a href="https://code.visualstudio.com/" target="_blank">Download do Visual Studio Code - Windows, Linux e Mac</a></li>
+    <li><a href="https://www.jetbrains.com/phpstorm/download/" target="_blank">Download do PHP Storm - Windows, Linux e Mac</a></li>
+    <li><a href="https://jquery.com/" target="_blank">Download do JQuery - Script</a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</menu>
+
+<p>PS: PHPStorm precisa ter o Java Instalado para funcionar. O Sublime Text para Linux pode ser baixado digitando <code>sudo apt-get install sublime-text</code>, o Notepad++ pode ser instalado com <code>sudo apt-get install notepad-plus-plus</code>.</p>
+
+<h3>PHP e MySQL</h3>
+
+<p>Além do editor de texto (tal como o HTML, que é integrado ao PHP), precisamos de um servidor para nosso sistema, como o WAMP/LAMP/MAMP ou o XAMPP (no Linux basta digitar <code>sudo apt install php apache2 mysql-server phpmyadmin lamp-server^</code> sem esquecer do ^, e usar a pasta /var/www/html para as páginas). Um editor de banco como o MySQL Workbench é opcional.</p>
+
+<menu>
+    <li><a href="https://www.apachefriends.org/pt_br/index.html" target="_blank">Download do Xampp - Windows, Linux e MAC</a></li>
+    <li><a href="http://www.wampserver.com/en/" target="_blank">Download do Wamp - Windows</a></li>
+    <li><a href="https://dev.mysql.com/downloads/workbench/" target="_blank">Download do MySQL Workbench - Windows, Linux e MAC</a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</menu>
+
+<p>No caso de configurar o servidor no Linux, faça assim:</p>
+
+<p>Se ao tentar acessar o phpmyadmin aparecer um erro, edite o arquivo /etc/apache2/apache2.conf colocando no final dele <code>Include /etc/phpmyadmin/apache.conf</code>, e para acessar a página, vá em /etc/phpmyadmin/config.inc.php e descomente a linha <code>$cfg['Servers'][$i]['AllowNoPassword'] = TRUE;</code>, reinicie o servidor digitando <code>sudo systemctl restart apache2</code>.</p>
+
+<p>Os serviços são parados com <code>sudo service apache2 stop</code> e <code>sudo service mysql stop</code> e iniciados trocando por start. Pra entrar no mysql apenas digite <code>sudo mysql</code>.</p>
+
+<p>Pode ser necessário copiar a pasta do phpmyadmin para a pasta do Apache digitando <code>sudo ln -s /usr/share/phpmyadmin /var/www/html</code>, e também entrar na pasta /var/www/html/phpmyadmin e dar permissão 755 para os arquivos para abrir o phpmyadmin. Para isso digite <code>sudo chmod -R 755 /var/www</code>.</p>
+
+<p>Para criar o usuário root, entre no mysql via terminal e dentro dele digite <code>create user root@localhost;</code> e <code>grant all on *.* to root@localhost with grant option;</code>.</p>
+
+<p>Para habilitar a exclusão de bancos, coloque true na linha <code>$cfg['AllowUserDropDatabase'] = true;</code> do arquivo /var/www/html/phpmyadmin/libraries/config.default.php</p>
+
+<h3>Python</h3>
+
+<p>Praticamente só é necessário o interpretador Python e um editor (o interpretador Python vem por padrão no Linux e Mac, mas geralmente é a versão 2, sendo que hoje se usa a 3, no Linux ele pode ser baixado pelo apt-get digitando <code>sudo apt-get install python3.6 idle3.6</code>), mas é recomendado uma IDE melhor como o Pycharm. O SQLite pode ser usado para criar aplicações com banco de dados.</p>
+
+<menu>
+    <li><a href="https://www.python.org/" target="_blank">Download do Interpretador Python - Windows e Mac</a></li>
+    <li><a href="https://www.jetbrains.com/pycharm/download/" target="_blank">Download do Pycharm - Windows, Linux e Mac</a></li>
+    <li><a href="https://www.sqlite.org/download.html" target="_blank">Download do SQLite (Linha de Comando) - Windows e Mac</a></li>
+    <li><a href="https://github.com/pawelsalawa/sqlitestudio/releases" target="_blank">Download do SQLite Studio - Windows, Linux e Mac</a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</menu>
+
+<p>Alguns programas como o Visual Studio também oferecem o Python.</p>
+
+<p>PS: PyCharm precisa ter o Java Instalado para funcionar.</p>
+
+<h3>Java/Kotlin</h3>
+
+<p>É necessário ter o JDK instalado (esse já vem com a JRE inclusa), uma IDE (as mais usadas são Netbeans, Eclipse e Intellij IDEA) e o JavaFX Scene Builder (essa última é usada com a IDE para criar aplicativos JavaFX). É necessário também indicar no path o caminho do JDK numa variável de ambiente JAVA_HOME também, e a JRE na variável JRE_HOME (e também a variável CATALINA_HOME caso use o Apache pra web). Para trabalhar com bancos de dados é necessário um servidor SQL. Se for programar em Java Web, precisa do Apache Tomcat ou do Glassfish. Para programar pra Android, precisa ter o JDK instalado e a IDE Android Studio, as aplicações são feitas em Java, e ele também possuí emulador de Android, o que consome muitos recurso do PC.</p>
+
+<menu>
+    <li><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">Download do Java Development Kit - Windows, Linux e Mac</a></li>
+    <li><a href="https://netbeans.org/downloads/" target="_blank">Download do Netbeans - Windows, Linux e Mac</a></li>
+    <li><a href="https://gluonhq.com/products/scene-builder/#download" target="_blank">Download do Scene Builder - Windows, Linux e Mac</a></li>
+    <li><a href="http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/oxygen2" target="_blank">Download do Eclipse - Windows, Linux e Mac</a></li>
+    <li><a href="https://www.jetbrains.com/idea/download" target="_blank">Download do Intellij IDEA - Windows, Linux e Mac</a></li>
+    <li><a href="https://www.enterprisedb.com/downloads/postgres-postgresql-downloads" target="_blank">Download do PostgreSQL - Windows, Linux e Mac</a></li>
+    <li><a href="https://tomcat.apache.org/download-90.cgi" target="_blank">Download do Apache Tomcat - Windows e Linux</a></li>
+    <li><a href="https://projects.eclipse.org/projects/ee4j.glassfish/downloads" target="_blank">Download do Glassfish - Windows e Linux</a></li>
+    <li><a href="https://gluonhq.com/products/javafx/" target="_blank">Download do JavaFX - Windows, Linux e Mac</a></li> 
+    <li><a href="https://developer.android.com/studio/index.html" target="_blank">Download do Android Studio - Windows, Linux e Mac</a></li>
+    <li><a href="https://kotlinlang.org/docs/command-line.html" target="_blank">Download do Compilador Kotlin - Windows, Linux e Mac</a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</menu>
+
+<p>PS: Intellij IDEA também é usado para aplicações em Kotlin, essa linguagem é interoperável com Java, portanto é possível também usar Kotlin no Android Studio, já que esta é baseada no Intellij IDEA. Para Kotlin também é necessário instalar o JDK.</p>
+
+<p>Caso não queira usar o OpenJDK distribuído com o Android Studio, vá em Default Project Structure, em SDK Location e escolha o diretório do JDK instalado no seu computador (no caso, o da Oracle).</p>
+
+<p>Outra coisa: Use o Apache Tomcat na versão 8 ou 9 caso use JSF com os pacotes javax, pois a partir da versão 10 eles foram substituídos por jakarta.</p>
+
+<h3>C#/Visual Basic</h3>
+
+<p>Essa linguagem praticamente só precisa do Visual Studio Community corretamente configurado. Para programar para Windows Mobile, precisa baixar a SDK do Windows 10 Mobile. Para programas em C# com banco de dados, precisa baixar o SQL Servers Express.</p>
+
+<menu>
+    <li><a href="https://visualstudio.microsoft.com/pt-br/" target="_blank">Download do Visual Studio Community - Windows</a></li>
+    <li><a href="https://developer.microsoft.com/pt-br/windows/downloads/windows-10-sdk" target="_blank">Download do SDK do Windows 10 Mobile - Windows</a></li>
+    <li><a href="https://www.microsoft.com/pt-br/sql-server/sql-server-downloads" target="_blank">Download do SQL Server Express Edition - Windows</a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</menu>
+
+<p>Para instalar os módulos, marque a opção "Desenvolvimento para Desktop com .NET" para aplicações Windows e "Asp.NET e Desenvolvimento Web" para aplicações Web (podemos marcar opções como "Processamento e Armazenamento de Dados" pra trabalhar com SQL Server ou "Desenvolvimento Desktop com C++" para programar nessa linguagem).</p>
+
+<h3>C/C++</h3>
+
+<p>Essa opção costuma ter várias IDEs para isso, a mais conhecida é o Codeblocks, que em algumas versões já vem com o compilador Mingw na versão do Windows (apesar de que é recomendado instalar separado nesse sistema), em Linux basta dar um apt-get nos pacotes gcc e g++, mas costumam já vir instalados nesses sistemas. Outras opções como o Visual Studio podem ser usadas, principalmente para interfaces gráficas. O QTCreator é usado para criar interfaces gráficas e pode ser integrado ao SQLite para usar banco de dados. No Mac também é necessário instalar o XCode para instalar o compilador, mesmo que use o Codeblocks pra desenvolver.</p>
+
+<menu>
+    <li><a href="http://www.codeblocks.org/downloads/binaries" target="_blank">Download do Codeblocks - Windows, Linux e Mac</a></li>
+    <li><a href="https://sourceforge.net/projects/mingw-w64/files/" target="_blank">Download do Mingw - Windows</a></li>
+    <li><a href="https://www1.qt.io/offline-installers/" target="_blank">Download do QTCreator - Windows, Linux e MAC</a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</menu>
+
+<p>PS: Ao baixar o Mingw, escolha a opção x86_64-posix-seh, e ao instalar o Mingw, selecione mingw32-base e o mingw320-gcc-g++, depois vá em Installation e Apply Changes. No caso do Linux, pode ser necessário adicionar o PPA usando <code>sudo add-apt-repository ppa:damien-moore/codeblocks-stable</code> e depois dando um update. No caso do QT, em Linux é necessário instalar pelo terminal os pacotes necessários, usando o comando <code>sudo apt install build-essential libgl1-mesa-dev</code>.</p>
+
+<h3>Perl</h3>
+
+<p>Em sistemas Linux e Mac o Perl vem instalado por padrão, mas em Windows precisamos instalar o Strawberry Perl, além de um editor.</p>
+
+<menu>
+    <li><a href="http://strawberryperl.com/" target="_blank">Download do Strawberry Perl - Windows</a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</menu>
+
+<h3>Ruby</h3>
+
+<p>Em sistemas Linux, talvez precise instalar caso não já venha incluído digitando <code>sudo apt install ruby-full</code>, em Mac pode ser instalado pelo Rbenv, e em Windows precisamos instalar o Ruby Installer.</p>
+
+<menu>
+    <li><a href="https://rubyinstaller.org/downloads/" target="_blank">Download do Ruby Installer - Windows</a></li>
+    <li><a href="https://github.com/rbenv/rbenv" target="_blank">Download do Rbenv (Instruções) - Mac</a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</menu>
+
+<h3>Objective-C/Swift</h3>
+
+<p>Nessas linguagens só é possível trabalhar no Mac, usando o XCode configurado. Ele também é usado para programar em IOS. Como alternativa, podemos usar o Objective-C em Linux, desde que ele não use bibliotecas específicas do Mac, como o Cocoa. Para instalar no Linux use o comando <code>sudo apt-get install gcc gobjc gnustep-devel</code>.</p>
+
+<menu>
+    <li><a href="https://xcodereleases.com/" target="_blank">Download do XCode - Mac</a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</menu>
+
+<h3>Assembly</h3>
+
+<p>Em sistemas Linux, o Nasm, programa pra Assembly pode ser baixado pelo apt-get, mas em Windows e Mac precisamos instalar ele separadamente.</p>
+
+<menu>
+    <li><a href="https://nasm.us/" target="_blank">Download do Nasm - Windows, Linux e Mac</a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</menu>
+
+<p>PS: No Windows também deve se ter instalado o Mingw, o mesmo usado em C e C++.</p>
+
+<footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

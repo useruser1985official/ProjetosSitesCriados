@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda C++</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cpp-1.html">Tudo sobre C++ Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cpp-2.html">Tudo sobre C++ Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cpp-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C++ Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cpp-4.html">Tudo sobre C++ Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cpp-5.html">Tudo sobre C++ Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cpp-6.html">Tudo sobre C++ Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cpp-7.html">Tudo sobre C++ Parte 7!</a></li>
+                    <li><a href="tudo-sobre-cpp-8.html">Tudo sobre C++ Parte 8!</a></li>
+                    <li><a href="tudo-sobre-cpp-9.html">Tudo sobre C++ Parte 9!</a></li>
+                    <li><a href="tudo-sobre-cpp-10.html">Tudo sobre C++ Parte 10!</a></li>
+                    <li><a href="tudo-sobre-cpp-11.html">Tudo sobre C++ Parte 11!</a></li>
+                    <li><a href="tudo-sobre-cpp-12.html">Tudo sobre C++ Parte 12!</a></li>
+                    <li><a href="tudo-sobre-cpp-13.html">Tudo sobre C++ Parte 13!</a></li>
+                    <li><a href="tudo-sobre-cpp-14.html">Tudo sobre C++ Parte 14!</a></li>
+                    <li><a href="tudo-sobre-cpp-15.html">Tudo sobre C++ Parte 15!</a></li>
+                    <li><a href="tudo-sobre-cpp-16.html">Tudo sobre C++ Parte 16!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C++ Parte 3</h2>
+
+<h3>Comando de Decisão If e Else</h3>
+
+<p>Os comando de decisão <code>if</code> e <code>else</code> é usado em casos que precisamos fazer uma comparação entre valores, para definir as funções executadas pelo programa.</p>
+
+<p>O condicional simples é feito apenas com a declaração <code>if</code> (significando "se") é usado para especificar um bloco de código que deverá ser executado, ao retornar true.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+int num1 = 8;
+
+if(num1 > 10) {
+    cout << "O valor é maior que 10" << "\n";
+}
+</code>
+</pre>
+
+<p>O condicional composto é feito com o if junto com o <code>else</code> (significando "senão"). O else se usa para executar um segundo bloco de código ao retornar false.</p>
+
+<p>Veja um exemplo:</p>
+
+<pre>
+<code>
+int num1 = 100;
+int num2 = 50;
+
+if(num1 < num2) {
+    cout << "O valor de " << num1 << " é menor que " << num2 << "\n";
+}
+else {
+    cout << "O valor de " << num1 << " é maior que " << num2 << "\n";
+}
+</code>
+</pre>
+
+<p>Existe ainda o condicional composto alinhando, que entre o if e o else tem o <code>else if</code>. O else if executa um segundo código ao if retornar false, antes de executar o else.</p>
+
+<p>Veja um exemplo, baseado no anterior:</p>
+
+<pre>
+<code>
+int num1 = 100;
+int num2 = 50;
+
+if(num1 < num2) {
+    cout << "O valor de " << num1 << " é menor que " << num2 << "\n";
+}
+else if(num1 > num2) {
+    cout << "O valor de " << num1 << " é maior que " << num2 << ".\n";
+}
+else {
+    cout << "Os valores " << num1 << " e " << num2 << " são iguais.\n";
+}
+</code>
+</pre>
+
+<p>PS: Em qualquer linguagem que tenha if, se colocar variáveis que recebam valores true e false (1 e 0 no C++), elas podem ser colocadas diretamente nos parênteses do if (apesar da maioria colocarem a comparação da variável com true), assim:</p>
+
+<pre>
+<code>
+int sol = 1;
+
+if(sol) {
+    cout << "Vou ao clube!";
+}
+else {
+    cout << "Vou ao cinema!";
+}
+</code>
+</pre>
+
+<h3>Comando de Decisão If e Else e Comando Goto</h3>
+
+<p>Como visto anteriormente, essa é uma estrutura simples com if e else no C++:</p>
+
+<pre>
+<code>
+int n1, n2, res;
+
+cout << "Digite a primeira nota: ";
+cin >> n1;
+
+cout << "Digite a segunda nota: ";
+cin >> n2;
+
+res = (n1 + n2) / 2;
+
+if(res >= 6) {
+    cout << "\nAprovado!\n";
+}
+else {
+    cout << "\nReprovado\n";
+} 
+</code>
+</pre>
+
+<p>E vimos também que existe o else if, como no exemplo abaixo:</p>
+
+<pre>
+<code>
+int n1, n2, res;
+
+cout << "Digite a primeira nota: ";
+cin >> n1;
+
+cout << "Digite a segunda nota: ";
+cin >> n2;
+
+res = (n1 + n2) / 2;
+
+if(res >= 6) {
+    cout << "\nAprovado!\n";
+}
+else if(res >= 4 && res < 6) {
+    cout << "\nRecuperação\n";
+}
+else {
+    cout << "\nReprovado\n";
+} 
+</code>
+</pre>
+
+<p>Já o comando <code>goto</code> (vai para) que direciona o ponteiro de execução do nosso programa, quando ele encontra o goto, ele vai até o label indicado em qualquer ponto do programa (criado apenas com o nome e dois pontos), e o goto apenas usará o nome do label que indicará.</p>
+
+<p>Veja um exemplo do uso do goto:</p>
+
+<pre>
+<code>
+int n1, n2, res;
+char opc; // Variável usada no label.
+
+inicio: // Label, indicado com dois pontos.
+
+system("cls"); // Adicione cstdlib ou stdlib.h, são os comandos do terminal do sistema operacional à ser compilado.
+
+cout << "Digite a primeira nota: ";
+cin >> n1;
+
+cout << "Digite a segunda nota: ";
+cin >> n2;
+
+res = (n1 + n2) / 2;
+
+if(res >= 6) {
+    cout << "\nAprovado!\n";
+}
+else if(res >= 4 && res < 6) {
+    cout << "\nRecuperação\n";
+}
+else {
+    cout << "\nReprovado\n";
+}
+
+cout << "\nDeseja Digitar Outras Notas? [S/N]: ";
+cin >> opc;
+
+if((char)toupper(opc) == 'S') { // Inclua cctype pro toupper
+    goto inicio; // Indicação do Label.
+}
+</code>
+</pre>
+
+<p>PS: pode notar que adicionamos um <code>system("cls")</code> para limpar a tela, mas o system necessita da biblioteca <code>cstdlib</code> para funcionar. Isso são os comandos do sistema operacional pro qual o programa será compilado (só lembrando que se usar o Linux, devemos usar "clear"). Note também que usamos o método <code>toupper()</code> para transformar a letra em maiúscula, e fazemos o mesmo com <code>tolower()</code> para transformar em minúscula (lembrando que em ambos os caso usamos o typecast de char e incluímos a biblioteca cctype).</p>
+
+<h3>Comando de Decisão Switch e Case</h3>
+
+<p>A declaração condicional <code>switch</code> (chaveamento) é usada quando é preciso realizar diferentes ações baseadas em distintas condições. Pra simplificar o código, geralmente se usa no lugar de um condicional alinhado.</p>
+
+<p>O <code>case</code> é o valor comparado com a expressão, se corresponder, o código associado será executado. O <code>break</code> garante que a estrutura seja finaliza ao encontrar uma correspondência. E o <code>default</code> é o bloco de códigos que será executado se nenhum caso corresponder à expressão.</p>
+
+<p>Veja que depois do case e do default, nesse caso, se usa dois pontos <code>:</code>, e que ele diferencia minúsculas e maiúsculas.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+int val;
+
+cout << "Selecione uma cor:\n";
+cout << "1 - Verde\n2 - Azul\n3 - Vermelho\n\n";
+cin >> val;
+
+switch(val) {
+    case 1:
+        cout << "Cor selecionada: Verde\n";
+        break;
+    case 2:
+        cout << "Cor selecionada: Azul\n";
+        break;
+    case 3:
+        cout << "Cor selecionada: Vermelho\n";
+        break;
+    default:
+        cout << "Valor inválido\n";
+        break;
+}
+</code>
+</pre>
+
+<p>Veja outro exemplo, com vários cases:</p>
+
+<pre>
+<code>
+int val;
+
+cout << "Selecione uma cor:\n";
+cout << "1 a 3- Verde\n4 a 6 - Azul\n\n";
+cin >> val;
+
+switch(val) {
+    case 1:
+    case 2:
+    case 3:
+        cout << "Cor selecionada: Verde\n";
+        break;
+    case 4:
+    case 5:
+    case 6:
+        cout << "Cor selecionada: Azul\n";
+        break;
+    default:
+        cout << "Valor inválido\n";
+        break;
+}
+</code>
+</pre>
+
+<p>Também podemos usar switchs aninhados, por exemplo:</p>
+
+<pre>
+<code>
+int val;
+
+cout << "Selecione um transporte:\n";
+cout << "1 - Carro\n2 - Moto\n3 - Avião\n4 - Helicóptero\n\n";
+cin >> val;
+
+switch(val) {
+    case 1:
+    case 2:
+        cout << "Transporte Terrestre.\n";
+        switch(val) {
+            case 1:
+                cout << "Carro Selecionado.";
+                break;
+            case 2:
+                cout << "Moto Selecionada.";
+                break;
+        }
+        break;
+    case 3:
+    case 4:
+        cout << "Transporte Aéreo.\n";
+        switch(val) {
+            case 3:
+                cout << "Avião Selecionado.";
+                break;
+            case 4:
+                cout << "Helicóptero Selecionado.";
+                break;
+        }
+        break;
+    default:
+        cout << "Transporte Desconhecido.\nNenhum Selecionado.\n";
+        break;
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-cpp-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-cpp-4.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

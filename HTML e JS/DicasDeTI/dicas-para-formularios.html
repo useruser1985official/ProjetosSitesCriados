@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Dicas para Formulários</h2>
+
+<p>Basicamente, um formulário básico seria assim:</p>
+
+<pre>
+<code>
+&lt;form method=&quot;post&quot; action=&quot;mailto:teste@teste.com&quot;&gt;
+    &lt;p&gt;&lt;label for=&quot;cNome&quot;&gt;Nome: &lt;/label&gt;&lt;input type=&quot;text&quot; name=&quot;tNome&quot; id=&quot;cNome&quot; size=&quot;35&quot; maxlength=&quot;120&quot; placeholder=&quot;Coloque seu Nome Completo&quot; required autofocus/&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;label for=&quot;cMail&quot;&gt;E-mail: &lt;/label&gt;&lt;input type=&quot;email&quot; name=&quot;tMail&quot; id=&quot;cMail&quot; size=&quot;35&quot; maxlength=&quot;75&quot; placeholder=&quot;Coloque um E-mail Válido&quot; required/&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;label for=&quot;cIdad&quot;&gt;Idade: &lt;/label&gt;&lt;input type=&quot;number&quot; name=&quot;tIdad&quot; id=&quot;cIdad&quot; min=&quot;0&quot; max=&quot;116&quot; step=&quot;1&quot; value=&quot;0&quot;/&gt;&lt;/p&gt;
+    &lt;p&gt;
+        Sexo:
+        &lt;input type=&quot;radio&quot; name=&quot;tSex&quot; id=&quot;cMasc&quot; value=&quot;M&quot; checked/&gt;&lt;label for=&quot;cMasc&quot;&gt;Masculino&lt;/label&gt;
+        &lt;input type=&quot;radio&quot; name=&quot;tSex&quot; id=&quot;cFem&quot; value=&quot;F&quot;/&gt;&lt;label for=&quot;cFem&quot;&gt;Feminino&lt;/label&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;label for=&quot;cNac&quot;&gt;Nacionalidade:&lt;/label&gt;
+        &lt;select name=&quot;tNac&quot; id=&quot;cNac&quot;&gt;
+            &lt;option selected&gt;Brasileiro Nato&lt;/option&gt;
+            &lt;option&gt;Brasileiro Naturalizado&lt;/option&gt;
+            &lt;option&gt;Estrangeiro&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;label for=&quot;cMsg&quot;&gt;Sua mensagem:&lt;/label&gt;&lt;br/&gt;
+        &lt;textarea name=&quot;tMsg&quot; id=&quot;cMsg&quot; cols=&quot;40&quot; rows=&quot;7&quot; maxlength=&quot;1000&quot; placeholder=&quot;Até 1000 caracteres&quot; required&gt;&lt;/textarea&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Enviar&quot;/&gt;
+        &lt;input type=&quot;reset&quot; value=&quot;Limpar&quot;/&gt;
+    &lt;/p&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>Com esses significados:</p>
+
+<pre>
+<code class="tags">
+&lt;form&gt;&lt;/form&gt; - Define um formulário, onde method é o tipo de envio (GET e POST) e action para onde os dados serão enviados.
+&lt;label&gt;&lt;/label&gt; - Define um label para respectivo elemento.
+&lt;input/&gt; - Define uma caixa de entrada, de vários tipos, além de botões.
+&lt;select&gt;&lt;/select&gt; - Define uma lista de conteúdos.
+&lt;option&gt;&lt;/option&gt; - Define um conteúdo de uma lista de um select ou datalist.
+&lt;textarea&gt;&lt;/textarea&gt; - Define uma área de texto.
+</code>
+</pre>
+
+<p>O método GET envia via URL, e o POST via pacotes. Para coisas mais rápidas, como algum cálculo, use o GET. Para coisas mais seguras, como dados e senhas, use o POST.</p>
+
+<p>Os tipos a serem definidos no input, basicamente são esses, apesar de existirem outros:</p>
+
+<table>
+    <tr>
+        <th>Tipo</th>
+        <th>Definição</th>
+    </tr>
+    <tr>
+        <td>text</td>
+        <td>Campo de Texto</td>
+    </tr>
+    <tr>
+        <td>password</td>
+        <td>Campo de Senha</td>
+    </tr>
+    <tr>
+        <td>email</td>
+        <td>Campo de E-mail</td>
+    </tr>
+    <tr>
+        <td>number</td>
+        <td>Campo Numérico</td>
+    </tr>
+    <tr>
+        <td>radio</td>
+        <td>Botão de Rádio</td>
+    </tr>
+    <tr>
+        <td>checkbox</td>
+        <td>Caixa de Seleção</td>
+    </tr>
+    <tr>
+        <td>range</td>
+        <td>Controle Deslizante</td>
+    </tr>
+    <tr>
+        <td>button</td>
+        <td>Botão Comum</td>
+    </tr>
+    <tr>
+        <td>submit</td>
+        <td>Botão para Envio</td>
+    </tr>
+    <tr>
+        <td>reset</td>
+        <td>Botão de Limpeza</td>
+    </tr>
+    <tr>
+        <td>date</td>
+        <td>Caixa de Calendário</td>
+    </tr>
+    <tr>
+        <td>color</td>
+        <td>Caixa de Cor</td>
+    </tr>
+</table>
+
+<p>Botões de rádio de um mesmo grupo deve ter o mesmo name, mas ids diferentes.</p>
+
+<p>Se quiser colocar um parâmetro para números decimais em input com <code>number</code>, você pode colocar números decimais como 0.5 no <code>step</code>.</p>
+
+<p>O atributo <code>value</code> não é obrigatório em tags option (dentro de tags select), é recomendável usar isso caso você não queira que vá o nome exato que está escrito entre as tags (por exemplo, pra estados, que se usa a abreviação), e sim o valor do parâmetro.</p>
+
+<p>Tags optgroup precisam ter o atributo label para definir o texto a ser escrito. Elas são colocadas dentro dos select, e os option vão dentro das optgroup, por exemplo:</p>
+
+<pre>
+<code>
+&lt;select name="tEst" id="cEst"&gt;
+    &lt;optgroup label="Região Sudeste"&gt;
+        &lt;option value="RJ"&gt;Rio de Janeiro&lt;/option&gt;
+        &lt;option value="SP" selected&gt;São Paulo&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label="Região Sul"&gt;
+        &lt;option value="PR"&gt;Paraná&lt;/option&gt;
+        &lt;option value="SC"&gt;Santa Catarina&lt;/option&gt;
+    &lt;/optgroup&gt;
+&lt;/select&gt;
+</code>
+</pre>
+
+<p>Para usar valores em datalist, coloque a id, e use as tags option normalmente, apenas com os valores com o atributo value. E para que a list apareça no input desejado, coloque o atributo list com o nome da id, dessa forma:</p>
+
+<pre>
+<code>
+&lt;p&gt;&lt;label for="cCid"&gt;Cidade: &lt;/label&gt;&lt;input type="text" name="tCid" id="cCid" size="20" maxlength="40" list="cidades" required/&gt;&lt;/p&gt;
+    &lt;datalist id="cidades"&gt;
+        &lt;option&gt;Rio de Janeiro&lt;/option&gt;
+        &lt;option&gt;Nova Iguaçu&lt;/option&gt;
+        &lt;option&gt;Niterói&lt;/option&gt;
+    &lt;/datalist&gt;
+</code>
+</pre>
+
+<p>Para deixar um texto ou número predefinido, use o atributo value com o texto ou número desejado dentro.</p>
+
+<p>No caso de formulários de cores, podemos predefinir a cor, usando valores hexadecimais dentro do atributo value, dessa forma:</p>
+
+<pre>
+<code>
+&lt;input type="color" value="#0000FF"/&gt;
+</code>
+</pre>
+
+<p>Para deixar um input como "apenas leitura" (como em alguns casos como o de somas), use o parâmetro <code>readonly</code>. Para fazer algo ser obrigatório use <code>required</code>. Para definir o primeiro algo a ser digitado use o <code>autofocus</code>.</p>
+
+<p>O input, além do submit, pode ter um botão personalizado, com o type <code>image</code> e o src como o caminho da imagem.</p>
+
+<p>Ao colocar um input para soma, não esqueca de indicar na tag form o evento <code>oninput</code> e o nome da função, dessa forma:</p>
+
+<pre>
+<code>
+&lt;form method="post" action="processo.php" oninput="calculo()"&gt;
+    Quantidade: &lt;input type="number" name="tQtd" id="cQtd" min="0" max="5" value="0"/&gt;
+    &lt;input type="text" name="tTot" id="cTot" placeholder="Total a Pagar" value="0" readonly/&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>PS: O readonly torna um campo somente-leitura.</p>
+
+<p>Esse seria um código de Javascript para o cálculo acima:</p>
+
+<pre>
+<code>
+function calculo() {
+    qtd = parseInt(document.getElementById("cQtd").value);
+    tot = qtd * 1500;
+    document.getElementById("cTot").value = tot;
+}
+</code>
+</pre>
+
+<p>Podemos resolver o mesmo formulário com a tag <code>output</code>, assim:</p>
+
+<pre>
+<code>
+&lt;form method="post" action="processo.php" oninput="calculo()"&gt;
+    Quantidade: &lt;input type="number" name="tQtd" id="cQtd" min="0" max="5" value="0"/&gt;
+    &lt;output name="tTot" id="cTot"&gt;Total a Pagar&lt;/output&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

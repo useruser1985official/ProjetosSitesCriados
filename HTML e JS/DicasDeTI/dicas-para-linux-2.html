@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+
+<h2>Dicas para Linux Parte 2</h2>
+
+<h3>Reparando Erros</h3>
+
+<p>Para entrar no "modo de segurança" linux, entre em opções avançadas e recovery mode, digite a senha de root e depois <code>startx</code> (para acessar essas opções no Ubuntu segure o shift na inicialização, vá em opções avançadas, recovery mode e escolha as opções da tela que abrirá, a dpkg é a usada para reparos).</p>
+
+<p>Para recuperar a inicialização, após esse comando, digite <code>apt-get install x-window-system</code>, <code>dpkg --configure -a</code> e <code>dpkg-reconfigure gdm3</code> (se necessário instale o gdm3, mas ao reconfigurar escolha a opção lightdm).</p>
+
+<p>Caso ambos deem erro, digite <code>sudo su -</code> e <code>mount -no remount,rw /</code>.</p>
+
+<p>Se o problema for na tela de login, entre em modo texto digitando Ctrl Alt F1 (se for no VirtualBox, apenas o Ctrl do lado direito com F1), e digite <code>rm ~/.Xauthority</code>, depois <code>sudo killall Xorg</code> e <code>sudo service lightdm restart</code>. Se desejar voltar pra ela clique Ctrl Alt F7 (ou o Ctrl direito com F7 no VirtualBox).</p>
+
+<p>Caso as barras de tarefas e menu sumam, digite na sequência <code>sudo gconftool --recursive-unset /apps/panel</code>, <code>sudo rm -rf ~/.gconf/apps/panel</code> e <code>pkill gnome-panel</code>.</p>
+
+<p>Caso o Linux trave na hora de reiniciar, pode ser problema na atualização do Kernel, então digite <code>sudo gedit /etc/default/grub</code> e edite essa linha pra que fique dessa forma:</p>
+
+<pre>
+<code>
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash reboot=b"
+GRUB_CMDLINE_LINUX="reboot=acpi"
+</code>
+</pre>
+
+<p>Depois disso rode o comando <code>sudo update-grub</code> e reinicie. Se não der certo tente essas dicas: <a href="https://www.edivaldobrito.com.br/como-instalar-o-boot-repair-no-ubuntu/" target="_blank">https://www.edivaldobrito.com.br/como-instalar-o-boot-repair-no-ubuntu/</a></p>
+
+<p>Caso não consiga conectar a internet devido ao erro tipo "Conexão não é Gerenciável", edite o arquivo NetworkManager.conf digitando <code>sudo vim /etc/NetworkManager/NetworkManager.conf</code> e veja se essa opção está no true:</p>
+
+<pre>
+<code>
+managed=true
+</code>
+</pre>
+
+<p>Dê um Esc, :wq pra salvar, e no terminal digite <code>sudo service network-manager restart</code>.</p>
+
+<p>Caso precise atualizar a área de trabalho, digite Alt e F2, e na janela de comando digite "r" e dê enter.</p>
+
+<p>Podemos também instalar o PSensor para monitorar o hardware do computador, simplesmente com <code>sudo apt install psensor</code>.</p>
+
+<h3>Mudar Tempo de Boot Automático do Grub</h3>
+
+<p>Para mudar o tempo padrão de boot automático do Grub, edite o arquivo /etc/default/grub como administrador (com o vim basta usar <code>sudo vim /etc/default/grub</code>), e procure essa linha:</p>
+
+<pre>
+<code>
+GRUB_TIMEOUT=10
+</code>
+</pre>
+
+<p>E coloque o tempo, em segundos, para modificar o tempo de boot (para um minuto, por exemplo, use <code>GRUB_TIMEOUT=60</code>). Caso não queira boot automatico do Grub, desative ele atribuindo -1 a variável, usando <code>GRUB_TIMEOUT=-1</code>.</p>
+
+<p>Para esconder o menu do Grub, em sistemas sem dual boot, procure essas linhas e as deixe dessa forma:</p>
+
+<pre>
+<code>
+GRUB_HIDDEN_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT_QUIET=true
+</code>
+</pre>
+
+<p>Para mostrar o menu do Grub, apenas comente as duas linhas acima com # em cada linha. Podemos também alterar dessa forma para exibir o menu:</p>
+
+<pre>
+<code>
+GRUB_TIMEOUT_STYLE=menu
+</code>
+</pre>
+
+<p>Depois de quaisquer alteração no arquivo de Grub, rode no terminal o comando <code>sudo update-grub</code> e reinicie. Se for distro baseada em Red Hat ou mesmo alguma que o update-grub não funcione, rode como root <code>grub-mkconfig -o /boot/grub/grub.cfg</code> (pode ser necessário substituir grub por grub2).</p>
+
+<h3>Desfragmentando Discos</h3>
+
+<p>Podemos desfragmentar um disco Linux simplesmente digitando <code>sudo e4defrag /</code> no terminal.</p>
+
+<p>Podemos também desfragmentar um diretório especificado digitando o caminho dele. Para ver o estado de fragmentação coloque o parâmetro <code>-c</code> antes do caminho do diretório.</p>
+
+<h3>Criação de Arquivos de Texto via Terminal</h3>
+
+<p>Para isso use o vi, digitando <code>vi arquivo.txt</code>, pressionamos i para passar ao modo de inserção, e depois pra sair do modo pressionamos ESC, e aí usamos :q pra sair, :w pra gravar, :q! pra sair sem gravar e :wq pra gravar e sair.</p>
+
+<h3>Instalando Driver de Vídeo no Linux</h3>
+
+<p>Caso tenha problemas com a resolução do vídeo, instale o driver rodando esses comandos:</p>
+
+<pre>
+<code>
+sudo apt-add-repository ppa:graphics-drivers/ppa
+
+sudo apt update
+
+sudo ubuntu-drivers autoinstall
+
+sudo apt install nvidia-390
+</code>
+</pre>
+
+<h3>Firewall no Linux</h3>
+
+<p>Podemos usar Firewall no Linux, no Ubuntu, por exemplo, para habilitar, use o comando <code>sudo ufw enable</code>.
+
+<p>Para permitir tráfegos como por exemplo, os TCP e UDP na porta 22 (SSH), digitamos <code>sudo ufw allow 22</code>, pra apenas os TCP, <code>sudo ufw allow 22/tcp</code>.
+
+<p>Para excluir um acesso à porta deles use algo como <code>sudo ufw delete allow 22</code>. Para resetar tudo (e desativar o Firewall), <code>sudo ufw reset</code>.</p>
+
+<p>Podemos também baixar uma interface gráfica para o Firewall, digitando <code>sudo apt-get install gufw</code>.</p>
+
+<h3>Adicionando Repositórios</h3>
+
+<p>Para adicionar outros repositórios, basta editar o arquivo de configuração em <code>/etc/apt/sources.list</code>, como nesse exemplo pra adicionar os repositórios do Kali em outras distros:</p>
+
+<pre>
+<code>
+deb http://http.kali.org/kali kali main non-free contrib
+
+deb http://security.kali.org/kali-security kali/updates main contrib non-free
+
+deb-src http://http.kali.org/kali kali main non-free contrib
+
+deb-src http://security.kali.org/kali-security kali/updates main contrib non-free
+</code>
+</pre>
+
+<p>No caso acima, onde está <code>deb</code> é o download dos pacotes, e <code>deb-src</code> são os códigos-fonte dos mesmos.</p>
+
+<p>PS: Caso apareça um erro de arquitetura como "Skipping acquire of configured file 'main/binary-i386/Packages' as repository", é porque um pacote não está disponível em 32 bits, somente em 64. Nesse caso deixe a linha do repositório que deu erro dessa forma:</p>
+
+<pre>
+<code>
+deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+</code>
+</pre>
+
+<h3>Mudando o Tema do Linux</h3>
+
+<p>Para deixar o Linux visualmente mais parecido com o Windows, podemos baixar o tema do Windows pra ele, digitando esses comandos:</p>
+
+<pre>
+<code>
+sudo add-apt-repository ppa:noobslab/themes
+
+sudo apt-get update
+
+sudo apt-get install windos-10-themes
+</code>
+</pre>
+
+<p>Para instalar os ícones, baixe o arquivo deb, nesse link: <a href="https://userscloud.com/lplljh734q2q" target="_blank">https://userscloud.com/lplljh734q2q</a></p>
+
+<p>É só executar o arquivo que ele instala.</p>
+
+<h3>Conectando Wi-Fi via Terminal</h3>
+
+<p>Para conectar, digite assim (substituindo pela interface da placa de rede wi-fi):</p>
+
+<pre>
+<code>
+iw eth0 essid &lt;NOME-DA-REDE&gt; mode managed
+</code>
+</pre>
+
+<p>Depois vc pega o IP da rede:</p>
+
+<pre>
+<code>
+dhclient eth0 
+</code>
+</pre>
+
+<h3>Formatar Pen-Drive pelo Terminal</h3>
+
+<p>Para formatar pen-drives, digite <code>sudo mount</code> e procure a partição referente ao pen-drive, geralmente a última em /dev/sdb1, onde fica o caminho do diretório da montagem dele em /media/user/.</p>
+
+<p>Para ver os dados de todos os discos, digite <code>sudo fdisk -l</code>.</p>
+
+<p>Para formatar o pen-drive, digite isso:</p>
+
+<pre>
+<code>
+sudo umount /dev/sdb1
+sudo mkfs.fat /dev/sdb1 -n "Nome do Pendrive"
+</code>
+</pre>
+
+<p>No caso acima é pra formatar em FAT32, para NTFS faça isso:</p>
+
+<pre>
+<code>
+sudo umount /dev/sdb1
+sudo mkfs.ntfs -f /dev/sdb1
+sudo ntfslabel /dev/sdb1 "Nome do Pendrive"
+</code>
+</pre>
+
+<p>Para montar, digite <code>sudo mount /dev/sdb1</code>, e pra ejetar, digite <code>sudo eject /dev/sdb1</code>.</p>
+
+<h3>Antivírus no Linux</h3>
+
+<p>O Linux, por ser menos vulnerável, não é necessário usar antivírus, no entanto, podemos instalar o Clamav para scanear pen-drives e partições.</p>
+
+<p>Para instalar, basta usar isso, em sistemas Debian e derivados:</p>
+
+<pre>
+<code>
+sudo apt install clamav clamav-daemon
+</code>
+</pre>
+
+<p>O Clamav roda via terminal, mas podemos instalar o clamtk, que é uma interface gráfica pra ele.</p>
+
+<p>Para atualizar as definições, use esses comandos:</p>
+
+<pre>
+<code>
+sudo service clamav-freshclam stop
+
+sudo freshclam
+
+sudo service clamav-freshclam start
+</code>
+</pre>
+
+<p>Para escanear um arquivo ou diretório, use esse comando:</p>
+
+<pre>
+<code>
+sudo clamscan -r /home/eu
+</code>
+</pre>
+
+<p>PS: Para diretórios é necessária a opção <code>-r</code>, que é suprimida para escanear arquivos.</p>
+
+<p>E para remover um arquivo infectado:</p>
+
+<pre>
+<code>
+sudo clamscan --infected --remove --recursive /home/eu/arquivo
+</code>
+</pre>
+
+<p>Para ele escanear com frequência tudo, inicialize esses serviços:</p>
+
+<pre>
+<code>
+/etc/init.d/clamav-daemon start
+
+/etc/init.d/clamav-freshclam start
+</code>
+</pre>
+
+<p>PS: Caso dê erro na atualização, digite esses comandos:</p>
+
+<pre>
+<code>
+sudo mkdir /var/log/clamav/
+
+sudo chown -R clamav:clamav /var/log/clamav/
+</code>
+</pre>
+
+<h3>Compactando e Descompactando Arquivos</h3>
+
+<h4>.tar</h4>
+
+<p>O tar (abreviação de "tape archive", como uma analogia as fitas magnéticas de antigamente) apenas agrupa arquivos, não os comprime, ele deve ser usado com outro comando para isso.</p>
+
+<p>Para compactar arquivos .tar:</p>
+
+<pre>
+<code>
+tar -zcf novonome.tar diretorioouarquivo.extensao
+
+# ou
+
+tar -zcf novonome.tar arquivo1.txt arquivo2.jpg arquivo3.mp3
+</code>
+</pre>
+
+<p>Para descompactar arquivos .tar:</p>
+
+<pre>
+<code>
+tar -xvf arquivado.tar
+</code>
+</pre>
+
+<h4>.tar.gz</h4>
+
+<p>Podemos arquivar em tar e os comprimir e diminuir seu tamanho diretamente com tar.gz.</p>
+
+<p>Para compactar arquivos .tar.gz:</p>
+
+<pre>
+<code>
+tar -vzcf novonome.tar.gz diretorioouarquivo.extensao
+</code>
+</pre>
+
+<p>Para descompactar arquivos .tar.gz:</p>
+
+<pre>
+<code>
+tar -zxvf arquivado.tar.gz
+</code>
+</pre>
+
+<h4>.tar.bz2</h4>
+
+<p>Podemos arquivar em tar e os comprimir e diminuir seu tamanho diretamente também com tar.bz2.</p>
+
+<p>Para compactar arquivos .tar.bz2:</p>
+
+<pre>
+<code>
+tar -vjcf novonome.tar.bz2 diretorioouarquivo.extensao
+</code>
+</pre>
+
+<p>Para descompactar arquivos .tar.bz2:</p>
+
+<pre>
+<code>
+tar -jxvf arquivado.tar.bz2
+</code>
+</pre>
+
+<h4>.tar.xz</h4>
+
+<p>Podemos arquivar em tar e os comprimir e diminuir seu tamanho diretamente também com tar.xz.</p>
+
+<p>Para compactar arquivos .tar.xz:</p>
+
+<pre>
+<code>
+tar -jcf novonome.tar.xz diretorioouarquivo.extensao
+</code>
+</pre>
+
+<p>Para descompactar arquivos .tar.xz:</p>
+
+<pre>
+<code>
+tar -xvf arquivado.tar.xz
+</code>
+</pre>
+
+<p>Em outras palavras, o básico para descompactar arquivos tar é usar o parâmetro <code>-xvf</code>, caso seja tar ou tar.xz. Se for tar.gz adicione o parâmetro <code>-z</code> e se for tar.bz2 adicione o parâmetro <code>-j</code>.</p>
+
+<h4>.zip</h4>
+
+<p>Podemos compactar também no formato zip.</p>
+
+<p>Para compactar arquivos .zip:</p>
+
+<pre>
+<code>
+zip -r novonome.zip diretorioouarquivo.extensao
+</code>
+</pre>
+
+<p>PS: Podemos compactar com senha, colocando o parâmetro <code>--encrypt</code>, nesse caso ele pedirá pra colocar uma senha.</p>
+
+<p>Para descompactar arquivos .zip:</p>
+
+<pre>
+<code>
+unzip arquivado.zip
+</code>
+</pre>
+
+<h4>.rar</h4>
+
+<p>Podemos compactar também no formato rar. primeiro devemos instalar o rar usando o comando <code>sudo apt-get install rar unrar</code>.</p>
+
+<p>Para compactar arquivos .rar:</p>
+
+<pre>
+<code>
+rar a novonome.rar diretorioouarquivo.extensao
+
+# ou
+
+rar a novonome.rar arquivo1.txt arquivo2.jpg arquivo3.mp3
+</code>
+</pre>
+
+<p>Para descompactar arquivos .rar:</p>
+
+<pre>
+<code>
+unrar x arquivado.rar
+</code>
+</pre>
+
+<h4>.7z</h4>
+
+<p>Podemos compactar também no formato 7z. primeiro devemos instalar o 7-Zip usando o comando <code>sudo apt-get install p7zip-full p7zip-rar</code>.</p>
+
+<p>Para compactar arquivos .7z:</p>
+
+<pre>
+<code>
+7z a novonome.7z diretorioouarquivo.extensao
+
+# ou
+
+7z a novonome.7z arquivo1.txt arquivo2.jpg arquivo3.mp3
+</code>
+</pre>
+
+<p>Para descompactar arquivos .7z:</p>
+
+<pre>
+<code>
+7z e arquivado.7z
+</code>
+</pre>
+
+<h3>Links de Ajuda</h3>
+
+<ol>
+    <li><a href="https://www.edivaldobrito.com.br/icones-vibrancy-colors/" target="_blank">Mudar Cor do Ubuntu</a></li>
+    <li><a href="https://www.hostinger.com.br/tutoriais/listar-servicos-linux" target="_blank">Gerenciar e Listar Serviços</a></li>
+    <li><a href="http://meupinguim.com/servicos-linux-desativar/" target="_blank">Serviços que Podem ser Desativados</a></li>
+    <li><a href="https://www.vivaolinux.com.br/artigo/Firewall-seguro-com-o-IPTables" target="_blank">Firewall do Linux</a></li>
+    <li><a href="https://www.vivaolinux.com.br/dica/Instalando-fontes-Truetype-no-Linux" target="_blank">Instalando Fontes no Linux</a></li>
+    <li><a href="http://meupinguim.com/bloqueando-sites-indesejaveis-linux/" target="_blank">Bloquear Sites Usando o Arquivo Hosts</a></li>
+    <li><a href="https://www.techtudo.com.br/dicas-e-tutoriais/noticia/2016/06/como-ativar-teclado-virtual-do-ubuntu-linux.html" target="_blank">Ativar Teclado Virtual</a></li>
+    <li><a href="https://acassis.wordpress.com/2011/04/09/como-usar-o-linux-em-modo-grafico-sem-mouse/" target="_blank">Usar o Linux sem Mouse</a></li>
+    <li><a href="
+https://www.edivaldobrito.com.br/oracle-java-no-ubuntu-18-04-lts/
+" target="_blank">Instalar Java Oracle no Linux</li>
+    <li><a href="https://www.edivaldobrito.com.br/stacer-no-ubuntu-via-repositorio/" target="_blank">Instalar Stacer no Linux</li>
+    <li><a href="https://sempreupdate.com.br/melhores-temas-para-ubuntu-2017/" target="_blank">Mudar Tema do Ubuntu</a></li>
+    <li><a href="https://www.diolinux.com.br/2017/11/pulseeffects-equalizador-som-linux.html" target="_blank">Instalar Equalizador de Som</a></li>
+    <li><a href="https://www.diolinux.com.br/2013/07/unity-tweak-tool-ferramenta-ideal-para-personalizar-o-ubuntu.html" target="_blank">Deixar Barra Transparente do Linux</a></li>
+    <li><a href="https://www.binarytides.com/install-wxwidgets-ubuntu/" target="_blank">Instalar e Compilar WxWidgets</a></li>
+    <li><a href="https://www.diolinux.com.br/2014/02/por-que-linux-android-nao-pega-virus.html" target="_blank">Por que o Linux e Android não Pega Vírus?</a></li>
+    <li><a href="https://www.vivaolinux.com.br/artigo/Mantendo-a-seguranca-no-Linux" target="_blank">Mantendo a Segurança no Linux</a></li>
+    <li><a href="https://www.diolinux.com.br/2016/09/os-7-ambientes-graficos-mais-populares-do-linux.html" target="_blank">Ambientes Gráficos mais Populares</a></li>
+    <li><a href="https://www.edivaldobrito.com.br/nao-desinstale-o-ubuntu-apenas-mude-a-interface/" target="_blank">Mudar Ambiente Gráfico Ubuntu</a></li>
+    <li><a href="https://www.clubedohardware.com.br/forums/topic/1359709-linux-ubuntu-estou-sem-%C3%A1udio-ap%C3%B3s-atualiza%C3%A7%C3%A3o/" target="_blank">Resolver Problemas com Som</a></li>
+    <li><a href="https://www.diolinux.com.br/2014/09/baixar-programas-mais-rapido-ubuntu.html" target="_blank">Atualizar Repositório de Programa do Ubuntu</a></li>
+    <li><a href="http://elias.praciano.com/2014/11/erro-ao-executar-o-apt-get-saiba-como-resolver/" target="_blank">Resolver Problemas com apt-get</a></li>
+    <li><a href="https://www.vivaolinux.com.br/topico/Helps-e-dicas-para-usuarios-iniciantes/Erro-ao-dar-update-2" target="_blank">Corrigir Pacotes Quebrados do apt-get</a></li>
+    <li><a href="https://www.techtudo.com.br/dicas-e-tutoriais/noticia/2011/12/como-formatar-um-pen-drive-no-terminal-do-linux.html" target="_blank">Formatar Pen-Drives no Linux</a></li>
+    <li><a href="https://sempreupdate.com.br/comandos-ftp-linux-unix/" target="_blank">Comandos FTP para Linux</a></li>
+    <li><a href="http://rberaldo.com.br/usando-o-ssh/" target="_blank">Usar Cliente SSH no Linux</a></li>
+    <li><a href="https://www.vivaolinux.com.br/artigo/Configurando-proxy-no-shell" target="_blank">Configurando Proxy via Shell</a></li>
+    <li><a href="https://cadernodelaboratorio.com.br/2018/04/06/debreate-criando-arquivos-deb/" target="_blank">Criando Arquivos DEB Facilmente</a></li>
+    <li><a href="https://www.diolinux.com.br/2016/05/como-instalar-as-ferramentas-do-kali-linux-no-ubuntu.html" target="_blank">Como Instalar Ferramentas do Kali no Ubuntu</a></li>
+    <li><a href="https://lerlinux.blogspot.com/2019/11/adaptador-de-rede-sem-fio-rtl8188ftv.html/" target="_blank">Corrigir Reconhecimento de Adaptador Wi-Fi no Linux</a></li>
+    <li><a href="https://www.edivaldobrito.com.br/como-instalar-o-ubuntu-cleaner/" target="_blank">Instalar Limpador para Ubuntu</a></li>
+    <li><a href="https://linuxdicasesuporte.blogspot.com/2020/10/mozilla-firefox-e-thunderbird-sempre.html" target="_blank">Corrigir PPA do Firefox e Thunderbird</a></li>
+    <li><a href="https://www.edivaldobrito.com.br/como-resetar-o-unity-compiz-para-deixa-los-com-configuracoes-originais/" target="_blank">Resetar Unity no Ubuntu</a></li>
+    <li><a href="https://plus.diolinux.com.br/t/resolvido-como-limpar-logs/3866/2" target="_blank">Limpar Logs no Linux</a></li>
+    <li><a href="https://imasters.com.br/devsecops/conheca-os-10-easter-eggs-mais-famosos-do-linux" target="_blank">Easter Eggs Famosos do Linux</a></li>
+    <li><a href="https://www.vivaolinux.com.br/dica/Como-remover-o-delay-inicial-do-GRUB" target="_blank">Alterar Tempo do Grub no Linux</a></li>
+    <li><a href="https://medium.com/totvsdevelopers/entendendo-o-crontab-607bc9f00ed3" target="_blank">Entendendo o Crontab no Linux</a></li>
+    <li><a href="http://ptcomputador.com/Sistemas/linux/204984.html" target="_blank">Excluir Arquivos da Lixeira pelo Terminal</a></li>
+    <li><a href="https://sempreupdate.com.br/o-que-e-pie-position-independent-executables/" target="_blank">O que é o PIE dos Executáveis do Linux</a></li>
+    <li><a href="https://linuxdicasesuporte.blogspot.com/2018/06/manipulando-swap-no-ubuntu-1804-e.html" target="_blank">Manipulando a Swap no Ubuntu</a></li>
+    <li><a href="https://www.techtudo.com.br/noticias/2016/11/como-desativar-conta-de-root-administrador-no-linux.ghtml" target="https">Ativando e Desativando a Conta Root do Linux</a></li>
+</ol>
+
+<p><a href="dicas-para-linux-1.html">Parte 1 da Matéria</a></p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

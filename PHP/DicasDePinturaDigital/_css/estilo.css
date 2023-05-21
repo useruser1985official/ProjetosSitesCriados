@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+body {
+    background-image: linear-gradient(to right, rgb(255, 0, 0), rgb(0, 255, 0), rgb(0, 0, 255));
+    font-family: cursive;
+}
+
+div#interface {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: -8px;
+    padding: 15px;
+    min-height: 650px;
+}
+
+header#cabecalho {
+    height: 100px;
+    border-bottom: 1px solid black;
+}
+
+h1 {
+    font-size: 30pt;
+}
+
+iframe#youtube {
+    width: 400px;
+    height: 225px;
+    border: 15px inset;
+    border-image: linear-gradient(135deg, rgb(255, 0, 0) 0%, rgb(0, 255, 0) 45%, rgb(0, 0, 255) 90%) 1;
+    box-shadow: 0px 0px 8px black;
+}
+
+form fieldset {
+    margin: 5px auto;
+    width: 600px;
+    padding: 20px;
+}
+
+form fieldset#fSexo {
+    margin: 0px;
+    padding: 5px;
+    width: 275px;
+}
+
+form p {
+    text-indent: 0px;
+    margin: 5px;
+}
+
+input, select, textarea {
+    font-family: Cambria, serif;
+    font-size: 12pt;
+    background-color: rgba(0, 0, 48, 0.5);
+    color: white;
+}
+
+input:hover, select:hover, textarea:hover {
+    background-color: rgba(0, 0, 16, 0.5);
+}
+
+span#botoes input {
+    height: 35px;
+    width: 80px;
+}
+
+form#fLogin fieldset {
+    width: 200px;
+}
+
+form#fLogin h3 {
+    font-family: Cambria, serif;
+    font-size: 12pt;
+    text-align: center;
+}
+
+div#mens h3 {
+    text-align: center;
+}

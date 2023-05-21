@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Java</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-1.html">Tudo sobre Java Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-2.html">Tudo sobre Java Parte 2!</a></li>
+                    <li><a href="tudo-sobre-java-3.html">Tudo sobre Java Parte 3!</a></li>
+                    <li><a href="tudo-sobre-java-4.html">Tudo sobre Java Parte 4!</a></li>
+                    <li><a href="tudo-sobre-java-5.html">Tudo sobre Java Parte 5!</a></li>
+                    <li><a href="tudo-sobre-java-6.html">Tudo sobre Java Parte 6!</a></li>
+                    <li><a href="tudo-sobre-java-7.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java Parte 7</h2>
+
+<h3>Listas e Classe ArrayList</h3>
+
+<p>Caso seja necessário usar um array de tamanho variável, use uma implementação da interface List com a classe ArrayList, dessa forma:</p>
+
+<pre>
+<code>
+List&lt;Integer&gt; numeros = new ArrayList&lt;&gt;(); // Importe java.util.List e java.util.ArrayList
+
+numeros.add(5); // Adiciona itens.
+numeros.add(10);        
+numeros.add(52);  
+numeros.add(40);      
+numeros.add(35);
+
+for(int n: numeros) {
+    System.out.println(n);
+}
+
+numeros.remove(1); // Remove pelo índice
+</code>
+</pre>
+
+<p>O List é uma interface do Java, por isso não pode ser criado objetos usando o List puramente, ele tem que ter alguma implementação (execução), como no caso acima, o ArrayList. Dentro da tag vai a classe invólucro desejada.</p>
+
+<p>Como visto acima, podemos adicionar e remover elementos usando o <code>add()</code> e o <code>remove()</code> da classe ArrayList (o remove retira elementos pelo índice, mas pode remover também pelo conteúdo). Observe que usamos também um objeto Iterator para correr todos os elementos do ArrayList.</p>
+
+<p>PS: Podemos adicionar os itens diretamente usando o método asList da classe Arrays, que também retorna um ArrayList, dessa forma:</p>
+
+<pre>
+<code>
+List&lt;Integer&gt; numeros = Arrays.asList(5, 16, 40, 53, 80); // Importe java.util.List e java.util.Arrays
+</code>
+</pre>
+
+<p>Para ler um elemento do ArrayList, use o get() com o índice dele, assim:</p>
+
+<pre>
+<code>
+numeros.add(72); 
+numeros.add(84);
+
+System.out.println(numeros.get(0));
+</code>
+</pre>
+
+<p>Lembrando que os dados do add tem que ser do mesmo tipo definido pro ArrayList, se for objeto, deverá ter a criação dos mesmos com o new e os parâmetros necessários.</p>
+
+<p>Veja um exemplo mais complexo:</p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in, "CP1252"); // Importe java.util.Scanner      
+List&lt;String&gt; pessoas = new ArrayList&lt;&gt;(); // Importe java.util.ArrayList e java.util.List.
+      
+String nome;
+int cont = 1;
+String opc;
+int indice;
+int posicao = 0;
+
+do {
+    System.out.printf("Insira o %dº nome: ", cont);
+    if(cont > 1) {
+        teclado.nextLine(); // Isso é pra resolver erros de leitura
+    }
+    nome = teclado.nextLine();
+
+    pessoas.add(nome); // Isso adiciona elementos à lista, na posição seguinte
+    cont++;
+    System.out.print("Deseja Continuar? [S/N] ");
+    opc = teclado.next();
+}
+while(opc.toUpperCase().equals("S"));
+
+System.out.println(pessoas);
+
+System.out.print("Deseja remover algum elemento? Especifique qual: ");
+
+// Esse bloco verifica se o item existe na Lista:
+
+try {
+    indice = teclado.nextInt() - 1;
+
+    pessoas.remove(indice); // Isso remove elementos na Lista.
+}
+catch(IndexOutOfBoundsException ex) {
+    System.err.println("Índice Inexistente!"); // Impressão em Vermelho, exibida caso coloque um índice errado.
+}
+
+System.out.println(pessoas);
+
+Iterator&lt;String&gt; it = pessoas.iterator(); // Importe java.util.Iterator 
+
+while(it.hasNext()) { // Verifica se existe item próximo
+    System.out.println((posicao + 1) + "ª Posição: " +  it.next());
+    posicao++;
+}
+</code>
+</pre>
+
+<p>Também pode ser assim, mas quase não é usado, já que a segunda declaração de tipagem é redundante:</p>
+
+<pre>
+<code>
+List&lt;String&gt; pessoas = new ArrayList&lt;String&gt;();
+</code>
+</pre>
+
+<p>Para ordenar os itens da lista usamos o método sort() da classe Collections (Importe java.util.Collections):</p>
+
+<pre>
+<code>
+Collections.sort(pessoas);
+</code>
+</pre>
+
+<p>E para ordenar de forma reversa (Importe java.util.Collections):</p>
+
+<pre>
+<code>
+Collections.reverse(pessoas);
+</code>
+</pre>
+
+<p>Se precisar contar os itens da lista, use o método size(), assim:</p>
+
+<pre>
+<code>
+System.out.println(pessoas.size());
+</code>
+</pre>
+
+<p>Se quiser verificar se um item existe numa lista, use o método <code>contains</code>, assim:</p>
+
+<pre>
+<code>
+System.out.println(pessoas.contains("Carlos")); // Retorna um booleano
+</code>
+</pre>
+
+<p>Para limpar todos os itens das listas, use o método clear(), assim:</p>
+
+<pre>
+<code>
+pessoas.clear();
+</code>
+</pre>
+
+<p>PS: Use classes invólucro no uso dele pra evitar erros (por exemplo, Integer ao invés de int, Float ao invés de float, Character ao invés de char e etc.), isso ocorre porque o List tem que receber um objeto.</p>
+
+<p>Lembrando que a classe List pode implementar outras classes, a ArrayList é a mais comum, mas tem outras classe que podem o implementar, como a Vector e a LinkedList, usando os mesmos métodos. Podemos fazer alterações assim:</p>
+
+<pre>
+<code>
+List&lt;Integer&gt; numeros = new Vector&lt;&gt;(); // Importe java.util.List e java.util.Vector
+// List&lt;Integer&gt; numeros = new LinkedList&lt;&gt;(); // Importe java.util.List e java.util.LinkedList
+</code>
+</pre>
+
+<p>O Vector é recomendado para listas que aumentem de valor frequentemente (mas ele está obsoleto em versões mais recentes do Java). O LinkedList tem algumas diferenças mas ele é menos usado.</p>
+
+<p>Crie um programa com JOptionPane onde receberá a quantidade de índices e pedirá essa quantidade para digitarmos os números, e exibirá eles na ordem. Esse é o código:</p>
+
+<pre>
+<code>
+int cont = 1;
+int pos;
+List&lt;Integer&gt; numeros = new ArrayList&lt;&gt;(); // Importe java.util.List e java.util.ArrayList
+
+pos = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe a quantidade de números desejada: ")); // Importe javax.swing.JOptionPane
+
+do {
+    numeros.add(Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o " + cont + "º número:")));
+    cont++;
+}
+while(cont <= pos);
+
+Collections.sort(numeros); // Importe java.util.Collections
+
+JOptionPane.showMessageDialog(null, numeros, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+</code>
+</pre>
+
+<h3>Estruturas de Dados em Java</h3>
+
+<p>Assim como o List, temos também outros tipos de containers, mas com algumas diferenças entre eles.</p>
+
+<p>O Stack (pilha) é como um tubo fechado de um lado e aberto de outro, onde o primeiro elemento inserido é o último a sair e vice-versa. Veja um exemplo de uso de Stack:</p>
+
+<pre>
+<code>
+Stack&lt;Character&gt; vogais = new Stack&lt;&gt;(); // Importe java.util.Stack
+        
+vogais.push('A');
+vogais.push('E');
+vogais.push('I');
+vogais.push('O');
+vogais.push('U');
+        
+while(!vogais.empty()) {
+    System.out.printf("Elemento no topo: %c\n", vogais.peek());
+    System.out.printf("Número de elementos: %d\n", vogais.size());
+    vogais.pop();
+}
+</code>
+</pre>
+
+<p>Esses são os métodos básicos das pilhas:</p>
+
+<table>
+    <tr>
+        <th>Método</th>
+        <th>Funcionalidade</th>
+    </tr>
+    <tr>
+        <td>push()</td>
+        <td>Adiciona um elemento à pilha</td>
+    </tr>
+    <tr>
+        <td>pop()</td>
+        <td>Remove um elemento da pilha</td>
+    </tr>
+    <tr>
+        <td>size()</td>
+        <td>Exibe o tamanho da pilha</td>
+    </tr>
+    <tr>
+        <td>peek()</td>
+        <td>Exibe o último elemento da pilha</td>
+    </tr>
+    <tr>
+        <td>empty()</td>
+        <td>Verifica se a pilha está vazia</td>
+    </tr>
+</table>
+
+<p>Alguns dos exemplos em que uma pilha pode ser usada é em mecanismos de desfazer/refazer de editores, navegação entre páginas web, etc.</p>
+
+<p>Já na Queue (fila), os primeiros elementos a entrarem também são os primeiros a saírem, como um túnel, aberto dos dois lados. No caso, a Queue é uma interface e a classe que a implementa é a LinkedList. Veja um exemplo de uso de Queue:</p>
+
+<pre>
+<code>
+Queue&lt;Character&gt; vogais = new LinkedList&lt;&gt;(); // Importe Queue e LinkedList de java.util
+       
+vogais.add('A');
+vogais.add('E');
+vogais.add('I');
+vogais.add('O');
+vogais.add('U');
+        
+while(!vogais.isEmpty()) {
+    System.out.printf("1º Elemento: %c\n", vogais.peek());
+    System.out.printf("Número de elementos: %d\n", vogais.size());
+    vogais.remove();
+}
+</code>
+</pre>
+
+<p>PS: Alguns métodos da Queue são diferentes, são esses:</p>
+
+<table>
+    <tr>
+        <th>Método</th>
+        <th>Funcionalidade</th>
+    </tr>
+    <tr>
+        <td>add()</td>
+        <td>Adiciona um elemento à fila</td>
+    </tr>
+    <tr>
+        <td>remove()</td>
+        <td>Remove um elemento da fila</td>
+    </tr>
+    <tr>
+        <td>size()</td>
+        <td>Exibe o tamanho da fila</td>
+    </tr>
+    <tr>
+        <td>peek()</td>
+        <td>Exibe o último elemento da fila</td>
+    </tr>
+    <tr>
+        <td>isEmpty()</td>
+        <td>Verifica se a fila está vazia</td>
+    </tr>
+</table>
+
+<p>PS: Como visto anteriormente, a classe LinkedList também pode implementar a interface List, mas nesse caso só poderá usar os métodos descritos em List e se comporta de forma parecida com o ArrayList, que pode ser aumentada e diminuída em qualquer lugar. Declarando como Queue só poderá usar os métodos declarados em Queue, que são os métodos das filas.</p>
+
+<p>Alguns dos exemplos em que uma fila pode ser usada é em controle de documentos (para impressão, por exemplo), troca de mensagem entre dispositivos numa rede, etc.</p>
+
+<p>Já o Map, que recebe dois parâmetros, a chave e o valor, se usa assim:</p>
+
+<pre>
+<code>
+Map&lt;Integer, Character&gt; vogais = new HashMap&lt;&gt;(); // Importe Map e HashMap de java.util
+        
+vogais.put(1, 'A');
+vogais.put(2, 'E');
+vogais.put(3, 'I');
+vogais.put(4, 'O');
+vogais.put(5, 'U');
+        
+Set&lt;Entry&lt;Integer, Character&gt;&gt; setter = vogais.entrySet(); // Importe java.util.Map.Entry e java.util.Set
+Iterator it = setter.iterator(); // Importe java.util.Iterator
+Entry&lt;Integer, Character&gt; ent;
+         
+while(it.hasNext()) { // Verifica se tem o próximo item
+    ent = (Entry)it.next();
+    System.out.printf("Chave: %d - Elemento: %c\n", ent.getKey(), ent.getValue());
+}
+        
+vogais.clear(); // Isso limpa o map
+</code>
+</pre>
+
+<p>Como exercício, tente outros tipos de elementos nesses contâiners.</p>
+
+<h3>Enums em Java</h3>
+
+<p>Além da criação de classes, existem também as enums, uma enum é um tipo no qual declaramos um conjunto de valores, muito semelhante à uma classe, mas seus valores sempre são constantes e não possuí métodos setters.</p>
+
+<p>Veja um exemplo simples de declaração de enum (pode ser em outro arquivo ou dentro da classe):</p>
+
+<pre>
+<code>
+public enum Reais {
+    dois, cinco, dez, vinte, cinquenta, cem;
+}
+</code>
+</pre>
+
+<p>E a atribuição de valores na classe principal:</p>
+
+<pre>
+<code>
+Reais r2 = Reais.dois;
+Reais r5 = Reais.cinco;
+Reais r10 = Reais.dez;
+</code>
+</pre>
+
+<p>Podemos fazer assim também, colocando um conteúdo dentro de cada atributo entre parênteses e um construtor com o mesmo nome do Enum e o tipo deles:</p>
+
+<pre>
+<code>
+public enum Reais {
+    dois(2), cinco(5), dez(10), vinte(20), cinquenta(50), cem(100);
+    public int valor;
+
+    Reais(int v) {
+        valor = v;
+    }
+}
+</code>
+</pre>
+
+<p>E para correr a Enum podemos usar o for it, no método main:</p>
+
+<pre>
+<code>
+for(Reais re: Reais.values()){
+    System.out.println("O valor da nota de " + re + " é de R$ " + re.valor + ".");
+}
+</code>
+</pre>
+
+<p>PS: Enum é uma herança de uma classe interna do Java, portanto não pode ter herança de nada.</p>
+
+<p>Como Exercício, pegue o mesmo Enum e exiba eles num JOptionPane, esse é o código:</p>
+
+<pre>
+<code>
+String mensagem = "&lt;html&gt;";
+
+for(Reais re: Reais.values()) {
+    mensagem += "O valor da nota de " + re + " é de R$ " + re.valor + ".&lt;br/&gt;";
+}
+
+mensagem += "&lt;/html&gt;";
+
+JOptionPane.showMessageDialog(null, mensagem, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+</code>
+</pre>
+
+
+<h3>Argumentos para main, args</h3>
+
+<p>Quando usamos passagem de parâmetros para a função main, podemos chamar um programa através do terminal pelo nome, podendo enviar um valor, que pode ser tratado dentro do programa através de um parâmetro, <code>args</code>, na função main.</p>
+
+<p>A <code>String args[]</code> é um array de string que armazena os argumentos.</p>
+
+<p>Veja um exemplo de programa que receberá um parâmetro (rodando pelo terminal):</p>
+
+<pre>
+<code>
+public class Argumentos {
+    public static void main(String args[]) {
+        int cont = 0;
+        
+        System.out.printf("Argumentos: %d\n", args.length);
+        
+        while(cont < args.length) {
+            System.out.printf("\nParâmetro Nº%d: %s", cont + 1, args[cont]);
+            cont++;
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Como exercício, tente passar vários tipos de parâmetro, lembrando que quando um parâmetro só tem espaços, passe eles entre aspas.</p>
+
+<h3>Lendo e Escrevendo Arquivos</h3>
+
+<p>Para escrever num arquivo de texto usamos esse código: </p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in, "CP1252"); // Importe java.util.Scanner
+String cont;
+
+System.out.print("Digite algo para ser gravado no arquivo: ");
+cont = teclado.nextLine();
+
+FileWriter arq = null; // Importe java.io.FileWriter
+
+try {
+    if(System.getProperty("os.name").contains("Windows")) { // Windows
+        Path relat = Paths.get(System.getenv("USERPROFILE") + "\\Desktop"); // Importe java.nio.file.Path e java.nio.file.Paths
+                
+        arq = new FileWriter(relat.toString() + "\\arq.txt");
+    }
+    else {
+        Path relat = Paths.get(System.getenv("HOME") + "/Desktop");
+
+        arq = new FileWriter(relat.toString() + "/arq.txt");
+    }  
+   
+
+    PrintWriter gravar = new PrintWriter(arq); // Importe java.io.PrintWriter
+    
+    gravar.println(cont);
+    
+    arq.close();
+    
+    System.out.println("Conteúdo Gravado com Sucesso!");
+}
+catch(IOException ex) { // Importe java.io.IOException
+    System.err.println("ERRO: " + ex.getMessage());
+}
+</code>
+</pre>
+
+<p>PS: Se o arquivo tiver algo escrito antes de executar o programa, ele sobrescreverá o mesmo. Para ele não sobreescrever, adicione no construtor do FileWriter o parâmetro true, assim:</p>
+
+<pre>
+<code>
+arq = new FileWriter("arq.txt", true);
+</code>
+</pre>
+
+<p>Para ler, fazemos assim: </p>
+
+<pre>
+<code>
+FileReader arq = null; // Import java.io.FileReader
+
+try {
+    if(System.getProperty("os.name").contains("Windows")) { // Windows
+        Path relat = Paths.get(System.getenv("USERPROFILE") + "\\Desktop"); // Importe java.nio.file.Path e java.nio.file.Paths
+                
+        arq = new FileReader(relat.toString() + "\\arq.txt");
+    }
+    else {
+        Path relat = Paths.get(System.getenv("HOME") + "/Desktop");
+
+        arq = new FileReader(relat.toString() + "/arq.txt");
+    }
+
+    BufferedReader ler = new BufferedReader(arq); // Importe java.io.BufferedReader
+    
+    String linha = ler.readLine();
+    
+    while(linha != null) {
+        System.out.println(linha); // Lê a primeira linha
+        
+        linha = ler.readLine(); // Lê da segunda à última linha
+    }
+    
+    arq.close();
+}
+catch(IOException ex) { // Importe java.io.IOException
+    System.err.println("ERRO: " + ex.getMessage());
+}
+</code>
+</pre>
+
+<p>Como exercício, faça o mesmo programa de escrita e leitura com JOptionPane.</p>
+
+<!-- Curso extraído do Curso em Vídeo.
+https://www.youtube.com/playlist?list=PLHz_AreHm4dkI2ZdjTwZA4mPMxWTfNSpR
+-->
+
+<ul>
+    <li><a href="tudo-sobre-java-6.html">Parte Anterior da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

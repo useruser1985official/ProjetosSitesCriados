@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Dicas de Git e GitHub</h2>
+
+<h3>Instalando Git e Github</h3>
+
+<p>Primeiro, vamos instalar no Windows o Git, nesse link aqui: <a href="https://git-scm.com/" target="_blank">https://git-scm.com/</a></p>
+
+<p>PS: O Git também pode ser instalado no Linux, pelo terminal mesmo, procurando pelo pacote "git".</p>
+
+<p>Para o Windows, podemos baixar o Github Desktop, que facilitará por não exigir decorar comandos, baixe aqui: <a href="https://desktop.github.com/" target="_blank">https://desktop.github.com/</a></p>
+
+<p>No Github Desktop, em options, podemos configurar como por exemplo, o branch padrão em Git ou o editor de texto em Integrations.</p>
+
+<h3>Criando Conta no GitHub</h3>
+
+<p>Acesse o site do GitHub (<a href="https://github.com/" target="_blank">https://github.com/</a>)</p>
+
+<p>No GitHub Desktop, coloque seu login e senha. Ele abrirá o navegador para fazer o login, depois voltará ao programa, onde ele mostrará um e-mail temporário para uso. Clique em Finish.</p>
+
+<p>Agora a máquina está pronta para criar repositórios locais e remotos.</p>
+
+<h3>Primeiro Repositório Git e GitHub</h3>
+
+<p>Vamos criar dois repositórios, um pra HTML e um para Javascript (é recomendado criar repositórios separados para organização).</p>
+
+<p>Clique em Create a New Repository on Your Hard Drive para criar um repositório local (por exemplo, HTML, crie ele na pasta onde está os arquivos, o name pode ser o nome da pasta já com arquivos, caso não queira criar uma nova).</p>
+
+<p>Coloque os arquivos desejados na pasta do programa, depois vá em Commit Main.</p>
+
+<p>PS: Ele criará uma pasta local oculta com o nome .git, onde ficará as diversas versões do site ou programa.</p>
+
+<p>Para publicar remotamente, clique em Publish Repositories (se desejar marcar como privado ou não, pra acessarmos sites ele deverá estar desmarcado).</p>
+
+<p>Ao acessar o site, ele mostrará os seus arquivos lá. Ao abrir o programa, na tela inicial, veremos seus repositórios online, onde podemos cloná-lo pro nosso computador.</p>
+
+<p>Para apagar um repositório, vá no site em Settings do repositório desejado.</p>
+
+<p>Para clonar um repositório de uma URL, basta escolher no GitHub a opção Clone a Repository, vá em URL e coloque a URL ou username Github + repositório.</p>
+
+<p>Para atualizar um repositório existente, basta clonar o repositório, fazer as atualizações no código, fazer um novo commit e clicar em Push Origin.</p>
+
+<h3>Hospedando Site no GitHub Pages</h3>
+
+<p>No site, vá em Settings e procure a opção GitHub Pages, e escolha um tema, como o minimal, pra habilitar este, e em Sources escolha as opções main e /root. Ele é habilitado para cada repositório independentemente.</p>
+
+<p>Aí você acessará o link <code>https://nomedeusuario.github.io/NomedoRepositorio</code>.</p>
+
+<p>PS: Ele demora um pouco para aparecer online.</p>
+
+<h3>Comandos Iniciais do Git</h3>
+
+<p>Abra o prompt ou terminal e digite <code>git config --global user.name "Nome de Usuário"</code> pra configurar o nome de usuário, e faça o mesmo com e-mail (trocando o <code>user.name</code> para <code>user.email</code>).</p>
+
+<p>Crie uma pasta com o comando mkdir (por exemplo <code>mkdir pasta-git</code>) e entre nele com o comando cd. Para iniciar o Git nesse diretório, digite <code>git init .</code> (podendo ignorar o ponto, que significa diretório atual).</p>
+
+<p>Digite <code>git status</code> para ver o status dele. Ele avisará que nada foi adicionado ao commit, mas que existem arquivos. Para adicionar o arquivo, digite <code>git add nomedoarquivo</code> (ou use o coringa * para adicionar tudo). Dê o comando git status de novo para ver o status, agora faça o commit digitando <code>git commit -m "Motivo do Commit"</code>.</p>
+
+<p>Podemos digitar <code>git log</code> para ver os dados do commit.</p>
+
+<p>PS: Se o arquivo for alterado, ao rodar git status ele mostrará as alterações do arquivo e nesse caso, daremos o git add e git commit novamente pra adicionar uma atualização. Ele manterá a primeira atualização.</p>
+
+<h3>Trabalhar com Repositórios</h3>
+
+<p>Como sabemos, repositório é um local de armazenamento onde o projeto e suas alterações são mantidos. Na prática, é uma pasta comum do sistema. Para cada projeto gerenciaado pelo Git, um repositório é configurado.</p>
+
+<p>Para cada projeto, seguimos os seguintes passos:</p>
+
+<ul>
+    <li>Criar um diretório para armazenar o projeto.</li>
+    <li>Entrar no diretório (opcional).</li>
+    <li>Inicializar o repositório Git.</li>
+</ul>
+
+<p>É criado um subdiretório oculto .git que guardará os dados de alteração e snapshots. A área fora do diretório .git é o diretório de trabalho, onde ficam armazenados os arquivos que iremos manipular.</p>
+
+<p>A staging area é um local para onde os arquivos vão antes de um snapshot ser criado. Somente os arquivos da staging area vão para um snapshot. Selecionamos os arquivos desejado no diretório de trabalho.</p>
+
+<p>Para clonar um repositório, digite <code>git clone https://github.com/NomedoUsuario/NomeDoRepositorio.git</code>.</p>
+
+<p>Para linkar seu projeto para um repositório online, dentro do diretório desejado, digite <code>git init</code>, <code>git remote add origin https://github.com/user/repo.git</code> (menos em atualizações). Digite <code>git add .</code> (não esqueça do ponto) e <code>git commit -m "Motivo do Commit"</code>, e depois <code>git push origin master</code> (ele pedirá login e senha).</p>
+
+<p>PS: O login não utiliza a senha do GitHub, e sim a senha do token. Para criar um token, no site do GitHub, vá em Settings, Developer Settings e Personal Access Tokens. Pode ser utilizado <code>main</code> no lugar de <code>master</code>.</p>
+
+<p>Caso seja um novo upload para um repositório já existente e com arquivos, faça a inicialização, a adição e o commit (esqueça do remote add), depois digite os comandos <code>git branch -M master</code>, <code>git pull https://github.com/user/repo.git</code> e <code>git push https://github.com/user/repo.git master -f</code> (cuidado que ele sobrescreverá todos os arquivos, é recomendado clonar um repositório antes de atualizá-lo e upar tudo de uma vez). Caso queira remover um arquivo antes do upload, use o comando <code>git rm arquivo</code> (para diretórios use <code>git rm -rf diretorio</code>).</p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

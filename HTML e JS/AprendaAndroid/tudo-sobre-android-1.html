@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Android</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Android</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-android-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Android Parte 1!</a></li>
+                    <li><a href="tudo-sobre-android-2.html">Tudo sobre Android Parte 2!</a></li>
+                    <li><a href="tudo-sobre-android-3.html">Tudo sobre Android Parte 3!</a></li>
+                    <li><a href="tudo-sobre-android-4.html">Tudo sobre Android Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Android Parte 1</h2>
+
+<h3>Criando Primeiro Projeto</h3>
+
+<p>Para criar um novo projeto Android, cliquem em New Project, escolha Empty Activity, coloque o nome do aplicativo, se necessário coloque o nome do pacote, onde será salvo, escolha Java como linguagem e o Android mínimo que rodará o aplicativo. Espere os arquivos serem gerados, isso demora um pouco.</p>
+
+<p>Dentro da pasta app, tem a pasta java, onde encontra-se os pacotes e o arquivo Java, com o nome MainActivity. Dentro da pasta res, em layout, está o XML que é o "desenho" do aplicativo. Clicando nesse arquivo XML, podemos inserir componentes dele, os pegando em Pallete. Em cima onde estar AppTheme podemos mudar essa opção para NoActionBar para mudar o layout. Clique em mais temas e escolha a opção LightNoTitleBar para retirar a barra verde.</p>
+
+<p>Caso use Constraint Layout, clique no elemento (button, textView, etc.), e vá em Center para centralizar ele verticalmente e horizontalmente. Na paleta podemos organizar o layout.</p>
+
+<p>Lembrando que devemos ter um celular no emulador já instalado. Ao clicar no play, ele abrirá o emulador e executará o app nele.</p>
+
+<p>Para gerar o APK de debug, basta clicar no martelinho, ele estará localizado em app &gt; build &gt; outputs &gt; apk &gt; debug.</p>
+
+<p>Para gerar o APK, clique em Build e Make Project. Para gerar o APK assinado para colocar na Play Store, vai em Build e Generated Signed Builder/APK, escolha APK caso não queira colocar no Play Store. O arquivo estará em app/release.</p>
+
+<p>Crie uma chave em Key Store Path indicando o caminho onde será salva a chave, e o nome da chave (como upload) e confirme. A chave deverá ser válida por no mínimo 25 anos. Escolha a opção release para gerar o APK e marque a opção Full APK Signature.</p>
+
+<p>Algumas informações sobre isso vemos aqui: <a href="https://developer.android.com/studio/publish/app-signing?hl=pt-br" target="_blank">https://developer.android.com/studio/publish/app-signing?hl=pt-br</a></p>
+
+<p>Para definir versão dos aplicaticos, abra o arquivo build.gradle (Module) e em <code>versionName</code> defina a versão do APK.</p>
+
+<p>Podemos criar um programa "Olá Mundo" colocando um label com a id lblMens e um botão com a id btnClick, vamos nas propriedades do botão e colocamos em onclick o nome do evento como "exibir", e no Java colocamos esse código:</p>
+
+<pre>
+<code>
+public class MainActivity extends AppCompatActivity {
+    private TextView lblMens;
+    private Button btnClick;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        lblMens = (TextView)findViewById(R.id.lblMens); // Referenciação dos componentes
+        btnClick = (Button)findViewById(R.id.btnClick);
+    }
+
+    public void exibir(View v) { // Nome do evento do botão
+        lblMens.setText("Olá Mundo!");
+    }
+}
+
+</code>
+</pre>
+
+<p>Não esqueça de importar <code>android.widget.*</code> e <code>android.view.View</code> para os componentes.</p>
+
+<p>PS: A maioria das classes de pacotes padrões usadas no Java funcionam no Android, mas algumas não funcionam por conter código exclusivamente para aplicações Java desktop, como por exemplo:</p>
+
+<table>
+    <tr>
+        <th>Pacotes e Classes do Java 8</th>
+    </tr>
+    <tr>
+        <td>java.util.Scanner</td>
+    </tr>
+    <tr>
+        <td>java.awt.*</td>
+    </tr>
+    <tr>
+        <td>javax.swing.*</td>
+    </tr>
+    <tr>
+        <td>javafx.*</td>
+    </tr>
+</table>
+
+<p>No entanto, o Android Studio tem disponíveis vários pacotes exclusivos para implementação de aplicativos.</p>
+
+<p>PS: Para usar tags HTML num TextView, coloque no setText do elemento a classe Html e o método estático fromHtml, por exemplo <code>lblMens.setText(Html.fromHtml("&lt;b&gt;Olá, Mundo!&lt;/b&gt;"))</code> (importe <code>android.text.Html</code>).</p>
+
+<p>Para mudar a cor do botão, vá em BackgroundTint e mude a cor ali.</p>
+
+<h3>Inserindo Componentes</h3>
+
+<p>Coloque um botão no nosso projeto, veja que em components podemos ver os componentes inseridos. Vemos que tudo que é inserido aparece no XML (na tag TextView podemos mudar em android:text a frase padrão, por exemplo, ou mudar o texto do botão em Button).</p>
+
+<p>Em attributes, podemos mudar as propriedades dos componentes. Algumas delas são fontFamily, textStyle, textColor, textSize, etc.</p>
+
+<p>Para mudar o tamanho de alguns componentes, podemos ir no XML diretamente do atributo do componente e alterá-los, veja um exemplo de alterar tamanho de letra e cor:</p>
+
+<pre>
+<code>
+android:textColor="#FF0000"
+android:textSize="50sp"
+android:textStyle="bold"
+</code>
+</pre>
+
+<p>Para ocultar a barra de título, vá no ActivityMain.java e coloque essa função dentro da função onCreate:</p>
+
+<pre>
+<code>
+getSupportActionBar().hide();
+</code>
+</pre>
+
+<p>Se quiser colocar uma imagem no projeto, coloque um ImageView, vá nas propriedades em background, e escolha a imagem, que deverá estar em app &gt; src &gt; main &gt; res &gt; mipmap-xxxhdpi (o ideal é que tenha imagens de vários tamanhos em todas as pastas).</p>
+
+<p>PS: Caso for adicionar novos pacotes e classes no projeto, salve em app &gt; src &gt; main &gt; java.</p>
+
+<p>Caso tu queira um campo de texto não editável mas copiável, adicione a propriedade editable como false, remova todo tipo de texto nas opções de inputtype e coloque o textIsSelectable como true e focusable como true.</p>
+
+<p>Caso queira colocar uma imagem de fundo, coloque as opções wrap_content no width e height caso não queria que ela fique distorcida.</p>
+
+<p>PS: Para que o aplicativo não "resete" ao girar a tela, adicione no arquivo AndroidManifest.xml, na tag activity, a linha <code>android:configChanges="orientation|screenSize"</code>, ficando dessa forma:</p>
+
+<pre>
+<code>
+&lt;activity android:name=".MainActivity" android:configChanges="orientation|screenSize"&gt;
+</code>
+</pre>
+
+<p>Se quiser bloquear totalmente a rotação de tela, em vez do configChanges, adicione <code>android:screenOrientation="portrait"</code> na tag activity.</p>
+
+<p>Para o tema do celular (dark ou light) não mudar a cor do aplicativo, selecione o ConstraintLayout ou o LinearLayout em background. Não esqueça também de mudar a cor dos componentes, inclusive da letra em textColor (nem que tenha que editar diretamente no XML).</p>
+
+<h3>Depurando o Projeto Diretamente no Celular</h3>
+
+<p>Primeiro temos que instalar o driver do celular no computador, no celular, em opções do desenvolvedor, marque a opção Depuração USB.</p>
+
+<p>Ao clicar no play, temos a opção de escolher pra rodar o aplicativo diretamente no celular.</p>
+
+<h3>Mudando Propriedades dos Componentes</h3>
+
+<p>Em res, em mipmap, tem os ícones padrões do programa, clicando nessa pasta, podemos ir em file path para irmos até essa pasta (geralmente é em app &gt; src &gt; main &gt; res). Os nomes são todos ic_launcher e ic_launcher_round.</p>
+
+<p>Podemos trocar os ícones por outros de mesma resolução, do formato PNG, essas são as resoluções:</p>
+
+<table>
+	<tr>
+		<td>hdpi</td>
+		<td>72 x 72</td>
+	</tr>
+	<tr>
+		<td>mdpi</td>
+		<td>48 x 48</td>
+	</tr>
+	<tr>
+		<td>xhdpi</td>
+		<td>96 x 96</td>
+	</tr>
+	<tr>
+		<td>xxhdpi</td>
+		<td>144 x 144</td>
+	</tr>
+	<tr>
+		<td>xxxhdpi</td>
+		<td>192 x 192</td>
+	</tr>
+</table>
+
+<p>No entanto, para colocarmos ícones personalizados mais facilmente, nós clicamos na pasta res e em Image Asset, e lá colocamos o ícone personalizado do programa, além de ícones de notificação e etc.</p>
+
+<p>Em values, em strings.xml podemos ver as configurações dos componentes colocados.</p>
+
+<p>Adicionaremos um plain text e coloque a id txtNome, e um botão com a id btnClick.</p>
+
+<p>PS: Para os componentes não se sobreporem um no outro, coloque ele dentro de um linearlayout vertical. Podemos colocar spaces para realinhar eles.</p>
+
+<p>No código Java, alteramos ele assim:</p>
+
+<pre>
+<code>
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.*;
+import android.view.View;
+
+public class MainActivity extends AppCompatActivity {
+    private EditText txtNome;
+    private Button btnClick;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        txtNome = (EditText)findViewById(R.id.txtNome); // Nome das ids dos objetos
+        btnClick = (Button)findViewById(R.id.btnClick);
+    }
+}
+</code>
+</pre>
+
+<h3>Capturando Texto para String</h3>
+
+<p>Agora, para exibirmos a mensagem, altere o código assim:</p>
+
+<pre>
+<code>
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    txtNome = (EditText)findViewById(R.id.txtNome); // Nome das ids dos objetos
+    btnClick = (Button)findViewById(R.id.btnClick);
+
+    btnClick.setOnClickListener(new View.OnClickListener() { // Invocado quando o evento é executado
+        @Override
+        public void onClick(View v) {
+            AlertDialog.Builder diag = new AlertDialog.Builder(MainActivity.this);
+
+            diag.setMessage(txtNome.getText().toString().trim());
+            diag.setNeutralButton("Ok", null); // Cria o botão
+            diag.show(); // Exibe o botão
+        }
+    });
+}
+</code>
+</pre>
+
+<p>PS: Para definir a quantidade máxima de caracteres do edittext, coloque no XML a propriedade <code>android:maxLength="20"</code> com o número desejado. Podemos colocar o parâmetro lines para uma área de texto. No Java, podemos usar o método <code>trim()</code> para remover espaços indesejados, e <code>requestFocus()</code> para focalizar um elemento.</p>
+
+<p>PS: Podemos também exibir o texto assim:</p>
+
+<pre>
+<code>
+public void onClick(View v) {
+    Toast.makeText(v.getContext(), "Olá, " + txtNome.getText().toString().trim() + "!", Toast.LENGTH_LONG).show();
+}
+</code>
+</pre>
+
+<h3>Radio Button</h3>
+
+<p>Para isso, vamos colocar dois radiobuttons com as opções masculino e feminino (ids radMasc e radFem).</p>
+
+<p>Para apenas um ficar clicável, colocamos um radioGroup e arrastamos os radiobuttons pra dentro dele.</p>
+
+<p>E no código fazemos assim:</p>
+
+<pre>
+<code>
+public class MainActivity extends AppCompatActivity {
+    private EditText txtNome;
+    private Button btnClick;
+    private RadioButton radMasc, radFem;
+    private String sexo;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        txtNome = (EditText)findViewById(R.id.txtNome); // Nome das ids dos objetos
+        btnClick = (Button)findViewById(R.id.btnClick);
+        radMasc = (RadioButton)findViewById(R.id.radMasc);
+        radFem = (RadioButton)findViewById(R.id.radFem);
+
+
+        btnClick.setOnClickListener(new View.OnClickListener() { // Invocado quando o evento é executado
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder diag = new AlertDialog.Builder(MainActivity.this);
+
+                if(radMasc.isChecked()) {
+                    sexo = "Masculino";
+                }
+                else if(radFem.isChecked()) {
+                    sexo = "Feminino";
+                }
+
+                diag.setMessage(txtNome.getText().toString().trim() + "\n" + sexo);
+                diag.setNeutralButton("Ok", null); // Cria o botão
+                diag.show(); // Exibe o botão
+            }
+        });
+    }
+}
+</code>
+</pre>
+
+<p>PS: Podemos alterar a orientação dos botões pra horizontal, colocando essa opção nas propriedades do RadioGroup.</p>
+
+<h3>Campo Numérico</h3>
+
+<p>Para colocarmos um campo numérico, colocamos um text do tipo Number para a idade, com um label indicando a mesma, e o Number terá a id numId.</p>
+
+<p>Para capturar a idade, basta fazer assim:</p>
+
+<pre>
+<code>
+public class MainActivity extends AppCompatActivity {
+    private EditText txtNome;
+    private Button btnClick;
+    private EditText numId;
+    private RadioButton radMasc, radFem;
+    private int idade;
+    private String sexo;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        txtNome = (EditText)findViewById(R.id.txtNome); // Nome das ids dos objetos
+        btnClick = (Button)findViewById(R.id.btnClick);
+        radMasc = (RadioButton)findViewById(R.id.radMasc);
+        radFem = (RadioButton)findViewById(R.id.radFem);
+        numId = (EditText)findViewById(R.id.numId);
+
+        btnClick.setOnClickListener(new View.OnClickListener() { // Invocado quando o evento é executado
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder diag = new AlertDialog.Builder(MainActivity.this);
+
+                if(radMasc.isChecked()) {
+                    sexo = "Masculino";
+                }
+                else if(radFem.isChecked()) {
+                    sexo = "Feminino";
+                }
+
+                idade = Integer.parseInt(numId.getText().toString().trim());
+
+                diag.setMessage(txtNome.getText().toString().trim() + "\nIdade: " + idade + "\n" + sexo);
+                diag.setNeutralButton("Ok", null); // Cria o botão
+                diag.show(); // Exibe o botão
+            }
+        });
+    }
+}
+</code>
+</pre>
+
+<p>Para definir os valores mínimos e máximo de um number, coloque esse método no Java, com os mínimo e máximo desejados:</p>
+
+<pre>
+<code>
+EditText numId = (EditText)findViewById(R.id.numId);
+
+numId.setFilters(new InputFilter[]{new FiltroNumeros(0, 110)});
+</code>
+</pre>
+
+<p>Só que pra usar ele precisaremos criar uma classe pra isso, e importar ela pro nosso projeto, cujo código você baixa <a href="_files/FiltroNumeros.txt" target="_blank">clicando aqui</a>!</p>
+
+<p>PS: Podemos criar um operador ternário pra evitar erros com campos numéricos vazios:</p>
+
+<pre>
+<code>
+idade = !numId.getText().toString().trim().equals("") ? Integer.parseInt(numId.getText().toString().trim()) : 0;
+</code>
+</pre>
+
+<p>Podemos também, ao invés do operador ternário, colocar as variáveis dentro de um try catch com exceção NumberFormatException, assim:</p>
+
+<pre>
+<code>
+try {
+    idade = Integer.parseInt(numId.getText().toString().trim());
+    
+}
+catch(NumberFormatException ex) {
+    txtRes.setText("Foram inseridos valores não válidos!");
+}
+</code>
+</pre>
+
+<p>Para ele permitir números negativos, marque nas opções do InputType o NumberSigned, e o NumberDecimal é para números reais.</p>
+
+<h3>Checkbox</h3>
+
+<p>Da mesma forma que o radiobutton, podemos pegar dados do checkbox, já que ambos tem praticamente as mesmas propriedades.</p>
+
+<p>No Java podemos colocar o código assim:</p>
+
+<pre>
+<code>
+public class MainActivity extends AppCompatActivity {
+    private EditText txtNome;
+    private Button btnClick;
+    private EditText numId;
+    private RadioButton radMasc, radFem;
+    private int idade;
+    private String sexo;
+    private CheckBox chProg, chRed, chHard;
+    private static String conhe = "";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        txtNome = (EditText)findViewById(R.id.txtNome); // Nome das ids dos objetos
+        btnClick = (Button)findViewById(R.id.btnClick);
+        radMasc = (RadioButton)findViewById(R.id.radMasc);
+        radFem = (RadioButton)findViewById(R.id.radFem);
+        numId = (EditText)findViewById(R.id.numId);
+        chProg = (CheckBox)findViewById(R.id.chProg);
+        chRed = (CheckBox)findViewById(R.id.chRed);
+        chHard = (CheckBox)findViewById(R.id.chHard);
+
+        btnClick.setOnClickListener(new View.OnClickListener() { // Invocado quando o evento é executado
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder diag = new AlertDialog.Builder(MainActivity.this);
+
+                if(radMasc.isChecked()) {
+                    sexo = "Masculino";
+                }
+                else if(radFem.isChecked()) {
+                    sexo = "Feminino";
+                }
+
+                idade = Integer.parseInt(numId.getText().toString().trim());
+
+                if(chProg.isChecked()) {
+                    conhe += "\n";
+                    conhe += chProg.getText().toString();
+                }
+    
+                // Outro condicional:
+
+                if(chRed.isChecked()) {
+                    conhe += "\n";
+                    conhe += chRed.getText().toString();
+                }
+
+	            // Outro condicional:
+
+                if(chHard.isChecked()) {
+                    conhe += "\n";
+                    conhe += chHard.getText().toString();
+                }
+
+                diag.setMessage(txtNome.getText().toString().trim() + "\nIdade: " + idade + "\n" + sexo + "\nConhecimentos:\n" + conhe);
+                diag.setNeutralButton("Ok", null); // Cria o botão
+                diag.show(); // Exibe o botão
+
+                conhe = ""; // Isso limpa a variável
+            }
+        });
+    }
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-android-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

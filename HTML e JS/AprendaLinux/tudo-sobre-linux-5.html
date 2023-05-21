@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Linux</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Linux</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-linux-1.html">Tudo sobre Linux Parte 1!</a></li>
+                    <li><a href="tudo-sobre-linux-2.html">Tudo sobre Linux Parte 2!</a></li>
+                    <li><a href="tudo-sobre-linux-3.html">Tudo sobre Linux Parte 3!</a></li>
+                    <li><a href="tudo-sobre-linux-4.html">Tudo sobre Linux Parte 4!</a></li>
+                    <li><a href="tudo-sobre-linux-5.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Linux Parte 5!</a></li>
+                    <li><a href="tudo-sobre-linux-6.html">Tudo sobre Linux Parte 6!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Linux Parte 5</h2>
+
+<h3>Redirecionamento e Pipes no Linux - stdin, stdout, stderr</h3>
+
+<p>No Linux e Unix em geral, tudo é considerado arquivo, inclusive diretórios, discos, etc., e por isso tudo pode ser mapeado para o sistema de arquivos.</p>
+
+<p>Os dispositivos que são mapeados como arquivos eles são chamados de arquivos de dispositivos. Um exemplo clássico é o <code>/dev/sda</code>. Um arquivo de dispositivo é um objeto do sistema que oferece uma interface para o dispositivo em si.</p>
+
+<p>O kernel do Linux associa os drivers de dispositivos aos arquivos de dispositivos. Assim podemos acessar os dispositivos como se fossem arquivos.</p>
+
+<p>Os arquivos no Linux possuem uma espécie de abstração para identificação. Essa abstração é chamada de descritor de arquivos. É uma abstração de uma identificação para acessar um arquivo. Para isso temos três descritores, entrada padrão (stdin), saída padrão (stdout) e erro padrão (stderr).</p>
+
+<p>A entrada padrão é um stream (fluxo) para entrada de texto. Por padrão, a entrada padrão é vinculada ao teclado. Também é conhecida como descritor de arquivos 0.</p>
+
+<p>A saída padrão é um stream para saída normal dos programas. Por padrão, a saída padrão é vinculada ao terminal ou janela de terminal (no caso de sistemas com interfaces gráficas). Também é conhecida como descritor de arquivos 1.</p>
+
+<p>O erro padrão é um stream para saída de texto, usado para exibir mensagens de erro. Por padrão também é vinculada ao terminal ou janela do mesmo. Também é conhecida como descritor de arquivos 2.</p>
+
+<p>Com esses dados em mente, podemos utilizar os recursos chamados de pipes. Pros programas, ler os dados de um arquivo armazenado no sistema ou do teclado, dá no mesmo, não há diferença alguma pros programas, assim como escrever no terminal ou dentro de outro arquivo. Ele também pode ler ou enviar dados de ou para outros programas.</p>
+
+<p>O símbolo de pipe é a barra em pé (<b>|</b>). O pipe permite juntar dois comandos, como por exemplo <code>ls -l | less</code>, nesse caso, a saída do ls, ao invés de ir diretamente pro terminal, ele irá para o comando less, que tratará os dados de outra forma antes de enviá-los ao terminal.</p>
+
+<p>Os pipes podem ser redirecionados para outros comandos sucessivamente. Se forem usados mais de dois comandos com redirecionamentos, damos o nome de pipeline a operação resultante. Por exemplo, redirecionando para a saída de outros comandos:</p>
+
+<pre>
+<code>
+ls /etc | sort -r | less # Ele listará o diretório /etc, ordenará de forma reversa e mostrará ao poucos com o less
+</code>
+</pre>
+
+<p>Para redirecionar para um arquivo, usamos o <code>&gt;</code>, dessa forma:</p>
+
+<pre>
+<code>
+ls -i &gt; inodes.txt
+</code>
+</pre>
+
+<h3>Redirecionamento e Pipes no Linux - Comando tee</h3>
+
+<p>Na prática, as saídas que são redirecionadas para um arquivo, não são exibidas na saída padrão (terminal), exceto os erros padrão.</p>
+
+<p>O operador &gt; cria arquivos, se já existir ele será sobrescrito. Para não perder o conteúdo do arquivo e adicionar novas linhas, use o operador <code>&gt;&gt;</code>.</p>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+ls > texto.txt
+
+cat texto.txt
+
+echo "Lista de arquivos do diretório home"
+
+echo "Lista de arquivos do diretório home" &gt; texto.txt # Sobrescrevendo
+
+cat texto.txt
+
+ls > texto.txt # Sobrescrevendo de novo
+
+echo "Lista de arquivos do diretório home" &gt;&gt; texto.txt # Adicionando
+</code>
+</pre>
+
+<p>Para redirecionamento de entrada, podemos fazer assim:</p>
+
+<pre>
+<code>
+cat &lt; /etc/group &gt; /tmp/grupos
+
+cat /tmp/grupos
+</code>
+</pre>
+
+<p>No caso acima, o redirecionamento <code>&lt;</code> lê a partir de um arquivo (no caso, o /etc/group</p>
+
+<p>Vamos supor esse comando:</p>
+
+<pre>
+<code>
+ls -zz # A opção -zz não existe, gerará um erro.
+
+ls -zz > erro.txt
+</code>
+</pre>
+
+<p>Das duas formas, a saída aparecerá na tela. O arquivo erro.txt é gerado, mas ele não escreve no arquivo, porque o operador &gt; redireciona a saída padrão, e não o erro padrão.</p>
+
+<p>Para redirecionar a saída do erro padrão ao arquivo, colocamos o número 2 na frente do operador, dessa forma:</p>
+
+<pre>
+<code>
+ls -zz 2&gt; erro.txt # O -zz não existe, lembre-se.
+</code>
+</pre>
+
+<p>Pra mostrar a saída tanto no terminal quanto no arquivo ao mesmo tempo, usamos o comando tee, usando a sintaxe <code>tee opções arquivos</code>, que são essas:</p>
+
+<ul>
+    <li><code>-a</code>: Anexa aos arquivos, em vez de sobrescrevê-los.</li>
+    <li><code></code></li>
+    <li><code></code></li>
+</ul>
+
+<p>Veja alguns exemplos de uso:</p>
+
+<pre>
+<code>
+ls -l | tee saida.txt # Sobrescreverá caso já exista o arquivo saida.txt
+
+ls -i | tee saida.txt | less # Idem acima, mas usará o less para ver aos poucos
+</code>
+</pre>
+
+<h3>Gerenciamento de Usuários e Grupos - Arquivo /etc/passwd</h3>
+
+<p>As informações de usuários ficam armazenados em vários arquivos de configuração do seu sistema. Os principais arquivos são <code>/etc/passwd</code>, <code>/etc/group</code>, <code>/etc/shadow</code> e <code>/etc/gshadow</code>.</p>
+
+<p>O arquivo <code>/etc/passwd</code> contém a lista dos usuários do sistema (não apenas usuários humanos, mas também contas administrativas). Antigamente ele era usado também para arquivo de senhas de usuários, mas hoje em dia elas ficam em outro arquivo, o <code>/etc/shadow</code>. O arquivo passwd pode ser lido por qualquer um no sistema e pode ser editado com editores de texto (porém, não é recomendado, e sim que se altere usando comandos como o <code>usermod</code>, localizado em <code>/usr/sbin/usermod</code>).</p>
+
+<p>Digite o comando <code>cat /etc/passwd</code> para visualizarmos o arquivo no terminal.</p>
+
+<p>Cada linha é uma conta, cujas informações são divididas por dois pontos (:). Veja por exemplo essa linha:</p>
+
+<pre>
+<code>
+eu:x:1000:1000:eu,,,:/home/eu:/bin/bash
+</code>
+</pre>
+
+<p>Os campos são esses:</p>
+
+<ol>
+    <li>É o nome do usuário, usado pra fazer login.</li>
+    <li>É a <q>senha</q> (que não é <q>x</q>, mas que está no arquivo <code>/etc/shadow</code>).</li>
+    <li>É o UID (ID do usuário, variando de 0 a 65535).</li>
+    <li>É o GID (ID do grupo, primário, também variando de 0 a 65535).</li>
+    <li>São os comentários (informações extras, como o nome completo ou o telefone). As vírgulas indicam que caberiam mais informações.</li>
+    <li>É o diretório home (padrão) do usuário.</li>
+    <li>É o shell padrão do usuário.</li>
+</ol>
+
+<p>Os números de 1 a 999 para UID são reservados para contas de sistema e administrativas. As contas de usuário começam a contar a partir do 1000 (geralmente atribuída ao usuário principal do Linux). O usuário root recebe o UID 0.</p>
+
+<h3>Gerenciamento de Usuários e Grupos - Arquivos group e gshadow</h3>
+
+<p>O arquivo <code>/etc/group</code> define os grupos aos quais os usuários do Linux pertencem. Os grupos são usados para aplicar permissões de acesso a recursos do sistema. Também permitem facilitar o gerenciamento e monitoramento de usuários.</p>
+
+<p>Digite no terminal <code>cat /etc/group</code> para visualizarmos o arquivo.</p>
+
+<p>Cada linha é uma conta, cujas informações são divididas por dois pontos (:). Veja por exemplo essa linha:</p>
+
+<pre>
+<code>
+eu:x:1000:
+</code>
+</pre>
+
+<p>Os campos são esses:</p>
+
+<ol>
+    <li>É o nome do grupo.</li>
+    <li>É a <q>senha</q>, geralmente não usada.</li>
+    <li>É o GID (ID do grupo, variando de 0 a 65535).</li>
+    <li>Lista de membros, separados por vírgulas, o usuário de mesmo nome do grupo não aparece.</li>
+</ol>
+
+<p>O arquivo <code>/etc/gshadow</code> é onde estão as senhas criptografadas dos grupos. Podemos ver o arquivo digitando <code>sudo cat /etc/gshadow</code>.</p>
+
+<p>Cada linha é uma conta, cujas informações são divididas por dois pontos (:). Veja por exemplo essa linha:</p>
+
+<pre>
+<code>
+eu:!::
+</code>
+</pre>
+
+<p>Os campos são esses:</p>
+
+<ol>
+    <li>É o nome do grupo.</li>
+    <li>É a senha criptografada, se houver. Se houver um <q>!</q>, ela indica que os usuários que não são do grupo não podem acessá-la, mas que também não tem senha no mesmo.</li>
+    <li>São os administradores do grupo, o usuário de mesmo nome do grupo não aparece. O root também pode fazer isso mesmo não estando no mesmo.</li>
+    <li>Lista de membros, separados por vírgulas, o usuário de mesmo nome do grupo não aparece.</li>
+</ol>
+
+<p>Alguns comandos que podemos usar no terminal:</p>
+
+<ul>
+    <li><code>groups usuário</code>: Permite descobrir de quais grupos um usuário é membro.</li>
+    <li><code>id opções usuário</code>: Mostra os IDs de grupos e usuário e os grupos aos quais ele pertence. Algumas opções são <code>-g</code> (GID do grupo primário do usuário), <code>-G</code> (todos os GIDs dos grupos do usuário), e <code>-n</code> (combinado com g ou G, mostra os nomes dos grupos ao invés dos GIDs).</li>
+</ul>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+id -g eu
+
+id -G eu
+
+id -nG eu
+</code>
+</pre>
+
+<h3>Gerenciamento de Usuários e Grupos - Arquivo de Senhas shadow</h3>
+
+<p>O arquivo <code>/etc/shadow</code> contém as senhas criptografadas dos usuários, além de outras informações sobre as contas de usuário. Ele somente é legível pelo usuário root ou outro que tenha permissão para ler o mesmo.</p>
+
+<p>Digite o comando <code>sudo cat /etc/shadow</code> no terminal.</p>
+
+<p>Cada linha é uma conta, cujas informações são divididas por dois pontos (:). Veja por exemplo essa linha:</p>
+
+<pre>
+<code>
+syslog:*:17937:0:99999:7:::
+</code>
+</pre>
+
+<p>Os campos são esses:</p>
+
+<ol>
+    <li>É o nome da conta.</li>
+    <li>É a senha. Se possuir um <q>!</q> é porque ele não possui senha. Se possuir <q>*</q> é porque a conta está desativada e não poderá fazer login no sistema. Se possuir um <q>![senha]</q> é porque a conta tá travada. E se possuir um <q>!!</q> é porque a senha nunca foi configurada.</li>
+    <li>É a última modificação de senha, contada em dias desde 01/01/1970 até a data da modificação da mesma.</li>
+    <li>É o mínimo de dias antes que o usuário tem que esperar pra modificar sua senha.</li>
+    <li>É o máximo de dias que o usuário pode manter a mesma senha.</li>
+    <li>É o campo de aviso de dias antes da expiração da senha.</li>
+    <li>É o campo de dias após a validade do qual a conta é desabilitada.</li>
+    <li>É a expiração da conta, quando a conta será desativada, contada em dias desde 01/01/1970.</li>
+    <li>É um campo reservado, sem uso especificado.</li>
+</ol>
+
+<p>PS: A data 01/01/1970 é conhecida como a data Unix, para chegar ao dia exato especificado na conta, faça uma soma do tipo abaixo, na qual colocamos a quantidade de dias reference ao usuário/grupo:</p>
+
+<pre>
+<code>
+date -d "1970/01/01 + 15748 days"
+</code>
+</pre>
+
+<h3>Gerenciamento de Usuários e Grupos - Criar Usuários - Comandos useradd e adduser</h3>
+
+<p>Usamos o comando <code>useradd</code> para criar uma conta de usuário do sistema. As opções dele são <code>useradd opções nomedaconta</code>, que são essas:</p>
+
+<ul>
+    <li><code>-c comentário</code>: Define o campo comentário (nome, usuário, telefone, etc.).</li>
+    <li><code>-d diretoriohome</code>: Define o diretório home do usuário diferente do padrão.</li>
+    <li><code>-m</code>: Cria e preenche o diretório home padrão.</li>
+    <li><code>-s shell</code>: Define o shell padrão da conta.</li>
+    <li><code>-e dataexpiração</code>: Define a data na qual a conta será desabilitada (formato YYYY-MM-DD).</li>
+    <li><code>-u numeroid</code>: Define a UID desejada para o usuário (não use uma UID existente).</li>
+</ul>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+sudo useradd -m -c "Fulano da Silva" -s /bin/sh fulano # Cria o usuário fulano
+
+cat /etc/passwd # Verifica se o usuário existe
+</code>
+</pre>
+
+<p>Temos também o <code>adduser</code> que é um script escrito em Perl que usa o programa useradd para realizar tarefas de criação de usuários, na distros Debian e derivados. Ele pode ser usado para adicionar um usuário a um grupo já existentes.</p>
+
+<p>Digite esse comando que adicionará o usuário beltrano e pedirá dados como senha e etc.:</p>
+
+<pre>
+<code>
+sudo adduser beltrano
+</code>
+</pre>
+
+<p>O script adduser fica localizado em <code>/usr/sbin/adduser</code>.</p>
+
+<p>Para dar permissões de root para um usuário podemos fazer assim:</p>
+
+<pre>
+<code>
+sudo usermod -aG sudo beltrano
+</code>
+</pre>
+
+<p>E para deletar um usuário, assim como seu grupo, fazemos assim:</p>
+
+<pre>
+<code>
+sudo userdel -f beltrano
+
+sudo groupdel beltrano
+</code>
+</pre>
+
+<h3>Gerenciamento de Usuários e Grupos - Alterar Senhas - comando passwd</h3>
+
+<p>O comando <code>passwd</code> é usado para configurar a senha de um usuário, além de algumas opções de conta. A sintaxe é <code>passwd opções username</code>, que são essas:</p>
+
+<ul>
+    <li><code>-l</code>: Trava a senha da conta do usuário especificado.</li>
+    <li><code>-u</code>: Destrava a senha da conta do usuário especificado.</li>
+    <li><code>-d</code>: Exclui a senha do usuário especificado.</li>
+    <li><code>-e</code>: Força a expiração da senha do usuário</li>
+    <li><code>-x dias</code>: Faz com que a senha funcione apenas por determinados dias.</li>
+    <li><code>-n dias</code>: Define a quantidade mínima de dias que o usuário deve aguardar para alterar sua senha.</li>
+    <li><code>-w dias</code>: Define a quantidade de dias a partir do qual o usuário começa a receber seu aviso de senha.</li>
+    <li><code>-S</code>: Exibe o status da conta.</li>
+</ul>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+sudo passwd -S fulano
+
+sudo passwd fulano
+</code>
+</pre>
+
+<p>O user fulano, criado anteriormente, não tem senha, então podemos criar uma pra ele usando esses comandos:</p>
+
+<pre>
+<code>
+sudo passwd fulano
+
+sudo passwd -l fulano # Trava a conta
+
+sudo passwd -u fulano # Destrava a conta
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-linux-4.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-linux-6.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

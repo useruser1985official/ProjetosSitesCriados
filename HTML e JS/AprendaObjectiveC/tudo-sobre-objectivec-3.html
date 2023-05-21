@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Objective-C</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Objective-C</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-objectivec-1.html">Tudo sobre Objective-C Parte 1!</a></li>
+                    <li><a href="tudo-sobre-objectivec-2.html">Tudo sobre Objective-C Parte 2!</a></li>
+                    <li><a href="tudo-sobre-objectivec-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Objective-C Parte 3!</a></li>
+                    <li><a href="tudo-sobre-objectivec-4.html">Tudo sobre Objective-C Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Objective-C Parte 3</h2>
+
+<h3>Métodos</h3>
+
+<p>Basicamente, um procedimento é um método que não retorna nada, como este:</p>
+
+<pre>
+<code>
+void saudacao();
+
+int main(int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    saudacao();
+
+    [pool drain];
+
+    return 0;
+}
+
+void saudacao() {
+    NSLog(@"Olá, usuário! Bom dia!");
+}
+</code>
+</pre>
+
+<p>Com um parâmetro:</p>
+
+<pre>
+<code>
+void saudacao(const char *nome);
+
+int main(int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    saudacao("Fulano");
+
+    [pool drain];
+
+    return 0;
+}
+
+void saudacao(const char *nome) {
+    NSLog(@"Olá, %s! Bom dia!", nome);
+}
+</code>
+</pre>
+
+<p>Com isso podemos criar métodos para códigos grandes, por exemplo:</p>
+
+<pre>
+<code>
+void datas();
+
+int main(int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    datas();
+
+    [pool drain];
+
+    return 0;
+}
+
+void datas() {
+    NSDate *atual = [NSDate date];
+    NSDateFormatter *formataData = [[NSDateFormatter alloc] init];
+    NSDateFormatter *formataHora = [[NSDateFormatter alloc] init];
+    NSDateFormatter *formataSem = [[NSDateFormatter alloc] init];
+
+    [formataData setDateFormat: @"dd/MM/yyyy"];
+    [formataHora setDateFormat: @"HH:mm:ss"];
+    [formataSem setDateFormat: @"EEEE"];
+
+    NSString *data = [formataData stringFromDate: atual];
+    NSString *hora = [formataHora stringFromDate: atual];
+    NSString *sem = [formataSem stringFromDate: atual];
+
+    NSLog(@"Hoje é dia %@, %@, e a hora é %@.", data, sem, hora);
+}
+</code>
+</pre>
+
+<p>Exemplo de função, com parâmetro e retorno (o tipo é o tipo de retorno do método):</p>
+
+<pre>
+<code>
+int multi(int n1, int n2);
+
+int main(int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    NSLog(@"%d", multi(10, 5));
+
+    [pool drain];
+
+    return 0;
+}
+
+int multi(int n1, int n2) {
+    return n1 * n2;
+}
+</code>
+</pre>
+
+<p>PS: Podemos dividir os métodos em arquivos separados, onde a declaração dos métodos vão num arquivo .h e a implementação num arquivo .m, depois é só incluir o arquivo .h com um include no código principal (com aspas). Dessa forma:</p>
+
+<p>Arquivo funcoes.h:</p>
+
+<pre>
+<code>
+#ifndef FUNCOES_H_INCLUDED
+#define FUNCOES_H_INCLUDED
+
+int multi(int n1, int n2);
+
+#endif // FUNCOES_H_INCLUDED
+</code>
+</pre>
+
+<p>Arquivo funcoes.m:</p>
+
+<pre>
+<code>
+#include "funcoes.h"
+
+int multi(int n1, int n2) {
+    return n1 * n2;
+}
+</code>
+</pre>
+
+<p>Makefile:</p>
+
+<pre>
+<code>
+programa: main.o funcoes.o
+    gcc main.o funcoes.o -I /usr/include/GNUstep/ -L /usr/lib/GNUstep/ -l objc -lgnustep-base -fconstant-string-class=NSConstantString -lm -ldl -fobjc-exceptions -o programa -no-pie
+
+main.o: main.m funcoes.o
+    gcc -c main.m -I /usr/include/GNUstep/ -L /usr/lib/GNUstep/ -l objc -lgnustep-base -fconstant-string-class=NSConstantString -lm -ldl -fobjc-exceptions -o main.o
+
+funcoes.o: funcoes.m funcoes.h
+    gcc -c funcoes.m -I /usr/include/GNUstep/ -L /usr/lib/GNUstep/ -l objc -lgnustep-base -fconstant-string-class=NSConstantString -lm -ldl -fobjc-exceptions -o funcoes.o
+</code>
+</pre>
+
+<h3>Tratamento de Erros</h3>
+
+<p>Vamos considerar esse código para calcular uma divisão:</p>
+
+<pre>
+<code>
+int n1, n2, res;
+
+printf("Digite o numerador: ");
+scanf("%d", &n1);
+printf("Digite o denominador: ");
+scanf("%d", &n2);
+
+res = n1 / n2;
+
+NSLog(@"A divisão entre %d e %d é igual a %d.", n1, n2, res);
+</code>
+</pre>
+
+<p>Se tentarmos dividir qualquer número por zero, ele dará erro e lançara uma exceção.</p>
+
+<p>Para tratarmos esse erro, usamos o bloco try catch para isso:</p>
+
+<pre>
+<code>
+@try {
+
+}
+@catch(NSException *ex) {
+
+}
+@finally { // Opcional
+
+}
+</code>
+</pre>
+
+<p>No caso, colocamos o código suscetível a erro dentro do try, ele executará ele todo ou parará quando encontrar um erro, e passará a executar o que está dentro do catch. O finally executará com erro ou não.</p>
+
+<p>O código acima ficaria assim:</p>
+
+<pre>
+<code>
+@try {
+    int n1, n2, res;
+
+    printf("Digite o numerador: ");
+    scanf("%d", &n1);
+    printf("Digite o denominador: ");
+    scanf("%d", &n2);
+
+    res = n1 / n2;
+
+    NSLog(@"A divisão entre %d e %d é igual a %d.", n1, n2, res);
+}
+@catch(NSException *ex) {
+    NSLog(@"O código deu erro: %@.", ex.name);
+}
+@finally {
+    NSLog(@"Conclusão do código!");
+}
+</code>
+</pre>
+
+<p>PS: Podemos ter vários catch num mesmo bloco try, cada um com uma exceção específica.</p>
+
+<p>No entanto, o código acima não pega a exceção como queremos, nós podemos usar um <code>@throw</code> para isso, que nem precisa estar dentro do try, mas numa função, como abaixo:</p>
+
+<pre>
+<code>
+int divisao(int n1, int n2);
+
+int main(int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    @try {
+        int n1, n2, res;
+
+        printf("Digite o numerador: ");
+        scanf("%d", &n1);
+        printf("Digite o denominador: ");
+        scanf("%d", &n2);
+
+        res = divisao(n1, n2);
+
+        NSLog(@"A divisão entre %d e %d é igual a %d.", n1, n2, res);
+    }
+    @catch(NSException *ex) {
+        NSLog(@"O código deu erro: %@.", ex.name);
+    }
+    @finally {
+        NSLog(@"Conclusão do código!");
+    }
+
+    [pool drain];
+
+    return 0;
+}
+
+int divisao(int n1, int n2) {
+    if(n2 == 0) {
+        [NSException raise: @"É impossível dividir por zero" format: @""];
+    }
+
+    return n1 / n2;
+}
+</code>
+</pre>
+
+<h3>Introdução aos Ponteiros</h3>
+
+<p>Os ponteiros são variáveis especiais que contém um endereço de memória armazenado, em vez de dados comuns, esse endereço é, no geral, a posição na memória de uma outra variável. Dessa forma, a variável que contém esse endereço aponta para a outra variável, daí o nome <q>ponteiro</q>.</p>
+
+<p>O <code>&</code> pega o endereço de memória, ou envia conteúdos para ele. O <code>*</code> pega o conteúdo que está no endereço apontado, ou envia para o mesmo.</p>
+
+<p>Veja um exemplo simples de ponteiro:</p>
+
+<pre>
+<code>
+int num = 50;
+int *pont;
+
+pont = &amp;num;
+
+NSLog(@"Endereço de num: %p", &amp;num);
+NSLog(@"Conteúdo de num: %d", num);
+NSLog(@"Endereço de pont: %p", &amp;pont);
+NSLog(@"Endereço apontado por pont: %p", pont);
+NSLog(@"Conteúdo apontado por pont: %d", *pont);
+
+free(pont); // Liberando memória do ponteiro.
+</code>
+</pre>
+
+<p>PS: Os ponteiros podem ser de qualquer tipo, mas eles devem ser do mesmo tipo da variável que ele aponta (por exemplo, um ponteiro int só pode apontar uma variável int, um ponteiro double só pode apontar uma variável double e assim por diante).</p>
+
+<h3>System e Getenv</h3>
+
+<p>Usamos o System e o Getenv da mesma forma que em C, como podem ver:</p>
+
+<pre>
+<code>
+chdir("/home"); // Inclua unistd.h
+
+system("ls"); // Inclua stdlib.h
+</code>
+</pre>
+
+<p>Usando uma variável de ambiente do sistema:</p>
+
+<pre>
+<code>
+chdir(getenv("HOME"));
+
+system("ls");
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-objectivec-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-objectivec-4.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

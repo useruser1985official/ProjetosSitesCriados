@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda MySQL</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda MySQL</h1>
+                <menu>
+                    <li><a href="index.php">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-mysql-1.html">Tudo sobre MySQL Parte 1!</a></li>
+                    <li><a href="tudo-sobre-mysql-2.html">Tudo sobre MySQL Parte 2!</a></li>
+                    <li><a href="tudo-sobre-mysql-3.html">Tudo sobre MySQL Parte 3!</a></li>
+                    <li><a href="tudo-sobre-mysql-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre MySQL Parte 4!</a></li>
+                    <li><a href="tudo-sobre-mysql-5.html">Tudo sobre MySQL Parte 5!</a></li>
+                    <li><a href="tudo-sobre-mysql-6.html">Tudo sobre MySQL Parte 6!</a></li>
+                    <li><a href="tudo-sobre-mysql-7.html">Tudo sobre MySQL Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre MySQL Parte 4</h2>
+
+<h3>Chaves Estrangeiras e JOIN</h3>
+
+<p>Quando criamos uma tabela em MySQL, nós temos que escolher uma coisa chamada <code>engine</code>, que é a máquina que vai criar os registros.</p>
+
+<p>No final de um arquivo SQL você encontrará o engine:</p>
+
+<pre>
+<code>
+engine = innodb
+</code>
+</pre>
+
+<p>No caso, o <code>Inno DB</code> é uma máquina de criação de tabelas, ou seja, um engine (mecanismo). A principal característica do Inno DB é suportar chaves estrangeiras.</p>
+
+<p>Outras engines são o <code>MylSAM</code> e o <code>XtraDB</code>. A MylSAM é a mais antiga, mas ela não dá suporte à algumas transações, no caso, as que são ACID, cujo significado são esses:</p>
+
+<ul>
+    <li>Atomicidade: Ou faz tudo, ou nada é considerado, não faz nada incompleto.</li>
+    <li>Consistência: Um banco continuará estável tanto na hora quando após a transação, ou volta pro estado anterior.</li>
+    <li>Isolamento: Quando duas ou mais transações acontecem ao mesmo tempo, elas são executadas de forma separada, sem conflito entre si.</li>
+    <li>Durabilidade: Uma transação tem que durar o tempo necessário até alterarmos dele.</li>
+</ul>
+
+<p>No exemplo, temos dois bancos de dados distintos, que tem relacionamento entre si, no primeiro, dados de usuários no banco "gafanhotos", e no outro banco temos cursos. Mas no caso especificado, um usuário do banco gafanhotos poderá escolher um curso do banco cursos.</p>
+
+<img src="_imagens/gafanhotos.jpg" alt="Gafanhotos"/>
+
+<p>No exemplo da imagem, Gafanhotos prefere Cursos, o Gafanhotos é o lado 1, se invertesse, como Cursos é preferido por gafanhotos, Cursos seria o lado um (quem exporta é o lado 1, quem importa é o lado "N").</p>
+
+<p>O que a gente tem que fazer a chave (como a primária) do lado um (do qual ela vem) e levar para o lado "N", adicionando-a no outro lado, ela não precisa ter o mesmo nome da chave primária de onde ela veio, mas tem que ter o mesmo tipo e mesmo tamanho.</p>
+
+<p>No exemplo, a chave idcurso do Cursos terá o nome de curso preferido na chave estrangeira Gafanhotos:</p>
+
+<pre>
+<code>
+use cadastro;
+describe gafanhotos;
+alter table gafanhotos
+add column cursopreferido int;
+</code>
+</pre>
+
+<p>Para adicionar uma chave estrangeira, logo após executar o código acima, você fará isso:</p>
+
+<pre>
+<code>
+alter table gafanhotos
+add foreign key(cursopreferido)
+references cursos(idcurso);
+</code>
+</pre>
+
+<p>No caso, o <code>foreign key</code> adiciona a chave, e o <code>references</code> é a tabela do qual ele será ligado (importado), o que tá entre parênteses é o nome das colunas respectivas. Dê um describe na tabela e verifique se a chave está como <code>MUL</code> (múltipla).</p>
+
+<pre>
+<code>
+describe gafanhotos;
+</code>
+</pre>
+
+<p>Vamos fazer um update num cadastro qualquer assim, por exemplo:</p>
+
+<pre>
+<code>
+update gafanhotos set cursopreferido = '6' where id = '1';
+</code>
+</pre>
+
+<p>Para fazer múltiplos updates, podemos procurar essa opção no próprio PHPMyAdmin e selecionar todos.</p>
+
+<p>PS: Se tentar apagar uma chave primária que foi exportada pra outra tabela (ou seja, uma chave relacionada), ele não permitirá, por exemplo, isso:</p>
+
+<pre>
+<code>
+delete from cursos where idcurso = '6';
+</code>
+</pre>
+
+<p>Caso queira apagar uma chave estrangeira, faça assim:</p>
+
+<pre>
+<code>
+alter table gafanhotos
+drop foreign key gafanhotos_ibfk_1;
+alter table gafanhotos
+drop index cursopreferido;
+</code>
+</pre>
+
+<p>PS: O método acima também serve para excluir outros tipos de índices, como primary_key, unique, etc.</p>
+
+<p>Para aparecer um outro dado da tabela (que não seja a chave primária, mas outro dado referente à ela), usaremos o <code>join</code>.
+
+<p>No banco cadastro, digite isso:</p>
+
+<pre>
+<code>
+select gafanhotos.nome, gafanhotos.cursopreferido, cursos.nome, cursos.ano
+from gafanhotos join cursos;
+</code>
+</pre>
+
+<p>PS: O que tiver com ponto, o do lado direito é o nome da tabela e do esquerdo, nome da coluna.</p>
+
+<p>No comando acima, dará um erro, pois ele juntará todos os curso, mas para corrigí-lo, usaremos um filtro no join, colocando logo após tudo, a ligação com <code>on</code> as duas tabelas e bancos respectivos, assim:</p>
+
+<pre>
+<code>
+select gafanhotos.nome, gafanhotos.cursopreferido, cursos.nome, cursos.ano
+from gafanhotos join cursos
+on cursos.idcurso = gafanhotos.cursopreferido;
+</code>
+</pre>
+
+<p>PS: Isso daí só mostrará os que tem dados referentes nas chaves estrangeiras. Também podemos usar <code>inner join</code> nesse caso.</p>
+
+<p>Para ordenar, basta apenas isso:</p>
+
+<pre>
+<code>
+select gafanhotos.nome, cursos.nome, cursos.ano
+from gafanhotos inner join cursos
+on cursos.idcurso = gafanhotos.cursopreferido
+order by gafanhotos.nome;
+</code>
+</pre>
+
+<p>Também podemos usar "apelidos" para as colunas com o parâmetro <code>as</code>, dessa forma:</p>
+
+<pre>
+<code>
+select g.nome, c.nome, c.ano
+from gafanhotos as g inner join cursos as c
+on c.idcurso = g.cursopreferido
+order by g.nome;
+</code>
+</pre>
+
+<p>No geral, o Inner Join não considera cadastros que não tem ligação com chaves estrangeiras. Para tratar estes, usamos o <code>left join</code>, dessa forma:</p>
+
+<pre>
+<code>
+select g.nome, c.nome, c.ano
+from gafanhotos as g left join cursos as c
+on c.idcurso = g.cursopreferido;
+</code>
+</pre>
+
+<p>No caso acima, o left join escolhe a tabela preferencial, que no caso seria a esquerda (esquerda quem exporta, direita quem importa), não considerar nenhum é o inner. Na verdade, existem várias formas de trabalhar com o join.</p>
+
+<p>O inner join retorna os registros que são comuns às duas tabelas. É o método mais conhecido:</p>
+
+<pre>
+<code>
+select * from gafanhotos inner join cursos on gafanhotos.cursopreferido = cursos.idcurso;
+</code>
+</pre>
+
+<p>O left join retorna todos os registros que estão na primeira tabela (a), além dos que são comuns com a segunda tabela (b):</p>
+
+<pre>
+<code>
+select * from gafanhotos left join cursos on gafanhotos.cursopreferido = cursos.idcurso;
+</code>
+</pre>
+
+<p>O right join retorna todos os registros que esão na segunda tabela (b), além dos que são comuns com a primeira tabela (a):</p>
+
+<pre>
+<code>
+select * from gafanhotos right join cursos on gafanhotos.cursopreferido = cursos.idcurso;
+</code>
+</pre>
+
+<p>O left excluding join retorna todos os registros da primeira tabela (a), desde que não sejam em comum com a segunda tabela (b):</p>
+
+<pre>
+<code>
+select * from gafanhotos left join cursos on cursos.nome is null;
+</code>
+</pre>
+
+<p>O right excluding join retorna todos os registros da segunda tabela (b), desde que não sejam em comum com a primeira tabela (a):</p>
+
+<pre>
+<code>
+select * from gafanhotos right join cursos on gafanhotos.nome is null;
+</code>
+</pre>
+
+<p>Veja abaixo um exemplo gráfico das SQL Joins:</p>
+
+<img src="_imagens/sql-joins.jpg" alt="SQL Joins"/>
+
+<p>PS: Não é possível usar FULL JOIN em MySQL, mas ele existe em outros bancos.</p>
+
+<h3>Inner JOIN com Várias Tabelas</h3>
+
+<p>Como visto anteriormente, cada gafanhoto preferiria um curso, trazendo a chave primária de cursos para gafanhotos com a chave estrangeira.</p>
+
+<p>Nesse novo exemplo, vários gafanhotos podem ver vários cursos. Nesse caso,  o "N" (que ficava em ambos os lados), ficará no meio, e o "Assiste" será um nova entidade, e terá um "1" entre as entidades, assim:</p>
+
+<img src="_imagens/gafanhotos-2.jpg" alt="Gafanhotos 2"/>
+
+<p>No caso acima, o "Assiste" receberá duas chaves estrangeiras, que serão as primárias de gafanhotos e cursos.</p>
+
+<p>Para isso, crie uma nova tabela com esse nome, assim:</p>
+
+<pre>
+<code>
+create table gafanhoto_assiste_curso (
+    id int not null auto_increment,
+    data date,
+    idgafanhoto int,
+    idcurso int,
+    primary key(id),
+    foreign key(idgafanhoto) references gafanhotos(id),
+    foreign key(idcurso) references cursos(idcurso)
+) default charset = utf8;
+</code>
+</pre>
+
+<p>PS: Nem toda chave estrangeira precisa ser do tipo INT, apenas ser do mesmo tipo da chave primária.</p>
+
+<p>Entenda primeiro a ligação que iremos fazer:</p>
+
+<img src="_imagens/gafanhotos-3.jpg" alt="Gafanhotos"/>
+
+<p>No caso acima, vários cursos estão sendo assistido por várias pessoas.</p>
+
+<p>Vamos normalmente cadastrar isso na nova tabela, como novos cadastros, assim:</p>
+
+<pre>
+<code>
+insert into gafanhoto_assiste_curso values
+(default, '2014-03-01', '1', '2'),
+(default, '2015-12-22', '3', '6'),
+(default, '2014-01-01', '22', '12'),
+(default, '2016-05-12', '1', '19');
+</code>
+</pre>
+
+<p>PS: O default é onde será gerado um dado automaticamente (id).</p>
+
+<p>Para sabermos quais cursos os alunos estão fazendo na tabela do meio, precisamos fazer as junções, dessa forma:</p>
+
+<pre>
+<code>
+select * from gafanhotos g
+join gafanhoto_assiste_curso a
+on g.id = a.idgafanhoto;
+</code>
+</pre>
+
+<p>Podemos fazer a filtragem do que desejamos ver também:</p>
+
+<pre>
+<code>
+select g.nome, idcurso from gafanhotos g
+join gafanhoto_assiste_curso a
+on g.id = a.idgafanhoto
+order by g.nome;
+</code>
+</pre>
+
+<p>E para puxar o nome do curso, faremos assim:</p>
+
+<pre>
+<code>
+select g.nome, c.nome from gafanhotos g
+join gafanhoto_assiste_curso a
+on g.id = a.idgafanhoto
+join cursos c
+on a.idcurso = c.idcurso
+order by g.nome;
+</code>
+</pre>
+
+<!-- Curso extraído do Curso em Vídeo.
+https://www.youtube.com/playlist?list=PLHz_AreHm4dkBs-795Dsgvau_ekxg8g1r
+-->
+
+<h3>Criando Tabelas Virtuais (Views)</h3>
+
+<p>Uma exibição/visão (view) é uma tabela virtual baseada no conjunto de resultados de uma consulta SQL.</p>
+
+<p>Ela contém linhas e colunas como uma tabela real, e pode receber comandos como declarações join, where e funções como uma tabela normal.</p>
+
+<p>Mostra sempre resultados de dados atualizados, pois o motor do banco de dados recria os dados toda vez que um usuário consulta a visão.</p>
+
+<p>Veja um exemplo de uso abaixo:</p>
+
+<pre>
+<code>
+create view curso_2018 as select nome, descricao, totaulas from cursos where ano = 2018;
+</code>
+</pre>
+
+<p>PS: Podemos usar várias combinações, baseadas no select que você deseja consultas, da forma que achar necessário.</p>
+
+<p>E para visualizar a view, fazemos assim:</p>
+
+<pre>
+<code>
+select * from curso_2018;
+</code>
+</pre>
+
+<p>Veja outro exemplo mais complexo abaixo:</p>
+
+<pre>
+<code>
+create view vis_users as select gafanhotos.nome as user, cursos.nome as curso
+from gafanhotos inner join cursos on gafanhotos.cursopreferido = cursos.idcurso;
+</code>
+</pre>
+
+<p>E depois:</p>
+
+<pre>
+<code>
+select * from vis_users;
+</code>
+</pre>
+
+<p>Com as visões, podemos criar códigos complexos e fazer a consulta das mesmas de forma bem mais simples.</p>
+
+<p>Podemos também alterar as visões usando o alter, por exemplo:</p>
+
+<pre>
+<code>
+alter view vis_users as select gafanhotos.nome as user, cursos.nome as curso, cursos.ano as ano from gafanhotos
+inner join cursos on gafanhotos.cursopreferido = cursos.idcurso;
+</code>
+</pre>
+
+<p>E para excluir, fazemos simplesmente assim:</p>
+
+<pre>
+<code>
+drop view vis_users;
+</code>
+</pre>
+
+<p>Podemos também usar alias nos joins das views, por exemplo:</p>
+
+<pre>
+<code>
+create view alunos_2018 as select g.nome, a.idcurso from gafanhotos g
+join gafanhoto_assiste_curso a
+on g.id = a.idgafanhoto
+order by g.nome;
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-mysql-3.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-mysql-5.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

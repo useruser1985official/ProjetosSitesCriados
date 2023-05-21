@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda C#</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C#</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-csharp-1.html">Tudo sobre C# Parte 1!</a></li>
+                    <li><a href="tudo-sobre-csharp-2.html">Tudo sobre C# Parte 2!</a></li>
+                    <li><a href="tudo-sobre-csharp-3.html">Tudo sobre C# Parte 3!</a></li>
+                    <li><a href="tudo-sobre-csharp-4.html">Tudo sobre C# Parte 4!</a></li>
+                    <li><a href="tudo-sobre-csharp-5.html">Tudo sobre C# Parte 5!</a></li>
+                    <li><a href="tudo-sobre-csharp-6.html">Tudo sobre C# Parte 6!</a></li>
+                    <li><a href="tudo-sobre-csharp-7.html">Tudo sobre C# Parte 7!</a></li>
+                    <li><a href="tudo-sobre-csharp-8.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C# Parte 8!</a></li>
+                    <li><a href="tudo-sobre-csharp-9.html">Tudo sobre C# Parte 9!</a></li>
+                    <li><a href="tudo-sobre-csharp-10.html">Tudo sobre C# Parte 10!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C# Parte 8</h2>
+
+<h3>Estruturas (structs)</h3>
+
+<p>As classes definem tipos de referência que são armazenadas no heap. Se uma classe contiver poucos dados haverá um grande overhead no gerenciamento do heap. Uma classe usa então duas áreas de memória para armazenar dados. Nesses casos, podemos utilizar uma estrutura que utiliza apenas uma área de memória.</p>
+
+<p>Estruturas em C# são usadas para criar tipos de valor, e por isso são armazenadas na stack (pilha). Sendo assim, o overhead de gerenciamento de memória pode ser bastante reduzido. Uma estrutura pode ter campos, métodos e até mesmo contrutores (com algumas limitações).</p>
+
+<p>Veja um exemplo abaixo de uso de estrutuas:</p>
+
+<pre>
+<code>
+using System;
+
+namespace EstruturasStructs {
+    class Program {
+        static void Main(string[] args) {
+            horario agora;
+
+            agora.hora = 10;
+            agora.minuto = 30;
+
+            Console.WriteLine("Horário: {0}:{1}", agora.hora, agora.minuto);
+
+            Console.Read();
+        }
+
+        struct horario {
+            public int hora, minuto, segundo;
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Diferente de uma classe, as estruturas não precisamos instanciar elas, e não é uma boa ideia usar campos públicos nelas, até por uma questão de segurança, é melhor usar eles privados.</p>
+
+<p>Veja um exemplo abaixo (de forma parecida com classes e objetos):</p>
+
+<pre>
+<code>
+using System;
+
+namespace EstruturasStructs {
+    class Program {
+        static void Main(string[] args) {
+            horario agora = new horario(11, 25, 00);
+
+            Console.WriteLine("Agora são {0} horas", agora.horaAt());
+
+            Console.Read();
+        }
+
+        struct horario {
+            private int hora, minuto, segundo;
+
+            public horario(int h, int m, int s) {
+                this.hora = h % 24;
+                this.minuto = m % 60;
+                this.segundo = s % 60;
+            }
+
+            public int horaAt() {
+                return this.hora;
+            }
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Podemos também copiar os dados dessa forma:</p>
+
+<pre>
+<code>
+horario agora = new horario(11, 25, 00);
+
+Console.WriteLine("Agora são {0} horas", agora.horaAt());
+
+horario copia = agora;
+
+Console.WriteLine("Agora são {0} horas", copia.horaAt());
+</code>
+</pre>
+
+<h3>Classe ColorDialog - Usando Paletas de Cores</h3>
+
+<p>Essa classe permite que nós insiremos um controle que contém uma paleta de cores para alterar cores no nosso projeto. Ela pode ser inserida arrastando o controle pro projeto, e instanciando a classe ao clicar um botão.</p>
+
+<p>Abra um Windows Form, coloque dois botões, um para cor de fundo e outro para cor de texto, altere os names dela. Coloque também um textbox e coloque uma fonte maior.</p>
+
+<p>Da primeira forma, arrastaremos o controle ColorDialog pro formulário, ele não aparecerá lá, mas abaixo do frame tem a opção de trabalharmos nele.</p>
+
+<p>Veja algumas das propriedades do controle:</p>
+
+<ul>
+    <li><b>AnyColor</b> - Define se mostrará todas as cores básicas disponíveis ou não na caixa de diálogo.</li>
+    <li><b>AllowFullOpen</b> - Habilita ou desabilita a opção de cores personalizadas.</li>
+    <li><b>SolidColorOnly</b> - Se a caixa de diálogo restringirá as cores apenas a cores sólidas ou não.</li>
+    <li><b>Color</b> - Define a cor padrão.</li>
+</ul>
+
+<p>Para programar o botão de cor de fundo, coloque esse código no evento de clicar:</p>
+
+<pre>
+<code>
+private void btnCorFundo_Click(object sender, EventArgs e) {
+    if(cdgCaixaCores.ShowDialog() == DialogResult.OK) {
+        txtCores.BackColor = cdgCaixaCores.Color;
+    }
+}
+</code>
+</pre>
+
+<p>Dessa forma, já podemos alterar a cor da caixa de texto.</p>
+
+<p>Para alterar a cor da letra, usaremos outra forma, instanciaremos a classe no evento click do segundo botão, onde as propriedades alteraremos todas via código. Ficaria assim o código do segundo botão:</p>
+
+<pre>
+<code>
+private void btnCorTexto_Click(object sender, EventArgs e) {
+    ColorDialog cdgCaixaCores2 = new ColorDialog();
+
+    cdgCaixaCores2.AllowFullOpen = false;
+    cdgCaixaCores2.AnyColor = true;
+    cdgCaixaCores2.SolidColorOnly = false;
+    cdgCaixaCores2.Color = Color.Blue;
+
+    if(cdgCaixaCores2.ShowDialog() == DialogResult.OK) {
+        txtCores.ForeColor = cdgCaixaCores2.Color;
+    }
+}
+</code>
+</pre>
+
+<h3>Interface Gráfica - Controle ListBox</h3>
+
+<p>O ListBox é um elemento que utilizamos para criar uma lista de itens que podem ser selecionados, adicionados ou removidos da mesma, por meio de outros controles.</p>
+
+<p>Crie um programa com uma caixa de texto, abaixo dele coloque os botões com adicionar item e preencher lista automaticamente, no meio coloque um listbox, e do lado direito coloque quatro botões, com limpar lista, remover selecionado, ler item da lista e classificar lista.</p>
+
+<p>O ListBox tem várias propriedades, onde podemos alterar coisas como o name, backcolor para a cor de fundo e outras, datasource para puxar dados de fontes distintas, font e fontcolor, items (que usamos para preencher os items padrão).</p>
+
+<p>Esse é o código do botão adicionar item:</p>
+
+<pre>
+<code>
+private void btnAdd_Click(object sender, EventArgs e) {
+    if(string.IsNullOrWhiteSpace(txtAddItem.Text)) {
+        MessageBox.Show("Digite um item para adicionar à lista!", "Digite um Item");
+        txtAddItem.Focus();
+    }
+    else {
+        lstAnimais.Items.Add(txtAddItem.Text);
+        txtAddItem.Clear();
+        txtAddItem.Focus();
+    }
+}
+</code>
+</pre>
+
+<p>Esse é o código do botão preencher lista automaticamente:</p>
+
+<pre>
+<code>
+private void btnPreench_Click(object sender, EventArgs e) {
+    if(lstAnimais.Items.Count == 0) {
+        string[] bichos = new string[10] {"Jacaré", "Onça", "Elefante", "Gato", "Cão", "Papagaio", "Lontra", "Golfinho", "Foca", "Tatu"};
+        lstAnimais.Items.AddRange(bichos);
+    }
+    else {
+        MessageBox.Show("Lista já preenchida!", "Lista preenchida");
+    }
+}
+</code>
+</pre>
+
+<p>No limpar lista basta simplesmente chamar o Clear, assim:</p>
+
+<pre>
+<code>
+private void btnLimp_Click(object sender, EventArgs e) {
+    lstAnimais.Items.Clear();
+}
+</code>
+</pre>
+
+<p>No remover selecionado, coloque isso:</p>
+
+<pre>
+<code>
+private void btnRem_Click(object sender, EventArgs e) {
+    for(int i = lstAnimais.SelectedIndices.Count - 1; i >= 0; i--) {
+        lstAnimais.Items.RemoveAt(lstAnimais.SelectedIndices[i]);
+    }
+}
+</code>
+</pre>
+
+<p>No ler item da lista, coloque isso:</p>
+
+<pre>
+<code>
+private void btnLer_Click(object sender, EventArgs e) {
+    if(lstAnimais.SelectedIndex < 0) {
+        MessageBox.Show("Selecione um item da lista!", "Selecione um item");
+    }
+    else {
+        string item = lstAnimais.SelectedItem.ToString();
+        MessageBox.Show("Item selecionado: " + item, "Item selecionado");
+    }
+}
+</code>
+</pre>
+
+<p>E no classificar lista, coloque simplesmente isso:</p>
+
+<pre>
+<code>
+private void btnClass_Click(object sender, EventArgs e) {
+    lstAnimais.Sorted = true;
+}
+</code>
+</pre>
+
+<h3>Gerando Números Aleatórios com a Classe Random</h3>
+
+<p>Em C# existe a classe Random que permite a geração de números aleatórios, que podem ser usados em várias aplicações, como criptografia, jogos e análises estatísticas.</p>
+
+<p>Crie um novo Windows form, com um botão de gerar números, e dois labels para aparecer os números, um para gerar números inteiros e outro para gerar números reais (double).</p>
+
+<p>Esse é o código, onde usamos a classe Random:</p>
+
+<pre>
+<code>
+private void btnGer_Click(object sender, EventArgs e) {
+    Random numAle = new Random();
+
+    int valInt = numAle.Next(); // Gera inteiros positivos.
+    double valDem = numAle.NextDouble(); // Gera reais positivos.
+
+    lblInt.Text = valInt.ToString();
+    lblDem.Text = valDem.ToString();
+}
+</code>
+</pre>
+
+<p>O random gera um valor entre 0 e aproximadamente 2 bilhões (mais exatamente, o valor máximo do tipo int).</p>
+
+<p>PS: Para restringir o gerador a um intervalo específico, é só colocar o mínimo e o máximo (com um a mais) entre as aspas do next, assim:</p>
+
+<pre>
+<code>
+int valInt = numAle.Next(1, 101); // Gera números de 1 a 100.
+</code>
+</pre>
+
+<h3>Criando Menus em Aplicações no Visual Studio</h3>
+
+<p>Para colocar um menu na parte superior do programa, crie um novo projeto Windows Form, e coloque nele o MenuStrip, note que tem uma parte exibida fora do frame, mas tem uma parte dentro dele para que possamos criar o nome do menu.</p>
+
+<p>No primeiro menu, teremos o nome Arquivo (e nos itens dele podemos adicionar algumas coisas, como o sair), e teremos ao lado o segundo menu Ajuda (também com alguns itens).</p>
+
+<p>PS: Nos itens de menu também podemos colocar outros tipos de itens, como caixas de texto e combobox.</p>
+
+<p>Para programar, basta usar o evento click, veja o código do item sair de arquivo:</p>
+
+<pre>
+<code>
+private void sairToolStripMenuItem_Click(object sender, EventArgs e) {
+    Application.Exit();
+}
+</code>
+</pre>
+
+<p>Para o sobre, vamos criar um novo item no nosso projeto, que será o Window Form, com o nome janela, e coloque um label com alguma frase.</p>
+
+<p>Voltando ao formulário principal, no evento click do sobre de ajuda, coloque esse código:</p>
+
+<pre>
+<code>
+private void sobreToolStripMenuItem_Click(object sender, EventArgs e) {
+    Janela tela = new Janela();
+
+    tela.Show();
+
+    this.Hide(); // Isso é para fechar o form principal, pode ser omitido caso não queira isso.
+}
+</code>
+</pre>
+
+<p>Só que isso causa um problema, o programa continua em execução ao fechar a segunda janela, já que a primeira foi apenas oculta e não fechada. Para resolver isso, vá na segunda janela, vá nas propriedades dela e em eventos, vá em FormClosed (onde define o código a ser executado ao clicar no X da janela). Esse é o código colocado no evento dela:</p>
+
+<pre>
+<code>
+private void Janela_FormClosed(object sender, FormClosedEventArgs e) {
+    if(Application.OpenForms.Count == 0) { // Isso verifica se não tem formulário do programa aberto.
+        Application.Exit();
+    }
+    else { // Aqui controlaremos as outras janelas, no caso, a primeira.
+        foreach(Form formAber in Application.OpenForms) {
+            if(formAber is Form1) {
+                formAber.Show();
+                break;
+            }
+        }
+    }
+}
+</code>
+</pre>
+
+<p>PS: Podemos colocar também um menu na segunda janela, coloque o menu arquivo e o item sair, com o mesmo código do primeiro frame.</p>
+
+<p>Também podemos colocar uma tecla de atalho, clicando no item, e nas propriedades dele, ir no evento ShortcutKeys, onde escolhemos as teclas dos atalhos.</p>
+
+<h3>Ordenação de Arrays com Método Bubble Sort</h3>
+
+<p>Primeiramente, crie um formunlário com três botões, com nomes criar array, ordenar array e ordenar método sort, e quatro labels, array 1 não ordenado, array 1 ordenado, array 2 não ordenado e array 2 ordenado.</p>
+
+<p>Na classe principal, fora de qualquer função, antes do construtor, declare os array assim:</p>
+
+<pre>
+<code>
+int[] x = {2, 1, 8, 7, 5, 9, 15, 3, 6};
+int[] y = {4, 2, 9, 7, 6, 18, 11, 4, 8};
+</code>
+</pre>
+
+<p>O código do primeiro botão (criar array) é esse:</p>
+
+<pre>
+<code>
+private void btnCri_Click(object sender, EventArgs e) {
+    lblArr1N.Text = "Itens do array na ordem original:\n";
+
+    for(int i = 0; i < x.Length; i++) {
+        lblArr1N.Text += " " + x[i];
+    }
+
+    lblArr2N.Text = "Itens do array na ordem original:\n";
+
+    for(int i = 0; i < y.Length; i++) {
+        lblArr2N.Text += " " +y[i];
+    }
+}
+</code>
+</pre>
+
+<p>Esse é o código do segundo botão:</p>
+
+<pre>
+<code>
+private void btnOrd_Click(object sender, EventArgs e) {
+    bubblesort(x);
+
+    lblArr1O.Text = "Itens do array ordenados:\n";
+
+    for(int i = 0; i < x.Length; i++) {
+        lblArr1O.Text += " " + x[i];
+    }
+}
+</code>
+</pre>
+
+<p>Lembrando que o método bubblesort tem que ser criado, dentro da mesma classe, mas fora de qualquer outro método, dessa forma:</p>
+
+<pre>
+<code>
+public void bubblesort(int[] n) {
+    for(int i = 1; i < n.Length; i++) {
+        for(int j = 0; j < n.Length - 1; j++) {
+            if(n[j] > n[j + 1]) {
+                troca(n, j);
+            }
+        }
+    }
+}
+
+public void troca(int[] g, int p) {
+    int aux;
+    aux = g[p];
+    g[p] = g[p + 1];
+    g[p + 1] = aux;
+}
+</code>
+</pre>
+
+<p>E no último botão, é bem mais simples, pois usaremos um método interno do C#, dessa forma:</p>
+
+<pre>
+<code>
+private void btnOrdSort_Click(object sender, EventArgs e) {
+    Array.Sort(y);
+
+    lblArr2O.Text = "Itens do array ordenados:\n";
+
+    foreach(int item in y) {
+        lblArr2O.Text += " " + item.ToString();
+    }
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-csharp-7.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-csharp-9.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

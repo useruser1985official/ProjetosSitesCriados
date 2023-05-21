@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Python</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Python</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-python-1.html">Tudo sobre Python Parte 1!</a></li>
+                    <li><a href="tudo-sobre-python-2.html">Tudo sobre Python Parte 2!</a></li>
+                    <li><a href="tudo-sobre-python-3.html">Tudo sobre Python Parte 3!</a></li>
+                    <li><a href="tudo-sobre-python-4.html">Tudo sobre Python Parte 4!</a></li>
+                    <li><a href="tudo-sobre-python-5.html">Tudo sobre Python Parte 5!</a></li>
+                    <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
+                    <li><a href="tudo-sobre-python-7.html">Tudo sobre Python Parte 7!</a></li>
+                </menu>
+            </header>
+
+<h2>Exercícios - Parte 8</h2>
+
+<p>Crie um módulo chamado moeda.py, que tenha as funções incorporadas aumentar(), diminuir(), dobro() e metade(). Faça também um programa que importe esse módulo e use algumas dessas funções:</p>
+
+<p>Módulo:</p>
+
+<pre>
+<code>
+def aumentar(preco, taxa):
+    res = preco + (preco * taxa / 100)
+    return res
+
+def diminuir(preco, taxa):
+    res = preco - (preco * taxa / 100)
+    return res
+
+def dobro(preco):
+    res = preco * 2
+    return res
+
+def metade(preco):
+    res = preco / 2
+    return res
+</code>
+</pre>
+
+<p>Programa:</p>
+
+<pre>
+<code>
+# Coloque tudo no mesmo diretório
+
+import moeda
+
+p = float(input("Digite o preço: R$"))
+
+print(f"A metade de R${p:.2f} é R${moeda.metade(p):.2f}.")
+print(f"O dobro de R${p:.2f} é R${moeda.dobro(p):.2f}.")
+print(f"Aumentando 10%, temos R${moeda.aumentar(p, 10):.2f}.")
+</code>
+</pre>
+
+<p>Pode ser assim também:</p>
+
+<pre>
+<code>
+# Coloque tudo no mesmo diretório
+
+from moeda import metade, dobro, aumentar
+
+p = float(input("Digite o preço: R$"))
+
+print(f"A metade de R${p:.2f} é R${metade(p):.2f}.")
+print(f"O dobro de R${p:.2f} é R${dobro(p):.2f}.")
+print(f"Aumentando 10%, temos R${aumentar(p, 10):.2f}.")
+</code>
+</pre>
+
+<hr/>
+
+<p>Adapte o código do desafio anterior, criando uma função adicional chamada moeda(), que consiga mostrar os valores como um valor monetário formatado:</p>
+
+<p>Módulo:</p>
+
+<pre>
+<code>
+def aumentar(preco, taxa):
+    res = preco + (preco * taxa / 100)
+    return res
+
+def diminuir(preco, taxa):
+    res = preco - (preco * taxa / 100)
+    return res
+
+def dobro(preco):
+    res = preco * 2
+    return res
+
+def metade(preco):
+    res = preco / 2
+    return res
+
+def moeda(preco = 0, m = "R$"):
+    return f"{m}{preco:.2f}".replace(".",",")
+</code>
+</pre>
+
+<p>Programa:</p>
+
+<pre>
+<code>
+# Coloque tudo no mesmo diretório
+
+from moeda import moeda, metade, dobro, aumentar
+
+p = float(input("Digite o preço: R$"))
+
+print(f"A metade de {moeda(p)} é {moeda(metade(p))}.")
+print(f"O dobro de {moeda(p)} é {moeda(dobro(p))}.")
+print(f"Aumentando 10%, temos {moeda(aumentar(p, 10))}.")
+</code>
+</pre>
+
+<hr/>
+
+<p>Modifique as funções que foram criadas nos desafios anteriores para que elas aceitem um parâmetro a mais, informando se o valor retornado por elas vai ser ou não formatado pela função moeda():</p>
+
+<p>Módulo:</p>
+
+<pre>
+<code>
+def aumentar(preco, taxa, formato = False):
+    res = preco + (preco * taxa / 100)
+    return res if formato is False else moeda(res)
+
+def diminuir(preco, taxa, formato = False):
+    res = preco - (preco * taxa / 100)
+    return res if formato is False else moeda(res)
+
+def dobro(preco, formato = False):
+    res = preco * 2
+    return res if formato is False else moeda(res)
+
+def metade(preco, formato = False):
+    res = preco / 2
+    return res if formato is False else moeda(res)
+
+def moeda(preco = 0, m = "R$"):
+    return f"{m}{preco:.2f}".replace(".",",")
+</code>
+</pre>
+
+<p>Programa:</p>
+
+<pre>
+<code>
+# Coloque tudo no mesmo diretório
+
+from moeda import moeda, metade, dobro, aumentar, diminuir
+
+p = float(input("Digite o preço: R$"))
+
+print(f"A metade de {moeda(p)} é {metade(p, True)}.")
+print(f"O dobro de {moeda(p)} é {dobro(p, True)}.")
+print(f"Aumentando 10%, temos {aumentar(p, 10, True)}.")
+print(f"Diminuindo 13%, temos {diminuir(p, 13, True)}.")
+</code>
+</pre>
+
+<hr/>
+
+<p>Adicione ao módulo moeda.py criados nos desafios anteriores, uma função chamada resumo(), que mostre na tela algumas informações geradas pelas funções que já temos no módulo criado até aqui:</p>
+
+<p>Módulo:</p>
+
+<pre>
+<code>
+# Adicione isso:
+
+def resumo(preco = 0, taxaA = 10, taxaR = 5):
+    print("-" * 30)
+    print("RESUMO DO VALOR".center(30))
+    print("-" * 30)
+    print(f"Preço Analisado: \t{moeda(preco)}")
+    print(f"Dobro do preço: \t{dobro(preco, True)}")
+    print(f"Metade do preço: \t{metade(preco, True)}")
+    print(f"{taxaA:02.0f}% de aumento: \t{aumentar(preco, taxaA, True)}")
+    print(f"{taxaR:02.0f}% de redução: \t{diminuir(preco, taxaR, True)}")
+    print("-" * 30)
+</code>
+</pre>
+
+<p>Programa:</p>
+
+<pre>
+<code>
+from moeda import resumo
+
+p = float(input("Digite o preço: R$"))
+resumo(p, 20, 12)
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um pacote com uma pasta utilidades que tenha dois módulos internos chamados moeda e dado. Transfira todas as funções utilizadas nos desafios anteriores para o primeiro pacote e mantenha tudo funcionando:</p>
+
+<p>Crie a pasta utilidades, dentro dela o pacote moeda e coloque o mesmo código de moeda no arquivo __init__.py do mesmo pacote.</p>
+
+<p>Programa:</p>
+
+<pre>
+<code>
+from utilidades.moeda import resumo
+
+p = float(input("Digite o preço: R$"))
+resumo(p, 20, 12)
+</code>
+</pre>
+
+<hr/>
+
+<p>Dentro do pacote criado no desafio anterior, temos um módulo chamado dado. Crie uma função chamada leiaDinheiro() que seja capaz de funcionar como a função input(), mas com uma validação de dados para aceitar apenas valores que sejam monetários:</p>
+
+<p>Módulo (arquivo __init__.py):</p>
+
+<pre>
+<code>
+def leiaDinheiro(msg):
+    valido = False
+
+    while not valido:
+        entrada = str(input(msg)).replace(",", ".").strip()
+
+        if entrada.isalpha() or entrada == "":
+            print(f"\033[0;31mERRO: \"{entrada}\" é um preço inválido!\033[m")
+        else:
+            valido = True
+
+            return float(entrada)
+</code>
+</pre>
+
+<p>Programa:</p>
+
+<pre>
+<code>
+from utilidades.moeda import resumo
+from utilidades.dado import leiaDinheiro
+
+p = leiaDinheiro("Digite o preço: R$")
+resumo(p, 20, 12)
+</code>
+</pre>
+
+<hr/>
+
+<p>Reescreva a função leiaInt(), incluindo agora a possibilidade da digitação de um número de tipo inválido. Aproveite e crie também a função leiaFloat com a mesma funcionalidade:</p>
+
+<p>Módulo:</p>
+
+<pre>
+<code>
+def leiaInt(msg):
+    while True:
+        try:
+            n = int(input(msg))
+        except (ValueError, TypeError):
+            print("\033[31mERRO: Por favor, digite um número inteiro válido!\033[m")
+            continue
+        except KeyboardInterrupt:
+            print("\033[31m\nEntrada de dados interrompida pelo usuário!\033[m")
+            return 0
+        else:
+            return n
+
+def leiaFloat(msg):
+    while True:
+        try:
+            n = float(input(msg))
+        except (ValueError, TypeError):
+            print("\033[31mERRO: Por favor, digite um número real válido!\033[m")
+            continue
+        except KeyboardInterrupt:
+            print("\033[31m\nEntrada de dados interrompida pelo usuário!\033[m")
+            return 0
+        else:
+            return n
+</code>
+</pre>
+
+<p>Programa:</p>
+
+<pre>
+<code>
+from leitura import leiaInt, leiaFloat
+
+n1 = leiaInt("Digite um valor inteiro: ")
+n2 = leiaFloat("Digite um valor real: ")
+print(f"O valor inteiro digitado foi {n1} e o valor real foi {n2}.")
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um código em Python que teste se o site pudim (pudim.com.br) está acessível no momento:</p>
+
+<pre>
+<code>
+import urllib.request
+
+try:
+    site = urllib.request.urlopen("http://www.pudim.com.br")
+except urllib.error.URLError:
+    print("O site Pudim não está acessível no momento!")
+else:
+    print("Consegui acessar o site Pudim com sucesso!")
+    print(site.read().decode()) # Isso pega o conteúdo HTML do site
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um pequeno sistema modularizado que permita cadastrar pessoas pelo seu nome e idade em um arquivo de texto simples. O sistema só vai ter duas opções: Cadastrar uma nova pessoa e listar todas as pessoas cadastradas:</p>
+
+<p>Módulo (menu/lib/interface):</p>
+
+<pre>
+<code>
+def leiaInt(msg):
+    while True:
+        try:
+            n = int(input(msg))
+        except (ValueError, TypeError):
+            print("\033[31mERRO: Por favor, digite um número inteiro válido!\033[m")
+            continue
+        except KeyboardInterrupt:
+            print("\033[31m\nEntrada de dados interrompida pelo usuário!\033[m")
+            return 0
+        else:
+            return n
+
+def linha(tam = 42):
+    return "-" * tam
+
+def cabecalho(txt):
+    print(linha())
+    print(txt.center(42))
+    print(linha())
+
+
+def menu(lista):
+    cabecalho("MENU PRINCIPAL")
+    c = 1
+    for item in lista:
+        print(f"\033[33m{c}\033[m - \033[34m{item}\033[m")
+        c += 1
+    print(linha())
+    opc = leiaInt("\033[32mSua opção: \033[m") # Pegue a função criada na outra aula
+    return opc
+</code>
+</pre>
+
+<p>Sistema (fora de qualquer biblioteca):</p>
+
+<pre>
+<code>
+from menu.lib.interface import *
+from time import sleep
+
+while True:
+    resposta = menu(["Ver Pessoas Cadastradas", "Cadastrar Nova Pessoa", "Sair do Sistema"])
+
+    if resposta == 1:
+        cabecalho("Opção 1")
+    elif resposta == 2:
+        cabecalho("Opção 2")
+    elif resposta == 3:
+        cabecalho("Saindo do Sistema...")
+        break
+    else:
+        print("\033[31mERRO! Digite uma Opção Válida!\033[m")
+    sleep(2)
+</code>
+</pre>
+
+<p>Parte dois:</p>
+
+<p>Módulo (menu/lib/arquivo):</p>
+
+<pre>
+<code>
+from menu.lib.interface import *
+
+def arqExiste(nome):
+    try:
+        a = open(nome, "rt") # Abrir pra leitura em modo texto
+        a.close()
+    except FileNotFoundError:
+        return False
+    else:
+        return True
+
+def criarArq(nome):
+    try:
+        a = open(nome, "wt+") # Escrever no arquivo, e cria-lo caso nao exista!
+        a.close()
+    except:
+        print("Houve um erro na criaçao do arquivo!")
+    else:
+        print(f"Arquivo {nome} criado com sucesso!")
+
+def lerArq(nome):
+    try:
+        a = open(nome, "rt")
+    except:
+        print("Erro ao ler o arquivo!")
+    else:
+        cabecalho("PESSOAS CADASTRADAS")
+        print(a.read())
+</code>
+</pre>
+
+<p>Sistema:</p>
+
+<pre>
+<code>
+from menu.lib.interface import *
+from menu.lib.arquivo import *
+from time import sleep
+
+arq = "cadastro.txt"
+
+if not arqExiste(arq):
+    criarArq(arq)
+
+while True:
+    resposta = menu(["Ver Pessoas Cadastradas", "Cadastrar Nova Pessoa", "Sair do Sistema"])
+
+    if resposta == 1:
+        # Listar conteudo de arquivo
+        lerArq(arq)
+    elif resposta == 2:
+        cabecalho("Opção 2")
+    elif resposta == 3:
+        cabecalho("Saindo do Sistema...")
+        break
+    else:
+        print("\033[31mERRO! Digite uma Opção Válida!\033[m")
+    sleep(2)
+</code>
+</pre>
+
+<p>Parte três:</p>
+
+<p>Complemento do módulo arquivo:</p>
+
+<pre>
+<code>
+def lerArq(nome):
+    try:
+        a = open(nome, "rt")
+    except:
+        print("Erro ao ler o arquivo!")
+    else:
+        cabecalho("PESSOAS CADASTRADAS")
+
+        for linha in a:
+            dado = linha.split(";")
+            dado[1] = dado[1].replace("\n", "")
+            print(f"{dado[0]:<30}{dado[1]:>3} anos")
+    finally:
+        a.close()
+
+def cadastrar(arq, nome = "desconhecido", idade = 0):
+    try:
+        a = open(arq, "at")
+    except:
+        print("Houve um ERRO na abertura dentro do arquivo!")
+    else:
+        try:
+            a.write(f"{nome};{idade}\n")
+        except:
+            print("Houve um ERRO na hora de escrever os dados!")
+        else:
+            print(f"Novo registro de {nome} adicionado.")
+            a.close()
+</code>
+</pre>
+
+<p>Complemento do programa principal (sistema):</p>
+
+<pre>
+<code>
+while True:
+    resposta = menu(["Ver Pessoas Cadastradas", "Cadastrar Nova Pessoa", "Sair do Sistema"])
+
+    if resposta == 1:
+        # Listar conteudo de arquivo
+        lerArq(arq)
+    elif resposta == 2:
+        cabecalho("NOVO CADASTRO")
+        nome = str(input("Nome: "))
+        idade = leiaInt("Idade: ")
+        cadastrar(arq, nome, idade)
+    elif resposta == 3:
+        cabecalho("Saindo do Sistema...")
+        break
+    else:
+        print("\033[31mERRO! Digite uma Opção Válida!\033[m")
+    
+    sleep(2)
+</code>
+</pre>
+
+<ul>
+    <li><a href="exercicios-7.html">Parte Anterior da Matéria!</a></li>
+    <!-- <li><a href="exercicios-9.html">Continuação da Matéria!</a></li> -->
+</ul>
+
+        </div>
+    </body>
+</html>

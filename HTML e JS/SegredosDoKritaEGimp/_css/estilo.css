@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+body {
+    background: url("../_imagens/fundo.png") center fixed repeat;
+}
+
+div#interface {
+    background-color: rgba(32, 32, 64, 0.95);
+    color: white;
+    margin: -8px;
+    padding: 25px;
+    min-height: 900px;
+}

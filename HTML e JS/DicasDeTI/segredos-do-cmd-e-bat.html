@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Segredos do CMD</h2>
+
+<h3>Como Navegar pelas Pastas</h3>
+
+<p>Para navegar em pastas, usamos o comando <code>cd</code>, dessa forma:</p>
+
+<pre>
+<code>
+cd C:\Users
+</code>
+</pre>
+
+<p>Se estiver na pasta desejada, basta digitar o caminho, assim:</p>
+
+<pre>
+<code>
+cd Public
+</code>
+</pre>
+
+<p>As mesmas dicas valem pra executar programas ou outros arquivos, mas não esqueça da extensão dos mesmos. Pode ser preciso colocar <code>start</code> no início e também pode ser necessário colocar entre aspas, caso tenha espaços no nome, dessa forma:</p>
+
+<pre>
+<code>
+"Fotos do dia.jpg"
+</code>
+</pre>
+
+<p>PS: O start pode ser usado com processos, nesse caso não precisa estar no caminho pré-definido, e também, além de arquivos, também abre pastas.</p>
+
+<p>O start também pode ser usado com um parâmetro de inicialização, indiciando o que o programa abrirá, por exemplo:</p>
+
+<pre>
+<code>
+start firefox.exe uol.com.br
+start notepad.exe C:\Users\%username%\Documents\Notas\Contatos.txt
+</code>
+</pre>
+
+<p>Se quiser renomear um arquivo, use o comando <code>ren</code> ou <code>rename</code>seguido pelo nome antigo e o nome que o substituirá, dessa forma:</p>
+
+<pre>
+<code>
+rename "Fotos do dia.jpg" pictures.jpg
+</code>
+</pre>
+
+<p>Se quiser deletar um arquivo pernamentemente pelo prompt, use o comando <code>del</code>, assim:</p>
+
+<pre>
+<code>
+del "Fotos do dia.jpg"
+</code>
+</pre>
+
+<p>Se usar o del em pastas, os arquivos dela serão excluídos, mas a pasta e os arquivos das subpastas permanecerão. Seria algo assim:</p>
+
+<pre>
+<code>
+del "Nova Pasta"
+</code>
+</pre>
+
+<p>Se quiser selecionar também os arquivos das subpastas, use o parâmetro <code>/s</code>. As pastas permanecerão.</p>
+
+<p>Para selecionar os arquivos sem pedir confirmação, use o parâmetro <code>/q</code>.</p>
+    
+<p>Para incluir arquivos somente leitura use <code>/f</code>.</p>
+
+<p>Você também pode usar todos os parâmetros juntos, dessa forma:</p>
+
+<pre>
+<code>
+del /q /f /s "Nova Pasta"
+</code>
+</pre>
+
+<p>Também existem parâmetros como <code>/p</code> para pedir confirmação, <code>/a:r</code> para excluir arquivos somente leitura, <code>/a:s</code> para arquivos do sistema, <code>/a:h</code> para arquivos ocultos e outros, também podemos usar o <code>-</code> como negação de qualquer um deles, por exemplo <code>/a:-r</code> para não excluir arquivos somente leitura.</p>
+
+<p>Para fazer o mesmo com pastas, usamos <code>rmdir</code> ou <code>rd</code>, os parâmetros /s e /q são os únicos que também podem ser usados, da mesma forma, veja um exemplo:</p>
+
+<pre>
+<code>
+rmdir /s /q "Nova Pasta"
+</code>
+</pre>
+
+<p>PS: Cuidado com isso.</p>
+
+<p>Também podemos mover arquivos, usando o comando <code>move</code>, seguido pelo caminho pro qual o arquivo será movido, dessa forma:</p>
+
+<pre>
+<code>
+move "Fotos do dia.jpg" C:\Users\Public\Documents
+</code>
+</pre>
+
+<p>Para copiar, usamos da mesma forma, com o comando <code>copy</code>, mas caso queira copiar com outro nome, já informe o caminho com o novo nome, dessa forma:</p>
+
+<pre>
+<code>
+copy picture.jpg C:\Users\Public\Documents\foto.jpg
+</code>
+</pre>
+
+<p>Tanto o move quando o copy podem ser usados com o parâmetro <code>/y</code> que suprime o pedido de substituição, caso exista um arquivo de mesmo nome, e da mesma forma o <code>/-y</code> perguntar se desejamos substituir ele.</p>
+
+<p>PS: A barra tem que ser a <code>\</code>, senão não vai funcionar. Para copiar arquivos ocultos e pastas, use o <code>xcopy</code>. O <code>*</code> pode ser usado como coringa para vários arquivos em todos os casos (por exemplo, <code>*.txt</code> afetaria todos os arquivos de texto).</p>
+
+<p>Para ver os diretórios dentro das pastas, use o comando <code>dir</code>.</p>
+
+<p>Podemos também usar parâmetros no dir, o parâmetro <code>/a:d</code> lista só diretórios, o <code>/a:-d</code> para não listar diretórios (a negação também pode ser usada com outros parâmetros), <code>/a:a</code> apenas arquivos, <code>/a:h</code> para arquivos ocultos, <code>/a:r</code> para arquivos somente leitura e <code>/a:s</code> para arquivos de sistema (todos esses também podem usar a negação). Um uso dele seria <code>dir /a:a</code>.
+
+<p>Também podemos listar apenas um tipo de extensão de arquivo, por exemplo:</p>
+
+<pre>
+<code>
+dir *.dll
+</code>
+</pre>
+
+<p>Ou especificar o caminho que queremos verificar, caso não queira ver o conteúdo do diretório atual:</p>
+
+<pre>
+<code>
+dir C:\Users
+</code>
+</pre>
+
+<p>Podemos também salvar o conteúdo do dir ou de outro comando na área de transferência usando o comando <code>clip</code>, assim:</p>
+
+<pre>
+<code>
+dir | clip
+</code>
+</pre>
+
+<p>Para voltar um diretório, use o cd com dois pontos na frente, assim:</p>
+
+<pre>
+<code>
+cd..
+</code>
+</pre>
+
+<p>PS: Com um ponto, ele fica no mesmo diretório.</p>
+
+<p>Você pode voltar a raiz do diretório da mesma forma, colocando uma barra após o cd, assim:</p>
+
+<pre>
+<code>
+cd\
+</code>
+</pre>
+
+<p>Digitar o nome do disco levará à ele, mesmo se for um removível (como <code>D:</code> ou <code>E:</code>).</p>
+
+<p>PS: Tanto faz o lado da barra, e minúsculas não são diferenciadas. Mas alguns comandos podem não funcionar com a barra do lado errado.</p>
+
+<p>Para limpar toda a tela CMD, basta executar o comando <code>cls</code>.</p>
+
+<h3>Comandos para Desligar</h3>
+
+<p>Para desligar, usamos o comando <code>shutdown /s</code>.</p>
+
+<p>Para reiniciar, usamos <code>shutdown /r</code>.</p>
+
+<p>Para programar isso, usamos o <code>/t 600</code> (o número representa os segundos), por exemplo:</p>
+
+<pre>
+<code>
+shutdown /r /t 200
+</code>
+</pre>
+
+<p>Usamos o parâmetro <code>/a</code> para cancelar qualquer um deles. O <code>/f</code> para forçar a ação. O <code>/c</code> para exibir uma mensagem. E o <code>/l</code> só pra fazer logoff. Veja um exemplo:</p>
+
+<pre>
+<code>
+shutdown /r /t 600 /c "Reiniciaremos em 10 Minutos"
+</code>
+</pre>
+
+<h3>Como Procurar Comandos já Digitados</h3>
+
+<p>Podemos usar o comando <code>doskey /history</code> para visualizar um comando já digitado. Mas se quiser repetir um comando já digitado, tecle F7 e F9.</p>
+    
+<p>PS: Podemos usar só o F7 e navegar até o comando para reexecutá-lo diretamente. Se usar o F9, ele reescreverá o comando sem executar novamente.</p>
+
+<h3>Como Encerrar Processos</h3>
+
+<p>Abra o CMD e digite <code>tasklist</code> para exibir os números dos códigos ativos, depois use o comando <code>taskkill</code> seguido do código do processo, por exemplo:</p>
+
+<pre>
+<code>
+taskkill /im 352
+</code>
+</pre>
+
+<p>Usar diretamente o nome do processo também dá certo (não esqueça da extensão exe):</p>
+
+<pre>
+<code>
+taskkill /im opera.exe
+</code>
+</pre>
+
+<p>Em casos de processos mais teimosos, você deve usar o <code>/f</code> e o <code>/t</code> antes do <code>/im</code>, dessa forma:</p>
+
+<pre>
+<code>
+taskkill /f /t /im opera.exe
+</code>
+</pre>
+
+<p>O /f força a exclusão do processo. O /t fecha processos filhos, o /im mata o processo.</p>
+
+<p>Podemos usar o <code>/pid</code> para especificar um processo a ser encerrado, assim:</p>
+
+<pre>
+<code>
+taskkill /f /pid 1026
+</code>
+</pre>
+
+<h3>Usando os Comandos para Verificar Erros</h3>
+
+<p>Para procurar e corrigir erros de disco, usamos o comando <code>chkdsk</code>. Para corrigir erros do sistema de arquivos automaticamente, usamos o <code>/f</code>. Para procurar setores defeituosos e tentar recuperá-los, usamos <code>/r</code>.</p>
+
+<p>Você também pode usar os dois comandos juntos, e também definir o disco que quer verificar, dessa forma:</p>
+
+<pre>
+<code>
+chkdsk /f /r E:
+</code>
+</pre>
+
+<p>E também podemos usar o <code>chkdsk /scan /forceofflinefix</code> para uma verificação online, sem precisar reiniciar o PC.</p>
+
+<p>Para exibir e modificar a verificação de disco usamos <code>chkntfs C:</code>, também podemos usar alguns parâmetros nele.</p>
+
+<p>Também podemos usar <code>sfc /scannow</code> para verificar a integridade dos arquivos protegidos do sistema (necessários no Windows) e os repara. Se quiser apenas verificar os arquivos sem reparar, use o comando <code>sfc /verifyonly</code></p>
+
+<p>Para reparar a imagem do Windows, usamos <code>dism /online /cleanup-image /scanhealth</code>, e após a verificação, usamos <code>dism /online /cleanup-image /restorehealth</code> e <code>dism /online /cleanup-image /startcomponentcleanup</code>.</p>
+
+<p>Em sistemas 32 bits, podemos forçar o uso de PAE, que permite acessar mais memória, digitando <code>bcdedit /set nx alwaysoff</code>, depois <code>bcdedit /set pae forceenable</code> e reiniciando o PC.</p>
+
+<h3>Escrevendo na Tela</h3>
+
+<p>Antes de mais nada, pode ocorrer de palavras acentuadas aparecerem com a codificação errada. Para corrigir isso basta usar o comando <code>chcp</code> para isso. Nos padrões brasileiros, seriam 850, 1252 ou 65001. Veja o exemplo para mudar o código:</p>
+
+<pre>
+<code>
+chcp 1252
+</code>
+</pre>
+
+<p>Para apenas visualizar a página ativa, use o chcp sozinho.</p>
+
+<p>PS: Ao criar arquivos BAT, é recomendado colocar <code>chcp 1252</code> no começo para evitar erros de acentos, principalmente nos casos em que usaremos o BAT para escrever em arquivos.</p>
+
+<p>Se quiser testar alguma frase acentuada, use o comando <code>echo</code> pra isso, dessa forma:</p>
+
+<pre>
+<code>
+echo Essa é uma frase com acentuação!
+</code>
+</pre>
+
+<p>Ou em um arquivo:</p>
+
+<pre>
+<code>
+echo Essa é uma frase com acentuação!&gt;&gt;C:\Users\%username%\Desktop\teste.txt
+</code>
+</pre>
+
+<p>Para pular uma linha num conteúdo escrito, podemos usar <code>echo.&gt;&gt;C:\Users\%username%\Desktop\teste.txt</code>.</p>
+
+<p>O echo pode ser usado com ou sem aspas.</p>
+
+<p>No caso do CMD em si estar com os acentos desconfigurados, abra um prompt como administrador, na borda dele clique com o botão direito e vá em "Padrões".</p>
+
+<p>PS: Usando dois &gt;&gt; ele adicionará uma nova linha no arquivo, caso exista, se usar um só &gt; ele sobrescreverá o arquivo existente.</p>
+
+<h3>Usando com Redes e Internet</h3>
+
+<p>Para mudar o IP, podemos usar o comando <code>ipconfig</code> com os parâmetros <code>/release</code> (que libera o endereço IP) e na sequência o <code>/renew</code> (que renova o endereço IP), dessa forma:</p>
+
+<pre>
+<code>
+ipconfig /release
+ipconfig /renew
+</code>
+</pre>
+
+<p>PS: Isso só vale para IPv4, para IPv6 usamos <code>/release6</code> e <code>/renew6</code> nos parâmetros.</p>
+
+<p>Lembrando que isso afeta todas as conexões. Para afetar somente uma conexão específica, use o nome específico dela, como por exemplo <code>ipconfig /release "Conexão Local"</code>.</p>
+
+<p>Use o <code>ipconfig /flushdns</code> para  liberar o cachê DNS. E depois digite <code>ipconfig /registerdns</code> para registrar e atualizar o DNS. Podemos também verificar o conteúdo do cache DNS digitando <code>ipconfig /displaydns</code>. Podemos inclusive parar e reiniciar os serviços DNS e DHCP com o comando net (os nomes são dnscache e dhcp), e depois reiniciar os mesmos.</p>
+
+<p>Para exibir informações sobre o IP e o endereço MAC, digite <code>ipconfig /all</code>.</p>
+
+<p>Para conferir o ping (latência) e a conectividade das páginas ou IPs, use simplesmente o comando <code>ping</code> seguido do site ou IP. O <code>tracert</code> é usado para rastrear a rota de um pacote.</p>
+
+<!--<p>Para descobrir o IP de um site, use o comando <code>host nomedosite.com.br</code>.</p>-->
+
+<p>Para descobrir o MTU da interface, digitamos <code>netsh interface ipv4 show subinterfaces</code>.</p>
+
+<p>Para selecionar o tamanho em bytes dos pacotes enviados pelo ping, usamos o <code>/l</code> seguido do número (por exemplo, <code>ping /l 1500 www.google.com.br</code>). Para selecionar a quantidade de requisições use o parâmetro /n seguido do número, por exemplo <code>/n 6</code>. Para desativar a fragmentação de pacotes, usamos o <code>/f</code> junto, por exemplo, <code>ping /l 1500 /f www.google.com.br</code>.</p>
+
+<p>Podemos também usar parâmetros no tracert, como para aumentar a quantidade máxima de saltos com o /h, por exemplo <code>tracert /h 60 www.google.com.br</code>.</p>
+
+<p>PS: Tanto no ping quanto no tracert, pode ser necessário colocar <code>/4</code> para forçar IPv4 ou <code>/6</code> para forçar IPv6.</p>
+
+<p>Para liberar o cache ARP, basta usar <code>netsh interface ip delete arpcache</code>, para excluir o cache de destino use <code>netsh interface ip delete destinationcache</code>, para resetar o TCP/IP usamos <code>netsh int ip reset all</code>.</p>
+
+<p>Ainda nos problemas de rede, podemos digitar o comando <code>netstat /a /n /b</code> para verificar todas as portas abertas, os IP's e os processos aos quais elas estão conectados.</p>
+
+<p>Para descobrir o endereço MAC, basta simplesmente usar <code>getmac</code> no prompt.</p>
+
+<p>Para vermos o cachê ARP, usamos <code>arp /a</code>. Para excluir ele usamos <code>arp /a /d</code>.</p>
+
+<p>Para resetar o catálogo do provedor winsock ao estado inicial, digite <code>nbtstat /R</code>, <code>nbtstat /RR</code> e <code>netsh winsock reset catalog</code>.</p>
+
+<p>Para resetar o proxy, digite <code>netsh advfirewall reset</code> e <code>netsh winhttp reset proxy</code>.</p>
+
+<p>Podemos usar <code>route print</code> para ver a rota da nossa rede. E também podemos adicionar e remover todas especificando o IP com <code>route add 192.168.0.0 mask 255.255.255.0 192.168.0.1</code> e <code>route delete 192.168.0.0</code>, respectivamente.</p>
+
+<p>Podemos também utilizar o comando <code>nslookup</code> assim, para vermos dados sobre o servidor do site:</p>
+
+<pre>
+<code>
+nslookup -q=ns www.google.com.br
+</code>
+</pre>
+
+<h3>Comando Runas</h3>
+
+<p>Para executar um programa como administrador com o comando runas, digite assim:</p>
+
+<pre>
+<code>
+runas /savecred /user:nomedeusuario C:\Windows\notepad.exe 
+</code>
+</pre>
+
+<p>Ou pode ser assim também:</p>
+
+<pre>
+<code>
+runas /savecred /user:nomededominio\nomedeusuario C:\Windows\notepad.exe 
+</code>
+</pre>
+
+<p>Isso pode ser colocado em atalhos.</p>
+
+<h3>Editar Dados de Registro</h3>
+
+<p>Para exibir as chaves, usamos <code>reg query</code> e o caminho desejado da chave, dessa forma:</p>
+
+<pre>
+<code>
+reg query HKLM\Software
+</code>
+</pre>
+
+<p>Para adicionar uma chave de registro pelo CMD, use o reg, dessa forma:</p>
+
+<pre>
+<code>
+reg add HKLM\Software\NomeDaChave /v NomeDoValor /t REG_SZ /d "Dados do Valor" /f
+</code>
+</pre>
+
+<p>O <code>/v</code> é o nome do valor (pode ser usado <code>/ve</code> para colocar um nome de valor vazio no valor padrão). Aspas são usadas apenas em dados de strings, outros tipos não se usam.</p>
+
+<p>O <code>/t</code> são os tipos de dados, que são esses (o padrão é o REG_SZ, de strings):</p>
+
+<table>
+    <tr>
+        <th>ID do tipo</th>
+        <th>Nome Simbólico</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>REG_NONE</td>
+        <td>Sem tipo definido</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>REG_SZ</td>
+        <td>Valor de cadeia de caracteres UTF-16</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>REG_EXPAND_SZ</td>
+        <td>Valor de cadeia de caracteres expansível</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>REG_BINARY</td>
+        <td>Dados binários</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>REG_DWORD</td>
+        <td>Valor DWORD, inteiro sem sinal de 32 bits</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>REG_MULTI_SZ</td>
+        <td>Cadeia de caracteres múltipla (lista ordenada)</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>REG_QWORD</td>
+        <td>Valor QWORD, inteiro de 64 bits</td>
+    </tr>
+</table>
+
+<p>O <code>/d</code> são os valores a serem atribuídos ao nome do valor do registro adicionado.</p>
+
+<p>O <code>/f</code> força a inserção da chave sem perguntar se ela já existe e a substituí.</p>
+
+<p>Caso seja pra adicionar um valor à uma chave já existente, use o mesmo método, usando o mesmo caminho da chave, com o novo nome do valor e os dados do novo valor.</p>
+
+<pre>
+<code>
+reg add HKLM\Software\NomeDaChave /v NovoValor /t REG_SZ /d "Novos Dados" /f
+</code>
+</pre>
+
+<p>Exemplo com valores binários:</p>
+
+<pre>
+<code>
+reg add HKLM\Software\NomeDaChave /v NomeDoBinario /t REG_BINARY /d 000001 /f
+</code>
+</pre>
+
+<p>Para mudar um valor já existente, basta atribuir ao valor já existente, os novos dados. Por exemplo:</p>
+
+<pre>
+<code>
+reg add HKLM\Software\NomeDaChave /v NomeDoValor /t REG_SZ /d "Outros Dados" /f
+</code>
+</pre>
+
+<p>PS: Os dados inseridos podem ser por exemplo, um comando para o CMD ou execução de algum programa EXE ou BAT (sem o start, apenas o caminho do mesmo), pode não funcionar pra alguns tipos de aplicações como Java. Nesse caso o tipo é o REG_SZ. E as chaves são como as pastinhas do registro, os valores são como as variáveis.</p>
+
+<p>Também podemos copiar as chaves e seus valores da mesma forma, usando o copy, assim:</p>
+
+<pre>
+<code>
+reg copy HKLM\Software\NomeDaChave HKCU\Software\NomeDaChave /s /f
+</code>
+</pre>
+
+<p>PS: O /s copia as subchaves junto.</p>
+
+<p>Se for apagar apenas um valor específico da chave, basta fazer dessa forma:</p>
+
+<pre>
+<code>
+reg delete HKLM\Software\NomeDaChave /v NomeDoValor /f
+</code>
+</pre>
+
+<p>Para apagar uma chave já existente, use apenas o reg delete e o /f no final para forçar a exclusão.</p>
+
+<pre>
+<code>
+reg delete HKLM\Software\NomeDaChave /f
+</code>
+</pre>
+
+<p>PS: Pode ser necessário colocar o nome da chave ou valor entre aspas, caso o nome tenha espaços.</p>
+
+<p>Uma forma que podemos utilizar, é pra manipular conteúdos inicializados com o Windows, indo na chave Run de HKCU ou HKLM, por exemplo:</p>
+
+<pre>
+<code>
+reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v Inicializando /t REG_SZ /d "\"C:\Windows\executavel.exe\"" /f
+</code>
+</pre>
+
+<p>Lembrando de HKCU é do usuário atual e HKLM é do sistema todo.</p>
+
+<p>PS: Nesse caso, só utilizamos sequências de escape nas aspas, se elas existirem, as barras não utilizam, e podemos usar variáveis do sistema.</p>
+
+<p>Da mesma forma, podemos utilizar esse método pra deletar o valor (inclusive podemos utilizar para excluir da inicialização programas teimosos e malwares):</p>
+
+<pre>
+<code>
+reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v Inicializando /f
+</code>
+</pre>
+
+<h3>Excluir Tarefas Agendadas</h3>
+
+<p>Para exibir as tarefas agendadas, use <code>schtasks /query</code>.</p>
+
+<p>Também podemos excluir tarefas agendadas, usando o <code>schtasks /delete</code>, dessa forma:</p>
+
+<pre>
+<code>
+schtasks /delete /f /tn "Driver Booster Scheduler"
+</code>
+</pre>
+
+<p>PS: O <code>/tn</code> é o que especificará o nome da tarefa a ser excluída.</p>
+
+<p>Essas opções acima costumam ser utilizadas com outros parâmetros, como adicionar, por exemplo.</p>
+
+<h3>Administrar Serviços</h3>
+
+<p>Para administrar os serviços inicializados ou parados, usamos o <code>net</code> seguido da opção desejada, dessa forma:</p>
+
+<ul>
+    <li>Inicializar: <code>net start service_name</code></li>
+    <li>Parar: <code>net stop service_name</code></li>
+    <li>Pausar: <code>net pause service_name</code></li>
+    <li>Continuar: <code>net continue service_name</code></li>
+</ul>
+
+<p>PS: Para ver os serviços usados, utilize o comando <code>sc query</code>.</p>
+
+<p>Para gerenciar e também excluir serviços, usamos o <code>sc</code> com os seguintes parâmetros:</p>
+
+<ul>
+    <li>Inicializar: <code>sc start service_name</code></li>
+    <li>Parar: <code>sc stop service_name</code></li>
+    <li>Pausar: <code>sc pause service_name</code></li>
+    <li>Continuar: <code>sc continue service_name</code></li>
+    <li>Criar: <code>sc create service_name</code></li>
+    <li>Excluir: <code>sc delete service_name</code></li>
+</ul>
+
+<h3>Administrando Usuários</h3>
+
+<p>Para criar um usuário novo com senha, basta digitar isso:</p>
+
+<pre>
+<code>
+net user nomedousuario senha /add
+</code>
+</pre>
+
+<p>PS: Caso queira criar um usuário sem senha, basta omití-la.</p>
+
+<p>Caso queira adicionar/alterar a senha de um usuário local, digite isso:</p>
+
+<pre>
+<code>
+net user nomedousuario novasenha
+</code>
+</pre>
+
+<p>Para dar privilégios de administrador ao usuário criado:</p>
+
+<pre>
+<code>
+net localgroup administradores nomedousuario /add
+</code>
+</pre>
+
+<p>Para remover o usuário dos administradores:</p>
+
+<pre>
+<code>
+net localgroup administradores nomedousuario /delete
+</code>
+</pre>
+
+<p>Para excluir um usuário:</p>
+
+<pre>
+<code>
+net user nomedousuario /delete
+</code>
+</pre>
+
+<p>Para listar os usuários existentes:</p>
+
+<pre>
+<code>
+net localgroup usuários
+</code>
+</pre>
+
+<p>Para listar os administradores:</p>
+
+<pre>
+<code>
+net localgroup administradores
+</code>
+</pre>
+
+<p>Pode ser que, caso o sistema não esteja configurado em português, que tenha que usar <q>users</q> e <q>administrators</q> ao invés de usuários e administradores.</p>
+
+<p>PS: Rode como administrador esses comandos.</p>
+
+<h3>Comandos no CMD</h3>
+
+<p>Agora que vimos alguns comandos do Windows, veja alguns dos comandos mais usados:</p>
+
+<ul>
+    <li><code>cd "pasta"</code> (<code>chdir</code>)- Abre uma pasta.</li>
+    <li><code>cls</code> - Limpa a tela.</li>
+    <li><code>color xx</code> - Muda a cor da tela, usando números para cores, o primeiro é o fundo do CMD e o segundo é a cor.</li>
+    <li><code>date /t</code> - Mostra a data do sistema.</li>
+    <li><code>dir</code> - Exibe a lista de arquivos (podendo receber como parâmetro <code>*.extensao</code>, para listar apenas um tipo de arquivo, ou mesmo mais de um).</li>
+    <li><code>diskcopy "origem" "destino"</code> - Copia o conteúdo de um disco para o outro.</li>
+    <li><code>md "pasta"</code> (<code>mkdir</code>) - Cria uma pasta.</li>
+    <li><code>time /t</code> - Mostra a hora do sistema.</li>
+    <li><code>title "Nome"</code> - Define um nome pra janela.</li>
+    <li><code>tree</code> - Mostra a estrutura de pastas graficamente.</li>
+    <li><code>ver</code> - Mostra a versão do Windows.</li>
+    <li><code>vol</code> - Mostra o nome e o número de série do sistema.</li>
+    <li><code>echo off</code> - Oculta os comandos e o caminho na tela. Usado com <code>@</code> no início do BAT para ocultar comandos (no BAT, o arroba oculta o caminho de qualquer comando, usando apenas no echo off no começo dispensa a necessidade de usar arrobas em outros comandos num mesmo BAT).</li>
+    <li><code>echo</code> - Para escrever na tela, não aceita sequências de escape. O echo com um ponto ao lado pula uma linha.</li>
+    <li><code>set variavel=dados</code> - Cria variáveis. As variáveis são utilizadas entre dois símbolos de porcentagem, na forma <code>%variavel%</code>.</li>
+    <li><code>rem</code> - Para comentários (Pode utilizar <code>::</code> no lugar dele).</li>
+    <li><code>pause</code> - Isso pausará o prompt até uma tecla ser clicada (ao usar <code>pause&gt;nul</code>, a mensagem pressione qualquer tecla é oculta).</li>
+    <li><code>start</code> - Usada para abrir um programa, pasta ou site (incluindo coisas como <code>start chrome.exe www.google.com.br</code>).</li>
+    <li><code>move "origem" "destino"</code> - Para mover arquivos.</li>
+    <li><code>copy "origem" "destino"</code> - Para copiar arquivos (ao usar <code>copy con arquivo.tipo</code>, criará um arquivo novo), aí você insere os dados e tecla Ctrl Z e Enter pra copiar.</li>
+    <li><code>xcopy "origem" "destino"</code> - Para copiar também arquivos somente leitura de subpastas e diretórios (como <code>xcopy C:\Users\%username%\Imagens E:\Imagens</code>).</li>
+    <li><code>goto</code> - Significa "vai para", usamos um parâmetro para redirecionar à um marcador de menu ou submenu (como <code>if %op%==1 (goto A)</code>, que vai para o marcador <code>:A</code>)</li>
+    <li><code>:</code> - Marcador de menu ou submenu, para mostrar uma opção de escolha, usado junto com o goto (como <code>:A</code>).</li>
+    <li><code>&amp;</code> - Para "grudar" mais de um comando numa mesma linha.</li>
+    <li><code>echo "texto"&gt;&gt;"arquivo"</code> - Escreve num arquivo, e não no prompt (por exemplo, <code>echo teste>>C:\Users\%username%\Desktop\teste.txt</code>). Se o arquivo não existir, será criado. Da mesma forma, as setas podem ser utilizadas com funções do echo e outros comandos, por exemplo <code>dir&gt;&gt;arquivo.txt</code> escreve o conteúdo de dir no arquivo especificado. Usando um <code>&gt;</code> ele sobreescreve o arquivo caso exista, usando dois <code>&gt;&gt;</code> ele adiciona o texto no arquivo caso exista.</li>
+    <li><code>type</code> - Lê o Arquivo no CMD (como <code>type C:\Users\%username%\Desktop\teste.txt</code>).</li>
+    <li><code>findstr</code> - Procura as palavras escritas pelo usuário, quando usamos o parâmetro /i ele não diferencia maiúsculas (como <code>findstr /i PALAVRA C:\Users\%username%\Desktop\teste.txt</code>)</li>
+    <li><code>rename nomeantigo.txt nomeatual.txt</code> - Renomeia arquivos e pastas.</li>
+    <li><code>net</code> - Usado com os comandos <code>start</code>, <code>stop</code>, <code>pause</code> e <code>continue</code> para iniciar, parar, pausar e continuar serviços do Windows.</li>
+    <li><code>del "nomedoarquivo"</code> (<code>erase</code>) - Para excluir arquivos e conteúdos de pastas (para excluir pastas use <code>rd</code> ou <code>rmdir</code>, da mesma forma).</li>
+    <li><code>doskey /history</code> - Mostra o histórico de comandos já digitados.</li>
+    <li><code>shutdown</code> - Para desligar o computador (com parâmetro <code>/s</code>) ou reiniciar (parâmetro <code>/r</code>), pode ser definido o tempo para a operação com o parâmetro <code>/t 600</code> (em segundos).</li>
+    <li><code>chkdsk C:</code> - Para corrigir erros de disco.</li>
+    <li><code>sfc /scannow</code> - Verifica a integridade dos arquivos no sistema e os repara.</li>
+    <li><code>tasklist</code> - Mostra os processos ativos no sistema.</li>
+    <li><code>taskkill /pid 3806</code> - Mata um processo baseado no seu PID (se quiser usar o nome literal, use <code>/im processo.exe</code>).</li>
+    <li><code>ipconfig</code> - Para configurações de redes, basicamente com <code>/release</code> libera o endereço IP e <code>/renew</code> o renova, e <code>/all</code> mostra detalhes completos das interfaces de rede (ele sozinho mostra detalhes resumidos).</li>
+    <li><code>ping nomeouipdosite.com</code> - Verifica se há conectividade num host.</li>
+    <li><code>tracert nomeouipdosite.com</code> - Rastreia a rota de um pacote até o host especificado.</li>
+    <li><code>netstat /nb</code> - Verifica quais portas estão abertas e os IPs associados a elas.</li>
+    <li><code>whoami</code> - Mostra usuários logados no sistema.</li>
+    <li><code>driverquery</code> - Para verificar os drivers instalados</li>
+    <li><code>systeminfo</code> - Exibe informações do sistema.</li>
+    <li><code>sc</code> - Gerenciar serviços (por exemplo, parar, iniciar, pausar e excluir).</li>
+    <li><code>diskpart</code> - Gerencia partições de disco.</li>
+    <li><code>verify</code> - Faz com que o Windows verifique se os arquivos estão gravados corretamente em um disco.</li>
+    <li><code>format "destino" /fs NTFS</code> -  Formata um disco especificado em um formato especificado.</li>
+    <li><code>help</code> - Exibe a ajuda.</li>
+    <li><code>hostname</code> - Retorna o nome do host do computador.</li>
+    <li><code>exit</code> - Fecha o Prompt.</li>
+</ul>
+
+<p>Para interromper algum comando sendo executado, dê um Ctrl C. Para ajuda a um comando, digite ele seguido de <code>/?</code>, como por exemplo <code>dir /?</code>.</p>
+
+<p>Como coringa, usamos o *, podendo inclusive usar nas extensões, como *.*. E comandos do CMD não são case-sensitive.</p>
+
+<p>A variável <code>%errorlevel%</code> guarda o status do último comando executado. Se o mesmo foi executado corretamente, ele retornará <q>0</q>, se o comando der erro ele retornará outro número diferente de zero (por exemplo, comando não encontrado retorna <q>9009</q>). Podemos visualizar o conteúdo dessa variável digitando no prompt <code>echo %errorlevel%</code>. Esse código também pode ser usado em BAT Script também, como em condicionais e laços de repetição.</p>
+
+<p>Muitos desses comandos também podem ser usados no Executar, mas são melhores visualizados no CMD. No entanto, esses são mais específicos pro Executar (apesar de funcionarem no CMD também):</p>
+
+<ul>
+    <li><code>cleanmgr</code> - Abre a limpeza de disco.</li>
+    <li><code>msconfig</code> - Abre a janela de itens de inicialização do sistema.</li>
+    <li><code>winver</code> - Mostra a versão do Windows.</li>
+    <li><code>regedit</code> - Abre o registro do Windows.</li>
+    <li><code>mrt</code> - Abre a ferramenta de Remoção de Software Mal-intencionado.</li>
+    <li><code>msinfo32</code> - Abre a janela de informações de hardware do sistema, onde exibe os componentes e até mesmo os conflitos.</li>
+    <li><code>control</code> - Abre a central de controle (podendo ser combinada para abrir determinados controles, como <code>control mouse</code> e <code>control fonts</code>).</li>
+    <li><code>cmd</code> - Abre o prompt de comando.</li>
+    <li><code>powershell</code> - Abre o Powershell.</li>
+    <li><code>calc</code> - Abre a calculadora.</li>
+    <li><code>services.msc</code> - Abre a janela de serviços do sistema.</li>
+    <li><code>gpedit.msc</code> - Abre o Editor de Política de Grupo.</li>
+    <li><code>devmgmt.msc</code> - Abre o Gerenciador de Dispositivos.</li>
+    <li><code>ncpa.cpl</code> - Abre as conexões de rede.</li>
+    <li><code>dxdiag</code> - Abre a Ferramenta de Diagnóstico do DirectX, com informações sobre o hardware.</li>
+</ul>
+
+<p>PS: Tome cuidado com as fork bombs, que chamam vários processos iguais até travar o sistema. No CMD do Windows, uma fork bomb pode ser assim (quase sempre num arquivo BAT):</p>
+
+<pre>
+<code>
+:: Não execute nada desse código:
+
+:B
+
+start %0
+
+goto B
+</code>
+</pre>
+
+<p>Só pra entender, é um comando que chama o próprio arquivo de lotes várias vezes em uma espécie de loop (<code>%0</code> é referência ao próprio arquivo de lote).</p>
+
+<h3>Criação de Arquivos BAT</h3>
+
+<p>Para criar arquivos BAT, crie um arquivo de texto no Bloco de Notas e salve com a extensão .bat, no formato ANSI, (ou use o <code>copy con</code> do CMD, o <code>edit</code> do DOS ou <code>echo</code> com arquivo no CMD), para criar um arquivo de scripts novo, e coloque os comandos dessa forma:</p>
+
+<pre>
+<code>
+@echo off
+
+chcp 1252
+
+cls
+
+title Introdução ao BAT em Windows
+
+echo Criação do BAT em Windows Efetuada com Êxito.
+
+echo.
+
+pause
+</code>
+</pre>
+
+<p>No código acima, o <code>@echo off</code> tira a exibição dos caminhos do programa, o arroba faz isso em todos os comandos que ele estiver do lado, no entando, usando o echo off dessa forma, ele automaticamente oculta a exibição de todos. O chcp 1252 é pra corrigir acentos (principalmente nos casos que escrevermos arquivos pelo CMD), e o echo com o ponto pula uma linha.</p>
+
+<p>Dessa forma, podemos criar arquivos que executem várias funções de uma vez. Todos os comandos do CMD funcionam normalmente no BAT, mas alguns caracteres podem não funcionar. Podemos inclusive, usar variáveis e operadores condicionais e de repetição.</p>
+
+<h3>Variáveis no CMD</h3>
+
+<p>Para utilizar variáveis no CMD, usamos o comando <code>set nome=</code>, usada para declarar variáveis (tem que estar com o = tudo junto, tipo <code>set num=3</code>). As variáveis são usadas com a porcentagem entre eles (tipo <code>%num%</code>). Podemos também atribuir um caminho de pasta à elas, programas ou sites à elas. Veja um exemplo em BAT:</p>
+
+<pre>
+<code>
+@echo off
+
+set pasta=C:\Users\%username%\Pictures
+
+start explorer.exe %pasta%
+
+exit
+</code>
+</pre>
+
+<p>PS: Variáveis em CMD não diferenciam maiúsculas de minúsculas.</p>
+
+<p>Se quiser pedir dados do usuário em variáveis, use o parâmetro <code>/p</code> para ele ser inserido na variável. O parâmetro <code>/a</code> é usado para operações matemáticas, cujo resultado será jogado na variável. Veja um exemplo:</p>
+
+<pre>
+<code>
+@echo off
+
+set /p nome=Digite seu nome: 
+
+set /p idade=Digite sua idade: 
+
+set /a ano=2017 - idade
+
+echo Olá %nome%, você nasceu em %ano%.
+
+exit
+</code>
+</pre>
+
+<p>PS: Você pode usar <code>%username%</code> como um coringa que mostrará o nome do usuário logado no momento. O parâmetro <code>/i</code>, é usado para não diferenciar maiúsculas de minúsculas. </p>
+
+<p>Essas são as variáveis do sistema (usadas também entre dois %):</p>
+
+<table>
+    <tr>
+        <th>Variável</th>
+        <th>Conteúdo Exibido</th>
+    </tr>
+    <tr>
+        <td>USERPROFILE</td>
+        <td>C:\Users\UsuarioAtual</td>
+    </tr>
+    <tr>
+        <td>PROGRAMDATA</td>
+        <td>C:\Programdata</td>
+    </tr>
+    <tr>
+        <td>ALLUSERSPROFILE</td>
+        <td>C:\Programdata</td>
+    </tr>
+    <tr>
+        <td>WINDIR</td>
+        <td>C:\Windows</td>
+    </tr>
+    <tr>
+        <td>SYSTEMROOT</td>
+        <td>C:\Windows</td>
+    </tr>
+    <tr>
+        <td>PROGRAMFILES</td>
+        <td>C:\Program Files</td>
+    </tr>
+    <tr>
+        <td>COMMONPROGRAMFILES</td>
+        <td>C:\Program Files\Common Files</td>
+    </tr>
+    <tr>
+        <td>USERNAME</td>
+        <td>"UsuarioAtual"</td>
+    </tr>
+    <tr>
+        <td>COMPUTERNAME</td>
+        <td>Nome do Computador</td>
+    </tr>
+    <tr>
+        <td>LOCALAPPDATA</td>
+        <td>C:\Users\Usuário Atual\AppData\Local</td>
+    </tr>
+    <tr>
+        <td>APPDATA</td>
+        <td>C:\Users\Usuário Atual\AppData\Roaming</td>
+    </tr>
+    <tr>
+        <td>ERRORLEVEL</td>
+        <td>Código de Erro do Último Comando (quando é diferente de 0).</td>
+    </tr>
+    <tr>
+        <td>CD</td>
+        <td>Pasta Atual</td>
+    </tr>
+    <tr>
+        <td>USERDOMAIN</td>
+        <td>Nome do Computador</td>
+    </tr>
+    <tr>
+        <td>SYSTEMDRIVE</td>
+        <td>C:</td>
+    </tr>
+    <tr>
+        <td>HOMEDRIVE</td>
+        <td>C:</td>
+    </tr>
+    <tr>
+        <td>SYSTEMDIRECTORY</td>
+        <td>C:\Windows\System32</td>
+    </tr>
+    <tr>
+        <td>COMSPEC</td>
+        <td>C:\Windows\System32\cmd.exe</td>
+    </tr>
+    <tr>
+        <td>TEMP</td>
+        <td>C:\Users\Usuário Atual\AppData\Local\Temp</td>
+    </tr>
+    <tr>
+        <td>TMP</td>
+        <td>C:\Users\Usuário Atual\AppData\Local\Temp</td>
+    </tr>
+    <tr>
+        <td>HOMEPATH</td>
+        <td>\Users\Usuário Atual</td>
+    </tr>
+    <tr>
+        <td>PATH</td>
+        <td>Retorna o path do sistema</td>
+    </tr>
+    <tr>
+        <td>PATHEXT</td>
+        <td>Retorna as extensões de executáveis</td>
+    </tr>
+    <tr>
+        <td>OS</td>
+        <td>Retorna o nome do Sistema Operacional</td>
+    </tr>
+    <tr>
+        <td>PROCESSOR_IDENTIFIER</td>
+        <td>Retorna dados sobre o processador</td>
+    </tr>
+</table>
+
+<p>PS: Em sistemas 64 bits, a variável <code>PROGRAMFILES</code> é referente a pasta de aplicações 64 bits, para acessar a pasta de aplicações 32 bits, use <code>PROGRAMFILES(x86)</code>. O mesmo vale para a <code>COMMONPROGRAMFILES</code>, que em aplicativos de 32 bits é <code>COMMONPROGRAMFILES(x86)</code>.</p>
+
+<h3>Operações Aritméticas</h3>
+
+<p>Como visto no exemplo anterior, é possível fazer operações aritméticas no BAT, normalmente com +, -, * e /, mas lembrando que o % não funciona como cálculo de módulo, devemos utilizar dois %% para isso. Ao fazer contas diretamente pelo CMD usamos apenas um %.</p>
+
+<p>Veja um exemplo de uso para operações aritméticas:</p>
+
+<pre>
+<code>
+set /p num1=Digite o primeiro número: 
+
+set /p num2=Digite o segundo número: 
+
+cls
+
+set /a soma=num1 + num2
+
+set /a subs=num1 - num2
+
+set /a mult=num1 * num2
+
+set /a divi=num1 / num2
+
+set /a rest=num1 %% num2
+
+echo A soma entre %num1% e %num2% é igual à %soma%.
+
+echo A subtração entre %num1% e %num2% é igual à %subs%.
+
+echo A multiplicação entre %num1% e %num2% é igual à %mult%.
+
+echo A divisão entre %num1% e %num2% é igual à %divi% com resto de %rest%.
+
+echo.
+
+pause
+</code>
+</pre>
+
+<p>Também podemos fazer operações aritméticas sem variáveis, apenas digitando set /a seguida da operação, como <code>set /a 10 + 5</code>, ele retornará o resultado da conta.</p>
+
+<h3>Condicionais IF, ELSE e ELSE IF</h3>
+
+<p>Podemos também usar condicionais no BAT, usando o <code>if</code>, o <code>else</code> e o <code>else if</code>. Dessa forma:</p>
+
+<pre>
+<code>
+@echo off
+
+set /p num=Digite um Número: 
+
+if %num% lss 10 (
+echo É menor que 10.
+) else if %num% gtr 10 (
+echo É maior que 10.
+) else (
+echo É igual à 10.
+)
+
+pause
+</code>
+</pre>
+
+<p>PS: Assegure-se que o fecha parênteses esteja na mesma linha do else ou else if, pra não dar erro.</p>
+
+<p>Veja outro exemplo de BAT para criar pastas:</p>
+
+<pre>
+<code>
+@echo off
+
+cd C:\Users\%username%\Desktop
+
+if exist teste (
+echo Essa Pasta já Existe.
+) else (
+mkdir teste &amp; echo A Pasta foi Criada.
+)
+
+pause
+</code>
+</pre>
+
+<p>PS: O <code>&amp;</code> é para executarmos mais de um comando na mesma linha.</p>
+
+<p>Veja algumas opções que podemos usar com números, só lembrando que equ e neq é necessário usar com letras e palavras também:</p>
+
+<table>
+    <tr>
+        <td>equ</td>
+        <td>Igual</td>
+    </tr>
+    <tr>
+        <td>neq</td>
+        <td>Diferente</td>
+    </tr>
+    <tr>
+        <td>lss</td>
+        <td>Menor que</td>
+    </tr>
+    <tr>
+        <td>leq</td>
+        <td>Menor que ou igual</td>
+    </tr>
+    <tr>
+        <td>gtr</td>
+        <td>Maior que</td>
+    </tr>
+    <tr>
+        <td>geq</td>
+        <td>Maior que ou igual</td>
+    </tr>
+</table>
+
+<p>Veja um exemplo para calcular médias:</p>
+
+<pre>
+<code>
+set /p n1=Digite a primeira nota: 
+
+set /p n2=Digite a segunda nota: 
+
+:: Não esqueça da ordem de precedência:
+set /a med=(n1 + n2) / 2
+
+if %med% lss 4 (
+set sit=Reprovado
+) else if %med% gtr 6 (
+set sit=Aprovado
+) else (
+set sit=Em Recuperação
+)
+
+cls
+
+echo A média das notas é %med%. %sit%!
+</code>
+</pre>
+
+<h3>Laço de Repetição FOR</h3>
+
+<p>Para criar uma estrutura de repetição em BAT, usamos o <code>for</code>, dessa forma:</p>
+
+<pre>
+<code>
+@echo off
+
+set cao=Volta o cão arrependido, com suas orelhas tão fartas, com seu osso roído, e com o rabo entre as patas...
+
+for /l %%r in (1 1 44) do (
+echo %cao%
+)
+
+pause
+</code>
+</pre>
+
+<p>O <code>/l</code> fará as incrementações. A letra com dois % na frente (<code>%%r</code>)é um parâmetro que pode ser qualquer letra. O <code>in</code> passará os números de incremento, com eles entre parênteses, representando na ordem, o início, incremento e fim do mesmo (no caso de usar decremento, apenas coloque o início menor que o fim, sem colocar sinal de - no incremento). O <code>do</code> especifica os comandos a serem executados.</p>
+
+<p>Para fazer o incremento também aparecer no echo, fazemos dessa forma:</p>
+
+<pre>
+<code>
+@echo off
+
+set cao=Volta o cão arrependido, com suas orelhas tão fartas, com seu osso roído, e com o rabo entre as patas...
+
+for /l %%r in (1 1 44) do (
+echo %%r - %cao%
+)
+
+pause
+</code>
+</pre>
+
+<p>Veja outro exemplo com um programa que exibe a tabuada de um número:</p>
+
+<pre>
+<code>
+@echo off
+
+setlocal EnableDelayedExpansion
+
+:inicio
+set /p num=Digite um número para ver sua tabuada: 
+
+echo.
+
+echo Tabuada de %num%:
+
+echo.
+
+echo ---------------
+
+set cont=1
+
+for /l %%t in (1 1 10) do (
+set /a res=%num% * !cont!
+
+echo %num% x !cont! = !res!
+
+set /a cont+=1
+)
+
+echo ---------------
+
+echo.
+
+set /p opc=Deseja digitar outros números? [S/N] 
+
+if /i %opc%==S (
+cls
+
+goto inicio
+) else (
+exit
+)
+</code>
+</pre>
+
+<p>O Delayed Expansion fazem as variáveis mudarem de nome para valores, então muitas vezes é necessário habilitar elas pra usar com contas.</p>
+
+<h3>Array</h3>
+
+<p>Para criar um array num BAT podemos fazer assim:</p>
+
+<pre>
+<code>
+set vetor=1 2 3 4
+
+:: Esse for funciona como um for iterator
+
+for %%v in (%vetor%) do ( 
+echo %%v 
+)
+</code>
+</pre>
+
+<p>Ao fazer um array de conteúdos não numéricos, fazemos definindo as posições, assim:</p>
+
+<pre>
+<code>
+setlocal EnableDelayedExpansion
+
+set vogais[0]=A
+set vogais[1]=E
+set vogais[2]=I
+set vogais[3]=O
+set vogais[4]=U
+
+for /l %%n in (0 1 4) do ( 
+echo !vogais[%%n]! 
+)
+</code>
+</pre>
+
+<h3>Funções em BAT</h3>
+
+<p>Podemos simular funções em BAT, veja um exemplo simples de criação de uma função:</p>
+
+<pre>
+<code>
+call:mensagem
+
+:mensagem
+
+echo Introdução à Funções em BAT
+</code>
+</pre>
+
+<p>PS: As funções em BAT deverão sempre ficar no final do script.</p>
+
+<p>Para passarmos parâmetros, não os colocamos dentro dos parênteses, eles são jogados nas variáveis %~1, %~2, %~3, etc. Por exemplo:</p>
+
+<pre>
+<code>
+call:multi 10 5
+
+:multi n1 n2
+:: %~1 e %~2 são os parâmetros
+
+set /a res=%~1 * %~2
+
+echo A multiplicação é %res%
+</code>
+</pre>
+
+<p>Exemplo com parâmetros:</p>
+
+<pre>
+<code>
+call:soma 10 5
+
+:soma n1 n2
+
+set /a res=%~1 + %~2
+
+echo %res%
+</code>
+</pre>
+
+<p><a href="_files/agenda.txt" target="_blank">Clique Aqui e veja o código de um arquivo BAT no qual ele adicionará dados de agenda à um arquivo TXT.</a></p>
+
+<p>Veja algumas dessas dicas:</p>
+
+<iframe src="https://www.youtube.com/embed/videoseries?list=PLb0Py0TLymHYgC8AlqqOLGi8kB49nTBjB"></iframe>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda C++</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cpp-1.html">Tudo sobre C++ Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cpp-2.html">Tudo sobre C++ Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cpp-3.html">Tudo sobre C++ Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cpp-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C++ Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cpp-5.html">Tudo sobre C++ Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cpp-6.html">Tudo sobre C++ Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cpp-7.html">Tudo sobre C++ Parte 7!</a></li>
+                    <li><a href="tudo-sobre-cpp-8.html">Tudo sobre C++ Parte 8!</a></li>
+                    <li><a href="tudo-sobre-cpp-9.html">Tudo sobre C++ Parte 9!</a></li>
+                    <li><a href="tudo-sobre-cpp-10.html">Tudo sobre C++ Parte 10!</a></li>
+                    <li><a href="tudo-sobre-cpp-11.html">Tudo sobre C++ Parte 11!</a></li>
+                    <li><a href="tudo-sobre-cpp-12.html">Tudo sobre C++ Parte 12!</a></li>
+                    <li><a href="tudo-sobre-cpp-13.html">Tudo sobre C++ Parte 13!</a></li>
+                    <li><a href="tudo-sobre-cpp-14.html">Tudo sobre C++ Parte 14!</a></li>
+                    <li><a href="tudo-sobre-cpp-15.html">Tudo sobre C++ Parte 15!</a></li>
+                    <li><a href="tudo-sobre-cpp-16.html">Tudo sobre C++ Parte 16!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C++ Parte 4</h2>
+
+<h3>Comando de Repetição While</h3>
+
+<p>Em determinados casos pode ser necessário repetir um programa diversas vezes, nesse caso devemos usar um loop para efetuar essa repetição de código quantas vezes forem necessárias. Também são chamados de laços de repetição.</p>
+
+<p>A repetição <code>while</code> (enquanto) realiza um teste lógico no início do loop, e cada vez que o teste retornar verdadeiro, os comandos associados ao laço são executados. Se retornar falso, o laço é encerrado e o processamento volta para o fluxo principal do programa. Veja um exemplo:</p>
+
+<p>Veja um exemplo simples de laço while:</p>
+
+<pre>
+<code>
+int n;
+
+n = 1;
+
+while(n <= 10) {
+    cout << n << "\n";
+    n++;
+}
+
+cout << "\nRotina Finalizada.\n";
+</code>
+</pre>
+
+<p>PS: Tome cuidado com os dados, principalmente incrementos e decrementos, senão vai criar um loop infinito que travará o programa.</p>
+
+<p>Veja outro exemplo, mas com repetições de strings (nesse caso, também usamos números, eles só não são exibidos):</p>
+
+<pre>
+<code>
+int cont;
+
+cont = 0;
+
+while(cont <= 9) {
+    cout << "Texto que será Repetido.\n";
+    cont++;
+}
+
+cout << "\nRotina Finalizada.\n";
+</code>
+</pre>
+
+<p>A contagem também pode ser feita de trás pra frente:</p>
+
+<pre>
+<code>
+int cont;
+
+cont = 20;
+
+while(cont >= 0) {
+    cout << "Texto que será Repetido - " << cont << "\n";
+    cont--;
+}
+
+cout << "\nRotina Finalizada.\n";
+</code>
+</pre>
+
+<p>Também é aceitável fazer o pré-incremento/decremento diretamente nos parênteses do While (desde que seja apenas o incremento ou decremento de 1, com ++ ou --), por exemplo:</p>
+
+<pre>
+<code>
+int cont;
+
+cont = 0;
+
+while(cont ++< 20) {
+    cout << "Texto que será Repetido - " << cont << "\n";
+}
+
+cout << "\nRotina Finalizada.\n";
+</code>
+</pre>
+
+<p>Também podemos usar o incremento/decremento com outros valores, por exemplo:</p>
+
+<pre>
+<code>
+int cont;
+
+cont = 0;
+
+while(cont <= 20) {
+    cout << "Texto que será Repetido - " << cont << "\n";
+    cont += 2;
+}
+
+cout << "\nRotina Finalizada.\n";
+</code>
+</pre>
+
+<p>Também podemos usar o comando <code>break</code> para selecionar uma parada, junto com o if, por exemplo:</p>
+
+<pre>
+<code>
+int cont;
+
+cont = 0;
+
+while(true) {
+    cout << "Texto que será Repetido - " << cont << "\n";
+    if(cont == 10) {
+        break; // Ao chegar no 10, ele parará antes.
+    }
+    cont++;
+}
+
+cout << "\nRotina Finalizada.\n";
+</code>
+</pre>
+
+<p>Podemos também usar o continue, que não executa o código mas continua a contagem depois dele, dessa forma:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+int main() {
+    int cont;
+    
+    cont = 0;
+
+    while(true) {
+        cont++;
+        if(cont == 10) {
+            continue;
+        }
+        else if(cont == 15) {
+            break;
+        }
+        cout << cont << " - Texto que será repetido!" << endl;
+    }
+
+    cout << endl << "Rotina Finalizada!" << endl;
+
+    return 0;
+}
+</code>
+</pre>
+
+<h3>Comando de Repetição Do While</h3>
+
+<p>Outra forma de criar repetição é a <code>do while</code>, significando repita. Diferente do while, a do while é colocada no final, praticamente o contrário dela.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+int cont;
+    
+cont = 22;
+
+do {
+    cout << "Texto que será Repetido - " << cont << "\n";
+    cont++;
+}
+while(cont <= 20);
+
+cout << "\nRotina Finalizada.\n";
+</code>
+</pre>
+
+<p>PS: Pode ver que, por esse fator, o comando do será executado, e só depois ele testará, independente do valor recebido. O que garante que pelo menos uma vez, o bloco de comandos é executado.</p>
+
+<h3>Comando de Repetição For</h3>
+
+<p>A estrutura <code>for</code> é usada para construir estruturas de loop nos casos para que se conhecem de antemão o número de repetições que devem ser realizadas (como 10 vezes, 20 vezes, etc.).</p>
+
+<p>Veja um exemplo simples de uso:</p>
+
+<pre>
+<code>
+int x;
+
+for(x = 0; x < 10; x++) {
+    cout << x << "\n";
+}
+</code>
+</pre>
+
+<p>Veja outro exemplo mais complexo, com mais inicializações e incrementos juntos:</p>
+
+<pre>
+<code>
+int x, y, z;
+
+for(x = 0, y = 1, z = 0; x < 10; x++, y += 2, z += 2) {
+    cout << x << " - " << y << " - " << z << "\n";
+}
+</code>
+</pre>
+
+<p>Veja outro exemplo, onde temos duas opções de condições:</p>
+
+<pre>
+<code>
+int x, y, z;
+
+for(x = 0, y = 1, z = 0; x < 10 && z <= 6; x++, y += 2, z += 2) {
+    cout << x << " - " << y << " - " << z << "\n";
+}
+</code>
+</pre>
+
+<p>PS: Também é possível criar um for sem blocos de comando, mas eles não são muito utlilizados, são usados para dar um "atraso" no programa, basta finalizar com ponto e vírgula após os parênteses.</p>
+
+<h3>Array - Vetor</h3>
+
+<p>Um array é uma estrutura homogênea que mantém uma série de dados do mesmo tipo. Podemos acessar os elementos individuais por meio de um índice, geralmente numérico. Possuem tamanho fixo. Os arrays são contados a partir do 0.</p>
+
+<p>Um array de uma dimensão pode ser chamado de vetor. Um array bidimensional é conhecido como matriz.</p>
+
+<p>Veja um exemplo de uso de vetores:</p>
+
+<pre>
+<code>
+int vetor[5]; // O número dentro dos colchetes predefine as posições do array.
+
+// Os valores abaixo armazenam valores nas posições indicadas do vetor.
+
+vetor[0] = 10;
+vetor[1] = 20;
+vetor[2] = 30;
+vetor[3] = 40;
+vetor[4] = 50;
+
+cout << vetor[0] << "\n"; // Exibirá somente o valor da posição 5 do vetor.
+</code>
+</pre>
+
+<p>PS: Só lembrando que no código acima, não adianta declarar valores pra espaços 5 em diante, pelo vetor declarado só ir até a posição 4 (contada de 0 à 4).</p>
+
+<p>Para mostrar todos os valores de um array (principalmente quando ele tem muitas posições, podemos criar uma estrutura de repetição, dessa forma:</p>
+
+<pre>
+<code>
+int vetor[5];
+int i;
+
+vetor[0] = 10;
+vetor[1] = 20;
+vetor[2] = 30;
+vetor[3] = 40;
+vetor[4] = 50;
+
+for(i = 0; i < 5; i++) {
+    cout << vetor[i] << "\n";
+}
+</code>
+</pre>
+
+<p>Também podemos usar variáveis diretamente na repetição, assim:</p>
+
+<pre>
+<code>
+int tam = 5;
+int vetor[tam];
+int i;
+
+vetor[0] = 10;
+vetor[1] = 20;
+vetor[2] = 30;
+vetor[3] = 40;
+vetor[4] = 50;
+
+for(i = 0; i < tam; i++) {
+    cout << vetor[i] << "\n";
+}
+</code>
+</pre>
+
+<p>Também podemos fazer as declarações diretamente no Array:</p>
+
+<pre>
+<code>
+int vetor[5] = {10, 20, 30, 40, 50};
+int i;
+
+for(i = 0; i < 5; i++) {
+    cout << vetor[i] << "\n";
+}
+</code>
+</pre>
+
+<p>Para pegar o tamanho de um vetor, usamos o sizeof, dessa forma:</p>
+
+<pre>
+<code>
+int vetor[5] = {10, 20, 30, 40, 50};
+int i;
+
+int tam = sizeof(vetor) / sizeof(int);
+
+for(i = 0; i < tam; i++) {
+    cout << vetor[i] << endl;
+}
+</code>
+</pre>
+
+<p>E também podemos usar uma versão "resumida" do for em arrays, o for it, dessa forma:</p>
+
+<pre>
+<code>
+int vetor[5] = {10, 20, 30, 40, 50};
+
+for(int i: vetor) {
+    cout << i << endl;
+}
+</code>
+</pre>
+
+<h3>Ordenando Arrays com Bubblesort</h3>
+
+<p>Para ordenar arrays, usamos um algoritmo específico pra isso, veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+int tam = 10;
+int numeros[tam] = {7, 4, 6, 2, 1, 9, 3, 5, 0, 8};
+int aux;
+
+for(int cont = 1; cont < tam; cont++) {
+    for(int i = 0; i < tam - 1; i++) {
+        if(numeros[i] > numeros[i + 1]) {
+            aux = numeros[i];
+            numeros[i] = numeros[i + 1];
+            numeros[i + 1] = aux;
+        }
+    }
+}
+
+cout << "Elementos do array em ordem crescente:" << endl;
+
+for(int i = 0; i < tam; i++) {
+    cout << numeros[i] << endl;
+}
+</code>
+</pre>
+
+<p>Como visto acima, o Bubblesort nada mais é do que uma estrutura com dois for encadeados e um if dentro o segundo for, que fará a ordenação.</p>
+
+<h3>Array Bidimensional - Matriz</h3>
+
+<p>Uma matriz é um tipo de array que possuí duas dimensões (como se tivesse linhas e colunas, tipo uma tabela). As linhas e colunas são númeradas a partir do 0. Assim como os vetores, as matrizes só suportam dados do mesmo tipo. A grosso modo, são arrays dentro de arrays.</p>
+
+<p>Veja uma representação gráfica de uma matriz com números:</p>
+
+<table>
+    <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+    </tr>
+</table>
+
+<p>Veja o código de uma matriz para exibir números, note que usamos um for aninhado para exibir isso como se fosse uma tabela:</p>
+
+<pre>
+<code>
+int matriz[3][4]; // Os primeiros colchetes são a quantidade de linhas e os segundos a de colunas.
+int l, c;
+
+matriz[0][0] = 0; // Adiciona um valor ao espaço referente à linha 0, coluna 0.
+matriz[0][1] = 0; // O mesmo na linha 0, coluna 1, e assim por diante nas demais.
+matriz[0][2] = 0;
+matriz[0][3] = 0;
+    
+matriz[1][0] = 1; // Adiciona um valor ao espaço referente à linha 1, coluna 0.
+matriz[1][1] = 1; // O mesmo na linha 1, coluna 1, e assim por diante nas demais.
+matriz[1][2] = 1;
+matriz[1][3] = 1;
+
+matriz[2][0] = 2;
+matriz[2][1] = 2;
+matriz[2][2] = 2;
+matriz[2][3] = 2;
+
+for(l = 0; l < 3; l++) {
+    for(c = 0; c < 4; c++) {
+        cout << matriz[l][c] << " ";
+    }
+    cout << "\n";
+}
+</code>
+</pre>
+
+<p>Também podemos usar o for aninhado para preencher automaticamente os valores do vetor, dessa forma:</p>
+
+<pre>
+<code>
+int matriz[3][4];
+int l, c;
+
+for(l = 0; l < 3; l++) {
+    for(c = 0; c < 4; c++) {
+        matriz[l][c] = l; // No lugar podemos usar um cin para pegar valores do teclado.
+    }
+}
+
+for(l = 0; l < 3; l++) {
+    for(c = 0; c < 4; c++) {
+        cout << matriz[l][c] << " ";
+    }
+    cout << "\n";
+}
+</code>
+</pre>
+
+<p>PS: como indicado acima, no lugar do <code>matriz[l][c] = l</code>, podemos colocar um cin para pegar os valores do teclado, assim:</p>
+
+<pre>
+<code>
+cout << "Digite um valor para a posição da linha " << l << ", coluna " << c << ": ";
+cin >> matriz[l][c];
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-cpp-3.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-cpp-5.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Android</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Android</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-android-1.html">Tudo sobre Android Parte 1!</a></li>
+                    <li><a href="tudo-sobre-android-2.html">Tudo sobre Android Parte 2!</a></li>
+                    <li><a href="tudo-sobre-android-3.html">Tudo sobre Android Parte 3!</a></li>
+                    <li><a href="tudo-sobre-android-4.html">Tudo sobre Android Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Android com Banco de Dados - Parte 1</h2>
+
+<h3>SQLite no Android Studio - Parte 1</h3>
+
+<p>Crie um novo projeto empty activity, veja se ele está em Linear Layout.</p>
+
+<p>Em res, layout, crie um layout resource file com o nome item_lista, e veja se ele está como Constraint Layout.</p>
+
+<p>Voltando ao main_activity.xml, coloque os seguintes campos: Código, nome, telefone e e-mail, com as ids txtCod, txtNome, txtTel e txtMail, não esqueça que cada um tem um tipo específico de entrada (number, plain, phone e mail).</p>
+
+<p>Coloque um linear layout horizontal abaixo deles e dentro dele, três botões (Limpar, Salvar e Destruir), com suas respectives IDs. Coloque abaixo de tudo também um listview com a id lstClie.</p>
+
+<p>No Java, faça isso:</p>
+
+<pre>
+<code>
+package com.example.appcombanco;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.*;
+
+public class MainActivity extends AppCompatActivity {
+    private EditText txtCod, txtNome, txtTel, txtMail;
+    private Button btnLimp, btnSalv, btnDest;
+    private ListView lstClie;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
+
+        txtCod = (EditText)findViewById(R.id.txtCod);
+        txtNome = (EditText)findViewById(R.id.txtNome);
+        txtTel = (EditText)findViewById(R.id.txtTel);
+        txtMail = (EditText)findViewById(R.id.txtMail);
+
+        btnLimp = (Button)findViewById(R.id.btnLimp);
+        btnSalv = (Button)findViewById(R.id.btnSalv);
+        btnDest = (Button)findViewById(R.id.btnDest);
+
+        lstClie = (ListView)findViewById(R.id.lstClie);
+    }
+}
+</code>
+</pre>
+
+<p>Crie também essa classe:</p>
+
+<pre>
+<code>
+package com.example.appcombanco;
+
+public class Cliente {
+    private int codigo;
+    private String nome;
+    private String telefone;
+    private String email;
+
+    // Sobrecarga de construtores:
+
+    public Cliente() {
+
+    }
+
+    public Cliente(int codigo, String nome, String telefone, String email) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+    }
+
+    public Cliente(String nome, String telefone, String email) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
+</code>
+</pre>
+
+<p>Crie também essa classe:</p>
+
+<pre>
+<code>
+package com.example.appcombanco;
+
+import android.content.*;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class BancoDados extends SQLiteOpenHelper {
+    private static final int VERSAO = 1;
+    private static final String BANCO = "cadastro.db3";
+
+    public BancoDados(Context cont) {
+        super(cont, BANCO, null, VERSAO);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+}
+</code>
+</pre>
+
+<h3>SQLite no Android Studio - Parte 2</h3>
+
+<p>Coloque essas constantes na classe BancoDados:</p>
+
+<pre>
+<code>
+private static final int VERSAO = 1;
+private static final String BANCO = "cadastro.db3";
+private static final String TABELA = "clientes";
+private static final String COLUNACOD = "codigo";
+private static final String COLUNANOME = "nome";
+private static final String COLUNATEL = "telefone";
+private static final String COLUNAMAIL = "email";
+</code>
+</pre>
+
+<p>E na função onCreate, coloque o método assim:</p>
+
+<pre>
+<code>
+@Override
+public void onCreate(SQLiteDatabase db) {
+    String queryCol = "create table if not exists " + TABELA + " ("
+            + COLUNACOD + " integer not null primary key autoincrement,"
+            + COLUNANOME + " varchar(100),"
+            + COLUNATEL + " varchar(20),"
+            + COLUNAMAIL + " varchar(70))";
+
+    db.execSQL(queryCol);
+}
+</code>
+</pre>
+
+<p>Basicamente, o código de criação da tabela seria esse:</p>
+
+<pre>
+<code>
+create table if not exists clientes (
+    codigo integer not null primary key autoincrement,
+    nome varchar(100),
+    telefone varchar(20),
+    email varchar(70)
+);
+</code>
+</pre>
+
+<p>Crie esse método na classe BancoDados:</p>
+
+<pre>
+<code>
+public void addCliente(Cliente cl) {
+    SQLiteDatabase db = this.getWritableDatabase();
+
+    ContentValues values = new ContentValues();
+
+    values.put(COLUNANOME, cl.getNome());
+    values.put(COLUNATEL, cl.getTelefone());
+    values.put(COLUNAMAIL, cl.getEmail());
+    
+    db.insert(TABELA, null, values);
+    db.close();
+}
+</code>
+</pre>
+
+<p>Na classe MainActivity, coloque essa variável:</p>
+
+<pre>
+<code>
+private BancoDados db = new BancoDados(this);
+</code>
+</pre>
+
+<p>E no método onCreate da MainActivity, coloque isso no final dele:</p>
+
+<pre>
+<code>
+db.addCliente(new Cliente("Exemplo de Nome", "123-4567", "teste@teste"));
+
+Toast.makeText(MainActivity.this, "Salvo com Sucesso", Toast.LENGTH_LONG).show();
+</code>
+</pre>
+
+<p>O banco de dados será criado automaticamente ao fazermos o aplicativo (SQLite é o banco de dados padrão do Android). Para visualizar ele use um celular rootado e o aplicativo SQLite Database Editor.</p>
+
+<p>No MainActivity, podemos colocar outros cadastros, copiando e alterando os dados do objeto db com o método addCliente.</p>
+
+<p>Na classe BancoDados, crie esse método:</p>
+
+<pre>
+<code>
+public void delCliente(Cliente cl) {
+    SQLiteDatabase db = this.getWritableDatabase();
+
+    db.delete(TABELA, COLUNACOD + " = ?", new String[] {String.valueOf(cl.getCodigo())});
+    
+    db.close();
+}
+</code>
+</pre>
+
+<p>No MainActivity, apague as linhas de salvar clientes e coloque isso:</p>
+
+<pre>
+<code>
+Cliente cl = new Cliente();
+cl.setCodigo(1); // Código a ser apagado
+db.delCliente(cl);
+
+Toast.makeText(MainActivity.this, "Deletado com Sucesso", Toast.LENGTH_LONG).show();  
+</code>
+</pre>
+
+<h3>SQLite no Android Studio - Parte 3</h3>
+
+<p>Adicione esse método na classe BancoDados:</p>
+
+<pre>
+<code>
+public Cliente selecCliente(int codigo) {
+    SQLiteDatabase db = this.getReadableDatabase(); // É só leitura
+
+    Cursor curs = db.query(TABELA, new String[]{COLUNACOD, COLUNANOME, COLUNATEL, COLUNAMAIL}, COLUNACOD + " = ?", new String[]{String.valueOf(codigo)}, null, null, null, null); // Importe android.database.Cursor
+
+    if(curs != null) {
+        curs.moveToFirst();
+    }
+
+    db.close();
+
+    Cliente cl = new Cliente(Integer.parseInt(curs.getString(0)), curs.getString(1), curs.getString(2), curs.getString(3));
+
+    return cl;
+}
+</code>
+</pre>
+
+<p>E no MainActivity coloque isso:</p>
+
+<pre>
+<code>
+Cliente cl = db.selecCliente(2);
+
+Log.d("Cliente selecionado", "Código: " + cl.getCodigo() // Importe android.util.Log
++ "Nome: " + cl.getNome()
++ "Telefone: " + cl.getTelefone()
++ "E-mail: " + cl.getEmail());
+</code>
+</pre>
+
+<p>Aí é só ir em Logcat e colocar na pesquisa "cliente selecionado".</p>
+
+<p>Coloque no BancoDados essa função:</p>
+
+<pre>
+<code>
+public void atCliente(Cliente cl) {
+    SQLiteDatabase db = this.getWritableDatabase();
+
+    ContentValues values = new ContentValues();
+
+    values.put(COLUNANOME, cl.getNome());
+    values.put(COLUNATEL, cl.getTelefone());
+    values.put(COLUNAMAIL, cl.getEmail());
+
+    db.update(TABELA, values, COLUNACOD + " = ?", new String[]{String.valueOf(cl.getCodigo())});
+    db.close();
+}
+</code>
+</pre>
+
+<p>E no MainActivity coloque isso:</p>
+
+<pre>
+<code>
+Cliente cl = new Cliente();
+
+cl.setCodigo(1);
+cl.setNome("Outro Nome");
+cl.setTelefone("12345678");
+cl.setEmail("outroexemplo@exemplo.com");
+
+db.atCliente(cl);
+
+Toast.makeText(MainActivity.this, "Atualizado com Sucesso", Toast.LENGTH_LONG).show();
+</code>
+</pre>
+
+<h3>SQLite no Android Studio - Parte 4</h3>
+
+<p>Na classe BancoDados, coloque essa função:</p>
+
+<pre>
+<code>
+public List&lt;Cliente&gt; listarContatos() {
+    List&lt;Cliente&gt; listaCl = new ArrayList&lt;&gt;(); // Importe java.util.List e java.util.ArrayList
+
+    String query = "select * from " + TABELA;
+
+    SQLiteDatabase db = this.getWritableDatabase();
+
+    Cursor curs = db.rawQuery(query, null); // No lugar do null pode ir parâmetros num array de String para ?
+
+    if(curs.moveToFirst()) {
+        do {
+            Cliente cl = new Cliente();
+
+            cl.setCodigo(Integer.parseInt(curs.getString(0)));
+            cl.setNome(curs.getString(1));
+            cl.setTelefone(curs.getString(2));
+            cl.setEmail(curs.getString(3));
+
+            listaCl.add(cl);
+        }
+        while(curs.moveToNext());
+    }
+
+    db.close();
+
+    return listaCl;
+}
+</code>
+</pre>
+
+<p>No MainActivity, coloque esses atributos:</p>
+
+<pre>
+<code>
+private ArrayAdapter&lt;String&gt; adapter;
+private List&lt;String&gt; lista;
+</code>
+</pre>
+
+<p>Crie essa função no MainActivity (e coloque a invocação dela no onCreate):</p>
+
+<pre>
+<code>
+public void listarClientes() {
+    List&lt;Cliente&gt; clientes = db.listarContatos();
+
+    for(Cliente c: clientes) {
+        Log.d("Lista", "\nID: "  + c.getCodigo() + " Nome: " + c.getNome() + " Telefone: " + c.getTelefone() + " E-mail: " + c.getEmail());
+    }
+}
+</code>
+</pre>
+
+<p>Rode, e depois altere a mesma função dessa forma:</p>
+
+<pre>
+<code>
+public void listarClientes() {
+    List&lt;Cliente&gt; clientes = db.listarContatos();
+
+    lista = new ArrayList&lt;&gt;();
+
+    adapter = new ArrayAdapter&lt;String&gt;(MainActivity.this, android.R.layout.simple_list_item_1, lista) {
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) { // Importe
+            View v = super.getView(position, convertView, parent);
+
+            ((TextView)v).setTextColor(Color.BLACK); // Importe
+
+            return v;
+        }
+    };
+
+    lstClie.setAdapter(adapter);
+
+    for(Cliente c: clientes) {
+        lista.add(c.getCodigo() + " - " + c.getNome() + " - " + c.getTelefone() + " - " + c.getEmail());
+
+        adapter.notifyDataSetChanged();
+    }
+}
+</code>
+</pre>
+
+<p>Dentro da função onCreate, coloque esse código:</p>
+
+<pre>
+<code>
+listarClientes();
+
+lstClie.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    @Override
+    public void onItemClick(AdapterView&lt;?&gt; parent, View v, int position, long id) {
+        String conteudo = (String)lstClie.getItemAtPosition(position);
+
+        Toast.makeText(MainActivity.this, "Selecionado: " + conteudo, Toast.LENGTH_LONG).show();
+    }
+});
+</code>
+</pre>
+
+<p>PS: O campo código deverá estar com o enabled como false.</p>
+
+<p>Agora altere a função acima assim:</p>
+
+<pre>
+<code>
+lstClie.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+        String conteudo = (String)lstClie.getItemAtPosition(position);
+
+        String codigo = conteudo.substring(0, conteudo.indexOf(" - "));
+
+        Cliente cl = db.selecCliente(Integer.parseInt(codigo));
+
+        txtCod.setText(String.valueOf(cl.getCodigo()));
+        txtNome.setText(cl.getNome());
+        txtTel.setText(cl.getTelefone());
+        txtMail.setText(cl.getEmail());
+    }
+});
+</code>
+</pre>
+
+<h3>SQLite no Android Studio - Parte 5</h3>
+
+<p>Coloque essa função na MainActivity:</p>
+
+<pre>
+<code>
+public void limpaCampo() {
+    txtCod.setText("");
+    txtNome.setText("");
+    txtTel.setText("");
+    txtMail.setText("");
+    
+    txtNome.requestFocus();
+}
+</code>
+</pre>
+
+<p>E dentro do método onCreate coloque isso para o botão limpar:</p>
+
+<pre>
+<code>
+btnLimp.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        limpaCampos();
+    }
+});
+</code>
+</pre>
+
+<p>PS: Para o teclado não aparecer ao abrir o app, vá no manifesto dele, e na tag activity coloque isso:</p>
+
+<pre>
+<code>
+android:windowSoftInputMode="stateHidden"
+</code>
+</pre>
+
+<p>Para o botão salvar, coloque isso:</p>
+
+<pre>
+<code>
+btnSalv.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        // Se estiver vazio ele salva, se tiver conteúdo ele atualiza.
+
+        String codigo = txtCod.getText().toString().trim();
+        String nome = txtNome.getText().toString().trim();
+        String tel = txtTel.getText().toString().trim();
+        String mail = txtMail.getText().toString().trim();
+
+        if(nome.isEmpty()) {
+            txtNome.setError("Este Campo é Obrigatório!");
+        }
+        else {
+            if(codigo.isEmpty()) {
+                // Salva
+
+                db.addCliente(new Cliente(nome, tel, mail));
+
+                Toast.makeText(MainActivity.this, "Salvo com Sucesso", Toast.LENGTH_LONG).show();
+
+                limpaCampos();
+
+                listarClientes();
+            }
+            else {
+                // Atualiza
+                
+                db.atCliente(new Cliente(Integer.parseInt(codigo), nome, tel, mail));
+
+                Toast.makeText(MainActivity.this, "Atualizado com Sucesso", Toast.LENGTH_LONG).show();
+
+                limpaCampos();
+
+                listarClientes();
+            }
+        }
+    }
+});
+</code>
+</pre>
+
+<p>E para excluir, colocamos assim:</p>
+
+<pre>
+<code>
+btnDest.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        String codigo = txtCod.getText().toString().trim();
+
+        if(codigo.isEmpty()) {
+             Toast.makeText(MainActivity.this, "Nenhum Cliente Selecionado", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Cliente cl = new Cliente();
+
+            cl.setCodigo(Integer.parseInt(codigo));
+
+            db.delCliente(cl);
+
+            Toast.makeText(MainActivity.this, "Deletado com Sucesso", Toast.LENGTH_LONG).show();
+
+            limpaCampos();
+
+            listarClientes();
+        }
+    }
+});
+</code>
+</pre>
+
+<p>PS: Podemos fazer melhorias nesse programa, como por exemplo criar um método para facilitar a exibição de mensagens.</p>
+
+<p>Agora coloque esse atributo no MainActivity para podermos esconder o teclado ao salvar:</p>
+
+<pre>
+<code>
+private InputMethodManager inp;
+</code>
+</pre>
+
+<p>Instancie o objeto no onCreate:</p>
+
+<pre>
+<code>
+inp = (InputMethodManager)this.getSystemService(Service.INPUT_METHOD_SERVICE);
+</code>
+</pre>
+
+<p>E crie essa função:</p>
+
+<pre>
+<code>
+public void escTeclado() {
+    inp.hideSoftInputFromWindow(txtNome.getWindowToken(), 0);
+}
+</code>
+</pre>
+
+<p>Agora coloque a invocação da função em todos os lugares que mexem com dados, no caso, junto com limpaCampos e listarClientes, logo abaixo deles.</p>
+
+<p>Como exercício, vá no cadastro anterior e coloque banco de dados nele.</p>
+
+<ul>
+    <!--<li><a href="android-com-db-2.html">Continuação da Matéria!</a></li>-->
+</ul>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda PHP Intermediário</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda PHP Intermediário</h1>
+                <menu>
+                    <li><a href="index.php">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre PHP Intermediário Parte 1!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-2.html">Tudo sobre PHP Intermediário Parte 2!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-3.html">Tudo sobre PHP Intermediário Parte 3!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-4.html">Tudo sobre PHP Intermediário Parte 4!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-5.html">Tudo sobre PHP Intermediário Parte 5!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-6.html">Tudo sobre PHP Intermediário Parte 6!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-7.html">Tudo sobre PHP Intermediário Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre PHP Intermediário Parte 1</h2>
+
+<h3>Trabalhando com Banco de Dados - Inserindo Dados</h3>
+
+<p>Para fazermos isso, vamos usar três páginas.</p>
+
+<p>Na primeira, vamos criar um formulário básico primeiro, para trabalharmos com Bancos, dessa forma:</p>
+
+<pre>
+<code>
+&lt;form method="post" action="conclusao.php"&gt;
+    &lt;p&gt;Nome: &lt;input type="text" name="tNome" id="cNome" size="35" maxlength="120" placeholder="Digite seu Nome" required autofocus/&gt;&lt;/p&gt;
+    &lt;p&gt;E-mail: &lt;input type="email" name="tMail" id="cMail" size="35" maxlength="65" placeholder="Coloque um E-mail Válido" required/&gt;&lt;/p&gt;
+    &lt;p&gt;Mensagem:&lt;/p&gt;
+    &lt;textarea cols="40" rows="5" name="tMsg" id="cMsg" maxlength="500" placeholder="Sua Mensagem" required&gt;&lt;/textarea&gt;
+    &lt;input type="hidden" name="tData" id="cData" value="&lt;?php echo date('Y-m-d') ?&gt;"/&gt;
+    &lt;br/&gt;
+    &lt;input type="submit" value="Enviar"/&gt;
+    &lt;input type="reset" value="Limpar"/&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>Lembrando que, em formulários, o action vai para a página onde tem os códigos, se for executado na mesma página, apenas deixe as aspas vazias.</p>
+
+<p>PS: Note que no código acima, a data atual é exibida em uma supertag PHP.</p>
+
+<p>No PHPMyAdmin, criaremos um database com um nome qualquer, por exemplo, "videoaulas", usamos esses comandos:</p>
+
+<pre>
+<code>
+create database videoaulas
+default character set utf8
+default collate utf8_general_ci;
+</code>
+</pre>
+
+<p>E também criaremos uma tabela, com esses comandos:</p>
+
+<pre>
+<code>
+use videoaulas;
+create table comentarios (
+    id int not null auto_increment,
+    nome varchar(120),
+    email varchar(50),
+    mensagem longtext,
+    data date,
+    primary key(id)
+)
+default charset = utf8;
+</code>
+</pre>
+
+<p>Para ligarmos a página PHP com o banco de dados, criamos uma nova página com o nome dados.php, sem códigos HTML com esse dados:</p>
+
+<pre>
+<code>
+$hostname = "localhost";
+$username = "root";
+$password = "";
+$database = "videoaulas";
+$conexao = mysqli_connect($hostname, $username, $password, $database) or die ("Falha na Conexão com o Banco de Dados");
+
+// mysqli_connect() pega os dados das variáveis e fará a conexão com o PHPMyAdmin.
+
+mysqli_set_charset($conexao, "utf8"); // Isso corrige acentuação
+</code>
+</pre>
+
+<p>PS: Lembrando que no mysqli_connect(), as variáveis tem sempre que ter a mesma ordem, host (site), user (login), senha e database (banco).</p>
+
+<p>Para entender, <code>mysqli_connect()</code> fará a conexão do PHP com o banco MySQL, hostname é o nome do site, database é o nome do banco de dados no PHPMyAdmin, root é o nome de usuário (login) e password é a senha (que pode ou não ser vazia), e o <code>mysqli_query()</code> executa os códigos com o banco.</p>
+
+<p>O <code>or die</code> é usado para sair e exibir alguma mensagem caso não consiga conexão, se não houver erro, ele continua a execução, o <code>mysqli_set_charset()</code> ali é para corrigir erros de caracteres.</p>
+
+<p>Na página que receberá os dados (no caso, conclusao.php), colocaremos antes de todo o HTML um bloco PHP como esses códigos:</p>
+
+<pre>
+<code>
+include_once("dados.php"); // Incluí o outro script PHP.
+
+$nome = $_POST["tNome"];
+$mail = $_POST["tMail"];
+$msg = $_POST["tMsg"];
+$data = $_POST["tData"];
+
+// Caso não queira colocar a data num input, podemos substituir a variável apenas por isso:
+// $data = date("Y-m-d");
+
+if($mail != "") {
+    $sql = "insert into comentarios (nome, email, mensagem, data) values ('$nome', '$mail', '$msg', '$data')";
+    $salvar = mysqli_query($conexao, $sql);
+    // A variável $sql salva os comandos numa string, mysqli_query() executa os dados das variáveis dentro do PHPMyAdmin.
+}
+
+$linhas = mysqli_affected_rows($conexao); // Mostra quantas linhas foram afetadas no banco.
+
+mysqli_close($conexao); // Encerra a conexão.
+</code>
+</pre>
+
+<p>Pra entender, a variável <code>$sql</code> executará os comandos do banco de dados, o <code>$linhas</code> pegará o número de linhas afetadas no banco (no caso, 0 ou 1), o <code>mysqli_close()</code> fecha a conexão.</p>
+
+<p>PS: Lembre-se que os comandos do Insert Into tem que estar todos na mesma ordem.</p>
+
+<p>Lembrando que para filtrar os códigos, usamos <code>htmlspecialchars()</code> para evitar que o site seja invadido com códigos maliciosos, <code>isset()</code> para ver se tem algum caractere inserido, e o <code>trim()</code> para retirar espaços desnecessários antes e depois do texto, com operadores ternários, por exemplo:</p>
+
+<pre>
+<code>
+$nome = isset($_POST["tNome"]) ? htmlspecialchars(trim($_POST["tNome"]), ENT_QUOTES) : "";
+$mail = isset($_POST["tMail"]) ? htmlspecialchars(trim($_POST["tMail"]), ENT_QUOTES) : "";
+$msg = isset($_POST["tMsg"]) ? htmlspecialchars(trim($_POST["tMsg"]), ENT_QUOTES) : "";
+$data = isset($_POST["tData"]) ? htmlspecialchars(trim($_POST["tData"]), ENT_QUOTES) : "";
+</code>
+</pre>
+
+<p>Na página de conclusão, podemos abrir uma supertag PHP no corpo do site, para exibir se a mensagem foi enviada, assim:</p>
+
+<pre>
+<code>
+if($linhas == 1) {
+    echo "Sua Mensagem foi Enviada!";
+}
+else if($mail == "") {
+    echo "Página Indisponível no Momento!";
+}
+else {
+    echo "Falha no Envio, Tente Novamente!";
+}
+</code>
+</pre>
+
+<p>Se quisermos que, após a execução dos dados, ele volte para determinada página, podemos usar o <code>header</code>, dessa forma, no final do código da segunda página, no lugar do mysqli_close(), no final do código:</p>
+
+<pre>
+<code>
+header("location: index.php");
+</code>
+</pre>
+
+<h3>Trabalhando com Banco de Dados - Exibindo Dados</h3>
+
+<p>Para exibirmos as mensagens do banco, usamos esse código, na página desejada (no exemplo criaremos uma página pra consultas, consultas.php), no começo dela, antes do HTML:</p>
+
+<pre>
+<code>
+include_once("dados.php");
+  
+$sql = "select * from comentarios order by data desc"; // Coloca os comandos numa string.
+$coment = mysqli_query($conexao, $sql); // Executa os dados das variáveis no MySQL.
+$row = mysqli_fetch_assoc($coment); // Coloca os dados num array e retorna resultados.
+$total = mysqli_num_rows($coment); // Consulta se ainda existem dados.
+</code>
+</pre>
+
+<p>PS: O Desc no caso é "descendente".</p>
+
+<p>E no corpo da página consultas, colocamos esse código (podendo ter outras tags HTML para uma exibição melhor):</p>
+
+<pre>
+<code>
+echo "&lt;fieldset&gt;";
+echo "&lt;legend&gt;" . $row["id"] . "&lt;/legend&gt;";
+echo "&lt;p&gt;" . $row["nome"] . "&lt;/p&gt;";
+echo "&lt;p&gt;" . $row["email"] . "&lt;/p&gt;";
+echo "&lt;pre&gt;" . $row["mensagem"] . "&lt;/pre&gt;";
+echo "&lt;p&gt;" . $row["data"] . "&lt;/p&gt;";
+echo "&lt;/fieldset&gt;";
+</code>
+</pre>
+
+<p>PS: Lembrando que nesse caso, vai os nomes da tabela no MySQL, não dos names do HTML.</p>
+
+<p>Mas até aí, enfrentamos dois problemas, o formato que a data é exibida (formato americano), e que só exibe o primeiro contato.</p>
+
+<p>Para corrigir o problema da Data, colocamos apenas isso no lugar do <code>$row["Data"]</code>:</p>
+
+<pre>
+<code>
+date("d-m-Y", strtotime($row["data"]))
+</code>
+</pre>
+
+<p>A função <code>strtotime()</code> é usada para manipular datas. Mudando o traço, podemos mudar o separador (por exemplo, (d/m/Y).</p>
+
+<p>E para exibir os dados, apenas coloque tudo num do while, dessa forma:</p>
+
+<pre>
+<code>
+do {
+    echo "&lt;fieldset&gt;";
+    echo "&lt;legend&gt;" . $row["id"] . "&lt;/legend&gt;";
+    echo "&lt;p&gt;" . $row["nome"] . "&lt;/p&gt;";
+    echo "&lt;p&gt;" . $row["email"] . "&lt;/p&gt;";
+    echo "&lt;pre&gt;" . $row["mensagem"] . "&lt;/pre&gt;";
+    echo "&lt;p&gt;" . $row["data"] . "&lt;/p&gt;";
+    echo "&lt;/fieldset&gt;";
+}
+while($row = mysqli_fetch_assoc($coment));
+</code>
+</pre>
+
+<p>PS: Para não exibir os dados das tags HTML sem existir algum cadastro, podemos colocar tudo num if, dessa forma:</p>
+
+<pre>
+<code>
+if($total > 0) {
+    do {
+        echo "&lt;fieldset&gt;";
+        echo "&lt;legend&gt;" . $row["id"] . "&lt;/legend&gt;";
+        echo "&lt;p&gt;" . $row["nome"] . "&lt;/p&gt;";
+        echo "&lt;p&gt;" . $row["email"] . "&lt;/p&gt;";
+        echo "&lt;pre&gt;" . $row["mensagem"] . "&lt;/pre&gt;";
+        echo "&lt;p&gt;" . $row["data"] . "&lt;/p&gt;";
+        echo "&lt;/fieldset&gt;";
+    }
+    while($row = mysqli_fetch_assoc($coment));
+}
+else {
+    echo "&lt;h3&gt;Não Existe Mensagens no Banco de Dados.&lt;/h3&gt;";
+}
+</code>
+</pre>
+
+<h3>Trabalhando com Banco de Dados - Excluindo Banco de Dados</h3>
+
+<p>Para excluir bancos de dados, podemos inserir algum link ou botão que direcione para uma página para isso, na própria página de consultas.</p>
+
+<p>Como exemplo, colocaremos isso no código PHP, dentro do do while, assim:</p>
+
+<pre>
+<code>
+echo "&lt;p&gt;&lt;a href='excluir.php?id=" . $row["id"] . "'&gt;Excluir&lt;/a&gt;&lt;/p&gt;";
+</code>
+</pre>
+
+<p>Na página de exclusão, colocamos apenas isso, sem HTML:</p>
+
+<pre>
+<code>
+include_once("dados.php");
+    
+$id = (int)htmlspecialchars($_GET["id"], ENT_QUOTES); // Pegará dados da URL, por isso é GET, NÃO é o id do banco
+
+$sql_del = "delete from comentarios where id = '$id'";
+$excluir = mysqli_query($conexao, $sql_del);
+
+header("location: consultas.php");
+</code>
+</pre>
+
+<h3>Trabalhando com Banco de Dados - Atualizando Dados</h3>
+
+<p>Vamos criar uma nova página com um formulário igual ou parecido com o principal, para edição (o reset não funcionará como limpar, nesse caso, a data pode ser suprimida, nesse exemplo).</p>
+
+<p>Na página de consultas, colocaremos isso no PHP:</p>
+
+<pre>
+<code>
+echo "&lt;p&gt;&lt;a href='editar.php?id=" . $row["id"] . "'&gt;Editar&lt;/a&gt;&lt;/p&gt;";
+</code>
+</pre>
+
+<p>Voltando na página de edição, colocaremos antes do HTML isso:</p>
+
+<pre>
+<code>
+include_once("dados.php");
+
+$id = (int)htmlspecialchars($_GET["id"], ENT_QUOTES); // O único que pegará dados da URL, por isso é GET.
+
+$sql = "select * from comentarios where id = '$id'"; // Joga os comandos do MySQL numa string.
+$coment = mysqli_query($conexao, $sql); // Executa dados no MySQL
+$row = mysqli_fetch_assoc($coment); // Coloca os dados num array e retorna resultados.
+$total = mysqli_num_rows($coment); // Consulta se ainda existem dados.
+</code>
+</pre>
+    
+<p>E mostraremos os values referentes às tabelas no Banco, com PHP, nos inputs, dessa forma:</p>
+
+<pre>
+<code>
+value="&lt;?php echo $row['nome'] ?&gt;"
+value="&lt;?php echo $row['email'] ?&gt;"
+</code>
+</pre>
+
+<p>PS: No textarea basta apenas colocar a supertag PHP entre as tags.</p>
+
+<p>Para funcionar, vamos usar também dentro do formulário um input hidden pra passar o IP, dessa forma</p>
+
+<pre>
+<code>
+&lt;input type="hidden" name="tId" id="cId" value="&lt;?php echo $row['id'] ?&gt;"/&gt;
+</code>
+</pre>
+
+<p>No caso, o action vai ser numa página PHP vazia (sem HTML), denominada atualizar, esse é o código dela:</p>
+
+<pre>
+<code>
+include_once("dados.php");
+
+$id = isset($_POST["tId"]) ? (int)htmlspecialchars($_POST["tId"]), ENT_QUOTES) : 0; // Esse pegará dado do Input Hidden.
+
+$nome = isset($_POST["tNome"]) ? htmlspecialchars(trim($_POST["tNome"]), ENT_QUOTES) : "";
+$mail = isset($_POST["tMail"]) ? htmlspecialchars(trim($_POST["tMail"]), ENT_QUOTES) : "";
+$msg = isset($_POST["tMsg"]) ? htmlspecialchars(trim($_POST["tMsg"]), ENT_QUOTES) : "";
+
+if($mail != "") {
+    $sql_atu = "update comentarios set nome = '$nome', email = '$mail', mensagem = '$msg' where id = '$id'";
+    $atualizar = mysqli_query($conexao, $sql_atu);
+}
+
+header("location: consultas.php");
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-php-intermediario-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

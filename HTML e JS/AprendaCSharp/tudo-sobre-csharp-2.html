@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda C#</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C#</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-csharp-1.html">Tudo sobre C# Parte 1!</a></li>
+                    <li><a href="tudo-sobre-csharp-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C# Parte 2!</a></li>
+                    <li><a href="tudo-sobre-csharp-3.html">Tudo sobre C# Parte 3!</a></li>
+                    <li><a href="tudo-sobre-csharp-4.html">Tudo sobre C# Parte 4!</a></li>
+                    <li><a href="tudo-sobre-csharp-5.html">Tudo sobre C# Parte 5!</a></li>
+                    <li><a href="tudo-sobre-csharp-6.html">Tudo sobre C# Parte 6!</a></li>
+                    <li><a href="tudo-sobre-csharp-7.html">Tudo sobre C# Parte 7!</a></li>
+                    <li><a href="tudo-sobre-csharp-8.html">Tudo sobre C# Parte 8!</a></li>
+                    <li><a href="tudo-sobre-csharp-9.html">Tudo sobre C# Parte 9!</a></li>
+                    <li><a href="tudo-sobre-csharp-10.html">Tudo sobre C# Parte 10!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C# Parte 2</h2>
+
+<h3>Manipulando Texto</h3>
+
+<p>Temos outras funções para trabalhar com strings, como a <code>Replace</code> (que substitui algo na string), e a <code>Concat</code> da classe String, que concatena algo. Veja o uso delas:</p>
+
+<pre>
+<code>
+string frase = "Isso é uma String";
+            
+Console.WriteLine(frase.Replace("String", "Frase")); // Substitui algo
+            
+Console.WriteLine(String.Concat(frase, " e ela foi concatenada!")); // Concatena com mais algo
+</code>
+</pre>
+
+<p>Para inverter strings, usamos o método <code>Reverse</code> da classe Array, mas antes temos que converter a string para array de char, assim:</p>
+
+<pre>
+<code>
+string frase = "Isso é uma String";
+char[] novo = frase.ToCharArray(); // Converte string pra array de char
+            
+Array.Reverse(novo); // Inverte
+            
+Console.WriteLine(new String(novo)); // Converte novamente para string
+</code>
+</pre>
+
+<p>Para remover espaços desnecessário de strings, basta usar o <code>Trim</code>, assim:</p>
+
+<pre>
+<code>
+string texto = "        Exemplo de String!          ";
+
+Console.WriteLine(texto.Trim());
+</code>
+</pre>
+
+<p>Para transformar todas as letras em maiúsculas e minúsculas, use os métodos <code>ToUpper()</code> e <code>ToLower()</code> do objeto, respectivamente:</p>
+
+<pre>
+<code>
+string frase = "Isso é uma String";
+            
+Console.WriteLine(frase.ToUpper()); // Converte pra maiúscula
+
+Console.WriteLine(frase.ToLower()); // Converte pra minúscula
+</code>
+</pre>
+
+<p>Para comparar strings, ao invés do ==, use o método <code>Equals()</code>, assim:</p>
+
+<pre>
+<code>
+string texto1 = "Microsoft";
+string texto2 = new string("Microsoft");
+
+Console.WriteLine(texto1.Equals(texto2));
+</code>
+</pre>
+
+<p>Para ver se uma string está vazia, use o método <code>IsNullOrEmpty()</code> do objeto, assim:</p>
+
+<pre>
+<code>
+string nome = "";
+
+Console.WriteLine("Nome está vazio ou nulo? " + string.IsNullOrEmpty(nome));
+</code>
+</pre>
+
+<p>Para ver a quantidade de caracteres de uma string, use o atributo <code>Length</code> do objeto, assim:</p>
+
+<pre>
+<code>
+string frase = "Exemplo de String";
+            
+Console.WriteLine("Quantidade de caracteres: " + frase.Length);
+</code>
+</pre>
+
+<h3>Operadores de Atribuição, Incremento e Decremento</h3>
+
+<p>Os operadores de atribuição são usados para atribuir um valor à uma variável. O operador é um <code>=</code>, mas temos também operadores de atribuição com operações aritméticas, como o <code>+=</code> (que é um acumulador, que soma valores à variável), da mesma forma age os operadores<code>-=</code>, <code>*=</code> e <code>/=</code>, que fazem a atribuição com a operação.</p>
+
+<p>Veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+using System;
+
+namespace OperadoresAtribuicaoIncrementoEDecremento {
+    class Program {
+        static void Main(string[] args) {
+            int var1;
+            var1 = 50;
+
+            Console.WriteLine("Atribuição: {0}", var1);
+
+            var1 += 20; // Seria o mesmo que var1 = var1 + 20
+
+            Console.WriteLine("Acumulando: {0}", var1);
+
+            var1 *= 2; // Seria o mesmo que var1 = var1 * 2
+
+            Console.WriteLine("Multiplicando: {0}", var1);
+            Console.ReadLine();
+        }
+    }
+}
+</code>
+</pre>
+
+<p>PS: Note que usamos uma exibição diferente no WriteLine(), como se fosse um print formatado.</p>
+
+<p>Para formatar valores float, faça assim, colocando a quantidade de casas com zeros:</p>
+
+<pre>
+<code>
+float real = 12345.6789f;
+
+Console.WriteLine("{0:0.00}", real);
+</code>
+</pre>
+
+<p>Podemos também usar isso no método <code>String.Format()</code>, que pode ser usado em Windows Forms, por exemplo.</p>
+
+<p>Os operadores de incremento e decremento são usados para aumentar e diminuir valores de um em um, e podem ser usados o pré e o pós, dependendo da necessidade.</p>
+
+<p>Veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+using System;
+
+namespace OperadoresAtribuicaoIncrementoEDecremento {
+    class Program {
+        static void Main(string[] args) {
+            int contador;
+            contador = 50;
+
+            Console.WriteLine(contador); // Executa normal
+            Console.WriteLine(contador++); // Executa e incrementa depois
+            Console.WriteLine(contador); // Executa já incrementado.
+
+            Console.ReadLine();
+        }
+    }
+}
+</code>
+</pre>
+
+<p>No caso acima, seria mais correto fazer o pré-decremento, assim:</p>
+
+<p></p>
+
+<pre>
+<code>
+Console.WriteLine(contador); // Executa normal
+Console.WriteLine(++contador); // Incrementa e executa após isso
+Console.WriteLine(contador); // Executa já incrementado.
+</code>
+</pre>
+
+<p>Da mesma forma acima, o decremento é usado.</p>
+
+<h3>Operadores Relacionais e Lógicos</h3>
+
+<p>Um operador booleano é um operador que realiza um cálculo cujo resultado pode ser true ou false. Em C# há vários operadores booleanos, que podem ser classificados em dois tipos distintos, operadores relacionais e de igualdade e e operadores condicionais lógicos</p>
+
+<p>Esses são os operadores relacionais e de igualdade:</p>
+
+<table>
+    <tr>
+        <th>Operador Aritmético</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>==</td>
+        <td>Igualdade.</td>
+    </tr>
+    <tr>
+        <td>!=</td>
+        <td>Diferente.</td>
+    </tr>
+    <tr>
+        <td>&gt;</td>
+        <td>Maior.</td>
+    </tr>
+    <tr>
+        <td>&lt;</td>
+        <td>Menor.</td>
+    </tr>
+    <tr>
+        <td>&gt;=</td>
+        <td>Maior ou Igual.</td>
+    </tr>
+    <tr>
+        <td>&lt;=</td>
+        <td>Menor ou Igual.</td>
+    </tr>
+</table>
+
+<p>PS: Em alguns casos, o igual não compara dois tipos de conteúdos, como por exemplo, objetos, sendo necessário usar o método <code>Equals()</code> desses mesmos objetos.</p>
+
+<p>Os operadores lógicos permitem combinar expressões ou valores booleanos e retornar um resultado lógico:</p>
+
+<p>Esse são os operadores lógicos usados em C#:</p>
+
+<table>
+    <tr>
+        <th>Operador</th>
+        <th>Operação</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>&&</td>
+        <td>AND</td>
+        <td>E</td>
+    </tr>
+    <tr>
+        <td>||</td>
+        <td>OR</td>
+        <td>Ou</td>
+    </tr>
+    <tr>
+        <td>!</td>
+        <td>NOT</td>
+        <td>Não</td>
+    </tr>
+    <tr>
+        <td>^</td>
+        <td>XOR</td>
+        <td>Ou Exclusivo</td>
+    </tr>
+</table>
+
+<p>Veja um exemplo abaixo do uso de NOT:</p>
+
+<pre>
+<code>
+using System;
+
+namespace OperadoresLogicosERelacionais {
+    class Program {
+        static void Main(string[] args) {
+            bool valor;
+            valor = true;
+            valor = !valor; // Inversão
+
+            Console.WriteLine(valor.ToString()); // Retorna false
+
+            Console.ReadLine();
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Veja um exemplo de uso de AND:</p>
+
+<pre>
+<code>
+using System;
+
+namespace OperadoresLogicosERelacionais {
+    class Program {
+        static void Main(string[] args) {
+            int idade;
+            bool valida;
+
+            Console.Write("Digite sua idade: ");
+            idade = int.Parse(Console.ReadLine());
+
+            valida = (idade > 0) && (idade <= 120);
+
+            Console.WriteLine(valida.ToString());
+
+            Console.ReadLine();
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Veja um exemplo do uso de OR:</p>
+
+<pre>
+<code>
+using System;
+
+namespace OperadoresLogicosERelacionais {
+    class Program {
+        static void Main(string[] args) {
+            int temperatura;
+            bool invalida;
+
+            Console.Write("Digite a temperatura em graus Celsius para ver se a água está nos estados sólido ou gasoso: ");
+            temperatura = int.Parse(Console.ReadLine());
+
+            invalida = (temperatura < 0) || (temperatura > 100);
+
+            Console.WriteLine(invalida.ToString());
+
+            Console.ReadLine();
+        }
+    }
+}
+</code>
+</pre>
+
+<p>PS: Note que nos dois métodos acima, usamos o método Console.ReadLine() para pegar dados de entrada do teclado.</p>
+
+<p>Também temos o operador ternário em C#:</p>
+
+<pre>
+<code>
+using System;
+
+namespace OperadoresLogicosERelacionais {
+    class Program {
+        static void Main(string[] args) {
+            Console.Write("Digite sua idade: ");
+            int idade = int.Parse(Console.ReadLine());
+            string maior = (idade >= 18) ? "É de Maior!" : "É de Menor!";
+
+            Console.WriteLine(maior);
+
+            Console.ReadLine();
+        }
+    }
+}
+</code>
+</pre>
+
+<h3>Estruturas de Decisão Condicional Simples e Composta</h3>
+
+<p>Como sabemos, o condicional simples é usada para testar condições e determinar as ações a seguir de acordo com o resultado do teste, contendo apenas o if.</p>
+
+<p>O condicional composto contém o if e o else, que executa um código se a expressão do if for verdadeira, caso contrário ele executará o código do else.</p>
+
+<p>Veja um exemplo de condicional simples em C#:</p>
+
+<pre>
+<code>
+using System;
+
+namespace EstruturasCondicionaisSimplesEComposta {
+    class Program {
+        static void Main(string[] args) {
+            int num1;
+            int num2;
+
+            Console.Write("Digite um número: ");
+            num1 = int.Parse(Console.ReadLine());
+
+            Console.Write("Digite outro número: ");
+            num2 = int.Parse(Console.ReadLine());
+
+            if(num1 == num2) {
+                Console.Write("Os números " + num1 + " e " + num2 + " são iguais!");
+            }
+
+            Console.Read();
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Da mesma forma, para criar um condicional composto, basta colocar o else abaixo do if, ele automaticamente é relacionado à chave do último if:</p>
+
+<pre>
+<code>
+if(num1 == num2) {
+    Console.Write("Os números " + num1 + " e " + num2 + " são iguais!");
+}
+else {
+    Console.Write("Os números " + num1 + " e " + num2 + " são diferentes!");
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-csharp-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-csharp-3.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

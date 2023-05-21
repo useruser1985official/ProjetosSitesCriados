@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Poo Java</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Poo Java</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-poo-java-1.html">Tudo sobre Poo Java Parte 1!</a></li>
+                    <li><a href="tudo-sobre-poo-java-2.html">Tudo sobre Poo Java Parte 2!</a></li>
+                    <li><a href="tudo-sobre-poo-java-3.html">Tudo sobre Poo Java Parte 3!</a></li>
+                    <li><a href="tudo-sobre-poo-java-4.html">Tudo sobre Poo Java Parte 4!</a></li>
+                    <li><a href="tudo-sobre-poo-java-5.html">Tudo sobre Poo Java Parte 5!</a></li>
+                    <li><a href="tudo-sobre-poo-java-6.html">Tudo sobre Poo Java Parte 6!</a></li>
+                    <li><a href="tudo-sobre-poo-java-7.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Poo Java Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Poo Java Parte 7</h2>
+
+<h3>Projeto Final em Java - Parte 2</h3>
+
+<p>Na segunda parte do exercício, faremos a ligação das classes Video e Gafanhotos, usando uma classe com o nome Visualizacao. Esse é o diagrama dela:</p>
+
+<table>
+    <tr>
+        <th>Visualizacao</th>
+    </tr>
+    <tr>
+        <td>
+            - static nomeCanal<br/>
+            - espectador<br/>
+            - filme
+        </td>
+    </tr>
+    <tr>
+        <td>
+            + static exibirCanal()<br/>
+            + avaliar()<br/>
+            + avaliar(nota)<br/>
+            + avaliar(porc)
+        </td>
+    </tr>
+</table>
+
+<p>Veja o código de Visualizacao:</p>
+
+<pre>
+<code>
+package projetoyoutube;
+
+public class Visualizacao {
+    private static String nomeCanal = "Videoaulas de Java";
+    private Gafanhoto espectador;
+    private Video filme;
+    
+    public static void exibirCanal() {
+        System.out.println("O nome do canal é " + nomeCanal + ".");
+    }
+
+    public Visualizacao(Gafanhoto espectador, Video filme) {
+        this.espectador = espectador;
+        this.filme = filme;
+        this.filme.setViews(this.filme.getViews() + 1);
+        this.espectador.setTotAssistido(this.espectador.getTotAssistido() + 1);
+    }
+
+    @Override
+    public String toString() { // Ele automaticamente chamará os métodos toString de espectador e filme
+        return "Visualizacao{" + "nomeCanal=" + nomeCanal + ", espectador=" + espectador + ", filme=" + filme + "}";
+    }
+    
+    public static String getNomeCanal() {
+        return nomeCanal;
+    }
+    
+    public static void setNomeCanal(String nomeCanal) {
+        Visualizacao.nomeCanal = nomeCanal;
+    }
+
+    public Gafanhoto getEspectador() {
+        return espectador;
+    }
+
+    public void setEspectador(Gafanhoto espectador) {
+        this.espectador = espectador;
+    }
+
+    public Video getFilme() {
+        return filme;
+    }
+
+    public void setFilme(Video filme) {
+        this.filme = filme;
+    }
+}
+</code>
+</pre>
+
+<p>E na classe principal, podemos fazer isso:</p>
+
+<pre>
+<code>
+package projetoyoutube;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class YoutubePoo {
+    public static void main(String[] args) {
+        List&lt;Video&gt; v = new ArrayList&lt;&gt;();  // Importe java.util.List e java.util.ArrayList
+       
+        v.add(new Video("Aula 1 de POO"));
+        v.add(new Video("Aula 12 de Java"));
+        v.add(new Video("Aula 15 de HTML5"));
+        
+        List&lt;Gafanhoto&gt; g = new ArrayList&lt;&gt;();
+
+        g.add(new Gafanhoto("Jubileu", 22, "M", "CorvoJubileu"));
+        g.add(new Gafanhoto("Creuza", 12, "F", "Creuzita"));
+        
+        List&lt;Visualizacao&gt; vis = new ArrayList&lt;&gt;();
+        
+        Visualizacao.exibirCanal();
+
+        vis.add(new Visualizacao(g.get(0), v.get(2)));
+        
+        System.out.println(vis.get(0).toString());      
+
+        vis.add(new Visualizacao(g.get(0), v.get(1)));
+        
+        System.out.println(vis.get(1).toString());      
+    }
+}
+</code>
+</pre>
+
+<p>Agora faremos o polimorfismo de sobrecarga. Terá três tipos de avaliação, por like, por nota e por porcentagem de vídeos assistidos.</p>
+
+<p>Abaixo do método construtor em Visualização, apenas poste isso:</p>
+
+<pre>
+<code>
+public void avaliar() {
+    this.filme.setAvaliacao(5);
+}
+
+public void avaliar(int nota) {
+    this.filme.setAvaliacao(nota);
+}
+
+public void avaliar(float porc) {
+    int nova = 0;
+    if(porc <= 20) {
+        nova = 3;
+    }
+    else if(porc > 20 && porc <= 50) {
+        nova = 5;
+    }
+    else if(porc > 50 && porc <= 90) {
+        nova = 8;
+    }
+    else {
+        nova = 10;
+    }
+    this.filme.setAvaliacao(nova);
+}
+</code>
+</pre>
+
+<p>Mas tem um porém, várias pessoas podem ver o vídeo, e dessa forma ele fará que a última avaliação que prevaleça. Para resolver isso, criaremos uma forma dele criar uma média de avaliações.</p>
+
+<p>Na classe Video, em public void setAvaliacao, modificaremos pra isso:</p>
+
+<pre>
+<code>
+public void setAvaliacao(int avaliacao) {
+    int media;
+    media = (int)(this.avaliacao + avaliacao) / this.views;
+    this.avaliacao = media;
+}
+</code>
+</pre>
+
+<p>Como podemos ver, podemos personalisar os métodos getter e setter, nem sempre precisamos "aceitar" tudo que o Netbeans nos sugere.</p>
+
+<p>E na classe principal, para exibir, faremos isso:</p>
+
+<pre>
+<code>
+package projetoyoutube;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class YoutubePoo {
+    public static void main(String[] args) {
+        List&lt;Video&gt; v = new ArrayList&lt;&gt;();  // Importe java.util.List e java.util.ArrayList
+       
+        v.add(new Video("Aula 1 de POO"));
+        v.add(new Video("Aula 12 de Java"));
+        v.add(new Video("Aula 15 de HTML5"));
+        
+        List&lt;Gafanhoto&gt; g = new ArrayList&lt;&gt;();
+
+        g.add(new Gafanhoto("Jubileu", 22, "M", "CorvoJubileu"));
+        g.add(new Gafanhoto("Creuza", 12, "F", "Creuzita"));
+        
+        List&lt;Visualizacao&gt; vis = new ArrayList&lt;&gt;();
+        
+        Visualizacao.exibirCanal();
+
+        vis.add(new Visualizacao(g.get(0), v.get(2)));
+        
+        System.out.println(vis.get(0).toString());      
+
+        vis.add(new Visualizacao(g.get(0), v.get(1)));
+        
+        System.out.println(vis.get(1).toString());      
+
+        vis.get(0).avaliar();
+        vis.get(1).avaliar(85.0f);
+
+        System.out.println(vis.get(0).toString());
+        System.out.println(vis.get(1).toString());
+    }
+}
+</code>
+</pre>
+
+<p>PS: Graças a orientação a objetos, podemos ligar o Java com banco de dados.</p>
+
+<h3>Tipos Genéricos em Java</h3>
+
+<p>Podemos usar também "tipos genéricos", usando apenas uma letra maiúscula, que nos permite configurar os tipos usados em Java, por exemplo:</p>
+
+<pre>
+<code>
+public class TesteGeneric {
+    private static class Generico&lt;E&gt; { // Classe interna privada e estática, com parâmetro de tipagem.
+        private E entidade;
+        
+        public E getEntidade() {
+            return this.entidade;
+        }
+        
+        public void setEntidade(E entidade) {
+            this.entidade = entidade;
+        }
+    }
+    
+    
+    public static void main(String[] args) {
+        Generico&lt;String&gt; texto = new Generico&lt;&gt;();
+        
+        texto.setEntidade("Exemplo de String!");
+        
+        System.out.println(texto.getEntidade());
+        
+        Generico&lt;Integer&gt; numero = new Generico&lt;&gt;();
+        
+        numero.setEntidade(50);
+        
+        System.out.println(numero.getEntidade());
+    }
+}
+</code>
+</pre>
+
+<p>PS: Podemos criar normalmente uma classe externa com tipos genéricos, basta adaptar o código acima.</p>
+
+<p>Caso use mais de um tipo genérico, coloque dentro da mesma tag, separados por vírgulas. Em heranças e implementações, caso a classe a ser herdada ou a interface a ser implementada tenha tipos genéricos, a classe herdeira ou implementadora deverá ter o mesmo tipo (por exemplo, se a interface for <code>public interface NomeDaInterface&lt;E&gt;</code>, a classe que a implementa deverá ter o tipo a ser recebido indicado, como por exemplo <code>public class NomeDaClasse implements NomeDaInterface&lt;Integer&gt;</code>, e nesse caso o objeto criado será <code>NomeDaInterface objeto = new NomeDaClasse()</code>. Caso não declare o tipo genérico e queira que ele seja declarado na criação do objeto, coloque a extensão ou implementação (no caso seria <code>public class NomeDaClasse&lt;E&gt; implements NomeDaInterface&lt;E&gt;</code>), e nesse caso o objeto criado será <code>NomeDaInterface&lt;ClasseInvolucro&gt; objeto = new NomeDaClasse&lt;&gt;()</code>. Esse é o conceito de polimorfismo paramétrico.</p>
+
+<p>PS: Só podemos passar tipos de classes invólucros dessa forma, então use Integer, Float, Double e Character. Observe também que criamos uma classe interna e estática pra isso, mas podemos usar classes externas para tipos genéricos, assim como interfaces.</p>
+
+<ul>
+    <li><a href="tudo-sobre-poo-java-5.html">Parte Anterior da Matéria!</a></li>
+    <!-- <li><a href="tudo-sobre-poo-java-7.html">Continuação da Matéria!</a></li> -->
+</ul>
+        </div>
+    </body>
+</html>

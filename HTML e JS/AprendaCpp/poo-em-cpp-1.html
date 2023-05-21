@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda C++</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cpp-1.html">Tudo sobre C++ Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cpp-2.html">Tudo sobre C++ Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cpp-3.html">Tudo sobre C++ Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cpp-4.html">Tudo sobre C++ Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cpp-5.html">Tudo sobre C++ Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cpp-6.html">Tudo sobre C++ Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cpp-7.html">Tudo sobre C++ Parte 7!</a></li>
+                    <li><a href="tudo-sobre-cpp-8.html">Tudo sobre C++ Parte 8!</a></li>
+                    <li><a href="tudo-sobre-cpp-9.html">Tudo sobre C++ Parte 9!</a></li>
+                    <li><a href="tudo-sobre-cpp-10.html">Tudo sobre C++ Parte 10!</a></li>
+                    <li><a href="tudo-sobre-cpp-11.html">Tudo sobre C++ Parte 11!</a></li>
+                    <li><a href="tudo-sobre-cpp-12.html">Tudo sobre C++ Parte 12!</a></li>
+                    <li><a href="tudo-sobre-cpp-13.html">Tudo sobre C++ Parte 13!</a></li>
+                    <li><a href="tudo-sobre-cpp-14.html">Tudo sobre C++ Parte 14!</a></li>
+                    <li><a href="tudo-sobre-cpp-15.html">Tudo sobre C++ Parte 15!</a></li>
+                    <li><a href="tudo-sobre-cpp-16.html">Tudo sobre C++ Parte 16!</a></li>
+                </menu>
+            </header>
+
+<h2>Orientação a Objetos em C++ - Parte 1</h2>
+
+<h3>Classes, public, private e Métodos</h3>
+
+<p>No começo, trabalharemos com a classe no mesmo arquivo.</p>
+
+<p>Para declarar a classe (lembrando que todo nome de classe começa com maiúscula), e no C++ tem que ter ponto e vírgula após o fechamento das chaves:</p>
+
+<pre>
+<code>
+class Aviao {
+    public:
+        // Atributos:
+        int velocidade;
+        int velMax;
+        string tipo;
+
+        // Métodos, construídos fora da classe:
+        void ini(int tp);
+    private:
+};
+
+void Aviao::ini(int tp) { // Referência a classe e o nome do método.
+    if(tp == 1) {
+        this->velMax = 800;
+        this->tipo = "Jato";
+    }
+    else if(tp == 2) {
+        this->velMax = 350;
+        this->tipo = "Monomotor";
+    }
+    else if(tp == 3) {
+        this->velMax = 180;
+        this->tipo = "Planador";
+    }
+}
+</code>
+</pre>
+
+<p>PS: Note que os métodos são criados fora da classe, no entanto, eles são indicados dentro dela, onde também são definidos a visibilidade os mesmos. As inicializações de atributos são as únicas coisas feitas dentro da classe, caso existam (e não sejam estáticos) E o this vai ser substituído pelo nome do objeto. Ele verifica um atributo dentro de um método da própria classe e será substituído pela classe chamadora. O this não é necessário ser usado no C++, mas é bom mantermos o hábito de usar ele.</p>
+
+<p>É permitido criar métodos dentro das classes, mas esse método não é muito usado em C++, nesse caso, ficaria assim:</p>
+
+<pre>
+<code>
+class Aviao {
+    public:
+        int velocidade;
+        int velMax;
+        string tipo;
+
+        void ini(int tp) {
+            if(tp == 1) {
+                this->velMax = 800;
+                this->tipo = "Jato";
+            }
+            else if(tp == 2) {
+                this->velMax = 350;
+                this->tipo = "Monomotor";
+            }
+            else if(tp == 3) {
+                this->velMax = 180;
+                this->tipo = "Planador";
+            }
+        }
+    private:
+};
+</code>
+</pre>
+
+<p>No método principal, basta chamar assim:</p>
+
+<pre>
+<code>
+int main() {
+    Aviao *av1 = new Aviao();
+
+    av1->ini(3);
+
+    cout << av1->velMax;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: Note que ao criar um novo objeto, temos que colocar o asterisco, que é o ponteiro que indica o endereço de memória do objeto. Sempre que criamos um objeto usando new, ele cria uma alocação de memória, e por isso devemos chamar pelo ponteiro.</p>
+
+<p>Caso queira criar objetos em Array, pode fazer algo do tipo:</p>
+
+<pre>
+<code>
+int main() {
+    Aviao *av[3]; // Colocar quantidade de posições desejadas
+	
+    // No caso, terá três posições contadas a partir do 0.
+
+    av[0] = new Aviao();
+    av[1] = new Aviao();
+    av[2] = new Aviao();
+
+    av[0]->ini(1);
+    av[1]->ini(2);
+    av[2]->ini(3);
+
+    cout << av[0]->velMax << endl;
+    cout << av[1]->velMax << endl;
+    cout << av[2]->velMax << endl;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>No caso de listas, vector e outros contâiners, usamos o ponteiro com o nome da classe dentro das tags do mesmo, por exemplo:</p>
+
+<pre>
+<code>
+vector&lt;Aviao*&gt; av;
+
+av.push_back(new Aviao());
+av.push_back(new Aviao());
+av.push_back(new Aviao());
+
+av[0]->ini(1);
+av[1]->ini(2);
+av[2]->ini(3);
+</code>
+</pre>
+
+<p>Código completo abaixo:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class Aviao {
+    public:
+        // Atributos:
+        int velocidade;
+        int velMax;
+        string tipo;
+
+        // Métodos, construídos fora da classe:
+        void ini(int tp);
+
+    private:
+};
+
+void Aviao::ini(int tp) { // Referência a classe e o nome do método.
+    if(tp == 1) {
+        this->velMax = 800;
+        this->tipo = "Jato";
+    }
+    else if(tp == 2) {
+        this->velMax = 350;
+        this->tipo = "Monomotor";
+    }
+    else if(tp == 3) {
+        this->velMax = 180;
+        this->tipo = "Planador";
+    }
+}
+
+int main() {
+    Aviao *av[3]; // Não esqueça do ponteiro
+
+    av[0] = new Aviao();
+    av[1] = new Aviao();
+    av[2] = new Aviao();
+
+    av[0]->ini(1);
+    av[1]->ini(2);
+    av[2]->ini(3);
+
+    cout << av[0]->velMax << endl;
+    cout << av[1]->velMax << endl;
+    cout << av[2]->velMax << endl;
+
+    return 0;
+}
+</code>
+</pre>
+
+
+<p>PS: Em C++, a seta é usada para atributos e métodos de objetos criados com ponteiro, que usa o new, quando é apenas uma nova atribuição com um objeto existente, usamos o ponto. Veja abaixo como seria a criação de uma instância sem new (apesar de funcionar, não é recomendada por não usar alocação de memória):</p>
+
+<pre>
+<code>
+Aviao av; // Nesse caso usa sem ponteiro
+
+av.ini(1); // Usa pontos por não ser criado com new
+</code>
+</pre>
+
+<p>Isso ocorre porque, ao criar uma variável de um objeto, automaticamente ele é atribuído à classe especificada, mesmo sem inicializar, em linguagens como Java e C# não é possível fazer assim, exigindo a instanciação do objeto.</p>
+
+<p>Caso a classe tenha algum parâmetro no construtor, coloque os parênteses na variável do objeto e seus parâmetros, caso não tenha nenhum não coloque parênteses.</p>
+
+<p>Caso queira retornar o nome da classe em C++, use o método <code>typeid(*this).name()</code> no objeto (não esqueça de incluir no cabeçalho <code>&lt;typeinfo&gt;</code>).</p>
+
+<h3>Agregação de Objetos</h3>
+
+<p>Quando fizermos uma agregação entre diferentes objetos, como as passagens de parâmetros, atributos ou retornos com objetos e classes, também é necessário usar ponteiros nos objetos, tanto na implementação quanto na declaração, por exemplo:</p>
+
+<pre>
+<code>
+class Aeroporto {
+    public:
+        Aviao *avi; // Não esqueça do ponteiro, pode ser preciso retirá-lo em alguns casos de chamar componentes através do outro objeto.
+
+        const Aviao *getAvi(); // Aqui também tem ponteiro
+        void setAvi(Aviao *avi); // Não esqueça do ponteiro
+};
+
+const Aviao *Aeroporto::getAvi() { // Não esqueça do ponteiro
+    return this->avi;
+}
+
+void Aeroporto::setAvi(Aviao *avi) { // Não esqueça do ponteiro
+    this->avi = avi;
+}
+</code>
+</pre>
+
+<p>PS: Nos métodos setter com outros objetos, se o parâmetro tem ponteiro, basta passar o objeto sem o asterisco. Caso o parâmetro não tenha ponteiro, será necessário passar o objeto com o símbolo <code>&amp;</code>.</p>
+
+<p>Ou seja, sempre que declararmos, inicializarmos ou retornar objetos, se utilizam os ponteiros neles. Se for inicializar ele, use o <code>new NomeDaClasse()</code> normalmente. Mas inicialização de atributos não são muito usados, a não ser que sejam constantes (inicializados dentro da classe) ou estáticos (cuja inicialização ocorre fora da classe no arquivo de implementação).</p>
+
+<p>Para usar métodos ou atributos de objetos agregados na classe principal, fazemos assim:</p>
+
+<pre>
+<code>
+Aviao *av = new Aviao();
+
+av->ini(1);
+
+Aeroporto *aero = new Aeroporto();
+
+aero->setAvi(av);
+cout << aero->getAvi()->tipo << endl;
+</code>
+</pre>
+
+<p>Também podemos fazer a agregação assim:</p>
+
+<pre>
+<code>
+class Aeroporto {
+    public:
+        Aviao *avi; // Não esqueça do ponteiro, pode ser preciso retirá-lo em alguns casos de chamar componentes através do outro objeto.
+
+        const Aviao *getAvi(); // Aqui também tem ponteiro
+        void setAvi(Aviao *avi); // Não esqueça do ponteiro
+};
+
+const Aviao *Aeroporto::getAvi() { // Não esqueça do ponteiro
+    return this->avi;
+}
+
+void Aeroporto::setAvi(Aviao *avi) { // Não esqueça do ponteiro
+    this->avi = avi;
+}
+
+int main() {
+    // Teste sem ponteiros
+    Aviao av; // Não precisa inicializar objetos com new nesse caso, em C++.
+
+    av.ini(1);
+
+    Aeroporto aero;
+
+    aero.setAvi(&av); // Não esqueça do &amp; comercial
+    cout << aero.getAvi()->tipo << endl; // O tipo usa seta
+
+    return 0;
+}
+</code>
+</pre>
+
+<h3>Métodos e Atributos Estáticos em C++</h3>
+
+<p>No C++ é possível criar métodos estáticos, que é quando podemos chamar um método de uma classe sem precisar criar um objeto, apenas chamando o nome da classe seguido do método, na sintaxe <code>NomeDaClasse::nomeDoMetodo()</code>.</p>
+
+<p>No código, apenas coloque <code>static</code> antes do tipo da função, dentro da classe (apenas dentro da classe, não na implementação). O static pode também ser usado em atributos, e no código principal podemos instanciar sem o new, como por exemplo <code>NomeDaClasse::nomeDoAtributo = conteudo</code>. (lembrando que nesse caso, mudaremos o conteúdo do atributo da classe e todos os objetos criados por ela serão alterados, por compartilhamento, independente da alteração ser dentro ou fora da classe). Nesse caso, dentro da classe não utilizamos this, só o nome do atributo ou método sozinho.</p>
+
+<p>Veja um exemplo abaixo de uso :</p>
+
+<pre>
+<code>
+class Aviao {
+    public:
+        int velocidade;
+        int velMax;
+        string tipo;
+        static int quantTanque; // Atributo estático, não é possível inicializar diretamente aqui.
+
+        void ini(int tp);
+        static void decolar(); // Indica apenas o método estático aqui.
+    private:
+};
+
+int Aviao::quantTanque = 50; // A inicialização acontece só aqui.
+
+void Aviao::ini(int tp) {
+    if(tp == 1) {
+        this->velMax = 800;
+        this->tipo = "Jato";
+    }
+    else if(tp == 2) {
+        this->velMax = 350;
+        this->tipo = "Monomotor";
+    }
+    else if(tp == 3) {
+        this->velMax = 180;
+        this->tipo = "Planador";
+    }
+}
+
+void Aviao::decolar() { // Método estático, não se indica nada aqui.
+    cout << "Pronto pra Decolar!" << endl;
+}
+
+int main() {
+    Aviao::quantTanque = 100; // Atributo estático alterado aqui.
+
+    cout << Aviao::quantTanque << endl; // Atributo estático chamado diretamente
+    Aviao::decolar(); // Método estático chamado diretamente
+
+    Aviao *av1 = new Aviao();
+    av1->ini(1);
+    cout << av1->tipo << endl;
+    cout << av1->quantTanque << endl; // Atributo estático
+    av1->decolar(); // Pegará o mesmo valor do método estático.
+	
+    Aviao *av2 = new Aviao();
+    av2->ini(2);
+    cout << av2->tipo << endl;
+    cout << av2->quantTanque << endl; // Atributo estático
+    av2->decolar(); // Método estático
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>O static, teoricamente, significa que só uma alocação de memória é criada para esse atributo ou método, não tendo duas cópias na memória em simultâneo.</p>
+
+<p>Em outras palavras, o static manipula os atributos e métodos na classe toda, não apenas em uma instância, e todo objeto criado com ela também terá essa alteração. São atributos e métodos globais.</p>
+
+<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados, e nunca se deve utilizar o this neles. Lembrando que métodos getters e setters de atributos estáticos, também deverão ser estáticos.</p>
+
+<h3>Classe em Arquivo Externo e Construtor</h3>
+
+<p>Dessa vez, crie no projeto, um arquivo de cabeçalho (file). A classe será construída dentro dele, com o mesmo código acima, mas este terá algumas alterações.</p>
+
+<p>Nele, terá o método construtor, que não tem declaração de tipo e tem o mesmo nome da classe. Esse método construirá automaticamente atributos ao objeto. Assim:</p>
+
+<pre>
+<code>
+class Aviao {
+    public:
+        int velocidade;
+        int velMax;
+        std::string tipo; // Será necessário colocar std em strings, e incluir o iostream no cabeçalho.
+        static int quantTanque;
+
+        Aviao(int tp);
+        static void decolar();
+    private:
+};
+
+int Aviao::quantTanque = 50; // Atributo estático.
+
+Aviao::Aviao(int tp) {
+    if(tp == 1) {
+        this->velMax = 800;
+        this->tipo = "Jato";
+    }
+    else if(tp == 2) {
+        this->velMax = 350;
+        this->tipo = "Monomotor";
+    }
+    else if(tp == 3) {
+        this->velMax = 180;
+        this->tipo = "Planador";
+    }
+   
+    this->velocidade = 0;
+}
+
+void Aviao::decolar() { // Método estático.
+    std::cout << "Pronto pra Decolar!" << std::endl;
+}
+</code>
+</pre>
+
+<p>Esse código acima, sempre estará no arquivo de cabeçalho, entre o ifndef/define e o endif.</p>
+
+<p>Para incluir na página principal, usamos o include entre aspas, no caso <code>#include "Aviao.h"</code>. Dessa forma:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Aviao.h"
+
+using namespace std;
+
+int main() {
+    Aviao *av[3];
+	
+    av[0] = new Aviao(1);
+    av[1] = new Aviao(2);
+    av[2] = new Aviao(3);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Essa é uma das vantagens da orientação a objetos, já que esse arquivo de cabeçalho pode ser utilizado para criar vários objetos, e também pode ser reaproveitado em outros programas C++.</p>
+
+<p>Código completo do cabeçalho Aviao.h:</p>
+
+<pre>
+<code>
+#ifndef AVIAO_H_INCLUDED
+#define AVIAO_H_INCLUDED
+#include &lt;iostream&gt; // Não esqueça do include
+
+class Aviao {
+    public:
+        int velocidade;
+        int velMax;
+        std::string tipo;
+        static int quantTanque;
+
+        Aviao(int tp);
+        static void decolar();
+        void imprimir();
+    private:
+};
+
+int Aviao::quantTanque = 50; // Atributo estático.
+
+Aviao::Aviao(int tp) {
+    if(tp == 1) {
+        this->velMax = 800;
+        this->tipo = "Jato";
+    }
+    else if(tp == 2) {
+        this->velMax = 350;
+        this->tipo = "Monomotor";
+    }
+    else if(tp == 3) {
+        this->velMax = 180;
+        this->tipo = "Planador";
+    }
+
+    this->velocidade = 0;
+}
+
+void Aviao::decolar() { // Método estático.
+    std::cout << "Pronto pra Decolar!" << std::endl;
+}
+
+void Aviao::imprimir() {
+    std::cout << "Tipo: " << tipo << std::endl;
+    std::cout << "Velocidade Máxima: " << velMax << std::endl;
+    std::cout << "Velocidade atual: " << velocidade << std::endl;
+    std::cout << "-----------------------" << std::endl;
+}
+
+#endif // AVIAO_H_INCLUDED
+</code>
+</pre>
+
+<p>PS: O std nos cout, nos endl e nas strings é porque não estamos informando o namespace no Aviao.h.</p>
+
+<p>Código na função principal:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Aviao.h"
+
+using namespace std;
+
+int main() {
+    Aviao *av[3];
+	
+    av[0] = new Aviao(1);
+    av[1] = new Aviao(2);
+    av[2] = new Aviao(3);
+
+    av[0]->imprimir();
+    av[1]->imprimir();
+    av[2]->imprimir();
+
+    return 0;
+}
+
+</code>
+</pre>
+
+<p>PS: Podemos criar também classes diretamente no arquivo classes, nesse caso seria algo do tipo:</p>
+
+<p>No arquivo h, colocamos apenas a parte da assinatura (interface) da classe:</p>
+
+<pre>
+<code>
+#ifndef AVIAO_H_INCLUDED
+#define AVIAO_H_INCLUDED
+#include &lt;iostream&gt; // Não podemos esquecer do iostream aqui.
+
+// Podemos colocar o using namespace std também aqui, pra evitar o uso de std.
+
+class Aviao {
+    public:
+        int velocidade;
+        int velMax;
+        std::string tipo;
+        static int quantTanque;
+
+        Aviao(int tp);
+        static void decolar();
+        void imprimir();
+    private:
+};
+
+#endif // AVIAO_H_INCLUDED
+</code>
+</pre>
+
+<p>No arquivo cpp, colocaremos a implementação (execução) dos métodos (incluindo os getters, setters e construtores), além dos atributos estáticos:</p>
+
+<pre>
+<code>
+#include "Aviao.h"
+// Não é necessário colocar iostream e outras bibliotecas aqui, caso estejam em h.
+
+int Aviao::quantTanque = 50; // Atributo estático.
+
+Aviao::Aviao(int tp) {
+    if(tp == 1) {
+        this->velMax = 800;
+        this->tipo = "Jato";
+    }
+    else if(tp == 2) {
+        this->velMax = 350;
+        this->tipo = "Monomotor";
+    }
+    else if(tp == 3) {
+        this->velMax = 180;
+        this->tipo = "Planador";
+    }
+
+    this->velocidade = 0;
+}
+
+void Aviao::decolar() { // Método estático.
+    std::cout << "Pronto pra Decolar!" << std::endl;
+}
+
+void Aviao::imprimir() {
+    std::cout << "Tipo: " << tipo << std::endl;
+    std::cout << "Velocidade Máxima: " << velMax << std::endl;
+    std::cout << "Velocidade atual: " << velocidade << std::endl;
+    std::cout << "-----------------------" << std::endl;
+}
+</code>
+</pre>
+
+<p>E no método principal, basta incluirmos apenas o arquivo de cabeçalho h normalmente.</p>
+
+<p>Caso seja necessário chamar um método de uma classe pai dentro de outro método em uma classe filha, chame usando uma sintaxe tipo <code>ClassePai::metodoDela()</code>.</p>
+
+<p>E também podemos fazer sobrecarga de mais de um construtor, colocando na mesma classe dois ou mais construtores, todos com o nome igual da classe e sem tipo, mas com parâmetros diferentes.</p>
+
+<p>PS: Caso num construtor precise inicializar um atributo como nulo, use <code>NULL</code> e inclua a bibioteca <code>&lt;cstddef&gt;</code>. Lembrando que apenas ponteiros podem usar NULL.</p>
+
+<p>Além dos construtores, também temos os destrutores em C++, declarados de forma quase igual aos construtores, usando o nome da mesma classe, diferenciando por um til, declarando na classe algo tipo <code>virtual ~NomeDaClasse()</code> (se a classe não for pra extensão, pode retirar o virtual), e a implementação é feita dessa forma:</p>
+
+<pre>
+<code>
+Aviao::~Aviao() {
+    std::cout << "Objeto Destruído" << std::endl; // A mensagem é opcional
+}
+</code>
+</pre>
+
+<p>E para destruir o objeto especificado, fazemos algo assim no main:</p>
+
+<pre>
+<code>
+delete avi;
+delete *arAv; // Se for destruir array de objetos, coloque o ponteiro pra destruir o array todo
+</code>
+</pre>
+
+<p>PS: Objetos de contâiners como list e vector, só podem ser destruídos separadamente. Podemos fazer um for it pra isso, por exemplo:</p>
+
+<pre>
+<code>
+for(auto a: av) { // Nome do objeto no lugar do av, o a é o que será iterado.
+    delete a;
+}
+</code>
+</pre>
+
+<p>Lembrando que, caso tenha agregação de objetos, é recomendado usar o <code>delete this->nomeDoObjeto</code> desses objetos dentro do destrutor da classe.</p>
+
+<p>Isso é usado para destruir um objeto no meio da execução do programa, pra não sobrecarregar a memória. Diferente de outras linguagens POO surgidas posteriormente, o C++ não faz a coleta de lixo, por isso é necessário usar o delete pra destruir objetos (objetos agregados em outros objetos são destruídos automaticamente, mas o principal não), na verdade, no C++ a POO é mais primitiva, por ter sido a primeira linguagem a usar esse paradigma. Sempre mantenha o hábito de usar o delete em objetos em C++ por esse motivo.</p>
+
+<p>PS: Lembrando que o delete só pode ser usado em objetos criados com ponteiros, inicializados com new, por não haver coleta de lixo desse tipo de objeto. Objetos criados sem essa atribuição tem a coleta de lixo feita automaticamente, por isso não se usa delete.</p>
+
+<p>Após o uso do delete no objeto, podemos atribuir ele novamente com outras características, por exemplo:</p>
+
+<pre>
+<code>
+Aviao *av = new Aviao(1);
+
+av->imprimir();
+
+delete av;
+
+av = new Aviao(2); // Na nova atribuição é sem ponteiro mesmo.
+
+av->imprimir();
+
+delete av;
+</code>
+</pre>
+
+<p>PS: Não é necessário criar o destrutor para usar o delete, porque ele já cria um por padrão, mas pode ser útil pra exibir mensagens, por exemplo. Os construtores também são criados automaticamente, quando não são especificados no código. Destrutores em C++ não podem ser sobrepostos.</p>
+
+<ul>
+    <li><a href="poo-em-cpp-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

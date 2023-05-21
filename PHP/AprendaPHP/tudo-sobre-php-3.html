@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda PHP</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda PHP</h1>
+                <menu>
+                    <li><a href="index.php">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-php-1.html">Tudo sobre PHP Parte 1!</a></li>
+                    <li><a href="tudo-sobre-php-2.html">Tudo sobre PHP Parte 2!</a></li>
+                    <li><a href="tudo-sobre-php-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre PHP Parte 3!</a></li>
+                    <li><a href="tudo-sobre-php-4.html">Tudo sobre PHP Parte 4!</a></li>
+                    <li><a href="tudo-sobre-php-5.html">Tudo sobre PHP Parte 5!</a></li>
+                    <li><a href="tudo-sobre-php-6.html">Tudo sobre PHP Parte 6!</a></li>
+                </menu>
+            </header>
+                           
+<h2>Tudo sobre PHP Parte 3</h2>
+
+<h3>Estrutura condicional If e Else</h3>
+
+<p>O condicional simples é feito apenas com a declaração <code>if</code> (significando "se") é usado para especificar um bloco de código que deverá ser executado, ao retornar true. O condicional composto é feito com o if junto com o <code>else</code> (significando "senão"). O else se usa para executar um segundo bloco de código ao retornar false. Existe ainda o condicional composto alinhando, que entre o if e o else tem o <code>else if</code>. O else if executa um segundo código ao if retornar false, antes de executar o else.</p>
+
+<p>No PHP, se usa muito o operador ternário, mas em certos casos é necessário usar o condicional if e else, como podemos usar os dois juntos. Veja um exemplo:</p>
+
+<p>Código HTML:</p>
+
+<pre>
+<code>
+&lt;form method="get" action="testes.php"&gt;
+    Ano de Nascimento: &lt;input type="number" name="ano" min="1900" max="2017" value="1900"/&gt;
+    &lt;input type="submit" value="Verificar"/&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>PHP na segunda página:</p>
+
+<pre>
+<code>
+$ano = isset($_GET["ano"]) ? (int)$_GET["ano"] : 1990;
+$idade = date("Y") - $ano;
+echo "Você nasceu em $ano e tem $idade.&lt;br/&gt;";
+if($idade &gt;= 18) {
+    $v = "já pode votar";
+    $d = "já pode dirigir";
+}
+else {
+    $v = "não pode votar";
+    $d = "não pode dirigir";
+}
+echo "Com essa idade você $v e $d.";
+</code>
+</pre>
+
+<p>Mas vamos considerar a situação de que existe votos opcionais, podemos usar condições aninhadas para resolver isso no condicional (que são condições dentro das outras), dessa forma:</p>
+
+<pre>
+<code>
+$ano = isset($_GET["ano"]) ? (int)$_GET["ano"] : 1990;
+$idade = date("Y") - $ano;
+echo "Você nasceu em $ano e tem $idade.&lt;br/&gt;";
+if($idade &lt; 16) {
+    $tipoVoto = "não vota";
+}
+else {
+    if(($idade &gt;= 16 && $idade &lt; 18) || ($idade &gt; 70)) {
+        $tipoVoto = "voto opcional";
+    }
+    else {
+        $tipoVoto = "voto obrigatório";
+    }
+}
+echo "Com essa idade, $tipoVoto.";
+</code>
+</pre>
+
+<p>Podemos simplificar essa opção usando o else if, assim:</p>
+
+<pre>
+<code>
+$ano = isset($_GET["ano"]) ? (int)$_GET["ano"] : 1990;
+$idade = date("Y") - $ano;
+echo "Você nasceu em $ano e tem $idade.&lt;br/&gt;";
+if($idade &lt; 16) {
+    $tipoVoto = "não vota";
+}
+else if(($idade &gt;= 16 && $idade &lt; 18) || ($idade &gt; 70)) {
+    $tipoVoto = "voto opcional";
+}
+else {
+    $tipoVoto = "voto obrigatório";
+}
+echo "Com essa idade, $tipoVoto.";
+</code>
+</pre>
+
+<p>Agora vamos ver um exemplo calculando a média de duas notas de um aluno:</p>
+
+<p>HTML na primeira página:</p>
+
+<pre>
+<code>
+&lt;form method="get" action="testes.php"&gt;
+    Nota 1: &lt;input type="number" name="n1" min="0" max="10" value="0"/&gt;
+    Nota 1: &lt;input type="number" name="n2" min="0" max="10" value="0"/&gt;
+    &lt;input type="submit" value="Calcular Média"/&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>PHP na segunda página:</p>
+
+<pre>
+<code>
+$n1 = isset($_GET["n1"]) ? (float)$_GET["n1"] : 0;
+$n2 = isset($_GET["n2"]) ? (float)$_GET["n2"] : 0;
+$m = ($n1 + $n2) / 2;
+if($m &gt;= 8) {
+    $nota = "&lt;span style='color: green'&gt;APROVADO! PARABÉNS!&lt;/span&gt;";
+}
+else if($m &gt;= 5 && $m &lt; 8) {
+    $nota = "&lt;span style='color: yellow'&gt;EM RECUPERAÇÃO!&lt;/span&gt;";
+}
+else {
+    $nota = "&lt;span style='color: red'&gt;REPROVADO!&lt;/span&gt;";
+}
+echo "A sua média é de $m.&lt;br/&gt;";
+echo "Sua Situação: $nota";
+</code>
+</pre>
+
+<h3>Estrutura Condicional Switch e Case</h3>
+
+<p>A declaração condicional <code>switch</code> (chaveamento) é usada quando é preciso realizar diferentes ações baseadas em distintas condições. Pra simplificar o código, geralmente se usa no lugar de um condicional aninhado.</p>
+
+<p>O <code>case</code> é o valor comparado com a expressão, se corresponder, o código associado será executado. O <code>break</code> garante que a estrutura seja finaliza ao encontrar uma correspondência. E o <code>default</code> é o bloco de códigos que será executado se nenhum caso corresponder à expressão.</p>
+
+<p>Veja que depois do case e do default, nesse caso, se usa dois pontos <code>:</code>, e que ele diferencia minúsculas e maiúsculas, veja um exemplo de estrutura condicional:</p>
+
+<p>HTML na primeira página:</p>
+
+<pre>
+<code>
+&lt;form method="get" action="testes.php"&gt;
+    Número: &lt;input type="number" name="num" value="0"/&gt;
+    &lt;fieldset style="width: 300px"&gt;
+        &lt;legend&gt;Operação&lt;/legend&gt;
+        &lt;input type="radio" name="oper" id="dobro" value="1" checked/&gt;Dobro
+        &lt;input type="radio" name="oper" id="cubo" value="2"/&gt;Cubo
+        &lt;input type="radio" name="oper" id="raiz" value="3"/&gt;Raiz
+    &lt;/fieldset&gt;
+    &lt;input type="submit" value="Calcular"/&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>PHP na segunda página:</p>
+
+<pre>
+<code>
+$n = isset($_GET["num"]) ? (int)$_GET["num"] : 0;
+$o = isset($_GET["oper"]) ? (int)$_GET["oper"] : 1;
+switch($o) {
+    case 1:
+        $r = $n * 2;
+        break;
+    case 2:
+        $r = pow($n, 3);
+        break;
+    case 3:
+        $r = sqrt($n);
+        break;
+    default:
+        $r = "Operação Inválida";
+        break;
+}
+echo "O resultado da operação solicitada foi &lt;b&gt;$r&lt;/b&gt;."
+</code>
+</pre>
+
+<p>O case só suporta um valor, no entanto, quando queremos citar mais de um caso, podemos fazer algo como nesse exemplo:</p>
+
+<p>HTML:</p>
+
+<pre>
+<code>
+&lt;form method="get" action="testes.php"&gt;
+    Dia da Semana: &lt;input type="number" name="ds" min="1" max="7" value="2"/&gt;
+    &lt;input type="submit" value="Analisar"/&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>PHP na segunda página:</p>
+
+<pre>
+<code>
+$d = isset($_GET["ds"]) ? (int)$_GET["ds"] : 0;
+switch($d) {
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+        echo "É Dia de Estudar!";
+        break;
+    case 1:
+    case 7:
+        echo "É Dia de Descansar!";
+        break;
+    default:
+        echo "Dia Inválido!";
+        break;
+}
+</code>
+</pre>
+
+<p>Agora vamos criar um formulário com select para selecionar os estados e verificar em qual região do Brasil ele fica. Coloque as siglas referentes às regiões no value de cada option.</p>
+
+<p>Esse é o HTML da primeira página:</p>
+
+<pre>
+<code>
+&lt;form method=&quot;get&quot; action=&quot;testes.php&quot;&gt;
+    Estado:
+    &lt;select name=&quot;est&quot;&gt;
+        &lt;option value=&quot;NO&quot;&gt;Acre&lt;/option&gt; 
+        &lt;option value=&quot;NE&quot;&gt;Alagoas&lt;/option&gt;
+        &lt;option value=&quot;NO&quot;&gt;Amap&aacute;&lt;/option&gt;
+        &lt;option value=&quot;NO&quot;&gt;Amazonas&lt;/option&gt;
+        &lt;option value=&quot;NE&quot;&gt;Bahia&lt;/option&gt;
+        &lt;option value=&quot;NE&quot;&gt;Cear&aacute;&lt;/option&gt;
+        &lt;option value=&quot;CO&quot;&gt;Distrito Federal&lt;/option&gt;
+        &lt;option value=&quot;SE&quot;&gt;Esp&iacute;rito Santo&lt;/option&gt;
+        &lt;option value=&quot;CO&quot;&gt;Goi&aacute;s&lt;/option&gt;
+        &lt;option value=&quot;NE&quot;&gt;Maranh&atilde;o&lt;/option&gt;
+        &lt;option value=&quot;CO&quot;&gt;Mato Grosso&lt;/option&gt;
+        &lt;option value=&quot;CO&quot;&gt;Mato Grosso do Sul&lt;/option&gt;
+        &lt;option value=&quot;SE&quot;&gt;Minas Gerais&lt;/option&gt;
+        &lt;option value=&quot;NO&quot;&gt;Par&aacute;&lt;/option&gt;
+        &lt;option value=&quot;NE&quot;&gt;Para&iacute;ba&lt;/option&gt;
+        &lt;option value=&quot;SU&quot;&gt;Paran&aacute;&lt;/option&gt;
+        &lt;option value=&quot;NE&quot;&gt;Pernambuco&lt;/option&gt;
+        &lt;option value=&quot;NE&quot;&gt;Piau&iacute;&lt;/option&gt;
+        &lt;option value=&quot;SE&quot;&gt;Rio de Janeiro&lt;/option&gt;
+        &lt;option value=&quot;NE&quot;&gt;Rio Grande do Norte&lt;/option&gt;
+        &lt;option value=&quot;SU&quot;&gt;Rio Grande do Sul&lt;/option&gt;
+        &lt;option value=&quot;NO&quot;&gt;Rond&ocirc;nia&lt;/option&gt; 
+        &lt;option value=&quot;NO&quot;&gt;Roraima&lt;/option&gt;
+        &lt;option value=&quot;SU&quot;&gt;Santa Catarina&lt;/option&gt;
+        &lt;option value=&quot;SE&quot; selected&gt;S&atilde;o Paulo&lt;/option&gt;
+        &lt;option value=&quot;NE&quot;&gt;Sergipe&lt;/option&gt;
+        &lt;option value=&quot;NO&quot;&gt;Tocantins&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Verificar&quot;/&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>E esse é o PHP da segunda página:</p>
+
+<pre>
+<code>
+$est = isset($_GET["est"]) ? $_GET["est"] : null;
+switch($est) {
+    case "NO":
+        $reg = "Região Norte";
+        break;
+    case "NE":
+        $reg = "Região Nordeste";
+        break;
+    case "CO":
+        $reg = "Região Centro-Oeste";
+        break;
+    case "SE":
+        $reg = "Região Sudeste";
+        break;
+    case "SU":
+        $reg = "Região Sul";
+        break;
+    default:
+        $reg = "Região Desconhecida";
+        break;
+}
+echo "O estado solicitado fica na $reg";
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-php-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-php-4.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

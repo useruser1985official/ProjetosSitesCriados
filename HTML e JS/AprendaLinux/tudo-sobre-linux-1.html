@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Linux</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Linux</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-linux-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Linux Parte 1!</a></li>
+                    <li><a href="tudo-sobre-linux-2.html">Tudo sobre Linux Parte 2!</a></li>
+                    <li><a href="tudo-sobre-linux-3.html">Tudo sobre Linux Parte 3!</a></li>
+                    <li><a href="tudo-sobre-linux-4.html">Tudo sobre Linux Parte 4!</a></li>
+                    <li><a href="tudo-sobre-linux-5.html">Tudo sobre Linux Parte 5!</a></li>
+                    <li><a href="tudo-sobre-linux-6.html">Tudo sobre Linux Parte 6!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Linux Parte 1</h2>
+
+<h3>Comando ls - Listar Conteúdo de Diretórios no Linux</h3>
+
+<p>O comando <code>ls</code> é usado para listar arquivos nos sistemas Unix (Linux, OS X, BSD).</p>
+
+<p>Ele tem algumas opções, como essas:</p>
+
+<table>
+    <tr>
+        <th>Opções</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>-a</td>
+        <td>Mostra todos os arquivos, incluindo os ocultos</td>
+    </tr>
+    <tr>
+        <td>-A</td>
+        <td>Idem -a, mas não mostra os diretórios corrente ou pai</td>
+    </tr>
+    <tr>
+        <td>-i</td>
+        <td>Mostra o número do inode de cada arquivo na primeira coluna</td>
+    </tr>
+    <tr>
+        <td>-l</td>
+        <td>Formato longo, mostra permissões, números de links, proprietário, grupo, tamanho, dada de modificação e nome do arquivo.</td>
+    </tr>
+    <tr>
+        <td>-m</td>
+        <td>Arquivos listados em sequência, separados por vírgula</td>
+    </tr>
+    <tr>
+        <td>-n</td>
+        <td>Idem ao -l, porém mostra UID e GID em vez de nomes de proprietário</td>
+    </tr>
+    <tr>
+        <td>-o</td>
+        <td>Idem ao -l, porém não mostra o grupo do arquivo</td>
+    </tr>
+    <tr>
+        <td>-p</td>
+        <td>Mostra uma barra na frente de nomes de diretórios</td>
+    </tr>
+    <tr>
+        <td>-r</td>
+        <td>Ordem reversa</td>
+    </tr>
+    <tr>
+        <td>-h</td>
+        <td>Mostra o tamanho em formato legível por humanos, combinado com -l</td>
+    </tr>
+</table>
+
+<h3>Permissões de Acesso a Arquivos e Pastas pelo Terminal Linux</h3>
+
+<p>Primeiro, abra o terminal e digite <code>pwd</code> para mostrar qual diretório está atualmente, vá ao diretório home digitando <code>cd ~/</code>, e veja o conteúdo com <code>ls -l</code>.</p>
+
+<p>As primeiras letras (com vários d, r, w, x e etc.). são os códigos das permissões. A sintaxe seria algo assim:</p>
+
+<table>
+    <tr>
+        <th>Permissões</th>
+        <th>Links</th>
+        <th>Proprietário</th>
+        <th>Grupo</th>
+        <th>Tamanho</th>
+        <th>Data e Hora</th>
+        <th>Nome do Arquivo/Diretório</th>
+    </tr>
+    <tr>
+        <td>drwxr-xr-x</td>
+        <td>1</td>
+        <td>admin</td>
+        <td>Administrador</td>
+        <td>4096</td>
+        <td>Set 22 10:08</td>
+        <td>temp</td>
+    </tr>
+</table>
+
+<p>E os significados da primeira letra, <code>d</code> pra diretório, <code>-</code> para arquivo comum, <code>c</code> para arquivo de caractere, <code>b</code> para arquivo de bloco e <code>l</code> para link.</p>
+
+<p>No exemplo acima, <code>drwxr-xr-x</code>, a sintaxe seria essa:</p>
+
+<table>
+    <tr>
+        <th>Tipo</th>
+        <th>Proprietário</th>
+        <th>Grupo</th>
+        <th>Outros</th>
+    </tr>
+    <tr>
+        <td>d</td>
+        <td>rwx</td>
+        <td>r-x</td>
+        <td>r-x</td>
+    </tr>
+</table>
+
+<p>Essas configurações de grupos são para dar permissões de grupo para determinados dos usuários, se ele não é proprietário ou não estar no mesmo grupo, ele estará em outros.</p>
+
+<p>Os níveis de permissões são Proprietário, Grupo e Outros.</p>
+
+<p>No caso de permissões, os significados são <code>r</code> para leitura, <code>w</code> para escrita (gravação), <code>x</code> para execução e <code>-</code> quando é sem permissão.</p>
+
+<h3>Alterar Permissões pelo Terminal - Linux</h3>
+
+<p>Para alterarmos permissões de acesso à arquivos e diretórios, usamos o comando <code>chmod</code>.</p>
+
+<p>Existe dois modos mais usados, o literal e o octal, no caso, usaremos o octal, a sintaxe seria algo tipo <code>chmod 777 nomedoarquivo</code>.</p>
+
+<p>As permissões atribuídas com números é essa:</p>
+
+<ul>
+    <li>Leitura - <code>4</code></li>
+    <li>Gravação - <code>2</code></li>
+    <li>Execução - <code>1</code></li>
+</ul>
+
+<p>Lembre-se que existe uma ordem correta para aplicar as permissões, que são leitura, gravação e execução (rwx). Quando a permissão está ligada, será representada com 1 e desligada com 0.</p>
+
+<p>Se temos a opção rwx, a permissão em binário é 111. Se for --x é 001 (em octal 1), se for -w- é 010 (em octal 2), se for r-- é 100 (em octal 4).</p>
+
+<p>Por esse motivo acima, a representação dos números é feita da forma da tabelinha, e por termos oito combinações, é usado o modo octal.</p>
+
+<p>Para chegar ao número octal, também podemos fazer a conta diretamente, rwx (111) seria 4 + 2 + 1 (que seria 7 em octal), rw- seria 4 + 2 + 0 (6 em octal), r-- seria apenas o 4 em octal, etc.</p>
+
+<p>Essa é a tabelinha completa:</p>
+
+<table>
+    <tr>
+        <th>Permissões</th>
+        <th>Binário</th>
+        <th>Octal</th>
+    </tr>
+    <tr>
+        <td>---</td>
+        <td>000</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>--x</td>
+        <td>001</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>-w-</td>
+        <td>010</td>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>-wx</td>
+        <td>011</td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>r--</td>
+        <td>100</td>
+        <td>4</td>
+    </tr>
+    <tr>
+        <td>r-x</td>
+        <td>101</td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>rw-</td>
+        <td>110</td>
+        <td>6</td>
+    </tr>
+    <tr>
+        <td>rwx</td>
+        <td>111</td>
+        <td>7</td>
+    </tr>
+</table>
+
+<p>No exemplo, usaremos <code>rwxrw-rw-</code> para definirmos as permissões para o proprietário, para o grupo e para os outros.</p>
+
+<p>Em binário, ficaria <code>111 110 110</code> (766 em octal).</p>
+
+<p>Em outro exemplo, com <code>rw-r-----</code> ficaria <code>110 100 000</code> (640 em octal), que é leitura e gravação pro proprietário, leitura pro grupo e sem permissões para os outros.</p>
+
+<p>Vamos na prática, crie um arquivo de teste em qualquer pasta, e na pasta designada, digite o comando <code>ls -l teste.txt</code> para ver as permissões. Para alterá-las, use a base octal, por exemplo <code>chmod 770 teste.txt</code> (deverá ser usado como administrador, com o comando <code>sudo</code> antes).</p>
+
+<p>PS: Para alterar permissões recursivamente, como as de diretórios e seus arquivos, adicione o parâmetro <code>-R</code>, como por exemplo <code>sudo chmod -R 755 /var/www</code>.</p>
+
+<h3>Alterar Proprietário e Grupo dos Arquivos no Linux</h3>
+
+<p>Cada arquivo (e diretório) tem um proprietário individual, geralmente o usuário que o criou, e um grupo com o qual é associado, o "grupo do arquivo".</p>
+
+<p>Cada grupo pode ter diversos usuários como membros, o que combinado com o conceito de proprietário dos arquivos nos permite fornecer três camadas para controle de acesso aos arquivos e diretórios: usuário proprietário do arquivo, grupo do arquivo, e todos os demais usuários, os "outros".</p>
+
+<p>Podemos verificar quem é o proprietário de um arquivo ou diretório e seu grupo padrão usando o comando ls com a opção de listagem longa (-l):</p>
+
+<pre>
+<code>
+ls -l
+</code>
+</pre>
+
+<p>Observe que as pastas e arquivos mostram a propriedade do usuário, e o grupo associado, além das permissões, tamanho, etc.</p>
+
+<p>Podemos alterar o proprietário de um arquivo usando o comando chown (change owner). Somente o usuário root pode efetuar essa alteração.</p>
+
+<p>Essa é a sintaxe: <code>chown opcoes novoproprietario:novogrupo nomedosarquivos</code>.</p>
+
+<p>Por exemplo:</p>
+
+<pre>
+<code>
+sudo chown novoprop:novogrup arquivo
+</code>
+</pre>
+
+<p>Veja que o comando chown também permite alterar o grupo associado dos arquivos indicados.</p>
+
+<p>Há poucas opções disponíveis para o comando chown, mas uma das mais úteis é a opção -R ou --recursive, que permite alterar a propriedade do arquivo em uma árvore de diretórios inteira.</p>
+
+<p>Crie um novo usuário usando o comando <code>sudo useradd nomedouser</code> e dê privilégios de root pra ele com <code>sudo usermod -aG sudo nomedouser</code>.</p>
+
+<p>Tomemos como exemplo o diretório planilhas que contém 5 arquivos de planilhas, todas pertencentes ao mesmo usuário:</p>
+
+<pre>
+<code>
+ls -l
+
+sudo chown -R nomedouser ./planilhas
+</code>
+</pre>
+
+<p>Se um usuário for removido, os arquivos dos quais esse usuário era proprietário se mantém no sistema, e no lugar do nome do proprietário aparecerá ou UID que o usuário possuía. Por exemplo, vamos excluir o usuário com o comando <code>sudo userdel -f nomedouser</code>, seu grupo com <code>sudo groupdel nomedouser</code> e depois verificar como ficou a posse de seus arquivos:</p>
+
+<p>Para alterar apenas o grupo de um arquivo usaremos o comando chgrp, que pode ser executado pelo root (sempre) ou por um usuário comum (desde que o grupo seja alterado para um grupo ao qual o usuário pertença). A sintaxe é <code>chgrp novogrupo arquivos</code>.  As opções do comando chgrp são similares às do comando chown, como por exemplo a opção -R (--recursive).</p>
+
+<p>Vamos alterar o grupo do arquivo planilha-01 para o grupo marketing com o comando chgrp:</p>
+
+<pre>
+<code>
+sudo chgrp marketing planilha-01
+</code>
+</pre>
+
+<h3>Gerenciamento de Pacotes pela Linha de Comandos</h3>
+
+<p>O APT é um sistema de software que permite o gerenciamento de pacotes de software em distribuições Debian GNU/Linux e seus derivados, como o Ubuntu e Mint.</p>
+
+<p>Ele contém uma série de ferramentas utilizadas no gerenciamento dos pacotes, permitindo realizar tarefas como instalação e remoção de pacotes e atualização do sistema</p>
+
+<p>O APT usa um arquivo que lista as fontes de onde ele obterá os pacotes. Esse arquivo é o <code>/etc/apt/sources.list</code>, as entradas desse arquivo normalmente são formadas assim:</p>
+
+<pre>
+<code>
+deb http://host/ distribuição seção1 seção2 seção3
+deb-src http://host/ distribuição seção1 seção2 seção3
+</code>
+</pre>
+
+<p>Onde: deb e deb-src indicam o tipo de repositório: se ele armazena pacotes binários (deb), ou seja, pacotes pré-compilados prontos para instalação, ou se guarda pacotes fonte (deb-src), que são o código-fonte original do programa.</p>
+
+<p>Sempre que esse arquivo for modificado, deve-se rodar o comando apt-get update logo após. Isso deve ser feito para que o APT obtenha as listas de pacotes atualizadas das fontes especificadas. </p>
+
+<p>Podemos utilizar CDs ou DVDs como repositórios de pacotes do sistema. Para isso, insira o cd ou dvd da distribuição no drive, e emita o comando a seguir:</p>
+
+<pre>
+<code>
+sudo apt-cdrom add
+
+sudo apt-get update
+</code>
+</pre>
+
+<p>Agora o conteúdo do CD/DVD também está indexado no sistema, e seus pacotes podem ser instalados por meio do comando apt-get install. na seção seguinte, vamos listar essa e outras opções desse comando.</p>
+
+<p>O utilitário apt-get permite a manipulação de pacotes do APT a partir da linha de comandos. É uma espécie de back-end para outras ferramentas que usam a biblioteca APT. O apt-get pode ser acessado por meio de interfaces front-end, como o aptitude, synaptic e wajig. Porém, neste tutorial, estamos interessado no uso direto da ferramenta no terminal.</p>
+
+<p>A seguir temos as principais opções utilizadas com o comando apt-get:</p>
+
+<p>Instalar pacotes especificados:</p>
+
+<pre>
+<code>
+sudo apt-get install nomedospacotes
+</code>
+</pre>
+
+<p>Remover os pacotes especificados:</p>
+
+<pre>
+<code>
+sudo apt-get remove nomedopacote
+</code>
+</pre>
+
+<p>Remover os pacotes especificados, incluindo seus arquivos de configuração:</p>
+
+<pre>
+<code>
+sudo apt-get --purge remove nomedopacote
+</code>
+</pre>
+
+<p>Atualizar os pacotes instalados no sistema:</p>
+
+<pre>
+<code>
+sudo apt-get upgrade
+</code>
+</pre>
+
+<p>Atualizar a lista de pacotes dos repositórios:</p>
+
+<pre>
+<code>
+sudo apt-get update
+</code>
+</pre>
+
+<p>Atualizar a distribuição para a versão mais recente do kernel:</p>
+
+<pre>
+<code>
+sudo apt-get -u dist-upgrade
+</code>
+</pre>
+
+<p>Verificar a lista de dependêncas quebradas e corrigí-las:</p>
+
+<pre>
+<code>
+apt-get -f install
+</code>
+</pre>
+
+<p>Excluir todos os pacotes que foram baixados e já instalados:</p>
+
+<pre>
+<code>
+sudo apt-get clean
+</code>
+</pre>
+
+<p>Apagar todos os pacotes que não possam mais ser baixados:</p>
+
+<pre>
+<code>
+sudo apt-get autoclean
+</code>
+</pre>
+
+<p>Remover pacotes órfãos (pacote sem utilidades e dependências de arquivos removidos):</p>
+
+<pre>
+<code>
+sudo apt-get autoremove
+</code>
+</pre>
+
+<p>Baixar arquivos sem instalar:</p>
+
+<pre>
+<code>
+sudo apt-get -d install nomedoaplicativo
+</code>
+</pre>
+
+<p>Temos também, em algumas distros linux, a simplificação apenas com apt, com algumas diferenças, veja um comparativo rápido disso:</p>
+
+<img src="_imagens/apt-e-apt-get.png" alt="Diferenças entre Apt e Apt-get"/>
+
+<ul>
+    <li><a href="tudo-sobre-linux-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda PHP</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda PHP</h1>
+                <menu>
+                    <li><a href="index.php">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-php-1.html">Tudo sobre PHP Parte 1!</a></li>
+                    <li><a href="tudo-sobre-php-2.html">Tudo sobre PHP Parte 2!</a></li>
+                    <li><a href="tudo-sobre-php-3.html">Tudo sobre PHP Parte 3!</a></li>
+                    <li><a href="tudo-sobre-php-4.html">Tudo sobre PHP Parte 4!</a></li>
+                    <li><a href="tudo-sobre-php-5.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre PHP Parte 5!</a></li>  
+                    <li><a href="tudo-sobre-php-6.html">Tudo sobre PHP Parte 6!</a></li>
+                </menu>
+            </header>
+                           
+<h2>Tudo sobre PHP Parte 5</h2>
+
+<h3>Rotinas em PHP - Parte 1</h3>
+
+<p>Assim como no Javascript, também existem as funções em PHP, as rotinas são tratadas como funções ou procedimentos, indicadas pela palavra <code>function</code>. Veja um exemplo:</p>
+
+<pre>
+<code>
+function soma($a, $b) {
+    $s = $a + $b;
+    echo "&lt;p&gt;A soma vale $s.&lt;/p&gt;";
+}
+soma(3, 4); // Essa é a chamada da função.
+</code>
+</pre>
+
+<p>E também dá pra mudar as variáveis, dessa forma:</p>
+
+<pre>
+<code>
+function soma($a, $b) {
+    $s = $a + $b;
+    echo "&lt;p&gt;A soma vale $s.&lt;/p&gt;";
+}
+$x = 9;
+$y = 12;
+soma($x, $y);
+</code>
+</pre>
+
+<p>Como também dá pra inicializar os parâmetros com valores padrão, dessa forma:</p>
+
+<pre>
+<code>
+function soma($a = 0, $b = 0) {
+    $s = $a + $b;
+    echo "&lt;p&gt;A soma vale $s.&lt;/p&gt;";
+}
+
+soma(10, 15);
+soma(20);
+soma();
+</code>
+</pre>
+
+
+
+<p>Também podemos usar o <code>return</code> para retornar um valor (os códigos acima não retornam valores), como esse:</p>
+
+<pre>
+<code>
+function soma($a, $b) {
+    return $a + $b;
+}
+$x = 3;
+$y = 4;
+$r = soma($x, $y);
+echo "A soma entre $x e $y é igual a $r.";
+</code>
+</pre>
+
+<p>Dentro das funções, podemos usar <code>func_get_args()</code> (que pega os argumentos e coloca dentro de um vetor, para criar novas variáveis). E <code>func_num_args()</code> Retorna o número de argumentos que foram passados.</p>
+
+<pre>
+<code>
+function soma() {
+    $p = func_get_args();
+    $t = func_num_args();
+    $s = 0;
+    for($i = 0; $i &lt; $t; $i++) {
+        $s += $p[$i];
+    }
+    return $s;
+}
+$r = soma(3, 5, 2);
+echo "A soma dos valores é $r";
+</code>
+</pre>
+
+<p>Também podemos adicionar mais valores na função, por exemplo:</p>
+
+<pre>
+<code>
+$r = soma(3, 5, 2, 4, 8, 9);
+</code>
+</pre>
+
+<p>PS: Vetores são variáveis compostas, e o índice começa do 0, e não do 1. Inclusive nos parâmetros também podemos passar arrays, simplesmente passando a variável, algo tipo <code>funcao($parametrovetor)</code>.</p>
+
+<h3>Rotinas em PHP - Parte 2</h3>
+
+<p>Continuando o assunto de rotinas, vamos ver mais um exemplo:</p>
+
+<pre>
+<code>
+function teste($x) {
+    $x += 2;
+    echo "O valor de X é $x.&lt;br/&gt;";
+}
+$a = 3;
+teste($a); // Exibe a soma com a variável.
+echo "O valor de A é $a."; // Exibe o valor da variável sem alterar;
+</code>
+</pre>
+
+<p>Mas nesse caso, usaremos uma variável referenciada, assim:</p>
+
+<pre>
+<code>
+function teste(&amp;$x) {
+    $x += 2;
+    echo "O valor de X é $x.&lt;br/&gt;";
+}
+$a = 3;
+teste($a); // Exibe a soma com a variável.
+echo "O valor de A é $a."; // Também exibe a soma, qualquer alteração em X altera A.
+</code>
+</pre>
+
+<p>Usar uma função em PHP de outro arquivo PHP também é possível, usando o comando <code>include</code>.</p>
+
+<p>PHP separado:</p>
+
+<pre>
+<code>
+function ola() {
+    echo "Olá Mundo!";
+}
+</code>
+</pre>
+
+<p>Nas páginas à receberem as importações:</p>
+
+<pre>
+<code>
+include "funcoes.php";
+ola();
+</code>
+</pre>
+
+<p>Outro exemplo:</p>
+
+<p>Página PHP separada:</p>
+
+<pre>
+<code>
+function mostraValor($v) {
+    echo "Acabei de receber o valor $v";
+}
+</code>
+</pre>
+
+<p>Nas que recebem as importações:</p>
+
+<pre>
+<code>
+include "funcoes.php";
+mostraValor(4);
+</code>
+</pre>
+
+<p>Na teoria, o include pode ser uma extensão do código PHP, independente do conteúdo do mesmo.</p>
+
+<p>Temos também o comando <code>require</code> (requerido), que também incluí, mas esse código é requerido, caso o arquivo à ser incluído não exista, o código para no ponto dele. O include tentaria continuar os outros códigos existentes.</p>
+
+<p>Temos também as variações de ambos, que <code>include_once</code> e <code>require_once</code>, que é pra não incluir o arquivo mais de uma vez. Por exemplo:</p>
+
+<pre>
+<code>
+include "funcoes.php"; // Carrega o script.
+include_once "funcoes.php"; // Só carrega caso não tenha carregado.
+</code>
+</pre>
+
+<h3>Verificando Erros com Try Catch Finally</h3>
+
+<p>O try catch finally são utilizados para tratar erros. No bloco <code>try</code> nós inserirmos a rotina que queremos tratar o provável erro que acontecer. Quando ele acontece o erro no try, para a execução do bloco imediatamente, passa pro <code>catch</code> e passa essa exceção gerada pra ele, onde o erro será tratado propriamente dito, onde podemos interceptar a exceção e realizar o tratamento mais adequado ao programa. O <code>finally</code> sempre será executado, ele não é obrigatório.
+
+<p>Esse é a estrutura básica de um try catch:</p>
+
+<pre>
+<code>
+try {
+    echo "Mensagem de Teste!"; // É executado
+}
+catch(Exception $ex) {
+    echo "ERRO!"; // Não é executado
+}
+</code>
+</pre>
+
+<p>No código acima, apenas o que está no try será executado, já que o código dentro dele está certo, o que está no catch não será executado (o parâmetro dentro dos parênteses do catch pode ter qualquer nome).</p>
+
+<p>Nesse erro proposital, provocará a exceção de erro:</p>
+
+<pre>
+<code>
+try {
+    $palavra = isset($_GET["text"]) ? $_GET["text"] : "";
+
+    if($palavra == "") {
+        throw new Exception("Não foi Inserido nada no parâmetro!");
+    }
+
+    echo "A palavra passada foi $palavra."; // Daqui pra baixo não será executado, já que criou uma exceção de erro.
+}
+catch(Exception $ex) {
+    echo $ex->getMessage(); // Será executado
+}
+finally {
+    echo "&lt;br/&gt;Final do Programa!";
+}
+</code>
+</pre>
+
+<p>No caso acima, o que fez criar a exceção, foi o método <code>throw new Exception()</code>, pode ver que ele nem terminou de executar o código e já pulou pro catch. No finally, ele exibirá a mensagem independente se o erro ocorrer ou não.</p>
+
+<p>PS: Alguns erros o PHP já trata sem precisar dessa estrutura, como por exemplo, ao tentar fazer uma divisão por 0, que retornará um aviso e o valor INF. No caso acima, fizemos um tratamento diferente pra essa exceção.</p>
+
+<p>Vamos gerar um erro manualmente, numa verificação de números, onde a exceção é disparada ao receber um valor não-numérico:</p>
+
+<pre>
+<code>
+try {
+    $num = isset($_GET["n"]) ? $_GET["n"] : 0;
+    
+    if(!is_numeric($num)) {
+        throw new Exception("Não foi inserido um número válido!");
+    }
+    
+    echo "O número inserido foi: $num.";
+}
+catch(Exception $ex) {
+    echo $ex->getMessage();
+}
+</code>
+</pre>
+
+<p>PS: Podemos usar tanto new Exception quanto new Error. Existem outros para dados mais específicos, como o PDOException, usado em ligação com banco de dados PDO.</p>
+
+<p>Veja um exemplo de tratamento de erro de outro tipo:</p>
+
+<pre>
+<code>
+function metade(int $n): int { // Aqui dizemos o tipo do parâmetro e o retorno
+    return $n / 2;
+}
+
+try {
+    $res = metade("Texto");
+
+    echo "O resultado da divisão é $res!&lt;br/&gt;";
+}
+catch(TypeError $ex) {
+    echo "Não foi passado um valor numérico!&lt;br/&gt;";
+}
+</code>
+</pre>
+
+<p>Veja uma criação de várias exceções no mesmo bloco:</p>
+
+<pre>
+<code>
+function dividir($num1, $num2) {
+    if(!is_numeric($num1)) {
+        throw new InvalidArgumentException("O dividendo não é um número!&lt;br/&gt;");
+    }
+
+    // Outra condição:
+
+    if(!is_numeric($num2)) {
+        throw new InvalidArgumentException("O divisor não é um número!&lt;br/&gt;");
+    }
+
+    // Outra condição:
+
+    if($num2 == 0) {
+        throw new DivisionByZeroError("Não é possível realizar uma divisão por zero!&lt;br/&gt;");
+    }
+
+    $resultado = $num1 / $num2;
+
+    return $resultado;
+}
+
+try {
+    $resultado = dividir(6, 0);
+    
+    echo "O resultado da divisão é $resultado.";
+}
+catch(InvalidArgumentException $ex) {
+    echo $ex->getMessage();
+}
+catch(DivisionByZeroError $ex) {
+    echo $ex->getMessage();
+}
+catch(Exception $ex) {
+    echo $ex->getMessage();
+}
+</code>
+</pre>
+
+<h3>Funções String em PHP - Parte 1</h3>
+
+<p>Nós já vimos anteriormente que no PHP temos funções para manipular números (como abs(), pow(), sqrt(), entre outras), no PHP também podemos manipular strings. Veremos como fazer logo abaixo.</p>
+
+<p>A primeira que veremos é o <code>printf()</code>, para imprimir formatado, usando máscaras (uma das heranças do C).</p>
+
+<pre>
+<code>
+$prod = "leite";
+$preco = 4.50;
+printf("O %s está custando R\$%.2f", $prod, $preco);
+</code>
+</pre>
+
+<p>No caso acima, o <code>%s</code> mostra uma string, e o <code>%f</code> pra formatar um número decimal.</p>
+
+<p>Essas são algumas das máscaras aceitas em PHP:</p>
+
+<table>
+    <tr>
+        <th>Máscara</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>%d</td>
+        <td>Valor decimal (positivo ou negativo)</td>
+    </tr>
+    <tr>
+        <td>%u</td>
+        <td>Valor decimal sem sinal (só positivo)</td>
+    </tr>
+    <tr>
+        <td>%f</td>
+        <td>Valor real</td>
+    </tr>
+    <tr>
+        <td>%s</td>
+        <td>String</td>
+    </tr>
+</table>
+
+<p>Existem vários outros, mas esses são mais usados.</p>
+
+<p>A função <code>print_r</code> serve para mostrar detalhes de uma variável, principalmente se ela for um vetor (array), mais usada em testes. Veja no exemplo com vetores:</p>
+
+<pre>
+<code>
+$x[0] = 4;
+$x[1] = 3;
+$x[2] = 8;
+print_r($x);
+</code>
+</pre>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+$x2 = array(3, 7, 6, 2, 1, 9);
+print_r($x2);
+</code>
+</pre>
+
+<p>PS: O símbolo <code>=></code> exibido na saída significa associação.</p>
+
+<p>Podemos também substituir o print_r por <code>var_dump()</code> e <code>var_export()</code>. Cada uma formata de um jeito diferente.</p>
+
+<p>A função <code>wordwrap()</code> cria quebra de linhas nos códigos. Veja um exemplo:</p>
+
+<pre>
+<code>
+$txt = "Esse é um exemplo de string gigante que está aqui para exemplificar o uso da função wordwrap().";
+$res = wordwrap($txt, 8);
+print($res);
+</code>
+</pre>
+
+<p>O código acima quebra a linha no HTML, mas ela não é visível na página, o número significa a quantidade máxima de caracteres por linha.</p>
+
+<p>Para que a string seja visualizada também na página, faça dessa forma:</p>
+
+<pre>
+<code>
+$txt = "Esse é um exemplo de string gigante que está aqui para exemplificar o uso da função wordwrap().";
+$res = wordwrap($txt, 8, "&lt;br/&gt;\n", false);
+print($res);
+</code>
+</pre>
+
+<p>No caso acima, a tag &lt;br/&gt; quebra a linha na página e a sequência \n quebra a linha no código-fonte. O false é para evitar a quebra de linha em palavras inteiras com mais de oito letras (o true as quebrariam).</p>
+
+<p>A função <code>strlen()</code> calcula o comprimento de uma string em caracteres. Por exemplo:</p>
+
+<pre>
+<code>
+$txt = "Curso em Vídeo";
+$tam = strlen($txt);
+print($tam);
+</code>
+</pre>
+
+<p>PS: Caso tenha erros com a função strlen em palavras acentuadas, utilize a função <code>mb_strlen()</code> com o UTF-8, assim:</p>
+
+<pre>
+<code>
+$txt = "Curso em Vídeo";
+$tam = mb_strlen($txt, "utf-8");
+print($tam);
+</code>
+</pre>
+
+<p>A função <code>trim()</code> é muito usada em dados vindos de formulários, para o caso de digitarem espaços desnecessários no início ou fim dos mesmos, o strlen() conta os caracteres da string incluindo espaços. Veja um exemplo:</p>
+
+<pre>
+<code>
+$nome = "  José da Silva  ";
+print("Comprimento da String com espaços:&lt;br/&gt;");
+print(strlen($nome));
+print("&lt;br/&gt;");
+$novo = trim($nome);
+print($novo);
+print "&lt;br/&gt;Comprimento da String sem espaços:&lt;br/&gt;";
+print(strlen($novo));
+</code>
+</pre>
+
+<p>Temos também variações do trim, a <code>ltrim()</code> só elimina os espaços do início. A <code>rtrim()</code> faz o mesmo, mas só elimina os do final.</p>
+
+<p>A <code>str_word_count()</code> mostra quantas palavras tem numa string. Veja um exemplo:</p>
+
+<pre>
+<code>
+$frase = "Eu vou estudar PHP";
+$cont = str_word_count($frase, 0);
+print($cont);
+</code>
+</pre>
+
+<p>PS: O 0 no código acima é pra fazer a contagem, se mudar o número vai criar um array (1 e 2), mas usando o print_r, dessa forma:.</p>
+
+<pre>
+<code>
+$frase = "Eu vou estudar PHP";
+$cont = str_word_count($frase, 1);
+print_r($cont);
+</code>
+</pre>
+
+<p>A função <code>explode()</code> funciona de maneira bem simples, baseada na str_word_count(), o explode() procura pelos espaços (ou outro caractere) e mostrará quais strings serão "explodidas" (ou seja, quebradas) e jogadas num vetor. Exemplo:</p>
+
+<pre>
+<code>
+$site = "Curso em Vídeo";
+$vetor = explode(" ", $site);
+print_r($vetor);
+</code>
+</pre>
+
+<p>O <code>str_split</code> é bem parecido com o explode(), só que esse faz com cada letra. Veja um exemplo:</p>
+
+<pre>
+<code>
+$nome = "Maria";
+$vetor = str_split($nome);
+print_r($vetor);
+</code>
+</pre>
+
+<p>A função <code>implode()</code> é basicamente o inverso do explode(), ele pega elemento de um array e coloca em apenas uma string (pode ser substituída também pela <code>join()</code>), dessa forma:</p>
+
+<pre>
+<code>
+$vetor[0] = "Curso";
+$vetor[1] = "em";
+$vetor[2] = "Vídeo";
+$texto = implode(" ", $vetor);
+print($texto);
+</code>
+</pre>
+
+<p>A função <code>chr()</code> mostra os números de um código que representa um caractere do teclado. Veja num exemplo, que mostrará o "C":</p>
+
+<pre>
+<code>
+$letra = chr(67);
+echo "A letra de código 67 é $letra";
+</code>
+</pre>
+
+<p>A função <code>ord()</code> é basicamente o contrário do chr(). Veja um exemplo:</p>
+
+<pre>
+<code>
+$letra = "C";
+$cod = ord($letra);
+echo "A letra $letra tem código $cod";
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-php-4.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-php-6.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

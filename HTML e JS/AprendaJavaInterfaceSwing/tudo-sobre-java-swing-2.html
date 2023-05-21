@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Java com Interface Swing</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java com Interface Swing</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-swing-1.html">Tudo sobre Java com Interface Swing Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-swing-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java com Interface Swing Parte 2!</a></li>
+                    <li><a href="tudo-sobre-java-swing-3.html">Tudo sobre Java com Interface Swing Parte 3!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java com Interface Swing Parte 2</h2>
+
+<h3>Tela de Login - getPassword() e KeyEvent</h3>
+
+<p>Para não tivermos que apenas logar clicando no botão entrar, podemos adicionar um evento para que ele clique numa tecla para isso.</p>
+
+<p>Voltando à TelaLogin, vá no campo senha, e nos eventos, vá em Key e keyPressed, e coloque dentro dele uma condição para realizar a função ao clicar enter:</p>
+
+<pre>
+<code>
+private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {                                    
+    if(evt.getKeyCode() == KeyEvent.VK_ENTER) { // Importe
+        // Aqui os códigos executados serão colocados.
+    }
+}
+</code>
+</pre>
+
+<p>Veja que existe opções para trabalhar com todas as teclas, o que nos dá várias possibilidades.</p>
+
+<p>Podemos criar uma função e apenas a invocar nos métodos do action do botão e do press do teclado, assim:</p>
+
+<pre>
+<code>
+private void logar() {
+    if(txtLogin.getText().trim().equals("usuario") && String.valueOf(txtSenha.getPassword()).trim().equals("1234")) {
+        JOptionPane.showMessageDialog(null, "Bem-vindo", "Login", JOptionPane.INFORMATION_MESSAGE); // Importe javax.swing.JOptionPane
+    }
+    else {
+        JOptionPane.showMessageDialog(null, "Acesso Negado", "Login", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+private void btnEntrActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    this.logar();
+}                                       
+
+private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {                                    
+    if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        this.logar();
+    }
+}
+</code>
+</pre>
+
+<p>Podemos também, no lugar do método logar, um método para checkagem, que retorna true ou false, assim:</p>
+
+<pre>
+<code>
+private boolean checkagem(String login, String senha) {   
+    return login.equals("usuario") && senha.equals("1234");
+}
+
+private void btnEntrActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    if(this.checkagem(txtLogin.getText().trim(), String.valueOf(txtSenha.getPassword()).trim())) {
+        JOptionPane.showMessageDialog(null, "Bem-vindo", "Login", JOptionPane.INFORMATION_MESSAGE); // Importe javax.swing.JOptionPane
+    }
+    else {
+        JOptionPane.showMessageDialog(null, "Acesso Negado", "Login", JOptionPane.ERROR_MESSAGE);
+    }
+}                                       
+
+private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {                                    
+    if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if(this.checkagem(txtLogin.getText().trim(), String.valueOf(txtSenha.getPassword()))) {
+            JOptionPane.showMessageDialog(null, "Bem-vindo", "Login", JOptionPane.INFORMATION_MESSAGE); // Importe javax.swing.JOptionPane
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Acesso Negado", "Login", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Lembrando que o método getPassword() pega dados e joga num array de char, sendo necessário a conversão para String. Os métodos de login são recomendados ser colocados numa classe separada.</p>
+
+<h3>Criando um JTable - Inserindo Dados</h3>
+
+<p>Crie um frame com o nome ViewJTable, centralize, coloque o título e tudo mais, e nele crie um painel e cubra até um pouco menos da metade superior, nele coloque os labels e os campos para descrição, quantidade e preço, e um botão para cadastrar (variáveis dos campos serão txtDesc, txtQtd e txtPrec, e do botão será btnCadr).</p>
+
+<p>Crie um painel na parte de baixo e coloque uma tabela (variável paneProds) dentro dele e a redimensione, clique nela e com o botão direito, vá em conteúdo da tabela e em colunas, edite os nomes para Descrição, Quantidade e Preço (mantenha os tipos em Object, pois trabalharemos com objetos), tire a opção editável e exclua as colunas extras. No mesmo local, em linhas, exclua todas.</p>
+
+<p>PS: As tabelas já são incluídas com um painel de rolagem, não sendo necessário colocar outra.</p>
+
+<p>No action performed do Cadastrar, coloque esse código:</p>
+
+<pre>
+<code>
+private void btnCadrActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    if(!txtDesc.getText().trim().equals("") && !txtQtd.getText().trim().equals("") && !txtPrec.getText().trim().equals("")) {
+        DefaultTableModel dtmProds = (DefaultTableModel)paneProds.getModel(); // Isso pega o modelo da tabela, importe javax.swing.table.DefaultTableModel
+
+        Object dados[] = {txtDesc.getText().trim(), txtQtd.getText().trim(), txtPrec.getText().trim()}; // Isso pega os dados dos campos.
+
+        dtmProds.addRow(dados); // Isso envia os dados pra tabela.
+        
+        // Essas linhas apagam os dados escritos nos campos:
+            
+        txtDesc.setText("");
+        txtQtd.setText("");
+        txtPrec.setText("");
+    }
+    else {
+        JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Aviso", JOptionPane.WARNING_MESSAGE); // Importe javax.swing.JOptionPane
+    }     
+}
+</code>
+</pre>
+
+<h3>Remover Registros do JTable</h3>
+
+<p>Para remover os dados do JTable, precisaremos criar na table um botão com o nome excluir e variável btnExcl</p>
+
+<p>Para recebermos o item clicado da tabela, usamos o método <code>getSelectedRow()</code>, que recebe a posição do produto clicado (ao não clicarmos em nada, retorna -1, a contagem das linhas começa do 0), veja abaixo um exemplo de uso, no action performed botão btnExcl para testes:</p>
+
+<pre>
+<code>
+private void btnExclActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    System.out.println("Linha selecionada: "  + paneProds.getSelectedRow());
+}
+</code>
+</pre>
+
+<p>Entendendo como funciona, altere o método do Action Performed do btnExcl dessa forma:</p>
+
+<pre>
+<code>
+private void btnExclActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    if(paneProds.getSelectedRow() != -1) {
+        DefaultTableModel dtmProds = (DefaultTableModel)paneProds.getModel(); // Importe javax.swing.table.DefaultTableModel
+
+        dtmProds.removeRow(paneProds.getSelectedRow());
+        
+        txtDesc.setText("");
+        txtQtd.setText("");
+        txtPrec.setText("");
+    }
+    else {
+        JOptionPane.showMessageDialog(null, "Selecione algum item para excluir!", "Aviso", JOptionPane.WARNING_MESSAGE); // Importe javax.swing.JOptionPane
+    }
+}                                       
+</code>
+</pre>
+
+<h3>Obter e Atualizar Registros no JTable</h3>
+
+<p>Primeiro coloque na tabela um botão atualizar (variável btnAtu).</p>
+
+<p>Agora clique na tabela, em propriedades, vá nos eventos, em mouse e em mouse clicked, e coloque esse código:</p>
+
+<pre>
+<code>
+private void paneProdsMouseClicked(java.awt.event.MouseEvent evt) {                                       
+    if(paneProds.getSelectedRow() != -1) {
+        txtDesc.setText(paneProds.getValueAt(paneProds.getSelectedRow(), 0).toString()); // Os números referentes são o da linha, passado pelo getSelectedRow(), e o da coluna, contados a partir do 0.
+        txtQtd.setText(paneProds.getValueAt(paneProds.getSelectedRow(), 1).toString());
+        txtPrec.setText(paneProds.getValueAt(paneProds.getSelectedRow(), 2).toString());
+    }
+    else {
+        txtDesc.setText("");
+        txtQtd.setText("");
+        txtPrec.setText("");
+    }
+}
+</code>
+</pre>
+
+<p>PS: Pode colocar o mesmo código em Key e KeyReleased, que selecionará o item ao navegarmos com as setas do teclado.</p>
+
+<p>Para atualizar, colocamos isso no action performed do botão atualizar:</p>
+
+<pre>
+<code>
+private void btnAtuActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    if(paneProds.getSelectedRow() != -1) {
+        paneProds.setValueAt(txtDesc.getText().trim(), paneProds.getSelectedRow(), 0);
+        paneProds.setValueAt(txtQtd.getText().trim(), paneProds.getSelectedRow(), 1);
+        paneProds.setValueAt(txtPrec.getText().trim(), paneProds.getSelectedRow(), 2);   
+    }
+    else {
+        JOptionPane.showMessageDialog(null, "Selecione algum item para atualizar!", "Aviso", JOptionPane.WARNING_MESSAGE); // Importe javax.swing.JOptionPane
+    }
+}
+</code>
+</pre>
+
+<h3>Ordenando JTable por Coluna</h3>
+
+<p>Para ordenar os itens por colunas, vamos no construtor e coloque esse código:</p>
+
+<pre>
+<code>
+public ViewJTable() {
+    initComponents();
+
+    DefaultTableModel mode = (DefaultTableModel)paneProds.getModel(); // Importe javax.swing.table.DefaultTableModel
+
+    paneProds.setRowSorter(new TableRowSorter(mode)); // Importe javax.swing.table.TableRowSorter
+}
+</code>
+</pre>
+
+<p>O método setRowSorter() é o que permite nos fazer a ordenação por coluna.</p>
+
+<h3>JFileChooser</h3>
+
+<p>Para criarmos uma forma de upar arquivos pelo Java, crie um frame com o nome TelaJFileChooser, faça os ajustes de centralizar e etc., e coloque um campo de texto e um botão, com as variáveis txtFile e btnArqu. Coloque também um label abaixo sem nada, com a variável lblImg, para nossa imagem upada aparecer.</p>
+
+<p>Esse é o código do botão upload:</p>
+
+<pre>
+<code>
+private void btnArqActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    JFileChooser arquivo = new JFileChooser(); // Importe javax.swing.JFileChooser
+
+    arquivo.setDialogTitle("Procurar Arquivos"); // Isso colocará um título na janela que abrirá para selecioar arquivos.
+
+    arquivo.setFileSelectionMode(JFileChooser.FILES_ONLY); // Isso escolhe se selecionará pastas ou pastas e arquivos.
+
+    FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagem", "jpg", "jpeg", "png", "gif"); // Isso cria o filtro dos tipos de arquivos para upload. Importe javax.swing.filechooser.FileNameExtensionFilter 
+    arquivo.setFileFilter(filtro); // Isso filtra os arquivos.
+
+    int retorno = arquivo.showOpenDialog(this); // Isso abrirá a janela para selecionar arquivos do computador. A variável não é necessária para isso, somente para definir a condição do if abaixo.
+
+    if(retorno == JFileChooser.APPROVE_OPTION) { // Isso verifica o tipo de arquivo selecionado.
+        File arq = arquivo.getSelectedFile(); // Isso pega o caminho do arquivo, importe java.io.File
+        
+        txtFile.setText(arq.getPath()); // Isso pega o endereço e muda o texto do campo.
+    
+        lblImg.setIcon(new ImageIcon(arq.getPath())); // Isso mudará a imagem do label, importe import javax.swing.ImageIcon;
+    }
+}
+</code>
+</pre>
+
+<p>PS: Caso não queira que seja editável o campo de texto, coloque no construtor o método <code>setEditable(false)</code>, dessa forma:</p>
+
+<pre>
+<code>
+public TelaJFileChooser() {
+    initComponents();
+
+    txtFile.setEditable(false);
+}
+</code>
+</pre>
+
+<p>Com isso, já podemos enviar arquivos para algum servidor ou pasta.</p>
+
+<h3>JSlider</h3>
+
+<p>Crie um frame com o nome TelaSlider, configure ela e coloque um controle deslizante e um label para mostrar os dados, com as variáveis sliNum e lblNum.</p>
+
+<p>Nas propriedades, você pode estar alterando os valores em minimum, maximum e value (que define o valor default), e em operation podemos escolher se o slider será horizontal ou vertical.</p>
+
+<p>Para ele pegar os valores do slider, vá em propriedades, Change e stateChange, e coloque esse código:</p>
+
+<pre>
+<code>
+private void sliNumStateChanged(javax.swing.event.ChangeEvent evt) {                                    
+    lblNum.setText(String.valueOf(sliNum.getValue()));
+}
+</code>
+</pre>
+
+<h3>Spinner</h3>
+
+<p>Crie um frame com o nome TelaSpinner, e coloque um label, um spinner e um botão, com as variáveis spNum e btnNum. Coloque os valores mínimos de 0 e máximo de 10, e coloque esse código no método de evento do botão:</p>
+
+<pre>
+<code>
+private void btnNumActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    String exten[] = {"zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez"};
+    int num = (int)spNum.getValue();
+
+    JOptionPane.showMessageDialog(null, String.format("O valor de %d por extenso é \"%s\".", num, exten[num]), "Info", JOptionPane.INFORMATION_MESSAGE); // Importe javax.swing.JOptionPane
+}
+</code>
+</pre>
+
+<h3>Tema JFrame - LookAndFeel</h3>
+
+<p>O tema padrão do Java Swing é o "Nimbus", mas ele pode ser alterado, procure no código do frame, dentro do método main, alguma linha tipo essa:</p>
+
+<pre>
+<code>
+if("Nimbus".equals(info.getName())) {
+    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+    break;
+}
+</code>
+</pre>
+
+<p>No lugar onde está escrito "Nimbus", podemos alterar o nome do que é passado lá pra mudar o tema.</p>
+
+<p>Alguns dos temas possíveis de serem usados além do "Nimbus" são o "Windows" (pra ficar mais parecido com o tema do C#), o "Windows Classic", o "Metal", o "GTK+", o "Mac OS X" e o "CDE/Motif" (atenção pras maiúsculas e minúsculas). Também é possível criar e baixar temas específicos.</p>
+
+<h3>Ícone do JFrame</h3>
+
+<p>Para mudar a imagem do JFrame, basta colocar isso no JFrame (substituindo pela imagem salva no pacote):</p>
+
+<pre>
+<code>
+public TelaLogin() {
+    initComponents();
+    this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/user.png")).getImage());
+}
+</code>
+</pre>
+
+<p>O código que vai dentro do setIconImage() também pode ser colocado nas propriedades, em iconimage e código personalizado, que seria colocado isso:</p>
+
+<pre>
+<code>
+new javax.swing.ImageIcon(getClass().getResource("/images/user.png")).getImage()
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-java-swing-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-java-swing-3.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

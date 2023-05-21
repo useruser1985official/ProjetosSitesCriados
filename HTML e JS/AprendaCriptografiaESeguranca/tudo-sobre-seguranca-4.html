@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Criptografia e Segurança</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Criptografia e Segurança</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-seguranca-1.html">Tudo sobre Criptografia e Segurança Parte 1!</a></li>
+                    <li><a href="tudo-sobre-seguranca-2.html">Tudo sobre Criptografia e Segurança Parte 2!</a></li>
+                    <li><a href="tudo-sobre-seguranca-3.html">Tudo sobre Criptografia e Segurança Parte 3!</a></li>
+                    <li><a href="tudo-sobre-seguranca-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Criptografia e Segurança Parte 4!</a></li>
+                    <li><a href="tudo-sobre-seguranca-5.html">Tudo sobre Criptografia e Segurança Parte 5!</a></li>
+                    <li><a href="tudo-sobre-seguranca-6.html">Tudo sobre Criptografia e Segurança Parte 6!</a></li>
+                    <li><a href="tudo-sobre-seguranca-7.html">Tudo sobre Criptografia e Segurança Parte 7!</a></li>            
+                    <li><a href="tudo-sobre-seguranca-8.html">Tudo sobre Criptografia e Segurança Parte 8!</a></li>
+                    <li><a href="tudo-sobre-seguranca-9.html">Tudo sobre Criptografia e Segurança Parte 9!</a></li>
+                    <li><a href="tudo-sobre-seguranca-10.html">Tudo sobre Criptografia e Segurança Parte 10!</a></li>
+                    <li><a href="tudo-sobre-seguranca-11.html">Tudo sobre Criptografia e Segurança Parte 11!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Criptografia e Segurança Parte 4</h2>
+
+<h3>Steghide - Esteganografia no Linux - Ocultando Mensagens em Imagens</h3>
+
+<p>A Esteganografia é a ocultação de arquivos (como uma mensagem) em outro arquivo, como uma imagem, vídeo ou áudio.</p>
+
+<p>Para usarmos a esteganografia, primeiro crie um arquivo de texto com alguma mensagem qualquer.</p>
+
+<p>Depois, instale, caso já não tenha instalado, o Steghide usando o comando <code>sudo apt-get install steghide</code>.</p>
+
+<p>O Steghide suporta vários formatos de arquivos, como JPEG, BMP, WAV e AU. Para ver o manual dele, digite <code>man steghide</code>.</p>
+
+<p>Esses são os comando do Steghide:</p>
+
+<p>Para ocultar uma mensagem em um arquivo de imagem ou som, usamos o comando embed seguido dos argumentos apropriados. Os principais argumentos são os seguintes:</p>
+
+<ul>
+    <li><code>-ef</code> - Especificar o arquivo que será incorporado ou seja, o arquivo que contém a mensagem secreta. Se este argumento for omitido ou o nome do arquivo for o caractere-, os dados secretos serão lidos diretamente da entrada padrão (teclado).</li>
+    <li><code>-cf</code> - Especificar o arquivo portador que será usado para incorporar os dados secretos. Esse arquivo deve estar em um dos formatos a seguir: AU, BMP, JPEG ou WAV. Se este argumento for omitido ou o nome do arquivo for o caractere -, o steghide lerá o arquivo portador a partir da entrada padrão.</li>
+</ul>
+
+<p>Para extrairmos uma mensagem oculta de um arquivo esteganografado usamos o comando extract, cujo argumento principal é esse:</p>
+
+<ul>
+    <li><code>-sf</code> - Especificar o arquivo esteganografado (que contém os dados secretos embutidos). Se este argumento for omitido ou o nome do arquivo for o caractere -, o steghide lerá o arquivo esteganografado a partir da entrada padrão.</li>
+</ul>
+
+<p>Primeiramente, pegue uma imagem grande em JPEG, e crie um arquivo de texto com uma mensagem.</p>
+
+<p>Para ocultar a mensagem dentro da imagem, digitamos esse comando, no diretório onde estão os arquivos:</p>
+
+<pre>
+<code>
+steghide embed -cf imagen.jpg -ef mensagem.txt
+</code>
+</pre>
+
+<p>Ele pedirá pra criar uma senha., e o arquivo é modificado, visualmente ela estará igual antes, mas terá a mensagem oculta. Para especificar um algoritmo de criptografia, use a opção -e seguida do algoritmo, por exemplo <code>-e rc2</code>.</p>
+
+<p>Para mostrar informações do arquivo, fazemos assim:</p>
+
+<pre>
+<code>
+steghide info imagem.jpg
+</code>
+</pre>
+
+<p>No caso acima, ele mostrará os dados da imagem, e mostrará a opção de tentar obter dados do arquivo embutido, aí ele pedirá a senha pra mostrar estes dados.</p>
+
+<p>E para extrair a mensagem, fazemos isso:</p>
+
+<pre>
+<code>
+steghide extract -sf imagens.jpg
+</code>
+</pre>
+
+<p>Ele pedirá a senha, e extrairá a mensagem.</p>
+
+<p>Para mostrar informações sobre os algoritmos de criptografia, use esse comando:</p>
+
+<pre>
+<code>
+steghide encinfo
+</code>
+</pre>
+
+<h3>Kali Linux – Coletando Informações com DMitry</h3>
+
+<p>O DMitry (Deepmagic Information Gathering Tool) é uma aplicação Open Source de linha de comandos que nos permite coletar diversos tipos de informações sobre um host em uma rede. A ferramenta, que é codificada em linguagem C, é capaz de coletar dados sobre subdomínios, endereços de e-mail, efetuar escaneamento de portas TCP (port scan), lookups whois e mais algumas funções.</p>
+
+<p>O site oficial do projeto é o <a href="http://mor-pah.net/software/dmitry-deepmagic-information-gathering-tool/" target="_blank">http://mor-pah.net/software/dmitry-deepmagic-information-gathering-tool/</a>, onde você pode baixar a versão mais recente do pacote. No kali Linux, a ferramenta está presente por padrão, não sendo necessário baixá-la e instalá-la. De acordo com o site do desenvolvedor, o DMitry pode ser executado em várias plataformas, incluindo FreBSD, Mac OS X, SuSE Linux e OpenBSD, entre outras. Ele lembra um pouco o Nmap, mas é um pouco mais simples.</p>
+
+<p>Vamos começar executando o software sem usar nenhuma opção. Para isso, execute o comando a seguir no terminal:</p>
+
+<pre>
+<code>
+dmitry
+</code>
+</pre>
+
+<p>Ele mostrará a saída que explica as funções das opções do programa.</p>
+
+<p>Exemplo de um lookup whois num host:</p>
+
+<pre>
+<code>
+dmitry -w www.google.com.br
+</code>
+</pre>
+
+<p>Podemos realizar um TCP port scan no endereço 192.168.1.1:</p>
+
+<pre>
+<code>
+dmitry -p 192.168.1.1
+</code>
+</pre>
+
+<p>E um TCP port scan no endereço 192.168.1.110 (uma estação com Windows 7), porém mostrando as portas filtradas na saída:</p>
+
+<pre>
+<code>
+dmitry -p -f 192.168.1.110
+</code>
+</pre>
+
+<p>E pra salvar a saída do comando anterior em um arquivo:</p>
+
+<pre>
+<code>
+dmitry -p -f 192.168.1.110 -o portas-escaneadas
+</code>
+</pre>
+
+<p>O Kali Linux traz outras ferramentas para coleta de informações sobre hosts, muitas delas bem mais completas que o DMitry, que é uma ferramenta bem simples</p>
+
+<h3>Kali Linux – Manipulando Endereços MAC com Macchanger</h3>
+
+<p>O utilitário de linha de comandos macchanger (GNU Mac Changer), escrito por Alvaro Lopez Ortega,  permite visualizar e manipular o endereço MAC (Media Access Control) das interfaces de rede do computador. Esse utilitário está presente nativamente no Kali Linux.</p>
+
+<p>Para instalá-lo no Debian GNU/Linux e derivados (como o Ubuntu Linux) use o comando a seguir:</p>
+
+<pre>
+<code>
+sudo apt-get install macchanger
+</code>
+</pre>
+
+<p>A sintaxe básica dele é macchanger opções dispositivo.</p>
+
+<p>PS: Todos os comandos deverão ser utilizado como root, então dê <code>sudo su</code> caso não esteja no Kali. Pode ser necessário também dar um down na interface antes de fazer alterações nela.</p>
+
+<p>Vamos visualizar o endereço mac (MAC Address) atual da interface eth0:</p>
+
+<pre>
+<code>
+macchanger -s eth0
+</code>
+</pre>
+
+<p>Vamos alterar o endereço MAC da interface eth0 sem no entanto alterar os bytes do fabricante, criando um endereço aleatório:</p>
+
+<pre>
+<code>
+macchanger -e eth0
+</code>
+</pre>
+
+<p>Podemos também configurar um endereço MAC totalmente aleatório na interface eth0:</p>
+
+<pre>
+<code>
+macchanger -r eth0
+</code>
+</pre>
+
+<p>Ou configurar um endereço MAC específico, como o 12:34:56:78:90:AB, na interface eth0:</p>
+
+<pre>
+<code>
+macchanger -m 12:34:56:78:90:AB eth0
+</code>
+</pre>
+
+<p>E podemos também resetar o endereço MAC para o valor original na interface eth0:</p>
+
+<pre>
+<code>
+macchanger -p eth0
+</code>
+</pre>
+
+<h3>Acessando um Servidor Linux via SSH com Android</h3>
+
+<p>Primeiro, veja se o openssh-server está instalado no Linux, e se o serviço está ativo (dando o comando <code>sudo service ssh start</code>), e no Android, vá na Play Store e baixe o VX ConnectBot nele.</p>
+
+<p>No Linux, pegue o IP privado dele (digitando <code>ifconfig</code>), e coloque no programa do Android, o nome do usuário no Linux, o IP e a porta, na sintaxe <code>nomedeusuario@192.168.0.1:22</code> (22 é a porta padrão do SSH).</p>
+
+<p>Ao tentar a conexão, ele pedirá a senha do Linux e logará nesse sistema via SSH, podendo ser controlado pelo Android.</p>
+
+<p>PS: Pode ser necessário ter que liberar a porta 22 no Firewall do Linux.</p>
+
+<p>Podemos também acessar um servidor Windows, nesse caso configuramos o Moba SSH como servidor.</p>
+
+<h3>Acessando um Desktop Linux via VNC com Android</h3>
+
+<p>Primeiro loge dentro do Linux e baixe o servidor VNC digitando <code>sudo apt-get install x11vnc</code>, e depois inicie o serviço digitando <code>x11vnc --forever</code> (deixe o terminal aberto).</p>
+
+<p>No Android, vá na Play Store e baixe o aplicativo VNC Viewer, que tornará nosso Android um cliente VNC.</p>
+
+<p>Dentro do APP Android, colocamos em Adress o IP privado do servidor seguido da porta, e o nome de usuário dele em Name, ele mostrará a conexão sem criptografia (que não pede a senha). Dentro do Android mostrará inclusive a interface gráfica do Linux acessado.</p>
+
+<p>Podemos também acessar um Windows pelo Android, nesse caso instalamos no Windows o <a href="https://www.tightvnc.com/download.php" target="_blank">Tight VNC</a> e usamos ele como servidor no PC, o restante permanece da mesma forma.</p>
+
+<p>PS: Pode ser necessário ter que liberar a porta do VNC (especificada no terminal) no Firewall do Linux.</p>
+
+<h3>Esteganografia - Ocultando mensagens em arquivos</h3>
+
+<p>A esteganografia é uma técnica utilizada para "esconder" ou ocultar mensagens, imagens ou arquivos dentro de outros arquivos.</p>
+
+<p>A esteganografia tem origem na Grécia antiga, na qual escreviam com uma tinta "invisível" que só podia ser vista com uma técnica especial. Em informática, usamos dois arquivos, a mensagem e o portador (carrier).</p>
+
+<p>Vamos ver na imagem abaixo o que faremos em seguida:</p>
+
+<img src="_imagens/esteganografia.jpg" alt="Esteganografia"/>
+
+<p>E da mesma forma, a extração do mesmo:</p>
+
+<img src="_imagens/extracao.jpg" alt="Extração"/>
+
+<p>Lembrando que no exemplo usaremos texto em uma imagem, mas qualquer arquivo pode ser inserido em qualquer arquivo.</p>
+
+<p>Existem vários programas disponíveis para esteganografia, no exemplo, vamos usar o OpenPuff para Windows.</p>
+
+<p>Baixe o OpenPuff, ele não precisa de instalação, basta apenas descompactar e usar. <a href="http://embeddedsw.net/zip/OpenPuff_release.zip" target="_blank">Clique aqui para baixar</a>.</p>
+
+<p>Abra a pasta e execute o aplicativo dentro dela. Ele demora um pouco enquanto, veja que ele tem várias opções como, além da esteganografia, tem marca d'água (pra proteger os direitos autorais de imagens e arquivos).</p>
+
+<p>Clique no botão "Hide" e ele abrirá a tela para isso. Na tela que abrir, vá na parte 1 e insira até três senhas diferentes nos campos, a primeira é requerida, para criptografar, as outras são recomendadas, mas opcionais, a segunda é pro gerador de números aleatórios e a terceira é o embaralhamento da mesma.</p>
+
+<p>Coloque num txt uma mensagem qualquer e selecione uma imagem (para query).</p>
+
+<p>Na parte dois, clique em "Browse" e selecione o txt da mensagem (que será o arquivo a ser escondido).</p>
+
+<p>Na parte três, coloque os arquivos em "ADD" (vamos trabalhar só com um no caso, se a mensagem for grande, pode ser dividida em vários portadores).</p>
+
+<p>Na parte quatro é opcional, é mais pra escolher a qualidade do arquivo ou dos algoritmos utilizados, etc.</p>
+
+<p>Depois é só salvar o novo arquivo clicando em "Hide Data". Veja que aparentemente, nada da imagem parece alterada.</p>
+
+<p>Para descobrir a mensagem, pegue o arquivo esteganografado e faça o mesmo procedimento no OpenPuff, escolhendo a opção "Unhide". carrega ela em ADD Carries e em Unhide. A mensagem oculta será salva como um novo arquivo.</p>
+
+<p>Dependendo do tamanho do arquivo a ser escondido, a imagem poderá ter tamanhos diferenciados, se uma imagem tiver tamanho muito grande, é provável que tenha alguma coisa escondida, principalmente malwares.</p>
+
+<h3>Criptografia com GnuPG no Windows - Apresentação</h3>
+
+<p>Primeiro vamos baixar e instalar o programa GPG4Win (que contém o Kleopatra) para trabalharmos com criptografia. Baixe ele aqui: <a href="https://www.gpg4win.org/get-gpg4win.html" target="_blank">https://www.gpg4win.org/get-gpg4win.html</a></p>
+
+<p>PS: Pode ser que a versão do GnuPG que vem com o GPG4Win esteja desatualizada, nesse caso atualize baixando daqui: <a href="https://gnupg.org/ftp/gcrypt/binary/" target="_blank">https://gnupg.org/ftp/gcrypt/binary/</a></p>
+
+<p>Abra o Kleopatra, clique em file e em new certificate, as escolha de formato será aberto, as opções são OpenPGP (que é um padrão aberto e são criadas localmente, sem uma autoridade de certificação, podendo ser certificadas pelos amigos e conhecidos), e a X.509 (que precisará verifiar a chave com uma autoridade de certificação, que terá um custo). No caso, criaremos OpenGPG.</p>
+
+<p>Ao abrir o Kleopatra e escolher OpenGPG, coloque o nome, e-mail e comentário para o qual será enviado.</p>
+
+<p>Tem um botão escrito Advanced Settings, que tem algumas opções avançadas como as de algoritmos, tamanhos de chaves e validades. Quanto maior a chave, mais difícil de quebrar a criptografia, porém, mais recursos de hardware serão consumidos. Marque a opção autenticação para configurar a validade dela.</p>
+
+<p>No próximo, ele mostrará os dados, e depois pedirá para você inserir uma senha para descriptografar posteriormente.</p>
+
+<p>Ele criará a chave, exibirá o fingerprint, terá as opções de fazer um back-up dela também.</p>
+
+<p>Na chave pronta, clique com o botão direito para ver as opções deles para alteração e criação de certificados.</p>
+
+<p>Para encriptar um arquivo com essa chave, basta ir em file, sign/encrypt files, adicionar o arquivo, escolher a chave criada, e confirmar, será gerado um arquivo criptografado. Também podemos encriptar um arquivo com uma senha.</p>
+
+<p>Para desencriptar, faça da mesma forma, insira a senha (caso seja criptografado com uma, se foi criptografado com sua chave pública, ele pedirá a senha da sua chave privada) e ele será descriptografado.</p>
+
+<p>O Kleopatra também fornece um autenticador de chaves, basta colocar o arquivo e a chave dele na mesma pasta e clicar diretamente na chave, que abrirá o Kleopatra e verificará a autencidade do arquivo (podendo também pesquisar a chave dele num servidor, importar e certificar a mesma). Também é possível usar a maioria dos comandos do GPG do Linux pelo CMD do Windows.</p>
+
+<h3>MobaSSH - Servidor SSH para Windows</h3>
+
+<p>O MobaSSH é um servidor SSH que roda no Windows, com ele podemos executar comandos e transferir arquivos de uma máquina remota Windows a partir de outra máquina de qualquer sistema operacional, usando uma conexão criptografada com o protocolo SSH.</p>
+
+<p>Primeiro, baixe o MobaSSH do site oficial dele, baixe a free: <a href="https://mobassh.mobatek.net/" target="_blank">https://mobassh.mobatek.net/</a></p>
+
+<p>Descompacte o executável, e instale ele no seu Windows. Veja que temos a configuração de várias coisas dentro do programa. Ele será instalado como um serviço e por isso, precisamos reiniciar ele.</p>
+
+<p>Primeiramente, devemos usar uma conta do Windows com uma senha, então coloque uma senha ou crie uma conta administradora com senha e acesse por ela. O MobaSSH não permite acesso sem senha por segurança (mas é configurável).</p>
+
+<p>O mesmo arquivo, usado para baixar e instalar o MobaSSH, é usado para gerenciar, atualizar e desinstalar à ele mesmo.</p>
+
+<p>Devemos também adicionar uma regra no firewall do Windows, em regras de entrada clique com o botão direito, crie uma nova regra, e escolha a opção porta, regra TCP e porta 22, permitir a conexão e o escopo da regra, e dê um nome à ela.</p>
+
+<p>Abriremos o CMD e pegue o IP privado da máquina, e na outra máquina da sua rede, podemos usar um programa como o Bitvise SSH para acessar essa primeira máquina.</p>
+
+<p>Lembrando que mesmo sendo acesso à um Windows, ele exibirá da mesma estrutura como um Linux.</p>
+
+<p>PS: No Windows 10 podemos instalar o servidor SSH nativo do sistema, indo em Apps e Recurso e Recursos Opcionais.</p>
+
+<ul>
+    <li><a href="tudo-sobre-seguranca-3.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-seguranca-5.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

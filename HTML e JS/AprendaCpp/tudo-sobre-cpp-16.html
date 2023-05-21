@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda C++</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cpp-1.html">Tudo sobre C++ Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cpp-2.html">Tudo sobre C++ Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cpp-3.html">Tudo sobre C++ Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cpp-4.html">Tudo sobre C++ Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cpp-5.html">Tudo sobre C++ Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cpp-6.html">Tudo sobre C++ Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cpp-7.html">Tudo sobre C++ Parte 7!</a></li>
+                    <li><a href="tudo-sobre-cpp-8.html">Tudo sobre C++ Parte 8!</a></li>
+                    <li><a href="tudo-sobre-cpp-9.html">Tudo sobre C++ Parte 9!</a></li>
+                    <li><a href="tudo-sobre-cpp-10.html">Tudo sobre C++ Parte 10!</a></li>
+                    <li><a href="tudo-sobre-cpp-11.html">Tudo sobre C++ Parte 11!</a></li>
+                    <li><a href="tudo-sobre-cpp-12.html">Tudo sobre C++ Parte 12!</a></li>
+                    <li><a href="tudo-sobre-cpp-13.html">Tudo sobre C++ Parte 13!</a></li>
+                    <li><a href="tudo-sobre-cpp-14.html">Tudo sobre C++ Parte 14!</a></li>
+                    <li><a href="tudo-sobre-cpp-15.html">Tudo sobre C++ Parte 15!</a></li>
+                    <li><a href="tudo-sobre-cpp-16.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C++ Parte 16!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C++ Parte 16</h2>
+
+<h3>Data e Hora em C++ 11</h3>
+
+<p>Podemos fazer dessa forma para manipular data e hora em C++ moderno (inclua as bibliotecas chrono e ctime):</p>
+
+<pre>
+<code>
+using namespace std;
+using namespace chrono;
+
+int main() {
+    time_t atual = system_clock::to_time_t(system_clock::now()); // Exibe com ctime(&atual)
+
+    string data(10, ' ');
+    strftime(&data[0], data.size() + 1, "%d/%m/%Y", localtime(&atual));
+
+    string hora(8, ' ');
+    strftime(&hora[0], hora.size() + 1, "%H:%M:%S", localtime(&atual));
+
+    string ds(1, ' ');
+    strftime(&ds[0], ds.size() + 1, "%w", localtime(&atual));
+
+    string semana[7] = {"Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"};
+
+    cout << data << endl;
+    cout << hora << endl;
+    cout << semana[stoi(ds)] << endl;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Podemos até criar uma classe baseada no uso dessas bibliotecas (nesse caso inclua iostream, chrono e ctime no arquivo h):</p>
+
+<pre>
+<code>
+using namespace std;
+using namespace chrono;
+
+class Date {
+    public:
+        string now();
+        string week();
+        int day();
+        int month();
+        int year();
+        int hours();
+        int minutes();
+        int seconds();
+    private:
+        static time_t atual;
+        static string semana[7];
+        int ds;
+
+        string manip(int quant, const char* tex);
+};
+
+time_t Date::atual = system_clock::to_time_t(system_clock::now());
+string Date::semana[7] = {"Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"};
+
+string Date::now() {
+    return ctime(&atual);
+}
+
+string Date::manip(int quant, const char* tex) {
+    string data(quant, ' ');
+    strftime(&data[0], data.size() + 1, tex, localtime(&atual));
+
+    return data;
+}
+
+string Date::week() {
+    ds = stoi(this->manip(1, "%w"));
+
+    return semana[ds];
+}
+
+int Date::day() {
+    return stoi(this->manip(2, "%d"));
+}
+
+int Date::month() {
+    return stoi(this->manip(2, "%m"));
+}
+
+int Date::year() {
+    return stoi(this->manip(4, "%Y"));
+}
+
+int Date::hours() {
+    return stoi(this->manip(2, "%H"));
+}
+
+int Date::minutes() {
+    return stoi(this->manip(2, "%M"));
+}
+
+int Date::seconds() {
+    return stoi(this->manip(2, "%S"));
+}
+</code>
+</pre>
+
+<p>Dessa forma, podemos simplesmente chamar assim no programa principal (dê o include do arquivo Date.h):</p>
+
+<pre>
+<code>
+Date dataAtual;
+
+cout << "O dia da semana é: " << dataAtual.week() << endl;
+
+cout << "O dia de hoje é: ";
+cout << dataAtual.day() << "/" << dataAtual.month() << "/" << dataAtual.year() << endl;
+
+cout << "A hora atual é: ";
+cout << dataAtual.hours() << ":" << dataAtual.minutes() << ":" << dataAtual.seconds() << endl;
+</code>
+</pre>
+
+<h3>Map - Smart Pointer/Ponteiro Inteligente em C++ 11</h3>
+
+<p>Os smart pointer, diferente dos ponteiros normais, ele destrói o elemento automaticamente após a execução ou alguma exceção, liberando memória automaticamente após o uso do objeto sem necessidade de usar free ou delete.</p>
+
+<p>Relembrando, um ponteiro em num, nós fazemos assim:</p>
+
+<pre>
+<code>
+int *pont; // Criação do ponteiro
+int num; // Variável do mesmo tipo
+
+num = 10; // Atribuição de valor à variável
+pont = &amp;num; // Atribuição do endereço de num à variável
+
+cout << "Conteúdo..: " << *pont << endl; // Conteúdo de num
+cout << "Endereço..: " << pont << endl; // Endereço de num
+
+delete pont;
+</code>
+</pre>
+
+<p>Agora deixe o código assim, transformando o int num objeto:</p>
+
+<pre>
+<code>
+int *pont = new int();
+
+*pont = 10;
+
+cout << "Conteúdo..: " << *pont << endl; // Conteúdo de pont
+cout << "Endereço..: " << &pont << endl; // Endereço de pont
+
+delete pont;
+</code>
+</pre>
+
+<p>Mas até aí, nada de novo.</p>
+
+<p>Para usarmos os ponteiros inteligentes, importamos a biblioteca memory, veja um exemplo de alteração do código acima, dessa forma</p>
+
+<pre>
+<code>
+unique_ptr&lt;int&gt; pont(new int());
+
+*pont = 10;
+
+cout << "Conteúdo..: " << *pont << endl; // Conteúdo de pont
+cout << "Endereço..: " << &pont << endl; // Endereço de pont
+</code>
+</pre>
+
+<p>Como visto acima, não se usa o delete, e nem é necessário, porque ele já faz a coleta de lixo automaticamente.</p>
+
+<p>Só que tem um porém, o unique_ptr só permite um ponteiro por vez, portanto, isso não é possível fazer:</p>
+
+<pre>
+<code>
+unique_ptr&lt;int&gt; pont(new int());
+unique_ptr&lt;int&gt; pont2 = pont;
+</code>
+</pre>
+
+<p>Para resolver isso, usamos o ponteiro compartilhado, shared_ptr, dessa forma:</p>
+
+<pre>
+<code>
+shared_ptr&lt;int&gt; pont(new int());
+shared_ptr&lt;int&gt; pont2 = pont;
+</code>
+</pre>
+
+<p>Em outras palavras, o unique_ptr não pode ser compartilhado, já o shared_ptr permite isso, mas é menos usado. Temos também o auto_ptr, que identifica automaticamente, mas ele foi removido em versões mais recentes do C++ por desuso;</p>
+
+<p>Crie agora um ponteiro tradicional de objeto string, assim:</p>
+
+<pre>
+<code>
+string *pal = new string("Cursos");
+
+cout << "Palavra: " << *pal << endl;
+cout << "Tamanho: " << pal->size() << endl;
+</code>
+</pre>
+
+<p>O mesmo código usando o ponteiro inteligente:</p>
+
+<pre>
+<code>
+unique_ptr&lt;string&gt; pal(new string("Cursos"));
+
+cout << "Palavra: " << *pal << endl;
+cout << "Tamanho: " << pal->size() << endl;
+</code>
+</pre>
+
+<p>Crie fora do main, uma classe simples com esse código:</p>
+
+<pre>
+<code>
+class Carro {
+    public:
+        int vel = 0;
+        
+        int getVel() {
+            return vel;
+        }
+        void setVel(int v) {
+            this->vel = v;
+        }
+};
+</code>
+</pre>
+
+<p>E crie um objeto com o método tradicional assim:</p>
+
+<pre>
+<code>
+Carro *c1 = new Carro();
+
+c1->setVel(100);
+
+cout << "Velocidade: " << c1->getVel() << endl;
+
+delete c1;
+</code>
+</pre>
+
+<p>Mesmo código acima, só que com ponteiro inteligente:</p>
+
+<pre>
+<code>
+unique_ptr&lt;Carro&gt; c1(new Carro());
+
+c1->setVel(100);
+
+cout << "Velocidade: " << c1->getVel() << endl;
+</code>
+</pre>
+
+<p>Outro exemplo, usando o shared_ptr com um segundo objeto:</p>
+
+<pre>
+<code>
+shared_ptr&lt;Carro&gt; c1(new Carro());
+shared_ptr&lt;Carro&gt; c2 = c1;
+
+c1->setVel(100);
+c2->setVel(80);
+    
+cout << "Velocidade: " << c1->getVel() << endl;
+cout << "Velocidade: " << c2->getVel() << endl;
+</code>
+</pre>
+
+<p>Observe que no código acima, ambos os objetos retornam 80, porque usam o mesmo ponteiro, e portanto, o método de um altera/captura características do outro, por compartilhamento.</p>
+
+<p>Para que cada ponteiro tenhas suas características particulares, use o unique_ptr mesmo:</p>
+
+<pre>
+<code>
+unique_ptr&lt;Carro&gt; c1(new Carro());
+unique_ptr&lt;Carro&gt; c2(new Carro());
+
+c1->setVel(100);
+c2->setVel(80);
+
+cout << "Velocidade: " << c1->getVel() << endl;
+cout << "Velocidade: " << c2->getVel() << endl;
+</code>
+</pre>
+
+<p>No C++ 11, caso precise inicializar um ponteiro como nulo, podemos usar <code>nullptr</code> no lugar do NULL.</p>
+
+<h3>Algoritmo For_Each em C++ 11</h3>
+
+<p>O algoritmo for each é mais uma maneira para percorrer um container, usando uma função lambda para isso.</p>
+
+<p>Para trabalhar com foreach, precisamos importar a biblioteca algorithm.</p>
+
+<p>Veja um exemplo de código com iterator:</p>
+
+<pre>
+<code>
+vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+vector&lt;int&gt;::iterator it;
+
+for(it = n.begin(); it != n.end(); it++) {
+    cout << *it << endl;
+}
+</code>
+</pre>
+
+<p>Ou simplificando:</p>
+
+<pre>
+<code>
+vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+for(auto it = n.begin(); it != n.end(); it++) {
+    cout << *it << endl;
+}
+</code>
+</pre>
+
+<p>Simplificando mais ainda (essa é a forma mais simples de escrever):</p>
+
+<pre>
+<code>
+vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+for(auto it: n) {
+    cout << it << endl;
+}
+</code>
+</pre>
+
+<p>E claro, podemos usar o for tradicional também.</p>
+
+<p>Mas não é difícil fazer com o for each, que é uma função, que recebe uma função lambda, veja como usar:</p>
+
+<pre>
+<code>
+vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+for_each(n.begin(), n.end(), [](int num){cout << num << endl;});
+</code>
+</pre>
+
+<p>Em outras palavras, os parâmetros são o dado inicial, o dado final e a função, que é preferível ser lambda.</p>
+
+<p>Podemos também colocar outras operações dentro dessa função lambda, por exemplo:</p>
+
+<pre>
+<code>
+vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+for_each(n.begin(), n.end(), [](int num) {
+    num += 10;
+    cout << num << endl;
+});
+</code>
+</pre>
+
+<p>PS: A alteração acima só acontece dentro do lambda, ele não altera os dados do vector, como podem ver, usando outro for each:</p>
+
+<pre>
+<code>
+vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+for_each(n.begin(), n.end(), [](int num) {
+    num += 10;
+    cout << num << endl;
+});
+
+cout << endl;
+
+for_each(n.begin(), n.end(), [](int num) {
+    cout << num << endl;
+});
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-cpp-15.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-cpp-17.html">Continuação da Matéria!</a></li>-->
+</ul>
+        </div>
+    </body>
+</html>

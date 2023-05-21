@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Criação de Arquivos REG</h2>
+
+<p>O registro é um banco de dados hierárquico no Windows que armazena informações importantes sobre hardware do sistema, programas instalados e configurações, alé de perfis de cada uma das contas de usuário no computador.</p>
+
+<p>Os dados do registro são armazenados em chaves (compartimentos, como se fossem "pastinhas"), e dentro deles tem subchaves, que funcionam da mesma forma. As configurações que aparecem do lado direito são chamados de valores. Os valores sempre possuem um nome, o tipo de dados e o conteúdo dos dados (como se fossem variáveis). Tudo isso são parâmetros que ficam armazenados dentro das chaves, e os valores são itens de configurações.</p>
+            
+<p>Para inserir uma chave de registro (chave é como as pastas), editamos um arquivo REG com os dados dessa forma:</p>
+
+<pre>
+<code>
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\NomeDaChave]
+"NomeDoValor"=hex:00,00,00
+</code>
+</pre>
+
+
+<p>Para editar o valor dentro da chave, basta colocar como se ela fosse adicionada, com o conteúdo alterado, por exemplo:</p>
+
+<pre>
+<code>
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\NomeDaChave]
+"NomeDoValor"=hex:00,00,01
+</code>
+</pre>
+
+<p>Para adicionar um novo valor dentro de uma chave existente, basta colocar o caminho da chave com o novo valor, por exemplo:</p>
+
+<pre>
+<code>
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\NomeDaChave]
+"NovoValor"="Novos Dados"
+</code>
+</pre>
+
+
+
+<p>Para excluir um valor de uma chave, atribua o valor à ela com um <code>-</code> assim:
+
+<pre>
+<code>
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\NomeDaChave]
+"NomeDoValor"=-
+</code>
+</pre>
+
+<p>Para deletar uma chave, a mesma coisa, só colocando um <code>-</code> na frente, dentro dos colchetes:</p>
+
+<pre>
+<code>
+Windows Registry Editor Version 5.00
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\NomeDaChave]
+"NomeDoValor"=hex:00,00,01
+</code>
+</pre>
+
+<p>Para colocar mais de uma chave no mesmo arquivo REG, dê espacamento de uma linha entre eles, e mais de um valor numa mesma chave, coloque um abaixo do outro, por exemplo:</p>
+
+<pre>
+<code>
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\SOFTWARE\NomeDaChave]
+"NomeDoValor"=hex:00,00,01
+"NomeDoValor2"=hex:00,01,00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\NomeDaChave]
+"NomeDoValor"=hex:00,00,01
+"NomeDoValor2"=hex:00,01,00
+</code>
+</pre>
+
+<p>Da mesma forma para excluir várias chaves e/ou valores:</p>
+
+<pre>
+<code>
+Windows Registry Editor Version 5.00
+
+[-HKEY_CURRENT_USER\SOFTWARE\NomeDaChave]
+"NomeDoValor"=-
+"NomeDoValor2"=-
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\NomeDaChave]
+"NomeDoValor"=-
+"NomeDoValor2"=-
+</code>
+</pre>
+
+<p>No caso de valores em texto, como caminhos de programas, colocarmos entre aspas, e se necessário, aspas com sequências de escape, assim:</p>
+
+<pre>
+<code>
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\NomeDaChave]
+"NomeDoCaminho"="\"C:\\Windows\\executavel.exe\""
+</code>
+</pre>
+
+<p>Caso deseje inserir algum dado no valor padrão da chave, basta fazer algo assim, usando um @, no exemplo inserimos um dado em branco:
+
+<pre>
+<code>
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\NomeDaChave]
+@=""
+</code>
+</pre>
+
+<p>Para voltar ao valor não-definido do valor padrão, basta excluir o valor com um menos na frente do igual normalmente (no caso <code>@=-</code>).</p>
+
+<p>PS: Lembrando que é necessário colocar "Windows Registry Editor Version 5.00" para o arquivo reg funcionar. No lugar dele pode ser usado "REGEDIT4", mas pode não funcionar no Windows 8, 8.1 e 10.</p>
+
+<p>Esses são os tipos de dados mais comuns em entradas de registro, que são utilizados para configurar os valores que guardamos dentro das chaves:</p>
+
+<table>
+    <tr>
+        <th>ID do tipo</th>
+        <th>Nome Simbólico</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>REG_NONE</td>
+        <td>Sem tipo definido</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>REG_SZ</td>
+        <td>Valor de cadeia de caracteres UTF-16</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>REG_EXPAND_SZ</td>
+        <td>Valor de cadeia de caracteres expansível</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>REG_BINARY</td>
+        <td>Dados binários</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>REG_DWORD</td>
+        <td>Valor DWORD, inteiro sem sinal de 32 bits</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>REG_MULTI_SZ</td>
+        <td>Cadeia de caracteres múltipla (lista ordenada)</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>REG_QWORD</td>
+        <td>Valor QWORD, inteiro de 64 bits</td>
+    </tr>
+</table>
+
+<p>O registro tem cinco chaves principais (chaves raiz ou de alto nível):</p>
+
+<p>A chave <code>HKEY_CLASSES_ROOT</code> contém informações relativas a associações de nomes de arquivos, objetos OLE, associações com objetos COM, e associações de arquivos de classe. Parâmetros contidos nessa chave são na verdade um link (atalho) para a chave HKEY_LOCAL_MACHINE\SOFTWARE\Classes. Abreviada normalmente como HKCR.</p>
+
+<p>A chave <code>HKEY_CURRENT_USER</code> contém as configurações do usuário logado no sistema no momento, incluindo variáveis de ambiente, configurações de desktop, de redes e de aplicações. É um link para HKEY_USERS\&lt;SID-DO-USUÁRIO-ATUAL&gt;. Abreviada normalmente como HKCU.</p>
+
+<p>A chave <code>HKEY_LOCAL_MACHINE</code> contém todas as informações globais de hardware e sistema operacional. A informação nessa chave é aplicável a todos os usuários que se logam no sistema local. Abreviada normalmente como HKLM.</p>
+
+<p>A chave <code>HKEY_USERS</code> contém dados de todos os perfis de usuários no sistema, incluindo HKEY_CURRENT_USER e o perfil de usuário padrão. No geral, usamos a chave HKCU para configuração do usuário atual. Abreviada normalmente como HKU.</p>
+
+<p>A chave <code>HKEY_CURRENT_CONFIG</code> armezena todos os dados sobre a configuração atual de hadware da máquina. É um link para HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Hardware Profiles\Current. Não é muito utilizada no geral. Abreviada normalmente como HKCC.</p>
+
+<p>Uma coisa que podemos fazer, por exemplo, é criar uma entrada de registro onde um comando, BAT ou programa é executado ao inicializar (não funciona com aplicações Java), para isso, procure a chave RUN em HKCU ou HKLM (essa última é para todos os usuários), localizadas em <code>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</code> e <code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</code>. Veja um exemplo prático disso:</p>
+
+<pre>
+<code>
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
+"Inicializando"="\"C:\\Windows\\executavel.exe\""
+</code>
+</pre>
+
+<p>PS: Pode ser necessário usar sequências de escape, caso tenha algum comando com barras invertidas ou aspas.</p>
+
+<p>Para verificar se a chave realmente foi adicionada, basta abrir o regedit ou olhar pelo CMD com o comando reg query.</p>
+
+<p>E para apagar, da mesma forma, colocando o menos na frente do nome do valor:</p>
+
+<pre>
+<code>
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
+"Inicializando"=-
+</code>
+</pre>
+
+<p>Sabendo disso, podemos também usar isso para excluir programas que inicializam com o sistema, principalmente malwares e semelhantes, cujas entradas são colocadas justamente em run.</p>
+
+<p>PS: Variáveis do sistema não funcionam para adicionar chaves por esse método, só são possíveis utilizando o CMD ou BAT pra isso.</p>
+
+<p>Uma coisa que dá pra fazer no registro é remover programas padrões de determinadas extensões, indo em <code>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts</code>.</p>
+
+<p>Outro macete que podemos utilizar é a retirada de modo somente leitura de cartões SD, com esse código:</p>
+
+<pre>
+<code>
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\StorageDevicePolicies]
+"Proteção contra Gravação"=dword:00000000
+</code>
+</pre>
+
+            <footer>
+                <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+            </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Poo Java</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Poo Java</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-poo-java-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Poo Java Parte 1!</a></li>
+                    <li><a href="tudo-sobre-poo-java-2.html">Tudo sobre Poo Java Parte 2!</a></li>
+                    <li><a href="tudo-sobre-poo-java-3.html">Tudo sobre Poo Java Parte 3!</a></li>
+                    <li><a href="tudo-sobre-poo-java-4.html">Tudo sobre Poo Java Parte 4!</a></li>
+                    <li><a href="tudo-sobre-poo-java-5.html">Tudo sobre Poo Java Parte 5!</a></li>
+                    <li><a href="tudo-sobre-poo-java-6.html">Tudo sobre Poo Java Parte 6!</a></li>
+                    <li><a href="tudo-sobre-poo-java-7.html">Tudo sobre Poo Java Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Poo Java Parte 1</h2>
+
+<h3>Criando Classes e Objetos em Java</h3>
+
+<p>Os objetos podem ser materiais (físicas) ou abstratos que pode ser percebida pelos sentidos e descritos por meio de suas características (atributos), seus comportamentos (métodos) e seu estado atual (status). Pode incluir desde coisas como carro, pessoa ou coisas como datas, horário e etc.</p>
+
+<p>Veja por exemplo, uma caneta, que pode ser um objeto e uma classe, no caso, a caneta física em si é o objeto (o que foi oriundo), e a classe é o modelo que foi criado para poder classificar uma caneta (a palavra <code>class</code> vem de classificação). A classe é a idealização de uma caneta (o que uma caneta tem pra ser uma caneta, como modelo, cor, ponta e etc.), e o objeto caneta foi a instanciação (criação) dessa classe.</p>
+
+<p>O Java não permite ter duas ou mais classes no mesmo documento de classe. Algumas linguagens Orientadas a Objetos (como o PHP), isso já é possível.</p>
+
+<p>Crie um novo projeto Java com a classe principal, e também crie no mesmo pacote, uma classe Java com o nome Caneta (com a primeira em maiúscula, pascalcase permitido, pois será também o nome dela). O código da classe Caneta será esse:</p>
+
+<pre>
+<code>
+package criandoclassespoo;
+
+public class Caneta {
+    
+}
+</code>
+</pre>
+
+<p>E dentro coloque as variáveis referentes aos atributos da caneta (lembrando que variáveis em Java se indicam tipos e classes invólucro, a String tem a primeira maiúscula por ser classe). Dessa forma:</p>
+
+<pre>
+<code>
+public class Caneta {
+    String modelo;
+    String cor;
+    float ponta;
+    int carga;
+    boolean tampada;
+}
+</code>
+</pre>
+
+<p>E dentro dela, os métodos (funções) rabiscar, tampar e destampar. Ficará assim:</p>
+
+<pre>
+<code>
+package criandoclassespoo;
+
+public class Caneta {
+    String modelo;
+    String cor;
+    float ponta;
+    int carga;
+    boolean tampada;
+    
+    void rabiscar() {
+        
+    }
+    void tampar() {
+        
+    }
+    void destampar() {
+        
+    }
+}
+</code>
+</pre>
+
+<p>E na classe principal do Java, não precisará chamar a outra classe porque ambas estão no msmo pacote, basta criar (instanciar) o objeto como uma variável (c1), usando <code>new Caneta</code> pra chamar a classe, assim:</p>
+
+<pre>
+<code>
+Caneta c1 = new Caneta();
+
+// A variável c1 na verdade é um objeto.
+</code>
+</pre>
+
+<p>Podemos mexer também nos atributos da caneta, dessa forma:</p>
+
+<pre>
+<code>
+package criandoclassespoo;
+
+public class CriandoClassesPoo {
+    public static void main(String[] args) {
+       Caneta c1 = new Caneta();
+       
+       c1.cor = "Azul";
+       c1.ponta = 0.5f;
+       c1.tampada = false;
+    }
+}
+</code>
+</pre>
+
+<p>No caso, coloca após a variável do objeto, um ponto e o atributo com os dados.</p>
+
+<p>Diferente do PHP, no Java não existe uma função como o var_dump para mostrar o objeto, então criaremos na classe Caneta um método de status, assim:</p>
+
+<pre>
+<code>
+void status() {
+    System.out.print("Uma caneta " + this.cor);
+    System.out.println(" está tampada? " + this.tampada);
+}
+</code>
+</pre>
+
+<p>E na classe principal, chamamos a função, assim:</p>
+
+<pre>
+<code>
+c1.status();
+</code>
+</pre>
+
+<p>Podemos melhorar a função assim:</p>
+
+<pre>
+<code>
+void status() {
+    System.out.println("Modelo: " + this.modelo);
+    System.out.println("Cor: " + this.cor);
+    System.out.println("Ponta: " + this.ponta);
+    System.out.println("Carga: " + this.carga);
+    System.out.println("Tampada: " + this.tampada);
+}
+</code>
+</pre>
+
+<p>PS: O this vai ser substituído pelo nome do objeto. Ele verifica um atributo ou método na própria classe e será substituído pela classe chamadora. O this não é necessário ser usado no Java, pelo menos em alguns casos, mas é bom mantermos o hábito de usar ele.</p>
+
+<p>Essa é a vantagem da programação orientada a objetos, ele cria programas menores, por "espalhar" e gerar códigos em arquivos separados, que fazemos com que se relacionam entre si.</p>
+
+<p>Voltando à classe Caneta, criaremos as funções tampar e destampar, usando o this também, dessa forma:</p>
+
+<pre>
+<code>
+void tampar() {
+    this.tampada = true;
+}
+void destampar() {
+    this.tampada = false;
+}
+</code>
+</pre>
+
+<p>E da mesma forma, chame as funções na classe principal:</p>
+
+<pre>
+<code>
+package criandoclassespoo;
+
+public class CriandoClassesPoo {
+    public static void main(String[] args) {
+        Caneta c1 = new Caneta();
+       
+        c1.cor = "Azul";
+        c1.ponta = 0.5f;
+        c1.tampar();
+        c1.status();
+    }
+}
+</code>
+</pre>
+
+<p>Agora, voltando na classe Caneta, coloque dentro do método rabiscar um condicional:</p>
+
+<pre>
+<code>
+void rabiscar() {
+    if(this.tampada == true) {
+        System.out.println("ERRO! Não posso rabiscar!");
+    }
+    else {
+        System.out.println("Estou rabiscando...");
+    }
+}
+</code>
+</pre>
+
+<p>E na classe principal, teste isso, e depois mude o tampar para destampar:</p>
+
+<pre>
+<code>
+package criandoclassespoo;
+
+public class CriandoClassesPoo {
+    public static void main(String[] args) {
+        Caneta c1 = new Caneta();
+       
+        c1.cor = "Azul";
+        c1.ponta = 0.5f;
+        c1.tampar();
+        c1.status();
+        c1.rabiscar();
+    }
+}
+</code>
+</pre>
+
+<p>Sem apagar o primeiro objeto, crie um segundo com outros dados, por exemplo:</p>
+
+<pre>
+<code>
+package criandoclassespoo;
+
+public class CriandoClassesPoo {
+    public static void main(String[] args) {
+        Caneta c1 = new Caneta();
+       
+        c1.cor = "Azul";
+        c1.ponta = 0.5f;
+        
+        c1.tampar();
+        c1.rabiscar();
+        
+        Caneta c2 = new Caneta();
+        
+        c2.modelo = "Montblanc";
+        c2.cor = "Preta";
+        
+        c2.destampar();
+        c2.rabiscar();
+    }
+}
+</code>
+</pre>
+
+<p>Com isso, podemos ver que os dois objetos, apesar de vierem da mesma classe, são totalmente distintos e não tem ligação entre si. Isso são instâncias diferentes de uma mesma classe.</p>
+
+<p>Quando uma classe tá criada, podemos utilizar ela nos projetos à vontade, o POO permite reaproveitamento de código, uma das vantagens da orientação à objetos.</p>
+
+<p>Caso queira retornar o nome da classe em Java, use o método <code>this.getClass().getSimpleName()</code>.</p>
+
+<p>Faça como exercício, pegue dois objetos, um real e um abstrato (por exemplo, um carro e uma aula), e crie atributos e métodos dele, da mesma forma da caneta.</p>
+
+<h3>Configurando Visibilidade de Atributos e Métodos</h3>
+
+<p>Como visto, temos esse diagrama de classes, onde colocamos todos os atributos e os métodos dela:</p>
+
+<table style="float: left;">
+    <tr>
+        <th>Caneta</th>
+    </tr>
+    <tr>
+        <td>
+            + modelo<br/>
+            + cor<br/>
+            - ponta<br/>
+            # carga<br/>
+            # tampada<br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            + escrever()<br/>
+            + rabiscar()<br/>
+            + pintar()<br/>
+            # tampar()<br/>
+            # destampar()<br/>
+        </td>
+    </tr>
+</table>
+
+<table style="margin: 120px auto auto 120px">
+    <caption>Significado da tabela ao lado</caption>
+    <tr>
+        <th>Símbolo</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>+</td>
+        <td>Público (public)</td>
+    </tr>
+    <tr>
+        <td>-</td>
+        <td>Privado (private)</td>
+    </tr>
+    <tr>
+        <td>#</td>
+        <td>Protegido (protected)</td>
+    </tr>
+</table>
+
+<p>Voltando ao código anterior, com a classe Caneta, vamos criar um novo objeto com a caneta.</p>
+
+<p>E na classe, vamos ver a visibilidade dos atributos, por padrão. eles são públicos (ou seja, podem ser mexidos em qualquer lugar). Mas para trabalharmos com encapsulamento, futuramente, precisaremos definir explicitamente os atributos que serão públicos, privados e protegidos.</p>
+
+<p>De acordo com o diagrama, vamos colocar a visibilidade específica de cada atributo, dessa forma:</p>
+
+<pre>
+<code>
+public String modelo;
+public String cor;
+private float ponta;
+protected int carga;
+protected boolean tampada;
+</code>
+</pre>
+
+<p>E também nos métodos:</p>
+
+<pre>
+<code>
+public void status() {
+    System.out.println("Modelo: " + this.modelo);
+    System.out.println("Cor: " + this.cor);
+    System.out.println("Ponta: " + this.ponta);
+    System.out.println("Carga: " + this.carga);
+    System.out.println("Tampada: " + this.tampada);
+}
+
+public void rabiscar() {
+    if(this.tampada == true) {
+        System.out.println("ERRO! Não posso rabiscar!");
+    }
+    else {
+        System.out.println("Estou rabiscando...");
+    }
+}
+protected void tampar() {
+    this.tampada = true;
+}
+protected void destampar() {
+    this.tampada = false;
+}
+</code>
+</pre>
+
+<p>E na classe principal, coloque isso:</p>
+
+<pre>
+<code>
+package criandoclassespoo;
+
+public class CriandoClassesPoo {
+    public static void main(String[] args) {
+        Caneta c1 = new Caneta();
+       
+        c1.modelo = "BIC Cristal";
+ 
+        c1.status();
+    }
+}
+</code>
+</pre>
+
+<p>PS: O protected é pra quando você não quer deixar um atributo public, mas você quer compartilhar ele com as subclasses (é um intermediário entre public e private). No caso do Java, o protected permite acesso a classes apenas do mesmo pacote.</p>
+
+<p>Pode ver que, no caso acima, podemos mexer nos atributos modelo e cor, que são públicos, mas na ponta, que é privado, não podemos colocar nada, senão dará erro, ele só pode ser alterado dentro da classe.</p>
+
+<p>O mesmo vale para os métodos tampar() e destampar(), apenas o método rabiscar() pode ser chamado por ser público. Mas no Java, podemos mexer em métodos e atributos protegidos também.</p>
+
+<p>Tente colocar o método rabiscar privado e chame ele na classe principal, verá que dará erro. Depois volte a deixar ele público.</p>
+
+<p>Agora deixe o atributo tampada privado e os métodos tampar() e destampar() públicos. E chame os métodos na classe principal assim:</p>
+
+<pre>
+<code>
+package criandoclassespoo;
+
+public class CriandoClassesPoo {
+    public static void main(String[] args) {
+        Caneta c1 = new Caneta();
+       
+        c1.modelo = "BIC Cristal";
+        c1.cor = "Azul";
+        // c1.ponta = 0.5f;
+        c1.carga = 50;
+        // c1.tampada = true;
+        
+        c1.tampar();
+        c1.status();
+        c1.rabiscar();
+    }
+}
+</code>
+</pre>
+
+<p>Aí que tá o pulo do gato, se colocarmos os métodos tampar() e destampar() públicos, poderemos alterar o atributo "tampada", mesmo sendo privado, pela função estar dentro da mesma classe (só a mesma classe pode mexer em atributos privados dentro dela).</p>
+
+<p>Isso é como uma caixa registradora de um mercado, quando você compra um produto, o atendente é público (você tem acesso), e a caixa registradora é protegida (você não tem acesso), mas o atendente tem acesso à ela e com isso, você pode dar o dinheiro ao atendente e ele pode te dar o troco.</p>
+
+<p>Os atributos também podem ser inicializados de forma padrão dentro da classe, como por exemplo <code>protected int carga = 100</code>. Se o atributo for um objeto, pode ser algo tipo <code>private NomeDaClasse objeto = new NomeDaClasse()</code>. Mas não são muito usados, a não ser que sejam atributos finais ou estáticos.</p>
+
+<h3>Métodos e Atributos Estáticos</h3>
+
+<p>No Java é possível criar métodos estáticos, que é quando podemos chamar um método de uma classe sem precisar criar um objeto, sem usar o new, apenas chamando o nome da classe seguido do método, na sintaxe <code>NomeDaClasse.nomeDoMetodo()</code>.</p>
+
+<p>No código, apenas coloque <code>static</code> antes do tipo da função que deseja ser acessada de tal forma, dentro da classe. O static pode também ser usado em atributos (sempre inicializados dentro da classe), e no código principal chamamos diretamente junto com o nome da classe, como por exemplo <code>NomeDaClasse.nomeDoAtributo = conteudo</code>. (lembrando que nesse caso, mudaremos o conteúdo do atributo da classe e todos os objetos criados por ela serão alterados, por compartilhamento, independente da alteração ser dentro ou fora da classe). Nesse caso, dentro da classe não utilizamos this, só o nome do atributo ou método sozinho.</p>
+
+<p>Veja um exemplo de uso de métodos e atributos estáticos na classe Caneta:</p>
+
+<pre>
+<code>
+protected static float preco = 1.50f;
+
+public static void custo() {
+    System.out.printf("A caneta custa R$ %.2f.\n", preco);
+
+    // Note que não usamos this para exibir atributos estáticos.
+}
+</code>
+</pre>
+
+<p>E no código principal:</p>
+
+<pre>
+<code>
+public static void main(String[] args) {
+    Caneta.custo(); // Método estático.
+
+    Caneta c1 = new Caneta();
+    c1.status();
+    c1.custo(); // Pegará o mesmo valor do método estático.
+
+    Caneta c2 = new Caneta();
+    c2.status();
+    c2.custo(); // Pegará o mesmo valor do método estático.
+}
+</code>
+</pre>
+
+<p>PS: Não é recomendado chamar atributos e métodos estáticos através de objetos (tanto que algumas linguagens nem permitem isso), pois são atributos e métodos da classe, por isso devem ser chamados diretamente através dela.</p>
+
+<p>Também podemos fazer novas atribuições em atributos estáticos no código principal, desde que sejam públicos, e toda instância feita por ele também é alterada, por exemplo:</p>
+
+<pre>
+<code>
+Caneta.preco = 2.25f; // Atributo estático
+</code>
+</pre>
+
+<p>O static, teoricamente, significa que só uma alocação de memória é criada para esse atributo ou método, não tendo duas cópias na memória em simultâneo.</p>
+
+<p>Em outras palavras, o static manipula os atributos e métodos na classe toda, não apenas em uma instância, e todo objeto criado com ela também terá essa alteração. São atributos e métodos globais.</p>
+
+<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados.</p>
+
+<h3>Métodos Getter, Setter e Construtor</h3>
+
+<p>O método getter é o método acessor (que pega), ele acessa um determinado atributo mantendo a segurança de acesso à ele. Para entender, pense como uma pessoa que precisa saber quantos documentos (atributos) tem em uma estante (objeto e classe), a pessoa A tem 5 e a pessoa B tem 12, e tem outros documentos lá. O método getter seria como um funcionário intermediário numa mesa, que tem acesso à essa estante, e as outras pessoas não. Método que, apesar de impedir o acesso diretamente, é mais seguro e útil. Não é obrigatório, mas no mercado é muito utilizado em programação.</p>
+
+<p>O método setter é o método modificadores (que muda), ele modifica coisas que estão no objeto mantendo a segurança do atributo. Pensando na mesma situação, a pessoa A chegou na estante e ele tem 5 documentos lá e quer colocar mais um documento dele, mas nada garante que ele ou outra pessoa coloque no lugar certo ou mexa em outros. O método setter também seria como um funcionário intermediário numa mesa, com acesso à essa estante, da mesma forma da anterior. Impede o acesso diretamente e é mais seguro e útil. Eles tem que receber parâmetros pra isso.</p>
+
+<p>O método construtor é o que constrói algo sem que o usuário faça uma chamada, já com as propriedades dos atributos desejados (como azul, Bic Cristal, tampada usando o exemplo da caneta), que podem ser mudados depois.</p>
+
+<p>Voltando à classe Caneta, veremos os métodos getter, setter e construtor. Primeiro veja o diagrama que utilizaremos:</p>
+
+<table>
+    <tr>
+        <th>Caneta</th>
+    </tr>
+    <tr>
+        <td>
+            + Modelo<br/>
+            - Ponta<br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            + getModelo()<br/>
+            + setModelo(m)<br/>
+            + getPonta()<br/>
+            + setPonta(p)<br/>
+        </td>
+    </tr>
+</table>
+
+<p>Crie um novo projeto Java com classe principal, e no mesmo pacote crie outra classe Caneta, com esse código:</p>
+
+<pre>
+<code>
+package aplicacaocaneta;
+
+public class Caneta {
+    public String modelo;
+    private float ponta;
+    
+    public void status() {
+        System.out.println("Modelo: " + this.modelo);
+        System.out.println("Ponta: " + this.ponta);
+    }
+    
+    public String getModelo() {
+        return this.modelo;
+    }
+    public void setModelo(String m) {
+        this.modelo = m;
+    }
+    public float getPonta() {
+        return this.ponta;
+    }
+    public void setPonta(float p) {
+        this.ponta = p;
+    }
+}
+</code>
+</pre>
+
+<p>PS: Os métodos getters deverão ter o mesmo tipo de retorno, não podem ser void (vazio).</p>
+
+<p>E na classe principal, deixe apenas isso, pra criar o objeto:</p>
+
+<pre>
+<code>
+package aplicacaocaneta;
+
+public class AplicacaoCaneta {
+    public static void main(String[] args) {
+        Caneta c1 = new Caneta();
+        
+        c1.status();
+    }
+}
+</code>
+</pre>
+
+<p>Aí, coloque depois da criação do objeto, isso, para mudar o conteúdo dos atributos usando o setter, assim:</p>
+
+<pre>
+<code>
+package aplicacaocaneta;
+
+public class AplicacaoCaneta {
+    public static void main(String[] args) {
+        Caneta c1 = new Caneta();
+        
+        c1.setModelo("BIC Cristal");
+        // c1.modelo = "Mont Blanc";
+        c1.setPonta(0.5f);
+        // c1.ponta = 0.4;
+        
+        c1.status();
+    }
+}
+</code>
+</pre>
+
+<p>Pode ver que o método setter modifica sempre as propriedades do atributo mesmo se forem privados, se acessarmos diretamente, só conseguiremos mudar se o atributo for público. Como a mesa exemplificada acima. Tente mudar ali em cima as partes comentadas.</p>
+
+<p>Para exibir, usamos o método getter em prints também, veja a alteração de um método da classe Caneta:</p>
+
+<pre>
+<code>
+public void status() {
+    System.out.println("SOBRE A CANETA:");
+    System.out.println("Modelo: " + this.getModelo());
+    System.out.println("Ponta: " + this.getPonta());
+}
+</code>
+</pre>
+
+<p>Ou na classe principal, colocar um print ao invés da função acima:</p>
+
+<pre>
+<code>
+System.out.println("Tenho uma caneta " + c1.getModelo() + " de ponta " + c1.getPonta());
+</code>
+</pre>
+
+<p>Ele mostrará o objeto criado atualmente com as propriedades atribuídas. Esse uso de métodos públicos getters e setters para alterar atributos privados é o principal passo pro encapsulamento, e esses métodos também podem ser privados, para evitar que se façam alterações no código (é bastante comum deixarem só o getter público, sem ao menos criar um método setter).</p>
+
+<p>PS: Métodos getters e setters de atributos estáticos, também deverão ser estáticos, e seguir a mesma regra de não usar o this.</p>
+
+<p>Para usarmos o método construtor em POO, usaremos uma função que sempre terá o mesmo nome da classe, sem tipo de retorno, que criará propriedades automaticamente no objeto, dessa forma:</p>
+
+<pre>
+<code>
+public Caneta() {
+    this.cor = "Azul";
+}
+</code>
+</pre>
+
+<p>O código completo ficaria assim:</p>
+
+<pre>
+<code>
+package aplicacaocaneta;
+
+public class Caneta {
+    private String modelo;
+    private String cor;
+    private float ponta;
+    private boolean tampada;
+    
+    public Caneta() {
+        this.tampar();
+        this.cor = "Azul";
+    }
+    
+    public void status() {
+        System.out.println("SOBRE A CANETA:");
+        System.out.println("Modelo: " + this.getModelo());
+        System.out.println("Ponta: " + this.getPonta());
+        System.out.println("Cor: " + this.cor);
+        System.out.println("Tampada: " + this.tampada);
+    }
+    public void tampar() {
+        this.tampada = true;
+    }
+    public void destampar() {
+        this.tampada = false;
+    }
+
+    public String getModelo() {
+        return this.modelo;
+    }
+    public void setModelo(String m) {
+        this.modelo = m;
+    }
+    public float getPonta() {
+        return this.ponta;
+    }
+    public void setPonta(float p) {
+        this.ponta = p;
+    }
+}
+</code>
+</pre>
+
+<p>E na classe principal, basta apenas isso:</p>
+
+<pre>
+<code>
+package aplicacaocaneta;
+
+public class AplicacaoCaneta {
+    public static void main(String[] args) {
+        Caneta c1 = new Caneta();
+        
+        c1.status();
+    }
+}
+</code>
+</pre>
+
+<p>Dessa forma, já criamos os objetos com propriedades nos atributos automaticamente.</p>
+
+<p>Agora, alteraremos o método construtor, dessa forma:</p>
+
+<pre>
+<code>
+public Caneta(String m, String c, float p) {
+    this.modelo = m;
+    this.cor = c;
+    this.ponta = p; // ou this.setPonta(p);
+    this.tampar();
+}
+</code>
+</pre>
+
+<p>E na classe principal, podemos fazer isso, passando os parâmetros:</p>
+
+<pre>
+<code>
+package aplicacaocaneta;
+
+public class AplicacaoCaneta {
+    public static void main(String[] args) {
+        Caneta c1 = new Caneta("BIC", "Azul", 0.4f);
+        Caneta c2 = new Caneta("Pilot", "Verde", 1.0f);
+        
+        c1.status();
+        c2.status();
+    }
+}
+</code>
+</pre>
+
+<p>Dessa forma, usando o mesmo construtor, podemos criar infinitos objetos. E com a classe pronta, fica muito mais simples criar quantos objetos precisar.</p>
+
+<p>PS: No Netbeans é possível criar os métodos clicando no botão direito, mas é bom manter a prática de escrever manualmente. E em Java, métodos getters booleanos geralmente são escritos como is ao invés de get quando gerados pelo Netbeans, mas ambas as formas podem ser usadas e é recomendado manter o get.</p>
+
+<p>No Java é possível fazer sobrecarga de métodos construtores (que é mais de um método construtor com parâmetros e códigos diferentes) por ser fortemente tipado. Podemos por exemplo, criar um construtor sem parâmetro e sem código, e outro com parâmetros e códigos diferentes.</p>
+
+<p>Lembrando que não existem destrutores em Java, que são métodos usados para destruir um objeto antes do final da execução, pois ele apenas "esquece" os objetos não utilizados, ao invés de destruí-los.</p>
+
+<p>PS: Toda classe cria seu construtor padrão, que não recebe nem contém valor algum, quando estes não são especificados nela.</p>
+
+<ul>
+    <li><a href="tudo-sobre-poo-java-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

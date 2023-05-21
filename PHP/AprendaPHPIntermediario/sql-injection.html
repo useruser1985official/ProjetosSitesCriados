@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda PHP Intermediário</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda PHP Intermediário</h1>
+                <menu>
+                    <li><a href="index.php">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-1.html">Tudo sobre PHP Intermediário Parte 1!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-2.html">Tudo sobre PHP Intermediário Parte 2!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-3.html">Tudo sobre PHP Intermediário Parte 3!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-4.html">Tudo sobre PHP Intermediário Parte 4!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-5.html">Tudo sobre PHP Intermediário Parte 5!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-6.html">Tudo sobre PHP Intermediário Parte 6!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-7.html">Tudo sobre PHP Intermediário Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>SQL Injection</h2>
+
+<h3>SQL Injection via URL</h3>
+
+<p>Primeiro, teremos que usar um site vulnerável, veja alguns permitidos para testes: <a href="https://www.checkmarx.com/2015/04/16/15-vulnerable-sites-to-legally-practice-your-hacking-skills/" target="_blank">https://www.checkmarx.com/2015/04/16/15-vulnerable-sites-to-legally-practice-your-hacking-skills/</a></p>
+
+<p>Se o site, ao ter um parâmetro como <code>?id=2</code> e ao tirar o número dê algum erro, é sinal que ele está desprotegido</p>
+
+<p>Coloque na URL algo assim: <code>id=-1 union select 1,2,3,4,5,6,7,8--</code>, pra tentar descobrir os nomes das tabelas. Enquanto der erro, tire ou adicione números.</p>
+
+<p>Coloque um comando completo, com um suposto nome de login, tipo: <code>-1 union select 1,2,3,4,5,6,7,8 from login--</code>. (o union une resultados de duas ou mais querys em um único result set, no caso, ele unirá o select do servidor com o inserido na injeção).</p>
+
+<p>Uma dica é fazermos tabelas com nomes diferenciados, pois os invasores procuram nomes comuns como login, contato e etc.</p>
+
+<p>Para descobrir os dados após descobrir a tabela, aparecerão os parâmetros passados em algum lugar do site.</p>
+
+<p>Se aparecer algo tipo 4 e 6, podemos fazer: <code>id=-1 union select 1,2,3,user,5,senha,7,8--</code>.</p>
+
+<p>Nesse ponto, podemos já ter descoberto a senha, e podemos entrar no admin do site.</p>
+
+<h3>Solução do Problema SQL Injection via URL</h3>
+
+<p>Para isso, procute a variável onde se passa o parâmetro da URL. Onde for número inteiro, bloqueie a passagem de parâmetros strings, e números serão convertidos para inteiro, com algo tipo assim:</p>
+
+<pre>
+<code>
+isset((int)$_GET["id"]) ? (int)$_GET["id"] : 0;
+</code>
+</pre>
+
+<p>Faça isso em todos que tiverem declarações inteiras (só que deixe ele por último, fora de qualquer método como htmlspecialchars()).</p>
+
+<h3>Solução Completa do Problema SQL Injection via URL</h3>
+
+<p>Quando um parâmetro é número, a solução acima funciona, mas quando é string, é mais complicado, podemos usar uma função tipo essa:</p>
+
+<pre>
+<code>
+function anti_injection($sql) {
+    $sql = preg_ireplace(preg_quote("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"), "", $sql); // Qualquer palavra da string especificad aqui será transformado em nada.
+    $sql = strip_tags($sql); // Retira as tags como as &lt;script&gt;&lt;/script&gt;
+    $sql = (get_magic_quotes_gpc()) ? $sql : addslashes($sql); // A função addslashes coloca uma \ após cada aspa simples ou dupla, a transformando numa sequência de escape.
+    $sql = trim($sql); // Retira espaços
+    return $sql;
+}
+</code>
+</pre>
+
+<p>PS: A função get_magic_quotes_gpc() retorna a configuração atual de diretiva de configuração, se ela tiver ativada, ela já coloca automaticamente o escape nos dados recebidos em métodos GET e POST, assim como em cookies.</p>
+
+<p>Ele também pode ser assim, funciona tão efetivamente e é mais fácil de entender:</p>
+
+<pre>
+<code>
+function anti_injection($texto) {  
+    $lista = array("select", "update", "drop", "insert", "delete", "alter", "from", "where", "table", "tables", "database", ";", "--", "#", "%", "&amp;", "'", "\"", "(", ")", "&lt;", "&gt;", "[", "]", ":", "?", "`", "|", "*");
+    
+    $tags = strip_tags($texto);
+    
+    $remove = str_ireplace($lista, "", $tags);
+    
+    $muda = htmlspecialchars($remove, ENT_QUOTES);
+
+    $escape = (get_magic_quotes_gpc()) ? $muda : addslashes($muda);
+    
+    $limpa = trim($escape);
+    
+    return $limpa;
+}
+</code>
+</pre>
+
+<p>E por um include, chame o arquivo com o código acima.</p>
+
+<p>E faça o ID (o que está sendo passado pela url), assim:</p>
+
+<pre>
+<code>
+$id = anti_injection(filter_input(INPUT_GET, "id"));
+</code>
+</pre>
+
+<p>PS: O filter_input() funciona como os métodos get e post, só que com uma filtragem básica. O que vai nos parênteses é o name do parâmetro HTML a ser recebido.</p>
+
+<p>A função strip_tags() protege contra ataques XSS, o operador ternário com get_magic_quotes_gpc() protege contra injeções de SQL, pelo menos esses dois precisam estar na função anti injection.</p>
+
+<h3>SQL Injection via Formulário</h3>
+
+<p>Um macete muito comum é colocar nos formulários algo tipo <code>'or''='</code> (atenção, tem duas aspas simples sequenciais) no login, e o mesmo na senha, e tentar logar.</p>
+
+<p>Para evitar isso, inclua o arquivo anti injection que criamos anteriormente. e da mesma forma, faça isso:</p>
+
+<pre>
+<code>
+$login = anti_injection(filter_input(INPUT_GET, "login"));
+$senha = anti_injection(filter_input(INPUT_GET, "senha"));
+</code>
+</pre>
+
+<p>PS: Coloque o método htmlspecialchars() por fora da invocação da função, para prevenção de algum caractere especial não ter sido colocado no filtro, já o filter_input() vai dentro de tudo, pois ele substituí os métodos $_GET[], $_POST[] e outros do tipo, se forçar conversão pra número, deixe o typecast fora de todos os métodos.</p>
+
+<p>Veja alguns dos métodos usados para SQL Injection em PHP onde o esperado é <code>select * from tabela where login = '$campoLogin' and senha = '$campoSenha'</code>:</p>
+
+<table>
+    <tr>
+        <th>O que Digitar no Login</th>
+        <th>Resultado</th>
+        <th>Funcionamento</th>
+    </tr>
+    <tr>
+        <td>login'; --</td>
+        <td>select * from tabela where login = 'login';-- and senha = ''</td>
+        <td>Sabendo o login, tudo após o ponto e vírgula, virará comentário (ou seja, a parte de senha).</td>
+    </tr>
+    <tr>
+        <td>'or '1 = 1</td>
+        <td>select * from tabela where login = '' or '1 = 1' and senha = ''</td>
+        <td>Não precisa saber o login nem a senha,  condição sempre será satisfatória</td>
+    </tr>
+    <tr>
+        <td>123'; drop table tabela; --</td>
+        <td>select * from tabela where login = '123'; drop table tabela; --and senha = ''</td>
+        <td>O login não faz diferença, o objetivo era só apagar a tabela.</td>
+    </tr>
+</table>
+
+<p>PS: Pode ser preciso retirar os últimos ponto e vírgula dos comandos antes dos comentários, ficando <code>login' --</code>, <code>' or '1 = 1 --</code> ou <code>123'; truncate table users --</code>.</p>
+
+<p>Esse site também tem algumas dicas: <a href="https://juancarloscunha.wordpress.com/2009/08/19/tutorial-como-invadir-com-sql-injection-mysql-sql-injection-por-method-_get-e-_post-programa-para-sqlinjection/" target="_blank">https://juancarloscunha.wordpress.com/2009/08/19/tutorial-como-invadir-com-sql-injection-mysql-sql-injection-por-method-_get-e-_post-programa-para-sqlinjection/</a></p>
+
+<p>E aqui temos outras dicas de como evitar ataques: <a href="https://eufacoprogramas.com/net-como-evitar-sql-injection/" target="_blank">https://eufacoprogramas.com/net-como-evitar-sql-injection/</a></p>
+
+        </div>
+    </body>
+</html>

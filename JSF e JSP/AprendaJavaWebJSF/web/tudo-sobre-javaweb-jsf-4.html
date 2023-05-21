@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Java Web JSF</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java Web JSF</h1>
+                <menu>
+                    <li><a href="index.jsf">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsf-1.html">Tudo sobre Java Web JSF Parte 1!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsf-2.html">Tudo sobre Java Web JSF Parte 2!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsf-3.html">Tudo sobre Java Web JSF Parte 3!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsf-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java Web JSF Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java Web JSF Parte 4</h2>
+
+<h3>Criando Componentes</h3>
+
+<p>A todo momento trabalhamos com Primefaces, mas agora vamos criar nosso próprios componentes em JSF.</p>
+
+<p>O toolbar que nós usamos em todas as páginas, poderiamos usar um componente criado por nós mesmos.</p>
+
+<p>No JSF por padrão, temos uma pasta com o nome resources para esses componentes. Dentro dela crie uma pasta com o nome imagens e coloque uma imagen com o nome logo_carro, e coloque esse código no template.xhtml:</p>
+
+<pre>
+<code>
+&lt;h:panelGrid columns="2"&gt;
+    &lt;h:graphicImage library="imagens" name="logo-carro.png" width="100px"&gt;&lt;/h:graphicImage&gt;
+    &lt;h1&gt;&Sistema Carros&lt;/h1&gt
+&lt;/h:panelGrid&gt;
+</code>
+</pre>
+
+<p>Usando o graphicImage, o JSF é responsável por procurar a pasta e colocar o arquivo no seu site, sem ter que voltar ou avançar pastas.</p>
+
+<p>Outra forma, é usando o próprio Netbeans, vamos selecionar a tag toolbarGroup toda da página gerenciar-carros, clicar com o botão direito e ir em refatorar e em criar componente, esse componente terá o nome toolbarCrud, a pasta sccomp (dentro de resources), e o prefixo sc).</p>
+
+<p>Observe que no lugar da tag está a chamada do nosso componente (sc:toolbarGrud) e a importação na tag principal do XHTML,</p>
+
+<p>No caso, os actions no nosso toolbar serão alterados para funcionar em todas as páginas. Nos XHTML de todo o site, como o controle-tela, coloque a tag sc:toolbarGrud e a importação da mesma no código principal.</p>
+
+<p>No toolbarCrud coloque isso:</p>
+
+<pre>
+<code>
+&lt;cc:interface&gt;
+    &lt;cc:attribute name="crudBean" required="true"&gt;&lt;/cc:attribute&gt;
+&lt;/cc:interface&gt;
+</code>
+</pre>
+
+<p>E na página gerenciar-carro.xhtml altere a toolbarCrud assim:</p>
+
+<pre>
+<code>
+&lt;sc:toolbarCrud crudBean="#{carroBean}"/&gt;
+</code>
+</pre>
+
+<p>Da mesma forma, coloque usuarioBean em controle-tela.xhtml.</p>
+
+<p>E no toolbarCrud altere todos os componentes, no lugar de carroBean/usuarioBean, para cc.attrs.crudBean, por exemplo:</p>
+
+<pre>
+<code>
+action="cc.attrs.crudBean.novo()"
+</code>
+</pre>
+
+<p>PS: Podemos colocar ícones usando a propriedade icon nos botões, no caso, seroa ui-icon-document para novo, ui-icon-disk para salvar e ui-icon-sear para buscar.</p>
+
+<p>No toolbarCrud.xhtml, podemos colocar essa tag, abaixo do primeiro toolbarGroup:</p>
+
+<pre>
+<code>
+&lt;p:toolbarGroup align="right"&gt;
+    &lt;cc:insertChildren&gt;&lt;/cc:insertChildren&gt;
+&lt;/p:toolbarGroup&gt;
+</code>
+</pre>
+
+<p>Com a tag insertChildren, podemos colocar qualquer coisa dentro das tags do nosso elemtno em qualquer página que desejarmos, por exemplo:</p>
+
+<pre>
+<code>
+&lt;sc:toolbarCrud crudBean="#{carroBean}"&gt;
+    &lt;p:inputText value="Texto"&gt;&lt;/p:inputText&gt;
+&lt;/sc:toolbarCrud&gt;
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-javaweb-jsf-3.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-javaweb-5.html">Continuação da Matéria!</a></li>-->
+</ul>
+        </div>
+    </body>
+</html>

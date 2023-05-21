@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Linux</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Linux</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-linux-1.html">Tudo sobre Linux Parte 1!</a></li>
+                    <li><a href="tudo-sobre-linux-2.html">Tudo sobre Linux Parte 2!</a></li>
+                    <li><a href="tudo-sobre-linux-3.html">Tudo sobre Linux Parte 3!</a></li>
+                    <li><a href="tudo-sobre-linux-4.html">Tudo sobre Linux Parte 4!</a></li>
+                    <li><a href="tudo-sobre-linux-5.html">Tudo sobre Linux Parte 5!</a></li>
+                    <li><a href="tudo-sobre-linux-6.html">Tudo sobre Linux Parte 6!</a></li>
+                </menu>
+            </header>
+
+<h2>Shell Scripting - Parte 2</h2>
+
+<h3>Comparando Arquivos e Diretórios com Comando Test</h3>
+
+<p>As comparações de arquivos são o tipo de comparações mais poderosas e mais usadas em Shell Scripting. O comando test permite testar o status de arquivos e diretórios no sistema de arquivos Linux, conforme a tabela a seguir:</p>
+
+<table>
+    <tr>
+        <th>Comando</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>-d arquivo</td>
+        <td>Verifica se o arquivo existe e se é um diretório</td>
+    </tr>
+    <tr>
+        <td>-e arquivo</td>
+        <td>Verifica se o arquivo existe</td>
+    </tr>
+    <tr>
+        <td>-f arquivo</td>
+        <td>Verifica se o arquivo existe e se é um arquivo</td>
+    </tr>
+    <tr>
+        <td>-r arquivo</td>
+        <td>Verifica se o arquivo existe e se possui permissão de leitura para o usuário atual</td>
+    </tr>
+    <tr>
+        <td>-s arquivo</td>
+        <td>Verifica se o arquivo existe e não está vazio</td>
+    </tr>
+    <tr>
+        <td>-w arquivo</td>
+        <td>Verifica se o arquivo existe e tem permissão de escrita</td>
+    </tr>
+    <tr>
+        <td>-x arquivo</td>
+        <td>Verifica se o arquivo existe e tem permissão de execução</td>
+    </tr>
+    <tr>
+        <td>-O arquivo</td>
+        <td>Verifica se o arquivo existe e é propriedade do usuário atual</td>
+    </tr>
+    <tr>
+        <td>-G arquivo</td>
+        <td>Verifica se o arquivo existe e seu grupo padrão é o mesmo do usuário atual</td>
+    </tr>
+    <tr>
+        <td>arq1 -nt arq2</td>
+        <td>Verifica se o arquivo arq1 é mais novo que arq2</td>
+    </tr>
+    <tr>
+        <td>arq1 -ot arq2</td>
+        <td>Verifica se o arquivo arq1 é mais antigo que arq2</td>
+    </tr>
+</table>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Verifica se o diretório HOME do usuário
+# existe e mostra seu conteúdo:
+
+if [ -d $HOME ]; then
+    echo "Seu diretório home existe e o conteúdo é: "
+
+    cd $HOME
+    ls -l
+else
+    echo "Diretório não encontrado!"
+fi
+</code>
+</pre>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Verifica se o objeto é um arquivo
+
+if [ -e $HOME ]; then
+    echo "O objeto existe, vamos ver se é arquivo ou diretório."
+    
+    if [ -f $HOME ]; then
+        echo "É um arquivo!"
+    else
+        echo "É um diretório!"
+    fi
+else
+    echo "Objeto não encontrado!"
+fi
+</code>
+</pre>
+
+<p>PS: Note que temos acima um if aninhado.</p>
+
+<h3>Testar Condições Compostas com AND e OR</h3>
+
+<p>A declaração if-then permite usar lógica booleana para combinar testes. Podemos usar dois operadores booleanos, AND (&&) e OR (||).</p>
+
+<p>Veja um exemplo de uso de AND:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Testar comparações compostas. Vamos verificar se
+# o usuário logado atualmente é o "eu" e se ele tem
+# permissão de escrita no seu arquivo .bashrc
+
+if [ $USER = eu ]&&[ -w $HOME/.bashrc ]; then
+    echo "O usuário $USER tem permissão para alterar o arquivo!"
+else
+    echo "O usuário $USER não pode alterar o arquivo agora!"
+fi
+</code>
+</pre>
+
+<p>O OR funciona da mesma forma, apenas mudando o && para ||.</p>
+
+<h3>Comando Case - Teste de Múltiplas Condições</h3>
+
+<p>Esse comando verifica condições múltiplas que podem ocorrer em uma variável, em um formato parecido com uma lista. A estrutura case substitui e simplifica o uso do if-then-else com várias declarações. O comando case compara o valor de uma variável ou expressão com os valores da lista criada. Se os valores baterem, o shell executará os comandos especificado para o valor.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Usando o comando case
+
+local=quarto
+
+case $local in
+    quarto)
+        echo "Você está no quarto!";;
+    cozinha)
+        echo "Aqui é a cozinha!";;
+    sala)
+        echo "Está na sala agora!";;
+    banheiro | lavanderia)
+        echo "Foi ao banheiro ou à lavanderia!";;
+    *)
+        echo "Você não está dentro de casa!";;
+esac
+</code>
+</pre>
+
+<p>Atenção que ele deverá ter dois ponto-e-vírgula após o final de cada condição (seria o equivalente ao break). O * seria o equivalente ao default.</p>
+
+<h3>Estrutura de Repetição For</h3>
+
+<p>O Shell Bash oferece três estruturas de repetição para criação de loops estruturados. São elas os comandos FOR, WHILE e UNTIL.</p>
+
+<p>O comando for permite criar um loop que itera através de uma série de valores. Cada iteração executa um conjunto definido de comando usando um dos valores da lista. A cada iteração, a variável valor contém o valor atual da lista.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Ler valores de uma lista, declarada no próprio comando for
+
+for valor in pastel pizza esfiha 'pão de queijo'
+do
+    echo "Adoro $valor."
+done
+</code>
+</pre>
+
+<p>Caso os itens iterados sejam composts por palavras separadas por espaços (como Ana Paula), o comando for irá considerar cada palavra como um item separado. Isso é devido à variável de ambiente IFS (Internal Field Separator), a qual define uma lista de caracteres que o shell bash usa como separadores de campos. São eles, por padrão: Espaço, tabulação e newline. É possível alterar essa lista de separadores.</p>
+
+<p>PS: Podemos usar o laço assim também:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Ler valores de uma lista, declarada no próprio comando for
+
+for valor in pastel pizza esfiha 'pão de queijo'; do
+    echo "Adoro $valor."
+done
+</code>
+</pre>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Arquivo lista contém uma lista de nomes,
+# um por linha, incluindo nomes compostos
+
+arquivo=~/lista.txt
+
+IFS_OLD=$IFS
+
+IFS=$'\n'
+
+for nome in `cat $arquivo`; do
+    echo "O nome é $nome"
+done
+
+IFS=$IFS_OLD
+</code>
+</pre>
+
+<p>PS: Baixe a lista <a href="_files/lista.txt" target="_blank" download="lista.txt">clicando aqui</a>.</p>
+
+<p>IFS é uma variável do sistema, nós fazemos uma alteração nela pra não cortar nomes compostos.</p>
+
+<p>Veja outro exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Iterando todos os itens de um diretório
+
+for item in ~/*; do
+    if [ -d "$item" ]; then
+        echo "O item $item é um diretório!"
+    elif [ -f "$item" ]; then
+        echo "O item $item é um arquivo!"
+    fi
+done
+</code>
+</pre>
+
+<p>Podemos também fazer o laço assim, usando o seq, que faz o incremento de um em um a partir do um até o número indicado:</p>
+
+<pre>
+<code>
+for cont in $(seq 10); do
+    echo $cont
+done
+</code>
+</pre>
+
+<p>O seq aceita parâmetros também, na ordem inicio, incremento, fim, por exemplo:</p>
+
+<pre>
+<code>
+for cont in $(seq 0 5 100); do
+    echo $cont
+done
+</code>
+</pre>
+
+<p>E podemos fazer uma contagem crescente ou decrescente de 1 em 1, por exemplo:</p>
+
+<pre>
+<code>
+for i in {10..0}; do
+    echo $i
+done
+</code>
+</pre>
+
+<h3>Estrutura While</h3>
+
+<p>O comando while permite definir um comando a testar e então iterar por um conjunto de comandos enquanto o comando definido de teste retornar status de saída zero. Quando o comando de teste retornar status de saída diferente de zero, o while para de executar seu bloco de comandos e o loop é encerrado.</p>
+
+<p>O comando test usa o mesmo formato da estrutura if-then, e podemos usar o comando test para testar condições. O status de saída do comando de teste deve mudar em algum momento durante as iterações, ou teremos um loop infinito.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Testando o comando while
+
+var=10
+
+while [ $var -gt 0 ]; do
+    echo $var
+
+    var=$[$var - 1]
+done
+</code>
+</pre>
+
+<h3>Estrutura de Repetição Until</h3>
+
+<p>O comando until opera de forma oposta ao comando while. É necessário especificar um comando de teste que retorne um status de saída diferente de zero para que o bloco de comandos listado no loop seja executado. Quando o comando de teste retornar status de saída zero, o loop termina.</p>
+
+<p>Veja um exemplo de uso de until:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Testando da estrutura de repetição until
+
+var=50
+
+until [ $var -eq 0 ]; do
+    echo $var
+
+    var=$[$var - 2]
+done
+</code>
+</pre>
+
+<h3>Laço For no Estilo Linguagem C</h3>
+
+<p>É possível usar uma estrutura de repetição for no estilo da linguagem C em um script do shell. Neste caso, teremos uma variável contador que irá controlar o número de iterações do loop.</p>
+
+<p>Exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Testando for no estilo C
+
+for((i = 1; i <= 15; i++)); do
+    echo "Número $i"
+done
+</code>
+</pre>
+
+<p>PS: Observe que não é 100% igual a um laço for do C.</p>
+
+<h3>Ler Dados do Teclado - Parâmetros de Linha de Comando</h3>
+
+<p>Frequentemente, precisamos escrever scripts que interajam com o usuário. Há algumas formas de se obter dados dos usuários no shell, como parâmetros de linha de comando, opções e leitura de dados diretamente do teclado.</p>
+
+<p>É o método para passar dados ao script do shell. Os parâmetros de linha de comando permitem adicionar valores de dados à linha de comando ao executar o script. Para passar parâmetros a um script, digite-os após o nome do script, ao executá-lo.</p>
+
+<p>O Shell Bash atribui variáveis especiais, denomidadas parâmetros posicionais, a todos os parâmetros digitados na linha de comandos. Os parâmetros posicionais são números, sendo $0 o nome do programa, $1 o primeiro parâmetro, $2 o segundo, e assim por diante até o nono ($9). Para adicionar mais parâmetros, englobe o nº do parâmetros entre parênteses, como $(10).</p>
+
+<p>Veja um exemplo (passe o parâmetro depois do nome do script):</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Teste de parâmetros na linha de comandos
+# Para executar digite na linha de comandos
+# Após o nome do script o número, por exemplo:
+# ./script.sh 5
+
+echo "Programa que calcula o quadrado de um número."
+
+quadrado=$[$1 * $1]
+
+echo "O quadrado de $1 é $quadrado."
+</code>
+</pre>
+
+<p>Há algumas variáveis especiais disponúveus no shell bash. A variável especial $# contém o número de parâmetros de linha de comando fornecidos ao rodas o script. Podemos usá-la para verificar se o usuário digitou o Nº de parâmetros necessários para rodar o programa corretamente.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Verificação de número de parâmetros
+
+if [ $# -ne 1 ]; then
+    echo "Digite um valor!"
+else
+    result=$[$1 * 3]
+
+    echo "O triplo de $1 é $result."
+fi
+</code>
+</pre>
+
+<h3>Ler Dados do Teclado - Comando Shift</h3>
+
+<p>O comando shift auxilia na manipulação de parâmetros de linha de comando. O comando shift desloca os parâmetros em suas posições relativas. Ao ser usado, o comando shift "rebaixa" cada parâmetro em uma posição, de modo que o valor variável $3 é movido para $2, o valor de $2 é movido para $1 e o valor de $1 é descartado.</p>
+
+<p>Veja um exemplo de uso (passe pelo menos um parâmetro, não precisa ser números):</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Exemplo de uso do comando shift
+
+i=1
+
+while [ -n "$1" ]; do
+    echo "O parâmetro $i tem o valor $1."
+
+    i=$[$i + 1]
+    
+    shift
+done
+</code>
+</pre>
+
+<h3>Ler Dados do Teclado - Opções de Linha de Comando</h3>
+
+<p>Opções são letras precedidas por um hífen que alteram o comportamento de um comando. Para processar opções passadas ao script, vamos usar uma combinação dos comandos case e shift.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Usando opções de um script
+
+while [ -n "$1" ]; do
+    case "$1" in
+        -a)
+            echo "Opção selecionada: A";;
+        -b)
+            echo "Opção selecionada: B";;
+        -c)
+            echo "Opção selecionada: C";;
+        -*)
+            echo "Opção incorreta";;
+    esac
+    shift       
+done
+</code>
+</pre>
+
+<p>Podemos passar mais de um parâmetro no script acima.</p>
+
+<h3>Comando Read - Ler Dados do Teclado e de Arquivos</h3>
+
+<p>O comando read aceita entrada de dados da entrada padrão ou de outro descritor de arquivos. Após receber a entrada, o comando read coloca os dados em uma variável padrão.</p>
+
+<p>Veja um exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+echo -n "Digite seu nome: "
+
+read nome
+
+echo "Seu nome é $nome."
+</code>
+</pre>
+
+<p>Se não for especificada nenhuma variável para receber os dados no comando read, então o valor lido será colocado na variável de ambiente REPLY.</p>
+
+<p>Veja um exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+read -p "Digite sua idade: "
+
+echo "Você tem $REPLY anos de idade!"
+</code>
+</pre>
+
+<p>É possível especificar um valor de timeout para o comando read, para isso, usamos a opção -t para passar o Nº de segundos que o comando aguardará uma entrada do usuário. Quando o time expira, o read retorna status de saída não-zero.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Usando timer
+
+echo -n "Digite seu nome: "
+
+if read -t 4 nome; then
+    echo "Olá $nome, tudo bem por aí?"
+else
+    echo "Você demorou mais de 4 segundos para responder!"
+fi
+</code>
+</pre>
+
+<p>É possível também fazer que o comando read conte o Nº de caracteres de entrada, e saia imediatamente quando um número predefinido for digitado, atribuindo os dados recolhidos a uma variável.</p>
+
+<p>Veja um exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Lendo um caracter (-n1 significa um caracter lido)
+
+echo -n "Deseja prosseguir com a operação? [S/N] "
+
+read -n1 resposta
+
+echo
+
+case $resposta in
+    S|s)
+        echo "Você escolher continuar!";;
+    N|n)
+        echo "Operação interrompida!";;
+    *)
+        echo "Opção inválida. Digite apenas s ou n!";;
+esac
+</code>
+</pre>
+
+<p>É possível ler o que o usuário digita, sem que no entanto apareçam os caracteres no monitor. Esse recurso é útil, por exemplo, para capturarmos senhas. Para isso, use a opção -s.</p>
+
+<p>Veja um exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Entrada oculta
+
+echo -n "Digite sua senha: "
+
+read -s senha
+
+echo
+
+echo "A senha digitada foi $senha."
+</code>
+</pre>
+
+<p>Podemos usar o comando read para ler dados armazenados em um arquivo no computador. Cada chamada ao comando read lê uma linha de texto. Quando não houverem mais linhas para ler, o comando read sairá com status de saída zero.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Ler dados de um arquivo de texto
+
+contador=1
+
+cat lista.txt | while read linha; do
+    echo "Linha $contador: $linha"
+
+    contador=$[$contador + 1]
+done
+</code>
+</pre>
+
+<h3>Criando Caixas de Diáloho TUI com Whiptail no Linux</h3>
+
+<p>O Whiptail é um programa que permite exibir caixas de diálogo dentro da linha de comando do Linux.</p>
+
+<p>Veja um exemplo de linha num script:</p>
+
+<pre>
+<code>
+whiptail --title "Caixa MessageBox" --msgbox "Criando uma Caixa de Mensagens com o Whiptail. Escolha OK para Continuar!" --fb 10 50
+</code>
+</pre>
+
+<p>Especificamos na sequência, o título e o tipo de caixa (no caso msgbox).</p>
+
+<p>Temos também a caixa yes/no, que é assim:</p>
+
+<pre>
+<code>
+if whiptail --title "Caixa Yes/No" --yesno "Escolha a Alternativa Yes ou No!" --fb 10 50
+then
+    echo "Você escolheu yes. O status de saída é $?."
+else
+    echo "Você escolheu no. O status de saída é $?."
+fi
+</code>
+</pre>
+
+<p>Podemos inclusive personalizar os botões, por exemplo:</p>
+
+<pre>
+<code>
+if whiptail --title "Escolhendo o Tipo de Instalação" --yes-button "Completa" --no-button "Personalizada" --yesno "Escolha o Tipo de Instalação!" --fb 10 50
+then
+    echo "Você escolheu completa. O status de saída é $?."
+else
+    echo "Você escolheu personalizada. O status de saída é $?."
+fi
+</code>
+</pre>
+
+<p>A caixa info é bem simples, veja o código abaixo:</p>
+
+<pre>
+<code>
+whiptail --title "Caixa de Informações" --infobox "Criando uma Caixa de Informações. Escolha OK para Continuar!" 10 80
+</code>
+</pre>
+
+<p>O inputbox pede um dado digitado pelo usuário, veja um exemplo:</p>
+
+<pre>
+<code>
+nome=$(whiptail --title "Caixa InputBox" --inputbox "Digite seu nome:" --fb 10 60 3>&1 1>&2 2>&3)
+
+statusaida=$?
+
+if [ $statusaida = 0 ]; then
+    echo "O Nome digitado foi $nome."
+else
+    echo "Entrada cancelada pelo usuário."
+fi
+</code>
+</pre>
+
+<p>De forma parecida, o passwordbox pede um dado que será oculto por caracteres, como os de senhas:</p>
+
+<pre>
+<code>
+senha=$(whiptail --title "Caixa de Senha" --passwordbox "Digite sua senha!" --fb 10 60 3>&1 1>&2 2>&3)
+
+statusaida=$?
+
+if [ $statusaida = 0 ]; then
+    echo "A senha digitada foi: $senha."
+else
+    echo "Entrada cancelada."
+fi
+</code>
+</pre>
+
+<p>O checklist permite selecionar itens de uma lista, clicando no espaço, veja um exemplo de uso:</p>
+
+<pre>
+<code>
+cidade=$(whiptail --title "Listagem de Cidades" --checklist --fb \
+"Quais cidades deseja visitar?" 15 50 5 \
+"Londres" "Inglaterra" ON \
+"Berlim" "Alemanha" OFF \
+"Toronto" "Canadá" OFF \
+"Abu Dhabi" "Emirados Árabes" OFF \
+"Pequim" "China" OFF 3>&1 1>&2 2>&3)
+
+status=$?
+
+if [ $status = 0 ]; then
+    echo "As cidades escolhidas foram:" $cidade
+else
+    echo "Entrada cancelada pelo usuário!"
+fi
+</code>
+</pre>
+
+<p>PS: Use o tab para acessar os botões OK e Cancelar.</p>
+
+<h3>Criando Funções em Scripts</h3>
+
+<p>Quando criamos scripts mais complexos, acabamos reutilizando partes do código várias vezes, para evitar isso usamos funções dentro do shell scripting:</p>
+
+<p>A primeira forma de criar funções é usando a palavra-chave function, por exemplo:</p>
+
+<pre>
+<code>
+function exemplo {
+    echo "Isso foi chamado por uma função!"
+}
+</code>
+</pre>
+
+<p>Podemos criar sem a palavra function, mas nesse caso devemos colocar os parênteses após o nome da função. Por exemplo:</p>
+
+<pre>
+<code>
+exemplo() {
+    echo "Isso foi chamado por uma função!"
+}
+</code>
+</pre>
+
+<p>Para invocar a função, basta colocarmos o nome da função no script, ficando assim:</p>
+
+<pre>
+<code>
+exemplo() {
+    echo "Isso foi chamado por uma função!"
+}
+
+exemplo
+</code>
+</pre>
+
+<p>Um exemplo mais complexo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Função em um script do shell
+
+function mensagem {
+    echo "Essa Frase será Repetida!"
+}
+
+# Chamando a função:
+
+contador=1
+
+while [ $contador -le 10 ]; do
+    mensagem
+
+    contador=$[$contador + 1]
+done
+
+# Outro texto, indicando o fim do script:
+
+echo "Função Executada com Sucesso!"
+</code>
+</pre>
+
+<p>Uma função pode ser colocada dentro de uma variável para ser trabalhada, veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Função em um script do shell
+
+function quadrado {
+    read -p "Digite um número entre 20 e 30: " numero
+
+    echo $[$numero * $numero]
+}
+
+# Atribuindo o valor da função à variável do shell valor:
+
+valor=`quadrado`
+
+# Mostrando o valor:
+
+echo "O quadrado do número é $valor."
+</code>
+</pre>
+
+<p>Uma função também pode receber parâmetros, mas no caso, não colocamos nada entre parênteses, os parâmetros, como visto, são guardados nas variáveis $1, $2, $3, etc. Veja um exemplo de uso abaixo:</p>
+
+<pre>
+<code>
+function soma {
+    echo "A soma é" $[$1 + $2]
+}
+
+soma 10 5
+</code>
+</pre>
+
+<p>E também pode retornar valores, e seu retorno irá para a variável $?, por exemplo:</p>
+
+<pre>
+<code>
+function valor {
+    read -p "Digite um número entre 0 e 255: " num
+
+    return $num
+}
+
+valor
+
+echo "O valor retornado é $?."
+</code>
+</pre>
+
+<p>O <code>return</code> também pode ser usado sem nada para um retorno do tipo "void", para interromper uma rotina.</p>
+
+<p>PS: Ele só retornará números entre 0 e 255 nesse caso, para simular um retorno de outros números, além de ponto-flutuante e strings, devemos fazer assim:</p>
+
+<pre>
+<code>
+function valor {
+    read -p "Digite um número qualquer: " num
+
+    echo $num
+}
+
+saida=`valor`
+
+echo "O valor retornado é $saida."
+</code>
+</pre>
+
+<p>Exemplo com parâmetro e retorno:</p>
+
+<pre>
+<code>
+function cubo {
+    echo $[$1 * $1 * $1]
+}
+ 
+res=`cubo 10`
+
+echo "O cubo de 10 é $res."
+</code>
+</pre>
+
+<p>Veja um exemplo pra exibir a data atual do sistema:</p>
+
+<pre>
+<code>
+function datas {
+    echo -n "Data: "
+
+    date +%d/%m/%Y
+    
+    semana=("Domingo" "Segunda-feira" "Terça-feira" "Quarta-feira" "Quinta-feira" "Sexta-feira" "Sábado")
+
+    ds=`date +%w`
+
+    echo ${semana[$ds]}
+
+    echo -n "Hora: "
+
+    date +%H:%M:%S
+}
+
+datas
+</code>
+</pre>
+
+<h3>Criando Caixas de Diálogo TUI com Dialog</h3>
+
+<p>O dialog é um pacote utilizado pra criar aquelas caixinhas que aparecem na linha de comando ao instalar alguns programas. Isso é chamado de TUI.</p>
+
+<p>PS: Pode ser necessário instalar o dialog dando um apt-get nele.</p>
+
+<p>Esse comando usa vários parâmetros de linha de comando para determinar o tipo de widget que iremos criar. Cada widget significa cada janelinha que o dialog pode criar.</p>
+
+<p>No exemplo abaixo, criamos uma caixa de mensagens, com os parâmentros título, corpo da caixa e dimensões da mesma.</p>
+
+<pre>
+<code>
+dialog --title "Caixa de Mensagem" --msgbox "Caixa de Teste" 10 35
+</code>
+</pre>
+
+<p>Seguindo a mesma lógica, podemos usar o yesno:</p>
+
+<pre>
+<code>
+dialog --title "Caixa Yes/No" --yesno "Escolha Sim ou Não" 10 35
+
+# Retorna 0 se selecionar OK:
+
+echo $?
+</code>
+</pre>
+
+<p>E pro inputbox:</p>
+
+<pre>
+<code>
+nome=$(dialog --title "Caixa de Nomes" --inputbox "Digite seu nome:" 10 35 --stdout)
+
+echo $?
+
+echo "O nome digitado foi $nome."
+</code>
+</pre>
+
+<p>Com senhas:</p>
+
+<pre>
+<code>
+senha=$(dialog --title "Caixa de Senhas" --passwordbox "Digite sua senha:" 10 35 --stdout)
+
+echo $?
+
+echo "A senha digitada foi $senha."
+</code>
+</pre>
+
+<p>Podemos mostrar uma grande quantidade de informações com o textbox, usando um arquivo do sistema para exibir. Veja como fazer:</p>
+
+<pre>
+<code>
+dialog --textbox /etc/group 20 50
+</code>
+</pre>
+
+<p>O menu também é simples de entender:</p>
+
+<pre>
+<code>
+sistema=$(dialog --menu "Escolha o sistema: " 20 35 15 \
+1 "Linux" \
+2 "BSD" \
+3 "Solaris" \
+4 "Android" --stdout)
+
+echo $sistema
+</code>
+</pre>
+
+<p>PS: Ele retornará o número por ser o primeiro item da linha, para retornar a string, inverta, assim:</p>
+
+<pre>
+<code>
+sistema=$(dialog --menu "Escolha o sistema: " 20 35 15 \
+"Linux" 1 \
+"BSD" 2 \
+"Solaris" 3 \
+"Android" 4 --stdout)
+</code>
+</pre>
+
+<p>PS: O terceiro parâmetro define o tamanho da caixa interna.</p>
+
+<p>O calendar também é bem simples, veja o código:</p>
+
+<pre>
+<code>
+data=$(dialog --calendar "Escolha a data: " 0 0 --stdout)
+
+echo $data
+</code>
+</pre>
+
+<p>PS: Ao passar os parâmetros como 0 0 ele ajustará a caixa automaticamente. A ordem é linha e coluna.</p>
+
+<p>O infobox é bem simples, veja como fazê-lo:</p>
+
+<pre>
+<code>
+dialog --title "Informação" --infobox "Operação Concluída com Êxito" 5 35
+
+sleep 4; clear
+</code>
+</pre>
+
+<p>PS: Note que colocamos um sleep para ele demorar 4 segundos para encerrar o widget e depois o clear para limpar a tela.</p>
+
+<p>O radiolist permite escolhermos apenas um item usando as setas e a barra de espaço, veja como fazê-lo:</p>
+
+<pre>
+<code>
+itens=$(dialog --radiolist "Escolha uma cor" 15 30 4 \
+"Verde" "" OFF \
+"Azul" "" OFF \
+"Vermelho" "" OFF \
+"Amarelo" "" ON --stdout)
+
+echo $itens
+</code>
+</pre>
+
+<p>PS: O terceiro parâmetro é a quantidade de itens, e as aspas vazia é pra não ter nada além do nome das cores.</p>
+
+<h3>Declaração Break - Encerrando Loops Prematuramente</h3>
+
+<p>O break é utilizado para encerrar prematuramente um loop, como por exemplo um laço for ou while.</p>
+
+<p>Vamos supor esse laço for:</p>
+
+<pre>
+<code>
+for num in 1 2 3 4 5 6 7 8 9 10
+do
+    echo "Número: $num"
+done
+</code>
+</pre>
+
+<p>Para interromper num determinado número, colocamos o break assim:</p>
+
+<pre>
+<code>
+for num in 1 2 3 4 5 6 7 8 9 10
+do
+    if [ $num -eq 6 ]; then
+        break
+    fi
+    
+    echo "Número: $num"
+done
+
+echo "Loop finalizado!"
+</code>
+</pre>
+
+<p>Veja outro exemplo mais complexo:</p>
+
+<pre>
+<code>
+read -p "Digite um número entre 1 e 10: " num
+
+while [ $num -ne 0 ]; do
+    if [ $num -gt 10 ]; then
+        break
+    fi
+
+    echo "Número digitado: $num"
+
+    read -p "Digite um número entre 1 e 10: " num
+done
+
+if [ $num -eq 0 ]; then
+    echo "Você encerrou o programa digitando zero!"
+else
+    echo "Você digitou um valor fora do intervalo. Programa finalizado."
+fi
+</code>
+</pre>
+
+<p>Temos também o continue, que interrompe a execução do laço no ponto que ele se encontra, mas continua o loop. Veja um exemplo:</p>
+
+<pre>
+<code>
+cont=0
+
+while [ $cont -lt 10 ]; do
+    cont=$[$cont + 1]
+
+    if [ $[$cont % 2] -eq 0 ]; then
+        continue
+    fi
+
+    echo $cont
+done
+</code>
+</pre>
+
+<p>Podemos fazer um loop infinito, interrompido pelo break também, por exemplo:</p>
+
+<pre>
+<code>
+cont=0
+
+while true; do
+    cont=$[$cont + 1]
+
+    if [ $cont -gt 100 ]; then
+        break
+    fi
+
+    echo $cont
+done
+</code>
+</pre>
+
+<h3>Formatar e Exibir texto com o comando Printf</h3>
+
+<p>O comando printf  no Linux é uma ferramenta interna (built-in) do shell Bash e de outros como Ksh e Zsh que permite formatar e exibir uma saída de texto.</p>
+
+<p>Este comando é útil para exibir informações em um formato específico no terminal, como por exemplo tabelas e relatórios. Veja um exemplo:</p>
+
+<pre>
+<code>
+printf "Dia da semana: %s\nHorário: %s\n" Sábado 11:00
+</code>
+</pre>
+
+<p>A string de formato possui caracteres de quebra de linha \n e dois especificadores de formato %s, que são substituídos pelos argumentos.</p>
+
+<p>Basicamente, é a mesma coisa do printf do C, só que sem os parênteses e as vírgulas.</p>
+
+<p>Essas são algumas das máscaras aceitas em Bash:</p>
+
+<table>
+    <tr>
+        <th>Máscara</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>%d</td>
+        <td>Valor decimal (positivo ou negativo)</td>
+    </tr>
+    <tr>
+        <td>%u</td>
+        <td>Valor decimal sem sinal (só positivo)</td>
+    </tr>
+    <tr>
+        <td>%f</td>
+        <td>Valor real</td>
+    </tr>
+    <tr>
+        <td>%s</td>
+        <td>String</td>
+    </tr>
+</table>
+
+<p>Também é possível usar as sequências de escape, como vimos anteriormente com a <code>\n</code>. Outras sequências também podem ser usadas.</p>
+
+
+<ul>
+    <li><a href="shell-script-1.html">Parte Anterior da Matéria!</a></li>
+    <!-- <li><a href="shell-script-3.html">Continuação da Matéria!</a></li> -->
+</ul>
+
+        </div>
+    </body>
+</html>

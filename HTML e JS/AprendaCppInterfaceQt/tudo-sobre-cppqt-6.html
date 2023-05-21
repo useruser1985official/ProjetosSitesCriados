@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda C++ com QT Creator</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++ com QT Creator</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cppqt-1.html">Tudo sobre C++ com QT Creator Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cppqt-2.html">Tudo sobre C++ com QT Creator Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cppqt-3.html">Tudo sobre C++ com QT Creator Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cppqt-4.html">Tudo sobre C++ com QT Creator Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cppqt-5.html">Tudo sobre C++ com QT Creator Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cppqt-6.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C++ com QT Creator Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cppqt-7.html">Tudo sobre C++ com QT Creator Parte 7!</a></li>
+                </menu>
+            </header>
+          
+<h2>Tudo sobre C++ com QT Creator Parte 6</h2>
+
+<h3>Criando um Bloco de Notas - Parte 1</h3>
+
+<p>Abra um novo projeto, coloque o nome nele em WindowTitle e crie um arquivo de recursos (Add New File > Qt > New Resource File) e dê o nome ArquivoDeRecursos.</p>
+
+<p>Dentro da pasta do programa, coloque a pasta com ícones (<a href="_files/icones.rar" target="_blank">clique aqui pra baixar</a>), adicione no arquivo de recursos o prefixo /icones e coloque os ícones dele lá dentro.</p>
+
+<p>Clique com o botão direito em Add Menu Bar e Add Tool Bar, caso elas já não existam. Adicione o Menu Arquivo, com os itens Novo, Abrir, um separador, Salvar e Salvar Como, outro separador e o item Fechar.</p>
+
+<p>Crie outro menu com o texto Editar, e os itens Desfazer, Refazer, um separador, Recortar, Copiar e Colar. Faça também um Menu com Sobre e Item Sobre o Programa.</p>
+
+<p>Coloque os ícones, em Icon e no lado dele, escolha o ícone no arquivo de recursos. Faça com todos os itens. Depois disso, arraste da barra de tarefas os ícones para a Toolbar, na mesma ordem (deixe apenas o fechar por último, separado por um separador).</p>
+
+<p>Adicione um Text Edit e cubra ele todo por todo o frame, ou quase todo.</p>
+
+<p>No código do mainwindow.cpp, coloque isso:</p>
+
+<pre>
+<code>
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+// Coloque as importações para QMessageBox, QFile, QFileDialog e QTextStream
+
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+
+    this->setCentralWidget(ui->textEdit); // Isso fará o Text Edit ocupar todo o frame.
+}
+
+MainWindow::~MainWindow() {
+    delete ui;
+}
+</code>
+</pre>
+
+<p>No mainwindow.h, coloque isso dentro da classe, em private:</p>
+
+<pre>
+<code>
+QString localArquivo;
+</code>
+</pre>
+
+<p>Adicione o slot trigerred no item novo e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_actionNovo_triggered() {
+    localArquivo = "";
+    ui->textEdit->clear();
+    ui->textEdit->setFocus();
+}
+</code>
+</pre>
+
+<h3>Criando um Bloco de Notas - Parte 2</h3>
+
+<p>Continuando, iremos adicionar no item Abrir o slot triggered nele, e colocaremos esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_actionAbrir_triggered() {
+    QString filtro = "Todos os Arquivos (*.*) ;; Arquivos de Texto (*.txt)";
+    QString nomeArquivo = QFileDialog::getOpenFileName(this, "Abrir", QDir::homePath(), filtro); // Importe QFileDialog
+    QFile arquivo(nomeArquivo); // Importe QFile
+
+    localArquivo = nomeArquivo; // Variável Global criada anteriormente
+
+    if(!arquivo.open(QFile::ReadOnly | QFile::Text)) {
+        QMessageBox::warning(this, "Aviso", "O Arquivo não Pôde ser Aberto!"); // Importe QMessageBox
+        return;
+    }
+
+    QTextStream entrada(&arquivo); // Importe QTextStream
+    QString texto = entrada.readAll();
+
+    ui->textEdit->setText(texto);
+
+    arquivo.close();
+}
+</code>
+</pre>
+
+<h3>Criando um Bloco de Notas - Parte 3</h3>
+
+<p>Agora crie o slot triggered do Salvar Como, e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_actionSalvar_Como_triggered() {
+    QString filtro = "Todos os Arquivos (*.*) ;; Arquivos de Texto (*.txt)";
+    QString nomeArquivo = QFileDialog::getSaveFileName(this, "Salvar", QDir::homePath(), filtro); // Importe QFileDialog
+    QFile arquivo(nomeArquivo); // Importe QFile
+    localArquivo = nomeArquivo; // Variável Global
+
+    if(!arquivo.open(QFile::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, "Aviso", "O Arquivo não Pôde ser Salvo!"); // Importe QMessageBox
+        return;
+    }
+
+    QTextStream saida(&arquivo); // Importe QTextStream
+    QString texto = ui->textEdit->toPlainText();
+
+    saida << texto;
+
+    arquivo.flush();
+
+    arquivo.close();
+}
+</code>
+</pre>
+
+<p>Adicione também o slot triggered do Salvar, e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_actionSalvar_triggered() {
+    QFile arquivo(localArquivo); // Importe QFile, variável Global
+
+    if(!arquivo.open(QFile::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, "Aviso", "O Arquivo não Pôde ser Salvo!"); // Importe QMessageBox
+        return;
+    }
+
+    QTextStream saida(&arquivo); // Importe QTextStream
+    QString texto = ui->textEdit->toPlainText();
+
+    saida << texto;
+
+    arquivo.flush();
+
+    arquivo.close();
+}
+</code>
+</pre>
+
+<p>Adicione o slot triggered do Fechar, Recortar, Copiar e Colar, e coloque isso:</p>
+
+<pre>
+<code>
+void MainWindow::on_actionFechar_triggered() {
+    close();
+}
+
+void MainWindow::on_actionCopiar_triggered() {
+    ui->textEdit->copy();
+}
+
+void MainWindow::on_actionRecortar_triggered() {
+    ui->textEdit->cut();
+}
+
+void MainWindow::on_actionColar_triggered() {
+    ui->textEdit->paste();
+}
+</code>
+</pre>
+
+<p>Esses são dos triggereds de Desfazer e Refazer:</p>
+
+<pre>
+<code>
+void MainWindow::on_actionDesfazer_triggered() {
+    ui->textEdit->undo();
+}
+
+void MainWindow::on_actionRefazer_triggered() {
+    ui->textEdit->redo();
+}
+</code>
+</pre>
+
+<p>PS: Podemos adicionar atalhos de teclas para os comandos do menu.</p>
+
+<h3>Criando um Bloco de Notas - Parte 4</h3>
+
+<p>Continuando nosso bloco de notas, adicione um menu com o texto Formatar (antes do sobre) e os itens Fonte, Cor da Fonte e Cor de fundo.</p>
+
+<p>Adicione o slot triggered no item Fonte e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_actionFonte_triggered() {
+    bool fonteOk;
+    QFont fonte = QFontDialog::getFont(&fonteOk, this); // inclua QFont e QFontDialog
+
+    if(fonteOk) {
+        ui->textEdit->setFont(fonte);
+    }
+    else {
+        return;
+    }
+}
+</code>
+</pre>
+
+<p>Agora adicione o triggered do item Cor da Fonte e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_actionCor_triggered() {
+    QColor cor = QColorDialog::getColor(Qt::black, this, "Escolha uma Cor"); // inclua QColor e QColorDialog
+
+    if(cor.isValid()) {
+        ui->textEdit->setTextColor(cor);
+    }
+    else {
+        return;
+    }
+}
+</code>
+</pre>
+
+<p>E no triggered da cor do fundo coloque isso:</p>
+
+<pre>
+<code>
+void MainWindow::on_actionCor_de_Fundo_triggered() {
+    QColor cor = QColorDialog::getColor(Qt::white, this, "Escolha uma Cor"); // inclua QColor e QColorDialog
+
+    if(cor.isValid()) {
+        ui->textEdit->setTextBackgroundColor(cor);
+    }
+    else {
+        return;
+    }
+}
+</code>
+</pre>
+
+<h3>Criando um Bloco de Notas - Parte 5</h3>
+
+<p>Adicione no menu arquivo o item Imprimir, antes do Fechar, com um separador.</p>
+
+<p>No arquivo .pro, vá na linha 7 (aproximadamente), onde está QT e coloque isso:</p>
+
+<pre>
+<code>
+QT       += core gui printsupport
+</code>
+</pre>
+
+<p>Adicione o slot triggered no item Imprimir e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_actionImprimir_triggered() {
+    QPrinter imp; // inclua QPrinter
+
+    imp.setPrinterName("Impressora");
+
+    QPrintDialog cxImp(&imp, this); // inclua QPrintDialog
+
+    if(cxImp.exec() == QDialog::Rejected) {
+        return;
+    }
+    
+    ui->textEdit->print(&imp);
+}
+</code>
+</pre>
+
+<h3>Classe QTimer - Gerenciamento de Intervalos</h3>
+
+<p>Crie um novo projeto e vá no mainwindow.h e altere o código assim:</p>
+
+<pre>
+<code>
+#include &lt;QMainWindow&gt;
+#include &lt;QTimer&gt; // Inclua isso
+#include &lt;QDebug&gt; // Inclua isso
+
+namespace Ui {
+    class MainWindow;
+}
+
+class MainWindow : public QMainWindow {
+    Q_OBJECT
+
+    public:
+        explicit MainWindow(QWidget *parent = nullptr);
+        ~MainWindow();
+    public slots:
+        void minhaFuncao();
+    private:
+        Ui::MainWindow *ui;  
+        QTimer *tempo;
+        static int cont;
+};
+</code>
+</pre>
+
+<p>No mainwindow.cpp, altere assim:</p>
+
+<pre>
+<code>
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
+int MainWindow::cont = 0;
+
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+
+    tempo = new QTimer(this); // Variável global criada.
+    connect(tempo, SIGNAL(timeout()), this, SLOT(minhaFuncao()));
+
+    tempo->start(1000); // Tempo em milissegundos que define o tempo que a função é executada
+}
+
+MainWindow::~MainWindow() {
+    delete ui;
+}
+
+void MainWindow::minhaFuncao() {
+    cont++;
+    qDebug() << "Timer: " << cont; // Inclua QDebug
+}
+</code>
+</pre>
+
+<p>O código aparecerá no debug, executado de um em um segundo.</p>
+
+<h3>Classe QTimer - Criando um Relógio Digital</h3>
+
+<p>Continuando o programa anterior, podemos criar um programa que pegue a hora do sistema e atualize de um em um segundo. Colocamos um label e mudamos o nome dele para lblRelogio.</p>
+
+<p>No mainwindow.h, altere o código dessa forma:</p>
+
+<pre>
+<code>
+class MainWindow : public QMainWindow {
+    Q_OBJECT
+
+    public:
+        explicit MainWindow(QWidget *parent = nullptr);
+        ~MainWindow();
+    public slots:
+        void atualizaRelogio();
+    private:
+        Ui::MainWindow *ui;  
+        QTimer *tempo; // Inclua QTimer
+};
+</code>
+</pre>
+
+<p>E o mainwindow.cpp, altere dessa forma: </p>
+
+<pre>
+<code>
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+
+    tempo = new QTimer(this); // Variável global criada.
+    connect(tempo, SIGNAL(timeout()), this, SLOT(atualizaRelogio()));
+
+    tempo->start(1000); // Tempo em milissegundos que define o tempo que a função é executada
+}
+
+MainWindow::~MainWindow() {
+    delete ui;
+}
+
+void MainWindow::atualizaRelogio() {
+    QTime tempoAtual = QTime::currentTime(); // Retorna o horário atual, é QTime mesmo, inclua QDateTime
+    QString tempoTexto = tempoAtual.toString("hh:mm:ss");  // Formatação da hora
+
+    ui->lblRelogio->setText(tempoTexto);
+}
+</code>
+</pre>
+
+<p>Pra formatar o label, basta ir nas propriedades dele, em font.</p>
+
+<ul>
+    <li><a href="tudo-sobre-cppqt-5.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-cppqt-7.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

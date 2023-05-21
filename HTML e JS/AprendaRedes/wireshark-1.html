@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html">Tudo sobre Redes Parte 13!</a></li>
+                </menu>
+            </header>
+                           
+<h2>Wireshark - Parte 1</h2>
+
+<h3>Primeiros Passos</h3>
+
+<p>Primeiramente, baixe o Wireshark, em Linux use o apt-get, em Windows baixe nesse link: <a href="https://www.wireshark.org/#download" target="_blank">https://www.wireshark.org/#download</a></p>
+
+<p>PS: É provável que a versão do Npcap do Windows que vem com o Wireshark esteja desatualizada, se for o caso baixe aqui: <a href="https://nmap.org/npcap/#download" target="_blank">https://nmap.org/npcap/#download</a></p>
+
+<p>Nele, vemos primeiramente as placas de rede disponíveis no nosso computador. Clique nela, e veremos todas as atividades da nossa rede, abra o navegador com o programa aberto para vermos a atividade.</p>
+
+<p>A barbatana do tubarão inicia a captura de pacotes, para parar clique no quadrado vermelho. Vemos os IPs de destino, protocolos e outros dados. Abaixo dele tem os dados do pacote, como os MACs de destino e outros dados. Para ver os dados de um determinado IP, clique nele.</p>
+
+<p>Podemos ver por exemplo, no filtro, os pacotes de um determinado protocolo, por exemplo, o ARP.</p>
+
+<p>Podemos salvar o arquivo de análise também e ver em outro computador.</p>
+
+<p>PS: Podemos por exemplo, dar um ping na linha de comando do sistema e analisar os requests e replys deste.</p>
+
+<h3>Filtrando Endereços IP</h3>
+
+<p>Para pegar apenas informações de um determinado IP, digitamos no filtro <code>ip.addr == 192.168.0.1</code> (substituindo pelo IP desejado), para ver os resultados desse IP de uma cor destacada.</p>
+
+<p>Para vermos apenas resultados com esse determinado IP, digitamos <code>ip.dst == 192.168.0.1</code>, e pegar esse IP de destino, digite <code>ip.dst == 192.168.0.1</code>.</p>
+
+<h3>Filtrando Endereços e Protocolos</h3>
+
+<p>Para colocar algo que queremos que não seja exibido, usamos o mesmo filtro, mas com um ponto de exclamação, que significa negação, por exemplo <code>!(ip.addr == 192.168.0.1)</code>.</p>
+
+<p>Para não mostrar tráfegos de um determinado protocolo, podemos usar por exemplo <code>not tcp</code>, para mais de um podemos ser por exemplo <code>not tcp and not arp</code>.</p>
+
+        </div>
+    </body>
+</html>

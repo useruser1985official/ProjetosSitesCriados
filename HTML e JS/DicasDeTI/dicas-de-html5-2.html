@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script>
+            function mudaBorda() {
+                let bord = document.getElementById("borda").value;
+
+                document.getElementById("margem").style.border = "15px " + bord;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Dicas de HTML5 Parte 2</h2>
+
+<p>Para colocar uma imagem, fazemos assim:</p>
+
+<pre>
+<code>
+&lt;img src="_imagens/linkdaimagem.png" alt="Texto da Imagem"/&gt;
+</code>
+</pre>
+
+<p>Para que imagens de tamanhos diferentes sejam exibidas ao diminuir e aumentar o tamanho da janela do navegador, faça assim, com a tag <code>picture</code>:</p>
+
+<pre>
+<code>
+&lt;picture&gt;
+    &lt;source media="(max-width: 750px)" srcset="_imagens/peq.png" type="image/png"/&gt;
+    &lt;source media="(max-width: 1000px)" srcset="_imagens/med.png" type="image/png"/&gt;
+    &lt;img src="_imagens/gran.png" alt="Imagem"/&gt;
+&lt;/picture&gt;
+</code>
+</pre>
+
+<p>No caso acima, a imagem da tag img é carregada por padrão, mas se a largura da janela for menor que 1000px, vai carregar a imagem definida em source.</p>
+
+<p>PS: O ideal é o max-width ser um pouquinho mais que que o tamanho da imagem definida no mesmo source.</p>
+
+<p>Os MIME Types usados são esses:</p>
+
+<table>
+    <tr>
+        <th>Extensão</th>
+        <th>Parâmetro</th>
+    </tr>
+    <tr>
+        <td>JPEG/JPG</td>
+        <td>image/jpeg</td>
+    </tr>
+    <tr>
+        <td>PNG</td>
+        <td>image/png</td>
+    </tr>
+    <tr>
+        <td>GIF</td>
+        <td>image/gif</td>
+    </tr>
+</table>
+
+<p>Podemos usar o figure e o figcaption para colocar legendas em fotos, assim:</p>
+
+<pre>
+<code>
+&lt;figure class="foto-leg"&gt;
+    &lt;img src="_imagens/windows-7.png" id="fig-ex"/&gt;
+    &lt;figcaption&gt;
+        &lt;h3&gt;Windows 7&lt;/h3&gt;
+        &lt;p&gt;Microsoft&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+</code>
+</pre>
+
+<p>O código acima ficaria assim:</p>
+
+<figure class="foto-leg">
+    <img src="_imagens/windows-7.png" id="fig-ex"/>
+    <figcaption>
+        <h3>Windows 7</h3>
+        <p>Microsoft</p>
+    </figcaption>
+</figure>
+
+<p>Para formatar a imagem acima em CSS, usamos esses códigos:</p>
+
+<pre>
+<code>
+figure.foto-leg {
+    position: relative;
+    border: 8px solid white;
+    box-shadow: 1px 1px 4px black;
+    max-width: 400px; /* Esse define o tamanho da borda. */
+    max-height: 250px; /* Esse define o tamanho da borda. */
+}
+figure.foto-leg img {
+    width: 100%; /* Esse define o tamanho da imagem. */
+    height: 100%; /* Esse define o tamanho da imagem. */
+}
+figure.foto-leg figcaption {
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    width: 100%; /* Esse define o tamanho do fundo da legenda. */
+    height: 100%; /* Esse define o tamanho do fundo da legenda. */
+    padding: 10px;
+    box-sizing: border-box;
+    transition: opacity 1s;
+}
+figure.foto-leg:hover figcaption {
+    opacity: 1;
+}
+</code>
+</pre>
+
+<p>O parâmetro <code>relative</code> é importante pra definir o espaço que a legenda ficará (pois ele ficará dentro de um container), senão caso você use <code>absolute</code> no figcaption, ele pode sair do espaço pré-definido (absolute deixa ele livre pelo site). Isso vale para tudo, num site em HTML5</p>
+
+<p>PS: Podemos usar outras bordas além do solid, como por exemplo:</p>
+
+<form id="selBorda" oninput="mudaBorda()">
+    Selecione a borda:
+    <select id="borda">
+        <option selected>solid</option>
+        <option>dotted</option>
+        <option>dashed</option>
+        <option>double</option>
+        <option>groove</option>
+        <option>ridge</option>
+        <option>inset</option>
+        <option>outset</option>
+    </select>
+</form>
+
+<br/>
+
+<div id="margem">
+    
+</div>
+
+<p>As formatações com o figcaption é pra formatar a legenda da foto e a transição da mesma.</p>
+
+<p>As listas ordenadas podem ser definidas por tipos de ordenação, com parâmetro <code>type</code>, 1 para números, a para letras minúsculas, A para letras maiúsculas e I para números romanos. O parâmetro <code>start</code> é para definir o início do primeiro item e se define por números, veja um exemplo:</p>
+
+<pre>
+<code>
+&lt;ol type="I" start="10"&gt;
+    &lt;li&gt;Item 10.&lt;/li&gt;
+    &lt;li&gt;Item 11.&lt;/li&gt;
+    &lt;li&gt;Item 12.&lt;/li&gt;
+&lt;/ol&gt;
+</code>
+</pre>
+
+<p>O parâmetro <code>type</code> pode ser usado nas listas não-ordenadas, mas para definir se do lado terá bolinhas, quadrados, nada, etc. (com os parâmetros <code>disc</code>, <code>circle</code>, <code>square</code> e <code>none</code>).</p>
+    
+<p>Em ambos os casos, o type pode ser definido em CSS também, com o parâmetro <code>list-style-type</code>.</p>
+
+<p>PS: Podemos colocar listas dentro de listas também, como por exemplo:</p>
+
+<pre>
+<code>
+&lt;ul&gt;
+    &lt;li&gt;Lista de Items:&lt;/li&gt;
+    &lt;ol&gt;
+        &lt;li&gt;Item 1&lt;/li&gt;
+        &lt;li&gt;Item 2&lt;/li&gt;
+        &lt;li&gt;Item 3&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/ul&gt;
+</code>
+</pre>
+
+<p>O nav pode ser configurado assim, para criar um menu flutuante:</p>
+
+<p>Em HTML5:</p>
+
+<pre>
+<code>
+&lt;nav id="menu"&gt;
+    &lt;h1&gt;Menu Principal&lt;/h1&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="index.html"&gt;Página Inicial&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="contato.html"&gt;Contato&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+</code>
+</pre>
+
+<p>CSS referente ao nav acima:</p>
+
+<pre>
+<code>
+nav#menu ul {
+    list-style-type: none;
+    text-transform: uppercase;
+    position: absolute;
+    top: -20px;
+    left: 300px;
+}
+nav#menu li {
+    display: inline-block;
+    background-color: #dddddd;
+    padding: 10px;
+    margin: 2px;
+    transition: background-color 1s;
+}
+nav#menu li:hover {
+    background-color: #606060;
+}
+nav#menu h1 {
+    display: none;
+}
+nav#menu a {
+    color: black;
+    text-decoration: none;
+}
+nav#menu a:hover {
+    color: white;
+    text-decoration: underline;
+}
+</code>
+</pre>
+
+<p>Lembrando que o parâmetro <code>padding</code> é um espaçamento interno, e o <code>margin</code> é um externo.</p>
+
+<p>Alguns parâmetros de transformação de texto que podemos usar em <code>text-transform</code> são <code>none</code>, <code>capitalize</code>, <code>uppercase</code> e <code>lowercase</code>.</p>
+
+<p>Com um parâmetro dentro de uma tag div, você pode delimitar o espaço de um site, entre outras configurações, assim:</p>
+
+<pre>
+<code>
+div#interface {
+    width: 800px;
+    background-color: white;
+    margin: 10px auto;
+    box-shadow: 0px 0px 10px black;
+    padding: 10px;
+}
+</code>
+</pre>
+
+<p>Para definir a configuração das margens, a ordem é cima, direita, baixo e esquerda (ou seja, sentido horário). O auto é pra centralizar de acordo com o navegador. No caso da sombra, a ordem é apenas lateral e vertical, nesse ordem, o terceiro é espalhamento. No caso do padding, você pode colocar só uma vez caso todas as margens sejam iguais, ou usar complementos como left e bottom.</p>
+
+<p>O CSS também pode ser usado para configurar bordas redondas. Fazendo uma DIV quadrada, você pode fazer um círculo com ela, usando o parâmetro <code>border-radius</code>, dessa forma:</p>
+
+<pre>
+<code>
+div.circulo {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+</code>
+</pre>
+
+<p>O CSS também pode ser usado para definir posições de imagens:</p>
+
+<pre>
+<code>
+header#cabecalho img#icone {
+    position: absolute;
+    left: 780px;
+    top: 40px;
+}
+</code>
+</pre>
+
+<p>Assim como na sombra, pra definir posições de imagens também é apenas lateral e vertical, nessa mesma ordem, veja um exemplo de CSS definindo uma imagem e também uma borda inferior:</p>
+
+<pre>
+<code>
+header#cabecalho {
+    border-bottom: 1px #606060 solid;
+    height: 150px;
+    background: url("../_imagens/logo-peq.jpg") no-repeat 0px 100px;
+}
+</code>
+</pre>
+
+<p>Para importar fontes do arquivo do site para o CSS, você usa o parâmetro assim:</p>
+
+<pre>
+<code>
+@font-face {
+    font-family: "FonteLogo";
+    src: url("../_fonts/bubblegum-sans-regular.otf");
+}
+</code>
+</pre>
+
+<p>Ao colocar fontes importadas no CSS, você pode escolher qualquer nome, mas deverá sempre escrever entre aspas, dessa forma:</p>
+
+<pre>
+<code>
+header#cabecalho h1 {
+    font-family: "FonteLogo", sans-serif;
+    font-size: 30pt;
+    color: #606060;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .6);
+    padding: 0px;
+    margin-bottom: 0px;
+}
+</code>
+</pre>
+
+<p>O Google também tem um site de fontes, <a href="https://fonts.google.com/" target="_blank">que você pode visitar clicando aqui</a>. Nele, você pode importar da URL ou mesmo baixar para usar no seu site ou instalar. Só procurar as opções de importação, e em CSS, e usar da mesma forma acima, como podem ver:</p>
+
+<pre>
+<code>
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web");
+</code>
+</pre>
+
+<p>Para dividir as áreas do site, usamos as tags <code>section</code> e <code>aside</code>, veja um exemplo de como dividir em áreas esquerda e direita:</p>
+
+<pre>
+<code>
+&lt;section id="corpo"¨&gt;
+    &lt;h1&gt;Isso é principal e ficará a esquerda!&lt;/h1&gt;
+&lt;/section&gt;
+&lt;aside id="lateral"¨&gt;
+    &lt;h1&gt;Isso ficará a direita!&lt;/h1&gt;
+&lt;/aside&gt;
+&lt;footer id="rodape"¨&gt;
+    &lt;h1&gt;Isso ficará embaixo pra não encavalar o layout do site.&lt;/h1&gt;
+&lt;/footer&gt;
+</code>
+</pre>
+
+<p>O CSS deverá ser configurado também, para funcionar, dessa forma:</p>
+
+<pre>
+<code>
+section#corpo {
+    display: block;
+    width: 500px;
+    float: left;
+    border-right: 1px solid black;
+    padding-right: 15px;
+}
+aside#lateral {
+    display: block;
+    width: 350px;
+    float: right;
+}
+footer#rodape {
+    clear: both;
+    border-top: 1px solid black;
+}
+footer#rodape p {
+    text-align: center;
+}
+</code>
+</pre>
+
+<p>PS: Lembre-se de configurar o <code>footer</code> com o parâmetro <code>clear</code>, para não bagunçar o layout do site.</p>
+
+<p>Podemos usar o <code>caption</code> para escrever títulos em tabelas, ele é usado dentro das tags <code>table</code>, mas ficará fora da tabela, logo acima da mesma. Os <code>tr</code> são as linhas, e o <code>td</code> as células da linha. O <code>th</code> pode ser utilizado no lugar do td em alguns casos (mas terá caracteres em negrito), veja um exemplo:</p>
+
+
+<pre>
+<code>
+&lt;table id="tabela"&gt;
+    &lt;caption&gt;Lista de Teste&lt;/caption&gt;
+    &lt;tr&gt;
+        &lt;th class="ce"&gt;Texto&lt;/th&gt;
+        &lt;th class="cd"&gt;Número&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td class="ce"&gt;Um&lt;/td&gt;
+        &lt;td class="cd"&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td class="ce"&gt;Dois&lt;/td&gt;
+        &lt;td class="cd"&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</code>
+</pre>
+
+<p>PS: Podemos usar as tags <code>thead</code> para o cabeçalho da tabela (onde iriam os th), <code>tbody</code> para o corpo principal e <code>tfoot</code> para o rodapé da tabela. Todas essas tags tem fechamento, de uso similar as tags head, body e footer, respectivamente. Lembrando que tags thead e tfoot não se usam a tag tr dentro delas, mas na tbody sim.</p>
+
+<p>Para criar formatações de bordas, use CSS. Formate o table para a parte externa e os tds e th para a parte interna (também pode usar no tr, dependendo do formato da tabela). Outras configurações como cores e fontes procedem da mesma forma. Veja um exemplo de tabela em CSS:</p>
+
+<pre>
+<code>
+table#tabela {
+    border: 1px solid blue;
+    border-spacing: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+table#tabela td {
+    border: 1px solid blue;
+    padding: 5px;
+    text-align: center;
+    vertical-align: top;
+}
+table#tabela td.ce {
+    color: white;
+    background-color: aquamarine;
+    vertical-align: top;
+    font-weight: bold;
+}
+table#tabela td.cd {
+    background-color: aqua;
+}
+table#tabela th {
+    border: 1px solid blue;
+    padding: 5px;
+    text-align: center;
+    vertical-align: top;
+}
+table#tabela th.ce {
+    color: white;
+    background-color: blue;
+    vertical-align: top;
+    font-weight: bold;
+}
+table#tabela th.cd {
+    background-color: blue;
+}
+table#tabela caption {
+    color: blue;
+    font-size: 12pt;
+    font-weight: bolder;
+}
+table#tabela caption span {
+    display: block;
+    float: right;
+    color: cyan;
+    font-size: 8pt;
+    margin-top: 10px;
+}
+</code>
+</pre>
+
+<p>Podemos usar o <code>rowspan</code> para uma célula ocupar mais de uma linha, e o <code>colspan</code> para mais de uma coluna, definindo o parâmetro com números, dentro da tag td ou th que será alterada.</p>
+
+<p>No HTML e CSS, as ids só podem ser aplicadas a um único objeto. Para aplicar a vários objetos, usamos classes, como visto no exemplo acima.</p>
+
+<p>Você pode configurar as tags dentros de uma tag <code>article</code> usando CSS, dessa forma:</p>
+
+<pre>
+<code>
+&lt;article id="noticias"&gt;
+    &lt;h2&gt;Isso será formatado!&lt;/h2&gt;
+    &lt;p&gt;Isso não!&lt;/p&gt;
+    &lt;p&gt;Nem isso!&lt;/p&gt;
+&lt;/article&gt;
+</code>
+</pre>
+
+<p>Estilo do código acima:</p>
+
+<pre>
+<code>
+article#noticias h2 {
+    font-size: 12pt;
+    color: #606060;
+    background-color: #dddddd;
+    padding: 5px 0px 5px 10px;
+    margin: 10px 0px 10px 0px;
+}
+</code>
+</pre>
+
+<p>PS: Você pode usar um header dentro do article também, para fazer formatações diferentes dentro do mesmo, pra determinadas tags.</p>
+
+<p>Dentro de uma tag img, é recomendável usar o atributo <code>alt</code>, que ajuda nos mecanismos de busca (como o Google), mas não aparece nada ao passar o mouse em cima, a palavra só aparece caso a imagem não carregue. Para aparecer textos, usamos o parâmetro <code>title</code>, da mesma forma. Veja os exemplos:</p>
+
+<p>Assim não aparece nada ao passar o mouse:</p>
+
+<pre>
+<code>
+&lt;img src="_imagens/fundo.jpg" alt="Exemplo"/&gt;
+</code>
+</pre>
+
+<p>Assim aparece o texto ao passar o mouse:</p>
+
+<pre>
+<code>
+&lt;img src="_imagens/fundo.jpg" title="Exemplo"/&gt;
+</code>
+</pre>
+
+<p>PS: Se as imagens estão dentro das tags figure, não há necessidade de usar tais parâmetros.</p>
+
+<p>Você pode exibir dois documentos HTML numa só página, a segunda página, exibida num frame separado pode ter suas próprias configurações.</p>
+
+<p>Para usar as tags <code>iframe</code>, você deve utilizar um name nelas, caso sejam pra exibir outras páginas. Para Youtube, apenas deve usar o atributo <code>frameborder</code> para tirar as bordas e, caso queira permitir tela cheia, o atributo <code>allowfullscreen</code>.</p>
+
+<p>Esse é um exemplo básico para exibir vídeos do Youtube (alguns parâmetros podem ser removidos e definidos em CSS):</p>
+
+<pre>
+<code>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/WRcs8rebZtA" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+</code>
+</pre>
+
+<p>Mas para remover bordas, é recomendável usar o CSS pra isso na página principal, dessa forma:</p>
+
+<pre>
+<code>
+section#conteudo {
+    width: 1000px;
+    margin: auto;
+}
+iframe#frame-spec {
+    width: 430px;
+    height: 280px;
+    border: none;
+}
+iframe#frame-spec::-webkit-scrollbar {
+    display: none;
+}
+</code>
+</pre>
+
+<p>Para remover as barras de rolagem de um frame e impedir a rolagem do mesmo, você usa o parâmetro <code>overflow: hidden;</code> dentro da página CSS exclusiva do iframe a ser exibido, assim:</p>
+
+<pre>
+<code>
+body {
+    font-family: Arial;
+    font-size: 10pt;
+    overflow: hidden;
+}
+</code>
+</pre>
+
+<p>PS: O parâmetro <code>scrolling="no"</code> está descontinuado no HTML5.</p>
+
+<p>Para criar degradês fixos no background, usamos assim:</p>
+
+<pre>
+<code>
+body {
+    background-image: linear-gradient(to right, white, blue);
+    background-attachment: fixed;
+}
+</code>
+</pre>
+
+<p>Podemos colocar também ao invés de to right/left/top/botton, colocamos algo como 90deg (até 360). Podemos colocar várias cores (no mínimo 2), divididas por vírgulas, para contraste maior. Também podemos colocar logo após as cores a porcentagem de cor, separada por um espaço.</p>
+
+<p>Para gradiente circular, colocamos no lugar do linear-gradient, o radial-gradient, assim:</p>
+
+<pre>
+<code>
+background-image: radial-gradient(circle, blue, green, red);
+</code>
+</pre>
+
+<p>Caso não cubra a página toda, coloque a configuração global do CSS como 100%, assim:</p>
+
+<pre>
+<code>
+* {
+    height: 100%;
+}
+</code>
+</pre>
+
+<p>Podemos criar degradês em bordas também, por exemplo:</p>
+
+<pre>
+<code>
+#borda {
+    border: 8px solid;
+    border-image: linear-gradient(135deg, red 0%, blue 90%) 1; /* Não esqueça do 1 */
+}
+</code>
+</pre>
+
+<p><a href="dicas-de-html5-1.html">Parte 1 da Matéria</a></p>
+<p><a href="dicas-de-html5-3.html">Parte 3 da Matéria</a></p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

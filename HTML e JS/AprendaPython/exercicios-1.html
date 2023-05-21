@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Python</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Python</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-python-1.html">Tudo sobre Python Parte 1!</a></li>
+                    <li><a href="tudo-sobre-python-2.html">Tudo sobre Python Parte 2!</a></li>
+                    <li><a href="tudo-sobre-python-3.html">Tudo sobre Python Parte 3!</a></li>
+                    <li><a href="tudo-sobre-python-4.html">Tudo sobre Python Parte 4!</a></li>
+                    <li><a href="tudo-sobre-python-5.html">Tudo sobre Python Parte 5!</a></li>
+                    <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
+                    <li><a href="tudo-sobre-python-7.html">Tudo sobre Python Parte 7!</a></li>
+                </menu>
+            </header>
+
+<h2>Exercícios - Parte 1</h2>
+
+<p>Crie um programa que escreva Olá Mundo, mas com uma variável no print. Exemplo:</p>
+
+<pre>
+<code>
+msg = "Olá Mundo!"
+print(msg)
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia um nome e mostre uma mensagem de boas-vindas:</p>
+
+<pre>
+<code>
+nome = input("Qual é o seu Nome? ")
+print("É um prazer te conhecer, {}.".format(nome))
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia dois números e mostre a soma entre eles. Exemplo:</p>
+
+<pre>
+<code>
+n1 = int(input("Digite um valor: "))
+n2 = int(input("Digite outro valor: "))
+s = n1 + n2;
+print("A soma entre {} e {} é igual à {}.".format(n1, n2, s))
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia algo pelo teclado e mostre na tela o seu tipo primitivo e todas as informações possívis entre eles. Exemplo:</p>
+
+<pre>
+<code>
+alg = input("Digite Algo: ")
+print("O valor {} só tem espaços? {}".format(alg, alg.isspace()))
+print("O valor {} é um número? {}".format(alg, alg.isnumeric()))
+print("O valor {} é alfabético? {}".format(alg, alg.isalpha()))
+print("O valor {} é alfanumérico? {}".format(alg, alg.isalnum()))
+print("O valor {} está em maiúsculas? {}".format(alg, alg.isupper()))
+print("O valor {} está em minúsculas? {}".format(alg, alg.islower()))
+print("O valor {} está capitalizada? {}".format(alg, alg.istitle()))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia um número inteiro e mostre na tela o seu sucessor e o seu antecessor. Por exemplo:</p>
+
+<pre>
+<code>
+num = int(input("Digite um número:\n"))
+print("O número digitado foi {}, seu sucessor é {} e seu antecessor é {}.".format(num, (num + 1), (num - 1)))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia um número e mostre o seu dobro, triplo e raiz quadrada, por exemplo:</p>
+
+<pre>
+<code>
+num = int(input("Digite um número:\n"))
+dobr = num * 2
+trip = num * 3
+raiz = num ** (1 / 2)
+print("O número digitado foi {} e seu dobro é {}".format(num, dobr))
+print("O número digitado foi {} e seu triplo é {}".format(num, trip))
+print("O número digitado foi {} e sua raiz é {:.2f}".format(num, raiz))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia duas notas de um aluno e calcule sua média, por exemplo:</p>
+
+<pre>
+<code>
+not1 = float(input("Digite a primeira nota: "))
+not2 = float(input("Digite a segunda nota: "))
+med = (not1 + not2) / 2
+print("A notas foram {:.1f} e {:.1f} e a média entre elas é {:.1f}.".format(not1, not2, med))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia um valor em metros e o exiba convertido em centímetro e milímetros, por exemplo:</p>
+
+<pre>
+<code>
+met = float(input("Digite o valor em metros:\n"))
+cent = met * 100
+mili = met * 1000
+print("{} M equiválem à {} CM e à {} MM.".format(met, cent, mili))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia um número inteiro e mostre na tela a sua tabuada (você pode colocar <code>:2</code> dentro dos parênteses para que o espaço livre seja ocupado e fique tudo organizado), veja um exemplo:</p>
+
+<pre>
+<code>
+num = int(input("Digite um número para ver sua tabuada: "))
+print("\nTabuada de {}:\n".format(num))
+print("-" * 12)
+print("{} x {:2} = {}".format(num, 1, num * 1))
+print("{} x {:2} = {}".format(num, 2, num * 2))
+print("{} x {:2} = {}".format(num, 3, num * 3))
+print("{} x {:2} = {}".format(num, 4, num * 4))
+print("{} x {:2} = {}".format(num, 5, num * 5))
+print("{} x {:2} = {}".format(num, 6, num * 6))
+print("{} x {:2} = {}".format(num, 7, num * 7))
+print("{} x {:2} = {}".format(num, 8, num * 8))
+print("{} x {:2} = {}".format(num, 9, num * 9))
+print("{} x {:2} = {}".format(num, 10, num * 10))
+print("-" * 12)
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia quanto dinheiro uma pessoa tem na carteira e mostre quantos dólares ela pode comprar (considerando que um Dólar vale 3,27 Reais), por exemplo:</p>
+
+<pre>
+<code>
+cot = float(input("Digite o valor de US$ 1,00 em R$: "))
+val = float(input("\nDigite um valor em R$: "))
+dol = val / cot
+print("Você tem R${:.2f} e pode comprar US${:.2f}.".format(val, dol))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia a largura e a altura de uma parede em metros, calcule sua área e a quantidade de tinta necessária para pintá-la (sabendo que cada litro pinta 2 M<sup>2</sup>), por exemplo:</p>
+
+<pre>
+<code>
+larg = float(input("Largura da Parede: "))
+alt = float(input("Altura da Parede: "))
+quad = larg * alt
+print("Sua parede tem a dimensão de {} x {} e sua área é de {}M².".format(larg, alt, quad))
+tinta = quad / 2
+print("Para pintar essa parede, você precisará de {}L de tinta.".format(tinta))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia o preço de um produto e mostre seu novo preço, com 5% de desconto, por exemplo:</p>
+
+<pre>
+<code>
+preco = float(input("Digite o preço do produto em R$: "))
+novo = preco - (preco * 5 / 100)
+print("\nO preço original é de R${:.2f} e o preço com desconto é R${:.2f}.".format(preco, novo))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia o salário de um funcionário e mostre o novo com 15% de aumento.</p>
+
+<pre>
+<code>
+salario = float(input("Digite o salário em R$: "))
+novo = salario + (salario * 15 / 100)
+print("\nO salário antigo do funcionário é de R${:.2f} e o salário com 15% de aumento é R${:.2f}.".format(salario, novo))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia um valor em metros e o exiba convertido em quilômetros, centímetros e milímetros:</p>
+
+<pre>
+<code>
+met = float(input("Uma distância em metros: "))
+km = met / 1000
+hm = met / 100
+dam = met / 10
+dm = met * 10
+cm = met * 100
+mm = met * 1000
+print("A medida de {:.0f}m corresponde à {:.3f}km, {:.2f}hm, {:.1f}dam, {:.0f}dm, {:.0f}cm e à {:.0f}mm.<br/>".format(met, km, hm, dam, dm, cm, mm))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que defina o preço de um produto, e com pagamento à vista dê 5% de desconto, e parcelando dando uma porcentagem de aumento (como 8% e 12%):</p>
+
+<pre>
+<code>
+produto = float(input("Digite o preço do produto em R$: "))
+descont = produto - (produto * 5 / 100)
+parc1 = produto + (produto * 8 / 100)
+parc2 = produto + (produto * 12 / 100)
+parc3 = produto + (produto * 15 / 100)
+print("\nO produto originalmente custa R${:.2f}.\n".format(produto))
+print("Para pagar à vista, ele terá 5% de desconto, e sairá R${:.2f}.".format(descont))
+print("Para pagar em 12X, cada parcela sairá R${:.2f}, totalizando R${:.2f}".format(parc1 / 12, parc1))
+print("Para pagar em 24X, cada parcela sairá R${:.2f}, totalizando R${:.2f}".format(parc2 / 24, parc2))
+print("Para pagar em 36X, cada parcela sairá R${:.2f}, totalizando R${:.2f}".format(parc3 / 36, parc3))
+</code>
+</pre>
+
+<hr/>
+
+<p>Vamos fazer um progrrama que converta °C em °F:</p>
+
+<pre>
+<code>
+cels = float(input("Informe a temperatura em °C: "))
+fahr = cels * 9 / 5  + 32
+print("A temperatura de {}°C corresponde à {}".format(cels, fahr))
+</code>
+</pre>
+
+<hr/>
+
+<p>Veja abaixo, um programa que calcule a quantidade de Km percorridos por um carro alugado, sendo que ele custa R$60 por dia e R$0,15 por Km:</p>
+
+<pre>
+<code>
+dias = int(input("Quantos dias alugados? "))
+km = float(input("Quantos Km rodados? "))
+pago = (dias * 60) + (km * 0.15)
+print("O total a pagar é de R${:.2f}.".format(pago))
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia um número real qualquer pelo teclado e mostre na tela a sua porção inteira.</p>
+
+<pre>
+<code>
+from math import trunc
+
+num = float(input("Digite um valor: "))
+
+print("O valor digitado foi {} e sua porção inteira é {}.".format(num, trunc(num)))
+</code>
+</pre>
+
+<p>Dá pra fazer o mesmo sem importação, apenas convertendo pra inteiro:</p>
+
+<pre>
+<code>
+num = float(input("Digite um valor: "))
+print("O valor digitado foi {} e sua porção inteira é {}.".format(num, int(num)))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia o comprimento do cateto oposto e do cateto adjacente de um triângulo retângulo, calcule e mostre o comprimento da hipotenusa.</p>
+
+<pre>
+<code>
+import math
+
+co = float(input("Comprimento do cateto oposto: "))
+ca = float(input("Comrpimento do cateto adiacente: "))
+
+hi = math.hypot(co, ca)
+
+print("A hipotenusa vai medir {:.2f}".format(hi))
+</code>
+</pre>
+
+<p>O mesmo que:</p>
+
+<pre>
+<code>
+co = float(input("Comprimento do cateto oposto: "))
+ca = float(input("Comrpimento do cateto adiacente: "))
+
+hi = (co ** 2 + ca ** 2) ** (1 / 2)
+
+print("A hipotenusa vai medir {:.2f}".format(hi))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia um ângulo qualquer e mostre na tela o valor do seno, cosseno e tangente desse ângulo.</p>
+
+<pre>
+<code>
+from math import radians, sin, cos, tan
+
+angulo = float(input("Digite o ângulo que você deseja: "))
+
+seno = sin(radians(angulo))
+cosseno = cos(radians(angulo))
+tangente = tan(radians(angulo))
+
+print("O ângulo de {} tem o SENO de {:.2f}.".format(angulo, seno))
+print("O ângulo de {} tem o COSSENO de {:.2f}.".format(angulo, cosseno))
+print("O ângulo de {} tem o TANGENTE de {:.2f}.".format(angulo, tangente))
+</code>
+</pre>
+
+<hr/>
+
+<p>Um professor quer sortear um dos seus quatro alunos para apagar o quadro, faça um programa que ajude ele, lendo o nome deles e escrevendo o nome do escolhido.</p>
+
+<pre>
+<code>
+from random import choice
+
+n1 = str(input("Primeiro aluno: "))
+n2 = str(input("Segundo aluno: "))
+n3 = str(input("Terceiro aluno: "))
+n4 = str(input("Quarto aluno: "))
+
+lista = [n1, n2, n3, n4]
+escolhido = choice(lista)
+
+print("O aluno escolhido foi {}".format(escolhido))
+</code>
+</pre>
+
+<hr/>
+
+<p>O mesmo professor do desafio anterior quer sortear a ordem de apresentação de trabalho dos alunos. Faça um programa que leia o nome dos quatro alunos e mostre a ordem sorteada.</p>
+
+<pre>
+<code>
+from random import shuffle
+
+n1 = str(input("Primeiro aluno: "))
+n2 = str(input("Segundo aluno: "))
+n3 = str(input("Terceiro aluno: "))
+n4 = str(input("Quarto aluno: "))
+
+lista = [n1, n2, n3, n4]
+shuffle(lista)
+
+print("A ordem de apresentação será")
+print(lista)
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que abra e reproduza um áudio de um arquivo MP3.</p>
+
+<pre>
+<code>
+import pygame
+
+pygame.mixer.init()
+pygame.mixer.music.load("hurricane.mp3")
+pygame.mixer.music.play()
+
+input("Pressione qualquer tecla pra fechar o programa!\n")
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia o nome completo de uma pessoa e mostre o nome com todas as letras maiúsculas e minúsculas, quantas letras ao todo (sem considerar espaço) e quantas letras tem o primeiro nome:</p>
+
+<pre>
+<code>
+nome = str(input("Digite seu nome completo: ")).strip()
+
+print("\nAnalisando seu nome...\n")
+
+print("Seu nome em maiúsculas é {}.".format(nome.upper()))
+print("Seu nome em minúsculas é {}.".format(nome.lower()))
+print("Seu nome tem ao todo {} letras.".format(len(nome) - nome.count(" ")))
+print("Seu primeiro nome tem {} letras.".format(nome.find(" ")))
+</code>
+</pre>
+
+<p>Pode ser assim também:</p>
+
+<pre>
+<code>
+separa = nome.split()
+print("Seu primero nome é {} e ele tem {} letras.".format(separa[0], len(separa[0])))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia um número de 0 a 9999 e mostre cada um dos dígitos separados:</p>
+
+<pre>
+<code>
+num = int(input("Informe um número: "))
+u = num // 1 % 10
+d = num // 10 % 10
+c = num // 100 % 10
+m = num // 1000 % 10
+print("Analisando o número {}".format(num))
+print("Unidade: {}".format(u))
+print("Dezena: {}".format(d))
+print("Centena: {}".format(c))
+print("Milhar: {}".format(m))
+</code>
+</pre>
+
+<p>Pode ser assim também:</p>
+
+<pre>
+<code>
+num = int(input("Informe um número: "))
+ns = str(num)
+print("Analisando o número {}".format(num))
+print("Unidade: {}".format(ns[3]))
+print("Dezena: {}".format(ns[2]))
+print("Centena: {}".format(ns[1]))
+print("Milhar: {}".format(ns[0]))
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia o nome de uma cidade e diga se ela começa ou não com o nome "santo":</p>
+
+<pre>
+<code>
+cid = str(input("Em que cidade você nasceu? ")).strip()
+print(cid[:5].upper() == "SANTO")
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia o nome de uma pessoa e diga se ela tem "Silva" no nome.</p>
+
+<pre>
+<code>
+nome = str(input("Qual é o seu nome completo? ")).strip()
+print("Seu nome tem Silva? {}".format("silva" in nome.lower()))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia uma frase pelo teclado e mostre quantas vezes aparece a letra "A", e em que posição ela aparece pela primeira e última vez:</p>
+
+<pre>
+<code>
+frase = str(input("Digite uma frase: ")).upper().strip()
+print("A letra A aparece {} vezes na frase.".format(frase.count("A")))
+print("A primeira letra A apareceu na posição {}.".format(frase.find("A") + 1))
+print("A última letra A apareceu na posição {}".format(frase.rfind("A") + 1))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia o nome completo de uma pessoa, mostrando em seguida o primeiro e o último nome separadamente:</p>
+
+<pre>
+<code>
+n = str(input("Digite seu nome completo: ")).strip()
+nome = n.split()
+print("Seu primeiro nome é {}.".format(nome[0]))
+print("Seu último nome é {}.".format(nome[len(nome) - 1]))
+</code>
+</pre>
+
+<ul>
+    <li><a href="exercicios-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

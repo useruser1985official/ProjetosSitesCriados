@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html">Tudo sobre Redes Parte 13!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Redes Parte 3</h2>
+
+<h3>Servidor DNS - Instalação e Configurações Gerais de Rede no Linux</h3>
+
+<p>Primeiramente, configure a rede do servidor e digite o comando <code>sudo ifconfig</code>, daí veremos o IP obtido vi DHCP.</p>
+
+<p>Como o DNS precisa ter um IP fixo, devemos editar o arquivo de configuração, digitando <code>sudo vim /etc/network/interfaces</code>, digite i para entrar no modo de inserção e escreva abaixo esse código:</p>
+
+<pre>
+<code>
+auto eth0
+iface eth0 inet static
+address 192.168.1.200
+netmask 255.255.255.0
+network 192.168.1.0
+broadcast 192.168.1.255
+gateway 192.168.1.1
+</code>
+</pre>
+
+<p>PS: Substitua eth0 pelo nome de sua interface.</p>
+
+<p>Para editar o arquivo de hosts, digite <code>sudo vim /etc/hosts</code> e adicione essas entradas:</p>
+
+<pre>
+<code>
+192.168.1.200 Ubuntu-32.exemplodedominio.net Ubuntu-32
+</code>
+</pre>
+
+<p>PS: Esse endereço é o nome da máquina (pego depois do arroba no terminal), seguido de um nome de domínio qualquer.</p>
+
+<p>Para ver o nome da máquina, digite o comando <code>hostname</code> (podemos editar o arquivo /etc/hostname para mudar o nome da máquina).</p>
+
+<p>Dê um ping no Google, ele não conseguirá acessar a internet, por isso iremos editar o arquivo do resolvedor DNS (<code>sudo vim /etc/resolv.conf</code>) e digitamos isso:</p>
+
+<pre>
+<code>
+nameserver 8.8.8.8
+</code>
+</pre>
+
+<p>PS: Esse é o servidor DNS do Google, existem vários que podemos usar. Tente dar um ping num site agora.</p>
+
+<p>Instale o programa bind digitando <code>sudo apt-get install bind9</code>. Para ver se ele está rodando após instalar digite <code>sudo /etc/init.d/bind9 status</code>, depois vá na pasta /etc/bind e dê um ls nele.</p>
+
+<h3>Servidor DNS - Criação das Zonas e Testes com Clientes no Linux</h3>
+
+<p>Agora digite <code>sudo vim /etc/bind/named.conf.local</code> para editar o arquivo que iremos usar para adicionar as zonas DNS, entre no modo de inserção e digite isso:</p>
+
+<pre>
+<code>
+// Zona de pesquisa direta:
+
+zone "exemplodedominio.net" {
+    type master;
+    file "/etc/bind/db.exemplodedominio.net";
+};
+
+// Zona de pesquisa reversa
+
+zone "1.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.192";
+};
+</code>
+</pre>
+
+<p>Esses arquivos em file são arquivos novos que serão criados, cuidado com as chaves e os pontos e vírgula. O nome da zona é o endereço IP de rede ao contrário (não confundir com o IP da máquina).</p>
+
+<p>Edite o arquivo de opções digitando <code>sudo vim /etc/bind/named.conf.options</code>, e procure em forwarders, tire os comentários (as barras //) e deixe dessa forma:</p>
+
+<pre>
+<code>
+forwarders {
+    192.168.1.1;
+    8.8.8.8;
+};
+</code>
+</pre>
+
+<p>PS: O IP ali é o IP do roteador e o DNS do provedor.</p>
+
+<p>Copie os arquivos digitando <code>cd /etc/bind</code>, <code>sudo cp db.local db.exemplodedominio.net</code> e <code>sudo cp db.127 db.192</code>.</p>
+
+<p>Vamos editar os arquivos copiados, o primeiro é digitando <code>sudo vim /etc/bind/db.exemplodedominio.net</code>, deixando dessa forma:</p>
+
+<pre>
+<code>
+@   IN  SOA Ubuntu-32.exemplodedominio.net. root.exemplodedominio.net. (
+
+            100         ; Serial
+            604800          ; Refresh
+            86400           ; Retry
+            2419200         ; Expire
+            604800 )            ; Negative Cache TLL
+;
+exemplodedominio.net.   IN  NS  Ubuntu-32.exemplodedominio.net.
+exemplodedominio.net.   IN  A   192.168.1.200
+;@  IN  A   127.0.0.1
+;@  IN  AAAA    ::1
+
+Ubuntu-32   IN  A   192.168.1.200
+roteador        IN  A   192.168.1.1
+vendas      IN  A   192.168.1.50
+www     IN  CNAME   exemplodedominio.net.
+</code>
+</pre>
+
+<p>Agora edite o outro arquivo digitando <code>sudo vim /etc/bind/db.192</code> e deixe ele assim:</p>
+
+<pre>
+<code>
+@   IN  SOA Ubuntu-32.exemplodedominio.net. root.exemplodedominio.net. (
+
+            1           ; Serial
+            604800          ; Refresh
+            86400           ; Retry
+            2419200         ; Expire
+            604800 )            ; Negative Cache TLL
+
+;
+    IN  NS  Ubuntu-32.
+1   IN  PTR roteador.exemplodedominio.net.
+50  IN  PTR vendas.exemplodedominio.net
+200 IN  PTR Ubuntu-32.exemplodedominio.net.
+</code>
+</pre>
+
+<p>Reinicie o bind digitando <code>sudo /etc/init.d/bind9 restart</code>, e verificaremos os arquivos de zona digitando <code>named-checkzone exemplodedominio.net /etc/bind/db.exemplodedominio.net</code> e <code>named-checkzone exemplodedominio.net /etc/bind/db.192</code>. Reinicie a máquina.</p>
+
+<p>Após reiniciar, digite <code>cat /etc/resolv.conf</code> para ver este arquivo. Para testar digite <code>host -l exemplodedominio.net</code>. Digite <code>nslookup exemplodedominio.net</code> e <code>dig exemplodedominio.net</code>, faça o mesmo com o IP, digitando <code>host 192.168.1.50</code> e dê um ping digitando <code>ping vendas.exemplodedominio.net</code>.</p>
+
+<p>Para testar o encaminhador, digite primeiramente o ping num site qualquer da internete veja se ele responde.</p>
+
+<p>Ná máquina cliente, edite o arquivo de configuração digitando <code>sudo vim /etc/resolv.conf</code> e deixe ele desse jeito:</p>
+
+<pre>
+<code>
+nameserver 192.168.1.200
+search exemplodedominio.net
+</code>
+</pre>
+
+<p>Dê um ping na máquina, digitando <code>ping Ubuntu-32</code>. Podemos também pingar o vendas, digitando <code>ping vendas</code> e ver isso também num site da internet.</p>
+
+<h3>Tcpdump – Capturar e Analisar Tráfego de Rede no Linux</h3>
+
+
+<p>O tcpdump é uma excelente ferramenta para realizar captura e análise de pacotes de rede, recomendada para profissionais que precisem realizar monitoramento e manutenção em uma rede de computadores, além de estudantes que queiram entender a fundo o funcionamento da pilha de protocolos TCP/IP. O site oficial do tcpdump, e também da biblioteca libpcap (sobre o qual ele é baseado).</p>
+
+<p>O tcpdump, que é software livre, roda na linha de comandos, estando disponível em diversos sistemas operacionais, como Linux, BSD, OS X, AIX e outros. Ele faz uso da biblioteca libpcap para realizar a captura de pacotes, e existe uma versão da ferramenta para Windows, chamada de WinDump, que usa a biblioteca WinPcap. Neste artigo vamos nos focar no tcpdump em si, usando para isso um sistema Linux (Ubuntu; qualquer outro sistema Linux irá servir para testar os exemplos mostrados).</p>
+
+<p>Para instalar o tcpdump no Ubuntu Linux, ou em sistemas baseados em Debian, use o comando <code>sudo apt-get install tcpdump</code>. Para ver as opções dele digite o help dele.</p>
+
+<p>Podemos por exemplo, capturar somente o tráfego a partir da interface eth0 digitando <code>sudo tcpdump -i eth0</code>. Gravar os pacotes capturados em um arquivo de nome captura.pcap digitando <code>sudo tcpdump -w captura.pcap</code>. Ler os pacotes capturados a partir do arquivo captura.pcap digitando <code>sudo tcpdump -r captura.pcap</code>. Capturar somente o tráfego associado ao protocolo ICMP, na interface eth0 digitando <code>sudo tcpdump -i eth0 icmp</code>. Capturar somente o tráfego associado ao protocolo ARP, na interface eth0 digitando <code>sudo tcpdump -i eth0 arp</code>. Capturar somente 50 pacotes a partir da interface eth0 digitando <code>sudo tcpdump -c 50 -i eth0</code>. Podemos também mostrar os pacotes capturados tanto em ASCII quanto em HEX, incluindo cabeçalho Ethernet digitando <code>sudo tcpdump -XX -i eth0</code>. Capturar pacotes mostrando IPs em vez de nome digitando <code>sudo tcpdump -n -i eth0</code>. Capturar somente pacotes maiores que 100 bytes: digitando <code>sudo tcpdump -i eth0 greater 100</code>, neste exemplo, se emitirmos um comando ping a partir de outra janela de terminal, os pacotes não serão capturados, pois são menores que 100 bytes.</p>
+
+<p>Capturar somente pacotes destinados à porta 53 digitando <code>sudo tcpdump -i eth0 port 53</code>, para testar, abrimos um navegador e acessamos uma página qualquer da Web. Usando filtros de condições: Capturar pacotes que usam o protocolo e cujo endereço de destino seja 64.233.186.121 digitando <code>sudo tcpdump -i eth0 dst 64.233.186.121 and icmp</code>, para testar, abrimos outra janela de terminal e emitimos o comando ping para vários endereços; somente serão capturados pacotes ao ser usado o endereço discriminado no comando. Se abrirmos um navegador e tentarmos acessar esse mesmo endereço (ou o site, www.planetaunix.com.br), os pacotes não serão capturados, por conta do protocolo utilizado (http em vez de icmp), mostrando que ambas as condições (AND) precisam ser satisfeitas para que essa captura tenha efeito. Capturar somente os pacotes ICMP Echo Request enviados pelo programa ping da máquina local, cujo IP é 192.168.1.105, para um endereço remoto, como 8.8.8.8 digitando <code>sudo tcpdump -i eth0 icmp and src 192.168.1.105 and dst 8.8.8.8</code>.</p>
+
+<p>Existem diversas outras opções e funcionalidades disponíveis no utilitário, e recomendamos uma leitura minuciosa das páginas de manual do tcpdump para aprofundar seus conhecimentos a respeito.</p>
+
+<p>Outras ferramentas muito utilizadas para captura e análise de pacotes são o Wireshark, tshark, WinDump, Ettercap e ngrep, entre outras.</p>
+
+<h3>O que é um RFC</h3>
+
+<p>Os RFCs são publicações que documentam os padrões e protocolos oficiais da internet, são gerenciados pelo IETF (Internet Engineering Task Force). Podem conter de uma página à várias centenas de páginas de informações sobre um padrão.</p>
+
+<p>Eles são identificados por um número, que é atribuído sequencialmente a cada novo RFC publicado. Se um padrão necessitar de atualização, então um novo RFC será gerado com as revisões necessárias. O processo de padronização de um RFC é documentado pelo RFC 2026.</p>
+
+<p>A cada RFC é atribuído um status que diz respeito ao processo de padronização:</p>
+
+<ul>
+    <li>Informacional</li>
+    <li>Experimental</li>
+    <li>Melhor Prática Atual (Best Current Practice - BCP)</li>
+    <li>Trilha dos Padrões (Standard Track)</li>
+    <li>Histórico.</li>
+</ul>
+
+<p>E dentro das trilhas de padrões, temos esses:</p>
+
+<ul>
+    <li>Proposto (Proposed Standard)</li>
+    <li>Rascunho (Draft Standard)</li>
+    <li>Padrão da Internet (Internet Standard)</li>
+</ul>
+
+<p>Todos os RFCs podem ser consultados gratuitamente na internet.</p>
+
+<p>O repositório de RFCs é esse: <a href="https://www.rfc-editor.org/" target="_blank">https://www.rfc-editor.org/</a></p>
+
+<p>Podemos buscar as RFCs por nome, palavra-chave, autor ou número nesse site.</p>
+
+<p>No search do site (escolha a opção Advance), você pode pesquisar o RFC, informando o número do RFC ou uma palavra-chave qualquer. Também tem opções de filtro ao lado, como qualquer outro site de pesquisa.</p>
+
+<p>Vamos pelo mais comum, pesquisando por palavra-chave, no exemplo, pesquisaremos ICMP.</p>
+
+<p>Ali aparece informações como status, download em PDF, se ele está obsoleto, etc.</p>
+
+<p>Veja alguns exemplos de RFCs:</p>
+
+<table>
+    <tr>
+    <th>Padrão/Protocolo</th>
+    <th>Número do RFC</th>
+    </tr>
+    <tr>
+    <td>ARP</td>
+    <td>826</td>
+    </tr>
+    <tr>
+    <td>DHCP</td>
+    <td>2131</td>
+    </tr>
+    <tr>
+    <td>DNS</td>
+    <td>1034 e 1035</td>
+    </tr>
+    <tr>
+    <td>FTP</td>
+    <td>959</td>
+    </tr>
+    <tr>
+    <td>HTTP</td>
+    <td>1945</td>
+    </tr>
+    <tr>
+    <td>ICMP</td>
+    <td>792</td>
+    </tr>
+    <tr>
+    <td>IP</td>
+    <td>791</td>
+    </tr>
+    <tr>
+    <td>IPv6</td>
+    <td>2460</td>
+    </tr>
+    <tr>
+    <td>MD5</td>
+    <td>1321</td>
+    </tr>
+    <tr>
+    <td>SSH</td>
+    <td>4251</td>
+    </tr>
+    <tr>
+    <td>TCP</td>
+    <td>793</td>
+    </tr>
+    <tr>
+    <td>UDP</td>
+    <td>768</td>
+    </tr>
+</table>
+
+<h3>O que é o MTU</h3>
+
+<p>Existe um limite de tamanho de dados de uma rede que define a quantidade de bytes que pode ser transmitidos dentro de um quadro. Pro padrão Ethernet, o limite de unidade máxima de trasmissão é de 1500 bytes (existe em outros padrões também). É uma característica da camada de enlace conhecida como MTU.</p>
+
+<p>Quando um datagrama a ser enviado em uma rede for maior do que o MTU da camada de enlace, o protocolo IP realizará a fragmentação dos dados, quebrando o datagrama em pedaços menores, chamados de fragmentos, cada um com tamanho menor do que o MTU.</p>
+
+<p>Veja abaixo uns MTUs típicos:</p>
+
+<table>
+    <tr>
+    <th>Rede</th>
+    <th>MTU (em bytes)</th>
+    </tr>
+    <tr>
+    <td>Hyperchannel</td>
+    <td>65535</td>
+    </tr>
+    <tr>
+    <td>WLAN 802.11</td>
+        <td>7981</td>
+    </tr>
+    <tr>
+    <td>Quadros Jumbo Ethernet</td>
+    <td>1501 - 9198</td>
+    </tr>
+    <tr>
+    <td>Tonken Ring 802.5</td>
+    <td>4464</td>
+    </tr>
+    <tr>
+    <td>FDDI</td>
+    <td>4352</td>
+    </tr>
+    <tr>
+    <td>Ethernet</td>
+    <td>1500</td>
+    </tr>
+    <tr>
+    <td>IEEE 802.3/802.2</td>
+    <td>1492</td>
+    </tr>
+    <tr>
+    <td>PPPoE</td>
+    <td>1492</td>
+    </tr>
+    <tr>
+    <td>X.25</td>
+    <td>576</td>
+    </tr>
+</table>
+
+<p>Para descobrir o MTU da interface, abrimos o CMD do Windows e digitamos <code>netsh interface ipv4 show subinterfaces</code>.</p>
+
+<p>O Path MTU (MTU do Caminho) é sobre o maior valor de MTU que pode tragegar em uma rede sem que os pacotes sofram fragmentação (esse valor pode mudar).</p>
+
+<p>Para a máquina saber qual a MTU correta à ser utilizada, tem o Path MTU Discovery (Descoberta do MTU de Caminho), para determinar o caminho MTU ideal entre dois hosts IP para evitar a fragmentação dos datagramas IP. Uma das formas é ligar o bit DF (Don't Fragment) do cabeçalho IP dos datagramas transmitidos. Ou a mensagem ICMP (destino inalcançável, tamanho muito grande).</p>
+
+<p>Para testar o MTU, usamos o Ping (no CMD) com as opções <code>/l tamanho-pacote</code>, que permite ajustar o tamanho (payload) do pacote enviado pelo ping para o valor "tamanho-pacote". E o <code>/f</code>, que habilita o bit DF no pacote transmitido (impedindo a fragmentação do mesmo).</p>
+
+<p>Vamos exemplificar, executando no prompt o comando <code>netsh interface ipv4 show subinterfaces</code>. Se for o caso, coloque ipv6 no lugar.</p>
+
+<p>Agora dê um ping num site qualquer (por exemplo <code>ping bosontreinamentos.com.br</code>)</p>
+
+<p>Agora faça o mesmo, com a opção <code>/l 1500</code>, no caso, <code>ping /l 1500 bosontreinamentos.com.br</code> (ou outro número, esse número é a quantidade de bytes enviados, que pode ser até 65500, o padrão é 32). Se estiver em Linux, use o parâmetro <code>-s</code>.</p>
+
+<p>O MTU típico é de 1500, como já vimos, mas a transmissão pode ser feita com outro número maior, como 8500, nesse caso os pacotes serão fragmentados.</p>
+
+<p>Ao colocar o <code>/f</code>, antes do site, ele não fragmentará os pacotes, o que pode dar erro em tamanhos maiores. Como por exemplo, <code>ping /l 1500 /f bosontreinamentos.com.br</code></p>
+
+<h3>O Que é Um Gateway</h3>
+
+<p>Pode ser traduzido como "portão de entrada". O gateway pode ser um PC com duas (ou mais) placas de rede, ou um dispositivo dedicado, utilizado para unir duas redes (como por exemplo, um roteador, ou geralmente um dispositivo que une as funções de modem e roteador podendo ter também um switch integrado e um access point). Existem vários usos possíveis, desde interligar duas redes que utilizam protocolos diferentes, até compartilhar a conexão com a internet entre várias estações.</p>
+
+<p>O endereço do gateway deve ser informado nas propriedades de rede, mas numa rede onde as estações estão configuradas para obter seus endereços automaticamente é possível configurar o servidor DHCP para enviar o endereço do gateway automaticamente. A estação enviará ao gateway qualquer requisição de endereço que não faça parte da rede local.</p>
+
+<p>A princípio, isso permitiria que apenas um micro acessasse a web, mas é possível compartilhar a conexão entre vários micros via NAT, opção disponível tanto no Windows quanto no Linux. Quando você compartilha a conexão entre vários micros, apenas o servidor que está compartilhando a conexão possui um endereço IP válido, só ele "existe" na internet. Todos os demais acessam através dele.</p>
+
+<p>O default gateway ou gateway padrão é justamente o micro da rede que tem a conexão, é ele que os outros consultarão quando precisarem acessar qualquer coisa na internet. Por exemplo, se você montar uma rede doméstica com 4 PCs, usando os endereços IP <code>192.168.0.1</code>, <code>192.168.0.2</code>, <code>192.168.0.3</code> e <code>192.168.0.4</code>, e o PC <code>192.168.0.1</code> estiver compartilhando o acesso à internet, as outras três estações deverão ser configuradas para utilizar o endereço <code>192.168.0.1</code> como gateway padrão.</p>
+
+<ul>
+    <li><a href="tudo-sobre-redes-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-redes-4.html">Continuação da Matéria</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda PHP com PDO</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda PHP com PDO</h1>
+                <menu>
+                    <li><a href="index.php">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-php-pdo-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre PHP com PDO Parte 1!</a></li>
+                    <li><a href="tudo-sobre-php-pdo-2.html">Tudo sobre PHP com PDO Parte 2!</a></li>
+                    <!--
+                    <li><a href="tudo-sobre-php-3.html">Tudo sobre PHP Parte 3!</a></li>
+                    <li><a href="tudo-sobre-php-4.html">Tudo sobre PHP Parte 4!</a></li>
+                    <li><a href="tudo-sobre-php-5.html">Tudo sobre PHP Parte 5!</a></li>
+                    <li><a href="tudo-sobre-php-6.html">Tudo sobre PHP Parte 6!</a></li>
+                    -->
+                </menu>
+            </header>
+            
+<h2>Tudo sobre PHP com PDO Parte 1</h2>
+
+<h3>Criando Conexão</h3>
+
+<p>Para começar, crie um banco de dados com esse código:</p>
+
+<pre>
+<code>
+create database mercadophp
+default character set utf8
+default collate utf8_general_ci;
+
+use mercadophp;
+create table produto (
+    id int not null auto_increment,
+    descricao varchar(30) unique,
+    qtd int,
+    valor decimal(10, 2),
+    primary key(id)
+)
+default charset = utf8;
+</code>
+</pre>
+
+<p>Para trabalhar com PDO, crie uma página com o nome dados.php e coloque esse código:</p>
+
+<pre>
+<code>
+$hostname = "mysql:host=localhost;dbname=mercadophp;charset=utf8";
+$username = "root";
+$password = "";
+
+$conexao = new PDO($hostname, $username, $password);
+</code>
+</pre>
+
+<p>Como visto, a conexão não é muito diferente do mysqli, tirando o fato do hostname ter que indicar não apenas o host, mas também o banco de dados e o charset, na mesma variável. E a conexão é criada com um objeto PDO.</p>
+
+<p>PS: É possível usarmos outros tipos de bancos de dados, como o PostgreSQL, caso o banco de dados seja PostgreSQL, utilize <code>pgsql</code>, se for Oracle SQL, use <code>oci</code> e se for Microsoft SQL Server, use <code>dblib</code>.</p>
+
+<p>Só que é necessário tratar os erros da conexão com try catch, dessa forma:</p>
+
+<pre>
+<code>
+try {
+    $conexao = new PDO($hostname, $username, $password);
+}
+catch(PDOException $ex) {
+    echo "ERRO: {$ex->getMessage()}";
+}
+</code>
+</pre>
+
+<p>Como isso utiliza orientação a objetos, se torna mais seguro e fácil de criar.</p>
+
+<h3>Salvando com Prepare</h3>
+
+<p>O mesmo código feito na parte anterior em dados.php, coloque numa função, no mesmo arquivo, dessa forma:</p>
+
+<pre>
+<code>
+function getConnection() {
+    $hostname = "mysql:host=localhost;dbname=mercadophp;charset=utf8";
+    $username = "root";
+    $password = "";
+
+    try {
+        $conexao = new PDO($hostname, $username, $password);
+
+        return $conexao; // Não esqueça do retorno
+    }
+    catch(PDOException $ex) {
+        echo "ERRO: {$ex->getMessage()}";
+    }
+}
+</code>
+</pre>
+
+<p>PS: Observe que tem um retorno dentro do try.</p>
+
+<p>E crie um arquivo PHP com o nome inserir, dessa forma:</p>
+
+<pre>
+<code>
+include_once "dados.php";
+
+$conn = getConnection(); // Isso cria a conexão.
+
+$sql = "insert into produto (descricao, qtd, valor) values (?, ?, ?)";
+
+$stmt = $conn->prepare($sql); // Isso pega os dados da variável
+
+$stmt->bindValue(1, "Arroz"); // Isso substitui os ? na ordem numérica
+$stmt->bindValue(2, 10);
+$stmt->bindValue(3, 4.50);
+
+if($stmt->execute()) { // Isso executa o SQL
+    echo "Salvo com Sucesso!";
+}
+else {
+    echo "Erro ao Salvar!";
+}
+</code>
+</pre>
+
+<p>O ideal, no entando, é passar as variáveis, que serão referenciadas, assim:</p>
+
+<pre>
+<code>
+$descricao = "Farinha";
+$qtd = 10;
+$valor = 10.80;
+
+$stmt = $conn->prepare($sql); // Isso pega os dados da variável
+
+$stmt->bindValue(1, $descricao); // Isso substitui os ? na ordem numérica
+$stmt->bindValue(2, $qtd);
+$stmt->bindValue(3, $valor);
+</code>
+</pre>
+
+<p>Ao invés de números, podemos passar os parâmetros assim:</p>
+
+<pre>
+<code>
+$sql = "insert into produto (descricao, qtd, valor) values (:desc, :qtd, :val)";
+
+$descricao = "Farinha";
+$qtd = 10;
+$valor = 10.80;
+
+$stmt = $conn->prepare($sql); // Isso pega os dados da variável
+
+$stmt->bindValue(":desc", $descricao); // Isso substitui os ? na ordem numérica
+$stmt->bindValue(":qtd", $qtd);
+$stmt->bindValue(":val", $valor);
+</code>
+</pre>
+
+<h3>Salvando com Exec</h3>
+
+<p>Também podemos salvar com exec, dessa forma (podemos criar um arquivo só pra isso):</p>
+
+<pre>
+<code>
+include_once "dados.php";
+
+$conn = getConnection(); // Isso cria a conexão.
+
+$sql = "insert into produto (descricao, qtd, valor) values ('Sal', 10, 2.50)";
+
+if($conn->exec($sql)) { // Isso executa o SQL
+    echo "Salvo com Sucesso!";
+}
+else {
+    echo "Erro ao Salvar!";
+}
+</code>
+</pre>
+
+<p>O problema é que dessa forma, apesar de ser mais simples, é mais vulnerável à SQL Injection.</p>
+
+<h3>Consulta com Prepare</h3>
+
+<p>Crie um arquivo com o nome consultas.php e coloque esse código:</p>
+
+<pre>
+<code>
+include_once "dados.php";
+
+$conn = getConnection(); // Isso cria a conexão.
+
+$sql = "select * from produto";
+
+$stmt = $conn->prepare($sql); // Isso pega os dados da variável
+
+$stmt->execute(); // Isso executa o SQL
+
+$result = $stmt->fetchAll(); // Isso retorna o array com os dados do banco
+
+var_dump($result);
+</code>
+</pre>
+
+<p>Claro que usar o var_dump() vai mostrar os dados de forma complicada de visualizar, nesse caso, substituiremos pelo foreach, assim:</p>
+
+<pre>
+<code>
+foreach($result as $value) {
+    echo "Descrição: " . $value['descricao'] . "&lt;br/&gt;";
+}
+</code>
+</pre>
+
+<p>Da mesma forma, podemos colocar os outros campos do array e colocar ele com tags HTML para ser formatada na página.</p>
+
+<p>Podemos usar outros parâmetros também, por exemplo:</p>
+
+<pre>
+<code>
+$sql = "select * from produto where id = :id";
+
+$stmt = $conn->prepare($sql);
+
+$stmt->bindValue(":id", 1);
+
+$stmt->execute();
+</code>
+</pre>
+
+<h3>Update com Prepare</h3>
+
+<p>Agora crie um arquivo com o nome update.php, com esse código:</p>
+
+<pre>
+<code>
+include_once "dados.php";
+
+$conn = getConnection(); // Isso cria a conexão.
+
+$sql = "update produto set descricao = :desc, qtd = :qtd, valor = :val where id = :id";
+
+$descricao = "Farinha de Trigo";
+$qtd = 10;
+$valor = 10.80;
+$id = 2;
+
+$stmt = $conn->prepare($sql); // Isso pega os dados da variável
+
+$stmt->bindValue(":desc", $descricao); // Isso substitui os ? na ordem numérica
+$stmt->bindValue(":qtd", $qtd);
+$stmt->bindValue(":val", $valor);
+$stmt->bindValue(":id", $id);
+
+if($stmt->execute()) {
+    echo "Atualizado com Sucesso!";
+}
+else {
+    echo "Erro ao Atualizar!";
+}
+</code>
+</pre>
+
+<p>Não tem segredo, pode ver que são poucas as alterações em relação ao inserir.</p>
+
+<h3>Delete com Prepare</h3>
+
+<p>Também não tem segredo em relação ao inserir e atualizar, e é ainda mais fácil, crie um arquivo com o nome deletar.php e coloque o código abaixo:</p>
+
+<pre>
+<code>
+include_once "dados.php";
+
+$conn = getConnection(); // Isso cria a conexão.
+
+$sql = "delete from produto where id = :id";
+
+$id = 1;
+
+$stmt = $conn->prepare($sql); // Isso pega os dados da variável
+
+$stmt->bindValue(":id", $id); // Isso substitui os ? na ordem numérica
+
+if($stmt->execute()) {
+    echo "Deletado com Sucesso!";
+}
+else {
+    echo "Erro ao Excluir!";
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-php-pdo-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

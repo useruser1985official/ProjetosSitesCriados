@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Assembly</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Assembly</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-assembly-1.html">Tudo sobre Assembly Parte 1!</a></li>
+                    <li><a href="tudo-sobre-assembly-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Assembly Parte 2!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Assembly Parte 2</h2>
+
+<h3>Funções de Conversão</h3>
+
+<p>Coloque essas funções abaixo do mostra_valor:</p>
+
+<pre>
+<code>
+; Converte string para inteiro:
+; Entrada esi (ponteiro da string), ecx (número de caracteres da string)
+string_to_int:
+    xor ebx, ebx
+
+.prox_digito:
+    movzx eax, byte [esi] ; Em 64 bits use rsi
+    inc esi
+    sub al, '0'
+    imul ebx, 10
+    add ebx, eax ; ebx = ebx * 10 + eax
+    loop .prox_digito
+    mov eax, ebx
+
+    ret
+
+; Converter inteiro para string:
+; Entrada eax (inteiro pra converter) e esi (ponteiro da string)
+; Saída eax
+
+int_to_string:
+    add esi, 9
+    mov byte [esi], 0
+    mov ebx, 10
+.prox_digito:
+    xor edx, edx
+    div ebx
+    add dl, '0'
+    dec esi
+    mov [esi], dl
+    test eax, eax
+    jnz .prox_digito ; Pule até ser zero
+    mov eax, esi
+
+    ret
+</code>
+</pre>
+
+<p>Altere as sections e o start assim:</p>
+
+<pre>
+<code>
+section .data
+    v1 dw '105', 0xa ; 5 no formato variável
+
+section .bss ; Na .bss colocamos todas as variáveis que quisermos
+    buffer: resb 10 ; Máximo de caracteres permitidos
+
+section .text
+    global _start
+
+_start:
+    call converter_valor
+    call mostrar_valor
+</code>
+</pre>
+
+<p>Altere as funções criadas anteriormente também:</p>
+
+<pre>
+<code>
+converter_valor:
+    lea esi, [v1]
+    mov ecx, 3
+    call string_to_int
+    add eax, 1  
+
+    ret
+
+mostrar_valor:
+    lea esi, [buffer]
+    call int_to_string
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, buffer
+    mov edx, 10
+
+    int 0x80
+
+    ret
+</code>
+</pre>
+
+<p>Dessa forma, na session .data podemos passar números com até 10 caracteres:</p>
+
+<pre>
+<code>
+section .data
+    v1 dw '105', 0xa ;
+</code>
+</pre>
+
+<h3>Menu do Sistema</h3>
+
+<p>Faça o seguinte programa:</p>
+
+<pre>
+<code>
+section .data ; Variáveis fixas
+    ; Tit é o tipo da variável
+    tit         db 10, "+-------------+", 10, "| Calculadora |", 10, "| Calculadora |", 10, "+-------------+", 0
+    ltit        equ $- tit
+
+    obVal1      db 10, "Valor 1: ", 0
+    lobVal1     equ $- obVal1
+
+    obVal2      db 10, "Valor 2: ", 0
+    lobVal2     equ $- obVal2
+
+    opc1        db 10, "1, Adicionar", 0
+    lopc1       equ $- opc1
+
+    opc2        db 10, "2, Subtrair", 0
+    lopc2       equ $- opc2
+
+    opc3        db 10, "3, Muliplicar", 0
+    lopc3       equ $- opc3
+
+    opc4        db 10, "4, Dividir", 0
+    lopc4       equ $- opc4
+
+    msgOpc      db 10, "Deseja realizar? ", 0
+    lmsgOpc     equ $- msgOpc
+
+    msgErro     db 10, "Valor da Opção Inválida!", 0
+    lmsgErro    equ $- msgErro
+
+    salLinha    db 10, 0
+    lsalLinha   db $- salLinha
+
+section .bss ; Variável que podem mudar de valor
+    opc     resb 2
+    num1    resb 10
+    num2    resb 10
+    result  resb 10
+
+section .text
+    global _start
+
+_start:
+    mov ecx, tit
+    mov edx, ltit
+    call mst_saida
+
+    ; Valor 1
+
+    mov ecx, obVal1
+    mov edx, lobVal1    
+    call mst_saida
+
+    mov ecx, num1
+    mov edx, 10
+    mov eax, 3
+    mov ebx, 0
+
+    int 80h
+
+    ; Valor 2
+
+    mov ecx, obVal2
+    mov edx, lobVal2    
+    call mst_saida
+
+    mov ecx, num2
+    mov edx, 10
+    mov eax, 3
+    mov ebx, 0
+
+    int 80h
+
+    ; Opção 1
+
+    mov ecx, opc1
+    mov edx, lopc1      
+    call mst_saida
+
+    ; Opção 2
+
+    mov ecx, opc2
+    mov edx, lopc2      
+    call mst_saida
+
+    ; Opção 3
+
+    mov ecx, opc3
+    mov edx, lopc3      
+    call mst_saida
+
+    ; Opção 4
+
+    mov ecx, opc4
+    mov edx, lopc4      
+    call mst_saida
+    
+    ; Ler opções:
+
+    mov ecx, msgOpc 
+    mov edx, lmsgOpc        
+    call mst_saida
+
+    mov ecx, opc
+    mov edx, 2
+    mov eax, 3
+    mov ebx, 0
+
+    int 80h
+
+    ; Conversões para decimal
+
+    mov ah, [opc]
+    sub ah, '0'
+
+    ; Verifica opções:
+
+    cmp ah, 1
+    je  adicionar
+
+    cmp ah, 2
+    je  subtrair
+
+    cmp ah, 3
+    je  multiplicar
+
+    cmp ah, 4
+    je  dividir
+    
+    mov ecx, msgErro
+    mov edx, lmsgErro
+    call mst_saida
+    jmp exit
+
+; Métodos
+adicionar:
+    jmp exit
+
+subtrair:
+    jmp exit
+
+multiplicar:
+    jmp exit
+
+dividir:
+    jmp exit
+
+mst_saida:
+    mov eax, 4
+    mov ebx, 0
+
+    int 80h
+
+    ret
+
+exit:
+    mov ecx, salLinha
+    mov edx, lsalLinha  
+    call mst_saida
+
+    mov eax, 1
+    mov ebx, 0
+
+    int 80h
+</code>
+</pre>
+
+<p>Agora complete as funções de adicionar, subtrair, multiplicar e dividir, assim:</p>
+
+<pre>
+<code>
+adicionar:
+    add eax, ebx
+
+    jmp exit
+
+subtrair:
+    sub eax, ebx
+
+    jmp exit
+    
+multiplicar:
+    mov ebx, eax
+    mul ebx
+
+    jmp exit
+
+dividir:
+    mov ebx, eax
+    div ebx
+
+    jmp exit
+</code>
+</pre>
+
+<h3>União com o C++</h3>
+
+<p>Crie um arquivo cpp (como troca.cpp) para colocarmos nosso programa em C++, com esse código:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+extern "C" int getValorASM(int a); // Isso receberá o valor do Aseembly
+
+int main() {
+    cout << "ASM me DEU " << getValorASM(32) << endl;
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>Faça também esse programa em Assembly:</p>
+
+<pre>
+<code>
+global getValorASM ; Mesmo nome no arquivo cpp
+
+segment .text
+
+getValorASM:
+    mov eax, edi ; Pega o valor que receberá do cpp, use rdi com 64 bits
+    add eax, 1
+
+    ret
+</code>
+</pre>
+
+<p>Compile o programa Assembly com o comando nasm, e depois monte o C++ com esse código objeto do Assembly, digitando <code>g++ troca.o troca.cpp -o troca -no-pie</code>.</p>
+
+<p>Ele deverá retornar 33, que é a soma do 1 do Assembly com o 32 do C++.</p>
+
+<p>Crie um arquivo com o nome makefile, sem extensão, desse jeito mesmo, e coloque esse código (não esqueça da tabulação):</p>
+
+<pre>
+<code>
+troca: troca.cpp troca.o
+    g++ troca.o troca.cpp -o troca -no-pie
+
+troca.o: troca.asm
+    nasm -f elf32 troca.asm -o troca.o
+
+clean:
+    rm -f *.o
+</code>
+</pre>
+
+<p>Dessa forma, compilamos o programa apenas digitando <code>make</code> no terminal.</p>
+
+<h3>Saltos Condicionais</h3>
+
+<p>Crie esse programa em C++ primeiramente, com o nome questao.cpp:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+extern "C" int question(int a);
+
+int main() {
+    if(question(26) == 1) {
+        cout << "Número Par!" << endl;
+    }
+    else {
+        cout << "Número Ímpar!" << endl;
+    }
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Crie também o questao.asm em Assembly:</p>
+
+<pre>
+<code>
+global question
+
+segment .text
+
+; Par é qualquer número que subtrair 2 sucessivamente será igual a zero
+; Se for menor que zero, ele é ímpar
+
+question:
+    mov ebx, edi ; Por onde recebemos o valor
+    jmp _testar  ; Pula até o ponto da função testar
+
+_testar:
+    cmp ebx, 0   ; Compara o valor de ebx com zero
+    je _par      ; Igual a zero
+    jl _impar    ; Menor que zero
+    sub ebx, 2
+    jmp _testar
+
+_par:
+    mov eax, 1
+    ret
+
+_impar:
+    mov eax, 0
+    ret
+</code>
+</pre>
+
+<p>E o makefile com esse código:</p>
+
+<pre>
+<code>
+questao: questao.cpp questao.o
+    g++ questao.o questao.cpp -o questao -no-pie
+
+questao.o: questao.asm
+    nasm -f elf64 questao.asm -o questao.o
+
+clean:
+    rm -f *.o
+</code>
+</pre>
+
+<p>Mude o número 26 para 27 no arquivo cpp e compile de novo, para ver o resultado diferente.</p>
+
+<ul>
+    <li><a href="tudo-sobre-assembly-1.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-assembly-3.html">Continuação da Matéria!</a></li>-->
+</ul>
+
+        </div>
+    </body>
+</html>

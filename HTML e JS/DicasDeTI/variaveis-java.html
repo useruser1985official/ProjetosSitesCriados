@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+
+<h2>Variáveis de Ambiente Java</h2>
+
+<p>Podemos colocar na variável de ambiente do sistema, os arquivos do JRE e JDK para que assim, possamos executar e compilar bytecodes Java através da linha de comando.</p>
+
+<h3>Windows</h3>
+
+<p>Após a instalação do JDK, vá em computador, propriedades do sistema e configurações avançadas do sistema, em avançado vá em variáveis de ambiente.</p>
+
+<p>Nas variáveis de usuário, veja se em PATH está com <code>%JAVA_HOME%\bin</code>, senão adicione ali.</p>
+
+<p>Nas variáveis do sistema, crie a variável JAVA_HOME com o caminho do JDK (por exemplo <code>C:\Program Files\Java\jdk1.8.0_181</code>) e JRE_HOME com o caminho do JRE (por exemplo <code>C:\Program Files\Java\jre1.8.0_181</code>).</p>
+
+<h3>Linux</h3>
+
+<p>Após a instalação do pacote Java, vá na pasta dele e digite esses comandos:</p>
+
+<pre>
+<code>
+sudo ln -s /opt/jdk1.8.0_181/java /usr/bin/java
+
+sudo ln -s /opt/jdk1.8.0_181/javac /usr/bin/javac
+</code>
+</pre>
+
+<p>Isso criará um atalho no diretório /usr/bin, que por padrão está na variável de ambiente do Linux, e permitirá o acesso pelo terminal.</p>
+
+<p>PS: Deve ser colocado o caminho daonde foi instalado o JDK, caso seja outro.</p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

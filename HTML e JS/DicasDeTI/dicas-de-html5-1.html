@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Dicas de HTML5 Parte 1</h2>
+
+<p>Essa é a estrutura básica de uma página HTML5, sendo o DOCTYPE uma tag identificadora da versão do HTML (no caso, o HTML5):</p>
+
+<pre>
+<code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-br"&gt;
+    &lt;head&gt;
+    
+    &lt;/head&gt;
+    &lt;body&gt;
+    
+    &lt;/body&gt;
+&lt;/html&gt;
+</code>
+</pre>
+
+<p>Para linkar favicons no HTML, usamos a tag <code>link</code>, que também é usada para linkar conteúdo CSS na página. Para anexar conteúdo Javascript usamos a tag <code>script</code>. Para colocar título, use a tag <code>title</code>, e para corrigir erros de acentuação, use a tag <code>meta</code>, assim:</p>
+
+<pre>
+<code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-br"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"/&gt;
+        &lt;title&gt;Título da Página em HTML&lt;/title&gt;
+        &lt;link rel="icon" href="_imagens/favicon.ico"/&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"/&gt;
+        &lt;link rel="stylesheet" href="_css/estilo.css"/&gt;
+        &lt;script src="_javascript/funcoes.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;!--
+            O restante do conteúdo se coloca dentro da tag body
+        --&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code>
+</pre>
+
+<p>A tag meta também é utilizada para outras configurações, como a viewport, que define se o site ocupará a tela inteira.</p>
+
+<p>E podemos usar CSS e Javascript diretamente no HTML, com as tags <code>style</code> e <code>script</code>, respectivamente:</p>
+
+<pre>
+<code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-br"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"/&gt;
+        &lt;title&gt;Título da Página em HTML&lt;/title&gt;
+        &lt;link rel="icon" href="_imagens/favicon.ico"/&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"/&gt;
+        &lt;style&gt;
+            /* Isso é código CSS (comentários em CSS são feitos usando barra e asterisco) */
+
+            html {
+                font-family: Arial, sans-serif;
+                color: white;
+                background: url("_imagens/fundo.png") center fixed repeat;
+                background-color: black;
+            }
+        &lt;/style&gt;
+        &lt;script&gt;
+            alert("Isso é um código em Javascript!");
+
+            // Dependendo do caso, a tag script pode ficar em body também
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;!-- Essa tag abaixo só é exibida com o Javascript desativado: --&gt;
+        &lt;noscript&gt;
+            Ative o Javascript do seu navegador!
+        &lt;/noscript&gt;
+        &lt;h1&gt;Olá Mundo!&lt;/h1&gt;
+        &lt;h2&gt;Primeiros passos em HTML5&lt;/h2&gt;
+
+        &lt;p&gt;PS: HTML &lt;b&gt;não&lt;/b&gt; é linguagem de programação, nem CSS!&lt;/p&gt;
+        &lt;script&gt;
+            document.write("Mas Javascript é!");
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code>
+</pre>
+
+<p>Vejam as principais tags de HTML5, que podem ser úteis:</p>
+
+<pre>
+<code class="tags">
+&lt;html&gt;&lt;/html&gt; - Define o início do documento HTML, todos as demais tags devem estar dentro desta tag.
+&lt;head&gt;&lt;/head&gt; - É o cabeçalho onde ficar os metadados do documento, como metatags, CSS e Javascript.
+&lt;meta/&gt; - São as metatags, como charset, description, viewport ou keywords.
+&lt;link/&gt; - Utilizado para linkar um arquivo de imagem ou CSS a página HTML.
+&lt;title&gt;&lt;/title&gt; - Define o título do documento, mostrado na barra de títulos do navegador e como link nos mecanismos de busca.
+&lt;script&gt;&lt;/script&gt; - É utilizado para escrever ou anexar um arquivo normalmente Javascript a página.
+&lt;style&gt;&lt;/style&gt; - É utilizada para adicionar um código CSS a página.
+&lt;body&gt;&lt;/body&gt; - É o corpo ou área principal do documento, dentro deste deve ficar o conteúdo da sua página.
+&lt;header&gt;&lt;/header&gt; - Para agrupar conteúdo num cabeçalho (não necessariamente só no cabeçalho principal do site).
+&lt;h1&gt;&lt;/h1&gt; - Representam níveis de títulos, sendo o h1 de maior importância, vai até o h6 (não confundir com letra grande).
+&lt;p&gt;&lt;/p&gt; - Define um parágrafo.
+&lt;b&gt;&lt;/b&gt; - Deixa o texto em negrito (para textos em destaque use &lt;strong&gt;&lt;/strong&gt;).
+&lt;i&gt;&lt;/i&gt; - Deixa o texto em itálico (para textos em ênfase use &lt;em&gt;&lt;/em&gt;).
+&lt;del&gt;&lt;/del&gt; - Para riscar palavras (mostrar conteúdo excluído).
+&lt;ins&gt;&lt;/ins&gt; - Para sublinhar palavras (mostrar conteúdo incluído).
+&lt;br/&gt; - Define uma quebra de linha.
+&lt;a&gt;&lt;/a&gt; - Define um link que deve ser apontado com o atributo href.
+&lt;img/&gt; - Define a utilização de uma imagem (JPG, GIF, PNG e outras). A imagem deve ser apontada com o uso do atributo src.
+&lt;!-- --&gt; - Para comentários (que não aparecem no documento).
+&lt;wbr/&gt; - Para forçar quebra de linha ao ajustar palavras compostas sem criar hífens.
+&lt;hr/&gt; - Para criar uma linha.
+&lt;span&gt;&lt;/span&gt; - Na verdade é uma tag "vazia", que pode ter funções implementadas.
+&lt;div&gt;&lt;/div&gt; - Também uma tag "vazia", mais usada em blocos.
+&lt;pre&gt;&lt;/pre&gt; - Usada para pré-formatar textos.
+&lt;code&gt;&lt;/code&gt; - Para exibir códigos, usada geralmente em conjunto com a tag pre.
+&lt;var&gt;&lt;/var&gt; - Mesmo caso da tag code.
+&lt;sup&gt;&lt;/sup&gt; - Para o texto ficar sobreescrito.
+&lt;sub&gt;&lt;/sub&gt; - Para o texto ficar sub-escrito.
+&lt;nav&gt;&lt;/nav&gt; - Para definir menus de navegação (inclusive menus flutuantes).
+&lt;ol&gt;&lt;/ol&gt; - Para listas ordenadas.
+&lt;ul&gt;&lt;/ul&gt; - Para listas não ordenadas.
+&lt;li&gt;&lt;/li&gt; - Para definir cada item de listas.
+&lt;section&gt;&lt;/section&gt; - Para definir uma área principal, caso haja divisões de sessões no site.
+&lt;aside&gt;&lt;/aside&gt; - Para definir uma área secundária (como uma lateral).
+&lt;footer&gt;&lt;/footer&gt; - Para agrupar conteúdo no rodapé.
+&lt;table&gt;&lt;/table&gt; - Para Definir Tabelas.
+&lt;caption&gt;&lt;/caption&gt; - Para identificar uma tabela (fora do quadro, mas dentro das tags table).
+&lt;article&gt;&lt;/article&gt; - Para separar artigos em sessões (usa dentro das tags section).
+&lt;iframe&gt;&lt;/iframe&gt; - Para exibir outras páginas em janelas separadas, muito usada também para vídeo do Youtube.
+&lt;map&gt;&lt;/map&gt; - Para definir mapas de sites (dentro de tags section).
+&lt;area/&gt; - Para definir as coordenadas de um mapa (usada dentro de tags maps).
+&lt;embed/&gt; - Usada para colocar conteúdos chamados por plugins, como aplicações Flash.
+&lt;audio&gt;&lt;/audio&gt; - Para exibir um arquivo de áudio em um formato como MP3 ou OGG.
+&lt;video&gt;&lt;/video&gt; - Para exibir um arquivo de vídeo em um formato como MP4 ou WEBM.
+&lt;form&gt;&lt;/form&gt; - Para criar formulários.
+&lt;input/&gt; - Para definir campos, botões e outros componentes em formulários.
+</code>
+</pre>
+
+<!-- &lt;div&gt;&lt;/div&gt; - Função. -->
+
+<p>O span é usado como o div, mas o div é para um bloco, e span para uma linha), mas pode ser usada, por exemplo, para formatar textos com CSS (pode ser usada dentro da TAG, algo como <code>&lt;span style="text-decoration: underline"&gt;</code>).</p>
+
+<p>Evite o uso excessivo de tags br para espaçamento, use o CSS para isso. E também lembre-se que espaços com Enter não querem dizer nada pro HTML.</p>
+
+<p>PS: Existem algumas tags que estão obsoletas em HTML5, veja elas aqui: <a href="https://www.w3.org/TR/2010/WD-html5-20100304/obsolete.html" target="_blank">https://www.w3.org/TR/2010/WD-html5-20100304/obsolete.html</a></p>
+
+<p>Apesar de algumas delas ainda funcionarem por compatibilidade, elas pararão de funcionar com o tempo. No lugar delas, é recomendado usar o CSS com tags span, poucas tags foram substituídas. Algumas das tags obsoletas são essas:</p>
+
+<pre>
+<code>
+basefont
+big
+center
+font
+strike
+tt
+</code>
+</pre>
+
+<p>Parâmetros como <code>bgcolor</code>, <code>color</code>, <code>align</code> e <code>font</code> (além da tag <code>font</code>) estão depreciadas e não devem ser usadas em HTML5, já que este foca apenas na semântica, a parte visual é totalmente configurada por CSS. Os únicos parâmetros ainda existentes em HTML5 são o <code>width</code> e o <code>height</code>, mas é preferível usar o CSS também.</p>
+
+<p>Veja aqui as tags e parâmetros depreciados no HTML5: <a href="https://www.devmedia.com.br/tags-e-atributos-depreciados-na-html/28042" target="_blank">https://www.devmedia.com.br/tags-e-atributos-depreciados-na-html/28042</a></p>
+
+<p>Para usar CSS, podemos usar estilo local em determinada tag usando o parâmetro <code>style</code> (sendo recomendada para pequenas configurações em tags específicas). O mais recomendado é usar arquivos CSS externos ou usando a tag <code>style</code> para configurar estilos.</p>
+
+<p>Usando a tag style ou arquivos CSS (coloque no head a tag <code>&lt;link rel="stylesheet" href="_css/estilo.css"/&gt;</code>):</p>
+
+<pre>
+<code>
+@charset "UTF-8"; /* Coloque apenas em arquivos CSS separados, para compatibilidade de acentuação. */
+
+h1 {
+    font-family: Arial, sans-serif;
+    font-size: 30pt;
+    color: black;
+}
+</code>
+</pre>
+
+<p>Estilo local (inline):</p>
+
+<pre>
+<code>
+&lt;h1 style="font-family: Arial, sans-serif; color: blue"&gt;Título da Página&lt;/h1&gt;
+</code>
+</pre>
+
+<p>PS: O <code>@charset</code> é uma regra CSS para corrigir acentuações. Existem outras como a <code>@font-face</code> e a <code>@import</code>. E os comentários em CSS devem estar entre as <code>/* */</code>, independente da quantidade de linhas destes.</p>
+
+<p>As prioridades de estilos são nessa ordem: Inline, tag style e arquivo CSS externo.</p>
+
+<p>As tags <code>frame</code>, <code>frameset</code> e <code>noframes</code> foram retiradas por prejudicar a navegação e usabilidade.</p>
+
+<p>E essas tags foram substituídas:</p>
+
+<ul>
+    <li><code>acronym</code>: Substituída por <code>abbr</code>.</li>
+    <li><code>applet</code>: Substituída por <code>object</code>.</li>
+    <li><code>dir</code>: Substituída por <code>ul</code>.</li>
+    <li><code>strike</code> e <code>s</code>: Substituída por <code>del</code> (mas prefira usar o CSS para isso).</li>
+    <li><code>u</code>: Substituída por <code>ins</code> (idem o item anterior).</li>
+    <li><code>isindex</code>: Substituída por <code>form</code>.</li>
+    <li><code>menu</code>: Substituída por <code>ul</code>.</li>
+</ul>
+
+<p>Lembre-se também das diferenças entre <code>href</code> e <code>src</code>:</p>
+
+<ul>
+    <li>href = Usado nas tags <code>a</code> e <code>link</code>, em links como html e php, mas no caso de tag link também se usa com CSS e favicons. Em tags a, o href com aspas vazias direciona pra página no qual ele está (página atual) e também pode ter comandos Javascript.</li>
+    <li>src = Usado em imagens (em <code>img</code>), videos e audios (independente se ser em tags <code>audio</code>/<code>video</code>, <code>source</code> ou em <code>iframe</code>) e scripts, em iframe sempre usa ele até mesmo pra HTML e PHP.</li>
+</ul>
+
+<p>O href é a referencia de um link, para onde ele aponta. Já o src é o arquivo fonte com alguma informação.</p>
+
+<p>Veja alguns símbolos especiais:</p>
+
+<pre>
+<code class="simb">
+&amp;nbsp; = &nbsp; (Espaço "não-quebrável").
+&amp;amp; = &amp; (E Comercial).
+&amp;shy; = &shy; (Para forçar quebra de linha ao ajustar palavras compostas, criando hífens ao quebrar).
+&amp;quot; = &quot; (Aspas Duplas).
+&amp;lt; = &lt; (Menor).
+&amp;gt; = &gt; (Maior).
+&amp;le; = &le; (Menor ou Igual).
+&amp;ge; = &ge; (Maior ou Igual).
+&amp;pound; = &pound; (Libra).
+&amp;yen; = &yen; (Ien).
+&amp;euro; = &euro; (Euro).
+&amp;copy; = &copy; (Copyright).
+&amp;cent; = &cent; (Centavos).
+&amp;delta; = &delta; (Delta).
+&amp;reg; = &reg; (Marca Registrada).
+&amp;trade; = &trade; (Trademark).
+&amp;permil; = &permil; (Por Mil).
+&amp;lambda; = &lambda; (Lambda).
+&amp;radic; = &radic; (Raiz Quadrada).
+&amp;frac12; = &frac12; (Meio).
+&amp;frac34; = &frac34; (Três Quartos).
+&amp;infin; = &infin; (Infinito).
+&amp;plusmn; = &plusmn; (Mais ou Menos).
+&amp;ne; = &ne; (Não Igual).
+&amp;divide; = &divide; (Divisão).
+&amp;pi; = &pi; (Pi).
+&amp;larr; = &larr; (Seta pra Esquerda).
+&amp;rarr; = &rarr; (Seta pra Direita).
+&amp;uarr; = &uarr; (Seta pra Cima).
+&amp;darr; = &darr; (Seta pra Baixo).
+&amp;spades; = &spades; (Espadas).
+&amp;clubs; = &clubs; (Paus).
+&amp;hearts; = &hearts; (Copas).
+&amp;diams; = &diams; (Ouros).
+</code>
+</pre>
+
+<p>Alguns desses símbolos ficam diferentes se a inicial foi maiúscula, como por exemplo, as setas. Podemos ver outros símbolos aqui nesse link: <a href="https://pt.wikipedia.org/wiki/Ajuda:Caracteres_de_escape" target="_blank">https://pt.wikipedia.org/wiki/Ajuda:Caracteres_de_escape</a></p>
+
+<p>Também podemos usar símbolos HTML para letras acentuadas ou com cedilha, por exemplo:</p>
+
+<pre>
+<code class="simb">
+&amp;aacute; = &aacute;
+&amp;agrave; = &agrave;
+&amp;atilde; = &atilde;
+&amp;acirc; = &acirc;
+&amp;uuml; = &uuml;
+&amp;ccedil; = &ccedil;
+</code>
+</pre>
+
+<p>PS: Podemos usar outras letras, minúsculas ou maiúsculas, como por exemplo <code>&amp;Eacute;</code> para gerar a letra <code>&Eacute;</code> e <code>&amp;Otilde;</code> para gerar a letra <code>&Otilde;</code>, claro, dentro das possibilidades, um <code>&amp;Tacute;</code> por exemplo, não funciona.</p>
+
+<p>Para emojis você primeiro vai nesse site: <a href="https://emojipedia.org/" target="_blank">https://emojipedia.org/</a></p>
+
+<p>Copie o código de "codepoint" (como U+1F596) e escreva assim no HTML: <code>&amp;#x1F596;</code>. Ele resultará o emoji &#x1F596;.</p>
+
+<p>PS: Os emojis não funcionam em todos os navegadores.</p>
+
+<p>Para criar âncoras de sites externos fazemos assim:</p>
+
+<pre>
+<code>
+&lt;a href="https://www.google.com.br/" target="_blank" rel="external"&gt;Clique Aqui para Abrir o Google!&lt;/a>&gt;
+</code>
+</pre>
+
+<p>O rel indica que o link é externo, mas não é obrigatório, já que o que faz o link abrir em nova aba é o target mesmo. Links externos podem ser indicados também com <code>nofollow</code>, que indica aos indexadores para não seguir essa página.</p>
+
+<p>Para criar links internos, basta usar o caminho dos arquivos html e remover os parâmetros target e rel, assim:</p>
+
+<pre>
+<code>
+&lt;a href="contato.html"&gt;Entre em Contato Conosco!&lt;/a&gt;
+</code>
+</pre>
+
+<p>PS: Atenção as posições das pastas do site, caso existam, que deverão ser indicadas (como <code>_noticias/main.html</code>), e para voltar a pasta anterior use dois pontos (como <code>../index.html</code>).</p>
+
+<p>No entanto, semanticamente, links internos deverão ter o target indicando <code>_self</code>, como por exemplo:</p>
+
+<pre>
+<code>
+&lt;a href="contato.html" target="_self" rel="next"&gt;Entre em Contato Conosco!&lt;/a&gt;
+</code>
+</pre>
+
+<p>Como visto, podemos indicar páginas internas no rel com antes (<code>prev</code>) e depois (<code>next</code>).</p>
+
+<p>Para link de downloads de PDF, fazemos assim:</p>
+
+<pre>
+<code>
+&lt;ul&gt;
+    &lt;li&gt;&lt;a href="_files/livro.pdf" download="livro.pdf" type="application/pdf"&gt;Baixar o livro em PDF&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="_files/livro.zip" download="livro.zip" type="application/zip"&gt;Baixar o livro em ZIP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;      
+</code>
+</pre>
+
+<p>PS: O type não é obrigatório, mas forçará o arquivo a ser baixado, assim como o parâmetro download.</p>
+
+<p>Para ver todos os MIME Types, podemos olhar nesse site: <a href="https://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank">https://www.iana.org/assignments/media-types/media-types.xhtml</a></p>
+
+<p>Em CSS se usa <code>#</code> para formatar IDs específicas, e <code>.</code> para fazer o mesmo com classes, e ainda pode usar <code>:</code> para movimentos de mouse, após o nome da tag em que um deles se localiza, por exemplo:</p>
+
+<p>Uma mesma página pode ter vários links de estilos e de scripts, assim como tags referentes aos mesmos, só tome cuidado para não conflitar algum deles.</p>
+
+<pre>
+<code>
+header#cabecalho {
+    
+}
+input.enviar {
+    
+}
+a:hover {
+    
+}
+a:visited {
+
+}
+</code>
+</pre>
+
+<p>No caso usamos dessa forma nas tags:</p>
+
+<pre>
+<code>
+&lt;header id="cabecalho"&gt;
+
+&lt;/header&gt;
+
+&lt;input class="enviar"/&gt;
+</code>
+</pre>
+
+<p>PS: Sobre os movimentos das tags a, o <code>hover</code> é para trabalharmos quando movimentarmos o mouse por cima (pode ser usado com outras tags), podemos usar o <code>visited</code> para quando o link já tiver sido visitado, o <code>link</code> para quando antes de clicarmos e o <code>active</code> para o momento de clicarmos.</p>
+
+<p>Para trabalharmos com cores (usando <code>color</code> para letras e <code>background-color</code> para o fundo), usamos três formas basicamente: Nomes explícitos em inglês (como red, white, gray, green, blue), códigos hexademicais (como #0000ff), e o rgb (como rgb(255, 255, 0), e também tem o rgba para definir a opacidade de 0 a 1, como rgba(255, 255, 0, 0.4)). Os códigos de várias cores podem ser vistos aqui: <a href="https://pt.wikipedia.org/wiki/Lista_de_cores" target="_blank">https://pt.wikipedia.org/wiki/Lista_de_cores</a></p>
+
+<p>No caso de famílias de letras (font-family), além das fontes padrões como Arial, Cambria e Calibri, podemos importar nossas próprias fontes (algo que será visto posteriormente), e também podemos usar fontes genéricas, apenas indicando os tipos, que no caso são serif, sans-serif, monospace, cursive e fantasy.</p>
+
+<p>PS: Para importar outro arquivo CSS numa folha CSS, use no começo a diretiva <code>@import "folha.css"</code>. Se quiser definir algo como importante (como por exemplo, a cor de fundo, use algo como <code>background-color: red !important</code>.</p>
+
+<p>Apesar da possibilidade de usar a tags <code>&lt;i&gt;&lt;/i&gt;</code> para inclinar textos, podemos fazer isso em CSS com o <code>font-style</code>. Da mesma forma, o <code>&lt;b&gt;&lt;/b&gt;</code> pode ser substituído pelo <code>font-weight</code>. Para sublinhar usamos a tag <code>&lt;ins&gt;&lt;/ins&gt;</code>, ou usamos totalmente o CSS, dessa forma:</p>
+
+<pre>
+<code>
+ul li {
+    font-family: Arial;
+    font-size: 13pt;
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: underline;
+}
+</code>
+</pre>
+
+<p>PS: Esteja atento as diferenças de especificar elementos no CSS:</p>
+
+<pre>
+<code>
+div span /* Apenas o elemento filho do primeiro */
+
+div > span /* Elemento que é filho direto do primeiro */
+
+div + span /* Elemento e o próximo que vier */
+
+div ~ span /* Todos os elementos após o primeiro */
+</code>
+</pre>
+
+<p>Só lembrando que há diferença entre <code>&lt;b&gt;&lt;/b&gt;</code> e <code>&lt;strong&gt;&lt;/strong&gt;</code>, assim como <code>&lt;i&gt;&lt;/i&gt;</code> e <code>&lt;em&gt;&lt;/em&gt;</code>. As tags <code>strong</code> e <code>em</code> destacam o que estiver entre elas para mecanismos de pesquisa como algo relevante. As tags <code>b</code> e <code>i</code> só alteram visualmente.</p>
+
+<p>No <code>text-decoration</code> podemos riscar também usando o <code>line-through</code>, assim:</p>
+
+<pre>
+<code>
+p span {
+    text-decoration: line-through;
+}
+</code>
+</pre>
+
+<p>Também temos os parâmetros <code>overline</code> (linha superior) e <code>blink</code> (piscar).</p>
+
+<p>Para criar bordas num texto, usamos o <code>text-shadow</code>, assim:</p>
+
+<pre>
+<code>
+h2 {
+    text-shadow: 1px -1px black, -1px 1px black, 1px 1px black, -1px -1px black;
+}
+</code>
+</pre>
+
+<p><a href="dicas-de-html5-2.html">Parte 2 da Matéria</a></p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

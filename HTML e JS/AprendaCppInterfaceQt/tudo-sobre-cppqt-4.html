@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda C++ com QT Creator</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++ com QT Creator</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cppqt-1.html">Tudo sobre C++ com QT Creator Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cppqt-2.html">Tudo sobre C++ com QT Creator Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cppqt-3.html">Tudo sobre C++ com QT Creator Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cppqt-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C++ com QT Creator Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cppqt-5.html">Tudo sobre C++ com QT Creator Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cppqt-6.html">Tudo sobre C++ com QT Creator Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cppqt-7.html">Tudo sobre C++ com QT Creator Parte 7!</a></li>
+                </menu>
+            </header>
+          
+<h2>Tudo sobre C++ com QT Creator Parte 4</h2>
+
+<h3>List Widget</h3>
+
+<p>Abra um novo projeto e coloque um list widget nele. Coloque acima dele um line height e quatro push buttons e organize eles.</p>
+
+<p>Os nomes dos botões serão adicionar, adicionar * (vários), marcar e desmarcar. E as variáveis, txtItem, btnAdd, btnAdAs, btnMarc, btnDesm e lstItens</p>
+
+<p>No slot de clicked do botão adicionar, coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnAdd_clicked() {
+    if(ui->txtItem->text().trimmed() != ""){
+        ui->lstItens->addItem(ui->txtItem->text().trimmed());
+        
+        ui->txtItem->clear();
+        ui->txtItem->setFocus();
+    }
+}
+</code>
+</pre>
+
+<p>Aí ele poderá adicionar os elementos digitados na lista.</p>
+
+<p>Para adicionar vários itens de uma só vez, podemos colocar esse código no slot clicked do segundo botão:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnAdAs_clicked() {
+    QListWidgetItem *item1 = new QListWidgetItem("C++");
+    QListWidgetItem *item2 = new QListWidgetItem("C#");
+    QListWidgetItem *item3 = new QListWidgetItem("PHP");
+    QListWidgetItem *item4 = new QListWidgetItem("Java");
+    QListWidgetItem *item5 = new QListWidgetItem("Python");
+    
+    
+    ui->lstItens->addItem(item1);
+    ui->lstItens->addItem(item2);
+    ui->lstItens->addItem(item3);
+    ui->lstItens->addItem(item4);
+    ui->lstItens->addItem(item5);    
+}
+</code>
+</pre>
+
+<p>No slot clicked do marcar, colocaremos isso:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnMarc_clicked() {
+    ui->lstItens->currentItem()->setForeground(Qt::lightGray);
+    ui->lstItens->currentItem()->setBackground(Qt::darkGreen);    
+}
+</code>
+</pre>
+
+<p>Da forma acima, usamos constantes que alteram as cores dos itens da lista. Aí ele mudará a cor dos itens que marcarmos.</p>
+
+<p>E no slot clicked do desmarcar, usamos a mesma lógica, com as cores padrões:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnDesm_clicked() {
+    ui->lstItens->currentItem()->setForeground(Qt::black);
+    ui->lstItens->currentItem()->setBackground(Qt::white);
+}
+</code>
+</pre>
+
+<p>Agora, para indicar que marcamos vários itens na programação, temos que fazer diferente. Declare um vector global assim:</p>
+
+<pre>
+<code>
+QVector&lt;int&gt; marcados; // Inclua QVector
+</code>
+</pre>
+
+<p>E altere os métodos de eventos assim:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnMarc_clicked() {
+    if(ui->lstItens->currentRow() != -1) {
+        if(marcados.indexOf(ui->lstItens->currentRow()) == -1) {
+            ui->lstItens->currentItem()->setForeground(Qt::lightGray);
+            ui->lstItens->currentItem()->setBackground(Qt::darkGreen);
+
+            marcados.push_back(ui->lstItens->currentRow());
+
+            qDebug() << "Marcados: " << marcados; // Inclua QDebug
+        }
+    }
+}
+
+void MainWindow::on_btnDesm_clicked() {
+    if(ui->lstItens->currentRow() != -1) {
+        if(marcados.indexOf(ui->lstItens->currentRow()) >= 0) {
+            ui->lstItens->currentItem()->setForeground(Qt::black);
+            ui->lstItens->currentItem()->setBackground(Qt::white);
+
+            marcados.erase(marcados.begin() + marcados.indexOf(ui->lstItens->currentRow()));
+
+            qDebug() << "Marcados: " << marcados;
+        }
+    }
+}
+</code>
+</pre>
+
+<p>No caso acima, no console do Qt aparecerá as posições marcadas.</p>
+
+<p>Embaixo da lista, colocamos um botão com o texto Desmarcar Todos, a variável btnDesmTod e colocamos esse código, para desmarcar tudo:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnDesmTod_clicked() {
+    while(!marcados.empty()) {
+        ui->lstItens->setCurrentRow(marcados.last());
+        ui->lstItens->currentItem()->setForeground(Qt::black);
+        ui->lstItens->currentItem()->setBackground(Qt::white);
+        marcados.pop_back();
+    }
+}
+</code>
+</pre>
+
+<h3>TabWidget</h3>
+
+<p>O tabwidget permite termos abas (guias) no nosso programa. Para usar ele, abra um novo projeto e adicione o componente tabwidget, e coloque a variável tbAbas.</p>
+
+<p>Em cada aba, coloque dois labels, com conteúdos diferentes. Para alterar o texto da aba, clique nela e vá nas propriedades, e procre por currentTabText. Para tornar elas fecháveis, marque a casa de tabsClosable (mas precisaremos programar para fechar), adicione no tabWidget o slot de tabCloseRequested, e coloque esse código nele:</p>
+
+<pre>
+<code>
+void MainWindow::on_tbAbas_tabCloseRequested(int index) {
+    ui->tbAbas->removeTab(index); // O número passado é o referente da aba, começando do 0.
+}
+</code>
+</pre>
+
+<p>É possível adicionar uma aba clicando no widget e indo em insert page, mas vamos adicionar elas via programação, para isso coloque um botão fora das abas para isso, mude o name e adicione o slot de clicked nele, e coloque o código assim:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnAdd_clicked() {
+    ui->tbAbas->addTab(new QWidget(), "Nova Aba: " + QString::number(ui->tbAbas->count() + 1));
+}
+</code>
+</pre>
+
+<p>Mas para não dar erros de contagem ao fechar abas, podemos criar uma variável global e inicializar ela no construtor, assim:</p>
+
+<pre>
+<code>
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+    
+    i = ui->tbAbas->count(); // Coloque a variável i estática do tipo int na classe MainWindow em mainwindow.h
+}
+</code>
+</pre>
+
+<p>Adicione o decremento dessa variável no método de remover:</p>
+
+<pre>
+<code>
+void MainWindow::on_tbAbas_tabCloseRequested(int index) {
+    ui->tbAbas->removeTab(index); // O número passado é o referente da aba, começando do 0.
+    i--;
+}
+</code>
+</pre>
+
+<p>E no método de botão de adicionar, assim:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnAdd_clicked() {
+    i++;
+    ui->tbAbas->addTab(new QWidget(), "Nova Aba: " + QString::number(i));
+}
+</code>
+</pre>
+
+<p>Agora adicione um botão para fecharmos a aba aberta, mude o name adicione o slot de clicked nela e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnRem_clicked() {
+    ui->tbAbas->removeTab(ui->tbAbas->currentIndex());
+    i--;
+}
+</code>
+</pre>
+
+<h3>TabWidget - Parte 2</h3>
+
+<p>Voltando ao projeto anterior, exclua as labels de exemplo das tabs. Como vimos, podemos remover e adicionar páginas clicando com o botão direito, podemos remover indo em Page 1 e 2 (ou a página atual) e em delete.</p>
+
+<p>No entanto, vamos adicionar mais uma tab, para fazermos um formulário. Basicamente, nós arrastamos os componentes para isso. Mas vamos adicionar uma tab que é aberta com um botão, já com o formulário.</p>
+
+<p>Adicione um botão para adicionarmos o formulário, mude o name e o texto dele.</p>
+
+<p>Vá no nosso projeto, vá em Add New, Qt e Add Designer Form Class, e escolha a opção Widget do template.</p>
+
+<p>No novo formulário, adicione três labels, três line edit e duas botões. Organize cada label e line edit num layout horizontal, e os dois botões também, e coloque tudo num vertical.</p>
+
+<p>Volte no formulário principal e adicione o slot de clicked no botão criado, e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnCads_clicked() {
+    i++;
+    ui->tbAbas->addTab(new FormTab(), "Novo Cadastro"); // Inclua formtab.h
+}
+</code>
+</pre>
+
+<h3>Trabalhando com Diretórios - Parte 1</h3>
+
+<p>Num novo projeto, coloque um combobox, abaixo dele um list widget, e abaixo dele, um line text e dois botões, alinhe estes nuum layout horizontal e tudo num vertical.</p>
+
+<p>Os botões serão para remover e adicionar diretórios, mude os names deles e dos outros conteúdos.</p>
+
+<p>No exemplo, a pasta será criada na mesma pasta do projeto.</p>
+
+<p>Primeiramente, coloque esse método no mainwindow.cpp:</p>
+
+<pre>
+<code>
+QString MainWindow::local = "C:/Meus Projetos/C++ Qt/TrabalhandoComDiretorios/"; // Caminho desejado, global, coloque na classe como static
+
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+
+    QDir unidades;// Inclua QDir
+
+    foreach(QFileInfo qfi, unidades.drives()) {
+        ui->cbUnid->addItem(qfi.absoluteFilePath());
+    }
+}
+</code>
+</pre>
+
+<p>Isso retornará as unidades no combobox.</p>
+
+<p>Adicione no combobox, o slot de currentTextChanged, que retorna uma string, e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_cbUnid_currentTextChanged(const QString &amp;arg1) {
+    ui->lstDir->clear();  
+    QDir conteudo(arg1);
+    
+    foreach(QFileInfo qfi, conteudo.entryInfoList()) {
+        if(qfi.isDir()) {
+            ui->lstDir->addItem("Pasta: " + qfi.absoluteFilePath());
+        }
+        else if(qfi.isFile()) {
+            ui->lstDir->addItem("Arquivo: " + qfi.absoluteFilePath());
+        }
+    }
+}
+</code>
+</pre>
+
+<p>PS: Podemos mover por diretório, semelhante ao chdir usado no C++ comum, dentro do QT usamos o método estático <code>setCurrent()</code> de QDir, assim (inclua QDir):</p>
+
+<pre>
+<code>
+QDir::setCurrent(QDir::homePath() + "/Desktop"); // Vai até a área de trabalho
+
+qDebug() << QDir::currentPath(); // Mostra diretório atual.
+</code>
+</pre>
+
+<p>Como visto acima, o <code>homePath()</code> retorna o home do usuário (C:\Users\Usuário no Windows, /home/usuário no Linux), temos também o <code>rootPath()</code> que retorna a raiz do sistema (C:\ no Windows e / no Linux) e o <code>tempPath()</code> que retorna a pasta de temporários do sistema. O <code>currentPath()</code> mostra o diretório atual da execução.</p>
+
+<ul>
+    <li><a href="tudo-sobre-cppqt-3.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-cppqt-5.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Dicas de HTML5 Parte 3</h2>
+
+<p>Ao acessar o link com a hashtag seguida da id de alguma tag do site, a página será posicionada na mesma posição em que ela se encontra. Sabendo disso, facilitará o uso de alguns recursos como os mapas.</p>
+
+<p>Para utilizar mapas de imagens, você usa as tags <code>map</code>, e na imagem (ou outro arquivo) você indica o uso do mapa desejado com o parâmetro <code>usemap</code>, tudo dentro de tags section (os mapas não precisam obrigatoriamente estar dentro da tag, mas é recomendável).</p>
+
+<p>Para definir os usos de mapas, usamos as tags <code>area</code> (sem fechamento), com as coordenadas e a tag shape, que definirá o tipo de polígono usado (círculo, retangular e poligonal), dessa forma:</p>
+
+<pre>
+<code>
+&lt;section id="conteudo"&gt;
+    &lt;img src="_imagens/foto.jpg" usemap="#meumapa"/&gt;
+    &lt;map name="meumapa"&gt;
+        &lt;area shape="rect" coords="179,202,270,260" href="exemplo.html#tela" target="janela"/&gt;
+        &lt;area shape="circle" coords="76,51,11" href="exemplo.html#gadgets" target="janela"/&gt;
+        &lt;area shape="poly" coords="28,143,83,216,84,249,27,169" href="exemplo.html#sensores" target="janela"/&gt;
+    &lt;/map&gt;
+    &lt;iframe src="exemplo.html" name="janela" id="frame-spec"&gt;&lt;/iframe&gt;
+&lt;/section&gt;
+</code>
+</pre>
+
+<p>Pode ver que no atributo href, o link será usado com a hashtag e a id do artigo da página no iframe. Para funcionar corretamente, devemos usar o parâmetro target com o name do iframe que está a página.</p>
+
+<p>Para definir as coordenadas da imagem desejada, você pode usar um editor de imagens qualquer e abrir a imagem, e pegar as coordenadas desejadas para isso.</p>
+
+<p>Essas são as ordens das coordenadas, e seus respectivos nomes nos parâmetros:</p>
+
+<p>Ordem das coordenadas em retângulos/quadrados (<code>rect</code>):</p>
+
+<ul>
+    <li>Superior esquerdo.</li>
+    <li>Inferior direito.</li>
+</ul>
+
+<p>Ordem das coordenadas em circunferências (<code>circle</code>):</p>
+<ul>
+    <li>Centro da cincunferência.</li>
+    <li>Raio da cincunferência.</li>
+</ul>
+
+<p>Ordem das coordenadas em polígonos livres, como um losango ou trapézio (<code>poly</code>):</p>
+
+<ul>
+    <li>Superior esquerdo.</li>
+    <li>Superior direito.</li>
+    <li>Inferior direito.</li>
+    <li>Inferior esquerda.</li>
+</ul>
+
+<p>Você pode inserir imagens sem precisar da tag img, usando CSS, para gerar efeitos especiais, como nesse exemplo, que criamos uma lista com fotos onde elas são ampliadas ao passar o mouse:</p>
+
+<p>No HTML fará somente isso:</p>
+
+<pre>
+<code>
+&lt;ul id="album-fotos"&gt;
+    &lt;li id="foto01"&gt;&lt;span&gt;Foto 01&lt;/span&gt;&lt;/li&gt;
+    &lt;li id="foto02"&gt;&lt;span&gt;Foto 02&lt;/span&gt;&lt;/li&gt;
+    &lt;li id="foto03"&gt;&lt;span&gt;Foto 03&lt;/span&gt;&lt;/li&gt;
+    &lt;li id="foto04"&gt;&lt;span&gt;Foto 04&lt;/span&gt;&lt;/li&gt;
+    &lt;li id="foto05"&gt;&lt;span&gt;Foto 05&lt;/span&gt;&lt;/li&gt;
+    &lt;li id="foto06"&gt;&lt;span&gt;Foto 06&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code>
+</pre>
+
+<p>E no CSS você postará algo assim:</p>
+
+<pre>
+<code>
+ul#album-fotos {
+    width: 700px;
+    margin: 0 auto;
+    padding: 50px;
+    overflow: hidden;
+    list-style: none;
+}
+ul#album-fotos li {
+    float: left;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    border: 5px solid white;
+    background-color: white;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, .4);
+    -webkit-transition: all .4s ease-in;
+}
+ul#album-fotos li:hover {
+    -webkit-transform: scale(1.5);
+}
+ul#album-fotos li span {
+    opacity: 0;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    background-color: rgba(0, 0, 0, .3);
+    font-size: 9pt;
+    line-height: 370px;
+    padding: 5px;
+}
+ul#album-fotos li:hover span {
+    opacity: 1;
+}
+ul#album-fotos li#foto01 {
+    background: url("../_imagens/galeria-01.jpg") no-repeat;
+    background-position: 50% 50%;
+    background-size: 400px 400px;
+    background-color: white;   
+}
+ul#album-fotos li#foto01:hover {
+    background-position: 0px 0px;
+    background-size: 200px 200px;
+}
+ul#album-fotos li#foto02 {
+    background: url("../_imagens/galeria-02.jpg") no-repeat;
+    background-position: 50% 50%;
+    background-size: 400px 400px;
+    background-color: white;   
+}
+ul#album-fotos li#foto02:hover {
+    background-position: 0px 0px;
+    background-size: 200px 200px;
+}
+ul#album-fotos li#foto03 {
+    background: url("../_imagens/galeria-03.jpg") no-repeat;
+    background-position: 50% 50%;
+    background-size: 400px 400px;
+    background-color: white;   
+}
+ul#album-fotos li#foto03:hover {
+    background-position: 0px 0px;
+    background-size: 200px 200px;
+}
+ul#album-fotos li#foto04 {
+    background: url("../_imagens/galeria-04.jpg") no-repeat;
+    background-position: 50% 50%;
+    background-size: 400px 400px;
+    background-color: white;   
+}
+ul#album-fotos li#foto04:hover {
+    background-position: 0px 0px;
+    background-size: 200px 200px;
+}
+ul#album-fotos li#foto05 {
+    background: url("../_imagens/galeria-05.jpg") no-repeat;
+    background-position: 50% 50%;
+    background-size: 400px 400px;
+    background-color: white;   
+}
+ul#album-fotos li#foto05:hover {
+    background-position: 0px 0px;
+    background-size: 200px 200px;
+}
+ul#album-fotos li#foto06 {
+    background: url("../_imagens/galeria-06.jpg") no-repeat;
+    background-position: 50% 50%;
+    background-size: 400px 400px;
+    background-color: white;   
+}
+ul#album-fotos li#foto06:hover {
+    background-position: 0px 0px;
+    background-size: 200px 200px;
+}
+</code>
+</pre>
+
+<p>As tags spans (que são "vazias") nesse caso é usado para esconder o texto temporariamente, como podem ver no CSS acima.</p>
+
+<p>Para colocar áudio e vídeo em HTML, você usa a tags <code>audio</code> e <code>video</code>, respectivamente, com os atributos, que são o <code>controls</code> (que exibe os controles), o <code>autoplay</code> (que inicia a reprodução automaticamente), o <code>muted</code> (inicia sem som) e o <code>loop</code> (que faz ele reproduzir novamente desde o início, ao final da execução).</p>
+
+<p>O caminho do áudio ou vídeo é colocado numa tag <code>source</code> (sem fechamento), dentro das tags audio ou video, dessa forma:</p>
+
+<pre>
+<code>
+&lt;audio id="musica" controls&gt;
+    &lt;source src="_media/audio.mp3" type="audio/mpeg"/&gt;
+    &lt;source src="_media/audio.ogg" type="audio/ogg"/&gt;
+    &lt;p&gt;Não é possível reproduzir o áudio!&lt;/p&gt;
+&lt;/audio&gt;
+</code>
+</pre>
+
+
+<p>PS: A ordem dos source tem influência, ele vai tentar o primeiro, depois o segundo e assim por diante, por isso é recomendado usar do menor ao maior, em MB. Lembrando que quanto mais pesados os arquivos de áudio e vídeo, mais tráfego terá no seu servidor.</p>
+
+<p>No exemplo acima, apenas um dos arquivos será carregado no navegador, no caso será o formato que o navegador reconhecerá melhor. E tem também um texto alternativo para caso nenhum seja reconhecido. Mas no geral, o MP3 pra áudios e MP4 pra vídeos costuma ser aceitos por todos os navegadores atualizados.</p>
+
+<p>Se tiver um único arquivo, podemos colocar diretamente na tag audio ou video o src, assim:</p>
+
+<pre>
+<code>
+&lt;audio id="musica" src="_media/audio.mp3" controls&gt;
+    &lt;p&gt;Não é possível reproduzir o áudio!&lt;/p&gt;
+&lt;/audio&gt;
+</code>
+</pre>
+
+<p>Só que essa forma não é recomendada porque nem sempre os arquivos são compatíveis com 100% dos navegadores.</p>
+
+<p>Dentro das tags videos, é possível colocar uma imagem personalizada como miniatura do vídeo com o atributo <code>poster</code>, dessa forma:</p>
+
+<pre>
+<code>
+&lt;video id="filme" controls poster="_imagens/mini-video.jpg"&gt;
+    &lt;source src="_media/video.mp4" type="video/mp4"/&gt;
+    &lt;source src="_media/video.ogv" type="video/ogg"/&gt;
+    &lt;p&gt;Não é possível reproduzir o vídeo!&lt;/p&gt;
+&lt;/video&gt;
+</code>
+</pre>
+
+<p>PS: Os parâmetros width e height podem ser usados em tags video. E o width em audio. Mas é melhor usar o CSS para dimensionar eles.</p>
+
+<p>O parâmetro <code>preload</code> define que o arquivo será carregado enquanto a página é lida (o padrão é o <code>auto</code>, que só termina de carregar junto com o site, <code>metadata</code> carrega apenas dados do arquivo e <code>none</code> não carrega nada, mas é ignorado caso o autoplay esteja definido.</p>
+
+<p>Esses são os parâmetros para os formatos de arquivos de áudio e vídeo suportados pelo HTML5:</p>
+
+<p>Para áudio:</p>
+
+<table>
+    <tr>
+        <th>Extensão</th>
+        <th>Parâmetro</th>
+    </tr>
+    <tr>
+        <td>MP3</td>
+        <td>audio/mpeg</td>
+    </tr>
+    <tr>
+        <td>WAV</td>
+        <td>audio/wav</td>
+    </tr>
+    <tr>
+        <td>OGG</td>
+        <td>audio/ogg</td>
+    </tr>
+</table>
+
+<p>Para vídeo:</p>
+
+<table>
+    <tr>
+        <th>Extensão</th>
+        <th>Parâmetro</th>
+    </tr>
+    <tr>    
+        <td>MP4</td>
+        <td>video/mp4</td>
+    </tr>
+    <tr>
+        <td>M4V</td>
+        <td>video/mp4</td>
+    </tr>
+    <tr>
+        <td>WEBM</td>
+        <td>video/webm</td>
+    </tr>
+    <tr>
+        <td>OGV</td>
+        <td>video/ogg</td>
+    </tr>
+</table>
+
+<p>Você também pode colocar um plano de fundo para áudios e vídeos, colocando tudo dentro de uma div com uma id pré-definida, nessa forma:</p>
+
+<pre>
+<code>
+&lt;div id="tv-radio"&gt;
+    &lt;video id="filme" controls poster="_imagens/mini-video.jpg"&gt;
+        &lt;source src="_media/video.mp4" type="video/mp4"/&gt;
+        &lt;source src="_media/video.ogv" type="video/ogg"/&gt;
+        &lt;p&gt;Não é possível reproduzir o vídeo!&lt;/p&gt;
+    &lt;/video&gt;
+    &lt;audio id="musica" controls&gt;
+        &lt;source src="_media/audio.mp3" type="audio/mpeg"/&gt;
+        &lt;source src="_media/audio.ogg" type="audio/ogg"/&gt;
+        &lt;p&gt;Não é possível reproduzir o áudio!&lt;/p&gt;
+    &lt;/audio&gt;
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>Para ajustar o background e a posição do vídeo e controles do áudio acima, usamos CSS, dessa forma:</p>
+
+<pre>
+<code>
+div#tv-radio {
+    width: 900px;
+    height: 580px;
+    margin: auto;
+    background: url(../_imagens/radio-tv.png) no-repeat;
+}
+audio#musica {
+    display: block;
+    position: relative;
+    left: 575px;
+    top: 500px;
+    width: 300px;
+}
+video#filme {
+    display: block;
+    position: relative;
+    left: 90px;
+    top: 80px;
+    width: 440px;
+}
+</code>
+</pre>
+
+<p>Para colocar aplicações chamadas por plugins, como aplicações flash, fazemos assim:</p>
+
+<pre>
+<code>
+&lt;embed src="arquivoflash.swf" type="application/x-shockwave-flash" width="640" height="480"/&gt;
+</code>
+</pre>
+
+<p>Para criar bordas em letras, faça assim no CSS:</p>
+
+<pre>
+<code>
+h1 {
+    color: white;
+    text-shadow: 1px -1px black, -1px 1px black, 1px 1px black, -1px -1px black;
+}
+</code>
+</pre>
+
+<p>Para criar bordas maiores, basta seguir a proporção (2px -2px, por exemplo).</p>
+
+<p>Para abreviações, cujo conteúdo completo aparece ao colocar o mouse em cima dele, usamos o <code>abbr</code>, assim:</p>
+
+<pre>
+<code>
+&lt;p&gt;Aprendendo a codificar em &lt;abbr title=&quot;Hypertext Markup Language (Linguagem de Marca&ccedil;&atilde;o de Hipertexto)&quot;&gt;HTML&lt;/abbr&gt;&lt;/p&gt;
+</code>
+</pre>
+
+<p>De forma parecida, usamos o dfn, que deixa o conteúdo em itálico inclusive:</p>
+
+<pre>
+<code>
+&lt;p&gt;&lt;dfn title=&quot;Hypertext Markup Language&quot;&gt;HTML&lt;/dfn&gt; &eacute; uma linguagem de marca&ccedil;&atilde;o utilizada em p&aacute;ginas na web.&lt;/p&gt;
+&lt;p&gt;&lt;dfn title=&quot;Cascading Style Sheets&quot;&gt;CSS&lt;/dfn&gt; &eacute; uma linguagem de estilos que define a formata&ccedil;&atilde;o e estilos de tags HTML.&lt;/p&gt;
+</code>
+</pre>
+
+<p>Para informações de contato, usamos a tag <code>address</code>, assim:</p>
+
+<pre>
+<code>
+&lt;address&gt;
+    As informa&ccedil;&otilde;es de contato s&atilde;o:&lt;br/&gt;
+    E-mail: &lt;a href=&quot;mailto:contato@dicasdeti.com.br&quot;&gt;contato@dicasdeti.com.br&lt;/a&gt;&lt;br/&gt;
+    Telefone: (01) 2345-6789
+&lt;/address&gt;
+</code>
+</pre>
+
+<p>A tag <code>base</code> especifica um link base para links (como os usados em a), e é usada dentro do <code>head</code>, e só pode ser usada uma vez, assim:</p>
+
+<pre>
+<code>
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;/&gt;
+    &lt;title&gt;T&iacute;tulo da P&aacute;gina em HTML&lt;/title&gt;
+    &lt;base href=&quot;http://localhost/DicasDeTI/&quot;/&gt;
+&lt;/head&gt;
+</code>
+</pre>
+
+<p>Para inverter direção de textos, usamos a tag <code>bdo</code>, assim:</p>
+
+<pre>
+<code>
+&lt;p&gt;&lt;bdo dir=&quot;rtl&quot;&gt;Socorram-me, subi no &ocirc;nibus em Marrocos.&lt;/bdo&gt;&lt;/p&gt;
+&lt;!-- Para inverter usamos o par&acirc;metro &quot;rtl&quot; (Right to Left), para a dire&ccedil;&atilde;o padr&atilde;o &eacute; &quot;ltr&quot; --&gt;
+</code>
+</pre>
+
+<p>Para citações longas usamos a tag <code>blockquote</code>, e pra curtas a tag <code>q</code>, e podemos destacar citações com a tag <code>cite</code>, assim:</p>
+
+<pre>
+<code>
+&lt;!-- Cita&ccedil;&atilde;o longa: --&gt;
+&lt;blockquote cite=&quot;http://localhost/DicasDeTI&quot;&gt;
+    &lt;p&gt;Isso &eacute; uma cita&ccedil;&atilde;o longa sobre o exemplo da tag blockquote.&lt;/p&gt;
+    &lt;p&gt;Mais informa&ccedil;&otilde;es pesquise sobre &lt;cite&gt;blockquote&lt;/cite&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;!-- Cita&ccedil;&atilde;o curta: --&gt;
+&lt;p&gt;Isso &eacute; uma cita&ccedil;&atilde;o curta sobre o exemplo da tag &lt;q cite=&quot;https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/q&quot;&gt;q&lt;/q&gt;.&lt;/p&gt;
+</code>
+</pre>
+
+<p>Use a tag q ao invés de simplesmente aspas, por ter um significado semântico, mesmo se não tiver o parâmetro cite.</p>
+
+<p>Além da tag input, podemos criar botões usando a tag <code>button</code>, assim:</p>
+
+<pre>
+<code>
+&lt;button name=&quot;botao&quot;&gt;Texto do Bot&atilde;o&lt;/button&gt;
+</code>
+</pre>
+
+<p>Podemos usar a tag interativa <code>details</code> junto com <code>summary</code> para mostrar mais detalhes sobre algo, assim:</p>
+
+<pre>
+<code>
+&lt;details&gt;
+    &lt;summary&gt;Detalhes sobre a tag details:&lt;/summary&gt;
+    &lt;p&gt;Acesse o link: &lt;a href=&quot;https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/details&quot; target=&quot;_blank&quot;&gt;https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/details&lt;/a&gt;&lt;/p&gt;
+&lt;/details&gt;
+</code>
+</pre>
+
+<p>Para englobar uma lista de pares de termos e descrições (como uma lista ordenada tipo "dicionário"), usamos a tag <code>dl</code> em conjunto com a <code>dt</code> e <code>dd</code>, assim:</p>
+
+<pre>
+<code>
+&lt;dl&gt;
+    &lt;dt&gt;HTML&lt;/dt&gt;
+    &lt;dd&gt;HTML &eacute; uma linguagem de marca&ccedil;&atilde;o utilizada em p&aacute;ginas na web.&lt;/dd&gt;
+    &lt;dt&gt;CSS&lt;/dt&gt;
+    &lt;dd&gt;CSS &eacute; uma linguagem de estilos que define a formata&ccedil;&atilde;o e estilos de tags HTML.&lt;/dd&gt;
+&lt;/dl&gt;
+</code>
+</pre>
+
+<p>Podemos usar a tag <code>kbd</code> para mostrar determinadas palavras, como no exemplo abaixo que é pra mostrar como salvar uma página do site:</p>
+
+<pre>
+<code>
+&lt;p&gt;Para salvar o site nos seus favoritos utilize &lt;kbd&gt;Ctrl D&lt;/kbd&gt;.&lt;/p&gt;
+</code>
+</pre>
+
+<p>Para destacar parte do texto, podemos usar a tag <code>mark</code> assim:</p>
+
+<pre>
+<code>
+&lt;p&gt;O texto tem uma parte destacada &lt;mark&gt;que &eacute; essa&lt;/mark&gt;!&lt;/p&gt;
+</code>
+</pre>
+
+<p>Podemos usar a tag <code>meta</code>, em head, para redirecionar páginas, por exemplo:</p>
+
+<pre>
+<code>
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;/&gt;
+    &lt;!-- Redireciona ap&oacute;s 3 segundos: --&gt;
+    &lt;meta http-equiv=&quot;refresh&quot; content=&quot;3;url=https://www.google.com.br/&quot;&gt;
+    &lt;title&gt;T&iacute;tulo da P&aacute;gina em HTML&lt;/title&gt; 
+&lt;/head&gt;
+</code>
+</pre>
+
+<p>Para criar medidores, usamos o <code>meter</code>, assim:</p>
+
+<pre>
+<code>
+Temperatura atual:&lt;br/&gt;
+&lt;meter min=&quot;-50&quot; max=&quot;50&quot; low=&quot;22&quot; high=&quot;25&quot; value=&quot;22&quot;&gt;&deg;C&lt;/meter&gt;22&deg;C
+&lt;hr/&gt;
+M&iacute;nima:&lt;br/&gt;
+&lt;meter min=&quot;-50&quot; max=&quot;50&quot; low=&quot;22&quot; high=&quot;25&quot; value=&quot;20&quot;&gt;&deg;C&lt;/meter&gt;20&deg;C
+&lt;hr/&gt;
+M&aacute;xima:&lt;br/&gt;
+&lt;meter min=&quot;-50&quot; max=&quot;50&quot; low=&quot;22&quot; high=&quot;25&quot; value=&quot;26&quot;&gt;&deg;C&lt;/meter&gt;26&deg;C
+</code>
+</pre>
+
+<p>Para criar barras de progressão, usamos a tag <code>progress</code>, assim:</p>
+
+<pre>
+<code>
+&lt;progress value=&quot;70&quot; max=&quot;100&quot;&gt;70%&lt;/progress&gt;
+</code>
+</pre>
+
+<p>Para, por exemplo, mostrarmos traduções de caracteres diferentes, podemos usar as tags <code>ruby</code> e <code>rt</code>:</p>
+
+<pre>
+<code>
+&lt;ruby&gt;
+    &#28450;&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;Kan&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;
+    &#23383;&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;Ji&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;
+&lt;/ruby&gt;
+</code>
+</pre>
+
+<p>Podemos utilizar o <code>samp</code> para representar uma saída de um código, assim:</p>
+
+<pre>
+<code>
+&lt;p&gt;A sa&iacute;da do c&oacute;digo ser&aacute; essa:&lt;/p&gt;
+
+&lt;p&gt;&lt;samp&gt;Hello World!&lt;/samp&gt;&lt;/p&gt;
+</code>
+</pre>
+
+<p>A tag <code>small</code> permite criar trechos de texto pequenos, assim:</p>
+
+<pre>
+<code>
+&lt;p&gt;Isso &eacute; uma frase com fonte normal &lt;small&gt;e isso &eacute; com uma fonte pequena.&lt;/small&gt;&lt;/p&gt;
+
+&lt;p&gt;Ela pode ser combinada com outras tags para gerar resultados como 10&lt;sup&gt;&lt;small&gt;3&lt;/small&gt;&lt;/sup&gt; e H&lt;sub&gt;&lt;small&gt;2&lt;/small&gt;&lt;/sub&gt;0.&lt;/p&gt;
+</code>
+</pre>
+
+<p>Podemos criar um efeito de animação em botões, crie esse botão abaixo:</p>
+
+<pre>
+<code>
+&lt;button class="botao"&gt;&lt;span&gt;Clique Aqui!&lt;/span&gt;&lt;/button&gt;
+</code>
+</pre>
+
+<p>E esse código em CSS para o efeito:</p>
+
+<pre>
+<code>
+.botao {
+    border-radius: 15px;
+    background-color: #5511ff;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 14pt;
+    padding: 15px;
+    width: 200px;
+    cursor: pointer;
+    margin: 5px;
+    transition: all .5s;
+}
+
+.botao span {
+    display: inline-block;
+    position: relative;
+    transition: all .5s;
+}
+
+.botao span:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0px;
+    right: -10px;
+    transition: all .5s;
+}
+
+.botao:hover span {
+    padding-right: 25px;
+}
+
+.botao:hover span:after {
+    opacity: 1;
+    right: 2px;
+}
+</code>
+</pre>
+
+<p>A tag time pode ser usada assim:</p>
+
+<pre>
+<code>
+&lt;p&gt;O horário da reunião é &lt;time&gt;20:00&lt;/time&gt;.&lt;/p&gt;
+
+&lt;p&gt;O dia do evento é &lt;time datetime="2023-06-01 14:00"&gt;1º de junho&lt;/time&gt;.&lt;/p&gt;
+</code>
+</pre>
+
+<p><a href="dicas-de-html5-2.html">Parte 2 da Matéria</a></p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Criptografia e Segurança</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Criptografia e Segurança</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-seguranca-1.html">Tudo sobre Criptografia e Segurança Parte 1!</a></li>
+                    <li><a href="tudo-sobre-seguranca-2.html">Tudo sobre Criptografia e Segurança Parte 2!</a></li>
+                    <li><a href="tudo-sobre-seguranca-3.html">Tudo sobre Criptografia e Segurança Parte 3!</a></li>
+                    <li><a href="tudo-sobre-seguranca-4.html">Tudo sobre Criptografia e Segurança Parte 4!</a></li>
+                    <li><a href="tudo-sobre-seguranca-5.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Criptografia e Segurança Parte 5!</a></li>
+                    <li><a href="tudo-sobre-seguranca-6.html">Tudo sobre Criptografia e Segurança Parte 6!</a></li>
+                    <li><a href="tudo-sobre-seguranca-7.html">Tudo sobre Criptografia e Segurança Parte 7!</a></li>            
+                    <li><a href="tudo-sobre-seguranca-8.html">Tudo sobre Criptografia e Segurança Parte 8!</a></li>
+                    <li><a href="tudo-sobre-seguranca-9.html">Tudo sobre Criptografia e Segurança Parte 9!</a></li>
+                    <li><a href="tudo-sobre-seguranca-10.html">Tudo sobre Criptografia e Segurança Parte 10!</a></li>
+                    <li><a href="tudo-sobre-seguranca-11.html">Tudo sobre Criptografia e Segurança Parte 11!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Criptografia e Segurança Parte 5</h2>
+
+<h3>Introdução ao Registro do Windows</h3>
+
+<p>O registro é um banco de dados hierárquico no Windows que armazena informações importantes sobre hardware do sistema, programas instalados e configurações, alé de perfis de cada uma das contas de usuário no computador.</p>
+
+<p>O registro foi introduzido no Windows 3.1, e foi expandido ao longo do tempo para armazenar mais informações e configurações do sistema e programas. Antes de existir o registro, as configurações dos programas eram armazenados em arquivos de texto com extensão .ini, que ainda existe, mas é bem menos usado que antigamente, praticamente tudo é feito no registro, hoje em dia.</p>
+
+<p>Para abrir o registro, procure no executar ou no iniciar "regedit.exe", ele será executado como administrador.</p>
+
+<p>Os dados do registro são armazenados em chaves (compartimentos, como se fossem "pastinhas"), e dentro deles tem subchaves, que funcionam da mesma forma. As configurações que aparecem do lado direito são chamados de valores. Os valores sempre possuem um nome, o tipo de dados e o conteúdo dos dados (como se fossem variáveis). Tudo isso são parâmetros que ficam armazenados dentro das chaves, e os valores são itens de configurações.</p>
+
+<p>Esses são os tipos de dados mais comuns em entradas de registro, que são utilizados para configurar os valores que guardamos dentro das chaves:</p>
+
+<table>
+    <tr>
+        <th>ID do tipo</th>
+        <th>Nome Simbólico</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>REG_NONE</td>
+        <td>Sem tipo definido</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>REG_SZ</td>
+        <td>Valor de cadeia de caracteres UTF-16</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>REG_EXPAND_SZ</td>
+        <td>Valor de cadeia de caracteres expansível</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>REG_BINARY</td>
+        <td>Dados binários</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>REG_DWORD</td>
+        <td>Valor DWORD, inteiro sem sinal de 32 bits</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>REG_MULTI_SZ</td>
+        <td>Cadeia de caracteres múltipla (lista ordenada)</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>REG_QWORD</td>
+        <td>Valor QWORD, inteiro de 64 bits</td>
+    </tr>
+</table>
+
+<p>O registro tem cinco chaves principais (chaves raiz ou de alto nível), que são essas:</p>
+
+<ul>
+    <li>HKEY_CLASSES_ROOT</li>
+    <li>HKEY_CURRENT_USER</li>
+    <li>HKEY_LOCAL_MACHINE</li>
+    <li>HKEY_USERS</li>
+    <li>HKEY_CURRENT_CONFIG</li>
+</ul>
+
+<p>PS: Podem existir também outras, dependendo da versão dos Windows.</p>
+
+<p>A chave <code>HKEY_CLASSES_ROOT</code> contém informações relativas a associações de nomes de arquivos, objetos OLE, associações com objetos COM, e associações de arquivos de classe. Parâmetros contidos nessa chave são na verdade um link (atalho) para a chave HKEY_LOCAL_MACHINE\SOFTWARE\Classes. Abreviada normalmente como HKCR.</p>
+
+<p>A chave <code>HKEY_CURRENT_USER</code> contém as configurações do usuário logado no sistema no momento, incluindo variáveis de ambiente, configurações de desktop, de redes e de aplicações. É um link para HKEY_USERS\&lt;SID-DO-USUÁRIO-ATUAL&gt;. Abreviada normalmente como HKCU.</p>
+
+<p>A chave <code>HKEY_LOCAL_MACHINE</code> contém todas as informações globais de hardware e sistema operacional. A informação nessa chave é aplicável a todos os usuários que se logam no sistema local. Abreviada normalmente como HKLM.</p>
+
+<p>A chave <code>HKEY_USERS</code> contém dados de todos os perfis de usuários no sistema, incluindo HKEY_CURRENT_USER e o perfil de usuário padrão. No geral, usamos a chave HKCU para configuração do usuário atual. Abreviada normalmente como HKU.</p>
+
+<p>A chave <code>HKEY_CURRENT_CONFIG</code> armezena todos os dados sobre a configuração atual de hadware da máquina. É um link para HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Hardware Profiles\Current. Não é muito utilizada no geral. Abreviada normalmente como HKCC.</p>
+
+<p>Uma das coisas que podemos fazer no registro é exportar ele (fazer um backup), apenas indo em arquivo e exportar, escolhendo a ramificação selecionada ou tudo. Da mesma forma, você importa os dados.</p>
+
+<p>Para criar uma chave, podemos fazer isso clicando com o botão direito no local onde ela será inserida (por exemplo, em HKEY_LOCAL_MACHINE\SOFTWARE), podemos escolher uma nova chave (pasta) ou diretamente os valores. No exemplo, criaremos a chave Teste, ele já terá um valor padrão não definido dentro dela (ou seja, está vazia), basta clicar duas vezes nele, colocar os valores na janela que abre e dar OK, ele já será salvo (em alguns casos pode ser necessário reiniciar o PC). Da mesma forma, podemos criar novos valores dentro da mesma chave, clicando com o botão direito dentro dela.</p>
+
+<p>Caso você entre muito numa chave de difícil localização que precise mexer com frequência, clique nela e adicione aos favoritos, logo acima do editor de registro, nesse mesmo local terá o link de acesso direto à ela. Da mesma forma, podemos remover os favoritos.</p>
+
+<p>A seguir veremos um exemplo de configuração de registro do Windows que você pode testar em seu sistema (de preferência, teste numa máquina virtual).</p>
+
+<p>Para desabilitar o painel de controle, vamos em HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer e criar o valor NoControlPanel do tipo DWORD, e o valor será 1 (pra habilitar restrição), pra desabilitar o valor é 0 (de preferência hexadecimal). Depois o valor criado pode ser excluído.</p>
+
+<p>PS: Os nomes não podem ter erros, e eles não são inventados, são nomes que o sistema e/ou os programas reconhecem. E tome muito cuidado para mexer no registro.</p>
+
+
+<h3>Como Funciona a Cifra de César</h3>
+
+<p>A cifra de César é uma técnica de criptografia bastante simples e provavelmente a mais conhecida de todas. Trata-se de um tipo de cifra de substituição, na qual cada letra de um texto a ser criptografado é substituída por outra letra, presente no alfabeto porém deslocada a um certo número de posições à esquerda ou à direita. A cifra de César recebe esse nome pois, segundo o escrito Suetônio, foi utilizada por Júlio César para se comunicar com seus generais, protegendo mensagens militares.</p>
+
+<p>Sendo uma cifra de substituição monoalfabética, cada letra do texto plano é substituída por uma outra letra do alfabeto no texto criptogradado (cifrado), de forma constante (sempre as mesmas letras são utilizadas). Por conta disso, eele acaba sendo extremamente simples de ser decifrada e nunca é utilizada na prática, pois não possui absolutamente nenhuma segurança. Como o texto cifrado acaba tendo exatamente o mesmo número de caracteres do texto plano, também classificamos a cifra de César como monogrâmica, sendo então classificada mais corretamente como cifra de substituição monoalfabética monogrâmica.</p>
+
+<p>Essas são algumas formas de funcionamento:</p>
+
+<ul>
+    <li>Atribuindo valores numéricos às letras do alfabeto (A = 1, B = 2, C = 3).</li>
+    <li>Escolhendo o valor de rotação (deslocamento das letras), como por exemplo 4, e calculando e substituindo as letras de acordo com o deslocamento (A = 1 + 4 = 5 = E, B = 2 + 4 = 6 = F, quando chegar no Z, as últimas letras são atribuídas às primeiras (W = 23 + 4 = 1 = A, X = 24 + 4 = 2 = B, etc.).</li>
+</ul>
+
+<p>Utilizando o exemplo anterior, vamos ver a cifra de César na prática, com rotação à esquerda de quatro posições:</p>
+
+<ul>
+    <li><b>Alfabeto normal: </b>ABCDEFGHIJKLMNOPQRSTUVWXYZ</li>
+    <li><b>Alfabeto cifrado: </b>EFGHIJKLMNOPQRSTUVWXYZABCD</li>
+</ul>
+
+<p>Veja um exemplo de mensagem cifrada nesse método:</p>
+
+<ul>
+    <li>Vamos aprender criptografia.</li>
+    <li>ZEQSW ETVIRHIV GVMTXSKVEJME.</li>
+</ul>
+
+<p>Temos alguns sites que podemos usar para criptografar e desencriptar, como esse, que tem a opção de bruteforce e também de escolher o deslocamento: <a href="http://www.dcode.fr/caesar-cipher" target="_blank">http://www.dcode.fr/caesar-cipher</a></p>
+
+<h3>O que é Ransomware e Como se Proteger dessa Ameaça</h3>
+
+<p>Ransomware é um tipo de software malicioso que bloqueia o acesso aos dados da vítima até que um resgate seja pago, e exibe na tela uma mensagem de requisição de pagamento. No geral, criptografam os arquivos da vítima, tornando-os totalmente inacessíveis e só podem ser decriptados após o pagamento do resgate. Alguns ransomwares criptografam todo o HD da máquina, outros criptografam arquivos e pastas específicos. Trata-se de uma grande ameaça a indivíduos e organizações.</p>
+
+<p>O ransomware funciona num sistema de extorsão criptoviral:</p>
+
+<ul>
+    <li>Ransomware infecta máquina da vítima.</li>
+    <li>Arquivos são criptografados com uma chave pública.</li>
+    <li>Chave privada é gerada e armazenada em um local oculto na internet.</li>
+    <li>Resgate é solicitado para liberar a chave privada.</li>
+    <li>Vítima paga o resgate, usualmente em bitcoin.</li>
+    <li>Atacante envia chave privada para vítima.</li>
+    <li>Vítima decripta seus arquivos e os recupera.</li>
+</ul>
+
+<p>No caso, geralmente é usado uma chave assimétrica (pública) para isso, veja na imagem abaixo o processo de funcionamento:</p>
+
+<img src="_imagens/publica.jpg" alt="Assimétrica"/>
+
+<p>No geral, ransomwares infectam as máquinas das vítimas por meio de cavalos de tróia (trojans). Podem infectar quaisquer tipos de equipamentos, como PCs e notebooks, smartphones, smart TVs, tablets e dispositivos IOT. Basicamente qualquer equipamento com sistema operacional.</p>
+
+<p>Os principais vetores de infecção de ransomware são, basicamente, os mesmos da maioria dos malwares existentes:</p>
+
+<ul>
+    <li>E-mails de phishing.</li>
+    <li>Anexos de e-mail maliciosos.</li>
+    <li>Links em documentos (Office, etc.).</li>
+    <li>Download de programas e arquivos.</li>
+    <li>Navegação em sites específicos (drive-by).</li>
+    <li>Pendrives e mídias removíveis (menos comum).</li>
+</ul>
+
+<p>Os sinais de que seu sistema está sendo infectado por ransomware incluem:</p>
+
+<ul>
+    <li>Lentidão atípica da máquina.</li>
+    <li>Tráfego de rede desconhecido.</li>
+    <li>Arquivos sendo renomeados automaticamente.</li>
+    <li>Extensões estranhas em nomes de arquivos.</li>
+    <li>O mais óbvio, mensagem de pedido de resgate (no sistema já comprometido).</li>
+</ul>
+
+<p>Se quisermos ver os tipos de extensões dos arquivos criptografados pelo ransomware, podemos ver nesse site: <a href="https://www.file-extensions.org/filetype/extension/name/ransomware-encrypted-files" target="_blank">https://www.file-extensions.org/filetype/extension/name/ransomware-encrypted-files</a></p>
+
+<p>As formas de pagamento do resgate costumam ser essas:</p>
+
+<ul>
+    <li>Bitcoin (modo preferido).</li>
+    <li>Serviços de voucher (Paysafecard, por exemplo).</li>
+    <li>Transferências eletrônicas</li>
+    <li>Porcorn ransomware (infecte outras máquinas e ganhe sua decriptação).</li>
+</ul>
+
+<p>Alguns nomes conhecidos de ransomware são Cryptolocker, CryptoWall, KeRanger, Torrentlocker, AndroidDefender, Locky, WannaCry, TeslaCrypt e AIDS.</p>
+
+<p>Para se proteger do ransomware siga esses métodos:</p>
+
+<ul>
+    <li>Manter o sistema operacional sempre atualizado.</li>
+    <li>Possuir backups dos dados importantes em local seguro.</li>
+    <li>Utilizar softwares anti-malware e mantê-los atualizados.</li>
+    <li>Se detectado ataque em curso, agir imediatamente, desconectando as máquinas da rede, e desligar as máquinas infectadas.</li>
+    <li>Desabilitar WSH (Windows Scripting Host).</li>
+    <li>Impedir que aplicativos sejam executados em %AppData% e %LocalAppData%.</li>
+    <li>Impor UAC (User Account Control).</li>
+    <li>Sempre exibir as extensões dos arquivos no Explorer.</li>
+    <li>Usar AppLocker para bloquear a execução de programas.</li>
+</ul>
+
+<p>E para se livrar dele:</p>
+
+<ul>
+    <li>Identificar e conter a propagação da infecção.</li>
+    <li>Identificar o ransomware.</li>
+    <li>Eliminar o ransomware das máquinas com ferramentas apropriadas (antivirus/antirransomware).</li>
+    <li>Tentar usar ferramentas de decriptação.</li>
+    <li>Reinstalar o SO.</li>
+    <li>Restaurar backup dos arquivos criptografados.</li>
+    <li>Como último recurso, pagar o resgate.</li>
+</ul>
+
+<p>Nesse site temos algumas ferramentas disponíveis para desencriptar arquivos infectados por ransomware: <a href="https://www.nomoreransom.org/pt/index.html" target="_blank">https://www.nomoreransom.org/pt/index.html</a></p>
+
+<h3>O que é um Firewall?</h3>
+
+<p>O firewall é um sistema de hadware/software cuja função é proteger uma rede local de ameaças provenientes de uma rede externa (como a internet) e de hosts na própria rede. O firewall controla o tráfego de dados entre as redes interconectadas de acordo com regras pré-estabelecidas (políticas de segurança).</p>
+
+<p>Veja como um firewall funciona:</p>
+
+<ul>
+    <li>Todo o tráfego que entra e sai da rede deve passar pelo firewall. O acesso à LAN deve ser bloqueado fisicamente usando-se o firewall entre as redes.</li>
+    <li>Apenas o tráfego autorizado (definido pelas regras de segurança) poderá atravessar o firewall.</li>
+    <li>O firewall deve ser imune à penetração. Ou seja, deve-se usar um software confiável com um SO seguro.</li>
+</ul>
+
+<p>O firewall protege a rede em ambos os sentidos, como o nome já diz, é como uma parede "corta-fogo", como mostra na imagem abaixo:</p>
+
+<img src="_imagens/firewall.png" alt="Firewall"/>
+
+<p>Mas tem coisas que um firewall não faz, como podemos ver abaixo:</p>
+
+<ul>
+    <li>Não protege contra ataques que o atravessem, por exemplo, advindos de uma conexão VPN estabelecida.</li>
+    <li>Não protege contra ameaças internas, como funcionários.</li>
+    <li>Não protege contra infecção de vírus e outros tipos de malware, principalmente entre máquinas na rede interna.</li>
+</ul>
+
+<p>Esses são alguns dos tipos de firewall que existem:</p>
+
+<ul>
+    <li>Filtro de pacotes.</li>
+    <li>Filtro de estado de sessão (inspeção de estado).</li>
+    <li>Gateway de aplicação (proxy).</li>
+    <li>UTM (gerenciamento unificado de ameaças).</li>
+</ul>
+
+<p>Num filtro de pacotes, as regras são aplicadas a cada pacote IP que chega e então o pacote é encaminhado ou descartado. Esse firewall filtra os pacotes em ambas as direções (incoming e outgoing).As regras de filtragem são baseadas no conteúdo do pacote, como IPs de origem e destino, Nº de portas de comunicação, tipo de procotolo e interface de rede.</p>
+
+<p>As regras são verificadas em sequência quando um pacote é analisado. Se houver correspondência entre uma regra e um pacote, a regra é aplicada e as subsequentes são ignoradas. Se nenhuma regra for encontrada para tatar o pacote, então uma regra padrão pode ser aplicada. As regras padrão podem ser descartas (drop/block/deny) e permitir (allow).</p>
+
+<p>Os filtros de pacotes apresentam alguns problemas:</p>
+
+<ul>
+    <li>Não examinam dados das camadas superiores, assim não são efetivos contra ataques que explorer vulnerabilidades das aplicações.</li>
+    <li>Log é limitado devido à pouca quantidade de informações em um pacote.</li>
+    <li>Geralmente não suportam esquemas de autenticação de usuários</li>
+</ul>
+
+<p>Também podemos usar um outro tipo de firewall, o de filtro de estado de sessão, que funciona dessa forma:</p>
+
+<ul>
+    <li>Aprimoramento do sistema de filtro de pacotes.</li>
+    <li>Examina o status das conexões de redes ativas e determina quais pacotes aceitar ou não.</li>
+    <li>Permite ou bloqueia tráfego de acordo com o estado, a porta e o protocolo.</li>
+    <li>Monitora toda atividade a partir do momento em que uma conexão é aberta até que ela seja fechada.</li>
+</ul>
+
+<p>Temos também o firewall pessoal, funcionando dessa forma:</p>
+
+<ul>
+    <li>Um firewall pessoal é instalado no sistema operaciona da máquina do usuário.</li>
+    <li>Geralmente é implementado pelo S.O.</li>
+    <li>Protege a máquina contra ameaças na rede externa e de outras máquinas na rede interna.</li>
+    <li>Pode ser implementado como software de terceiros, incluindo pacotes de antivírus do tipo "Internet Security".</li>
+</ul>
+
+<p>Esses são alguns exemplos de firewalls pessoais:</p>
+
+<ul>
+    <li>Firewall do Windows com Segurança Avançada.</li>
+    <li>Linux iptables.</li>
+    <li>Norton Internet Security.</li>
+    <li>Comodo Firewall.</li>
+    <li>Karpersky Internet Security.</li>
+    <li>McAfee Personal Firewall.</li>
+</ul>
+
+<p>E temos também os firewalls de hardware (usando aparelhos físicos):</p>
+
+<ul>
+    <li>Um firewall de hardware é um appliance dedicado, que consiste em um hardware específico com um software de firewall instalado.</li>
+    <li>No geral, possui uma performance maior do que um firewall de software instalado em um servidor comum.</li>
+</ul>
+
+<p>No firewall do Windows, podemos adicionar novas regras de entrada e saída, clicando com o botão direito na regra especificada, escolhendo o tipo de regra (como programa, porta, predefinida ou personalizada), a ação (permitir, permitir apenas se for segura ou bloquear a conexão), o escopo e o nome. Para excluir uma regra existente, basta clicar com o botão direito e excluir ela.</p>
+
+<p>Podemos também usar Firewall no Linux, no Ubuntu, por exemplo, podemos habilitar ele digitando <code>sudo ufw enable</code>. Para permitir tráfegos como por exemplo, os TCP e UDP na porta 22 (SSH), digitamos <code>sudo ufw allow 22</code> (ou pra apenas os TCP, <code>sudo ufw allow 22/tcp</code>), e para verificar a porta requerida do SSH, <code>sudo ufw allow ssh</code>. Para excluir um deles use algo tipo <code>sudo ufw delete allow 22</code>, pra verificar todas as especificações, <code>sudo ufw status</code>, e pra resetar tudo (e desativar) <code>sudo ufw reset</code>. Podemos também baixar uma interface gráfica pra ele, digitando <code>sudo apt-get install gufw</code>.</p>
+
+<h3>O que é Proxy e VPN</h3>
+
+<p>Muita gente confunde o que é proxy com a definição de uma VPN. Embora ambos sirvam para mascarar o seu IP e impedir que você seja identificado na internet, a forma como atuam é bem diferente.</p>
+
+<p>Um proxy é um serviço que age como um intermediário entre o usuário e a internet, recebe e repassa todas as suas requisições ao site que você está acessando. Dessa forma, o IP registrado nessas páginas acessadas é o do proxy e não o seu. Assim, sua identidade não fica exposta na rede, dificultando que você seja rastreado.</p>
+
+<p>Neste ponto, muita gente pensa que um proxy e uma VPN são a mesma coisa, pois ambos possuem a mesma função, que é proteger a identidade do usuário na internet, mas, não é bem assim.</p>
+
+<p>Embora uma VPN (Virtual Private Network) também possa ser usada para acessar serviços de outros países, e mascarar seu IP, ela cria uma rede privada criptografada, blindando totalmente os dados entre o computador do usuário e o servidor VPN. Já o proxy é apenas um intermediário entre você e a internet e não criptografa nada.</p>
+
+<p>Por isso mesmo, é normal utilizar mais de um proxy para realizar uma conexão realmente anônima, com cada servidor escondendo o IP do servidor anterior, dificultando o rastreio do usuário.</p>
+
+<p>Assim como as VPNs, existem as versões pagas dos serviços de proxies, desenvolvidas por empresas confiáveis e que são mais seguras. Há também as versões gratuitas, mais vulneráveis a ataques e que podem acessar e repassar seus dados a terceiros, bem mais facilmente do que uma VPN gratuita, dada a falta de criptografia. Por isso, tome muito cuidado com qual serviço você vai usar e proteja bem os seus dados.</p>
+
+<p>PS: A rede Tor não deve ser confundida com nenhum dos dois, apesar da rede Tor usar proxies aleatórios com vários nós.</p>
+
+<h3>O Que é Bitcoin</h3>
+
+<p>Uma Criptomoeda é uma forma de dinheiro digital, ou moeda virtual, desenvolvido para ser seguro e anônimo. Associadas à Internet, as criptomoedas utilizam criptografia forte para gerenciar transferências de valores e pagamentos. Não são controladas por bancos, governos ou outras instituições. As criptomoedas usam tecnologia descentralizada para permitir que usuários realizem pagamentos seguros e enviem, recebam e armazenem dinheiro sem precisar usar seu nome ou passar por um banco ou outra instituição financeira, permitindo dessa forma a criação de Moedas Virtuais (Cryptocurrencies).</p>
+
+<p>O termo Moeda Virtual foi definido pelo Banco Central Europeu em 2014 como sendo: "Uma representação digital de valor que não é emitida nem por um banco central ou autoridade pública, e nem é necessariamente ligada a uma moeda fiat (fiduciária), mas é aceito por pessoas naturais ou legais como meio de pagamento e pode ser transferida, armazenada ou negociada eletronicamente".</p>
+
+<p>Antes do surgimento da primeira criptomoeda descentralizada, o Bitcoin, algumas tentativas de implementar um sistema de moeda digital foram realizados, como por exemplo:</p>
+
+<ul>
+    <li><b>B-money: </b>Sistema de pagamentos eletrônico distribuído e anônimo, proposto por Wei Dai em 1998.</li>
+    <li><b>Bit Gold: </b>Moeda digital projetada por Nick Szabo em 1998.</li>
+    <li><b>Hashcash: </b>Sistema baseado em funções de hash criptográfico, com algoritmo Proof-of-Work (PoW), proposto por Adam Back em 1997. O conceito de PoW foi reutilizado no processo de mineração de bitcoins posteriormente.</li>
+    <li><b>RPOW: </b>Primeiro sistema de moeda baseado em PoW reutilizável, apresentado por Hal Finney em 2004. Hal Finney se tornou posteriormente o primeiro usuário de bitcoin após Satoshi Nakamoto, recebendo a primeira transação em bitcoin do próprio Nakamoto.</li>
+</ul>
+
+<p>São baseadas em um registro digital (livro-razão) distribuído chamado de blockchain, que é um registro de todas as transações em moeda virtual atualizadas e mantidas pela rede de detentores de moedas. As criptomoedas são criadas por meio de um processo chamado de mineração, que envolve o uso do poder de processamento de computadores para resolver problemas complexos de matemática que validam as transações e geram moedas. De acordo com a Universidade de Cambridge, há em 2017 entre 2,9 e 5,8 milhões de usuários distintos utilizando carteiras de criptomoeda, a maioria bitcoin.</p>
+
+<p>Muitas centenas de criptomoedas foram criadas, algumas com duração muito curta, outras criadas apenas com propósitos fraudulentos, outras ainda trazendo inovações tecnológicas adicionais e sendo negociadas ativamente nos mercados especializados. Existem hoje, literalmente, centenas de criptomoedas disponíveis na Internet, das quais apenas um punhado é efetivamente negociada. No geral, os mecanismos de funcionamento e princípios básicos de operação da maioria das criptomoedas são derivadas do protocolo original Bitcoin, com modificações mais ou menos extensas sendo adicionadas.</p>
+
+<p>Dois conceitos importantes para o entendimento do funcionamento das criptomoedas são o conceito de Transação e o conceito de Endereço:</p>
+
+<ul>
+    <li>Endereço é uma string (conjunto) de caracteres que identifica uma carteira de criptomoedas e que permite realizar uma transação.</li>
+    <li>Transação é o processo de transferir unidades monetárias de um endereço para outro, ou seja, enviar ou receber dinheiro ou efetuar um pagamento em criptomoeda. Esse processo dá origem ao Blocos de Transações.</li>
+</ul>
+
+<p>As criptomoedas, como o famoso Bitcoin e ouras moedas relacionadas são baseadas em dois tipos distintos de estruturas de dados: Transações, que são agrupadas em Blocos. Os blocos são encadeados usando hashes dos blocos anteriores na cadeia, formando uma estrutura de dados mais complexa autenticada chamada de Blockchain. As transações e os blocos são distribuídas entre todos os nós participantes da rede por meio de um protocolo que roda sobre uma rede peer-to-peer (P2P). Um novo bloco é adicionado ao blockchain se um nó na rede consegue fornecer uma "prova de trabalho" - Proof of Work (PoW) - para ele. O algoritmo PoW age como um defesa contra ataques específicos e também permite que uma assinatura digital sem chave autentique os novos blocos, assim como o blockchain completo. Se um nó não considerar um bloco como válido, então esse bloco não será adicionado ao blockchain.</p>
+
+<p>As transações, dessa forma, ficam armazenadas de forma definitiva no bolckchain, imutável para sempre, e os usuários armazenam suas criptomoedas (na verdade, códigos que representam as criptomoedas) em softwares específicos denominados Carteiras (Wallets), que podem ser instaladas em um computador, smartphone, ou ainda serem hardwares especializados para armazenamento offline.</p>
+
+<p>A principal criptomoeda em "circulação" atualmente é o Bitcoin, mas existem literalmente centenas de outras criptomoedas disponíveis. Classificamos essas outras moedas como "altcoins" ("alternative coins / moedas alternativas") por serem alternativas à moeda dominante, que é o próprio bitcoin. Alguns exemplos de criptomoedas (altcoins) mais conhecidas são: Litecoin, BCash, Peercoin, Namecoin, Dash, Dogecoin, Ripple e Ethereum. Veja mais sobre altcoins: <a href="http://altcoins.com/" target="_blank">http://altcoins.com/</a></p>
+
+<ul>
+    <li><a href="tudo-sobre-seguranca-4.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-seguranca-6.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

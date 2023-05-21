@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Objective-C</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Objective-C</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-objectivec-1.html">Tudo sobre Objective-C Parte 1!</a></li>
+                    <li><a href="tudo-sobre-objectivec-2.html">Tudo sobre Objective-C Parte 2!</a></li>
+                    <li><a href="tudo-sobre-objectivec-3.html">Tudo sobre Objective-C Parte 3!</a></li>
+                    <li><a href="tudo-sobre-objectivec-4.html">Tudo sobre Objective-C Parte 4!</a></li>
+                </menu>
+            </header>
+
+<h2>Orientação a Objetos em Objective-C - Parte 2</h2>
+
+<h3>Herança</h3>
+
+<p>Vamos considerar a seguinte classe:</p>
+
+<pre>
+<code>
+@interface Veiculo : NSObject {
+    NSString *modelo;
+    float potencia;
+}
+
+-(void) apresentacao;
+-(id) init: (NSString *) _modelo: (float) _potencia;
+
+-(NSString *) getModelo;
+-(float) getPotencia;
+-(void) setModelo: (NSString *) _modelo;
+-(void) setPotencia: (float) _potencia;
+
+@end
+
+@implementation Veiculo
+-(void) apresentacao {
+    NSLog(@"O %@ é do modelo %@, potência %.1f.", [self class], modelo, potencia);
+}
+
+-(id) init: (NSString *) _modelo: (float) _potencia {
+    modelo = _modelo;
+    potencia = _potencia;
+}
+
+-(NSString *) getModelo {
+    return modelo;
+}
+
+-(float) getPotencia {
+    return potencia;
+}
+
+-(void) setModelo: (NSString *) _modelo {
+    modelo = _modelo;
+}
+
+-(void) setPotencia: (float) _potencia {
+    potencia = _potencia;
+}
+@end
+</code>
+</pre>
+
+<p>Para fazer uma herança, basta substituir o NSObject pela classe desejada. Caso tenha sobreposição de construtor ou outro método, use o <code>super</code>. Veja um exemplo:</p>
+
+<pre>
+<code>
+@interface Carro : Veiculo
+-(id) init: (NSString *) _modelo: (float) _potencia;
+@end
+
+@implementation Carro
+-(id) init: (NSString *) _modelo: (float) _potencia {
+    [super init: _modelo: _potencia];
+}
+@end
+</code>
+</pre>
+
+<p>Instanciação da classe:</p>
+
+<pre>
+<code>
+Veiculo *fusca = [[Carro alloc] init: @"Fusca": 1.6];
+
+[fusca apresentacao];
+</code>
+</pre>
+
+<p>A mesma classe Veiculo pode gerar outras classes, como por exemplo Moto e Onibus.</p>
+
+<p>PS: O Objective-C não suporta herança múltipla.</p>
+
+<h3>Abstração e Polimorfismo</h3>
+
+<p>Podemos simular classes e métodos abstratos, assim:</p>
+
+<pre>
+<code>
+@interface Energia : NSObject
+-(void) ligar;
+-(void) desligar;
+@end
+
+@implementation Energia
+-(void) ligar {
+    [NSException raise: @"Implemente o método \"ligar\"" format: @""];
+}
+
+-(void) desligar {
+    [NSException raise: @"Implemente o método \"desligar\"" format: @""];
+}
+@end
+</code>
+</pre>
+
+<p>E as classes herdeiras:</p>
+
+<pre>
+<code>
+@interface Lampada : Energia
+// Métodos sobrepostos
+-(void) ligar;
+-(void) desligar;
+@end
+
+@implementation Lampada
+-(void) ligar {
+    NSLog(@"A Lâmpada está acesa!");
+}
+
+-(void) desligar {
+    NSLog(@"A Lâmpada apagou!");
+}
+@end
+</code>
+</pre>
+
+<p>A outra classe:</p>
+
+<pre>
+<code>
+@interface Televisao : Energia
+// Métodos sobrepostos:
+-(void) ligar;
+-(void) desligar;
+@end
+
+@implementation Televisao
+-(void) ligar {
+    NSLog(@"A TV está ligada!");
+}
+
+-(void) desligar {
+    NSLog(@"A TV desligou!");
+}
+@end
+</code>
+</pre>
+
+<p>A instanciação:</p>
+
+<pre>
+<code>
+Energia *lamp = [[Lampada alloc] init];
+
+[lamp ligar];
+[lamp desligar];
+
+Energia *tv = [[Televisao alloc] init];
+
+[tv ligar];
+[tv desligar];
+</code>
+</pre>
+
+<p>PS: Qualquer método pode ser sobreposto, caso chame ele na classe filha, use o método <code>[super nomeDoMetodo]</code> para isso. As classes com métodos abstratos e interfaces não podem ser instanciadas.</p>
+
+<h3>Agregação de Objetos</h3>
+
+<p>Vamos supor essa classe:</p>
+
+<pre>
+<code>
+@interface Pilha : NSObject {
+    NSString *marca;
+    int carga;
+}
+
+-(id) init: (NSString *) _marca;
+-(void) apresentacao;
+-(NSString *) getMarca;
+-(int) getCarga;
+-(void) setMarca: (NSString *) _marca;
+-(void) setCarga: (int) _carga;
+@end
+
+@implementation Pilha
+-(id) init: (NSString *) _marca {
+    marca = _marca;
+    carga = 100;
+}
+
+-(void) apresentacao {
+    NSLog(@"A marca da pilha é %@.", marca);
+    NSLog(@"A carga da pilha é %d%%.", carga);
+}
+
+-(NSString *) getMarca {
+    return marca;
+}
+
+-(int) getCarga {
+    return carga;
+}
+
+-(void) setMarca: (NSString *) _marca {
+    marca = _marca;
+}
+
+-(void) setCarga: (int) _carga {
+    carga = _carga;
+}
+@end
+</code>
+</pre>
+
+<p>Nós podemos fazer relacionamentos entre clases diferentes, veja por exemplo a classe abaixo, que tem um atributo do "tipo" da classe acima:</p>
+
+<pre>
+<code>
+@interface Aparelho : NSObject {
+    Pilha *pl;
+}
+
+-(id) init: (Pilha *) _pl;
+-(void) ligado;
+-(Pilha *) getPl;
+-(void) setPl: (Pilha *) _pl;
+@end
+
+@implementation Aparelho
+-(id) init: (Pilha *) _pl {
+    pl = _pl;
+}
+
+-(void) ligado {
+    if([pl getCarga] > 0) { // Getter do objeto Pilha
+        NSLog(@"O aparelho está ligado e a carga da pilha é de %d%%!", [pl getCarga]);
+    }
+    else {
+        NSLog(@"A pilha do aparelho está sem carga!");
+    }
+}
+
+-(Pilha *) getPl {
+    return pl;
+}
+
+-(void) setPl: (Pilha *) _pl {
+    pl = _pl;
+}
+@end
+</code>
+</pre>
+
+<p>Aí podemos chamar os objetos assim:</p>
+
+<pre>
+<code>
+Pilha *ray = [[Pilha alloc] init: @"Rayovac"];
+
+[ray apresentacao];
+
+Aparelho *controle = [[Aparelho alloc] init: ray];
+
+[controle ligado];
+
+NSLog(@"A carga da pilha é de %d%%!", [[controle getPl] getCarga]);
+</code>
+</pre>
+
+<ul>
+    <li><a href="poo-em-objectivec-1.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="poo-em-objectivec-3.html">Continuação da Matéria!</a></li>-->
+</ul>
+
+        </div>
+    </body>
+</html>

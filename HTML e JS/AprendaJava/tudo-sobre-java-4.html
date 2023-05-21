@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Java</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-1.html">Tudo sobre Java Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-2.html">Tudo sobre Java Parte 2!</a></li>
+                    <li><a href="tudo-sobre-java-3.html">Tudo sobre Java Parte 3!</a></li>
+                    <li><a href="tudo-sobre-java-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java Parte 4!</a></li>
+                    <li><a href="tudo-sobre-java-5.html">Tudo sobre Java Parte 5!</a></li>
+                    <li><a href="tudo-sobre-java-6.html">Tudo sobre Java Parte 6!</a></li>
+                    <li><a href="tudo-sobre-java-7.html">Tudo sobre Java Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java Parte 4</h2>
+
+<h3>Estruturas de Repetição - Parte 1</h3>
+
+<p>Uma das formas de criar repetições em Java é com a estrutura <code>while</code> (enquanto).</p>
+
+<p>A repetição while realiza um teste lógico no início do loop, e cada vez que o teste retornar verdadeiro, os comandos associados ao laço são executados. Se retornar falso, o laço é encerrado e o processamento volta para o fluxo principal do programa.</p>
+
+<p>Veja um exemplo de repetição while em Java:</p>
+
+<pre>
+<code>
+public static void main(String[] args) {
+    int cc = 1;
+
+    while(cc &lt;= 20) {
+        System.out.println("Cambalhota " + cc);
+        cc++;
+    }
+} 
+</code>
+</pre>
+
+<p>Temos também a opção <code>continue</code> para não interromper a execução de um código ao não mostrar determinados valores:</p>
+
+<pre>
+<code>
+public static void main(String[] args) {
+    int cc = 0;
+    
+    while(cc < 10) {
+        cc++;
+        if(cc == 5 || cc == 7) {
+            continue;
+        }
+        System.out.println("Cambalhota " + cc);
+    }
+} 
+</code>
+</pre>
+
+<p>E temos também o <code>break</code> para interromper (não confundir com o break do switch e case). Veja um exemplo:</p>
+
+<pre>
+<code>
+public static void main(String[] args) {
+    int cc = 0;
+    
+    while(true) {
+        cc++;
+        if(cc == 2 || cc == 3) {
+            continue;
+        }
+        else if(cc == 7) {
+            break;
+        }
+        System.out.println("Cambalhota " + cc);
+    }
+} 
+</code>
+</pre>
+
+<p>Vamos criar um programa Java em Swing que conte números. Esse é o código do clicar botão:</p>
+
+<pre>
+<code>
+int cc = 1;
+String contagem = "";
+
+while(cc &lt;= 10) {
+    contagem += cc + " ";
+    cc++;
+}
+
+lblCont.setText(contagem);
+</code>
+</pre>
+
+<p>Vamos fazer um exercício, um fatorial em Java Swing. Nesse vamos colocar o evento change no objeto numérico. Veja o código:</p>
+
+<pre>
+<code>
+int num = Integer.parseInt(numFat.getValue().toString());
+int fat = 1;
+int cont = num;
+String resul = "";
+
+while(cont >= 1) {
+    fat *= cont;
+    cont--;
+    if(cont >= 1) {
+        resul += (cont + 1) + " x ";
+    }
+    else {
+        resul += (cont + 1);
+    }
+}
+lblFat.setText(Integer.toString(fat));
+lblCont.setText(resul);
+</code>
+</pre>
+
+<h3>Estruturas de Repetição - Parte 2</h3>
+
+<p>Outra forma de criar repetição é a <code>do while</code>, significando repita. Diferente do while, a do while é colocada no final, praticamente o contrário dela. Veja um exemplo:</p>
+
+<pre>
+<code>
+int cc = 1;
+do {
+    System.out.println("Cambalhota:" + cc);
+    cc++;
+}
+while(cc < 4);
+</code>
+</pre>
+
+<p>Veja um exemplo mais complexo:</p>
+
+<pre>
+<code>
+int n, s = 0;
+String resp;
+Scanner teclado = new Scanner(System.in); // Adicionar Importação.
+do {
+    System.out.print("Digite um número: ");
+    n = teclado.nextInt();
+    s += n;
+    System.out.print("Quer continuar? [S/N] ");
+    resp = teclado.next();
+}
+while(resp.equals("s"));
+System.out.println("A soma de todos os valores é " + s);
+</code>
+</pre>
+
+<p>PS: Pode ver que, por esse fator, o comando do será executado, e só depois ele testará, independente do valor recebido. O que garante que pelo menos uma vez, o bloco de comandos é executado.</p>
+
+<p>Vamos criar um programa que criará janelas automaticamente, nesse caso, a classe principal permanecerá marcada. Na importação, colocaremos <code>javax.swing.JOptionPane</code> para isso.</p>
+
+<p>Para exibir a mensagem, usamos <code>JOptionPane.showMessageDialog()</code>, assim:</p>
+
+<pre>
+<code>
+JOptionPane.showMessageDialog(null, "Olá Mundo!");
+</code>
+</pre>
+
+<p>Para mudar o que está escrito em cima, poderíamos fazer assim:</p>
+
+<pre>
+<code>
+JOptionPane.showMessageDialog(null, "Olá Mundo!", "Boas Vindas", JOptionPane.INFORMATION_MESSAGE);
+</code>
+</pre>
+
+<p>PS: No lugar do <code>INFORMATION_MESSAGE</code>, podemos usar <code>WARNING_MESSAGE</code> e <code>ERROR_MESSAGE</code>.</p>
+
+<p>Para perguntas, podemos fazer assim:</p>
+
+<pre>
+<code>
+int pergunta = JOptionPane.showConfirmDialog(null, "Escolha uma opção", "Pergunta", JOptionPane.YES_NO_OPTION);
+
+if(pergunta == JOptionPane.YES_OPTION) {
+    JOptionPane.showMessageDialog(null, "Escolheu o sim!", "Info", JOptionPane.INFORMATION_MESSAGE);
+}
+else {
+    JOptionPane.showMessageDialog(null, "Escolheu o não!", "Info", JOptionPane.INFORMATION_MESSAGE);
+}
+</code>
+</pre>
+
+<p>Para pegar valores, usamos o <code>JOptionPane.showInputDialog()</code>, dessa forma:</p>
+
+<pre>
+<code>
+JOptionPane.showInputDialog(null, "Informe um número:", "Entrada", JOptionPane.QUESTION_MESSAGE);
+</code>
+</pre>
+
+<p>Veja um exemplo com mais de uma janela:</p>
+
+<pre>
+<code>
+int num = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe um número:", "Entrada", JOptionPane.QUESTION_MESSAGE));
+JOptionPane.showMessageDialog(null, "Você digitou o valor " + num, "Info", JOptionPane.INFORMATION_MESSAGE);
+</code>
+</pre>
+
+<p>Veja outro exemplo aplicado com a repetição:</p>
+
+<pre>
+<code>
+public static void main(String[] args) {
+    int num;
+    do {
+        num = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe um número (valor 0 interrompe):", "Entrada", JOptionPane.QUESTION_MESSAGE));
+    }
+    while(num != 0);
+}  
+</code>
+</pre>
+
+<p>Veja um exemplo no qual mostramos os resultados de números somados:</p>
+
+<pre>
+<code>
+int num, soma = 0;
+do {
+    num = Integer.parseInt(JOptionPane.showInputDialog(null, "&lt;html&gt;Informe um número&lt;br/&gt;&lt;i&gt;(valor 0 interrompe)&lt;/i&gt;:&lt;/html&gt;", "Matemática", JOptionPane.QUESTION_MESSAGE));
+    soma += num;
+}
+while(num != 0);
+JOptionPane.showMessageDialog(null, "&lt;html&gt;Resultado Final!&lt;hr/&gt;Somatório vale " + soma + "&lt;/html&gt;", "Info", JOptionPane.INFORMATION_MESSAGE);
+</code>
+</pre>
+
+<p>Para mostrar os valores passados (total, pares, ímpares, acima de 100 e média, faremos isso):</p>
+
+<pre>
+<code>
+int num, soma = 0;
+int cont = 0;
+int par = 0;
+int impar = 0;
+int cent = 0;
+float media = 0;
+do {
+    num = Integer.parseInt(JOptionPane.showInputDialog(null, "&lt;html>Informe um número&lt;br/>&lt;i>(valor 0 interrompe)&lt;/i>:&lt;/html>", "Matemática", JOptionPane.QUESTION_MESSAGE));
+    soma += num;
+    cont += 1;
+    if(num == 0) {
+        cont -= 1;
+        break;
+    }
+    else if(num % 2 == 0) {
+        par += 1;
+    }
+    else {
+        impar += 1;
+    }
+    
+    // Esse é outro Condicional.
+    
+    if(num >= 100) {
+        cent += 1;
+    }
+    
+    media = soma / cont;
+}
+while(true);
+JOptionPane.showMessageDialog(null, "&lt;html>Resultado Final!&lt;br/>&lt;hr/>Somatório vale " + soma + "&lt;br/>Total de Valores: " + cont + "&lt;br/>Total de Pares: " + par + "&lt;br/>Total de Ímpares: " + impar + "&lt;br/>Valores Acima de 100: " + cent + "&lt;br/>Média dos Valores: " + media + "&lt;/html>", "Resultado", JOptionPane.INFORMATION_MESSAGE);  
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-java-3.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-java-5.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

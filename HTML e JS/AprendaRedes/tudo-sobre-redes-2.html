@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html">Tudo sobre Redes Parte 13!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Redes Parte 2</h2>
+
+<h3>O que é Domínio de Broadcast</h3>
+
+<p>O domínio de broadcast é o conjunto de dispositivos que recebem um quadro broadcast enviado de um dispositivo que está na mesma rede. Seria até onde chega uma mensagem de broadcast.</p>
+
+<p>Vamos supor que exista um switch com quatro portas (ele pode ter muito mais). Quando o computador A quer mandar uma mensagem para todos os outros dispositivos da rede, ele envia um quadro broadcast do qual o switch vai replicar para todas as portas. O switch coloca por padrão todas as portas no mesmo domínio de broadcast.</p>
+
+<p>Lembrando do MAC Adress, que tem 48 bits, um quadro broadcast é enviado para o MAC de cada dispositivo.</p>
+
+<h3>Diferenças entre Hub e Switch</h3>
+
+<p>Um hub é um equipamento passivo, enquanto um switch é um equipamento ativo.</p>
+
+<p>Os hubs estão em desuso em redes cabeadas hoje, mas é importante conhecer seu funcionamento.</p>
+
+<p>Basicamente, o hub funciona de uma forma similar a usar um trio elétrico para dar recado a uma pessoa (o recado vai chegar, mas vai chegar pra todo mundo que está ali).</p>
+
+<p>O switch, no entanto, seria como mandar uma carta (mesmo passando por alguém no caminho, só é entrega ao destinatário).</p>
+
+<p>No hub, a captura de pacotes é simples, chegam a todos, e é inseguro, pouco comum hoje.</p>
+
+<p>Já no switch, tem o cascateamento, porta de uplink, espelhamento de porta. Usando estes conceitos podemos capturar todo ou quase todo tráfego de uma rede LAN, num programa como o Wireshark.</p>
+
+<h3>O Que é Vlan</h3>
+
+<p>Uma vlan permite segmentar um domínio de broadcast.</p>
+
+<p>Vamos supor que um computador mande uma mensagem pra um switch, e todos os computadores da rede ouçam sua mensagem (supondo que tenham 48), e também o outro switch ligado à ele, também com 48, totalizando 96 redes, cada computador teria que parar 95 vezes para ouvir o broadcast dos outros pra ver se é dele, o que causaria um problema na rede.</p>
+
+<p>Nesse momento, é bom saber uma quantidade máxima de computadores suportados. Para isso criamos uma vlan (ligando e configurando os switchs), vamos supor que tenhamos vlan 1 e vlan 2 (podendo ter mais, não confundir com os switch, em ambos tem computadores de ambas as vlans), nesse caso, apenas os computadores que estão na mesma vlan que receberão a mensagem. Isso é útil por exemplo, numa empresa, na qual podemos dividir por exemplo, as informações do marketing e do financeiro, onde uma não interfere na outra.</p>
+
+<p>Também temos o protocolo 802.1Q. Vamos supor que temos a vlan 1 e vlan 2, que coloca uma "tag" informando sobre a vlan da qual o dispositivo pertence e envia a mensagem pros dispositivos da mesma vlan. Após a entrega das informações, ele destroí essa tag, que não é recebida pelos computadores.</p>
+
+<h3>Introdução ao HTTP</h3>
+
+<p>HTTP é a sigla de HyperText Transfer Protocol que em português significa "Protocolo de Transferência de Hipertexto". É um protocolo de comunicação entre sistemas de informação que permite a transferência de dados entre redes de computadores, principalmente na World Wide Web (Internet).</p>
+
+<p>O HTTP é o protocolo utilizado para transferência de páginas HTML do computador para a Internet. Por isso, os endereços dos websites (URL) utilizam no início a expressão "http://", definindo o protocolo usado. Esta informação é necessária para estabelecer a comunicação entre a URL e o servidor Web que armazena os dados, enviando então a página HTML solicitada pelo usuário.</p>
+
+<p>Para que a transferência de dados na Internet seja realizada, o protocolo HTTP necessita estar agregado a outros dois protocolos de rede: TCP (Transmission Control Protocol) e IP (Internet Protocol). Esses dois últimos protocolos formam o modelo TCP/IP, necessário para a conexão entre computadores clientes-servidores.</p>
+
+<p>Temos também o HTTPS, que é a versão criptografada do HTTP, mas também funcionando de forma parecida.</p>
+
+<p>No inspencionar elemento, em Network, podemos olhar as opções de rede do protocolo HTTP, vemos os arquivos carregados e os códigos das páginas (como 200, que é de sem erros, 304, que é de arquivo no cache do navegador ou 404, que é não encontrado). Basicamente é isso:</p>
+
+<table>
+    <tr>
+        <th>Número</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>1--</td>
+        <td>Informativo</td>
+    </tr>
+    <tr>
+        <td>2--</td>
+        <td>Confirmação</td>
+    </tr>
+    <tr>
+        <td>3--</td>
+        <td>Redirecionamento</td>
+    </tr>
+    <tr>
+        <td>4--</td>
+        <td>Erro do Cliente</td>
+    </tr>
+    <tr>
+        <td>5--</td>
+        <td>Erro do Servidor</td>
+    </tr>
+</table>
+
+<h3>Protocolo Spanning Tree - Parte 1</h3>
+
+<p>O protocolo Spannin Tree Protocol (STP) é um protocolo baseado em um algoritmo que garante que não ocorrerá loop em uma rede local. Geralmente são usados em redes de grande porte.</p>
+
+<p>Em redes maiores é necessário estabelecer redundância para evitar que a rede continue funcionando mesmo quando um switch apresentar problema.</p>
+
+<p>A forma que o protocolo Spanning Tree trabalha para que isso não ocorra, utiliza quadros especiais chamados BPDU - Bridge Protocol Data Unit.</p>
+
+<p>BPDUs são trocados regularmente, normalmente a cada dois segundos e permitem que os witches fiquem sabendo de alterações na rede bem como para ou iniciar encaminhamento nas portas conforme necessário.</p>
+
+<p>BPDUs além de descobrirem portas que podem causar loops também ajudam a definir qual será o switch principal (core) da rede e qual a melhor forma de chegar bloqueando linhas redundantes.</p>
+
+<p>Vamos dar uma olhada em três tipos de porta:</p>
+
+<ul>
+    <li><b>Root Port: </b>Porta usada para chegar no root bridge.</li>
+    <li><b>Designated Port: </b>Porta que encaminha os quadros.</li>
+    <li><b>Blocking Port: </b>Porta que, caso ativada, pode causar loops.</li>
+</ul>
+
+<p>O root bridge é escolhido através do seu Bridge ID, número formado por um valor chamado "Bridge Priority" + o MAC Address.</p>
+
+<p>O primeiro número é 32768 por padrão, mas pode ser alterado desde que seja um múltiplo de 4096. Por exemplo <code>32768.0200.0000.1111</code>.</p>
+
+<p>Vamos supor que numa rede, tenhamos três switchs, com esses números:</p>
+
+<ul>
+    <li><code>32768.0200.0000.1111</code></li>
+    <li><code>32768.0200.0000.2222</code></li>
+    <li><code>32768.0200.0000.3333</code></li>
+</ul>
+
+<p>O Root Bridge é o que será o que tem o menor número. Quanto menor o número, maior a prioridade dele.</p>
+
+<p>A Root Port (RP) são as portas que os outros switches usam para chegar ao Root Bridge. No segundo switch, tem uma porta chamada Designated Port (DP), que é ligada ao terceiro switch pelo Blocking Port (BP), que bloqueia a porta, caso necessário, mas libera a conexão se precisar, caso seja um caminho mais curto.</p>
+
+<p>O caminho que será escolhido para se chegar no Root Bridge leva em consideração o curso que indica o melhor caminho baseado na taxa de transferência dos links. Veja a tabela abaixo:</p>
+
+<table>
+    <tr>
+        <th>Data Rate</th>
+        <th>STP Cost<br/>(802.1D-1998)</th>
+        <th>RSTP Cost<br/>(802.1D-2004 / 802.1w)</th>
+    </tr>
+    <tr>
+        <td>4 Mbit/s</td>
+        <td>250</td>
+        <td>5.000.000</td>
+    </tr>
+    <tr>
+        <td>10 Mbit/s</td>
+        <td>100</td>
+        <td>2.000.000</td>
+    </tr>
+    <tr>
+        <td>16 Mbit/s</td>
+        <td>62</td>
+        <td>1.250.000</td>
+    </tr>
+    <tr>
+        <td>100 Mbit/s</td>
+        <td>19</td>
+        <td>200.000</td>
+    </tr>
+    <tr>
+        <td>1 Gbit/s</td>
+        <td>4</td>
+        <td>20.000</td>
+    </tr>
+    <tr>
+        <td>2 Gbit/s</td>
+        <td>3</td>
+        <td>10.000</td>
+    </tr>
+    <tr>
+        <td>10 Gbit/s</td>
+        <td>2</td>
+        <td>2.000</td>
+    </tr>
+</table>
+
+<p>Mas pode ser mais rápido pra ele usar uma conexão mais curta para enviar as mensagens, independente da velocidade.</p>
+
+<h3>Protocolo Spanning Tree - Parte 2</h3>
+
+<p>Vamos ver hoje sobre os estaddos que uma porta de um switch com STP habilitado podem assumir:</p>
+
+<ul>
+    <li><b>Blocking: </b>Uma porta que causaria um loop caso estivesse ativa. Ela não recebe e nem envia dados de usuário neste estado, mas continua recebendo BPDUs e pode transformar em uma porta que faz encaminhamentos caso a situação da rede se altere e seja necessário.</li>
+    <li><b>Listening: </b>O switch verifica os BPDUs e verifica se ele não deve ficar bloqueado, neste caso ele não ajuda a construir a tabela MAC nem encaminha quadros.</li>
+    <li><b>Learning: </b>Neste estado a porta ainda não encaminha os quadros, mas "aprende" endereços MAC dos quadros que passam por ela e ajuda a construir a tabela MAC.</li>
+    <li><b>Forwarding: </b>Uma porta funcionando normalmente, ou seja, recebendo e encaminhando quadros, mesmo assim, continua monitorando BPDUs para saber se em algum momento não deve entrar em estado bloqueado.</li>
+    <li><b>Disabled: </b>Uma porta desabilitada, que pode ser feito pelo administrador da rede manualmente.</li>
+</ul>
+
+<p>Vamos supor que na sua rede tenha um dispositivo novo conectado, uma porta bloqueada passaria um certo tempo pra estar ativa novamente. Para isso foi criado o RSTP. Ele tem umas diferenças que faz que esse processo de alteração das portas seja mais rápido, veja a tabela abaixo como exemplo:</p>
+
+<table>
+    <tr>
+        <th>STP (802.1D)<br/>Estado da Porta</th>
+        <th>RSTP (802.1W)<br/>Estado da Porta</th>
+        <th>A porta está inclusa<br/>na topologia ativa?</th>
+        <th>A porta está "aprendendo"<br/>endereços MAC?</th>
+    </tr>
+    <tr>
+        <td>Disable</td>
+        <td>Discarding</td>
+        <td>Não</td>
+        <td>Não</td>
+    </tr>
+    <tr>
+        <td>Blocking</td>
+        <td>Discarding</td>
+        <td>Não</td>
+        <td>Não</td>
+    </tr>
+    <tr>
+        <td>Listening</td>
+        <td>Discarding</td>
+        <td>Sim</td>
+        <td>Não</td>
+    </tr>
+    <tr>
+        <td>Learning</td>
+        <td>Learning</td>
+        <td>Sim</td>
+        <td>Sim</td>
+    </tr>
+    <tr>
+        <td>Forwarding</td>
+        <td>Forwarding</td>
+        <td>Sim</td>
+        <td>Sim</td>
+    </tr>
+</table>
+
+<p>Pra ficar um pouco mais fácil de entender, vamos ver o papel das portas da rede (Port Roles), que é uma função veriável que pode ser dada à uma determinada porta. A port root e a porta designada continua com os mesmos objetivos, já a porta bloqueada tem os objetivos de atuar como "backup" e "alternativa".</p>
+
+<ul>
+    <li><b>Alternate Port: </b>É uma porta alternativa para se chegar na Root Brigde.</li>
+    <li><b>Backup Port: </b>Uma porta no qual o switch não descartou as informações e pode ser rapidamente usada quando uma outra porta falhar.</li>
+</ul>
+
+<h3>Protocolo Ethenet</h3>
+
+<p>Ethernet é um conjunto de tecnologias para Local Area Networks (LANs).</p>
+
+<p>Os padrões Ethernet compreentes variantes de cabeamento e transmissão de sinal.</p>
+
+<p>A velocidade de transmissão dos padrões Ethernet são medidos em bits por segundo, muito provavelmente você vai encontrar um dos seguintes padrões: Standart Ethernet (10 Mbps), Fast Ethernet (100 Mbps) e Gigabit Ethernet (1000 Mbps).</p>
+
+<p>O Ethernet é definido pelo IEEE como 802.3.</p>
+
+<p>Os diferentes padrões são bem compatíveis entre si.</p>
+
+<p>Veja abaixo a tabela com o modelo OSI, já que o Ethernet trabalha na camada 1 e 2 dele:</p>
+
+<table>
+    <tr>
+        <th>OSI</th>
+        <th colspan="3">Ethernet</th>
+    </tr>
+    <tr>
+        <td rowspan="2">Enlace</td>
+        <td colspan="3">Controle de Link Lógico (LLC)</td>
+    </tr>
+    <tr>
+        <td colspan="3">Controle de Acesso ao Meio (MAC)</td>
+    </tr>
+    <tr>
+        <td rowspan="5">Física</td>
+        <td>Standart Ethernet</td>
+        <td>Fast Ethernet</td>
+        <td>Gigabit Ethernet</td>
+    </tr>
+    <tr>
+        <td>10 Base 5</td>
+        <td>100 Base TX</td>
+        <td>1000 Base T</td>
+    </tr>
+    <tr>
+        <td>10 Base 2</td>
+        <td>100 Base T4</td>
+        <td rowspan="3">1000 Base LX</td>
+    </tr>
+    <tr>
+        <td>10 Base T</td>
+        <td rowspan="2">100 Base FX</td>
+    </tr>
+    <tr>
+        <td>10 Base FX</td>
+    </tr>
+</table>
+
+<p>O primeiro número é a velocidade da rede em Mbps.</p>
+
+<p>Base vem de "bandabase" e diz respeito de como o sinal é transportado.</p>
+
+<p>No final, a letra T indica o tipo de cabo usado:</p>
+
+<ul>
+    <li><b>T - </b>Par trançado.</li>
+    <li><b>C - </b>Coaxial (ou um número 5 indicando que o cabo pode chegar à 500m ou 2 indicando 185m.</li>
+    <li><b>F - </b>Fibra Óptica.</li>
+</ul>
+
+<p>Pra terminar essa parte, mostraremos os modos de comunicação que existem no protocolo Ethernet. Veja abaixo:</p>
+
+<ul>
+    <li><b>Simplex: </b>Permite a comunicação em apenas uma direção com a largura de banda usada para a transmissão do sinal (por exemplo, o mouse).</li>
+    <li><b>Half-Duplex: </b>Permite o envio e recebimento de dados, mas não ao mesmo tempo.</li>
+    <li><b>Full-Duplex: </b>Permite enviar e receber ao mesmo tempo (como as placas de rede).</li>
+</ul>
+
+<h3>Cabo Par trançado - Parte 1</h3>
+
+<p>Apesar de muita coisa hoje em dia ser sem fio, ainda é necessário cabeamento em muitas partes da rede, pelo menos até chegar ao roteador, por isso é importante conhecer os tipos diferentes de cabo usados em redes internas.</p>
+
+<p>O cabo par-trançado é um dos tipos de cabo mais utilizados, possuí 4 pares de fios, e cada par possuí uma quantidade de tranças (torções) por metro, e cada par (trança) possuí sinais iguais porém opostos, isso faz com que os pares minimizem interferências entre eles e permitem que os sinais transmitidos e recebidos possam ser comparados.</p>
+
+<p>O cabo UTP (Unshielded Twisted Pair) é o mais utilizado, mas ele não tem nenhuma proteção extra.</p>
+
+<p>O cabo SCTP (Screened Twisted Pair) e o FTP (Foiled Twisted Pair) oferecem proteção para todos os pares usando folha para blindagem.</p>
+
+<p>O cabo S/STP (Screened Shielded Twisted Pair) e o S/FTP (Screened Foiled Twisted Pair) oferecem proteção para o cabo e mais uma proteção que separa cada par dentro do cabo.</p>
+
+<p>PS: O FTP não tem nada a ver com protocolo FTP.</p>
+
+<p>Outras características presentes nos cabos são essas:</p>
+
+<ul>
+    <li><b>CMX: </b>Para instalações residenciais com pouco cabo (casas comuns).</li>
+    <li><b>CM: </b>Para instalações horizontais em lugares com alta ocupação, com fluxo de ar forçado (por exemplo, em prédios que possuem dutos para passar cabos de todos tipos, como ambientes comerciais).</li>
+    <li><b>CMR (Riser): </b>Para instalações verticais como em "shafts" (por exemplo, em prédios com mais de dois andares).</li>
+    <li><b>CMP (Plenum): </b>Aplicação horizontal em locais onde gases tóxicos se espalhando rapidamente poderiam causar danos às pessoas (em espaços livres em locais onde também passam dutos de ar, os cabos não passam dentro desses dutos).</li>
+</ul>
+
+<h3>Cabo Par Trançado - Parte 2</h3>
+
+<p>Para escolhermos bem os cabos, precisamos conhecer bem as categorias deles, que são essas:</p>
+
+<ul>
+    <li><b>Categoria 3: </b>Indicado para redes Ethernet 10 Mbps e Token Ring 4 Mbps (em desuso, substituído pela categoria 5).</li>
+    <li><b>Categoria 5: </b>Indicado para redes Ethernet 100 Mbps.</li>
+    <li><b>Categoria 5e: </b>Indicado para redes Ethernet 1 Gbps.</li>
+    <li><b>Categoria 6: </b>Indicado para redes Ethernet 10 Gbps (até 55 metros).</li>
+    <li><b>Categoria 6a: </b>Indicado para redes Ethernet 10 Gbps (até 100 metros).</li>
+</ul>
+
+<p>A metragem influencia na velocidade, é a distância máxima entre o switch até o computador (incluindo tomadas, filtros e etc.).</p>
+
+<h3>Cabo Par Trançado - Parte 3</h3>
+
+<p>O conector RJ-45 é o conector mais usados em redes com cabo par trançado, mas nem sempre eles são iguais, apesar de semelhantes.</p>
+
+<p>A maioria dos dispositivos novos detectam automaticamente quem transmite e quem recebe e não depende mais da pinagem do cabo para se comunicar.</p>
+
+<h3>Fibra Óptica - Parte 1</h3>
+
+<p>A fibra óptica é um dos mais importantes meios de transmissão. É recomenada principalmente para alplicações que precisam trafegar altas taxas de dados em longas distâncias. Os dados são transmitidos em forma de luz, por isso é imune a interferência eletromagnética e tem baixa atenuação. Muito usada em tráfego de dados por longas distâncias e alta velocidade.</p>
+
+<p>As fibras ópticas podem ser dividdas em dois modos, fibra multimodo e fibra monomodo.</p>
+
+<p>A fibra multimodo é usada em aplicações onde distâncias menores são consideradas, normalmente utiliza LED e o tamanho do núcleo é maior, por isso, a luz fica "batendo" no tráfego do cabo.</p>
+
+<p>A fibra monomodo é usada em aplicações de longa distâncias, normalmente utiliza laser e o núcleo tem um tamanho menor, por isso trafega por um caminho "reto".</p>
+
+<p>Ambas as fibras tem uma capa, bem semelhante.</p>
+
+<h3>Fibra Óptica - Parte 2</h3>
+
+<p>Os conectores mais usados em fibra óptica são os conectores ST, mas atualmente é mais comum os conectores SC.</p>
+
+<p>Outro que é menor e mais simples é o LC, por ter dois conectores integrados (um de transmissão e outro de recepção).</p>
+
+<p>O mais fácil de instalar de todos, no entanto, é o MTRJ, parecido com o RJ-45.</p>
+
+<h3>Fibra Óptica - Parte 3</h3>
+
+<p>Esses são os padrões da fibra óptica e suas velocidades:</p>
+
+<table>
+    <tr>
+	<th>Tipo de Fibra</th>
+	<th>Padrão Ethernet</th>
+	<th>Velocidade</th>
+	<th>Distância</th>
+    </tr>
+    <tr>
+	<td rowspan="3">Multimodo</td>
+	<td>100 BASE-FX</td>
+	<td>100 Mbit/s</td>
+        <td>2 Km</td>
+    </tr>
+    <tr>
+	<td>1000 BASE-SX</td>
+	<td>1000 Mbit/s</td>
+	<td>200 - 550 m</td>
+    </tr>
+    <tr>
+	<td>10 G BASE-SR</td>
+	<td>10 Gbit/s</td>
+	<td>300 m</td>
+    </tr>
+    <tr>
+	<td rowspan="2">Monomodo</td>
+	<td>1000 BASE-LX</td>
+	<td>1000 Mbit/s</td>
+	<td>2 Km</td>
+    </tr>
+    <tr>
+	<td>10 G BASE-LR</td>
+	<td>10 Gbit/s</td>
+	<td>10 Km</td>
+    </tr>
+</table>
+
+<h3>Cabo Coaxial</h3>
+
+<p>O cabo coaxial é um tipo de cabo usado para transmitir sinais, usado não só em redes (muito raro hoje em dia), mas também em outras aplicações como CFTV (Circuito Fechado) e TV à cabo. Ele tem um condutor central, um isolante em torno dele, em volta dele uma capa metálica ou malha. Os cabos de antena geralmente são esses.</p>
+
+<p>Os tipos mais comuns de cabo coaxial são:</p>
+
+<ul>
+    <li><b>RG-59: </b>Típicamente usado para transmissão de vídeo analógico, especialmente CFTV.</li>
+    <li><b>RG-6: </b>Mais grosso que o RG-59, usado por operadoras de TV à cabo.</li>
+    <li><b>RG-58: </b>Similar ao RG-59, utilizado antigamente em redes 10 BASE 2 Ethernet Networks.</li>
+</ul>
+
+<p>Os conectores mais comuns são o F, muito comum nos cabos de antenas e receptores de TV por assinatura, e o BNC, geralmente usadas em CFTV.</p>
+
+<p>Ainda que alguns cabos não sejam mais utilizados, é comum encontrar referências sobre eles em livros e materiais de estudos. Veja a tabela abaixo:</p>
+
+<table>
+    <tr>
+	<th>Padrão</th>
+	<th>Cabo</th>
+	<th>Capacidade</th>
+	<th>Distância</th>
+    </tr>
+    <tr>
+	<td>10 BASE 5</td>
+	<td>Coax (thicknet ou RG-8/U)</td>
+	<td>10 Mbps</td>
+	<td>500 m</td>
+    </tr>
+    <tr>
+	<td>10 BASE 2</td>
+	<td>Coax (thinnet ou RG-58)</td>
+	<td>10 Mbps</td>
+	<td>185 m</td>
+    </tr>
+</table>
+
+<ul>
+    <li><a href="tudo-sobre-redes-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-redes-3.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

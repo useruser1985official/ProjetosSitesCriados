@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Hacking</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Hacking</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-hacking-1.html">Tudo sobre Hacking Parte 1!</a></li>
+                    <li><a href="tudo-sobre-hacking-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Hacking Parte 2!</a></li>
+                    <li><a href="tudo-sobre-hacking-3.html">Tudo sobre Hacking Parte 3!</a></li>
+                    <li><a href="tudo-sobre-hacking-4.html">Tudo sobre Hacking Parte 4!</a></li>
+                    <li><a href="tudo-sobre-hacking-5.html">Tudo sobre Hacking Parte 5!</a></li>
+                    <li><a href="tudo-sobre-hacking-6.html">Tudo sobre Hacking Parte 6!</a></li>
+                    <li><a href="tudo-sobre-hacking-7.html">Tudo sobre Hacking Parte 7!</a></li>
+                    <li><a href="tudo-sobre-hacking-8.html">Tudo sobre Hacking Parte 8!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Hacking Parte 2</h2>
+
+<h3>O Hacker Saberia</h3>
+
+<p>Um hacker conhece profundamente o sistema operacional, seja qual for, por isso é bom conhecer vários tipos de sistemas.</p>
+
+<p>Um exemplo seria o uso do executar no Windows, que acessamos clicando em Win e R, podemos digitar vários comandos nele, com o o <code>winver</code> para vermos a versão do Windows ou o <code>cleanmgr</code> para abrir o utilitário de limpeza de disco.</p>
+
+<p>Digite, no executar, o comando <code>msinfo32</code>, que abrirá a janela de informações do sistema, como as de hardware e do sistema operacional.</p>
+
+<p>Uma coisa que precisamos saber é o uso do sfc, que reparar arquivos de sistema corrompidos, usando o comando <code>sfc /scannow</code> no CMD.</p>
+
+<p>O <code>msconfig</code> é útil para vermos se existe um trojan rodando no sistema, além de itens de inicialização, onde podemos desativar os mesmos.</p>
+
+<p>Digite no executar <code>regedit</code> para abrir o registro, olhe se nas chaves Run do registro não tem algum programa suspeito inicializando com o sistema, elas se localizam em <code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run</code> e <code>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run</code>. Caso ache algum valor suspeito, exclua ele (antes pesquise no Google pra ter certeza se não é um processo necessário).</p>
+
+<p>No executar, digite <code>msconfig</code> pra abrir as Configurações do Sistema, em inicialização de programas, também podemos ver os programas que são inicializados com o sistema, podendo os desabilitar. Podemos ver no Gerenciador de Tarefas se existe algum processo suspeito também, e encerrá-lo e excluir ele do computador, indo em Abrir Local do Arquivo.</p>
+
+<p>Usando o <code>ipconfig</code> no CMD podemos ter acesso ao IP e outros dados da rede do nosso PC. Para vermos os IPs abertos usados por aplicativos, usamos o comando <code>netstat /nb</code> (no caso, são no Windows).</p>
+
+<p>No executar, podemos digitar <code>sysedit</code> para termos acesso ao "bloco de notas" da configuração do sistema, onde podemos editar arquivos importantes do mesmo.</p>
+
+<p>No Firefox de qualquer sistema, podemos ver dados sobre o servidor do site indo no inspencionar elemento do Firefox, e em Network, ver os métodos GET ou POST do site e clicar num deles, indo em Headers e procurando a opção X-Powered-By ou a Server. Podemos ver outros dados como o IP do site e proteção XSS.</p>
+
+<p>Em sistemas Linux, podemos verificar a integridade dos arquivos através de hashs, que deverão ser iguais aos indicados nos sites oficiais. É possível baixar programas pra verificar hashs de arquivos no Windows também.</p>
+
+<h3>Senha</h3>
+
+<p>Um hacker vai ter um alvo e um objetivo, que muitas vezes a intenção é pegar a senha do usuário e do administrador.</p>
+
+<p>Existem muitas senhas fracas (ou senhas podres), mas existem geradores de senhas mais seguras, que misturam letras, números e outros caracteres, só que muitas vezes são de difícil memorização.</p>
+
+<p>Quando maior a senha e tiver maior diferenciação de caracteres, mais difícil serão de ser quebradas.</p>
+
+<p>Uma boa dica de criar senha, é usar uma frase fácil de lembrar só pra você (como Eu Vou Morar em Altamira) e pegar só as iniciais (no caso, EVMEA), e colocar ela com números e caracteres especiais no início e no fim, podemos também intercalar maiúsculas e minúsculas, ficando algo como @9EvMeA1#.</p>
+
+<p>Uma senha mais difícil demora mais para um hacker a quebrar por bruteforce, e nesse caso ele terá que usar outra técnica pra descobrir a senha, o que pode fazer ele desistir do ataque.</p>
+
+<h3>Atualizações de Segurança</h3>
+
+<p>Um dos maiores problemas de segurança são os softwares desatualizados, que pode ter uma vulnerabilidade que pode ser explorada por hackers, um exemplo de programa cujas versões antigas são bastante vulneráveis é o Internet Explorer. Um tipo de invasão famosa é quando trocam a página inicial do site, explorada por servidores desatualizados.</p>
+
+<p>Independente do sistema ser um servidor ou um computador pessoal, é necessário manter ele atualizado, já que muitos ataques, como os de rootkits, são feitos em brechas de programas e sistemas desatualizados.</p>
+
+<p>O Windows tem o Windows Update, que é o sistema de atualização do sistema, onde podemos verificar as atualizações de segurança do mesmo. É recomendado instalar as atualizações críticas, geralmente listadas como importantes. O download das atualizações semrpe é liberado na segunda Terça-feira do mês (entre os dias 8 e 14), mas pode ser liberada atualizações de emergência a qualquer momento. Isso vale tanto para PC quanto para servidores. Linux costuma ter atualizações liberadas com mais frequência pela comunidade, sempre sendo necessário ver o APT dele (com os comandos <code>apt-get install</code>, <code>apt-get update</code> e <code>apt-get upgrade</code>.</p>
+
+<p>Lembrando que temos que manter todos os programas do computador atualizados, sobretudo, navegadores, plugins, antivírus e outros softwares de segurança, pois todos podem ter brechas exploradas em programas desatualizados.</p>
+
+<h3>Serviços Online</h3>
+
+<p>Temos sites como esse, que podemos usar para verificar a velocidade da internet: <a href="http://www.minhaconexao.com.br/" target="_blank">http://www.minhaconexao.com.br/</a></p>
+
+<p>Podemos usar o site Localiza IP para rastrear a localização de um IP: <a href="https://www.localizaip.com.br/" target="_blank">https://www.localizaip.com.br/</a></p>
+
+<p>Podemos também verificar links e arquivos suspeitos através do site Vírus Total: <a href="https://www.virustotal.com/" target="_blank">https://www.virustotal.com/</a></p>
+
+<p>Outro site útil para verificar links de sites é o Norton Safe Web: <a href="https://safeweb.norton.com/" target="_blank">https://safeweb.norton.com/</a></p>
+
+<p>Se o link estiver encurtado, copie ele e verifique o verdadeiro link nesse site: <a href="http://urlxray.com/" target="_blank">http://urlxray.com/</a></p>
+
+<p>Por esse site, podemos saber se um site está fora do ar: <a href="https://foradoar.org/" target="_blank">https://foradoar.org/</a></p>
+
+<p>Esse site mostra informações sobre algum domínio de site especificado: <a href="https://www.whoishostingthis.com/" target="_blank">https://www.whoishostingthis.com/</a></p>
+
+<p>Esse site além de exibir informações sobre o site, exibe informações confidenciais como documentos, contato e coisas confidenciais sobre o site: <a href="http://website.informer.com/" target="_blank">http://website.informer.com/</a></p>
+
+<p>Aqui podemos <!--encriptar e -->consultar hashs de senhas: <a href="https://hashes.com/" target="_blank">https://hashes.com/</a></p>
+
+<p>Para testar a força de uma senha, podemos usar esse site: <a href="https://www.security.org/how-secure-is-my-password/" target="_blank">https://www.security.org/how-secure-is-my-password/</a></p>
+
+<p>Para denunciar um site falso pro Google, usamos esse link: <a href="https://safebrowsing.google.com/safebrowsing/report_phish/" target="_blank">https://safebrowsing.google.com/safebrowsing/report_phish/</a></p>
+
+<p>Esse site verifica erros de códigos de várias linguagens de programação: <a href="https://www.mycompiler.io/" target="_blank">https://www.mycompiler.io/</a></p>
+
+<p>Esse site mostra vários dados referentes a IPs: <a href="https://awebanalysis.com/pt/" target="_blank">https://awebanalysis.com/pt/</a></p>
+
+<p>Esse site permite upar arquivos como TXT sem precisar de cadastro, com um link para compartilhar: <a href="https://www.fileconvoy.com/" target="_blank">https://www.fileconvoy.com/</a></p>
+
+<p>Esse site permite hospedar códigos Javascript a serem inseridos em sites (como em ataques XSS): <a href="http://yourjavascript.com/" target="_blank">http://yourjavascript.com/</a></p>
+
+<p>Esse site é usado para criar links para usuários clicarem, que redirecionam pra qualquer página que queira, de forma a descobrir o IP deles: <a href="https://iplogger.org/" target="_blank">https://iplogger.org/</a></p>
+
+<p>Para encurtar a URL, podemos usar esse site: <a href="https://twixar.com/" target="_blank">https://twixar.com/</a></p>
+
+<h3>Anônimo</h3>
+
+<p>Uma forma de proteção contra hacker, e também é útil para um hacker, é o anonimato, que é pra mandar um e-mail que ninguém saiba de onde veio, e navegar sem que te rastreiem.</p>
+
+<p>Existem sites para que possamos navegar anonimamente (cuidado que existem honeypots). Um site que pode ser usado pra isso é esse: <a href="https://nl.hideproxy.me/" target="_blank">https://nl.hideproxy.me/</a></p>
+
+<p>Para vermos se o site acima funciona, entre num site de verificar IPs para ver se ele realmente mudou, como esse: <a href="http://www.meuip.com.br/" target="_blank">http://www.meuip.com.br/</a></p>
+
+<p>Podemos também mandar e-mails anônimos, usando sites como esse: <a href="http://emailanonimo.com.br/" target="_blank">http://emailanonimo.com.br/</a></p>
+
+<p>Assim como podemos receber e-mails em endereços temporários (que pode ser útil pra criar contas em sites que exigem confirmação), usando sites como esse: <a href="https://getnada.com/" target="_blank">https://getnada.com/</a></p>
+
+<p>Uma forma bastante usada é o uso de proxy, que podemos pegar o IP e a porta deles e conectarmos por ele, indo nas configurações de rede local. Podemos procurar em sites como esse (sempre escolha o proxy do tipo anonymous com https): <a href="https://www.us-proxy.org/" target="_blank">https://www.us-proxy.org/</a></p>
+
+<h3>Antivírus - Parte 1</h3>
+
+<p>Os problemas de segurança dizem a respeito de senhas, vírus, trojans, antivírus, firewall e proteção de dados.</p>
+
+<p>No caso, instalamos um antivírus no sistema (sempre tenha apenas um pra não entrarem em conflito).</p>
+
+<h3>Antivírus - Parte 2</h3>
+
+<p>Um antivírus tem várias opções de verificação, como na inicialização, de arquivos, macros e e-mails. Ele deverá ter as definições de atualizações de vírus sempre atualizadas.</p>
+
+<p>Em algumas vezes, é necessário desligar o antivírus pra alguns programas hackers no Windows.</p>
+
+<p>Alguns dos antivírus mais famosos são o Avast, AVG, Karpersky, McAfee, Avira, Norton e Microsoft Essentials.</p>
+
+<h3>Firewall - Parte 1</h3>
+
+<p>Além do antivírus, é importante ter um bom firewall no PC.</p>
+
+<p>O Windows já tem um firewall nativo, mas é possível baixar um Firewall e instalar posteriormente, alguns antivírus também já vem com Firewall, geralmente os mais pagos.</p>
+
+<p>Alguns dos firewalls mais usados são os Comodo e o PC Tools, e os que vem incluídos em antivírus "Pro", como versões pagas do Avast, Norton e Karpersky. Linux também usa firewall, o mais conhecido é o Iptables.</p>
+
+<h3>Firewall - Parte 2</h3>
+
+<p>Um firewall tem a função de impedir que dados indesejáveis entrem e saiam no PC, e que seja invadida por hackers. Ele faz filtragem das portas de conexão de rede, a protegendo em ambos os sentidos.</p>
+
+<p>Quando um programa suspeito precisa executar uma conexão, o Firewall bloqueia e avisa se realmente queremos que essa conexão seja realizada.</p>
+
+<h3>Navegação Segura</h3>
+
+<p>Para sabermos se uma página realmente é segura, precisamos tomar uns cuidados.</p>
+
+<p>Vamos supor que exista uma página falsa de um banco, que envie e-mails falsos para usuários, de forma que coloquem dados bancários nesse falso site para serem roubados.</p>
+
+<p>Ao receber um e-mail desses, verifique, ao passar o mouse por cima dos links (sem clicar), se ele está realmente direcionado à uma página verdadeira.</p>
+
+<p>No site verdadeiro de um banco, costuma ter algumas coisas para segurança dos usuários, como um teclado virtual do próprio site, por exemplo.</p>
+
+<p>Mas a maior prova de que o site é verdadeiro, é ver se existe a conexão "https", com o cadeadinho, clicando nele, veremos as informações de segurança do site, como os certificados digitais.</p>
+
+<p>PS: Existem formas de criar sites fakes com https, então não confie sempre nisso.</p>
+
+<p>Alguns sites, como os de pornografia, costumam abrir várias abas e pode por exemplo, fazer novos downloads como os de plugins, que podem ser maliciosos. Cookies de rastreamento também costumam ser baixados, o que é risco de privacidade.</p>
+
+<h3>Back-Up</h3>
+
+<p>Uma coisa muito importante também é manter um back-up dos dados mais importantes</p>
+
+<p>O Windows tem o utilitário de fazer back-ups, procurando em Back-Up e Restauração, onde podemos selecionar os arquivos e pastas para isso.</p>
+
+<p>Podemos fazer o back-up em outro dispositivo ou mídia removiva, como CD e pen-drive.</p>
+
+<p>Também podemos colocar os arquivos numa pasta só pra back-up e gravar ela num CD, DVD ou pen-drive.</p>
+
+<ul>
+    <li><a href="tudo-sobre-hacking-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-hacking-3.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

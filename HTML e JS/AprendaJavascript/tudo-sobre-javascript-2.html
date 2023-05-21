@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Javascript</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Javascript</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-javascript-1.html">Tudo sobre Javascript Parte 1!</a></li>
+                    <li><a href="tudo-sobre-javascript-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Javascript Parte 2!</a></li>
+                    <li><a href="tudo-sobre-javascript-3.html">Tudo sobre Javascript Parte 3!</a></li>
+                    <li><a href="tudo-sobre-javascript-4.html">Tudo sobre Javascript Parte 4!</a></li>
+                    <li><a href="tudo-sobre-javascript-5.html">Tudo sobre Javascript Parte 5!</a></li>
+                    <li><a href="tudo-sobre-javascript-6.html">Tudo sobre Javascript Parte 6!</a></li>
+                    <li><a href="tudo-sobre-javascript-7.html">Tudo sobre Javascript Parte 7!</a></li>
+                    <li><a href="tudo-sobre-javascript-8.html">Tudo sobre Javascript Parte 8!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Javascript Parte 2</h2>
+
+<h3>Trabalhando com Páginas</h3>
+
+<p>Se quisermos trabalhar com abertura de páginas no Javascript, usamos o <code>location</code> seguido do link, ele redirecionará automaticamente (ou dentro de uma função ou condicional), dessa forma:</p>
+
+<pre>
+<code>
+function voltar() {
+    history.go(-1);
+}
+function ir() {
+    location = "https://www.google.com.br";
+}
+function inicio() {
+    location = "index.html";
+}
+</code>
+</pre>
+
+<p>Para recarregar uma página, podemos usar o <code>location.reload()</code>, assim:</p>
+
+<pre>
+<code>
+function recarregar() {
+    location.reload();
+}
+</code>
+</pre>
+
+<p>Para criarmos janelas pop-ups em Javascript, usamos o <code>open</code>, dessa forma:</p>
+
+<pre>
+<code>
+function abrir() {
+    open("https://www.google.com.br/", "teste", "resizable = no, scrollbars = no, width = 250, height = 350");
+}
+// Parâmetros do open ("link", "nome da janela", "parâmetros (tipo CSS)")
+</code>
+</pre>
+
+<p>Os parâmetros do open, são o link, seguido do nome da janela e do estilo (parecido com CSS, só que com atribuições de <code>=</code> e separados por vírgulas. Se colocar apenas o link sem parâmetros, ele apenas abrirá a página numa nova guia.</p>
+
+<p>PS: Se quiser colocar um parâmetro pra fechar, podemos criar outra função, colocando o open numa variável, assim:</p>
+
+<pre>
+<code>
+var popSite;
+    
+function abrir() {
+    popSite = open("https://www.google.com.br/", "teste", "resizable = no, scrollbars = no, width = 250, height = 350");
+}
+function fechar() {
+    popSite.close();
+}
+</code>
+</pre>
+
+<h3>Código Javascript no Console do Navegador</h3>
+
+<p>Podemos por exemplo, abrir o site do Google na página inicial, ir no inspencionar elemento do navegador e ir em console, clique para limpar o excesso de código e digite esses comandos:</p>
+
+<pre>
+<code>
+alert("Olá Mundo!")
+
+document.body.style.background = "black"
+</code>
+</pre>
+
+<p>O primeiro comando mostra um alerta e o segundo muda o fundo da página para preto.</p>
+
+<p>Clique na setinha e nela clique na imagem do logo para ver o nome da tag e ID/Class dela (no caso é img#hplogo), e digite isso no console:</p>
+
+<pre>
+<code>
+document.querySelector("img#hplogo").style.filter = "grayscale(100%)"
+</code>
+</pre>
+
+<p>Esse comando acima deixa o logo em preto e branco.</p>
+
+<p>Esse comando aqui some com o logo do Google:</p>
+
+<pre>
+<code>
+document.querySelector("img#hplogo").style.visibility = "hidden"
+</code>
+</pre>
+
+<p>Podemos entrar num site qualquer, como o G1 e ir num título de uma matéria, pegue o nome da tag e ID/Class dele (com a seta) e coloque esse código:</p>
+
+<pre>
+<code>
+document.querySelector("span.bstn-h1-title").innerText = "O melhor curso de Javascript do Youtube!"
+</code>
+</pre>
+
+<h3>Manipulando objetos HTML pelo ID - Parte 1</h3>
+
+<p>Para manipular objetos, usamos o método <code>document.getElementById()</code>. Dentro dos parênteses, colocamos o ID do objeto entre aspas (por exemplo, uma imagem).</p>
+
+<p>Veja um exemplo de semáforo em Javascript:</p>
+
+<pre>
+<code>
+function vermelho() {
+    document.getElementById("farol").src = "_imagens/sinal-vermelho.png";
+}
+function amarelo() {
+    document.getElementById("farol").src = "_imagens/sinal-amarelo.png";
+}
+function verde() {
+    document.getElementById("farol").src = "_imagens/sinal-verde.png";
+}
+</code>
+</pre>
+
+<p>Links de chamadas dos códigos acima:</p>
+
+<pre>
+<code>
+&lt;input type="button" onclick="vermelho()" id="vermelho" class="semaforo" value="Pare"/&gt;
+&lt;input type="button" onclick="amarelo()" id="amarelo" class="semaforo" value="Atenção"/&gt;
+&lt;input type="button" onclick="verde()" id="verde" class="semaforo" value="Siga"/&gt;
+</code>
+</pre>
+
+<p>Ou simplificando, com um parâmetro:</p>
+
+<pre>
+<code>
+function sinal(estado) {
+    document.getElementById("farol").src = "_imagens/" + estado + ".png";
+}
+</code>
+</pre>
+
+<p>E com os botões apenas assim:</p>
+
+<pre>
+<code>
+&lt;input type="button" onclick="sinal('sinal-vermelho')" id="vermelho" value="Pare"/&gt;
+&lt;input type="button" onclick="sinal('sinal-amarelo')" id="amarelo" value="Atenção"/&gt;
+&lt;input type="button" onclick="sinal('sinal-verde')" id="verde" value="Siga"/&gt;
+</code>
+</pre>
+
+<p>PS: Após o método, se coloca "src" para trabalhar com arquivos ou links. E "value" para valores (como os passados por um formulário). Outros dados de uma tag, como href, title e outros também podem ser trabalhados.</p>
+
+<h3>Manipulando objetos HTML pelo ID - Parte 2</h3>
+
+<p>Continuando, vamos escrever esse código, que nesse caso, trabalhará com o value:</p>
+
+<pre>
+<code>
+function custoGas() {
+    var precoGas = document.getElementById("cPreG").value;
+    var totalGas = document.getElementById("cTotG").value;
+    var litroGas = parseFloat(totalGas) / parseFloat(precoGas);
+    document.getElementById("cLitG").value = litroGas.toFixed(3);
+}
+</code>
+</pre>
+
+<p>HTML do código acima:</p>
+
+<pre>
+<code>
+&lt;form method="get" oninput="custoGas()"&gt;
+    &lt;p&gt;Total a Pagar: R$&lt;input type="number" name="tTotG" id="cTotG" min="0" step="0.01" value="0"/&gt;&lt;/p&gt;
+    &lt;p&gt;Litros &lt;input type="number" name="tLitG" id="cLitG" min="0" step="0.001" value="0"/&gt;&lt;/p&gt;
+    &lt;p&gt;Preço p/ Litro: R$&lt;input type="number" name="tPreG" id="cPreG" step="0.001" value="3.099" readonly/&gt;&lt;/p&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>Você pode passar parâmetros dentro das funções também, veja nesse exemplo, que usamos eventos pra acender, apagar e quebrar uma lâmpada (nesse caso os caminhos dos arquivos ficam sendo parte dos parâmetros):</p>
+
+<pre>
+<code>
+var quebrada = false;
+function mudaLampada(tipo) {
+    if(!quebrada) {
+        document.getElementById("luz").src = "_imagens/" + tipo + ".jpg" ;
+        if(tipo == "lampada-quebrada") {
+            quebrada = true;
+        }
+    }
+}
+</code>
+</pre>
+
+<p>No código HTML, ficaria assim:</p>
+
+<pre>
+<code>
+&lt;img src="_imagens/lampada-apagada.jpg" onmouseover="mudaLampada('lampada-acesa')" onmouseout="mudaLampada('lampada-apagada')"<br/>onclick="mudaLampada('lampada-quebrada')" id="luz"/&gt;
+</code>
+</pre>
+
+<p>Também podemos usar variáveis nos parâmetros getElementById, nas atribuições dos mesmos.</p>
+
+<p>Também podemos usar isso para validar formulários em HTML, veja um exemplo:</p>
+
+<pre>
+<code>
+function validar() {
+    // Use let ao invés de var em funções
+    let nome = document.getElementById("cNome").value;
+    let mail = document.getElementById("cMail").value;
+    let mens = document.getElementById("cMsg").value;
+    
+    if(nome == "") {
+        alert("Você deve preencher o campo 'Nome Completo'!");
+        document.getElementById("cNome").focus();
+        return false;
+    }
+    else if(mail == "") {
+        alert("Você deve preencher o campo 'E-mail'!");
+        document.getElementById("cMail").focus();
+        return false;
+    }
+    else if(mens == "") {
+        alert("Você deve preencher o campo 'Sua Mensagem'!");
+        document.getElementById("cMsg").focus();
+        return false;
+    }   
+}
+</code>
+</pre>
+
+<p>PS: O Método <code>focus()</code> pode ser usado normalmente no getElementById().</p>
+
+<p>Para isso basta invocar a função colocando um onclick no botão "Enviar", ou mesmo colocar cada função num onblur em cada input.</p>
+
+<p>O mesmo método acima pode ser usado usando os names ao invés das ids dos inputs, dessa forma:</p>
+
+<pre>
+<code>
+function validar() {
+    let nome = document.nameFormulario.nameInputNome.value;
+    let mail = document.nameFormulario.nameInputMail.value;
+    let mens = document.nameFormulario.nameTextareaMsg.value;
+    
+    if(nome == "") {
+        alert("Você deve preencher o campo 'Nome Completo'!");
+        document.nameFormulario.nameInputNome.focus();
+        return false;
+    }
+    else if(mail == "") {
+        alert("Você deve preencher o campo 'E-mail'!");
+        document.nameFormulario.nameInputMail.focus();
+        return false;
+    }
+    else if(mens == "") {
+        alert("Você deve preencher o campo 'Sua Mensagem'!");
+        document.nameFormulario.nameTextareaMsg.focus();
+        return false;
+    }   
+}
+</code>
+</pre>
+
+<p>PS: Podemos colocar, logo após o value, o método <code>trim()</code> para remover espaços desnecessários.</p>
+
+<p>Podemos também pegar elementos pelo nome da tag usando o <code>document.getElementsByTagName()</code> (atenção que o Elements tá no plural), dessa forma:</p>
+
+<pre>
+<code>
+var tags = document.getElementsByTagName("title"); // Isso recebe todos os elementos das tags especificadas, que serão colocados num vetor.
+
+document.write(tags[0].innerHTML); // Isso exibe tudo que tiver na tag especificada, contada a partir do zero.
+</code>
+</pre>
+
+<p>Podemos também pegar pelo name dos conteúdos HTML usando <code>document.getElementByName()</code>.</p>
+
+<p>O innerHTML pode ser utilizado para pegar ou alterar o que estiver dentro de duas tags (por exemplo, tudo que está dentro de uma tag p ou h2). Por exemplo:</p>
+
+<pre>
+<code>
+var pegaElemento = document.getElementById("texto").innerHTML;
+
+alert(pegaElemento);
+</code>
+</pre>
+
+<p>PS: Podemos colocar, no lugar do nome da tag, o asterisco (*), para pegar elementos de todas as tags da página. E lembre-se também que o código Javascript nesse caso, deve vir depois das tags especificadas senão não funciona.</p>
+
+<p>Outro exemplo de uso de innerHTML para alterar conteúdos das tags:</p>
+
+<pre>
+<code>
+document.getElementsByTagName("h1")[0].innerHTML = "Novo";
+</code>
+</pre>
+
+<p>Isso é usado principalmente para mudar elementos de tags que não aceitam elementos value como a tag p, e podemos usar isso para mudar elementos de textos utilizando um evento, por exemplo.</p>
+
+<p>Existem outras opções para pegar dados como o da classe (<code>document.getElementsByClassName()</code>).</p>
+
+<h3>Identificando e convertendo dados</h3>
+
+<p>O operador <code>typeof</code> é usado pra identificar tipos de dados e variáveis, por exemplo:</p>
+
+<pre>
+<code>
+document.write(typeof "Música" + "&lt;br/&gt;");
+document.write(typeof 395.21 + "&lt;br/&gt;");
+document.write(typeof 14 + "&lt;br/&gt;");
+document.write(typeof true + "&lt;br/&gt;");
+</code>
+</pre>
+
+<p>Para converter números em strings usamos o método <code>String()</code>, por exemplo:</p>
+
+<pre>
+<code>
+var n = 40;
+document.write("A variável n é do tipo " + typeof n + ".&lt;br/&gt;");
+n = String(n);
+document.write("A variável n agora é do tipo " + typeof n + ".&lt;br/&gt;");
+document.write("Valor de n: " + n + "&lt;br/&gt;"); 
+</code>
+</pre>
+
+<p>O método <code>String()</code> também pode ser usado pra converter valores lógicos para string, por exemplo:</p>
+
+<pre>
+<code>
+var b = false;
+document.write("A variável b é do tipo " + typeof b + ".&lt;br/&gt;");
+b = String(b);
+document.write("A variável b agora é do tipo " + typeof b + ".&lt;br/&gt;");
+document.write("Valor de b: " + b + "&lt;br/&gt;");
+</code>
+</pre>
+
+<p>Podemos também usar o método toString() do objeto, exemplo:</p>
+
+<pre>
+<code>
+var n = 40;
+document.write("A variável n é do tipo " + typeof n + ".&lt;br/&gt;");
+n = n.toString();
+document.write("A variável n agora é do tipo " + typeof n + ".&lt;br/&gt;");
+document.write("Valor de n: " + n + "&lt;br/&gt;");
+</code>
+</pre>
+
+<p>Para converter strings em números, usamos o método <code>Number()</code>, por exemplo:</p>
+
+<pre>
+<code>
+var a = "15";
+var b = "21.6";
+document.write("A variável a é do tipo " + typeof a + ".&lt;br/&gt;");
+document.write("A variável b é do tipo " + typeof b + ".&lt;br/&gt;");
+a = Number(a);
+b = Number(b);
+document.write("A variável a agora é do tipo " + typeof a + ".&lt;br/&gt;");
+document.write("A variável b agora é do tipo " + typeof b + ".&lt;br/&gt;");
+document.write("Valor de a: " + a + ".&lt;br/&gt;");
+document.write("Valor de b: " + b + ".&lt;br/&gt;");
+</code>
+</pre>
+
+<p>Pode se converter uma string específica para um número inteiro usando o método <code>parseInt()</code> (que só converte os números inteiros) e o <code>parseFloat()</code> (que mantém as casas decimais, e pode ser usada com inteiros também), como já visto acima, exemplo:</p>
+
+<pre>
+<code>
+var a = "20";
+document.write("A variável a é do tipo " + typeof a + ".&lt;br/&gt;");
+a = parseInt(a);
+document.write("A variável a agora é do tipo " + typeof a + ".&lt;br/&gt;");
+document.write("Valor de a: " + a + ".&lt;br/&gt;");
+var b = "14.85";
+document.write("A variável b é do tipo " + typeof b + ".&lt;br/&gt;");
+b = parseFloat(b);
+document.write("A variável b agora é do tipo " + typeof b + ".&lt;br/&gt;");
+document.write("Valor de b: " + b + ".&lt;br/&gt;");
+</code>
+</pre>
+
+<p>Quando usamos números de ponto flutuante, podemos controlar a exibição de casas decimais com o método <code>toFixed()</code>, com o número de casas desejadas entre os parênteses, por exemplo:</p>
+
+<pre>
+<code>
+var a = 25.3;
+alert("O valor é de " + a.toFixed(2));
+</code>
+</pre>
+
+<p>Podemos também controlar o número máximo de casas com o método <code>toPrecision()</code> (só que esse limita todos os números, não apenas os decimais), usando da mesma forma do toFixed() por exemplo:</p>
+
+<pre>
+<code>
+var a = 13.4;
+alert("O valor é de " + a.toPrecision(4));
+</code>
+</pre>
+
+<p>PS: Temos também o método <code>charAt()</code>, que retorna o caractere da posição específica da string (do índice especificado). Veja um exemplo:</p>
+
+<pre>
+<code>
+var frase = "Uma frase qualquer!";
+document.write(frase);
+document.write("&lt;br/&gt;Primeiro caractere: " + frase.charAt(0));
+document.write("&lt;br/&gt;Último caractere: " + frase.charAt(frase.length - 1));
+</code>
+</pre>
+
+<p>PS: Observe que o atributo <code>length</code> do objeto string retorna a quantidade de caracteres do mesmo.</p>
+
+<p>Podemos usar a função <code>substring()</code> para pegar partes desejadas de uma string, por exemplo:</p>
+
+<pre>
+<code>
+var frase = "Uma frase qualquer!";
+var cont = 0;
+alert(frase.substring(0, 9));
+alert(frase.substring(10, frase.length));
+</code>
+</pre>
+
+<p>Temos também o replace para substituir partes de uma string, por exemplo:</p>
+
+<pre>
+<code>
+var dinheiro = "R$ 125,94";
+
+var grana = parseFloat(dinheiro.replace(",", ".").replace("R$", "").trim());
+
+alert(typeof grana);
+
+document.write(grana);
+</code>
+</pre>
+
+<p>PS: Esse método só substitui apenas uma ocorrência. Para substituir todas as ocorrências, use <code>replaceAll()</code>, da mesma forma.</p>
+
+<p>E este pode ser aplicado também assim, para remover, por exemplo, caracteres não-numéricos:</p>
+
+<pre>
+<code>
+var entrada = prompt("Digite o CPF:");
+
+var strCpf = entrada.replace(/[^\d]+/g, "").trim();
+
+alert(strCpf);
+</code>
+</pre>
+
+<p>O eval() é uma função que avalia ou executa um argumento. Se o argumento for uma expressão, ele avalia a expressão. Se o argumento for uma ou mais declarações JS, ele executa as instruções. Veja um exemplo:</p>
+
+<pre>
+<code>
+var x = eval(prompt("Digite um número:")) + eval(prompt("Digite outro número:"));
+alert(x);
+</code>
+</pre>
+
+<p>A grosso modo, ele serve pra pegar números (por exemplo, de um input ou prompt) em strings e tratar como numbers, se for passado outro caractere, ele não executará (mas é bom não exagerar no uso disso).</p>
+
+<p>Para formatar moedas, podemos fazer assim:</p>
+
+<pre>
+<code>
+var money = 96848.50;
+alert(money.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})); // Pra Dólar é USD e pra Euro é EUR
+</code>
+</pre>
+
+<p>Podemos verificar também se um número é nulo, usando <code>isNaN()</code>, assim:</p>
+
+<pre>
+<code>
+var res = Math.sqrt(-1);
+
+if(isNaN(res)) {
+    alert("Não é possível tirar raiz de número negativo!");
+}
+else {
+    alert("A raiz é " + res + ".");
+}
+</code>
+</pre>
+
+<p>Podemos também usar os métodos <code>toLowerCase()</code> e <code>toUpperCase()</code> para converter as letras para minúsculas e maiúsculas, respectivamente, dessa forma:</p>
+
+<pre>
+<code>
+var minus = "abc";
+
+document.write(minus.toUpperCase());
+
+document.write("&lt;br/&gt;");
+
+var maius = "DEF";
+
+document.write(maius.toLowerCase());
+</code>
+</pre>
+
+<p>Temos vários outros métodos para manipular strings, como podem ver:</p>
+
+<pre>
+<code>
+var frase = "Isso é uma String";
+
+document.write(`${frase.split("").reverse().join("")}&lt;br/&gt;`); // Inverte a frase, o split separa em caracteres e joga num array, o reverse inverte e o join junta tudo de novo numa string
+
+document.write(`${frase.concat(" e ela foi concatenada!")}&lt;br/&gt;`); // Concatena com mais algo
+
+document.write(`${frase.split("")}&lt;br/&gt;`); // O argumento é o divisor da string, ele joga num array
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-javascript-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-javascript-3.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

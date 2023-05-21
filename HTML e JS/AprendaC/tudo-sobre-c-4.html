@@ -1,0 +1,653 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda C</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-c-1.html">Tudo sobre C Parte 1!</a></li>
+                    <li><a href="tudo-sobre-c-2.html">Tudo sobre C Parte 2!</a></li>
+                    <li><a href="tudo-sobre-c-3.html">Tudo sobre C Parte 3!</a></li>
+                    <li><a href="tudo-sobre-c-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C Parte 4!</a></li>
+                    <li><a href="tudo-sobre-c-5.html">Tudo sobre C Parte 5!</a></li>
+                    <li><a href="tudo-sobre-c-6.html">Tudo sobre C Parte 6!</a></li>
+                    <li><a href="tudo-sobre-c-7.html">Tudo sobre C Parte 7!</a></li>
+                    <li><a href="tudo-sobre-c-8.html">Tudo sobre C Parte 8!</a></li>
+                    <li><a href="tudo-sobre-c-9.html">Tudo sobre C Parte 9!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C Parte 4</h2>
+
+<h3>Funções - Introdução</h3>
+
+<p>Uma função permite que você determine um trecho de código que executa uma tarefa específica e que você reutilize esse trecho de código sempre que necessário, sem a necessidade de recriar ou redigitar aquele código. As funções são os recursos mais importante em C e estão presentes em grande parte das linguagens de programação.</p>
+
+<p>O próprio main do C é uma função, assim como o printf e o scanf, mas essas são funções internas da linguagem.</p>
+
+<p>Veja como trabalhamos com funções em C:</p>
+
+<pre>
+<code>
+void escrevaNome(); // Isso avisa o compilador que existem funções.
+
+int main(void) {
+    setlocale(LC_ALL,"portuguese"); // Isso não tem nada a ver com a função, apenas corrige acentuações. Importe locale.h.
+    escrevaNome(); // Invocação da Função.
+    
+    return 0;
+}
+
+// Abaixo é a função, no caso, "escrevaNome()" é o nome que podemos definir pra função. Foi definida como void pra não retornar nada.
+
+void escrevaNome() {
+    printf("Introdução à Funções em C!\n");
+}
+</code>
+</pre>
+
+<p>Dentro da função principal int main, podemos colocar a invocação da função mais de uma vez, para ela ser executada mais vezes, por exemplo:</p>
+
+<pre>
+<code>
+int main(void) {
+    setlocale(LC_ALL,"portuguese");
+    escrevaNome();
+    escrevaNome();
+    escrevaNome();
+    escrevaNome();
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: É recomendado que cada função faça apenas uma coisa por vez.</p>
+
+<p>Também é possível passar parâmetros nas funções, passando as variáveis (por exemplo <code>funcao(int num, char let)</code>. Nos parâmetros também podemos passar arrays, passando a variável com ponteiro, algo tipo <code>funcao(int* vetorpassado)</code>.</p>
+
+<p>Elas também podem retornar valores, com a instrução <code>return</code> no final dela, só que nesse caso a função não será void, e sim do mesmo tipo do retorno (por exemplo, int, char ou float). Veja por exemplo:</p>
+
+<pre>
+<code>
+int quadrado(int n);
+
+int main(void) {
+    setlocale(LC_ALL,"portuguese");
+    int num = 5;
+
+    printf("O quadrado de %d é %d!", num, quadrado(num));
+    
+    return 0;
+}
+
+int quadrado(int n) {
+    return n * n;
+}
+</code>
+</pre>
+
+<p>PS: Não é possível usar parâmetros com valores padrões inicializados em C.</p>
+
+<h3>Funções - Escopo das Variáveis</h3>
+
+<p>O escopo de uma variável determina como e onde uma variável é utilizada dentro de um programa.</p>
+
+<p>Existem três escopos distintos em C:</p>
+
+<ul>
+    <li>Local</li>
+    <li>Parâmetro de Função</li>
+    <li>Global</li>
+</ul>
+
+<p>As variáveis locais são declaradas dentro de uma função. Elas não podem ser acessadas de fora da função, nem serem usadas diretamente por outras funções. Quando a função onde a variável local foi declarada termina sua execução (quando retorna), a variável é "destruída" (memória desalocada).</p>
+
+<p>Os parâmetros declarados em uma função são variáveis locais à função. Portanto, só podem ser acessados diretamente a partir de sua função, e sua existência cessa quando a função termina sua execução.</p>
+
+<p>As variáveis globais são declaradas fora das funções, incluindo a função main. Assim, se tornam acessíveis a partir de qualquer parte do programa, incluindo dentro de qualquer função presente. Eles permanecem disponíveis durante toda a execução do programa.</p>
+
+<p>PS: Podemos ter duas variáveis com o mesmo nome em um programa, se uma delas for local e a outra for globa, nesse caso, a variável local prevalece em seu escopo. Mas por conta da clareza do código, é altamente desaconselhável.</p>
+
+<p>Veja um exemplo do escopo de variáveis:</p>
+
+<pre>
+<code>
+void escrevaValor(); // Protótipo da função, apenas avisa que existe tal função no programa.
+
+int numero = 15; // Global
+
+int main(void) {
+    setlocale(LC_ALL,"portuguese"); // Importar locale.h
+    printf("O número é %d\n", numero);
+    escrevaValor();
+    
+    return 0;
+}
+
+void escrevaValor() {
+    int dobro = numero * 2; // Local
+    printf("E o dobro é %d\n", dobro);
+}
+</code>
+</pre>
+
+<p>No código acima, se pegarmos a variável global (no caso, a numero) e colocarmos dentro da função (escrevaValor()), ele dará erro, porque assim ela se tornará local e só funciona dentro da função da qual está.</p>
+
+<p>PS: Também é possível implementar a funcão antes do método main, nesse caso, dispensa a indicação do mesmo, mas não é recomendado.</p>
+
+<p>Caso deseje inicializar uma variável de um parâmetro com um valor padrão, coloque apenas na indicação, não coloque nada na função (a não ser que ela venha antes do main, nesse caso sim pode ser colocada a inicialização diretamente nela).</p>
+
+<h3>Arrays - Declaração e Atribuição</h3>
+
+<p>Um array é uma estrutura homogênea que mantém uma série de dados do mesmo tipo. Podemos acessar os elementos individuais por meio de um índice, geralmente numérico. Possuem tamanho fixo. Os arrays são contados a partir do 0.</p>
+
+<p>Um array de uma dimensão pode ser chamado de vetor. Um array bidimensional é conhecido como matriz.</p>
+
+<p>Veja um exemplo de uso de vetores:</p>
+
+<pre>
+<code>
+float notas[4] = {7.5, 8.0, 6.5, 3.5}; // Itens do Array, de 0 à 3, o número dentro dos colchetes predefine as posições do array.
+int i;
+
+for(i = 0; i < 4; i++) {
+    printf("Nota %d = %4.2f\n", i + 1, notas[i]); // i define a posição do array, é somado com 1 pra exibir de 1 à 4.
+}
+</code>
+</pre>
+
+<p>Veja outro exemplo, só que o array não será inicializado, e terá valores passados pelo usuário:</p>
+
+<pre>
+<code>
+float notas[4];
+int i;
+    
+for(i = 0; i < 4; i++) {
+    printf("Entre com a %dª nota do aluno: ", i + 1);
+    scanf("%f", &amp;notas[i]);
+}
+
+for(i = 0; i < 4; i++) {
+    printf("Nota %d = %4.2f\n", i + 1, notas[i]);
+}
+</code>
+</pre>
+
+<p>PS: Podemos também ler o número de casas de um vetor através do método sizeof (dividindo o sizeof do vetor pelo sizeof do tipo dele), dessa forma:</p>
+
+<pre>
+<code>
+float notas[4];
+int i;
+    
+for(i = 0; i < sizeof(notas) / sizeof(float); i++) {
+    printf("Entre com a %dª nota do aluno: ", i + 1);
+    scanf("%f", &amp;notas[i]);
+}
+
+for(i = 0; i < sizeof(notas) / sizeof(float); i++) {
+    printf("Nota %d = %4.2f\n", i + 1, notas[i]);
+}
+</code>
+</pre>
+
+<p>Caso seja para ler a quantidade de casas de uma sequência de caracteres, use o método <code>strlen()</code>, dessa forma:</p>
+
+<pre>
+<code>
+char *frase;
+
+frase = "Isso é uma sequência de char!";
+int i;
+
+for(i = 0; i < strlen(frase); i++) {
+    printf("%dº caractere: %c\n", i + 1, frase[i]);
+}
+</code>
+</pre>
+
+<h3>Ordenando Arrays com Bubblesort</h3>
+
+<p>O Bubblesort (classificação por bolhas) toma um vetor que tenha vários itens e ordenar os mesmos. Isso é muito útil para encontrar um valor com mais rapidez num código.</p>
+
+<p>Veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+setlocale(LC_ALL,"portuguese"); // Importar locale.h.
+
+int numeros[TAM]; // Array com constante, colocar #define no começo do programa.
+int i, aux, cont;
+
+printf("Entre com dez números para preencher o array (Pressione Enter após cada um):\n");
+
+for(i = 0; i < TAM; i++) {
+    scanf("%d", &numeros[i]);
+}
+    
+printf("Ordem atual dos itens no array:\n");
+
+for(i = 0; i < TAM; i++) {
+    printf("%4d", numeros[i]);
+}
+
+// Ordenação Bubblesort.
+
+for(cont = 1; cont < TAM; cont++) {
+    for(i = 0; i < TAM - 1; i++) {
+        if(numeros[i] > numeros[i + 1]) {
+            aux = numeros[i];
+            numeros[i] = numeros[i + 1];
+            numeros[i + 1] = aux;
+        }
+    }
+}
+
+printf("\nElementos do array em ordem crescente:\n");
+
+for(i = 0; i < TAM; i++) {
+    printf("%4d", numeros[i]);
+}
+</code>
+</pre>
+
+<p>Como visto acima, o Bubblesort nada mais é do que uma estrutura com dois for encadeados e um if dentro o segundo for, isso que fará a ordenação.</p>
+
+<p>PS: Para usar constantes, devemos colocar <code>#define</code> no formato #define NOMEDACONSTANTE DADO (no caso acima é #define TAM 10, para definir a quantidade de espaços do array, de 0 a 9). O #define é colocado junto com as bibliotecas, na parte superior do programa (sem ;). Apesar de ser possível exibir usando números diretamente nos array, podemos usar as constantes.</p>
+
+<h3>Matrizes - Declaração e Inicialização</h3>
+
+<p>Uma matriz é um tipo de array que possuí duas dimensões (como se tivesse linhas e colunas, tipo uma tabela). As linhas e colunas são númeradas a partir do 0. Assim como os vetores, as matrizes só suportam dados do mesmo tipo. A grosso modo, são arrays dentro de arrays.</p>
+
+<p>Veja uma representação gráfica de uma matriz com números:</p>
+
+<table>
+    <tr>
+        <td>7,5</td>
+        <td>6,8</td>
+        <td>9,6</td>
+        <td>6,7</td>
+    </tr>
+    <tr>
+        <td>6,5</td>
+        <td>6,3</td>
+        <td>8,4</td>
+        <td>7,6</td>
+    </tr>
+    <tr>
+        <td>5,7</td>
+        <td>8,6</td>
+        <td>9,0</td>
+        <td>4,5</td>
+    </tr>
+    <tr>
+        <td>4,5</td>
+        <td>5,8</td>
+        <td>6,8</td>
+        <td>7,0</td>
+    </tr>
+    <tr>
+        <td>3,6</td>
+        <td>7,6</td>
+        <td>8,1</td>
+        <td>6,5</td>
+    </tr>
+</table>
+
+<p>Veja um exemplo de declaração de matriz:</p>
+
+<pre>
+<code>
+setlocale(LC_ALL,"portuguese"); // Importar locale.h.
+int linha, coluna;
+
+// Matriz abaixo, não esquecer de definir as constantes no início do código.
+
+float notas[NUM_L][NUM_C] = {{7.5, 6.8, 9.6, 6.7},
+                             {6.5, 6.3, 8.4, 7.6},
+                             {5.7, 8.6, 9.0, 4.5},
+                             {4.5, 5.8, 6.8, 7.0},
+                             {3.6, 7.6, 8.1, 6.5}};
+
+printf("Exibindo o conteúdo da matriz declarada e inicializada:\n\n");
+
+for(linha = 0; linha < NUM_L; linha++) {
+    for(coluna = 0; coluna < NUM_C; coluna++) {
+        printf("%5.1f", notas[linha][coluna]);
+    }
+    printf("\n");
+}
+
+printf("\nValor do elememnto na 2ª linha, 3ª coluna: %4.2f\n", notas[1][2]); // Aqui pode ter os números alterados, esse é só um exemplo. Também pode ter um scanf aqui.
+</code>
+</pre>
+
+<p>Como visto acima, os dois for que farão a exibição de todos os dados da matriz. Não esqueça das constantes, que no caso, são a quantidade de colunas e linhas da matriz, e não a contagem delas.</p>
+
+<h3>Uso de System e Getenv</h3>
+
+<p>Para usarmos comandos do CMD ou terminal, usamos o system (import stdlib.h) para isso, dessa forma:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+    system("color 79");
+    
+    system("title System em C");
+
+    system("pause");
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>A maioria dos comandos do terminal (CMD para programas do Windows e Terminal para sistemas Unix) do sistema podem ser usados normalmente, mas os comandos de caminhar em pastas (cd) costumam dar erro, principalmente pelo uso de barras e também pelo fato do system não manter os dados após cada chamada dele.</p>
+
+<p>Para caminharmos por pastas no sistema, usamos o chdir para isso (importe unistd.h), dessa forma:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+
+int main() {
+    chdir("C:/Windows/System32");
+
+    system("dir");
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Só que variáveis de ambiente como %username% e %userprofile% no Windows (ou coisas como $HOME no Unix), não funcionam o chdir, para isso, usamos o getenv (sem qualquer símbolo de indicação de variável), dessa forma (importe unistd.h):</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+
+int main() {
+    chdir(getenv("USERPROFILE"));
+
+    chdir("Desktop");
+
+    system("dir");
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Dessa forma, facilita a manipulação de arquivos, podendo criar funções para criar, mover ou deletar arquivos.</p>
+
+<p>PS: No Windows, o chdir pode não funcionar, nesse caso use <code>SetCurrentDirectory()</code> (importe windows.h) para isso. E mesmo no Windows, em ambos os casos, utilize a barra pro lado direito, se for usar pra esquerda coloque duas. Isso acontece porque barras pra esquerda são interpretadas como sequências de escape.</p>
+
+<p>O getenv funciona com esse parâmetros:</p>
+
+<table>
+    <tr>
+        <th>Variável</th>
+        <th>Conteúdo Exibido</th>
+    </tr>
+    <tr>
+        <td>USERPROFILE</td>
+        <td>C:\Users\UsuarioAtual</td>
+    </tr>
+    <tr>
+        <td>PROGRAMDATA</td>
+        <td>C:\Programdata</td>
+    </tr>
+    <tr>
+        <td>ALLUSERSPROFILE</td>
+        <td>C:\Programdata</td>
+    </tr>
+    <tr>
+        <td>WINDIR</td>
+        <td>C:\Windows</td>
+    </tr>
+    <tr>
+        <td>SYSTEMROOT</td>
+        <td>C:\Windows</td>
+    </tr>
+    <tr>
+        <td>PROGRAMFILES</td>
+        <td>C:\Program Files</td>
+    </tr>
+    <tr>
+        <td>COMMONPROGRAMFILES</td>
+        <td>C:\Program Files\Common Files</td>
+    </tr>
+    <tr>
+        <td>USERNAME</td>
+        <td>"UsuarioAtual"</td>
+    </tr>
+    <tr>
+        <td>COMPUTERNAME</td>
+        <td>Nome do Computador</td>
+    </tr>
+    <tr>
+        <td>LOCALAPPDATA</td>
+        <td>C:\Users\Usuário Atual\AppData\Local</td>
+    </tr>
+    <tr>
+        <td>APPDATA</td>
+        <td>C:\Users\Usuário Atual\AppData\Roaming</td>
+    </tr>
+    <tr>
+        <td>ERRORLEVEL</td>
+        <td>Código de Erro do Último Comando (quando é diferente de 0).</td>
+    </tr>
+    <tr>
+        <td>CD</td>
+        <td>Pasta Atual</td>
+    </tr>
+    <tr>
+        <td>USERDOMAIN</td>
+        <td>Nome do Computador</td>
+    </tr>
+    <tr>
+        <td>SYSTEMDRIVE</td>
+        <td>C:</td>
+    </tr>
+    <tr>
+        <td>HOMEDRIVE</td>
+        <td>C:</td>
+    </tr>
+    <tr>
+        <td>SYSTEMDIRECTORY</td>
+        <td>C:\Windows\System32</td>
+    </tr>
+    <tr>
+        <td>COMSPEC</td>
+        <td>C:\Windows\System32\cmd.exe</td>
+    </tr>
+    <tr>
+        <td>TEMP</td>
+        <td>C:\Users\Usuário Atual\AppData\Local\Temp</td>
+    </tr>
+    <tr>
+        <td>TMP</td>
+        <td>C:\Users\Usuário Atual\AppData\Local\Temp</td>
+    </tr>
+    <tr>
+        <td>HOMEPATH</td>
+        <td>\Users\Usuário Atual</td>
+    </tr>
+    <tr>
+        <td>PATH</td>
+        <td>Retorna o path do sistema</td>
+    </tr>
+    <tr>
+        <td>PATHEXT</td>
+        <td>Retorna as extensões de executáveis</td>
+    </tr>
+    <tr>
+        <td>OS</td>
+        <td>Retorna o nome do Sistema Operacional</td>
+    </tr>
+    <tr>
+        <td>PROCESSOR_IDENTIFIER</td>
+        <td>Retorna dados sobre o processador</td>
+    </tr>
+</table>
+
+<p>Para usar em Linux, o processo é o mesmo, só mudando a navegação entre pastas (seria coisas como /usr/local/bin) e os comandos do getenv, que são esses:</p>
+
+<table>
+    <tr>
+        <th>Variável</th>
+        <th>Conteúdo Exibido</th>
+    </tr>
+    <tr>
+        <td>HOME</td>
+        <td>/home/UsuarioAtual</td>
+    </tr>
+    <tr>
+        <td>USER</td>
+        <td>"UsuarioAtual"</td>
+    </tr>
+    <tr>
+        <td>LOGNAME</td>
+        <td>"UsuarioAtual"</td>
+    </tr>
+	<tr>
+        <td>PWD</td>
+        <td>Diretório Atual</td>
+    </tr>
+    <tr>
+        <td>LANG</td>
+        <td>Idioma Atual</td>
+    </tr>
+	<tr>
+        <td>SHELL</td>
+        <td>/bin/bash (ou o Shell Atual)</td>
+    </tr>
+	<tr>
+        <td>TERM</td>
+        <td>Tipo de Terminal Usado</td>
+    </tr>
+	<tr>
+        <td>PATH</td>
+        <td>Diretórios a Pesquisar</td>
+    </tr>
+	<tr>
+        <td>MAIL</td>
+        <td>E-mail Definido</td>
+    </tr>
+	<tr>
+        <td>OSTYPE</td>
+        <td>Tipo de Sistema Usado</td>
+    </tr>
+    <!--
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+    -->
+</table>
+
+<ul>
+    <li><a href="tudo-sobre-c-3.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-c-5.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

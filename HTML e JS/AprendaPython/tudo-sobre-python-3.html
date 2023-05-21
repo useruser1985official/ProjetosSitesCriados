@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Python</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Python</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-python-1.html">Tudo sobre Python Parte 1!</a></li>
+                    <li><a href="tudo-sobre-python-2.html">Tudo sobre Python Parte 2!</a></li>
+                    <li><a href="tudo-sobre-python-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Python Parte 3!</a></li>
+                    <li><a href="tudo-sobre-python-4.html">Tudo sobre Python Parte 4!</a></li>
+                    <li><a href="tudo-sobre-python-5.html">Tudo sobre Python Parte 5!</a></li>
+                    <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
+                    <li><a href="tudo-sobre-python-7.html">Tudo sobre Python Parte 7!</a></li>
+                </menu>
+            </header>
+           
+<h2>Tudo sobre Python Parte 3</h2>
+
+<h3>Cores no Terminal</h3>
+
+<p>No Python, existem inúmeras formas de fazer a mesma coisa, no caso de cores, existe a possibilidade de usar módulos, mas isso não será usado no exemplo.</p>
+
+<p>O padrão ANSI tem as chamadas sequências de escape (como o <code>\n</code> pra pular linha), e isso é intepretado pelo terminal, muito usado em várias linguagens além do Python, como o Java e o C.</p>
+
+<p>Para usar as sequências para cores, usaremos algo tipo <code>\033[0;33;44m</code> (o 033 é a faixa de código, o 0 é o estilo de fonte, o 33 é a cor da letra e o 44 a cor do fundo, mas não precisa seguir essa ordem por cada coisa ter sua faixa de letras). Nesse exemplo, trabalhemos com poucas cores, mas já é o suficiente por enquanto. Esse exemplo tem poucas cores, e não é utilizado valores como RGB ou hexadecimal nesse exemplo.</p>
+
+<p>Esses são as formatações que podemos utilizar nesse caso:</p>
+
+<table>
+    <caption>Estilo da Fonte</caption>
+    <tr>
+        <th>Código</th>
+        <th>Significado</th>
+    </tr>
+    <tr style="color: white; background-color: black">
+        <td>0</td>
+        <td>None</td>
+    </tr>
+    <tr style="font-weight: bold; color: white; background-color: black">
+        <td>1</td>
+        <td>Negrito</td>
+    </tr>
+    <tr style="text-decoration: underline; color: white; background-color: black">
+        <td>4</td>
+        <td>Sublinhado</td>
+    </tr>
+    <tr style="color: black; background-color: white">
+        <td>7</td>
+        <td>Negativo</td>
+    </tr>
+</table>
+
+<br/>
+
+<table>
+    <caption>Cor da Letra</caption>
+    <tr>
+        <th>Código</th>
+        <th>Significado</th>
+    </tr>
+    <tr style="color: white; background-color: black">
+        <td>30</td>
+        <td>Branco</td>
+    </tr>
+    <tr style="color: red; background-color: black">
+        <td>31</td>
+        <td>Vermelho</td>
+    </tr>
+    <tr style="color: green; background-color: black">
+        <td>32</td>
+        <td>Verde</td>
+    </tr>
+    <tr style="color: yellow; background-color: black">
+        <td>33</td>
+        <td>Amarelo</td>
+    </tr>
+    <tr style="color: blue; background-color: black">
+        <td>34</td>
+        <td>Azul</td>
+    </tr>
+    <tr style="color: magenta; background-color: black">
+        <td>35</td>
+        <td>Magenta</td>
+    </tr>
+    <tr style="color: cyan; background-color: black">
+        <td>36</td>
+        <td>Ciano</td>
+    </tr>
+    <tr style="color: gray; background-color: black">
+        <td>37</td>
+        <td>Cinza</td>
+    </tr>
+</table>
+
+<br/>
+
+<table style="color: rgba(160,160,0,0.90)">
+    <caption style="color: white">Cor da Fonte</caption>
+    <tr>
+        <th>Código</th>
+        <th>Significado</th>
+    </tr>
+    <tr style="background-color: white">
+        <td>40</td>
+        <td>Branco</td>
+    </tr>
+    <tr style="background-color: red">
+        <td>41</td>
+        <td>Vermelho</td>
+    </tr>
+    <tr style="background-color: green">
+        <td>42</td>
+        <td>Verde</td>
+    </tr>
+    <tr style="background-color: yellow">
+        <td>43</td>
+        <td>Amarelo</td>
+    </tr>
+    <tr style="background-color: blue">
+        <td>44</td>
+        <td>Azul</td>
+    </tr>
+    <tr style="background-color: magenta">
+        <td>45</td>
+        <td>Magenta</td>
+    </tr>
+    <tr style="background-color: cyan">
+        <td>46</td>
+        <td>Ciano</td>
+    </tr>
+    <tr style="background-color: gray">
+        <td>47</td>
+        <td>Cinza</td>
+    </tr>
+</table>
+
+<p>Alguns exemplos:</p>
+
+<table>
+    <tr>
+        <th>Exemplo</th>
+        <th>Código</th>
+    </tr>
+    <tr style="color: white; background-color: red">
+        <td>Teste</td>
+        <td>\033[0;30;41m</td>
+    </tr>
+    <tr style="text-decoration: underline; color: yellow; background-color: blue">
+        <td>Teste</td>
+        <td>\033[4;33;44m</td>
+    </tr>
+    <tr style="font-weight: bold; color: magenta; background-color: yellow">
+        <td>Teste</td>
+        <td>\033[1;35;43m</td>
+    </tr>
+    <tr style="color: white; background-color: green">
+        <td>Teste</td>
+        <td>\033[30;42m</td>
+    </tr>
+    <tr style="color: white; background-color: black">
+        <td>Teste</td>
+        <td>\033[m</td>
+    </tr>
+    <tr style="color: black; background-color: white">
+        <td>Teste</td>
+        <td>\033[7;30m</td>
+    </tr>
+</table>
+
+<p>PS: Nas duas últimas, o branco com fundo preto retorna pro padrão do terminal, e no preto com fundo branco, invertemos as cores e mostramos letras brancas (geralmente essa forma de inversão é usada quando precisamos usar letras pretas).</p>
+
+<p>Nesse exemplo ele retorna uma letra em vermelho:</p>
+
+<pre>
+<code>
+print("\033[31mOlá, Mundo")
+</code>
+</pre>
+
+<p>PS: Para funcionar também no prompt do Windows, coloque essas linhas antes de tudo:</p>
+
+<pre>
+<code>
+from colorama import init
+
+init()
+</code>
+</pre>
+
+<p>E nesse caso, tem também o fundo amarelo:</p>
+
+<pre>
+<code>
+print("\033[31;43mOlá, Mundo")
+</code>
+</pre>
+
+<p>Exemplo com negrito, e no qual o fundo não vai até o final da linha (por resetar as configurações após a mensagem):</p>
+
+<pre>
+<code>
+print("\033[1;31;43mOlá, Mundo\033[m")
+</code>
+</pre>
+
+<p>Outro exemplo, com letra branca e fundo rosa:</p>
+
+<pre>
+<code>
+print("\033[4;30;45mOlá, Mundo\033[m")
+</code>
+</pre>
+
+<p>Com inversões de cores:</p>
+
+<pre>
+<code>
+print("\033[7;30mOlá, Mundo\033[m")
+</code>
+</pre>
+
+<p>E podemos inverter outras cores, nesse caso, invertemos a cor amarela e azul :</p>
+
+<pre>
+<code>
+print("\033[7;33;44mOlá, Mundo\033[m")
+</code>
+</pre>
+
+<p>Outro exemplo com operadores e máscaras:</p>
+
+<pre>
+<code>
+a = 3
+b = 5
+print("Os valores são \033[32m{}\033[m e \033[31m{}\033[m.".format(a, b))
+</code>
+</pre>
+
+<p>Podemos utilizar as formatações nas máscaras também:</p>
+
+<pre>
+<code>
+nome = "Teste"
+print("Olá! Muito prazer em te conhecer, {}{}{}!".format("\033[4;34m", nome, "\033[m"))
+</code>
+</pre>
+
+<p>Ou usando uma variável composta (dicionário):</p>
+
+<pre>
+<code>
+nome = "Teste"
+cores = {"limpa": "\033[m", "azul": "\033[34m", "amarelo": "\033[33m", "negativo": "\033[7;30m"}
+print("Olá! Muito prazer em te conhecer, {}{}{}!".format(cores["negativo"], nome, cores["limpa"]))
+</code>
+</pre>
+
+<h3>Condições Aninhadas</h3>
+
+<p>Quando algo é aninhado, é como se tivesse uma dentro da outra (como as matrioskas, aquelas bonecas russas que uma fica dentro da outra), no caso, isso é com as condições, que uma é dentro da outra. Isso é útil para criar mais de duas opções.</p>
+
+<p>Muitas vezes na programação, é necessário escolher entre mais de dois caminhos, nem sempre o mais "fácil".</p>
+
+<p>Também dá pra usar, além do <code>if</code> e do <code>else</code>, o <code>elif</code> (igual ao else if em outras linguagens).</p>
+
+<p>PS: Quando usa o if, o elif e mesmo o else são opcionais, apenas o if é obrigatório nesse caso. Podemos ter quantos elif quisermos.</p>
+
+<p>Veja um exemplo de uso prático:</p>
+
+<pre>
+<code>
+nome = str(input("Qual é o seu nome? "))
+if nome == "Bruce":
+    print("Você é o Batman!")
+elif nome == "Clark" or nome == "Kal":
+    print("Você é o Superman!")
+else:
+    print("Você não é o Batman!")
+print("Bom dia, {}.".format(nome))
+</code>
+</pre>
+
+<p>Podemos criar mais de um elif:</p>
+
+<pre>
+<code>
+nome = str(input("Qual é o seu nome? "))
+if nome == "Bruce":
+    print("Você é o Batman!")
+elif nome == "Clark" or nome == "Kal":
+    print("Você é o Superman!")
+elif nome in "Diana Barry Hal":
+    print("Você pertence à Liga da Justiça!")
+else:
+    print("Você não é o Batman!")
+print("Bom dia, {}.".format(nome))
+</code>
+</pre>
+
+<p>PS: O <code>in</code> procura uma palavra qualquer dentro das aspas.</p>
+
+<h3>Estrutura de Repetição For</h3>
+
+<p>Vamos supor um personagem de videogame que precise passar por várias plataformas até pegar um objeto (uma maçã, por exemplo), enquanto ele não conseguir pegar a maçã, ele vai continuar andando, quando conseguir ele para. Mas e se forem muitos passos até chegar ao local, ficaria complicado postar várias vezes o mesmo comando, pra isso usamos os laços de repetição. Para isso, ele terá um delimitador para parar o laço num determinado ponto (que no caso, seria no momento que ele pegaria a maçã), que será a variável de controle. Na mesma situação, teríamos que pegar moedas em alguns trechos, no qual nós colocamos um condicional if dentro do laço.</p>
+
+<p>Vamos supor que nesse mesmo "chão" tenha buracos no lugar de algumas plataformas, nesse caso, teria o passo e o pulo 3 vezes, ao encerrar o laço, teria o anda e o pega.</p>
+
+<p>No caso, usaremos a estrutura for (para), que usa um range (intervalo) para funcionar. É usada para construir estruturas de loop nos casos que se conhecem de antemão o número de repetições que devem ser realizadas.</p>
+
+<p>Veja um exemplo simples de uso:</p>
+
+<pre>
+<code>
+for c in range(1, 6):
+    print("Oi")
+</code>
+</pre>
+
+<p>Como visto no caso acima, a contagem vai de 1 até 5, no 6 ele para (seria o equivalente à <code>c = 1; c < 6; c++</code> em outras linguagens). Mas no caso acima, pra entendermos melhor, começamos a contagem do 0 até o limite:</p>
+
+<pre>
+<code>
+for c in range(0, 5):
+    print("Oi")
+</code>
+</pre>
+
+<p>PS: Não esqueça da tabulação, ela é necessária pro comando entrar no laço.</p>
+
+<p>Se for necessário fazer uma contagem de outro limite (por exemplo, de 3 até 9), colocamos um número a mais porque o último é ignorado:</p>
+
+<pre>
+<code>
+for c in range(3, 10):
+    print(c)
+</code>
+</pre>
+
+<p>Ou podemos fazer assim:</p>
+
+<pre>
+<code>
+for c in range(3, 9 + 1):
+    print(c)
+</code>
+</pre>
+
+<p>Se quiser fazer a contagem de trás pra frente, colocamos o decremento assim, da mesma forma (no caso, de 6 à 1):</p>
+
+<pre>
+<code>
+for c in range(6, 0, -1):
+    print(c)
+</code>
+</pre>
+
+<p>Da mesma forma, podemos criar outros passos como incremento e decremento no terceiro número.</p>
+
+<pre>
+<code>
+for c in range(0, 7, 2):
+    print(c)
+print("\nFIM")
+</code>
+</pre>
+
+<p>Veja um exemplo de uso, o qual escolheremos o limite da contagem:</p>
+
+<pre>
+<code>
+n = int(input("Digite um número: "))
+
+for c in range(0, n + 1):
+    print(c)
+print("\nFIM")
+</code>
+</pre>
+
+<p>Veja um exemplo mais complexo:</p>
+
+<pre>
+<code>
+i = int(input("Início: "))
+f = int(input("Fim: "))
+p = int(input("Passo: "))
+
+for c in range(i, f + 1, p):
+    print(c)
+print("\nFIM")
+</code>
+</pre>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+s = 0
+for c in range(0, 3):
+    n = int(input("Digite o valor: "))
+    s += n
+print("O somatório de todos os valores é {}.".format(s))
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-python-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-python-4.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

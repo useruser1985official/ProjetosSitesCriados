@@ -1,0 +1,60 @@
+<?php
+$env = isset($_GET["env"]) ? trim(htmlspecialchars(strip_tags($_GET["env"]), ENT_QUOTES)) : "";
+
+session_start();
+
+if(isset($_SESSION["NoticiasGerais"]["logado"])) {
+    header("location: consultas.php");
+}
+else {
+    unset($_SESSION["NoticiasGerais"]["logado"]);
+
+    setcookie(session_name(), null, 0, "/");
+}
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Notícias Gerais - O Seu Site de Notícias</title>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script src="_javascript/funcoes.js"></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header id="cabecalho">
+                <hgroup>
+                    <h1><a href="index.php">Notícias Gerais</a></h1>
+                    <h2>O Seu Site de Notícias</h2>
+                </hgroup>
+            </header>
+            <section id="corpo">
+                <h2>Acesso ao Sistema</h2>
+                
+                <div id="mens">
+                    <?php if($env == "user"): ?>
+                    <h3>ERRO! User Inexistente!</h3>
+                    <?php elseif($env == "password"): ?>
+                    <h3>ERRO! Senha Incorreta!</h3>
+                    <?php elseif($env == "restricted"): ?>
+                    <h3>AVISO! Área Restrita!</h3>
+                    <?php endif; ?>
+                </div>
+
+                <form method="post" name="admin" id="fLogin" action="entrar.php">
+                    <fieldset>
+                        <legend>Digite o Login e a Senha</legend>
+                        <p><label for="cLogin">Login: </label><input type="text" name="tLogin" id="cLogin" size="15" maxlength="12" placeholder="Login" required autofocus/></p>
+                        <p><label for="cSenha">Senha: </label><input type="password" name="tSenha" id="cSenha" size="15" maxlength="12" placeholder="Senha" required/></p>
+                        <input type="checkbox" name="tLemb" id="cLemb" value="on" checked/><label for="cLemb"><span>Lembrar Sessão</span></label>
+                        <p><div id="botoes"><input type="submit" value="Entrar" onclick="validaAdm()"/></div></p>
+                    </fieldset>
+                </form>
+            </section>
+            <footer id="rodape">
+                <p><a href="contato.php">Entre em Contato Conosco</a></p>
+            </footer>
+        </div>
+    </body>
+</html>

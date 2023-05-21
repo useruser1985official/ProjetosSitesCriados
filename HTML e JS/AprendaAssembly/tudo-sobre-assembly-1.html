@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Assembly</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Assembly</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-assembly-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Assembly Parte 1!</a></li>
+                    <li><a href="tudo-sobre-assembly-2.html">Tudo sobre Assembly Parte 2!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Assembly Parte 1</h2>
+
+<h3>Hello World</h3>
+
+<p>Crie um arquivo com extensão .asm (é recomendado, não é obrigatório), como por exemplo olamundo.asm.</p>
+
+<p>Podemos usar o Sublime Text para editar os códigos, para deixar ele editável para Assembly, siga as instruções aqui: <a href="https://baixonivel.wordpress.com/2016/12/02/ferramentas-preparando-o-sublime-text-para-edicao-de-codigo-assembly/" target="_blank">https://baixonivel.wordpress.com/2016/12/02/ferramentas-preparando-o-sublime-text-para-edicao-de-codigo-assembly/</a></p>
+
+<p>Para colocarmos comentários no Assembly, fazemos assim, usando ponto e vírgula:</p>
+
+<pre>
+<code>
+; Isso aqui é comentário
+; Isso também é comentário
+</code>
+</pre>
+
+<p>Basicamente, um programa Assembly é definido em duas sessões, a .data (onde estarão nossas variáveis), e a .text, assim:</p>
+
+<pre>
+<code>
+section .data:
+
+section .text:
+</code>
+</pre>
+
+<p>Os dados colocados dentro delas é recomendado usarmos tabulações, mas não é obrigatório também.</p>
+
+<p>Altere o código assim:</p>
+
+<pre>
+<code>
+section .data:
+    ; Isso define a variável com o nome msg do tipo binário
+    ; e que ela está na posição 0xa
+
+    msg db "Olá, Mundo!", 0xa
+
+    ; Isso define o tamanho da variável:
+
+    len equ $- msg
+
+section .text:
+    ; Primeiro, nessa sessão do programa, ele entra nesse método:
+
+    global _start
+
+; Criação do método:
+
+_start:
+    ; Acumulador de registro de dados. Ele move edx para len, ecx pra msg, etc.:
+    mov edx, len
+
+    ; Acumulador de registro de conta (operações string). Move ecx para nossa mensagem (onde ela é escrita):
+    mov ecx, msg
+
+    ; Acumulador de registro base. Nosso arquivo de saída (no caso nossa mensagem):
+    mov ebx, 1
+
+    ; Acumulador pra operações numéricas. Manda informação pro sistema (no caso de tamanho):
+    mov eax, 4
+
+    ; Endereço do Kernel (manda pro Kernel executar os códigos de _start:
+    int 0x80
+
+    ; Saída do programa, para finalizar ele:
+    mov eax, 1
+    mov ebx, 0
+    
+    int 0x80
+</code>
+</pre>
+
+<p>PS: Os programas com eax, ebx, ecx e edx são para manter a compatibilidade com 32 bits, para sistemas 64 bits usamos rax, rbx, rcx e rdx.</p>
+
+<p>Para compilar o programa digite <code>nasm -f elf64 olamundo.asm -o olamundo.o</code> (elf32 se for Linux de 32 bits, em Windows é win32 e win64). Isso chama o compilador do sistema. O arquivo com extensão .o é o resultado da saída do que escrevemos em chamada de máquina.</p>
+
+<p>Para montar o código objeto compilado, digite <code>ld olamundo.o -s -o olamundo</code> (o segundo olamundo é o nome do executável, no Windows deve ser olamundo.exe, e talvez gerar um .obj ao invés de .o). Caso esteja num sistema 64 bits e queira um executável de 32, digite <code>ld olamundo.o -m elf_i386 -o olamundo</code>.</p>
+
+<p>Basicamente, o que vai em .data é onde declaramos as variáveis, e o que vai em .text é onde escrevemos nosso programa, onde ele inicializa o método _start.</p>
+
+<p>PS: Caso esteja usando o Windows, pode ser necessário definir essa função no .text:</p>
+
+<pre>
+<code>
+segment .text
+    global _WinMain@16
+
+_WinMain@16:
+    mov eax, 0
+    ret 16 
+</code>
+</pre>
+
+<p>Para entender algumas instruções Assembly, leia esse artigo: <a href="http://numaboa.com.br/informatica/tutos/assembly/1122-instrucoes-comuns" target="_blank">http://numaboa.com.br/informatica/tutos/assembly/1122-instrucoes-comuns</a></p>
+
+<h3>Entrada de Dados</h3>
+
+<p>Crie um novo arquivo chamado entrada.asm e coloque esse código:</p>
+
+<pre>
+<code>
+; Programa para Entrada de Dados
+
+; Variáveis declaradas e inicializadas:
+
+SYS_EXIT    equ 1
+RET_EXIT    equ 5
+SYS_READ    equ 3
+SYS_WRITE   equ 4
+STD_IN      equ 0
+STD_OUT     equ 1
+MAX_IN      equ 10
+
+; Sessões:
+
+segment .data
+    msg db "Entre com seu nome: ", 0xA, 0xD
+    len equ $- msg
+
+; Sessão para inicialização de informações que serão usadas
+
+segment .bss
+    nome resb 2
+
+segment .text
+    global _start
+
+; Função:
+
+_start:
+    ; Usando as variáveis fica mais fácil saber o que cada comando faz:
+    mov eax, SYS_WRITE
+    mov ebx, STD_OUT
+    mov ecx, msg
+    mov edx, len
+
+    int 0x80
+
+    ; Entrada de dados, na ordem leitura, entrada, variável e máximo de caracteres:
+
+    mov eax, SYS_READ
+    mov ebx, STD_IN
+    mov ecx, nome
+    mov edx, MAX_IN
+
+    int 0x80
+exit:
+    mov eax, SYS_EXIT
+    mov ebx, RET_EXIT
+    
+    int 0x80
+</code>
+</pre>
+
+<p>Agora compile o arquivo digitando <code>nasm -f elf32 entrada.asm</code> e monte digitando <code>ld entrada.o -s -o entrada</code>.</p>
+
+<h3>Entendimento</h3>
+
+<p>Para entendermos, vamos supor esse programa em C:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(void) {
+    return 2;
+}
+</code>
+</pre>
+
+<p>Compile esse programa para vermos o resultado. Se estiver no Linux dê <code>echo $?</code> para vermos a saída de retorno dele.</p>
+
+<p>Agora um programa semelhante em Assembly</p>
+
+<pre>
+<code>
+section .text
+    global _start
+
+_start:
+    mov eax, 1
+    mov ebx, 2 ; Valor de retorno ao método
+
+    int 0x80
+</code>
+</pre>
+
+<p>Monte e compile ele.</p>
+
+<p>Agora pra comparação, rode os programas criados em Assembly e dê o echo $? pra ver a saída deles. Mas isso não significa que eles são iguais, pra comparação dê o comando <code>file</code> em cada um deles.</p>
+
+<p>O programa em C depende de várias bibliotecas, para ver elas digite <code>ldd progC</code>, se vermos os programas em Assembly eles não terão essas bibliotecas.</p>
+
+<p>Para vermos o código Assembly desmontado desses programas, digitamos <code>objdump -dM intel progA</code>, veremos que os programas em Assembly tem exatamente o que escrevemos ali, agora faça o mesmo no programa em C e veja quanto código foi gerado.</p>
+
+<p>Assim, os programas feitos diretamente em Assembly são menores, já que os programas de linguagens de alto e médio nível (como o C), dependem de várias bibliotecas. Também podemos descobrir, por exemplo, se um programa tem vírus.</p>
+
+<h3>Comparação</h3>
+
+<p>Faça um programa em Assembly com esse código:</p>
+
+<pre>
+<code>
+section .data
+    ; dd - Define double word - 4 bytes
+    ; db - Define byte - 1 byte
+    ; dw - Define word - 2 bytes
+    ; dq - Define quad word - 4 bytes
+    ; dt - Define ten word - 10 bytes
+
+    x dd 50 ; Use dq em sistemas 64 bits
+
+    y dd 10 ; Idem
+
+    msg1 db "X maior que Y", 0xa
+    len1 equ $- msg1
+    msg2 db "Y maior que X", 0xa
+    len2 equ $- msg2
+
+section .text
+    global _start
+
+_start:
+    mov eax, DWORD [x] ; Para 64 bits, use QWORD
+    mov ebx, DWORD [y]
+    cmp eax, ebx        ; Pode ser maior, menor ou igual
+
+    ; Chamada de método e compara números:
+    jge maior           ; Significados: je = | jg > | jge >= | jl < | jle <= | jne !=
+    mov edx, len2
+    mov ecx, msg2
+
+    ; Pula pra outro método:
+    jmp final
+
+
+; Definição dos métodos:
+
+maior:
+    mov edx, len1
+    mov ecx, msg1
+
+final:
+    mov ebx, 1
+    mov eax, 4
+
+    int 0x80
+
+    mov eax, 1
+
+    int 0x80
+</code>
+</pre>
+
+<p>Agora tente mudar os números.</p>
+
+<p>Pra entender, caso ele compare os números maior ou igual, ele executará a função maior, senão ele continuará até o fluxo do programa e saltará pra função final.</p>
+
+<h3>Introdução à Funções</h3>
+
+<p>Primeiro, crie esse programa para incrementar um número:</p>
+
+<pre>
+<code>
+section .data
+    v1 dw '5', 0xa ; 5 no formato variável
+
+section .text
+    global _start
+
+_start:
+    mov eax, [v1] ; Endereço da variável
+    sub eax, '0'  ; Converte para inteiro
+    add eax,  1   ; Adiciona um à variável
+    add eax, '0'  ; Convete para caractere novamente
+    mov [v1], eax
+
+    mov ecx, v1
+    mov eax, 4
+    mov ebx, 1
+    mov edx, 1
+
+    int 0x80
+
+_final: ; Label indicando finalização
+    mov eax, 1
+    mov ebx, 0
+
+    int 0x80
+</code>
+</pre>
+
+<p>Monte e compile ele.</p>
+
+<p>Podemos colocar funções, coloque isso abaixo do label final:</p>
+
+<pre>
+<code>
+converter_valor:
+    mov eax, [v1]
+    sub eax, '0' 
+    add eax,  1 
+    add eax, '0'
+    mov [v1], eax
+
+    ret ; Retorno da função
+
+mostrar_valor:
+    mov eax, 4
+    mov ebx, 1
+    mov edx, 1 ; Quantidade de caracteres a ser mostrada
+
+    int 0x80
+
+    ret
+</code>
+</pre>
+
+<p>E em _start, coloque assim:</p>
+
+<pre>
+<code>
+_start:
+    ; Call indica invocação de funções:
+    call converter_valor
+
+    mov ecx, v1
+    call mostrar_valor
+
+    int 0x80
+</code>
+</pre>
+
+<p>Agora altere a section .data assim:</p>
+
+<pre>
+<code>
+section .data
+    v1 dw '105', 0xa
+</code>
+</pre>
+
+<p>E a mostra_valor assim:</p>
+
+<pre>
+<code>
+mostrar_valor:
+    mov eax, 4
+    mov ebx, 1
+    mov edx, 3 ; Quantidade de caracteres a ser mostrada
+
+    int 0x80
+
+    ret
+</code>
+</pre>
+
+<p>Só que ele faz o incremento no primeiro elemento, e não no último. Isso corrigiremos futuramente.</p>
+
+<ul>
+    <li><a href="tudo-sobre-assembly-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

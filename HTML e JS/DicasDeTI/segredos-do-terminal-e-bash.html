@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Segredos do Terminal</h2>
+
+<h3>Como Navegar pelas Pastas</h3>
+
+<p>Para navegar em pastas, usamos o comando <code>cd</code>, dessa forma:</p>
+
+<pre>
+<code>
+cd /usr/local
+</code>
+</pre>
+
+<p>PS: O terminal do Linux pode ser aberto usando Ctrl Alt T.</p>
+
+<p>Se estiver na pasta desejada, basta digitar o caminho, assim:</p>
+
+<pre>
+<code>
+cd bin
+</code>
+</pre>
+
+<p>PS: Não esqueça da primeira barra, caso vá pra outro diretório distante do atual. A barra indica o diretório raiz.</p>
+
+<p>As mesmas dicas valem pra executar programas ou outros arquivos, mas não esqueça da extensão dos mesmos, caso existam, pra rodar executáveis é necessário colocar o ponto. Para abrir o local, é preciso colocar <code>xdg-open</code> no início e em qualquer comando, também pode ser necessário colocar entre aspas, caso tenha espaços no nome, dessa forma:</p>
+
+<pre>
+<code>
+./"Nome do Executavel"
+</code>
+</pre>
+
+<p>No Linux, alguns comandos necessitam do uso de administrador, por isso, dependendo da distro (como o Ubuntu), você acessa ele digitando <code>sudo su</code> e colocando a senha, ou podemos usar o sudo apenas num comando específico que o exija (tipo <code>sudo nautilus fotos.jpg</code>). O Debian faz isso usando apenas o <code>su</code>, pois ele não usa sudo em nada. Quando o terminal está em root, ele está com um <code>#</code>, enquanto no modo usuário está com um <code>$</code>.</p>
+
+<p>E também podemos iniciar programas escrevendo o nome dele diretamente (pode ser necessário incluir um ./ antes, tudo junto, sem espaços, para arquivos executáveis, ou o caminho dos mesmos, como por exemplo <code>./script.sh</code>, exceto quando estão no PATH), inclusive usando com um parâmetro de inicialização, indiciando o que o programa abrirá, por exemplo:</p>
+
+<pre>
+<code>
+firefox uol.com.br
+gedit /home/administrador/Documentos/Contatos.txt
+</code>
+</pre>
+
+<p>Se quiser renomear um arquivo, use o comando <code>mv</code> seguido pelo nome antigo e o nome que o substituirá, dessa forma:</p>
+
+<pre>
+<code>
+mv "Fotos do dia.jpg" pictures.jpg
+</code>
+</pre>
+
+<p>Se quiser deletar um arquivo pernamentemente pelo terminal, use o comando <code>rm</code>, assim:</p>
+
+<pre>
+<code>
+rm "Fotos do dia.jpg"
+</code>
+</pre>
+
+<p>Para fazer o mesmo com pastas, usamos <code>rm</code> com o parâmetro <code>-r</code>, ou o <code>-rf</code> que força a exclusão sem perguntar, pra diretórios vazios usamos <code>-d</code> veja um exemplo:</p>
+
+<pre>
+<code>
+rm -rf "Nova Pasta"
+</code>
+</pre>
+
+<p>PS: Cuidado com isso.</p>
+
+<p>Também podemos mover arquivos, usando o comando <code>mv</code>, seguido pelo caminho pro qual o arquivo será movido, dessa forma:</p>
+
+<pre>
+<code>
+mv fotos.jpg /home/administrador/
+</code>
+</pre>
+
+<p>Para copiar, usamos da mesma forma, com o comando <code>cp</code>, só que o caminho terá que ter o nome informado caso queira copiar com outro nome, dessa forma:</p>
+
+<pre>
+<code>
+cp fotos.jpg /home/administrador/pictures.jpg
+</code>
+</pre>
+
+<p>Para mover ou copiar diretórios recursivamente, use o parâmetro -r:</p>
+
+<pre>
+<code>
+cp -r diretorio /home/administrador/
+</code>
+</pre>
+
+<p>Tanto o mv quando o cp podem ser usados com o parâmetro <code>-f</code> que suprime o pedido de substituição, caso exista um arquivo de mesmo nome, e da mesma forma o <code>-i</code> perguntar se desejamos substituir ele.</p>
+
+<p>PS: A barra tem que ser a <code>/</code>, senão não vai funcionar. O <code>*</code> pode ser usado como coringa para vários arquivos em todos os casos (por exemplo, <code>*.txt</code> afetaria todos os arquivos de texto).</p>
+
+<p>Para ver os diretórios dentro das pastas, use o comando <code>ls</code> (com o parâmetro <code>-l</code> podemos ver as permissões, que podem ser alteradas pelo comando <code>chmod</code>).</p>
+
+<p>Podemos também usar parâmetros no ls, o parâmetro <code>-d</code> lista só diretórios, <!--o <code>/a:-d</code> para não listar diretórios (a negação também pode ser usada com outros parâmetros), <code>/a:a</code> apenas arquivos,--> e o <code>-a</code> para arquivos ocultos<!--, <code>/a:r</code> para arquivos somente leitura e <code>/a:s</code> para arquivos de sistema (todos esses também podem usar a negação)-->. Um uso dele seria <code>ls -a</code>.
+
+<p>Também podemos listar apenas um tipo de extensão de arquivo, por exemplo:</p>
+
+<pre>
+<code>
+ls *.so
+</code>
+</pre>
+
+<p>Ou especificar o caminho que queremos verificar, caso não queira ver o conteúdo do diretório atual:</p>
+
+<pre>
+<code>
+ls /usr/bin
+</code>
+</pre>
+
+<!--
+<p>Podemos também salvar o conteúdo do dir ou de outro comando na área de transferência usando o comando <code>clip</code>, assim:</p>
+
+<pre>
+<code>
+dir | clip
+</code>
+</pre>
+-->
+
+<p>Para voltar um diretório, use o cd com dois pontos na frente, assim:</p>
+
+<pre>
+<code>
+cd ..
+</code>
+</pre>
+
+<p>PS: Com um ponto, ele fica no mesmo diretório.</p>
+
+<p>Você pode voltar a raiz do diretório da mesma forma, colocando uma barra após o cd, assim:</p>
+
+<pre>
+<code>
+cd /
+</code>
+</pre>
+
+<p>PS: O lado da barra é sempre o mesmo, e minúsculas são diferenciadas.</p>
+
+<p>Para limpar toda a tela do terminal, basta executar o comando <code>clear</code>.</p>
+
+<h3>Comandos para Desligar</h3>
+
+<p>Para desligar, usamos o comando <code>sudo shutdown -h now</code>.</p>
+
+<p>Para reiniciar, usamos <code>sudo shutdown -r now</code> ou <code>sudo reboot</code>.</p>
+
+<p>Para programar isso, usamos o número em minutos, por exemplo:</p>
+
+<pre>
+<code>
+sudo shutdown -r 10
+</code>
+</pre>
+
+<p>Usamos o parâmetro <code>-c</code> para cancelar qualquer um deles. Para exibir uma mensagem colocamos ela entre aspas. Veja um exemplo:</p>
+
+<pre>
+<code>
+sudo shutdown -r 10 "Reiniciaremos em 10 Minutos"
+</code>
+</pre>
+
+<h3>Como Procurar Comandos já digitados</h3>
+
+<p>Podemos usar o comando <code>history</code> para visualizar um comando já digitado.</p>
+    
+<h3>Como Encerrar Processos</h3>
+
+<p>Abra o terminal e digite <code>top</code> (pode ser também <code>htop</code>, <code>ps</code> ou <code>pstree</code>, mas a exibição é diferente) para exibir os números dos códigos ativos, depois use o comando <code>kill</code> seguido do código PID do processo, por exemplo:</p>
+
+<pre>
+<code>
+kill -9 352
+</code>
+</pre>
+
+<p>Podemos usar o <code>xkill</code> no terminal (ou clicar Alt F2), que transformará o cursor do mouse num "X", que deverá ser clicado somente no programa travado. Temos também a opção <code>killall</code> para matar todos os processos de um mesmo tipo.</p>
+
+<p>Podemos também usar <code>killall</code> e o nome do processo a ser excluído (como por exemplo <code>killall firefox</code>).</p>
+
+<h3>Usando os Comandos para Verificar Erros</h3>
+
+<p>Para procurar e corrigir erros, usamos os comandos nessa ordem:</p>
+
+<pre>
+<code>
+fdisk -l # (lista as partições)
+e2fsck /dev/hdxx -y # (colocar a partição com problema)
+</code>
+</pre>
+
+<p>Ou use apenas <code>fsck.ext3 /dev/hda1</code>.</p>
+
+<p>PS: Pode ser necessário desmontar a partição usando o comando <code>umount /dev/hdxx</code> e depois montar de novo com <code>mount /dev/hdxx</code> .</p>
+
+<p>Em sistemas 32 bits, podemos forçar o uso de PAE, que permite acessar mais memória, digitando <code>cat /proc/cpuinfo | grep -i pae</code>, <code>sudo apt-get install linux-generic-pae</code> e <code>sudo apt-get install linux-headers-generic-pae</code>.</p>
+
+<h3>Escrevendo na Tela</h3>
+
+<p>Se quiser escrever frases na tela do terminal, use o comando <code>echo</code> pra isso, dessa forma:</p>
+
+<pre>
+<code>
+echo "Essa é uma frase com acentuação!"
+</code>
+</pre>
+
+<p>Ou em um arquivo:</p>
+
+<pre>
+<code>
+echo "Essa é uma frase com acentuação!"&gt;&gt;~/Desktop/teste.txt
+</code>
+</pre>
+
+<p>Para pular uma linha num conteúdo escrito, podemos usar <code>echo&gt;&gt;~/Desktop/teste.txt</code>.</p>
+
+<p>O echo deve ser usado com aspas.</p>
+
+<p>PS: Usando dois &gt;&gt; ele adicionará uma nova linha no arquivo, caso exista, se usar um só &gt; ele sobrescreverá o arquivo existente.</p>
+
+<h3>Usando com Redes e Internet</h3>
+
+<p>Para mudar o IP, podemos usar o comando <code>network-manager</code> com os parâmetros <code>stop</code> (que libera o endereço IP) e na sequência o <code>start</code> (que renova o endereço IP), dessa forma:</p>
+
+<pre>
+<code>
+sudo service network-manager stop 
+sudo service network-manager start
+</code>
+</pre>
+
+<p>Podendo também ser assim, em uma interface específica:</p>
+
+<pre>
+<code>
+sudo ip link set down eth0
+sudo ip link set up eth0
+</code>
+</pre>
+
+<p>Use o <code>sudo /etc/init.d/nscd restart</code> para modificar e liberar o cachê DNS (pode ser necessário instalar o nscd com apt-get).</p>
+
+<p>Para exibir informações sobre o IP e o endereço MAC, além das interfaces, digite <code>ip addr show</code>.</p>
+
+<p>PS: Antigamente existia o ifconfig no Linux, mas ele foi descontinuado. Os comandos básicos eram esses:</p>
+
+<pre>
+<code>
+ifconfig enp2s0 down # Desativa uma interface
+
+ifconfig enp2s0 up # Ativa uma interface
+
+ifconfig -a # Mostra informações detalhadas sobre todas as interfaces
+</code>
+</pre>
+
+<p>Para conferir o ping (latência) e a conectividade das páginas ou IPs, use simplesmente o comando <code>ping</code> seguido do site ou IP (use Ctrl Z para interromper). O <code>traceroute</code> é usado para rastrear a rota de um pacote.</p>
+
+<p>Para descobrir o IP de um site, use o comando <code>host nomedosite.com.br</code>.</p>
+
+<p>Para descobrir o MTU da interface, use <code>sudo ip link show</code>.</p>
+
+<p>Para selecionar o tamanho em bytes dos pacotes enviados pelo ping, usamos o <code>-s</code> seguido do número (por exemplo, <code>ping -s 1500 www.google.com.br</code>). Para selecionar a quantidade de requisições use o parâmetro -c seguido do número, por exemplo <code>-c 6</code><!-- Para desativar a fragmentação de pacotes, usamos o <code>/f</code> junto, por exemplo, <code>ping /l 1500 /f www.google.com.br</code>.--></p>
+
+<p>Podemos também usar parâmetros no traceroute, como para aumentar a quantidade máxima de saltos com o -m, por exemplo <code>traceroute -m 60 www.google.com.br</code>.</p>
+
+<!--
+
+<p>PS: Tanto no ping quanto no tracert, pode ser necessário colocar <code>/4</code> para forçar IPv4 ou <code>/6</code> para forçar IPv6.</p>
+
+<p>Para limpar o cache ARP, basta usar <code>netsh interface ip delete arpcache</code>, para resetar usamos <code>netsh int ip reset all</code>.</p>
+
+-->
+
+<p>Ainda nos problemas de rede, podemos digitar o comando <code>netstat -a -n -e</code> para verificar todas as portas abertas e os IP's aos quais elas estão conectadas. Ele foi substituído por <code>ss -all</code>.</p>
+
+<p>Para vermos o cachê ARP, usamos <code>arp -a</code> (mas foi substituído por <code>ip neigh show</code>). Para remover um IP dele, usamos <code>ip neigh del 1.1.1.1 dev enp2s0</code> (substituir o 1.1.1.1 pelo IP desejado).</p>
+
+<!--
+    
+<p>Para resetar o catálogo do provedor winsock ao estado inicial, digite <code>nbtstat /R</code>, <code>nbtstat /RR</code> e <code>netsh winsock reset catalog</code>.</p>
+
+<p>Para resetar o proxy, digite <code>netsh advfirewall reset</code> e <code>netsh winhttp reset proxy</code>.</p>
+
+-->
+
+<p>Podemos usar <code>ip route</code> para ver a rota da nossa rede. E também podemos adicionar e remover todas especificando o IP com <code>ip route add 192.168.0.1</code> e <code>ip route del 192.168.0.1</code>, respectivamente.</p>
+
+<p>Podemos também utilizar o comando <code>nslookup</code> assim, para vermos dados sobre o servidor do site:</p>
+
+<pre>
+<code>
+nslookup -q=ns www.google.com.br
+</code>
+</pre>
+
+<!--
+
+<h3>Excluir Tarefas Agendadas</h3>
+
+<p>Podemos fazer o mesmo com tarefas agendadas com o <code>schtasks /delete /f</code>, dessa forma:</p>
+
+<pre>
+<code>
+schtasks /delete /f /tn "Driver Booster Scheduler"
+</code>
+</pre>
+
+<p>PS: O <code>/tn</code> é o que especificará o nome da tarefa a ser excluída.</p>
+
+<p>Essas opções acima costumam ser utilizadas com outros parâmetros, como adicionar, por exemplo.</p>
+
+<p>Para exibir as tarefas agendadas, use <code>schtasks /query</code>.</p>
+
+-->
+
+<h3>Administrar Serviços</h3>
+
+<p>Para administrar os serviços inicializados ou parados, usamos o <code>service</code> seguido da opção desejada, dessa forma:</p>
+
+<ul>
+    <li>Inicializar: <code>sudo service service_name start</code></li>
+    <li>Parar: <code>sudo service service_name stop</code></li>
+</ul>
+
+<p>PS: Para ver os serviços usados, utilize o comando <code> service --status-all</code>.</p>
+
+<h3>Administrando Usuários</h3>
+
+<p>Para criar um usuário novo com senha, basta digitar isso:</p>
+
+<pre>
+<code>
+sudo useradd nomedousuario -p senha
+</code>
+</pre>
+
+<p>PS: Caso queira criar um usuário sem senha, basta omití-la e também o parâmetro -p.</p>
+
+<p>Caso queira adicionar/alterar a senha de um usuário local, digite isso:</p>
+
+<pre>
+<code>
+sudo passwd nomedousuario
+</code>
+</pre>
+
+<p>Para dar privilégios de administrador ao usuário criado:</p>
+
+<pre>
+<code>
+sudo usermod -aG sudo nomedousuario
+</code>
+</pre>
+
+<p>PS: Em algumas distros, o segundo sudo pode ter que ser substituído por <q>root</q>.</p>
+
+<!--
+<p>Para remover o usuário dos administradores:</p>
+
+<pre>
+<code>
+net localgroup administradores nomedousuario /delete
+</code>
+</pre>
+-->
+
+<p>Para excluir um usuário:</p>
+
+<pre>
+<code>
+sudo userdel -f nomedousuario
+</code>
+</pre>
+
+<p>Para listar os usuários existentes:</p>
+
+<pre>
+<code>
+cat /etc/passwd
+</code>
+</pre>
+
+<!--
+<p>Para listar os administradores:</p>
+
+<pre>
+<code>
+net localgroup administradores
+</code>
+</pre>
+-->
+
+<h3>Comandos no Terminal</h3>
+
+<p>Agora que vimos alguns comandos do Linux, veja alguns dos comandos mais usados:</p>
+
+<ul>
+    <li><code>cd</code> - Abre uma pasta.</li>
+    <li><code>clear</code> - Limpa a tela.</li>
+    <li><code>xterm -bg nomedacor -fg nomedacor</code> - Permite configurar as cores do fundo e da letra do terminal, respectivamente, com nomes em inglês, na sessão utilizada.</li>
+    <li><code>date</code> - Mostra a data do sistema (podemos formatar a data e hora com os parâmetros <code>+%d/%m/%y_%H:%M:%S_%w</code>, onde d é dia, m é mês, y é ano, H é hora, M é minuto, S é segundo e w é o dia da semana.).</li>
+    <li><code>ls</code> - Exibe a lista de arquivos (podendo receber como parâmetro <code>*.extensao</code>, para listar apenas um tipo de arquivo, ou mesmo mais de um).</li>
+    <li><code>mkdir "pasta"</code> - Cria uma pasta.</li>
+    <li><code>free</code> - Mostra a memória utilizada e livre do sistema (use os parâmetro <code>-k</code> para ver em KB e <code>-m</code> para ver em MB.</li>
+    <li><code>tree</code> - Mostra a estrutura de pastas graficamente.</li>
+    <li><code>cat /etc/issue</code> - Mostra a versão do Linux.</li>
+    <li><code>echo</code> - Para escrever na tela, aceita sequências de escape. O echo sem nada pula uma linha.</li>
+    <li><code>variavel="dados"</code> - Cria variáveis. As variáveis são utilizadas com um símbolo de cifrão no começo, na forma <code>$variavel</code>.</li>
+    <li><code>#</code> - Para comentários.</li>
+    <li><code>sleep 60</code> - Isso pausará o terminal por determinados segundos.</li>
+    <li><code>xdg-open</code> - Usada para abrir uma pasta ou site.</li>
+    <li><code>mv "origem" "destino"</code> - Para mover arquivos ou diretórios, pode ser usado também pra renomear arquivos.</li>
+    <li><code>cp "origem" "destino"</code> - Para copiar arquivos ou diretórios.</li>
+    <li><code>&amp;&amp;</code> - Para "grudar" mais de um comando numa mesma linha.</li>
+    <li><code>echo "texto"&gt;&gt;"arquivo"</code> - Escreve num arquivo, e não no terminal (por exemplo, <code>echo teste>>$HOME/teste.txt</code>). Se o arquivo não existir, será criado. Da mesma forma, as setas podem ser utilizadas com funções do echo e outros comandos, por exemplo <code>ls&gt;&gt;arquivo.txt</code> escreve o conteúdo de ls no arquivo especificado. Usando um <code>&gt;</code> ele sobreescreve o arquivo caso exista, usando dois <code>&gt;&gt;</code> ele adiciona o texto no arquivo caso exista.</li>
+    <li><code>more</code> - Lê o Arquivo no Terminal (como <code>more $HOME/teste.txt</code>), pode ser usado <code>cat</code> no lugar.</li>
+    <li><code>grep -i palavra arquivo</code> - Procura as palavras escritas pelo usuário, quando usamos o parâmetro -i ele não diferencia maiúsculas (como <code>grep -i PALAVRA $HOME/teste.txt</code>). Pode ser usado em conjunto com o ls (e também outros comandos) para procurar nomes ou extensões em arquivos, como <code>ls | grep jpg</code>.</li>
+    <li><code>rm</code> - Para excluir arquivos e conteúdos de pastas (para excluir pastas sem confirmação use <code>rm -r</code> ou <code>rmdir</code>).</li>
+    <li><code>history</code> - Mostra o histórico de comandos já digitados.</li>
+    <li><code>shutdown</code> - Para desligar o computador (com parâmetro <code>-h</code>) ou reiniciar (parâmetro <code>-r</code>), pode ser usado <code>now</code> para desligar imediatamente, ou definido o tempo para a operação com o número, como <code>10</code> (em minutos).</li>
+    <li><code>e2fsck /dev/hdxx -y</code> - Para corrigir erros de disco.</li>
+    <li><code>top</code> - Mostra os processos ativos no sistema (como alternativa temos o <code>htop</code>).</li>
+    <li><code>kill -9 3806</code> - Mata um processo baseado no seu PID (se quiser usar o nome literal, use <code>killall processo</code>.</li>
+    <li><code>ip</code> - Para configurações de redes, basicamente com <code>link set down eth0</code> libera o endereço IP e <code>link set up eth0</code> o renova, e <code>addr show</code> mostra detalhes completos das interfaces de rede.</li>
+    <li><code>ping nomeouipdosite.com</code> - Verifica se há conectividade num host.</li>
+    <li><code>traceroute nomeouipdosite.com</code> - Rastreia a rota de um pacote até o host especificado.</li>
+    <li><code>ss -all</code> - Verifica quais portas estão abertas e os IPs associados a elas.</li>
+    <li><code>alias nome=comando</code> - Define um alias temporário para um comando, para excluir ele digite <code>unalias nome</code>.</li>
+    <li><code>chmod 644 Arquivo</code> - Modifica permissões para arquivos usando números octais (4 leitura, 2 gravação e 1 execução, e as somas entre eles), na ordem proprietário, grupo e outros (pode ser usado <code>chmod +x arquivo</code> para torná-lo executável, e <code>chmod -x arquivo</code> para retirar isso. Para diretórios e seus arquivos recursivamente, use <code>chmod -R 755 diretorio</code></li>
+    <li><code>pwd</code> - Mostra o diretório atual.</li>
+    <li><code>who</code> - Mostra usuários logados no sistema.</li>
+    <li><code>df</code> - Mostra a quantidade de espaço livre no disco rígido (pra ver o usado use <code>du</code>.</li>
+    <li><code>stat arquivo</code> - Mostra o estado de um arquivo, útil para saber por exemplo a hora e data do último acesso ao mesmo.</li>
+    <li><code>file arquivo</code> - Exibe as informações de um arquivo especificado.</li>
+    <li><code>cat /proc/cpuinfo</code> - Exibe as informações da CPU.</li>
+    <li><code>cat /proc/meminfo</code> - Exibe as informações da memória.</li>
+    <li><code>sudo mkfs.fat /dev/sdb1</code> -  Formata um disco especificado em um formato especificado (no lugar de mkfs.fat pode ser <code>mkfs.ntfs</code> ou <code>mkfs.exfat</code>).</li>
+    <li><code>man</code> - Exibe o manual de outro comando.</li>
+    <li><code>hostname</code> - Retorna o nome do host do computador.</li>
+    <li><code>exit</code> - Fecha o Terminal.</li>
+</ul>
+
+<p>Caso algum comando não seja encontrado, digite <code>apt-get install nomedocomando</code>.</p>
+
+<p>Para interromper algum comando sendo executado, dê um Ctrl C. Para ajuda a um comando, digite ele seguido de <code>--help</code>, como por exemplo <code>ls --help</code>.</p>
+
+<p>Como coringa, usamos o *, podendo inclusive usar nas extensões, como *.*. E comandos do terminal são case-sensitive.</p>
+
+<p>A variável <code>$?</code> guarda o status do último comando executado. Se o mesmo foi executado corretamente, ele retornará <q>0</q>, se o comando der erro ele retornará outro número diferente de zero (por exemplo, comando não encontrado retorna <q>127</q>). Podemos visualizar o conteúdo dessa variável digitando no terminal <code>echo $?</code>. Esse código também pode ser usado em Shell Script também, como em condicionais e laços de repetição.</p>
+
+<p>PS: Tome cuidado com as fork bombs, que chamam vários processos iguais até travar o sistema. No terminal do Linux, uma fork bomb pode ser assim (quase sempre num arquivo Shell Script):</p>
+
+<pre>
+<code>
+# Não execute nada desse código:
+
+:(){:|:&};:
+</code>
+</pre>
+
+<p>Só pra entender, acima é uma função chamada ":" (pode ser qualquer nome) que chama a si mesma em primeiro e segundo plano.</p>
+
+<h3>Criação de Arquivos BASH</h3>
+
+<p>Para criar arquivos BASH, crie um arquivo de texto no Bloco de Notas e salve com a extensão .sh (ou use o <code>vi</code> no terminal, o <code>touch</code> ou o <code>echo</code> com arquivo no terminal), para criar um arquivo de scripts novo, e coloque os comandos dessa forma:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+echo "Criação do BASH em Linux Efetuada com Êxito."
+
+echo
+
+echo -n "Pressione qualquer tecla pra continuar..."
+
+read
+</code>
+</pre>
+
+<p>No código acima, o <code>#!/bin/bash</code> define o shell especificado para executar ele e o echo sem nada pula uma linha.</p>
+
+<p>Dessa forma, podemos criar arquivos que executem várias funções de uma vez. Todos os comandos do shell funcionam normalmente no BASH, mas alguns caracteres podem não funcionar. Podemos inclusive, usar variáveis e operadores condicionais e de repetição.</p>
+
+<p>Lembrando que para executar um script BASH no Linux, precisamos dar um <code>sudo chmod +x nomedoscript.sh</code> para rodar ele como executável (caso contrário ele é identificado como texto). Podemos digitar também, sem dar permissão, <code>bash nomedoscript.sh</code>, mas não é recomendado, a não ser em casos que é impossível dar as tais permissões.</p>
+
+<p>PS: Podemos usar outros shells do Linux, e a extensão .sh é opcional, já que o Linux identifica pelo mimetype, pela declaração de bash e pela permissão de execução, por isso ele pode ter outra extensão ou mesmo não ter nenhuma, mas pra facilitar a identificação, se usa a extensão .sh.</p>
+
+<h3>Variáveis no Shell</h3>
+
+<p>Para utilizar variáveis no shell, apenas usamos o nome dela com a atribuição (tem que estar com o = tudo junto, tipo <code>num=3</code>). As variáveis são usadas com um cifrão antes delas (tipo <code>$num</code>), exceto na atribuição. Podemos também atribuir um caminho de pasta à elas, programas ou sites à elas. Veja um exemplo:</p>
+
+<pre>
+<code>
+pasta=$HOME/Imagens
+
+xdg-open $pasta
+
+exit
+</code>
+</pre>
+
+<p>PS: Variáveis em shell diferenciam maiúsculas de minúsculas.</p>
+
+<p>Se quiser pedir dados do usuário em variáveis, use o comando <code>read</code> para ele ser inserido na variável. Para não pular de linha, coloque o parâmetro <code>-n</code> no echo. Veja um exemplo:</p>
+
+<pre>
+<code>
+echo -n "Digite seu nome: "
+
+read nome
+
+echo -n "Digite sua idade: "
+
+read idade
+
+ano=$[2018 - $idade]
+
+echo "Olá $nome, você nasceu em $ano."
+
+exit
+</code>
+</pre>
+
+<p>Podemos também usar o read diretamente, por exemplo:</p>
+
+<pre>
+<code>
+read -p "Digite seu nome: " nome
+
+read -p "Digite sua idade: " idade
+</code>
+</pre>
+
+<p>PS: Você pode usar <code>$USER</code> como um coringa que mostrará o nome do usuário logado no momento.</p>
+
+<p>Essas são as variáveis do sistema (usadas também com $):</p>
+
+<table>
+    <tr>
+        <th>Variável</th>
+        <th>Conteúdo Exibido</th>
+    </tr>
+    <tr>
+        <td>HOME</td>
+        <td>/home/UsuarioAtual</td>
+    </tr>
+    <tr>
+        <td>USER</td>
+        <td>"UsuarioAtual"</td>
+    </tr>
+    <tr>
+        <td>LOGNAME</td>
+        <td>"UsuarioAtual"</td>
+    </tr>
+	<tr>
+        <td>PWD</td>
+        <td>Diretório Atual</td>
+    </tr>
+    <tr>
+        <td>LANG</td>
+        <td>Idioma Atual</td>
+    </tr>
+	<tr>
+        <td>SHELL</td>
+        <td>/bin/bash (ou o Shell Atual)</td>
+    </tr>
+	<tr>
+        <td>TERM</td>
+        <td>Tipo de Terminal Usado</td>
+    </tr>
+	<tr>
+        <td>PATH</td>
+        <td>Diretórios definidos no Path</td>
+    </tr>
+	<tr>
+        <td>MAIL</td>
+        <td>E-mail Definido</td>
+    </tr>
+	<tr>
+        <td>OSTYPE</td>
+        <td>Tipo de Sistema Usado</td>
+    </tr>
+    <!--
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+	<tr>
+        <td></td>
+        <td></td>
+    </tr>
+    -->
+</table>
+
+<h3>Operações Aritméticas</h3>
+
+<p>Como visto no exemplo anterior, é possível fazer operações aritméticas no BASH, normalmente com +, -, * e /, o % funciona normalmente como cálculo de módulo.</p>
+
+<p>Veja um exemplo de uso para operações aritméticas:</p>
+
+<pre>
+<code>
+read -p "Digite o primeiro número: " num1
+
+read -p "Digite o segundo número: " num2
+
+clear
+
+soma=$[$num1 + $num2]
+
+subs=$[$num1 - $num2]
+
+mult=$[$num1 * $num2]
+
+divi=$[$num1 / $num2]
+
+rest=$[$num1 % $num2]
+
+echo "A soma entre $num1 e $num2 é igual à $soma."
+
+echo "A subtração entre $num1 e $num2 é igual à $subs."
+
+echo "A multiplicação entre $num1 e $num2 é igual à $mult."
+
+echo "A divisão entre $num1 e $num2 é igual à $divi com resto de $rest."
+
+echo
+
+read
+</code>
+</pre>
+
+<p>Também podemos fazer operações aritméticas sem variáveis, apenas digitando echo seguida da operação, como <code>echo $[10 + 5]</code>, ele retornará o resultado da conta.</p>
+
+<p>PS: Em alguns shells, a operação deve ser feita com dois parênteses, como por exemplo <code>echo $((10 + 5))</code>.</p>
+
+<h3>Condicionais IF, ELSE e ELIF e CASE</h3>
+
+<p>Podemos também usar condicionais no shell, usando o <code>if</code>, o <code>else</code> e o <code>elif</code>. Dessa forma:</p>
+
+<pre>
+<code>
+read -p "Digite um Número: " num
+
+if [ $num -lt 10 ]; then
+    echo "É menor que 10."
+elif [ $num -gt 10 ]; then
+    echo "É maior que 10."
+else
+    echo "É igual à 10."
+fi
+</code>
+</pre>
+
+<p>PS: Note que precisa ter um espaço entre as variáveis e os valores, dentro dos colchetes. Em arquivos sh pode ser necessário haver tabulação. Caso um condicional if tenha mais de uma opção pra mesma condição, coloque cada uma em colchetes separados, e o operador && ou || entre os colchetes sem espaços.</p>
+
+<p>Veja outro exemplo de shell para criar pastas:</p>
+
+<pre>
+<code>
+cd $HOME/Desktop
+
+if [ -d teste ]; then
+    echo "Essa Pasta já Existe."
+else
+    mkdir teste &amp;&amp; echo "A Pasta foi Criada."
+fi
+</code>
+</pre>
+
+<p>PS: O <code>&amp;</code> é para executarmos mais de um comando na mesma linha. Temos também o elif, que funciona como o else if. Para verificar se um arquivo existe, use o parâmetro <code>-f</code>, o parâmetro <code>-d</code> é para verificar se um diretório existe.</p>
+
+<p>Veja algumas opções que podemos usar com números, só lembrando que equ e neq é necessário usar com letras e palavras também:</p>
+
+<table>
+    <tr>
+        <td>-eq</td>
+        <td>Igual</td>
+    </tr>
+    <tr>
+        <td>-ne</td>
+        <td>Diferente</td>
+    </tr>
+    <tr>
+        <td>-lt</td>
+        <td>Menor que</td>
+    </tr>
+    <tr>
+        <td>-le</td>
+        <td>Menor que ou igual</td>
+    </tr>
+    <tr>
+        <td>-gt</td>
+        <td>Maior que</td>
+    </tr>
+    <tr>
+        <td>-ge</td>
+        <td>Maior que ou igual</td>
+    </tr>
+</table>
+
+<p>Veja um exemplo para calcular médias:</p>
+
+<pre>
+<code>
+read -p "Digite a primeira nota: " n1
+
+read -p "Digite a segunda nota: " n2
+
+# Não esqueça da ordem de precedência:
+med=$[($n1 + $n2) / 2]
+
+if [ $med -lt 4 ]; then
+    sit="Reprovado"
+elif [ $med -gt 6 ]; then
+    sit="Aprovado"
+else
+    sit="Em Recuperação"
+fi
+
+clear
+
+echo "A média das notas é $med. $sit!"
+</code>
+</pre>
+
+<p>Temos também o case, usado dessa forma:</p>
+
+<pre>
+<code>
+read -p "Digite sua opção: " opc
+
+case $opc in
+    1)
+        echo "Opção 1!";;
+    2)
+        echo "Opção 2!";;
+    3)
+        echo "Opção 3!";;
+    *)
+        echo "Opção Inválida!";;
+esac
+</code>
+</pre>
+
+<p>PS: O asterisco seria como o "default" em outras linguagens.</p>
+
+<h3>Laço de Repetição FOR e WHILE</h3>
+
+<p>Para criar uma estrutura de repetição em shell, usamos o <code>for</code>, dessa forma:</p>
+
+<pre>
+<code>
+for r in $(seq 1 1 44); do
+    echo "Volta o cão arrependido, com suas orelhas tão fartas, com seu osso roído, e com o rabo entre as patas..."
+done
+
+read
+</code>
+</pre>
+
+<p>O <code>in</code> passará os números de incremento, com eles entre o cifrão e os parênteses, representando na ordem, o início, incremento e fim do mesmo<!-- (no caso de usar decremento, apenas coloque o início menor que o fim, sem colocar sinal de - no incremento).--> O <code>do</code> especifica os comandos a serem executados.</p>
+
+<p>Para fazer o incremento também aparecer no echo, usamos a variávei de incremento, dessa forma:</p>
+
+<pre>
+<code>
+for r in $(seq 1 1 44); do
+    echo "$r - Volta o cão arrependido, com suas orelhas tão fartas, com seu osso roído, e com o rabo entre as patas..."
+done
+
+read
+</code>
+</pre>
+
+<p>PS: O laço pode ser feito assim, mais parecido com o laço em linguagem C e semelhantes:</p>
+
+<pre>
+<code>
+for((i = 0; i < 10; i++)); do # Usamos os mesmos operadores lógicos do C e semelhantes
+    echo $i
+done
+</code>
+</pre>
+
+<p>Veja outro exemplo com um programa que exibe a tabuada de um número:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Função
+
+tabuada() {
+    read -p "Digite um número para ver sua tabuada: " num
+
+    echo
+
+    echo "Tabuada de $num:"
+
+    echo
+
+    echo "-----------------"
+
+    for t in $(seq 1 1 10); do
+        res=$[$num * $t]
+
+        echo "$num x $t = $res"
+    done
+
+    echo "-----------------"
+
+    read -p "Deseja digitar outros números? [S/N] " opc
+
+    if [ $opc = s ]||[ $opc = S ]; then
+        clear
+
+        tabuada # Recursividade
+    fi
+}
+
+# Chamada da função
+
+tabuada
+</code>
+</pre>
+
+<p>O while podemos utilizar assim:</p>
+
+<pre>
+<code>
+cont=0
+
+while [ $cont -le 10 ]; do
+    echo $cont
+
+    cont=$[$cont + 1]
+done
+</code>
+</pre>
+
+<p>Com break e continue:</p>
+
+<pre>
+<code>
+cont=0
+
+while true; do
+    cont=$[$cont + 1]
+
+    if [ $[$cont % 2] -eq 0 ]; then
+        continue
+    elif [ $cont -gt 50 ]; then
+        break
+    fi
+
+    echo $cont
+done
+</code>
+</pre>
+
+<h3>Array</h3>
+
+<p>Para criar um array num BASH podemos fazer assim:</p>
+
+<pre>
+<code>
+vetor=(1 2 3 4)
+
+# O asterisco exibe todos os elementos do array
+
+echo ${vetor[*]}
+</code>
+</pre>
+
+<p>Podemos também colocar as posições diretamente:</p>
+
+<pre>
+<code>
+vogais=()
+
+vogais[0]="A"
+vogais[1]="E"
+vogais[2]="I"
+vogais[3]="O"
+vogais[4]="U"
+
+for i in ${vogais[*]}; do
+    echo -n "${i} "
+done
+
+echo
+</code>
+</pre>
+
+<h3>Funções em BASH</h3>
+
+<p>Podemos criar funções em BASH, veja um exemplo simples de criação de uma função:</p>
+
+<pre>
+<code>
+mensagem() {
+    echo "Introdução à Funções em BASH"
+}
+
+mensagem
+</code>
+</pre>
+
+<p>PS: Note que para exibir, não usamos os parênteses, pode se criar funções sem a palavra function, mas ela terá que ter parênteses após o nome indicando que é uma função, sem nada dentro.</p>
+
+<p>Para passarmos parâmetros, não os colocamos dentro dos parênteses, eles são jogados nas variáveis $1, $2, $3, etc. Por exemplo:</p>
+
+<pre>
+<code>
+multi() {
+    echo "A multiplicação é $[$1 * $2]"
+}
+
+multi 10 5
+</code>
+</pre>
+
+<p>Exemplo com parâmetro e retorno:</p>
+
+<pre>
+<code>
+soma() {
+    return $[$1 + $2]
+}
+ 
+soma 10 5 # Guardará automaticamente na variável $?
+
+echo "A soma é $?"
+</code>
+</pre>
+
+<p>Só que a forma acima só retorna valores inteiros entre 0 e 255, para simular o retorno com outros tipos de dados e números fora dessa faixa, fazemos assim:</p>
+
+<pre>
+<code>
+soma() {
+    echo $[$1 + $2]
+}
+
+res=`soma 1000 500`
+
+echo "A soma é $res"
+</code>
+</pre>
+
+<p><a href="_files/agenda-linux.txt" target="_blank">Clique Aqui e veja o código de um arquivo BASH no qual ele adicionará dados de agenda à um arquivo TXT.</a></p>
+
+<p>Vários outros comandos úteis podem ser vistos aqui: <a href="https://www.devmedia.com.br/comandos-importantes-linux/23893" target="_blank">https://www.devmedia.com.br/comandos-importantes-linux/23893</a></p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

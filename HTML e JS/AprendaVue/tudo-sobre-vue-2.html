@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Vue JS</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Vue JS</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-vue-1.html">Tudo sobre Vue JS Parte 1!</a></li>
+                    <li><a href="tudo-sobre-vue-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Vue JS Parte 2!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Vue JS Parte 2</h2>
+
+<h3>Diretiva v-bind - Atribuindo valor em class e style</h3>
+
+<p>Crie dentro da DIV esses botões:</p>
+
+<pre>
+<code>
+&lt;button class=&quot;btn&quot;&gt;Limpar&lt;/button&gt;
+&lt;button class=&quot;btn&quot;&gt;Enviar&lt;/button&gt;
+</code>
+</pre>
+
+<p>Adicione a linha do Bootstrap também, no head:</p>
+
+<p></p>
+
+<pre>
+<code>
+&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"&gt;
+</code>
+</pre>
+
+<p>No VUE, para colocarmos as classes do Bootstrap, faça assim:</p>
+
+<pre>
+<code>
+var app = new Vue({
+    el: "#app",
+    data: {
+        btnClassLimpar: "btn-danger",
+        btnClassEnviar: "btn-primary"
+    }
+});
+</code>
+</pre>
+
+<p>Coloque o <code>v-bind:class</code> dos botões enviar e limpar, usando suas variáveis, assim:</p>
+
+<pre>
+<code>
+v-bind:class="btnClassLimpar"
+</code>
+</pre>
+
+<p>Podemos usar com objetos e arrays também:</p>
+
+<pre>
+<code>
+var app = new Vue({
+    el: "#app",
+    data: {
+        btnClassLimpar: {
+            "btn-danger": true,
+            "btn-sm": true
+        },
+        btnClassEnviar: ["btn-primary", "btn-lg"]
+    }
+});
+</code>
+</pre>
+
+<p>Ou unir ambos:</p>
+
+<p></p>
+
+<pre>
+<code>
+var app = new Vue({
+    el: "#app",
+    data: {
+        btnClassLimpar: {
+            "btn-danger": true,
+            "btn-sm": true
+        },
+        btnClassEnviar: ["btn-primary", {
+                        "btn-lg": false
+                    }]
+    }
+});
+</code>
+</pre>
+
+<p>Coloque agora a diretiva <code>v-bind:style</code> em ambos os botões, com as variáveis <code>btnStyleLimpar</code> e <code>btnStyleEnviar</code>.</p>
+
+<p>Coloque no Vue, dentro de data, essas variáveis:</p>
+
+<pre>
+<code>
+btnStyleLimpar: "font-size: 50pt",
+btnStyleEnviar: "font-size: 10pt"
+</code>
+</pre>
+
+<p>Como objetos:</p>
+
+<pre>
+<code>
+btnStyleLimpar: {
+    "font-size": "50px",
+    "text-transform": "lowercase"
+},
+btnStyleEnviar: {
+    "font-size": "10px",
+    "text-transform": "uppercase"
+}
+</code>
+</pre>
+
+<p>PS: Podemos remover o v-bind nos elementos HTML, deixando apenas os dois pontos, algo como <code>:class</code> e <code>:style</code>.</p>
+
+<h3>Diretiva v-on - Manipulando Eventos</h3>
+
+<p>Para usarmos os métodos do Vue, fazemos usando o campo <code>methods</code>, assim:</p>
+
+<pre>
+<code>
+var app = new Vue({
+    el: "#app",
+    data: {
+        
+    },
+
+    methods: { // É tipo uma classe
+
+    }
+});
+</code>
+</pre>
+
+<p>Dentro do methods, faça essa função simples:</p>
+
+<pre>
+<code>
+methods: {
+    enviar() {
+        alert("Enviado!");
+    }
+}
+</code>
+</pre>
+
+<p>No botão de enviar dentro da DIV, coloque essa diretiva:</p>
+
+<pre>
+<code>
+v-on:click="enviar()"
+</code>
+</pre>
+
+<p>Podemos ter combinação de eventos também, por exemplo, num formulário:</p>
+
+<p>Faça esse formulário dentro da DIV:</p>
+
+<pre>
+<code>
+&lt;form method=&quot;post&quot; action=&quot;https://www.google.com.br&quot;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Enviar&quot; class=&quot;btn btn-primary&quot; v-on:click=&quot;enviar()&quot;/&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>Só que no caso acima, ele vai exibir o alerta e mandar pro Google. Para evitar esse redirecionamento automático, coloque <code>v-on:click.prevent.stop="enviar()"</code></p>
+
+<p>PS: Podemos remover o v-on nos elementos HTML, deixando apenas o arroba, algo como <code>@click</code>.</p>
+
+<ul>
+    <li><a href="tudo-sobre-vue-1.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-vue-3.html">Continuação da Matéria!</a></li>-->
+</ul>
+        </div>
+    </body>
+</html>
