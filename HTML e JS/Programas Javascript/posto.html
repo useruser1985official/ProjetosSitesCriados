@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Testes Javascript</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="_css/posto.css"/>
+        <script src="_javascript/posto.js"></script>
+    </head>
+    <body>
+        <div id="interface">
+            <ul>
+                <li id="gasolina">
+                    <h1>GASOLINA</h1>
+                    <form method="get" oninput="custoGas()">
+                        <p>Total a Pagar: R$<input type="number" name="tTotG" id="cTotG" min="0" step="0.01" value="0"/></p>
+                        <p>Litros:<input type="number" name="tLitG" id="cLitG" min="0" step="0.001" value="0"/></p>
+                        <p>Preço p/ Litro:<input type="number" name="tPreG" id="cPreG" step="0.001" value="6.399" readonly/></p>
+                    </form>
+                </li>
+                <li id="alcool">
+                    <h1>ÁLCOOL</h1>
+                    <form method="get" oninput="custoAlc()">
+                        <p>Total a Pagar: R$<input type="number" name="tTotA" id="cTotA" min="0" step="0.01" value="0"/></p>
+                        <p>Litros:<input type="number" name="tLitA" id="cLitA" min="0" step="0.001" value="0"/></p>
+                        <p>Preço p/ Litro:<input type="number" name="tPreA" id="cPreA" step="0.001" value="4.799" readonly/></p>
+                    </form>
+                </li>
+                <li id="diesel">
+                    <h1>DIESEL</h1>
+                    <form method="get" oninput="custoDie()">
+                        <p>Total a Pagar: R$<input type="number" name="tTotD" id="cTotD" min="0" step="0.01" value="0"/></p>
+                        <p>Litros:<input type="number" name="tLitD" id="cLitD" min="0" step="0.001" value="0"/></p>
+                        <p>Preço p/ Litro:<input type="number" name="tPreD" id="cPreD" step="0.001" value="4.999" readonly/></p>
+                    </form>
+                </li>
+            </ul>
+            <p><input type="button" onclick="javascript:history.go(-1)" value="Voltar à Página Anterior" class="voltar"/></p>
+        </div>
+    </body>
+</html>

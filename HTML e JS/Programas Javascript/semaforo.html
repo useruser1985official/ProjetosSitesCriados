@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Testes Javascript</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="_css/semaforo.css"/>
+        <script src="_javascript/semaforo.js"></script>
+    </head>
+    <body>
+        <div id="interface">
+            <img src="_imagens/sinal-verde.png" id="farol" alt="Semáforo"/>
+            <ul>
+                <li><input type="button" onclick="sinal('sinal-vermelho')" id="vermelho" value="Pare"/></li>
+                <li><input type="button" onclick="sinal('sinal-amarelo')" id="amarelo" value="Atenção"/></li>
+                <li><input type="button" onclick="sinal('sinal-verde')" id="verde" value="Siga"/></li>
+            </ul>
+            
+            <p><input type="button" onclick="javascript:history.go(-1)" value="Voltar à Página Anterior" class="voltar"/></p>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+form {
+    margin: 100px auto 200px 300px;
+    padding: 10px;
+}
+form input, select {
+    font-size: 14pt;
+}
+form input#cTemp, input#cRes {
+    width: 75px;
+}
+p input.voltar {
+    margin-left: 300px;
+}

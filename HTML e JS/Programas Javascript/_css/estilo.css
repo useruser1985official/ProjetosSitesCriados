@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+body {
+    font-family: Comic Sans MS;
+    background-color: black;
+}
+div#interface {
+    background-color: white;
+    padding: 0px 10px 0px 10px;
+}

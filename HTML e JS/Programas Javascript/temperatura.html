@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Testes Javascript</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="_css/temperatura.css"/>
+        <script src="_javascript/temperatura.js"></script>
+    </head>
+    <body>
+        <div id="interface">
+            <form method="get" oninput="temperatura()">
+                <input type="number" name="tTemp" id="cTemp" min="-273" step="0.1" value="0"/>
+                <select name="tTipo" id="cTipo">
+                    <optgroup label="Celsius para">
+                        <option value="CF" selected>°C para °F</option>
+                        <option value="CK">°C para °K</option>
+                    </optgroup>
+                    <optgroup label="Fahrenheit para">
+                        <option value="FC">°F para °C</option>
+                        <option value="FK">°F para °K</option>
+                    </optgroup>
+                    <optgroup label="Kelvin para">
+                        <option value="KC">°K para °C</option>
+                        <option value="KF">°K para °F</option>
+                    </optgroup>
+                </select>
+                <input type="number" name="tRes" id="cRes" step="0.1" value="32" readonly/>
+                <input type="reset" value="Resetar para 0°C/32°F"/>
+            </form>
+            
+            <p><input type="button" onclick="javascript:history.go(-1)" value="Voltar à Página Inicial" class="voltar"/></p>
+        </div>
+    </body>
+</html>

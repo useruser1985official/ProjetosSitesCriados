@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Programas JQuery</title>
+        <script src="_javascript/jquery.js"></script>
+        <script>
+            $(document).ready(function() {            
+                $("body").css("background-color", "rgb(255,255,255)");
+                $("*").css("color", "rgb(0,0,0)");
+                $("fieldset").css("border", "1px solid rgb(0,0,0)");
+                
+                $("#cor").on("input", function() {
+                    var redB = $("#redB").val();
+                    var greenB = $("#greenB").val();
+                    var blueB = $("#blueB").val();
+                    
+                    var redF = $("#redF").val();
+                    var greenF = $("#greenF").val();
+                    var blueF = $("#blueF").val();
+                    
+                    $("body").css("background-color", "rgb(" + redB + "," + greenB + "," + blueB + ")");
+                    $("*").css("color", "rgb(" + redF + "," + greenF + "," + blueF + ")");
+                    $("fieldset").css("border", "1px solid rgb(" + redF + "," + greenF + "," + blueF + ")");
+                });
+                
+                $("#resetar").click(function() {
+                    $("#redB").val(255);
+                    $("#greenB").val(255);
+                    $("#blueB").val(255);
+                    
+                    $("#redF").val(0);
+                    $("#greenF").val(0);
+                    $("#blueF").val(0);
+
+                    $("body").css("background-color", "rgb(255,255,255)");
+                    $("*").css("color", "rgb(0,0,0)");
+                    $("fieldset").css("border", "1px solid rgb(0,0,0)");
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1><a href="index.html">Programas JQuery</a></h1>
+            </header>
+            
+<form method="get" id="cor">
+    <fieldset>
+        <legend>Fundo:</legend>
+        <label for="redB">Vermelho:</label><input type="number" id="redB" min="0" max="255" step="1" value="255"/>
+        <br/>
+        <label for="greenB">Verde:</label><input type="number" id="greenB" min="0" max="255" step="1" value="255"/>
+        <br/>
+        <label for="blueB">Azul:</label><input type="number" id="blueB" min="0" max="255" step="1" value="255"/>
+        <br/>
+    </fieldset>
+    <fieldset>
+        <legend>Letra:</legend>
+        <label for="redF">Vermelho:</label><input type="number" id="redF" min="0" max="255" step="1" value="0"/>
+        <br/>
+        <label for="greenF">Verde:</label><input type="number" id="greenF" min="0" max="255" step="1" value="0"/>
+        <br/>
+        <label for="blueF">Azul:</label><input type="number" id="blueF" min="0" max="255" step="1" value="0"/>
+        <br/>
+    </fieldset>   
+    <input type="button" id="resetar" value="Resetar"/>
+</form>
+
+<br/>
+
+        </div>
+    </body>
+</html>

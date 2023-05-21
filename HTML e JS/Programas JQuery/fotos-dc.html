@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Programas JQuery</title>
+        <script src="_javascript/jquery.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#cat").height(300);
+                $("#mary").width(200);
+                $("#catN").text(300);
+                $("#maryN").text(200);
+                
+                $("#tam").on("input", function() {
+                    var cat = $("#catH").val();
+                    var mary = $("#maryW").val();
+                    
+                    $("#cat").height(cat);
+                    $("#mary").width(mary);
+                    $("#catN").text(cat);
+                    $("#maryN").text(mary);
+                });
+                
+                $("#resetar").click(function() {
+                    $("#cat").height(300);
+                    $("#mary").width(200);
+                    $("#catH").val(300);
+                    $("#maryW").val(200);
+                    $("#catN").text(300);
+                    $("#maryN").text(200);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1><a href="index.html">Programas JQuery</a></h1>
+            </header>
+            
+<form method="get" id="tam">
+    <p><label for="catH">Catwoman: </label><input type="range" id="catH" min="70" max="700" step="10" value="300"/><span id="catN"><label for="catH"></label></span></p>
+    <p><label for="maryW">Mary: </label><input type="range" id="maryW" min="50" max="1000" step="10" value="200"/><span id="maryN"><label for="maryW"></label></span></p>
+    <input type="button" id="resetar" value="Resetar"/>
+</form>
+
+<br/>
+
+<img src="_imagens/mulher-gato.gif" id="cat" alt="Catwoman"/>
+<img src="_imagens/mary-marvel.jpg" id="mary" alt="Mary"/>
+
+        </div>
+    </body>
+</html>

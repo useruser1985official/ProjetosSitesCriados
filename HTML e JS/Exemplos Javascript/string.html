@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Apresentar os Caracteres de uma String e suas Posições</title>
+        <script>
+            var frase = prompt("Digite uma frase:");
+            document.write(frase + "<br/>");
+            tamanho = frase.length;
+            for(i = 0; i < tamanho; i++) {
+                document.write("<br/>Caractere na posição " + i + ": " + frase.charAt(i));
+            }
+            
+            document.write("<br/><br/>Primeiro caractere: " + frase.charAt(0));
+            document.write("<br/>Último caractere: " + frase.charAt(frase.length - 1));
+            
+            // O método charAt() retorna o caractere da posição específica .da string (do índice especificado).
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>

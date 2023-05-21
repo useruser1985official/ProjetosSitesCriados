@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+body {
+	background-color: black;
+	color: white;
+	font-family: Arial, sans-serif;
+}
+
+span#data {
+	color: rgb(0,255,0);
+	font-size: 48pt;
+	font-family: LCDD;
+}

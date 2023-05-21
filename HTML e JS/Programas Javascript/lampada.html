@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Testes Javascript</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+        <script src="_javascript/lampada.js"></script>
+    </head>
+    <body>
+        <div id="interface">
+            <h1>Acenda a Lâmpada</h1>
+            <img src="_imagens/lampada-apagada.jpg" onmouseover="mudaLampada('lampada-acesa')" onmouseout="mudaLampada('lampada-apagada')" onclick="mudaLampada('lampada-quebrada')" id="luz" alt="Lâmpada"/>
+            
+            <p><input type="button" onclick="javascript:history.go(-1)" value="Voltar à Página Anterior" class="voltar"/></p>
+        </div>
+    </body>
+</html>

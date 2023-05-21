@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Campos pra Preenchimento</title>
+        <script>
+            function campo_obrigatorio(x) {
+                if(x.value == "") {
+                    alert("O campo " + x.name + " não pode ficar vazio!");
+                }
+            }
+        </script>
+    </head>
+    <body>
+        Nota: Os campor marcados com asterisco são obrigatórios.
+        <form method="post" action="mailto:teste@teste">
+            *Nome completo: <input type="text" name="nome" size="35" maxlength="65" onblur="campo_obrigatorio(this)"/><br/>
+            Idade: <input type="number" name="idade" min="0" max="116" value="0"/> Anos<br/>
+            *Cidade: <input type="text" name="cidade" size="25" maxlength="60" onblur="campo_obrigatorio(this)"/><br/>
+            Telefone: <input type="tel" name="telefone" size="20" maxlength="15"/>
+            <br/>
+            <input type="submit" value="Enviar"/>
+            <input type="reset" value="Limpar"/>
+        </form>
+    </body>
+</html>

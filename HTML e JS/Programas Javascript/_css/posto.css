@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+body {
+    overflow: hidden;
+    background-color: white;
+}
+h1 {
+    font-family: Arial, sans-serif;
+    font-size: 25pt;
+    font-weight: bold;
+}
+ul {
+    width: 1200px;
+    margin: 63px 0px 0px 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+ul li {
+    position: relative;
+    float: left;
+    width: 380px;
+    height: 570px;
+    margin: 0px 0px 0px 10px;
+    border: none;
+}
+ul li#gasolina {
+    background: url("../_imagens/bomba-gasolina.png") no-repeat;
+    background-size: 400px auto;
+}
+ul li#alcool {
+    background: url("../_imagens/bomba-alcool.png") no-repeat;
+    background-size: 400px auto;
+}
+ul li#diesel {
+    background: url("../_imagens/bomba-diesel.png") no-repeat;
+    background-size: 400px auto;
+}
+ul li#gasolina h1 {
+    display: block;
+    position: relative;
+    top: -3px;
+    left: 143px;
+    color: rgb(128,64,0);
+}
+ul li#alcool h1 {
+    display: block;
+    position: relative;
+    top: -3px;
+    left: 162px;
+    color: rgb(0,64,0);
+}
+ul li#diesel h1 {
+    display: block;
+    position: relative;
+    top: -3px;
+    left: 174px;
+    color: rgb(0,0,64);
+}
+ul li form {
+    display: block;
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    top: 0px;
+    left: -20px;
+    text-align: right;
+    margin: 0px;
+}
+ul li form input {
+    width: 70px;
+}
+p input.voltar {
+    position: absolute;
+    top: 20px;
+    left: 100px;
+}
