@@ -118,7 +118,6 @@
 
 <p>PS: Os nomes não podem ter erros, e eles não são inventados, são nomes que o sistema e/ou os programas reconhecem. E tome muito cuidado para mexer no registro.</p>
 
-
 <h3>Como Funciona a Cifra de César</h3>
 
 <p>A cifra de César é uma técnica de criptografia bastante simples e provavelmente a mais conhecida de todas. Trata-se de um tipo de cifra de substituição, na qual cada letra de um texto a ser criptografado é substituída por outra letra, presente no alfabeto porém deslocada a um certo número de posições à esquerda ou à direita. A cifra de César recebe esse nome pois, segundo o escrito Suetônio, foi utilizada por Júlio César para se comunicar com seus generais, protegendo mensagens militares.</p>
@@ -332,6 +331,36 @@
 <p>Assim como as VPNs, existem as versões pagas dos serviços de proxies, desenvolvidas por empresas confiáveis e que são mais seguras. Há também as versões gratuitas, mais vulneráveis a ataques e que podem acessar e repassar seus dados a terceiros, bem mais facilmente do que uma VPN gratuita, dada a falta de criptografia. Por isso, tome muito cuidado com qual serviço você vai usar e proteja bem os seus dados.</p>
 
 <p>PS: A rede Tor não deve ser confundida com nenhum dos dois, apesar da rede Tor usar proxies aleatórios com vários nós.</p>
+
+<h3>Como Desenvolver um Aplicativo Seguro</h3>
+
+<p>A segurança de aplicativos é mais predominante do que você poderia ter imaginado. Vamos falar sobre algumas ameaças comuns em segurança da aplicação e segurança de aplicativo, vulnerabilidades das quais você precisa estar ciente.</p>
+
+<p>As principais vulnerabilidades em dispositivos são essas:</p>
+
+<ul>
+    <li><b>Spywares e Malwares:</b> Depois de instalado, ele pode comprometer todos os outros aplicativos no dispositivo do usuário, incluindo os baixados de fontes confiáveis.</li>
+    <li><b>Vazamento de Dados:</b> Em casos como os de dispositivos móveis, um usuário geralmente permite que um aplicativo baixado acesse outros dados no dispositivo, um malware pode tranportar dados confidencias sem serem detectados.</li>
+    <li><b>Software ou Sistema Operaciona Obsoleto:</b> Softwares e sistemas mais antigos não conseguem identificar e interromper os ataques mais recentes, por não receber os patches de segurança.</li>
+    <li><b>Senhas Comprometidas ou Fracas:</b> Usar a mesma senha em várias contas é um risco, além de uso de senhas fáceis de serem quebradas ou descobertas.</li>
+    <li><b>Wi-Fi Público Inseguro:</b> A rede Wi-Fi pública pode estar sem criptografia ou mesmo ter algum malware ou monitoramento malicioso. E nunca devem ser usadas para acessar serviços privados ou confidenciais, como dados bancários e cartões de crédito.</li>
+    <li><b>Ataques de Phishing e Smishing:</b> E-mails falsos podem te redirecionar para sites falsos visando roubar seus dados com a técnica do phishing. O smishing concentra o ataque em mensagens de texto, que também contém um link que redireciona para sites falsos.</li>
+    <li><b>Engenharia Reversa:</b> Usando essa técnica, os invasores podem alterar o código-fonte, revelar os algoritmos de criptografia em uso e muito mais. Um exemplo de uso disso são os programas crackeados, que podem ser perigosos.</li>
+    <li><b>Dispositivos Roubados ou Perdidos:</b> A perda ou roubo de dispositivos (principalmente móveis) é outro risco sério, pois alguém com acesso físico ao dispositivo pode tentar passar pela tela de bloqueio.</li>
+</ul>
+
+<p>E para garantir a segurança de aplicativos móveis:</p>
+
+<ul>
+    <li><b>Criptografia de Dados:</b> Sempre que os dados são transferidos por meio do aplicativo, eles devem ser criptografados, para minimizar ataques de invasores e de engenharia reversa. Uma dica é criptografar o código-fonte.</li>
+    <li><b>Autenticação Forte de Alto Nível:</b> As autenticações fracas são o erro mais comum cometido ao projetar aplicativos, eles devem ser desenvolvidos de forma que apenas senhas fortes sejam aceitas. Uma outra dica é uma autenticação multifator, utilizando biometria.</li>
+    <li><b>Uso de Técnicas de Criptografia Atualizadas:</b> Algoritmos populares como MD5 e SHA-1 estão comrpometidos. É aconselhável empregar técnicas mais confiáveis. Também deve-se realizar testes de penetração manuais e modelagem de ameaças antes dos aplicativos serem lançados.</li>
+    <li><b>Conexões de Rede Seguras:</b> O aplicativo deve ter medidas de segurança para impedir o acesso não autorizado e proteger os dados se o aplicativo usar algum servidor. Podemos usar HTTPS (SSL ou de preferência, TLS) e VPN para isso.</li>
+    <li><b>Minimizar Permissões:</b> Você deve sempre evitar dar ao seu aplicativo muitas permissões, que nem sempre são necessárias. Lembre-se de que cada permissão solicitada pelo aplicativo é outra conexões que pode ser vulnerável.</li>
+    <li><b>Fique Alerta com Tecnologias de Detecção de Adulteração e Bibliotecas de Terceiros:</b> Você pode ativar as notificações usando métodos de quando um código nocivo é inserido. Devemos também implantar repositórios internos estruturados e empregar controles de política para proteger o sistema contra problemas de segurança.</li>
+    <li><b>Pratique Testes Repetidos:</b> A segurança do aplicativo deve passar por um processo contínuo e sem fim. Revise o código constantemente para encontrar falhas de segurança e corrija-as antes de publicá-las. Encontrar brechas no sistema é uma necessidade vital, pois podem se transformar em perigos reais.</li>
+    <li><b>Crie um Plano de Back-up e Restauração:</b> A tecnologia está se desenvolvendo rapidamente e os invasores estão criando maneiras inteligentes de comprometer aplicativos e roubar dados críticos. Precisamos proteger os aplicativos dos efeitos graves de uma violação com um plano de back-up e restauração. É altamente recomendado que os desenvolvedores forneçam aos usuários a opção de back-up de dados mais frequentes e armazenamento secundário.</li>
+</ul>
 
 <h3>O Que é Bitcoin</h3>
 

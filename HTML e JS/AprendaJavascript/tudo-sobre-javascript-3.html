@@ -443,8 +443,6 @@ switch(letra.toUpperCase()) {
 </code>
 </pre>
 
-<p>PS: Podemos colocar o método <code>toUpperCase()</code> na variável letra, para transformar tudo em maiúscula.</p>
-
 <h3>Estruturas de Repetição (Loops)</h3>
 
 <p>Em determinados casos pode ser necessário repetir um programa diversas vezes, nesse caso devemos usar um loop para efetuar essa repetição de código quantas vezes forem necessárias. Também são chamados de laços de repetição.</p>
@@ -454,7 +452,7 @@ switch(letra.toUpperCase()) {
 <pre>
 <code>
 var numero, contador = 0;
-numero = prompt("Digite um número qualquer entre 50 e 500", "0");
+numero = parseInt(prompt("Digite um número qualquer entre 50 e 500", "0"));
 if(numero &lt; 50 || numero &gt; 500) {
     alert("Valor fora do intervalo especificado!");
 }
@@ -504,7 +502,7 @@ while(true) {
 
 <pre>
 <code>
-var numero = prompt("Digite um número qualquer entre 50 e 500", "0");
+var numero = parseInt(prompt("Digite um número qualquer entre 50 e 500", "0"));
 if(numero &lt; 50 || numero &gt; 500) {
     alert("Valor fora do intervalo especificado");
 }

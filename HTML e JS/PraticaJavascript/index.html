@@ -9,11 +9,17 @@
     </head>
     <body>
         <script>
-            var frase = "Isso é uma String";
+            var numeros = [14, 23, 6, 38, 9, 13, 52, 7, 5];
 
-            document.write(`${frase.split("").reverse().join("")}<br/>`);
-            document.write(`${frase.concat(" e ela foi concatenada!")}<br/>`);
-            document.write(`${frase.split("")}<br/>`);
+            function ordenar(a, b) {
+                return b - a;
+            }
+
+            numeros.sort(ordenar);
+
+            for(let i = 0; i < numeros.length; i++) {
+                document.write(numeros[i] + "<br/>");
+            }
         </script>
     </body>
 </html>
