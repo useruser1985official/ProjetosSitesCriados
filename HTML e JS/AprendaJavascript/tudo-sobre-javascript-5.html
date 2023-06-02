@@ -57,8 +57,8 @@ saudacao(cham);
 
 <pre>
 <code>
-var tens = prompt("Entre com o valor da tensão!", "0");
-var resis = prompt("Entre com o valor da resistência!", "0");
+var tens = parseInt(prompt("Entre com o valor da tensão!", "0"));
+var resis = parseInt(prompt("Entre com o valor da resistência!", "0"));
 function calcula(t, r) {
     let res = t / r;
     return res;
@@ -76,9 +76,9 @@ document.write("O valor da corrente é " + corr + " A.");
 
 <p>Argumentos são passados a uma função usando parâmetros, que são nomes declarados no cabecalho da função.</p>
 
-<p>Parâmetros de tipos primitivos, como strings, numéricos ou booleanos, são passados por valor, o que significa que se o argumento for dentro da funçãom essa alteração não se reflete na variável do programa original (fora da função).</p>
+<p>Parâmetros de tipos primitivos, como strings, numéricos ou booleanos, são passados por valor, o que significa que se o argumento for dentro da função, essa alteração não se reflete na variável do programa original (fora da função).</p>
 
-<p>Objetos já são passados por referência, assim sendo, se a alteração for reakuzada no objeto dentro da função, a alteração irá se propagar para o objeto fora da função, no programa chamado.</p>
+<p>Objetos já são passados por referência, assim sendo, se a alteração for realizada no objeto dentro da função, a alteração irá se propagar para o objeto fora da função, no programa chamado.</p>
 
 <p>Veja um exemplo de passagem de parâmetros:</p>
 
@@ -160,7 +160,7 @@ saudacao(cham1, cham2);
 
 <p>Uma função pode ou não retornar um valor ao programa chamador da invocação. Caso seja retornado um valor, usamos a instrução <code>return</code> em um ponto apropriado do script.</p>
 
-<p>Quando a instrução returno é encontrada, o processamento do código da função para neste ponto, e retorna o valor (e o controle) para o chamador. Podemos ter mais de uma instrução return em uma função.</p>
+<p>Quando a instrução return é encontrada, o processamento do código da função para neste ponto, e retorna o valor (e o controle) para o chamador. Podemos ter mais de uma instrução return em uma função.</p>
 
 <p>Veja esse exemplo, que usamos pra calcular o quadrado de um número:</p>
 
@@ -170,7 +170,7 @@ function quadr(num) {
     let q = num * num;
     return q;
 }
-var n = prompt("Entre com um número pra definir o quadrado dele!", "0");
+var n = parseInt(prompt("Entre com um número pra definir o quadrado dele!", "0"));
 document.write("O quadrado de " + n + " é " + quadr(n));
 </code>
 </pre>
@@ -186,7 +186,7 @@ function quadr(num) {
     let q = num * num;
     return q;
 }
-var n = prompt("Entre com um número pra definir o quadrado dele!", "0");
+var n = parseInt(prompt("Entre com um número pra definir o quadrado dele!", "0"));
 document.write(quadr(n));
 </code>
 </pre>

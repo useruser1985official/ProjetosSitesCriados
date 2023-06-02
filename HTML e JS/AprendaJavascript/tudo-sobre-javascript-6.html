@@ -191,7 +191,7 @@ function alteraData() {
         &lt;option value="12"&gt;Dezembro&lt;/option&gt;
     &lt;/select&gt;&lt;/p&gt;
     &lt;p&gt;Ano: &lt;input type="number" id="ano" min="1900" max="2100" step="1" value="1900"/&gt;&lt;/p&gt;
-    &lt;input type="submit" value="Alterar Data" onclick="alteraData()"/&gt;
+    &lt;input type="button" value="Alterar Data" onclick="alteraData()"/&gt;
 &lt;/form&gt;
 </code>
 </pre>
@@ -231,7 +231,7 @@ document.write(novaMatriz[2][0] + "&lt;br/&gt;");
 </code>
 </pre>
 
-<p>Como visto acima, para ler um array dentro de uma matriz, usa-se os colchetes, o primeiro representa a coluna/bloco desejado, e o segundo, o conteúdo que deseja verificar (sempre contando a partir do 0).</p>
+<p>Como visto acima, para ler um array dentro de uma matriz, usa-se os colchetes, o primeiro representa a linha/bloco desejado, e o segundo, o conteúdo que deseja verificar (sempre contando a partir do 0).</p>
 
 <p>PS: Para verificar todos os elementos, basta não indicar os colchetes, apenas colocar o nome da matriz sem nada, igual uma variável).</p>
 
@@ -263,8 +263,8 @@ document.write("Conteúdo da matriz:&lt;br/&gt;" + valores);
 
 <pre>
 <code>
-var linhas = prompt("Digite a quantidade de linhas desejadas na matriz!", "1");
-var colunas = prompt("Digite a quantidade de colunas desejadas na matriz!", "1");
+var linhas = parseInt(prompt("Digite a quantidade de linhas desejadas na matriz!", "1"));
+var colunas = parseInt(prompt("Digite a quantidade de colunas desejadas na matriz!", "1"));
 alert("Criar uma matriz de " + linhas + " linhas por " + colunas + " colunas.");
 
 var matriz2 = [];
@@ -337,7 +337,7 @@ catch(ex) {
 </code>
 </pre>
 
-<p>Podemos colocar também a opção console.log para mostrar o erro (que será visto somente no inspecionar elemento do navegador).</p>
+<p>Podemos colocar também a opção console.log para mostrar o erro (que será visto somente no inspecionar elemento do navegador). Também colocamos uma mensagem que mostrará o tipo de erro:</p>
 
 <pre>
 <code>
@@ -398,7 +398,7 @@ catch(ex) {
 var num;
 
 try {
-    num = prompt("Digite um valor: ");
+    num = parseInt(prompt("Digite um valor: "));
     if(num > 10) {
         throw new Error("Valor inválido, o valor deverá ser até o máximo de 10!");
     }
@@ -419,7 +419,7 @@ catch(ex) {
 var num;
 
 try {
-    num = prompt("Digite um valor: ");
+    num = parseInt(prompt("Digite um valor: "));
     if(num > 10) {
         throw new Error("Valor inválido, o valor deverá ser até o máximo de 10!"); // Isso criará uma exceção
     }

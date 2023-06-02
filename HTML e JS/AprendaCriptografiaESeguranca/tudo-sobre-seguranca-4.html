@@ -268,11 +268,11 @@ macchanger -p eth0
 
 <p>PS: Pode ser que a versão do GnuPG que vem com o GPG4Win esteja desatualizada, nesse caso atualize baixando daqui: <a href="https://gnupg.org/ftp/gcrypt/binary/" target="_blank">https://gnupg.org/ftp/gcrypt/binary/</a></p>
 
-<p>Abra o Kleopatra, clique em file e em new certificate, as escolha de formato será aberto, as opções são OpenPGP (que é um padrão aberto e são criadas localmente, sem uma autoridade de certificação, podendo ser certificadas pelos amigos e conhecidos), e a X.509 (que precisará verifiar a chave com uma autoridade de certificação, que terá um custo). No caso, criaremos OpenGPG.</p>
+<p>Abra o Kleopatra, clique em file e em new certificate, as escolha de formato será aberto, as opções são OpenPGP (que é um padrão aberto e são criadas localmente, sem uma autoridade de certificação, podendo ser certificadas pelos amigos e conhecidos), e a X.509 (que precisará verifiar a chave com uma autoridade de certificação, que terá um custo). No caso, criaremos OpenPGP.</p>
 
-<p>Ao abrir o Kleopatra e escolher OpenGPG, coloque o nome, e-mail e comentário para o qual será enviado.</p>
+<p>Ao abrir o Kleopatra e escolher OpenPGP, coloque o nome, e-mail e comentário para o qual será enviado.</p>
 
-<p>Tem um botão escrito Advanced Settings, que tem algumas opções avançadas como as de algoritmos, tamanhos de chaves e validades. Quanto maior a chave, mais difícil de quebrar a criptografia, porém, mais recursos de hardware serão consumidos. Marque a opção autenticação para configurar a validade dela.</p>
+<p>Tem um botão escrito Advanced Settings, que tem algumas opções avançadas como as de algoritmos (escolha RSA de preferência), tamanhos de chaves e validades. Quanto maior a chave, mais difícil de quebrar a criptografia, porém, mais recursos de hardware serão consumidos. Marque a opção autenticação para configurar a validade dela.</p>
 
 <p>No próximo, ele mostrará os dados, e depois pedirá para você inserir uma senha para descriptografar posteriormente.</p>
 
@@ -284,7 +284,7 @@ macchanger -p eth0
 
 <p>Para desencriptar, faça da mesma forma, insira a senha (caso seja criptografado com uma, se foi criptografado com sua chave pública, ele pedirá a senha da sua chave privada) e ele será descriptografado.</p>
 
-<p>O Kleopatra também fornece um autenticador de chaves, basta colocar o arquivo e a chave dele na mesma pasta e clicar diretamente na chave, que abrirá o Kleopatra e verificará a autencidade do arquivo (podendo também pesquisar a chave dele num servidor, importar e certificar a mesma). Também é possível usar a maioria dos comandos do GPG do Linux pelo CMD do Windows.</p>
+<p>O Kleopatra também fornece um autenticador de chaves, basta colocar o arquivo e a chave dele na mesma pasta e clicar diretamente na chave, que abrirá o Kleopatra e verificará a autencidade do arquivo (podendo também pesquisar a chave dele num servidor, importar e certificar a mesma). Podemos também assinar arquivos com nossa chave privada, indo em sign/encrypt files. Também é possível usar a maioria dos comandos do GPG do Linux pelo CMD do Windows.</p>
 
 <h3>MobaSSH - Servidor SSH para Windows</h3>
 

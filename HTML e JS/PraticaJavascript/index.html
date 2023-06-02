@@ -9,16 +9,12 @@
     </head>
     <body>
         <script>
-            var numeros = [14, 23, 6, 38, 9, 13, 52, 7, 5];
+            onerror = erro;
 
-            function ordenar(a, b) {
-                return b - a;
-            }
+            alert(baixar());
 
-            numeros.sort(ordenar);
-
-            for(let i = 0; i < numeros.length; i++) {
-                document.write(numeros[i] + "<br/>");
+            function erro() {
+                alert("Houve um erro!");
             }
         </script>
     </body>
