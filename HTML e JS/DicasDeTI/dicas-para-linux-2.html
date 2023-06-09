@@ -272,6 +272,36 @@ sudo chown -R clamav:clamav /var/log/clamav/
 </code>
 </pre>
 
+<p>Podemos usar outras ferramentas para analisar o Linux, como o RkHunter e o ChkRootkit.</p>
+
+<p>Instale o RkHunter com <code>sudo apt install rkhunter</code>, e para utilizar ele digite isso:</p>
+
+<pre>
+<code>
+sudo rkhunter --update
+
+sudo rkhunter --check
+</code>
+</pre>
+
+<p>Caso tenha problemas para atualizar e checkar, edite essas linhas no arquivo /etc/rkhunter.conf:</p>
+
+<pre>
+<code>
+UPDATE_MIRRORS=1
+
+MIRRORS_MODE=0
+
+WEB_CMD=""
+
+SCRIPTWHITELIST=/bin/egrep
+
+SCRIPTWHITELIST=/bin/fgrep
+</code>
+</pre>
+
+<p>Já o ChkRootKit, instalamos com <code>sudo apt install chkrootkit</code>, e executando como administrador usando o comando <code>sudo chkrootkit</code>.</p>
+
 <h3>Compactando e Descompactando Arquivos</h3>
 
 <h4>.tar</h4>
@@ -475,6 +505,7 @@ https://www.edivaldobrito.com.br/oracle-java-no-ubuntu-18-04-lts/
     <li><a href="https://sempreupdate.com.br/o-que-e-pie-position-independent-executables/" target="_blank">O que é o PIE dos Executáveis do Linux</a></li>
     <li><a href="https://linuxdicasesuporte.blogspot.com/2018/06/manipulando-swap-no-ubuntu-1804-e.html" target="_blank">Manipulando a Swap no Ubuntu</a></li>
     <li><a href="https://www.techtudo.com.br/noticias/2016/11/como-desativar-conta-de-root-administrador-no-linux.ghtml" target="https">Ativando e Desativando a Conta Root do Linux</a></li>
+    <li><a href="https://blog.desdelinux.net/herramientas-libres-anti-malware-y-anti-rootkit/" target="_blank">Ferramentas Anti-malware para Linux</a></li>
 </ol>
 
 <p><a href="dicas-para-linux-1.html">Parte 1 da Matéria</a></p>

@@ -3,19 +3,59 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Prática Javascript</title>
+        <style>
+            #alerta {
+                display: none;
+                color: red;
+            }
+        </style>
         <script>
-            
+            function mostOculSenha() {
+                let senha = document.getElementById("cSenha");
+
+                if(senha.type == "password") {
+                    senha.type = "text";
+                }
+                else {
+                    senha.type = "password";
+                }
+            }
+
+            document.addEventListener("keydown", function(event) {
+                let estado = event.getModifierState("CapsLock");
+                let alertaCaps = document.getElementById("alerta");
+
+                if(estado) {
+                    alertaCaps.style.display = "inline";
+                }
+                else {
+                    alertaCaps.style.display = "none";
+                }
+            });
         </script>
     </head>
     <body>
-        <script>
-            onerror = erro;
+        <label for="cSenha">Senha: </label><input type="password" name="tSenha" id="cSenha"/> <span id="alerta">CAPS LOCK Ativado!</span><br/>
+        <input type="checkbox" name="tMost" id="cMost" onclick="mostOculSenha()"><label for="cMost">Mostrar Senha</label>
+    
+        <br/>
+        <br/>
 
-            alert(baixar());
+        <form oninput="res.value = num.value">
+            0<input type="range" name="num" min="0" max="100" step="5" value="50"/>100
+            <br/>
+            <output name="res">50</output>
+        </form>
 
-            function erro() {
-                alert("Houve um erro!");
-            }
-        </script>
+        <br/>
+        <br/>
+        
+        <form oninput="res.value = parseInt(n1.value) + parseInt(n2.value)">
+            <input type="number" name="n1" min="0" max="100" value="0"/>
+            +
+            <input type="number" name="n2" min="0" max="100" value="0"/>
+            =
+            <output name="res">0</output>
+        </form>
     </body>
 </html>
