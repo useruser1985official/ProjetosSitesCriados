@@ -171,6 +171,53 @@
 
 <p>Podemos também usar o ApateDNS para vermos os domínos DNS abertos do nosso sistema, incluindo os suspeitos, ele não precisa ser instalado: <a href="https://www.fireeye.com/content/dam/fireeye-www/services/freeware/sdl-apatedns.zip" target="_blank">https://www.fireeye.com/content/dam/fireeye-www/services/freeware/sdl-apatedns.zip</a></p>
 
+<h3>Arquivo Hosts</h3>
+
+<p>O arquivo hosts é usado para relacionar hostnames a endereços de IP. O arquivo pode ser editado como administrador/root com um editor de texto comum.</p>
+
+<p>Este arquivo no Windows se localiza em <code>C:\Windows\System32\drivers\etc\hosts</code> e no Linux em <code>/etc/hosts</code>.</p>
+
+<p>A sintaxe básica do arquivo é essa:</p>
+
+<pre>
+<code>
+# Tudo que tiver hashtag é comentário
+# Primeiro passamos o IP e depois o nome do host para o qual será associado a ele
+127.0.0.1          localhost
+
+# Para um exemplo de configuração de roteador, onde o gateway padrão usa o hostname "roteador":
+192.168.15.1          roteador.online
+</code>
+</pre>
+
+<p>Nesse caso, podemos acessar nosso roteador digitando <code>http://roteador.online/</code> no nosso navegador.</p>
+
+<p>Podemos também redirecionar um domínio para outro IP, inclusive públicos, como esse exemplo abaixo, que redireciona o site do Google para o IP de loopback do nosso dispositivo, usado para bloquear o acesso ao Google:</p>
+
+<pre>
+<code>
+# Use todos os domínios possíveis para bloquear geral:
+
+127.0.0.1          www.google.com.br
+127.0.0.1          google.com.br
+127.0.0.1          www.google.com
+127.0.0.1          google.com
+</code>
+</pre>
+
+<p>PS: Isso também pode ser usado por malwares que alteram o arquivo em questão, fazendo que eles redirecionem sites legítimos como o do Google, Facebook ou qualquer outro, para um IP onde está um site falso de phishing, portanto, fique alerta com entradas estranhas nesses arquivos, como por exemplo:</p>
+
+<pre>
+<code>
+# Isso seria um exemplo de um IP de um site falso,
+# para onde os links do Facebook seriam redirecionados:
+
+122.215.182.011          www.facebook.com
+122.215.182.011          facebook.com
+122.215.182.011          web.facebook.com
+</code>
+</pre>
+
 <ul>
     <li><a href="tudo-sobre-redes-6.html">Parte Anterior da Matéria!</a></li>
     <li><a href="tudo-sobre-redes-8.html">Continuação da Matéria!</a></li>

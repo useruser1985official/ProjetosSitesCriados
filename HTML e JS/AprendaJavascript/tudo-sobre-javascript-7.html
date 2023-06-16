@@ -148,7 +148,7 @@ var nome = prompt("Qual o seu nome?");
 
 <pre>
 <code>
-new Date.toUTCString();
+new Date().toUTCString();
 document.cookie = "nomeDoCookie=valorDoCookie; expires=data; path=localhost";
 </code>
 </pre>
@@ -232,7 +232,7 @@ onload = function() { // O window.onload inicia automaticamente a execução do 
     let nome = lerCookie("nome");
     
     if(nome == null) {
-        let nome = prompt("Qual o seu nome?");
+        nome = prompt("Qual o seu nome?");
         escreveCookie("nome", nome, 7); // Nome do cookie, valor do cookie e dias de expiração.
     }
 };
