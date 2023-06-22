@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda MySQL</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda MySQL</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-mysql-1.html">Tudo sobre MySQL Parte 1!</a></li>
+                    <li><a href="tudo-sobre-mysql-2.html">Tudo sobre MySQL Parte 2!</a></li>
+                    <li><a href="tudo-sobre-mysql-3.html">Tudo sobre MySQL Parte 3!</a></li>
+                    <li><a href="tudo-sobre-mysql-4.html">Tudo sobre MySQL Parte 4!</a></li>
+                    <li><a href="tudo-sobre-mysql-5.html">Tudo sobre MySQL Parte 5!</a></li>
+                    <li><a href="tudo-sobre-mysql-6.html">Tudo sobre MySQL Parte 6!</a></li>
+                    <li><a href="tudo-sobre-mysql-7.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre MySQL Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre MySQL Parte 7</h2>
+
+<h3>Campos Calculados em Tabelas no MySQL</h3>
+
+<p>Campos calculados (ou colunas geradas) são colunas em uma tabela em um banco de dados que apresentam os resultados de uma expressão pré-definida, geralmente uma fórmula aplicada a outras colunas, da mesma forma que uma View, porém sem causar overhead no banco, pois por padrão seus dados não são fisicamente armazenados na tabela. Uma outra vantagem de um campo calculado é que a integridade dos dados é aumentada, pois os cálculos são realizados em nível de tabela, em vez de serem realizados por meio de queries (consultas) criadas pelo desenvolvedor.</p>
+
+<p>Como citado, por padrão um campo calculado no MySQL não armazena nenhum valor, os dados são calculados no momento de uma consulta. Porém, é possível armazenar os dados de um campo gerado opcionalmente, o que significa que o cálculo é realizado e os dados são salvos na coluna. É possível até mesmo indexar um campo calculado, e uma das aplicações desses campos é na substituição de triggers, simplificando o design e a operação sobre o banco de dados.</p>
+
+<p>Para criar uma coluna calculada usamos a sintaxe <code>nomedacoluna tipodedados [generated always] as expressão [virtual | stored] constraints</code>, onde generated always é apenas uma forma de indicar explicitamente que o campo é calculado, expressão é a fórmula que desejamos usar para realizar o cálculo do valor da coluna, virtual significa que o valor do campo é calculado sempre que for realizada uma consulta a ele, mas seus dados não ficam armazenados na tabela em si. O campo nesse caso não ocupa espaço em disco. É possível criar índices secundários em colunas calculadas virtuais (com InnoDB), e stored significa que o valor do campo é calculado (em operações de inserção e atualização de dados) e armazenado na tabela. O acesso aos dados é mais rápido nesse caso, mas obviamente ocupa mais espaço em disco.</p>
+
+<p>O padrão é a criação de colunas do tipo virtual caso não seja especificada a opção. Também é possível termos colunas virtual e stored na mesma tabela (claro que não na mesma coluna).</p>
+
+<p>Uma coluna gerada pode fazer referência a outras colunas geradas, desde que elas tenham sido definidas antes na definição da tabela. Com relação às colunas base (não-geradas), é possível fazer referência a qualquer uma (exceto colunas com auto incremento), mesmo que sua definição ocorra posteriormente na tabela. Não é possível usar a opção auto_increment em um campo calculado.</p>
+
+<p>Como primeiro exemplo, vamos criar uma tabela de nome tbl_mult, que contém três campos numéricos: dois com dados inseridos pelo usuário (num1 e num2) e um terceiro gerado pela multiplicação de num1 por num2 (num1 * num2):</p>
+
+<pre>
+<code>
+create table tbl_mult (
+    id smallint primary key auto_increment,
+    num1 smallint not null,
+    num2 smallint not null,
+    num3 smallint generated always as (num1 * num2) virtual
+)
+default charset = utf8;
+</code>
+</pre>
+
+<p>Como criamos a coluna gerada como virtual, seus dados não ficam armazenados em disco.</p>
+
+<p>Podemos inserir alguns registros na tabela para testar a geração dos dados no campo calculado num3:</p>
+
+<pre>
+<code>
+insert into tbl_mult (num1, num2) values
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4);
+</code>
+</pre>
+
+<p>E verificar os dados calculados realizando uma consulta à tabela digitando <code>select * from tbl_mult</code>.</p>
+
+<p>Veja que os dados na coluna num3 mostram o resultado do cálculo especificado em cada linha da tabela.</p>
+
+<p>Vejamos outro exemplo. Suponha uma tabela de vendas contendo os campos preco_produto, qtde, desconto e preco_total. Queremos criar essa tabela de modo que o campo Preco_Total seja calculado dinamicamente, multiplicando o preço do produto pela quantidade (adquirida), e aplicando um desconto percentual especificado na coluna Desconto ao preço total. Queremos também persistir o valor calculado na tabela:</p>
+
+<pre>
+<code>
+create table tbl_vendas (
+    id smallint primary key auto_increment,
+    preco_produto decimal(6, 2) not null,
+    qtd tinyint not null,
+    desconto decimal(4, 2) not null,
+    preco_total decimal(6, 2) as (preco_produto * qtd * (1 - desconto / 100)) 
+)
+default charset = utf8;
+</code>
+</pre>
+
+<p>Vamos inserir alguns dados de vendas na tabela e depois verificar se o preço total foi calculado corretamente:</p>
+
+<pre>
+<code>
+insert into tbl_vendas (preco_produto, qtd, desconto) values
+(50.00, 2, 20),
+(65.00, 3, 15),
+(100.00, 1, 12),
+(132.00, 3, 18);
+</code>
+</pre>
+
+<p>Agora vamos efetuar a consulta para visualizar os dados na tabela digitando <code>select * from tbl_vendas</code>.</p>
+
+<p>Note que o campo preco_total possui os preços calculados corretamente para cada produto vendido.</p>
+
+<p>PS: Uma coluna calculada não pode ter a restrição not null aplicada, e também não pode ter dados inseridos por uma declaração insert e nem modificados por um update. Também não pode ser utilizada com definições de restrição default e foreign key (chave estrangeira). Não é necessário especificar o tipo de dados do campo calculado ao criar a tabela. Colunas persistidas ocupam mais espaço em disco do que colunas calculadas virtuais (sem persisted).</p>
+
+<h3>Tipo de dados Enum no MySQL</h3>
+
+<p>O tipo de dados enum é um objeto string cujo valor é escolhido a partir de uma lista de valores permitidos, enumerados de forma explícita durante a especificação de uma coluna, quando uma tabela é criada.</p>
+
+<p>É uma forma de se economizar espaço em disco, quando se sabe de antemão que a coluna só poderá armazenar um conjunto limitado de valores. Isso ocorre porque os valores são codificados internamente automaticamente como números, independente dos dados armazenados serem números, strings, etc. Assim, independente do tamanho do dado inserido na coluna, cada registro ocupará apenas um byte de espaço neste campo.</p>
+
+<p>Declaramos uma coluna do tipo enum ao criarmos uma tabela, passando os valores que serão armazenados entre parênteses, separados por vírgulas e individualmente envoltos entre aspas. Veja o exemplo:</p>
+
+<pre>
+<code>
+create table camisas (
+    id tinyint primary key auto_increment,
+    nome varchar(25),
+    tamanho enum('Pequena', 'Média', 'Grande', 'Extra-grande')
+)
+default charset = utf8;
+</code>
+</pre>
+
+<p>A coluna tamanho é uma enumeração que consiste nos quatro tamanhos possíveis para camisas a serem registradas na tabela.</p>
+
+<p>Vamos inserir um registro nesta tabela, por exemplo, uma camisa regata tamanho grande:</p>
+
+<pre>
+<code>
+insert into camisas (nome, tamanho) values ('Regata', 'Grande');
+</code>
+</pre>
+
+<p>E então realizar uma consulta simples para verificar a inserção dos dados:</p>
+
+<pre>
+<code>
+select * from camisas;
+</code>
+</pre>
+
+<p>Vamos tentar inserir agora um registro de uma camisa social, porém escrevendo um tamanho que não consta na lista de enumeração:</p>
+
+<pre>
+<code>
+insert into camisas (nome, tamanho) values ('Social', 'Medium');
+</code>
+</pre>
+
+<p>Esse código dará erro, pois não existe na enum.</p>
+
+<p>Alterando o valor inserido para "média" resolve o problema. Vamos aproveitar e inserir mais alguns registros:</p>
+
+<pre>
+<code>
+insert into camisas (nome, tamanho) values 
+('Social', 'Média'),
+('Polo', 'Pequena'),
+('Regata', 'Grande'),
+('Camiseta', 'Extra-grande');
+</code>
+</pre>
+
+<p>Uma coluna do tipo enum pode ter no máximo 65.535 elementos atribuídos.</p>
+
+<p>Podemos consultar os valores permissíveis para uma coluna do tipo enum com a declaração seguinte:</p>
+
+<pre>
+<code>
+show columns from camisas like 'tamanho';
+</code>
+</pre>
+
+<p>Além disso, podemos visualizar os números de índice dos valores enumerados armazenados consultando a coluna enum em um contexto numérico, como na seguinte declaração:</p>
+
+<pre>
+<code>
+select nome, tamanho + 0 from camisas;
+</code>
+</pre>
+
+<p>Note que há duas camisas com o mesmo número de índice associado (regata e polo) – isso ocorre porque ambas possuem o mesmo tamanho (grande, índice 3).</p>
+
+<p>Um problema típico do tipo enum em MySQL é a aplicação da cláusula order by para tentar ordenar os resultados de uma consulta pela coluna deste tipo. A ordenação padrão mostra os elementos na ordem em que foram inseridos (ordem de seus índices), e não em ordem alfabética. Veja o exemplo:</p>
+
+<pre>
+<code>
+select * from camisas order by tamanho;
+</code>
+</pre>
+
+<p>Claramente o resultado não foi o que esperávamos. Porém, podemos consertar isso executando o ORDER BY combinado com CAST, da seguinte maneira:</p>
+
+<pre>
+<code>
+select * from camisas order by cast(tamanho as char);
+</code>
+</pre>
+
+<p>Agora sim, resultado ordenado por tamanho em ordem alfabética.</p>
+
+<p>PS: Não e recomendado usar valores numéricos em uma coluna do tipo enum, pois neste caso não haverá economia de espaço de armazenamento (em relação a valores SMALLINT e TINYINT), além do risco de haver confusão entre o valor armazenado e o número empregado para representá-lo internamente.</p>
+
+<h3>Indexar tabelas em MySQL</h3>
+
+<p>Os índices são empregados em consultas para ajudar a encontrar registros com um valor específicos em uma coluna de forma rápida, ou seja, aumentar o desempenho na execução de consultas. Com índices, o MySQL vai direto a uma linha em vez de buscar toda a tabela até encontrar os registros que importam.</p>
+
+<p>Por padrão, o MySQL cria índice automaticamente para campos de chave primária, chave estrangeira e constraint unique. Além disso, podemos criar índices para outras colunas usadas com frequência em buscas ou junções.</p>
+
+<p>Os índices clusterizados alteram a forma como os dados são armazenados em um banco de dados, pois ele classifica as linhas de acordo com a coluna que possui o índice. Uma tabela só pode ter um índice clusterizado, geralmente está na coluna que é uma chave primária da tabela ou, em sua ausência, em uma coluna unique. Se uma tabela não possuir índice clusterizado, suas linhas são armazenadas em uma estrutura não-ordenada chamada de heap.</p>
+
+<p>Esse comando permite ver os índices de uma tabela:</p>
+
+<pre>
+<code>
+show index from cursos;
+</code>
+</pre>
+
+<p>Esse comando vai mostrar como vai ser realizado o comando que está na frente dele (no caso, o select):</p>
+
+<pre>
+<code>
+explain select * from cursos where nome = 'MySQL';
+</code>
+</pre>
+
+<p>Para criar um índice numa coluna da tabela, fazemos assim:</p>
+
+<pre>
+<code>
+create index idx_curso on cursos(nome);
+</code>
+</pre>
+
+<p>Dê o show index novamente e olhe ele, dê também novamente o comando explain. Nesse caso, ao invés de ler várias linhas, ele só lerá a linha onde está no nome especificado.</p>
+
+<p>PS: Use o índice apenas em colunas muito utilizadas, evite criar índices desnecessários.</p>
+
+<p>Para adicionar um índice em uma tabela já existente podemos fazer assim:</p>
+
+<pre>
+<code>
+alter table cursos add index idx_desc(descricao);
+</code>
+</pre>
+
+<p>Para excluir os índices criados, fazemos assim:</p>
+
+<pre>
+<code>
+drop index idx_curso on cursos;
+drop index idx_desc on cursos;
+</code>
+</pre>
+
+<h3>Operador UNION - Unir Dois ou Mais Resultados de Consultas</h3>
+
+<p>O operador UNION combina dados provenientes de duas ou mais consultas. Uma UNION combina as linhas de dois ou mais comandos em um conjunto de resultados. Cada declaração SELECT deve ter o mesmo número de colunas, tipos de dados e ordem das colunas.</p>
+
+<p>Veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+select item, preco_desconto, 'Produto Caro' resultado from produto where preco_desconto &gt;= 300.00
+union
+select item, preco_desconto, 'Produto Razoável' resultado from produto where preco_desconto &lt; 300.00;
+</code>
+</pre>
+
+<p>No caso acima, ele faz dois selects, um com os produtos acima de 300 Reais e a mensagem de caro, e outro com abaixo de 300 e a mensagem de razoável, e os dois são unidos num comando só.</p>
+
+<p>Veja outro exemplo abaixo:</p>
+
+<pre>
+<code>
+select item, preco_normal, preco_desconto from produto where preco_normal &lt; 300.00
+union
+select item, preco_normal, (preco_normal * 0.75) preco_desconto_novo from produto where preco_normal &gt;= 300.00;
+</code>
+</pre>
+
+<p>Inclusive, podemos entender melhor como funciona a SQL Injection, usando o select com números, assim:</p>
+
+<pre>
+<code>
+select * from produto union select 1;
+
+select * from produto union select 1, 2;
+
+select * from produto union select 1, 2, 3;
+
+select * from produto union select 1, 2, 3, 4;
+
+select * from produto union select 1, 2, 3, 4, 5;
+</code>
+</pre>
+
+<p>No caso acima, os número verificarão a quantidade de colunas em uma tabela, ao concluir uma consulta sem erros.</p>
+
+<p>PS: Os números são só pra representar, mas pode ser outros conteúdos, inclusive numa SQL Injection costuma-se passar funções do SQL para descobrir nomes de bancos e tabelas, como por exemplo:</p>
+
+<pre>
+<code>
+select * from produto union select 1, 2, 3;
+
+select * from produto union select 1, 2, 3, 4;
+
+select * from produto union select 1, 2, 3, 'aaa';
+
+-- O comando database() retorna o nome do banco atual
+
+select * from produto union select 1, 2, 3, database();
+
+select * from produto union select 1, 2, 3, schema_name from information_schema.schemata;
+
+-- Retorna os nomes dos bancos de dados
+
+select * from produto union select 1, 2, 3, group_concat(schema_name) from information_schema.schemata;
+
+-- Retorna os nomes das tabelas do banco especificado.
+
+select * from produto union select 1, 2, 3, group_concat(table_name) from information_schema.tables where table_schema = 'cadastro';
+
+-- Retorna os nomes das colunas das tabela especificada
+
+select * from produto union select 1, 2, 3, group_concat(column_name) from information_schema.columns where table_schema = 'cadastro' and table_name = 'produto';
+
+select * from produto union select 1, 2, 3, group_concat(id, ' - ', item, ' - ', preco_desconto) from cadastro.produto;
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-mysql-6.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-mysql-8.html">Continuação da Matéria!</a></li>-->
+</ul>
+
+        </div>
+    </body>
+</html>

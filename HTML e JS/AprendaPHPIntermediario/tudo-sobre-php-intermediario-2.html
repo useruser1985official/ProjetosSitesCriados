@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda PHP Intermediário</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda PHP Intermediário</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-1.html">Tudo sobre PHP Intermediário Parte 1!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre PHP Intermediário Parte 2!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-3.html">Tudo sobre PHP Intermediário Parte 3!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-4.html">Tudo sobre PHP Intermediário Parte 4!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-5.html">Tudo sobre PHP Intermediário Parte 5!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-6.html">Tudo sobre PHP Intermediário Parte 6!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-7.html">Tudo sobre PHP Intermediário Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre PHP Intermediário Parte 2</h2>
+
+<h3>Trabalhando com Includes</h3>
+
+<p>Primeiro, vamos criar um projeto novo, cuja página inicial (index) será algo tipo isso: <a href="_arquivos/site.txt" target="_blank">Site</a></p>
+
+<p>Os includes são usados para evitar que, ao criar um link novo, tenha que trocar em todas as páginas (principalmente sites com muitas páginas).</p>
+
+<p>Faremos uma segunda página com o nome "empresa.php", quase igual ao index, mas sem o footer e o header. Faremos também uma terceira com "topo.php", apenas com o header e uma quarta com "footer.php" apenas com o footer, todas a princípio, iguais.</p>
+
+<p>Na página empresa, nos locais onde estariam as tags header e footer, colocamos um bloco PHP com <code>include_once();</code> e o link da página referente (topo.php e header.php). Agora faremos o mesmo na index.php.</p>
+
+<p>Essa dica deverá ser usada em partes do site que serão comuns em todo o site, de forma que evite a edição de várias vezes do mesmo link.</p>
+
+<p>Por ser uma linguagem do lado servidor, nada escrito em PHP retornará pro cliente, se olhar o código-fonte, apenas retornará as linguagens do lado cliente (HTML, CSS e JS). Nada do lado servidor é visível para o cliente (como o PHP).</p>
+
+<h3>Arrays - Conceitos e Prática</h3>
+
+<p>Como sabemos, os arrays (vetores e matrizes), são variáveis compostas, que nos permitem ter mais de um valor numa mesma variável.</p>
+
+<p>Vejamos alguns exemplos:</p>
+
+<pre>
+<code>
+$x[0] = "Oi";
+$x[1] = "Olá";
+    
+echo $x[0];
+</code>
+</pre>
+
+<p>No caso acima, o $x é uma variável com array de duas posições (sempre numeradas a partir do 0).</p>
+
+<p>Assim como uma variável pode receber um valor de outra, ela virará array também, se a outra também for, dessa forma, complementando o código acima:</p>
+
+<pre>
+<code>
+$y = $x;
+echo $y[1];
+</code>
+</pre>
+
+<p>Esse é o jeito mais usado de criar um array:</p>
+
+<pre>
+<code>
+$zoo = array("Leão", "Elefante", "Girafa");
+echo $zoo;
+</code>
+</pre>
+
+<p>Mas nesse caso acima, o echo só exibirá que a variável é um array, mas não exibirá os valores. Para chamar a posição desejada, coloque ela da mesma forma entre colchetes, por exemplo:</p>
+
+<pre>
+<code>
+$zoo = array("Leão", "Elefante", "Girafa");
+echo $zoo[0];
+</code>
+</pre>
+
+<p>PS: Também podemos fazer um laço for pra exibir.</p>
+
+<p>Também podemos declarar as posições específicas, dessa forma:</p>
+
+<pre>
+<code>
+$nomes = array(0 => "João", 1 => "Camila", 2 => "Júlia", 4 => "Saulo", 3 => "Amanda");
+echo $nomes[3];
+</code>
+</pre>
+
+<p>PS: Note que nesse caso, não é obrigatório seguir a ordem das posições.</p>
+
+<p>E também não precisa ser somente números, as posições podem ser strings, por exemplo:</p>
+
+<pre>
+<code>
+$nomes = array("N" => "Sérgio", "P" => "Luciana");
+echo $nomes["N"];
+</code>
+</pre>
+
+<p>Assim como os vetores, temos também as matrizes (no PHP são vetores dentro de vetore). Veja um exemplo novo abaixo:</p>
+
+<pre>
+<code>
+$x[0][0] = "Valor 1";
+$x[0][1] = "Valor 2";
+
+echo $x[0][1];
+</code>
+</pre>
+
+<p>Declaração de vetor dentro de vetor (matriz):</p>
+
+<pre>
+<code>
+$n = array(array(2, 3), array(3, 4), array(9, 5));
+
+for($l = 0; $l &lt; 3; $l++) {
+    for($c = 0; $c &lt; 2; $c++) {
+        if($c &lt; 2 - 1) {
+            echo $n[$l][$c] . " ";
+        }
+        else {
+            echo $n[$l][$c] . "&lt;br/&gt;";
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Matriz com declarações de posições:</p>
+
+<pre>
+<code>
+$cor = array(0 => array(0 => "Ciano", 1 => "Preto"));
+echo $cor[0][1];
+</code>
+</pre>
+
+<h3>Arrays Associativos</h3>
+
+<p>Os arrays associativos, como visto, são aqueles em que os índices, ao invés de números (0, 1, 2, etc.), usamos strings, por exemplo:</p>
+
+<p>Veja um exemplo disso:</p>
+
+<pre>
+<code>
+$config = array();
+
+$config["Nome"] = "PontoCOM";
+$config["Email"] = "contato@pontocom";
+$config["Site"] = "http://pontocomdesenvolvimento.net";
+
+echo $config["Nome"] . " - " . $config["Site"];
+</code>
+</pre>
+
+<p>PS: Não é necessário declarar variáveis em PHP.</p>
+
+<p>A diferença disso pros arrays normais, é que facilita a procura de determinados códigos sem precisar decorar números (assim podemos achar mais facilmente o índice correspondente a campos como nome, email, etc., principalmente ao integrar com MySQL), esse tipo de array não é permitido em algumas linguagens.</p>
+
+<p>Veja mais um exemplo:</p>
+
+<pre>
+<code>
+$exemplo = array("Nome" => "PontoCOM", "Email" => "contato@pontocom", "Site" => "http://pontocomdesenvolvimento.net");
+echo $exemplo["Email"];
+</code>
+</pre>
+
+<p>Para vermos como está funcionando o código, usamos funções de depuração, o <code>print_r()</code> e <code>var_dump()</code>, usadas para testes.</p>
+
+<p>O print_r() mostra os detalhes da variável, em arrays ele mostra os índices e os valores dentro deles, e como ele foi formado, por exemplo:</p>
+
+<pre>
+<code>
+$exemplo = array("Nome" => "PontoCOM", "Email" => "contato@pontocom", "Site" => "http://pontocomdesenvolvimento.net");
+print_r($exemplo);
+</code>
+</pre>
+
+<p>PS: Ao ver o código-fonte do navegador, dá pra visualizar melhor.</p>
+
+<p>O var_dump() faz algo parecido, mas mais complexo, mostrando coisas como o número de índices e os tipos primitivos. Esse é mais usado em banco de dados. Por exemplo:</p>
+<pre>
+<code>
+$exemplo = array("Nome" => "PontoCOM", "Email" => "contato@pontocom", "Site" => "http://pontocomdesenvolvimento.net");
+var_dump($exemplo);
+</code>
+</pre>
+
+<h3>Array com Laço de Repetição</h3>
+
+<p>Para exibir o conteúdo de todos os índices do array sem precisar mostrar ele em vários echos separados, podemos usar laços de repetição, por exemplo:</p>
+
+<pre>
+<code>
+$zoo = array("Leão", "Elefante", "Girafa");
+
+for($i = 0; $i < 3; $i++) {
+    echo $zoo[$i] . " ";
+}
+</code>
+</pre>
+
+<p>Isso daí, inclusive é muito usado com banco de dados para exibir conteúdos.</p>
+
+<p>No caso do array for aumentando de tamanho, podemos utilizar a função <code>count()</code>, que mostra a quantidade de elementos do array. Por exemplo:</p>
+
+<pre>
+<code>
+$zoo = array("Leão", "Elefante", "Girafa");
+
+for($i = 0; $i < count($zoo); $i++) {
+    echo $zoo[$i] . " ";
+}
+</code>
+</pre>
+
+<p>PS: Cuidado pra não usar <= para não contar índices vazios. O print_r() e o var_dump() ajudam a identificar erros, inclusive.</p>
+
+<p>No caso acima, a medida que for adicionando elemento no Array, ele será exibido também, sem a necessidade de alterar o laço.</p>
+
+<p>Pra facilitar, podemos usar o foreach, dessa forma:</p>
+
+<pre>
+<code>
+foreach($zoo as $v) {
+    echo "$v ";
+}
+</code>
+</pre>
+
+<p>Mas tem um detalhe, se usarmos arrays associativos (com nomes definidos com Arrays), não poderemos usar o laço for. Nesse caso usamos o foreach. Por exemplo:</p>
+
+<pre>
+<code>
+$exemplo = array("Nome" => "PontoCOM", "Email" => "contato@pontocom", "Site" => "http://pontocomdesenvolvimento.net");
+
+foreach($exemplo as $k => $e) {
+    echo "$k = $e&lt;br/&gt;";
+}
+</code>
+</pre>
+
+<p>Veja um exemplo de uso com while para inserir valores no Array:</p>
+
+<pre>
+<code>
+$fim = 10;
+$i = 0;
+$vetor = array();
+
+while($fim > $i) {
+    $vetor[] = "Contador:" . $i;
+    $i++;
+}
+
+print_r($vetor);
+</code>
+</pre>
+
+<p>PS: Note que nesse caso, o índice está vazio. Pode ser colocado a variável $i dentro dele.</p>
+
+<h3>Trabalhando com Funções</h3>
+
+<p>Como sabemos, as funções são usadas para economizar tempo e trabalho para ações repetitivas.</p>
+
+<p>Veja um exemplo simples de uso de funções e invocação dela:</p>
+
+<pre>
+<code>
+function soma(){
+    $x = 10;
+    $y = 15;
+    echo $x + $y . "&lt;br/&gt;";
+}
+soma();
+</code>
+</pre>
+
+<p>Com uma função só, podemos chamar ela quantas vezes precisar, por exemplo:</p>
+
+<pre>
+<code>
+function soma(){
+    $x = 10;
+    $y = 15;
+    echo $x + $y . "&lt;br/&gt;";
+}
+soma();
+soma();
+soma();
+soma();
+</code>
+</pre>
+
+<p>Ou com um laço:</p>
+
+<pre>
+<code>
+function soma(){
+    $x = 10;
+    $y = 15;
+    echo $x + $y . "&lt;br/&gt;";
+}
+
+for($i = 0; $i < 5; $i++) {
+    soma();
+}
+</code>
+</pre>
+
+<p>Para entender a passagem de parâmetros, precisamos entender a diferença entre variáveis locais e globais, veja um exemplo:</p>
+
+<pre>
+<code>
+$x = 10; // Essa é global e não influencia da função.
+
+function soma($x, $y){
+    echo $x + $y . "&lt;br/&gt;"; // Essas são locais de escopo, apenas o que for passado pela função será executado.
+}
+
+soma(2, 5);
+soma(50, 20);
+soma(40, 15);
+</code>
+</pre>
+
+<p>Como visto, apenas o que for passado entre os parênteses da invocação, que serão colocadas nas variáveis locais da função. A variável global com 10 não influenciou em nada. Com isso, podemos passar diferentes valores pelos parâmetros (só não pode deixar eles vazios).</p>
+
+<p>As variáveis das funções também podem ter um valor padrão, que será substituído pelos valores passados, nesse caso, se não for passado nada, será usado o valor inicializado. Por exemplo:</p>
+
+<pre>
+<code>
+$x = 10;
+
+function soma($x = 0, $y = 0){
+    echo $x + $y . "&lt;br/&gt;";
+}
+
+soma(2, 5); // Retorna a soma.
+soma(50); // Retorna a soma de 50 (x) e o padrão 0 (y).
+soma(); // Retorna 0, por causa dos padrões.
+</code>
+</pre>
+
+<p>Veja outro exemplo:</p>
+
+<pre>
+<code>
+function med($n1, $n2, $n3, $n4) {
+    $res = ($n1 + $n2 + $n3 + $n4) / 4;
+    echo $res;
+}
+med(10, 8, 7, 10);
+</code>
+</pre>
+
+<p>Para uma exibição melhor, sem "gambiarra", usamos um return para retornar o valor para a invocação da função, esta será colocada numa variável, dessa forma:</p>
+
+<pre>
+<code>
+function med($n1, $n2, $n3, $n4) {
+    $res = ($n1 + $n2 + $n3 + $n4) / 4;
+    return $res;
+}
+$media = med(10, 8, 7, 10);
+echo "A nota que você tirou foi $media.";
+</code>
+</pre>
+
+<p>Veja um exemplo onde usamos um array com nomes, para exibir dados:</p>
+
+<pre>
+<code>
+function med($n1, $n2, $n3, $n4) {
+    $res = ($n1 + $n2 + $n3 + $n4) / 4;
+    return $res;
+}
+
+$alunos[0]["Nome"] = "Alice";
+$alunos[0]["Media"] = med(10, 8, 7, 10);
+
+$alunos[1]["Nome"] = "Mario";
+$alunos[1]["Media"] = med(9, 5, 7, 10);
+
+$alunos[2]["Nome"] = "Camile";
+$alunos[2]["Media"] = med(10, 5, 7, 8);
+
+$alunos[3]["Nome"] = "Jairo";
+$alunos[3]["Media"] = med(10, 4, 8, 10);
+
+for($i = 0; $i < count($alunos); $i++) {
+    echo "Nome do Aluno: " . $alunos[$i]["Nome"] . "&lt;br/&gt;";
+    echo "Média do Aluno: " . $alunos[$i]["Media"] . "&lt;br/&gt;&lt;br/&gt;";
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-php-intermediario-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-php-intermediario-3.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

@@ -10,7 +10,7 @@ div#interface {
     background-color: rgba(96,96,96,0.8);
     margin: -8px;
     padding: 20px;
-    min-height: 700px;
+    min-height: 750px;
 }
 header {
     border-bottom: 1px rgb(60,60,60) solid;

@@ -9,6 +9,7 @@ div#interface {
     background-color: rgba(16,16,16,0.8);
     padding: 10px;
     margin: -8px;
+    min-height: 750px;
 }
 header#cabecalho {
     height: 150px;

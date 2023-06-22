@@ -8,7 +8,7 @@
         <script src="_javascript/funcoes.js"></script>
     </head>
     <body>
-        <div id="cabecalho">
+        <div id="interface">
             <header>
                 <h1><a href="javascript:void()" onclick="alert('Você já Está na Página Inicial')">Introdução ao Plug.dj</a></h1>
             </header>

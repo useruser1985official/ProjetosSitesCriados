@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Poo PHP</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Poo PHP</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-poo-php-1.html">Tudo sobre Poo PHP Parte 1!</a></li>
+                    <li><a href="tudo-sobre-poo-php-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Poo PHP Parte 2!</a></li>
+                    <li><a href="tudo-sobre-poo-php-3.html">Tudo sobre Poo PHP Parte 3!</a></li>
+                    <li><a href="tudo-sobre-poo-php-4.html">Tudo sobre Poo PHP Parte 4!</a></li>
+                    <li><a href="tudo-sobre-poo-php-5.html">Tudo sobre Poo PHP Parte 5!</a></li>
+                    <li><a href="tudo-sobre-poo-php-6.html">Tudo sobre Poo PHP Parte 6!</a></li>
+                    <li><a href="tudo-sobre-poo-php-7.html">Tudo sobre Poo PHP Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Poo PHP Parte 2</h2>
+
+<h3>Exemplo Prático em PHP</h3>
+
+<p>Vamos supor uma classe (primeira classe) com o nome ContaBanco, que pode ser criada por várias pessoas (portando, teria várias contas), com funções básicas como sacar, abrir e fechar contas, pagar mensalidades, etc. Ela teria um formato parecido com esses atributos e métodos:</p>
+
+<table>
+    <tr>
+        <th>ContaBanco</th>
+    </tr>
+    <tr>
+        <td>
+            + static nomeBanco<br/>
+            + numConta<br/>
+            # tipo<br/>
+            - dono<br/>
+            - saldo<br/>
+            - status<br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            + static exibirBandeira()<br/>
+            + abrirConta()<br/>
+            + fecharConta()<br/>
+            + depositar()<br/>
+            + sacar()<br/>
+            + pagarMensal()<br/>
+        </td>
+    </tr>
+</table>
+
+<p>Crie um arquivo de classe PHP com o nome ContaBanco.php, e coloque esse código:</p>
+
+<pre>
+<code>
+class ContaBanco {
+    public static $nomeBanco = "Bradesco";
+    public $numConta;
+    protected $tipo;
+    private $dono;
+    private $saldo;
+    private $status;
+    
+    public static function exibirBandeira() {
+        echo "&lt;p&gt;O nome do banco é " . self::$nomeBanco . ".&lt;/p&gt;"; // Aqui usa self por ser estático.
+    }
+    
+    public function abrirConta($t) {
+        $this->setTipo($t);
+        $this->setStatus(true);
+        if($t == "CC") {
+            $this->setSaldo(50);
+        }
+        else if($t == "CP") {
+            $this->setSaldo(150);
+        }
+        echo "&lt;p&gt;Conta aberta com sucesso!&lt;/p&gt;";
+    }
+    public function fecharConta() {
+        if($this->getSaldo() > 0) {
+            echo "&lt;p&gt;A conta ainda tem dinheiro, não podemos fechá-la!&lt;/p&gt;";
+        }
+        else if($this->getSaldo() &lt; 0) {
+            echo "&lt;p&gt;A conta está em débito, não podemos fechá-la!&lt;/p&gt;";
+        }
+        else {
+            $this->setStatus(false);
+            echo "&lt;p&gt;A conta de {$this->getDono()} foi encerrada com sucesso!&lt;/p&gt;";
+        }
+    }
+    public function depositar($v) {
+        if($this->getStatus()) {
+            $this->setSaldo($this->getSaldo() + $v);
+            // $this->saldo = $this->saldo + $v;
+            echo "&lt;p&gt;Depósito de R\${$v} autorizado na conta de {$this->getDono()}.&lt;/p&gt;";
+            // O \$ é pra não conflitar com o $ da variável.
+        }
+        else {
+            echo "&lt;p&gt;Conta Fechada ou Inexistente!&lt;/p&gt;";
+        }
+    }
+    public function sacar($v) {
+        if($this->getStatus()) {
+            if($this->getSaldo() >= $v) {
+                $this->setSaldo($this->getSaldo() - $v);
+                // $this->saldo = $this->saldo - $v;
+                echo "&lt;p&gt;Saque de R\${$v} autorizado na conta de {$this->getDono()}.&lt;/p&gt;";
+            }
+            else {
+                echo "&lt;p&gt;Saldo insuficiente para saque!&lt;/p&gt;";
+            }
+        }
+        else {
+            echo "&lt;p&gt;Essa conta tá fechada ou não existe!&lt;/p&gt;";
+        }
+    }
+    public function pagarMensal() {
+        if($this->getTipo() == "CC") {
+            $v = 12;
+        }
+        else if($this->getTipo() == "CP") {
+            $v = 20;
+        }
+        
+        // Outra condição
+        
+        if($this->getStatus()) {
+            $this->setSaldo($this->getSaldo() - $v);
+            echo "&lt;p&gt;Mensalidade de R\${$v} debitada da conta de {$this->getDono()}.&lt;/p&gt;";
+        }
+        else {
+            echo "&lt;p&gt;Problemas na conta, não podemos cobrar.&lt;/p&gt;";
+        }
+    }
+    
+    // Especiais:
+    
+    public function __construct() {
+        $this->setSaldo(0);
+        $this->setStatus(false);
+        echo "&lt;p&gt;Conta criada com sucesso.&lt;/p&gt;"; // Apague depois. Não é recomendado colocar echo aqui, é só pra testar.
+    }
+    
+    public function __destruct() {
+        echo "Objeto ContaBanco Destruído!&lt;br/&gt;";
+    }
+    
+    public static function getNomeBanco() {
+        return self::$nomeBanco;
+    }
+    
+    public function getNumConta() {
+        return $this->numConta;
+    }
+
+    public function getTipo() {
+        return $this->tipo;
+    }
+
+    public function getDono() {
+        return $this->dono;
+    }
+
+    public function getSaldo() {
+        return $this->saldo;
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+ 
+    public static function setNomeBanco($nomeBanco) {
+        self::$nomeBanco = $nomeBanco;
+    }
+    
+    public function setNumConta($numConta) {
+        $this->numConta = $numConta;
+    }
+
+    public function setTipo($tipo) {
+        $this->tipo = $tipo;
+    }
+
+    public function setDono($dono) {
+        $this->dono = $dono;
+    }
+
+    public function setSaldo($saldo) {
+        $this->saldo = $saldo;
+    }
+
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+}
+</code>
+</pre>
+
+<p>PS: Prefira usar métodos setter do que mexer direto nos atributos.</p>
+
+<p>Com esse código pronto, vá no index e coloque esses comandos pra criar os objetos:</p>
+
+<pre>
+<code>
+require_once "ContaBanco.php";
+
+$p1 = new ContaBanco();
+$p2 = new ContaBanco();
+
+echo ContaBanco::$nomeBanco . "&lt;br/&gt;";
+ContaBanco::exibirBandeira();
+
+$p1->abrirConta("CC");
+$p1->setNumConta(1111);
+$p1->setDono("Jubileu");
+
+$p2->abrirConta("CP");
+$p2->setNumConta(2222);
+$p2->setDono("Creuza");
+
+print_r($p1);
+print_r($p2);
+
+unset($p1);
+unset($p2);
+</code>
+</pre>
+
+<p>Para depositar, basta colocar isso, no final do código, antes do print_r():</p>
+
+<pre>
+<code>
+$p1->depositar(300);
+$p2->depositar(500);
+</code>
+</pre>
+
+<p>Para sacar, da mesma forma:</p>
+
+<pre>
+<code>
+$p2->sacar(100);
+</code>
+</pre>
+
+<p>E cobrar mensalidade também:</p>
+
+<pre>
+<code>
+$p1->pagarMensal();
+$p2->pagarMensal();
+</code>
+</pre>
+
+<p>Tente outros números, principalmente na parte de sacar. E tente as outras funções.</p>
+
+<h3>Encapsulamento</h3>
+
+<p>Como sabemos, a POO tem três pilares, Encapsulamento, Herança e Polimorfismo (representados pelas letras EHP). O primeiro que vamos tratar é o encapsulamento.</p>
+
+<p>PS: Alguns consideram a Abstração um dos pilares também, o primeiro deles, mas na verdade ele está dentro do encapsulamento.</p>
+
+<p>Imagine que o carro, uma pilha ou qualquer outra coisa esteja numa "cápsula", no exemplo, vamos usar um controle remoto. O código estando encapsulado, ele está protegido internamente (como uma cápsula de remédio mesmo), deixando o que é pra ser privado "blindado" do usuário, e o que é público com contato permitido.</p>
+
+<p>A pilha também é um ótimo exemplo de encapsulamento, onde os componentes químicos que geram a eletricidade estão protegidos do contato humano (para proteger tanto os componentes quanto a pessoa), mas as partes metálicas estão disponíveis para fornecer energia ao produto. Além disso, a pilha sempre tem um formato padrão (tipo o AAA) para servir em vários produtos, independente da funcionalidade do produto. Mesmo se o componente interno da pilha for diferente (alcalina, comum, recarregável, etc.).</p>
+
+<p>No exemplo que usaremos, o controle remoto, a "cápsula" seria a capa que permite que nós interaja com ele, e o código seria os circuitos que operam isso, mas que não podemos tocar diretamente por segurança.</p>
+
+<p>O código "encapsulado" tem o mesmo padrão, e protege o código do usuário e vice-versa, impedindo que o programador cometa erros e prejudique o programa como um todo, independente do código encapsulado (ele só verificará as informações necessárias, sem precisar saber como ele funciona exatamente).</p>
+
+<p>Em outras palavras, encapsular é ocultar partes independentes da implementação, permitindo construir partes invisíveis ao mundo exterior.</p>
+
+<p>Basicamente, o uso de atributos privados e o acesso a eles ser feito através de métodos (como os getters e setters), já é o encapsulamento. Mas podemos fazer isso a nível de classe, usando uma interface, que obrigará a classe a ter todos os métodos descritos nela, além de proteger os atributos da classe implementadora do programa principal.</p>
+
+<p>Para criar um exemplo disso com um controle remoto, temos que definir uma interface (seria a "cápsula" do controle com os botões), de forma parecida com uma classe, mas sem atributos, e todos os métodos são públicos. E a classe ControleRemoto (como os circuitos encapsulados pela interface) terá os atributos e os métodos getters e setters privados (é o passo principal pra encapsular). Veja o que faremos no PHP:</p>
+
+<table style="float: left">
+    <tr>
+        <th>
+            <span style="font-weight: lighter">&lt;&lt;interface&gt;&gt;</span><br/>
+            Controlador
+        </th>
+    </tr>
+    <tr>
+        <td>
+            + ligar()<br/>
+            + desligar()<br/>
+            + abrirMenu()<br/>
+            + fecharMenu()<br/>
+            + maisVolume()<br/>
+            + menosVolume()<br/>
+            + ligarMudo()<br/>
+            + desligarMudo()<br/>
+            + play()<br/>
+            + pause()<br/>
+        </td>
+    </tr>
+</table>
+
+<table style="margin-left: 150px">
+    <tr>
+        <th>ControleRemoto</th>
+    </tr>
+    <tr>
+        <td>
+            - volume<br/>
+            - ligando<br/>
+            - tocando<br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            (Receberá elementos do controlador)<br/>
+            - setVolume()<br/>
+            - getVolume()<br/>
+            - setLigado()<br/>
+            - getLigado()<br/>
+            - setTocando()<br/>
+            - getTocando()<br/>
+        </td>
+    </tr>
+</table>
+
+<p>Crie uma nova Interface em PHP com o nome Controlador.php com esse código:</p>
+
+<pre>
+<code>
+interface Controlador {
+    public function ligar();
+    public function desligar();
+    public function abrirMenu();
+    public function fecharMenu();
+    public function maisVolume();
+    public function menosVolume();
+    public function ligarMudo();
+    public function desligarMudo();
+    public function play();
+    public function pause();
+}
+</code>
+</pre>
+
+<p>PS: Os métodos abstratos significam que o método não será desenvolvido na interface, e sim na classe. É como um aviso pra interface que existe um método (por exemplo, de abrir, aumentar volume, etc.), mas a interface não precisa e nem sabe como o código funciona na classe, apenas esta que tem que implementar (executar). Se um método a ser implementado numa classe for estático, ele não pode ser indicado na interface. Interfaces agem de forma parecida com uma classe abstrata, só que sem implementações e sem atributos, apenas a assinatura dos métodos, que são abstratos por padrão, dispensando a indicação de <code>abstract</code> neles.</p>
+
+<p>Crie também a classe ControleRemoto.php, assim (os atributos deverão estar privados, os métodos getter e setter não são obrigatórios ser):</p>
+
+<pre>
+<code>
+require_once "Controlador.php";
+
+class ControleRemoto implements Controlador {
+    private $volume;
+    private $ligado;
+    private $tocando;
+    
+    // Métodos especiais.
+    
+    public function __construct() {
+        $this->volume = 50;
+        $this->ligado = false;
+        $this->tocando = false;
+    }
+
+    public function ligar() {
+        $this->setLigado(true);
+    }
+    
+    public function desligar() {
+        $this->setLigado(false);
+    }
+    
+    public function abrirMenu() {
+        echo "&lt;br/&gt;Está ligado? " . ($this->getLigado() ? "SIM" : "NÃO");
+        echo "&lt;br/&gt;Está tocando? " . ($this->getTocando() ? "SIM" : "NÃO");
+        echo "&lt;br/&gt;Volume: " . $this->getVolume();
+        for($i = 0; $i &lt; $this->getVolume(); $i += 2) {
+            echo "|";
+        }
+        echo "&lt;br/&gt;";
+    }
+    
+    public function fecharMenu() {
+        echo "&lt;br/&gt;Fechando menu...";
+        
+    }
+
+    public function maisVolume() {
+        if($this->getLigado()) {
+            if($this->getVolume() < 100) {
+                $this->setVolume($this->getVolume() + 2);
+            }
+        }
+        else {
+            echo "&lt;br/&gt;ERRO! Está desligado, não posso aumentar o volume!";
+        }
+    }
+
+    public function menosVolume() {
+        if($this->getLigado()) {
+            if($this->getVolume() > 0) {
+                $this->setVolume($this->getVolume() - 2);
+            }
+        }
+        else {
+            echo "&lt;br/&gt;ERRO! Está desligado, não posso diminuir o volume!";
+        }
+    }
+    
+    public function ligarMudo() {
+        if($this->getLigado() && $this->getVolume() > 0) {
+            $this->setVolume(0);
+        }
+    }
+    
+    public function desligarMudo() {
+        if($this->getLigado() && $this->getVolume() == 0) {
+            $this->setVolume(50);
+        }
+    }
+
+    public function play() {
+        if($this->getLigado() && !($this->getTocando())) {
+            $this->setTocando(true);
+        }
+    }
+    
+    public function pause() {
+        if($this->getLigado() && $this->getTocando()) {
+            $this->setTocando(false);
+        }
+    }
+    
+    private function setVolume($volume) {
+        $this->volume = $volume;
+    }
+    
+    private function getVolume() {
+        return $this->volume;
+    }
+
+    private function setLigado($ligado) {
+        $this->ligado = $ligado;
+    }
+
+    private function getLigado() {
+        return $this->ligado;
+    }
+    
+    private function setTocando($tocando) {
+        $this->tocando = $tocando;
+    }
+    
+    private function getTocando() {
+        return $this->tocando;
+    }
+}
+</code>
+</pre>
+
+<p>PS: Usamos <code>implements</code> quando precisamos implementar uma interface, sendo obrigado executar todos os métodos descritos nela, é possível uma classe implementar mais de uma interface, com os nomes separados por vírgulas, usando algo como <code>class NomeDaClasse implements NomeDaInterface1, NomeDaInterface2</code>.</p>
+
+<p>E para criar o controle, fazemos assim no index:</p>
+
+<pre>
+<code>
+require_once "ControleRemoto.php";
+
+$c = new ControleRemoto();
+$c->ligar();
+$c->maisVolume(); // Aqui podemos colocar os outros métodos.
+$c->abrirMenu();
+</code>
+</pre>
+
+<p>Como exemplo, crie outros exemplos e funções baseados nesse controle.</p>
+
+<p>Essa é a vantagem do encapsulamento, ele protege o código contra ações externas e internas, e torna a forma interna de implementação invisível pro "lado de fora" (sabemos que quem mexe nela sabe como usar as funções, mas não como funcionam, até os métodos getter e setter são privados por isso).</p>
+
+<p>Em outras palavras, as interfaces estabelecem contratos entre as classes que as implementam, garantindo que elas tenham um certo comportamento.</p>
+
+<ul>
+    <li><a href="tudo-sobre-poo-php-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-poo-php-3.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

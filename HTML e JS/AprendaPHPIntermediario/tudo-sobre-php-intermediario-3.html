@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda PHP Intermediário</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda PHP Intermediário</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-1.html">Tudo sobre PHP Intermediário Parte 1!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-2.html">Tudo sobre PHP Intermediário Parte 2!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre PHP Intermediário Parte 3!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-4.html">Tudo sobre PHP Intermediário Parte 4!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-5.html">Tudo sobre PHP Intermediário Parte 5!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-6.html">Tudo sobre PHP Intermediário Parte 6!</a></li>
+                    <li><a href="tudo-sobre-php-intermediario-7.html">Tudo sobre PHP Intermediário Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre PHP Intermediário Parte 3</h2>
+
+<h3>Funções Anônimas (Expressões Lambda)</h3>
+
+<p>Normalmente uma função em PHP segue essa estrutura:</p>
+
+<pre>
+<code>
+function minhaFuncao() {
+    echo "Função Comum em PHP!";
+}
+</code>
+</pre>
+
+<p>Quando nós definimos uma função como esta acima, um nome lhe é atribuído (no caso, minhaFuncao), com isto o PHP então permite que, no código, seja possível se referir a essa função usando seu nome. Por exemplo, para se chamar a função do exemplo acima, fazemos apenas isto:</p>
+
+<pre>
+<code>
+minhaFuncao();
+</code>
+</pre>
+
+<p>As funções anônimas são semelhantes a essas funções e também pode ter argumentos e valores de retorno. A pricipal diferença é que funções anônimas não tem nome, como nesse exemplo abaixo:</p>
+
+<pre>
+<code>
+function($nome, $sobrenome) {
+    return "Olá $nome $sobrenome!";
+};
+</code>
+</pre>
+
+<p>Existem duas diferenças muito importantes na definição de uma função normal e uma função anônima:</p>
+
+<ul>
+    <li>Na função anônima não há um nome entre a palavra-chave function e o parêntese de abertura, isso informa ao PHP que uma função anônima está sendo criada.</li>
+    <li>Há um ponto-e-vírgula após a definição da função, isso ocorre porque as definições de funções anônimas são expressões (conhecidas como expressões Lambda), enquanto definições de funções regulares são construções de código.</li>
+</ul>
+
+<p>Essa função que criamos é perfeitamente válida, mas não é muito útil. Por não ter um nome, você não a pode referenciar esta função em qualquer outro ponto do código.</p>
+
+<p>No entanto, uma vez que uma função anônima é uma expressão (tal como um número ou uma string), é possível fazer coisas interessantes e/ou úteis, por exemplo:</p>
+
+<ul>
+    <li>Atribuí-la a uma variável e, então, chamá-la mais tarde usando o nome dessa variável (é possível até guardar um monte de funções anônimas em um array).</li>
+    <li>Passá-la a outra função, que pode chamá-la mais tarde (isso é conhecido omo callback).</li>
+    <li>Retorná-la de uma função externa, de modo que ela acesse variáveis da função exterior. Isto é conhecido como um closure.</li>
+</ul>
+
+<p>Quando uma função anônima é definida é possível então armazená-la em uma variável, assim:</p>
+
+<pre>
+<code>
+$criaCartao = function($nome, $sobrenome) {
+    return "Olá $nome $sobrenome!";
+};
+</code>
+</pre>
+
+<p>PS: Muitas vezes, funções anônimas são colocadas em uma só linha para facilitar a identificação, assim:</p>
+
+<pre>
+<code>
+$criaCartao = function($nome, $sobrenome) {return "Olá $nome $sobrenome!";};
+</code>
+</pre>
+
+<p>Com isto, podemos chamar a função através da variável que lhe foi atribuída, assim:</p>
+
+<pre>
+<code>
+echo $criaCartao("Juliana", "da Silva");
+</code>
+</pre>
+
+<p>Podemos também armazenar várias funções dentro de um array, assim:</p>
+
+<pre>
+<code>
+$sorteio = array(
+    function() {
+        echo "Você ganhou um video-game!";
+    },   
+    function() {
+        echo "Você ganhou um carro!";
+    }, 
+    function() {
+        echo "Você ganhou R$1,00!";
+    }
+);
+</code>
+</pre>
+
+<p>Uma vez que isso tenha sido feito, o código pode decidir qual a função a ser chamada em tempo de execução, assim:</p>
+
+<pre>
+<code>
+$resultado = rand(0, 2);
+$sorteio[$resultado]();
+</code>
+</pre>
+
+<p>Poddemos também usar as funções anônimas para criar simples função de callback inline.</p>
+
+<p>Callback é uma função que foi criada e, em seguida, passda a outra função como um argumento. Uma vez que se tem aesso à sua função de retorno de chamada, a função receptora pode chamá-la sempre que seja preciso.</p>
+
+<p>Muitas funções nativas do PHP aceitam retornos de chamada e é possível, também, escrever suas próprias funções de aceitação de callbacks.</p>
+
+<p>Veja como é possível usar <code>array_map()</code> com uma função de callback:</p>
+
+<pre>
+<code>
+// Cria uma função de callback:
+
+$criaCartao = function($nome) {
+    return "Olá, " . ucfirst($nome) . "!";
+};
+
+// E mapeira a função de callback para elementos de um array:
+
+$nomes = array("João", "Mariana", "Guilherme");
+
+print_r(array_map($criaCartao, $nomes));
+</code>
+</pre>
+
+<p>Embora funcione, é um pouco incômodo criar uma função regular apenas para atuar como uma callback simples. Ao invés disso, é possível criar a callback como uma função anônima:</p>
+
+<pre>
+<code>
+$nomes = array("João", "Mariana", "Guilherme");
+
+print_r(array_map(function($nome) {
+    return "Olá, " . ucfirst($nome) . "!";
+}, $nomes));
+</code>
+</pre>
+
+<p>Outro uso comum de callbacks é com a função <code>usort()</code> do PHP. Esta função permite ordenar arrays usando uma função de callback personalizada, por exemplo:</p>
+
+<pre>
+<code>
+$pessoas = array(
+    array("Nome" => "João", "Idade" => 42),
+    array("Nome" => "Mariana", "Idade" => 26),
+    array("Nome" => "Guilherme", "Idade" => 14)
+);
+</code>
+</pre>
+
+<p>Num próximo exemplo, é preciso classificar o array em ordem de idade crescente. Neste caso não é possível usar funções nativas de ordenação de array, já que estas não sabem nada sobre a chave "idade".</p>
+
+<p>Ao invés disso, é possível chamar <code>usort()</code> e passar em uma função anônima callback a ordenação do array por idade, desse jeito:</p>
+
+<pre>
+<code>
+usort($pessoas, function($pessoaA, $pessoaB) {
+    return ($pessoaA["Idade"] < $pessoaB["Idade"]) ? -1 : 1;
+});
+
+print_r($pessoas);
+</code>
+</pre>
+
+<h3>Exibindo Dados sem Pontos</h3>
+
+<p>Podemos também, ao invés de concatenar usando pontos, colocar as variáveis entre parênteses, por exemplo:</p>
+
+<pre>
+<code>
+$soma = 50 + 20;
+
+echo "A soma é $soma.";
+</code>
+</pre>
+
+<p>Mas podemos também colocar as variáveis entre duas chaves, assim:</p>
+
+<pre>
+<code>
+$soma = 50 + 20;
+
+echo "A soma é {$soma}.";
+</code>
+</pre>
+
+<p>Essa forma de usar as chaves, no entanto, é mais usadas com arrays e funções, que costumam dar erro ao colocar dentro das aspas da string.</p>
+
+<h3>Cookies - Conceito e Prática</h3>
+
+<p>Caso nós tenhamos um site que, por exemplo, o usuário pode escolher a cor de fundo do site, e sempre que ele entra, a cor escolhida por ele aparecerá para ele. Essa e muitas outras funcionalidades são feitas através dos cookies, que são arquivos que são salvos pelo navegador do usuário. Um exemplo clássico de uso de cookies são os cookies de rastreamento, usados em propagandas.</p>
+
+<p>Os cookies ficam gravados no navegador temporariamente, caso o navegador seja limpo ou eles perdam a validade, eles serão excluídos, por isso, apesar de facilitarem (por não precisar chamar por links a todo momento), ele não são muito seguros.</p>
+
+<p>Veja um exemplo prático de uso de cookies, que são criados com a função <code>setcookie()</code>:</p>
+
+<pre>
+<code>
+$variavel = "valor"; // Dado a ser trabalhado.
+setcookie("nome", $variavel); // Criação do cookie, com o nome e a variável com os dados.
+echo $_COOKIE["nome"]; // Isso exibe o cookie.
+</code>
+</pre>
+
+<p>Note que a chamada do cookie funciona parecido com os métodos GET/POST, inclusive, sendo recomendado filtrar ele dessa forma:</p>
+
+<pre>
+<code>
+echo filter_input(INPUT_COOKIE, "nome");
+</code>
+</pre>
+
+<p>PS: Podemos usar a mesma função que previne SQL Injection nos cookies também.</p>
+
+<p>Vamos fazer um exemplo com criação de cookies, em uma página do site, crie o cookie, dessa forma:</p>
+
+<pre>
+<code>
+$bg = "red";
+setcookie("bg", $bg);
+</code>
+</pre>
+
+<p>E na página desejada, coloque apenas isso numa supertag PHP, antes do HTML:</p>
+
+<pre>
+<code>
+$cor = $_COOKIE["bg"];
+</code>
+</pre>
+
+<p>PS: O recomendado é filtrar e usar um operador ternário, dessa forma:</p>
+
+<pre>
+<code>
+$cor = filter_input(INPUT_COOKIE, "bg") != null ? filter_input(INPUT_COOKIE, "bg") : "black";
+</code>
+</pre>
+
+<p>Para mudar a cor, abrimos no head uma tag style e colocaremos um parâmetro pro body, com a cor sendo mostrada num bloco PHP:</p>
+
+<pre>
+<code>
+body {
+    background-color: &lt;?php echo $cor; ?&gt;;
+}
+</code>
+</pre>
+
+<p>Volte à página que criou o cookie e crie um link para ir à página que será mudada, clique nele e a cor mudará.</p>
+
+<p>Experimente mudar o valor da cor (no caso, red), por outros como blue, red, ou valores hexadecimais ou rgb/rgba, igual se faz em CSS normalmente.</p>
+
+<p>O cookie só será alterado (e consequentemente, a página também), quando você passar novamente pela página que o cookie foi criado, senão ela não será alterada.</p>
+
+<p>Além dos valores, podemos também definir o tempo de duração dos mesmos, usando um terceiro parâmetro (time), nesse formato:</p>
+
+<pre>
+<code>
+$variavel = "valor";
+setcookie("nome", $variavel, time() + 3600); // Cookie duraria uma hora.
+echo $_COOKIE["nome"];
+</code>
+</pre>
+
+<p>PS: Note que o time funciona com segundos. Se não for definido nenhum valor, ele valerá até o fim da sessão.</p>
+
+<p>Os cookies também podem ter seu tempo multiplicado diretamente, veja um exemplo pro próprio parâmetro de cor:</p>
+
+<pre>
+<code>
+$bg = "black";
+setcookie("bg", $bg, time() + 3600 * 24 * 7);
+</code>
+</pre>
+
+<p>Outros parâmetros também podem ser usados (o de pasta e domínio são usados para evitar conflitos com cookies de outros sites):</p>
+
+<pre>
+<code>
+$variavel = "valor";
+setcookie("nome", $variavel, time() + 3600, "pastaDoSite", "dominioDoSite");
+echo $_COOKIE["nome"];
+</code>
+</pre>
+
+<p>PS: Caso queira fazer um cookie com a indicação de pasta e domínio, mas que seja válido até o fim da sessão, passe o valor null no lugar do time(), assim:</p>
+
+<pre>
+<code>
+setcookie("nome", $variavel, null, "pastaDoSite", "dominioDoSite");
+</code>
+</pre>
+
+<h3>Sessões - Conceitos e Prática</h3>
+
+<p>A sessão é um recurso do PHP que permite que você salve valores para serem usados ao logo da visita do usuário, e os valores da sessão podem ser usados em qualquer parte do site.</p> 
+
+<p>A sessão também é um cookie, e ela permanece ativa até que o usuário feche o browser ou seja destruída. A sessão é pessoal para cada visitante, quando alguém acessa seu site, é gerado um cookie para o computador dele, informando um ID único de sessão, o PHP usa esse identificador para organizar as sessões entre os visitantes do site.</p>
+
+<p>A sessão sempre é a primeira coisa num bloco PHP, antes de qualquer código PHP ou HTML, para isso usamos <code>session_start()</code>.</p>
+
+<p>Um exemplo conhecido de sessão é em áreas restritas do site, onde quem tem acesso é apenas quem usar um usuário e uma senha (por exemplo, administradores).</p>
+    
+<p>Veja um exemplo simples de uso de sessões, crie a página entrar.php pra isso:</p>
+
+<pre>
+<code>
+session_set_cookie_params(3600 * 24 * 365, "pastaDoSite", "dominioDoSite"); // Define o tempo de validade do cookie, podemos colocar num condicional para definir sessões.
+session_start();
+    
+$login = "pcanal";
+$senha = "122";
+
+if($login == "pcanal" && $senha == "123") {
+    $_SESSION["logado"] = true;
+    echo "Logado!";
+    header("location: restrito.php"); // Isso será adicionado após a página restrito.php ser criada.
+}
+else {
+    $_SESSION["logado"] = null;
+    echo "Não Logado!";
+}
+</code>
+</pre>
+
+<p>Com esse exemplo, podemos criar páginas restritas. Como exemplo, criaremos uma nova página coo o nome restrito, apenas com código PHP e um HTML básico para mostrar "página restrita". Veja abaixo:</p>
+
+<pre>
+<code>
+&lt;?php
+    session_start();
+    
+?&gt;
+
+&lt;?php if($_SESSION["logado"]): ?&gt;
+
+Usuário Logado
+
+&lt;?php else: ?&gt;
+
+Página Restrita, volte e tente novamente.
+
+&lt;?php endif; ?&gt;
+</code>
+</pre>
+
+<p>PS: Note que esse if e else são diferentes do que a gente viu até então, pois usamos vários blocos PHP e no final usamos o endif. Veja a sintaxe abaixo:</p>
+
+<pre>
+<code>
+if($condicao):
+// Conteúdo do if
+elseif($condicao): // Nesse caso é tudo junto
+// Conteúdo do else if
+else:
+// Conteúdo do else
+endif;
+</code>
+</pre>
+
+<p>Mas para funcionar corretamente, precisaremos encerrar sessões, senão o cookie permanecerá e a página "restrito" continuará a mostrar logado.</p>
+
+<h3>Destruindo uma Variável de Sessão</h3>
+
+<p>Continuando a parte anterior da página restrita, precisamos entender esses comandos:</p>
+
+<ul>
+    <li>isset() - Verifica se a variável existe.</li>
+    <li>unset() - Destroí a variável de sessão (realiza o logout).</li>
+</ul>
+
+<p>Para isso, apenas adicionaremos um isset() no $_SESSION[] da página restrito, assim:</p>
+
+<pre>
+<code>
+if(isset($_SESSION["logado"])):
+</code>
+</pre>
+
+<p>E numa página vazia denominada "sair.php", sem HTML, apenas colocamos isso:</p>
+
+<pre>
+<code>
+session_start();
+
+unset($_SESSION["logado"]);
+
+setcookie(session_name(), null, 0, "/");
+
+header("location: restrito.php");
+</code>
+</pre>
+
+<p>Para deslogar, na página restrito, apenas colocamos um link para a página sair, na parte "logada".</p>
+
+<p>PS: O ideal é colocar ambas as páginas de logar e deslogar em arquivos PHP separados, sem HTML.</p>
+
+<h3>Criando um Formulário de Contato com Envio em PHP</h3>
+
+<p>Primeiro crie um formulário em HTML, dessa forma:</p>
+
+<pre>
+<code>
+&lt;form method="post" action="formulario.php"&gt;
+    Nome: &lt;input type="text" name="tNome" id="cNome" required/&gt;
+    &lt;br/&gt;
+    Telefone: &lt;input type="tel" name="tTel" id="cTel"/&gt;
+    &lt;br/&gt;
+    E-Mail: &lt;input type="email" name="tMail" id="cMail" required/&gt;
+    &lt;br/&gt;
+    Mensagem: &lt;textarea name="tMsg" id="cMsg"&gt;&lt;/textarea&gt;
+    &lt;br/&gt;
+    &lt;input type="submit" value="Enviar"/&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>Agora criaremos um arquivo PHP vazio, com isso escrito, para vermos se os conteúdos estão sendo enviados:</p>
+
+<pre>
+<code>
+$nome = $_POST["tNome"];
+$fone = $_POST["tTel"];
+$mail = $_POST["tMail"];
+$msg = $_POST["tMsg"];
+
+echo "$nome &lt;br/&gt;";
+echo "$fone &lt;br/&gt;";
+echo "$mail &lt;br/&gt;";
+echo "$msg &lt;br/&gt;";
+</code>
+</pre>
+
+<p>Agora vamos entender para que serve o <code>$_REQUEST[]</code>, que pode receber tanto em GET como em POST, e também englobar todas as variáveis em uma única. Basta substituir no código acima em todos eles</p>
+
+<p>Vamos nesse mesmo arquivo acima, apagar os dados anteriores e escrevermos isso (não esqueça da filtragem do request):</p>
+
+<pre>
+<code>
+$para = "contato@teste.com";
+$assunto = "Contato pelo Site";
+
+$nome = $_REQUEST["tNome"];
+$fone = $_REQUEST["tTel"];
+$mail = $_REQUEST["tMail"];
+$msg = $_REQUEST["tMsg"];
+
+$corpo = "&lt;b&gt;Mensagem de Contato&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;";
+$corpo .= "&lt;b&gt;Nome: &lt;/b&gt; $nome&lt;br/&gt;";
+$corpo .= "&lt;b&gt;Telefone: &lt;/b&gt; $fone&lt;br/&gt;";
+$corpo .= "&lt;b&gt;E-Mail: &lt;/b&gt; $mail&lt;br/&gt;";
+$corpo .= "&lt;b&gt;Mensagem: &lt;/b&gt; $msg&lt;br/&gt;";
+
+// O .= fará a atribuição com a concatenação.
+
+$header = "From: $mail Reply-to: $mail";
+$header .= "Content-Type: text/html; charset = utf-8";
+
+mail($para, $assunto, $corpo, $header);
+    
+header("location: index.php?msg=enviado");
+</code>
+</pre>
+
+<p>Para entendermos bem, o ponto com igual (<code>.=</code>) faz a atribuição e a concatenação com outros conteúdos numa variáveis (mas não a torna um array).</p>
+
+<p>A função "mail" que enviará ao e-mail especificado as mensagens, no caso a sintaxe seria essa:</p>
+
+<pre>
+<code>
+mail($endereco, $assunto, $mensagem, $cabecalho);
+</code>
+</pre>
+
+<p>No caso acima, ele voltará para a página inicial com um parâmetro passado pela URL, nesse caso, colocaremos um código GET nela, antes do HTML, assim:</p>
+
+<pre>
+<code>
+$msg = isset($_REQUEST["msg"]) ? $_REQUEST["msg"] : "";
+</code>
+</pre>
+
+<p>E colocaremos antes do formulário isso:</p>
+
+<pre>
+<code>
+&lt;?php if($msg == "enviado"):?&gt;
+Mensagem Enviada!
+&lt;?php else: ?&gt;
+(Conteúdo do formulário)
+&lt;?php endif; ?&gt;
+</code>
+</pre>
+
+<p>Mas tem um detalhe, essa mensagem dará erro caso estejamos trabalhando em servidor local (XAMPP, Wamp), só funcionará quando tiver realmente num servidor na web.</p>
+
+<ul>
+    <li><a href="tudo-sobre-php-intermediario-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-php-intermediario-4.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

@@ -4,7 +4,7 @@ body {
     background-color: gray;
     font-family: Arial, sans-serif;
 }
-div {
+div#interface {
     background-color: white;
     width: 650px;
     margin: 0px auto;

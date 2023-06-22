@@ -1,0 +1,427 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda MySQL</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda MySQL</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-mysql-1.html">Tudo sobre MySQL Parte 1!</a></li>
+                    <li><a href="tudo-sobre-mysql-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre MySQL Parte 2!</a></li>
+                    <li><a href="tudo-sobre-mysql-3.html">Tudo sobre MySQL Parte 3!</a></li>
+                    <li><a href="tudo-sobre-mysql-4.html">Tudo sobre MySQL Parte 4!</a></li>
+                    <li><a href="tudo-sobre-mysql-5.html">Tudo sobre MySQL Parte 5!</a></li>
+                    <li><a href="tudo-sobre-mysql-6.html">Tudo sobre MySQL Parte 6!</a></li>
+                    <li><a href="tudo-sobre-mysql-7.html">Tudo sobre MySQL Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre MySQL Parte 2</h2>
+
+<h3>Manipulando linhas</h3>
+
+<p>Também chamado de manipulação de registros ou tuplas. Para explicar como funciona, primeiro vamos criar novos registros.</p>
+
+<p>Para começar, vamos deletar absolutamente todas as colunas da tabela, usando esse comando (deixaremos uma coluna temporária):
+
+<pre>
+<code>
+alter table cursos
+add column temp int,
+drop column idcurso,
+drop column nome,
+drop column descricao,
+drop column carga,
+drop column totaulas,
+drop column ano;
+</code>
+</pre>
+
+<p>Depois voltaremos a colocar as tabelas:</p>
+
+<pre>
+<code>
+alter table cursos
+drop column temp,
+add column idcurso int not null auto_increment,
+add column nome varchar(30),
+add column descricao varchar(50),
+add column carga decimal(4, 1),
+add column totaulas decimal(5, 3),
+add column ano int,
+add primary key(idcurso);
+</code>
+</pre>
+
+<p>E depois, colocar alguns registros com alguns erros propositais:</p>
+
+<pre>
+<code>
+insert into cursos values
+('1', 'HTML4', 'Curso de HTML5', '40', '37', '2017'),
+('2', 'Algoritmos', 'Lógica de Programação', '20', '15', '2017'),
+('3', 'PGP', 'Curso de PHP', '40', '8', '2017'),
+('4', 'Jarva', 'Introdução ao Java', '10', '29', '2000'),
+('5', 'MySQL', 'Banco de Dados', '30', '15', '2016');
+</code>
+</pre>
+
+<p>Um comando manipula uma linha por vez, mas dentro de uma linha dá pra mexer em várias colunas ao mesmo tempo.</p>
+
+<p>Para modificar algum dado, você usará o comando assim, o <code>update</code> atualiza, o <code>set</code> muda o nome e o campo desejado, e o <code>where</code> identifica a chave primária da linha alterada, dessa forma:</p>
+
+<pre>
+<code>
+update cursos
+set nome = 'HTML5'
+where idcurso = '1';
+</code>
+</pre>
+
+<p>Para mudar mais de uma coluna por linha ao mesmo tempo, pode fazer assim:</p>
+
+<pre>
+<code>
+update cursos
+set nome = 'PHP', ano = '2015'
+where idcurso = '3';
+</code>
+</pre>
+
+<p>Para evitar que a alteração limite a mais de uma linha, coloque o comando <code>limit</code>, mas ele pode ser dispensado caso use correntamente o where. Dessa forma:</p>
+
+<pre>
+<code>
+update cursos
+set nome = 'Java', carga = '40', ano = '2015'
+where idcurso = '4' limit 1;
+</code>
+</pre>
+
+<p>PS: Tome cuidado ao não usar o limit, o update pode bagunçar o banco de dados ao usar o where errado, ao identificar algo que tenha em vários registros.</p>
+
+<p>Para deletar um registro, use o comando <code>delete</code>, dessa forma:</p>
+
+<pre>
+<code>
+delete from cursos
+where idcurso = '5';
+</code>
+</pre>
+
+<p>Para apagar vários ao mesmo tempo, use da mesma forma, mas com o limit pra não apagar tudo:</p>
+
+<pre>
+<code>
+delete from cursos
+where ano = '2015' limit 3;
+</code>
+</pre>
+
+<p>PS: Para apagarmos todos os dados da tabela, mas mantendo a estrutura, usamos o comando <code>truncate</code> (ele também reseta os valores dos auto incrementos), assim:</p>
+
+<pre>
+<code>
+truncate table cursos;
+</code>
+</pre>
+
+<p>É possível excluir todo o conteúdo de uma tabela usando <code>delete from nomedatabela</code>, mas é errado usar o comando assim, pois o delete, assim como o update, devem ser usados com uma condição, além de que usando ele assim não reseta as chaves auto-incrementadas. Por esse motivo é melhor usar o truncate mesmo.</p>
+
+<p>Update, Delete e Truncate são DML.</p>
+
+<h3>Gerenciando Cópias de Segurança MySQL</h3>
+
+<p>Para explicar, vamos primeiramente recolocar os dados na tabela cursos, como descrito anteriormente.</p>
+
+<p>Para exportar banco de dados, é só ir no PhpMyAdmin, em New e exportar os bancos desejados (se faz o mesmo em tabelas, dentro do banco de dado desejado). Lá tem as opções e também o formato desejado. Para importar faz do mesmo modo, em Importar.</p>
+
+<p>PS: É recomendável marcar a opção de exportar personalizada, e marcar as opções drop database ou drop table, para apagar a tabela antiga.</p>
+
+<p>Quando for editar um arquivo SQL, você pode usar <code>--</code> Ao lado das linhas que são comentários, por exemplo:</p>
+
+<pre>
+<code>
+use cadastro;
+select * from usuarios;
+-- Isso é um comentário SQL, o servidor desconsidera essa parte por causa dos dois traços.
+</code>
+</pre>
+
+<p>Também é possível fazer comentários de várias linhas, colocando tudo entre <code>/*</code> e <code>*/</code>.</p>
+
+<h3>PHPMyAdmin Parte 1</h3>
+
+<p>Primeiro vamos aprender a usar o PHPMyAdmin pelo Prompt de Comando. Dependendo do servidor, é necessário informar a o usuário e a senha (geralmente é root e uma senha vazia). Para abrir ele no XAMPP, abra o painel, vá em console em shell, e no CMD digite o comando <code>mysql -u root</code>.</p>
+
+<p>Para visualizar os bancos de dados, use o comando <code>show databases;</code> (não esqueça do ponto e vírgula).</p>
+
+<p>Para ver qual banco está aberto, usamos o comando <code>status;</code>.</p>
+
+<p>Para abrir um banco de dados use <code>use cadastro;</code> (ou o nome do banco de dados desejado) normalmente. Ver as tabelas, <code>show tables;</code>. Assim como outros comandos como <code>desc</code> e <code>select * from</code> (não esqueça do ponto e vírgula após eles).</p>
+
+<p>Para fazer um back-up dos dados via linha de comando, fora do shell do MySQL digite <code>mysqldump -u nomedousuario -p nomedobanco>dump.sql.</code> (pode ser necessário colocar a opção <code>--single-transaction</code>). Para restaurar um back-up basta colocar <code>mysql -u nomedousuario -p&lt;dump.sql</code></p>
+
+<p>Também podemos renomear uma tabela ou banco pelo CMD, usando um comando tipo <code>update cursos set nome = 'PH' where idcurso = '3';</code>.</p>
+
+<p>PS: Podemos usar as setas pra cima e pra baixo para aparecer os comandos já utilizados no CMD.</p>
+
+<p>É também possível usar diretamente no servidor localhost o PHPMyAdmin.</p>
+
+<p>PS: Caso os acentos apareçam desconfigurados no Windows, edite o arquivo xampp_shell.bat da pasta xampp, colocando <code>chcp 1252</code> no começo dele, antes do comando goto.</p>
+
+<h3>PHPMyAdmin Parte 2</h3>
+
+<p>No PHPMyAdmin, vamos criar um banco de dados novo, nesse caso, vamos criar na aba "Base de Dados", na parte de colocar nome. Crie um nome qualquer como exemplo e escolha o agrupamento <code>utf8_general_ci</code>. Depois disso, crie uma tabela da mesma forma (como por exemplo, amigos) e a quantidade de colunas (no exemplo, serão três, com nomes id, nome e tel). Veja a configuração de cada campo:</p>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Tamanho</th>
+        <th>Predefinido</th>
+        <th>Agrupamento</th>
+        <th>Atributos</th>
+        <th>Nulo</th>
+        <th>Índice</th>
+        <th>Auto Incremento</th>
+    </tr>
+    <tr>
+        <td>id</td>
+        <td>INT</td>
+        <td> </td>
+        <td>None</td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td>PRIMARY</td>
+        <td>&radic;</td>
+    </tr>
+    <tr>
+        <td>nome</td>
+        <td>VARCHAR</td>
+        <td>30</td>
+        <td>None</td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td>UNIQUE</td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td>tel</td>
+        <td>VARCHAR</td>
+        <td>11</td>
+        <td>None</td>
+        <td> </td>
+        <td> </td>
+        <td>&radic;</td>
+        <td>---</td>
+        <td> </td>
+    </tr>
+</table>
+
+<p>Embaixo, você escolhe a Storage Engine (o padrão é InnoDB, mas pode usar MylSAM). No Collation, você pode escolher o utf8_general_ci também.</p>
+
+<p>Vamos ver as databases pelo CMD, usando <code>show databases;</code>, <code>use exemplo;</code>, <code>show tables;</code> e <code>desc amigos;</code>.</p>
+
+<p>Se quiser ver a estrutura criada pra criar a tabela, use o comando <code>show create table amigos;</code> (no CMD). O mesmo vale pra databases (no exemplo, <code>show create database exemplo;</code>.</p>
+
+<p>Voltando a PHPMyAdmin, se quiser mudar algum dado, é só ir em muda, na coluna desejada (por exemplo, mudaremos tel pra telefone e tamanho de 11 pra 15).</p>
+
+<p>Abaixo da aba onde mostra os comandos utilizados, tem a opção "Edita" para alterar algum deles, se desejado. Tem também a opção de código PHP.</p>
+
+<p>Também tem a opção de adicionar novas colunas, logo abaixo, veja um exemplo para Sexo:</p>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Tamanho</th>
+        <th>Predefinido</th>
+        <th>Agrupamento</th>
+        <th>Atributos</th>
+        <th>Nulo</th>
+        <th>Índice</th>
+        <th>Auto Incremento</th>
+    </tr>
+    <tr>
+        <td>sexo</td>
+        <td>ENUM</td>
+        <td>'M','F'</td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td>&radic;</td>
+        <td> </td>
+        <td> </td>
+    </tr>
+</table>
+
+<p>Vamos adicionar um cadastro, indo na aba insere da tabela, faça um teste com o mesmo telefone. Cuidado com as opções, principalmente abaixo.</p>
+
+<p>Da mesma forma, você pode editar os cadastros na tabela.</p>
+
+<p>Vamos exportar a base toda de exemplo, indo em exportar (escolha a opção personalizada pra escolher a base desejada).</p>
+
+<h3>Select - Parte 1</h3>
+
+<p>O comando mais famoso e um dos mais usados em SQL é o <code>select</code>.</p>
+
+<p>Vamos importar um arquivo de dump em SQL com o código já formatado com vários registros, para o banco cadastro. <a href="_arquivos/cursos.sql" target="_blank">Clique aqui para baixar</a>.</p>
+
+<p>Para verificar os registros, use o <code>select * from cursos</code>. O asterisco significa "todos".</p>
+
+<p>Se quiser escolher a ordenação por nome (ou outra chave), por exemplo, use assim:</p>
+
+<pre>
+<code>
+select * from cursos
+order by nome;
+</code>
+</pre>
+
+<p>PS: Se não colocar esse parâmetro, ele ordenará pela chave primária, independente de qual seja.</p>
+
+<p>Podemos usar o <code>desc</code> após o nome da chave desejada, para ordenar de trás pra frente, assim:</p>
+
+<pre>
+<code>
+select * from cursos
+order by nome desc;
+</code>
+</pre>
+
+<p>PS: Nesse caso, o desc quer dizer "descendente" por ser um parâmetro do ordem, e seu inverso seria o <code>asc</code> (que é desnecessário usar). Não tem nada a ver com o "describe".</p>
+
+<p>Podemos filtrar as colunas pelo nome das mesmas, por exemplo:</p>
+
+<pre>
+<code>
+select nome, carga, ano from cursos
+order by nome;
+</code>
+</pre>
+
+<p>Esse filtro podemos usar para mostrar apenas as colunas que queremos, inclusive, não precisam estar na ordem das colunas no banco. E também podemos criar outras ordenações, por exemplo:</p>
+
+<pre>
+<code>
+select ano, nome, carga from cursos
+order by ano, nome;
+</code>
+</pre>
+
+<p>No caso acima, ele vai ordenar tudo por ano, e dentro dos anos, arrumar os nomes.</p>
+
+<p>Podemos também filtrar as linhas com o parâmetro <code>where</code>, para mostrar somente algumas linhas, assim:</p>
+
+<pre>
+<code>
+select * from cursos
+where ano = '2016'
+order by nome;
+</code>
+</pre>
+
+<p>Da mesma forma, podemos usar ambos os filtros juntos:</p>
+
+<pre>
+<code>
+select nome, descricao, carga from cursos
+where ano = '2016'
+order by nome;
+</code>
+</pre>
+
+<p>No caso, filtramos por ano, mas não o mostramos ele no banco.</p>
+
+<p>Podemos também usar no lugar do igual, operadores relacionais diversos, como o menor ou igual, maior ou igual, maior, menor e diferente, veja no exemplo onde selecionamos 2015 e anos anterioires à ele:</p>
+
+<pre>
+<code>
+select nome, descricao, carga from cursos
+where ano &lt;= '2015'
+order by ano, nome;
+</code>
+</pre>
+
+<p>PS: Além do <code>!=</code>, o diferente pode ser representado por <code>&lt;&gt;</code>.</p>
+
+<p>Podemos também usar o operador <code>between</code> para selecionar algo entre uma coisa e outra, veja um exemplo no qual escolhemos entre 2014 e 2016:</p>
+
+<pre>
+<code>
+select nome, ano from cursos
+where ano between 2014 and 2016
+order by ano desc, nome asc;
+</code>
+</pre>
+
+<p>E tem também o <code>in</code> para especificar vários valores específicos, independente do intervalo, por exemplo:</p>
+
+<pre>
+<code>
+select nome, descricao, ano from cursos
+where ano in (2014, 2016, 2020)
+order by ano;
+</code>
+</pre>
+
+<p>Nesse caso acima só mostrará 2014, 2016 e 2020, intervalos entre eles não serão mostrados.</p>
+
+<p>Podemos também usar operadores lógicos (como and, or e not), por exemplo:</p>
+
+<pre>
+<code>
+select nome, carga, totaulas from cursos
+where carga &gt; 35 and totaulas &lt; 30
+order by nome;
+</code>
+</pre>
+
+<p>Pode ver no caso acima que são parâmetros de colunas totalmente diferentes.</p>
+
+<p>Mudando o and para or:</p>
+
+<pre>
+<code>
+select nome, carga, totaulas from cursos
+where carga &gt; 35 or totaulas &lt; 30
+order by nome;
+</code>
+</pre>
+
+<p>Inclusive, podemos ver como funciona uma SQL Injection, onde ao passar <code>' or '1 = 1</code> (geralmente é usado aspas simples) num formulário retornaria todas as ocorrências do banco, ficando dessa forma:</p>
+
+<pre>
+<code>
+select * from cursos where nome = 'MySQL' or '1 = 1';
+</code>
+</pre>
+
+<p>Ou assim:</p>
+
+<pre>
+<code>
+select * from cursos where nome = '' or '1 = 1';
+</code>
+</pre>
+
+<p>Select é DML, mas alguns o classificam em DQL.</p>
+
+<ul>
+    <li><a href="tudo-sobre-mysql-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-mysql-3.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

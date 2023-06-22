@@ -11,6 +11,7 @@ div#interface {
     background-color: rgba(8,32,16,0.95);
     margin: -8px;
     padding: 25px;
+    min-height: 750px;
 }
 
 section#conteudo {  

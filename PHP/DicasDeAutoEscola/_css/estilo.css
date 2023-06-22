@@ -8,7 +8,7 @@ div#interface {
     background-color: rgba(208,208,0,0.85);
     margin: -8px;
     padding: 20px;
-    min-height: 600px;
+    min-height: 750px;
     box-shadow: 0px 0px 10px silver;
 }
 header {
