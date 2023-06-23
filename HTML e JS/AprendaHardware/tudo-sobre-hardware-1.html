@@ -382,6 +382,316 @@ Quarta casa:
 </code>
 </pre>
 
+<h3>Números Octais e Hexadecimais</h3>
+
+<p>Como visto até agora, dois sistemas numéricos usados são o decimal, usado pelos humanos, e o binário, usado pelas máquinas, mas ainda tem outros sistemas utilizados na área de TI, no caso, veremos o sistema octal e hexadecimal.</p>
+
+<p>Números de IPv6 e MAC, ou hashs, são usados em hexadecimal, por exemplo. Códigos de erros em jogos ou de memória, ou permissões em Linux, são usados em octal.</p>
+
+<p>Basicamente, o sistema octal é de 0 a 7 (eliminando o oito, assim como o binário elimina o dois e o decimal só vai até nove). O sistema hexadecimal vai de 0 a 9 e depois tem seis letras de A a F (que não são lidos como letras do alfabeto). Veja abaixo os algarismos dessas bases:</p>
+
+<ul>
+    <li><b>Sistema Decimal: </b>0 1 2 3 4 5 6 7 8 9</li>
+    <li><b>Sistema Binário: </b>0 1</li>
+    <li><b>Sistema Octal: </b>0 1 2 3 4 5 6 7</li>
+    <li><b>Sistema Hexadecimal: </b>0 1 2 3 4 5 6 7 8 9 A B C D E F</li>
+</ul>
+
+<p>PS: Nos números octais e hexadecimais, assim como os binários, as casas também não são contadas por unidades, dezenas e etc, e não se lê coisas como "dez mil, cento e onze".</p>
+
+<p>Vamos relembrar o número 2004 em decimal:</p>
+
+<pre>
+<code>
+2004:
+
+2 = 2 x 10<sup><small>3</small></sup> = 2 x 1000
+0 = 0 x 10<sup><small>2</small></sup> = 0 x 100
+0 = 0 x 10<sup><small>1</small></sup> = 0 x 10
+4 = 4 x 10<sup><small>0</small></sup> = 4 x 1
+</code>
+</pre>
+
+<p>Isso acima é nada mais do que a notação posicional.</p>
+
+<p>Da mesma forma, a notação é usada para qualquer base, lembrando do binário:</p>
+
+<pre>
+<code>
+1101:
+
+1 = 1 x 2<sup><small>3</small></sup> = 1 x 8 = 8
+1 = 1 x 2<sup><small>2</small></sup> = 1 x 4 = 4
+0 = 0 x 2<sup><small>1</small></sup> = 0 x 2 = 0
+1 = 1 x 2<sup><small>0</small></sup> = 1 x 1 = 1
+
+8 + 4 + 0 + 1 = 13
+</code>
+</pre>
+
+<p>Vamos ver por exemplo, a notação posicional em octal (base 8), no caso, o 371:</p>
+
+<pre>
+<code>
+371:
+
+3 = 3 x 8<sup><small>2</small></sup> = 3 x 64 = 192
+7 = 7 x 8<sup><small>1</small></sup> = 7 x 8 = 56
+1 = 1 x 8<sup><small>0</small></sup> = 1 x 1 = 1
+
+192 + 56 + 1 = 249
+</code>
+</pre>
+
+<p>No caso acima, 371 na base 8 (leia três sete um em octal) é o mesmo que 249 em decimal (esse pode ser lido duzentos e quarenta e nove). A base 8 pode ser lida como, por exemplo, (371)<sub><small>8</small></sub>.</p>
+
+<p>Agora, no sistema hexadecimal (base 16), é bom lembrar primeiramente que os caracteres A, B, C, D, E e F são o mesmo que 10, 11, 12,13, 14 e 15 em decimal.</p>
+
+<table style="text-align: center">
+    <tr>
+        <th>Decimal</th>
+        <td>0</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        <td>14</td>
+        <td>15</td>
+    </tr>  
+    <tr>
+        <th>Hexadecimal</th>
+        <td>0</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <td>D</td>
+        <td>E</td>
+        <td>F</td>
+    </tr>
+    
+</table>
+
+<p>Vamos ver um exemplo de um número em hexadecimal, por exemplo, o 1FA:</p>
+
+<pre>
+<code>
+1FA:
+
+A = 10
+F = 15
+
+1 = 1 x 16<sup><small>2</small></sup> = 1 x 256 = 256
+F = 15 x 16<sup><small>1</small></sup> = 15 x 16 = 240
+A = 10 x 16<sup><small>0</small></sup> = 10 x 1 = 10
+
+256 + 240 + 10 = 506
+</code>
+</pre>
+
+<p>No caso acima, 1FA na base 16 (leia um efe a) é o mesmo que 506 em decimal (esse pode ser lido quinhentos e seis). Os números em hexadecimal podem ser lido, como por exemplo, (1FA)<sub><small>16</small></sub>.</p>
+
+<p>Veja outro exemplo, com 1257 na base 8:</p>
+
+<pre>
+<code>
+1257:
+
+1 = 1 x 8<sup><small>3</small></sup> = 1 x 512 = 512
+2 = 2 x 8<sup><small>2</small></sup> = 2 x 64 = 128
+5 = 5 x 8<sup><small>1</small></sup> = 5 x 8 = 40
+7 = 7 x 8<sup><small>0</small></sup> = 7 x 1 = 7
+
+512 + 128 + 40 + 7 = 687
+</code>
+</pre>
+
+<p>No caso acima, o 1257 em octal é o mesmo que 687 em decimal.</p>
+
+<p>Veja também outro exemplo, com 13C2 na base 16:</p>
+
+<pre>
+<code>
+13C2:
+
+C = 12
+
+1 = 1 x 16<sup><small>3</small></sup> = 1 x 4096 = 4096
+3 = 3 x 16<sup><small>2</small></sup> = 3 x 256 = 768
+C = 12 x 16<sup><small>1</small></sup> = 12 x 16 = 192
+2 = 2 x 16<sup><small>0</small></sup> = 2 x 1 = 2
+
+4096 + 768 + 192 + 2 = 5058
+</code>
+</pre>
+
+<p>No caso acima, o 13C2 em hexadecimal é o mesmo que 5058 em decimal.</p>
+
+<p>Dessa mesma forma, é possível fazer conversões de números de qualquer base, inclusive de bases não citadas como base 7 ou base 3.</p>
+
+<p>Como visto anteriormente, podíamos converter decimal em binário fazendo divisões inteiras, dessa forma:</p>
+
+<pre>
+<code>
+Primeira casa:
+13 |<ins> 2 </ins>
+ 1   6
+
+Segunda casa:
+6 |<ins> 2 </ins>
+0   3
+
+Terceira casa:
+3 |<ins> 2 </ins>
+1   1
+
+Quarta casa:
+1 |<ins> 2 </ins>
+1   0
+</code>
+</pre>
+
+<p>Da mesma forma, podemos converter decimal em octal, como podemos ver com o número 177 em decimal:</p>
+
+<pre>
+<code>
+Primeira casa:
+177|<ins> 8 </ins>
+  1  22
+
+Segunda casa:
+22 |<ins> 8 </ins>
+ 6   2
+
+Terceira casa:
+2 |<ins> 8 </ins>
+2   0
+</code>
+</pre>
+
+<p>Da mesma forma, vamos dividindo até não dar mais (ou seja, o resultado ser zero), no caso da divisão inteira, quando o numerador é menor que o denominador, o resultado é zero e o resto é igual ao numerador.</p>
+
+<p>Aí, da mesma forma, pegamos o número de baixo pra cima, o primeiro resto é a primeira casa, e o último resto (quando o resultado é zero), é o último dígito. No caso, o 177 em octal é 261.</p>
+
+<p>Para vermos que está certo, vamos reconverter o octal em decimal:</p>
+
+<pre>
+<code>
+261:
+
+2 = 2 x 8<sup><small>2</small></sup> = 2 x 64 = 128
+6 = 6 x 8<sup><small>1</small></sup> = 6 x 8 = 48
+1 = 1 x 8<sup><small>0</small></sup> = 1 x 1 = 1
+
+128 + 48 + 1 = 177
+</code>
+</pre>
+
+<p>A forma para converter decimal em hexadecimal é a mesma, como podemos ver com o número 685 em decimal:</p>
+
+<pre>
+<code>
+Primeira casa:
+685|<ins> 16 </ins>
+ 13  42
+
+13 = D
+
+Segunda casa:
+42 |<ins> 16 </ins>
+10   2
+
+10 = A
+
+Terceira casa:
+2 |<ins> 16 </ins>
+2   0
+</code>
+</pre>
+
+<p>Aí, da mesma forma, pegamos o número de baixo pra cima, o primeiro resto é a primeira casa, e o último resto (quando o resultado é zero), é o último dígito, e tudo que retornar de 10 a 15 trocamos por A a F. No caso, o 685 em hexadecimal é 2AD.</p>
+
+<p>Para vermos que está certo, vamos reconverter o hexadecimal em decimal:</p>
+
+<pre>
+<code>
+2AD:
+
+A = 10
+D = 13
+
+2 = 2 x 16<sup><small>2</small></sup> = 2 x 256 = 512
+A = 10 x 16<sup><small>1</small></sup> = 10 x 16 = 160
+D = 13 x 16<sup><small>0</small></sup> = 13 x 1 = 13
+
+512 + 160 + 13 = 685
+</code>
+</pre>
+
+<p>Podemos também converter outras bases, por exemplo, para hexadecimal em binário, vamos converter o 1E na base 16.</p>
+
+<p>Primeiro, convertermos o 1E para decimal, assim:</p>
+
+<pre>
+<code>
+1E:
+
+E = 14
+
+1 = 1 x 16<sup><small>1</small></sup> = 1 x 16 = 16
+E = 14 x 16<sup><small>0</small></sup> = 14 x 1 = 14
+
+16 + 14 = 30
+</code>
+</pre>
+
+<p>E depois, convertemos o resultado decimal para binário:</p>
+
+<pre>
+<code>
+Primeira casa:
+30 |<ins> 2 </ins>
+ 0   15
+
+Segunda casa:
+15 |<ins> 2 </ins>
+ 1   7
+
+Terceira casa:
+7 |<ins> 2 </ins>
+1   3
+
+Quarta casa:
+3 |<ins> 2 </ins>
+1   1
+
+Quinta casa:
+1 |<ins> 2 </ins>
+1   0
+</code>
+</pre>
+
+<p>Daí é só organizar, e veremos que 1E na base 16 é igual a 11110 na base 2. Dessa forma podemos ver que existe relação entre os sistemas numéricos.</p>
+
+<p>No caso, o sistema decimal serviu de ponte para conversões, isso pode ser usado para qualquer conversão, como de octal para hexadecimal, por exemplo.</p>
+
 <ul>
     <li><a href="tudo-sobre-hardware-2.html">Continuação da Matéria!</a></li>
 </ul>

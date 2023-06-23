@@ -170,7 +170,7 @@
 
 <p>Vamos abrir o prompt, digitando <code>tracert www.google.com.br</code> (ou outro site/IP).</p>
 
-<p>Digitando <code>tracert /?</code> (<code>traceroute --help</code> no Linux) você pode ver outras opções para usar como parâmetros. Por exemplo, podemos usar o parâmetro <code>/h</code> (<code>-m</code> em Linux) para escolher o número máximo de saltos (cujo padrão é 30), por exemplo: <code>tracert /h 15 www.google.com.br</code>. Ou forçar o uso de IPv4 com o parâmetro <code>/4</code> ou de IPv6 usando <code>/6</code>.</p>
+<p>Digitando <code>tracert /?</code> você pode ver outras opções para usar como parâmetros. Por exemplo, podemos usar o parâmetro <code>/h</code> para escolher o número máximo de saltos (cujo padrão é 30), por exemplo: <code>tracert /h 15 www.google.com.br</code>. Ou forçar o uso de IPv4 com o parâmetro <code>/4</code> ou de IPv6 usando <code>/6</code>.</p>
 
 <h3>Como Funciona o Utilitário Ping</h3>
 
@@ -186,9 +186,9 @@
 
 <p>Para usarmos ele, usamos o comando <code>ping www.google.com.br</code> (substituindo pelo site/IP desejado).</p>
 
-<p>Digitando <code>ping /?</code> (<code>ping --help</code> no Linux) você pode ver outras opções para usar como parâmetros.</p>
+<p>Digitando <code>ping /?</code> você pode ver outras opções para usar como parâmetros.</p>
 
-<p>Um exemplo de uso seria <code>ping /n 6 www.google.com.br</code>, para enviar seis requisições, ao invés do padrão 4 (em Linux o parâmetro é <code>-c</code> e o padrão é infinitas requisições). Outro exemplo seria colocar o parâmetro <code>/t</code> para enviar infinitas requisições no Windows, no Linux esse é o padrão (podendo ser interrompida com Ctrl C em Windows ou Ctrl Z em Linux, e paralisar temporariamente com Ctrl Break), por exemplo <code>ping /t www.google.com.br</code>. Também podemos forçar o uso de IPv4 com o parâmetro <code>/4</code> ou de IPv6 usando <code>/6</code>.</p>
+<p>Um exemplo de uso seria <code>ping /n 6 www.google.com.br</code>, para enviar seis requisições, ao invés do padrão 4. Outro exemplo seria colocar o parâmetro <code>/t</code> para enviar infinitas requisições no Windows, por exemplo <code>ping /t www.google.com.br</code>. Também podemos forçar o uso de IPv4 com o parâmetro <code>/4</code> ou de IPv6 usando <code>/6</code>.</p>
 
 <h3>Protocolo TCP - Campos do Cabeçalho</h3>
 

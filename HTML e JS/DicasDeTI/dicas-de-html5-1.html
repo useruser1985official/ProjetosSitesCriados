@@ -70,7 +70,7 @@
         &lt;style&gt;
             /* Isso é código CSS (comentários em CSS são feitos usando barra e asterisco) */
 
-            html {
+            body {
                 font-family: Arial, sans-serif;
                 color: white;
                 background: url("_imagens/fundo.png") center fixed repeat;
@@ -295,6 +295,23 @@ h1 {
 
 <p>PS: Os emojis não funcionam em todos os navegadores.</p>
 
+<p>Para colocar imagem ou cor de fundo num site, fazemos assim:</p>
+
+<pre>
+<code>
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    background: url("_imagens/fundo.png") center fixed repeat;
+    background-color: black;
+}
+</code>
+</pre>
+
+<p>O <code>center</code> é para centralizar (podemos usar <code>left</code>, <code>right</code>, <code>top</code> e <code>bottom</code>), e podemos também colocar as porcentagens das posições X e Y para posicionar a imagem. O <code>fixed</code> é para fixar a imagem ao rolar a página (para não rolar, basta não colocar ele). O <code>repeat</code> é para definir a repetição da imagem (para não repetir coloque <code>no-repeat</code>).</p>
+
+<p>PS: Para alguns desses componentes da propriedade <code>background</code>, temos propriedades específicas, como <code>background-size</code>, <code>background-position</code>, etc.</p>
+
 <p>Para criar âncoras de sites externos fazemos assim:</p>
 
 <pre>
@@ -394,6 +411,10 @@ ul li {
 }
 </code>
 </pre>
+
+<p>As opções que podem ser usadas no <code>font-weight</code> são, da mais fina à mais grossa, <code>lighter</code>, <code>normal</code>, <code>bold</code> e <code>bolder</code>. Podemos usar também um número entre 100 e 900.</p>
+
+<p>As opções que podem ser usadas no <code>font-style</code> são <code>normal</code>, <code>italic</code> e <code>oblique</code>. Podemos usar também um grau de inclinação, como por exemplo <code>oblique 40deg</code>.</p>
 
 <p>PS: Esteja atento as diferenças de especificar elementos no CSS:</p>
 

@@ -170,6 +170,281 @@
 
 <p>Seis cabeçalhos de extensão são definidos pelas especificações do IPv6. Novos cabeçalhos podemm ser definidos sem que seja preciso alterar os cabeçalhos base.</p>
 
+<h3>Comandos ip no Linux</h3>
+
+<p>Os comandos <code>ip</code> são usados para mostrar e configurar parâmetros de rede para as interfaces em uma máquina.</p>
+
+<p>Há dois conjuntos principais de programas para a configuração de rede no Linux: os pacotes net-tools e <code>iproute2</code>.</p>
+
+<p>Os antigos programas do conjunto net-tools (como o clássico ifconfig) pertencem ao sistema de redes Linux NET-3. A maioria está obsoleta atualmente.</p>
+
+<p>Já os programas do pacote iproute2 (como o ip, tratado neste tutorial), são o sistema de configuração de rede atual do Linux. O iproute2 consiste em uma série de utilitários, dos quais o ip é o foco desse nosso artigo, mas além do ip, outros utilitários que compõem o pacote iproute2 são:</p>
+
+<pre>
+<code>
+ss
+bridge
+rtmon
+nstat
+tc
+devlink
+</code>
+</pre>
+
+<p>E vários outros.</p>
+
+<p>A tabela a seguir mostra os principais objetos disponíveis para uso com os comandos ip, suas abreviações e função:</p>
+
+<table>
+    <tr>
+        <th>Objeto</th>
+        <th>Abreviação</th>
+        <th>Função</th>
+    </tr>
+    <tr>
+        <td>address</td>
+        <td>a, addr</td>
+        <td>Endereço em um dispositivo (IPv4 ou IPv6)</td>
+    </tr>
+    <tr>
+        <td>addrlabel</td>
+        <td>addrl</td>
+        <td>Configuração de rótulo para seleção de endereço</td>
+    </tr>
+    <tr>
+        <td>link</td>
+        <td>l</td>
+        <td>Dispositivo de rede</td>
+    </tr>
+    <tr>
+        <td>maddress</td>
+        <td>m, maddr</td>
+        <td>Endereço multicast</td>
+    </tr>
+    <tr>
+        <td>mroute</td>
+        <td>mr</td>
+        <td>Entrada de cache de roteamento multicast</td>
+    </tr>
+    <tr>
+        <td>neighbour</td>
+        <td>n, neigh</td>
+        <td>Entrada de cache ARP ou NDISC</td>
+    </tr>
+    <tr>
+        <td>rule</td>
+        <td>ru</td>
+        <td>Regra no banco de políticas de roteamento</td>
+    </tr>
+    <tr>
+        <td>tunnel</td>
+        <td>t</td>
+        <td>Túnel sobre IP</td>
+    </tr>
+</table>
+
+<p>No dia-a-dia de trabalho do administrador de redes Linux, é mais comum o uso dos objetos <code>address</code> e <code>link</code>, por se tratarem de objetos usados na configuração direta de endereçamento e interfaces de rede físicas, mas é importante conhecer todos eles, pois em algum momento eles podem ser necessários.</p>
+
+<h4>Exemplos</h4>
+
+<p>Vejamos alguns exemplos de aplicação do comando ip para gerenciamento de parâmetros de rede em um servidor (ou estação). Note que para executar a maior parte dos comandos é necessário possuir privilégios de administrador:</p>
+
+<p>Mostrar as interfaces de rede disponíveis no computador:</p>
+
+<pre>
+<code>
+sudo ip link show
+</code>
+</pre>
+
+<p>Ver os ips das interfaces de rede:</p>
+
+<pre>
+<code>
+sudo ip addr show
+
+# Ou simplesmente:
+
+sudo ip a
+</code>
+</pre>
+
+<p>Ver somente informações sobre o protocolo IPv4 nas interfaces:</p>
+
+<pre>
+<code>
+sudo ip -4 a
+</code>
+</pre>
+
+<p>Para o protocolo IPv6:</p>
+
+<pre>
+<code>
+sudo ip -6 a
+</code>
+</pre>
+
+<p>Reiniciar a máquina ou o serviço de rede após.</p>
+
+<p>Desabilitar uma interface de rede, como a enp0s3:</p>
+
+<pre>
+<code>
+sudo ip link set enp0s3 down
+</code>
+</pre>
+
+<p>Ver o ip de uma interface específica, como a enp0s3:</p>
+
+<pre>
+<code>
+sudo ip addr ls enp0s3
+
+# Ou
+
+sudo ip addr show enp0s3
+</code>
+</pre>
+
+<p>Ver estatísticas de comunicação (tx e rx) de uma interface específica (opção <code>-s</code>):</p>
+
+<pre>
+<code>
+sudo ip -s link show enp0s3
+</code>
+</pre>
+
+<p>Atribuir um endereço IP a uma interface específica:</p>
+
+<pre>
+<code>
+sudo ip addr add 192.168.12.100/26 dev enp0s3
+</code>
+</pre>
+
+<p>PS: Esta configuração é perdida ao reiniciar o sistema. Para mantê-la, editar o arquivo de configuração <code>/etc/network/interfaces</code> (Debian e derivados) ou os arquivos em <code>/etc/sysconfig/network-scripts/</code> (Red Hat e derivados).</p>
+
+<p>Excluir um endereço IP de uma interface específica:</p>
+
+<pre>
+<code>
+sudo ip addr del 192.168.12.100/26 dev enp0s3
+</code>
+</pre>
+
+<p>Ajustar o nome da interface de rede enp0s3 para eth0:</p>
+
+<pre>
+<code>
+sudo ip link set enp0s3 name eth0
+</code>
+</pre>
+
+<p>Verificar as rotas de rede (tabela de roteamento):</p>
+
+<pre>
+<code>
+sudo ip route show
+</code>
+</pre>
+
+<p>Adicionar uma rota estática:</p>
+
+<pre>
+<code>
+sudo ip route add 10.20.30.0/26 via 192.168.100.10 dev enp0s3
+</code>
+</pre>
+
+<p>PS: Esta configuração é perdida ao reiniciar o sistema. Para mantê-la, editar o arquivo de configuração <code>/etc/network/interfaces</code> (Debian e derivados) ou os arquivos em <code>/etc/sysconfig/network-scripts/</code> (Red Hat e derivados).</p>
+
+<p>Por exemplo, no Debian, adicionamos a linha:</p>
+
+<pre>
+<code>
+up ip route add 10.20.30.0/26 via 192.168.100.10 dev enp0s3
+</code>
+</pre>
+
+<p>Ao arquivo <code>/etc/network/interfaces</code> para adicionar a rota estática de forma permanente.</p>
+
+<p>Remover uma rota estática:</p>
+
+<pre>
+<code>
+sudo ip route del 10.20.30.0/26
+</code>
+</pre>
+
+<p>Adicionar um endereço de gateway padrão geral</p>
+
+<pre>
+<code>
+sudo ip route add default via 192.168.100.10
+</code>
+</pre>
+
+<p>Se o gateway padrão para a rede já existir, será emitida uma mensagem de erro.</p>
+
+<p>Configurar um endereço MAC em uma interface:</p>
+
+<pre>
+<code>
+sudo ip link set dev enp0s3 address 00:0a:75:20:f5:bd
+</code>
+</pre>
+
+<p>Alterar o MTU em uma interface. Por exemplo, aplicar um MTU de 9000 na interface enp0s3:</p>
+
+<pre>
+<code>
+sudo ip link set mtu 9000 dev enp0s3
+</code>
+</pre>
+
+<p>Geralmente alteramos o MTU em redes gigabit para permitir o tráfego de Jumbo Frames (quadros jumbo), de modo a aumentar a performance de transmissão da rede.</p>
+
+<p>Consultar a tabela ARP:</p>
+
+<pre>
+<code>
+sudo ip neigh
+</code>
+</pre>
+
+<p>Consultar a tabela ARP de um interface específica:</p>
+
+<pre>
+<code>
+sudo ip neigh show dev enp0s3
+</code>
+</pre>
+
+<p>Visualizar a ajuda dos comandos ip:</p>
+
+<pre>
+<code>
+sudo ip help
+</code>
+</pre>
+
+<p>Ou ainda, visualizar a ajuda apenas dos comandos de endereçamento:</p>
+
+<pre>
+<code>
+sudo ip addr help
+</code>
+</pre>
+
+<p>Habilitar o modo promíscuo na interface enp0s3:</p>
+
+<pre>
+<code>
+sudo ip link set enp0s3 promisc on
+</code>
+</pre>
+
 <ul>
     <li><a href="tudo-sobre-redes-12.html">Parte Anterior da Matéria!</a></li>
     <!--<li><a href="tudo-sobre-redes-14.html">Continuação da Matéria!</a></li>-->
