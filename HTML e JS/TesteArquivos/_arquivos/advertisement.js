@@ -1,1 +1,0 @@
-document.write("<div id=\"anuncio\">Venda seus Produtos na OLX!</div>");

@@ -29,95 +29,6 @@
             
 <h2>Tudo sobre Criptografia e Segurança Parte 5</h2>
 
-<h3>Introdução ao Registro do Windows</h3>
-
-<p>O registro é um banco de dados hierárquico no Windows que armazena informações importantes sobre hardware do sistema, programas instalados e configurações, alé de perfis de cada uma das contas de usuário no computador.</p>
-
-<p>O registro foi introduzido no Windows 3.1, e foi expandido ao longo do tempo para armazenar mais informações e configurações do sistema e programas. Antes de existir o registro, as configurações dos programas eram armazenados em arquivos de texto com extensão .ini, que ainda existe, mas é bem menos usado que antigamente, praticamente tudo é feito no registro, hoje em dia.</p>
-
-<p>Para abrir o registro, procure no executar ou no iniciar "regedit.exe", ele será executado como administrador.</p>
-
-<p>Os dados do registro são armazenados em chaves (compartimentos, como se fossem "pastinhas"), e dentro deles tem subchaves, que funcionam da mesma forma. As configurações que aparecem do lado direito são chamados de valores. Os valores sempre possuem um nome, o tipo de dados e o conteúdo dos dados (como se fossem variáveis). Tudo isso são parâmetros que ficam armazenados dentro das chaves, e os valores são itens de configurações.</p>
-
-<p>Esses são os tipos de dados mais comuns em entradas de registro, que são utilizados para configurar os valores que guardamos dentro das chaves:</p>
-
-<table>
-    <tr>
-        <th>ID do tipo</th>
-        <th>Nome Simbólico</th>
-        <th>Significado</th>
-    </tr>
-    <tr>
-        <td>0</td>
-        <td>REG_NONE</td>
-        <td>Sem tipo definido</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>REG_SZ</td>
-        <td>Valor de cadeia de caracteres UTF-16</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>REG_EXPAND_SZ</td>
-        <td>Valor de cadeia de caracteres expansível</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>REG_BINARY</td>
-        <td>Dados binários</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>REG_DWORD</td>
-        <td>Valor DWORD, inteiro sem sinal de 32 bits</td>
-    </tr>
-    <tr>
-        <td>7</td>
-        <td>REG_MULTI_SZ</td>
-        <td>Cadeia de caracteres múltipla (lista ordenada)</td>
-    </tr>
-    <tr>
-        <td>11</td>
-        <td>REG_QWORD</td>
-        <td>Valor QWORD, inteiro de 64 bits</td>
-    </tr>
-</table>
-
-<p>O registro tem cinco chaves principais (chaves raiz ou de alto nível), que são essas:</p>
-
-<ul>
-    <li>HKEY_CLASSES_ROOT</li>
-    <li>HKEY_CURRENT_USER</li>
-    <li>HKEY_LOCAL_MACHINE</li>
-    <li>HKEY_USERS</li>
-    <li>HKEY_CURRENT_CONFIG</li>
-</ul>
-
-<p>PS: Podem existir também outras, dependendo da versão dos Windows.</p>
-
-<p>A chave <code>HKEY_CLASSES_ROOT</code> contém informações relativas a associações de nomes de arquivos, objetos OLE, associações com objetos COM, e associações de arquivos de classe. Parâmetros contidos nessa chave são na verdade um link (atalho) para a chave HKEY_LOCAL_MACHINE\SOFTWARE\Classes. Abreviada normalmente como HKCR.</p>
-
-<p>A chave <code>HKEY_CURRENT_USER</code> contém as configurações do usuário logado no sistema no momento, incluindo variáveis de ambiente, configurações de desktop, de redes e de aplicações. É um link para HKEY_USERS\&lt;SID-DO-USUÁRIO-ATUAL&gt;. Abreviada normalmente como HKCU.</p>
-
-<p>A chave <code>HKEY_LOCAL_MACHINE</code> contém todas as informações globais de hardware e sistema operacional. A informação nessa chave é aplicável a todos os usuários que se logam no sistema local. Abreviada normalmente como HKLM.</p>
-
-<p>A chave <code>HKEY_USERS</code> contém dados de todos os perfis de usuários no sistema, incluindo HKEY_CURRENT_USER e o perfil de usuário padrão. No geral, usamos a chave HKCU para configuração do usuário atual. Abreviada normalmente como HKU.</p>
-
-<p>A chave <code>HKEY_CURRENT_CONFIG</code> armezena todos os dados sobre a configuração atual de hadware da máquina. É um link para HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Hardware Profiles\Current. Não é muito utilizada no geral. Abreviada normalmente como HKCC.</p>
-
-<p>Uma das coisas que podemos fazer no registro é exportar ele (fazer um backup), apenas indo em arquivo e exportar, escolhendo a ramificação selecionada ou tudo. Da mesma forma, você importa os dados.</p>
-
-<p>Para criar uma chave, podemos fazer isso clicando com o botão direito no local onde ela será inserida (por exemplo, em HKEY_LOCAL_MACHINE\SOFTWARE), podemos escolher uma nova chave (pasta) ou diretamente os valores. No exemplo, criaremos a chave Teste, ele já terá um valor padrão não definido dentro dela (ou seja, está vazia), basta clicar duas vezes nele, colocar os valores na janela que abre e dar OK, ele já será salvo (em alguns casos pode ser necessário reiniciar o PC). Da mesma forma, podemos criar novos valores dentro da mesma chave, clicando com o botão direito dentro dela.</p>
-
-<p>Caso você entre muito numa chave de difícil localização que precise mexer com frequência, clique nela e adicione aos favoritos, logo acima do editor de registro, nesse mesmo local terá o link de acesso direto à ela. Da mesma forma, podemos remover os favoritos.</p>
-
-<p>A seguir veremos um exemplo de configuração de registro do Windows que você pode testar em seu sistema (de preferência, teste numa máquina virtual).</p>
-
-<p>Para desabilitar o painel de controle, vamos em HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer e criar o valor NoControlPanel do tipo DWORD, e o valor será 1 (pra habilitar restrição), pra desabilitar o valor é 0 (de preferência hexadecimal). Depois o valor criado pode ser excluído.</p>
-
-<p>PS: Os nomes não podem ter erros, e eles não são inventados, são nomes que o sistema e/ou os programas reconhecem. E tome muito cuidado para mexer no registro.</p>
-
 <h3>Como Funciona a Cifra de César</h3>
 
 <p>A cifra de César é uma técnica de criptografia bastante simples e provavelmente a mais conhecida de todas. Trata-se de um tipo de cifra de substituição, na qual cada letra de um texto a ser criptografado é substituída por outra letra, presente no alfabeto porém deslocada a um certo número de posições à esquerda ou à direita. A cifra de César recebe esse nome pois, segundo o escrito Suetônio, foi utilizada por Júlio César para se comunicar com seus generais, protegendo mensagens militares.</p>
@@ -146,6 +57,20 @@
 </ul>
 
 <p>Temos alguns sites que podemos usar para criptografar e desencriptar, como esse, que tem a opção de bruteforce e também de escolher o deslocamento: <a href="http://www.dcode.fr/caesar-cipher" target="_blank">http://www.dcode.fr/caesar-cipher</a></p>
+
+<h3>O Que é um Ataque Zero Day?</h3>
+
+<p>Uma vulnerabilidade de dia zero (ou zero day) é uma vulnerabilidade de software descoberta por invasores antes que o fornecedor tome conhecimento dela. Como os fornecedores não a conhecem, não existe correção para vulnerabilidades de dia zero, o que aumenta a probabilidade de um ataque bem-sucedido. Uma exploração de dia zero é o método usado pelos crackers para atacar sistemas com essas vulnerabilidades não-identificadas anteriormente.</p>
+
+<p>Um ataque zero day (ataque de dia zero) se aproveita das falhas de um software que os desenvolvedores desconhecem para atacar as vítimas sem aviso prévio.</p>
+
+<p>Um ataque zero day,  nada mais é do que uma violação de segurança que tem como alvo uma vulnerabilidade de dia zero. Crackers criam malware especial, mais chamado de malware zero day ou malware de dia zero, que ataca essas falhas de segurança recém-descobertas. Após o ataque zero day, os desenvolvedores precisam se esforçar para identificar a violação, para descobrir o que aconteceu e criar uma solução antes que ocorram mais ataques.</p>
+
+<p>Os ataques zero day são realizados por <q>atores</q> maliciosos que se dividem nas seguintes categorias: Criminosos virtuais, crackitivistas, espionagem corporativa e guerra virtual.</p>
+
+<p>Um ataque zero day pode explorar vulnerabilidades de diversos sistemas, como, sistemas operacionais, navegadores da web, aplicativos, componentes que possuem código aberto, hardware e firmware, IoT (internet das coisas) e isso amplia o leque de possibilidades de vítimas em potencial para os cibercriminosos.</p>
+
+<p>Usuários que fazem o uso de um sistema vulnerável, como por exemplo, um navegador ou sistema operacional, nesse caso, cibercriminosos podem utilizar das vulnerabilidades de segurança para comprometer o dispositivo e construir grandes botnets (redes de máquinas infectadas controladas remotamente).</p>
 
 <h3>O que é Ransomware e Como se Proteger dessa Ameaça</h3>
 

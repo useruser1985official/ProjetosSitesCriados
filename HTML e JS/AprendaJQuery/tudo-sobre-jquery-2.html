@@ -213,7 +213,7 @@ $(function() {
         $("#imagem2").width(img2); // Id da imagem
     });
     
-    $("#resetar").click(function() {
+    $("#resetar").on("click", function() {
         $("#imagem1").height(300);
         $("#imagem2").width(200);
         $("#num1").val(300);

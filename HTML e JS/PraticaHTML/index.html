@@ -2,193 +2,102 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
-        <title>Título da Página em HTML</title>
+        <title>Pr&aacute;tica HTML</title>
         <link rel="icon" href="_imagens/favicon.ico"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="_css/estilo.css"/>
     </head>
     <body>
         <div id="interface">
-            <section id="corpo">
-                <nav id="menu">
-                    <h1>Menu Principal</h1>
-                    <ul>
-                        <li><a href="index.html">P&aacute;gina Inicial</a></li>
-                        <li><a href="contato.html">Contato</a></li>
-                    </ul>
-                </nav>
-                
-                <noscript>
-                    Ative o Javascript do seu navegador!
-                </noscript>
-                <h1>Ol&aacute;, Mundo!</h1>
-                <h2>Primeiros passos em HTML5.</h2>
+            <noscript>
+                Ative o Javascript do seu Navegador!
+            </noscript>
 
-                <p>PS: HTML <b>n&atilde;o</b> &eacute; linguagem de programa&ccedil;&atilde;o, nem CSS.</p>
-                
-                <script>
-                    document.write("Mas Javascript &eacute;!<br/>");
-                </script>
+            <h1 id="teste">Ol&aacute;, Mundo</h1>
+            <h2>Primeiros passos em HTML5</h2>
 
-                <p>A, E, I, O, U, sou do Curuz&uacute;... ♫♪</p>
+            <p>PS: HTML <b>n&atilde;o</b> &eacute; linguagem de programa&ccedil;&atilde;o, nem CSS!</p>
 
-                <h3>&#x1F596;</h3>
+            <pre>
+&nbsp;
+&amp;
+&shy;
+&quot;
+&lt;
+&gt;
+&le;
+&ge;
+&pound;
+&yen;
+&euro;
+&copy;
+&cent;
+&delta;
+&reg;
+&trade;
+&permil;
+&lambda;
+&radic;
+&frac12;
+&frac34;
+&infin;
+&plusmn;
+&ne;
+&divide;
+&pi;
+&larr;
+&rarr;
+&uarr;
+&darr;
+&spades;
+&clubs;
+&hearts;
+&diams;
 
-                <h3>&#x1F3B8;</h3>
+&Delta;
+&Lambda;
+&Pi;
 
-                <h3>&#x1FA98;</h3>
+&aacute;
+&agrave;
+&atilde;
+&acirc;
+&uuml;
+&ccedil;
+&Eacute;
+&Otilde;
+            </pre>
 
-                <a href="https://www.google.com.br/" target="_blank" rel="nofollow">Clique Aqui para Abrir o Google!</a>
-            
-                <br/>
+            <h1>&#x1fa98;</h1>
 
-                <br/>
+            <!-- Coment&aacute;rio em HTML -->
 
-                <img src="_imagens/gato-violao.gif" id="animado" alt="Gato e Violão"/>
+            <a href="https://www.google.com.br/" target="_blank" rel="external">Clique Aqui para Ir ao Google!</a>
 
-                <br/>
+            <br/>
+            <br/>
 
-                <picture id="luta">
-                    <source media="(max-width: 480px)" srcset="_imagens/luta-peq.jpg" type="image/jpeg"/>
-                    <source media="(max-width: 960px)" srcset="_imagens/luta-med.jpg" type="image/jpeg"/>
-                    <img src="_imagens/luta-grd.jpg" alt="Luta"/>
-                </picture>
+            <a href="contato.html" target="_self" rel="next">Entre em Contato Conosco!</a>
 
-                <br/>
+            <br/>
+            <br/>
 
-                <figure class="foto-leg">
-                    <img src="_imagens/farol.jpg" id="fig-ex"/>
-                    <figcaption>
-                        <h3>Farol da Barra</h3>
-                        <p>Salvador - BA</p>
-                    </figcaption>
-                </figure>
-            </section>
-            <aside id="lateral">
-                <h1>Isso ficará &agrave; direita!</h1>
+            <a href="#teste">Link de Teste</a>
 
-                <table id="tabela">
-                    <caption>Lista de Teste</caption>
-                    <thead>
-                        <tr>
-                            <th class="ce">Texto</th>
-                            <th class="cd">N&uacute;mero</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="ce">Um</td>
-                            <td class="cd">1</td>
-                        </tr>
-                        <tr>
-                            <td class="ce">Dois</td>
-                            <td class="cd">2</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <br/>
+            <br/>
 
-                <article id="noticias">
-                    <h2>Isso ser&aacute; formatado!</h2>
-                    <p>Isso n&atilde;o.</p>
-                    <p>Nem isso.</p>
-                </article>
+            <a href="_arquivos/html5-web.pdf" download="html5-web.pdf" type="application/pdf">Baixe o Livro em PDF!</a>
+        
+            <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
 
-                <iframe id="youtube" src="https://www.youtube.com/embed/WRcs8rebZtA"></iframe>
+            <p>Isso &eacute; <b>negrito</b> e <i>it&aacute;lico</i> sem sem&acirc;ntica.</p>
 
-                <br/>
-                <br/>
-
-                <div id="radio">
-                    <audio controls preload="auto">
-                        <source src="_multimidia/hurricane.mp3" type="audio/mpeg"/>
-                        <source src="_multimidia/hurricane.mp3" type="audio/ogg"/>
-                        <p>Desculpe, n&atilde;o &eacute; poss&iacute;vel reproduzir o &aacute;udio!</p>
-                    </audio>
-                </div>
-
-                <div id="tv">
-                    <video poster="_imagens/pica-pau-supermercado.png" controls preload="metadata">
-                        <source src="_multimidia/pica-pau-supermercado.mp4" type="video/mp4"/>
-                        <source src="_multimidia/pica-pau-supermercado.webm" type="video/webm"/>
-                        <p>Desculpe, n&atilde;o &eacute; poss&iacute;vel reproduzir o v&iacute;deo!</p>
-                    </video>
-                </div>
-            </aside>
-            <footer id="rodape">
-                <p>Aprendendo a codificar em <abbr title="Hypertext Markup Language (Linguagem de Marca&ccedil;&atilde;o de Hipertexto)">HTML</abbr>!</p>
-            
-                <p><dfn title="Hypertext Markup Language">HTML</dfn> &eacute; uma linguagem de marca&ccedil;&atilde;o utilizada em p&aacute;ginas da web.</p>
-                <p><dfn title="Cascading Style Sheets">CSS</dfn> &eacute; uma linguagem de estilos que define a formata&ccedil;&atilde;o e estilos de tags HTML.</p>
-
-                <address>
-                    As informa&ccedil;&otilde;es de contato s&atilde;o:<br/>
-                    E-mail: <a href="mailto:contato@dicasdeti.com.br">contato@dicasdeti.com.br</a><br/>
-                    Telefone: (01) 2345-6789
-                </address>
-
-                <p><bdo dir="rtl">Socorram-me, subi no &ocirc;nibus em Marrocos.</bdo></p>
-
-                <blockquote cite="http://localhost/DicasDeTI">
-                    <p>Isso &eacute; uma cita&ccedil;&atilde;o longa sobre o exemplo da tag blockquote.</p>
-                    <p>Mais informa&ccedil;&otilde;es pesquise sobre <cite>blockquote</cite>.</p>
-                </blockquote>
-
-                <p>Isso é uma cita&ccedil;&atilde;o curta sobre o exemplo da tag <q cite="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/q">q</q>.</p>
-
-                <button name="botao">Texto do bot&atilde;o</button>
-
-                <details>
-                    <summary>Detalhes sobre a tag details:</summary>
-                    <p>Acesse o link: <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/details" target="_blank">https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/details</a></p>
-                </details>
-
-                <dl>
-                    <dt>HTML</dt>
-                    <dd>HTML &eacute; uma linguagem de marca&ccedil;&atilde;o utilizada em p&aacute;ginas da web.</dd>
-                    <dt>CSS</dt>
-                    <dd>CSS &eacute; uma linguagem de estilos que define a formata&ccedil;&atilde;o e estilos de tags HTML.</dd>
-                </dl>
-
-                <p>Para salvar o site nos seus favoritos utilize <kbd>Ctrl D</kbd>.</p>
-
-                <p>O texto tem uma parte destacada <mark>que &eacute; essa</mark>!</p>
-
-                Temperatura atual:<br/>
-                <meter min="-50" max="50" low="22" high="25" value="22">°C</meter>22°C
-                <hr/>
-                M&iacute;nima:<br/>
-                <meter min="-50" max="50" low="22" high="25" value="20">°C</meter>20°C
-                <hr/>
-                M&aacute;xima:<br/>
-                <meter min="-50" max="50" low="22" high="25" value="26">°C</meter>26°C
-
-                <br/>
-
-                <progress value="70" max="100">70%</progress>
-
-                <br/>
-
-                <ruby>
-                    &#28450;<rp>(</rp><rt>Kan</rt><rp>)</rp>
-                    &#23383;<rp>(</rp><rt>Ji</rt><rp>)</rp>
-                </ruby>
-
-                <br/>
-
-                <p>A sa&iacute;da do c&oacute;digo ser&aacute; essa:</p>
-
-                <p><samp>Hello World!</samp></p>
-
-                <p>Isso &eacute; uma frase com fonte normal <small>e isso &eacute; com uma fonte pequena</small>.</p>
-
-                <p>Ela pode ser combinada com outras tags para gerar resultados como 10<sup><small>3</small></sup> e H<sub><small>2</small></sub>0.</small></sub></p>
-
-                <button class="botao"><span>Clique Aqui!</span></button>
-
-                <p>O hor&aacute;rio da reuni&atilde;o &eacute; <time>20:00</time>.</p>
-
-                <p>O dia do evento &eacute; <time datetime="2023-06-01 14:00">1º de junho</time>.</p>
-            </footer>
+            <p>Isso &eacute; <strong>negrito</strong> e <em>it&aacute;lico</em> com sem&acirc;ntica.</p>
         </div>
     </body>
 </html>

@@ -320,6 +320,7 @@
     <li><b>Vírus</b> - Para atacar o computador, o vírus age se anexando a um programa hospedeiro já existente. Em seguida, altera o começo do programa para executar o código malicioso que foi inserido no programa original. O vírus infecta outros arquivos, inclusive pelo compartilhamento de rede, e pode criar novos executáveis. Com a alteração do registro do Windows, um vírus pode forçar a sua execução ao ser reinicializado o computador.</li>
     <li><b>Worm</b> - Se o vírus necessita de um programa hospedeiro, o worm não precisa. Ele se propaga pela rede e infecta o computador explorando uma falha de segurança (exploit) do sistema operacional ou de algum aplicativo.</li>
     <li><b>Trojan</b> - O cavalo de troia é um tipo de malware     que exige uma ação do usuário para se instalar: seja executando um anexo de e-mail ou realizando o download de um programa. Em grande parte das vezes, técnicas como phishing levam qualquer usuário a executar esse malware acreditando ser um programa inofensivo com alguma utilidade para o computador.</li>
+    <li><b>Rootkit</b> - É um software criado para permitir que hackers tenham controle sobre um computador ou rede, oferecendo ferramentas que podem roubar arquivos e informações sensíveis do usuário.</li>
     <li><b>Backdoor</b> - O backdoor permite que um hacker comande o computador de forma remota e execute determinada ações, como o download de outros malwares, o envio de dados do usuário e spams, além de ataques de negação de serviço (Denial of Service).</li>
     <li><b>Adware</b> - Esse tipo de malware tem por característica exibir vários anúncios indesejados, levante, em alguns casos, o navegador a abrir sites com anúncios.</li>
     <li><b>Spyware</b> - O spyware recolhe informações do computador, como os sites visitados pelo usuário, e os envia ao hacker. O principal objetivo desse tipo de malware é o roubo de senhas. Para isso, pode ser usado o keylogger, que captura senhas a partir do que é teclado pelo usuário. Ou o screenlogger, que captura a imagem ao redor do mouse quando o usuário clica, permitindo ao hacker o roubo de senhas dos teclados virtuais.</li>
@@ -328,6 +329,16 @@
 </ul>
 
 <p>Com tantas ameaças, é bom manter o seu antivírus (ou antimalware) sempre atualizado.</p>
+
+<h3>O Que é Hooking?</h3>
+
+<p>Hooking, do inglês enganchar, é um conceito que permite modificar o comportamento de um programa. É a chance que um código te dá para alterar o comportamento original de alguma coisa sem alterar seu código.</p>
+
+<p>O aspecto prático de utilização dos hooks varia muito de ferramenta para ferramenta. A construção de módulos do Drupal (framework e sistema de gestão de conteúdos), por exemplo, é toda baseada em hooks. Quando vai salvar um post, exibir um bloco, exibir ajuda, deletar um comentário, em todas estas ocasiões o que o Drupal faz é verificar se os módulos disponibilizam funções com determinado nome para acrescentar ou retirar alguma coisa do que será feito.</p>
+
+<p>A principal vantagem dos hooks é não alterar o código original. Em todos os manuais de boas práticas de todas as ferramentas open-source que tem atualizações periódicas o mantra que se repete é não altere o core. Além de impossibilitar atualizações, quem vier depois para fazer manutenção não saberá da mudança e quem fica mal falado com isso é você e não a ferramenta.</p>
+
+<p>O hooking também pode ser usado por código malicioso, como por exemplo, rootkits. As técnicas comumente utilizadas por rootkits para esconder ou alterar estruturas internas do sistema operacional atacado podem inviabilizar sua detecção e monitoração por mecanismos de segurança ou outros métodos de análise, como no caso, o hooking.</p>
 
 <h3>O que é IDS e IPS?</h3>
 
