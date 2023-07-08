@@ -1,4 +1,4 @@
-.ex1 {
+.ex1, .ex2 {
     width: 460px;
     padding: 20px;
     background-color: #1e90ff;
@@ -18,6 +18,6 @@ p, input {
     border: 5px solid #ccc;
 }
 
-input.ev3 {
+input.ev1 {
     margin-left: 462px;
 }

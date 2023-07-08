@@ -29,6 +29,8 @@
 </code>
 </pre>
 
+<p>O Alt da tag img e de outras tags, é lido por leitores de tela, e ele aparece quando a imagem não é carregada, no caso da tag img.</p>
+
 <p>Para que imagens de tamanhos diferentes sejam exibidas ao diminuir e aumentar o tamanho da janela do navegador, faça assim, com a tag <code>picture</code>:</p>
 
 <pre>
@@ -43,7 +45,7 @@
 
 <p>No caso acima, a imagem da tag img é carregada por padrão, mas se a largura da janela for menor que 1000px, vai carregar a imagem definida em source.</p>
 
-<p>PS: O ideal é o max-width ser um pouquinho mais que que o tamanho da imagem definida no mesmo source.</p>
+<p>PS: O ideal é o max-width ser um pouquinho mais que que o tamanho da imagem definida no mesmo source. Podemos colocar outros parâmetros como <code>min-height</code>, por exemplo. E também coloque o source da menor imagem primeiro, depois as maiores.</p>
 
 <p>Os MIME Types usados são esses:</p>
 
@@ -149,7 +151,7 @@ figure.foto-leg:hover figcaption {
 
 <p>As formatações com o figcaption é pra formatar a legenda da foto e a transição da mesma.</p>
 
-<p>As listas ordenadas podem ser definidas por tipos de ordenação, com parâmetro <code>type</code>, 1 para números, a para letras minúsculas, A para letras maiúsculas e I para números romanos. O parâmetro <code>start</code> é para definir o início do primeiro item e se define por números, veja um exemplo:</p>
+<p>As listas ordenadas podem ser definidas por tipos de ordenação, com parâmetro <code>type</code>, 1 para números, a para letras minúsculas, A para letras maiúsculas e I para números romanos. O parâmetro <code>start</code> é para definir o início do primeiro item e se define por números (independente do tipo, se for letra ou número romano também se define com 1, 2, 3, etc.), veja um exemplo:</p>
 
 <pre>
 <code>
@@ -179,6 +181,8 @@ figure.foto-leg:hover figcaption {
 &lt;/ul&gt;
 </code>
 </pre>
+
+<p>Quando colocamos listas dentro de listas, cada ol ou ul é independente.</p>
 
 <p>O nav pode ser configurado assim, para criar um menu flutuante:</p>
 
@@ -234,6 +238,8 @@ nav#menu a:hover {
 <p>Lembrando que o parâmetro <code>padding</code> é um espaçamento interno, e o <code>margin</code> é um externo.</p>
 
 <p>Alguns parâmetros de transformação de texto que podemos usar em <code>text-transform</code> são <code>none</code>, <code>capitalize</code>, <code>uppercase</code> e <code>lowercase</code>.</p>
+
+<p>O <code>display</code> define os tipos de exibição interno e externo de um elemento, podendo ser <code>block</code> (lado a lado centralizado), <code>inline-block</code> (lado a lado centralizado, mas ocupando apenas a largura dos elementos juntos), <code>none</code> (nada é exibido), <code>flex</code> (lado a lado do lado esquerdo) e <code>grid</code> (um abaixo do outro).</p>
 
 <p>Com um parâmetro dentro de uma tag div, você pode delimitar o espaço de um site, entre outras configurações, assim:</p>
 
@@ -325,13 +331,13 @@ header#cabecalho h1 {
 
 <pre>
 <code>
-&lt;section id="corpo"¨&gt;
+&lt;section id="corpo"&gt;
     &lt;h1&gt;Isso é principal e ficará a esquerda!&lt;/h1&gt;
 &lt;/section&gt;
-&lt;aside id="lateral"¨&gt;
+&lt;aside id="lateral"&gt;
     &lt;h1&gt;Isso ficará a direita!&lt;/h1&gt;
 &lt;/aside&gt;
-&lt;footer id="rodape"¨&gt;
+&lt;footer id="rodape"&gt;
     &lt;h1&gt;Isso ficará embaixo pra não encavalar o layout do site.&lt;/h1&gt;
 &lt;/footer&gt;
 </code>
@@ -583,6 +589,8 @@ background-image: radial-gradient(circle, blue, green, red);
 }
 </code>
 </pre>
+
+<p>PS: Isso não funciona em bordas arredondadas com border-radius.</p>
 
 <p><a href="dicas-de-html5-1.html">Parte 1 da Matéria</a></p>
 <p><a href="dicas-de-html5-3.html">Parte 3 da Matéria</a></p>

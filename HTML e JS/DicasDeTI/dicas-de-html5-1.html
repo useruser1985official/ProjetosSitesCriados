@@ -91,7 +91,7 @@
         &lt;h1&gt;Olá Mundo!&lt;/h1&gt;
         &lt;h2&gt;Primeiros passos em HTML5&lt;/h2&gt;
 
-        &lt;p&gt;PS: HTML &lt;b&gt;não&lt;/b&gt; é linguagem de programação, nem CSS!&lt;/p&gt;
+        &lt;p&gt;PS: HTML &lt;strong&gt;não&lt;/strong&gt; é linguagem de programação, nem CSS!&lt;/p&gt;
         &lt;script&gt;
             document.write("Mas Javascript é!");
         &lt;/script&gt;
@@ -99,6 +99,8 @@
 &lt;/html&gt;
 </code>
 </pre>
+
+<p>Quando o arquivo a ser chamado está na mesma pasta que o HTML, basta chamar ele diretamente pelo nome, como <code>"arquivo.png"</code>. Se ele tiver em outra pasta dentro do diretório do HTML, coloque <code>"nomedapasta/arquivo.png"</code>. Se ele estiver em uma pasta anterior, use dois pontos pra voltar uma pasta, como <code>"../arquivo.png"</code>. Links externos são colocados diretamente, como <code>"https://dominio.com/arquivo.png"</code>. Isso vale pra tudo, documentos, URLs, imagens, multimídia, etc.</p>
 
 <p>Vejam as principais tags de HTML5, que podem ser úteis:</p>
 
@@ -113,7 +115,7 @@
 &lt;style&gt;&lt;/style&gt; - É utilizada para adicionar um código CSS a página.
 &lt;body&gt;&lt;/body&gt; - É o corpo ou área principal do documento, dentro deste deve ficar o conteúdo da sua página.
 &lt;header&gt;&lt;/header&gt; - Para agrupar conteúdo num cabeçalho (não necessariamente só no cabeçalho principal do site).
-&lt;h1&gt;&lt;/h1&gt; - Representam níveis de títulos, sendo o h1 de maior importância, vai até o h6 (não confundir com letra grande).
+&lt;h1&gt;&lt;/h1&gt; - Representam níveis de títulos, sendo o h1 de maior importância, vai até o h6 (não confundir com letra grande e eles não precisam seguir uma ordem numérica).
 &lt;p&gt;&lt;/p&gt; - Define um parágrafo.
 &lt;b&gt;&lt;/b&gt; - Deixa o texto em negrito (para textos em destaque use &lt;strong&gt;&lt;/strong&gt;).
 &lt;i&gt;&lt;/i&gt; - Deixa o texto em itálico (para textos em ênfase use &lt;em&gt;&lt;/em&gt;).
@@ -159,7 +161,7 @@
 
 <p>O span é usado como o div, mas o div é para um bloco, e span para uma linha), mas pode ser usada, por exemplo, para formatar textos com CSS (pode ser usada dentro da TAG, algo como <code>&lt;span style="text-decoration: underline"&gt;</code>).</p>
 
-<p>Evite o uso excessivo de tags br para espaçamento, use o CSS para isso. E também lembre-se que espaços com Enter não querem dizer nada pro HTML.</p>
+<p>Evite o uso excessivo de tags br para espaçamento, use o CSS para isso. E também lembre-se que espaços com Enter não querem dizer nada pro HTML, nem espaços normais.</p>
 
 <p>PS: Existem algumas tags que estão obsoletas em HTML5, veja elas aqui: <a href="https://www.w3.org/TR/2010/WD-html5-20100304/obsolete.html" target="_blank">https://www.w3.org/TR/2010/WD-html5-20100304/obsolete.html</a></p>
 
@@ -195,6 +197,8 @@ h1 {
 }
 </code>
 </pre>
+
+<p>PS: Para todo o documento, podemos colocar <code>*</code>, ou a tag html em si.</p>
 
 <p>Estilo local (inline):</p>
 
@@ -312,6 +316,20 @@ body {
 
 <p>PS: Para alguns desses componentes da propriedade <code>background</code>, temos propriedades específicas, como <code>background-size</code>, <code>background-position</code>, etc.</p>
 
+<p>O tamanho máximo recomendado de uma imagem para o fundo de um site é de 1500 de largura para não ficar muito pesado, com resolução entre 50 e 72, no Gimp.</p>
+
+<p>Além do tamanho, esteja atento a algumas diferenças entre os formatos de imagens mais comuns:</p>
+
+<ul>
+    <li><b>PNG:</b> Ocupa mais espaço, mas tem qualidade melhor e suporta transparência.</b>
+    <li><b>JPEG:</b> Ocupa menos espaço mas perde um pouco da qualidade e não suporta transparência.</li>
+    <li><b>GIF:</b> Suporta animações, mas tem suporte a bem menos cores, suporta transparência.</li>
+    <li><b>BMP:</b> É bem mais pesado, mas tem melhor qualidade e compatibilidade, não suporta transparência.</li>
+    <li><b>SVG:</b> É um arquivo de imagens vetoriais, em vez de pixels ele é definido por XML e por isso pode ser redimensionada sem perder a qualidade, suporta animações e transparência.</li>
+</ul>
+
+<p>O mais recomendado é usar o JPEG por ocupar menos espaço, mas se a qualidade e a transparência forem necessários use o PNG, e o GIF é melhor para ícones pequenos e simples e também para as famosas animações.</p>
+
 <p>Para criar âncoras de sites externos fazemos assim:</p>
 
 <pre>
@@ -365,6 +383,8 @@ body {
 
 <pre>
 <code>
+/* Classes e ids podem ser colocadas sem indicar a tag antes também. */
+
 header#cabecalho {
     
 }
@@ -398,9 +418,19 @@ a:visited {
 
 <p>No caso de famílias de letras (font-family), além das fontes padrões como Arial, Cambria e Calibri, podemos importar nossas próprias fontes (algo que será visto posteriormente), e também podemos usar fontes genéricas, apenas indicando os tipos, que no caso são serif, sans-serif, monospace, cursive e fantasy.</p>
 
+<p>Podemos também especificar mais de uma classe no mesmo elemento, para isso, use algo como <code>class="classe1 classe2"</code>. E para um mesmo bloco CSS servir para mais de um elemento, classe ou ID, podemos fazer assim:</p>
+
+<pre>
+<code>
+input, textarea {
+    
+}
+</code>
+</pre>
+
 <p>PS: Para importar outro arquivo CSS numa folha CSS, use no começo a diretiva <code>@import "folha.css"</code>. Se quiser definir algo como importante (como por exemplo, a cor de fundo, use algo como <code>background-color: red !important</code>.</p>
 
-<p>Apesar da possibilidade de usar a tags <code>&lt;i&gt;&lt;/i&gt;</code> para inclinar textos, podemos fazer isso em CSS com o <code>font-style</code>. Da mesma forma, o <code>&lt;b&gt;&lt;/b&gt;</code> pode ser substituído pelo <code>font-weight</code>. Para sublinhar usamos a tag <code>&lt;ins&gt;&lt;/ins&gt;</code>, ou usamos totalmente o CSS, dessa forma:</p>
+<p>Apesar da possibilidade de usar a tags <code>&lt;i&gt;&lt;/i&gt;</code> para inclinar textos, podemos fazer isso em CSS com o <code>font-style</code>. Da mesma forma, o <code>&lt;b&gt;&lt;/b&gt;</code> pode ser substituído pelo <code>font-weight</code> mesmo existindo o <code>&lt;strong&gt;&lt;/strong&gt;</code>. Para sublinhar usamos a tag <code>&lt;ins&gt;&lt;/ins&gt;</code>, ou usamos totalmente o CSS, dessa forma:</p>
 
 <pre>
 <code>
@@ -413,6 +443,8 @@ ul li {
 }
 </code>
 </pre>
+
+<p>PS: O uso de tags ins, assim como o del, tem efeito semântico.</p>
 
 <p>As opções que podem ser usadas no <code>font-weight</code> são, da mais fina à mais grossa, <code>lighter</code>, <code>normal</code>, <code>bold</code> e <code>bolder</code>. Podemos usar também um número entre 100 e 900.</p>
 

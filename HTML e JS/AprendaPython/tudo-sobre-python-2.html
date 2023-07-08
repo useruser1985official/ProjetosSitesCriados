@@ -411,6 +411,16 @@ print(len(frase.strip()))
 </code>
 </pre>
 
+<p>Inclusive, podemos fazer assim para verificar strings vazias:</p>
+
+<pre>
+<code>
+texto = str(input("Digite uma frase: "))
+
+print("A frase é {}!".format(texto.strip()) if texto else "Não foi Digitado Nada!") # Uma string vazia usamos como booleano, nessa comparação.
+</code>
+</pre>
+
 <p>Temos também o método <code>replace()</code> para mudarmos uma determinada palavra na string, dessa forma:</p>
 
 <pre>

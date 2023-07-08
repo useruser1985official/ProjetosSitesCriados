@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web");
 
 /* Comentário em CSS */
 
@@ -25,5 +26,236 @@ a:hover {
 }
 
 h1, h2 {
+    font-family: "Titillium Web", fantasy;
     text-shadow: 1px -1px deepskyblue, -1px 1px deepskyblue, 1px 1px deepskyblue, -1px -1px deepskyblue;
+}
+
+img {
+    border: 12px double white;
+    box-shadow: 1px 1px 4px black;
+}
+
+picture img {
+    max-width: 800px;
+    border-radius: 100%;
+}
+
+figure.foto-leg {
+    position: relative;
+    border: 8px solid white;
+    box-shadow: 1px 1px 4px black;
+    max-width: 800px;
+    max-height: 533px;
+}
+
+figure.foto-leg img {
+    width: 100%;
+    height: 100%;
+}
+
+figure.foto-leg figcaption {
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: opacity 1s;
+}
+
+figure.foto-leg:hover figcaption {
+    opacity: 1;
+}
+
+#fig-ex {
+    border: none;
+}
+
+nav#menu ul {
+    list-style-type: none;
+    text-transform: uppercase;
+    position: absolute;
+    top: -20px;
+    left: 300px;
+}
+
+nav#menu li {
+    display: inline-block;
+    background-color: #dddddd;
+    padding: 10px;
+    margin: 2px;
+    transition: background-color 1s;
+}
+
+nav#menu li:hover {
+    background-color: #606060;
+}
+
+nav#menu h1 {
+    display: none;
+}
+
+nav#menu li a {
+    color: black;
+    text-decoration: none;
+}
+
+nav#menu li:hover a {
+    color: white;
+    text-decoration: underline;
+}
+
+div.circulo {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 100%;
+}
+
+section#corpo {
+    display: block;
+    width: 850px;
+    float: left;
+    border-right: 1px solid black;
+    padding-right: 15px;
+}
+
+aside#lateral {
+    display: block;
+    width: 500px;
+    float: right;
+}
+
+footer#rodape {
+    clear: both;
+    border-top: 1px solid black;
+}
+
+table#tabela {
+    border: 1px solid blue;
+    border-spacing: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table#tabela td {
+    border: 1px solid blue;
+    padding: 5px;
+    text-align: center;
+    vertical-align: top;
+    text-shadow: 0px 0px 3px blue;
+}
+
+table#tabela td.ce {
+    color: white;
+    background-color: aquamarine;
+    vertical-align: top;
+    font-weight: bold;
+}
+
+table#tabela td.cd {
+    background-color: aqua;
+}
+
+table#tabela th {
+    border: 1px solid blue;
+    padding: 5px;
+    text-align: center;
+    vertical-align: top;
+}
+
+table#tabela th.ce {
+    color: white;
+    background-color: blue;
+    vertical-align: top;
+    font-weight: bold;
+}
+
+table#tabela th.cd {
+    background-color: blue;
+}
+
+iframe {
+    border: 12px double white;
+    box-shadow: 1px 1px 4px black;
+}
+
+.yt {
+    width: 400px;
+    height: 225px;
+}
+
+div#radio {
+    width: 400px;
+    height: 325px;
+    margin: auto;
+    background: url("../_imagens/radio.png") no-repeat;
+    background-size: 400px 325px;
+    margin: 15px;
+}
+
+div#tv {
+    width: 450px;
+    height: 350px;
+    margin: auto;
+    background: url("../_imagens/tv.png") no-repeat;
+    background-size: 450px 350px;
+}
+
+div#radio audio {
+    display: block;
+    position: relative;
+    top: 85px;
+    left: 30px;
+    width: 327px;
+}
+
+div#tv video {
+    display: block;
+    position: relative;
+    top: 23px;
+    left: 23px;
+    width: 405px;
+    height: 255px;
+}
+
+.botao {
+    border-radius: 15px;
+    background-color: #5511ff;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 14pt;
+    padding: 15px;
+    width: 200px;
+    cursor: pointer;
+    margin: 5px;
+    transition: all .5s;
+}
+
+.botao span {
+    display: inline-block;
+    position: relative;
+    transition: all .5s;
+}
+
+.botao span:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0px;
+    right: -10px;
+    transition: all .5s;
+}
+
+.botao:hover span {
+    padding-right: 25px;
+}
+
+.botao:hover span:after {
+    opacity: 1;
+    right: 2px;
 }
