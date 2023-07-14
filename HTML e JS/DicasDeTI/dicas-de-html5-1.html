@@ -114,6 +114,7 @@
 &lt;script&gt;&lt;/script&gt; - É utilizado para escrever ou anexar um arquivo normalmente Javascript a página.
 &lt;style&gt;&lt;/style&gt; - É utilizada para adicionar um código CSS a página.
 &lt;body&gt;&lt;/body&gt; - É o corpo ou área principal do documento, dentro deste deve ficar o conteúdo da sua página.
+&lt;main&gt;&lt;/main&gt; - Conteúdo principal da página.
 &lt;header&gt;&lt;/header&gt; - Para agrupar conteúdo num cabeçalho (não necessariamente só no cabeçalho principal do site).
 &lt;h1&gt;&lt;/h1&gt; - Representam níveis de títulos, sendo o h1 de maior importância, vai até o h6 (não confundir com letra grande e eles não precisam seguir uma ordem numérica).
 &lt;p&gt;&lt;/p&gt; - Define um parágrafo.
@@ -306,15 +307,41 @@ h1 {
 body {
     font-family: Arial, sans-serif;
     color: white;
-    background: url("_imagens/fundo.png") center fixed repeat;
-    background-color: black;
+    background: url("_imagens/fundo.png") center repeat fixed; /* A ordem é cor, imagem, posição, repetição, tamanho (não funciona em todos os browsers), anexo */
 }
 </code>
 </pre>
 
-<p>O <code>center</code> é para centralizar (podemos usar <code>left</code>, <code>right</code>, <code>top</code> e <code>bottom</code>), e podemos também colocar as porcentagens das posições X e Y para posicionar a imagem. O <code>fixed</code> é para fixar a imagem ao rolar a página (para não rolar, basta não colocar ele). O <code>repeat</code> é para definir a repetição da imagem (para não repetir coloque <code>no-repeat</code>).</p>
+<p>O <code>center</code> é para centralizar (podemos usar <code>left</code>, <code>right</code>, <code>top</code> e <code>bottom</code>, ou combinar dois deles como <code>left top</code>, <code>left center</code> ou mesmo <code>center center</code>, na ordem X Y), e podemos também colocar as porcentagens das posições X e Y para posicionar a imagem (como <code>50% 50%</code>).</p>
 
-<p>PS: Para alguns desses componentes da propriedade <code>background</code>, temos propriedades específicas, como <code>background-size</code>, <code>background-position</code>, etc.</p>
+<p>O <code>fixed</code> é para fixar a imagem ao rolar a página (para não rolar, basta não colocar ele ou colocar <code>scroll</code>).</p>
+
+<p>O <code>repeat</code> é para definir a repetição da imagem (para não repetir coloque <code>no-repeat</code>, podemos também colocar <code>repeat-x</code> e <code>repeat-y</code> para repetir somente ao lado ou embaixo um do outro).</p>
+
+<p>PS: Para alguns desses componentes da propriedade <code>background</code>, temos propriedades específicas, como <code>background-size</code>, <code>background-position</code>, etc. Veja um exemplo:</p>
+
+<pre>
+<code>
+body {
+    background-color: gray;
+    background-image: url("../_imagens/fundo.png");
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-attachment: fixed;
+}
+</code>
+</pre>
+
+<p>PS: O background-size pode ter também a opção <code>cover</code>, que definirá a imagem ocupando toda a tela, independente do tamanho da mesma.</p>
+
+<p>As cores em CSS, podem ser definidas basicamente de três formas:</p>
+
+<ul>
+    <li><b>Nomes literais</b>: Com nomes em inglês das cores, como <code>red</code>, <code>green</code>, <code>white</code>, etc.</li>
+    <li><b>Códigos RGB</b>: Com os números das cores RGB (red/vermelho, green/verde e blue/azul) indo de 0 a 255, o que permite gerar cerca de 16 milhões de cores, como por exemplo <code>rgb(0, 128, 255)</code>. Podemos tem a transparência de 0 a 1 com o rgba, como por exemplo <code>rgba(0, 128, 255, 0.5)</code>.</li>
+    <li><b>Códigos Hexadecimal</b>: O mesmo caso do RGB, só que escrito em hexadecimal, com cada grupo de números indo de 00 a ff. O RGB acima ficaria representado como <code>#0080ff</code>.</li>
+</ul>
 
 <p>O tamanho máximo recomendado de uma imagem para o fundo de um site é de 1500 de largura para não ficar muito pesado, com resolução entre 50 e 72, no Gimp.</p>
 
@@ -412,6 +439,8 @@ a:visited {
 </code>
 </pre>
 
+<p>No HTML e CSS, as ids só podem ser aplicadas a um único objeto. Para aplicar a vários objetos, usamos classes, como visto no exemplo acima.</p>
+
 <p>PS: Sobre os movimentos das tags a, o <code>hover</code> é para trabalharmos quando movimentarmos o mouse por cima (pode ser usado com outras tags), podemos usar o <code>visited</code> para quando o link já tiver sido visitado, o <code>link</code> para quando antes de clicarmos e o <code>active</code> para o momento de clicarmos.</p>
 
 <p>Para trabalharmos com cores (usando <code>color</code> para letras e <code>background-color</code> para o fundo), usamos três formas basicamente: Nomes explícitos em inglês (como red, white, gray, green, blue), códigos hexademicais (como #0000ff), e o rgb (como rgb(255, 255, 0), e também tem o rgba para definir a opacidade de 0 a 1, como rgba(255, 255, 0, 0.4)). Os códigos de várias cores podem ser vistos aqui: <a href="https://pt.wikipedia.org/wiki/Lista_de_cores" target="_blank">https://pt.wikipedia.org/wiki/Lista_de_cores</a></p>
@@ -484,6 +513,28 @@ p span {
 <code>
 h2 {
     text-shadow: 1px -1px black, -1px 1px black, 1px 1px black, -1px -1px black;
+}
+</code>
+</pre>
+
+<p>Podemos usar variáveis em CSS também, como por exemplo:</p>
+
+<pre>
+<code>
+/* O root é pra declarar variáveis em CSS, estas são declaradas com dois -- na frente: */
+
+:root {
+    --cor0: #c5ebd6;
+    --cor1: #83e1ad;
+    --fonte-padrao: Arial, sans-serif;
+}
+
+* {
+    font-family: var(--fonte-padrao);
+}
+
+body {
+    background-color: var(--cor0);
 }
 </code>
 </pre>

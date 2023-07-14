@@ -68,6 +68,39 @@
     </tr>
 </table>
 
+<p>Para fazer um site responsivo, que adapta a qualquer tela, basicamente fazemos assim:</p>
+
+<pre>
+<code>  
+body {
+    background-color: gray;
+}
+
+main {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    min-width: 240px;
+    max-width: 800px;
+    margin: auto;
+}
+
+img {
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+
+img.pequena {
+    max-width: 350px;
+    display: block;
+    margin: auto;
+}
+</code>
+</pre>
+
+<p>PS: O ideal é usar a tag picture para carregar fotos menores. E basicamente usamos o max e o min no width ou no height para tornar ele adaptável aos dispositivos.</p> 
+
 <p>Podemos usar o figure e o figcaption para colocar legendas em fotos, assim:</p>
 
 <pre>
@@ -125,7 +158,7 @@ figure.foto-leg:hover figcaption {
 </code>
 </pre>
 
-<p>O parâmetro <code>relative</code> é importante pra definir o espaço que a legenda ficará (pois ele ficará dentro de um container), senão caso você use <code>absolute</code> no figcaption, ele pode sair do espaço pré-definido (absolute deixa ele livre pelo site). Isso vale para tudo, num site em HTML5</p>
+<p>O parâmetro <code>relative</code> é importante pra definir o espaço que a legenda ficará (pois ele ficará dentro de um container), senão caso você use <code>absolute</code> no figcaption, ele pode sair do espaço pré-definido (absolute deixa ele livre pelo site). Isso vale para tudo, num site em HTML5.</p>
 
 <p>PS: Podemos usar outras bordas além do solid, como por exemplo:</p>
 
@@ -150,6 +183,29 @@ figure.foto-leg:hover figcaption {
 </div>
 
 <p>As formatações com o figcaption é pra formatar a legenda da foto e a transição da mesma.</p>
+
+<p>Veja a diferença entre position relative e absolute com esse exemplo:</p>
+
+<pre>
+<code>
+section#container {
+    position: relative;
+    height: 500px;
+    padding: 10px;
+    background-color: purple;
+}
+
+article#conteudo {
+    position: absolute;
+    height: 200px;
+    width: 400px;
+    background-color: yellow;
+    left: 50%; /* pode ser porcentagem, como 50%, a referência é o superior esquerdo */
+    top: 50%;
+    transform: translate(-50%, -50%); /* Isso é pra fazer pequenos ajustes, no caso, centralizar */
+}
+</code>
+</pre>
 
 <p>As listas ordenadas podem ser definidas por tipos de ordenação, com parâmetro <code>type</code>, 1 para números, a para letras minúsculas, A para letras maiúsculas e I para números romanos. O parâmetro <code>start</code> é para definir o início do primeiro item e se define por números (independente do tipo, se for letra ou número romano também se define com 1, 2, 3, etc.), veja um exemplo:</p>
 
@@ -235,7 +291,7 @@ nav#menu a:hover {
 </code>
 </pre>
 
-<p>Lembrando que o parâmetro <code>padding</code> é um espaçamento interno, e o <code>margin</code> é um externo.</p>
+<p>Lembrando que o parâmetro <code>padding</code> é um espaçamento interno, e o <code>margin</code> é um externo. Podemos colocar margin como <code>auto</code> para centralizar um conteúdo.</p>
 
 <p>Alguns parâmetros de transformação de texto que podemos usar em <code>text-transform</code> são <code>none</code>, <code>capitalize</code>, <code>uppercase</code> e <code>lowercase</code>.</p>
 
@@ -264,7 +320,7 @@ div#interface {
 div.circulo {
     width: 40px;
     height: 40px;
-    border-radius: 100%;
+    border-radius: 100%; /* Resultados com px, tipo 40px, geram resultados diferente das porcentagens */
 }
 </code>
 </pre>
@@ -371,89 +427,7 @@ footer#rodape p {
 
 <p>PS: Lembre-se de configurar o <code>footer</code> com o parâmetro <code>clear</code>, para não bagunçar o layout do site.</p>
 
-<p>Podemos usar o <code>caption</code> para escrever títulos em tabelas, ele é usado dentro das tags <code>table</code>, mas ficará fora da tabela, logo acima da mesma. Os <code>tr</code> são as linhas, e o <code>td</code> as células da linha. O <code>th</code> pode ser utilizado no lugar do td em alguns casos (mas terá caracteres em negrito), veja um exemplo:</p>
-
-
-<pre>
-<code>
-&lt;table id="tabela"&gt;
-    &lt;caption&gt;Lista de Teste&lt;/caption&gt;
-    &lt;tr&gt;
-        &lt;th class="ce"&gt;Texto&lt;/th&gt;
-        &lt;th class="cd"&gt;Número&lt;/th&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td class="ce"&gt;Um&lt;/td&gt;
-        &lt;td class="cd"&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td class="ce"&gt;Dois&lt;/td&gt;
-        &lt;td class="cd"&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/table&gt;
-</code>
-</pre>
-
-<p>PS: Podemos usar as tags <code>thead</code> para o cabeçalho da tabela (onde iriam os th), <code>tbody</code> para o corpo principal e <code>tfoot</code> para o rodapé da tabela. Todas essas tags tem fechamento, de uso similar as tags head, body e footer, respectivamente. Lembrando que tags thead e tfoot não se usam a tag tr dentro delas, mas na tbody sim.</p>
-
-<p>Para criar formatações de bordas, use CSS. Formate o table para a parte externa e os tds e th para a parte interna (também pode usar no tr, dependendo do formato da tabela). Outras configurações como cores e fontes procedem da mesma forma. Veja um exemplo de tabela em CSS:</p>
-
-<pre>
-<code>
-table#tabela {
-    border: 1px solid blue;
-    border-spacing: 0px;
-    margin-left: auto;
-    margin-right: auto;
-}
-table#tabela td {
-    border: 1px solid blue;
-    padding: 5px;
-    text-align: center;
-    vertical-align: top;
-}
-table#tabela td.ce {
-    color: white;
-    background-color: aquamarine;
-    vertical-align: top;
-    font-weight: bold;
-}
-table#tabela td.cd {
-    background-color: aqua;
-}
-table#tabela th {
-    border: 1px solid blue;
-    padding: 5px;
-    text-align: center;
-    vertical-align: top;
-}
-table#tabela th.ce {
-    color: white;
-    background-color: blue;
-    vertical-align: top;
-    font-weight: bold;
-}
-table#tabela th.cd {
-    background-color: blue;
-}
-table#tabela caption {
-    color: blue;
-    font-size: 12pt;
-    font-weight: bolder;
-}
-table#tabela caption span {
-    display: block;
-    float: right;
-    color: cyan;
-    font-size: 8pt;
-    margin-top: 10px;
-}
-</code>
-</pre>
-
-<p>Podemos usar o <code>rowspan</code> para uma célula ocupar mais de uma linha, e o <code>colspan</code> para mais de uma coluna, definindo o parâmetro com números, dentro da tag td ou th que será alterada.</p>
-
-<p>No HTML e CSS, as ids só podem ser aplicadas a um único objeto. Para aplicar a vários objetos, usamos classes, como visto no exemplo acima.</p>
+<p>O <code>text-align</code> ajusta o texto na horizontal (com os parâmetros <code>left</code>, <code>center</code> e <code>right</code>). O <code>vertical-align</code> ajusta na vertical, obviamente (com os parâmetros <code>top</code>, <code>middle</code> e <code>bottom</code>).</p>
 
 <p>Você pode configurar as tags dentros de uma tag <code>article</code> usando CSS, dessa forma:</p>
 
@@ -515,7 +489,29 @@ article#noticias h2 {
 </code>
 </pre>
 
-<p>Mas para remover bordas, é recomendável usar o CSS pra isso na página principal, dessa forma:</p>
+<p>Podemos fazer assim para um vídeo responsivo:</p>
+
+<pre>
+<code>
+div.youtube {
+    margin: 0px -20px 30px -20px;
+    padding: 20px;
+    padding-bottom: 50%;
+    position: relative;
+}
+
+div.youtube iframe {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    border: none;
+}
+</code>
+</pre>
+
+<p>Como vimos, para remover bordas, é recomendável usar o CSS pra isso na página principal, dessa forma:</p>
 
 <pre>
 <code>
@@ -558,6 +554,8 @@ body {
 }
 </code>
 </pre>
+
+<p>PS: Uma das opções de <q>cores</q> pode ser <code>transparent</code>.</p>
 
 <p>Podemos colocar também ao invés de to right/left/top/botton, colocamos algo como 90deg (até 360). Podemos colocar várias cores (no mínimo 2), divididas por vírgulas, para contraste maior. Também podemos colocar logo após as cores a porcentagem de cor, separada por um espaço.</p>
 

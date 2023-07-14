@@ -2,70 +2,56 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
-        <title>Pr&aacute;tica HTML</title>
+        <title>T&iacute;tulo da P&aacute;gina em HTML</title>
         <link rel="icon" href="_imagens/favicon.ico"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="_css/estilo.css"/>
     </head>
     <body>
-        <div id="interface">
-            <section id="corpo">
-                <noscript>
-                    Ative o Javascript do seu Navegador!
-                </noscript>
+        <main>
+            <h1>Revis&atilde;o de HTML5</h1>
 
-                <h1 id="teste">Ol&aacute;, Mundo</h1>
-                <h2>Primeiros passos em HTML5</h2>
+            <p>S&iacute;mbolos especiais:</p>
 
-                <nav id="menu">
-                    <h1>Menu Principal</h1>
-                    <ul>
-                        <li><a href="index.html">P&aacute;gina Inicial</a></li>
-                        <li><a href="contato.html">Contato</a></li>
-                    </ul>
-                </nav>
-
-                <p>PS: HTML <b>n&atilde;o</b> &eacute; linguagem de programa&ccedil;&atilde;o, nem CSS!</p>
-
-                <pre>
-&nbsp;
-&amp;
-&shy;
-&quot;
-&lt;
-&gt;
-&le;
-&ge;
-&pound;
-&yen;
-&euro;
-&copy;
-&cent;
-&delta;
-&reg;
-&trade;
-&permil;
-&lambda;
-&radic;
-&frac12;
-&frac34;
-&infin;
-&plusmn;
-&ne;
-&divide;
-&pi;
-&larr;
-&rarr;
-&uarr;
-&darr;
-&spades;
-&clubs;
-&hearts;
-&diams;
+<pre>
+&nbsp; -> &amp;nbsp;
+&amp; -> &amp;amp;
+&shy; -> &amp;shy;
+&quot; -> &amp;quot;
+&lt; -> &amp;lt;
+&gt; -> &amp;gt;
+&le; -> &amp;le;
+&ge; -> &amp;ge;
+&pound; -> &amp;pound;
+&yen; -> &amp;yen;
+&euro; -> &amp;euro;
+&copy; -> &amp;copy;
+&cent; -> &amp;cent;
+&delta; -> &amp;delta;
+&reg; -> &amp;reg;
+&trade; -> &amp;trade;
+&permil; -> &amp;permil;
+&lambda; -> &amp;lambda;
+&radic; -> &amp;radic;
+&frac12; -> &amp;frac12;
+&frac34; -> &amp;frac34;
+&infin; -> &amp;infin;
+&plusmn; -> &amp;plusmn;
+&ne; -> &amp;ne;
+&divide; -> &amp;divide;
+&pi; -> &amp;pi;
+&larr; -> &amp;larr;
+&rarr; -> &amp;rarr;
+&uarr; -> &amp;uarr;
+&darr; -> &amp;darr;
+&spades; -> &amp;spades;
+&clubs; -> &amp;clubs;
+&hearts; -> &amp;hearts;
+&diams; -> &amp;diams;
 
 &Delta;
 &Lambda;
-&Pi;
+&Larr;
 
 &aacute;
 &agrave;
@@ -73,178 +59,24 @@
 &acirc;
 &uuml;
 &ccedil;
+
 &Eacute;
 &Otilde;
-                </pre>
 
-                <h1>&#x1fa98;</h1>
 
-                <!-- Coment&aacute;rio em HTML -->
+</pre>
 
-                <a href="https://www.google.com.br/" target="_blank" rel="external">Clique Aqui para Ir ao Google!</a>
+            <h2>&#x1f596;&nbsp;&nbsp;&nbsp;&#x1fa98;</h2>
 
-                <br/>
-                <br/>
+            <p>Clique aqui para abrir o Google: <a href="https://www.google.com.br/" target="_blank">https://www.google.com.br/</a></p>
 
-                <a href="contato.html" target="_self" rel="next">Entre em Contato Conosco!</a>
+            <p><a href="_arquivos/html5-web.pdf" download="html5-web.pdf" type="application/pdf">Download do Livro</a></p>
 
-                <br/>
-                <br/>
+            <header id="cabecalho">
 
-                <a href="#teste">Link de Teste</a>
+            </header>
 
-                <br/>
-                <br/>
-
-                <a href="_arquivos/html5-web.pdf" download="html5-web.pdf" type="application/pdf">Baixe o Livro em PDF!</a>
-            
-                <ul>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                    <li>Item 3</li>
-                </ul>
-
-                <p>Isso &eacute; <b>negrito</b> e <i>it&aacute;lico</i> sem sem&acirc;ntica.</p>
-
-                <p>Isso &eacute; <strong>negrito</strong> e <em>it&aacute;lico</em> com sem&acirc;ntica.</p>
-
-                <img src="_imagens/gato-violao.gif" alt="Gato e Violão"/>
-
-                <br/>
-
-                <picture>
-                    <source media="(max-width: 600px)" srcset="_imagens/luta-peq.jpg" type="image/jpeg"/>
-                    <source media="(max-width: 1100px)" srcset="_imagens/luta-med.jpg" type="image/jpeg"/>
-                    <img src="_imagens/luta-grd.jpg" alt="Lutadora"/>
-                </picture>
-
-            </section>
-            <aside id="lateral">
-                <figure class="foto-leg">
-                    <img src="_imagens/farol.jpg" id="fig-ex"/>
-                    <figcaption>
-                        <h3>Farol da Barra</h3>
-                        <p>Salvador - BA</p>
-                    </figcaption>
-                </figure>
-
-                <br/>
-
-                <ul>
-                    <li>Lista de Items:</li>
-                    <ol>
-                        <li>Item</li>
-                        <li>Item</li>
-                        <li>Item</li>
-                    </ol>
-                </ul>
-
-                <br/>
-
-                <table id="tabela">
-                    <caption>Lista de Teste</caption>
-                    <tr>
-                        <th class="ce">Texto</th>
-                        <th class="cd">N&uacute;mero</th>
-                    </tr>
-                    <tr>
-                        <td class="ce">Um</td>
-                        <td class="cd">1</td>
-                    </tr>
-                    <tr>
-                        <td class="ce">Dois</td>
-                        <td class="cd">2</td>
-                    </tr>
-                </table>
-
-                <br/>
-
-                <iframe class="yt" src="https://www.youtube.com/embed/WRcs8rebZtA"></iframe>
-
-                <br/>
-                <br/>
-
-                <div id="radio">  
-                    <audio controls>
-                        <source src="_multimidia/hurricane.mp3" type="audio/mpeg"/>
-                        <source src="_multimidia/hurricane.ogg" type="audio/ogg"/>
-                        <p>Desculpe, mas n&atilde;o &eacute; poss&iacute;vel reproduzir o &aacute;udio!</p>
-                    </audio>
-                </div>
-
-                <div id="tv">
-                    <video src="_multimidia/pica-pau-supermercado.mp4" controls poster="_imagens/pica-pau-supermercado.png">
-                        <p>Desculpe, mas n&atilde;o &eacute; poss&iacute;vel reproduzir o v&iacute;deo!</p>
-                    </video>
-                </div>
-            </aside>
-            <footer id="rodape">
-                <p>Aprendendo a codificar em <abbr title="Hypertext Markup Language">HTML</abbr>.</p>
-
-                <p><dfn title="Hypertext Markup Language">HTML</dfn> &eacute; uma linguagem de marca&ccedil;&atilde;o utilizada em p&aacute;ginas na web.</p>
-
-                <p><dfn title="Cascading Style Sheets">CSS</dfn> &eacute; uma linguagem de estilos que define a formata&ccedil;&atilde;o e estilos de tags HTML.</p>
-
-                <address>
-                    As informa&ccedil;&otilde;es de contato s&atilde;o:<br/>
-                    E-mail: <a href="mailto:contato@dicasdeti.com.br">contato@dicasdeti.com.br</a><br/>
-                    Telefone: (01) 2345-6789
-                </address>
-
-                <p><bdo dir="rtl">Socorram-me, subi no &ocirc;nibus em Marrocos</bdo>.</p>
-
-                <blockquote cite="http://localhost/DicasDeTI">
-                    <p>Isso &eacute; uma cita&ccedil;&atilde;o longa sobre o exemplo da tag blockquote.</p>
-                    <p>Mais informa&ccedil;&otilde;es pesquise sobre <cite>blockquote</cite>.</p>
-                </blockquote>
-
-                <p>Isso &eacute; uma cita&ccedil;&atilde;o curta sobre o exemplo da tag <q cite="http://localhost/DicasDeTI">q</q>.</p>
-
-                <button>Texto do Bot&atilde;o</button>
-
-                <br/>
-
-                <details>
-                    <summary>Detalhes sobre a tag details:</summary>
-                    <p>Acesse o link: <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/details" target="_blank">https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/details</a></p>
-                </details>
-
-                <br/>
-
-                Temperatura atual:<br/>
-                <meter min="-50" max="50" low="22" high="25" value="22">°C</meter>22°C
-                <hr/>
-                M&iacute;nima:<br/>
-                <meter min="-50" max="50" low="22" high="25" value="20">°C</meter>20°C
-                <hr/>
-                M&aacute;xima:<br/>
-                <meter min="-50" max="50" low="22" high="25" value="26">°C</meter>26°C
-
-                <br/>
-
-                <progress value="70" max="100">70%</progress>
-
-                <br/>
-
-                <ruby>   
-                    &#28450;<rp>(</rp><rt>Kan</rt><rp>)</rp>
-                    &#23383;<rp>(</rp><rt>Ji</rt><rp>)</rp>
-                </ruby>
-
-                <p>A sa&iacute;da do c&oacute;digo ser&aacute; essa:</p>
-
-                <p><samp>Hello World!</samp></p>
-
-                <p>Isso &eacute; uma frase com fonte normal <small>e isso &eacute; com uma fonte pequena</small>.</p>
-
-                <p>Ela pode ser combinada com outras tags para gerar resultados como 10<sup><small>3</small></sup> e H<sub><small>2</small></sub>O.</p>
-            
-                <button class="botao"><span>Clique Aqui!</span></button>
-
-                <p>O hor&aacute;rio da reuni&atilde;o &eacute; <time>20:00</time>.</p>
-
-                <p>O dia do evento &eacute; <time datetime="2023-06-01 14:00">1º de junho</time>.</p>
-            </footer>
-        </div>
+            <input class="classe1 classe2 classe3"/>
+        </main>
     </body>
 </html>
