@@ -5,11 +5,40 @@
         <title>T&iacute;tulo da P&aacute;gina em HTML</title>
         <link rel="icon" href="_imagens/favicon.ico"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="_css/estilo.css" media="all"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" media="all"/>
+        <script>
+            function clickMenu() {
+                if(menu.style.display == "block") {
+                    menu.style.display = "none";
+                }
+                else {
+                    menu.style.display = "block";
+                }
+            }
+
+            function mudouTam() {
+                if(innerWidth >= 768) {
+                    menu.style.display = "block";
+                }
+                else {
+                    menu.style.display = "none";
+                }
+            }
+        </script>
     </head>
-    <body>
+    <body onresize="mudouTam()">
         <main>
             <h1>Revis&atilde;o de HTML5</h1>
+
+            <span id="burger" class="material-icons" onclick="clickMenu()">menu</span>
+            
+            <nav id="menu">
+                <ul>
+                    <li><a href="index.html">P&aacute;gina Inicial</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
 
             <p>S&iacute;mbolos especiais:</p>
 
@@ -62,8 +91,6 @@
 
 &Eacute;
 &Otilde;
-
-
 </pre>
 
             <h2>&#x1f596;&nbsp;&nbsp;&nbsp;&#x1fa98;</h2>
@@ -76,7 +103,115 @@
 
             </header>
 
-            <input class="classe1 classe2 classe3"/>
+            <picture>
+                <source media="(max-width: 540px)" srcset="_imagens/luta-peq.jpg"/>
+                <source media="(max-width: 1000px)" srcset="_imagens/luta-med.jpg"/>
+                <img src="_imagens/luta-grd.jpg" alt="Luta"/>
+            </picture>
+
+            <!--
+                image/jpeg
+                image/png
+                image/gif
+            -->
+            <figure class="foto-leg">
+                <img src="_imagens/farol.jpg" id="fig-ex"/>
+                <figcaption>
+                    <h3>Farol da Barra</h3>
+                    <p>Salvador - BA</p>
+                </figcaption>
+            </figure>
+
+            <div class="youtube">
+                <iframe src="https://www.youtube.com/embed/WRcs8rebZtA"></iframe>
+            </div>
+
+            <audio controls>
+                <source src="_multimidia/hurricane.mp3" type="audio/mpeg"/>
+                <source src="_multimidia/hurricane.ogg" type="audio/ogg"/>
+                <p>N&atilde;o &eacute; poss&iacute;vel reproduzir o &aacute;udio!</p>
+            </audio>
+
+            <br/>
+
+            <video controls poster="_imagens/pica-pau-supermercado.png">
+                <source src="_multimidia/pica-pau-supermercado.mp4" type="video/mp4"/>
+                <source src="_multimidia/pica-pau-supermercado.webm" type="video/webm"/>
+                <p>N&atilde;o &eacute; poss&iacute;vel reproduzir o v&iacute;deo!</p>
+            </video>
+
+            <p>Aprendendo a codificar em <abbr title="Hypertext Markup Language (Linguagem de Marca&ccedil;&atilde;o de Hipertexto)">HTML</abbr>.</p>
+
+            <p><dfn title="Hypertext Markup Language">HTML</dfn> &eacute; uma linguagem de marca&ccedil;&atilde;o utilizada em p&aacute;ginas da web.</p>
+
+            <p><dfn title="Cascading Style Sheets">CSS</dfn> &eacute; uma linguagem de estilos que define a formata&ccedil;&atilde;o e estilos de tags HTML.</p>
+
+            <address>
+                As informa&ccedil;&otilde;es de contato s&atilde;o:<br/>
+                E-mail: <a href="mailto:contato@dicasdeti.com.br">contato@dicasdeti.com.br</a><br/>
+                Telefone: (01) 2345-6789
+            </address>
+
+            <p><bdo dir="rtl">Socorram-me, subi no &ocirc;nibus em Marrocos.</bdo></p>
+
+            <blockquote cite="http://localhost/DicasDeTI">
+                <p>Isso &eacute; uma cita&ccedil;&atilde;o longa sobre o exemplo da tag blockquote.</p>
+                <p>Mais informa&ccedil;&otilde;es pesquise sobre <cite>blockquote</cite>.</p>
+            </blockquote>
+
+            <p>Isso &eacute; uma cita&ccedil;&atilde;o curta sobre o exemplo da tag <q cite="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/q">q</q>.</p>
+
+            <button name="botao">Texto do Bot&atilde;o</button>
+
+            <details>
+                <summary>Detalhes sobre a tag details:</summary>
+                <p>Acesse o link: <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/details" target="_blank">https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/details</a></p>
+            </details>
+
+            <dl>
+                <dt>HTML</dt>
+                <dd>HTML &eacute; uma linguagem de marca&ccedil;&atilde;o utilizada em p&aacute;ginas da web.</dd>
+                <dt>CSS</dt>
+                <dd>CSS &eacute; uma linguagem de estilos que define a formata&ccedil;&atilde;o e estilos de tags HTML.</dd>
+            </dl>
+
+            <p>Para salvar o site nos seus favoritos utilize <kbd>Ctrl D</kbd>.</p>
+
+            <p>O texto tem uma parte destacada <mark>que &eacute; essa</mark>.</p>
+
+            Temperatura atual:<br/>
+            <meter min="-50" max="50" low="22" high="25" value="22">°C</meter>22°C
+            <hr/>
+            M&iacute;nima:<br/>
+            <meter min="-50" max="50" low="22" high="25" value="20">°C</meter>20°C
+            <hr/>
+            M&aacute;xima:<br/>
+            <meter min="-50" max="50" low="22" high="25" value="26">°C</meter>26°C
+
+            <br/>
+
+            <progress value="70" max="100">70%</progress>
+
+            <br/>
+
+            <ruby>
+                &#28450;<rp>(</rp><rt>Kan</rt><rp>)</rp>
+                &#23383;<rp>(</rp><rt>Ji</rt><rp>)</rp>
+            </ruby>
+
+            <p>A sa&iacute;da co c&oacute;digo ser&aacute; essa:</p>
+
+            <p><samp>Hello World!</samp></p>
+
+            <p>Isso &eacute; uma frase com fonte normal <small>e isso &eacute com uma fonte pequena</small>.</p>
+
+            <p>Ela pode ser combinada com outras tags para gerar resultados como 10<sup><small>3</small></sup> e H<sub><small>2</small></sub>0.</p>
+
+            <button class="botao"><span>Clique Aqui!</span></button>
+
+            <p>O hor&aacute;rio da reuni&atilde;o &eacute; <time>20:00</time>.</p>
+
+            <p>O dia do evento &eacute; <time datetime="2023-06-01 14:00">1º de Junho</time>.</p>
         </main>
     </body>
 </html>

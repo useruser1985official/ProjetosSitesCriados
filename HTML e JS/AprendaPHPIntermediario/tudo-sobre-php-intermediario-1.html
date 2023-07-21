@@ -129,7 +129,7 @@ mysqli_close($conexao); // Encerra a conexão.
 
 <p>PS: Lembre-se que os comandos do Insert Into tem que estar todos na mesma ordem.</p>
 
-<p>Lembrando que para filtrar os códigos, usamos <code>htmlspecialchars()</code> para evitar que o site seja invadido com códigos maliciosos, <code>isset()</code> para ver se tem algum caractere inserido, e o <code>trim()</code> para retirar espaços desnecessários antes e depois do texto, com operadores ternários, por exemplo:</p>
+<p>Lembrando que para filtrar os códigos, usamos <code>htmlspecialchars()</code> ou <code>htmlentities()</code> (com algumas diferenças entre eles) para evitar que o site seja invadido com códigos maliciosos, <code>isset()</code> para ver se tem algum caractere inserido, e o <code>trim()</code> para retirar espaços desnecessários antes e depois do texto, com operadores ternários, por exemplo:</p>
 
 <pre>
 <code>

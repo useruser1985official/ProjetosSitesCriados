@@ -445,7 +445,7 @@ echo "&lt;span class='texto'&gt;$txt&lt;/span&gt;";
 
 <p>PS: Você pode ter várias supertags PHP numa mesma página. E pra execuções de códigos PHP na mesma página do formulário, apenas deixe o action com as aspas vazias.</p>
 
-<p>Para filtrar códigos HTML em input, use o parâmetro <code>htmlspecialchars()</code> entre os $_GET ou $_POST. Por exemplo:</p>
+<p>Para filtrar códigos HTML em input, use o parâmetro <code>htmlspecialchars()</code> ou <code>htmlentities()</code> (com algumas diferenças entre eles) entre os $_GET ou $_POST. Por exemplo:</p>
 
 <pre>
 <code>
