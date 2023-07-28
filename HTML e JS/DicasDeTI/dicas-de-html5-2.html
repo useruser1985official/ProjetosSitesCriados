@@ -80,6 +80,7 @@ main {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
+    width: 85%;
     min-width: 240px;
     max-width: 800px;
     margin: auto;
@@ -99,7 +100,7 @@ img.pequena {
 </code>
 </pre>
 
-<p>PS: O ideal é usar a tag picture para carregar fotos menores. E basicamente usamos o max e o min no width ou no height para tornar ele adaptável aos dispositivos.</p> 
+<p>PS: O ideal é usar a tag picture para carregar fotos menores. E basicamente usamos o max e o min no width ou no height para tornar ele adaptável aos dispositivos. Alguns elementos se adaptam automaticamente ao colocar o width como 100%.</p> 
 
 <p>Podemos usar o figure e o figcaption para colocar legendas em fotos, assim:</p>
 
@@ -489,6 +490,8 @@ article#noticias h2 {
 </code>
 </pre>
 
+<p>PS: O CSS tem prioridade em relação aos parâmetros como frameborder e width</p>
+
 <p>Podemos fazer assim para um vídeo responsivo:</p>
 
 <pre>
@@ -543,6 +546,57 @@ body {
 </pre>
 
 <p>PS: O parâmetro <code>scrolling="no"</code> está descontinuado no HTML5.</p>
+
+<p>Lembrando que colocar sites dentro de iframes nem sempre funcionam, então podemos colocar uma mensagem assim:
+
+<pre>
+<code>
+&lt;iframe src="frame.html" name="frame"&gt;
+    &lt;!-- Isso só aparece quando o navegador não é compatível --&gt;
+    &lt;p&gt;O seu navegador não é compatível com o iframe.&lt;/p&gt;
+&lt;/iframe&gt;
+</code>
+</pre>
+
+<p>Podemos configurar várias páginas a serem abertas no iframe, basta colocar o target (alvo) com o name do iframe, assim como parar a página num local especificado por uma id:</p>
+
+<pre>
+<code>
+&lt;p&gt;&lt;a href="frame.html#artigo" target="frame"&gt;Clique Aqui&lt;/a&gt;&lt;/p&gt;
+</code>
+</pre>
+
+<p>PS: Podemos colocar um parâmetro srcdoc que inclusive permite HTML, para colocarmos uma frase padrão, por exemplo:</p>
+
+<pre>
+<code>
+&lt;iframe srcdoc="&lt;h1&gt;Escolha uma Opção Acima&lt;/h1&gt;"&gt;
+    
+&lt;/iframe&gt;
+</code>
+</pre>
+
+<p>PS: Podemos colocar a opção sandbox e referrerpolicy para tornar eles mais seguros, principalmente com formulários, para evitar que eles não seja usados por atacantes dentros dos iframes. Basta colocar assim:</p>
+
+<pre>
+<code>
+&lt;iframe sandbox="sandbox" referrerpolicy="no-referrer"&gt;
+
+&lt;/iframe&gt;
+</code>
+</pre>
+
+<p>Mas para permitir o formulário com segurança, podemos fazer assim:</p>
+
+<pre>
+<code>
+sandbox="allow-same-origin allow-forms allow-scripts"
+</code>
+</pre>
+
+<p>No caso acima, ele só permitirá formulários do próprio site, e permitirá o Javascript também do próprio site, impedindo interações externas.</p>
+
+<p>PS: Indo em Google Maps ou no Waze e indo em compartilhar, tem a opção de copiar HTML assim como se faz com os vídeos do Youtube. Também podemos adicionar documentos do Google Docs, como planilhas e apresentações.</p>
 
 <p>Para criar degradês fixos no background, usamos assim:</p>
 

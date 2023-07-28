@@ -9,6 +9,19 @@
     <body>
         <h1>Contato</h1>
 
-        <p>Página Principal: <a href="index.html" target="_self" rel="prev">Index</a></p>
+        <form action="cadastro.html" method="post">
+            <p>
+                <label for="iusu">Usuário: </label>
+                <input type="text" name="usu" id="iusu"/>
+            </p>
+            <p>
+                <label for="itel">Telefone: </label>
+                <input type="tel" name="tel" id="itel" pattern="^\d[0-9]{4, 5}-[0-9]{4}$"/>
+            </p>
+            <p>
+                <input type="submit" value="Enviar"/>
+                <input type="reset" value="Limpar"/>
+            </p>
+        </form>
     </body>
 </html>

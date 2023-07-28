@@ -209,87 +209,105 @@
         <th>Protocolo</th>
         <th>Porta Padrão</th>
         <th>Serviço</th>
+        <th>Protocolo de Comunicação</th>
     </tr>
     <tr>
         <td>HTTP</td>
         <td>80<br/>8080</td>
-        <td>Navegação web (processamento de HTML) </td>
+        <td>Navegação web (processamento de HTML)</td>
+        <td>TCP</td>
     </tr>
     <tr>
         <td>HTTPS</td>
         <td>443</td>
         <td>Navegação web (processamento de HTML) com criptografia</td>
+        <td>TCP</td>
     </tr>
     <tr>
         <td rowspan="2">SMTP</td>
         <td>25<br/>587</td>
         <td>Envio de e-mails</td>
+        <td>TCP/UDP</td>
     </tr>
     <tr>
         <td>465</td>
         <td>Envio de e-mails com criptografia</td>
+        <td>TCP</td>
     </tr>
     <tr>
         <td rowspan="2">IMAP</td>
         <td>143</td>
         <td>Recebimento de e-mails<br/></td>
+        <td>TCP/UDP</td>
     </tr>
     <tr>
         <td>993</td>
         <td>Recebimento de e-mails com criptografia</td>
+        <td>TCP</td>
     </tr>
     <tr>
         <td rowspan="2">POP</td>
         <td>110<br/></td>
         <td>Recebimento de e-mails</td>
+        <td>TCP</td>
     </tr>
     <tr>
         <td>995</td>
         <td>Recebimento de e-mails com criptografia</td>
+        <td>TCP</td>
     </tr>
     <tr>
         <td>MSSQL</td>
         <td>1039<br/>433<br/>1040</td>
         <td>Banco de dados SQL Server</td>
+        <td>TCP/UDP</td>
     </tr>
     <tr>
         <td>MYSQL</td>
         <td>3306</td>
         <td>Banco de dados MySQL</td>
+        <td>TCP/UDP</td>
     </tr>
     <tr>
         <td>PGSQL</td>
         <td>5432</td>
         <td>Banco de dados Postgre</td>
+        <td>TCP</td>
     </tr>
     <tr>
         <td>FIREBIRD</td>
         <td>3050</td>
         <td>Banco de dados Firebird</td>
+        <td>TCP/UDP</td>
     </tr>
     <tr>
         <td>DNS</td>
         <td>53</td>
         <td>Consulta de DNS</td>
+        <td>TCP/UDP</td>
     </tr>
     <tr>
         <td>WHOIS</td>
         <td>43</td>
         <td>Consulta de whois</td>
+        <td>TCP</td>
     </tr>
     <tr>
         <td rowspan="2">FTP</td>
         <td>21</td>
         <td>Comandos FTP<br/>
+        <td>TCP</td>
     </tr>
     <tr>
         <td>20</td>
         <td>Transmissão de arquivos FTP</td>
+        <td>TCP</td>
     </tr>
     <tr>
         <td>SSH</td>
         <td rowspan="2">22</td>
         <td>Acesso SSH</td>
+        <td rowspan="2">TCP/UDP</td>
     </tr>
     <tr>
         <td>SFTP</td>
@@ -299,45 +317,54 @@
         <td>TELNET</td>
         <td>23</td>
         <td>Acesso remoto telnet</td>
+        <td>TCP/UDP</td>
     </tr>
     <tr>
         <td>SVN</td>
         <td>3690</td>
         <td>Controle de versões subversion</td>
+        <td>TCP</td>
     </tr>
     <tr>
         <td rowspan="2">DHCP</td>
         <td>67</td>
         <td>Envio de dados do cliente ao servidor</td>
+        <td>UDP</td>
     </tr>
     <tr>
         <td>68</td>
         <td>Recebimento de dados do servidor ao cliente</td>
+        <td>UDP</td>
     </tr>
     <tr>
         <td>SNMP</td>
         <td>161<br/>162</td>
         <td>Gerenciamento de redes</td>
+        <td>TCP/UDP</td>
     </tr>
     <tr>
         <td>RIP</td>
         <td>520<br/>521</td>
         <td>Roteamento que não requer conexões</td>
+        <td>UDP</td>
     </tr>
     <tr>
         <td>RDP</td>
         <td>3389</td>
         <td>Acesso Remoto do Windows</td>
+        <td>TCP</td>
     </tr>
     <tr>
         <td>SKYPE</td>
         <td>81</td>
         <td>Protocolo Skype</td>
+        <td>TCP</td>
     </tr>
     <tr>
         <td>VNC</td>
         <td>5900</td>
         <td>Acesso Remoto VNC</td>
+        <td>TCP</td>
     </tr>
 </table>
 

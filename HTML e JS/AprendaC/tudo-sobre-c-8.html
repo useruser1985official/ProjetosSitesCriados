@@ -441,6 +441,68 @@ char* trim(char *s) {
 </code>
 </pre>
 
+<p>Podemos criar funções com o <code>toupper()</code> para transformar o texto em maiúscula, podemos fazer o mesmo com minúsculas usando <code>tolower()</code>, assim:</p>
+
+<pre>
+<code>
+// Inclua string.h e ctype.h
+
+char* maiuscula(char* texto);
+char* minuscula(char* texto);
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+    
+    char *frase = "Uma Frase";
+    char *maius, *minus;
+    
+    printf("%s\n", frase);
+    
+    maius = maiuscula(frase);
+    
+    printf("%s\n", maius);
+    
+    minus = minuscula(frase);
+    
+    printf("%s\n", minus);
+    
+    return 0;
+}
+
+char* maiuscula(char* texto) {
+    unsigned long int tam = strlen(texto); 
+
+    char aux[tam]; 
+
+    for(int i = 0; i < tam; i++) {
+        aux[i] = toupper(texto[i]); 
+    }
+    
+    aux[tam] = '\0';
+
+    texto = aux;
+    
+    return texto;
+}
+
+char* minuscula(char* texto) {
+    unsigned long int tam = strlen(texto); 
+
+    char aux[tam]; 
+
+    for(int i = 0; i < tam; i++) {
+        aux[i] = tolower(texto[i]); 
+    }
+    
+    aux[tam] = '\0';
+
+    texto = aux;
+    
+    return texto;
+}
+</code>
+</pre>
+
 <ul>
     <li><a href="tudo-sobre-c-7.html">Parte Anterior da Matéria!</a></li>
     <li><a href="tudo-sobre-c-9.html">Continuação da Matéria!</a></li>

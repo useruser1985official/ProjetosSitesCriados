@@ -63,6 +63,8 @@
 
 <p>O método GET envia via URL, e o POST via pacotes. Para coisas mais rápidas, como algum cálculo, use o GET. Para coisas mais seguras, como dados e senhas, use o POST.</p>
 
+<p>O GET tem limitação de 3000 bytes, e não deve usar para dados como arquivos, além de dados sensíveis como senhas e números de cartões. O POST é um pouco mais seguro por enviar via pacotes, mas podemos verificar os dados pelo navegador, indo em inspecionar e em rede. Também é possível usar um sniffer de dados. Para proteger isso, precisaremos usar HTTPS.</p>
+
 <p>Os tipos a serem definidos no input, basicamente são esses, apesar de existirem outros:</p>
 
 <table>
@@ -118,11 +120,21 @@
         <td>color</td>
         <td>Caixa de Cor</td>
     </tr>
+    <tr>
+        <td>time</td>
+        <td>Caixa de Horário</td>
+    </tr>
+    <tr>
+        <td>file</td>
+        <td>Campo pra Upar Arquivos</td>
+    </tr>
 </table>
+
+<p>PS: O input do tipo file só funciona com o método post.</p>
 
 <p>Botões de rádio de um mesmo grupo deve ter o mesmo name, mas ids diferentes.</p>
 
-<p>Se quiser colocar um parâmetro para números decimais em input com <code>number</code> ou <code>range</code>, você pode colocar números decimais como 0.5 no <code>step</code>. Esses dois tipos de input são numéricos e tem parâmetros como <code>min</code>, <code>max</code>, além do citado step. Já os tipos de input com textos (como text, password e email), tem os parâmetros <code>maxlength</code>. Alguns parâmetros comuns em ambos são o <code>size</code> e o <code>value</code>.</p>
+<p>Se quiser colocar um parâmetro para números decimais em input com <code>number</code> ou <code>range</code>, você pode colocar números decimais como 0.5 no <code>step</code>. Esses dois tipos de input são numéricos e tem parâmetros como <code>min</code>, <code>max</code>, além do citado step. Já os tipos de input com textos (como text, password e email), tem os parâmetros <code>maxlength</code> e <code>minlength</code>. Alguns parâmetros comuns em ambos são o <code>size</code> e o <code>value</code>.</p>
 
 <p>O atributo <code>value</code> não é obrigatório em tags option (dentro de tags select), é recomendável usar isso caso você não queira que vá o nome exato que está escrito entre as tags (por exemplo, pra estados, que se usa a abreviação), e sim o valor do parâmetro.</p>
 
@@ -167,6 +179,8 @@
 </pre>
 
 <p>Para deixar um input como "apenas leitura" (como em alguns casos como o de somas), use o parâmetro <code>readonly</code>. Para fazer algo ser obrigatório use <code>required</code>. Para definir o primeiro algo a ser digitado use o <code>autofocus</code>.</p>
+
+<p>Para retirar o autocomplete (aquela listinha que aparece do que foi digitado), coloque na tag do formulário <code>autocomplete="off"</code>.</p>
 
 <p>O input, além do submit, pode ter um botão personalizado, com o type <code>image</code> e o src como o caminho da imagem.</p>
 
@@ -233,6 +247,67 @@ legend {
     font-family: Arial, sans-serif;
     font-weight: bold;
     font-size: 12pt;
+}
+</code>
+</pre>
+
+<p>Veja outro exemplo de tela de login:</p>
+
+<pre>
+<code>
+&lt;form method=&quot;post&quot; action=&quot;entrar.html&quot;&gt;
+    &lt;span class=&quot;material-icons&quot;&gt;person&lt;/span&gt;&lt;input type=&quot;text&quot; maxlength=&quot;75&quot; required autocomplete=&quot;email&quot;/&gt;
+    &lt;br/&gt;
+    &lt;span class=&quot;material-icons&quot;&gt;vpn_key&lt;/span&gt;&lt;input type=&quot;password&quot; minlength=&quot;8&quot; maxlength=&quot;15&quot; required autocomplete=&quot;current-password&quot;/&gt;
+    &lt;br/&gt;
+    &lt;a href=&quot;esqueci.html&quot; class=&quot;botao&quot;&gt;Esqueci a Senha &lt;span class=&quot;material-icons&quot;&gt;mail&lt;/span&gt;&lt;/a&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Enviar&quot;/&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>Estilo CSS:</p>
+
+<pre>
+<code>
+form > input[type=submit] {
+    display: block;
+    font-size: 1em;
+    width: 100%;
+    height: 40px;
+    padding-top: 5px;
+    margin-top: 5px;
+    background-color: #49a09d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form > input[type=submit]:hover {
+    background-color: #2d6462;
+}
+
+form > a.botao {
+    display: block;
+    text-align: center;
+    font-size: 1em;
+    width: 100%;
+    height: 40px;
+    padding-top: 5px;
+    margin-top: 5px;
+    background-color: white;
+    border: 1px solid #49a09d;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+form > a.botao:hover {
+    background-color: #6cd3cf;
+}
+
+form > a.botao > span {
+    font-size: 0.8em;
 }
 </code>
 </pre>

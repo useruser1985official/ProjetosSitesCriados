@@ -586,6 +586,281 @@ M&aacute;xima:&lt;br/&gt;
 </code>
 </pre>
 
+<p>Para criar versões diferentes de sites para impressora, podemos linkar o CSS assim, onde o padrão de media é <code>all</code> para todos, <code>print</code> para impressão, e <code>screen</code> para somente o site. Veja como usar:</p>
+
+<pre>
+<code>
+&lt;link rel="stylesheet" href="_css/estilo.css" media="screen"/&gt;
+&lt;link rel="stylesheet" href="_css/impressora.css" media="print"/&gt;
+</code>
+</pre>
+
+<p>Aí no CSS da impressora, podemos colocar, por exemplo, uma fonte serifada (que é melhor pra leitura no papel), e ocultar coisas como links e menus. Por exemplo:</p>
+
+<pre>
+<code>
+* {
+    margin: 10px;
+    padding: 10px;
+}
+
+html {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+
+ul, footer {
+    display: none;
+}
+</code>
+</pre>
+
+<p>Para separar em retrato (em pé) e paisagem (deitado), como por exemplo para celulares, podemos fazer assim:</p>
+
+<pre>
+<code>
+&lt;link rel="stylesheet" href="_css/retrato.css" media="screen and (orientation: portrait)"/&gt;
+&lt;link rel="stylesheet" href="_css/paisagem.css" media="screen and (orientation: landscape)"/&gt;
+</code>
+</pre>
+
+<p>Isso é útil, para, por exemplo, ter imagens de fundo de tamanho certinho pra cada tipo de tela. Veja um exemplo para a paisagem:</p>
+
+<pre>
+<code>
+body {
+    background-image: url("../_imagens/paisagem.jpg");
+    background-position: left bottom;
+}
+</code>
+</pre>
+
+<p>PS: No caso acima, pode ser necessário usar outras opções como center bottom.</p>
+
+<p>Podemos também criar um CSS específico para cada caso também, por exemplo:</p>
+
+<pre>
+<code>
+@media print {
+    /* As outras configurações ficam aqui */
+
+    ul {
+        display: none;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    
+}
+
+@media screen and (orientation: landscape) {
+                
+}
+</code>
+</pre>
+
+<p>Podemos configurar uma tela padrão para cada tipo de tela, como por exemplo:</p>
+
+<pre>
+<code>
+@media print { /* Impressão /*
+
+}
+
+@media screen and (max-width: 768px) { /* Podemos configurar um CSS padrão para mobile e colocar para outros tipos de tela aqui */
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) { /* Tablet */
+
+}
+</code>
+</pre>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+@media print {
+    body {
+        background-image: none;
+    }
+
+    img#print {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        background-image: url("../_imagens/back-phone.jpg");
+    }
+    
+    img#phone {
+        display: block;
+    }
+
+}
+</code>
+</pre>
+
+-----------------------------------------
+
+<p>Para fazer um menu responsivo:</p>
+
+<pre>
+<code>
+&lt;header&gt;
+    &lt;h1&gt;Menu&lt;/h1&gt;
+
+    &lt;ul id=&quot;menu&quot;&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Op&ccedil;&atilde;o 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Op&ccedil;&atilde;o 2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Op&ccedil;&atilde;o 3&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Op&ccedil;&atilde;o 4&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Op&ccedil;&atilde;o 5&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/header&gt;
+</code>
+</pre>
+
+<p>Para colocar o ícone de "hamburguinho" do site de fontesda Google:</p>
+
+<pre>
+<code>
+&lt;link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/&gt;
+</code>
+</pre>
+
+<p>Acima do ul colocamos isso:</p>
+
+<pre>
+<code>
+&lt;span id="burger" class="material-icons" onclick="clickMenu()"&gt;menu&lt;/span&gt;
+</code>
+</pre>
+
+<p>CSS do código acima:</p>
+
+<pre>
+<code>
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+main {
+    width: 90%;
+    margin: auto;
+    max-width: 1000px;
+}
+
+header {
+    background-color: gray;
+}
+
+header > h1 {
+    padding: 10px;
+    text-align: center;
+}
+
+nav#menu {
+    display: block;
+}
+
+nav#menu > ul {
+    list-style-type: none;
+}
+
+nav#menu > ul > li > a {
+    display: block;
+    padding: 10px;
+    margin: 0px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    background-color: rgb(87, 87, 87);
+}
+
+nav#menu > ul > li:hover > a {
+    background-color: gray;
+}
+
+span#burger {
+    background-color: rgb(48, 48, 48);
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+span#burger:hover {
+    background-color: white;
+    color: black;
+}
+</code>
+</pre>
+
+<p>E nesse caso precisaremos usar Javascript:</p>
+
+<pre>
+<code>
+function clickMenu() {
+    if(menu.style.display == "block") {
+        menu.style.display = "none";
+    }
+    else {
+        menu.style.display = "block";
+    }
+}
+</code>
+</pre>
+
+<p>Para ele ficar diferente em telas menores e maiores, faça assim:</p>
+
+<pre>
+<code>
+/* Atenção que é min e não max */
+@media screen and (min-width: 768px) {
+    span#burger {
+        display: none;
+    }
+    nav#menu > ul {
+        display: block;
+    }
+
+    nav#menu > ul > li {
+        display: inline-block;
+    }
+}
+</code>
+</pre>
+
+<p>E na tag body, coloque o evento onresize, assim:</p>
+
+<pre>
+<code>
+&lt;body onresize="mudouTam()"&gt;
+</code>
+</pre>
+
+<p>Com essa função em Javascript:</p>
+
+<pre>
+<code>
+function mudouTam() {
+    if(innerWidth >= 768) { // parâmetro do objeto window
+        menu.style.display = "block";
+    }
+    else {
+        menu.style.display = "none";
+    }
+}
+</code>
+</pre>
+
 <p><a href="dicas-de-html5-2.html">Parte 2 da Matéria</a></p>
 
         <footer>
