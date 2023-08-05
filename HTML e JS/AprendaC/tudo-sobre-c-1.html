@@ -114,9 +114,9 @@ int main(void) {
 </code>
 </pre>
 
-<p>No exemplo acima, o <code>scanf</code> é usado para capturar entradas de teclados, com máscaras de programação (<code>%</code>) e com <code>&amp;</code> ao lado da variável que será capturada.</p>
+<p>No exemplo acima, o <code>scanf</code> é usado para capturar entradas de teclados, com máscaras de formatação (<code>%</code>) e com <code>&amp;</code> ao lado da variável que será capturada.</p>
 
-<p>Também pode ser usado <code>puts</code> no lugar do printf, mas ele não permitirá usar máscaras de programação, por isso caiu em desuso.</p>
+<p>Também pode ser usado <code>puts</code> no lugar do printf, mas ele não permitirá usar máscaras de formatação, por isso caiu em desuso.</p>
 
 <p>PS: Caso você tenha configurado corretamente o path do Mingw no seu Windows, você pode criar diretamente arquivos com extensão c e compilar ele usando os comandos <code>gcc main.c -o nomedoprograma</code> (no Linux é o mesmo processo, apenas omitindo a extensão ou usando alguma extensão genérica, pode ser necessário usar o parâmetro <code>-no-pie</code> para gerar um executável, sendo que o padrão de algumas distribuições são <code>-pie</code> que gera a biblioteca compartilhada). Caso tenha mais de um arquivo do mesmo projeto, execute o comando <code>gcc -c nomedoarquivo.c</code> nos outros arquivos pra compilá-los e depois <code>gcc main.c nomedoarquivo.o -o nomedoprograma</code> no main pra montar. Pode ser necessário colocar o parâmetro <code>-lm</code> para forçar inclusão de bibliotecas, como as de operações matemáticas. Caso esteja num sistema 64 bits e queira compilar para 32 bits, use o parâmetro <code>-m32</code> (o default é <code>-m64</code>). Pode ser necessário instalar as dependências (instale o gcc-multilib).</p>
 
@@ -150,7 +150,7 @@ int main() {
     <li>Tipos Derivados (Structs, Arrays, Ponteiros, Unions, etc.)</li>
 </ul>
 
-<p>Tipos Básicos consistem em tipos aritméticos inteiros e de ponto-flutuante. Veja abaixo os tipos inteiros:</p>
+<p>Tipos Básicos consistem em tipos aritméticos inteiros e de ponto-flutuante. Veja abaixo os tipos primitivos:</p>
 
 <table>
     <tr>
@@ -197,6 +197,11 @@ int main() {
         <td>long</td>
         <td>4 bytes</td>
         <td>-2147483648 a 2147483647</td>
+    </tr>
+    <tr>
+        <td>long long</td>
+        <td>8 bytes</td>
+        <td>-9223372036854775808 a 9223372036854775807</td>
     </tr>
     <tr>
         <td>unsigned long</td>
@@ -264,7 +269,7 @@ typedef enum {false = 0, true = 1} logico;
 
 <p>Em C temos o tipo <code>char</code> para representar um caractere literal. Seu tamanho é de 1 byte, possuindo então valores entre 0 e 255.</p>
 
-<p>Caso precisemos armazenar uma cadeia de caracteres (string), usamos arrays do tipo char. Um caractere nulo, representado por <code>\0</code>, sempre indicará o final da cadeira (e ele conta no tamanho da cadeia). Podemos também usar <code>char*</code> (vetor de char com ponteiro) para strings.</p>
+<p>Caso precisemos armazenar uma cadeia de caracteres (string), usamos arrays do tipo char. Um caractere nulo, representado por <code>\0</code>, sempre indicará o final da cadeia (e ele conta no tamanho da cadeia). Podemos também usar <code>char*</code> (vetor de char com ponteiro) para strings.</p>
 
 <p>Para converter tipos em C, podemos fazer assim:</p>
 
@@ -354,7 +359,7 @@ y = x = 10;
 </code>
 </pre>
 
-<p>PS: Esse tipo de atribuição também funciona em qualquer linguagem descendente do C, como o Java, o PHP e o Python.</p>
+<p>PS: Esse tipo de atribuição também funciona em qualquer linguagem descendente do C, como o Java, o PHP e mesmo o Python.</p>
 
 <p>Veja alguns exemplos de atribuições de variáveis:</p>
 
@@ -398,7 +403,7 @@ printf("Exemplo com máscara %d", variavel_ou_dado);
     <li>Mostrar qualquer tipo de dados em campos com tamanho e precisão fixos.</li>
 </ul>
 
-<p>Veja algumas máscaras de programação, no C chamadas de especificadores de conversão:</p>
+<p>Veja algumas máscaras de formatação, no C chamadas de especificadores de conversão:</p>
 
 <table>
     <tr>
@@ -424,7 +429,7 @@ printf("Exemplo com máscara %d", variavel_ou_dado);
     <tr>
         <td>%i</td>
         <td>int</td>
-        <td>Número Inteiro com Decimal (Diferentes na Entrada e Saída de Dados)</td>
+        <td>Número Inteiro Decimal (Diferentes na Entrada e Saída de Dados)</td>
     </tr>
     <tr>
         <td>%ld</td>
@@ -510,7 +515,7 @@ int main(void) {
 </code>
 </pre>
 
-<p>PS: Os caracteres (char) únicos são representadas por aspas simples, as máscaras permanecem usarem duplas. Os textos em array usam aspas duplas.</p>
+<p>PS: Os caracteres (char) únicos são representadas por aspas simples, as máscaras permanecem usando duplas. Os textos em array usam aspas duplas.</p>
 
 <p>Veja outro exemplo de formatação, mais simples, no qual usamos mais de uma máscara de formatação no mesmo printf:</p>
 
