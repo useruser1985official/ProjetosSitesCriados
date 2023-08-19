@@ -101,7 +101,7 @@
 
 <h3>O que é DNS?</h3>
 
-<p>DNS (porta 53) é uma sigla que significa Domain Name System, que traduz nomes legíveis por humanos em endereços IP, utliziados pelos computadores, assim só precisamos nos lembrar do endereço do site (por exemplo, https://www.google.com.br/) ao invés do IP do mesmo. Basicamente, é um banco de dados de informações sobre hosts.</p>
+<p>DNS (porta 53) é uma sigla que significa Domain Name System, que traduz nomes legíveis por humanos em endereços IP, utliziados pelos computadores, assim só precisamos nos lembrar do endereço do site (por exemplo, <code>https://www.google.com.br/</code>) ao invés do IP do mesmo. Basicamente, é um banco de dados de informações sobre hosts.</p>
 
 <p>Essas são algumas das características do DNS:
     
@@ -141,6 +141,17 @@
     <li><b>Secundário: </b>Obtém os dados da zona a partir de outro servidor de nomes autoritativo para a zona, chamado de servidor mestre, que geralmente é o servidor primário (mas nem sempre).</li>
 </ul>
 
+<p>As partes de uma URL são essas:</p>
+
+<ul>
+    <li><b>Protocolo:</b> É o começo da URL, onde é indicado o protocolo usado, geralmente <code>http://</code> ou <code>https://</code>.</li>
+    <li><b>Subdomínio:</b> É o que vem antes do domínio, o principal é o <code>www</code>, mas temos vários outros como <code>mail</code>, <code>admin</code>, <code>blog</code> ou mesmo personalizados.</li>
+    <li><b>Nome do Domínio:</b> É o nome do site, basicamente, por exemplo, <q>google</q> é o domínio de <code>https://www.google.com/</code>.</li>
+    <li><b>Domínios Superiores de Topo Genérico (gTLD):</b> Tem três ou mais letras, é classificado pela utilização do site, como <code>.com</code>, <code>.net</code>, <code>.edu</code>, <code>.gov</code>, <code>.org</code>, entre outros.</li>
+    <li><b>Domínios Superiores de Topo de Código de País (ccTLD):</b> Sempre tem duas letras representando o país de origem, como <code>.br</code>, <code>.ar</code>, <code>.uk</code>, <code>.pt</code>, etc.</li>
+    <li><b>Caminho:</b> É tudo que vem depois da barra indicando algum caminho dentro do site (por exemplo, o search e tudo que vem depois dele em <code>https://www.google.com/search?q=dominio</code>).</li>
+</ul>
+
 <h3>Resolvedor DNS</h3>
 
 <p>DNS Resolver é o serviço cliente que acessa o servidor DNS. Responsável por iniciar e seguir as consultas que levam à resolução de nomes do recurso procurado. O resolver é responsável por executar uma consulta, interpretar as respostas e retornar a informação ao programa que a requisitou. As consultas DNS podem ser não-recursivas, recursivas, iterativas ou ainda uma combinação desses tipos.</p>
@@ -170,6 +181,20 @@
 <p>PS: Os métodos acima retornam dados diferentes.</p>
 
 <p>Podemos também usar o ApateDNS para vermos os domínos DNS abertos do nosso sistema, incluindo os suspeitos, ele não precisa ser instalado: <a href="https://www.fireeye.com/content/dam/fireeye-www/services/freeware/sdl-apatedns.zip" target="_blank">https://www.fireeye.com/content/dam/fireeye-www/services/freeware/sdl-apatedns.zip</a></p>
+
+<h3>Qual é a Diferença entre Domínio e Hospedagem?</h3>
+
+<p>Grande parte dos usuários possuem bastante dúvida em diferenciar as duas questões, muitos acham que ambas são a mesma coisa, pois alguns serviços para usuários mais leigos oferecem a ligação direta entre o domínio e o servidor de hospedagem.</p>
+
+<h4>O que é Domínio?</h4>
+
+<p>Domínio é o registro de um nome, que é utilizado para conectar seu site à sua hospedagem através de uma palavra ou sequência de caracteres com a finalidade de facilitar o acesso ao seu site através de um navegador de internet.</p>
+ 
+<h4>O que é Hospedagem?</h4>
+
+<p>Diferente do domínio, que faz apenas a ligação de seu site para que ele seja acessado através de uma palavra ou sequência de caracteres, a hospedagem é um como um espaço online reservado para seu site na internet, é por meio dela que você armazena os arquivos que mantém seu site no ar.</p>
+
+<p>Existem diversos tipos de planos para diferentes tipos de questões que você precise hospedar. De acordo com seu projeto ou plano de negócio podem haver vantagens ou desvantagens em cada modelo de contratação, portanto, antes de escolher seu plano de hospedagem, mensure o quanto de servidor você irá precisar e quais compatibilidades ele precisa ter para que o seu funcionamento seja como o esperado.</p>
 
 <h3>Arquivo Hosts</h3>
 

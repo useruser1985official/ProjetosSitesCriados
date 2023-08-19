@@ -57,7 +57,9 @@
 
 <p>Para colocar algo que queremos que não seja exibido, usamos o mesmo filtro, mas com um ponto de exclamação, que significa negação, por exemplo <code>!(ip.addr == 192.168.0.1)</code>.</p>
 
-<p>Para não mostrar tráfegos de um determinado protocolo, podemos usar por exemplo <code>not tcp</code>, para mais de um podemos ser por exemplo <code>not tcp and not arp</code>.</p>
+<p>Para não mostrar tráfegos de um determinado protocolo, podemos usar por exemplo <code>not tcp</code>, para mais de um podemos ser por exemplo <code>not tcp and not arp</code>. Como visto, podemos colocar operadores como <code>and</code>, <code>or</code> e <code>not</code> também.</p>
+
+<p>Podemos filtrar um determinado protocolo usando os comandos como por exemplo <code>tcp.port == 80</code> para filtrar o tráfego HTTP (podendo nesse caso ser diretamente pesquisado apenas <code>http</code> também).</p>
 
         </div>
     </body>

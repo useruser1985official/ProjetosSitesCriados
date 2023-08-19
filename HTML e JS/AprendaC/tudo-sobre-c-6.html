@@ -363,6 +363,14 @@ nome = (char*)malloc(sizeof(char) + 1);
 </code>
 </pre>
 
+<p>Ou podemos criar uma nova realocação após usar o malloc com o <code>realloc</code>, assim:</p>
+
+<pre>
+<code>
+nome = (char*)realloc(nome, sizeof(char) + 4);
+</code>
+</pre>
+
 <p>Para excluir um ponteiro ou memória alocada, use o free, dessa forma:</p>
 
 <pre>
@@ -370,6 +378,56 @@ nome = (char*)malloc(sizeof(char) + 1);
 free(nome);
 </code>
 </pre>
+
+<h3>Invertendo Valores de Variáveis</h3>
+
+<p>Em alguns casos, principalmente em jogos, é necessário inverter a direção ou valores de variáveis. Para tanto, existem os valores de inversão de variáveis. No caso, seria deixar o valor negativo se for positivo e vice-versa.</p>
+
+<p>Veja um exemplo simples disso:</p>
+
+<pre>
+<code>
+int num = 10;
+
+printf("%d\n", num);
+    
+num = num * -1;
+    
+printf("%d\n", num);
+</code>
+</pre>
+
+<p>Você também pode colocar o sinal negativo diretamente ao lado da variável à ser exibida, assim:</p>
+
+<pre>
+<code>
+int num = 10;
+    
+printf("%d\n", -num);
+</code>
+</pre>
+
+<p>PS: Esse negativo não muda o valor da variável, só na exibição  nesse cout ele faz a inversão.</p>
+
+<p>Para gravar o novo valor da variável, use a multiplicação por -1 antes de exibir.</p>
+
+<p>Veja um exemplo:</p>
+
+<pre>
+<code>
+int num = 10;
+
+printf("%d\n", num); // Valor original.
+
+num = num * -1;
+
+printf("%d\n", -num); // Retornará positivo, - com - retorna + e a variável foi alterada antes.
+
+printf("%d\n", num); // Retornará negativo, já que a variável foi alterada.
+</code>
+</pre>
+
+<p>PS: Só pra lembrar, + com + retornará positivo, e - com - retorna positivo. Apenas quando usarmos + e - que retornará negativo. Regra simples de matemática, iguais retornam positivo e diferentes retornam negativo.</p>
 
 <ul>
     <li><a href="tudo-sobre-c-5.html">Parte Anterior da Matéria!</a></li>

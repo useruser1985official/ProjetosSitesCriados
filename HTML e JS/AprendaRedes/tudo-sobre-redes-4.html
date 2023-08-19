@@ -31,6 +31,66 @@
             
 <h2>Tudo sobre Redes Parte 4</h2>
 
+<h3>Introdução ao Roteamento de Redes</h3>
+
+<p>A internet é uma coleção de redes interconectadas, e os pontos de ligação são os roteadores. Estes, por sua vez, estão organizados de forma hierárquica, onde alguns roteadores são utilizados apenas para trocar dados entre grupos de redes controlados pela mesma autoridade administrativa, enquanto outros roteadores fazem também a comunicação entre as autoridades administrativas. A entidade que controla e administra um grupo de redes e roteadores chama se Sistema Autônomo [RFC 1930].</p>
+
+<p>O roteamento é a principal forma utilizada na Internet para a entrega de pacotes de dados entre hosts (equipamentos de rede de uma forma geral, incluindo computadores, roteadores, etc.). O modelo de roteamento utilizado é o do salto-por-salto (hop-by-hop), onde cada roteador que recebe um pacote de dados, abre-o, verifica o endereço de destino no cabeçalho IP, calcula o próximo salto que vai deixar o pacote um passo mais próximo de seu destino e entrega o pacote neste próximo salto. Este processo se repete e assim segue até a entrega do pacote ao seu destinatário. No entanto, para que este funcione, são necessários dois elementos: Tabelas de roteamento e protocolos de roteamento.</p>
+
+<p>Tabelas de roteamento são registros de endereços de destino associados ao número de saltos até ele, podendo conter várias outras informações.</p>
+
+<p>Protocolos de roteamento determinam o conteúdo das tabelas de roteamento, ou seja, são eles que ditam a forma como a tabela é montada e de quais informações ela é composta. Existem dois tipos de algoritmo atualmente em uso pelos protocolos de roteamento: O algoritmo baseado em Vetor de Distancia (Distance-Vector Routing Protocols) e o algoritmo baseado no Estado de Enlace (Link State Routing Protocols).</p>
+
+<ul>
+    <li><b>Roteamento Interno:</b> Os roteadores utilizados para trocar informações dentro de Sistemas Autônomos são chamados roteadores internos (interior routers) e podem utilizar uma variedade de protocolos de roteamento interno (Interior Gateway Protocols - IGPs). Dentre eles estão: RIP, IGRP, EIGRP, OSPF e Integrated IS-IS.</li>
+    <li><b>Roteamento Externo:</b> Roteadores que trocam dados entre Sistemas Autônomos são chamados de roteadores externos (exterior routers), e estes utilizam o Exterior Gateway Protocol (EGP) ou o BGP (Border Gateway Protocol). Para este tipo de roteamento são considerados basicamente coleções de prefixos CIDR (Classless Inter Domain Routing) identificados pelo número de um Sistema Autônomo.</li>
+</ul>
+
+<h3>O que é o Roteamento?</h3>
+
+<p>Fazendo uma analogia, o roteamento funciona como um mapa onde as rotas são definidas e o roteador, equipamento responsável por fazer o roteamento, seria como um GPS que seleciona os melhores caminhos disponíveis para que esses dados cheguem da melhor forma ao seu destino.</p>
+
+<p>Para funcionar, o roteador precisa de informações como o endereço de destino e as rotas, que são, muitas vezes, encaminhadas por outros roteadores. Porém, além das diferentes funções dos roteadores, que podem ser usados apenas para trocar dados entre uma rede local, quanto para trocar dados entre outras redes, há ainda algumas diferenças na forma como o roteador transfere um pacote de dados.</p>
+
+<h4>Rotas Estáticas</h4>
+
+<p>Na rota estática, as rotas são definidas manualmente por um administrador da rede, neste tipo de roteamento, as rotas mudam muito lentamente, a depender do administrador da rede.</p>
+
+<h4>Rotas Dinâmicas</h4>
+
+<p>Na rota dinâmica, o roteador troca informações sobre as rotas com outros roteadores. Neste tipo, os caminhos mudam de acordo com a carga do tráfego ou da topologia da rede. Esse tipo de roteamento, apesar de conseguir mudanças mais rápidas na rota, é mais suscetível a problemas com loops e oscilações.</p>
+
+<h4>Rotas diretas</h4>
+
+<p>São as rotas criadas quando colocamos diretamente um IP na interface.</p>
+
+<h3>Como as Rotas são Definidas</h3>
+
+<p>Diferente das pontes, roteadores possuem a capacidade de escolher o melhor caminho para encaminhar o pacote caso existam muitos caminhos que levem ao mesmo destino. Essa escolha obedece a certos critérios. O roteador pode também ouvir o tráfego e determinar quando uma rota está muito congestionada, nesse caso ele escolhe uma rota alternativa para encaminhar o pacote. Considere a figura abaixo:</p>
+
+<img src="_imagens/rotas.jpg" alt="Rotas"/>
+
+<p>Observe que saindo de PC1 até chegar a PC4, existem 2 caminhos ou 2 rotas. Quando o pacote chega a R1 com destino a R4, ele tanto pode ser encaminhado por R2 ou R3. Qual rota R1 irá escolher para encaminhar o pacote? O roteador toma essa decisão baseado em certos parâmetros, que constam em sua tabela de roteamento.</p>
+
+<ul>
+    <li>Métrica (Número de saltos até a rede destino).</li>
+    <li>Distância administrativa (Custo da rota até a rede destino).</li>
+</ul>
+
+<p>Aquela rota que tiver o menor número de saltos será a escolhida. Caso o número de saltos seja igual para as duas situações, então aquela rota com o menor custo (menor distância administrativa) será a escolhida. Tendo por base a figura 5.17 e de posse das informações da tabela abaixo, vamos ver qual será a rota escolhida, considerando que as rotas não estejam demasiadamente ocupadas.</p>
+
+<p>Observe que o número de saltos é o mesmo para as duas rotas (2). Para chegar a R4 em qualquer um dos caminhos é preciso passar por 2 roteadores a partir de R1 Mas, observe que a distância administrativa indo por R3 é menor do que indo por R2.</p>
+
+<p>Logo o pacote será encaminhado através de R3 e não de R2.</p>
+
+<p>Se as distâncias administrativas fossem as mesmas, os pacotes seriam divididos entre as duas rotas.</p>
+
+<h3>Tipos de Roteadores</h3>
+
+<p>Os roteadores podem ser equipamentos externos dedicados com um sistema operacional proprietário como é o caso dos roteadores CISCO por exemplo, ou podem ser serviços que são adicionados a um sistema operacional de rede servidor, tal como o Windows 2000. A diferença entre um e outro está na disponibilidade de recursos, nas situações em que podem ser usados e no custo.</p>
+
+<p>Prefira sempre os roteadores externos, pois eles possuem melhor performance, um sistema operacional proprietário otimizado e uma série de recursos para configuração, monitoração e diagnóstico. O problema desses roteadores é seu custo elevado. Mas para redes pequenas em que custo é uma palavra chave, um servidor como o Windows 2000, fazendo o papel de roteador, apesar de não ter uma série de recursos disponíveis nos equipamentos de fabricantes, daria conta do recado perfeitamente.</p>
+
 <h3>Protocolo ARP</h3>
 
 <p>O protocolo ARP fornece resolução dinâmica de endereços, que é um mapeamento entre as duas formas de endereçamento distintas: endereços IP, e qualquer outro tipo de endereço usado na camada de enlace. No caso dos quadros Ethernet, a camada de enlace usa o MAC Address (Media Access Control), endereço físico da interface. Permite obter o MAC Addres de uma interface a partir do seu Endereço IP.</p>
@@ -92,62 +152,64 @@
 
 <table>
     <tr>
-	<th>Tipo</th>
-	<th>Código</th>
-	<th>Descrição</th>
+        <th>Tipo</th>
+        <th>Código</th>
+        <th>Descrição</th>
     </tr>
     <tr>
-	<td>0</td>
-	<td>0</td>
-	<td>Echo Reply (Resposta de Eco, usado pelo comando Ping)</td>
+        <td>0</td>
+        <td>0</td>
+        <td>Echo Reply (Resposta de Eco, usado pelo comando Ping)</td>
     </tr>
     <tr>
-	<td rowspan="5">3</td>
-	<td></td>
-	<td>Destino Inalcançável</td>
+        <td rowspan="5">3</td>
+        <td></td>
+        <td>Destino Inalcançável</td>
     </tr>
     <tr>
-	<td>0</td>
-	<td>Rede de Destino Inalcançável</td>
+        <td>0</td>
+        <td>Rede de Destino Inalcançável</td>
     </tr>
     <tr>
-	<td>1</td>
-	<td>Host de Destino Inalcançável</td>
+        <td>1</td>
+        <td>Host de Destino Inalcançável</td>
     </tr>
     <tr>
-	<td>2</td>
-	<td>Protocolo de Destino Inalcançável</td>
+        <td>2</td>
+        <td>Protocolo de Destino Inalcançável</td>
     </tr>
     <tr>
-	<td>3</td>
-	<td>Porta de Destino Inalcançável</td>
+        <td>3</td>
+        <td>Porta de Destino Inalcançável</td>
     </tr>
     <tr>
-	<td>4</td>
-	<td>0</td>
-	<td>Sourche Quench - Controle de Fluxo Elementar</td>
+        <td>4</td>
+        <td>0</td>
+        <td>Sourche Quench - Controle de Fluxo Elementar</td>
     </tr>
     <tr>
-	<td>8</td>
-	<td>0</td>
-	<td>Echo Request (Requisição de Edo, usado pelo comando Ping)</td>
+        <td>8</td>
+        <td>0</td>
+        <td>Echo Request (Requisição de Edo, usado pelo comando Ping)</td>
     </tr>
     <tr>
-	<td rowspan="3">11</td>
-	<td></td>
-	<td>Tempo Excedido</td>
+        <td rowspan="3">11</td>
+        <td></td>
+        <td>Tempo Excedido</td>
     </tr>
     <tr>
-	<td>0</td>
-	<td>TTL Igual à 0 Durante o Trânsito</td>
+        <td>0</td>
+        <td>TTL Igual à 0 Durante o Trânsito</td>
     </tr>
     <tr>
-	<td>1</td>
-	<td>TTL Igual à 0 Durante Reconstrução dos Fragmentos</td>
+        <td>1</td>
+        <td>TTL Igual à 0 Durante Reconstrução dos Fragmentos</td>
     </tr>
 </table>
 
-<p>Mostramos o protocolo ICMP em ação usando os comandos ping e tracert, no prompt, seguido do ip ou domínio.</p>
+<p>Mostramos o protocolo ICMP em ação usando os comandos ping e tracert, no prompt, seguido do IP ou domínio.</p>
+
+<p>O TTL é o tempo de vida do pacote, que existe para que ele não fique procurando eternamente um host, iniciando em 255 e vai diminuindo de 1 em 1 (decremento) até achar o host (ele vai de 255 a 0), se ele não achar antes de chegar a 0, ele dará tempo excedido e finalizará sua vida. Isso é usado no ping e no tracert (sendo mais necessário neste último).</p>
 
 <h3>Como Funciona o Utilitário Traceroute</h3>
 
@@ -189,6 +251,8 @@
 <p>Digitando <code>ping /?</code> você pode ver outras opções para usar como parâmetros.</p>
 
 <p>Um exemplo de uso seria <code>ping /n 6 www.google.com.br</code>, para enviar seis requisições, ao invés do padrão 4. Outro exemplo seria colocar o parâmetro <code>/t</code> para enviar infinitas requisições no Windows, por exemplo <code>ping /t www.google.com.br</code>. Também podemos forçar o uso de IPv4 com o parâmetro <code>/4</code> ou de IPv6 usando <code>/6</code>.</p>
+
+<p>PS: O Ping é um comando para iniciar o teste de conectividade, apesar de algumas pessoas errarem, o ping é apenas o comando, o tempo de milissegundos para o outro dispositivo se chama latência (o tempo máximo de latência deve ser de 45 ms, em média, no Brasil, quanto mais distante maior será a latência, como por exemplo, um servidor nos EUA).</p>
 
 <h3>Protocolo TCP - Campos do Cabeçalho</h3>
 

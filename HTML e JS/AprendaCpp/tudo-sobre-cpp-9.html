@@ -249,6 +249,14 @@ nome = (char*)malloc(sizeof(char) + 1);
 </code>
 </pre>
 
+<p>Ou podemos criar uma nova realocação após usar o malloc com o <code>realloc</code>, assim:</p>
+
+<pre>
+<code>
+nome = (char*)realloc(nome, sizeof(char) + 4);
+</code>
+</pre>
+
 <p>Para excluir um ponteiro ou memória alocada, use o free, dessa forma:</p>
 
 <pre>

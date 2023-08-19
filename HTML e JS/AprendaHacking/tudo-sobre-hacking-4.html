@@ -94,7 +94,7 @@
 
 <p>Para pegar informações de um determinado IP, usamos no filtro <code>ip.addr == 192.168.0.1</code>, para vermos apenas resultados com esse determinado IP, digitamos <code>ip.dst == 192.168.0.1</code>, e pegar esse IP de destino, <code>ip.dst == 192.168.0.1</code>.</p>
 
-<p>Para colocar algo que queremos que não seja exibido, usamos o mesmo filtro, mas com um ponto de exclamação, que significa negação, por exemplo <code>!(ip.addr == 192.168.0.1)</code>. E para não mostrar tráfegos de um determinado protocolo, podemos usar <code>not tcp</code>, para mais de um, <code>not tcp and not arp</code>.</p>
+<p>Para colocar algo que queremos que não seja exibido, usamos o mesmo filtro, mas com um ponto de exclamação, que significa negação, por exemplo <code>!(ip.addr == 192.168.0.1)</code>. E para não mostrar tráfegos de um determinado protocolo, podemos usar <code>not tcp</code>, para mais de um, <code>not tcp and not arp</code>. Podemos usar o operador <code>or</code> também.</p>
 
 <h3>Capturando Senhas com Wireshark</h3>
 
@@ -104,7 +104,9 @@
 
 <p>Ele também pode sniffar o tráfego de redes sem fio e capturar senhas digitadas por exemplo, em wi-fi.</p>
 
-<p>O processo para sniffar HTTP pode ser feito com o filtro <code>tcp.port == 80 || udp.port == 80</code>, da mesma forma, com HTTPS usamos a porta 443, mas nesse caso o conteúdo estará criptografado.</p>
+<p>O processo para sniffar HTTP pode ser feito com o filtro <code>tcp.port == 80</code>, da mesma forma, com HTTPS usamos a porta 443, mas nesse caso o conteúdo estará criptografado.</p>
+
+<p>Numa rede baseada em switches, só poderemos capturar tráfego direcionado à nossa máquina, broadcasts e alguns multicasts. Dá pra configurar isso no switch com o espelhamento de portas, que copia o tráfego para a porta da sua estação. Um estouro de tabela MAC do switch também podemos fazer ele entrar em modo broadcast.</p>
 
 <h3>Scanning de redes com Nmap e Zenmap</h3>
 

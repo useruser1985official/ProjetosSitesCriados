@@ -343,7 +343,7 @@ cin >> login;
 cout << "Digite a senha: ";
 cin >> senha;
 
-if(login.compare("admin") == 0 && senha.compare("123")  == 0) { // Inclua cstring
+if(!login.compare("admin") && !senha.compare("123")) { // Inclua cstring
     cout << "Bem-Vindo!" << endl;
 }
 else {

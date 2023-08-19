@@ -379,7 +379,7 @@ printf("Nome está vazio? %s\n", (strlen(nome) == 0 ? "true" : "false"));
 char *f1 = "Frase 1";
 char *f2 = "Frase 2";
 
-char *resul = strcmp(f1, f2) == 0 ? "iguais" : "diferentes";
+char *resul = !strcmp(f1, f2) ? "iguais" : "diferentes";
 
 printf("As frases são %s.\n", resul);
 </code>

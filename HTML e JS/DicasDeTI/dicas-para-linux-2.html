@@ -68,12 +68,18 @@ GRUB_TIMEOUT=10
 
 <pre>
 <code>
+GRUB_DEFAULT=0
 GRUB_HIDDEN_TIMEOUT=0
 GRUB_HIDDEN_TIMEOUT_QUIET=true
+GRUB_TIMEOUT=0
+GRUB_DISABLE_OS_PROBER=true
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+GRUB_CMDLINE_LINUX=""
 </code>
 </pre>
 
-<p>Para mostrar o menu do Grub, apenas comente as duas linhas acima com # em cada linha. Podemos também alterar dessa forma para exibir o menu:</p>
+<p>Para mostrar o menu do Grub, apenas comente as duas linhas com "HIDDEN" com # em cada linha. Podemos também alterar dessa forma para exibir o menu:</p>
 
 <pre>
 <code>

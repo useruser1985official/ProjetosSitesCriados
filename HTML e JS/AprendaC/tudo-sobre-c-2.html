@@ -207,7 +207,7 @@ scanf("Digite algo: %d", &amp;teste);
 </code>
 </pre>
 
-<p>O que está entre aspas descreve os formatos de entradas, e os outros argumentos são ponteiros para variáveis nas quais as entradas serão armazenadas.</p>
+<p>O que está entre aspas descreve os formatos de entradas, e os outros argumentos são endereços para variáveis nas quais as entradas serão armazenadas.</p>
 
 <p>Ao usarmos o scanf precisamos indicar o endereço da variável de armazenamento do dado lido prefixando-a com o caractere <code>&amp;</code>.</p>
 
@@ -219,48 +219,44 @@ scanf("Digite algo: %d", &amp;teste);
         <th>Descrição</th>
     </tr>
     <tr>
-        <td>d</td>
+        <td>%d</td>
         <td>Lê um Número Inteiro Decimal com Sinal</td>
     </tr>
     <tr>
-        <td>c</td>
+        <td>%c</td>
         <td>Lê um Caractere Único. NULL não é Adicionado.</td>
     </tr>
     <tr>
-        <td>f, e ou E</td>
+        <td>%f, %e ou %E</td>
         <td>Lê um Número Decimal (Real ou de Ponto Flutuante)</td>
     </tr>
     <tr>
-        <td>i</td>
+        <td>%i</td>
         <td>Lê um Número Inteiro Decimal, Octal ou Hexadecimal (Diferentes na Entrada e Saída de Dados)</td>
     </tr>
     <tr>
-        <td>o</td>
+        <td>%o</td>
         <td>Lê um Número Inteiro em Formato Octal sem Sinal</td>
     </tr>
     <tr>
-        <td>x ou X</td>
+        <td>%x ou %X</td>
         <td>Lê um Número Inteiro em Formato Hexadecimal sem Sinal.</td>
     </tr>
     <tr>
-        <td>u</td>
+        <td>%u</td>
         <td>Lê um Número Inteiro Decimal sem Sinal</td>
     </tr>
     <tr>
-        <td>h ou l</td>
-        <td>Colocado Antes de um Especificador Inteiro para Indicar Valor Short ou Long</td>
+        <td>%h ou %l</td>
+        <td>Colocado Antes de um Especificador Inteiro para Indicar Valor Short ou Long (por exemplo %ld)</td>
     </tr>
     <tr>
-        <td>L</td>
+        <td>%L</td>
         <td>Colocado Antes de um Especificador de Ponto Flutuante para indicar valor Long Double</td>
     </tr>
     <tr>
-        <td>s</td>
+        <td>%s</td>
         <td>Lê uma Cadeia de Caracteres (String ou Ponto pra char), incluindo o NULL.</td>
-    </tr>
-    <tr>
-        <td>[conjunto de caracteres]</td>
-        <td>Varre uma String e Lê os Caracteres Pertencentes ao Array Indicado.</td>
     </tr>
 </table>
 
@@ -331,7 +327,7 @@ printf("Olá %s, é um prazer te conhecer!\n", nome);
 
 <h3>Operadores e Expressões Aritméticas</h3>
 
-<p>Os operadores aritméticos em C são os mesmos da maioria das linguagens: Multiplicação, divisão, adição, subtração e módulo, assim como a maioria das funções.</p>
+<p>Os operadores aritméticos em C são os mesmos da maioria das linguagens: Multiplicação, divisão, módulo, adição e subtração (nessa ordem de procedência, os parênteses tem prioridade a todos esses operadores), assim como a maioria das funções.</p>
 
 <p>O símbolo de divisão inteira e divisão comum são os mesmos, ele retorna uma divisão inteira se o numerador e o denominador são inteiros.</p>
 
@@ -409,7 +405,7 @@ int main() {
 </code>
 </pre>
 
-<p>Os operadores lógicos <code>AND</code>, <code>OR</code> e <code>NOT</code> também são usados no C. Assim como os operadores ternários, por exemplo:</p>
+<p>Os operadores lógicos <code>&&</code> (and), <code>||</code> (or) e <code>!</code> (not) também são usados no C. Assim como os operadores ternários, por exemplo:</p>
 
 <pre>
 <code>
@@ -428,7 +424,33 @@ int main() {
 </code>
 </pre>
 
-<p>PS: Podemos também colocar atribuição com algum valor, como por exemplo <code>num += 2</code> ou <code>num -= 3</code>, que faça a atribuição e a operação juntos no mesmo comando. Concatenação com atribuição também pode ser colocada com o <code>+=</code>.</p>
+<p>PS: Podemos também colocar atribuição com algum valor, como por exemplo <code>num += 2</code> ou <code>num -= 3</code>, que faça a atribuição e a operação juntos no mesmo comando. Concatenação com atribuição também pode ser colocada com o <code>+=</code>. O incremento de mais um é colocado apenas usando um <code>++</code> antes ou depois da variável desejada (e a posição faz toda a diferença), da mesma forma podemos decrementar menos um com <code>--</code>. Veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+int num = 5;
+
+printf("Número: %d\n", num);
+
+num++; // Nesse caso pode usar o pós
+
+printf("Número incrementado: %d\n", num);
+
+num += 2;
+  
+printf("Número com mais 2: %d\n", num);
+
+num--;
+
+printf("Número decrementado: %d\n", num);
+
+num -= 3;
+
+printf("Número com menos 3: %d\n", num);
+printf("Número com pré-incremento: %d\n", ++num); // Nesse caso usa o pré, que incrementa antes de exibir
+printf("Número com pré-decremento: %d\n", --num);
+</code>
+</pre>
 
 <ul>
     <li><a href="tudo-sobre-c-1.html">Parte Anterior da Matéria!</a></li>

@@ -49,15 +49,26 @@
 
 <p>O switch, no entanto, seria como mandar uma carta (mesmo passando por alguém no caminho, só é entrega ao destinatário).</p>
 
-<p>No hub, a captura de pacotes é simples, chegam a todos, e é inseguro, pouco comum hoje.</p>
+<p>No hub, a captura de pacotes é simples, chegam a todos, e é inseguro, pouco comum hoje. Inclusive, ele manda as mensagens para todos os dispositivos sem exceção, inclusive o mesmo que enviou a mensagem.</p>
 
-<p>Já no switch, tem o cascateamento, porta de uplink, espelhamento de porta. Usando estes conceitos podemos capturar todo ou quase todo tráfego de uma rede LAN, num programa como o Wireshark.</p>
+<p>Já no switch, tem o cascateamento, porta de uplink, espelhamento de porta, o que permite o envio de mensagens a apenas determinados dispositivos.</p>
+
+<p>Usando estes conceitos podemos capturar todo ou quase todo tráfego de uma rede LAN, num programa como o Wireshark (num hub acaba sendo mais fácil devido ao fato deste enviar pacotes a todos os hosts, num switch é um pouco mais difícil).</p>
+
+<h3>Tipos de Rede Intranet e Extranet</h3>
+
+<p>Em uma rede privada os recursos e sistemas compartilhados ficam restritos à organização e podem estar estruturados de duas formas:</p>
+
+<ul>
+    <li><b>Intranet:</b> Compreende uma rede privada que utiliza em uma estrutura física e lógica o módulo de internet. No entanto, os serviços de rede4, como servidores de arquivos e impressão, servidor web e as aplicações são de uso interno.</li>
+    <li><b>Extranet:</b> Conhecida popularmente como internet. A diferença é que os recursos só podem ser acessados com autorização de um administrador da rede de uma companhia.</li>
+</ul>
 
 <h3>O Que é Vlan</h3>
 
 <p>Uma vlan permite segmentar um domínio de broadcast.</p>
 
-<p>Vamos supor que um computador mande uma mensagem pra um switch, e todos os computadores da rede ouçam sua mensagem (supondo que tenham 48), e também o outro switch ligado à ele, também com 48, totalizando 96 redes, cada computador teria que parar 95 vezes para ouvir o broadcast dos outros pra ver se é dele, o que causaria um problema na rede.</p>
+<p>Vamos supor que um computador mande uma mensagem pra um switch, e todos os computadores da rede ouçam sua mensagem (supondo que tenham 48), e também o outro switch ligado à ele, também com 48, totalizando 96 hosts, cada computador teria que parar 95 vezes para ouvir o broadcast dos outros pra ver se é dele, o que causaria um problema na rede.</p>
 
 <p>Nesse momento, é bom saber uma quantidade máxima de computadores suportados. Para isso criamos uma vlan (ligando e configurando os switchs), vamos supor que tenhamos vlan 1 e vlan 2 (podendo ter mais, não confundir com os switch, em ambos tem computadores de ambas as vlans), nesse caso, apenas os computadores que estão na mesma vlan que receberão a mensagem. Isso é útil por exemplo, numa empresa, na qual podemos dividir por exemplo, as informações do marketing e do financeiro, onde uma não interfere na outra.</p>
 
@@ -300,12 +311,12 @@
 
 <p>Base vem de "bandabase" e diz respeito de como o sinal é transportado.</p>
 
-<p>No final, a letra T indica o tipo de cabo usado:</p>
+<p>No final, a letra T, C ou F indica o tipo de cabo usado:</p>
 
 <ul>
     <li><b>T - </b>Par trançado.</li>
     <li><b>C - </b>Coaxial (ou um número 5 indicando que o cabo pode chegar à 500m ou 2 indicando 185m.</li>
-    <li><b>F - </b>Fibra Óptica.</li>
+    <li><b>F - </b>Fibra Óptica (pode ser S ou L também).</li>
 </ul>
 
 <p>Pra terminar essa parte, mostraremos os modos de comunicação que existem no protocolo Ethernet. Veja abaixo:</p>
