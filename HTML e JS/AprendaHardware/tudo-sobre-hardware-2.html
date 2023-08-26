@@ -101,7 +101,7 @@ Quinta casa:
 
 <p>Aí é só juntar tudo e veremos que 27 em octal é 10111 (o zero a esquerda pode ser descartado no binário e em outros sistemas numéricos).</p>
 
-<p>E para converter binário para octal, seguimos a mesma lógica da potencia de 2<sup>3</sup>. Dividimos o binário em pequenos grupos de três.</p>
+<p>E para converter binário para octal, seguimos a mesma lógica da potencia de 2<sup><small>3</small></sup>. Dividimos o binário em pequenos grupos de três.</p>
 
 <p>Veja a conversão de 1000101 em binário para octal:</p>
 
@@ -111,7 +111,7 @@ Quinta casa:
 </code>
 </pre>
 
-<p>PS: Caso não seja possível completar o grupo com três, complete com zeros.</p>
+<p>PS: Caso não seja possível completar o grupo com três, complete com zeros à esquerda.</p>
 
 <p>Seguindo a mesma lógica, vamos usar os resultados das potências (4, 2, 1) e somar tudo que tiver abaixo de um, ou seja:</p>
 
@@ -209,7 +209,7 @@ B = 11
 
 <p>Aí é só juntar tudo e veremos que 1B em hexadecimal é 11011 (o zero a esquerda pode ser descartado no binário e em outros sistemas numéricos).</p>
 
-<p>E para converter binário para hexadecimal, seguimos a mesma lógica da potencia de 2<sup>4</sup>. Dividimos o binário em pequenos grupos de quatro.</p>
+<p>E para converter binário para hexadecimal, seguimos a mesma lógica da potencia de 2<sup><small>4</small></sup>. Dividimos o binário em pequenos grupos de quatro.</p>
 
 <p>Veja a conversão de 1011101 em binário para hexadecimal:</p>
 
@@ -219,7 +219,7 @@ B = 11
 </code>
 </pre>
 
-<p>PS: Caso não seja possível completar o grupo com quatro, complete com zeros.</p>
+<p>PS: Caso não seja possível completar o grupo com quatro, complete com zeros à esquerda.</p>
 
 <p>Seguindo a mesma lógica, vamos usar os resultados das potências (8, 4, 2, 1) e somar tudo que tiver abaixo de um, ou seja:</p>
 
@@ -263,7 +263,7 @@ B = 11
 </code>
 </pre>
 
-<p>Nesse caso, precisamos lembrar que 10 - 1 é igual à 1, e 11 - 1 é igual à 10. A regra de "emprestar" números quando foi subtrair 0 de 1 permanece.</p>
+<p>Nesse caso, precisamos lembrar que 10 - 1 é igual à 1, e 11 - 1 é igual à 10. A regra de "emprestar" números quando foi subtrair 1 de 0 permanece.</p>
 
 <p>No caso de octais a mesma coisa, por exemplo:</p>
 
@@ -313,7 +313,7 @@ A13
 
 <p>Nesse caso, podemos converter os hexadecimais para decimal (no caso E vira 14) e fazer a subtração, e converter o resultado para hexadecimal. As regras de "emprestar" permanecem.</p>
 
-<p>PS: Tanto na base octal quanto na hexadecimal, é interessante converter os algarismos das unidades, dezenas e etc., para decimal, fazer a conta e reconverter para a base especificada.</p>
+<p>PS: Tanto na base octal quanto na hexadecimal, é interessante converter os algarismos em binário, octal ou hexadecimal para decimal, fazer a conta e reconverter para a base especificada.</p>
 
 <h3>Revisão de Tabuada e Potências</h3>
 

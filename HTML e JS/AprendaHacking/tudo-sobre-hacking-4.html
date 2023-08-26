@@ -118,6 +118,8 @@
 
 <p>No Nmap, podemos usar outras opções como a intensidade do scan (usando as opções <code>-T0</code>, <code>-T1</code> até <code>-T5</code> que é a mais forte), a detecção de sistema operacional (usando <code>-A</code>) e o modo verbose (com <code>-v</code>). Um exemplo combinando todos seria <code>nmap -T4 -A -v google.com</code>.</p>
 
+<p>PS: Caso o servidor a ser escaneado esteja com o ping desabilitado, use o parâmetro <code>-Pn</code> junto.</p>
+
 <p>Podemos usar o Zenmap, do mesmo programa, que tem uma interface gráfica pra ajudar nos scanners. Podemos colocar o alvo da mesma forma e escolher as configurações do scanner. Nele aparece outras informações como o sistema operacional usado pelo servidor, a topologia da rede, o traceroute e outros detalhes. Teste colocando um site, como o Google mesmo, no alvo e clique em scan.</p>
 
 <p>Portas de e-mail como SMTP (25, 587, 465), IMAP (143 e 993) e POP (110 e 995) indicam que um servidor de e-mail está sendo executado. Porta 53 indica um servidor DNS em execução. Porta 21 indica que o FTP está em execução. O mesmo vale pra serviços como HTTP, SSH, Telnet e outros. As portas 135, 137, 138, 139 e 445 mostram um host Windows desprotegido.</p>
@@ -349,7 +351,7 @@ reboot
 
 <p>PS: Todos esses comandos podem ser combinados com outros, principalmente com palavras-chave para retornar resultados mais relevantes.</p>
 
-<p>Podemos também procurar coisas literais entre aspas (como <code>"Recuperar Senha"</code>), colocar um <q>*</q> como coringa (como <code>"Samuel * da Silva"</code>), suprimir algo da pesquisa com um <q>-</q> (como <code>vazamento de contas -água -luz</code>), entre outras coisas.</p>
+<p>Podemos também procurar coisas literais entre aspas (como <code>"Recuperar Senha"</code>), colocar um <q>*</q> como coringa (como <code>"Samuel * da Silva"</code>), suprimir algo da pesquisa com um <q>-</q> (como <code>vazamento de contas -água -luz</code>), entre outras coisas. Um truque que podemos usar é para descobrir servidores FTP, digitando <code>intext:"index of" inurl:ftp</code>.</p>
 
 <p>Nesse site temos muitas outras dicas que podemos usar para buscas no Google: <a href="https://tavernalinux.com/google-hacking-para-pentest-61604f8f8122" target="_blank">https://tavernalinux.com/google-hacking-para-pentest-61604f8f8122</a></p>
 

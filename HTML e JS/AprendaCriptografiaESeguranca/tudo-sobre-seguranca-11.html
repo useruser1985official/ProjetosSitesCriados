@@ -336,6 +336,37 @@
     <li>Faça cópias sempre que houver indícios de risco iminente (por exemplo, mau funcionamento, alerta de falhas, atualização de sistemas, envio a serviços de manutenção).</li>
 </ul>
 
+<h3>Tipos de Backups</h3>
+
+<p>Existem três tipos de backup:</p>
+
+<table>
+    <tr>
+        <th>Tipo</th>
+        <th>Descrição</th>
+        <th>Vantagens</th>
+        <th>Desvantagens</th>
+    </tr>
+    <tr>
+        <td>Completo</td>
+        <td>Copia todos os dados, serve como referencial para os demais tipos</td>
+        <td>Mais básico e completo, cópia de todos os dados em um único conjunto de mídia, recuperação simples</td>
+        <td>Mais demorado, ocupa mais espaço</td>
+    </tr>
+    <tr>
+        <td>Incremental</td>
+        <td>Copia apenas os dados alterados ou criados após o último backup completo ou incremental</td>
+        <td>Menor volume de dados, mais rápido, ocupa menos espaço de armazenamento</td>
+        <td>Recuperação mais complexa (primeiro um completo e depois todos os incrementais</td>
+    </tr>
+    <tr>
+        <td>Diferencial</td>
+        <td>Copia os dados alterados ou criados desde o último backup completo</td>
+        <td>Recuperação mais rápida que o incremental (precisa só do último completo enquanto o incremental precisa do completo e dos incrementais)</td>
+        <td>Ocupa mais espaço que o incremental e menos que o completo, gasta mais tempos que o incremental e menos que o completo</td>
+    </tr>
+</table>
+
 <ul>
     <li><a href="tudo-sobre-seguranca-10.html">Parte Anterior da Matéria!</a></li>
     <!--<li><a href="tudo-sobre-seguranca-12.html">Continuação da Matéria!</a></li>-->

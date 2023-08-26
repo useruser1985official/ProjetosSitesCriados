@@ -50,6 +50,8 @@ print(lanche)
 
 <p>Visualmente, a diferença é que a lista usa colchetes, enquanto a tupla usava parênteses. Na verdade, as listas são mais próximas aos arrays em outras linguagens.<p>
 
+<p>PS: Nas listas também podemos colocar variáveis de diferentes tipos na mesma lista.</p>
+
 <p>Só que para adicionar um novo item à lista, usamos métodos do objeto de lista, o <code>append()</code> para colocar itens no final, e o <code>insert()</code> para colocar numa posição especifica, por exemplo:</p>
 
 <pre>
@@ -83,6 +85,27 @@ lanche[3] = "picolé"
 if "pizza" in lanche:
     lanche.remove("pizza")
 print(lanche)
+</code>
+</pre>
+
+<p>Assim como as tuplas, podemos também fazer o fatiamento, onde ele mostra apenas parte dos elementos da lista, assim:</p>
+
+<pre>
+<code>
+lanche = ["hambúrguer", "suco", "pizza", "pudim"]
+print(lanche[0:2])
+</code>
+</pre>
+
+<p>PS: No caso acima, ele não mostrará o elemento 2, e sim parará nesse elemento, no caso ele exibe os elementos 0 e 1 (hambúrguer e suco).</p>
+
+<p>Temos também outros tipos de fatiamento assim:</p>
+
+<pre>
+<code>
+lanche = ["hambúrguer", "suco", "pizza", "pudim"]
+print(lanche[1:]) # Mostra do primeiro elemento até o final
+print(lanche[-1]) # Mostra o último elemento, se for -2 é o penúltimo e etc.
 </code>
 </pre>
 
@@ -121,6 +144,17 @@ valores.sort(reverse = True)
 len(valores)
 </code>
 </pre>
+
+<p>E normalmente, podemos utilizar outros elementos assim:</p>
+
+<pre>
+<code>
+print(valores.count(5))
+print(valores.index(2))
+</code>
+</pre>
+
+<p>O método count, só lembrando, ele conta quantas vezes determinado elemento aparece numa variável composta. O index mostra a posição da primeira ocorrência do elemento.</p>
 
 <p>Se tentarmos mudar uma tupla o valor de índice de uma tupla, ela dará erro, por exemplo:</p>
 

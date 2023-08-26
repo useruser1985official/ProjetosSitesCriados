@@ -48,9 +48,11 @@
 
 <p>A função principal do switch é conectar os dispositivos que estão dentro de uma rede, não confunda com a funcionalidade do roteador (que conecta redes distintas entre si).</p>
 
+<p>Numa rede, nós ligamos o gateway padrão da rede (como um dispositivo wireless ou o modem integrado da operadora, que costumam ter só 4 portas para conexão) ao switch para que possamos conectar inúmeros dispositivos na nossa rede. Podemos inclusive configurar, por exemplo, um servidor DHCP.</p>
+
 <p>O switch é um equipamento concentrador, que encaminha os pacotes para o dispositivo ou grupo de dispositivos de destino, em vez de simplesmente encaminhar os pacotes para todos os nós da rede, como ocorria com os hubs. Aprende os endereços físicos dos nós e os associa às suas portas para uso posterior. Encaminha os quadros para seus destinos usando técnicas como Store and Forward, Cut-through, Fragment Free e Adaptive Switching.</p>
 
-<p>O swiitch cria uma tabela na sua memória denominada SAT (Source Address Table) com os endereços MAC das estações, que estão associados à cada porta. Quando um dispositivo transmite um quadro, o endereço de destino é pesquisado na SAT. Se encontrado o quadro será transmitido diretamente para a porta de destino. Se o endereço não for encontrado na SAT, o switch envia um broadcast perguntado em todas as portas sobre o endereço, e o adiciona a essa tabela.</p>
+<p>O switch cria uma tabela na sua memória denominada SAT (Source Address Table) com os endereços MAC das estações, que estão associados à cada porta. Quando um dispositivo transmite um quadro, o endereço de destino é pesquisado na SAT. Se encontrado o quadro será transmitido diretamente para a porta de destino. Se o endereço não for encontrado na SAT, o switch envia um broadcast perguntado em todas as portas sobre o endereço, e o adiciona a essa tabela.</p>
 
 <p>Esses são os métodos de encaminhamento:</p>
 
@@ -76,6 +78,14 @@
     <li><b>Enterprise (Core): </b>Conecta os switches workgroup e servidores de rede. Alta capacidade de transmissão e altamente gerenciáveis.</li>
     <li><b>Campus: </b>Interliga grandes extensões da rede, como prédios próximos e interligações com concessionárias de serviços.</li>
 </ul>
+
+<h3>O que é uma Bridge (Ponte)</h3>
+
+<p>Quando o administrador de redes necessita conectar duas redes distintas, uma solução viável pode ser utilizada – as bridges (pontes). Esse tipo de equipamento possui características muito parecidas com o switch. Porém, as suas aplicações em uma infraestrutura são bem distintas.</p>
+
+<p>Enquanto o switch é utilizado para conectar dispositivos da rede, a bridge é utilizada para inteligar duas redes (LAN). Mas nada impede que o administrador utilize o switch para interligar duas redes, desde que devidamente configurado e planejado.</p>
+
+<p>A vantagem em se utilizar as bridges é que a sua configuração é mais simples, necessitando apenas apontar o endereço das interfaces dos equipamentos das redes que estão sendo conectadas. Já ao se utilizar o switch, o ganho no processamento das informações pode proporcionar um ganho de desempenho na comunicação entre os dispositivos de redes distintas.</p>
 
 <h3>Escopos de Rede</h3>
 

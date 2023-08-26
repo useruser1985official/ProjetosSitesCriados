@@ -73,7 +73,7 @@ nameserver 8.8.8.8
 
 <p>PS: Esse é o servidor DNS do Google, existem vários que podemos usar. Tente dar um ping num site agora.</p>
 
-<p>Instale o programa bind digitando <code>sudo apt-get install bind9</code>. Para ver se ele está rodando após instalar digite <code>sudo /etc/init.d/bind9 status</code>, depois vá na pasta /etc/bind e dê um ls nele.</p>
+<p>Instale o programa Bind digitando <code>sudo apt-get install bind9</code>. Para ver se ele está rodando após instalar digite <code>sudo /etc/init.d/bind9 status</code>, depois vá na pasta /etc/bind e dê um ls nele.</p>
 
 <h3>Servidor DNS - Criação das Zonas e Testes com Clientes no Linux</h3>
 
@@ -158,7 +158,7 @@ www     IN  CNAME   exemplodedominio.net.
 </code>
 </pre>
 
-<p>Reinicie o bind digitando <code>sudo /etc/init.d/bind9 restart</code>, e verificaremos os arquivos de zona digitando <code>named-checkzone exemplodedominio.net /etc/bind/db.exemplodedominio.net</code> e <code>named-checkzone exemplodedominio.net /etc/bind/db.192</code>. Reinicie a máquina.</p>
+<p>Reinicie o Bind digitando <code>sudo /etc/init.d/bind9 restart</code>, e verificaremos os arquivos de zona digitando <code>named-checkzone exemplodedominio.net /etc/bind/db.exemplodedominio.net</code> e <code>named-checkzone exemplodedominio.net /etc/bind/db.192</code>. Reinicie a máquina.</p>
 
 <p>Após reiniciar, digite <code>cat /etc/resolv.conf</code> para ver este arquivo. Para testar digite <code>host -l exemplodedominio.net</code>. Digite <code>nslookup exemplodedominio.net</code> e <code>dig exemplodedominio.net</code>, faça o mesmo com o IP, digitando <code>host 192.168.1.50</code> e dê um ping digitando <code>ping vendas.exemplodedominio.net</code>.</p>
 
@@ -175,22 +175,22 @@ search exemplodedominio.net
 
 <p>Dê um ping na máquina, digitando <code>ping Ubuntu-32</code>. Podemos também pingar o vendas, digitando <code>ping vendas</code> e ver isso também num site da internet.</p>
 
-<h3>Tcpdump – Capturar e Analisar Tráfego de Rede no Linux</h3>
+<h3>TCPDump – Capturar e Analisar Tráfego de Rede no Linux</h3>
 
 
-<p>O tcpdump é uma excelente ferramenta para realizar captura e análise de pacotes de rede, recomendada para profissionais que precisem realizar monitoramento e manutenção em uma rede de computadores, além de estudantes que queiram entender a fundo o funcionamento da pilha de protocolos TCP/IP. O site oficial do tcpdump, e também da biblioteca libpcap (sobre o qual ele é baseado).</p>
+<p>O TCPDump é uma excelente ferramenta para realizar captura e análise de pacotes de rede, recomendada para profissionais que precisem realizar monitoramento e manutenção em uma rede de computadores, além de estudantes que queiram entender a fundo o funcionamento da pilha de protocolos TCP/IP.</p>
 
-<p>O tcpdump, que é software livre, roda na linha de comandos, estando disponível em diversos sistemas operacionais, como Linux, BSD, OS X, AIX e outros. Ele faz uso da biblioteca libpcap para realizar a captura de pacotes, e existe uma versão da ferramenta para Windows, chamada de WinDump, que usa a biblioteca WinPcap. Neste artigo vamos nos focar no tcpdump em si, usando para isso um sistema Linux (Ubuntu; qualquer outro sistema Linux irá servir para testar os exemplos mostrados).</p>
+<p>O TCPDump, que é software livre, roda na linha de comandos, estando disponível em diversos sistemas operacionais, como Linux, BSD, OS X, AIX e outros. Ele faz uso da biblioteca libpcap para realizar a captura de pacotes, e existe uma versão da ferramenta para Windows, chamada de WinDump, que usa a biblioteca WinPcap. Neste artigo vamos nos focar no tcpdump em si, usando para isso um sistema Linux (Ubuntu; qualquer outro sistema Linux irá servir para testar os exemplos mostrados).</p>
 
-<p>Para instalar o tcpdump no Ubuntu Linux, ou em sistemas baseados em Debian, use o comando <code>sudo apt-get install tcpdump</code>. Para ver as opções dele digite o help dele.</p>
+<p>Para instalar o TCPDump no Ubuntu Linux, ou em sistemas baseados em Debian, use o comando <code>sudo apt-get install tcpdump</code>. Para ver as opções dele digite o help dele.</p>
 
 <p>Podemos por exemplo, capturar somente o tráfego a partir da interface eth0 digitando <code>sudo tcpdump -i eth0</code>. Gravar os pacotes capturados em um arquivo de nome captura.pcap digitando <code>sudo tcpdump -w captura.pcap</code>. Ler os pacotes capturados a partir do arquivo captura.pcap digitando <code>sudo tcpdump -r captura.pcap</code>. Capturar somente o tráfego associado ao protocolo ICMP, na interface eth0 digitando <code>sudo tcpdump -i eth0 icmp</code>. Capturar somente o tráfego associado ao protocolo ARP, na interface eth0 digitando <code>sudo tcpdump -i eth0 arp</code>. Capturar somente 50 pacotes a partir da interface eth0 digitando <code>sudo tcpdump -c 50 -i eth0</code>. Podemos também mostrar os pacotes capturados tanto em ASCII quanto em HEX, incluindo cabeçalho Ethernet digitando <code>sudo tcpdump -XX -i eth0</code>. Capturar pacotes mostrando IPs em vez de nome digitando <code>sudo tcpdump -n -i eth0</code>. Capturar somente pacotes maiores que 100 bytes: digitando <code>sudo tcpdump -i eth0 greater 100</code>, neste exemplo, se emitirmos um comando ping a partir de outra janela de terminal, os pacotes não serão capturados, pois são menores que 100 bytes.</p>
 
-<p>Capturar somente pacotes destinados à porta 53 digitando <code>sudo tcpdump -i eth0 port 53</code>, para testar, abrimos um navegador e acessamos uma página qualquer da Web. Usando filtros de condições: Capturar pacotes que usam o protocolo e cujo endereço de destino seja 64.233.186.121 digitando <code>sudo tcpdump -i eth0 dst 64.233.186.121 and icmp</code>, para testar, abrimos outra janela de terminal e emitimos o comando ping para vários endereços; somente serão capturados pacotes ao ser usado o endereço discriminado no comando. Se abrirmos um navegador e tentarmos acessar esse mesmo endereço (ou o site, www.planetaunix.com.br), os pacotes não serão capturados, por conta do protocolo utilizado (http em vez de icmp), mostrando que ambas as condições (AND) precisam ser satisfeitas para que essa captura tenha efeito. Capturar somente os pacotes ICMP Echo Request enviados pelo programa ping da máquina local, cujo IP é 192.168.1.105, para um endereço remoto, como 8.8.8.8 digitando <code>sudo tcpdump -i eth0 icmp and src 192.168.1.105 and dst 8.8.8.8</code>.</p>
+<p>Capturar somente pacotes destinados à porta 53 digitando <code>sudo tcpdump -i eth0 port 53</code>, para testar, abrimos um navegador e acessamos uma página qualquer da Web. Usando filtros de condições: Capturar pacotes que usam o protocolo e cujo endereço de destino seja 64.233.186.121 digitando <code>sudo tcpdump -i eth0 dst 64.233.186.121 and icmp</code>, para testar, abrimos outra janela de terminal e emitimos o comando ping para vários endereços; somente serão capturados pacotes ao ser usado o endereço discriminado no comando. Se abrirmos um navegador e tentarmos acessar esse mesmo endereço (ou o site, www.planetaunix.com.br), os pacotes não serão capturados, por conta do protocolo utilizado (HTTP em vez de ICMP), mostrando que ambas as condições (AND) precisam ser satisfeitas para que essa captura tenha efeito. Capturar somente os pacotes ICMP Echo Request enviados pelo programa ping da máquina local, cujo IP é 192.168.1.105, para um endereço remoto, como 8.8.8.8 digitando <code>sudo tcpdump -i eth0 icmp and src 192.168.1.105 and dst 8.8.8.8</code>.</p>
 
 <p>Existem diversas outras opções e funcionalidades disponíveis no utilitário, e recomendamos uma leitura minuciosa das páginas de manual do tcpdump para aprofundar seus conhecimentos a respeito.</p>
 
-<p>Outras ferramentas muito utilizadas para captura e análise de pacotes são o Wireshark, tshark, WinDump, Ettercap e ngrep, entre outras.</p>
+<p>Outras ferramentas muito utilizadas para captura e análise de pacotes são o Wireshark, tshark, WinDump, Ettercap e NGrep, entre outras.</p>
 
 <h3>O que é um RFC</h3>
 
@@ -363,6 +363,14 @@ search exemplodedominio.net
 <p>A princípio, isso permitiria que apenas um micro acessasse a web, mas é possível compartilhar a conexão entre vários micros via NAT, opção disponível tanto no Windows quanto no Linux. Quando você compartilha a conexão entre vários micros, apenas o servidor que está compartilhando a conexão possui um endereço IP válido, só ele "existe" na internet. Todos os demais acessam através dele.</p>
 
 <p>O default gateway ou gateway padrão é justamente o micro da rede que tem a conexão, é ele que os outros consultarão quando precisarem acessar qualquer coisa na internet. Por exemplo, se você montar uma rede doméstica com 4 PCs, usando os endereços IP <code>192.168.0.1</code>, <code>192.168.0.2</code>, <code>192.168.0.3</code> e <code>192.168.0.4</code>, e o PC <code>192.168.0.1</code> estiver compartilhando o acesso à internet, as outras três estações deverão ser configuradas para utilizar o endereço <code>192.168.0.1</code> como gateway padrão.</p>
+
+<p>O gateway pode ter funções específicas nas redes, dependendo do planejamento do administrador de redes. Entre elas, podemos destacar:</p>
+
+<ul>
+    <li><b>Direcionamento:</b> No qual todas as mensagens são enviadas para o nó da rede, podendo ser roteador ou switch.</li>
+    <li><b>Proxy:</b> Uma lista de sites cujo acesso é ou não permitido por meio dos dispositivos da rede interna.</li>
+    <li><b>Firewall:</b> Um dispositivo de segurança que verifica o conteúdo dos pacotes e efetua seu bloqueio, quando nocivo aos serviços disponíveis na rede.</li>
+</ul>
 
 <ul>
     <li><a href="tudo-sobre-redes-2.html">Parte Anterior da Matéria!</a></li>
