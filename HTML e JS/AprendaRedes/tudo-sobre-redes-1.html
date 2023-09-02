@@ -108,7 +108,7 @@
         <td>Sessão</td>
     </tr>
     <tr>
-        <td>Transporte</td>
+        <td>Transporte (Host-to-Host)</td>
         <td>Transporte</td>
     </tr>
     <tr>
@@ -116,7 +116,7 @@
         <td>Rede</td>
     </tr>
     <tr>
-        <td rowspan="2">Física</td>
+        <td rowspan="2">Física (Acesso à Rede)</td>
         <td>Enlace</td>
     </tr>
     <tr>
@@ -136,7 +136,7 @@
         <td>HTTP, SMTP, IMAP, FTP, SIP, SSH, Telnet</td>
     </tr>
     <tr>
-        <td>Transporte</td>
+        <td>Transporte (Host-to-Host)</td>
         <td>TCP, UDP</td>
     </tr>
     <tr>
@@ -144,7 +144,7 @@
         <td>IPv4, IPv6</td>
     </tr>
     <tr>
-        <td>Física</td>
+        <td>Física (Acesso à Rede)</td>
         <td>ARP, Ethernet, FDDI</td>
     </tr>
 </table>
@@ -156,6 +156,26 @@
 <p>Para redefinir o TCP/IP do computador, use o comando <code>netsh int ip reset all</code> e reinicie o PC.</p>
 
 <p>Para vermos os IPs abertos no computador, suas respectivas portas e o tipo de protocolo usado (TCP ou UDP), usamos o comando <code>netstat /a /n /b</code> (no Linux use como parâmetro <code>-ane</code>).</p>
+
+<h3>Definições do Protocolo TCP/IP</h3>
+
+<p>Para isso, podemos definir a função de cada uma das camadas do protocolo TCP/IP como:</p>
+
+<ul>
+    <li><b>Aplicação:</b> Nesta camada define-se como os programas vão se comunicar com as diversas aplicações disponíveis nas redes. Ainda é de responsabilidade desta camada efetuar o gerenciamento da interface pela qual o usuário vai interagir com a aplicação.</li>
+    <li><b>Transporte (Host-to-Host):</b> É idêntica à camada de transporte do modelo de referência OSI, ou seja, responsável por prover, gerenciar e encerrar uma conexão ponto a ponto. Ao efetuar o gerenciamento da conexão, visa-se garantir a integridade dos dados pelo sequenciamento dos pacotes segmentados para efetuar o envio/recebimento das mensagens.</li>
+    <li><b>Rede (Internet):</b> Tem o mesmo objetivo da camada de rede do modelo de referência OSI, sendo responsável por definir o endereçamento dos dispositivos por meio do IP e garantir o roteamento dos pacotes nas redes.</li>
+    <li><b>Física (Acesso à Rede):</b> Desempenha a mesma função das camadas de enlace e física do modelo de referência OSI. Efetua o monitoramento do tráfego e analisa o endereçamento de hardware antes da transmissão pelo meio físico.</li>
+</ul>
+
+<p>Podemos destacar algumas semelhanças entre o modelo OSI e o protocolo TCP/IP:</p>
+
+<ul>
+    <li>Divisão em camadas.</li>
+    <li>As camadas de transporte e rede são equivalentes.</li>
+    <li>A comutação de pacotes é definida no modelo e efetuada no protocolo.</li>
+    <li>Os profissionais de redes necessitam conhecer ambos.</li>
+</ul>
 
 <h3>Endereço IP</h3>
 
@@ -365,6 +385,24 @@
         <td>5900</td>
         <td>Acesso Remoto VNC</td>
         <td>TCP</td>
+    </tr>
+    <tr>
+        <td>RTP</td>
+        <td>5004<br/>5005</td>
+        <td>Streaming de Áudio e Vídeo</td>
+        <td>UDP</td>
+    </tr>
+    <tr>
+        <td>SIP</td>
+        <td>5060</td>
+        <td>Responsável pelas Sessões de Comunicações</td>
+        <td>TCP/UDP</td>
+    </tr>
+    <tr>
+        <td>NTP</td>
+        <td>123</td>
+        <td>Responsável pela Sincronização de Horário</td>
+        <td>UDP</td>
     </tr>
 </table>
 

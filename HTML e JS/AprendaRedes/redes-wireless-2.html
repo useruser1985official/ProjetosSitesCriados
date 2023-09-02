@@ -66,6 +66,8 @@
 
 <p>Caso esteja utilizando o Linux, instale o LinSSID, digitando esses comandos: </p>
 
+<p>Quanto mais alta a onda da rede wi-fi, mais forte ela está, e ela não deve estar no mesmo nível de outra, no mesmo canal, pois dá interferência em ambas.</p>
+
 <pre>
 <code>
 sudo add-apt-repository ppa:wseverin/ppa
@@ -78,6 +80,43 @@ sudo apt-get install linssid
 
 <p>Alguns roteadores costumam mudar de canal para conseguir uma transmissão melhor e sem interferências. Nessa situação ele desconecta todos os dispositivos e os reconecta ao achar um canal livre.</p>
 
+<p>Os padrões wi-fi são esses:</p>
+
+<table>
+    <tr>
+        <th>Nome do Padrão</th>
+        <th>Velocidade da Rede</th>
+    </tr>
+    <tr>
+        <td>802.11.A</td>
+        <td>54 Mbps</td>
+    </tr>
+    <tr>
+        <td>802.11.B</td>
+        <td>11 Mbps</td>
+    </tr>
+    <tr>
+        <td>802.11.G</td>
+        <td>54 Mbps</td>
+    </tr>
+    <tr>
+        <td>802.11.N</td>
+        <td>600 Mbps</td>
+    </tr>
+    <tr>
+        <td>802.11.AC</td>
+        <td>3,6 Gbps</td>
+    </tr>
+    <tr>
+        <td>802.11.AX</td>
+        <td>10 Gbps</td>
+    </tr>
+</table>
+
+<p>Sempre escolha no roteador, o melhor padrão para wi-fi, mas o dispositivo também deverá ser compatível com o mesmo padrão, o que pode ter problemas com alguns dispositivos, principalmente os mais antigos, por isso que o padrão em muitos roteadores é o Mixed, mas ele diminui o desempenho.</p>
+
+<p>Sobre o canal de comunicação, aqui no Brasil tem 13, mas geralmente o melhor é usar o 1, 6 ou 11.</p>
+
 <h3>Protegendo seu Wi-Fi</h3>
 
 <p>No seu navegador, acesse o IP do seu roteador (indo em ipconfig, no caso do Windows, e pegando o endereço do gateway padrão), como por exemplo <code>192.168.15.1</code>.</p>
@@ -87,6 +126,10 @@ sudo apt-get install linssid
 <p>Toda rede wi-fi possui um protocolo de segurança, que define sua senha e a criptografa. Prefira os protocolos WPA3 ou WPA2, evite o protocolo WEP, que é mais vulnerável.</p>
 
 <p>Apesar da função WPS ser útil para conectar um dispositivo a rede wi-fi, ele também tem vulnerabilidades, pois facilita o acesso a invasores na rede, e por isso é recomendado desativá-lo.</p>
+
+<p>Já a opção SSID define see mostrará ou não a wi-fi para as pessoas, caso ela não seja mostrada teremos que configurar manualmente no dispositivo (mas isso pode ser burlado por um hacker).</p>
+
+<p>Temos também um filtro de MAC na configuração do wi-fi, onde podemos bloquear ou permitir determinados endereços físicos.</p>
 
 <p>Procure também atualizações para o firmware do seu roteador.</p>
 

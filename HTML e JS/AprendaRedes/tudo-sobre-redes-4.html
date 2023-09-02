@@ -39,7 +39,9 @@
 
 <p>Tabelas de roteamento são registros de endereços de destino associados ao número de saltos até ele, podendo conter várias outras informações.</p>
 
-<p>Protocolos de roteamento determinam o conteúdo das tabelas de roteamento, ou seja, são eles que ditam a forma como a tabela é montada e de quais informações ela é composta. Existem dois tipos de algoritmo atualmente em uso pelos protocolos de roteamento: O algoritmo baseado em Vetor de Distancia (Distance-Vector Routing Protocols) e o algoritmo baseado no Estado de Enlace (Link State Routing Protocols).</p>
+<p>Protocolos de roteamento determinam o conteúdo das tabelas de roteamento, ou seja, são eles que ditam a forma como a tabela é montada e de quais informações ela é composta. Existem dois tipos de algoritmo atualmente em uso pelos protocolos de roteamento: O algoritmo baseado em Vetor de Distância (Distance-Vector Routing Protocols) e o algoritmo baseado no Estado de Enlace (Link State Routing Protocols).</p>
+
+<p>Esses são os tipos de roteamento:</p>
 
 <ul>
     <li><b>Roteamento Interno:</b> Os roteadores utilizados para trocar informações dentro de Sistemas Autônomos são chamados roteadores internos (interior routers) e podem utilizar uma variedade de protocolos de roteamento interno (Interior Gateway Protocols - IGPs). Dentre eles estão: RIP, IGRP, EIGRP, OSPF e Integrated IS-IS.</li>
@@ -60,7 +62,7 @@
 
 <p>Na rota dinâmica, o roteador troca informações sobre as rotas com outros roteadores. Neste tipo, os caminhos mudam de acordo com a carga do tráfego ou da topologia da rede. Esse tipo de roteamento, apesar de conseguir mudanças mais rápidas na rota, é mais suscetível a problemas com loops e oscilações.</p>
 
-<h4>Rotas diretas</h4>
+<h4>Rotas Diretas</h4>
 
 <p>São as rotas criadas quando colocamos diretamente um IP na interface.</p>
 
@@ -77,9 +79,9 @@
     <li>Distância administrativa (Custo da rota até a rede destino).</li>
 </ul>
 
-<p>Aquela rota que tiver o menor número de saltos será a escolhida. Caso o número de saltos seja igual para as duas situações, então aquela rota com o menor custo (menor distância administrativa) será a escolhida. Tendo por base a figura 5.17 e de posse das informações da tabela abaixo, vamos ver qual será a rota escolhida, considerando que as rotas não estejam demasiadamente ocupadas.</p>
+<p>Aquela rota que tiver o menor número de saltos será a escolhida. Caso o número de saltos seja igual para as duas situações, então aquela rota com o menor custo (menor distância administrativa) será a escolhida. Tendo por base a figura acima e de posse das informações da tabela, vamos ver qual será a rota escolhida, considerando que as rotas não estejam demasiadamente ocupadas.</p>
 
-<p>Observe que o número de saltos é o mesmo para as duas rotas (2). Para chegar a R4 em qualquer um dos caminhos é preciso passar por 2 roteadores a partir de R1 Mas, observe que a distância administrativa indo por R3 é menor do que indo por R2.</p>
+<p>Observe que o número de saltos é o mesmo para as duas rotas (2). Para chegar a R4 em qualquer um dos caminhos é preciso passar por 2 roteadores a partir de R1, mas, observe que a distância administrativa indo por R3 é menor do que indo por R2.</p>
 
 <p>Logo o pacote será encaminhado através de R3 e não de R2.</p>
 
