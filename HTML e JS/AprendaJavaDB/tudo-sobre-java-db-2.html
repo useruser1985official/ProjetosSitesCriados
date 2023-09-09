@@ -106,6 +106,19 @@ default charset = utf8;
 
 <p>Para executar um arquivo de teste, tecle Shift e F6. Verifique se o servidor está ativo e conectado.</p>
 
+<h3>Anotações JUnit</h3>
+
+<p>Vamos ver agora algumas anotações do JUnit úteis para a organização e para a execução dos procedimentos de teste em classes Java:</p>
+
+<ul>
+    <li><code>@Test</code>: Usada para sinalizar que o método anotado é um método de teste.</li>
+    <li><code>@AfterAll</code>: Usada para sinalizar que o método anotado deve ser executado após todos os testes na classe de teste atual.</li>
+    <li><code>@AfterEach</code>: Para sinalizar que o método anotado deve ser executado após cada método @Test, @RepeatedTest, @ParameterizedTest, @TestFactory e @TestTemplate na classe de teste atual.</li>
+    <li><code>@BeforeAll</code>: Usada para sinalizar que o método anotado deve ser executado antes de todos os testes na classe de teste atual.</li>
+    <li><code>@BeforeEach</code>: Usada para sinalizar que o método anotado deve ser executado antes de cada método @Test, @RepeatedTest, @ParameterizedTest, @TestFactory e @TestTemplate na classe de teste atual.</li>
+    <li><code>@RepeatTest</code>: Usada para sinalizar que o método anotado é um método de modelo de teste que deve ser repetido um número específico de vezes com um nome de exibição configurável.</li>
+</ul>
+
 <h3>Criando DAO - Buscar Todos</h3>
 
 <p>Esse é o método para podermos ver o que está no banco pelo Java, coloque isso em CategoriaDao:</p>

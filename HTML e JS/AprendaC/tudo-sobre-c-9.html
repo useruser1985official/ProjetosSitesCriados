@@ -27,6 +27,33 @@
             
 <h2>Tudo sobre C Parte 9</h2>
 
+<h3>Variável Global e Local com Mesmo Nome</h3>
+
+<p>Na linguagem C, para conseguirmos acessar o valor de uma variável global, dentro de uma função que possui uma variável local com mesmo nome, devemos usar a instrução extern (Manzano, 2015). Veja no exemplo, que foi necessário criar uma nova variável chamada <q>b</q>, com um bloco de instruções, que atribui a nova variável o valor <q>externo</q> de x:</p>
+
+<pre>
+<code>
+int x = 10;
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+
+    int x = -1;
+    int b;
+
+    {
+        extern int x;
+        b = x;
+    }
+
+    printf("Valor de x: %d\n", x);
+    printf("Valor de b (x global): %d\n", b);
+
+    return 0;
+}
+</code>
+</pre>
+
 <ul>
     <li><a href="tudo-sobre-c-8.html">Parte Anterior da Matéria!</a></li>
     <!--<li><a href="tudo-sobre-c-10.html">Continuação da Matéria!</a></li>-->

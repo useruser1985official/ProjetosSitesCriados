@@ -95,8 +95,9 @@ int quadrado(int n) {
 </code>
 </pre>
 
-<p>PS: Não é possível usar parâmetros com valores padrões inicializados em C.</p>
+<p>PS: Também é possível implementar a funcão antes do método main, nesse caso, dispensa a indicação do mesmo, mas não é recomendado.</p>
 
+<p>Caso deseje inicializar uma variável de um parâmetro com um valor padrão, coloque apenas na indicação, não coloque nada na função (a não ser que ela venha antes do main, nesse caso sim pode ser colocada a inicialização diretamente nela).</p>
 <h3>Funções - Escopo das Variáveis</h3>
 
 <p>O escopo de uma variável determina como e onde uma variável é utilizada dentro de um programa.</p>
@@ -141,10 +142,6 @@ void escrevaValor() {
 </pre>
 
 <p>No código acima, se pegarmos a variável global (no caso, a numero) e colocarmos dentro da função (escrevaValor()), ele dará erro, porque assim ela se tornará local e só funciona dentro da função da qual está.</p>
-
-<p>PS: Também é possível implementar a funcão antes do método main, nesse caso, dispensa a indicação do mesmo, mas não é recomendado.</p>
-
-<p>Caso deseje inicializar uma variável de um parâmetro com um valor padrão, coloque apenas na indicação, não coloque nada na função (a não ser que ela venha antes do main, nesse caso sim pode ser colocada a inicialização diretamente nela).</p>
 
 <h3>Arrays - Declaração e Atribuição</h3>
 
@@ -311,7 +308,7 @@ for(i = 0; i < TAM; i++) {
 setlocale(LC_ALL,"portuguese"); // Importar locale.h.
 int linha, coluna;
 
-// Matriz abaixo, não esquecer de definir as constantes no início do código.
+// Matriz abaixo, não esquecer de definir as constantes no início do código, com NUM_L 5 e NUM_C 4.
 
 float notas[NUM_L][NUM_C] = {{7.5, 6.8, 9.6, 6.7},
                              {6.5, 6.3, 8.4, 7.6},
@@ -397,7 +394,7 @@ int main() {
 
 <p>Dessa forma, facilita a manipulação de arquivos, podendo criar funções para criar, mover ou deletar arquivos.</p>
 
-<p>PS: No Windows, o chdir pode não funcionar, nesse caso use <code>SetCurrentDirectory()</code> (importe windows.h) para isso. E mesmo no Windows, em ambos os casos, utilize a barra pro lado direito, se for usar pra esquerda coloque duas. Isso acontece porque barras pra esquerda são interpretadas como sequências de escape.</p>
+<p>PS: No Windows, o chdir pode não funcionar, nesse caso use <code>SetCurrentDirectory()</code> (importe windows.h) para isso. E mesmo no Windows, em ambos os casos, utilize a barra pro lado direito, se for usar pra esquerda coloque duas (tipo <code>\\</code>). Isso acontece porque barras pra esquerda são interpretadas como sequências de escape.</p>
 
 <p>O getenv funciona com esse parâmetros:</p>
 

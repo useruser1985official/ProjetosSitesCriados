@@ -34,8 +34,6 @@
             
 <h2>Tudo sobre C++ Parte 13</h2>
 
-
-
 <h3>Aritmética de Ponteiros</h3>
 
 <p>Há duas operações aritméticas que podemos efetuar com ponteiros: adição de ponteiros e subtração de ponteiros. Além disso, também é possível comparar dois ponteiros entre si.</p>
@@ -141,6 +139,44 @@ for(int i = 0; i < sizeof(pares) / sizeof(int); i++) {
     ponteiro = &pares[i];
 
     cout << "Conteúdo apontado pelo " << (i + 1) << "º incremento do ponteiro: " << *ponteiro << endl;
+}
+</code>
+</pre>
+
+<h3>Uso de Funções com Ponteiros</h3>
+
+<p>Uma função pode retornar um número inteiro, um real e um caractere, assim como também pode retornar um vetor. Para isso, devemos utilizar ponteiros (ou apontador). A única forma de retornar um vetor é por meio de um ponteiro, pois não é possível criar funções como por exemplo, <code>int[10] calcular()</code>, onde int[10] quer dizer que a função retorna um vetor com 10 posições.</p>
+
+<p>A seguir veja um exemplo de uso desse recurso através de uma função, que cria um vetor de dez posições e os preenche com valores aleatórios, imprime os valores, e posteriormente passa esse vetor para <q>quem</q> chamar a função:</p>
+
+<pre>
+<code>
+int *gerarRandomico();
+
+int main() {
+    int *p;
+    int i;
+
+    p = gerarRandomico();
+
+    for(i = 0; i < 10; i++) {
+        cout << "p[" << i << "] = " << p[i] << "." << endl;
+    }
+
+    return 0;
+}
+
+int *gerarRandomico() {
+    static int r[10];
+    int a;
+
+    for(a = 0; a < 10; a++) {
+        r[a] = rand() % 100;
+
+        cout << "r[" << a << "] = " << r[a] << "." << endl;
+    }
+
+    return r;
 }
 </code>
 </pre>

@@ -158,6 +158,8 @@ void iniVet(int *v) {
 </code>
 </pre>
 
+<p>A função que recebe o vetor como parâmetro poderia ser declarada também como <code>void iniVet(int v[])</code>.</p>
+
 <h3>Aritmética de Ponteiros</h3>
 
 <p>Há duas operações aritméticas que podemos efetuar com ponteiros: adição de ponteiros e subtração de ponteiros. Além disso, também é possível comparar dois ponteiros entre si.</p>
@@ -267,6 +269,44 @@ for(int i = 0; i < sizeof(pares) / sizeof(int); i++) {
 </pre>
 
 <p>Ele retornará 1 pra comparações verdadeiras e 0 pra falsas.</p>
+
+<h3>Uso de Funções com Ponteiros</h3>
+
+<p>Uma função pode retornar um número inteiro, um real e um caractere, assim como também pode retornar um vetor. Para isso, devemos utilizar ponteiros (ou apontador). A única forma de retornar um vetor é por meio de um ponteiro, pois não é possível criar funções como por exemplo, <code>int[10] calcular()</code>, onde int[10] quer dizer que a função retorna um vetor com 10 posições.</p>
+
+<p>A seguir veja um exemplo de uso desse recurso através de uma função, que cria um vetor de dez posições e os preenche com valores aleatórios, imprime os valores, e posteriormente passa esse vetor para <q>quem</q> chamar a função:</p>
+
+<pre>
+<code>
+int *gerarRandomico();
+
+int main() {
+    int *p;
+    int i;
+
+    p = gerarRandomico();
+
+    for(i = 0; i < 10; i++) {
+        printf("p[%d] = %d\n", i, p[i]);
+    }
+
+    return 0;
+}
+
+int *gerarRandomico() {
+    static int r[10];
+    int a;
+
+    for(a = 0; a < 10; a++) {
+        r[a] = rand() % 100;
+
+        printf("r[%d] = %d\n", a, r[a]);
+    }
+
+    return r;
+}
+</code>
+</pre>
 
 <h3>Alocação Dinâmica de Memória</h3>
 
@@ -407,7 +447,7 @@ printf("%d\n", -num);
 </code>
 </pre>
 
-<p>PS: Esse negativo não muda o valor da variável, só na exibição  nesse cout ele faz a inversão.</p>
+<p>PS: Esse negativo não muda o valor da variável, só na exibição nesse printf ele faz a inversão.</p>
 
 <p>Para gravar o novo valor da variável, use a multiplicação por -1 antes de exibir.</p>
 
