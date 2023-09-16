@@ -194,7 +194,7 @@
     <tr>
         <td>8</td>
         <td>0</td>
-        <td>Echo Request (Requisição de Edo, usado pelo comando Ping)</td>
+        <td>Echo Request (Requisição de Eco, usado pelo comando Ping)</td>
     </tr>
     <tr>
         <td rowspan="3">11</td>
@@ -211,25 +211,25 @@
     </tr>
 </table>
 
-<p>Mostramos o protocolo ICMP em ação usando os comandos ping e tracert, no prompt, seguido do IP ou domínio.</p>
+<p>Mostramos o protocolo ICMP em ação usando os comandos <code>ping</code> e <code>tracert</code>, no prompt, seguido do IP ou domínio.</p>
 
-<p>O TTL é o tempo de vida do pacote, que existe para que ele não fique procurando eternamente um host, iniciando em 255 e vai diminuindo de 1 em 1 (decremento) até achar o host (ele vai de 255 a 0), se ele não achar antes de chegar a 0, ele dará tempo excedido e finalizará sua vida. Isso é usado no ping e no tracert (sendo mais necessário neste último).</p>
+<p>O TTL é o tempo de vida do pacote, que existe para que ele não fique procurando eternamente um host, iniciando em 255 e vai diminuindo de 1 em 1 (decremento) até achar o host (ele vai de 255 a 0), se ele não achar antes de chegar a 0, ele dará tempo excedido e finalizará sua vida. Isso é usado no Ping e no Traceroute (sendo mais necessário neste último).</p>
 
 <h3>Como Funciona o Utilitário Traceroute</h3>
 
 <p>O Traceroute é uma ferramenta de diagnóstico que permite ver a rota que datagramas IP seguem quando são enviados de um host ao outro. Faz uso do protocolo ICMP e do campo TTL no cabeçalho IP do datagrama.</p>
 
-<p>O propósito do TTL é evitar que datagramas entrem em um loop de roteamento, quando um datagrama chega à um roteador, seu TTL é decrementado (-1) antes de ser encaminhado. Quando um roteador recebe um datagrama cujo TTL é igual à 0, ele o descarta e envia de volta ao host que o originou uma mensagem ICMP do tipo Tempo Excedido. Essa mensagem contém o endereço IP do roteado como endereço de origem.</p>
+<p>O propósito do TTL é evitar que datagramas entrem em um loop de roteamento, quando um datagrama chega à um roteador, seu TTL é decrementado (-1) antes de ser encaminhado. Quando um roteador recebe um datagrama cujo TTL é igual à 0, ele o descarta e envia de volta ao host que o originou uma mensagem ICMP do tipo Tempo Excedido. Essa mensagem contém o endereço IP do roteador como endereço de origem.</p>
 
-<p>Para entendermos o funcionamento do traceroute, precisamos saber que:</p>
+<p>Para entendermos o funcionamento do Traceroute, precisamos saber que:</p>
 
 <ul>
-    <li>O tracerout envia um datagrama com um TTL igual à  ao host de destino.</li>
-    <li>Ao chegar ao primeiro roteado no caminho, o TTL é decrementado, ficando com o valor zero, o datagrama é descartado e a mensagem "tempo excedido" é enviada de volta à origem.</li>
-    <li>Dessa forma, o primeiro roteador no caminho é identificado. Então o traceroute envia um novo datagrama, desta vez com o TTL igual à 2, que decerementa o TTL para 1, e então será descartado no segundo roteador, e assim descobrimos o endereço IP deste roteador também.</li>
+    <li>O Traceroute envia um datagrama com um TTL igual à do host de destino.</li>
+    <li>Ao chegar ao primeiro roteador no caminho, o TTL é decrementado, ficando com o valor zero, o datagrama é descartado e a mensagem "Tempo Excedido" é enviada de volta à origem.</li>
+    <li>Dessa forma, o primeiro roteador no caminho é identificado. Então o Traceroute envia um novo datagrama, desta vez com o TTL igual à 2, que decerementa o TTL para 1, e então será descartado no segundo roteador, e assim descobrimos o endereço IP deste roteador também.</li>
     <li>Esse processo continua até que um datagrama chegue ao host de destino.</li>
-    <li>Ao chegar no host de destino, será gerado um erro ICMP do tipo "Porta Inalcançávl", e então, o traceroute differencia o recebimento de mensagens "Tempo Excedido" da mensagem "Porta Inalcançável" para quando parar.</li>
-    <li>Já no Windows, são enviados datagramas ICMP do tipo Echo Request (o famoso ping), e quando o dispositivo de origem recebe uma resposta Echo Reply, ele sabe que o pacote chegou ao seu destino.</li>
+    <li>Ao chegar no host de destino, será gerado um erro ICMP do tipo "Porta Inalcançável", e então, o Traceroute differencia o recebimento de mensagens "Tempo Excedido" da mensagem "Porta Inalcançável" para quando parar.</li>
+    <li>Já no Windows, são enviados datagramas ICMP do tipo Echo Request (o famoso Ping), e quando o dispositivo de origem recebe uma resposta Echo Reply, ele sabe que o pacote chegou ao seu destino.</li>
 </ul>
 
 <p>Para trabalharmos com isso, usamos (em Windows), usamos o comando <code>tracert</code>. No Linux substitua por <code>traceroute</code>.</p>
@@ -240,15 +240,15 @@
 
 <h3>Como Funciona o Utilitário Ping</h3>
 
-<p>O programa ping é um utilitário que permite testar a conectividade entre dois hosts em uma rede. Ele funciona enviando uma mensagem ICMP do tipo Echo Requeste à um host, e espera o recebimento de uma mensagem ICMP do tipo Echo Reply em retorno (resumindo, ele envia uma mensagem que retornará num espaço de tempo).</p>
+<p>O programa Ping é um utilitário que permite testar a conectividade entre dois hosts em uma rede. Ele funciona enviando uma mensagem ICMP do tipo Echo Request à um host, e espera o recebimento de uma mensagem ICMP do tipo Echo Reply em retorno (resumindo, ele envia uma mensagem que retornará num espaço de tempo).</p>
 
 <p>No geral, se não conseguirmos "pingar" um host, significa que não há conectivadade entre as máquinas envolvidas no processo. É um dos primeiros passos que tomamos para determinar qual o problema que afeta uma rede onde um ou mais hosts não conseguem se comunicar entre si, ou com a rede externa.</p>
 
-<p>O número de sequência se inicia em 1 e é incrementado cada vez que uma nova mensagem Echo Requeste é enviada. O ping então mostra o número de sequência de cada datagrama retornado, de modo que podemos verificar se os pacotes se perderam, estão fora de ordem ou foram duplicados.</p>
+<p>O número de sequência se inicia em 1 e é incrementado cada vez que uma nova mensagem Echo Request é enviada. O Ping então mostra o número de sequência de cada datagrama retornado, de modo que podemos verificar se os pacotes se perderam, estão fora de ordem ou foram duplicados.</p>
 
 <p>Como sabemos, o protocolo IP é um serviço de entrega de datagramas do tipo "melhor esforço", de modo que qualquer uma dessas condições citadas pode vir à ocorrer.</p>
 
-<p>Além de mostrar o número de sequência, quando a mensagem de retorno Echo Reply é recebida, também são mostrados o TTL e o RTT calculado. O Ping calcula o RTT armazenando a hora na qual o pacote Echo Request é enviado na área de dados da mensagem ICMP. Então, quando a resposta Echo Reply é recebida, ele simplesmente subtrai esse valor de hora da hora atual (momento em que o datagrama é recebido); Erros e pacotes também são relatados pelo comando ping.</p>
+<p>Além de mostrar o número de sequência, quando a mensagem de retorno Echo Reply é recebida, também são mostrados o TTL e o RTT calculado. O Ping calcula o RTT armazenando a hora na qual o pacote Echo Request é enviado na área de dados da mensagem ICMP. Então, quando a resposta Echo Reply é recebida, ele simplesmente subtrai esse valor de hora da hora atual (momento em que o datagrama é recebido). Erros e pacotes também são relatados pelo comando Ping.</p>
 
 <p>Para usarmos ele, usamos o comando <code>ping www.google.com.br</code> (substituindo pelo site/IP desejado).</p>
 
@@ -256,7 +256,7 @@
 
 <p>Um exemplo de uso seria <code>ping /n 6 www.google.com.br</code>, para enviar seis requisições, ao invés do padrão 4. Outro exemplo seria colocar o parâmetro <code>/t</code> para enviar infinitas requisições no Windows, por exemplo <code>ping /t www.google.com.br</code>. Também podemos forçar o uso de IPv4 com o parâmetro <code>/4</code> ou de IPv6 usando <code>/6</code>.</p>
 
-<p>PS: O Ping é um comando para iniciar o teste de conectividade, apesar de algumas pessoas errarem, o ping é apenas o comando, o tempo de milissegundos para o outro dispositivo se chama latência (o tempo máximo de latência deve ser de 45 ms, em média, no Brasil, quanto mais distante maior será a latência, como por exemplo, um servidor nos EUA).</p>
+<p>PS: O Ping é um comando para iniciar o teste de conectividade, apesar de algumas pessoas errarem, o Ping é apenas o comando, o tempo de milissegundos para o outro dispositivo se chama latência (o tempo máximo de latência deve ser de 45 ms, em média, no Brasil, quanto mais distante maior será a latência, como por exemplo, um servidor nos EUA).</p>
 
 <h3>Protocolo TCP - Campos do Cabeçalho</h3>
 
@@ -290,10 +290,10 @@
     <li><b>Número de Porta de Destino: </b>Número que identifica a aplicação (processo) que deve receber os dados.</li>
     <li><b>Número de Sequência: </b>Número que identifica o byte em um fluxo de dados do transmissor para o receptor.</li>
     <li><b>Número de Confirmação: </b>Se a flag ACK estiver ativa, o valor desse campo será o próximo número de sequência que o destinatário respera receber.</li>
-    <li><b>Comprimento do Cabeçalho(Data Offset): </b>Tamanho do cabeçalho TCP em palavras de 32 bits.</li>
+    <li><b>Comprimento do Cabeçalho (Data Offset): </b>Tamanho do cabeçalho TCP em palavras de 32 bits.</li>
     <li><b>Reservado (3 bits): </b>Para uso futuro. Consiste atualmente na sequência 000.</li>
-    <li><b>Flags (ECN - Explicit Congestion Notification): </b>Contendo NS (Campo opcional adicionado ao ECN para proteger contra dissimulação acidental ou malicioso de pacotes marcados do transmissor), CWR (Congestion Window Reduced) e ECE (ECN- Echo, cuja função depende do valor da função SYN).</li>
-    <li><b>Flags (Bits de Controle): </b>Contendo URG (Quando ativado, indica que o campo ponteiro de urgente é válido e o recurso transferência de dados com prioridade foi invocado), ACK (Bit de Confirmação. Quando ativado, indica que o segmento carrega uma mensagem de confirmação e que o valor do campo Número de Confirmação é válido, e carrega o próximo número de sequência esperado pelo host), PSH (Bit de Push. Quando ativado, indica que o transmissor do segmento usa o recurso TCP Push, o qual requisita que os dados do segmento sejam imediatamente transmitidos à aplicação no dispositivo de destino), RST (Bit de Reset. Quando ativado, indica que o transmissor encontrou um problema e deseja resetar a conexão), SYN (Bit de Sincronismo. Requisição para sincronizar números de sequência e estabelecer uma conexão entre dois hosts. O campo número de seqência contém o número de sequência inicial (ISN) do host que transmite o segmento) e FIN (Bit de Finalização. Quando ativado indica que o transmissor do segmento requisita que a conexão seja encerrada).</li>
+    <li><b>Flags (ECN - Explicit Congestion Notification): </b>Contendo NS (campo opcional adicionado ao ECN para proteger contra dissimulação acidental ou malicioso de pacotes marcados do transmissor), CWR (Congestion Window Reduced) e ECE (ECN - Echo, cuja função depende do valor da função SYN).</li>
+    <li><b>Flags (Bits de Controle): </b>Contendo URG (quando ativado, indica que o campo ponteiro de urgente é válido e o recurso transferência de dados com prioridade foi invocado), ACK (Bit de Confirmação. Quando ativado, indica que o segmento carrega uma mensagem de confirmação e que o valor do campo Número de Confirmação é válido, e carrega o próximo número de sequência esperado pelo host), PSH (Bit de Push. Quando ativado, indica que o transmissor do segmento usa o recurso TCP Push, o qual requisita que os dados do segmento sejam imediatamente transmitidos à aplicação no dispositivo de destino), RST (Bit de Reset. Quando ativado, indica que o transmissor encontrou um problema e deseja resetar a conexão), SYN (Bit de Sincronismo. Requisição para sincronizar números de sequência e estabelecer uma conexão entre dois hosts. O campo número de seqência contém o número de sequência inicial (ISN) do host que transmite o segmento) e FIN (Bit de Finalização. Quando ativado indica que o transmissor do segmento requisita que a conexão seja encerrada).</li>
     <li><b>Tamanho da Janela: </b>O tamanho da janela de recepção indica o número de bytes que o transmissor deste segmento quer aceitar do host de destino, em cada transmissão.</li>
     <li><b>Checksum: </b>Usado para verificação de erros do cabeçalho e dos dados transmitidos.</li>
     <li><b>Ponteiro de Urgente: </b>Usado em conjunto com o flag URG para transferência de dados com prioridade.</li>

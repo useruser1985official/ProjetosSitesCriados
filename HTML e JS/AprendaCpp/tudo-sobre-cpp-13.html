@@ -409,6 +409,21 @@ cout << frase << endl;
 </code>
 </pre>
 
+<p>Para dividir uma string:</p>
+
+<pre>
+<code>
+string frase = "Exemplo de Frase";
+regex reg(" "); // Inclua regex, aqui vai o caractere para dividir
+
+vector&lt;string&gt; saida(sregex_token_iterator(frase.begin(), frase.end(), reg, -1), sregex_token_iterator()); // Inclua cstring e vector
+
+for(string s: saida) {
+    cout << s << endl;
+}
+</code>
+</pre>
+
 <p>Para jogar uma string num array de char:</p>
 
 <pre>
@@ -422,7 +437,7 @@ cout << novo << endl;
 
 <p>PS: Para fazer o contrário, que é converter um const char* para string, basta fazer um typecast com string.</p>
 
-<p>Você pode converter int em string usando o método <code>std::to_string()</code> (inclua cstring), assim:</p>
+<p>Você pode converter int em string usando o método <code>to_string()</code> (inclua cstring), assim:</p>
 
 <pre>
 <code>

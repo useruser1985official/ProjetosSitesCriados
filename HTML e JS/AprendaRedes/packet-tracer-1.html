@@ -74,16 +74,16 @@
 
 <p>Em Connections, vá em Straigh-Through e clique no PC (fast Ethernet) e ligue num Ethernet do switch. Faça o mesmo no laptop. Use o mesmo cabo pra ligar uma das portas do switch no servidor.</p>
 
-<p>Clique no servidor, na janela que abrir vá em Desktop e em IP Configuration e coloque um IP privado estático (como 10.0.0.1) e sua máscara de subrede. Pra configurar o servidor como um servidor DHCP, vá em Services, em DHCP e coloque os seguintes itens:</p>
+<p>Clique no servidor, na janela que abrir vá em Desktop e em IP Configuration e coloque um IP privado estático (como <code>10.0.0.1</code>) e sua máscara de subrede. Pra configurar o servidor como um servidor DHCP, vá em Services, em DHCP e coloque os seguintes itens:</p>
 
 <ul>
     <li><b>Service:</b> On</li>
-    <li><b>DNS Server:</b> 10.0.0.1</li>
+    <li><b>DNS Server:</b> <code>10.0.0.1</code></li>
 </ul>
 
-<p>Abra o PC, vá em Desktop e em IP Configuration, e selecione o DHCP. Ele escolherá o IP automaticamente para ele. Faça o mesmo no laptop. Se ele estiver conectado, ele entregará o IP da rede do servidor, se ele não tiver acesso ele terá um IP com 169.254 no começo, que indica falha de DHCP e não terá acesso à internet.</p>
+<p>Abra o PC, vá em Desktop e em IP Configuration, e selecione o DHCP. Ele escolherá o IP automaticamente para ele. Faça o mesmo no laptop. Se ele estiver conectado, ele entregará o IP da rede do servidor, se ele não tiver acesso ele terá um IP com <code>169.254</code> no começo, que indica falha de DHCP e não terá acesso à internet.</p>
 
-<p>Vamos fazer o nosso servidor ser um servidor HTTP também com domínio e tudo., clique nele, vá em Services e em DNS e em name, coloque o nome do nosso <q>site</q> (como www.exemplodesite.com) e o address como 10.0.0.1, e coloque On no DNS Service. Clique em HTTP e escolha o index.html e edite o documento (podemos inclusive importar arquivos como imagens e colocar via tags, para isso vá em import). Neste caso, o site estará disponível apenas na rede local.</p>
+<p>Vamos fazer o nosso servidor ser um servidor HTTP também com domínio e tudo., clique nele, vá em Services e em DNS e em name, coloque o nome do nosso <q>site</q> (como www.exemplodesite.com) e o address como <code>10.0.0.1</code>, e coloque On no DNS Service. Clique em HTTP e escolha o index.html e edite o documento (podemos inclusive importar arquivos como imagens e colocar via tags, para isso vá em import). Neste caso, o site estará disponível apenas na rede local.</p>
 
 <p>Para disponibilizar para a web, coloque uma nuvem Cloud (Network Services e WAN Emulation), o modem (mesmo local) e o pc (End Devices) numa outra rede. Ligue o PC no modem com o cabo Through e ligue o modem à nuvem com o cabo Phone. Ligue a nuvem com o cabo Cross-Over (Ethernet) e ligue no switch (Ethernet) da primeira rede. Espere a auto-configuração e clique na nuvem, vá em Config e DSL e adicione as portas lá, salve. Depois vá no PC na outra rede e coloque a configuração DHCP no ip dele (em Desktop), ele pegará o IP do servidor e entrará na rede dele.</p>
 
@@ -108,9 +108,9 @@
     <li>Through do Servidor (idem) ao Switch (idem, no 2).</li>
 </ul>
 
-<p>Clique no PC 0, em Config, no Fast Ethernet (placa de rede dele) e coloque o IP estático 192.168.1.3 com máscara 255.255.255.0. Faça o mesmo no PC 1 com o IP 192.168.1.4 (eles devem estar na mesma rede, se colocar 192.168.2.x por exemplo, ele estará fora da rede.</p>
+<p>Clique no PC 0, em Config, no Fast Ethernet (placa de rede dele) e coloque o IP estático <code>192.168.1.3</code> com máscara <code>255.255.255.0</code>. Faça o mesmo no PC 1 com o IP <code>192.168.1.4</code> (eles devem estar na mesma rede, se colocar 192.168.2.x por exemplo, ele estará fora da rede.</p>
 
-<p>No servidor coloque o IP 192.168.2.10. Ele fará parte de outra rede diferente dos dois PCs (que estão na rede 1), o switch tá na rede 2 com o servidor.</p>
+<p>No servidor coloque o IP <code>192.168.2.10</code>. Ele fará parte de outra rede diferente dos dois PCs (que estão na rede 1), o switch tá na rede 2 com o servidor.</p>
 
 <p>Abra o PC no Desktop e em terminal ou prompt de comando (simulando Linux e Windows, dê o comando <code>ping 192.168.1.4</code> e vê se o outro computador responde. Faça o mesmo com o servidor e veremos que ele não responde.</p>
 
@@ -118,7 +118,7 @@
 
 <p>Faça um novo projeto igual ao anterior, com um Laptop a mais. Mas não configure nada como anteriormente.</p>
 
-<p>Vamos no servidor e em Config, na placa de rede coloque o IP estático 192.168.0.1 e sua máscara padrão. Depois vá em Services e DHCP, veja se o Start IP está como 192.168.0.0 e o Máximo de Users com 255, e não esqueça de dar ON no DHCP.</p>
+<p>Vamos no servidor e em Config, na placa de rede coloque o IP estático <code>192.168.0.1</code> e sua máscara padrão. Depois vá em Services e DHCP, veja se o Start IP está como <code>192.168.0.0</code> e o Máximo de Users com 255, e não esqueça de dar ON no DHCP.</p>
 
 <p>Depois clique nos dispositivos e em Config, na placa de rede, coloque a opção DHCP que ele encontrará o IP automaticamente.</p>
 
@@ -136,7 +136,7 @@
 
 <p>Adicione um PC, um Laptop (ambos em End Devices), dois switches (ambos em Network Services) e mais um PC e um Laptop do outro lado.</p>
 
-<p>No primeiro PC, coloque em Desktop e IP Configuration, o IP 192.168.0.2. No laptop faça o mesmo com o IP 192.168.0.4. No segundo PC coloque 192.168.0.6 e no segundo laptop coloque 192.168.0.12. Ligue com o cabo Through os primeiros computadores no primeiro switch e os últimos no segundo. Ligue os dois switchs com o cabo Cross.</p>
+<p>No primeiro PC, coloque em Desktop e IP Configuration, o IP <code>192.168.0.2</code>. No laptop faça o mesmo com o IP <code>192.168.0.4</code>. No segundo PC coloque <code>192.168.0.6</code> e no segundo laptop coloque <code>192.168.0.12</code>. Ligue com o cabo Through os primeiros computadores no primeiro switch e os últimos no segundo. Ligue os dois switchs com o cabo Cross.</p>
 
 <p>Clique no Envelopinho e clique no PC 1 enviando pro Laptop 2, do outro lado, e veja se ele envia. Veja que ao lado aparece os protocolos usados, ao clicar em Simulation. Clique em um dos protocolos para ver mais detalhes sobre os mesmos.</p>
 
@@ -232,7 +232,7 @@ exit
 
 <p>Apague o cabo de Console e ligue o cabo Through e ligue nas portas Ethernet dos equipamentos.</p>
 
-<p>No laptop, em Desktop, vamos em IP Configuration e colocar o IP 192.168.0.10.</p>
+<p>No laptop, em Desktop, vamos em IP Configuration e colocar o IP <code>192.168.0.10</code>.</p>
 
 <p>Abra o switch e em CLI, digite a senha e esses comandos:</p>
 
@@ -340,7 +340,7 @@ exit
 
 <h3>Criando VLans</h3>
 
-<p>Tire o laptop anterior e deixe só o switch. Coloque um PC e um laptop de um lado, e um PC e um laptop do outro. Abra o primeiro PC, em Desktop e IP Configuration, coloque o IP 192.168.0.11. Faça o mesmo com os outros computadores, com os IPs 192.168.0.12 de um lado, e 192.168.1.11 e 192.168.1.12 no outro lado.</p>
+<p>Tire o laptop anterior e deixe só o switch. Coloque um PC e um laptop de um lado, e um PC e um laptop do outro. Abra o primeiro PC, em Desktop e IP Configuration, coloque o IP <code>192.168.0.11</code>. Faça o mesmo com os outros computadores, com os IPs <code>192.168.0.12</code> de um lado, e <code>192.168.1.11</code> e <code>192.168.1.12</code> no outro lado.</p>
 
 <p>Ligue com um cabo Through os computadores ao switch (os dois primeiros nas portas 1 e 2 e os outros dois nas portas 11 e 12). Coloque o painel de simulação e mande uma mensagem do PC 1 ao Laptop 1.</p>
 

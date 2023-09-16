@@ -29,7 +29,29 @@
 
 <p>O banco de dados é como um navio com containers, que guardam coisas com características semelhantes (como nomes, senhas, e-mails, etc.). Banco de dados são conjuntos de tabelas, tabelas são conjuntos de registros e registros contém campos.</p>
 
+<p>PS: Os registros também podem ser chamados de linhas ou tuplas.</p>
+
+<p>Saiba também que:</p>
+
+<ul>
+    <li>DDL é um acrônimo para data definition language (linguagem de definição de dados). Fazem parte desse grupo as instruções destinadas a criar, deletar e modificar banco de dados e tabelas. Nesse módulo, vão aparecer comandos como <code>create</code>, <code>alter</code> e <code>drop</code>.</li>
+    <li>DML é um acrônimo para data manipulation language (linguagem de manipulação de dados). Fazem parte deste grupo as instruções destinadas a recuperar, atualizar, adicionar ou excluir dados em um banco de dados. Nesse módulo vão aparecer comandos como <code>insert</code>, <code>select</code>, <code>update</code> e <code>delete</code>.</li>
+    <li>DCL é um acrônimo para data control language (linguagem de controle de dados). Fazem parte deste grupo as instruções destinadas a manter a segurança adequada para o banco de dados. Nesse módulo vão aparecer comandos como <code>grant</code> e <code>revoke</code>.</li>
+</ul>
+
+<p>Quando o assunto é banco de dados, um termo muito comum é o CRUD, um acrônimo para as quatro operações de DML que podemos fazer em uma tabela no banco de dados – podemos inserir informações (create), ler (read), atualizar (update) e apagar (delete).</p>
+
+<p>Os passos necessários para efetuar uma das operações do CRUD são sempre os mesmos:</p>
+
+<ul>
+    <li>Estabelecer a conexão com um banco.</li>
+    <li>Criar um cursor e executar um comando.</li>
+    <li>Gravar a operação.</li>
+    <li>Fechar o cursor e a conexão.</li>
+</ul>
+
 <p>Para criar o banco de dados usamos o comando <code>create database</code>, dessa forma:</p>
+
 <pre>
 <code>
 create database cadastro;

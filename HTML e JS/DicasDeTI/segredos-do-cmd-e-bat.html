@@ -651,10 +651,10 @@ net localgroup administradores
     <li><code>type</code> - Lê o Arquivo no CMD (como <code>type C:\Users\%username%\Desktop\teste.txt</code>).</li>
     <li><code>findstr</code> - Procura as palavras escritas pelo usuário, quando usamos o parâmetro /i ele não diferencia maiúsculas (como <code>findstr /i PALAVRA C:\Users\%username%\Desktop\teste.txt</code>)</li>
     <li><code>rename nomeantigo.txt nomeatual.txt</code> - Renomeia arquivos e pastas.</li>
-    <li><code>net</code> - Usado com os comandos <code>start</code>, <code>stop</code>, <code>pause</code> e <code>continue</code> para iniciar, parar, pausar e continuar serviços do Windows.</li>
+    <li><code>net</code> - Usado com os comandos <code>start</code>, <code>stop</code>, <code>pause</code> e <code>continue</code> para iniciar, parar, pausar e continuar serviços do Windows. Também usado para administrar usuários com os comandos <code>user</code> e <code>localgroup</code></li>
     <li><code>del "nomedoarquivo"</code> (<code>erase</code>) - Para excluir arquivos e conteúdos de pastas (para excluir pastas use <code>rd</code> ou <code>rmdir</code>, da mesma forma).</li>
     <li><code>doskey /history</code> - Mostra o histórico de comandos já digitados.</li>
-    <li><code>shutdown</code> - Para desligar o computador (com parâmetro <code>/s</code>) ou reiniciar (parâmetro <code>/r</code>), pode ser definido o tempo para a operação com o parâmetro <code>/t 600</code> (em segundos).</li>
+    <li><code>shutdown</code> - Para desligar o computador (com parâmetro <code>/s</code>) ou reiniciar (parâmetro <code>/r</code>), pode ser definido o tempo para a operação com o parâmetro <code>/t 600</code> (em segundos). Para anular qualquer um deles use o parâmetro <code>/a</code>.</li>
     <li><code>chkdsk C:</code> - Para corrigir erros de disco.</li>
     <li><code>sfc /scannow</code> - Verifica a integridade dos arquivos no sistema e os repara.</li>
     <li><code>tasklist</code> - Mostra os processos ativos no sistema.</li>
@@ -669,7 +669,7 @@ net localgroup administradores
     <li><code>sc</code> - Gerenciar serviços (por exemplo, parar, iniciar, pausar e excluir).</li>
     <li><code>diskpart</code> - Gerencia partições de disco.</li>
     <li><code>verify</code> - Faz com que o Windows verifique se os arquivos estão gravados corretamente em um disco.</li>
-    <li><code>format "destino" /fs NTFS</code> -  Formata um disco especificado em um formato especificado.</li>
+    <li><code>format "destino" /fs:NTFS</code> -  Formata um disco especificado em um formato especificado (NTFS, FAT32 ou exFAT).</li>
     <li><code>help</code> - Exibe a ajuda.</li>
     <li><code>hostname</code> - Retorna o nome do host do computador.</li>
     <li><code>exit</code> - Fecha o Prompt.</li>

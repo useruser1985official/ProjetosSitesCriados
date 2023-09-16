@@ -698,6 +698,17 @@ String novo = String.valueOf(vetor); // Convertendo array de char em string
 </code>
 </pre>
 
+<p>Para dividir uma string ao encontrar um delimitador, podemos fazer assim:</p>
+
+<pre>
+<code>
+String frase = "Exemplo de Frase";
+String dividido[] = frase.split(" "); // Pode ser qualquer caractere.
+
+System.out.println(dividido[0]);
+</code>
+</pre>
+
 <p>Para criar constantes, basta declarar como uma variável, com <code>static final</code> no começo (que impedirá que ela seja modificada, o static indica que só terá uma cópia dessa variável na memória, o final impede a alteração do atributo) e sempre a coloque inicializada, elas geralmente são escritas em maiúsculas, assim:</p>
 
 <pre>

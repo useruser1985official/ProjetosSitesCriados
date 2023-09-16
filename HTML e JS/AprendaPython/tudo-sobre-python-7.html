@@ -329,7 +329,7 @@ print(par(num))
 </code>
 </pre>
 
-<p>Na mesma função acima, podemos exibir assim:</p>
+<p>Usando a mesma função acima, podemos exibir assim:</p>
 
 <pre>
 <code>
@@ -660,10 +660,10 @@ try:
 
     if sexo not in "MmFf":
         raise Exception("Não foi inserido um sexo válido!")
-
-    print(f"O sexo digitado foi {sexo}.")
 except Exception as erro:
     print(erro)
+else:
+    print(f"O sexo digitado foi {sexo}.")
 </code>
 </pre>
 
