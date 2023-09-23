@@ -308,6 +308,38 @@ int *gerarRandomico() {
 </code>
 </pre>
 
+<p>PS: Ao passar um ponteiro por um parâmetro, siga essas regras:</p>
+
+<pre>
+<code>
+void funcao1(int *param);
+void funcao2(int param);
+
+int main() {
+    int n = 10;
+    int *p;
+    p = &amp;n;
+    
+    funcao1(p); // Caso a função tenha * e a variável de entrada seja ponteiro
+    funcao2(*p); // Caso a função não tenha * e a variável de entrada seja ponteiro
+    funcao1(&amp;n); // Caso a função tenha * e a variável de entrada não seja ponteiro
+    funcao2(n); // Casos mais comuns, onde nem a função e nem a variável são ponteiros
+    
+    return 0;
+}
+
+void funcao1(int *param) {
+    printf("Endereço de 1: %p\n", param);
+    printf("Conteúdo de 1: %d\n", *param);
+}
+
+void funcao2(int param) {
+    printf("Endereço de 2: %p\n", &amp;param);
+    printf("Conteúdo de 2: %d\n", param);
+}
+</code>
+</pre>
+
 <h3>Alocação Dinâmica de Memória</h3>
 
 <p>A alocação de memória é útil para reservar a quantidade necessária de memória RAM para o nosso programa, sem desperdício nem falta.</p>
@@ -419,6 +451,42 @@ free(nome);
 </code>
 </pre>
 
+<h3>Funções Recursivas</h3>
+
+<p>Existem determinadas situações que uma função necessita chamar ela mesma novamente. É uma coisa que deve ser feita com cuidado na programação, mas que também é muito útil em determinadas situações.</p>
+
+<p>Veja no exemplo uma função recursiva que faz a somatória dos antecessores de um número, inteiro positivo, informado pelo usuário, ou seja, se o usuário digitar 5, o programa deverá retornar o resultado da soma 5 + 4 + 3 + 2 + 1 + 0. A função deverá somar até o valor zero, portanto esse será o critério de parada:</p>
+
+<pre>
+<code>
+int somar(int valor);
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+    
+    int num, resultado;
+
+    printf("Digite um número inteiro positivo: ");
+    scanf("%d", &amp;num);
+
+    resultado = somar(num); // Primeira chamada da função
+
+    printf("\nResultado: %d.\n", resultado);
+
+    return 0;
+}
+
+int somar(int valor) {
+    if(valor == 0) {
+        return valor;
+    }
+    else {
+        return valor + somar(valor - 1);
+    }
+}
+</code>
+</pre>
+
 <h3>Invertendo Valores de Variáveis</h3>
 
 <p>Em alguns casos, principalmente em jogos, é necessário inverter a direção ou valores de variáveis. Para tanto, existem os valores de inversão de variáveis. No caso, seria deixar o valor negativo se for positivo e vice-versa.</p>
@@ -449,7 +517,7 @@ printf("%d\n", -num);
 
 <p>PS: Esse negativo não muda o valor da variável, só na exibição nesse printf ele faz a inversão.</p>
 
-<p>Para gravar o novo valor da variável, use a multiplicação por -1 antes de exibir.</p>
+<p>Para gravar o novo valor da variável, faça uma nova atribuição.</p>
 
 <p>Veja um exemplo:</p>
 
@@ -459,7 +527,7 @@ int num = 10;
 
 printf("%d\n", num); // Valor original.
 
-num = num * -1;
+num = -num;
 
 printf("%d\n", -num); // Retornará positivo, - com - retorna + e a variável foi alterada antes.
 

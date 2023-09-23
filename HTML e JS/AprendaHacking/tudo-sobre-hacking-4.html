@@ -28,7 +28,7 @@
 
 <h3>Diferenças entre Proxy, VPN e Tor</h3>
 
-<p>A conexão comum com a internet é do usuário pra internet e pra internet pro servidor, e vice-versa. O seu roteador tem um IP externo, e manda um sinal com as informações para outros roteadores no mundo, basicamente isso é a internet. Só que dessa forma, o servidor sabe suas informações pessoais, como IP externo, sistema operacional e etc., que pode ser usado por pessoas mal-intencionadas pra invadir seu computador.</p>
+<p>A conexão comum com a internet é do usuário pra internet e da internet pro servidor, e vice-versa. O seu roteador tem um IP externo, e manda um sinal com as informações para outros roteadores no mundo, basicamente isso é a internet. Só que dessa forma, o servidor sabe suas informações pessoais, como IP externo, sistema operacional e etc., que pode ser usado por pessoas mal-intencionadas pra invadir seu computador.</p>
 
 <p>O proxy é um servidor que fica entre o computador cliente e a internet, que utiliza uma criptografia, camuflando seu IP, dificultando a identificação do computador pelo servidor. Mas poucos proxies gratuitos não te espionam, muitos deles são armadilhas e só oferecem proteção para internet, não na rede interna, os serviços podem armazenar logs e os gratuitos geralmente não utilizam criptografia. Aqui encontramos alguns proxies de uso gratuito, é só colocar o IP e a porta corresponde nas conexões do seu sistema: <a href="https://www.us-proxy.org/" target="_blank">https://www.us-proxy.org/</a></p>
 
@@ -62,6 +62,8 @@
 
 <p>Esse é um dos sites de pesquisa da Deep Web:<a href="http://xmh57jrknzkhv6y3ls3ubitzfqnkrwxhopf5aygthi7d6rplyvk3noyd.onion/" target="_blank">http://xmh57jrknzkhv6y3ls3ubitzfqnkrwxhopf5aygthi7d6rplyvk3noyd.onion/</a></p>
 
+<p>Esse site é um fórum brasileiro de perguntas: <a href="http://xh6liiypqffzwnu5734ucwps37tn2g6npthvugz3gdoqpikujju525yd.onion/" target="_blank">http://xh6liiypqffzwnu5734ucwps37tn2g6npthvugz3gdoqpikujju525yd.onion/</a></p>
+
 <p>Muitos dos sites existentes por lá, são de coisas ilegais como pedofilia, venda de drogas, mas também tem muito conteúdo hacker por lá.</p>
 
 <h3>Entenda o Heartbleed Bug - Vulnerabilidade OpenSSL</h3>
@@ -92,7 +94,7 @@
 
 <p>A barbatana do tubarão indica a captura de pacotes da nossa rede. Vemos vários dados como endereços IP de destino e origem, protocolos e etc.</p>
 
-<p>Para pegar informações de um determinado IP, usamos no filtro <code>ip.addr == 192.168.0.1</code>, para vermos apenas resultados com esse determinado IP, digitamos <code>ip.dst == 192.168.0.1</code>, e pegar esse IP de destino, <code>ip.dst == 192.168.0.1</code>.</p>
+<p>Para pegar informações de um determinado IP, usamos no filtro <code>ip.addr == 192.168.0.1</code>, para vermos apenas resultados com esse determinado IP de origem, digitamos <code>ip.src == 192.168.0.1</code>, e pegar esse IP de destino, <code>ip.dst == 192.168.0.1</code>.</p>
 
 <p>Para colocar algo que queremos que não seja exibido, usamos o mesmo filtro, mas com um ponto de exclamação, que significa negação, por exemplo <code>!(ip.addr == 192.168.0.1)</code>. E para não mostrar tráfegos de um determinado protocolo, podemos usar <code>not tcp</code>, para mais de um, <code>not tcp and not arp</code>. Podemos usar o operador <code>or</code> também.</p>
 

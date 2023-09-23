@@ -181,6 +181,38 @@ int *gerarRandomico() {
 </code>
 </pre>
 
+<p>PS: Ao passar um ponteiro por um parâmetro, siga essas regras:</p>
+
+<pre>
+<code>
+void funcao(int *param);
+void funcao(int param);
+
+int main() {
+    int n = 10;
+    int *p;
+    p = &amp;n;
+    
+    funcao(p); // Caso a função tenha * e a variável de entrada seja ponteiro
+    funcao(*p); // Caso a função não tenha * e a variável de entrada seja ponteiro
+    funcao(&amp;n); // Caso a função tenha * e a variável de entrada não seja ponteiro
+    funcao(n); // Casos mais comuns, onde nem a função e nem a variável são ponteiros
+    
+    return 0;
+}
+
+void funcao(int *param) {
+    cout << "Endereço de 1: " << param << endl;
+    cout << "Conteúdo de 1: " << *param << endl;
+}
+
+void funcao(int param) {
+    cout << "Endereço de 2: " << &amp;param << endl;
+    cout << "Conteúdo de 2: " << param << endl;
+}
+</code>
+</pre>
+
 <h3>Números Randomicos em C++</h3>
 
 <p>Basicamente, no C, faríamos assim para gerar números randomicos no nosso programa:</p>
