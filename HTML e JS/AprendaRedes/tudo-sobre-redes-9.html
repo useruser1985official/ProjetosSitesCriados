@@ -142,6 +142,20 @@
 
 <p>A divisão em sub-redes é o processo de divisão de uma grande rede IP em múltiplas redes menores, com o propósito de aumentar sua performance, organização e segurança. Neste caso, deixamos de usar as máscaras padrão de classes e passamos a usar um esquema denominado CIDR (Classless Inter-Domain Routing), no qual a máscara a ser utilizada deve ser calculada de acordo com o endereço de rede original (a ser dividido) e o número de sub-redes ou hosts desejados.</p>
 
+<p>O cálculo de máscaras de classe C é feito pela quantidade máxima de hosts (256) subtraído pelo outro número (no caso, 192, 224 e 252), depois subtrai mais dois (o endereço da rede e o de broadcast). Por exemplo:</p>
+
+<pre>
+<code>
+ 256
+<ins>-224</ins>
+  32
+<ins>  -2</ins>
+  30
+</code>
+</pre>
+
+<p>Da mesma forma, podemos fazer cálculos com outras classes e IPs.</p>
+
 <p>A notação CIDR basicamente é onde tem os primeiros números 1 em binário na porção de rede da máscara, por exemplo, a máscara 255.0.0.0 tem a notação /8, a máscara 255.255.0.0 tem a notação /16 e a máscara 255.255.255.0 tem a notação /24. Numa aplicação em outra máscara, a notação muda (como a máscara 255.255.255.224 tem a notação /27).</p>
 
 <p>Assim, eliminamos e endereçamento por classes e conseguimos aprimorar a agregação de rotas.</p>
