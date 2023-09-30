@@ -154,15 +154,17 @@ print(num)
 <code>
 from datetime import datetime
 
-dia = datetime.now().day
-mes = datetime.now().month
-ano = datetime.now().year
+data = datetime.now()
 
-ds = datetime.now().weekday()
+dia = data.day
+mes = data.month
+ano = data.year
 
-hora = datetime.now().hour
-minuto = datetime.now().minute
-segundo = datetime.now().second
+ds = data.weekday()
+
+hora = data.hour
+minuto = data.minute
+segundo = data.second
 
 semana = ("Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo")
 
@@ -308,7 +310,7 @@ os.rmdir("test") # Remove pasta
 </code>
 </pre>
 
-<p>Se precisar de uma biblioteca e ela não estiver disponível, basta clicar na lâmpada vermelha do Pycharm pra instalar. Existem várias bibliotecas que podem ser adicionadas. Também podemos instalar pelo PIP digitando <code>pip3 install nomedopacote</code> (e usamos <code>pip3 install --upgrade pip3</code> para atualizar o PIP e o comando <code>pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U</code> para atualizar todos os pacotes). Em alguns sistemas o PIP pode ser atualizado usando o comando <code>python3 -m pip install --upgrade pip</code>, assim como pode ser necessário o mesmo para instalar pacotes (como <code>python3 -m pip install nomedopacote</code>).</p>
+<p>Se precisar de uma biblioteca e ela não estiver disponível, basta clicar na lâmpada vermelha do Pycharm pra instalar. Existem várias bibliotecas que podem ser adicionadas. Também podemos instalar pelo PIP digitando <code>pip3 install nomedopacote</code> (e usamos <code>pip3 install --upgrade pip3</code> para atualizar o PIP e o comando <code>pip install -U $(pip freeze | awk '{split($0, a, "=="); print a[1]}')</code> para atualizar todos os pacotes). Em alguns sistemas o PIP pode ser atualizado usando o comando <code>python3 -m pip install --upgrade pip</code>, assim como pode ser necessário o mesmo para instalar pacotes (como <code>python3 -m pip install nomedopacote</code>).</p>
 
 <p>Veja um exemplo de uso de biblioteca de emoticons:</p>
 

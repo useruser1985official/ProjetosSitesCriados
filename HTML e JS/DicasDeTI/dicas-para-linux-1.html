@@ -355,7 +355,7 @@ sudo rm /var/cache/debconf/*.dat
 </code>
 </pre>
 
-<p>Em algumas situações, principalmente ao instalar arquivos DEB, as dependências já são corrigidas com o apt-get install -f.</p>
+<p>Em algumas situações, principalmente ao instalar arquivos DEB, as dependências já são corrigidas com o sudo apt-get install -f. Dependendo do caso, pode ser necessário rodar <code>sudo dpkg --reconfigure -a</code>, podendo também ser especificado um pacote específico (o mesmo vale para o configure).</p>
 
 <p>PS: O apt-get clean também é usado para limpar arquivos de instalação já usados, pode ser usado apt-get autoclean também, ou autoremove para remover pacotes não usados.</p>
 
