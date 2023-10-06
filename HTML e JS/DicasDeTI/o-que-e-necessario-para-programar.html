@@ -19,23 +19,38 @@
 
 <p>Veja abaixo algumas linguagens, requisitos e programas (lembrando que as instruções são para Windows, em outras plataformas como o Linux alguns são instalados pelo gerenciador de pacotes):</p>
 
-<h3>HTML, CSS e Javascript</h3>
+<h3>Algoritmos em Portugol</h3>
 
-<p>Um editor de texto, pode ser até o Bloco de Notas, mas é preferível um editor melhor, como o Notepad++ ou o Sublime Text. Pode ser usado uma IDE mais robusta para isso, como o PHPStorm. O JQuery precisa ter um arquivo JS baixado para trabalhar com ele.</p>
+<p>O programa mais antigo para aprender algoritmos com Portugol é o Visualg, mas ele só roda em Windows. Hoje em dia temos a opção do Portugol Studio que tem uam sintaxe mais fácil de entender e roda em outras plataformas</p>
 
 <ul>
-    <li><a href="https://notepad-plus-plus.org/download/v7.5.4.html" target="_blank">Download do Notepad++ - Windows</a></li>
-    <li><a href="https://www.sublimetext.com/3" target="_blank">Download do Sublime Text - Windows, Linux e Mac</a></li>
-    <li><a href="https://code.visualstudio.com/" target="_blank">Download do Visual Studio Code - Windows, Linux e Mac</a></li>
-    <li><a href="https://www.jetbrains.com/phpstorm/download/" target="_blank">Download do PHP Storm - Windows, Linux e Mac</a></li>
-    <li><a href="https://jquery.com/" target="_blank">Download do JQuery - Script</a></li>
+    <li><a href="https://visualg3.com.br/" target="_blank">Download do Visualg - Windows</a></li>
+    <li><a href="https://univali-lite.github.io/Portugol-Studio/" target="_blank">Download do Portugol Studio - Windows, Linux e Mac</a></li>
     <!--
     <li><a href="" target="_blank">Download</a></li>
     <li><a href="" target="_blank">Download</a></li>
     -->
 </ul>
 
-<p>PS: PHPStorm precisa ter o Java Instalado para funcionar. O Sublime Text para Linux pode ser baixado digitando <code>sudo apt-get install sublime-text</code>, o Notepad++ pode ser instalado com <code>sudo apt-get install notepad-plus-plus</code>.</p>
+<h3>HTML, CSS e Javascript</h3>
+
+<p>Um editor de texto, pode ser até o Bloco de Notas, mas é preferível um editor melhor, como o Notepad++ ou o Sublime Text. Pode ser usado uma IDE mais robusta para isso, como o PHPStorm. O JQuery precisa ter um arquivo JS baixado para trabalhar com ele. Uma opção é o BlueFish, alternativa ao programa pago Adobe Dreamweaver, que no Linux pode ser instalado com o comando <code>sudo apt install bluefish</code>.</p>
+
+<ul>
+    <li><a href="https://notepad-plus-plus.org/downloads/" target="_blank">Download do Notepad++ - Windows</a></li>
+    <li><a href="https://www.sublimetext.com/3" target="_blank">Download do Sublime Text - Windows, Linux e Mac</a></li>
+    <li><a href="https://code.visualstudio.com/" target="_blank">Download do Visual Studio Code - Windows, Linux e Mac</a></li>
+    <li><a href="https://www.jetbrains.com/phpstorm/download/" target="_blank">Download do PHP Storm - Windows, Linux e Mac</a></li>
+    <li><a href="https://bluefish.openoffice.nl/download.html" target="_blank">Download do BlueFish - Windows, Linux e Mac</a></li>
+    <li><a href="https://jquery.com/" target="_blank">Download do JQuery - Script
+    </a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</ul>
+
+<p>PS: PHPStorm precisa ter o Java Instalado para funcionar. O Sublime Text para Linux pode ser baixado digitando <code>sudo apt install sublime-text</code>, o Notepad++ pode ser instalado com <code>sudo apt install notepad-plus-plus</code>.</p>
 
 <h3>PHP e MySQL</h3>
 
@@ -56,7 +71,7 @@
 
 <p>Se ao tentar acessar o PHPMyAdmin aparecer um erro, edite o arquivo /etc/apache2/apache2.conf colocando no final dele <code>Include /etc/phpmyadmin/apache.conf</code>, e para acessar a página, vá em /etc/phpmyadmin/config.inc.php e descomente a linha <code>$cfg['Servers'][$i]['AllowNoPassword'] = TRUE;</code>, reinicie o servidor digitando <code>sudo systemctl restart apache2</code>.</p>
 
-<p>Os serviços são parados com <code>sudo service apache2 stop</code> e <code>sudo service mysql stop</code> e iniciados trocando por start. Pra entrar no mysql apenas digite <code>sudo mysql</code>.</p>
+<p>Os serviços são parados com <code>sudo service apache2 stop</code> e <code>sudo service mysql stop</code> e iniciados trocando por start. Pra entrar no mysql apenas digite <code>sudo mysql</code>, caso esteja configurado com senha digite <code>sudo mysql -u root</code>.</p>
 
 <p>Pode ser necessário copiar a pasta do PHPMyAdmin para a pasta do Apache digitando <code>sudo ln -s /usr/share/phpmyadmin /var/www/html</code>, e depoiis entrar na pasta /var/www/ e dar permissão 777 para os arquivos para abrir o PHPMyAdmin e os arquivos PHP funcionarem. Para isso digite <code>sudo chmod -R 777 /var/www</code>.</p>
 
@@ -66,15 +81,15 @@
 
 <h3>Python</h3>
 
-<p>Praticamente só é necessário o interpretador Python e um editor (o interpretador Python vem por padrão no Linux e Mac, mas geralmente é a versão 2, sendo que hoje se usa a 3, no Linux ele pode ser baixado pelo apt-get digitando <code>sudo apt-get install python3.6 idle3.6</code>), mas é recomendado uma IDE melhor como o Pycharm. O SQLite pode ser usado para criar aplicações com banco de dados.</p>
+<p>Praticamente só é necessário o interpretador Python e um editor (o interpretador Python vem por padrão no Linux e Mac, mas geralmente é a versão 2, sendo que hoje se usa a 3, no Linux ele pode ser baixado pelo apt-get digitando <code>sudo apt-get install python3.10 idle3</code>), mas é recomendado uma IDE melhor como o Pycharm. O SQLite pode ser usado para criar aplicações com banco de dados. Uma opção é o Thonny, que no Linux pode ser instalado com o comando <code>sudo apt install thonny</code>.</p>
 
 <ul>
     <li><a href="https://www.python.org/" target="_blank">Download do Interpretador Python - Windows e Mac</a></li>
     <li><a href="https://www.jetbrains.com/pycharm/download/" target="_blank">Download do Pycharm - Windows, Linux e Mac</a></li>
+    <li><a href="https://thonny.org/" target="_blank">Download do Thonny - Windows, Linux e Mac</a></li>
     <li><a href="https://www.sqlite.org/download.html" target="_blank">Download do SQLite (Linha de Comando) - Windows e Mac</a></li>
     <li><a href="https://github.com/pawelsalawa/sqlitestudio/releases" target="_blank">Download do SQLite Studio - Windows, Linux e Mac</a></li>
     <!--
-    <li><a href="" target="_blank">Download</a></li>
     <li><a href="" target="_blank">Download</a></li>
     <li><a href="" target="_blank">Download</a></li>
     -->
@@ -130,14 +145,15 @@
 
 <h3>C/C++</h3>
 
-<p>Essa opção costuma ter várias IDEs para isso, a mais conhecida é o Codeblocks, que em algumas versões já vem com o compilador Mingw na versão do Windows (apesar de que é recomendado instalar separado nesse sistema), em Linux basta dar um apt-get nos pacotes gcc e g++, mas costumam já vir instalados nesses sistemas. Outras opções como o Visual Studio podem ser usadas, principalmente para interfaces gráficas. O QTCreator é usado para criar interfaces gráficas e pode ser integrado ao SQLite para usar banco de dados. No Mac também é necessário instalar o XCode para instalar o compilador, mesmo que use o Codeblocks pra desenvolver.</p>
+<p>Essa opção costuma ter várias IDEs para isso, a mais conhecida é o Codeblocks, que em algumas versões já vem com o compilador Mingw na versão do Windows (apesar de que é recomendado instalar separado nesse sistema), em Linux basta dar um apt-get nos pacotes gcc e g++, mas costumam já vir instalados nesses sistemas. Outras opções como o Visual Studio podem ser usadas, principalmente para interfaces gráficas. O QTCreator é usado para criar interfaces gráficas e pode ser integrado ao SQLite para usar banco de dados. Uma opção é o Geany, que suporta outras linguagens também, e que no Linux pode ser instalado com o comando <code>sudo apt install geany</code> No Mac também é necessário instalar o XCode para instalar o compilador, mesmo que use o Codeblocks pra desenvolver.</p>
 
 <ul>
     <li><a href="http://www.codeblocks.org/downloads/binaries" target="_blank">Download do Codeblocks - Windows, Linux e Mac</a></li>
     <li><a href="https://sourceforge.net/projects/mingw-w64/files/mingw-w64/" target="_blank">Download do Mingw - Windows</a></li>
+    <li><a href="https://www.geany.org/download/releases/" target="_blank">Download do Geany - Windows e Mac</a></li>
     <li><a href="https://www1.qt.io/offline-installers/" target="_blank">Download do QTCreator - Windows, Linux e MAC</a></li>
     <!--
-    <li><a href="" target="_blank">Download</a></li>
+    
     <li><a href="" target="_blank">Download</a></li>
     <li><a href="" target="_blank">Download</a></li>
     -->
