@@ -106,7 +106,7 @@ print("E o preço da sua passagem será de R${:.2f}.".format(preco))
 
 <pre>
 <code>
-dist = float(input("Qual e a distância da sua viagem? "))
+dist = float(input("Qual é a distância da sua viagem? "))
 print("\nVocê está prestes a começar uma viagem de {} Km.".format(dist))
 
 preco = dist * 0.50 if dist <= 200 else dist * 0.45
@@ -482,20 +482,19 @@ while jog == comp:
     print("PÔ")
 
     if comp == "Papel" and jog == "Pedra":
-        print("\nInfelizmente você perdeu.\nComputador escolheu {} e você escolheu {}.\nPapel embrulha Pedra!".format(comp, jog))
+        print("\nInfelizmente você perdeu.\nComputador escolheu {} e você escolheu {}. {} embrulha {}.".format(comp, jog, comp, jog))
     elif comp == "Tesoura" and jog == "Papel":
-        print("\nInfelizmente você perdeu.\nComputador escolheu {} e você escolheu {}.\nTesoura corta Papel!".format(comp, jog))
+        print("\nInfelizmente você perdeu.\nComputador escolheu {} e você escolheu {}. {} corta {}.".format(comp, jog, comp, jog))
     elif comp == "Pedra" and jog == "Tesoura":
-        print("\nInfelizmente você perdeu.\nComputador escolheu {} e você escolheu {}.\nPedra quebra Tesoura!".format(comp, jog))
+        print("\nInfelizmente você perdeu.\nComputador escolheu {} e você escolheu {}. {} quebra {}.".format(comp, jog, comp, jog))
     elif jog == "Pedra" and comp == "Tesoura":
-        print("\nParabéns, você venceu.\nComputador escolheu {} e você escolheu {}.\nPedra quebra Tesoura.".format(comp, jog))
+        print("\nParabéns, você venceu.\nComputador escolheu {} e você escolheu {}. {} quebra {}.".format(comp, jog, jog, comp))
     elif jog == "Tesoura" and comp == "Papel":
-        print("\nParabéns, você venceu.\nComputador escolheu {} e você escolheu {}.\nTesoura corta Papel.".format(comp, jog))
+        print("\nParabéns, você venceu.\nComputador escolheu {} e você escolheu {}. {} corta {}.".format(comp, jog, jog, comp))
     elif jog == "Papel" and comp == "Pedra":
-        print("\nParabéns, você venceu.\nComputador escolheu {} e você escolheu {}.\nPapel embrulha Pedra.".format(comp, jog))
+        print("\nParabéns, você venceu.\nComputador escolheu {} e você escolheu {}. {} embrulha {}.".format(comp, jog, jog, comp))
     else:
         print("\nO computador escolheu {} e você escolheu {}.\nReiniciando...\n".format(comp, jog))
-        sleep(3)
 </code>
 </pre>
 

@@ -368,7 +368,7 @@ printf("Tamanho do array de char: %d\n", tam);
 <code>
 char* nome = "";
 
-printf("Nome está vazio? %s\n", (strlen(nome) == 0 ? "true" : "false"));
+printf("Nome está vazio? %s\n", !strlen(nome) ? "true" : "false");
 </code>
 </pre>
 
@@ -433,7 +433,7 @@ char* trim(char *s) {
     int i;
 
     while(isspace(*s)) s++;
-    for(i = strlen(s) - 1; (isspace(s[i])); i--);
+    for(i = strlen(s) - 1; isspace(s[i]); i--);
     s[i + 1] = '\0';
 
     return s;

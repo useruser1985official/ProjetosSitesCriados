@@ -239,7 +239,7 @@ void Acordar::levantar() {
 void Acordar::levantar(const char* tempo) {
     std::string verif = (std::string)tempo;
 
-    if(verif.compare("Chuva") == 0 || verif.compare("Tempestade") == 0) {
+    if(!verif.compare("Chuva") || !verif.compare("Tempestade")) {
         std::cout << "Não vou Levantar pra Sair, está Chovendo!" << std::endl;
     }
     else {

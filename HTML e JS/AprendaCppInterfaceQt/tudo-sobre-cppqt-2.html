@@ -147,7 +147,7 @@ void MainWindow::on_btnEntr_clicked() {
     QString login = ui->txtLogin->text().trimmed();
     QString senha = ui->txtSenha->text().trimmed();
 
-    if(login.compare("admin") == 0 && senha.compare("123") == 0) {
+    if(!login.compare("admin") && !senha.compare("123")) {
         QMessageBox::information(this, "Login", "Bem-vindo ao Sistema!"); // inclua QMessageBox
     }
     else {
@@ -244,7 +244,7 @@ void MainWindow::on_btnVerif_clicked() {
         msg += "Caixa 3 marcada!";
     }
     
-    if(msg.compare("") == 0) {
+    if(!msg.compare("")) {
         msg = "Nenhum Marcado!";
     }
 
@@ -274,7 +274,7 @@ void MainWindow::on_btnVerif2_clicked() {
         }
     }
 
-    if(msg.compare("") == 0) {
+    if(!msg.compare("")) {
         msg = "Nenhum Marcado!";
     }
 
