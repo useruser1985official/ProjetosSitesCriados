@@ -96,11 +96,11 @@ sqlmap -u http://testphp.vulnweb.com/login.php --dbs --forms
 
 <p>O Hydra tenta fazer ataques baseados num dicionário com prováveis senhas, que pode ser criado ou baixado!</p>
 
-<p>Para usarmos o Hydra com um nome de usuário, digitamos <code>hydra -l nomedousuario -P wordlist.txt http://nomeouipdoalvo.com</code>.</p>
+<p>Para usarmos o Hydra com um nome de usuário, digitamos <code>hydra -l nomedousuario -P wordlist.txt nomeouipdoalvo.com ftp</code>. Onde está <q>ftp</q> pode ser outros serviços, como por exemplo, o SSH.</p>
 
-<p>Se não souber o nome de usuário e usar dicionário pra ambos, digite <code>hydra -L wordlistlogin.txt -P wordlistsenha.txt http://nomeouipdoalvo.com</code>.</p>
+<p>Se não souber o nome de usuário e usar dicionário pra ambos, digite <code>hydra -L wordlistlogin.txt -P wordlistsenha.txt nomeouipdoalvo.com ftp</code>.</p>
 
-<p>Como no caso usaremos o ataque a um roteador, colocaremos no http o ip dele, para descobrir digite <code>route -n</code>.</p>
+<p>Como no caso usaremos o ataque a um roteador, colocaremos no alvo o IP dele, para descobrir digite <code>route -n</code>.</p>
 
 <p>PS: O Hydra tenta descobrir apenas o que está especificado nas wordlists, não tenta quebrar a senha exatamente. E caso você saiba a senha mas não o login, basta passar o parâmetro -p seguido da senha.</p>
 
@@ -113,16 +113,6 @@ sqlmap -u http://testphp.vulnweb.com/login.php --dbs --forms
 <p>Aqui temos outras dicas para uso do Hydra: <a href="https://hackersec.com/comandos-e-truques-com-thc-hydra-brute-force/" target="_blank">https://hackersec.com/comandos-e-truques-com-thc-hydra-brute-force/</a></p>
 
 <p>PS: Podemos baixar também uma interface gráfica para o Hydra, digitando <code>sudo apt-get install hydra-gtk</code>.</p>
-
-<h3>Quebrando Senhas com John the Ripper</h3>
-
-<p>Primeiramente, caso não esteja no Kali, baixe o programa digitando <code>sudo apt-get install john</code>.</p>
-
-<p>Para testar a ferramenta, digite <code>john --test</code>.</p>
-
-<p>Para quebrar a senha de usuário do sistema, digite, como root, <code>sudo john /etc/shadow</code>.</p>
-
-<p>Para verificar a senha de um determinado nome, digite <code>john -show -users:root /etc/shadow</code>.</p>
 
 <h3>Como Realizar um Ataque Dos</h3>
 
@@ -151,6 +141,20 @@ nc www.google.com.br 80
 nc -l -p 80
 </code>
 </pre>
+
+<h3>Quebrando Senhas com John the Ripper</h3>
+
+<p>Primeiramente, caso não esteja no Kali, baixe o programa digitando <code>sudo apt-get install john</code>.</p>
+
+<p>Para testar a ferramenta, digite <code>john --test</code>.</p>
+
+<p>Para quebrar a senha de usuário do sistema, digite, como root, <code>sudo john /etc/shadow</code>.</p>
+
+<p>Para verificar a senha de um determinado nome, digite <code>john -show -users:root /etc/shadow</code>.</p>
+
+<p>Salve as senhas num banco de dados da seguinte forma: <code>unshadow /etc/passwd /etc/shadow >> pass.db</code>. E depois dê o comando <code>john pass.db</code>.</p>
+
+<p>Para quebrar a senha de um arquivo ZIP ou PDF, podemos digitar <code>zip2john pasta.zip > hash.txt</code> para gerar o hash da senha. E depois tente usando o comando <code>john hash.txt --wordlist=senhas.txt</code>. O processo pra PDF é o mesmo, mudando apenas para <code>pdf2john</code>.</p>
 
 <h3>Sequestrar Navegador com Beef XSS</h3>
 

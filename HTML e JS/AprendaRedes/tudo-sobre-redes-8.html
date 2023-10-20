@@ -110,11 +110,29 @@ $ORIGIN 1.168.192.IN-ADDR-ARPA.; diretiva de nome base
 
 <p>A IANA (Internet Assigned Numbers Authority) reserva blocos de endereços IP para uso em redes internas, sendo um bloco para redes classe A, um para classe B e outro para classe C, como segue:</p>
 
-<ul>
-    <li><code>10.0.0.0</code> até <code>10.255.255.255</code></li>
-    <li><code>172.16.0.0</code> até <code>172.31.255.255</code></li>
-    <li><code>192.168.0.0</code> até <code>192.168.255.255</code></li>
-</ul>
+
+<table>
+    <tr>
+        <th></th>
+        <th>IP Inicial</th>
+        <th>IP Final</th>
+    </tr>
+    <tr>
+        <td>Classe A</td>
+        <td><code>10.0.0.0</code></td>
+        <td><code>10.255.255.255</code></td>
+    </tr>
+    <tr>
+        <td>Classe B</td>
+        <td><code>172.16.0.0</code></td>
+        <td><code>172.31.255.255</code></td>
+    </tr>
+    <tr>
+        <td>Classe C</td>
+        <td><code>192.168.0.0</code></td>
+        <td><code>192.168.255.255</code></td>
+    </tr>
+</table>
 
 <p>Todas máquinas tem algum desses IPs, seja uma rede comporativa ou doméstica, a classe C geralmente é usada para pequenas redes.</p>
 
@@ -166,31 +184,44 @@ $ORIGIN 1.168.192.IN-ADDR-ARPA.; diretiva de nome base
 
 <p>O cliente envia mensagens de broadcast para a rede em busca de um servidor DHCP. Conteúdo básico da mensagem:</p>
 
-<ul>
-    <li>srcAddr=0.0.0.0, srcPort=68 dstAddr=255.255.255.255, dstPort=67.</li>
-    <li>MAC Address do cliente.</li>
-</ul>
+<pre>
+<code>
+srcAddr=0.0.0.0, srcPort=68 dstAddr=255.255.255.255, dstPort=67
+</code>
+</pre>
+
+<p>E o MAC Address do cliente.</p>
 
 <p>Após o servidor receber a requisição DHCP de um cliente, é enviada por ele uma mensagem DHCPOFFER. Conteúdo da mensagem:</p>
 
+<pre>
+<code>srcAddr=IP do servidor, srcPort=67, dstAddr=255.255.255.255, dstPort=68
+</code>
+</pre>
+
+<p>Além do:</p>
+
 <ul>
-    <li>srcAddr=IP do servidor, srcPort=67, dstAddr=255.255.255.255, dstPort=68.</li>
     <li>MAC Address do Cliente.</li>
     <li>IP oferecido pelo servidor, mais a máscara de subrede e duração da concessão.</li>
 </ul>
 
 <p>O cliente então responde com uma DHCPREQUEST, requerendo as configurações oferecidas. Conteúdo básico da mensagem:</p>
 
-<ul>
-    <li>srcAddr=0.0.0.0, srcPort=68, dstAddr=255.255.255.255, dstPort=67.</li>
-    <li>O servidor é identificado pelo IP, contido no campo de opções de DHCP da mensagem.</li>
-</ul>
+<pre>
+<code>
+srcAddr=0.0.0.0, srcPort=68, dstAddr=255.255.255.255, dstPort=67
+</code>
+</pre>
+
+<p>O servidor é identificado pelo IP, contido no campo de opções de DHCP da mensagem.</p>
 
 <p>Quando o servidor recebe a mensagem DHCPREQUEST do cliente, envia um pacote DHCPACK a este com as configurações oferecidas, finalizando a configuração DHCP. O cliente verifica se o endereço fornecido não está em uso enviando um pacote ARP para a rede. Conteúdo básico da mensagem:</p>
 
-<ul>
-    <li>srcAddr=IP do servidor, srcPort=67, dstAddr=255.255.255.255, dstPort=68.</li>
-</ul>
+<pre>
+<code>srcAddr=IP do servidor, srcPort=67, dstAddr=255.255.255.255, dstPort=68
+</code>
+</pre>
 
 <p>Basicamente, o cliente manda o DHCPDISCOVER pro servidor, que devolve o DHCPOFFER, o cliente aceitando devolve o DHCPREQUEST e o servidor devolve o DHCPACK (aceitando a oferta e fornece o IP e outras configurações).</p>
 
@@ -302,17 +333,17 @@ $ORIGIN 1.168.192.IN-ADDR-ARPA.; diretiva de nome base
     <tr>
         <td>03</td>
         <td>04</td>
-        <td>192.168.1.1</td>
+        <td><code>192.168.1.1</code></td>
     </tr>
     <tr>
         <td>06</td>
         <td>04</td>
-        <td>192.168.1.100</td>
+        <td><code>192.168.1.100</code></td>
     </tr>
     <tr>
         <td>42</td>
         <td>04</td>
-        <td>200.160.0.8</td>
+        <td><code>200.160.0.8</code></td>
     </tr>
 </table>
 
@@ -322,11 +353,11 @@ $ORIGIN 1.168.192.IN-ADDR-ARPA.; diretiva de nome base
 
 <img src="_imagens/tipos-dhcp.jpg" alt="Tipos DHCP"/>
 
-<p>O endereço de auto-configuração (APIPA) trata-se do endereço IP de auto-configuração de hosts, que são os endereços da faixa 169.254.0.1 até 169.254.255.254. Caso um host esteja utilizando um endereço dessa faixa, provavelmente trata-se de problemas de comunicação com o servidor DHCP.</p>
+<p>O endereço de auto-configuração (APIPA) trata-se do endereço IP de auto-configuração de hosts, que são os endereços da faixa <code>169.254.0.1</code> até <code>169.254.255.254</code>. Caso um host esteja utilizando um endereço dessa faixa, provavelmente trata-se de problemas de comunicação com o servidor DHCP.</p>
 
 <p>Um endereço IP dinâmico pode ser reservado para uso exclusivo de um host, no processo conhecido como reserva de IP. Para isso o servidor DHCP registra em uma tabela o endereço MAC do host e o IP que ele utilizará. Desta forma, o endereço deste host nunca mudará e não necessitará de configuração manual por parte de usuário.</p>
 
-<p>Um escopo DHCP nada mais é do que a faixa de IPs que serão distribuídos a uma sub-rede em particular, mais uma máscara de sub-rede, por exemplo: Faixa de 192.168.1.20 a 192.168.1.40, com máscara de sub-rede 255.255.255.0. Cada sub-rede terá seu próprio escopo DHCP.</p>
+<p>Um escopo DHCP nada mais é do que a faixa de IPs que serão distribuídos a uma sub-rede em particular, mais uma máscara de sub-rede, por exemplo: Faixa de <code>192.168.1.20</code> a <code>192.168.1.40</code>, com máscara de sub-rede <code>255.255.255.0</code>. Cada sub-rede terá seu próprio escopo DHCP.</p>
 
 <p>No servidor podemos verificar o nome das máquinas conectadas, seus IPs Privados, MAC e a concessão das mesmas.</p>
 

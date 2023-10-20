@@ -8,7 +8,12 @@ function natalEAnoNovo() {
     let falta;
     let mensagem;
 
-    if(mes == 11) {
+    if(mes == 10) {
+        falta = 25 - dia + 30 + 31;
+
+        mensagem = "Faltam " + falta + " dias para o Natal e " + (falta + 7) + " dias para o ano de " + (ano + 1) + "!";
+    }
+    else if(mes == 11) {
         falta = 25 - dia + 30;
 
         mensagem = "Faltam " + falta + " dias para o Natal e " + (falta + 7) + " dias para o ano de " + (ano + 1) + "!";
@@ -24,7 +29,7 @@ function natalEAnoNovo() {
     else if(dia == 25 && mes == 12) {
         mensagem = "Feliz Natal para você!";
     }
-    else if(dia > 25 && dia < 31 && mes == 12) {
+    else if((dia > 25 && dia < 31) && mes == 12) {
         falta = 31 + 1 - dia;
 
         mensagem = "Faltam " + falta + " dias para o ano de " + (ano + 1) + "!";
@@ -38,7 +43,7 @@ function natalEAnoNovo() {
     else if(dia == 6 && mes == 1) {
         mensagem = "Feliz Dia de Reis para você! Hoje se encerram as festas natalinas!";
     }
-    else if(dia > 6 && mes == 1 || mes == 2 || mes == 3) {
+    else if((dia > 6 && mes == 1) || mes == 2 || mes == 3) {
         mensagem = "As festas natalinas já passaram!";
     }
     else {
