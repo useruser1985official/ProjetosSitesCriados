@@ -296,6 +296,10 @@ printf("Frase: %s\n", frase);
 
 <p>PS: Por padrão, o <code>scanf</code> só lê a primeira palavra de uma cadeia de caracteres, para ler palavras compostas use o <code>fgets</code>, como indicado acima.</p>
 
+<p>O procedimento <code>fgets</code> permite ler uma string de outra variável, no caso, quando passamos o parâmetro <code>stdin</code>, ele lê da entrada padrão do sistema, igual ao scanf, só que ele permite usar frases com espaços. Esse método, assim como o printf e o scanf, pertence a biblioteca stdio.h.</p>
+
+<p>Em alguns casos, dependendo dos comandos do programa, o scanf pode ser ignorado. Nesse caso, basta apenas colocar uma sequência de escape \n antes da máscara para que ele seja identificado numa nova linha (por exemplo, <code>"\n%d"</code>). Mas o recomendado é usar o <code>fflush(stdin)</code>, como mostrado acima, o fflush limpa o buffer do teclado, mas tem casos que temos que usar a quebra de linha mesmo.</p>
+
 <p>Veja outro exemplo:</p>
 
 <pre>
@@ -311,8 +315,6 @@ printf("Ano: %d\n", ano);
 </pre>
 
 <p>Você pode ver que ali, nós digitamos num formato de data de uma vez só, no caso, dia, mês e ano ficarão em variáveis separadas. As barras da data é ignorada com a máscara de caracteres <code>%*c</code>, nesse caso, o asterisco significa "ignore".</p>
-
-<p>Em alguns casos, dependendo dos comandos do programa, o scanf pode ser ignorado. Nesse caso, basta apenas colocar uma sequência de escape \n antes da máscara para que ele seja identificado numa nova linha (por exemplo, <code>"\n%d"</code>). Mas o recomendado é usar o <code>fflush(stdin)</code>, como mostrado acima.</p>
 
 <p>PS: Quando estamos trabalhando com vetores de char, podemos colocar no scanf a variável sem o &, por exemplo:</p>
 
