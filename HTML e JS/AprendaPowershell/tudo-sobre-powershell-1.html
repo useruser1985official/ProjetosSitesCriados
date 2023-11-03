@@ -29,18 +29,18 @@
 <p>Esses são os comando mais comuns do Powershell:</p>
 
 <ul>
-    <li><code>Get-ChildItem</code> - Mostra o conteúdo do diretório atual.</li>
-    <li><code>Set-Location</code> - Move entre diretórios.</li>
+    <li><code>Get-ChildItem</code> - Mostra o conteúdo do diretório atual (podendo usar <code>-Directory</code> para listar só pastas ou <code>-File</code> para listar só arquivos, além de parâmetros como <code>*.txt</code>.</li>
+    <li><code>Set-Location C:\Users</code> - Move entre diretórios.</li>
     <li><code>Get-Location</code> - Mostra diretório atual.</li>
     <li><code>New-Item arquivo/pasta</code> - Cria um arquivo ou diretório (colocar <code>-Type Directory</code> para pastas).</li>
     <li><code>Get-Content arquivo</code> - Lê o arquivo na linha de comando do Powershell.</li>
-    <li><code>Rename-Item</code> - Renomeia um arquivo ou diretório.</li>
-    <li><code>Select-String palavra</code> - Encontra uma linha num arquivo..</li>
+    <li><code>Rename-Item nomeantigo nomenovo</code> - Renomeia um arquivo ou diretório.</li>
+    <li><code>Select-String palavra arquivo</code> - Encontra uma linha num arquivo..</li>
     <li><code>Move-Item arquivo C:\Users</code> - Move o arquivo para outro diretório especificado</li>
     <li><code>Copy-Item arquivo C:\Users</code> - Copia o arquivo para outro diretório especificado</li>
     <li><code>Remove-Item arquivo/pasta</code> - Remove o arquivo ou pasta especificado.</li>
     <li><code>Get-History</code> - Mostra o histórico de comandos.</li>
-    <li><code>Write-Output</code> - Para escrever na tela (pode ser omitido usando somente o conteúdo).</li>
+    <li><code>Write-Output "Frase"</code> - Para escrever na tela (pode ser omitido usando somente o conteúdo).</li>
     <li><code>Read-Host "Frase"</code> - Pede que o usuário digite um dado, para guardar numa variável.</li>
     <li><code>#</code> - Para comentários.</li>
     <li><code>Get-Help</code>  - Exibe a ajuda (para um comando, use <code>-?</code>).</li>
@@ -211,6 +211,10 @@ Get-FileHash nomedoarquivo.extensão -Algorithm md5 | Format-List > arquivo.txt
     <tr>
         <td>PROCESSOR_IDENTIFIER</td>
         <td>Retorna dados sobre o processador</td>
+    </tr>
+    <tr>
+        <td>PROCESSOR_ARCHITECTURE</td>
+        <td>Retorna a arquitetura do processador</td>
     </tr>
 </table>
 

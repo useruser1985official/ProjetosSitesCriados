@@ -209,165 +209,35 @@ shell
 
 <p>Se a invasão for bem-sucedida, você poderá navegar no sistema, usando a linha de comando.</p>
 
-<h3>Bruteforce de Subdomínios com Python</h3>
+<h3>Descobrindo Senhas com o HashCat</h3>
 
-<p>Para isso, devemos fazer nosso próprio scanner em Python, esse é o código:</p>
+<p>Como sabemos, as senhas são guardados no banco de dados no formato de hash, e podemos usar geradores de hash para criptografar as mesmas.</p>
 
-<pre>
-<code>
-import sys
-import dns.resolver
+<p>Para descobrir senhas usaremos o HashCat. Nativo no Kali Linux, ele pode ser instalado em outras distros com <code>sudo apt install hashcat ocl-icd-libopencl1 opencl-headers clinfo   beignet-opencl-icd mesa-opencl-icd lsb-core</code>.</p>
 
-try:
-    dominio = str(input("Insira o nome ou IP do domínio: "))
-except:
-    print("O domínio é inválido!")
-    sys.exit(1)
+<p>Salve um arquivo com o nome hashes.txt com os hashs desejados. Podemos baixar um exemplo <a href="_files/hashes.txt" target="_blank">aqui</a>!</p>
 
-try:
-    arquivo = open("wordlist.txt")
-    linhas = arquivo.read().splitlines()
-except:
-    print("Arquivo não encontrado ou inválido!")
-    sys.exit(1)
+<p>Para utilizar o hashcat, use na sintaxe <code>hashcat -a 0 -m 100 hashes.txt wordlist.txt</code>. No lugar do arquivo dos hashs podemos colocar o mesmo literalmente.</p>
 
-for l in linhas:
-    subdominio = l + "." + dominio
+<p>Se você receber um erro de "exceção de comprimento de linha" no hashcat, geralmente é porque o modo hash que você solicitou não corresponde ao hash.</p>
 
-    try:
-        respostas = dns.resolver.resolve(subdominio, "a")
+<p>Esses são os tipos de hashs: <a href="https://hashcat.net/wiki/doku.php?id=example_hashes" target="_blank">https://hashcat.net/wiki/doku.php?id=example_hashes</a></p>
 
-        for res in respostas:
-            print("{} - {}".format(subdominio, res))
-    except:
-        pass
-</code>
-</pre>
+<p>Eles devem ser usados após o parâmetro -m, para MD5 o número é 0, SHA-1 o número é 100 e SHA-256 é 1400.</p>
 
-<p>Temos também que baixar uma wordlist de subdomínios, <a href="_files/wordlist.txt" target="_blank">clicando aqui</a>.</p>
-
-<p>PS: Pode ser necessário instalar o módulo dns, no Linux fazemos isso digitando no terminal <code>sudo apt-get install python3-dnspython</code>.</p>
-
-<h3>Desenvolvendo um Port Scanner em Python</h3>
-
-<p>Podemos obter informações de um site com aplicações como Nmap, Whois e várias outras, veja um exemplo simples de uso do netcat:</p>
+<p>O parâmetro -a indica o tipo de ataque, onde 0 é com wordlist, para fazer com bruteforce é 3, por exemplo:</p>
 
 <pre>
 <code>
-nc www.google.com.br 80
+sudo hashcat -a 3 -m 0 hashes.txt ????????
 </code>
 </pre>
 
-<p>Digite algo nessa tela e dê enter que retornará um erro porque o servidor não entenderá o que mandamos para ele. Ele deverá ser conectado à uma porta ativa (geralmente a 80 ou a 443).</p>
+<p>Onde está ? é o tipo de caractere e sua quantidade, onde a interrogação é o coringa pra todos, os tipos de caracteres podem ser vistos dando um --help no hashcat.</p>
 
-<p>É dessa forma que nosso port scanner funcionará, esse é o código:</p>
+<p>PS: Em quaisquer casos, pode ser necessário forçar com <code>--force</code>, e também executar como root.</p>
 
-<pre>
-<code>
-import socket
-
-# AF_INET é o IPv4 e SOCK_STREAM é o protocolo TCP
-cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-cliente.connect(("www.google.com.br", 80)) # Site e porta
-cliente.send("...\n\n".encode()) # Dados a serem enviados!
-
-resposta = cliente.recv(1024) # Número de bytes recebidos
-
-print(resposta)
-</code>
-</pre>
-
-<p>Dessa forma temos retornado o mesmo erro pelo netcat visto.</p>
-
-<p>Podemos fazer ele retornar um código com o método connect_ex, que ao retornar 0 significa que ele deu certo.</p>
-
-<pre>
-<code>
-import socket
-
-cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criação do objeto com IPv4 e TCP
-
-codigo = cliente.connect_ex(("www.google.com.br", 80)) # Conectando o cliente (nós) ao servidor do Google. O método connect_ex retorna um código, sendo 0 a conexão deu certo.
-
-print(codigo)
-</code>
-</pre>
-
-<p>Pro código ficar mais rápido, podemos fazer assim:</p>
-
-<pre>
-<code>
-import socket
-
-cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criando o objeto com IPv4 e TCP
-
-cliente.settimeout(0.1) # Tempo de tentar a conexão
-
-codigo = cliente.connect_ex(("www.google.com.br", 80)) # Conecta o cliente ao servidor do google. Sendo 0 a conexão deu certo.
-
-print(codigo)
-</code>
-</pre>
-
-<p>Quanto menor esse tempo, ele esperará menos tempo para responder, é recomendado usar valores mais altos.</p>
-
-<p>Podemos melhorar ainda mais esse código assim: </p>
-
-<pre>
-<code>
-import socket
-
-# Tupla de portas:
-portas = (20, 21, 22, 23, 25, 43, 53, 67, 68, 80, 110, 135, 137, 138, 139, 143, 433, 443, 445, 465, 587, 993, 995, 1039, 1040, 3050, 3306, 5432, 8080)
-
-print("-=" * 12)
-
-for p in portas:
-    cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criando objeto com IPv4 e TTCP
-    cliente.settimeout(0.5) # Tempo de tentar a conexão
-    codigo = cliente.connect_ex(("www.google.com.br", p)) # Conectando o cliente ao servidor através das portas da tupla, sendo 0 a conexão deu certo.
-
-    if codigo == 0:
-        sit = "aberta"
-    else:
-        sit = "fechada"
-
-    print("A porta {} está {}.".format(p, sit))
-
-print("-=" * 12)
-</code>
-</pre>
-
-<p>As portas abertas retornarão 0 e as fechadas outro número, como 11.</p>
-
-<p>Podemos melhorar mais ainda esse código, podendo selecionar o IP ou site desejado:</p>
-
-<pre>
-<code>
-import socket
-
-serv = str(input("Coloque o link ou IP no site: "))
-
-portas = (20, 21, 22, 23, 25, 43, 53, 67, 68, 80, 110, 135, 137, 138, 139, 143, 433, 443, 445, 465, 587, 993, 995, 1039, 1040, 3050, 3306, 5432, 8080)
-
-print("-=" * 30)
-
-for p in portas:
-    cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criando objeto com IPv4 e TTCP
-    cliente.settimeout(0.5) # Tempo de tentar a conexão
-    codigo = cliente.connect_ex((serv, p)) # Conectando o cliente ao servidor através das portas da tupla, sendo 0 a conexão deu certo.
-
-    if codigo == 0:
-        sit = "aberta"
-    else:
-        sit = "fechada"
-
-    print("A porta {} de {} está {}.".format(p, serv, sit))
-
-print("-=" * 30)
-</code>
-</pre>
+<p>Aqui temos outras dicas com outros tipos de hash: <a href="https://infosecwriteups.com/cracking-hashes-with-hashcat-2b21c01c18ec" target="_blank">https://infosecwriteups.com/cracking-hashes-with-hashcat-2b21c01c18ec</a></p>
 
 <ul>
     <li><a href="tudo-sobre-hacking-4.html">Parte Anterior da Matéria!</a></li>
