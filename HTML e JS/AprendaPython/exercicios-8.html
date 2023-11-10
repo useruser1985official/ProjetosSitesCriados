@@ -326,6 +326,48 @@ else:
 
 <hr/>
 
+<p>Crie uma função segura para criptografar senhas, com a opção de usar ou não o "salt":</p>
+
+<p>Módulo:</p>
+
+<pre>
+<code>
+from hashlib import md5, sha1, sha256
+
+def criptografar(texto, sal = ""):
+    texto = texto.strip().encode("utf-8")
+    sal = sal.strip().encode("utf-8")
+
+    if not texto:
+        raise Exception("\033[31mPasse um Valor em Texto!\033[m")
+
+    hashTex = sha1(texto).hexdigest()
+    hashSal = ""
+
+    if sal:
+        hashSal = md5(sal).hexdigest()
+
+    cript = sha256(hashTex.encode("utf-8") + hashSal.encode("utf-8")).hexdigest()
+
+    return cript
+</code>
+</pre>
+
+<p>Programa:</p>
+
+<pre>
+<code>
+from criptografia import criptografar
+
+try:
+    print(criptografar("senha", "salt"))
+except Exception as erro:
+    print(erro)
+</code>
+</pre>
+
+<hr/>
+
 <p>Crie um pequeno sistema modularizado que permita cadastrar pessoas pelo seu nome e idade em um arquivo de texto simples. O sistema só vai ter duas opções: Cadastrar uma nova pessoa e listar todas as pessoas cadastradas:</p>
 
 <p>Módulo (menu/lib/interface):</p>

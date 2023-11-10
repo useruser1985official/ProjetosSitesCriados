@@ -39,7 +39,7 @@
 
 <p>Nele, vemos primeiramente as placas de rede disponíveis no nosso computador. Clique nela, e veremos todas as atividades da nossa rede, abra o navegador com o programa aberto para vermos a atividade.</p>
 
-<p>A barbatana do tubarão inicia a captura de pacotes, para parar clique no quadrado vermelho. Vemos os IPs de destino, protocolos e outros dados. Abaixo dele tem os dados do pacote, como os MACs de destino e outros dados. Para ver os dados de um determinado IP, clique nele.</p>
+<p>A barbatana do tubarão inicia a captura de pacotes, para parar clique no quadrado vermelho. Vemos os IPs de origem (source) e destino, protocolos e outros dados. Abaixo dele tem os dados do pacote, como os MACs de destino e outros dados. Para ver os dados de um determinado IP, clique nele.</p>
 
 <p>Podemos ver por exemplo, no filtro, os pacotes de um determinado protocolo, por exemplo, o ARP.</p>
 
@@ -59,7 +59,9 @@
 
 <p>Para não mostrar tráfegos de um determinado protocolo, podemos usar por exemplo <code>not tcp</code>, para mais de um podemos ser por exemplo <code>not tcp and not arp</code>. Como visto, podemos colocar operadores como <code>and</code>, <code>or</code> e <code>not</code> também.</p>
 
-<p>Podemos filtrar um determinado protocolo usando os comandos como por exemplo <code>tcp.port == 80</code> para filtrar o tráfego HTTP (podendo nesse caso ser diretamente pesquisado apenas <code>http</code> também).</p>
+<p>Podemos filtrar um determinado protocolo usando os comandos como por exemplo <code>tcp.port == 80</code> para filtrar o tráfego HTTP (podendo nesse caso ser diretamente pesquisado apenas <code>http</code> também). Outros filtros podem ser usados (inclusive com negação), para protocolos como FTP, SSH, entre outros.</p>
+
+<p>Clique com o botão direito em um os pacotes e em Follow e TCP Stream, você terá acesso ao código binário do programa. Se permitido, teremos outras opções disponíves, como UDP Stream e TLS Stream.</p>
 
         </div>
     </body>

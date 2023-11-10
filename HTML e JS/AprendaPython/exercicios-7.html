@@ -343,36 +343,6 @@ help(notas)
 
 <hr/>
 
-<p>Crie uma função segura para criptografar senhas, com a opção de usar ou não o "salt":</p>
-
-<pre>
-<code>
-from hashlib import md5, sha1, sha256
-
-def criptografar(texto, sal):
-    texto = texto.strip().encode("utf-8")
-    sal = sal.strip().encode("utf-8")
-
-    if not texto:
-        raise Exception("Passe um Valor em Texto!")
-
-    hashTex = sha1(texto).hexdigest()
-    hashSal = ""
-
-    if sal:
-        hashSal = md5(sal).hexdigest()
-
-    cript = sha256(hashTex.encode("utf-8") + hashSal.encode("utf-8")).hexdigest()
-
-    return cript
-
-
-print(criptografar("senha", "salt"))
-</code>
-</pre>
-
-<hr/>
-
 <p>Faça um mini-sistema que utilize o interactive help do Python. O usuário vai digitar o comando e o manual vai aparecer. Quando o usuário digitar a palavra FIM, o programa se encerrará. Use cores:</p>
 
 <pre>

