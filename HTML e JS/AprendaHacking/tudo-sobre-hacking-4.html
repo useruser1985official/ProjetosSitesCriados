@@ -126,6 +126,29 @@
 
 <p>Portas de e-mail como SMTP (25, 587, 465), IMAP (143 e 993) e POP (110 e 995) indicam que um servidor de e-mail está sendo executado. Porta 53 indica um servidor DNS em execução. Porta 21 indica que o FTP está em execução. O mesmo vale pra serviços como HTTP, SSH, Telnet e outros. As portas 135, 137, 138, 139 e 445 mostram um host Windows desprotegido.</p>
 
+<p>Podemos usar scripts internos do Nmap para fazer mais coisas, além de outros comandos, por exemplo:</p>
+
+<pre>
+<code>
+# Detectando falhas em servidores utilizando verbose:
+nmap -sS -v -Pn -A --open --script=vuln 192.168.15.1
+
+# Burlar firewall em rede externa:
+nmap -f -sV -A 192.168.15.1 # Ocorre a fragmentação
+nmap -sS -sV -A 192.168.15.1 # Faz varreduras do tipo SYN
+nmap -Pn -sV -A 192.168.15.1 # Não envia pacotes ICMP (ping)
+
+# Buscando falhas de DDoS:
+nmap -sU -A -Pn -n -pU:19,53,123,161 --script=ntp-monlist,dns-recursion,snmp-sysdescr 192.168.15.1
+
+# Fazendo bruteforce no banco de dados do alvo:
+nmap --script=mysql-brute 192.168.15.1
+
+# Fazer menos "ruídos" numa rede interna com um scan mais demorado:
+nmap -T0 --send-ip 192.168.15.1/24 # send-ip pode ser ignorado em redes externas
+</code>
+</pre>
+
 <h3>Identificando Ícones do Zenmap</h3>
 
 <p>Em Topologia, vemos os hosts dessa forma:</p>

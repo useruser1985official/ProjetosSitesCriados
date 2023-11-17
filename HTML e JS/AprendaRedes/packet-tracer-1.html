@@ -89,7 +89,20 @@
 
 <p>Remova o cabo do segundo PC, e coloque um roteador wireless (Network Services, Wireless Devices e WRT300N), ligue o PC no roteador com um cabo Through (na porta Ethernet 1). Use o mesmo cabo para ligar a porta Internet do roteador à porta do modem. Ele agora pegará o DHCP do roteador (com um IP diferente do servidor).</p>
 
-<p>PS: Nã confunda o roteador wireless com o access point, o roteador wireless cria outra rede na qual os dispositivos wireless se conectam, podendo inclusive ser protegida por senha. O access point apenas compartilha a rede cabeada com dispositivos wireless, como um switch wireless. Ambos podem ter rede e senhas configuradas, indo em Config e escolhendo a opção WPA2-PSK</p>
+<p>PS: Não confunda o roteador wireless com o access point, o roteador wireless cria outra rede na qual os dispositivos wireless se conectam, podendo inclusive ser protegida por senha. O access point apenas compartilha a rede cabeada com dispositivos wireless, como um switch wireless. Ambos podem ter rede e senhas configuradas, indo em Config e escolhendo a opção WPA2-PSK</p>
+
+<p>Podemos configurar outras coisas no servidor, como um firewall, em Desktop, nesse caso, colocamos as seguintes configurações (não esqueça de colocar On antes):</p>
+
+<ul>
+    <li><b>Action:</b> Coloque Allow (permitir) ou Deny (negar).</li>
+    <li><b>Protocol:</b> Coloque o protocolo a impedir.</li>
+    <li><b>Remote IP:</b> Coloque a rede do IP (como <code>192.168.0.0</code>).</li>
+    <li><b>Remote Wildcard Mask:</b> Coloque a máscara ao contrário (como <code>0.255.255.255</code>).</li>
+    <li><b>Remote Port:</b> Coloque a porta (escreva any para qualquer porta).</li>
+    <li><b>Local Port:</b> Coloque a porta local.</li>
+</ul>
+
+<p>Depois é só adicionar, no caso, poderiamos adicionar várias adições para cada protocolo.</p>
 
 <h3>Nível Básico - Parte 1</h3>
 

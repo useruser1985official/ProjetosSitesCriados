@@ -330,6 +330,19 @@ select * from produto union select 1, 2, 3, group_concat(id, ' - ', item, ' - ',
 </code>
 </pre>
 
+<h3>Como Não Armazenar Senhas de Usuários em Bancos de Dados</h3>
+
+<p>Nunca armazene senhas em bancos de dados das seguintes formas:</p>
+
+<ul>
+    <li><b>Senhas em Texto Plano:</b> Ela estará disponível para um invasor sem nenhuma segurança.</li>
+    <li><b>Criptografar as Senhas:</b> Os algoritmos podem ser revertidos, em muitos casos.</li>
+    <li><b>Algoritmos de Hash:</b> Podem ser descobertos através de rainbow tables ou ataques de força bruta e dicionário, principalmente se forem senhas mais fáceis, podem também ter ataques como os de colisão e aniversário (probabilidades).</li>
+    <li><b>Criar Algoritmos de Criptografia:</b> Podem conter falhas graves e também podem ser reversíveis.</li>
+</ul>
+
+<p>Uma das formas mais seguras é usar hashs com um <q>salt</q> (valor aleatório) adicionado à senha, para gerar um hash único, podemos criar funções que auxiliem nisso.</p>
+
 <ul>
     <li><a href="tudo-sobre-mysql-6.html">Parte Anterior da Matéria!</a></li>
     <!--<li><a href="tudo-sobre-mysql-8.html">Continuação da Matéria!</a></li>-->

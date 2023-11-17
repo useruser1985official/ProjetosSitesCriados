@@ -407,7 +407,7 @@ crunch 3 5 -f /usr/share/crunch/charset.lst mixalpha
     </tr>
 </table>
 
-<h3>Ataque com Medusa</h3>
+<h3>Ataque com Medusa e Patator</h3>
 
 <p>Com uma wordlist pronta podemos atacar usando uma ferramenta como a Medusa. Basicamente o comando dele é <code>medusa -h hostouip -u nomedousuario -P wordlist -M protocolo</code>, por exemplo:</p>
 
@@ -420,6 +420,16 @@ medusa -h 10.10.10.123 -u admin -P wordlist.txt -M ftp
 <p>No caso acima, com FTP, após ele descobrir a senha, podemos digitar <code>ftp 10.10.10.123 senha</code>.</p>
 
 <p>No Medusa, podemos colocar as opções (como -h, -u e -p) como minúsculas para dados específicos, e como maiúsculas (-H, -U, -P) para arquivos de texto com vários hosts, usuários ou senhas.</p>
+
+<p>Outra ferramenta ótima pra ataques é o Patator, usada dessa forma:</p>
+
+<pre>
+<code>
+patator ssh_login host=192.168.119.8 user=nomedologin password=FILE0 0=wordlist.txt
+</code>
+</pre>
+
+<p>Para ver os módulos disponíveis no Patator, apenas digite <code>patator</code> no terminal.</p>
 
 <h3>Consulta de Senhas na Deep Web</h3>
 
