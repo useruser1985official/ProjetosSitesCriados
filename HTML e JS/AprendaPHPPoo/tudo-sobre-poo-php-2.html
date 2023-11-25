@@ -277,8 +277,10 @@ class Ventilador {
         else if($vel > 3) {
             $vel = 3;
         }
+
+        self::$velocidade = $vel;
         
-        printf("O ventilador está ligado, na velocidade de %d.\n", $vel);
+        printf("O ventilador está ligado, na velocidade de %d.\n", self::$velocidade);
     }
 
     public static function desligar() {

@@ -165,7 +165,7 @@ else {
 
 printf("\nDeseja Digitar Outras Notas? [S/N]: ");
 fflush(stdin);
-scanf("%c", &opc);
+scanf("\n%c", &opc);
 
 if((char)toupper(opc) == 'S') { // Inclua ctype.h pro toupper
     system("cls"); // Adicione stdlib.h, são os comandos do terminal do sistema operacional à ser compilado.
@@ -393,7 +393,7 @@ while((char)toupper(cod) == 'S') { // importe ctype.h
     not = 0;
     printf("Deseja calcular outra média? [S/N]");
     fflush(stdin);
-    scanf("%c", &cod);
+    scanf("\n%c", &cod);
 }
 </code>
 </pre>

@@ -283,8 +283,10 @@ public class Ventilador {
         else if(vel > 3) {
             vel = 3;
         }
+
+        velocidade = vel;
         
-        System.out.printf("O ventilador está ligado, na velocidade de %d.\n", vel);
+        System.out.printf("O ventilador está ligado, na velocidade de %d.\n", velocidade);
     }
 
     public static void desligar() {
