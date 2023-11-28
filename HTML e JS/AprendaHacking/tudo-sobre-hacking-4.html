@@ -146,6 +146,15 @@ nmap --script=mysql-brute 192.168.15.1
 
 # Fazer menos "ruídos" numa rede interna com um scan mais demorado:
 nmap -T0 --send-ip 192.168.15.1/24 # send-ip pode ser ignorado em redes externas
+
+# Para ver as portas abertas em uma rede:
+nmap 192.168.15.0/24
+
+# Para descobrir os IPs de uma rede especificada, use esse comando:
+nmap -sP 192.168.15.0/24
+
+# Para descobrir o sistema operacional de um host:
+nmap -O 192.168.15.1
 </code>
 </pre>
 

@@ -63,6 +63,30 @@
 
 <p>Clique com o botão direito em um os pacotes e em Follow e TCP Stream, você terá acesso ao código binário do programa. Se permitido, teremos outras opções disponíves, como UDP Stream e TLS Stream.</p>
 
+<h3>Usando o Tshark via Linha de Comandos</h3>
+
+<p>Para usar o Tshark via linha de comandos, usamos dessa forma:</p>
+
+<pre>
+<code>
+tshark -D # Mostra as interfaces
+
+tshark -i NomeDaInterface "tcp port 80" # Usamos um filtro igual na interface gráfica
+
+tshark -i NomeDaInterface -w arquivo.pcapng # Salva num arquivo
+
+tshark -r arquivo.pcapng # Lê um arquivo no terminal
+</code>
+</pre>
+
+<p>Podemos usar vários filtros, inclusive em conjunto, por exemplo:</p>
+
+<pre>
+<code>
+tshark -i NomeDaInterface "http" -w trafego-http.pcapng
+</code>
+</pre>
+
         </div>
     </body>
 </html>
