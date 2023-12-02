@@ -80,7 +80,7 @@
 
 <p>Quando conversamos pelo Skype, ele está conectado diretamente ao computador da pessoa, o que facilita a descoberta do IP do usuário. O Facebook, por sua vez, envia pro servidor antes de mandar pro outro usuário, o que dificulta a descoberta.</p>
 
-<p>Para o Skype, descobrimos usando o comando <code>netstat -a -n</code>. Onde, no endereço Externo, estará o IP do usuário (feche as outras aplicações que se conectam à internet antes). Para ver os processos que estão usando esses IPs e portas, digite o comando com o parâmetro /b (-e no Linux).</p>
+<p>Para o Skype, descobrimos usando o comando <code>netstat -a -n</code>. Onde, no endereço Externo, estará o IP do usuário (feche as outras aplicações que se conectam à internet antes). Para ver os processos que estão usando esses IPs e portas, digite o comando com o parâmetro /b (-e no Linux). Hoje em dia o netstat no Linux foi substituído por <code>ss -all</code>.</p>
 
 <p>No Facebook e outros sites, já que isso não funciona, temos que usar uma engenharia social, no caso, entraremos no site IP Logger, colocaremos um link qualquer nele, e enviar o link encurtado pra pessoa, que não perceberá porque o redirecionamento é normal, mas o site fornece pra você um link onde vemos o IP dos usuários que o acessaram, além dos navegadores, sistemas operacionais e hostnames. O site é esse: <a href="https://iplogger.org/" target="_blank">https://iplogger.org/</a></p>
 
