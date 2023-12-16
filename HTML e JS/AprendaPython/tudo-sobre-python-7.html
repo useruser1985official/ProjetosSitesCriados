@@ -200,22 +200,6 @@ print(f"A fora vale {a}.")
 
 <p>Como visto acima, o a da função local tem valor diferente do a global.</p>
 
-<p>Outro exemplo:</p>
-
-<pre>
-<code>
-def funcao():
-    n1 = 4
-    print(f"N1 dentro vale {n1}.")
-
-n1 = 2
-funcao()
-print(f"N1 fora vale {n1}.")
-</code>
-</pre>
-
-<p>No caso acima, o n1 de dentro da função também não é o mesmo n1 do programa principal.</p>
-
 <p>Podemos também indicar que a variável é global dentro da função, de forma que ele não crie outra local com o mesmo nome, assim:</p>
 
 <pre>
@@ -237,6 +221,21 @@ print(f"A fora vale {a}.")
 </pre>
 
 <p>No caso acima, o a global é alterado para 8 ao chamar a função. O b recebeu o parâmetro antes do a ser alterado.</p>
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+def funcao():
+    n1 = 4
+    print(f"N1 dentro vale {n1}.")
+
+n1 = 2
+funcao()
+print(f"N1 fora vale {n1}.")
+</code>
+</pre>
+
+<p>No caso acima, o n1 de dentro da função também não é o mesmo n1 do programa principal.</p>
 
 <p>As funções também podem retornar valores, usando a palavra <code>return</code>, vamos voltar à função somar, como estava:</p>
 
@@ -593,22 +592,6 @@ finally:
 
 <p>No caso acima, o erro foi tratato e se tentarmos dividir por zero ou inserir uma string, ele exibirá a nossa mensagem.</p>
 
-<p>Veja esse exemplo com arquivos:</p>
-
-<pre>
-<code>
-try:
-    arquivo = open("arquvo.txt", "rt")
-    
-    for l in arquivo:
-        print(l)
-
-    arquivo.close()
-except:
-    print("Arquivo não Encontrado!")
-</code>
-</pre>
-
 <p>Podemos jogar a exceção numa variável, assim:</p>
 
 <pre>
@@ -650,6 +633,22 @@ finally:
 </pre>
 
 <p>PS: Ao testar um programa com exceções, teste fazendo o certo primeiro, pra depois provocar as exceções.</p>
+
+<p>Veja esse exemplo com arquivos:</p>
+
+<pre>
+<code>
+try:
+    arquivo = open("arquvo.txt", "rt")
+
+    for l in arquivo:
+        print(l)
+
+    arquivo.close()
+except:
+    print("Arquivo não Encontrado!")
+</code>
+</pre>
 
 <p>Podemos também criar nossas próprias condições para exceções, usando um if e o comando <code>raise</code>, assim:</p>
 

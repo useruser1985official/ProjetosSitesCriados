@@ -197,9 +197,9 @@ class Controlador {
 <pre>
 <code>
 class ControleRemoto : Controlador {
-    hidden [int]$volume = 0
-    hidden [bool]$ligado = $false
-    hidden [bool]$tocando = $false
+    hidden [int]$volume
+    hidden [bool]$ligado
+    hidden [bool]$tocando
     
     [void]ligar() {
         $this.setLigado($true)
@@ -460,7 +460,7 @@ $controle = [Aparelho]::new($ray)
 
 $controle.ligado()
 
-Write-Host ([string]::Format("A carga da pilha é de {0}%!", $this.getPl().getCarga()))
+Write-Host ([string]::Format("A carga da pilha é de {0}%!", $controle.getPl().getCarga()))
 </code>
 </pre>
 

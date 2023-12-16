@@ -323,7 +323,7 @@ ipconfig /renew
 
 <p>Para descobrir o MTU da interface, digitamos <code>netsh interface ipv4 show subinterfaces</code> (pode ser <code>ipv6</code> também).</p>
 
-<p>Para selecionar o tamanho em bytes dos pacotes enviados pelo ping, usamos o <code>/l</code> seguido do número (por exemplo, <code>ping /l 1500 www.google.com.br</code>). Para selecionar a quantidade de requisições use o parâmetro /n seguido do número, por exemplo <code>/n 6</code>. Para desativar a fragmentação de pacotes, usamos o <code>/f</code> junto, por exemplo, <code>ping /l 1500 /f www.google.com.br</code>.</p>
+<p>Para selecionar o tamanho em bytes dos pacotes enviados pelo ping, usamos o <code>/l</code> seguido do número (por exemplo, <code>ping /l 1500 www.google.com.br</code>). Para selecionar a quantidade de requisições use o parâmetro /n seguido do número, por exemplo <code>/n 6</code>. Para desativar a fragmentação de pacotes, usamos o <code>/f</code> junto, por exemplo, <code>ping /l 1500 /f www.google.com.br</code>. O parâmetro <code>/t</code> envia requisições infinitas.</p>
 
 <p>Podemos também usar parâmetros no tracert, como para aumentar a quantidade máxima de saltos com o /h, por exemplo <code>tracert /h 60 www.google.com.br</code>.</p>
 

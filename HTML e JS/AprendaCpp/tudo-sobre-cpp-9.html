@@ -131,6 +131,76 @@ void iniVet(int *v) {
 
 <p>A função que recebe o vetor como parâmetro poderia ser declarada também como <code>void iniVet(int v[])</code>.</p>
 
+<p>Para entendermos que o uso de ponteiros e referência independe do escopo, veja esse código aqui sem ponteiros e referências:</p>
+
+<pre>
+<code>
+int testar(int n1, int n2);
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+    
+    int n1 = 10;
+    int n2 = 20;
+
+    cout << "Valores antes de chamar a função: ";
+    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+
+    testar(n1, n2);
+
+    cout << "Valores depois de chamar a função: ";
+    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+
+    return 0;
+}
+
+int testar(int n1, int n2) {
+    n1 = -1;
+    n2 = -2;
+
+    cout << "Valores dentro da função testar: " << endl;
+    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Agora o mesmo com os ponteiros e referências:</p>
+
+<pre>
+<code>
+int testar(int *n1, int *n2);
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+    
+    int n1 = 10;
+    int n2 = 20;
+
+    cout << "Valores antes de chamar a função: ";
+    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+
+    testar(&n1, &n2);
+
+    cout << "Valores depois de chamar a função: ";
+    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+
+    return 0;
+}
+
+int testar(int *n1, int *n2) {
+    *n1 = -1;
+    *n2 = -2;
+
+    cout << "Valores dentro da função testar: " << endl;
+    cout << "n1 = " << *n1 << " e n2 = " << *n2 << endl;
+
+    return 0;
+}
+</code>
+</pre>
+
 <p>PS: Podemos ter também ponteiros duplos, isso é chamado de indireção múltipla, veja um exemplo abaixo:</p>
 
 <pre>

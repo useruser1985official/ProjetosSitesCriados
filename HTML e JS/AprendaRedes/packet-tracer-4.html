@@ -31,6 +31,28 @@
                            
 <h2>Cisco Packet Tracer - Parte 4</h2>
 
+<h3>Criando Cenários Complexos (InfraEstrutura)</h3>
+
+<p>Coloque dois servidores, um switch 2960, quatro roteadores 1941, mais um switch 2960, dois PCs e mais um servidor, uma nuvem, um modem DSL e mais um PC. Coloque um roteador wi-fi WRT300N, uma impressora e dois laptops.</p>
+
+<p>Separe os dois servidores e o primeiro switch num retângulo (representando servidores como os do Facebook ou do Google). Coloque os quatro roteadores e o outro switch dentro de outro retângulo (representando a rede da internet). Os dois PCs e o outro servidor num outro (representando a operadora). A nuvem fica livre (representando o poste/armário da rua). O modem e o terceiro PC num outro (representando a casa do cliente). Coloque o roteador wi-fi, a impressora e os dois laptops num outro (uma outra rede conectada à internet).</p>
+
+<p>No primeiro retângulo (servidores), ligue as portas do servidor nas portas Fast do switch da rede, e ligue uma porta Giga do switch no roteador à esquerda do segundo retângulo. Todos com o cabo Through.</p>
+
+<p>No segundo retângulo (internet), ligue o switch dele nos dois PCs e no servidor do retângulo abaixo. Ligue o mesmo switch com uma porta Giga no roteador de baixo e outra na nuvem, tudo com cabo Through, ligue a nuvem no modem do retângulo e ligue o modem ao PC dele.</p>
+
+<p>No último ligue a porta do roteador wi-fi à impressora. Os laptops vão se conectar a conectar via wi-fi. O roteador wi-fi deverá ter a porta Internet ligada ao roteador da direita.</p>
+
+<p>No caso dos roteadores, eles serão interligados como um losango, para criar uma rota estática, mas teremos que desligar eles e adicionar mais uma porta em cada um deles. Coloque a placa HWIC-2T em cada uma delas. No caso ele criará portas seriais. E ligue essas portas com um cabo serial DTE. Após isso ligue todas as interfaces dos roteadores.</p>
+
+<p>PS: O ideal é só ligar as portas do roteador que estão sendo usadas, por questão de segurança.</p>
+
+<p>Coloque um marcador com IP (como por exemplo, da faixa de <code>200.0.0.0</code>) e a máscara correspondente (no caso <code>255.255.255.224</code>) na rede do servidor. Os dois PCs e a rede com a nuvem, modem e o outro PC estarão na faixa <code>172.16.0.0</code> e máscara <code>255.255.255.192</code>. A rede à direita com o wi-fi coloque a rede <code>192.168.0.0</code> e máscara <code>255.255.255.192</code>.</p>
+
+<p>PS: Note que colocamos a rede 172.16 com uma máscara de um padrão de rede pequena, nesse caso é permitido pois ele não está na classe B e em nenhuma outra.</p>
+
+<p>Como os roteadores conectam redes diferentes, ele terá uma outra rede na qual o roteador de cima está, como por exemplo <code>10.0.0.0</code> com a máscara <code>255.255.255.252</code> ligada ao roteador da esquerda. E a rede <code>11.0.0.0</code> com a mesma máscara ligado ao roteador da direita. O roteador de baixo está ligado as redes do roteador da esquerda com <code>12.0.0.0</code> e a mesma máscara, e o da direita com <code>13.0.0.0</code> e a mesma máscara.</p>
+
 <h3>Determinando IPs e a Quantidade de Hosts por Rede</h3>
 
 <p>A máscara <code>255.255.255.192</code> permite acomodar 62 hosts. A máscara <code>255.255.255.224</code> permite acomodar 30 hosts. E a máscara <code>255.255.255.252</code> permite acomodar somente 2 hosts.</p>

@@ -27,6 +27,92 @@
             
 <h2>Tudo sobre C Parte 7</h2>
 
+<h3>Funções Recursivas</h3>
+
+<p>Existem determinadas situações que uma função necessita chamar ela mesma novamente. É uma coisa que deve ser feita com cuidado na programação, mas que também é muito útil em determinadas situações.</p>
+
+<p>Veja no exemplo uma função recursiva que faz a somatória dos antecessores de um número, inteiro positivo, informado pelo usuário, ou seja, se o usuário digitar 5, o programa deverá retornar o resultado da soma 5 + 4 + 3 + 2 + 1 + 0. A função deverá somar até o valor zero, portanto esse será o critério de parada:</p>
+
+<pre>
+<code>
+int somar(int valor);
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+    
+    int num, resultado;
+
+    printf("Digite um número inteiro positivo: ");
+    scanf("%d", &amp;num);
+
+    resultado = somar(num); // Primeira chamada da função
+
+    printf("\nResultado: %d.\n", resultado);
+
+    return 0;
+}
+
+int somar(int valor) {
+    if(valor == 0) {
+        return valor;
+    }
+    else {
+        return valor + somar(valor - 1);
+    }
+}
+</code>
+</pre>
+
+<h3>Invertendo Valores de Variáveis</h3>
+
+<p>Em alguns casos, principalmente em jogos, é necessário inverter a direção ou valores de variáveis. Para tanto, existem os valores de inversão de variáveis. No caso, seria deixar o valor negativo se for positivo e vice-versa.</p>
+
+<p>Veja um exemplo simples disso:</p>
+
+<pre>
+<code>
+int num = 10;
+
+printf("%d\n", num);
+    
+num = num * -1;
+    
+printf("%d\n", num);
+</code>
+</pre>
+
+<p>Você também pode colocar o sinal negativo diretamente ao lado da variável à ser exibida, assim:</p>
+
+<pre>
+<code>
+int num = 10;
+    
+printf("%d\n", -num);
+</code>
+</pre>
+
+<p>PS: Esse negativo não muda o valor da variável, só na exibição nesse printf ele faz a inversão.</p>
+
+<p>Para gravar o novo valor da variável, faça uma nova atribuição.</p>
+
+<p>Veja um exemplo:</p>
+
+<pre>
+<code>
+int num = 10;
+
+printf("%d\n", num); // Valor original.
+
+num = -num;
+
+printf("%d\n", -num); // Retornará positivo, - com - retorna + e a variável foi alterada antes.
+
+printf("%d\n", num); // Retornará negativo, já que a variável foi alterada.
+</code>
+</pre>
+
+<p>PS: Só pra lembrar, + com + retornará positivo, e - com - retorna positivo. Apenas quando usarmos + e - que retornará negativo. Regra simples de matemática, iguais retornam positivo e diferentes retornam negativo.</p>
+
 <h3>Estrutura - Definição e Atribuição</h3>
 
 <p>As estruturas são uma espécie de agrupamento de diversas variáveis distintas sob um nome comum. É um tipo de dados que o próprio programador define para usar no seu programa, existem outros tipos de dados que o usuário pode definir, mas aqui só falaremos de estruturas. As estruturas são usadas para criar um tipo de dado específico, composto ou complexo para usar no programa.</p>
