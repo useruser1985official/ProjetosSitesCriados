@@ -318,8 +318,8 @@ while(1) { // Loop infinito
 <pre>
 <code>
 // Isso dará erro:
-char *frase = "Isso é uma string";
-char *copia = *frase;
+char frase[20] = "Isso é uma string";
+char copia[20] = *frase;
 
 printf("%s\n", copia);
 </code>
@@ -329,8 +329,8 @@ printf("%s\n", copia);
 
 <pre>
 <code>
-char *frase = "Isso é uma string";
-char *copia;
+char frase[20] = "Isso é uma string";
+char copia[20];
 
 strcpy(copia, frase); // Inclua string.h
 
@@ -342,7 +342,7 @@ printf("%s\n", copia);
 
 <pre>
 <code>
-char frase[20] = "Isso é uma string";
+char frase[50] = "Isso é uma string";
 
 strcat(frase, " com mais alguma coisa!"); // Inclua string.h
 
@@ -396,7 +396,7 @@ char *divi;
 
 divi = strtok(frase, " ");
 
-while(frase != NULL) {
+while(divi != NULL) {
     printf("%s\n", divi);
 
     divi = strtok(NULL, " ");
@@ -438,6 +438,16 @@ char* trim(char *s) {
 
     return s;
 }
+</code>
+</pre>
+
+<p>E usamos assim:</p>
+
+<pre>
+<code>
+char frase[20] = "Isso é uma string";
+
+printf("%s\n", trim(frase));
 </code>
 </pre>
 

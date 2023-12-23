@@ -396,6 +396,9 @@ class Aparelho:
     def __init__(self, pl):
         self.__pl = pl
 
+    def __del__(self):
+        del self.__pl
+
     def ligado(self):
         if self.__pl.getCarga() > 0: # Getter do objeto Pilha
             print(f"O aparelho está ligado e a carga da pilha é de {self.__pl.getCarga()}%!")

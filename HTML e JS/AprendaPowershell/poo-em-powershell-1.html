@@ -304,7 +304,7 @@ $c.abrirMenu()
 </code>
 </pre>
 
-<p>PS: Ao chamar métodos da classe pai na classe filha, use o método <code>base()</code> no caso do construtor e os parâmetros, caso existam, fora das chaves. Pra chamar um método específico, chame a classe sem parênteses, como <code>[NomeDaClasse]::metodo</code>. Pode ser feito com qualquer método. Caso precise atribuir valor nulo à algum atributo ou variável, use <code>$null</code>.</p>
+<p>PS: Ao chamar métodos da classe pai na classe filha, use o método <code>base()</code> no caso do construtor e os parâmetros, caso existam, fora das chaves (de forma parecida com o C#, na sintaxe <code>NomeClasse([string]$param) : base($param) {</code>. Pra chamar um método específico, chame a classe e o método como <code>([NomeDaClasse]$this).metodo()</code>. Pode ser feito com qualquer método. Caso precise atribuir valor nulo à algum atributo ou variável, use <code>$null</code>.</p>
 
 <h3>Herança e Polimorfismo</h3>
 
@@ -377,6 +377,8 @@ $bichano.respirar()
 $bichano.lutar()
 </code>
 </pre>
+
+<p>PS: É possível fazer sobrecarga de métodos em Powershell, quando duas ou mais funções tem o mesmo nome mas assinaturas de parâmetros diferentes.</p>
 
 <h3>Agregação de Objetos</h3>
 
