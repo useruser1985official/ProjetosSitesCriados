@@ -72,7 +72,6 @@ public class PrimeiroPrograma {
 
 <p>Depois é só executar para testar. Se funcionar, pode ser construído e executado em qualquer sistema que tenha o JRE instalado.</p>
 
-
 <p>PS: você pode escrever <code>sout</code> e teclar o tab que aparecerá System.out.println. Se fizer o mesmo com <code>psvm</code> Aparecerá a estrutura básica do método principal. O System.out.println pula uma linha, mas tirando isso, é a mesma coisa que System.out.print.</p>
 
 <p>Os comentários de uma linha se colocam ao lado de <code>//</code>, e de várias linhas entre <code>/* */</code>, por exemplo:</p>
@@ -184,11 +183,11 @@ java -jar OlaMundo.jar
 
 <h3>Introdução ao Java Swing e JavaFX</h3>
 
-<p>O Java funciona por pacotes, é meio que como um carro popular (que só vem o básico, e outros itens você vai adicionando). Todo carro básico tem por exemplo, volante, mas não vem por exemplo, com ar-condicionado, que tem que ser adicionado. Vendo o Java como um carro popular, os pacotes que já existem não precisam importar (como para fazer contas), mas os que não possuí pode ser importado (apenas o pacote java.lang é carregado automaticamente por padrão), na verdade, a maioria deve ser importada. </p>
+<p>O Java funciona por pacotes, é meio que como um carro popular (que só vem o básico, e outros itens você vai adicionando). Todo carro básico tem por exemplo, volante, mas não vem por exemplo, com ar-condicionado, que tem que ser adicionado. Vendo o Java como um carro popular, os pacotes que já existem não precisam importar (como para fazer contas), mas os que não possuí pode ser importado (apenas o pacote <code>java.lang</code> é carregado automaticamente por padrão), na verdade, a maioria deve ser importada.</p>
 
 <p>Com o pacote Swing, você pode criar interfaces gráficas. Ele é um sucessor do AWT (que ainda é usado), mas este se comporta de maneira diferente em outros sistemas que não sejam o Windows.</p>
 
-<p>As interfaces gráficas também são feitas baseadas em orientação à objetos, pois elas são criadas facilmente graças ao conceito de herança.</p>
+<p>As interfaces gráficas também são feitas baseadas em orientação a objetos, pois elas são criadas facilmente graças ao conceito de herança.</p>
 
 <p>Para criar um programa Java com Swing, cria-se o projeto da mesma forma anterior, mas sem criar a classe principal (essa será definida ao testar a execução do programa pela primeira vez). Nos pacotes de códigos-fontes, clique no Pacote Default com o botão direito, em Novo e em Outros, escolha Forms Gui Swing e Form JFrame. Defina o nome da Classe (primeira maiúscula com pascalcase) e do Pacote (todas em minusculas). A janela será aberta para configurar o layout dela e o código-fonte.</p>
 
@@ -291,6 +290,20 @@ private void botaoClicarActionPerformed(java.awt.event.ActionEvent evt) {
 <p>Lembrando que para pegar o arquivo JAR pronto, após compilar, basta ir na pasta de projetos da IDE, e procurar ele na pasta dist (geralmente), e ele poderá ser executado em qualquer sistema com JRE instalado, e clicando diretamente nele.</p>
 
 <p>Faça os exercícios de pegar Idioma do Sistema e Resolução de Tela igual no anterior, mas em Java Swing. E colocando imagens também.</p>
+
+<p>PS: Mesmo que o java.lang seja carregado por padrão, podemos fazer uma importação direta de algum objeto ou classe. Veja um exemplo de importação direta do objeto out:</p>
+
+<pre>
+<code>
+import static java.lang.System.out; // Nesse caso tem que colocar o static no caso de métodos ou atributos estáticos, tem casos que não se coloca o static
+
+public class Teste {
+    public static void main(String[] args) {
+        out.println("Olá, Mundo!");
+    }
+}
+</code>
+</pre>
 
 <h3>Tipos Primitivos e Manipulação de Dados</h3>
 

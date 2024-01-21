@@ -109,7 +109,20 @@ MinhasClasses.Console.FuncaoInventada();
 </code>
 </pre>
 
-<p>A diretiva using traz o namespace para o escopo do nosso projeto, assim não é necessário qualificar explicitamente os objetos com o respectivo namespace (o Console.WriteLine(), por exemplo, com o using, não precisa ter escrito o nome completo System.Console.WriteLine()). Ou seja, inclui outros namespaces no programa (de forma parecida com o import do Java ou o include do C/C++).</p>
+<p>A diretiva using traz o namespace para o escopo do nosso projeto, assim não é necessário qualificar explicitamente os objetos com o respectivo namespace (o Console.WriteLine(), por exemplo, com o using, não precisa ter escrito o nome completo System.Console.WriteLine()). Ou seja, inclui outros namespaces no programa (de forma parecida com o import do Java ou o include do C/C++). Veja abaixo um exemplo de Olá, Mundo sem o using:</p>
+
+<pre>
+<code>
+namespace OlaMundo {
+    class Program {
+        static void Main(string[] args) {
+            System.Console.WriteLine("Olá Mundo!");
+            System.Console.ReadLine();
+        }
+    }
+}
+</code>
+</pre>
 
 <p>As classes sempre são compiladas em assemblies (montagens), os assemblies são containers para as classes, que são arquivos usualmente com a extensão .dll (bibliotecas de vínculo dinâmico do Windows). As classes mais comuns, como a System.Console pertencem ao assembly mscorlib.dll (presente na plataforma .NET), que permite o reuso de código para que funcione corretamente nos programas em C#.</p>
 

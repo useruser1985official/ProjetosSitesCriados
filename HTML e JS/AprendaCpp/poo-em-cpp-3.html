@@ -568,36 +568,69 @@ t->imp();
 
 <pre>
 <code>
-class AbstVeiculo {
+class Estoque {
     public:
-        virtual void imp() = 0;
+        virtual void defineLado(int l) = 0;
+        virtual double volume() = 0;
+        virtual ~Estoque() = 0; // Toda classe abstrata deve ter um método destrutor virtual puro, mesmo que os outros métodos não os sejam
 };
+
+Estoque::~Estoque() { // Implementação Vazia, sempre necessária, no caso.
+
+}
 </code>
 </pre>
 
 <p>Um método virtual atribuído a 0 é como se ele fosse abstrato, ou seja, não terá implementação na interface, isso é uma função virtual pura, e toda classe que herdará, deverá implementar, sobreescrevendo ele.</p>
 
-<p>E na classe que a implementará, coloque como se fosse uma herança, e o sobreponha o método com override:</p>
+<p>PS: Uma classe com métodos abstratos não pode ser instanciada, mesmo se tiver apenas um método virtual puro. Na verdade, para criar uma classe abstrata, basta declarar um ou mais métodos virtual puros (atribuídos com 0). Quando a classe só tem métodos virtuais puros, age de forma igual à uma interface (que existe em linguagens POO como Java, C# e PHP, mas não em C++).</p>
+
+<p>Para criar uma classe com todos os métodos prontos como abstrata (para ser usada em heranças), basta criar o método destrutor dela como virtual puro (<code>virtual ~NomeDaClasse() = 0</code> e uma implementação (mesmo sem código algum entre as chaves) na mesma classe, pode ser feita na Veiculo, por exemplo, nesse código acima seria o recomendado, pra encapsular também a classe), e as classes que a herdarem, não precisam de nenhuma alteração. Caso esse método virtual não possua implementação, aí sim as classes filhas dessa terão que implementar.</p>
+
+<p>E na classe que a implementará, coloque como se fosse uma herança, e o sobreponha os métodos com override:</p>
 
 <pre>
 <code>
-include "AbstVeiculo.h"
+include "Estoque.h"
 
-class Veiculo : public AbstVeiculo {
+class Caixa : public Estoque {
     public:
-        int vel;
-        int blind;
-        int rodas;
-        // Setters
-        void setTipo(int tp);
-        void setVelMax(int vm);
-        void setArma(bool ar);
-        virtual void imp() override; // Aqui possuí o virtual porque será sobreposto novamente.
+        void defineLado(int l) override;
+        double volume() override;
+
+        const double getLado();
+        void setLado(double lado);
     private:
-        int tipo;
-        int velMax;
-        bool arma;
+        double lado;
 };
+
+void Caixa::defineLado(int l) {
+    this->lado = l;
+}
+
+double Caixa::volume() {
+    return lado * lado * lado;
+}
+
+const double Caixa::getLado() {
+    return lado;
+}
+
+void Caixa::setLado(double lado) {
+    this->lado = lado;
+}
+</code>
+</pre>
+
+<p>E a implementação no main:</p>
+
+<pre>
+<code>
+Estoque *cx = new Caixa();
+
+cx->defineLado(5);
+
+cout << cx->volume() << endl;
 </code>
 </pre>
 
@@ -605,10 +638,12 @@ class Veiculo : public AbstVeiculo {
 
 <pre>
 <code>
-AbstVeiculo *c = new Carro();
+Estoque *cx = new Caixa();
 
-if(typeid(c) == typeid(AbstVeiculo*)) { // inclua typeinfo
-    c->imp();
+if(typeid(cx) == typeid(Estoque*)) { // inclua typeinfo
+    cx->defineLado(5);
+
+    cout << cx->volume() << endl;
 }
 else {
     cerr << "Classe AbstVeiculo Não Implementada!" << endl;
@@ -616,10 +651,32 @@ else {
 </code>
 </pre>
 
-<p>PS: Uma classe com métodos abstratos não pode ser instanciada, mesmo se tiver apenas um método virtual puro. Na verdade, para criar uma classe abstrata, basta declarar um ou mais métodos virtual puros (atribuídos com 0). Quando a classe só tem métodos virtuais puros, age de forma igual à uma interface (que existe em linguagens POO como Java, C# e PHP, mas não em C++).</p>
+<p>Usando uma classe base no "tipo" do objeto, e ele sendo implementado com uma classe herdeira, permite maior polimorfismo, pois qualquer classe que herde o "tipo" da classe anterior, pode ser implementada.</p>
 
-<p>Para criar uma classe com todos os métodos prontos como abstrata (para ser usada em heranças), basta criar o método destrutor dela como virtual puro (<code>virtual ~NomeDaClasse() = 0</code> e uma implementação (mesmo sem código algum entre as chaves) na mesma classe, pode ser feita na Veiculo, por exemplo, nesse código acima seria o recomendado, pra encapsular também a classe), e as classes que a herdarem, não precisam de nenhuma alteração. Caso esse método virtual não possua implementação, aí sim as classes filhas dessa terão que implementar.</p>
+<p>Alternativamente, podemos fazer assim, de uma forma mais "gambiarrenta":</p>
 
+<pre>
+<code>
+// Funções estruturadas:
+void defLado(Estoque &caix, int l) {
+    caix.defineLado(l);
+}
+
+double verVol(Estoque &caix) {
+    return caix.volume();
+}
+
+int main() {
+    Caixa cx;
+
+    defLado(cx, 5);
+
+    cout << verVol(cx) << endl;
+
+    return 0;
+}
+</code>
+</pre>
 
 <h3>Protected x Private x Public</h3>
 
