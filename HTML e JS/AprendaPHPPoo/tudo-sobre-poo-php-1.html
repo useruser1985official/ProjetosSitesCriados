@@ -332,60 +332,6 @@ print_r($c1);
 
 <p>Os atributos também podem ser inicializados de forma padrão dentro da classe, como por exemplo <code>protected $carga = 100</code>. Se o atributo for um objeto, pode ser algo tipo <code>private $objeto = new NomeDaClasse()</code>. Mas não são muito usados, a não ser que sejam atributos finais (não existentes em PHP, pois utilizamos constantes) ou estáticos.</p>
 
-<h3>Métodos e Atributos Estáticos</h3>
-
-<p>No PHP é possível criar métodos estáticos, que é quando podemos chamar um método de uma classe sem precisar criar um objeto, sem usar o new, apenas chamando o nome da classe seguido do método, na sintaxe <code>NomeDaClasse::nomeDoMetodo()</code>.</p>
-
-<p>No código, apenas coloque <code>static</code> antes do tipo da função que deseja ser acessada de tal forma, dentro da classe. O static pode também ser usado em atributos (sempre inicializados dentro da classe), e no código principal chamamos diretamente junto com o nome da classe, como por exemplo <code>NomeDaClasse::$nomeDoAtributo = $conteudo</code>. (lembrando que nesse caso, mudaremos o conteúdo do atributo da classe e todos os objetos criados por ela serão alterados, por compartilhamento, independente da alteração ser dentro ou fora da classe). Nesse caso, dentro da classe, ao invés do $this->, usamos <code>self::</code> nos atributos estáticos.</p>
-
-<p>Veja um exemplo de uso de métodos e atributos estáticos na classe Caneta:</p>
-
-<pre>
-<code>
-protected static $preco = 1.50;
-
-public static function custo() {
-    echo "&lt;p&gt;A caneta custa R$" . number_format(self::$preco, 2, ".", ",") . ".&lt;/p&gt;";
-
-    // Note que ao invés de $this, usamos self para exibir atributos estáticos.
-}
-</code>
-</pre>
-
-<p>E no código principal:</p>
-
-<pre>
-<code>
-require_once 'Caneta.php';
-
-Caneta::custo(); // Método estático.
-
-$c1 = new Caneta();
-var_dump($c1);
-$c1->custo(); // Pegará o mesmo valor do método estático.
-
-$c2 = new Caneta();
-var_dump($c2);
-$c1->custo(); // Pegará o mesmo valor do método estático.
-</code>
-</pre>
-
-<p>PS: Não é recomendado chamar atributos e métodos estáticos através de objetos (tanto que algumas linguagens nem permitem isso), pois são atributos e métodos da classe, por isso devem ser chamados diretamente através dela.</p>
-
-<p>Também podemos fazer novas atribuições em atributos estáticos no código principal, desde que sejam públicos, e toda instância feita por ele também é alterada, por exemplo:</p>
-
-<pre>
-<code>
-Caneta::$preco = 2.25; // Atributo estático
-</code>
-</pre>
-
-<p>O static, teoricamente, significa que só uma alocação de memória é criada para esse atributo ou método, não tendo duas cópias na memória em simultâneo.</p>
-
-<p>Em outras palavras, o static manipula os atributos e métodos na classe toda, não apenas em uma instância, e todo objeto criado com ela também terá essa alteração. São atributos e métodos globais.</p>
-
-<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados.</p>
-
 <h3>Métodos Getter, Setter e Construtor</h3>
 
 <p>O método getter é o método acessor (que pega), ele acessa um determinado atributo mantendo a segurança de acesso à ele. Para entender, pense como uma pessoa que precisa saber quantos documentos (atributos) tem em uma estante (objeto e classe), a pessoa A tem 5 e a pessoa B tem 12, e tem outros documentos lá. O método getter seria como um funcionário intermediário numa mesa, que tem acesso à essa estante, e as outras pessoas não. Método que, apesar de impedir o acesso diretamente, é mais seguro e útil. Não é obrigatório, mas no mercado é muito utilizado em programação.</p>
@@ -593,6 +539,68 @@ unset($c1);
 </pre>
 
 <p>PS: Toda classe cria seus construtores e destrutores padrões, que não recebem nem contém valor algum, quando estes não são especificados nela.</p>
+
+<h3>Métodos e Atributos Estáticos</h3>
+
+<p>No PHP é possível criar métodos estáticos, que é quando podemos chamar um método de uma classe sem precisar criar um objeto, sem usar o new, apenas chamando o nome da classe seguido do método, na sintaxe <code>NomeDaClasse::nomeDoMetodo()</code>.</p>
+
+<p>No código, apenas coloque <code>static</code> antes do tipo da função que deseja ser acessada de tal forma, dentro da classe. O static pode também ser usado em atributos (sempre inicializados dentro da classe), e no código principal chamamos diretamente junto com o nome da classe, como por exemplo <code>NomeDaClasse::$nomeDoAtributo = $conteudo</code>. (lembrando que nesse caso, mudaremos o conteúdo do atributo da classe e todos os objetos criados por ela serão alterados, por compartilhamento, independente da alteração ser dentro ou fora da classe). Nesse caso, dentro da classe, ao invés do $this->, usamos <code>self::</code> nos atributos estáticos.</p>
+
+<p>Veja um exemplo de uso de métodos e atributos estáticos numa classe denominada Lampada:</p>
+
+<pre>
+<code>
+class Lampada {
+    private static $preco = 9.50;
+    private static $acesa = false;
+
+    public static function custo() {
+        printf("A lâmpada custa R$ %.2f.&lt;br/&gt;", self::$preco);
+
+        // Note que não usamos this para exibir atributos estáticos e sim self.
+    }
+
+    public static function acender() {
+        echo "A lâmpada está acesa!&lt;br/&gt;";
+        self::$acesa = true;
+    }
+
+    public static function apagar() {
+        echo "A lâmpada está apagada!&lt;br/&gt;";
+        self::$acesa = false;
+    }
+}
+</code>
+</pre>
+
+<p>E no código principal:</p>
+
+<pre>
+<code>
+require_once 'Lampada.php';
+
+Lampada::custo(); // Método estático.
+
+Lampada::acender();
+Lampada::apagar();
+</code>
+</pre>
+
+<p>PS: Não é recomendado chamar atributos e métodos estáticos através de objetos (tanto que algumas linguagens nem permitem isso), pois são atributos e métodos da classe, por isso devem ser chamados diretamente através dela.</p>
+
+<p>Também podemos fazer novas atribuições em atributos estáticos no código principal, desde que sejam públicos, e toda instância feita por ele também é alterada, por exemplo:</p>
+
+<pre>
+<code>
+Lampada::$preco = 7.25; // Atributo estático
+</code>
+</pre>
+
+<p>O static, teoricamente, significa que só uma alocação de memória é criada para esse atributo ou método, não tendo duas cópias na memória em simultâneo.</p>
+
+<p>Em outras palavras, o static manipula os atributos e métodos na classe toda, não apenas em uma instância, e todo objeto criado com ela também terá essa alteração. São atributos e métodos globais.</p>
+
+<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados.</p>
 
 <ul>
     <li><a href="tudo-sobre-poo-php-2.html">Continuação da Matéria!</a></li>

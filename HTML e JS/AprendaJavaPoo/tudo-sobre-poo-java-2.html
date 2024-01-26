@@ -35,7 +35,6 @@
     </tr>
     <tr>
         <td>
-            + static nomeBanco<br/>
             + numConta<br/>
             # tipo<br/>
             - dono<br/>
@@ -45,7 +44,6 @@
     </tr>
     <tr>
         <td>
-            + static exibirBandeira()<br/>
             + abrirConta()<br/>
             + fecharConta()<br/>
             + depositar()<br/>
@@ -62,20 +60,14 @@
 package bancopoo;
 
 public class ContaBanco {
-    public static String nomeBanco = "Bradesco";
     public int numConta;
     protected String tipo;
     private String dono;
     private float saldo;
     private boolean status;
     
-    public static void exibirBandeira() {
-        System.out.println("O nome do banco é " + nomeBanco + "."); // Sem this por ser estático. 
-    }
-    
     public void estadoAtual() {
         System.out.println("-------------------");
-        System.out.println("Banco: " + getNomeBanco()); // Sem this também.
         System.out.println("Conta: " + this.getNumConta());
         System.out.println("Tipo: " + this.getTipo());
         System.out.println("Dono: " + this.getDono());
@@ -156,14 +148,6 @@ public class ContaBanco {
         this.setStatus(false);
     }
     
-    public static String getNomeBanco() {
-        return nomeBanco;
-    }
-    
-    public static void setNomeBanco(String nomeBanco) {
-        ContaBanco.nomeBanco = nomeBanco;
-    }
-    
     public int getNumConta() {
         return numConta;
     }
@@ -219,9 +203,6 @@ public class BancoPoo {
     public static void main(String[] args) {
         ContaBanco p1 = new ContaBanco();
         ContaBanco p2 = new ContaBanco();
-        
-        System.out.println(ContaBanco.nomeBanco);
-        ContaBanco.exibirBandeira();
         
         p1.abrirConta("CC");
         p1.setNumConta(1111);

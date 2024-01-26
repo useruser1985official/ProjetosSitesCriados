@@ -35,14 +35,12 @@
     </tr>
     <tr>
         <td>
-            - static nomeCanal<br/>
             - espectador<br/>
             - filme
         </td>
     </tr>
     <tr>
         <td>
-            + static exibirCanal()<br/>
             + avaliar()<br/>
             + avaliar(nota)<br/>
             + avaliar(porc)
@@ -57,13 +55,8 @@
 package projetoyoutube;
 
 public class Visualizacao {
-    private static String nomeCanal = "Videoaulas de Java";
     private Gafanhoto espectador;
     private Video filme;
-    
-    public static void exibirCanal() {
-        System.out.println("O nome do canal é " + nomeCanal + ".");
-    }
 
     public Visualizacao(Gafanhoto espectador, Video filme) {
         this.espectador = espectador;
@@ -74,15 +67,7 @@ public class Visualizacao {
 
     @Override
     public String toString() { // Ele automaticamente chamará os métodos toString de espectador e filme
-        return "Visualizacao{" + "nomeCanal=" + nomeCanal + ", espectador=" + espectador + ", filme=" + filme + "}";
-    }
-    
-    public static String getNomeCanal() {
-        return nomeCanal;
-    }
-    
-    public static void setNomeCanal(String nomeCanal) {
-        Visualizacao.nomeCanal = nomeCanal;
+        return "Visualizacao{" + ", espectador=" + espectador + ", filme=" + filme + "}";
     }
 
     public Gafanhoto getEspectador() {
@@ -127,9 +112,6 @@ public class YoutubePoo {
         g.add(new Gafanhoto("Creuza", 12, "F", "Creuzita"));
         
         List&lt;Visualizacao&gt; vis = new ArrayList&lt;&gt;();
-        
-        Visualizacao.exibirCanal();
-
         vis.add(new Visualizacao(g.get(0), v.get(2)));
         
         System.out.println(vis.get(0).toString());      
@@ -215,8 +197,6 @@ public class YoutubePoo {
         
         List&lt;Visualizacao&gt; vis = new ArrayList&lt;&gt;();
         
-        Visualizacao.exibirCanal();
-
         vis.add(new Visualizacao(g.get(0), v.get(2)));
         
         System.out.println(vis.get(0).toString());      

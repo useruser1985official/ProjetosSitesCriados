@@ -314,148 +314,6 @@ int main() {
 </code>
 </pre>
 
-<h3>Métodos e Atributos Estáticos em C++</h3>
-
-<p>No C++ é possível criar métodos estáticos, que é quando podemos chamar um método de uma classe sem precisar criar um objeto, apenas chamando o nome da classe seguido do método, na sintaxe <code>NomeDaClasse::nomeDoMetodo()</code>.</p>
-
-<p>No código, apenas coloque <code>static</code> antes do tipo da função, dentro da classe (apenas dentro da classe, não na implementação). O static pode também ser usado em atributos, e no código principal podemos instanciar sem o new, como por exemplo <code>NomeDaClasse::nomeDoAtributo = conteudo</code>. (lembrando que nesse caso, mudaremos o conteúdo do atributo da classe e todos os objetos criados por ela serão alterados, por compartilhamento, independente da alteração ser dentro ou fora da classe). Nesse caso, dentro da classe não utilizamos this, só o nome do atributo ou método sozinho.</p>
-
-<p>Veja um exemplo abaixo de uso :</p>
-
-<pre>
-<code>
-class Aviao {
-    public:
-        int velocidade;
-        int velMax;
-        string tipo;
-        static int quantTanque; // Atributo estático, não é possível inicializar diretamente aqui.
-
-        void ini(int tp);
-        static void decolar(); // Indica apenas o método estático aqui.
-    private:
-};
-
-int Aviao::quantTanque = 50; // A inicialização acontece só aqui.
-
-void Aviao::ini(int tp) {
-    if(tp == 1) {
-        this->velMax = 800;
-        this->tipo = "Jato";
-    }
-    else if(tp == 2) {
-        this->velMax = 350;
-        this->tipo = "Monomotor";
-    }
-    else if(tp == 3) {
-        this->velMax = 180;
-        this->tipo = "Planador";
-    }
-}
-
-void Aviao::decolar() { // Método estático, não se indica nada aqui.
-    cout << "Pronto pra Decolar!" << endl;
-}
-
-int main() {
-    Aviao::quantTanque = 100; // Atributo estático alterado aqui.
-
-    cout << Aviao::quantTanque << endl; // Atributo estático chamado diretamente
-    Aviao::decolar(); // Método estático chamado diretamente
-
-    Aviao *av1 = new Aviao();
-    av1->ini(1);
-    cout << av1->tipo << endl;
-    cout << av1->quantTanque << endl; // Atributo estático
-    av1->decolar(); // Pegará o mesmo valor do método estático.
-	
-    Aviao *av2 = new Aviao();
-    av2->ini(2);
-    cout << av2->tipo << endl;
-    cout << av2->quantTanque << endl; // Atributo estático
-    av2->decolar(); // Método estático
-
-    return 0;
-}
-</code>
-</pre>
-
-<p>O static, teoricamente, significa que só uma alocação de memória é criada para esse atributo ou método, não tendo duas cópias na memória em simultâneo.</p>
-
-<p>Em outras palavras, o static manipula os atributos e métodos na classe toda, não apenas em uma instância, e todo objeto criado com ela também terá essa alteração. São atributos e métodos globais.</p>
-
-<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados, e nunca se deve utilizar o this neles. Lembrando que métodos getters e setters de atributos estáticos, também deverão ser estáticos.</p>
-
-<p>Paralelamente, podemos fazer um exemplo apenas com métodos e atributos estáticos:</p>
-
-<pre>
-<code>
-class Ventilador {
-    private:
-        static bool ligado;
-        static int velocidade;
-    public: 
-        static void ligar(int vel);
-        static void desligar();
-        static bool getLigado();
-        static int getVelocidade();
-        static void setLigado(bool ligado);
-        static void setVelocidade(int velocidade);
-};
-
-bool Ventilador::ligado = false;
-int Ventilador::velocidade = 0;
-
-void Ventilador::ligar(int vel) {
-    ligado = true;
-
-    if(vel < 1) {
-        vel = 1;
-    }
-    else if(vel > 3) {
-        vel = 3;
-    }
-    
-    printf("O ventilador está ligado, na velocidade de %d.\n", vel);
-}
-
-void Ventilador::desligar() {
-    velocidade = 0;
-    ligado = false;
-
-    cout << "O ventilador está desligado!" << endl;
-}
-
-bool Ventilador::getLigado() {
-    return ligado;
-}
-
-int Ventilador::getVelocidade() {
-    return velocidade;
-}
-
-void Ventilador::setLigado(bool ligado) {
-    Ventilador::ligado = ligado;
-}
-
-void Ventilador::setVelocidade(int velocidade) {
-    Ventilador::velocidade = velocidade;
-}
-</code>
-</pre>
-
-<p>E na classe principal:</p>
-
-<pre>
-<code>
-Ventilador::ligar(3);
-Ventilador::ligar(2);
-Ventilador::desligar();
-
-cout << Ventilador::getLigado() << endl;
-</code>
-</pre>
-
 <h3>Classe em Arquivo Externo e Construtor</h3>
 
 <p>Dessa vez, crie no projeto, um arquivo de cabeçalho (file). A classe será construída dentro dele, com o mesmo código acima, mas este terá algumas alterações.</p>
@@ -469,14 +327,9 @@ class Aviao {
         int velocidade;
         int velMax;
         std::string tipo; // Será necessário colocar std em strings, e incluir o iostream no cabeçalho.
-        static int quantTanque;
 
         Aviao(int tp);
-        static void decolar();
-    private:
 };
-
-int Aviao::quantTanque = 50; // Atributo estático.
 
 Aviao::Aviao(int tp) {
     if(tp == 1) {
@@ -493,10 +346,6 @@ Aviao::Aviao(int tp) {
     }
    
     this->velocidade = 0;
-}
-
-void Aviao::decolar() { // Método estático.
-    std::cout << "Pronto pra Decolar!" << std::endl;
 }
 </code>
 </pre>
@@ -539,15 +388,11 @@ class Aviao {
         int velocidade;
         int velMax;
         std::string tipo;
-        static int quantTanque;
 
         Aviao(int tp);
-        static void decolar();
         void imprimir();
     private:
 };
-
-int Aviao::quantTanque = 50; // Atributo estático.
 
 Aviao::Aviao(int tp) {
     if(tp == 1) {
@@ -564,10 +409,6 @@ Aviao::Aviao(int tp) {
     }
 
     this->velocidade = 0;
-}
-
-void Aviao::decolar() { // Método estático.
-    std::cout << "Pronto pra Decolar!" << std::endl;
 }
 
 void Aviao::imprimir() {
@@ -626,10 +467,8 @@ class Aviao {
         int velocidade;
         int velMax;
         std::string tipo;
-        static int quantTanque;
 
         Aviao(int tp);
-        static void decolar();
         void imprimir();
     private:
 };
@@ -644,8 +483,6 @@ class Aviao {
 <code>
 #include "Aviao.h"
 // Não é necessário colocar iostream e outras bibliotecas aqui, caso estejam em h.
-
-int Aviao::quantTanque = 50; // Atributo estático.
 
 Aviao::Aviao(int tp) {
     if(tp == 1) {
@@ -662,10 +499,6 @@ Aviao::Aviao(int tp) {
     }
 
     this->velocidade = 0;
-}
-
-void Aviao::decolar() { // Método estático.
-    std::cout << "Pronto pra Decolar!" << std::endl;
 }
 
 void Aviao::imprimir() {
@@ -739,6 +572,79 @@ delete av;
 </pre>
 
 <p>PS: Não é necessário criar o destrutor para usar o delete, porque ele já cria um por padrão, mas pode ser útil pra exibir mensagens, por exemplo. Os construtores também são criados automaticamente, quando não são especificados no código. Destrutores em C++ não podem ser sobrepostos.</p>
+
+<h3>Métodos e Atributos Estáticos</h3>
+
+<p>No C++ é possível criar métodos estáticos, que é quando podemos chamar um método de uma classe sem precisar criar um objeto, sem usar o new, apenas chamando o nome da classe seguido do método, na sintaxe <code>NomeDaClasse::nomeDoMetodo()</code>.</p>
+
+<p>No código, apenas coloque <code>static</code> antes do tipo da função que deseja ser acessada de tal forma, dentro da classe. O static pode também ser usado em atributos (sempre inicializados da classe), e no código principal chamamos diretamente junto com o nome da classe, como por exemplo <code>NomeDaClasse::nomeDoAtributo = conteudo</code>. (lembrando que nesse caso, mudaremos o conteúdo do atributo da classe e todos os objetos criados por ela serão alterados, por compartilhamento, independente da alteração ser dentro ou fora da classe). Nesse caso, dentro da classe não utilizamos this, só o nome do atributo ou método sozinho.</p>
+
+<p>Veja um exemplo de uso de métodos e atributos estáticos numa classe denominada Lampada:</p>
+
+<pre>
+<code>
+// Isso pode ir no arquivo .h:
+class Lampada {
+    private:
+        static float preco;
+        static bool acesa;
+    public:
+        static void custo();
+        static void acender();
+        static void apagar();
+};
+
+// Daqui pra baixo iria no arquivo .cpp:
+
+float Lampada::preco = 9.50;
+bool Lampada::acesa = false;
+
+void Lampada::custo() {
+    printf("A lâmpada custa R$ %.2f.\n", preco);
+
+    // Note que não usamos this para exibir atributos estáticos.
+}
+
+void Lampada::acender() {
+    cout << "A lâmpada está acesa!" << endl;
+    acesa = true;
+}
+
+void Lampada::apagar() {
+    cout << "A lâmpada está apagada!" << endl;
+    acesa = false;
+}
+</code>
+</pre>
+
+<p>E no código principal:</p>
+
+<pre>
+<code>
+int main() {
+    Lampada::custo(); // Método estático.
+
+    Lampada::acender();
+    Lampada::apagar();
+}
+</code>
+</pre>
+
+<p>PS: Não é recomendado chamar atributos e métodos estáticos através de objetos (tanto que algumas linguagens nem permitem isso), pois são atributos e métodos da classe, por isso devem ser chamados diretamente através dela.</p>
+
+<p>Também podemos fazer novas atribuições em atributos estáticos no código principal, desde que sejam públicos, e toda instância feita por ele também é alterada, por exemplo:</p>
+
+<pre>
+<code>
+Lampada::preco = 7.25; // Atributo estático, deixe ele público
+</code>
+</pre>
+
+<p>O static, teoricamente, significa que só uma alocação de memória é criada para esse atributo ou método, não tendo duas cópias na memória em simultâneo.</p>
+
+<p>Em outras palavras, o static manipula os atributos e métodos na classe toda, não apenas em uma instância, e todo objeto criado com ela também terá essa alteração. São atributos e métodos globais.</p>
+
+<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados.</p>
 
 <ul>
     <li><a href="poo-em-cpp-2.html">Continuação da Matéria!</a></li>

@@ -35,7 +35,6 @@
     </tr>
     <tr>
         <td>
-            + static nomeBanco<br/>
             + numConta<br/>
             # tipo<br/>
             - dono<br/>
@@ -45,7 +44,6 @@
     </tr>
     <tr>
         <td>
-            + static exibirBandeira()<br/>
             + abrirConta()<br/>
             + fecharConta()<br/>
             + depositar()<br/>
@@ -60,16 +58,11 @@
 <pre>
 <code>
 class ContaBanco {
-    public static $nomeBanco = "Bradesco";
     public $numConta;
     protected $tipo;
     private $dono;
     private $saldo;
     private $status;
-    
-    public static function exibirBandeira() {
-        echo "&lt;p&gt;O nome do banco é " . self::$nomeBanco . ".&lt;/p&gt;"; // Aqui usa self por ser estático.
-    }
     
     public function abrirConta($t) {
         $this->setTipo($t);
@@ -151,10 +144,6 @@ class ContaBanco {
         echo "Objeto ContaBanco Destruído!&lt;br/&gt;";
     }
     
-    public static function getNomeBanco() {
-        return self::$nomeBanco;
-    }
-    
     public function getNumConta() {
         return $this->numConta;
     }
@@ -173,10 +162,6 @@ class ContaBanco {
 
     public function getStatus() {
         return $this->status;
-    }
- 
-    public static function setNomeBanco($nomeBanco) {
-        self::$nomeBanco = $nomeBanco;
     }
     
     public function setNumConta($numConta) {
@@ -212,9 +197,6 @@ require_once "ContaBanco.php";
 
 $p1 = new ContaBanco();
 $p2 = new ContaBanco();
-
-echo ContaBanco::$nomeBanco . "&lt;br/&gt;";
-ContaBanco::exibirBandeira();
 
 $p1->abrirConta("CC");
 $p1->setNumConta(1111);

@@ -64,9 +64,9 @@ c1.status()
 
 <p>PS: Para pegar o nome da classe, use <code>self.__class__.__name__</code>.</p>
 
-<h3>Métodos Estáticos, Encapsulamento e Construtor</h3>
+<h3>Encapsulamento e Construtor e Métodos Estáticos</h3>
 
-<p>Classe com atributos e métodos estáticos, getters, setters, construtor e destrutor:</p>
+<p>Classe com getters, setters, construtor e destrutor:</p>
 
 <pre>
 <code>
@@ -75,7 +75,6 @@ class Caneta:
     __cor = ""
     __ponta = 0
     __tampada = False
-    __preco = 1.50 # Simulação de estático
 
     def tampar(self):
         self.__tampada = True
@@ -89,10 +88,6 @@ class Caneta:
         print("Ponta: {}".format(self.__ponta))
         print("Tampada: {}".format(self.__tampada))
 
-    @staticmethod
-    def custo(): # Método estático não tem self
-        print("A caneta custa R${:.2f}.".format(Caneta.__preco))  
-    
     # Construtor
     def __init__(self, m, c, p):
         self.__modelo = m
@@ -124,8 +119,6 @@ class Caneta:
 
 <pre>
 <code>
-Caneta.custo() # Chamada de método estático
-
 c1 = Caneta("BIC", "Azul", 0.4)
 c2 = Caneta("Pilot", "Verde", 1.0)
 
@@ -134,6 +127,45 @@ c2.status()
 
 del c1
 del c2 
+</code>
+</pre>
+
+<p>Veja um exemplo de classe somente com métodos e atributos estáticos:</p>
+
+<pre>
+<code>
+class Lampada:
+    __preco = 9.50 # Simulação de estático
+    __acesa = False
+    
+    @staticmethod
+    def custo(): # Método estático não tem self, atributos também não
+        print("A lâmpada custa R${:.2f}.".format(Lampada.__preco))
+    
+    @staticmethod
+    def acender():
+        print("A lâmpada está acesa!")
+        Lampada.__acesa = True
+    
+    @staticmethod
+    def apagar():
+        print("A lâmpada está apagada!")
+        Lampada.__acesa = False
+</code>
+</pre>
+
+<p>E o uso:</p>
+
+<pre>
+<code>
+from Lampada import Lampada
+
+Lampada.custo() # Método estático.
+
+Lampada.acender()
+Lampada.apagar()
+
+Lampada.__custo = 8.25 # Atributo estático
 </code>
 </pre>
 

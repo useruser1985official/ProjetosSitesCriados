@@ -444,58 +444,61 @@ Console.WriteLine(Caixa.caixaLado2());
 </code>
 </pre>
 
-<p>Paralelamente, podemos fazer um exemplo apenas com métodos e atributos estáticos:</p>
+<p>Veja um exemplo de uso de métodos e atributos estáticos numa classe denominada Lampada:</p>
 
 <pre>
 <code>
-class Ventilador {
-    private static bool ligado = false;
-    private static int velocidade = 0;
-    
-    public static void ligar(int vel) {
-        ligado = true;
+class Lampada {
+    private static float preco = 9.50f;
+    private static bool acesa = false;
 
-        if(vel < 1) {
-            vel = 1;
-        }
-        else if(vel > 3) {
-            vel = 3;
-        }
-        
-        Console.WriteLine("O ventilador está ligado, na velocidade de {0}.", vel);
+    public static void custo() {
+        Console.WriteLine("A lâmpada custa R$ {0:0.00}.", preco);
+
+        // Note que não usamos this para exibir atributos estáticos.
     }
 
-    public static void desligar() {
-        velocidade = 0;
-        ligado = false;
-
-        Console.WriteLine("O ventilador está desligado!");
+    public static void acender() {
+        Console.WriteLine("A lâmpada está acesa!");
+        acesa = true;
     }
 
-    public static bool Ligado {
-        get => ligado;
-        set => ligado = value;
-    }
-
-    public static int Velocidade {
-        get => velocidade;
-        set => velocidade = value;
+    public static void apagar() {
+        Console.WriteLine("A lâmpada está apagada!");
+        acesa = false;
     }
 }
 </code>
 </pre>
 
-<p>E na classe principal:</p>
+<p>E no código principal:</p>
 
 <pre>
 <code>
-Ventilador.ligar(3);
-Ventilador.ligar(2);
-Ventilador.desligar();
+static void Main(string[] args) {
+    Lampada.custo(); // Método estático.
 
-Console.WriteLine(Ventilador.getLigado());
+    Lampada.acender();
+    Lampada.apagar();
+}
 </code>
 </pre>
+
+<p>PS: Não é recomendado chamar atributos e métodos estáticos através de objetos (tanto que algumas linguagens nem permitem isso), pois são atributos e métodos da classe, por isso devem ser chamados diretamente através dela.</p>
+
+<p>Também podemos fazer novas atribuições em atributos estáticos no código principal, desde que sejam públicos, e toda instância feita por ele também é alterada, por exemplo:</p>
+
+<pre>
+<code>
+Lampada.preco = 7.25f; // Atributo estático, deixe ele público
+</code>
+</pre>
+
+<p>O static, teoricamente, significa que só uma alocação de memória é criada para esse atributo ou método, não tendo duas cópias na memória em simultâneo.</p>
+
+<p>Em outras palavras, o static manipula os atributos e métodos na classe toda, não apenas em uma instância, e todo objeto criado com ela também terá essa alteração. São atributos e métodos globais.</p>
+
+<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados.</p>
 
 <h3>Classes - Campos Compartilhados</h3>
 

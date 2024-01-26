@@ -57,13 +57,11 @@
             - pagAtual<br/>
             - aberto<br/>
             - leitor<br/>
-            - static idioma<br/>
         </td>
     </tr>
     <tr>
         <td>
             + detalhes()<br/>
-            + static verIdioma()<br/>
         </td>
     </tr>
 </table>
@@ -165,11 +163,6 @@ class Livro implements Publicacao {
     private $pagAtual;
     private $aberto;
     private $leitor;
-    private static $idioma = "Português";
-
-    public static function verIdioma() {
-        echo "&lt;p&gt;O idioma do livro é " . self::$idioma . ".&lt;/p&gt;";
-    }
 
     public function detalhes() {
         echo "Livro " . $this->titulo . " escrito por " . $this->autor . ".";
@@ -256,10 +249,6 @@ class Livro implements Publicacao {
         return $this->leitor;
     }
 
-    public static function getIdioma() {
-         return self::$idioma;
-    }
-
     public function setTitulo($titulo) {
         $this->titulo = $titulo;
     }
@@ -283,10 +272,6 @@ class Livro implements Publicacao {
     public function setLeitor($leitor) {
         $this->leitor = $leitor;
     }
-
-    public static function setIdioma($idioma) {
-         self::$idioma = $idioma;
-    }
 }
 </code>
 </pre>
@@ -296,8 +281,6 @@ class Livro implements Publicacao {
 <pre>
 <code>
 require_once "Livro.php"; // Não é necessário carregar também Pessoa.php.
-
-Livro::verIdioma();
 
 $p[0] = new Pessoa("Sérgio", 22, "M");
 $p[1] = new Pessoa("Maria", 31, "F");
