@@ -356,6 +356,15 @@ free(pont);
 </code>
 </pre>
 
+<p>Ah, um ponteiro sempre ocupará a quantidade fixa de 8 bytes, isso porque ele ocupa apenas o endereço de memória que aponta para outra variável, que pode ter capacidade de bytes variada, como por exemplo:</p>
+
+<pre>
+<code>
+printf("%ld\n", sizeof(num));
+printf("%ld\n", sizeof(pont));
+</code>
+</pre>
+
 <h3>Ponteiros - Indireção Múltipla</h3>
 
 <p>Podemos ter um ponteiro que aponte para um outro ponteiro, o qual por sua vez aponta para uma variável comum com um valor armazenado na memória.</p>

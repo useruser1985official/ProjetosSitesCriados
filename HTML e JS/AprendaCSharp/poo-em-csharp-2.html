@@ -169,14 +169,14 @@ Mamifero bichano = new Gato();
 </code>
 </pre>
 
-<p>Isso é útil para ganharmos em polimorfismo, onde podemos usar vários tipos de objetos em, por exemplo, parâmetros, desde que eles tenham a mesma interface ou classe pai em comum.</p>
+<p>Isso é útil para ganharmos em polimorfismo, onde podemos usar vários tipos de objetos em, por exemplo, parâmetros, desde que eles tenham a mesma classe pai em comum. Isso é o polimorfismo de inclusão.</p>
 
 <p>E no programa principal, usamos assim:</p>
 
 <pre>
 <code>
-Humano homem = new Humano();
-Gato bichano = new Gato();
+Mamifero homem = new Humano();
+Mamifero bichano = new Gato();
 
 homem.lutar();
 
@@ -267,59 +267,42 @@ carro.mostraChassis();
 
 <p>Basicamente, existem dois tipos de polimorfismo em C#, o de sobreposição e o de sobrecarga.</p>
 
-<p>O de sobreposição, visto anteriormente, é quando um método, indicado como virtual, é substituído em uma classe descendente, onde ele tem o mesmo nome e é indicado por override, assim:</p>
+<p>O de sobreposição, visto anteriormente, é quando um método, indicado como virtual, é substituído em uma classe descendente, onde ele tem o mesmo nome e é indicado por override.</p>
 
-<p>Método da classe pai:</p>
-
-<pre>
-<code>
-public virtual void lutar() { // Método virtual
-    Console.WriteLine("Mamíferos Lutam entre Si!");
-}
-</code>
-</pre>
-
-<p>Método da classe filha:</p>
+<p>E como visto nos construtores, podemos criar métodos comuns usando o mesmo nome, desde que os parâmetros sejam diferentes, isso é o polimorfismo de sobrecarga, como nesse exemplo:</p>
 
 <pre>
 <code>
-public override void lutar() { // Método sobreescrito
-    Console.WriteLine("Humanos Lutam com Armas!");
-}
-</code>
-</pre>
-
-<p>E como visto nos construtores, podemos criar métodos comuns usando o mesmo nome, desde que os parâmetros sejam diferentes, como nesse exemplo:</p>
-
-<pre>
-<code>
-class Radio {
-    private int volume;
-
-    public void aumentarSom() {
-        this.volume++;
-        Console.WriteLine(this.volume);
-    }
-
-    public void aumentarSom(string tex) {
-        if(tex.Equals("Máximo")) {
-            this.volume = 100;
+class Microondas {
+    public void ligar(int minuto, int segundo) {
+        if(minuto > 0 || segundo > 0) {
+            Console.WriteLine("A comida estará pronta em {0}:{1:00}M.", minuto, segundo);
         }
-        Console.WriteLine(this.volume);
-    }
-
-    public void diminuirSom() {
-        this.volume--;
-        Console.WriteLine(this.volume);
-    }
-
-    public void diminuirSom(string tex){
-        if(tex.Equals("Mudo")) {
-            this.volume = 0;
+        else {
+            Console.WriteLine("Escolha um tempo maior que 0:00.");
         }
-        Console.WriteLine(this.volume);
     }
-}
+
+    public void ligar(string alimento) {
+        if(alimento.ToLower().Equals("pipoca")) {
+            Console.WriteLine("Vamos estourar pipoca!");
+        }
+        else if(alimento.ToLower().Equals("bolo de caneca")) {
+            Console.WriteLine("Vamos fazer bolo de caneca!");
+        }
+        else {
+            Console.WriteLine("ERRO! Alimento desconhecido!");
+        }
+    }
+
+    public void ligar(bool descongelar) {
+        if(descongelar) {
+            Console.WriteLine("Vamos descongelar o alimento!");
+        }
+        else {
+            Console.WriteLine("ERRO! Não poderei descongelar o alimento!");
+        }
+    }
 </code>
 </pre>
 	
@@ -327,12 +310,11 @@ class Radio {
 
 <pre>
 <code>
-Radio panasonic = new Radio();
+Microondas micro = new Microondas();
 
-panasonic.aumentarSom();
-panasonic.aumentarSom("Máximo");
-panasonic.diminuirSom();
-panasonic.diminuirSom("Mudo");
+micro.ligar(3, 30);
+micro.ligar("Pipoca");
+micro.ligar(true);
 </code>
 </pre>
 

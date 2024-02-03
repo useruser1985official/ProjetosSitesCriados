@@ -34,571 +34,341 @@
 
 <h2>Orientação a Objetos em C++ - Parte 2</h2>
 
-<h3>Classes, Get e Set</h3>
+<h3>Classe em Arquivo Externo, Construtor e Destrutor</h3>
 
-<p>Crie um novo projeto e nele, um novo arquivo de cabeçalho com o nome classes.h.</p>
+<p>Dessa vez, crie no projeto, um arquivo de cabeçalho (file). A classe será construída dentro dele, com o mesmo código acima, mas este terá algumas alterações.</p>
 
-<p>Note que nesse caso, teremos alguns atributos privados, que só podem ser manipulados pela própria classe (encapsulamento), para isso teremos que criar métodos getters e setters para podermos usar eles.</p>
+<p>Nele, terá o método construtor, que não tem declaração de tipo e tem o mesmo nome da classe. Esse método construirá automaticamente atributos ao objeto. Assim:</p>
 
 <pre>
 <code>
-#ifndef CLASSES_H_INCLUDED
-#define CLASSES_H_INCLUDED
-#include &lt;iostream&gt;
-
-class Veiculo {
+class Aviao {
     public:
         int velocidade;
-        int tipo;
-        Veiculo(int tp); // Construtor
-    private:
-        std::string nome;
         int velMax;
-        bool ligado;
+        std::string tipo; // Será necessário colocar std em strings, e incluir o iostream no cabeçalho.
+
+        Aviao(int tp);
 };
 
-Veiculo::Veiculo(int tp) {
+Aviao::Aviao(int tp) {
     if(tp == 1) {
-        this->velMax = 200;
-        this->nome = "Carro";
+        this->velMax = 800;
+        this->tipo = "Jato";
     }
     else if(tp == 2) {
-        this->velMax = 250;
-        this->nome = "Moto";
+        this->velMax = 350;
+        this->tipo = "Monomotor";
     }
     else if(tp == 3) {
-        this->velMax = 150;
-        this->nome = "Caminhão";
+        this->velMax = 180;
+        this->tipo = "Planador";
     }
+   
+    this->velocidade = 0;
 }
-
-#endif // CLASSES_H_INCLUDED
-
 </code>
 </pre>
 
-<p>E pra tentar executar na principal:</p>
+<p>Esse código acima, sempre estará no arquivo de cabeçalho, entre o ifndef/define e o endif.</p>
+
+<p>Para incluir na página principal, usamos o include entre aspas, no caso <code>#include "Aviao.h"</code>. Dessa forma:</p>
 
 <pre>
 <code>
 #include &lt;iostream&gt;
-#include "Classes.h"
+#include "Aviao.h"
 
 using namespace std;
 
 int main() {
-    Veiculo *v1 = new Veiculo(1);
+    Aviao *av[3];
     
-    v1->velMax = 250; // Não é possível alterar por ser privado.
+    av[0] = new Aviao(1);
+    av[1] = new Aviao(2);
+    av[2] = new Aviao(3);
 
-    cout << v1->velMax; // Não é possível executar por ser privado.
-
-    return 0;
-}
-</code>
-</pre>
-
-<p>Como visto, esse código acima dará erro por tentarmos manipular atributos privados. Para isso, criamos um método getter e setter. Adicione isso no Classes.h:</p>
-
-<pre>
-<code>
-const int Veiculo::getVelMax() {
-    return velMax;
-}
-void Veiculo::setVelMax(int vm) {
-    velMax = vm;
-}
-</code>
-</pre>
-
-<p>PS: Não esqueça de colocar na classe a declaração dos métodos em público, assim:</p>
-
-<pre>
-<code>
-const int getVelMax();
-void setVelMax(int vm);
-</code>
-</pre>
-
-<p>E agora poderemos executar normalmente assim:</p>
-
-<pre>
-<code>
-#include &lt;iostream&gt;
-#include "Classes.h"
-
-using namespace std;
-
-int main() {
-    Veiculo *v1 = new Veiculo(1);
-
-    v1->setVelMax(250);
-
-    cout << v1->getVelMax();
+    delete *av;
 
     return 0;
 }
 </code>
 </pre>
 
-<p>Agora podem ver que funciona normalmente. Isso torna o código mais seguro, já que o atributo é privado, mas pode ser alterado pelo método por ser público e este alterar dentro da classe.</p>
+<p>Essa é uma das vantagens da orientação a objetos, já que esse arquivo de cabeçalho pode ser utilizado para criar vários objetos, e também pode ser reaproveitado em outros programas C++.</p>
 
-<p>PS: O <code>const</code> não é obrigatório no getter, mas garante mais segurança, sempre coloque em todos os  getters manipulados. O const em POO é para métodos que não alterarão nenhum atributo, pode ser usado em qualquer método, mas de preferência é usado em métodos getters.</p>
-
-<p>Veja outro exemplo, com mais objetos:</p>
+<p>Código completo do cabeçalho Aviao.h:</p>
 
 <pre>
 <code>
-#include &lt;iostream&gt;
-#include "Classes.h"
+#ifndef AVIAO_H_INCLUDED
+#define AVIAO_H_INCLUDED
+#include &lt;iostream&gt; // Não esqueça do include
 
-using namespace std;
-
-int main() {
-    Veiculo *v1 = new Veiculo(1);
-    Veiculo *v2 = new Veiculo(2);
-    Veiculo *v3 = new Veiculo(3);
-
-    cout << v1->getVelMax() << endl;
-    cout << v2->getVelMax() << endl;
-    cout << v3->getVelMax() << endl;
-
-    return 0;
-}
-</code>
-</pre>
-
-<p>Caso não queira que podemos alterar pelo método setter também, coloque ele como privado na classe.</p>
-
-<p>Crie também os métodos setter e getters ligado públicos, para alterar o atributo ligado, assim:</p>
-
-<pre>
-<code>
-const bool Veiculo::getLigado() {
-    return ligado;
-}
-void Veiculo::setLigado(int l) {
-    if(l == 1) {
-        ligado = true;
-    }
-    else if(l == 0) {
-        ligado = false;
-    }
-}
-</code>
-</pre>
-
-<p>Dentro da classe:</p>
-
-<pre>
-<code>
-const bool getLigado();
-void setLigado(int l);
-</code>
-</pre>
-
-<p>Crie também um método para visualizarmos o estado dos carros:</p>
-
-<pre>
-<code>
-void Veiculo::estado() {
-    if(this->getLigado()) {
-        std::cout << "Veículo " << nome << " está ligado!" << std::endl;
-    }
-    else {
-        std::cout << "Veículo " << nome << " está desligado!" << std::endl;
-    }
-}
-</code>
-</pre>
-
-<p>E no arquivo principal podemos fazer isso:</p>
-
-<pre>
-<code>
-#include &lt;iostream&gt;
-#include "Classes.h"
-
-using namespace std;
-
-int main() {
-    Veiculo *v1 = new Veiculo(1);
-    Veiculo *v2 = new Veiculo(2);
-    Veiculo *v3 = new Veiculo(3);
-
-    v1->setLigado(1);
-    v2->setLigado(0);
-    v3->setLigado(1);
-
-    cout << v1->getVelMax() << endl;
-    cout << v2->getVelMax() << endl;
-    cout << v3->getVelMax() << endl;
-
-    v1->estado();
-    v2->estado();
-    v3->estado();
-	
-    return 0;
-}
-</code>
-</pre>
-
-<p>PS: O public permite acesso em qualquer parte do programa, o private só permite acesso na classe da qual ela pertence, e ainda existe o protected, que só permite acesso na classe e nas filhas dela (é um meio-termo entre public e private).</p>
-
-<h3>Classes e Herança</h3>
-
-<p>Com a herança, uma classe pode herdar propriedades de outras classes, podendo ter outras adicionadas.</p>
-
-<p>Vamos criar um novo projeto e um file com as classes. Esse é o código da classe:</p>
-
-<pre>
-<code>
-class Veiculo {
+class Aviao {
     public:
-        int vel;
-        int blind;
-        int rodas;
-    private:
-        int tipo;
+        int velocidade;
         int velMax;
-        bool arma;
+        std::string tipo;
+
+        Aviao(int tp);
+        void imprimir();
+    private:
 };
+
+Aviao::Aviao(int tp) {
+    if(tp == 1) {
+        this->velMax = 800;
+        this->tipo = "Jato";
+    }
+    else if(tp == 2) {
+        this->velMax = 350;
+        this->tipo = "Monomotor";
+    }
+    else if(tp == 3) {
+        this->velMax = 180;
+        this->tipo = "Planador";
+    }
+
+    this->velocidade = 0;
+}
+
+void Aviao::imprimir() {
+    std::cout << "Tipo: " << tipo << std::endl;
+    std::cout << "Velocidade Máxima: " << velMax << std::endl;
+    std::cout << "Velocidade atual: " << velocidade << std::endl;
+    std::cout << "-----------------------" << std::endl;
+}
+
+#endif // AVIAO_H_INCLUDED
 </code>
 </pre>
 
-<p>No caso acima, a classe Veiculo (classe pai) é genérica, e classes como Moto e Carro (filhas) herdam características da mesma.</p>
+<p>PS: O std nos cout, nos endl e nas strings é porque não estamos informando o namespace no Aviao.h.</p>
 
-<p>Vamos criar a classe Moto, assim:</p>
+<p>Código na função principal:</p>
 
 <pre>
 <code>
-class Moto : public Veiculo {
+#include &lt;iostream&gt;
+#include "Aviao.h"
+
+using namespace std;
+
+int main() {
+    Aviao *av[3];
     
-};
-</code>
-</pre>
+    av[0] = new Aviao(1);
+    av[1] = new Aviao(2);
+    av[2] = new Aviao(3);
 
-<p>No caso acima, ele já está herdando as coisas de Veiculo, mas sem adicionar mais nada, isso é a herança pobre.</p>
+    av[0]->imprimir();
+    av[1]->imprimir();
+    av[2]->imprimir();
 
-<p>No arquivo principal, crie o objeto assim:</p>
-
-<pre>
-<code>
-#include &lt;iostream&gt;
-#include "Classes.h"
-
-using namespace std;
-
-int main() {
-    Moto *v1 = new Moto();
+    delete *av;
 
     return 0;
 }
+
 </code>
 </pre>
 
-<p>Ou assim, de forma que usaremos apenas o que for descrito na classe pai, ganhando em polimorfismo:</p>
+<p>PS: Podemos criar também classes diretamente no arquivo classes, nesse caso seria algo do tipo:</p>
+
+<p>No arquivo h, colocamos apenas a parte da assinatura (interface) da classe:</p>
 
 <pre>
 <code>
-#include &lt;iostream&gt;
-#include "Classes.h"
+#ifndef AVIAO_H_INCLUDED
+#define AVIAO_H_INCLUDED
+#include &lt;iostream&gt; // Não podemos esquecer do iostream aqui.
 
-using namespace std;
+// Podemos colocar o using namespace std também aqui, pra evitar o uso de std.
 
-int main() {
-    Veiculo *v1 = new Moto();
-
-    return 0;
-}
-</code>
-</pre>
-
-
-
-<p>Agora, crie o construtor na classe Moto, inicializando os atributos públicos assim:</p>
-
-<pre>
-<code>
-class Moto : public Veiculo {
+class Aviao {
     public:
-        Moto(); // Construtor
-};
+        int velocidade;
+        int velMax;
+        std::string tipo;
 
-Moto::Moto() {
-    vel = 0;
-    blind = 0;
-    rodas = 2;    
-}
-</code>
-</pre>
-
-<p>E no arquivo principal:</p>
-
-<pre>
-<code>
-#include &lt;iostream&gt;
-#include "Classes.h"
-
-using namespace std;
-
-int main() {
-    Veiculo *v1 = new Moto();
-	
-    cout << v1->rodas << endl;
-
-    return 0;
-}
-</code>
-</pre>
-
-<p>Para alterarmos os atributos privados, faremos métodos setters na classe Veiculo, e também um método para exibição, de forma que ficará assim:</p>
-
-<pre>
-<code>
-class Veiculo {
-    public:
-        int vel;
-        int blind;
-        int rodas;
-        // Setters
-        void setTipo(int tp);
-        void setVelMax(int vm);
-        void setArma(bool ar);
-        void imp();
+        Aviao(int tp);
+        void imprimir();
     private:
-        int tipo;
-        int velMax;
-        bool arma;
 };
 
-void Veiculo::imp() {
-    std::cout << "Tipo de veículo: " << tipo << std::endl;
-    std::cout << "Velocidade máxima: " << velMax << std::endl;
-    std::cout << "Quantidade de rodas: " << rodas << std::endl;
-    std::cout << "Blindagem: " << blind << std::endl;
-    std::cout << "Armamento: " << arma << std::endl;
-    std::cout << "------------------------" << std::endl;
+#endif // AVIAO_H_INCLUDED
+</code>
+</pre>
+
+<p>No arquivo cpp, colocaremos a implementação (execução) dos métodos (incluindo os getters, setters e construtores), além dos atributos estáticos:</p>
+
+<pre>
+<code>
+#include "Aviao.h"
+// Não é necessário colocar iostream e outras bibliotecas aqui, caso estejam em h.
+
+Aviao::Aviao(int tp) {
+    if(tp == 1) {
+        this->velMax = 800;
+        this->tipo = "Jato";
+    }
+    else if(tp == 2) {
+        this->velMax = 350;
+        this->tipo = "Monomotor";
+    }
+    else if(tp == 3) {
+        this->velMax = 180;
+        this->tipo = "Planador";
+    }
+
+    this->velocidade = 0;
 }
 
-void Veiculo::setTipo(int tp) {
-    tipo = tp;
-}
-void Veiculo::setVelMax(int vm) {
-    velMax = vm;
-}
-void Veiculo::setArma(bool ar) {
-    arma = ar;
+void Aviao::imprimir() {
+    std::cout << "Tipo: " << tipo << std::endl;
+    std::cout << "Velocidade Máxima: " << velMax << std::endl;
+    std::cout << "Velocidade atual: " << velocidade << std::endl;
+    std::cout << "-----------------------" << std::endl;
 }
 </code>
 </pre>
 
-<p>E no construtor da Moto, basta colocar a chamada dos métodos setters:</p>
+<p>E no método principal, basta incluirmos apenas o arquivo de cabeçalho h normalmente.</p>
+
+<p>Caso seja necessário chamar um método de uma classe pai dentro de outro método em uma classe filha, chame usando uma sintaxe tipo <code>ClassePai::metodoDela()</code>.</p>
+
+<p>E também podemos fazer sobrecarga de mais de um construtor, colocando na mesma classe dois ou mais construtores, todos com o nome igual da classe e sem tipo, mas com parâmetros diferentes.</p>
+
+<p>PS: Caso num construtor precise inicializar um atributo como nulo, use <code>NULL</code> e inclua a bibioteca <code>&lt;cstddef&gt;</code>. Lembrando que apenas ponteiros podem usar NULL.</p>
+
+<p>Além dos construtores, também temos os destrutores em C++, declarados de forma quase igual aos construtores, usando o nome da mesma classe, diferenciando por um til, declarando na classe algo tipo <code>virtual ~NomeDaClasse()</code> (se a classe não for pra extensão, pode retirar o virtual), e a implementação é feita dessa forma:</p>
 
 <pre>
 <code>
-class Moto : public Veiculo {
+Aviao::~Aviao() {
+    std::cout << "Objeto Destruído" << std::endl; // A mensagem é opcional
+}
+</code>
+</pre>
+
+<p>E para destruir o objeto especificado, fazemos algo assim no main:</p>
+
+<pre>
+<code>
+delete avi;
+delete *arAv; // Se for destruir array de objetos, coloque o ponteiro pra destruir o array todo
+</code>
+</pre>
+
+<p>PS: Objetos de contâiners como list e vector, só podem ser destruídos separadamente. Podemos fazer um for it pra isso, por exemplo:</p>
+
+<pre>
+<code>
+for(auto a: av) { // Nome do objeto no lugar do av, o a é o que será iterado.
+    delete a;
+}
+</code>
+</pre>
+
+<p>Lembrando que, caso tenha agregação de objetos, é recomendado usar o <code>delete this->nomeDoObjeto</code> desses objetos dentro do destrutor da classe.</p>
+
+<p>Isso é usado para destruir um objeto no meio da execução do programa, pra não sobrecarregar a memória. Diferente de outras linguagens POO surgidas posteriormente, o C++ não faz a coleta de lixo, por isso é necessário usar o delete pra destruir objetos (objetos agregados em outros objetos são destruídos automaticamente, mas o principal não), na verdade, no C++ a POO é mais primitiva, por ter sido a primeira linguagem a usar esse paradigma. Sempre mantenha o hábito de usar o delete em objetos em C++ por esse motivo.</p>
+
+<p>PS: Lembrando que o delete só pode ser usado em objetos criados com ponteiros, inicializados com new, por não haver coleta de lixo desse tipo de objeto. Objetos criados sem essa atribuição tem a coleta de lixo feita automaticamente, por isso não se usa delete.</p>
+
+<p>Após o uso do delete no objeto, podemos atribuir ele novamente com outras características, por exemplo:</p>
+
+<pre>
+<code>
+Aviao *av = new Aviao(1);
+
+av->imprimir();
+
+delete av;
+
+av = new Aviao(2); // Na nova atribuição é sem ponteiro mesmo.
+
+av->imprimir();
+
+delete av;
+</code>
+</pre>
+
+<p>PS: Não é necessário criar o destrutor para usar o delete, porque ele já cria um por padrão, mas pode ser útil pra exibir mensagens, por exemplo. Os construtores também são criados automaticamente, quando não são especificados no código. Destrutores em C++ não podem ser sobrepostos.</p>
+
+<h3>Métodos e Atributos Estáticos</h3>
+
+<p>No C++ é possível criar métodos estáticos, que é quando podemos chamar um método de uma classe sem precisar criar um objeto, sem usar o new, apenas chamando o nome da classe seguido do método, na sintaxe <code>NomeDaClasse::nomeDoMetodo()</code>.</p>
+
+<p>No código, apenas coloque <code>static</code> antes do tipo da função que deseja ser acessada de tal forma, dentro da classe. O static pode também ser usado em atributos (sempre inicializados da classe), e no código principal chamamos diretamente junto com o nome da classe, como por exemplo <code>NomeDaClasse::nomeDoAtributo = conteudo</code>. (lembrando que nesse caso, mudaremos o conteúdo do atributo da classe e todos os objetos criados por ela serão alterados, por compartilhamento, independente da alteração ser dentro ou fora da classe). Nesse caso, dentro da classe não utilizamos this, só o nome do atributo ou método sozinho.</p>
+
+<p>Veja um exemplo de uso de métodos e atributos estáticos numa classe denominada Lampada:</p>
+
+<pre>
+<code>
+// Isso pode ir no arquivo .h:
+class Lampada {
+    private:
+        static float preco;
+        static bool acesa;
     public:
-        Moto(); // Construtor
+        static void custo();
+        static void acender();
+        static void apagar();
 };
 
-Moto::Moto() {
-    vel = 0;
-    blind = 0;
-    rodas = 2;
-    setTipo(1);
-    setVelMax(120);
-    setArma(false);
+// Daqui pra baixo iria no arquivo .cpp:
+
+float Lampada::preco = 9.50;
+bool Lampada::acesa = false;
+
+void Lampada::custo() {
+    printf("A lâmpada custa R$ %.2f.\n", preco);
+
+    // Note que não usamos this para exibir atributos estáticos.
+}
+
+void Lampada::acender() {
+    cout << "A lâmpada está acesa!" << endl;
+    acesa = true;
+}
+
+void Lampada::apagar() {
+    cout << "A lâmpada está apagada!" << endl;
+    acesa = false;
 }
 </code>
 </pre>
 
-<p>No método principal, podemos fazer assim:</p>
-
-<pre>
-<code>
-#include &lt;iostream&gt;
-#include "Classes.h"
-
-using namespace std;
-
-int main() {
-    Veiculo *v1 = new Moto();
-
-    v1->imp();
-
-    return 0;
-}
-</code>
-</pre>
-
-<p>Crie agora, outra classe que herdará de veículo, a classe Carro, assim:</p>
-
-<pre>
-<code>
-class Carro : public Veiculo {
-    public:
-        Carro(); // Construtor
-};
-
-Carro::Carro() {
-    vel = 0;
-    blind = 0;
-    rodas = 4;
-    setTipo(2);
-    setVelMax(200);
-    setArma(false);
-}
-</code>
-</pre>
-
-<p>E também a classe Tanque, da mesma forma:
-
-<pre>
-<code>
-class Tanque : public Veiculo {
-    public:
-        Tanque(); // Construtor
-};
-
-Tanque::Tanque() {
-    vel = 0;
-    blind = 1;
-    rodas = 8;
-    setTipo(3);
-    setVelMax(160);
-    setArma(true);
-}
-</code>
-</pre>
-
-<p>E no método principal:</p>
-
-<pre>
-<code>
-#include &lt;iostream&gt;
-#include "Classes.h"
-
-using namespace std;
-
-int main() {
-    Veiculo *v1 = new Moto();
-    Veiculo *v2 = new Carro();
-    Veiculo *v3 = new Tanque();
-
-    v1->imp();
-    v2->imp();
-    v3->imp();
-
-    return 0;
-}
-</code>
-</pre>
-
-<p>Em C++ também podemos fazer heranças múltiplas, que é quando uma classe herda de mais de uma classe ao mesmo tempo, faríamos algo assim:</p>
-
-<pre>
-<code>
-class Herdeira : public Classe1, public Classe2 {
-
-};
-</code>
-</pre>
-
-<p>E nas classes filhas de outras, também podemos fazer o "super", que é a herança de construtores de classes pais, dessa forma:</p>
-
-<pre>
-<code>
-Classe2::Classe2(int n1, int n2, int n3) : Classe1(n1, n2) { // Indica a classe pai, no segundo parenteses são só os parâmetros do construtor da classe pai sem declaração de tipo.
-    this->num3 = n3;
-}
-</code>
-</pre>
-
-<p>Caso tenha herança múltipla, os construtores de ambas as classes pais deverão ser indicadas após os dois pontos, separadas por vírgulas.</p>
-
-<h3>Classes em C++ Moderno</h3>
-
-<p>No C++ 11, podemos utilizar as classes e objetos de outras formas.</p>
-
-<p>Esse é o código da classe, note que no C++ 11 podemos inicializar diretamente as classes assim, apenas num arquivo h:</p>
-
-<pre>
-<code>
-class Carro {
-    public:
-        int velMax;
-        int potencia;
-        const char* nome;
-
-        Carro(const char* n, int p): nome(n), potencia(p) { // Lista de inicialização, substituí o uso de this
-            if(p < 100) {
-                this->velMax = 120;
-            }
-            else if(p < 200) {
-                this->velMax = 220;
-            }
-            else {
-                this->velMax = 350;
-            }
-        }
-};
-</code>
-</pre>
-
-<p>Observe que nesse caso acima não usamos o this, e sim uma lista de inicialização.</p>
-
-<p>E podemos utilizar a inicialização uniforme para criar objetos, dessa forma:</p>
+<p>E no código principal:</p>
 
 <pre>
 <code>
 int main() {
-    Carro c1{"Corsa", 90}; // Sempre na ordem dos atributos na classe
+    Lampada::custo(); // Método estático.
 
-    cout << c1.nome << " - " << c1.potencia << " - " << c1.velMax << endl;
-
-    // Não se usa delete para excluir esse tipo de objeto
-
-    return 0;
+    Lampada::acender();
+    Lampada::apagar();
 }
 </code>
 </pre>
 
-<p>PS: Observe que não usamos um asterisco de ponteiro nesse caso, e como nesse caso utilizamos a inicialização uniforme, que não usa o new para criar objetos, não usamos a seta neles, apenas um ponto. A seta só utiliza quando usamos new. Também não usamos delete pra excluir objetos não utilizados (também é utilizada apenas com o new).</p>
+<p>PS: Não é recomendado chamar atributos e métodos estáticos através de objetos (tanto que algumas linguagens nem permitem isso), pois são atributos e métodos da classe, por isso devem ser chamados diretamente através dela.</p>
 
-<p>Podemos usar ponteiros inteligentes para criar objetos da forma moderna também, nesse caso, usamos new e precisamos usar setas:</p>
-
-<pre>
-<code>
-int main() {
-    unique_ptr&lt;Carro&gt; c1(new Carro{"Corsa", 90}); // Importe memory
-
-    // Nesse caso usamos seta por usar new
-
-    cout << c1->nome << " - " << c1->potencia << " - " << c1->velMax << endl;
-
-    return 0;
-}
-</code>
-</pre>
-
-<p>E com os ponteiros inteligentes, não precisamos usar delete pra excluir objetos, pois nesse caso sim, ele faz a coleta de lixo automaticamente.</p>
-
-<p>Os ponteiros inteligentes também podem ser usados em containers com objetos, por exemplo:</p>
+<p>Também podemos fazer novas atribuições em atributos estáticos no código principal, desde que sejam públicos, e toda instância feita por ele também é alterada, por exemplo:</p>
 
 <pre>
 <code>
-vector&lt;unique_ptr&lt;Carro&gt;&gt; car;
-
-car.emplace_back(new Carro("Corsa", 90)); // Note que nesse caso usamos emplace_back, não push_back.
-car.emplace_back(new Carro("Vectra", 135));
-car.emplace_back(new Carro("Camaro", 200));
-
-cout << car[0]->nome << " - " << car[0]->potencia << " - " << car[0]->velMax << endl;
-cout << car[1]->nome << " - " << car[1]->potencia << " - " << car[1]->velMax << endl;
-cout << car[2]->nome << " - " << car[2]->potencia << " - " << car[2]->velMax << endl;
+Lampada::preco = 7.25; // Atributo estático, deixe ele público
 </code>
 </pre>
+
+<p>O static, teoricamente, significa que só uma alocação de memória é criada para esse atributo ou método, não tendo duas cópias na memória em simultâneo.</p>
+
+<p>Em outras palavras, o static manipula os atributos e métodos na classe toda, não apenas em uma instância, e todo objeto criado com ela também terá essa alteração. São atributos e métodos globais.</p>
+
+<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados.</p>
 
 <ul>
     <li><a href="poo-em-cpp-1.html">Parte Anterior da Matéria!</a></li>

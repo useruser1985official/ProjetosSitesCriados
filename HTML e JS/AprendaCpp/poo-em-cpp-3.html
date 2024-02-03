@@ -34,797 +34,513 @@
 
 <h2>Orientação a Objetos em C++ - Parte 3</h2> 
 
-<h3>Encapsulamento</h3>
+<h3>Classes, Get e Set</h3>
 
-<p>Basicamente, o encapsulamento é uma técnica de protegermos os membros da nossa classe. Nós sabemos que existe os métodos public e private para isso. Alguns atributos e métodos precisam ser protegidos contra alterações do usuário, e isso fazemos usando o private.</p>
+<p>Crie um novo projeto e nele, um novo arquivo de cabeçalho com o nome classes.h.</p>
 
-<p>Relembrando o código do projeto Avião, até o momento, por exemplo, temos na classe Aviao que a velocidade máxima é definida pelo tipo dele, mas, pelos atributos estarem públicos, é possível alterar no programa principal, como por exemplo:</p>
-
-<pre>
-<code>
-Aviao *av = new Aviao(1);
-
-av->imprimir();
-
-av->velMax = 150;
-
-av->imprimir();
-</code>
-</pre>
-
-<p>No caso acima, a velocidade do tipo de avião (jato tem a velocidade máxima de 800, mas conseguimos alterar para 150, o que está fora das regras do planejado).</p>
-
-<p>Para resolver isso, basta definir a propriedade desejada como private, assim ela só poderá ser alterada pela classe:</p>
+<p>Note que nesse caso, teremos alguns atributos privados, que só podem ser manipulados pela própria classe (encapsulamento), para isso teremos que criar métodos getters e setters para podermos usar eles.</p>
 
 <pre>
 <code>
-class Aviao {
+#ifndef CLASSES_H_INCLUDED
+#define CLASSES_H_INCLUDED
+#include &lt;iostream&gt;
+
+class Veiculo {
     public:
-        int velocidade = 0;
-        std::string tipo;
-
-        Aviao(int tp);
-        void imprimir();
+        int velocidade;
+        int tipo;
+        Veiculo(int tp); // Construtor
     private:
+        std::string nome;
         int velMax;
-};
-</code>
-</pre>
-
-<p>Dessa forma, não será possível alterar o atributo no programa principal e nem fora da classe, dessa forma, chamar velMax dará erro.</p>
-
-<p>Para imprimir, usamos os métodos getters para isso. Coloque isso na declaração da classe, em public:</p>
-
-<pre>
-<code>
-const int getVelMax();
-void setVelMax(int velMax);
-</code>
-</pre>
-
-<p>Na implementação:</p>
-
-<pre>
-<code>
-const int Aviao::getVelMax() {
-    return velMax;
-}
-void Aviao::setVelMax(int velMax) {
-    this->velMax = velMax;
-}
-</code>
-</pre>
-
-<p>E no código principal:</p>
-
-<pre>
-<code>
-Aviao *av = new Aviao(1);
-
-av->imprimir();
-
-cout << av->getVelMax() << endl;
-</code>
-</pre>
-
-<p>Como visto, o método getter foi usado para obter o valor do atributo privado, temos também o setter que podemos alterar, passando a velocidade como parâmetro. Como ambos são public, eles podem alterar o atributo mesmo estando privado, por pertencerem a mesma classe, isso é o encapsulamento.</p>
-
-<p>Veja um uso de método setter:</p>
-
-<pre>
-<code>
-Aviao *av = new Aviao(1);
-
-av->imprimir();
-
-av->setVelMax(150);
-
-av->imprimir();
-</code>
-</pre>
-
-<p>PS: Caso não queiram utilizar esse método setter, para não poder alterar o atributo, basta apenas retirar ele. Podemos também utilizar métodos setters privados e usar eles para alterar os elementos dentro da própria classe, ao invés de usar os atributos diretamente.</p>
-
-<h3>Polimorfismo</h3>
-
-<p>O polimorfismo de sobreposição tem bases na herança, só que nas classes filhas, o método é sobreposto, como um novo. Isso vale tanto pra métodos comuns quando para virtuais puros (abstratos).</p>
-
-<p>Vamos ver a classe Violao, que terá as classes filhas Guitarra e Cavaquinho sobreescrevendo métodos.</p>
-
-<p>Classe Violao:</p>
-
-<pre>
-<code>
-class Violao {
-    public:
-        virtual void cordas();
-        virtual void ampli();
+        bool ligado;
 };
 
-void Violao::cordas() {
-    std::cout << "Tem 6 Cordas!" << std::endl;
+Veiculo::Veiculo(int tp) {
+    if(tp == 1) {
+        this->velMax = 200;
+        this->nome = "Carro";
+    }
+    else if(tp == 2) {
+        this->velMax = 250;
+        this->nome = "Moto";
+    }
+    else if(tp == 3) {
+        this->velMax = 150;
+        this->nome = "Caminhão";
+    }
 }
 
-void Violao::ampli() {
-    std::cout << "Amplificação Acústica!" << std::endl;
-}
+#endif // CLASSES_H_INCLUDED
+
 </code>
 </pre>
 
-<p>PS: Note que todo método que poderá ser sobreescrito, deverá ter a indicação <code>virtual</code> na declaração da classe pai.</p>
-
-<p>Classe Cavaquinho:</p>
-
-<pre>
-<code>
-class Cavaquinho : public Violao {
-    public:
-        void cordas() override;
-};
-
-void Cavaquinho::cordas() {
-    std::cout << "Tem 4 Cordas!" << std::endl;
-}
-</code>
-</pre>
-
-<p>E a classe Guitarra:</p>
-
-<pre>
-<code>
-class Guitarra : public Violao {
-    public:
-        void ampli() override;
-};
-
-void Guitarra::ampli() {
-    std::cout << "Amplificação Elétrica!" << std::endl;
-}
-</code>
-</pre>
-
-<p>PS: Note também que todo método sobreescrito nas classe filhas deverão ter uma indicação <code>override</code> na declaração (o override só existe no C++11).</p>
-
-<p>E no main, basta chamar assim:</p>
+<p>E pra tentar executar na principal:</p>
 
 <pre>
 <code>
 #include &lt;iostream&gt;
-#include "Violao.h"
-#include "Guitarra.h"
-#include "Cavaquinho.h"
+#include "Classes.h"
 
 using namespace std;
 
 int main() {
-    Violao *v = new Violao();
+    Veiculo *v1 = new Veiculo(1);
+    
+    v1->velMax = 250; // Não é possível alterar por ser privado.
 
-    v->cordas();
-    v->ampli();
+    cout << v1->velMax; // Não é possível executar por ser privado.
 
-    Guitarra *g = new Guitarra();
-
-    g->cordas();
-    g->ampli();
-
-    Cavaquinho *c = new Cavaquinho();
-
-    c->cordas();
-    c->ampli();
+    delete v1;
 
     return 0;
 }
 </code>
 </pre>
 
-<p>Para implantar um polimorfismo de sobrecarga (no qual um mesmo método tem assinaturas diferentes) é simples, veja um exemplo abaixo:</p>
+<p>Como visto, esse código acima dará erro por tentarmos manipular atributos privados. Para isso, criamos um método getter e setter. Adicione isso no Classes.h:</p>
 
 <pre>
 <code>
-class Acordar {
-    public:
-        void levantar();
-        void levantar(const char* tempo);
-        void levantar(int hora, int minuto);
-        void levantar(bool folga);
-        void levantar(double clima);
-};
-
-
-void Acordar::levantar() {
-    std::cout << "Vou Levantar da Cama!" << std::endl;
+const int Veiculo::getVelMax() {
+    return velMax;
 }
-
-void Acordar::levantar(const char* tempo) {
-    std::string verif = (std::string)tempo;
-
-    if(!verif.compare("Chuva") || !verif.compare("Tempestade")) {
-        std::cout << "Não vou Levantar pra Sair, está Chovendo!" << std::endl;
-    }
-    else {
-        std::cout << "Estou Levantando, o Tempo tá Bom!" << std::endl;
-    }
-}
-
-void Acordar::levantar(int hora, int minuto) {
-    if(hora >= 10) {
-        std::cout << "Acordei muito tarde!" << std::endl;
-    }
-    else if(hora < 8) {
-        std::cout << "Acordei muito cedo!" << std::endl;
-    }
-    else {
-        std::cout << "Acordei na hora certa!" << std::endl;
-    }
-}
-
-void Acordar::levantar(bool folga) {
-    if(folga == true) {
-        std::cout << "Vou dormir mais porque é folga!" << std::endl;
-    }
-    else {
-        std::cout << "Vou levantar pra trabalhar!" << std::endl;
-    }
-}
-
-void Acordar::levantar(double clima) {
-    if(clima < 21) {
-        std::cout << "Tá frio demais pra levantar!" << std::endl;
-    }
-    else {
-        std::cout << "A temperatura tá boa, vou levantar!" << std::endl;
-    }
+void Veiculo::setVelMax(int vm) {
+    velMax = vm;
 }
 </code>
 </pre>
 
-<p>E no main, podemos fazer assim:</p>
+<p>PS: Não esqueça de colocar na classe a declaração dos métodos em público, assim:</p>
+
+<pre>
+<code>
+const int getVelMax();
+void setVelMax(int vm);
+</code>
+</pre>
+
+<p>E agora poderemos executar normalmente assim:</p>
 
 <pre>
 <code>
 #include &lt;iostream&gt;
-#include "Acordar.h"
+#include "Classes.h"
 
 using namespace std;
 
-int main(){
-    Acordar *a = new Acordar();
+int main() {
+    Veiculo *v1 = new Veiculo(1);
 
-    a->levantar();
-	
-    a->levantar("Chuva");
-    a->levantar("Sol");
-	
-    a->levantar(10, 30);
-    a->levantar(9, 00);
-    a->levantar(7, 15);
-	
-    a->levantar(true);
-    a->levantar(false);
-	
-    a->levantar(19.5);
-    a->levantar(23.7);
+    v1->setVelMax(250);
+
+    cout << v1->getVelMax();
+
+    delete v1;
 
     return 0;
 }
 </code>
 </pre>
 
-<p>PS: Note que não dá pra usar os tipos string e float, nesse casos os substituímos por const char* (não esqueça do asterisco) e double. E para isso funcionar, os parâmetros deverão ser de tipos diferentes. Sobrecarga pode ser usada em construtores também.</p>
+<p>Agora podem ver que funciona normalmente. Isso torna o código mais seguro, já que o atributo é privado, mas pode ser alterado pelo método por ser público e este alterar dentro da classe.</p>
 
-<p>A sobrecarga também é possível ser feita em construtores, onde um recebe parâmetros diferente do outro, como por exemplo, um construtor vazio sem parâmetros e outro com parâmetros alterados dentro dele.</p>
+<p>PS: O <code>const</code> não é obrigatório no getter, mas garante mais segurança, sempre coloque em todos os  getters manipulados. O const em POO é para métodos que não alterarão nenhum atributo, pode ser usado em qualquer método, mas de preferência é usado em métodos getters.</p>
 
-<h3>Herança, Virtual, Override</h3>
+<p>Veja outro exemplo, com mais objetos:</p>
 
-<p>Como sabemos, a herança é quando uma classe herda todas as características de outra classe. As classes herdeiras podem, além de herdar as características da classe pai, pode ter atributos e métodos próprios, além de sobreposição de alguns métodos.</p>
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
 
-<p>Crie a classe Veiculo novamente com esse código:</p>
+using namespace std;
+
+int main() {
+    Veiculo *v1 = new Veiculo(1);
+    Veiculo *v2 = new Veiculo(2);
+    Veiculo *v3 = new Veiculo(3);
+
+    cout << v1->getVelMax() << endl;
+    cout << v2->getVelMax() << endl;
+    cout << v3->getVelMax() << endl;
+
+    delete v1;
+    delete v2;
+    delete v3;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Caso não queira que podemos alterar pelo método setter também, coloque ele como privado na classe.</p>
+
+<p>Crie também os métodos setter e getters ligado públicos, para alterar o atributo ligado, assim:</p>
+
+<pre>
+<code>
+const bool Veiculo::getLigado() {
+    return ligado;
+}
+void Veiculo::setLigado(int l) {
+    if(l == 1) {
+        ligado = true;
+    }
+    else if(l == 0) {
+        ligado = false;
+    }
+}
+</code>
+</pre>
+
+<p>Dentro da classe:</p>
+
+<pre>
+<code>
+const bool getLigado();
+void setLigado(int l);
+</code>
+</pre>
+
+<p>Crie também um método para visualizarmos o estado dos carros:</p>
+
+<pre>
+<code>
+void Veiculo::estado() {
+    if(this->getLigado()) {
+        std::cout << "Veículo " << nome << " está ligado!" << std::endl;
+    }
+    else {
+        std::cout << "Veículo " << nome << " está desligado!" << std::endl;
+    }
+}
+</code>
+</pre>
+
+<p>E no arquivo principal podemos fazer isso:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Veiculo *v1 = new Veiculo(1);
+    Veiculo *v2 = new Veiculo(2);
+    Veiculo *v3 = new Veiculo(3);
+
+    v1->setLigado(1);
+    v2->setLigado(0);
+    v3->setLigado(1);
+
+    cout << v1->getVelMax() << endl;
+    cout << v2->getVelMax() << endl;
+    cout << v3->getVelMax() << endl;
+
+    v1->estado();
+    v2->estado();
+    v3->estado();
+
+    delete v1;
+    delete v2;
+    delete v3;
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: O public permite acesso em qualquer parte do programa, o private só permite acesso na classe da qual ela pertence, e ainda existe o protected, que só permite acesso na classe e nas filhas dela (é um meio-termo entre public e private).</p>
+<h3>Classes e Herança</h3>
+
+<p>Com a herança, uma classe pode herdar propriedades de outras classes, podendo ter outras adicionadas.</p>
+
+<p>Vamos criar um novo projeto e um file com as classes. Esse é o código da classe:</p>
 
 <pre>
 <code>
 class Veiculo {
     public:
-        int velMax;
+        int vel;
+        int blind;
         int rodas;
-
-        void imp();
-    	
-        const char* getNome();
-        void setNome(const char* nome);
-        const char* getCor();
-        void setCor(const char* cor);
     private:
-        const char* nome;
-        const char* cor;
+        int tipo;
+        int velMax;
+        bool arma;
 };
 </code>
 </pre>
 
-<p>Implementação dos métodos, incluindo os getters e setters:</p>
+<p>No caso acima, a classe Veiculo (classe pai) é genérica, e classes como Moto e Carro (filhas) herdam características da mesma.</p>
+
+<p>Vamos criar a classe Moto, assim:</p>
 
 <pre>
 <code>
-void Veiculo::imp() {
-    std::cout << "Nome...: " << this->nome << std::endl;
-    std::cout << "Cor....: " << this->cor << std::endl;
-    std::cout << "Rodas..: " << this->rodas << std::endl;
-    std::cout << "Vel Máx: " << this->velMax << std::endl << std::endl;
-}
-
-const char* Veiculo::getNome() {
-    return this->nome;
-}
-
-void Veiculo::setNome(const char* nome) {
-    this->nome = nome;
-}
-
-const char* Veiculo::getCor() {
-    return this->cor;
-}
-
-void Veiculo::setCor(const char* cor) {
-    this->cor = cor;
-}
-</code>
-</pre>
-
-<p>Como visto acima, nada de novo, o método imprimir está dentro da classe e pode acessar atributos privados.</p>
-
-<p>Agora crie a classe Carro, herdando de Veiculo:</p>
-
-<pre>
-<code>
-class Carro : public Veiculo {
-    public:
-        Carro();
+class Moto : public Veiculo {
+    
 };
 </code>
 </pre>
 
-<p>Implementação do construtor:</p>
+<p>No caso acima, ele já está herdando as coisas de Veiculo, mas sem adicionar mais nada, isso é a herança pobre.</p>
+
+<p>No arquivo principal, crie o objeto assim:</p>
 
 <pre>
 <code>
-Carro::Carro() {
-    this->velMax = 160;
-    this->rodas = 4;
-    this->setNome("Carro");
-    this->setCor("Branco");
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Moto *v1 = new Moto();
+
+    delete v1;
+
+    return 0;
 }
 </code>
 </pre>
 
-<p>Note que as propriedades chamadas não são da classe Carro, e sim da classe que ela herdou, a Veiculo.</p>
+<p>Ou assim, de forma que usaremos apenas o que for descrito na classe pai, ganhando em polimorfismo:</p>
 
-<p>Da mesma forma, podemos fazer igual em outras classes, como a Moto, que também herda de veículo:</p>
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Veiculo *v1 = new Moto();
+
+    delete v1;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Agora, crie o construtor na classe Moto, inicializando os atributos públicos assim:</p>
 
 <pre>
 <code>
 class Moto : public Veiculo {
     public:
-        Moto();
+        Moto(); // Construtor
 };
-</code>
-</pre>
 
-<p>Implementação do construtor:</p>
-
-<pre>
-<code>
 Moto::Moto() {
-    this->velMax = 200;
-    this->rodas = 2;
-    this->setNome("Moto");
-    this->setCor("Preta");
+    vel = 0;
+    blind = 0;
+    rodas = 2;    
 }
 </code>
 </pre>
 
-<p>E da mesma forma, a classe Militar, que ganhará algumas propriedades novas:</p>
+<p>E no arquivo principal:</p>
 
 <pre>
 <code>
-class Militar : public Veiculo {
-    public:
-        int municao;
-        bool armamento;
-        Militar(bool arma, int municao);
-};
-</code>
-</pre>
+#include &lt;iostream&gt;
+#include "Classes.h"
 
-<p>Implementação do construtor:</p>
-
-<pre>
-<code>
-Militar::Militar(bool arma, int municao) {
-    this->velMax = 150;
-    this->rodas = 6;
-
-    this->armamento = arma;
-    this->setNome("Tanque");
-    this->setCor("Verde");
-
-    if(arma) {
-        this->municao = municao;
-    }
-    else {
-        this->municao = 0;
-    }
-}
-</code>
-</pre>
-
-<p>Só que o método imp() não exibirá a munição e o armamento do Militar, para isso, voltamos em veículo e colocaremos o imp() na declaração como virtual, que permitirá sobreescrever o método em outras classes:</p>
-
-<pre>
-<code>
-class Veiculo {
-    public:
-        int velMax;
-        int rodas;
-
-        virtual void imp(); // Todo método que pode ser sobreposto deve ter o virtual na frente.
-    	
-        const char* getNome();
-        void setNome(const char* nome);
-        const char* getCor;
-        void setCor(const char* cor);
-    private:
-        const char* nome;
-        const char* cor;
-};
-</code>
-</pre>
-
-<p>E na classe Militar, colocamos a palavra override no método imp (existente no C++11), que indica que ele está sobrepondo:</p>
-
-<pre>
-<code>
-class Militar : public Veiculo {
-    public:
-        int municao;
-        bool armamento;
-        Militar(bool arma, int municao);
-
-        void imp() override;
-};
-</code>
-</pre>
-
-<p>Dessa forma, a implementação do método imp sobreposto em Militar fica assim:</p>
-
-<pre>
-<code>
-void Militar::imp() {
-    std::cout << "Nome.......: " << this->getNome() << std::endl; // Use o getter devido ao encapsulamento
-    std::cout << "Cor........: " << this->getCor() << std::endl;
-    std::cout << "Rodas......: " << this->rodas << std::endl;
-    std::cout << "Vel Máx....: " << this->velMax << std::endl;
-    std::cout << "Armamento..: " << this->armamento << std::endl;
-    std::cout << "Municao....: " << this->municao << std::endl << std::endl;
-}
-</code>
-</pre>
-
-<p>PS: Pode ser assim também, chamando o método da classe pai junto com o método sobreposto:</p>
-
-<pre>
-<code>
-void Militar::imp() {
-    Veiculo::imp(); // Chamada do método da classe pai
-
-    std::cout << "Armamento..: " << this->armamento << std::endl;
-    std::cout << "Municao....: " << this->municao << std::endl << std::endl;
-}
-</code>
-</pre>
-
-<p>Em outras palavras, o virtual num método de uma classe pai indica que esse método será sobreposto em alguma classe herdeira. E a classe que sobreescrever o método deverá indicar com override.</p>
-
-<p>Um método sem o virtual não pode ser sobreposto, de forma que não precisa colocar final num método que não queiramos que seja substituído, apenas deixe ele sem nada (mas pode ser colocado na indicação algo como <code>void nomeDoMetodo() final</code>), para tornar a classe também final, use algo tipo <code>class NomeDaClasse final</code>, o final só pode ser usado em C++11. Todo método que poderá sobreposto deverá ter virtual indicando isso. Em atributos, coloque <code>const</code> na indicação da variável e inicialize dentro da classe mesmo.</p>
-
-<p>No código principal faça isso:</p>
-
-<pre>
-<code>
-Carro *c = new Carro();
-
-c->imp();
-
-Moto *m = new Moto();
-
-m->imp();
-
-Militar *t = new Militar(true, 500);
-
-t->imp();
-</code>
-</pre>
-
-<p>Lembrando que podemos colocar a tipagem como uma classe (geralmente abstrata), mas a declaração do objeto com new deve ser de uma classe não-abstrata que implemente ou herde os métodos dela, por exemplo:</p>
-
-<pre>
-<code>
-Veiculo *c = new Carro();
-
-c->imp();
-
-Veiculo *m = new Moto();
-
-m->imp();
-
-Veiculo *t = new Militar(true, 500);
-
-t->imp();
-</code>
-</pre>
-
-<p>Isso é útil para ganharmos em polimorfismo, onde podemos usar vários tipos de objetos em, por exemplo, parâmetros, desde que eles tenham a mesma classe pai em comum.</p>
-
-<p>PS: Caso deseje simular uma interface, crie uma classe apenas com os nomes dos métodos, colocando eles virtuais, sem colocar as implementações deles, apenas atribuindo com 0 (classe abstrata):</p>
-
-<pre>
-<code>
-class Estoque {
-    public:
-        virtual void defineLado(int l) = 0;
-        virtual double volume() = 0;
-        virtual ~Estoque() = 0; // Toda classe abstrata deve ter um método destrutor virtual puro, mesmo que os outros métodos não os sejam
-};
-
-Estoque::~Estoque() { // Implementação Vazia, sempre necessária, no caso.
-
-}
-</code>
-</pre>
-
-<p>Um método virtual atribuído a 0 é como se ele fosse abstrato, ou seja, não terá implementação na interface, isso é uma função virtual pura, e toda classe que herdará, deverá implementar, sobreescrevendo ele.</p>
-
-<p>PS: Uma classe com métodos abstratos não pode ser instanciada, mesmo se tiver apenas um método virtual puro. Na verdade, para criar uma classe abstrata, basta declarar um ou mais métodos virtual puros (atribuídos com 0). Quando a classe só tem métodos virtuais puros, age de forma igual à uma interface (que existe em linguagens POO como Java, C# e PHP, mas não em C++).</p>
-
-<p>Para criar uma classe com todos os métodos prontos como abstrata (para ser usada em heranças), basta criar o método destrutor dela como virtual puro (<code>virtual ~NomeDaClasse() = 0</code> e uma implementação (mesmo sem código algum entre as chaves) na mesma classe, pode ser feita na Veiculo, por exemplo, nesse código acima seria o recomendado, pra encapsular também a classe), e as classes que a herdarem, não precisam de nenhuma alteração. Caso esse método virtual não possua implementação, aí sim as classes filhas dessa terão que implementar.</p>
-
-<p>E na classe que a implementará, coloque como se fosse uma herança, e o sobreponha os métodos com override:</p>
-
-<pre>
-<code>
-include "Estoque.h"
-
-class Caixa : public Estoque {
-    public:
-        void defineLado(int l) override;
-        double volume() override;
-
-        const double getLado();
-        void setLado(double lado);
-    private:
-        double lado;
-};
-
-void Caixa::defineLado(int l) {
-    this->lado = l;
-}
-
-double Caixa::volume() {
-    return lado * lado * lado;
-}
-
-const double Caixa::getLado() {
-    return lado;
-}
-
-void Caixa::setLado(double lado) {
-    this->lado = lado;
-}
-</code>
-</pre>
-
-<p>E a implementação no main:</p>
-
-<pre>
-<code>
-Estoque *cx = new Caixa();
-
-cx->defineLado(5);
-
-cout << cx->volume() << endl;
-</code>
-</pre>
-
-<p>E no método main podemos verificar se a classe implementa a classe abstrata usando um if e else:</p>
-
-<pre>
-<code>
-Estoque *cx = new Caixa();
-
-if(typeid(cx) == typeid(Estoque*)) { // inclua typeinfo
-    cx->defineLado(5);
-
-    cout << cx->volume() << endl;
-}
-else {
-    cerr << "Classe AbstVeiculo Não Implementada!" << endl;
-}
-</code>
-</pre>
-
-<p>Usando uma classe base no "tipo" do objeto, e ele sendo implementado com uma classe herdeira, permite maior polimorfismo, pois qualquer classe que herde o "tipo" da classe anterior, pode ser implementada.</p>
-
-<p>Alternativamente, podemos fazer assim, de uma forma mais "gambiarrenta":</p>
-
-<pre>
-<code>
-// Funções estruturadas:
-void defLado(Estoque &caix, int l) {
-    caix.defineLado(l);
-}
-
-double verVol(Estoque &caix) {
-    return caix.volume();
-}
+using namespace std;
 
 int main() {
-    Caixa cx;
+    Veiculo *v1 = new Moto();
+    
+    cout << v1->rodas << endl;
 
-    defLado(cx, 5);
-
-    cout << verVol(cx) << endl;
+    delete v1;
 
     return 0;
 }
 </code>
 </pre>
 
-<h3>Protected x Private x Public</h3>
-
-<p>Já sabemos como utilizar o public e o private </p>
-
-<p>Criemos uma declaração assim pra exemplificar:</p>
+<p>Para alterarmos os atributos privados, faremos métodos setters na classe Veiculo, e também um método para exibição, de forma que ficará assim:</p>
 
 <pre>
 <code>
 class Veiculo {
     public:
+        int vel;
+        int blind;
         int rodas;
-        const char* nome;
-        
-    protected:
-        int portas;
-        const char* cor;
-        
+        // Setters
+        void setTipo(int tp);
+        void setVelMax(int vm);
+        void setArma(bool ar);
+        void imp();
     private:
+        int tipo;
         int velMax;
-        int potencia;
+        bool arma;
 };
+
+void Veiculo::imp() {
+    std::cout << "Tipo de veículo: " << tipo << std::endl;
+    std::cout << "Velocidade máxima: " << velMax << std::endl;
+    std::cout << "Quantidade de rodas: " << rodas << std::endl;
+    std::cout << "Blindagem: " << blind << std::endl;
+    std::cout << "Armamento: " << arma << std::endl;
+    std::cout << "------------------------" << std::endl;
+}
+
+void Veiculo::setTipo(int tp) {
+    tipo = tp;
+}
+void Veiculo::setVelMax(int vm) {
+    velMax = vm;
+}
+void Veiculo::setArma(bool ar) {
+    arma = ar;
+}
 </code>
 </pre>
 
-<p>O public permite o acesso a qualquer parte do programa, o private permite o acesso apenas dentro da própria classe. O protected é meio que um meio-termo, pois permite acesso dentro de classes filhas.</p>
+<p>E no construtor da Moto, basta colocar a chamada dos métodos setters:</p>
 
-<p>Veja um exemplo de chamada de métodos protegidos em heranca, numa classe Carro:</p>
+<pre>
+<code>
+class Moto : public Veiculo {
+    public:
+        Moto(); // Construtor
+};
+
+Moto::Moto() {
+    vel = 0;
+    blind = 0;
+    rodas = 2;
+    setTipo(1);
+    setVelMax(120);
+    setArma(false);
+}
+</code>
+</pre>
+
+<p>No método principal, podemos fazer assim:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Veiculo *v1 = new Moto();
+
+    v1->imp();
+
+    delete v1;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Crie agora, outra classe que herdará de veículo, a classe Carro, assim:</p>
 
 <pre>
 <code>
 class Carro : public Veiculo {
     public:
-        Carro();
+        Carro(); // Construtor
 };
-</code>
-</pre>
 
-<p>E implementação:</p>
-
-<pre>
-<code>
 Carro::Carro() {
-    this->velMax = 100; // Não podemos acessar
-    this->potencia = 150; // Não podemos acessar
-    this->rodas = 4;
-    this->nome = "Carro";
-    this->portas = 4;
-    this->cor = "Branco";
+    vel = 0;
+    blind = 0;
+    rodas = 4;
+    setTipo(2);
+    setVelMax(200);
+    setArma(false);
 }
 </code>
 </pre>
 
-<p>Como visto, a classe Carro permitiu acesso aos métodos protegidos porque ela herda de Veiculo, uma agregação entre objetos também não vai dar erro:</p>
+<p>E também a classe Tanque, da mesma forma:
 
 <pre>
 <code>
-class Moto {
+class Tanque : public Veiculo {
     public:
-        Carro *c;
-};
-</code>
-</pre>
-
-<p>Isso ocorre porque a classe Moto, mesmo não tenho herança, ele cria um elemento Carro dentro da classe.</p>
-
-<p>Mas se tentarmos acessar qualquer atributo ou método protegido em partes do programa fora da classe e de suas herdeiras, dará erro.</p>
-
-<h3>Criando Templates</h3>
-
-<p>Podemos criar também "tipos genéricos" em C++, que nos permite configurar os tipos, iguais aos usados num contâiner.</p>
-
-<p>Primeiro, crie, num arquivo de classe, uma classe dessa forma:</p>
-
-<pre>
-<code>
-template&lt;class E&gt; class Generico {
-    public:
-        const E getEntidade();
-        void setEntidade(E entidade);
-    private:
-        E entidade;
+        Tanque(); // Construtor
 };
 
-template&lt;class E&gt; const E Generico&lt;E&gt;::getEntidade() {
-    return this->entidade;
-}
-
-template&lt;class E&gt; void Generico&lt;E&gt;::setEntidade(E entidade) {
-    this->entidade = entidade;
+Tanque::Tanque() {
+    vel = 0;
+    blind = 1;
+    rodas = 8;
+    setTipo(3);
+    setVelMax(160);
+    setArma(true);
 }
 </code>
 </pre>
 
-<p>PS: No caso de templates, coloque as implementações no arquivo h, no entanto, o arquivo cpp deverá estar presente, mesmo sem nada a não ser o include pro arquivo h.</p>
-
-<p>Como visto acima, a letra E será substituída pelo tipo que passaremos ali.</p>
-
-<p>E no programa principal, faça isso:</p>
+<p>E no método principal:</p>
 
 <pre>
 <code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
 int main() {
-    Generico&lt;string&gt; texto;
+    Veiculo *v1 = new Moto();
+    Veiculo *v2 = new Carro();
+    Veiculo *v3 = new Tanque();
 
-    texto.setEntidade("Exemplo de String!"); // Utilizamos ponto pelo objeto não ser criado com new.
+    v1->imp();
+    v2->imp();
+    v3->imp();
 
-    cout << texto.getEntidade() << endl; // Idem
-
-    Generico&lt;int&gt; numero;
-
-    numero.setEntidade(50);
-
-    cout << numero.getEntidade() << endl;
+    delete v1;
+    delete v2;
+    delete v3;
 
     return 0;
 }
 </code>
 </pre>
 
-<p>No entanto, o ideal é usarmos objetos criados com new, dessa forma:</p>
+<p>Em C++ também podemos fazer heranças múltiplas, que é quando uma classe herda de mais de uma classe ao mesmo tempo, faríamos algo assim:</p>
 
 <pre>
 <code>
-int main() {
-    Generico&lt;string&gt; *texto = new Generico&lt;string&gt;(); // Não esqueça do ponteiro
+class Herdeira : public Classe1, public Classe2 {
 
-    texto->setEntidade("Exemplo de String!"); // Utilizamos seta pelo objeto ser criado com new.
+};
+</code>
+</pre>
 
-    cout << texto->getEntidade() << endl; // Idem
+<p>E nas classes filhas de outras, também podemos fazer o "super", que é a herança de construtores de classes pais, dessa forma:</p>
 
-    Generico&lt;int&gt; *numero = new Generico&lt;int&gt;();
-
-    numero->setEntidade(50);
-
-    cout << numero->getEntidade() << endl;
-
-    return 0;
+<pre>
+<code>
+Classe2::Classe2(int n1, int n2, int n3) : Classe1(n1, n2) { // Indica a classe pai, no segundo parenteses são só os parâmetros do construtor da classe pai sem declaração de tipo.
+    this->num3 = n3;
 }
 </code>
 </pre>
 
-<p>Caso use mais de um tipo genérico, coloque dentro da mesma tag, separados por vírgulas.</p>
-
-<p>PS: Caso use mais de um tipo genérico, coloque dentro da mesma tag, separados por vírgulas. Em heranças e implementações, caso a classe a ser herdada ou implementada tenha tipos genéricos, a classe herdeira ou implementadora deverá ter o mesmo tipo (por exemplo, se a classe abstrata for <code>template &lt;class E&gt; class ClasseAbstrata</code>, a classe que a implementa deverá ter o tipo a ser recebido indicado, como por exemplo <code>class ClasseImplementadora : public ClasseAbstrata&lt;int&gt;</code>) e deverá estar em arquivos separados (h e cpp) e os métodos declarados como classe comum, e nesse caso o objeto criado será <code>ClasseAbstrata&lt;int&gt; *objeto = new ClasseImplementadora()</code>. Caso não declare o tipo genérico, coloque <code>template &lt;class E&gt; class ClasseImplementadora : public ClasseAbstrata&lt;E&gt;</code> e as implementações no mesmo arquivo h (mas crie um cpp vazio de mesmo nome pra evitar erros de compilação), e nesse caso o objeto criado será <code>ClasseAbstrata&lt;TipoOuClasse&gt; *objeto = new ClasseImplementadora&lt;TipoOuClasse&gt;()</code>. Esse é o conceito de polimorfismo paramétrico.</p>
+<p>Caso tenha herança múltipla, os construtores de ambas as classes pais deverão ser indicadas após os dois pontos, separadas por vírgulas.</p>
 
 <ul>
     <li><a href="poo-em-cpp-2.html">Parte Anterior da Matéria!</a></li>
-    <!--<li><a href="poo-em-cpp-4.html">Continuação da Matéria!</a></li>-->
+    <li><a href="poo-em-cpp-4.html">Continuação da Matéria!</a></li>
 </ul>
 
         </div>

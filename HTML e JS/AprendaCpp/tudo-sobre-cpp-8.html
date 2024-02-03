@@ -347,6 +347,15 @@ delete pont;
 </code>
 </pre>
 
+<p>Ah, um ponteiro sempre ocupará a quantidade fixa de 8 bytes, isso porque ele ocupa apenas o endereço de memória que aponta para outra variável, que pode ter capacidade de bytes variada, como por exemplo:</p>
+
+<pre>
+<code>
+cout << sizeof(num) << endl;
+cout << sizeof(pont) << endl;
+</code>
+</pre>
+
 <p>Caso precise declarar um ponteiro como nulo, use <code>NULL</code> e inclua a bibioteca <code>&lt;cstddef&gt;</code>.</p>
 
 <h3>Ponteiros - Parte 2</h3>
