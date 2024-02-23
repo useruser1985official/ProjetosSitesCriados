@@ -15,12 +15,14 @@
                     <li><a href="contato.html">Contato!</a></li>
                     <li><a href="tudo-sobre-assembly-1.html">Tudo sobre Assembly Parte 1!</a></li>
                     <li><a href="tudo-sobre-assembly-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Assembly Parte 2!</a></li>
+                    <li><a href="tudo-sobre-assembly-3.html">Tudo sobre Assembly Parte 3!</a></li>
+                    <li><a href="tudo-sobre-assembly-4.html">Tudo sobre Assembly Parte 4!</a></li>
                 </menu>
             </header>
             
 <h2>Tudo sobre Assembly Parte 2</h2>
 
-<h3>Funções de Conversão</h3>
+<h3>Funções de Conversão (32 bits)</h3>
 
 <p>Coloque essas funções abaixo do mostra_valor:</p>
 
@@ -118,7 +120,7 @@ section .data
 </code>
 </pre>
 
-<h3>Menu do Sistema</h3>
+<h3>Menu do Sistema (32 bits)</h3>
 
 <p>Faça o seguinte programa:</p>
 
@@ -318,7 +320,7 @@ dividir:
 </code>
 </pre>
 
-<h3>União com o C++</h3>
+<h3>União com o C++ (32 bits)</h3>
 
 <p>Crie um arquivo cpp (como troca.cpp) para colocarmos nosso programa em C++, com esse código:</p>
 
@@ -375,7 +377,7 @@ clean:
 
 <p>Dessa forma, compilamos o programa apenas digitando <code>make</code> no terminal.</p>
 
-<h3>Saltos Condicionais</h3>
+<h3>Saltos Condicionais (32 bits)</h3>
 
 <p>Crie esse programa em C++ primeiramente, com o nome questao.cpp:</p>
 
@@ -440,7 +442,7 @@ questao: questao.cpp questao.o
     g++ questao.o questao.cpp -o questao -no-pie
 
 questao.o: questao.asm
-    nasm -f elf64 questao.asm -o questao.o
+    nasm -f elf32 questao.asm -o questao.o
 
 clean:
     rm -f *.o
@@ -451,7 +453,7 @@ clean:
 
 <ul>
     <li><a href="tudo-sobre-assembly-1.html">Parte Anterior da Matéria!</a></li>
-    <!--<li><a href="tudo-sobre-assembly-3.html">Continuação da Matéria!</a></li>-->
+    <li><a href="tudo-sobre-assembly-3.html">Continuação da Matéria!</a></li>
 </ul>
 
         </div>

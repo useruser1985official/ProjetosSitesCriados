@@ -103,7 +103,7 @@ System.out.println(x);
         <th>Retorno</th>
     </tr>
     <tr>
-        <td>Pi</td>
+        <td>PI</td>
         <td>Constante &pi;</td>
         <td>Math.PI</td>
         <td>3.141592653589793</td>
@@ -111,7 +111,7 @@ System.out.println(x);
     <tr>
         <td>pow</td>
         <td>Exponenciação</td>
-        <td>Math.pow(5,2)</td>
+        <td>Math.pow(5, 2)</td>
         <td>25</td>
     </tr>
     <tr>
@@ -243,7 +243,7 @@ int num = aleatorio.nextInt(3) + 12;
 
 <p>Ou seja, dentro do método nextInt, colocamos o intervalo (contando o mínimo), e a soma é o mínimo.</p>
 
-<p>Se quiser verificar se um valor numérico retorna NaN (não numérico), podemos utilizar o método <code>isNaN()</code> (importe <code>static java.lang.Double.isNaN</code>), veja um exemplo simples de uso:</p>
+<p>Se quiser verificar se um valor numérico retorna NaN (não numérico), podemos utilizar o método <code>isNaN()</code>, veja um exemplo simples de uso:</p>
 
 <pre>
 <code>
@@ -254,7 +254,7 @@ double raiz;
 System.out.print("Digite um número pra ver a raiz: ");
 num = teclado.nextInt();
 
-raiz = !isNaN(Math.sqrt(num)) ? Math.sqrt(num) : 0.0; // Isso é um operador ternário, que verifica dados. Importe static java.lang.Double.isNaN
+raiz = !Double.isNaN(Math.sqrt(num)) ? Math.sqrt(num) : 0.0; // Isso é um operador ternário, que verifica dados.
 
 System.out.println("A raiz quadrada de " + num + " é " + raiz);
 </code>
@@ -295,7 +295,7 @@ System.out.println(hexa + " convertido para decimal: " + decimal3);
 <code>
 int num = (int)inpNum.getValue();
 int res = num % 2;
-double cub = Math.pow(num,3);
+double cub = Math.pow(num, 3);
 double rzQ = Math.sqrt(num);
 double rzC = Math.cbrt(num);
 int abs = Math.abs(num);
@@ -314,7 +314,12 @@ lblAbs.setText(Integer.toString(abs));
 
 <pre>
 <code>
+int n1 = 10;
+int n2 = 5;
+
 int maior = n1 > n2 ? n1 : n2;
+
+System.out.println(maior);
 </code>
 </pre>
 
@@ -398,7 +403,7 @@ String nome1 = "Gustavo";
 String nome2 = "Gustavo";
 String nome3 = new String("Gustavo");
 String res;
-res = (nome1.equals(nome3)) ? "igual" : "diferente";
+res = nome1.equals(nome3) ? "igual" : "diferente";
 System.out.println(res);
 </code>
 </pre>
@@ -493,7 +498,7 @@ String sit = (idade &gt;= 16 && idade &lt; 18 || idade &gt; 70)? "Opcional" : "O
 
 <p>Vamos fazer um joguinho em Swing, no qual terá um gênio de adivinhação. Ele terá duas imagens, uma com o balão e outra com o gênio, como se ele tivesse falando os resultados.</p>
 
-<p>PS: Para colocar um objeto em cima do outro, clique com o botão direito no layout e em "Definir Layout" e escolha "Layout Absoluto" (o default é Design Livre). Com o botão direito em cima do objeto você poderá ver se ele está acima de outro, e podemos escolher quais ficam na frente e atrás, tal como o Photoscape ou outro editor. A frase pode ser colocada entre tags <code>&lt;html&gt;&lt;/html&gt;</code> para encaixar dentro do balãozinho, inclusive, pode ser usados outras tags, como pra deixar em negrito ou itálico.</p>
+<p>PS: Para colocar um elemento em cima do outro, clique com o botão direito no layout e em "Definir Layout" e escolha "Layout Absoluto" (o default é Design Livre). Com o botão direito em cima do objeto você poderá ver se ele está acima de outro, e podemos escolher quais ficam na frente e atrás, tal como o Photoscape ou outro editor. A frase pode ser colocada entre tags <code>&lt;html&gt;&lt;/html&gt;</code> para encaixar dentro do balãozinho, inclusive, pode ser usados outras tags, como pra deixar em negrito ou itálico.</p>
 
 <p>Esse é o código colocado no método do construtor do frame, logo abaixo do initComponents():</p>
 

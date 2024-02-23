@@ -44,10 +44,10 @@
     </tr>
     <tr>
         <td>
-            + abrirConta()<br/>
+            + abrirConta(t)<br/>
             + fecharConta()<br/>
-            + depositar()<br/>
-            + sacar()<br/>
+            + depositar(v)<br/>
+            + sacar(v)<br/>
             + pagarMensal()<br/>
         </td>
     </tr>
@@ -262,14 +262,14 @@ class Ventilador {
 
         self::$velocidade = $vel;
         
-        printf("O ventilador está ligado, na velocidade de %d.\n", self::$velocidade);
+        printf("O ventilador está ligado, na velocidade de %d.&lt;br/&gt;", self::$velocidade);
     }
 
     public static function desligar() {
         self::$velocidade = 0;
         self::$ligado = false;
 
-        echo "O ventilador está desligado!";
+        echo "O ventilador está desligado!&lt;br/&gt;";
     }
 
     public static function getLigado() {
@@ -299,7 +299,7 @@ Ventilador::ligar(3);
 Ventilador::ligar(2);
 Ventilador::desligar();
 
-echo Ventilador::getLigado() . "&lt;br/&gt;";
+echo (Ventilador::getLigado() ? "true" : "false") . "&lt;br/&gt;";
 </code>
 </pre>
 
@@ -353,18 +353,18 @@ echo Ventilador::getLigado() . "&lt;br/&gt;";
     <tr>
         <td>
             - volume<br/>
-            - ligando<br/>
+            - ligado<br/>
             - tocando<br/>
         </td>
     </tr>
     <tr>
         <td>
             (Receberá elementos do controlador)<br/>
-            - setVolume()<br/>
+            - setVolume(volume)<br/>
             - getVolume()<br/>
-            - setLigado()<br/>
+            - setLigado(ligado)<br/>
             - getLigado()<br/>
-            - setTocando()<br/>
+            - setTocando(tocando)<br/>
             - getTocando()<br/>
         </td>
     </tr>

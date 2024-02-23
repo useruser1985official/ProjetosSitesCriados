@@ -380,6 +380,29 @@ having carga > (select avg(carga) from cursos);
     </tr>
 </table>
 
+<p>Inclusive, podemos utilizar formatações nas datas, dessa forma:</p>
+
+<pre>
+<code>
+-- Ele exibirá a data no formato especifico:
+select nome, date_format(nascimento, '%d/%m/%Y') from gafanhotos;
+</code>
+</pre>
+
+<p>PS: A função <code>date_format</code> também pode ser usada em inserts, assim:</p>
+
+<pre>
+<code>
+-- A data será salva no formato YYYY-MM-DD normalmente no banco, independente da formatação:
+insert into gafanhotos
+(nome, profissao, nascimento, sexo, peso, altura, nacionalidade)
+values
+('Solange', 'Secretária',  str_to_date('15/12/1981', '%d/%m/%Y'), 'F', '69.4', '1.72', 'Argentina');
+</code>
+</pre>
+
+<p>Basicamente, as regras são as mesmas de outra linguagens, usando <code>%d/%m/%Y</code> para dia, mês e ano. Usamos <code>%H/%M/%S</code> para hora, minuto e segundo. <code>%w</code> é usado para dia da semana.</p>
+
 <ul>
     <li><a href="tudo-sobre-mysql-2.html">Parte Anterior da Matéria!</a></li>
     <li><a href="tudo-sobre-mysql-4.html">Continuação da Matéria!</a></li>

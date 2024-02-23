@@ -4,7 +4,7 @@ class AntiInjection {
     private $inteiro;
     private static $listaNegra = array("select", "update", "drop", "truncate", "insert", "delete", "alter", "from", "where", "table", "tables", "database", "union", "--", "%", "<", ">", "[", "]", ":", "?", "`", "|", "*");
 
-    public function texto($frase) : string {
+    public function texto($frase): string {
         $this->limpa = str_ireplace(";", "&#59;", $frase);
         $this->limpa = str_ireplace("--", "&#45;&#45;", $this->limpa);
         $this->limpa = str_ireplace("*", "&#42;", $this->limpa);
@@ -20,14 +20,14 @@ class AntiInjection {
         return $this->limpa;
     }
 
-    public function campo($frase) : string {
+    public function campo($frase): string {
         $this->limpa = $this->texto($frase);
         $this->limpa = str_ireplace(self::$listaNegra, "", $this->limpa);
 
         return $this->limpa;
     }
 
-    public function numero($num) : int {
+    public function numero($num): int {
         $this->inteiro = (int)$this->campo($num);
 
         return $this->inteiro;

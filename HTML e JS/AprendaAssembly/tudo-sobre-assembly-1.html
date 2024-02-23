@@ -15,12 +15,14 @@
                     <li><a href="contato.html">Contato!</a></li>
                     <li><a href="tudo-sobre-assembly-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Assembly Parte 1!</a></li>
                     <li><a href="tudo-sobre-assembly-2.html">Tudo sobre Assembly Parte 2!</a></li>
+                    <li><a href="tudo-sobre-assembly-3.html">Tudo sobre Assembly Parte 3!</a></li>
+                    <li><a href="tudo-sobre-assembly-4.html">Tudo sobre Assembly Parte 4!</a></li>
                 </menu>
             </header>
             
 <h2>Tudo sobre Assembly Parte 1</h2>
 
-<h3>Hello World</h3>
+<h3>Hello World (32 bits)</h3>
 
 <p>Crie um arquivo com extensão .asm (é recomendado, não é obrigatório), como por exemplo olamundo.asm.</p>
 
@@ -55,7 +57,7 @@ section .data:
     ; Isso define a variável com o nome msg do tipo binário
     ; e que ela está na posição 0xa
 
-    msg db "Olá, Mundo!", 0xa
+    msg db "Olá, Mundo!", 0xa ; Cada caractere ocupa 1 byte, msg é um ponteiro pra mensagem
 
     ; Isso define o tamanho da variável:
 
@@ -67,7 +69,6 @@ section .text:
     global _start
 
 ; Criação do método:
-
 _start:
     ; Acumulador de registro de dados. Ele move edx para len, ecx pra msg, etc.:
     mov edx, len
@@ -92,9 +93,9 @@ _start:
 </code>
 </pre>
 
-<p>PS: Os programas com eax, ebx, ecx e edx são para manter a compatibilidade com 32 bits, para sistemas 64 bits usamos rax, rbx, rcx e rdx.</p>
+<p>PS: Os programas com eax, ebx, ecx e edx são para manter a compatibilidade com 32 bits, para sistemas 64 bits usamos rax, rbx, rcx e rdx. Os sistemas de 16 usavam ax, bx, cx e dx.</p>
 
-<p>Para compilar o programa digite <code>nasm -f elf64 olamundo.asm -o olamundo.o</code> (elf32 se for Linux de 32 bits, em Windows é win32 e win64). Isso chama o compilador do sistema. O arquivo com extensão .o é o resultado da saída do que escrevemos em chamada de máquina.</p>
+<p>Para compilar o programa digite <code>nasm -f elf32 olamundo.asm -o olamundo.o</code> (elf64 se for Linux de 64 bits, em Windows é win32 e win64). Isso chama o compilador do sistema. O arquivo com extensão .o é o resultado da saída do que escrevemos em chamada de máquina.</p>
 
 <p>Para montar o código objeto compilado, digite <code>ld olamundo.o -s -o olamundo</code> (o segundo olamundo é o nome do executável, no Windows deve ser olamundo.exe, e talvez gerar um .obj ao invés de .o). Caso esteja num sistema 64 bits e queira um executável de 32, digite <code>ld olamundo.o -m elf_i386 -o olamundo</code>.</p>
 
@@ -115,7 +116,7 @@ _WinMain@16:
 
 <p>Para entender algumas instruções Assembly, leia esse artigo: <a href="http://numaboa.com.br/informatica/tutos/assembly/1122-instrucoes-comuns" target="_blank">http://numaboa.com.br/informatica/tutos/assembly/1122-instrucoes-comuns</a></p>
 
-<h3>Entrada de Dados</h3>
+<h3>Entrada de Dados (32 bits)</h3>
 
 <p>Crie um novo arquivo chamado entrada.asm e coloque esse código:</p>
 
@@ -176,7 +177,7 @@ exit:
 
 <p>Agora compile o arquivo digitando <code>nasm -f elf32 entrada.asm</code> e monte digitando <code>ld entrada.o -s -o entrada</code>.</p>
 
-<h3>Entendimento</h3>
+<h3>Entendimento (32 bits)</h3>
 
 <p>Para entendermos, vamos supor esse programa em C:</p>
 
@@ -218,7 +219,7 @@ _start:
 
 <p>Assim, os programas feitos diretamente em Assembly são menores, já que os programas de linguagens de alto e médio nível (como o C), dependem de várias bibliotecas. Também podemos descobrir, por exemplo, se um programa tem vírus.</p>
 
-<h3>Comparação</h3>
+<h3>Comparação (32 bits)</h3>
 
 <p>Faça um programa em Assembly com esse código:</p>
 
@@ -279,7 +280,7 @@ final:
 
 <p>Pra entender, caso ele compare os números maior ou igual, ele executará a função maior, senão ele continuará até o fluxo do programa e saltará pra função final.</p>
 
-<h3>Introdução à Funções</h3>
+<h3>Introdução à Funções (32 bits)</h3>
 
 <p>Primeiro, crie esse programa para incrementar um número:</p>
 

@@ -196,6 +196,31 @@ include_once "funcoes.php"; // Só carrega caso não tenha carregado.
 </code>
 </pre>
 
+<h3>Rotinas em PHP - Parte 3</h3>
+
+<p>A partir da versão 7, podemos especificar os tipos das variáveis e do retorno de funções, por exemplo:</p>
+
+<pre>
+<code>
+<?php
+function exibirMensagem(string $msg): void { // Parâmetro só pode ser string, void não retorna nada
+    printf("%s&lt;br/&gt;", $msg);
+}
+
+function soma(int $n1, int $n2): int { // Tanto os parâmetros quanto o retorno são int
+    return $n1 + $n2;
+}
+
+exibirMensagem("Olá!"); // Só pode passar string
+
+$s = soma(5, 10); // Só pode passar inteiros
+
+echo "$s&lt;br/&gt;";
+</code>
+</pre>
+
+<p>Apesar do PHP ser uma linguagem fracamente e dinamicamente tipada, é possível definir tipos, principalmente por isso permitir tratamento de erros na linguagem.</p>
+
 <h3>Verificando Erros com Try Catch Finally</h3>
 
 <p>O try catch finally são utilizados para tratar erros. No bloco <code>try</code> nós inserirmos a rotina que queremos tratar o provável erro que acontecer. Quando ele acontece o erro no try, para a execução do bloco imediatamente, passa pro <code>catch</code> e passa essa exceção gerada pra ele, onde o erro será tratado propriamente dito, onde podemos interceptar a exceção e realizar o tratamento mais adequado ao programa. O <code>finally</code> sempre será executado, ele não é obrigatório.

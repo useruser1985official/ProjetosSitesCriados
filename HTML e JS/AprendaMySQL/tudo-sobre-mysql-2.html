@@ -44,7 +44,7 @@ drop column ano;
 </code>
 </pre>
 
-<p>Depois voltaremos a colocar as tabelas:</p>
+<p>Depois voltaremos a colocar as colunas:</p>
 
 <pre>
 <code>
@@ -167,8 +167,6 @@ select * from usuarios;
 
 <p>Para abrir um banco de dados use <code>use cadastro;</code> (ou o nome do banco de dados desejado) normalmente. Ver as tabelas, <code>show tables;</code>. Assim como outros comandos como <code>desc</code> e <code>select * from</code> (não esqueça do ponto e vírgula após eles).</p>
 
-<p>Para fazer um back-up dos dados via linha de comando, fora do shell do MySQL digite <code>mysqldump -u nomedousuario -p nomedobanco>dump.sql.</code> (pode ser necessário colocar a opção <code>--single-transaction</code>). Para restaurar um back-up basta colocar <code>mysql -u nomedousuario -p&lt;dump.sql</code></p>
-
 <p>Também podemos renomear uma tabela ou banco pelo CMD, usando um comando tipo <code>update cursos set nome = 'PH' where idcurso = '3';</code>.</p>
 
 <p>PS: Podemos usar as setas pra cima e pra baixo para aparecer os comandos já utilizados no CMD.</p>
@@ -177,6 +175,7 @@ select * from usuarios;
 
 <p>PS: Caso os acentos apareçam desconfigurados no Windows, edite o arquivo xampp_shell.bat da pasta xampp, colocando <code>chcp 1252</code> no começo dele, antes do comando goto.</p>
 
+<p>Para fazer um back-up dos dados via linha de comando, fora do shell do MySQL digite <code>mysqldump -u nomedousuario -p nomedobanco>dump.sql.</code> (pode ser necessário colocar a opção <code>--single-transaction</code>). Para restaurar um back-up basta colocar <code>mysql -u nomedousuario -p&lt;dump.sql</code></p>
 <h3>PHPMyAdmin Parte 2</h3>
 
 <p>No PHPMyAdmin, vamos criar um banco de dados novo, nesse caso, vamos criar na aba "Base de Dados", na parte de colocar nome. Crie um nome qualquer como exemplo e escolha o agrupamento <code>utf8_general_ci</code>. Depois disso, crie uma tabela da mesma forma (como por exemplo, amigos) e a quantidade de colunas (no exemplo, serão três, com nomes id, nome e tel). Veja a configuração de cada campo:</p>
