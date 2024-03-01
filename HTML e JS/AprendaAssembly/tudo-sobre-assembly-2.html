@@ -52,6 +52,7 @@ int_to_string:
     add esi, 9
     mov byte [esi], 0
     mov ebx, 10
+    
 .prox_digito:
     xor edx, edx
     div ebx
@@ -128,7 +129,7 @@ section .data
 <code>
 section .data ; Variáveis fixas
     ; Tit é o tipo da variável
-    tit         db 10, "+-------------+", 10, "| Calculadora |", 10, "| Calculadora |", 10, "+-------------+", 0
+    tit         db 10, "+-------------+", 10, "| Calculadora |", 10, "|             |", 10, "+-------------+", 0
     ltit        equ $- tit
 
     obVal1      db 10, "Valor 1: ", 0
@@ -356,7 +357,7 @@ getValorASM:
 </code>
 </pre>
 
-<p>Compile o programa Assembly com o comando nasm, e depois monte o C++ com esse código objeto do Assembly, digitando <code>g++ troca.o troca.cpp -o troca -no-pie</code>.</p>
+<p>Compile o programa Assembly com o comando nasm, e depois monte o C++ com esse código objeto do Assembly, digitando <code>g++ troca.o troca.cpp -o troca -no-pie -m32</code>.</p>
 
 <p>Ele deverá retornar 33, que é a soma do 1 do Assembly com o 32 do C++.</p>
 
@@ -365,7 +366,7 @@ getValorASM:
 <pre>
 <code>
 troca: troca.cpp troca.o
-    g++ troca.o troca.cpp -o troca -no-pie
+    g++ troca.o troca.cpp -o troca -no-pie -m32
 
 troca.o: troca.asm
     nasm -f elf32 troca.asm -o troca.o
@@ -439,7 +440,7 @@ _impar:
 <pre>
 <code>
 questao: questao.cpp questao.o
-    g++ questao.o questao.cpp -o questao -no-pie
+    g++ questao.o questao.cpp -o questao -no-pie -m32
 
 questao.o: questao.asm
     nasm -f elf32 questao.asm -o questao.o

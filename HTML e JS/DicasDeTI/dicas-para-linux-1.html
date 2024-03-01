@@ -15,7 +15,7 @@
 
 <h2>Dicas para Linux Parte 1</h2>
 
-<h3>Instalação de Arquivos</h3>
+<h3>Instalação de Programas</h3>
 
 <h4>Via Terminal</h4>
 
@@ -29,7 +29,7 @@ sudo apt-get install nomedoprograma
 
 <p>PS: Caso não queira que peça confirmação para instalação, use o parâmetro <code>-y</code>.</p>
 
-<p>Lembrando que o comando <code>sudo</code> dá uma permissão temporária de root para tarefas que exigam o superusuário. Caso você esteja usando o Debian e não encontre o sudo, basta instalar e habilitar ele com esses comandos (como root):</p>
+<p>Lembrando que o comando <code>sudo</code> dá uma permissão temporária de root para tarefas que exijam o superusuário. Caso você esteja usando o Debian e não encontre o sudo, basta instalar e habilitar ele com esses comandos (como root):</p>
 
 <pre>
 <code>
@@ -113,11 +113,11 @@ rm nomedopacote.tar.gz
 
 <p>O comando ln -s cria um link para a pasta /usr/bin, de forma que possamos abrir ele usando o terminal apenas digitando o nome do programa.</p>
 
-<p>Esse processo pode ser usado para instalar programas (caso já estejam compilados) na pasta /opt, por exemplo, onde ele ficará acessível à todos os usuários.</p>
+<p>Esse processo pode ser usado para instalar programas (caso já estejam compilados) na pasta <code>/opt</code>, por exemplo, onde ele ficará acessível a todos os usuários.</p>
 
 <p>PS: Se conter um arquivo install ou readme, olhe ele para ver se a forma de instalar pode ter alguma diferença, como dependências ou comandos específicos. A documentação do desenvolvedor no site oficial também pode ter informações do tipo.</p>
 
-<p>Só lembrando de o tar é apenas um arquivador, as extensões xz, bz2, gz e etc., são as compactações usadas nos arquivos, que se tiverem em c, cpp e h, e tiverem um makefile, eles não foram compilados (são apenas códigos-fontes). Quanto tiverem arquivos so, sh e executáveis (sem extensões, geralmente), ele já está compilado. Sempre olhe dentro da pasta descompactada para ver os tipos de arquivos dentro dela.</p>
+<p>Só lembrando de que o tar é apenas um arquivador, as extensões xz, bz2, gz e etc., são as compactações usadas nos arquivos, que se tiverem em c, cpp e h, e tiverem um makefile, eles não foram compilados (são apenas códigos-fontes). Quanto tiverem arquivos so, sh e executáveis (sem extensões, geralmente), ele já está compilado. Sempre olhe dentro da pasta descompactada para ver os tipos de arquivos dentro dela.</p>
 
 <p>Caso o pacote tar venha com os códigos-fonte pra compilar, use esses comandos para compilar o programa (pode demorar um pouco), após mover ele pro diretório definitivo (como o /opt):</p>
 

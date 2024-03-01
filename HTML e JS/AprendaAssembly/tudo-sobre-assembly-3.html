@@ -107,6 +107,7 @@ section .data
 section .data
     msg db 79, 105, 33, 10
     tam equ 3 ; Macro que define uma constante chamada tam
+
 section .text
     global _start
 
@@ -132,6 +133,288 @@ section .data
     tam equ $- msg ; Macro que define uma constante chamada tam
 </code>
 </pre>
+
+<h3>Leitura de Dados</h3>
+
+<p>Para ler dados do teclado, faça o programa assim:</p>
+
+<pre>
+<code>
+section .data
+    perg db "Como você se chama? "
+    tamPerg equ $- perg
+
+    ola db "Olá, "
+    tamOla equ $- ola
+    tamNome equ 10
+
+section .bss
+    nome resb tamNome
+
+section .text
+    global _start
+
+_start:
+    ; Imprimindo a mensagem "Como você se chama"
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, perg
+    mov rdx, tamPerg
+
+    syscall
+
+    ; Ler o nome do usuário
+    mov rax, 0
+    mov rdi, 0
+    mov rsi, nome
+    mov rdx, tamNome
+
+    syscall
+
+    ; Imprimir "Olá"
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, ola
+    mov rdx, tamOla
+
+    syscall
+
+    ; Imprimir nome do usuário
+
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, nome
+    mov rdx, tamNome
+
+    syscall
+
+    ; Encerrar o programa
+    mov rax, 60
+    mov rdi, 0
+
+    syscall
+</code>
+</pre>
+
+<p>Compile e monte ele.</p>
+
+<h3>A Seção .data</h3>
+
+<p>Vamos considerar esse programa:</p>
+
+<pre>
+<code>
+section .data
+    ola db "Olá "
+    ana db "Ana."
+
+section .text
+    global _start
+
+_start:
+    ; Imprimindo a mensagem "Olá"
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, ola
+    mov rdx, 5
+
+    syscall
+
+    ; Encerrando o programa
+    mov rax, 60
+    mov rdi, 0
+
+    syscall
+</code>
+</pre>
+
+<p>Para imprimir o nome também, faça assim:</p>
+
+<pre>
+<code>
+section .data
+    ola db "Olá "
+    ana db "Ana."
+
+section .text
+    global _start
+
+_start:
+    ; Imprimindo a mensagem "Olá"
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, ola
+    mov rdx, 4
+
+    syscall
+
+    ; Imprimindo a mensagem "Ana"
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, ana
+    mov rdx, 4
+
+    syscall
+
+    ; Encerrando o programa
+    mov rax, 60
+    mov rdi, 0
+
+    syscall
+</code>
+</pre>
+
+<p>Agora volte ao programa anterior, mas com 9 no tamanho da mensagem Olá:</p>
+
+<pre>
+<code>
+section .data
+    ola db "Olá "
+    ana db "Ana."
+
+section .text
+    global _start
+
+_start:
+    ; Imprimindo a mensagem "Olá"
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, ola
+    mov rdx, 9
+
+    syscall
+
+    ; Encerrando o programa
+    mov rax, 60
+    mov rdi, 0
+
+    syscall
+</code>
+</pre>
+
+<p>Note que ele imprimiu "Ana" também, mas desta vez não deveria ser impresso por não temos dado comandos para imprimir isso. A section .data é como se fosse a memória RAM, onde ola e ana são ponteiros para determinadas posições da memória. O ponteiro de Ana será logo após o de Olá. Por isso o certo é especificar o tamanho com o "$-".</p>
+
+<h3>Registradores e Compatibilidade entre 32 e 64 bits.</h3>
+
+<p>Podemos fazer os mesmos programas para serem compatíveis com 32 bits, apenas mudando os comandos de r para e (como por exemplo, rax vira eax, rdi vira edi, etc. Da mesma forma fazemos para 16 bits, usando coisas como ax e di).</p>
+
+<p>Se fizermos as alterações para 32 bits e compilar para 64 bits, ele continuará compatível, no entanto, poderá ter problemas para 16 bits.</p>
+
+<h3>Depuração (Debug) de Código-Fonte</h3>
+
+<p>Com a depuração, podemos ver passo a passo da execução de um programa para encontrar erros.</p>
+
+<p>Vamos supor esse programa:</p>
+
+<pre>
+<code>
+section .data
+    msg db "Boa noite.", 10
+    tam equ $- msg
+
+section .text
+    global _start
+
+_start:
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, msg
+    mov rdi, tam ; Erro proposital, o certo seria rdx
+
+    syscall
+
+    mov rax, 60
+    mov rdi, 0
+
+    syscall
+</code>
+</pre>
+
+<p>Compile e monte. Para depurar o programa digite <code>gdb -q ./programa</code>. No caso, só poderemos usar o breakpoint na parte _start, digitando dentro do gdb <code>break _start</code>, depois digite <code>run</code> e <code>layout asm</code>, e para uma sintaxe mais parecida com o programa, digite <code>set disassembly-flavor intel</code> e <code>layout regs</code>. No layout regs mostrará cada instrução sendo executada passo a passo, para isso digite <code>stepi</code>. Para examinar a string (como por exemplo em hexa, 0x402000) digite <code>x/s 0x402000</code>. Para sair, dê Ctrl C e digite <code>quit</code>.</p>
+
+<h3>Subrotinas</h3>
+
+<p>Voltando ao nosso programa de perguntar o nome do usuário, vamos refazer ele com funções:</p>
+
+<pre>
+<code>
+section .data
+    perg db "Como você se chama? "
+    tamPerg equ $- perg
+
+    ola db "Olá, "
+    tamOla equ $- ola
+    tamNome equ 10
+
+section .bss
+    nome resb tamNome
+
+section .text
+    global _start
+
+_start:
+    call imprimePergunta ; call chama as funções
+    call lerNome
+    call imprimeOla
+    call imprimeNome
+    call encerraPrograma
+
+imprimePergunta:
+    ; Imprimindo a mensagem "Como você se chama"
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, perg
+    mov rdx, tamPerg
+
+    syscall
+
+    ret ; Retorna para quem a chamou
+
+lerNome:
+    ; Ler o nome do usuário
+    mov rax, 0
+    mov rdi, 0
+    mov rsi, nome
+    mov rdx, tamNome
+
+    syscall
+
+    ret
+
+imprimeOla:
+    ; Imprimir "Olá"
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, ola
+    mov rdx, tamOla
+
+    syscall
+
+    ret
+
+imprimeNome:
+    ; Imprimir nome do usuário
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, nome
+    mov rdx, tamNome
+
+    syscall
+
+    ret
+
+encerraPrograma:
+    ; Encerrar o programa
+    mov rax, 60
+    mov rdi, 0
+
+    syscall
+
+    ret
+</code>
+</pre>
+
+<p>Com isso, quando precisarmos repetir alguma coisa no programa, basta chamar a função especificada ao invés de reescrever ele. A ordem das funções não importa, apenas a ordem na qual elas são invocadas.</p>
 
 <ul>
     <li><a href="tudo-sobre-assembly-2.html">Parte Anterior da Matéria!</a></li>
