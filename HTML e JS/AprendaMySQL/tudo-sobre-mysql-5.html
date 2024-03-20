@@ -116,11 +116,15 @@ select 10 div 3 as 'Divisão de 10 por 3', 10 mod 3 as 'Resto de 10 por 3';
     </tr>
     <tr>
         <td>sqrt(x)</td>
-        <td>Retorna a traiz quadrada de x</td>
+        <td>Retorna a raiz quadrada de x</td>
     </tr>
     <tr>
         <td>sin(x)</td>
         <td>Seno de um ângulo específico x, em radianos</td>
+    </tr>
+    <tr>
+        <td>concat(x, y)</td>
+        <td>Concatena dois conteúdos, como textos e números</td>
     </tr>
     <tr>
         <td>bin(x)</td>
@@ -301,7 +305,7 @@ drop procedure ver_carga;
     <li><b>Local: </b>Limitadas ao bloco begin onde foram declaradas.</li>
 </ul>
 
-<p>Podemos criar variáveis locais em um procedimento ou função usando uma declaração declare dentro de um bloco begin. A variável pode ser criada e inicializada com um valor, se desejado. Ficam disponíveis apenas dentro do bloo onde foram criadas, e em bloos que existem dentro do bloco onde a variável foi criada. Após o bloco ter sido executado e encerrado, a variável é desalocada da memória.</p>
+<p>Podemos criar variáveis locais em um procedimento ou função usando uma declaração declare dentro de um bloco begin. A variável pode ser criada e inicializada com um valor, se desejado. Ficam disponíveis apenas dentro do bloco onde foram criadas, e em blocos que existem dentro do bloco onde a variável foi criada. Após o bloco ter sido executado e encerrado, a variável é desalocada da memória.</p>
 
 <p>Veja um exemplo abaixo:</p>
 
@@ -326,7 +330,7 @@ delimiter ;
 <pre>
 <code>
 select * from cursos where idcurso = 4;
-select aumenta_aulas(4, 10) as 'Aumento da Carga';
+select aumenta_aulas(4, 10) as 'Aumento das Aulas';
 </code>
 </pre>
 
@@ -341,7 +345,7 @@ select aumenta_aulas(4, 10) as 'Aumento da Carga';
 <pre>
 <code>
 delimiter //
-create function calcula_aul(carg decimal(8, 2))
+create function calcula_aula(carg decimal(8, 2))
 returns decimal(8, 2)
 begin
     declare aultot decimal(8, 2);
@@ -360,13 +364,13 @@ delimiter ;
 </code>
 </pre>
 
-<p>PS: O Else não é obrigatório.</p>
+<p>PS: O Else if e o Else não são obrigatórios.</p>
 
 <p>E para executar normalmente, fazemos assim:</p>
 
 <pre>
 <code>
-select calcula_aul(50) as 'Total de Aulas';
+select calcula_aula(50) as 'Total de Aulas';
 </code>
 </pre>
 
@@ -376,12 +380,12 @@ select calcula_aul(50) as 'Total de Aulas';
 <code>
 -- Primeiro exclua a função anterior:
 
-drop function calcula_aul;
+drop function calcula_aula;
 
 -- E crie novamente com o case, assim:
 
 delimiter //
-create function calcula_aul(carg decimal(8, 2))
+create function calcula_aula(carg decimal(8, 2))
 returns decimal(8, 2)
 begin
     declare aultot decimal(8, 2);
@@ -407,7 +411,7 @@ delimiter ;
 
 <h3>Estruturas de Repetição - Loop</h3>
 
-<p>Um bloco iterativo é um bloco de código que é executado repetidamente por um comando especial até que uma condilão de parada o interrompa. Um bloco iterativo pode ser aninhado com outros.</p>
+<p>Um bloco iterativo é um bloco de código que é executado repetidamente por um comando especial até que uma condição de parada o interrompa. Um bloco iterativo pode ser aninhado com outros.</p>
 
 <p>O MySQL possui três tipos básicos de blocos iterativos, loop, repeat e while</p>
 
