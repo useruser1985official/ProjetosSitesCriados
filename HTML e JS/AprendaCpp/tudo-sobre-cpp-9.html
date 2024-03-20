@@ -135,7 +135,7 @@ void iniVet(int *v) {
 
 <pre>
 <code>
-int testar(int n1, int n2);
+void testar(int n1, int n2);
 
 int main() {
     setlocale(LC_ALL, "portuguese");
@@ -154,14 +154,12 @@ int main() {
     return 0;
 }
 
-int testar(int n1, int n2) {
+void testar(int n1, int n2) {
     n1 = -1;
     n2 = -2;
 
     cout << "Valores dentro da função testar: " << endl;
     cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
-
-    return 0;
 }
 </code>
 </pre>
@@ -210,7 +208,7 @@ int *pont; // Ponteiro normal
 int **duplPont; // Ponteiro de ponteiro
 
 pont = &amp;num; // Aponta pra num
-duplPont = &amp;pont; // Aponta pra pont, que aponta pra a, ele não aponta diretamente pra a.
+duplPont = &amp;pont; // Aponta pra pont, que aponta pra num, ele não aponta diretamente pra num.
 
 cout << "Endereço de num.........................................: " << &num << endl;
 cout << "Conteúdo de num.........................................: " << num << endl;
@@ -287,6 +285,7 @@ int main() {
 #include &lt;iostream&gt;
 #include &lt;cstdio&gt; // Para fgets
 #include &lt;cstdlib&gt; // Para malloc
+#include &lt;cstring&gt; // Para strlen
 
 using namespace std;
 
@@ -300,7 +299,7 @@ int main() {
 
     // Isso é pra remover a quebra de linha:
     size_t len;
-    len = strlen(nome); // Inclua string.h
+    len = strlen(nome); // Inclua cstring
 
     if(nome[len - 1] == '\n') nome[--len] = 0;
 
@@ -634,7 +633,7 @@ int main() {
     printf("Digite um número e uma string: ");
     scanf("%d %s", &num1, &nome);
 
-    printf("Valor da variável: \n%d\n%s\n", num1, nome);
+    printf("Valor das variáveis: \n%d\n%s\n", num1, nome);
 
     return 0;
 }

@@ -152,7 +152,7 @@ order by gafanhotos.nome;
 </code>
 </pre>
 
-<p>Também podemos usar "apelidos" para as colunas com o parâmetro <code>as</code>, dessa forma:</p>
+<p>Também podemos usar "apelidos" para as tabelas ou colunas com o parâmetro <code>as</code>, dessa forma:</p>
 
 <pre>
 <code>
@@ -203,7 +203,7 @@ select * from gafanhotos right join cursos on gafanhotos.cursopreferido = cursos
 
 <pre>
 <code>
-select * from gafanhotos left join cursos on cursos.nome is null;
+select * from gafanhotos left join cursos on gafanhotos.cursopreferido = cursos.idcurso where cursos.idcurso is null;
 </code>
 </pre>
 
@@ -211,7 +211,7 @@ select * from gafanhotos left join cursos on cursos.nome is null;
 
 <pre>
 <code>
-select * from gafanhotos right join cursos on gafanhotos.nome is null;
+select * from gafanhotos right join cursos on gafanhotos.cursopreferido = cursos.idcurso where gafanhotos.cursopreferido is null;
 </code>
 </pre>
 
@@ -283,7 +283,7 @@ on g.id = a.idgafanhoto;
 
 <pre>
 <code>
-select g.nome, idcurso from gafanhotos g
+select g.nome, a.idcurso from gafanhotos g
 join gafanhoto_assiste_curso a
 on g.id = a.idgafanhoto
 order by g.nome;
@@ -369,13 +369,13 @@ drop view vis_users;
 </code>
 </pre>
 
-<p>Podemos também usar alias nos joins das views, por exemplo:</p>
+<p>Podemos também usar outras combinações, como filtros e ordenações, ao criar as views, por exemplo:</p>
 
 <pre>
 <code>
-create view alunos_2018 as select g.nome, a.idcurso from gafanhotos g
-join gafanhoto_assiste_curso a
-on g.id = a.idgafanhoto
+create view alunos_2018 as select g.nome as user, c.nome as cursos from gafanhotos g
+join cursos c
+on g.cursopreferido = c.idcurso where c.ano = 2018
 order by g.nome;
 </code>
 </pre>

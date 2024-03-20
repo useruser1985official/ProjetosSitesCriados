@@ -39,11 +39,29 @@ numeros.add(52);
 numeros.add(40);      
 numeros.add(35);
 
-for(int n: numeros) {
-    System.out.println(n);
+for(int i = 0; i < numeros.size(); i++) {
+    System.out.println(numeros.get(i));
 }
 
 numeros.remove(1); // Remove pelo índice
+</code>
+</pre>
+
+<p>Para exibir os elementos da lista, podemos usar o for, dessa forma:</p>
+
+<pre>
+<code>
+for(int n: numeros) {
+    System.out.println(n);
+}
+</code>
+</pre>
+
+<p>Podemos usar uma Lambda para iterar a list, assim:</p>
+
+<pre>
+<code>
+numeros.forEach(n -> System.out.println(n));
 </code>
 </pre>
 
@@ -175,7 +193,7 @@ pessoas.clear();
 
 <p>PS: Use classes invólucro no uso dele pra evitar erros (por exemplo, Integer ao invés de int, Float ao invés de float, Character ao invés de char e etc.), isso ocorre porque o List tem que receber um objeto.</p>
 
-<p>Lembrando que a classe List pode implementar outras classes, a ArrayList é a mais comum, mas tem outras classe que podem o implementar, como a Vector e a LinkedList, usando os mesmos métodos. Podemos fazer alterações assim:</p>
+<p>Lembrando que a interface List pode implementar outras classes, a ArrayList é a mais comum, mas tem outras classe que podem o implementar, como a Vector e a LinkedList, usando os mesmos métodos. Podemos fazer alterações assim:</p>
 
 <pre>
 <code>
@@ -197,7 +215,7 @@ List&lt;Integer&gt; numeros = new ArrayList&lt;&gt;(); // Importe java.util.List
 pos = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe a quantidade de números desejada: ")); // Importe javax.swing.JOptionPane
 
 do {
-    numeros.add(Integer.parseInt(JOptionPane.showInputDialog(null, "Informe o " + cont + "º número:")));
+    numeros.add(Integer.valueOf(JOptionPane.showInputDialog(null, "Informe o " + cont + "º número:")));
     cont++;
 }
 while(cont <= pos);

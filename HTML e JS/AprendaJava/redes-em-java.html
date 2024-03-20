@@ -319,7 +319,7 @@ public class Cliente {
             
             // Criamos um buffer para poder enviar ou receber dados:
             byte buffer[] = new byte[8];
-            // Criar um..
+            // Criar um endereço para enviar pacote ao servidor:
             InetAddress end = InetAddress.getByName(serv); // Importe e adicione o throws no método main
             // Criar um datagrama:
             DatagramPacket pct = new DatagramPacket(buffer, buffer.length, end, porta); // Importe

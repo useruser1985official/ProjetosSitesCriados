@@ -437,7 +437,7 @@ net localgroup administradores
     <li><code>xdg-open</code> - Usada para abrir uma pasta ou site.</li>
     <li><code>mv "origem" "destino"</code> - Para mover arquivos ou diretórios, pode ser usado também pra renomear arquivos.</li>
     <li><code>cp "origem" "destino"</code> - Para copiar arquivos ou diretórios.</li>
-    <li><code>&amp;&amp;</code> - Para "grudar" mais de um comando numa mesma linha.</li>
+    <li><code>&amp;&amp;</code> - Para "grudar" mais de um comando numa mesma linha. Pode ser usado <code>;</code> no lugar.</li>
     <li><code>echo "texto"&gt;&gt;"arquivo"</code> - Escreve num arquivo, e não no terminal (por exemplo, <code>echo teste>>$HOME/teste.txt</code>). Se o arquivo não existir, será criado. Da mesma forma, as setas podem ser utilizadas com funções do echo e outros comandos, por exemplo <code>ls&gt;&gt;arquivo.txt</code> escreve o conteúdo de ls no arquivo especificado. Usando um <code>&gt;</code> ele sobreescreve o arquivo caso exista, usando dois <code>&gt;&gt;</code> ele adiciona o texto no arquivo caso exista.</li>
     <li><code>more</code> - Lê o Arquivo no Terminal (como <code>more $HOME/teste.txt</code>), pode ser usado <code>cat</code> no lugar.</li>
     <li><code>grep -i palavra arquivo</code> - Procura as palavras escritas pelo usuário, quando usamos o parâmetro -i ele não diferencia maiúsculas (como <code>grep -i PALAVRA $HOME/teste.txt</code>). Pode ser usado em conjunto com o ls (e também outros comandos) para procurar nomes ou extensões em arquivos, como <code>ls | grep jpg</code>.</li>
@@ -452,7 +452,7 @@ net localgroup administradores
     <li><code>ping nomeouipdosite.com</code> - Verifica se há conectividade num host.</li>
     <li><code>traceroute nomeouipdosite.com</code> - Rastreia a rota de um pacote até o host especificado.</li>
     <li><code>ss -all</code> - Verifica quais portas estão abertas e os IPs associados a elas.</li>
-    <li><code>alias nome=comando</code> - Define um alias temporário para um comando, para excluir ele digite <code>unalias nome</code>.</li>
+    <li><code>alias nome="comandos"</code> - Define um alias temporário para um comando, para excluir ele digite <code>unalias nome</code>.</li>
     <li><code>chmod 644 Arquivo</code> - Modifica permissões para arquivos usando números octais (4 leitura, 2 gravação e 1 execução, e as somas entre eles), na ordem proprietário, grupo e outros (pode ser usado <code>chmod +x arquivo</code> para torná-lo executável, e <code>chmod -x arquivo</code> para retirar isso. Para diretórios e seus arquivos recursivamente, use <code>chmod -R 755 diretorio</code></li>
     <li><code>pwd</code> - Mostra o diretório atual.</li>
     <li><code>who</code> - Mostra usuários logados no sistema.</li>
@@ -772,9 +772,9 @@ fi
 </code>
 </pre>
 
-<p>PS: O <code>&amp;</code> é para executarmos mais de um comando na mesma linha. Temos também o elif, que funciona como o else if. Para verificar se um arquivo existe, use o parâmetro <code>-f</code>, o parâmetro <code>-d</code> é para verificar se um diretório existe.</p>
+<p>PS: O <code>&amp;&amp;</code> é para executarmos mais de um comando na mesma linha. Temos também o elif, que funciona como o else if. Para verificar se um arquivo existe, use o parâmetro <code>-f</code>, o parâmetro <code>-d</code> é para verificar se um diretório existe.</p>
 
-<p>Veja algumas opções que podemos usar com números, só lembrando que equ e neq é necessário usar com letras e palavras também:</p>
+<p>Veja algumas opções que podemos usar com números, só lembrando que eq e ne é necessário usar com letras e palavras também:</p>
 
 <table>
     <tr>
@@ -865,7 +865,7 @@ read
 
 <p>O <code>in</code> passará os números de incremento, com eles entre o cifrão e os parênteses, representando na ordem, o início, incremento e fim do mesmo<!-- (no caso de usar decremento, apenas coloque o início menor que o fim, sem colocar sinal de - no incremento).--> O <code>do</code> especifica os comandos a serem executados.</p>
 
-<p>Para fazer o incremento também aparecer no echo, usamos a variávei de incremento, dessa forma:</p>
+<p>Para fazer o incremento também aparecer no echo, usamos a variável de incremento, dessa forma:</p>
 
 <pre>
 <code>
@@ -1008,6 +1008,11 @@ mensagem() {
 }
 
 mensagem
+
+# Também pode ser assim, com a palavra function e sem parênteses:
+# function nomedafuncao {
+#     
+# }
 </code>
 </pre>
 
