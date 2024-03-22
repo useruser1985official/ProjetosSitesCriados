@@ -403,6 +403,23 @@ string substituir(string entrada, string subst, string novo) {
 </code>
 </pre>
 
+<p>O método find também pode ser usado para encontrar uma palavra numa string:</p>
+
+<pre>
+<code>
+string entrada = "Apenas uma frase!";
+
+size_t posicao = entrada.find("frase");
+
+if(posicao != string::npos) {
+    cout << "Palavra encontrada." << endl;
+}
+else {
+    cout << "Palavra não encontrada." << endl;
+}
+</code>
+</pre>
+
 <p>Para transformar tudo em maiúscula, podemos fazer assim:</p>
 
 <pre>

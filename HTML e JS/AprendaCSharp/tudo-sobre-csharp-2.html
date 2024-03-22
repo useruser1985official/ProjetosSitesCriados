@@ -88,6 +88,23 @@ Console.WriteLine(texto1.Equals(texto2));
 </code>
 </pre>
 
+<p>Para encontrar se uma palavra existe na string, faça assim:</p>
+
+<pre>
+<code>
+string frase = "Isso é uma String";
+
+int posicao = frase.IndexOf("String");
+
+if(posicao != -1) {
+    Console.WriteLine("Palavra encontrada.");
+}
+else {
+    Console.WriteLine("Palavra não encontrada.");
+}
+</code>
+</pre>
+
 <p>Para ver se uma string está vazia, use o método <code>IsNullOrEmpty()</code> do objeto, assim:</p>
 
 <pre>

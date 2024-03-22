@@ -215,7 +215,9 @@ macchanger -p eth0
 
 <h3>Acessando um Desktop Linux via VNC com Android</h3>
 
-<p>Primeiro loge dentro do Linux e baixe o servidor VNC digitando <code>sudo apt-get install x11vnc</code>, e depois inicie o serviço digitando <code>x11vnc --forever</code> (deixe o terminal aberto).</p>
+<p>Primeiro loge dentro do Linux e baixe o servidor VNC digitando <code>sudo apt-get install x11vnc</code>, e depois inicie o serviço digitando <code>x11vnc --forever</code> (deixe o terminal aberto, não execute como root).</p>
+
+<p>PS: Caso ele termine a aplicação abruptamente, vá no arquivo em /etc/gdm3/custom.conf (pode ser lightdm também) e tira a hashtag de comentário da linha <code># WaylandEnable=false</code>. Reinicie e tente novamente.</p>
 
 <p>No Android, vá na Play Store e baixe o aplicativo VNC Viewer, que tornará nosso Android um cliente VNC.</p>
 

@@ -98,6 +98,22 @@ echo "A string foi encontrada na posição $pos";
 
 <p>PS: Esse método diferencia maiúsculas e minúsculas, se ele não encontrar valor, retornará false (uma variável vazia). Para resolver isso, basta usar o <code>stripos()</code> (atenção ao i depois do r), que ignorará essa diferenciação.</p>
 
+<p>O método pode ser jogado numa condicional para encontrar uma palavra:</p>
+
+<pre>
+<code>
+$frase = "Estou aprendendo PHP!";
+$posicao = strpos($frase, "PHP");
+
+if($posicao !== false) {
+    echo "Palavra encontrada.";
+}
+else {
+    echo "Palavra não encontrada.";
+}
+</code>
+</pre>
+
 <p>O <code>substr_count()</code> indica quantas vezes uma palavra é encontrada numa string, por exemplo:</p>
 
 <pre>

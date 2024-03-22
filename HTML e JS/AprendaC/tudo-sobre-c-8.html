@@ -387,6 +387,23 @@ printf("As frases são %s.\n", resul);
 
 <p>Se o resultado de strcmp for zero, as strings são iguais, se for menor o conteúdo é menor e se for maior que 0 o conteúdo é maior.</p>
 
+<p>Para encontrar uma palavra numa string, fazemos assim, com o método <code>strstr</code>:</p>
+
+<pre>
+<code>
+char frase[20] = "Isso é uma string";
+
+char *resul = strstr(frase, "string");
+
+if(resul != NULL) {
+    printf("A palavra foi encontrada!\n");
+}
+else {
+    printf("Não existe essa palavra na string!\n");
+}
+</code>
+</pre>
+
 <p>Para dividir uma string, usamos o método <code>strtok</code> assim:</p>
 
 <pre>

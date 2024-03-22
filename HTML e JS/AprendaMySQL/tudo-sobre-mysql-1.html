@@ -107,11 +107,13 @@ default collate utf8_general_ci;
 
 <p>Para atualizar as tabelas, devemos usar campos mais inteligentes, tipos primitivos melhor dimensionados e muito mais. Para economizar espaços em bytes no seu servidor. Veja alguns tipos primitivos que podemos usar:</p>
 
+<p>Para guardar cadeias de caracteres, prefira o <code>varchar</code>, que ocupa menos espaço caso ele receba um valor menor que o predefinido.</p>
+
 <p>Para números reais é preferível o <code>decimal</code>.</p>
 
 <p>A idade é melhor cadastrar a data de nascimento e calcular usando o <code>date</code> para não ter que atualizar todo ano.</p>
 
-<p>Para sexo usaremos uma coleção com valores pré-definidos, com o <code>enum</code>, sempre colocando not null.</p>
+<p>Para sexo usaremos uma coleção com valores pré-definidos, com o <code>enum</code>, sempre colocando <code>not null</code>.</p>
 
 <p>Para o peso e altura, usareamos o <code>decimal</code>, e os números entre parênteres. O primeiro é a quantidade de caracteres, e o segundo são as casas decimais (o primeiro sempre é maior).</p>
     
@@ -122,7 +124,7 @@ default collate utf8_general_ci;
 create table pessoas (
     nome varchar(30) not null,
     nascimento date,
-    sexo enum("M", "F") not null,
+    sexo enum('M', 'F') not null,
     peso decimal(5, 2),
     altura decimal(3, 2),
     nacionalidade varchar(20) default 'Brasil'
@@ -155,7 +157,7 @@ default charset = utf8;
 
 <h3>Inserindo Dados na Tabela com Insert Into</h3>
 
-<p>Para inserir dados em tabelas, primeiros a gente pega os nomes dos campos do Mysql, separados por vírgula, assim:</p>
+<p>Para inserir dados em tabelas, primeiros a gente pega os nomes dos campos do MySQL, separados por vírgula, assim:</p>
 
 <pre>
 <code>

@@ -295,7 +295,7 @@ private void botaoClicarActionPerformed(java.awt.event.ActionEvent evt) {
 
 <pre>
 <code>
-import static java.lang.System.out; // Nesse caso tem que colocar o static no caso de métodos ou atributos estáticos, tem casos que não se coloca o static
+import static java.lang.System.out; // Nesse caso tem que colocar o static no caso de métodos ou atributos estáticos, na maioria dos casos não se coloca o static
 
 public class Teste {
     public static void main(String[] args) {
@@ -563,6 +563,8 @@ public class TiposPrimitivos {
 </code>
 </pre>
 
+<p>PS: Evite carregar todas as classes de um determinado pacote sem necessidade, isso ocorre usando algo como <code>import java.util.*;</code> (asterisco é um coringa pra "todos"), mas isso deixa o programa mais pesado.</p>
+
 <p>Lembre-se dos métodos para ler importações, como descrito na tabelinha acima. Veja alguns exemplos:</p>
 
 <pre>
@@ -655,7 +657,7 @@ System.out.println(texto);
 </code>
 </pre>
 
-<p>O método substring seleciona determinados caracteres de uma string, contados a partir do zero até um número limite, o indexOf pode determinar esse limite:</p>
+<p>O método <code>substring</code> seleciona determinados caracteres de uma string, contados a partir do zero até um número limite, o <code>indexOf</code> pode determinar esse limite:</p>
 
 <pre>
 <code>
@@ -664,6 +666,21 @@ String frase = "Estude Java! É Muito Legal!";
 String selec = frase.substring(0, frase.indexOf("!"));
 
 System.out.println(selec);
+</code>
+</pre>
+
+<p>Para encontrar uma palavra em uma String, use o método <code>contains</code>, assim:</p>
+
+<pre>
+<code>
+String frase = "Estude Java! É Muito Legal!";
+
+if(frase.contains("Java")) {
+    System.out.println("Palavra encontrada.");
+}
+else {
+    System.out.println("Palavra não encontrada.");
+}
 </code>
 </pre>
 

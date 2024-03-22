@@ -133,7 +133,7 @@ truncate table cursos;
 </code>
 </pre>
 
-<p>É possível excluir todo o conteúdo de uma tabela usando <code>delete from nomedatabela</code>, mas é errado usar o comando assim, pois o delete, assim como o update, devem ser usados com uma condição, além de que usando ele assim não reseta as chaves auto-incrementadas. Por esse motivo é melhor usar o truncate mesmo.</p>
+<p>É possível excluir todo o conteúdo de uma tabela usando <code>delete from nomedatabela</code> e atualizar todo o conteúdo usando <code>update nomedatabela set nomedocampo = 'Dados'</code>, mas é errado usar o comando assim, pois o delete, assim como o update, devem ser usados com uma condição, além de que usando o delete assim, não reseta as chaves auto-incrementadas. Por esse motivo é melhor usar o truncate mesmo.</p>
 
 <p>Update, Delete e Truncate são DML.</p>
 

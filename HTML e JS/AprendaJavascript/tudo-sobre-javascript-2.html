@@ -82,6 +82,17 @@ function fechar() {
 </code>
 </pre>
 
+<p>Esse código serve pra pegar o sistema operacional do usuário:</p>
+
+<pre>
+<code>
+var plataforma = navigator.platform;
+var dados = navigator.oscpu;
+
+alert(`Sistema operacional: ${plataforma}\n${dados}`)
+</code>
+</pre>
+
 <h3>Código Javascript no Console do Navegador</h3>
 
 <p>Podemos por exemplo, abrir o site do Google na página inicial, ir no inspencionar elemento do navegador e ir em console, clique para limpar o excesso de código e digite esses comandos:</p>
@@ -536,11 +547,13 @@ document.write(maius.toLowerCase());
 <code>
 var frase = "Isso é uma String";
 
-document.write(`${frase.split("").reverse().join("")}&lt;br/&gt;`); // Inverte a frase, o split separa em caracteres e joga num array, o reverse inverte e o join junta tudo de novo numa string
+document.write(`${frase.split("").reverse().join("")}&lt;br/&gt;`); // Inverte a frase, o split separa em caracteres (com delimitador definido entre aspas) e joga num array, o reverse inverte e o join junta tudo de novo numa string
 
 document.write(`${frase.concat(" e ela foi concatenada!")}&lt;br/&gt;`); // Concatena com mais algo
 
 document.write(`${frase.split("")}&lt;br/&gt;`); // O argumento é o divisor da string, ele joga num array, podemos dividir letras e palavras
+
+document.write(`${frase.includes("String")}&lt;br/&gt;`); // Verifica se existe uma palavra na string
 </code>
 </pre>
 
