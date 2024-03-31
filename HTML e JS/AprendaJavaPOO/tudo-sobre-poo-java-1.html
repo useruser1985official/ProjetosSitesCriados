@@ -237,7 +237,7 @@ public class CriandoClassesPoo {
         
         Caneta c2 = new Caneta();
         
-        c2.modelo = "Montblanc";
+        c2.modelo = "MontBlanc";
         c2.cor = "Preta";
         
         c2.destampar();
@@ -494,9 +494,9 @@ public class AplicacaoCaneta {
         Caneta c1 = new Caneta();
         
         c1.setModelo("BIC Cristal");
-        // c1.modelo = "Mont Blanc";
+        // c1.modelo = "MontBlanc";
         c1.setPonta(0.5f);
-        // c1.ponta = 0.4;
+        // c1.ponta = 0.4f;
         
         c1.status();
     }
@@ -528,7 +528,7 @@ System.out.println("Tenho uma caneta " + c1.getModelo() + " de ponta " + c1.getP
 
 <p>Ele mostrará o objeto criado atualmente com as propriedades atribuídas. Esse uso de métodos públicos getters e setters para alterar atributos privados é o principal passo pro encapsulamento, e esses métodos também podem ser privados, para evitar que se façam alterações no código (é bastante comum deixarem só o getter público, sem ao menos criar um método setter).</p>
 
-<p>PS: Métodos getters e setters de atributos estáticos, também deverão ser estáticos, e seguir a mesma regra de não usar o this.</p>
+<p>PS: Métodos getters e setters de atributos estáticos, também deverão ser estáticos, e seguir a regra de não usar o this.</p>
 
 <p>Para usarmos o método construtor em POO, usaremos uma função que sempre terá o mesmo nome da classe, sem tipo de retorno, que criará propriedades automaticamente no objeto, dessa forma:</p>
 

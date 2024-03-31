@@ -404,7 +404,7 @@ print_r($c1);
 <code>
 $c1 = new Caneta();
 $c1->setModelo("BIC");
-// $c1->modelo = "Mont Blanc";
+// $c1->modelo = "MontBlanc";
 $c1->setPonta(0.5);
 // $c1->ponta = 0.4;
     
@@ -424,7 +424,7 @@ echo "Eu tenho uma caneta {$c1->getModelo()} de ponta {$c1->getPonta()}.";
 
 <p>Ele mostrará o objeto criado atualmente com as propriedades atribuídas. Esse uso de métodos públicos getters e setters para alterar atributos privados é o principal passo pro encapsulamento, e esses métodos também podem ser privados, para evitar que se façam alterações no código (é bastante comum deixarem só o getter público, sem ao menos criar um método setter).</p>
 
-<p>PS: Métodos getters e setters de atributos estáticos, também deverão ser estáticos, e seguir a mesma regra de não usar o $this e sim o self.</p>
+<p>PS: Métodos getters e setters de atributos estáticos, também deverão ser estáticos, e seguir a regra de não usar o $this e sim o self.</p>
 
 <p>Para usarmos o método construtor em POO, usaremos a função <code>__construct()</code> (com duas underlines mesmo), que criará propriedades automaticamente no objeto, dessa forma:</p>
 

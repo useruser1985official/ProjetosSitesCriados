@@ -532,6 +532,14 @@ int main() {
 
 <p>Como visto, a única diferença no open, ao usar o fstream, é a indicação <code>ios::out</code>, que indica a saída do programa para o arquivo.</p>
 
+<p>PS: Para não sobreescrever o arquivo, da mesma forma, podemos colocar o app no out, dessa forma:</p>
+
+<pre>
+<code>
+arquivo.open("arquivo.txt", ios::out | ios::app);
+</code>
+</pre>
+
 <p>Para ler o mesmo arquivo (entrada do arquivo para o programa)., use <code>ios::in</code>. Podemos fazer assim (coloque esse código logo abaixo do programa, antes do return):</p>
 
 <pre>
@@ -549,14 +557,6 @@ if(arquivo.is_open()) {
 else {
     cout << "Não foi Possível Abrir o Arquivo!" << endl;
 }
-</code>
-</pre>
-
-<p>PS: Para não sobreescrever o arquivo, da mesma forma, podemos colocar o app no out, dessa forma:</p>
-
-<pre>
-<code>
-arquivo.open("arquivo.txt", ios::out | ios::app);
 </code>
 </pre>
 

@@ -291,6 +291,8 @@ delete t;
 
 <p>Isso é útil para ganharmos em polimorfismo, onde podemos usar vários tipos de objetos em, por exemplo, parâmetros, desde que eles tenham a mesma classe pai em comum. Isso é o polimorfismo de inclusão.</p>
 
+<p>PS: Lembrando que, nesse caso, só poderemos usar os métodos declarados na classe pai, no caso, a Veiculo, mesmo que estes métodos sejam sobrepostos em classes herdeiras.</p>
+
 <h3>Classe Abstrata Simulando Interface</h3>
 
 <p>Caso deseje simular uma interface, crie uma classe apenas com os nomes dos métodos, colocando eles virtuais, sem colocar as implementações deles, apenas atribuindo com 0 (classe abstrata):</p>
@@ -316,7 +318,7 @@ Estoque::~Estoque() { // Implementação Vazia, sempre necessária, no caso.
 
 <p>PS: Uma classe com métodos abstratos não pode ser instanciada, mesmo se tiver apenas um método virtual puro. Na verdade, para criar uma classe abstrata, basta declarar um ou mais métodos virtual puros (atribuídos com 0). Quando a classe tem exclusivamente métodos virtuais puros, age de forma igual à uma interface (que existe em linguagens POO como Java, C# e PHP, mas não em C++).</p>
 
-<p>Para criar uma classe com todos os métodos prontos como abstrata (para ser usada em heranças), basta criar o método destrutor dela como virtual puro (<code>virtual ~NomeDaClasse() = 0</code> e uma implementação do mesmo (mesmo sem código algum entre as chaves) na mesma classe, pode ser feita na Veiculo, por exemplo, nesse código acima seria o recomendado, pra encapsular também a classe), e as classes que a herdarem, não precisam de nenhuma alteração. Caso esse método virtual não possua implementação, aí sim as classes filhas dessa terão que implementar.</p>
+<p>Para criar uma classe com todos os métodos prontos como abstrata (para ser usada em heranças), basta criar o método destrutor dela como virtual puro (<code>virtual ~NomeDaClasse() = 0</code> e uma implementação do mesmo (mesmo sem código algum entre as chaves) na mesma classe (nesse código acima seria o recomendado, pra encapsular também a classe), e as classes que a herdarem, não precisam de nenhuma alteração. Caso esse método virtual não possua implementação, aí sim as classes filhas dessa terão que implementar.</p>
 
 <p>E na classe que a implementará, coloque como se fosse uma herança, e o sobreponha os métodos com <code>override</code>:</p>
 

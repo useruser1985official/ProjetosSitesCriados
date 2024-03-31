@@ -396,6 +396,27 @@ yum autoremove # Remove pacotes não usados
 
 <p>Para listar os pacotes já instalados, use o comando <code>rpm -qa</code>.</p>
 
+<p>Hoje temos como opção também o gerenciador de pacotes dnf, cujos comandos básicos são esses:</p>
+
+<pre>
+<code>
+dnf check-update # Verifica atualizações
+dnf upgrade # Atualiza os programas
+dnf system-upgrade # Atualiza o sistema
+dnf clean packages # Limpa os pacotes em cache
+dnf clean all # Limpa os pacotes já baixados
+dnf autoremove # Remove pacotes não usados
+
+dnf install nomedopacote # Instala um pacote
+dnf remove nomedopacote # Remove um pacote
+dnf search nomedopacote # Procura um pacote
+dnf list # Lista os pacotes disponíveis
+dnf info nomedopacote # Mostra informações sobre um pacote
+dnf check-update # Também lista os pacotes a atualizar
+dnf list installed # Lista os pacotes instalados
+</code>
+</pre>
+
 <p>PS: Todos os comandos devem ser executados como root.</p>
 
 <h3>Pastas Importantes do Sistema</h3>
