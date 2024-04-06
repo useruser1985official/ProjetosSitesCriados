@@ -68,6 +68,13 @@ class Visualizacao {
         $this->espectador->setTotAssistido($this->espectador->getTotAssistido() + 1);
     }
     
+    public function __destruct() {
+        unset($this->espectador);
+        unset($this->filme);
+
+        echo "Objeto Visualizacao Destruído!&lt;br/&gt;";
+    }
+
     public function getEspectador() {
         return $this->espectador;
     }
@@ -105,6 +112,10 @@ $vis[1] = new Visualizacao($g[0], $v[1]);
 
 print_r($vis[0]);
 print_r($vis[1]);
+
+unset($v);
+unset($g);
+unset($vis);
 </code>
 </pre>
 
@@ -177,6 +188,10 @@ $vis[1]->avaliarPorc(85.0);
 
 print_r($vis[0]);
 print_r($vis[1]);
+
+unset($v);
+unset($g);
+unset($vis);
 </code>
 </pre>
 

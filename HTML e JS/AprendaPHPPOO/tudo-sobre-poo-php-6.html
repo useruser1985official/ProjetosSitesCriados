@@ -261,6 +261,9 @@ class Video implements AcoesVideo {
         $this->reproduzindo = false;
     }
 
+    public function __destruct() {
+        echo "Objeto Video Destruído!&lt;br/&gt;";
+    }
     
     public function like() {
         $this->curtidas++;
@@ -327,6 +330,8 @@ $v[1] = new Video("Aula 12 de PHP");
 $v[2] = new Video("Aula 15 de HTML5");
 
 print_r($v);
+
+unset($v);
 </code>
 </pre>
 
@@ -347,6 +352,10 @@ abstract class Pessoa {
         $this->idade = $idade;
         $this->sexo = $sexo;
         $this->experiencia = 0;
+    }
+
+    public function __destruct() {
+        echo "Objeto Pessoa Destruído!&lt;br/&gt;";
     }
 
     protected function ganharExp($n){
@@ -406,6 +415,10 @@ class Gafanhoto extends Pessoa {
         $this->totAssistido = 0;
     }
    
+    public function __destruct() {
+        echo "Objeto Gafanhoto Destruído!&lt;br/&gt;";
+    }
+
     public function assistirMaisUm() {
         $this->totAssistido++;
     }
@@ -448,6 +461,9 @@ $g[0] = new Gafanhoto("Jubileu", 22, "M", "CorvoJubileu");
 $g[1] = new Gafanhoto("Creuza", 35, "F", "Creuza35");
 
 print_r($g);
+
+unset($v);
+unset($g);
 </code>
 </pre>
 

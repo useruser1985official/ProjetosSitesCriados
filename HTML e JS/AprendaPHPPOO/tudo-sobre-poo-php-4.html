@@ -122,6 +122,10 @@ class Pessoa {
         $this->sexo = $sexo;
     }
     
+    public function __destruct() {
+        echo "Objeto Pessoa Destruído!&lt;br/&gt;";
+    }
+
     public function getNome() {
         return $this->nome;
     }
@@ -225,6 +229,12 @@ class Livro implements Publicacao {
         $this->pagAtual = 0;
     }
     
+    public function __destruct() {
+        unset($this->leitor); // Destruindo objeto no destrutor
+
+        echo "Objeto Livro Destruído!&lt;br/&gt;";
+    }
+
     public function getTitulo() {
         return $this->titulo;
     }
@@ -293,6 +303,9 @@ $l[2]->abrir();
 $l[2]->folhear(305); // Aqui se passa parâmetros;
 $l[2]->avancarPag();
 $l[2]->detalhes();
+
+unset($p);
+unset($l);
 </code>
 </pre>
 

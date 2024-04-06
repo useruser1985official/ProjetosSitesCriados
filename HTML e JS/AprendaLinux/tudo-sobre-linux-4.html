@@ -185,6 +185,203 @@ rmdir nomedodiretorio
 
 <p>O comando <code>rm -rf /</code> remove recursivamente todos os arquivos e diretórios do seu sistema Linux, até a raiz. <ins>NUNCA</ins> o execute.</p>
 
+<h3>Comandos top e uptime - Monitoramento e Performance de Sistemas Linux</h3>
+
+<p>O comando <code>top</code> fornece uma visão em tempo real do sistema em execução. Essas são as opções dele:</p>
+
+<ul>
+    <li><code>-d atraso</code>: Especifica o atraso em segundos entre atualizações de tela. O padrão é 5 segundos.</li>
+    <li><code>-i</code>: Ignora processos ociosos.</li>
+    <li><code>-n num</code>: Exibe num iterações e depois termina.</li>
+    <li><code>-b</code>: Roda em modo de batch. Útil para mandar a saída de top para outros programas ou um arquivo.</li>
+</ul>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+top # Modo interativo, use q para sair
+
+top -i # Ignora processos ociosos
+
+top -n 3 # Roda 3 vezes
+</code>
+</pre>
+
+<p>As opções do modo interativo são essas:</p>
+
+<ul>
+    <li><code>h</code>: Gera uma tela de ajuda.</li>
+    <li><code>k</code>: Termina um processo (será pedido seu PID).</li>
+    <li><code>q</code>: Sai do programa.</li>
+    <li><code>r</code>: Mofifica a prioridade de um processo (renice). Serão pediso seu PID e valor nic (valores positivos tem menos prioridade).</li>
+    <li><code>s</code>: Modifica o atraso em segundos entre as atualizações. Será pedido o tempo em segundos.</li>
+</ul>
+
+<p>Descrição dos campos de TOP:</p>
+
+<ul>
+    <li><b>PID</b>: O PID de cada processo.</li>
+    <li><b>USER</b>: Usuário proprietário do processo.</li>
+    <li><b>PR</b>: Prioridade da tarefa.</li>
+    <li><b>NI</b>: Valor nice da tarefa.</li>
+    <li><b>VIRT</b>: Memória virtual usada pelo processo.</li>
+    <li><b>RES</b>: Memória física usada pelo processo.</li>
+    <li><b>SHR</b>: Memória compartilhada usada pelo processo.</li>
+    <li><b>S</b>: Estado da tarefa (S = sleeping, R = running, T = stopped, Z = zombie, etc.).</li>
+    <li><b>%CPU</b>: Porcentagem de tempo de CPU usada pela tarefa.</li>
+    <li><b>%MEM</b>: Porcentagem de tempo de memória usada pela tarefa.</li>
+    <li><b>TIME+</b>: Tempo total de atividade da tarefa desde que ela foi iniciada.</li>
+    <li><b>COMMAND</b>: Nome do processo.</li>
+</ul>
+
+<p>O comando <code>uptime</code> mostra o tempo atual, há quanto tempo o sistema está rodando, quantos usuários estão logados atualmente e as médias de carga do sistema nos últimos 1, 5 e 15 minutos. Use apenas <code>uptime</code> no terminal.</p>
+
+<h3>Comandos vmstat e free - Monitoramento e Performance do Sistema Linux</h3>
+
+<p>O comando <code>vmstat</code> reporta informações sobre processos, memória, paginação, blocos de I/O, traps e atividades de CPU. Usa a sintaxe <code>vmstat opções</code>. As opções são essas:</p>
+
+<ul>
+    <li><code>-S M</code>: Usa a unidade MB em vez do padrão KB.</li>
+    <li><code>-a</code>: Mostra memória ativa e inativa.</li>
+    <li><code>-d</code>: Mostra estatísticas de discos.</li>
+    <li><code>-p partição</code>: Mostra informações de R/W na partição especificada.</li>
+    <li><code>-s</code>: Mostra estatísticas em formato de tabela.</li>
+</ul>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+vmstat
+
+vmstat -S M
+</code>
+</pre>
+
+<p>Os campos do vmstat são esses:</p>
+
+<ul>
+    <li><code>procs</code>
+        <ul>
+            <li><code>r</code>: Nº de processos esperando para rodar.</li>
+            <li><code>b</code>: Nº de processos em dormência inininterrupta.</li>
+        </ul>
+    </li>
+    <li><code>memory</code>
+        <ul>
+            <li><code>swpd</code>: Memória virtual usada.</li>
+            <li><code>free</code>: Memória livre.</li>
+            <li><code>buff</code>: Memória usada como buffer.</li>
+            <li><code>cache</code>: Memória usada com cache.</li>
+        </ul>
+    </li>
+    <li><code>swap</code>
+        <ul>
+            <li><code>si</code>: Memória trocada a partir do disco.</li>
+            <li><code>so</code>: Memória trocada para o disco.</li>
+        </ul>
+    </li>
+</ul>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+vmstat -a
+
+vmstat -d
+
+vmstat -p /dev/sda1
+
+vmstat -s
+</code>
+</pre>
+
+<p>O comando <code>free</code> exibe a quantidade de memória livre e usada no sistema. Usa-se o comando <code>free opcoes</code>, que são essas:</p>
+
+<ul>
+    <li><code>-b</code>: Mostra o uso da memória em bytes.</li>
+    <li><code>-k</code>: Idem, em KB.</li>
+    <li><code>-m</code>: Idem, em MB.</li>
+    <li><code>-t</code>: Exibe uma linha que mostra os totais.</li>
+    <li><code>-s n</code>: Operação contínua em intervalos de n segundos.</li>
+</ul>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+free
+
+free -b
+
+free -k
+
+free -m
+
+free -t
+
+free -s 1
+</code>
+</pre>
+
+<h3>Comando iostat e dstat - Monitoramento e Performance do Sistema Linux</h3>
+
+<p>O comando <code>iostat</code> mostra informações sobre o uso da CPU e várias estatísticas sobre E/S do sistema. A sintaxe é <code>iostat opções</code>, que são essas:</p>
+
+<ul>
+    <li><code>-c</code>: Mostra apenas estatísticas da CPU.</li>
+    <li><code>-d</code>: Mostra apenas estatísticas de I/O de disco.</li>
+    <li><code>-p sda</code>: Mostra apenas estatísticas para sda.</li>
+</ul>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+iostat -c
+
+iostat -d
+
+iostat -p sda # Não precisa colocar o caminho completo
+</code>
+</pre>
+
+<p>O comando <code>dstat</code> permite efetuar monitoramento e verificar performance do sistema Linux, possuindo características dos comandos top, vmstat, free e iostat combinadas. Instale ele com <code>sudo apt install dstat</code>. A sintaxe é <code>dstat opções</code>, que são essas:</p>
+
+<ul>
+    <li><code>n</code>: No lugar do n, colocamos o intervalo de atualização em segundos.</li>
+    <li><code>-m</code>: Estatísticas de uso de memória.</li>
+    <li><code>-c</code>: Estatísticas de CPU.</li>
+    <li><code>-d</code>: Estatísticas de disco.</li>
+    <li><code>-i</code>: Interrupções.</li>
+    <li><code>-n</code>: Estatísticas de uso de rede.</li>
+    <li><code>--fs</code>: Estatísticas do sistema de arquivos.</li>
+</ul>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+dstat
+
+dstat -m
+
+dstat -c
+
+dstat -d
+
+dstat -i
+
+dstat -n
+
+dstat --fs
+</code>
+</pre>
+
+<p>PS: Temos também uma ferramenta gráfica para o dstat, digitando <code>sudo apt install gnome-system-monitor</code>.</p>
+
 <h3>Como Criar Array RAID por Software no Linux</h3>
 
 <p>RAID é um arranjo redundante de discos independentes. O dispositivo RAID é um dispositivo virtual criado a partir de dois ou mais dispositivos de blocos reais no Linux, como HDs.</p>
@@ -401,204 +598,6 @@ uUID=c9a487ed-032b-48a9-b4ef-b8a6db93ea74   /raid   ext4    defaults    0   0
 </pre>
 
 <p>Reinicialize a máquina, veja que nas mensagens da inicialização aparecerá os discos criados pelo RAID.</p>
-
-<h3>Comandos top e uptime - Monitoramento e Performance de Sistemas Linux</h3>
-
-<p>O comando <code>top</code> fornece uma visão em tempo real do sistema em execução. Essas são as opções dele:</p>
-
-<ul>
-    <li><code>-d atraso</code>: Especifica o atraso em segundos entre atualizações de tela. O padrão é 5 segundos.</li>
-    <li><code>-i</code>: Ignora processos ociosos.</li>
-    <li><code>-n num</code>: Exibe num iterações e depois termina.</li>
-    <li><code>-b</code>: Roda em modo de batch. Útil para mandar a saída de top para outros programas ou um arquivo.</li>
-</ul>
-
-<p>Digite esses comandos:</p>
-
-<pre>
-<code>
-top # Modo interativo, use q para sair
-
-top -i # Ignora processos ociosos
-
-top -n 3 # Roda 3 vezes
-</code>
-</pre>
-
-<p>As opções do modo interativo são essas:</p>
-
-<ul>
-    <li><code>h</code>: Gera uma tela de ajuda.</li>
-    <li><code>k</code>: Termina um processo (será pedido seu PID).</li>
-    <li><code>q</code>: Sai do programa.</li>
-    <li><code>r</code>: Mofifica a prioridade de um processo (renice). Serão pediso seu PID e valor nic (valores positivos tem menos prioridade).</li>
-    <li><code>s</code>: Modifica o atraso em segundos entre as atualizações. Será pedido o tempo em segundos.</li>
-</ul>
-
-<p>Descrição dos campos de TOP:</p>
-
-<ul>
-    <li><b>PID</b>: O PID de cada processo.</li>
-    <li><b>USER</b>: Usuário proprietário do processo.</li>
-    <li><b>PR</b>: Prioridade da tarefa.</li>
-    <li><b>NI</b>: Valor nice da tarefa.</li>
-    <li><b>VIRT</b>: Memória virtual usada pelo processo.</li>
-    <li><b>RES</b>: Memória física usada pelo processo.</li>
-    <li><b>SHR</b>: Memória compartilhada usada pelo processo.</li>
-    <li><b>S</b>: Estado da tarefa (S = sleeping, R = running, T = stopped, Z = zombie, etc.).</li>
-    <li><b>%CPU</b>: Porcentagem de tempo de CPU usada pela tarefa.</li>
-    <li><b>%MEM</b>: Porcentagem de tempo de memória usada pela tarefa.</li>
-    <li><b>TIME+</b>: Tempo total de atividade da tarefa desde que ela foi iniciada.</li>
-    <li><b>COMMAND</b>: Nome do processo.</li>
-</ul>
-
-<p>O comando <code>uptime</code> mostra o tempo atual, há quanto tempo o sistema está rodando, quantos usuários estão logados atualmente e as médias de carga do sistema nos últimos 1, 5 e 15 minutos. Use apenas <code>uptime</code> no terminal.</p>
-
-<h3>Comandos vmstat e free - Monitoramento e Performance do Sistema Linux</h3>
-
-<p>O comando <code>vmstat</code> reporta informações sobre processos, memória, paginação, blocos de I/O, traps e atividades de CPU. Usa a sintaxe <code>vmstat opções</code>. As opções são essas:</p>
-
-<ul>
-    <li><code>-S M</code>: Usa a unidade MB em vez do padrão KB.</li>
-    <li><code>-a</code>: Mostra memória ativa e inativa.</li>
-    <li><code>-d</code>: Mostra estatísticas de discos.</li>
-    <li><code>-p partição</code>: Mostra informações de R/W na partição especificada.</li>
-    <li><code>-s</code>: Mostra estatísticas em formato de tabela.</li>
-</ul>
-
-<p>Digite esses comandos:</p>
-
-<pre>
-<code>
-vmstat
-
-vmstat -S M
-</code>
-</pre>
-
-<p>Os campos do vmstat são esses:</p>
-
-<ul>
-    <li><code>procs</code>
-        <ul>
-            <li><code>r</code>: Nº de processos esperando para rodar.</li>
-            <li><code>b</code>: Nº de processos em dormência inininterrupta.</li>
-        </ul>
-    </li>
-    <li><code>memory</code>
-        <ul>
-            <li><code>swpd</code>: Memória virtual usada.</li>
-            <li><code>free</code>: Memória livre.</li>
-            <li><code>buff</code>: Memória usada como buffer.</li>
-            <li><code>cache</code>: Memória usada com cache.</li>
-        </ul>
-    </li>
-    <li><code>swap</code>
-        <ul>
-            <li><code>si</code>: Memória trocada a partir do disco.</li>
-            <li><code>so</code>: Memória trocada para o disco.</li>
-        </ul>
-    </li>
-</ul>
-
-<p>Digite esses comandos:</p>
-
-<pre>
-<code>
-vmstat -a
-
-vmstat -d
-
-vmstat -p /dev/sda1
-
-vmstat -s
-</code>
-</pre>
-
-<p>O comando <code>free</code> exibe a quantidade de memória livre e usada no sistema. Usa-se o comando <code>free opcoes</code>, que são essas:</p>
-
-<ul>
-    <li><code>-b</code>: Mostra o uso da memória em bytes.</li>
-    <li><code>-k</code>: Idem, em KB.</li>
-    <li><code>-m</code>: Idem, em MB.</li>
-    <li><code>-t</code>: Exibe uma linha que mostra os totais.</li>
-    <li><code>-s n</code>: Operação contínua em intervalos de n segundos.</li>
-</ul>
-
-<p>Digite esses comandos:</p>
-
-<pre>
-<code>
-free
-
-free -b
-
-free -k
-
-free -m
-
-free -t
-
-free -s 1
-</code>
-</pre>
-
-<h3>Comando iostat e dstat - Monitoramento e Performance do Sistema Linux</h3>
-
-<p>O comando <code>iostat</code> mostra informações sobre o uso da CPU e várias estatísticas sobre E/S do sistema. A sintaxe é <code>iostat opções</code>, que são essas:</p>
-
-<ul>
-    <li><code>-c</code>: Mostra apenas estatísticas da CPU.</li>
-    <li><code>-d</code>: Mostra apenas estatísticas de I/O de disco.</li>
-    <li><code>-p sda</code>: Mostra apenas estatísticas para sda.</li>
-</ul>
-
-<p>Digite esses comandos:</p>
-
-<pre>
-<code>
-iostat -c
-
-iostat -d
-
-iostat -p sda # Não precisa colocar o caminho completo
-</code>
-</pre>
-
-<p>O comando <code>dstat</code> permite efetuar monitoramento e verificar performance do sistema Linux, possuindo características dos comandos top, vmstat, free e iostat combinadas. Instale ele com <code>sudo apt install dstat</code>. A sintaxe é <code>dstat opções</code>, que são essas:</p>
-
-<ul>
-    <li><code>n</code>: No lugar do n, colocamos o intervalo de atualização em segundos.</li>
-    <li><code>-m</code>: Estatísticas de uso de memória.</li>
-    <li><code>-c</code>: Estatísticas de CPU.</li>
-    <li><code>-d</code>: Estatísticas de disco.</li>
-    <li><code>-i</code>: Interrupções.</li>
-    <li><code>-n</code>: Estatísticas de uso de rede.</li>
-    <li><code>--fs</code>: Estatísticas do sistema de arquivos.</li>
-</ul>
-
-<p>Digite esses comandos:</p>
-
-<pre>
-<code>
-dstat
-
-dstat -m
-
-dstat -c
-
-dstat -d
-
-dstat -i
-
-dstat -n
-
-dstat --fs
-</code>
-</pre>
-
-<p>PS: Temos também uma ferramenta gráfica para o dstat, digitando <code>sudo apt install gnome-system-monitor</code>.</p>
-
 
 <ul>
     <li><a href="tudo-sobre-linux-3.html">Parte Anterior da Matéria!</a></li>

@@ -185,28 +185,28 @@ int *gerarRandomico() {
 
 <pre>
 <code>
-void funcao(int *param);
-void funcao(int param);
+void procedimento(int *param);
+void procedimento(int param);
 
 int main() {
     int n = 10;
     int *p;
     p = &amp;n;
     
-    funcao(p); // Caso a função tenha * e a variável de entrada seja ponteiro
-    funcao(*p); // Caso a função não tenha * e a variável de entrada seja ponteiro
-    funcao(&amp;n); // Caso a função tenha * e a variável de entrada não seja ponteiro
-    funcao(n); // Casos mais comuns, onde nem a função e nem a variável são ponteiros
+    procedimento(p); // Caso a função/procedimento tenha * e a variável de entrada seja ponteiro
+    procedimento(*p); // Caso a função/procedimento não tenha * e a variável de entrada seja ponteiro
+    procedimento(&amp;n); // Caso a função/procedimento tenha * e a variável de entrada não seja ponteiro
+    procedimento(n); // Casos mais comuns, onde nem a função/procedimento e nem a variável são ponteiros
     
     return 0;
 }
 
-void funcao(int *param) {
+void procedimento(int *param) {
     cout << "Endereço de 1: " << param << endl;
     cout << "Conteúdo de 1: " << *param << endl;
 }
 
-void funcao(int param) {
+void procedimento(int param) {
     cout << "Endereço de 2: " << &amp;param << endl;
     cout << "Conteúdo de 2: " << param << endl;
 }
@@ -379,26 +379,26 @@ cout << entrada << endl;
 
 <pre>
 <code>
-string substituir(string entrada, string subst, string novo);
+string substituir(string texto, string antigo, string novo);
 
 int main() {
-    string texto = "Apenas uma frase! A frase foi repetida!";
+    string entrada = "Apenas uma frase! A frase foi repetida!";
 
-    texto = substituir(texto, "frase", "string"); // Na ordem palavra a ser substituída, palavra a substituir e palavra substituta
+    entrada = substituir(entrada, "frase", "string"); // Na ordem palavra a ser substituída, palavra a substituir e palavra substituta
     
-    cout << texto << endl;
+    cout << entrada << endl;
 
     return 0;
 }
 
-string substituir(string entrada, string subst, string novo) {
+string substituir(string texto, string antigo, string novo) {
     size_t pos;
         
-    while((pos = entrada.find(subst)) != string::npos) {
-        entrada.replace(entrada.find(subst), subst.length(), novo); // Na ordem palavra a ser substituída, quantidade de caracteres da mesma e palavra substituta
+    while((pos = texto.find(antigo)) != string::npos) {
+        texto.replace(texto.find(antigo), antigo.length(), novo); // Na ordem palavra a ser substituída, quantidade de caracteres da mesma e palavra substituta
     }
     
-    return entrada;
+    return texto;
 }
 </code>
 </pre>
@@ -438,11 +438,11 @@ cout << entrada << endl;
 
 <pre>
 <code>
-string frase = "Apenas uma frase!";
+string entrada = "Apenas uma frase!";
     
-reverse(frase.begin(), frase.end()); // Inclua algorithm
+reverse(entrada.begin(), entrada.end()); // Inclua algorithm
     
-cout << frase << endl;
+cout << entrada << endl;
 </code>
 </pre>
 
@@ -450,11 +450,11 @@ cout << frase << endl;
 
 <pre>
 <code>
-string frase = "Apenas uma frase!";
+string entrada = "Apenas uma frase!";
     
-frase.append(" E ela foi concatenada!");
+entrada.append(" E ela foi concatenada!");
     
-cout << frase << endl;
+cout << entrada << endl;
 </code>
 </pre>
 
@@ -462,10 +462,10 @@ cout << frase << endl;
 
 <pre>
 <code>
-string frase = "Exemplo de Frase";
+string entrada = "Exemplo de Frase";
 regex reg(" "); // Inclua regex, aqui vai o caractere para dividir
 
-vector&lt;string&gt; saida(sregex_token_iterator(frase.begin(), frase.end(), reg, -1), sregex_token_iterator()); // Inclua cstring e vector
+vector&lt;string&gt; saida(sregex_token_iterator(entrada.begin(), entrada.end(), reg, -1), sregex_token_iterator()); // Inclua cstring e vector
 
 for(string s: saida) {
     cout << s << endl;
@@ -477,8 +477,8 @@ for(string s: saida) {
 
 <pre>
 <code>
-string frase = "Apenas uma frase!";
-const char* novo = frase.c_str();
+string entrada = "Apenas uma frase!";
+const char* novo = entrada.c_str();
     
 cout << novo << endl;
 </code>

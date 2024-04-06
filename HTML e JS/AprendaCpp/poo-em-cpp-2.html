@@ -271,9 +271,17 @@ for(auto a: av) { // Nome do objeto no lugar do av, o a é o que será iterado.
 </code>
 </pre>
 
-<p>Lembrando que, caso tenha agregação de objetos, é recomendado usar o <code>delete this->nomeDoObjeto</code> desses objetos dentro do destrutor da classe.</p>
-
 <p>Isso é usado para destruir um objeto no meio da execução do programa, pra não sobrecarregar a memória. Diferente de outras linguagens POO surgidas posteriormente, o C++ não faz a coleta de lixo, por isso é necessário usar o delete pra destruir objetos (objetos agregados em outros objetos são destruídos automaticamente, mas o principal não), na verdade, no C++ a POO é mais primitiva, por ter sido a primeira linguagem a usar esse paradigma. Sempre mantenha o hábito de usar o delete em objetos em C++ por esse motivo.</p>
+
+<p>Lembrando que, caso tenha agregação de objetos, é recomendado usar o <code>delete this->nomeDoObjeto</code> desses objetos dentro do destrutor da classe, dessa forma:</p>
+
+<pre>
+<code>
+NomeDaClasse::~NomeDaClasse() {
+    delete this->objetoAgregado;
+}
+</code>
+</pre>
 
 <p>PS: Lembrando que o delete só pode ser usado em objetos criados com ponteiros, inicializados com new, por não haver coleta de lixo desse tipo de objeto. Objetos criados sem essa atribuição tem a coleta de lixo feita automaticamente, por isso não se usa delete.</p>
 
