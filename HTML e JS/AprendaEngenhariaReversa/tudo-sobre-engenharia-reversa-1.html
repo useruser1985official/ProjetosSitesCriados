@@ -189,7 +189,7 @@ print(0x10) # Retorna 16 (10 é lido com hexadecimal e retorna 16 em decimal).
 
 <p>Voltando ao programa em C que fizemos, e dê o comando cat no código-fonte para vermos o conteúdo do texto, e depois dê o comando hd no código-fonte para vermos o conteúdo em bytes dele. Sabendo disso, podemos analisar um código-fonte e vermos quantas puladas de linha existem nele, procurando os bytes 0a dentro do programa, e ao lado ele é representado por m ponto, já que o ponto representa caracteres não gráficos (atenção que o ponto é exibido mas é representado por 2e).</p>
 
-<p>Dê o comando hd no programa compilado, podemos ver que dentro dele temos algumas strings mais ou menos compreensíveis no meio de outros não compreensíveis. Se alterarmos um desses bytes, o programa terá outro comportamento. Para encontrarmos todas as strings dentro de um arquivo e suas posições, digitamos <code>strings -t x arquivo.txt</code> (ele não é 100% preciso, mas encontra a maioria delas). Por padrão, ele não mostra strings com 3 ou menos caracteres, para ver elas digitamos <code>strings -n 3 -t x arquivo.txt</code>. Podemos ver as funções de print do C digitando <code>man isprint</code> que checa se os caracteres são imprimíveis.</p>
+<p>Dê o comando hd no programa compilado, podemos ver que dentro dele temos algumas strings mais ou menos compreensíveis no meio de outros não compreensíveis. Se alterarmos um desses bytes, o programa terá outro comportamento. Para encontrarmos todas as strings dentro de um arquivo e suas posições, digitamos <code>strings -t x arquivo</code> (ele não é 100% preciso, mas encontra a maioria delas). Por padrão, ele não mostra strings com 3 ou menos caracteres, para ver elas digitamos <code>strings -n 3 -t x arquivo</code>. Podemos ver as funções de print do C digitando <code>man isprint</code> que checa se os caracteres são imprimíveis.</p>
 
 <p>Faça um programa simples em C que realize um cálculo, por exemplo:</p>
 
@@ -250,7 +250,7 @@ while(fread(&byte, sizeof(byte), 1, fp)) {
 </code>
 </pre>
 
-<p>Dessa forma, com esse programa, conseguimos ver apenas a parte legível de por exemplo, programas executáveis compilados.</p>
+<p>Dessa forma, com esse programa, conseguimos ver apenas a parte legível de, por exemplo, programas executáveis compilados.</p>
 
 <p>Para exercitar, pegue apenas os caracteres maiúsculos e só os minúsculos, por exemplo.</p>
 
@@ -282,7 +282,7 @@ while(fread(&byte, sizeof(byte), 1, fp)) {
 
 <p>No Hex Workshop, iremos até posição da DWORD (no caso a 100), e iremos até a posição que virá após a 0103 (ou seja, a 104 e 105). E veremos os bytes 4C 01, invertendo fica 01 4C, e o 14C signifca binário para máquinas i386 (ou seja, 32x).</p>
 
-<p>Podemos gerar uma saída XML do programa, digitando <code>readpe -format xml -h coff nomedoexecutavel.exe>>dados.xml</code></p>
+<p>Podemos gerar uma saída XML do programa, digitando <code>readpe --format xml -h coff nomedoexecutavel.exe>>dados.xml</code></p>
 
 <p>Abra o Detected It Easy, coloque o caminho do executável pra escanear, e em PE ele mostrará todos os dados igual o readpe, olhe todas as opções dentro de PE. Ele também pode editar arquivos executáveis.</p>
 

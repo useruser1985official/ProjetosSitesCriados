@@ -91,6 +91,19 @@ public void pagarMensal() {
 
 <p>PS: Pode ser necessário ir na classe Pessoa e colocar os atributos de privados para protegidos (aí você verá a diferença entre ambos).</p>
 
+<p>E também o método toString assim:</p>
+
+<pre>
+<code>
+@Override
+public String toString() {
+    return "Aluno{" + super.toString() + "matr=" + matr + ", curso=" + curso + '}';
+}
+</code>
+</pre>
+
+<p>PS: O super executa um método na classe mãe, explicaremos ele mais pra frente.</p>
+
 <p>E na classe principal, crie um objeto com Aluno, assim:</p>
 
 <pre>
@@ -108,8 +121,6 @@ public class FaculdadePoo {
         a1.setCurso("Informática");
 
         a1.pagarMensal();
-
-        System.out.println(a1.toString());
     }
 }
 </code>
@@ -136,6 +147,11 @@ public class Bolsista extends Aluno {
     @Override
     public void pagarMensal() {
         System.out.println(this.nome + " é bolsista, então paga com desconto!");
+    }
+
+    @Override
+    public String toString() {
+        return "Bolsista{" + super.toString() + "bolsa=" + bolsa + '}';
     }
 
     public float getBolsa() {

@@ -294,7 +294,7 @@ package projetoleitura;
 public class ProjetoLeitura {
     public static void main(String[] args) {
         Pessoa p[] = new Pessoa[2];
-        Publicacao l[] = new Livro[3]; // Implementação de interface
+        Publicacao l[] = new Publicacao[3]; // Implementação de interface
         
         p[0] = new Pessoa("Sérgio", 22, "M");
         p[1] = new Pessoa("Maria", 31, "F");
@@ -405,7 +405,7 @@ public class Aluno extends Pessoa {
     private String curso;
     
     public void cancelarMatr() {
-        System.out.println("Matrícula será candelada!");
+        System.out.println("Matrícula será cancelada!");
     }
 
     public int getMatr() {
