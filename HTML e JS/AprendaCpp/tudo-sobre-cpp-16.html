@@ -330,7 +330,7 @@ cout << "Velocidade: " << c2->getVel() << endl;
 
 <p>O algoritmo for each é mais uma maneira para percorrer um container, usando uma função lambda para isso.</p>
 
-<p>Para trabalhar com foreach, precisamos importar a biblioteca algorithm.</p>
+<p>Para trabalhar com foreach, precisamos importar a biblioteca <code>algorithm</code>.</p>
 
 <p>Veja um exemplo de código com iterator:</p>
 
@@ -377,7 +377,7 @@ for(auto it: n) {
 <code>
 vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-for_each(n.begin(), n.end(), [](int num){cout << num << endl;});
+for_each(n.begin(), n.end(), [](int num){cout << num << endl;}); // Inclua algorithm
 </code>
 </pre>
 

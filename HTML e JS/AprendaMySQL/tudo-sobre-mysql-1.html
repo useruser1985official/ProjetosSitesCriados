@@ -135,6 +135,14 @@ default charset = utf8;
 
 <p>A constraint <code>not null</code> é pra obrigar a preencher os dados exigidos (geralmente é necessária pro enum funcionar, por exemplo). A constraint <code>default</code> é usada pra pré-definir um valor padrão, caso nada seja enviado.</p>
 
+<p>Agora delete a tabela com esse comando:</p>
+
+<pre>
+<code>
+drop table pessoas;
+</code>
+</pre>
+
 <p>Para evitar que duas pessoas exatamente iguais se cadastrem, criaremos um campo para gerar um código automático, como uma matrícula. Para isso usamos o constraint <code>auto_increment</code>. Para definir uma chave primária, usamos <code>primary key()</code> com o campo entre parênteses. Veja um exemplo:</p>
 
 <pre>
@@ -352,7 +360,7 @@ drop index nome;
 
 <p>PS: Não é possível deletar uma chave primária definida com auto-incremento, então use o <code>modify column</code> antes de deletar uma chave primária. O modify também pode ser usado para devolver a constraint unique à uma chave.</p>
 
-<p>Para excluir uma tabela completa, apenas usamos o drop, assim:</p>
+<p>Para excluir uma tabela, podemos usar o drop assim:</p>
 
 <pre>
 <code>

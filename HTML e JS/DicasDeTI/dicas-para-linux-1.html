@@ -421,9 +421,9 @@ dnf list installed # Lista os pacotes instalados
 
 <p>PS: Todos os comandos devem ser executados como root.</p>
 
-<h3>Pastas Importantes do Sistema</h3>
+<h3>Diretórios Importantes do Sistema</h3>
 
-<p>Essas são as pastas mais importantes do Linux e sistemas baseados em Unix:</p>
+<p>Esses são os diretórios mais importantes do Linux e sistemas baseados em Unix:</p>
 
 <ul>
     <li><b>/bin</b>: Binários essenciais ao sistema.</li>
@@ -447,13 +447,15 @@ dnf list installed # Lista os pacotes instalados
     <li><b>/var</b>: Arquivos de dados variáveis, é como o usr, mas com permissão de escrita para arquivos.</li>
 </ul>
 
-<p>O Android (que também usa Kernel Linux) também possuí a maioria dessas pastas (exceto /boot, /cdrom, /home, /mnt, /opt, /run, /srv, /usr e /var) não acessíveis em sistemas sem root, e tem outras pastas como a <b>/cache</b> (armazenamento de dados pra execução), <b>/data</b> (dados), <b>/init</b> (inicialização), <b>/sdcard</b> (cartão SD), <b>/storage</b> (área de armazenamento) e <b>/system</b> (sistema).</p>
+<p>PS: Os diretórios são reconhecidos como arquivos no Linux.</p>
+
+<p>O Android (que também usa Kernel Linux) também possuí a maioria desses diretórios (exceto /boot, /cdrom, /home, /mnt, /opt, /run, /srv, /usr e /var) não acessíveis em sistemas sem root, e tem outras pastas como a <b>/cache</b> (armazenamento de dados pra execução), <b>/data</b> (dados), <b>/init</b> (inicialização), <b>/sdcard</b> (cartão SD), <b>/storage</b> (área de armazenamento) e <b>/system</b> (sistema).</p>
 
 <p>PS: A pasta <code>/opt</code>: Pode ser usado para instalar arquivos de downloads.</p>
 
 <p>Para mover entre pastas usamos <code>cd</code> (igual no DOS), para exibir conteúdo do diretório <code>ls</code>.</p>
 
-<p>O arquivo <code>~/.bashrc</code> é onde está o path do usuário, onde podemos adicionar variáveis de ambiente colocando <code>export PATH=$PATH:/caminhodapasta/</code>, e em <code>/etc/bash.bashrc</code> podemos colocar outras variáveis de ambiente, na sintaxe <code>NOMEDAVARIAVEL=conteudo</code>. Podemos também colocar outras pastas no path de forma global no arquivo <code>/etc/environment</code>, separadas por dois pontos (como <code>:/caminhododiretorio</code>).</p>
+<p>O arquivo <code>~/.bashrc</code> é onde está o path do usuário, onde podemos adicionar variáveis de ambiente colocando <code>export PATH=$PATH:/caminhododiretorios/</code>, e em <code>/etc/bash.bashrc</code> podemos colocar outras variáveis de ambiente, na sintaxe <code>NOMEDAVARIAVEL=conteudo</code>. Podemos também colocar outros diretórios no path de forma global no arquivo <code>/etc/environment</code>, separado por dois pontos (como <code>:/caminhododiretorio</code>).</p>
 
 <p>PS: Evite colocar caminhos com espaços.</p>
 
