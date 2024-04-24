@@ -44,7 +44,7 @@
 
 <p>Compile o programa novamente, pois corrompemos o mesmo.</p>
 
-<p>Volte aos sections headers e vá no .plt, que é onde estão os endereços das funções externas. Uma biblioteca dinâmica é carregada no sistema ao executar o programa, o printf por exemplo tá na lib.c. Digite o comando <code>nm keygenme | less</code> para vermos os símbolos do binário, onde veremos todas as bibliotecas das quais pertencem cada função.</p>
+<p>Volte aos sections headers e vá no .plt, que é onde estão os endereços das funções externas. Uma biblioteca dinâmica é carregada no sistema ao executar o programa, o printf por exemplo tá na libc. Digite o comando <code>nm keygenme | less</code> para vermos os símbolos do binário, onde veremos todas as bibliotecas das quais pertencem cada função.</p>
 
 <p>Digite <code>gdb -q ./keygenme</code> e dentro do programa, digite <code>disassemble main</code>, onde vemos o código assembler do main. Faça o mesmmo com printf e com o endereço do mesmo.</p>
 
