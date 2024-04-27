@@ -141,7 +141,7 @@ truncate table cursos;
 
 <p>Para explicar, vamos primeiramente recolocar os dados na tabela cursos, como descrito anteriormente.</p>
 
-<p>Para exportar banco de dados, é só ir no PhpMyAdmin, em New e exportar os bancos desejados (se faz o mesmo em tabelas, dentro do banco de dado desejado). Lá tem as opções e também o formato desejado. Para importar faz do mesmo modo, em Importar.</p>
+<p>Para exportar banco de dados, é só ir no PHPMyAdmin, em New e exportar os bancos desejados (se faz o mesmo em tabelas, dentro do banco de dado desejado). Lá tem as opções e também o formato desejado. Para importar faz do mesmo modo, em Importar.</p>
 
 <p>PS: É recomendável marcar a opção de exportar personalizada, e marcar as opções drop database ou drop table, para apagar a tabela antiga.</p>
 
@@ -161,7 +161,7 @@ select * from usuarios;
 
 <p>Primeiro vamos aprender a usar o PHPMyAdmin pelo Prompt de Comando. Dependendo do servidor, é necessário informar a o usuário e a senha (geralmente é root e uma senha vazia). Para abrir ele no XAMPP, abra o painel, vá em console em shell, e no CMD digite o comando <code>mysql -u root</code>.</p>
 
-<p>PS: Caso for logar com outro usuário, use o nome do usuário especificado. Se ele tiver senha, podemos logar digitando <code>mysql -u nomedousuario -p senha</code>.</p>
+<p>PS: Caso for logar com outro usuário, use o nome do usuário especificado. Se ele tiver senha, podemos logar digitando <code>mysql -u nomedousuario -p</code> (ele pedirá a senha logo em seguida).</p>
 
 <p>Para visualizar os bancos de dados, use o comando <code>show databases;</code> (não esqueça do ponto e vírgula).</p>
 
@@ -177,7 +177,8 @@ select * from usuarios;
 
 <p>PS: Caso os acentos apareçam desconfigurados no Windows, edite o arquivo xampp_shell.bat da pasta xampp, colocando <code>chcp 1252</code> no começo dele, antes do comando goto.</p>
 
-<p>Para fazer um back-up dos dados via linha de comando, fora do shell do MySQL digite <code>mysqldump -u nomedousuario -p nomedobanco>dump.sql.</code> (pode ser necessário colocar a opção <code>--single-transaction</code>). Para restaurar um back-up basta colocar <code>mysql -u nomedousuario -p&lt;dump.sql</code></p>
+<p>Para fazer um back-up dos dados via linha de comando, fora do shell do MySQL digite <code>mysqldump -u nomedousuario -p nomedobanco&gt;dump.sql.</code> (pode ser necessário colocar a opção <code>--single-transaction</code>). Para restaurar um back-up basta colocar <code>mysql -u nomedousuario -p&lt;dump.sql</code></p>
+
 <h3>PHPMyAdmin Parte 2</h3>
 
 <p>No PHPMyAdmin, vamos criar um banco de dados novo, nesse caso, vamos criar na aba "Base de Dados", na parte de colocar nome. Crie um nome qualquer como exemplo e escolha o agrupamento <code>utf8_general_ci</code>. Depois disso, crie uma tabela da mesma forma (como por exemplo, amigos) e a quantidade de colunas (no exemplo, serão três, com nomes id, nome e tel). Veja a configuração de cada campo:</p>

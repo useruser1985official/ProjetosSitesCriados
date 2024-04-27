@@ -293,127 +293,72 @@ delete t;
 
 <p>PS: Lembrando que, nesse caso, só poderemos usar os métodos declarados na classe pai, no caso, a Veiculo, mesmo que estes métodos sejam sobrepostos em classes herdeiras.</p>
 
-<h3>Classe Abstrata Simulando Interface</h3>
+<h3>Protected x Private x Public</h3>
 
-<p>Caso deseje simular uma interface, crie uma classe apenas com os nomes dos métodos, colocando eles virtuais, sem colocar as implementações deles, apenas atribuindo com 0 (classe abstrata):</p>
+<p>Já sabemos como utilizar o public e o private </p>
 
-<pre>
-<code>
-class Estoque {
-    public:
-        virtual void defineLado(int l) = 0;
-        virtual double volume() = 0;
-        virtual ~Estoque() = 0; // Toda classe abstrata deve ter um método destrutor virtual puro, mesmo que os outros métodos não os sejam
-};
-
-Estoque::~Estoque() { // Implementação Vazia, sempre necessária, no caso.
-
-}
-</code>
-</pre>
-
-<p>Um método virtual atribuído a 0 é como se ele fosse abstrato, ou seja, não terá implementação na interface, isso é uma função virtual pura, e toda classe que herdará, deverá implementar, sobreescrevendo ele.</p>
-
-<p>Uma classe pode ter vários métodos implementados e ter uma ou mais funções virtuais puras. O método destrutor (sempre obrigatório ser um método virtual puro em classes abstratas) deverá ter uma implementação vazia, os outros métodos virtuais puros não tem implementação nenhuma.</p>
-
-<p>PS: Uma classe com métodos abstratos não pode ser instanciada, mesmo se tiver apenas um método virtual puro. Na verdade, para criar uma classe abstrata, basta declarar um ou mais métodos virtual puros (atribuídos com 0). Quando a classe tem exclusivamente métodos virtuais puros, age de forma igual à uma interface (que existe em linguagens POO como Java, C# e PHP, mas não em C++).</p>
-
-<p>Para criar uma classe com todos os métodos prontos como abstrata (para ser usada em heranças), basta criar o método destrutor dela como virtual puro (<code>virtual ~NomeDaClasse() = 0</code> e uma implementação do mesmo (mesmo sem código algum entre as chaves) na mesma classe (nesse código acima seria o recomendado, pra encapsular também a classe), e as classes que a herdarem, não precisam de nenhuma alteração. Caso esse método virtual não possua implementação, aí sim as classes filhas dessa terão que implementar.</p>
-
-<p>E na classe que a implementará, coloque como se fosse uma herança, e o sobreponha os métodos com <code>override</code>:</p>
+<p>Criemos uma declaração assim pra exemplificar:</p>
 
 <pre>
 <code>
-include "Estoque.h"
-
-class Caixa : public Estoque {
+class Veiculo {
     public:
-        void defineLado(int l) override;
-        double volume() override;
-
-        const double getLado();
-        void setLado(double lado);
+        int rodas;
+        const char* nome;
+        
+    protected:
+        int portas;
+        const char* cor;
+        
     private:
-        double lado;
+        int velMax;
+        int potencia;
 };
-
-void Caixa::defineLado(int l) {
-    this->lado = l;
-}
-
-double Caixa::volume() {
-    return lado * lado * lado;
-}
-
-const double Caixa::getLado() {
-    return lado;
-}
-
-void Caixa::setLado(double lado) {
-    this->lado = lado;
-}
 </code>
 </pre>
 
-<p>E a implementação no main:</p>
+<p>O public permite o acesso a qualquer parte do programa, o private permite o acesso apenas dentro da própria classe. O protected é meio que um meio-termo, pois permite acesso dentro de classes filhas.</p>
+
+<p>Veja um exemplo de chamada de métodos protegidos em heranca, numa classe Carro:</p>
 
 <pre>
 <code>
-Estoque *cx = new Caixa();
-
-cx->defineLado(5);
-
-cout << cx->volume() << endl;
-
-delete cx;
+class Carro : public Veiculo {
+    public:
+        Carro();
+};
 </code>
 </pre>
 
-<p>E no método main podemos verificar se a classe implementa a classe abstrata usando um if e else:</p>
+<p>E implementação:</p>
 
 <pre>
 <code>
-Estoque *cx = new Caixa();
-
-if(typeid(cx) == typeid(Estoque*)) { // inclua typeinfo
-    cx->defineLado(5);
-
-    cout << cx->volume() << endl;
+Carro::Carro() {
+    this->velMax = 100; // Não podemos acessar
+    this->potencia = 150; // Não podemos acessar
+    this->rodas = 4;
+    this->nome = "Carro";
+    this->portas = 4;
+    this->cor = "Branco";
 }
-else {
-    cerr << "Classe AbstVeiculo Não Implementada!" << endl;
-}
-
-delete cx;
 </code>
 </pre>
 
-<p>Usando uma classe base no "tipo" do objeto, e ele sendo implementado com uma classe herdeira, permite maior polimorfismo, pois qualquer classe que herde o "tipo" da classe anterior, pode ser implementada.</p>
-
-<p>Alternativamente, podemos fazer assim, de uma forma mais "gambiarrenta":</p>
+<p>Como visto, a classe Carro permitiu acesso aos métodos protegidos porque ela herda de Veiculo, uma agregação entre objetos também não vai dar erro:</p>
 
 <pre>
 <code>
-// Funções estruturadas:
-void defLado(Estoque &caix, int l) {
-    caix.defineLado(l);
-}
-
-double verVol(Estoque &caix) {
-    return caix.volume();
-}
-
-int main() {
-    Caixa cx;
-
-    defLado(cx, 5);
-
-    cout << verVol(cx) << endl;
-
-    return 0;
-}
+class Moto {
+    public:
+        Carro *c;
+};
 </code>
 </pre>
+
+<p>Isso ocorre porque a classe Moto, mesmo não tenho herança, ele cria um elemento Carro dentro da classe.</p>
+
+<p>Mas se tentarmos acessar qualquer atributo ou método protegido em partes do programa fora da classe e de suas herdeiras, dará erro.</p>
 
 <ul>
     <li><a href="poo-em-cpp-4.html">Parte Anterior da Matéria!</a></li>

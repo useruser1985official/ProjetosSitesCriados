@@ -226,16 +226,26 @@ delete av;
 <code>
 class Violao {
     public:
-        virtual void cordas();
-        virtual void ampli();
+        int cordas;
+        const char* tipoAmpli;
+
+        virtual void quantCordas();
+        virtual void amplificacao();
+
+        Violao();
 };
 
-void Violao::cordas() {
-    std::cout << "Tem 6 Cordas!" << std::endl;
+void Violao::quantCordas() {
+    std::cout << "Violão tem " << this->cordas << " Cordas!" << std::endl;
 }
 
-void Violao::ampli() {
-    std::cout << "Amplificação Acústica!" << std::endl;
+void Violao::amplificacao() {
+    std::cout << "Violão tem Amplificação " << this->tipoAmpli << "!" << std::endl;
+}
+
+Violao::Violao() {
+    this->cordas = 6;
+    this->tipoAmpli = "Acústica";
 }
 </code>
 </pre>
@@ -248,11 +258,23 @@ void Violao::ampli() {
 <code>
 class Cavaquinho : public Violao {
     public:
-        void cordas() override;
+        void quantCordas() override;
+        void amplificacao() override;
+
+        Cavaquinho();
 };
 
-void Cavaquinho::cordas() {
-    std::cout << "Tem 4 Cordas!" << std::endl;
+void Cavaquinho::quantCordas() {
+    std::cout << "Cavaquinho tem " << this->cordas << " Cordas!" << std::endl;
+}
+
+void Cavaquinho::amplificacao() {
+    std::cout << "Cavaquinho tem Amplificação " << this->tipoAmpli << "!" << std::endl;
+}
+
+Cavaquinho::Cavaquinho() {
+    this->cordas = 4;
+    this->tipoAmpli= "Acústica";
 }
 </code>
 </pre>
@@ -263,11 +285,23 @@ void Cavaquinho::cordas() {
 <code>
 class Guitarra : public Violao {
     public:
-        void ampli() override;
+        void quantCordas() override;
+        void amplificacao() override;
+
+        Guitarra();
 };
 
-void Guitarra::ampli() {
-    std::cout << "Amplificação Elétrica!" << std::endl;
+void Guitarra::quantCordas() {
+    std::cout << "Guitarra tem " << this->cordas << " Cordas!" << std::endl;
+}
+
+void Guitarra::amplificacao() {
+    std::cout << "Guitarra tem Amplificação " << this->tipoAmpli << "!" << std::endl;
+}
+
+Guitarra::Guitarra() {
+    this->cordas = 6;
+    this->tipoAmpli = "Elétrica";
 }
 </code>
 </pre>
@@ -288,18 +322,18 @@ using namespace std;
 int main() {
     Violao *v = new Violao();
 
-    v->cordas();
-    v->ampli();
+    v->quantCordas();
+    v->amplificacao();
 
     Guitarra *g = new Guitarra();
 
-    g->cordas();
-    g->ampli();
+    g->quantCordas();
+    g->amplificacao();
 
     Cavaquinho *c = new Cavaquinho();
 
-    c->cordas();
-    c->ampli();
+    c->quantCordas();
+    c->amplificacao();
 
     delete v;
     delete g;
@@ -320,7 +354,7 @@ class Pessoa {
         void levantar(const char* tempo);
         void levantar(int hora, int minuto);
         void levantar(bool folga);
-        void levantar(double temperatura);
+        void levantar(float temperatura);
 };
 
 
@@ -360,7 +394,7 @@ void Pessoa::levantar(bool folga) {
     }
 }
 
-void Pessoa::levantar(double temperatura) {
+void Pessoa::levantar(float temperatura) {
     if(temperatura < 21) {
         std::cout << "Tá frio demais pra levantar!" << std::endl;
     }
@@ -395,8 +429,8 @@ int main(){
     p->levantar(true);
     p->levantar(false);
     
-    p->levantar(19.5);
-    p->levantar(23.7);
+    p->levantar(19.5f);
+    p->levantar(23.7f);
 
     delete p;
 
@@ -405,7 +439,7 @@ int main(){
 </code>
 </pre>
 
-<p>PS: Note que não dá pra usar os tipos string e float, nesse casos os substituímos por const char* (não esqueça do asterisco) e double. E para isso funcionar, os parâmetros deverão ser de tipos diferentes. Sobrecarga pode ser usada em construtores também.</p>
+<p>PS: Note que substituímos o tipo string por const char* (não esqueça do asterisco), pode ser que nem sempre dê pra usar string ou mesmo float (para este funcionar, devemos colocar um f depois do número float, no caso de classes). Independente disso, para a sobrecarga funcionar, os parâmetros deverão ser de tipos diferentes.</p>
 
 <p>A sobrecarga também é possível ser feita em construtores, onde um recebe parâmetros diferente do outro, como por exemplo, um construtor vazio sem parâmetros e outro com parâmetros alterados dentro dele.</p>
 
