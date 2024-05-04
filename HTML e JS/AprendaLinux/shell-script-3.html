@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="_imagens/favicon.ico"/>
+        <title>Aprenda Linux</title>
+        <link rel="stylesheet" href="_css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Linux</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-linux-1.html">Tudo sobre Linux Parte 1!</a></li>
+                    <li><a href="tudo-sobre-linux-2.html">Tudo sobre Linux Parte 2!</a></li>
+                    <li><a href="tudo-sobre-linux-3.html">Tudo sobre Linux Parte 3!</a></li>
+                    <li><a href="tudo-sobre-linux-4.html">Tudo sobre Linux Parte 4!</a></li>
+                    <li><a href="tudo-sobre-linux-5.html">Tudo sobre Linux Parte 5!</a></li>
+                    <li><a href="tudo-sobre-linux-6.html">Tudo sobre Linux Parte 6!</a></li>
+                </menu>
+            </header>
+
+<h2>Shell Scripting - Parte 3</h2>
+
+<h3>Testar Condições Compostas com AND e OR</h3>
+
+<p>A declaração if-then permite usar lógica booleana para combinar testes. Podemos usar dois operadores booleanos, AND (&&) e OR (||).</p>
+
+<p>Veja um exemplo de uso de AND:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Testar comparações compostas. Vamos verificar se
+# o usuário logado atualmente é o "eu" e se ele tem
+# permissão de escrita no seu arquivo .bashrc
+
+if [ $USER = eu ]&&[ -w $HOME/.bashrc ]; then
+    echo "O usuário $USER tem permissão para alterar o arquivo!"
+else
+    echo "O usuário $USER não pode alterar o arquivo agora!"
+fi
+</code>
+</pre>
+
+<p>O OR funciona da mesma forma, apenas mudando o && para ||.</p>
+
+<h3>Comando Case - Teste de Múltiplas Condições</h3>
+
+<p>Esse comando verifica condições múltiplas que podem ocorrer em uma variável, em um formato parecido com uma lista. A estrutura case substitui e simplifica o uso do if-then-else com várias declarações. O comando case compara o valor de uma variável ou expressão com os valores da lista criada. Se os valores baterem, o shell executará os comandos especificado para o valor.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Usando o comando case
+
+local=quarto
+
+case $local in
+    quarto)
+        echo "Você está no quarto!";;
+    cozinha)
+        echo "Aqui é a cozinha!";;
+    sala)
+        echo "Está na sala agora!";;
+    banheiro | lavanderia)
+        echo "Foi ao banheiro ou à lavanderia!";;
+    *)
+        echo "Você não está dentro de casa!";;
+esac
+</code>
+</pre>
+
+<p>Atenção que ele deverá ter dois ponto-e-vírgula após o final de cada condição (seria o equivalente ao break). O * seria o equivalente ao default.</p>
+
+<h3>Estrutura de Repetição For</h3>
+
+<p>O Shell Bash oferece três estruturas de repetição para criação de loops estruturados. São elas os comandos FOR, WHILE e UNTIL.</p>
+
+<p>O comando for permite criar um loop que itera através de uma série de valores. Cada iteração executa um conjunto definido de comando usando um dos valores da lista. A cada iteração, a variável valor contém o valor atual da lista.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Ler valores de uma lista, declarada no próprio comando for
+
+for valor in pastel pizza esfiha 'pão de queijo'
+do
+    echo "Adoro $valor."
+done
+</code>
+</pre>
+
+<p>Caso os itens iterados sejam composts por palavras separadas por espaços (como Ana Paula), o comando for irá considerar cada palavra como um item separado. Isso é devido à variável de ambiente IFS (Internal Field Separator), a qual define uma lista de caracteres que o shell bash usa como separadores de campos. São eles, por padrão: Espaço, tabulação e newline. É possível alterar essa lista de separadores.</p>
+
+<p>PS: Podemos usar o laço assim também:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Ler valores de uma lista, declarada no próprio comando for
+
+for valor in pastel pizza esfiha 'pão de queijo'; do
+    echo "Adoro $valor."
+done
+</code>
+</pre>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Arquivo lista contém uma lista de nomes,
+# um por linha, incluindo nomes compostos
+
+arquivo=~/lista.txt
+
+IFS_OLD=$IFS
+
+IFS=$'\n'
+
+for nome in `cat $arquivo`; do
+    echo "O nome é $nome"
+done
+
+IFS=$IFS_OLD
+</code>
+</pre>
+
+<p>PS: Baixe a lista <a href="_files/lista.txt" target="_blank" download="lista.txt">clicando aqui</a>.</p>
+
+<p>IFS é uma variável do sistema, nós fazemos uma alteração nela pra não cortar nomes compostos.</p>
+
+<p>Veja outro exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Iterando todos os itens de um diretório
+
+for item in ~/*; do
+    if [ -d "$item" ]; then
+        echo "O item $item é um diretório!"
+    elif [ -f "$item" ]; then
+        echo "O item $item é um arquivo!"
+    fi
+done
+</code>
+</pre>
+
+<p>Podemos também fazer o laço assim, usando o seq, que faz o incremento de um em um a partir do um até o número indicado:</p>
+
+<pre>
+<code>
+for cont in $(seq 10); do
+    echo $cont
+done
+</code>
+</pre>
+
+<p>O seq aceita parâmetros também, na ordem inicio, incremento, fim, por exemplo:</p>
+
+<pre>
+<code>
+for cont in $(seq 0 5 100); do
+    echo $cont
+done
+</code>
+</pre>
+
+<p>E podemos fazer uma contagem crescente ou decrescente de 1 em 1, por exemplo:</p>
+
+<pre>
+<code>
+for i in {10..0}; do
+    echo $i
+done
+</code>
+</pre>
+
+<h3>Estrutura While</h3>
+
+<p>O comando while permite definir um comando a testar e então iterar por um conjunto de comandos enquanto o comando definido de teste retornar status de saída zero. Quando o comando de teste retornar status de saída diferente de zero, o while para de executar seu bloco de comandos e o loop é encerrado.</p>
+
+<p>O comando test usa o mesmo formato da estrutura if-then, e podemos usar o comando test para testar condições. O status de saída do comando de teste deve mudar em algum momento durante as iterações, ou teremos um loop infinito.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Testando o comando while
+
+var=10
+
+while [ $var -gt 0 ]; do
+    echo $var
+
+    var=$[$var - 1]
+done
+</code>
+</pre>
+
+<h3>Estrutura de Repetição Until</h3>
+
+<p>O comando until opera de forma oposta ao comando while. É necessário especificar um comando de teste que retorne um status de saída diferente de zero para que o bloco de comandos listado no loop seja executado. Quando o comando de teste retornar status de saída zero, o loop termina.</p>
+
+<p>Veja um exemplo de uso de until:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Testando da estrutura de repetição until
+
+var=50
+
+until [ $var -eq 0 ]; do
+    echo $var
+
+    var=$[$var - 2]
+done
+</code>
+</pre>
+
+<h3>Laço For no Estilo Linguagem C</h3>
+
+<p>É possível usar uma estrutura de repetição for no estilo da linguagem C em um script do shell. Neste caso, teremos uma variável contador que irá controlar o número de iterações do loop.</p>
+
+<p>Exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Testando for no estilo C
+
+for((i = 1; i <= 15; i++)); do
+    echo "Número $i"
+done
+</code>
+</pre>
+
+<p>PS: Observe que não é 100% igual a um laço for do C.</p>
+
+<h3>Ler Dados do Teclado - Parâmetros de Linha de Comando</h3>
+
+<p>Frequentemente, precisamos escrever scripts que interajam com o usuário. Há algumas formas de se obter dados dos usuários no shell, como parâmetros de linha de comando, opções e leitura de dados diretamente do teclado.</p>
+
+<p>É o método para passar dados ao script do shell. Os parâmetros de linha de comando permitem adicionar valores de dados à linha de comando ao executar o script. Para passar parâmetros a um script, digite-os após o nome do script, ao executá-lo.</p>
+
+<p>O Shell Bash atribui variáveis especiais, denomidadas parâmetros posicionais, a todos os parâmetros digitados na linha de comandos. Os parâmetros posicionais são números, sendo $0 o nome do programa, $1 o primeiro parâmetro, $2 o segundo, e assim por diante até o nono ($9). Para adicionar mais parâmetros, englobe o nº do parâmetros entre parênteses, como $(10).</p>
+
+<p>Veja um exemplo (passe o parâmetro depois do nome do script):</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Teste de parâmetros na linha de comandos
+# Para executar digite na linha de comandos
+# Após o nome do script o número, por exemplo:
+# ./script.sh 5
+
+echo "Programa que calcula o quadrado de um número."
+
+quadrado=$[$1 * $1]
+
+echo "O quadrado de $1 é $quadrado."
+</code>
+</pre>
+
+<p>Há algumas variáveis especiais disponúveus no shell bash. A variável especial $# contém o número de parâmetros de linha de comando fornecidos ao rodas o script. Podemos usá-la para verificar se o usuário digitou o Nº de parâmetros necessários para rodar o programa corretamente.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Verificação de número de parâmetros
+
+if [ $# -ne 1 ]; then
+    echo "Digite um valor!"
+else
+    result=$[$1 * 3]
+
+    echo "O triplo de $1 é $result."
+fi
+</code>
+</pre>
+
+<h3>Ler Dados do Teclado - Comando Shift</h3>
+
+<p>O comando shift auxilia na manipulação de parâmetros de linha de comando. O comando shift desloca os parâmetros em suas posições relativas. Ao ser usado, o comando shift "rebaixa" cada parâmetro em uma posição, de modo que o valor variável $3 é movido para $2, o valor de $2 é movido para $1 e o valor de $1 é descartado.</p>
+
+<p>Veja um exemplo de uso (passe pelo menos um parâmetro, não precisa ser números):</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Exemplo de uso do comando shift
+
+i=1
+
+while [ -n "$1" ]; do
+    echo "O parâmetro $i tem o valor $1."
+
+    i=$[$i + 1]
+    
+    shift
+done
+</code>
+</pre>
+
+<h3>Ler Dados do Teclado - Opções de Linha de Comando</h3>
+
+<p>Opções são letras precedidas por um hífen que alteram o comportamento de um comando. Para processar opções passadas ao script, vamos usar uma combinação dos comandos case e shift.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Usando opções de um script
+
+while [ -n "$1" ]; do
+    case "$1" in
+        -a)
+            echo "Opção selecionada: A";;
+        -b)
+            echo "Opção selecionada: B";;
+        -c)
+            echo "Opção selecionada: C";;
+        -*)
+            echo "Opção incorreta";;
+    esac
+    shift       
+done
+</code>
+</pre>
+
+<p>Podemos passar mais de um parâmetro no script acima.</p>
+
+<h3>Comando Read - Ler Dados do Teclado e de Arquivos</h3>
+
+<p>O comando read aceita entrada de dados da entrada padrão ou de outro descritor de arquivos. Após receber a entrada, o comando read coloca os dados em uma variável padrão.</p>
+
+<p>Veja um exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+echo -n "Digite seu nome: "
+
+read nome
+
+echo "Seu nome é $nome."
+</code>
+</pre>
+
+<p>Se não for especificada nenhuma variável para receber os dados no comando read, então o valor lido será colocado na variável de ambiente REPLY.</p>
+
+<p>Veja um exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+read -p "Digite sua idade: "
+
+echo "Você tem $REPLY anos de idade!"
+</code>
+</pre>
+
+<p>É possível especificar um valor de timeout para o comando read, para isso, usamos a opção -t para passar o Nº de segundos que o comando aguardará uma entrada do usuário. Quando o time expira, o read retorna status de saída não-zero.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Usando timer
+
+echo -n "Digite seu nome: "
+
+if read -t 4 nome; then
+    echo "Olá $nome, tudo bem por aí?"
+else
+    echo "Você demorou mais de 4 segundos para responder!"
+fi
+</code>
+</pre>
+
+<p>É possível também fazer que o comando read conte o Nº de caracteres de entrada, e saia imediatamente quando um número predefinido for digitado, atribuindo os dados recolhidos a uma variável.</p>
+
+<p>Veja um exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Lendo um caracter (-n1 significa um caracter lido)
+
+echo -n "Deseja prosseguir com a operação? [S/N] "
+
+read -n1 resposta
+
+echo
+
+case $resposta in
+    S|s)
+        echo "Você escolher continuar!";;
+    N|n)
+        echo "Operação interrompida!";;
+    *)
+        echo "Opção inválida. Digite apenas s ou n!";;
+esac
+</code>
+</pre>
+
+<p>É possível ler o que o usuário digita, sem que no entanto apareçam os caracteres no monitor. Esse recurso é útil, por exemplo, para capturarmos senhas. Para isso, use a opção -s.</p>
+
+<p>Veja um exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Entrada oculta
+
+echo -n "Digite sua senha: "
+
+read -s senha
+
+echo
+
+echo "A senha digitada foi $senha."
+</code>
+</pre>
+
+<p>Podemos usar o comando read para ler dados armazenados em um arquivo no computador. Cada chamada ao comando read lê uma linha de texto. Quando não houverem mais linhas para ler, o comando read sairá com status de saída zero.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Ler dados de um arquivo de texto
+
+contador=1
+
+cat lista.txt | while read linha; do
+    echo "Linha $contador: $linha"
+
+    contador=$[$contador + 1]
+done
+</code>
+</pre>
+
+<ul>
+    <li><a href="shell-script-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="shell-script-4.html">Continuação da Matéria!</a></li> 
+</ul>
+
+        </div>
+    </body>
+</html>
