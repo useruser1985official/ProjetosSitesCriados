@@ -100,15 +100,21 @@ class Visualizacao {
 <code>
 require_once "Visualizacao.php";
 
-$v[0] = new Video("Aula 1 de POO");
-$v[1] = new Video("Aula 12 de PHP");
-$v[2] = new Video("Aula 15 de HTML5");
+$v = array();
 
-$g[0] = new Gafanhoto("Jubileu", 22, "M", "Jubi");
-$g[1] = new Gafanhoto("Creuza", 12, "F", "Creuzita");
+array_push($v, new Video("Aula 1 de POO"));
+array_push($v, new Video("Aula 12 de PHP"));
+array_push($v, new Video("Aula 15 de HTML5"));
 
-$vis[0] = new Visualizacao($g[0], $v[2]);
-$vis[1] = new Visualizacao($g[0], $v[1]);
+$g = array();
+
+array_push($g, new Gafanhoto("Jubileu", 22, "M", "Jubi"));
+array_push($g, new Gafanhoto("Creuza", 12, "F", "Creuzita"));
+
+$vis = array();
+
+array_push($vis, new Visualizacao($g[0], $v[2]));
+array_push($vis, new Visualizacao($g[0], $v[1]));
 
 print_r($vis[0]);
 print_r($vis[1]);
@@ -173,15 +179,21 @@ public function setAvaliacao($avaliacao) {
 <code>
 require_once "Visualizacao.php";
 
-$v[0] = new Video("Aula 1 de POO");
-$v[1] = new Video("Aula 12 de PHP");
-$v[2] = new Video("Aula 15 de HTML5");
+$v = array();
 
-$g[0] = new Gafanhoto("Jubileu", 22, "M", "Jubi");
-$g[1] = new Gafanhoto("Creuza", 12, "F", "Creuzita");
+array_push($v, new Video("Aula 1 de POO"));
+array_push($v, new Video("Aula 12 de PHP"));
+array_push($v, new Video("Aula 15 de HTML5"));
 
-$vis[0] = new Visualizacao($g[0], $v[2]);
-$vis[1] = new Visualizacao($g[0], $v[1]);
+$g = array();
+
+array_push($g, new Gafanhoto("Jubileu", 22, "M", "Jubi"));
+array_push($g, new Gafanhoto("Creuza", 12, "F", "Creuzita"));
+
+$vis = array();
+
+array_push($vis, new Visualizacao($g[0], $v[2]));
+array_push($vis, new Visualizacao($g[0], $v[1]));
 
 $vis[0]->avaliar();
 $vis[1]->avaliarPorc(85.0);

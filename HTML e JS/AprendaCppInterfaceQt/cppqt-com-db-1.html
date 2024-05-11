@@ -215,7 +215,7 @@ void JanelaLogin::on_btnEntr_clicked() {
 </code>
 </pre>
 
-<p>PS: Diferente de outras linguagens, o índice das interrogações começam em 0, e não em 1.</p>
+<p>PS: Diferente de outras linguagens, o índice das interrogações começam em 0, e não em 1. Essas interrogações são consultas preparadas para evitar SQL Injection.</p>
 
 <p>O recomendado é colocar a senha criptografada, nesse caso colocamos no SQLite o hash da senha (por exemplo, em SHA-1), e no código acima alteramos assim:</p>
 

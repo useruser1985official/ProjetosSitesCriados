@@ -289,9 +289,9 @@ ifconfig -a # Mostra informações detalhadas sobre todas as interfaces
 
 <p>Podemos também usar parâmetros no traceroute, como para aumentar a quantidade máxima de saltos com o -m, por exemplo <code>traceroute -m 60 www.google.com.br</code>.</p>
 
-<!--
+<p>PS: Tanto no ping quanto no traceroute, pode ser necessário colocar <code>-4</code> para forçar IPv4 ou <code>-6</code> para forçar IPv6.</p>
 
-<p>PS: Tanto no ping quanto no tracert, pode ser necessário colocar <code>/4</code> para forçar IPv4 ou <code>/6</code> para forçar IPv6.</p>
+<!--
 
 <p>Para limpar o cache ARP, basta usar <code>netsh interface ip delete arpcache</code>, para resetar usamos <code>netsh int ip reset all</code>.</p>
 
@@ -309,7 +309,7 @@ ifconfig -a # Mostra informações detalhadas sobre todas as interfaces
 
 -->
 
-<p>Podemos usar <code>ip route</code> para ver a rota da nossa rede. E também podemos adicionar e remover todas especificando o IP com <code>ip route add 192.168.0.1</code> e <code>ip route del 192.168.0.1</code>, respectivamente.</p>
+<p>Podemos usar <code>ip route</code> para ver a rota da nossa rede. E também podemos adicionar e remover todas especificando o IP com <code>ip route add 192.168.0.1/24 via 192.168.100.10 dev enp2s0</code> e <code>ip route del 192.168.0.1/24</code>, respectivamente.</p>
 
 <p>Podemos também utilizar o comando <code>nslookup</code> assim, para vermos dados sobre o servidor do site:</p>
 

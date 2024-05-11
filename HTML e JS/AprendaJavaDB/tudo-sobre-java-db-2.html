@@ -140,6 +140,7 @@ public List&lt;Categoria&gt; findAll() { // Importe java.util.List
         while(rs.next()) { // Executa enquanto os dados forem true.
             Categoria cate = new Categoria();
 
+            cate.setId(rs.getInt("id"));
             cate.setDescricao(rs.getString("descricao"));
             categorias.add(cate);
         }

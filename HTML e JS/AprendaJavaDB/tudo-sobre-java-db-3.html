@@ -170,6 +170,56 @@ public void atualizar() {
 </code>
 </pre>
 
+<h3>Deletar Registro com Composição</h3>
+
+<p>Coloque isso em ProdutoDAO: </p>
+
+<pre>
+<code>
+public boolean delete(Produto prod) { // Importar model.bean.Categoria
+    String sql = "delete from produto where id = ?";
+
+    PreparedStatement stmt = null; // Importar;
+
+    try {
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, prod.getId()); // Substituir pela id desejada
+        stmt.executeUpdate(); // Isso é responsável pelo insert, update e delete no banco.
+
+        return true;
+    }
+    catch(SQLException ex) {
+        System.err.println("Erro: " + ex);
+
+        return false;
+    }
+    finally { // Isso fecha a conexão
+        ConnectionFactory.closeConnection(con, stmt);
+    }
+}
+</code>
+</pre>
+
+<p>E no ProdutoDAOTest, coloque isso:</p>
+
+<pre>
+<code>
+@Test
+public void deletar() {
+    Produto prod = new Produto();
+    prod.setId(3);
+    ProdutoDAO dao = new ProdutoDAO();
+
+    if(dao.delete(prod)) {
+        System.out.println("Deletado com Sucesso!");
+    }
+    else {
+        fail("Erro ao Deletar!");
+    }
+}
+</code>
+</pre>
+
 <h3>Organizando Projeto no Netbeans</h3>
 
 <p>Para prosseguirmos, vamos usar interfaces gráficas para o Java.</p>

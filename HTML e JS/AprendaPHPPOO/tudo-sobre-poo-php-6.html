@@ -325,9 +325,11 @@ class Video implements AcoesVideo {
 <code>
 require_once "Video.php";
 
-$v[0] = new Video("Aula 1 de POO");
-$v[1] = new Video("Aula 12 de PHP");
-$v[2] = new Video("Aula 15 de HTML5");
+$v = array();
+
+array_push($v, new Video("Aula 1 de POO"));
+array_push($v, new Video("Aula 12 de PHP"));
+array_push($v, new Video("Aula 15 de HTML5"));
 
 print_r($v);
 
@@ -451,14 +453,18 @@ class Gafanhoto extends Pessoa {
 require_once "Video.php";
 require_once "Gafanhoto.php";
 
-$v[0] = new Video("Aula 1 de POO");
-$v[1] = new Video("Aula 12 de PHP");
-$v[2] = new Video("Aula 15 de HTML5");
+$v = array();
+
+array_push($v, new Video("Aula 1 de POO"));
+array_push($v, new Video("Aula 12 de PHP"));
+array_push($v, new Video("Aula 15 de HTML5"));
 
 print_r($v);
 
-$g[0] = new Gafanhoto("Jubileu", 22, "M", "Jubi");
-$g[1] = new Gafanhoto("Creuza", 35, "F", "Creuza35");
+$g = array();
+
+array_push($g, new Gafanhoto("Jubileu", 22, "M", "Jubi"));
+array_push($g, new Gafanhoto("Creuza", 12, "F", "Creuzita"));
 
 print_r($g);
 
