@@ -43,6 +43,85 @@ public ViewEleitor() {
 </code>
 </pre>
 
+<p>Vamos criar a classe EleitorDAO em model.dao, com esse código:</p>
+
+<pre>
+<code>
+package model.dao;
+
+import connection.ConnectionFactory;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import model.bean.Eleitor;
+
+public class EleitorDAO {
+    private Connection con = null; // Importar java.sql.Connection
+    
+    public EleitorDAO() {
+        con = ConnectionFactory.getConnection(); // Importar connection.ConnectionFactory
+    }
+
+    public void create(Eleitor e) {
+        PreparedStatement stmt = null;
+        String sql = "insert into eleitor (nome, cpf, cep, rua, bairro, numero) values (?, ?, ?, ?, ?, ?)"; // Inserir os dados do SQL.
+        
+        try {
+            stmt = con.prepareStatement(sql);
+
+            stmt.setString(1, e.getNome());
+            stmt.setString(2, e.getCpf());
+            stmt.setString(3, e.getCep());
+            stmt.setString(4, e.getRua());
+            stmt.setString(5, e.getBairro());
+            stmt.setInt(6, e.getNumero());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Salvo com Sucesso!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar!\n\n" + ex, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+}
+</code>
+</pre>
+
+<p>E no action do botão Salvar, em ViewEleitor:</p>
+
+<pre>
+<code>
+if(txtNome.getText().trim().equals("") || txtCPF.getText().trim().length() != 14 || txtCEP.getText().trim().length() != 9 || txtRua.getText().trim().equals("") || txtBair.getText().trim().equals("")) {
+    JOptionPane.showMessageDialog(null, "Preencha Todos os Campos!", "Aviso", JOptionPane.WARNING_MESSAGE);
+}
+else {
+    Eleitor e = new Eleitor(); // Importe
+    EleitorDAO dao = new EleitorDAO(); // Importe
+            
+    e.setNome(txtNome.getText().trim());
+    e.setCpf(txtCPF.getText().trim());
+    e.setCep(txtCEP.getText().trim());
+    e.setRua(txtRua.getText().trim());
+    e.setBairro(txtBair.getText().trim());
+    e.setNumero((int)numEle.getValue());
+            
+    dao.create(e);
+            
+    txtNome.setText("");
+    txtCPF.setText("");
+    txtCEP.setText("");
+    txtRua.setText("");
+    txtBair.setText("");
+    numEle.setValue(0);
+}
+</code>
+</pre>
+
 <p>Vá em EleitorDAO e coloque esse método:</p>
 
 <pre>
@@ -146,16 +225,16 @@ public void delete(Eleitor e) {
 <code>
 private void btnExclActionPerformed(java.awt.event.ActionEvent evt) {                                        
     if(paneEle.getSelectedRow() != -1) {
-        Eleitor e = new Eleitor(); // Importe
+        Eleitor elei = new Eleitor(); // Importe
         EleitorDAO dao = new EleitorDAO(); // Importe
 
-        e.setId((int)paneEle.getValueAt(paneEle.getSelectedRow(), 0));
+        elei.setId((int)paneEle.getValueAt(paneEle.getSelectedRow(), 0));
 
-        dao.delete(e);
+        dao.delete(elei);
         
         txtNome.setText("");
         txtCPF.setText("");
-    txtCEP.setText("");
+        txtCEP.setText("");
         txtRua.setText("");
         txtBair.setText("");
         numEle.setValue(0);
@@ -173,7 +252,7 @@ private void btnExclActionPerformed(java.awt.event.ActionEvent evt) {
 
 <p>Abra os Views de Eleitor, Urna e Candidado, e nas propriedades deles coloque a opção DISPOSE em defaultCloseOperation:</p>
 
-<p>Adicione os eventos nos botões de Eleitor, Urna e Candidado. Esse é o código de um deles:</p>
+<p>Adicione os eventos nos botões de Eleitor, Urna e Candidado no ViewPrincipal. Esse é o código de um deles:</p>
 
 <pre>
 <code>
@@ -195,85 +274,6 @@ numEle.setValue(0);
 </pre>
 
 <p>Os outros botões trabalharemos depois.</p>
-
-<p>Vamos criar a classe EleitorDAO em model.dao, com esse código:</p>
-
-<pre>
-<code>
-package model.dao;
-
-import connection.ConnectionFactory;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
-import model.bean.Eleitor;
-
-public class EleitorDAO {
-    private Connection con = null; // Importar java.sql.Connection
-    
-    public EleitorDAO() {
-        con = ConnectionFactory.getConnection(); // Importar connection.ConnectionFactory
-    }
-
-    public void create(Eleitor e) {
-        PreparedStatement stmt = null;
-        String sql = "insert into eleitor (nome, cpf, cep, rua, bairro, numero) values (?, ?, ?, ?, ?, ?)"; // Inserir os dados do SQL.
-        
-        try {
-            stmt = con.prepareStatement(sql);
-
-            stmt.setString(1, e.getNome());
-            stmt.setString(2, e.getCpf());
-            stmt.setString(3, e.getCep());
-            stmt.setString(4, e.getRua());
-            stmt.setString(5, e.getBairro());
-            stmt.setInt(6, e.getNumero());
-            
-            stmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Salvo com Sucesso!", "Informação", JOptionPane.INFORMATION_MESSAGE);
-        }
-        catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Salvar!\n\n" + ex, "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-        finally {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
-    }
-}
-</code>
-</pre>
-
-<p>E no action do botão Salvar, em ViewEleitor:</p>
-
-<pre>
-<code>
-if(txtNome.getText().trim().equals("") || txtCPF.getText().trim().length() != 14 || txtCEP.getText().trim().length() != 9 || txtRua.getText().trim().equals("") || txtBair.getText().trim().equals("")) {
-    JOptionPane.showMessageDialog(null, "Preencha Todos os Campos!", "Aviso", JOptionPane.WARNING_MESSAGE);
-}
-else {
-    Eleitor e = new Eleitor(); // Importe
-    EleitorDAO dao = new EleitorDAO(); // Importe
-            
-    e.setNome(txtNome.getText().trim());
-    e.setCpf(txtCPF.getText().trim());
-    e.setCep(txtCEP.getText().trim());
-    e.setRua(txtRua.getText().trim());
-    e.setBairro(txtBair.getText().trim());
-    e.setNumero((int)numEle.getValue());
-            
-    dao.create(e);
-            
-    txtNome.setText("");
-    txtCPF.setText("");
-    txtCEP.setText("");
-    txtRua.setText("");
-    txtBair.setText("");
-    numEle.setValue(0);
-}
-</code>
-</pre>
 
 <ul>
     <li><a href="tudo-sobre-java-db-6.html">Parte Anterior da Matéria!</a></li>

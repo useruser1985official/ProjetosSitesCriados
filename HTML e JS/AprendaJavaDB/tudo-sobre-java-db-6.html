@@ -430,28 +430,30 @@ dao.create(user);
 
 <pre>
 <code>
-PreparedStatement stmt = null;
-ResultSet rs = null; // Importe
-String sql = "select * from usuario where login = ? and senha = ?";
-        
-boolean checkagem = false;
-
-try {
-    stmt = con.prepareStatement(sql);
-    stmt.setString(1, login);
-    stmt.setString(2, senha);
+public boolean checkLogin(String login, String senha) {
+    PreparedStatement stmt = null;
+    ResultSet rs = null; // Importe
+    String sql = "select * from usuario where login = ? and senha = ?";
             
-    rs = stmt.executeQuery();
+    boolean checkagem = false;
 
-    if(rs.next()) {
-        checkagem = true;
+    try {
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, login);
+        stmt.setString(2, senha); // A criptografia vai aqui
+                
+        rs = stmt.executeQuery();
+
+        if(rs.next()) {
+            checkagem = true;
+        }
     }
-}
-catch(SQLException ex) {
-    JOptionPane.showMessageDialog(null, "Erro ao Autenticar!\n\n" + ex, "Erro", JOptionPane.ERROR_MESSAGE);
-}
+    catch(SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Erro ao Autenticar!\n\n" + ex, "Erro", JOptionPane.ERROR_MESSAGE);
+    }
 
-return checkagem;
+    return checkagem;
+}
 </code>
 </pre>
 
@@ -462,11 +464,11 @@ return checkagem;
 UsuarioDAO dao = new UsuarioDAO();
 
 if(dao.checkLogin(txtLogin.getText().trim(), new String(txtSenha.getPassword()).trim())) {
-    new ViewJTable().setVisible(true);
+    new ViewPrincipal().setVisible(true);
     this.dispose();
 }
 else {
-    JOptionPane.showMessageDialog(null, "Acesso Negado!", "Acesso Negado!", JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Acesso Negado!", "Erro", JOptionPane.ERROR_MESSAGE);
 }
 </code>
 </pre>
