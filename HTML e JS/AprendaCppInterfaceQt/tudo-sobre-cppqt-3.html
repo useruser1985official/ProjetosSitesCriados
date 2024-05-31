@@ -257,7 +257,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     
     QString cursos[4] = {"C++", "PHP", "C#", "Javascript"};
 
-    for(int i = 0; i <= 4; i++) {
+    for(int i = 0; i < 4; i++) {
         ui->cxItens->addItem(cursos[i]);
     }
 }
@@ -276,7 +276,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     QString cursos[4] = {"C++", "PHP", "C#", "Javascript"};
     QString icones[4] = {":/icons/files/cpp.png", ":/icons/files/php.png", ":/icons/files/csharp.png", ":/icons/files/js.png"}; // Inclua QIcon
 
-    for(int i = 0; i <= 4; i++) {
+    for(int i = 0; i < 4; i++) {
         ui->cxItens->addItem(QIcon(icones[i]), cursos[i]);
     }
 }

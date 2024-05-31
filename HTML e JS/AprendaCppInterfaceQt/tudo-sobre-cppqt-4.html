@@ -36,7 +36,7 @@
 <pre>
 <code>
 void MainWindow::on_btnAdd_clicked() {
-    if(ui->txtItem->text().trimmed() != ""){
+    if(ui->txtItem->text().trimmed().compare("")) { // Inverso da comparação
         ui->lstItens->addItem(ui->txtItem->text().trimmed());
         
         ui->txtItem->clear();
