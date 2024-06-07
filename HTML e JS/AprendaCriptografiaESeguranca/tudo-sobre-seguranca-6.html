@@ -353,11 +353,21 @@ gpg --auto-key-locate nodefault,wkd --locate-keys email@servico.com
 </code>
 </pre>
 
-<p>Para remover uma chave pública do chaveiro:</p>
+<p>Para criar um certificado de revogação:</p>
 
 <pre>
 <code>
-gpg --delete-keys 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB
+gpg --gen-revoke 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB > 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB-revcert.rev
+</code>
+</pre>
+
+<p>PS: Sempre crie o arquivo de revogação de chave após criar a chave.</p>
+
+<p>Para revogar uma chave, basta importar ela:</p>
+
+<pre>
+<code>
+gpg --import 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB-revcert.rev
 </code>
 </pre>
 
@@ -369,23 +379,13 @@ gpg --delete-secret-keys 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB
 </code>
 </pre>
 
-<p>Para criar um certificado de revogação:</p>
+<p>Para remover uma chave pública do chaveiro:</p>
 
 <pre>
 <code>
-gpg --gen-revoke 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB > 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB-revcert.rev
+gpg --delete-keys 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB
 </code>
 </pre>
-
-<p>Para revogar uma chave, basta importar ela:</p>
-
-<pre>
-<code>
-gpg --import 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB-revcert.rev
-</code>
-</pre>
-
-<p>PS: Sempre crie o arquivo de revogação de chave após criar a chave.</p>
 
 <p>Para alterar a frase senha de uma chave, utilize o comando:</p>
 

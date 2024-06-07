@@ -437,8 +437,8 @@ net localgroup administradores
     <li><code>#</code> - Para comentários.</li>
     <li><code>sleep 60</code> - Isso pausará o terminal por determinados segundos.</li>
     <li><code>xdg-open</code> - Usada para abrir uma pasta ou site.</li>
-    <li><code>mv "origem" "destino"</code> - Para mover arquivos ou diretórios, pode ser usado também pra renomear arquivos.</li>
-    <li><code>cp "origem" "destino"</code> - Para copiar arquivos ou diretórios.</li>
+    <li><code>mv "origem" "destino"</code> - Para mover arquivos ou diretórios (pode ser necessário especificar <code>-r</code>), pode ser usado também pra renomear arquivos.</li>
+    <li><code>cp "origem" "destino"</code> - Para copiar arquivos ou diretórios (pode ser necessário especificar <code>-r</code>).</li>
     <li><code>&amp;&amp;</code> - Para "grudar" mais de um comando numa mesma linha. Pode ser usado <code>;</code> no lugar.</li>
     <li><code>echo "texto"&gt;&gt;"arquivo"</code> - Escreve num arquivo, e não no terminal (por exemplo, <code>echo teste>>$HOME/teste.txt</code>). Se o arquivo não existir, será criado. Da mesma forma, as setas podem ser utilizadas com funções do echo e outros comandos, por exemplo <code>ls&gt;&gt;arquivo.txt</code> escreve o conteúdo de ls no arquivo especificado. Usando um <code>&gt;</code> ele sobreescreve o arquivo caso exista, usando dois <code>&gt;&gt;</code> ele adiciona o texto no arquivo caso exista.</li>
     <li><code>more</code> - Lê o Arquivo no Terminal (como <code>more $HOME/teste.txt</code>), pode ser usado <code>cat</code> no lugar.</li>
