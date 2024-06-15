@@ -31,110 +31,6 @@
                            
 <h2>Cisco Packet Tracer - Parte 2</h2>
 
-<h3>Configurando Porta Trunk</h3>
-
-<p>Crie um novo projeto com três computadores, um switch 2950-24 do lado esquerdo, um switch 2960 do lado direito e mais três computadores do lado direito. Configure os computadores com os seguintes IPs:</p>
-
-<p>Lado esquerdo (portas 1, 2 e 11):</p>
-
-<ul>
-    <li><code>192.168.10.1</code></li>
-    <li><code>192.168.10.2</code></li>
-    <li><code>192.168.20.1</code></li>
-</ul>
-
-<p>Ligue com o cabo Through no primeiro switch.</p>
-
-<p>Lado direito (portas 1, 11 e 12):</p>
-
-<ul>
-    <li><code>192.168.10.3</code></li>
-    <li><code>192.168.20.2</code></li>
-    <li><code>192.168.20.3</code></li>
-</ul>
-
-<p>Ligue o mesmo tipo de cabo no segundo switch.</p>
-
-<p>Use o cabo Cross e ligue nas últimas portas de ambos os switches (porta 24).</p>
-
-<p>Na CLI do primeiro switch e do segundo switch, digite esses comandos:</p>
-
-<pre>
-<code>
-enable
-
-configure terminal
-
-vlan 10
-
-name lab-1
-
-exit
-
-vlan 20
-
-name lab-2
-
-exit
-
-interface range FastEthernet 0/1 - 10
-
-switchport mode access
-
-switchport access vlan 10
-
-no shutdown
-
-exit
-
-interface range FastEthernet 0/11 - 20
-
-switchport mode access
-
-switchport access vlan 20
-
-no shutdown
-
-exit
-
-exit
-
-show vlan brief
-
-copy running-config startup-config
-</code>
-</pre>
-
-<p>Para configurar a porta trunk (no caso, a 24), entre no primeiro switch e digite esses comandos, e faça o mesmo no segundo:</p>
-
-<pre>
-<code>
-enable
-
-conf t
-
-interface FastEthernet 0/24
-
-switchport mode trunk
-
-no shutdown
-
-exit
-
-exit
-
-show interface trunk
-
-copy running-config startup-config
-</code>
-</pre>
-
-<p>No último comando, veremos a porta truncada e as VLans habilitadas.</p>
-
-<p>Nesse caso, os computadores estão nas redes <code>192.168.10</code> e <code>192.168.20</code>, mesmo que ambas estejam em switches diferentes, mas estão truncados.</p>
-
-<p>Pra testar, entre no prompt do PC <code>192.168.10.1</code> e dê um ping no PC <code>192.168.10.3</code>, ele vai responder mesmo estando em switches diferentes.</p>
-
 <h3>Revisão e Configuração de Endereço IP em um Roteador</h3>
 
 <p>Num novo projeto, coloque um roteador 2621XM e coloque um módulo serial do tipo WIC-1T (desligue ele antes).</p>
@@ -511,6 +407,110 @@ show ip route
 <p>Da mesma forma, podemos ir ao prompt do segundo PC e pingar a porta da rede 1 do roteador e do primeiro PC (<code>192.168.1.1</code> e <code>192.168.1.10</code>).</p>
 
 <p>Agora todo mundo tá vendo todo mundo. Volte ao prompt do primeiro PC e use o comando <code>tracert 192.168.3.10</code> para vermos a rota dele. Faça o mesmo no segundo PC com <code>tracert 192.168.1.10</code>. Dessa forma entendemos como funciona o traceroute, onde cada IP é um roteador onde passa para chegar ao endereço final.</p>
+
+<h3>Firewall: Listas de controle de acesso (ACL) no Cisco Packet Tracer</h3>
+
+<p>Coloque um PC com o IP <code>192.168.1.2</code> com o gateway <code>192.168.1.1</code>, e um roteador 2621XM ligado a ele com o IP <code>192.168.1.1</code> e máscara padrão C, mas do outro lado do roteador terá o IP <code>192.168.2.1</code> e a máscara <code>255.255.255.252</code> (outra rede). Coloque ao lado um firewall 5506 e no final, um servidor. No firewall, que será configurado por último, a porta ligada ao roteador terá a mesma máscara e o IP <code>192.168.2.2</code>. Do outro lado, será outra rede, com o IP do firewall sendo <code>192.168.3.1</code> e o servidor com o IP <code>192.168.3.2</code> com o gateway <code>192.168.3.1</code>, ambos com a máscara <code>255.255.255.252</code>.</p>
+
+<p>No roteador, vamos em config e coloque em Config, em RIP, adicione as redes <code>192.168.1.0</code> e <code>192.168.2.0</code>.</p>
+
+<p>No servidor, habilite o HTTP para um teste.</p>
+
+<p>No firewall, vá em CLI e digite esses comandos:</p>
+
+<pre>
+<code>
+enable # Pede senha, mas ela é em branco, só confirmar
+
+conf t
+
+interface g1/1
+
+ip address 192.168.2.2 255.255.255.252
+
+no shutdown
+
+nameif cliente
+
+security-level 0 # Adiciona nível segurança 0, para redes públicas
+
+exit
+
+interface g1/2
+
+ip address 192.168.3.1 255.255.255.252
+
+no shutdown
+
+nameif servidor
+
+security-level 0
+
+exit
+</code>
+</pre>
+
+<p>Ele ainda não estará funcionando como um firewall, faremos isso em seguida.</p>
+
+<p>Digite no CLI do firewall ainda:</p>
+
+<pre>
+<code>
+router rip
+
+network 192.168.2.0
+
+network 192.168.3.0
+
+exit
+</code>
+</pre>
+
+<p>No PC, podemos fazer o ping com o servidor digitando no prompt ping 192.168.3.2, podemos também abrir o site no navegador pelo mesmo IP.</p>
+
+<p>Digite no PC:</p>
+
+<pre>
+<code>
+ftp 192.168.3.2
+
+cisco # Usuário, a senha é a mesma
+
+quit
+</code>
+</pre>
+
+<p>Podemos ver que não estamos com nenhuma restrição na rede.</p>
+
+<p>No firewall, vamos maximizar a segurança da rede do servidor para 100, digitando no CLI:</p>
+
+<pre>
+<code>
+interface g1/2
+
+security-level 100
+
+exit
+</code>
+</pre>
+
+<p>Volte no computador e tente acessar o servidor tanto pelo site quanto pelo FTP, ele não permitirá. Podemos fazer o teste da cartinha também ou o Ping no prompt.</p>
+
+<p>Para criar listas de acesso para permitir, por exemplo, apenas o HTTP, vá no CLI do firewall e digite esses comandos:</p>
+
+<pre>
+<code>
+conf t
+
+access-list permitir-http extended permit tcp 192.168.1.0 255.255.255.0 host 192.168.3.2 eq 80 # Permitindo qualquer requisição TCP na porta 80 ao servidor.
+
+access-group permitir-http in interface cliente
+
+exit
+</code>
+</pre>
+
+<p>Volte no PC e tente acessar o site, ele abrirá normalmente, mas o Ping e o FTP continuará sendo bloqueado. O site só abrirá com o IP, pois se tiver DNS configurado no servidor, ele não abrirá por não estar autorizado o tráfego desse protocolo, que inclusive usa o UDP ao invés do TCP.</p>
 
 <ul>
     <li><a href="packet-tracer-1.html">Parte Anterior da Matéria!</a></li>

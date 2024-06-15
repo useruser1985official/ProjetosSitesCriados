@@ -179,7 +179,7 @@ clock set 22:30:05 2 FEB 2014
 
 <p>Faça isso até alterar a data toda, que aparecerá <code>&lt;cr&gt;</code> ao terminar. Para ver se alterou mesmo, digite <code>show clock</code> novamente.</p>
 
-<p>Para salvar a configuração, digite <code>copy running-config startup-config</code>e clique enter sem digitar nada. Ele salvará com o nome startup-config</p>
+<p>Para salvar a configuração, digite <code>copy running-config startup-config</code> e clique enter sem digitar nada. Ele salvará com o nome startup-config</p>
 
 <p>Para configurar a senha, digite isso:</p>
 
@@ -412,6 +412,110 @@ exit
 <p>A primeira VLan vai da porta 1 a 10, e a segunda da porta 11 ao 20.</p>
 
 <p>Para ver as VLans, digite <code>show vlan brief</code>. As portas que não ficaram em nenhuma VLan ficarão na default, as outras VLAN serão as criadas (mkt e fin).</p>
+
+<h3>Configurando Porta Trunk</h3>
+
+<p>Crie um novo projeto com três computadores, um switch 2950-24 do lado esquerdo, um switch 2960 do lado direito e mais três computadores do lado direito. Configure os computadores com os seguintes IPs:</p>
+
+<p>Lado esquerdo (portas 1, 2 e 11):</p>
+
+<ul>
+    <li><code>192.168.10.1</code></li>
+    <li><code>192.168.10.2</code></li>
+    <li><code>192.168.20.1</code></li>
+</ul>
+
+<p>Ligue com o cabo Through no primeiro switch.</p>
+
+<p>Lado direito (portas 1, 11 e 12):</p>
+
+<ul>
+    <li><code>192.168.10.3</code></li>
+    <li><code>192.168.20.2</code></li>
+    <li><code>192.168.20.3</code></li>
+</ul>
+
+<p>Ligue o mesmo tipo de cabo no segundo switch.</p>
+
+<p>Use o cabo Cross e ligue nas últimas portas de ambos os switches (porta 24).</p>
+
+<p>Na CLI do primeiro switch e do segundo switch, digite esses comandos:</p>
+
+<pre>
+<code>
+enable
+
+configure terminal
+
+vlan 10
+
+name lab-1
+
+exit
+
+vlan 20
+
+name lab-2
+
+exit
+
+interface range FastEthernet 0/1 - 10
+
+switchport mode access
+
+switchport access vlan 10
+
+no shutdown
+
+exit
+
+interface range FastEthernet 0/11 - 20
+
+switchport mode access
+
+switchport access vlan 20
+
+no shutdown
+
+exit
+
+exit
+
+show vlan brief
+
+copy running-config startup-config
+</code>
+</pre>
+
+<p>Para configurar a porta trunk (no caso, a 24), entre no primeiro switch e digite esses comandos, e faça o mesmo no segundo:</p>
+
+<pre>
+<code>
+enable
+
+conf t
+
+interface FastEthernet 0/24
+
+switchport mode trunk
+
+no shutdown
+
+exit
+
+exit
+
+show interface trunk
+
+copy running-config startup-config
+</code>
+</pre>
+
+<p>No último comando, veremos a porta truncada e as VLans habilitadas.</p>
+
+<p>Nesse caso, os computadores estão nas redes <code>192.168.10</code> e <code>192.168.20</code>, mesmo que ambas estejam em switches diferentes, mas estão truncados.</p>
+
+<p>Pra testar, entre no prompt do PC <code>192.168.10.1</code> e dê um ping no PC <code>192.168.10.3</code>, ele vai responder mesmo estando em switches diferentes.</p>
 
 <ul>
     <li><a href="packet-tracer-2.html">Continuação da Matéria!</a></li>
