@@ -81,23 +81,27 @@
 
 <p>A CPU é responsável pelo processamento de informações do computador, dentro do processador está o cache, registradores e outros tipos de memórias. É como o "cérebro" do computador, já que é responsável por trabalhar os dados enviados por e para outros componentes e os direcionar da melhor maneira, comandando tudo.</p>
 
-<p>Usaremos de referência o processador Pentium G4560, que tem 3.5Ghz, 3 MB de cache, é dual-core, com 64 bits, de 6ª geração e custa em média uns 350 Reais.</p>
+<p>Usaremos de referência o processador Pentium G4560, que tem 3.5Ghz, 3 MB de cache, é dual-core, tem 4 threads, com 64 bits, de 6ª geração e custa em média uns 350 Reais.</p>
 
-<p>Para escolhermos bem um processador, veja a quantidade de GHz (quanto maior, melhor), a quantidade de núcleos físicos (que dividem as tarefas, quanto mais, melhor) e os bits (32 ou 64) também são importantes, dependendo do sistema escolhido (processadores de 32 bits só acessam até 4 GB de RAM, processadores de 64 bits processam muito mais memória, mas só quando usados também com sistemas de 64 bits). A geração também influi, mas menos que essas outras opções.</p>
+<p>Para escolhermos bem um processador, veja a quantidade de GHz (quanto maior, melhor), o cache (quanto mais, melhor), a quantidade de núcleos físicos (que dividem as tarefas, quanto mais, melhor), de threads (quanto mais, melhor) e os bits (32 ou 64) também são importantes, dependendo do sistema escolhido (processadores de 32 bits só acessam até 4 GB de RAM, processadores de 64 bits processam muito mais memória, mas só quando usados também com sistemas de 64 bits), o número de bits (32 ou 64) é a quantidade de bits que o processador consegue responder de uma só vez. A geração também influi, mas menos que essas outras opções.</p>
 
 <p>PS: O sistema 32 bits pode ser identificado também como x86, enquanto o de 64 bits é identificado como x64.</p>
 
+<p>O cache de CPU é uma área de memória rápida localizada no processador.</p>
+
 <p>A medida em Hertz representa a contagem de ciclos que o circuito realiza a todo segundo (1 Hz é um ciclo por segundo). Como são valores muito altos geralmente usamos Khz (1.000 ciclos por segundo), Mhz (1.000.000 de ciclos por segundo) e Ghz (1.000.000.000 de ciclos por segundo). Um processador de 4,0 Ghz realiza 4 bilhões de ciclos por segundo.</p>
+
+<p>O thread é uma sequência de instruções que podem ser executados pelo processador. Em computação, um thread é a menor unidade de processamento que pode ser agendada pelo sistema operacional.</p>
 
 <p>Na verdade, o processador é o CPU, e não o gabinete, como a maioria pensa.</p>
 
-<p>Dentro da caixinha, além do processador, tem o dissipador de calor (a ventoinha interna do computador).</p>
+<p>Dentro da caixinha, além do processador, tem o dissipador de calor (a ventoinha interna do computador). A caixa indica o soquete padrão do processador, que no caso é LGA1151, e a placa deve ser do mesmo padrão, inclusive o número.</p>
 
 <p>PS: Cuidado para não colocar a mão nos contatos do processador, pegue sempre de lado, como se faz com um CD/DVD.</p>
 
 <h3>Mais sobre Processadores</h3>
 
-<p>Nos números dos processadores Intel, o número que vai do i3 ao i9 diz da potência do processador (quanto maior, mais potente, a i3 para uso comum, i5 para gamers e i7 para alto desempenho). Já sobre as séries, elas variam, da menor pra maior, T, S, E, H, K e R (sendo, por exemplo, a T pra uso comuns, S um meio-termo e a H para gamers). Já o número (como 4560) mostra qual é a geração (1ª número) e a hierarquia (últimos 3 números, quando maior, melhor).</p>
+<p>Nos números dos processadores Intel, o número que vai do i3 ao i9 diz da potência do processador (quanto maior, mais potente, a i3 para uso comum, i5 para gamers e i7 para alto desempenho). Já sobre as séries, elas variam, da menor pra maior, T, S, E, H, K e R (sendo, por exemplo, a T pra uso comuns, S um meio-termo e a H para gamers, a ausência da letra indica uma versão padrão). Já o número (como 4560) mostra qual é a geração (1ª número) e a hierarquia (últimos 3 números, quanto maior, melhor).</p>
 
 <p>Para a compreensão, é preciso conhecer:</p>
 
@@ -113,7 +117,7 @@
 
 <p>A unidade lógica e aritmética (ULA) é um circuito digital que realiza operações lógicas e aritméticas. A ULA é uma peça fundamental da unidade central de processamento (CPU), e até dos mais simples microprocessadores. É na verdade, uma <q>grande calculadora eletrônica</q> e sua tecnologia já estava disponível quando os primeiros computadores modernos foram construídos.</p>
 
-<p>Além dos núcleos físicos disponíveis nos processadores, também temos os núcleos lógicos, que são criados pelos processadores de maneira virtual.</p>
+<p>Além dos núcleos físicos disponíveis nos processadores, também temos os núcleos lógicos (threads), que são criados pelos processadores de maneira virtual.</p>
 
 <p>Outra opção de processadores muito utilizada é os AMD, com essas classificações:</p>
 
@@ -130,15 +134,26 @@
 
 <p>No padrão LGA, os contatos (pininhos) ficam na placa-mãe e as entradas no processador e são mais comuns em processadores Intel. Já no padrão PGA é justamente o contrário (os contatos que ficam no processador). O PGA é um padrão mais antigo e é mais comum nos processadores AMD (não em todos).</p>
 
-<p>O processador e a placa-mãe devem ser compatíveis entre si (ou ambos é LGA ou ambos é PGA, não podendo ter o processador de um padrão e a placa-mãe de outro).</p>
+<p>O processador e a placa-mãe devem ser compatíveis entre si (ou ambos é LGA ou ambos é PGA, não podendo ter o processador de um padrão e a placa-mãe de outro). Também deve se prestar atenção nos números ao lado (por exemplo, o processador LGA1151 deverá ser usado numa placa-mãe também LGA1151, que tem 1151 pinos de contato).</p>
 
 <p>Existem também os processadores ARM, que são processadores com conjunto reduzido de instruções e que, por isso, consomem menos energia e esquentam menos, muito comuns em dispositivos como celulares, tablets e computadores mais simples como o Raspberry PI. Inclusive, muitos desses processadores costumam ser integrados com memória RAM e a GPU num mesmo componente, chamado de SoC (System on Chip, ou sistema em um chip).</p>
+
+<p>Para entender, veja a quantidade de memória que um processador pode processar:</p>
+
+<ul>
+    <li><b>8 bits:</b> 2<sup><small>8</small></sup> = 256 posições de memória = 256 B.</li>
+    <li><b>16 bits:</b> 2<sup><small>16</small></sup> = 65.536 posições de memória = 64 KB.</li>
+    <li><b>32 bits:</b> 2<sup><small>32</small></sup> = 4.294.967.296 posições de memória = 4 GB.</li>
+    <li><b>64 bits:</b> 2<sup><small>64</small></sup> = 18.446.744.073.709.551.616 posições de memória = 16 EB (ExaBytes).</li>
+</ul>
+
+<p>Os padrões 8 e 16 bits não são mais usados atualmente. O de 32 bits ainda é usado em alguns sistemas e programas, principalmente os mais antigos. Hoje em dia a maioria dos sistemas trabalham com 64 bits.</p>
 
 <h3>Fonte de Alimentação</h3>
 
 <p>As fontes são responsáveis por gerar a energia suficiente para todos os componentes do computador, de maneira adequada para cada um deles, além de ter o cooler para refrigeração do gabinete. Seria como o "sistema digestório" do computador.</p>
 
-<p>A fonte escolhida para nosso computador é a da Corsair VS400, de 400 Watts (que já é suficiente para alimentar todos os componentes do PC), e custa em média uns 200 Reais.</p>
+<p>A fonte escolhida para nosso computador é a da Corsair VS400, de 400 Watts (que já é suficiente para alimentar todos os componentes do PC), 6 - 3 A, com bivolt automático, e custa em média uns 200 Reais.</p>
     
 <p>Procure as fontes que tenham o selo 80 Plus ou maior, isso indica o reaproveitamento da energia (no caso, a de 400 Watts fornece cerca de 320, que é 80%). Fontes que reaproveitam pouca energia podem não fornecer o suficiente para os componentes e sobreaquecer.</p>
 
@@ -154,11 +169,13 @@
 
 <p>Saiba também a diferença entre volts, ampere e watts. Os volts são a tensão (diferença de potencial), que geralmente é 110 ou 220. Os amperes são a corrente (quantidade de elétrons que passa no fio em um determinado tempo). Os watts são a potência (capacidade de pegar a energia e transformar em trabalho). Numa analogia a uma mangueira de água, os volts seriam a pressão da água, os amperes seriam o volume da água (fluxo) mesmo se ela estiver desligada, e os watts a velocidade que ela enche um balde.</p>
 
+<p>As melhores marcas de fontes são: Antec, Corsair, ReDragon, EVGA e Aerocool.</p>
+
 <h3>Placa-Mãe</h3>
 
 <p>A placa-mãe (ou placa lógica) é a parte que se conecta os demais componentes do computador, como HD, RAM, processador, placa de vídeo, unidades de disco, etc.</p>
 
-<p>No exemplo do nosso computador, usaremos a placa-mãe Asus H110M-D, de 2400 MHZ, que suporta até 32 GB de RAM e processadores de 6ª e 7ª geração, tem USB 2.0 e 3.0, placa de som integrada e saídas HDMI e VGA, e custa em torno de 325 Reais.</p>
+<p>No exemplo do nosso computador, usaremos a placa-mãe Asus H110M-D, de 2400 MHZ, que suporta até 32 GB de RAM e processadores de 6ª e 7ª geração (do padrão LGA1151), tem USB 2.0 e 3.0, placa de som integrada e saídas HDMI e VGA, e custa em torno de 325 Reais.</p>
 
 <p>Lembre-se que primeiro devemos escolher o processador, para depois escolhermos a placa-mãe com as configurações. Os números (como o 110) são só pra representar a geração da placa.</p>
 
@@ -185,6 +202,10 @@
 <p>A placa-mãe escolhida é do tipo Micro-ATX. Veja abaixo os principais tipos de placas-mãe existentes:</p>
 
 <img src="_imagens/placa-mae-formatos.jpg" alt="Tipos de Placas-Mães"/>
+
+<p>PS: Atualmente, alguns sistemas como o Windows 11 estão exigindo o TPM (Trusted Platform Module) na versão 2.0 ou superior, um chip de hardware que é incluso na placa-mãe que traz funções de segurança baseada em hardware, como armazenamento de chaves criptográficas, proteção de dados sensíveis e geração de números aleatórios seguros. Caso esse módulo TPM não esteja disponível na placa, ele pode ser colocado separadamente através de um conector TPM header.</p>
+
+<p>As melhores marcas de placas-mãe são: AsRock, ASUS/ROG, Biostar, EVGA, Gigabyte/AORUS e MSI.</p>
 
 <h3>BIOS e Firmware</h3>
 
@@ -229,6 +250,8 @@
 
 <p>PS: A memória RAM é o que chamamos de memória física, os sistemas também costumam ter uma memória virtual que utiliza por exemplo, um pendrive ou uma parte do disco rígido, quando a memória RAM física está cheia, geralmente conhecido como Swapfile.</p>
 
+<p>As melhores marcas de memória RAM são: Corsair, Crucial, G.SKill, Kingston, Team Group e XPG.</p>
+
 <h3>HDD e SSD</h3>
 
 <p>O HD e o SD são responsáveis pelo armazenamento de arquivos, programas e tudo tipo de conteúdo utilizado no computador, incluindo o sistema operacional.</p>
@@ -249,6 +272,8 @@
 
 <p>Ao adquirir HDs e SDs, preste atenção nas séries de "cores", o green é mais pra armazenamento, já que tem desempenho menor, a blue é um intermediário e a black é de maior desempenho, mas gasta mais energia.</p>
 
+<p>As melhores marcas de HD são: Western Digital (WD), Seagate, Toshiba e HGST. Já sobre os SSDs, podemos citar também as marcas Samsung, Crucial, Adata e Kingston.</p>
+
 <h3>Periféricos</h3>
 
 <p>Um monitor ideal para programar deve ser widescreen, mas não é quesito obrigatório, só que estes ajudam a visualizar melhor algumas IDEs.</p>
@@ -262,6 +287,12 @@
 <p>Caso pegue mouse e teclado sem fio, prefira os que usem apenas um USB. O DPI do mouse deverá ser maior para telas maiores, principalmente pra usar em TV.</p>
     
 <p>Pode ser interessante mouse com mais botões, principalmente pra quem é profissional e quer colocar atalhos nos mouses, mas é dispensável. Só evite escolher mouses e teclados muito baratos.</p>
+
+<p>Caixas de som pode ser uma mais básica, mas não pegue uma muito ruim. Opções mais caras e com mais recursos são necessárias para quem trabalha com áudio ou quer uma qualidade sonora melhor.</p>
+
+<p>As melhores marcas de monitor são AOC, Acer, Asus, AsRock, além de marcas consolidadas em outros eletrônicos como Samsung e LG.</p>
+
+<p>Sobre teclados e mouse, as melhores marcas são Logitech, Razer, HyperX, ReDragon, SteelSeries e marcas consolidadas em outros eletrônicos como Philips e Samsung.</p>
 
 <h3>Softwares</h3>
 
