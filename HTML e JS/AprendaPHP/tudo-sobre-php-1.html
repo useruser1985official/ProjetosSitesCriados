@@ -317,6 +317,16 @@ echo intdiv(5, 2);
 </code>
 </pre>
 
+<p>Para converter números de qualquer base para qualquer base, use o método <code>base_convert()</code>, assim:</p>
+
+<pre>
+<code>
+echo base_convert(16, 10, 2) . "&lt;br/&gt;"; // Converte 16 em decimal para binário
+echo base_convert(16, 10, 8) . "&lt;br/&gt;"; // Converte 16 em decimal para octal
+echo base_convert(16, 10, 16) . "&lt;br/&gt;"; // Converte 16 em decimal para hexadecimal
+</code>
+</pre>
+
 <h3>Operadores de Atribuição</h3>
 
 <p>Além do operador de atribuição <code>=</code>, comum em qualquer linguagem, temos também outras atribuições.</p>
