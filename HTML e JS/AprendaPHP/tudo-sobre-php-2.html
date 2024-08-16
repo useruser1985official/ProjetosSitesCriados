@@ -297,7 +297,7 @@ echo date("Y");
 <code>
 date_default_timezone_set("America/Sao_Paulo"); // Pra ajustar fusos horários
 echo date("d/m/Y") . "&lt;br/&gt;"; // Exibe dia, mês e ano com quatro dígitos.
-echo date("H:i:s"); // Exibe hora, minutos e segundos.
+echo date("H:i:s") . "&lt;br/&gt;"; // Exibe hora, minutos e segundos.
 echo date("w"); // Exibe o dia da semana, a partir do 0 (para colocar no array).
 </code>
 </pre>
@@ -327,7 +327,7 @@ Veja um exemplo de formulário em HTML:
 <code>
 $valor = $_GET["v"];
 $rq = sqrt($valor);
-echo "A raiz quadrada de $valor é igual a " . number_format($rq,5) . ".";
+echo "A raiz quadrada de $valor é igual a " . number_format($rq, 5) . ".";
 </code>
 </pre>
 
@@ -449,7 +449,7 @@ echo "&lt;span class='texto'&gt;$txt&lt;/span&gt;";
 
 <pre>
 <code>
-htmlspecialchars(isset($_GET["tFiltro"]), ENT_QUOTES)) ? htmlspecialchars($_GET["tFiltro"], ENT_QUOTES)) : "";
+$txt = isset($_GET["t"]) ? htmlspecialchars($_GET["t"], ENT_QUOTES) : "Texto Genérico";
 </code>
 </pre>
 
@@ -457,7 +457,7 @@ htmlspecialchars(isset($_GET["tFiltro"]), ENT_QUOTES)) ? htmlspecialchars($_GET[
 
 <pre>
 <code>
-$ini = filter_input(INPUT_GET, "tFiltro") !== null ? (int)filter_input(INPUT_GET, "tFiltro") : 0;
+$ini = filter_input(INPUT_GET, "filtro") != null ? (int)filter_input(INPUT_GET, "filtro") : 0;
 </code>
 </pre>
 

@@ -211,6 +211,8 @@ h1 {
 
 <p>PS: O <code>@charset</code> é uma regra CSS para corrigir acentuações. Existem outras como a <code>@font-face</code> e a <code>@import</code>. E os comentários em CSS devem estar entre as <code>/* */</code>, independente da quantidade de linhas destes.</p>
 
+<p>Uma mesma página pode ter vários links de estilos e de scripts, assim como tags referentes aos mesmos, só tome cuidado para não conflitar algum deles.</p>
+
 <p>As prioridades de estilos são nessa ordem: Inline, tag style e arquivo CSS externo.</p>
 
 <p>As tags <code>frame</code>, <code>frameset</code> e <code>noframes</code> foram retiradas por prejudicar a navegação e usabilidade.</p>
@@ -406,8 +408,6 @@ body {
 
 <p>Em CSS se usa <code>#</code> para formatar IDs específicas, e <code>.</code> para fazer o mesmo com classes, e ainda pode usar <code>:</code> para movimentos de mouse, após o nome da tag em que um deles se localiza, por exemplo:</p>
 
-<p>Uma mesma página pode ter vários links de estilos e de scripts, assim como tags referentes aos mesmos, só tome cuidado para não conflitar algum deles.</p>
-
 <pre>
 <code>
 /* Classes e ids podem ser colocadas sem indicar a tag antes também. */
@@ -441,7 +441,17 @@ a:visited {
 
 <p>No HTML e CSS, as ids só podem ser aplicadas a um único objeto. Para aplicar a vários objetos, usamos classes, como visto no exemplo acima.</p>
 
-<p>PS: Sobre os movimentos das tags a, o <code>hover</code> é para trabalharmos quando movimentarmos o mouse por cima (pode ser usado com outras tags), podemos usar o <code>visited</code> para quando o link já tiver sido visitado, o <code>link</code> para quando antes de clicarmos e o <code>active</code> para o momento de clicarmos.</p>
+<p>PS: Sobre os movimentos do mouse, o <code>hover</code> é para trabalharmos quando movimentarmos o mouse por cima, podemos usar o <code>visited</code> para quando o link já tiver sido visitado, o <code>link</code> para quando antes de clicarmos e o <code>active</code> para o momento de clicarmos. Veja como são usados eles:</p>
+
+<ul>
+    <li><code>:hover</code>: Aplica estilos a um elemento quando o usuário passa o cursor sobre ele.</li>
+    <li><code>:active</code>: Aplica estilos a um elemento no momento em que ele está sendo ativado pelo usuário, geralmente clicado.</li>
+    <li><code>:focus</code>: Aplica estilos a um elemento quando ele recebe o foco, geralmente através de navegação pelo teclado ou clique.</li>
+    <li><code>:link</code>: Aplica estilos a um link que ainda não foi visitado.</li>
+    <li><code>:visited</code>: Aplica estilos a um link que já foi visitado pelo usuário.</li>
+    <li><code>:first-line</code>: Aplica estilos à primeira linha de um bloco de texto.</li>
+    <li><code>:first-letter</code>: Aplica estilos à primeira letra de um bloco de texto.</li>
+</ul>
 
 <p>Para trabalharmos com cores (usando <code>color</code> para letras e <code>background-color</code> para o fundo), usamos três formas basicamente: Nomes explícitos em inglês (como red, white, gray, green, blue), códigos hexademicais (como #0000ff), e o rgb (como rgb(255, 255, 0), e também tem o rgba para definir a opacidade de 0 a 1, como rgba(255, 255, 0, 0.4)). Os códigos de várias cores podem ser vistos aqui: <a href="https://pt.wikipedia.org/wiki/Lista_de_cores" target="_blank">https://pt.wikipedia.org/wiki/Lista_de_cores</a></p>
 

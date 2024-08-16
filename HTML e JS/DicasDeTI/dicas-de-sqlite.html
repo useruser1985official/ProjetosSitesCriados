@@ -114,7 +114,18 @@ sqlite3 sistema.db3 .dump &gt; backup.sql
 </code>
 </pre>
 
-<p>Para fazer um banco de dados SQLite com mais conteúdos, importe <a href="_files/cursos.sql" target="_blank">esse arquivo clicando aqui</a> e salve no banco de dados com o comando <code>sqlite3 cadastro.db3 &lt; cursos.sql</code>. Ele tem as tabelas cursos e gafanhotos com chaves estrangeiras.</p>
+<p>Para fazer um banco de dados SQLite com mais conteúdos, importe <a href="_files/cursos.sql" target="_blank">esse arquivo clicando aqui</a> e salve no banco de dados com o comando <code>sqlite3 sistema.db3 &lt; cursos.sql</code>. Ele tem as tabelas cursos e gafanhotos com chaves estrangeiras.</p>
+
+<p>Saiba também que:</p>
+
+<ul>
+    <li>Não existe <code>describe</code>, o <code>desc</code> é só para consultas descendentes em <code>select</code>.</li>
+    <li>Não suporta colunas inseridas em outras posições com <code>alter table</code>, apenas na última.</li>
+    <li>Não existe <code>modify</code> nem <code>change</code>.</li>
+    <li>Não dá para ter mais de um <code>drop column</code> ou <code>add column</code> em cada <code>alter table</code>, nem deletar chaves primárias.</li>
+    <li>Não dá pra usar <code>limit</code>.</li>
+    <li>Não existe <code>truncate</code>, <code>status</code>, <code>show</code>.</li>
+</ul>
 
         <footer>
             <p><a href="contato.html">Entre em Contato Conosco!</a></p>
