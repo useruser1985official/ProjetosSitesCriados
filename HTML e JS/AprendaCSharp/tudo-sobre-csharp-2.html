@@ -82,7 +82,7 @@ Console.WriteLine(frase.ToLower()); // Converte pra minúscula
 <pre>
 <code>
 string texto1 = "Microsoft";
-string texto2 = new string("Microsoft");
+string texto2 = new string("Microsoft".ToCharArray());
 
 Console.WriteLine(texto1.Equals(texto2));
 </code>
@@ -130,7 +130,7 @@ Console.WriteLine("Quantidade de caracteres: " + frase.Length);
 <pre>
 <code>
 string frase = "Exemplo de Frase";
-string[] dividido = frase.Split(" "); // Pode ser qualquer caractere.
+string[] dividido = frase.Split(' '); // Pode ser qualquer caractere.
 
 Console.WriteLine(dividido[0]);
 </code>

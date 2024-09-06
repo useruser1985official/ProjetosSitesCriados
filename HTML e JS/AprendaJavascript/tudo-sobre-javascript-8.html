@@ -277,6 +277,93 @@ addEventListener("load", inicia);
 </code>
 </pre>
 
+<h3>JSON</h3>
+
+<p>JSON (Javascript Object Notation) é o formato usado para armazenamento e troca de informações em arquivos de texto. JSON foi baseado no Javascript, mas pode ser usado independentemente da linguagem de programação.</p>
+
+<p>Arquivos JSON são compostos por objetos que apresentam um conjunto de chaves e valores separados por vírgula. Valores podem receber strings (escritas com aspas), numerais (escritos sem aspas), arrays, estruturas lógicas, objetos nulos (null) ou até mesmo outros objetos.</p>
+
+<p>Sintaxe do JSON:</p>
+
+<pre>
+<code>
+"objeto" = {
+    "chave": "valor",
+    [...]
+}
+</code>
+</pre>
+
+<p>Por exemplo:</p>
+
+<pre>
+<code>
+let pessoa = {
+    nome: "José",
+    sobrenome: "da Silva",
+    idade: 34
+};
+</code>
+</pre>
+
+<p>Em geral, arquivos JSON são salvos em um arquivo separado na extensão <q>.json</q>.</p>
+
+<p>Exemplo: <q>empresa.json</q>:</p>
+
+<pre>
+<code>
+{
+    "funcionarios": [
+        {"nome": "José", "sobrenome": "da Silva", "idade": 23},
+        {"nome": "Ana", "sobrenome": "Gonzales", "idade": 33},
+        {"nome": "Sérgio", "sobrenome": "Parker", "idade": 18}
+    ]
+}
+</code>
+</pre>
+
+<p><q>script.js</q> – declaração direta no código JS como uma string:</p>
+
+<pre>
+<code>
+var obj = JSON.parse('{\
+    "funcionarios": [\
+        {"nome": "José", "sobrenome": "da Silva", "idade": 23},\
+        {"nome": "Ana", "sobrenome": "Gonzales", "idade": 33},\
+        {"nome": "Sérgio", "sobrenome": "Parker", "idade": 18}\
+    ]\
+}');
+
+console.log(obj);
+</code>
+</pre>
+
+<h3>Geolocalização com Javascript</h3>
+
+<p>Geolocalização corresponde à detecção de sua posição geográfica com base no sistema global de linhas imaginárias horizontais e verticais que dividem a superfície da Terra. Latitude corresponde às linhas horizontais, e longitude, às verticais.</p>
+
+<p>Nos dias de hoje tornou-se trivial a utilização de métodos de obtenção de localização do dispositivo de acesso, e tal posicionamento pode ser explorado por scripts construídos com Javascript. Navegadores modernos apresentam suporte à API da geolocalização. A obtenção do posicionamento pode ser feita através da propriedade global navigator e do objeto geolocation.</p>
+
+<pre>
+<code>
+var lat;
+var lon;
+
+if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(posicao) {
+        console.log(posicao);
+
+        lat = posicao.coords.latitude;
+        lon = posicao.coords.longitude;
+
+        console.log(lat, lon);
+    });
+}
+</code>
+</pre>
+
+<p>Ao abrir essa página no navegador, se houver suporte será exibida uma caixa de diálogo questionando se você autoriza a divulgação de sua geolocalização. Esse procedimento garante que sua localização seja utilizada apenas quando previamente autorizado.</p>
+
 <ul>
     <li><a href="tudo-sobre-javascript-7.html">Parte Anterior da Matéria!</a></li>
     <!--<li><a href="tudo-sobre-javascript-9.html">Continuação da Matéria!</a></li>-->

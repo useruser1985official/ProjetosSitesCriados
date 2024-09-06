@@ -29,17 +29,17 @@
 
 <p>Primeiro, teremos que usar um site vulnerável, veja alguns permitidos para testes: <a href="https://www.checkmarx.com/2015/04/16/15-vulnerable-sites-to-legally-practice-your-hacking-skills/" target="_blank">https://www.checkmarx.com/2015/04/16/15-vulnerable-sites-to-legally-practice-your-hacking-skills/</a></p>
 
-<p>Se o site, ao ter um parâmetro como <code>?id=2</code> e ao tirar o número dê algum erro, é sinal que ele está desprotegido</p>
+<p>Se o site, ao ter um parâmetro como <code>?id=2</code> e ao tirar o número dê algum erro, ou colocar uma aspas simples, é sinal que ele está desprotegido</p>
 
-<p>Coloque na URL algo assim: <code>id=-1 union select 1,2,3,4,5,6,7,8--</code>, pra tentar descobrir os nomes das tabelas. Enquanto der erro, tire ou adicione números.</p>
+<p>Coloque na URL algo assim: <code>id=-1 union select 1, 2, 3, 4, 5, 6, 7, 8;--</code>, pra tentar descobrir os nomes das tabelas. Enquanto der erro, tire ou adicione números.</p>
 
-<p>Coloque um comando completo, com um suposto nome de login, tipo: <code>-1 union select 1,2,3,4,5,6,7,8 from login--</code>. (o union une resultados de duas ou mais querys em um único result set, no caso, ele unirá o select do servidor com o inserido na injeção).</p>
+<p>Coloque um comando completo, com um suposto nome de login, tipo: <code>-1 union select 1, 2, 3, 4, 5, 6, 7, 8 from login;--</code>. (o union une resultados de duas ou mais querys em um único result set, no caso, ele unirá o select do servidor com o inserido na injeção).</p>
 
 <p>Uma dica é fazermos tabelas com nomes diferenciados, pois os invasores procuram nomes comuns como login, contato e etc.</p>
 
 <p>Para descobrir os dados após descobrir a tabela, aparecerão os parâmetros passados em algum lugar do site.</p>
 
-<p>Se aparecer algo tipo 4 e 6, podemos fazer: <code>id=-1 union select 1,2,3,user,5,senha,7,8--</code>.</p>
+<p>Se aparecer algo tipo 4 e 6, podemos fazer: <code>id=-1 union select 1, 2, 3, user, 5, senha, 7, 8;--</code>.</p>
 
 <p>Nesse ponto, podemos já ter descoberto a senha, e podemos entrar no admin do site.</p>
 
@@ -49,7 +49,7 @@
 
 <pre>
 <code>
-isset((int)$_GET["id"]) ? (int)$_GET["id"] : 0;
+isset($_GET["id"]) ? (int)$_GET["id"] : 0;
 </code>
 </pre>
 
@@ -64,14 +64,11 @@ isset((int)$_GET["id"]) ? (int)$_GET["id"] : 0;
 function anti_injection($sql) {
     $sql = preg_ireplace(preg_quote("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"), "", $sql); // Qualquer palavra da string especificad aqui será transformado em nada.
     $sql = strip_tags($sql); // Retira as tags como as &lt;script&gt;&lt;/script&gt;
-    $sql = (get_magic_quotes_gpc()) ? $sql : addslashes($sql); // A função addslashes coloca uma \ após cada aspa simples ou dupla, a transformando numa sequência de escape.
     $sql = trim($sql); // Retira espaços
     return $sql;
 }
 </code>
 </pre>
-
-<p>PS: A função get_magic_quotes_gpc() retorna a configuração atual de diretiva de configuração, se ela tiver ativada, ela já coloca automaticamente o escape nos dados recebidos em métodos GET e POST, assim como em cookies.</p>
 
 <p>Ele também pode ser assim, funciona tão efetivamente e é mais fácil de entender:</p>
 
@@ -85,10 +82,8 @@ function anti_injection($texto) {
     $remove = str_ireplace($lista, "", $tags);
     
     $muda = htmlspecialchars($remove, ENT_QUOTES);
-
-    $escape = (get_magic_quotes_gpc()) ? $muda : addslashes($muda);
     
-    $limpa = trim($escape);
+    $limpa = trim($muda);
     
     return $limpa;
 }
@@ -134,17 +129,17 @@ $senha = anti_injection(filter_input(INPUT_GET, "senha"));
     </tr>
     <tr>
         <td>login'; --</td>
-        <td>select * from tabela where login = 'login';-- and senha = ''</td>
+        <td>select * from tabela where login = 'login';-- and senha = '';</td>
         <td>Sabendo o login, tudo após o ponto e vírgula, virará comentário (ou seja, a parte de senha).</td>
     </tr>
     <tr>
         <td>'or '1 = 1</td>
-        <td>select * from tabela where login = '' or '1 = 1' and senha = ''</td>
-        <td>Não precisa saber o login nem a senha,  condição sempre será satisfatória</td>
+        <td>select * from tabela where login = '' or '1 = 1' and senha = '';</td>
+        <td>Não precisa saber o login nem a senha, condição sempre será satisfatória</td>
     </tr>
     <tr>
         <td>123'; drop table tabela; --</td>
-        <td>select * from tabela where login = '123'; drop table tabela; --and senha = ''</td>
+        <td>select * from tabela where login = '123'; drop table tabela; --and senha = '';</td>
         <td>O login não faz diferença, o objetivo era só apagar a tabela.</td>
     </tr>
 </table>

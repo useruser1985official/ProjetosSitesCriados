@@ -121,10 +121,15 @@ sqlite3 sistema.db3 .dump &gt; backup.sql
 <ul>
     <li>Não existe <code>describe</code>, o <code>desc</code> é só para consultas descendentes em <code>select</code>.</li>
     <li>Não suporta colunas inseridas em outras posições com <code>alter table</code>, apenas na última.</li>
-    <li>Não existe <code>modify</code> nem <code>change</code>.</li>
+    <li>Não existe <code>modify</code> nem <code>change</code>, e nem a constraint <code>default</code>.</li>
     <li>Não dá para ter mais de um <code>drop column</code> ou <code>add column</code> em cada <code>alter table</code>, nem deletar chaves primárias.</li>
     <li>Não dá pra usar <code>limit</code>.</li>
-    <li>Não existe <code>truncate</code>, <code>status</code>, <code>show</code>.</li>
+    <li>Não existe <code>truncate</code>, <code>status</code>, <code>show</code> nem <code>explain</code>.</li>
+    <li>Não existe <code>date_format</code> nem <code>str_to_date</code>.</li>
+    <li>O operador <code>like</code> não diferencia maiúsculas de minúsculas, mas não reconhece acentos.</li>
+    <li>Não dá pra alterar view com <code>alter view</code>, sendo necessária deletar e criar uma nova. Também não podemos adicionar, alterar e excluir índices com ele (para criar um índice basta usar <code>create index nome_do_indice on nome_da_tabela(nome_da_coluna)</code>, e excluir um índice simplesmente use <code>drop index nome_do_indice</code>).</li>
+    <li>Não existem as funções <code>div</code>, <code>mod</code>, <code>bin</code>, <code>oct</code>, <code>md5</code>, <code>sha1</code> e <code>database</code>. No entanto, existe a função <code>hex</code> para mostrar números hexadecimais, e a função <code>group_concat</code> só aceita dois argumentos (coluna e string separadora). Outras funções, como as matemáticas <code>ceiling</code>, <code>floor</code>, <code>pow</code> e <code>sqrt</code> existem normalmente.</li>
+    <li>Não podemos criar funções e procedimentos armazenados, apenas triggers.</li>
 </ul>
 
         <footer>
