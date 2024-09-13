@@ -221,6 +221,18 @@ select * from gafanhotos right join cursos on gafanhotos.cursopreferido = cursos
 
 <p>PS: Não é possível usar <code>full join</code> ou <code>full outer join</code> em MySQL, mas ele existe em outros bancos baseados em SQL.</p>
 
+<p>Podemos puxar os dados do banco sem usar join, mas ele é menos usado. Veja um exemplo assim:</p>
+
+<pre>
+<code>
+select gafanhotos.nome, gafanhotos.profissao, cursos.nome
+from gafanhotos, cursos
+where gafanhotos.cursopreferido = cursos.idcurso;
+</code>
+</pre>
+
+<p>No caso acima, o <q>join</q> foi substituído pela vírgula.</p>
+
 <h3>Inner Join com Várias Tabelas</h3>
 
 <p>Como visto anteriormente, cada gafanhoto preferiria um curso, trazendo a chave primária de cursos para gafanhotos com a chave estrangeira.</p>

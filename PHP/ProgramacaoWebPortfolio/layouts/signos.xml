@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<signos>
+<horoscopo>
     <signo>
         <dataInicio>21/03</dataInicio>
         <dataFim>20/04</dataFim>
@@ -72,4 +72,4 @@
         <signoNome>Peixes</signoNome>
         <descricao>Planeta Dominante: Netuno</descricao>
     </signo>
-</signos>
+</horoscopo>

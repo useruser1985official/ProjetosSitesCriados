@@ -69,23 +69,34 @@
     <li>Escolher um caminho (rota) a ser seguido pelos pacotes até que cheguem a seus destinos, por meio de protocolos de roteamento adequados.</li>
 </ul>
 
-<h3>Endereço IPv6</h3>
+<h3>Mais Sobre Endereços IPv6</h3>
 
 <p>Um endereço IPv6 é formado por oito blocos de quatro dígitos hexadecimais, separados por dois pontos. Cada bloco pode conter números de 0000 a ffff. Por exemplo, um endereço IPv6 pode ser <code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code>.</p>
 
-<p>A configuração do IPv6 não usa mais a máscara de sub-rede no formato tradicional do IPv4. Em vez disso, utiliza o prefixo da sub-rede. O prefixo indica quantos bits do endereço são usados para identificar a rede. Por exemplo, um prefixo de <code>/64</code> significa que os primeiros 64 bits do endereço IP são usados para identificar a rede e os 64 bits restantes são usados para identificar o host.</p>
+<p>A configuração do IPv6 não usa mais a máscara de sub-rede no formato tradicional do IPv4. Em vez disso, utiliza o prefixo da sub-rede. O prefixo indica quantos bits do endereço são usados para identificar a rede. Por exemplo, um prefixo de <code>/64</code> significa que os primeiros 64 bits do endereço IP são usados para identificar a rede e os bits restantes são usados para identificar o host.</p>
 
 <p>Para entender a estrutura da rede, aqui estão algumas informações relevantes sobre os tipos de endereços IPv6:</p>
 
 <ul>
     <li><b>Endereço Global Unicast:</b> Similar aos endereços públicos no IPv4, esses endereços são roteáveis na internet. Um exemplo é <code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code>.</li>
-    <li><b>Endereço Link-Local:</b> Usado para comunicação dentro da mesma rede local (link). Não é roteável e é automaticamente configurado por cada dispositivo. Todos os endereços link-local começam com fe80::/10. Um exemplo é <code>fe80::1a2b:3c4d:5e6f:7a8b</code>.</li>
-    <li><b>Endereço Unique Local:</b> Semelhante aos endereços privados do IPv4, esses endereços são usados em redes internas e não são roteados na internet. Eles têm o prefixo fc00::/7. Um exemplo é <code>fc00::1234:5678:9abc</code>.</li>
+    <li><b>Endereço Link-Local:</b> Usado para comunicação dentro da mesma rede local (link). Não é roteável e é automaticamente configurado por cada dispositivo. Todos os endereços link-local começam com fe80::. Um exemplo é <code>fe80::1a2b:3c4d:5e6f:7a8b</code>.</li>
+    <li><b>Endereço Unique Local:</b> Semelhante aos endereços privados do IPv4, esses endereços são usados em redes internas e não são roteados na internet. Eles têm o prefixo fc00::. Um exemplo é <code>fc00::1234:5678:9abc</code>.</li>
     <li><b>Endereço de Loopback:</b> Usado para testes de diagnóstico no próprio dispositivo. No IPv6, o endereço de loopback é <code>::1</code> (ou <code>0:0:0:0:0:0:0:1</code>).</li>
     <li><b>Endereço de Auto-Configuração:</b> No IPv6, quando um dispositivo não consegue obter um endereço IP a partir de um servidor DHCPv6, ele pode gerar um endereço IPv6 link-local automaticamente. Não há um equivalente exato ao APIPA do IPv4, mas endereços link-local são criados automaticamente.</li>
 </ul>
 
 <p>PS: Num endereço IPv6, podemos omitir zeros a esquerda, e sequência de 0000 em outros campos pode ser colocado apenas um <q>0</q> ou deixar uma sequência de um ou mais zeros como um espaço vazio (como <q>::</q>). Um exemplo seria <code>2001:db8:85a3::8a2e:370:7334</code>.</p>
+
+<p>Saiba também que:</p>
+
+<ul>
+    <li>O identificador de rede, assim como no IPv4, deve ser único dentro da rede, a mesma regra vale pro identificador de host.</li>
+    <li>Endereços IPv6 não utilizam um padrão de broadcast. O conceito de broadcast foi substituído por multicast em IPv6, portanto, não existem endereços reservados para tal.</li>
+    <li>Endereços com todos os bits ajustados como 0 são usados para a identificação da própria rede ou para endereçamento de grupos (multicast).</li>
+    <li>Não se usa um identificador de host com todos os bits ajustados como 0 ou 1 para denotar um endereço específico, pois a abordagem é diferente da usada em IPv4.</li>
+    <li>Com o IPv6, todas as redes locais devem ter prefixos /64, necessário para funcionalidades como a da autoconfiguração.</li>
+    <li>Usuários receberão de seus provedores redes /48, mas alguns provedores podem entregar aos usuários domésticos redes com tamanho /56.</li>
+</ul>
 
 <ul>
     <li><a href="tudo-sobre-redes-13.html">Parte Anterior da Matéria!</a></li>

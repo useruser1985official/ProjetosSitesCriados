@@ -405,6 +405,66 @@ for($i = 0; $i < count($alunos); $i++) {
 </code>
 </pre>
 
+<h3>Leitura de Arquivos e Exibição de Dados</h3>
+
+<p>Ler e exibir arquivos é uma tarefa muito útil quando se deseja construir aplicações web complexas, capazes de disponibilizar informações úteis para os usuários. Atualmente, precisamos exibir informações dinâmicas em diversos sites. Mostrar os dados sem nenhum tratamento visual não é algo bem-visto em sites. O ideal é fazer a leitura dos dados e sua devida formatação.</p>
+
+<p>Veja a seguir um exemplo:</p>
+
+<p>Um site que exiba informações a respeito do mercado financeiro, ou algum site que faz importação de produtos.</p>
+
+<p>O histórico da cotação do dólar é informação primordial, assim, pode-se criar um arquivo com as cotações no seguinte formato:</p>
+
+<pre>
+<code>
+20/11/2020 - 5.38710
+21/11/2020 - 5.37970
+22/11/2020 - 5.38060
+23/11/2020 - 5.44500
+24/11/2020 - 5.43900
+25/11/2020 - 5.37910
+26/11/2020 - 5.34980
+27/11/2020 - 5.36980
+28/11/2020 - 5.34560
+29/11/2020 - 5.34560
+30/11/2020 - 5.38030
+</code>
+</pre>
+
+<p>Podemos exibir esses dados em uma tabela HTML, para isso, podemos fazer uma página PHP.</p>
+
+<p>Veja um exemplo simples disso:</p>
+
+<pre>
+<code>
+&lt;table border=&quot;1&quot;&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Data&lt;/th&gt;
+        &lt;th align=&quot;right&quot;&gt;Valor&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;?php
+        $arquivo = fopen(&quot;cotacoes.txt&quot;, &quot;r&quot;);
+
+        if($arquivo) {
+            while(!feof($arquivo)) {
+                $linha = fgets($arquivo);
+
+                $vetor = explode(&quot;-&quot;, $linha);
+                $data = $vetor[0];
+                $valor = trim($vetor[1]);
+                echo &quot;&lt;tr&gt;&quot;;
+                echo &quot;&lt;td&gt;$data&lt;/td&gt;&quot;;
+                echo &quot;&lt;td align=\&quot;right\&quot;&gt;&quot; . number_format($valor, 2, &quot;,&quot;, &quot;.&quot;) . &quot;&lt;/td&gt;&quot;;
+                echo &quot;&lt;/tr&gt;&quot;;
+            }
+
+            fclose($arquivo);
+        }
+    ?&gt;
+&lt;/table&gt;
+</code>
+</pre>
+
 <ul>
     <li><a href="tudo-sobre-php-intermediario-1.html">Parte Anterior da Matéria!</a></li>
     <li><a href="tudo-sobre-php-intermediario-3.html">Continuação da Matéria!</a></li>

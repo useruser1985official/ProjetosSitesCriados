@@ -4,9 +4,7 @@ function limpar($texto) {
 
 	$muda = htmlspecialchars($tags, ENT_QUOTES);
 
-	$escape = (get_magic_quotes_gpc()) ? $muda : addslashes($muda);
-
-	$limpa = trim($escape);
+	$limpa = trim($muda);
 
 	return $limpa;
 }
