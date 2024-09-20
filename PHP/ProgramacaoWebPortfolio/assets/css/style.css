@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+body {
+    background-color: #d7dce0 !important;
+    font-family: Arial, sans-serif !important;
+}
+
+h1 {
+    margin: 20px 10px 30px 10px !important;
+    font-size: 22pt !important;
+    font-weight: bold !important;
+}
+
+.container {
+    max-width: 450px !important;
+    height: 350px;
+    background-color: white;
+    border-radius: 10px;
+    margin: auto !important;
+    padding: 30px !important;
+    text-align: center;
+}
+
+label {
+    margin: 0px !important;
+}
+
+input {
+    margin: 10px auto !important;
+    width: 250px !important;
+}
+
+.visualizacao {
+    padding: 100px !important;
+    max-width: 750px !important;
+    height: 450px !important;
+    background-image: linear-gradient(to bottom, rgb(160, 103, 253), rgb(40, 0, 105)) !important;
+    color: white;
+}
