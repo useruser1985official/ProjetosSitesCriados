@@ -270,7 +270,7 @@ $env = isset($_REQUEST["env"]) ? $_REQUEST["env"] : "";
 include "../funcao/funcao-inserir.php";
 include "../../extensoes/url-amigavel.php";
 
-$nome = utf8_decode($_REQUEST["tNome"]);
+$nome = $_REQUEST["tNome"];
 $url = url_amigavel($nome); // Função chamada pela extensão criada.
 $img = $_REQUEST["tImg"];
 
@@ -323,7 +323,7 @@ function url_amigavel($url) {
 include "../funcao/funcao-inserir.php";
 include "../../extensoes/url-amigavel.php";
 
-$titulo = utf8_decode($_REQUEST["tTit"]);
+$titulo = $_REQUEST["tTit"];
 $url = url_amigavel($titulo); // Função chamada pela extensão criada.
 $resumo = $_REQUEST["tRes"];
 $conteudo = $_REQUEST["tCont"];
@@ -362,7 +362,7 @@ include "../funcao/funcao-inserir.php";
 
 $login = $_REQUEST["tNome"];
 $senha = $_REQUEST["tSenha"];
-$cripsenha = crypt($senha);
+$cripsenha = password_hash($senha, PASSWORD_BCRYPT);
 
 inserir(array("login", "senha"), array($login, $cripsenha), "user");
 
@@ -370,11 +370,11 @@ header("location: ../inserir-user.php?env=sucess");
 </code>
 </pre>
 
-<p>Pode ver que, no código acima, usamos uma variável com uma função para criptografar senhas, a <code>crypt()</code>, existem outros métodos, como o <code>md5()</code> e o <code>sha1()</code>, mas o crypt é o mais usado e mais seguro.</p>
+<p>Pode ver que, no código acima, usamos uma variável com uma função para criptografar senhas, a <code>password_hash()</code>, existem outros métodos, como o <code>md5()</code> e o <code>sha1()</code>, mas o password_hash é o mais usado e mais seguro. Antigamente tinha o <code>crypt</code>, mas ele foi depreciado.</p>
 
 <p>Teste o código acima com md5 também para testar.</p>
 
-<p>A diferença entre os dois métodos, é que o MD5 sempre gerará um código igual para a mesma senha, enquanto o crypt, mesmo sendo a mesma senha, a criptografia será totalmente diferente.</p>
+<p>A diferença entre os dois métodos, é que o MD5 sempre gerará um código igual para a mesma senha, enquanto o password_hash, mesmo sendo a mesma senha, a criptografia será totalmente diferente.</p>
 
 <p>Podemos usar no PHP os algoritmos de criptografia MD5 (32 caracteres), SHA1 (40 caracteres) e SHA256 (64 caracteres). Veja um exemplo abaixo:</p>
 

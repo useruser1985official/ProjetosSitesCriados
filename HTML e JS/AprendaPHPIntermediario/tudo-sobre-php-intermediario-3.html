@@ -258,7 +258,7 @@ $cor = $_COOKIE["bg"];
 
 <pre>
 <code>
-$cor = filter_input(INPUT_COOKIE, "bg") != null ? filter_input(INPUT_COOKIE, "bg") : "black";
+$cor = filter_input(INPUT_COOKIE, "bg") !== null ? filter_input(INPUT_COOKIE, "bg") : "black";
 </code>
 </pre>
 
@@ -510,7 +510,7 @@ $msg = isset($_REQUEST["msg"]) ? $_REQUEST["msg"] : "";
 
 <pre>
 <code>
-&lt;?php if($msg == "enviado"):?&gt;
+&lt;?php if($msg == "enviado"): ?&gt;
 Mensagem Enviada!
 &lt;?php else: ?&gt;
 (Conteúdo do formulário)

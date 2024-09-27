@@ -144,7 +144,7 @@ include "../../extensoes/url-amigavel.php";
 
 // Resgata os valores do formulário
 
-$titulo = utf8_decode($_REQUEST["tTit"]);
+$titulo = $_REQUEST["tTit"];
 $url = url_amigavel($titulo);
 $resumo = $_REQUEST["tRes"];
 $conteudo = $_REQUEST["tCont"];

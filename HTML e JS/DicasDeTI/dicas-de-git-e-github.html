@@ -65,6 +65,8 @@
 
 <p>Abra o prompt ou terminal e digite <code>git config --global user.name "Nome de Usuário"</code> pra configurar o nome de usuário, e faça o mesmo com e-mail (trocando o <code>user.name</code> para <code>user.email</code>).</p>
 
+<p>Os arquivos de configuração de usuário ficam no Windows em <code>C:\Users\%username%</code> e no Linux em <code>/home/$USER</code>, o arquivo em questão é o <code>.gitconfig</code> (oculto). Para deslogar, digite <code>git config --global --unset user.name</code> e faça o mesmo trocando o trocando o <code>user.name</code> para <code>user.email</code>.</p>
+
 <p>Crie uma pasta com o comando mkdir (por exemplo <code>mkdir pasta-git</code>) e entre nele com o comando cd. Para iniciar o Git nesse diretório, digite <code>git init .</code> (podendo ignorar o ponto, que significa diretório atual).</p>
 
 <p>Digite <code>git status</code> para ver o status dele. Ele avisará que nada foi adicionado ao commit, mas que existem arquivos. Para adicionar o arquivo, digite <code>git add nomedoarquivo</code> (ou use o coringa * para adicionar tudo). Dê o comando git status de novo para ver o status, agora faça o commit digitando <code>git commit -m "Motivo do Commit"</code>.</p>

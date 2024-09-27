@@ -357,6 +357,19 @@ bebidas.forEach(b => document.write(b + "&lt;br/&gt;"));
 </code>
 </pre>
 
+<p>E também podemos passar lambdas em funções que recebem outras funções como argumentos, como o setInterval:</p>
+
+<pre>
+<code>
+let num = 1;
+
+setInterval(() => {
+    console.log("Chamada " + num);
+    num++;
+}, 2000);
+</code>
+</pre>
+
 <h3>Integrando Javascript com HTML5</h3>
 
 <p>Podemos, por exemplo, criar uma forma de ocultar e mostrar parte de um texto longo em HTML usando Javascript.

@@ -100,8 +100,8 @@ $consulta = select("user", "*", "where login = '$user'");
 
 if($consulta == true) {
     for($i = 0; $i < count($consulta); $i++) {
-        // Compara as senhas, o crypt comparará mesmo com criptografia diferente
-        if(crypt($senha, $consulta[$i]["senha"]) == $consulta[$i]["senha"]) {
+        // Compara as senhas, o password_verify comparará mesmo com criptografia diferente
+        if(password_verify($senha, $consulta[$i]["senha"]) == $consulta[$i]["senha"]) {
             session_start();
             $_SESSION["usuario"] = $user;
             $_SESSION["logado"] = true;

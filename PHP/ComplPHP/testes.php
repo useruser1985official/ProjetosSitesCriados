@@ -1,5 +1,5 @@
 <?php
-    
+    $cor = filter_input(INPUT_COOKIE, "bg") !== null ? filter_input(INPUT_COOKIE, "bg") : "black";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -8,35 +8,16 @@
         <link rel="icon" href="imagens/favicon.ico"/>
         <link rel="stylesheet" href="css/estilo.css"/>
         <title>Complemento em PHP</title>
+        <style>
+            body {
+                background-color: <?php echo $cor; ?>;
+            }
+        </style>
     </head>
     <body>
         <div class="terminal">
             <?php
-                $valor = isset($_GET["n"]) ? (int)$_GET["n"] : 0;
-
-                echo "Analisando o número $valor.<br/>";
-                echo "Valores múltiplos: ";
-
-                $tot = 0;
-
-                for($i = 1; $i <= $valor; $i++) {
-                    if($valor % $i == 0) {
-                        $exi = $i;
-                        $tot++;
-
-                        echo "$exi ";
-                    }
-                }
-
-                echo "<br/>";
-                echo "Total de múltiplos: $tot<br/>";
-
-                if($tot == 2) {
-                    echo "É Primo!";
-                }
-                else {
-                    echo "Não é Primo!";
-                }
+                
             ?>
             <br/>
             <br/>
