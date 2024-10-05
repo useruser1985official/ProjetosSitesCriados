@@ -22,7 +22,7 @@
         </nav>
        <section class="centro">
            
-            <h1>Inserir Sites Relacionados</h1>
+            <h1>Inserir Empresa</h1>
         
             <?php if($env == "sucess"): ?>
             <section class="info-sucesso">
@@ -30,11 +30,23 @@
             </section>
             <?php endif; ?>
 
-            <form method="post" action="inserts/inserir-sites-processo.php">
-                <p><label for="nome">Nome do Site: </label></p>
+            <form method="post" action="inserts/inserir-empresa-processo.php">
+                <p><label for="nome">Nome: </label></p>
                 <p><input type="text" name="nome" id="inome"/></p>
-                <p><label for="link">Link do Site: </label></p>
-                <p><input type="text" name="link" id="ilink"/></p>
+                <p><label for="logo">Logomarca: </label></p>
+                <p><input type="text" name="logo" id="ilogo"/></p>
+                <p><label for="fone">Telefone: </label></p>
+                <p><input type="tel" name="fone" id="ifone"></p>
+                <p><label for="mail">E-mail: </label></p>
+                <p><input type="email" name="mail" id="imail"></p>
+                <p><label for="end">Endereço: </label></p>
+                <p><input type="text" name="end" id="iend"></p>
+                <p><label for="cid">Cidade: </label></p>
+                <p><input type="text" name="cid" id="icid"></p>
+                <p><label for="cep">CEP: </label></p>
+                <p><input type="text" name="cep" id="icep"></p>
+                <p><label for="sob">Sobre: </label></p>
+                <p><textarea name="sob" id="isob"></textarea></p>
                 <p><button type="submit">Inserir</button></p>
             </form>
        </section>

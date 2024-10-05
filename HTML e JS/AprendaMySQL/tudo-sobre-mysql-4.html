@@ -85,6 +85,14 @@ describe gafanhotos;
 </code>
 </pre>
 
+<p>PS: Podemos já criar a chave estrangeira ao criar a tabela, no caso, na coluna especificada, fazemos assim:</p>
+
+<pre>
+<code>
+cursopreferido int not null references cursos(idcurso)
+</code>
+</pre>
+
 <p>Vamos fazer um update num cadastro qualquer assim, por exemplo:</p>
 
 <pre>

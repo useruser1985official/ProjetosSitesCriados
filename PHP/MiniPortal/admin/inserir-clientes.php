@@ -29,8 +29,23 @@
                 <h1>Dados Enviados com Sucesso!</h1>
             </section>
             <?php endif; ?>
+            <?php if($env == "erro-extensao"): ?>
+            <section class="info">
+                <h1>Só Envie Imagens com Extensões jpg, jpeg, png ou gif!</h1>
+            </section>
+            <?php endif; ?>
+            <?php if($env == "erro-tamanho"): ?>
+            <section class="info">
+                <h1>Só Envie Imagens com até 2 MB!</h1>
+            </section>
+            <?php endif; ?>
+            <?php if($env == "erro-imagem"): ?>
+            <section class="info">
+                <h1>Não foi Possível Enviar o Arquivo!</h1>
+            </section>
+            <?php endif; ?>
 
-            <form method="post" action="inserts/inserir-clientes-processo.php">
+            <form method="post" action="inserts/inserir-clientes-processo.php" enctype="multipart/form-data">
                 <p><label for="nome">Nome: </label></p>
                 <p><input type="text" name="nome" id="inome"/></p>
                 <p><label for="img">Imagem: </label></p>

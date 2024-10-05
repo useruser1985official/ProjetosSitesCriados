@@ -4,24 +4,24 @@
                 <ul>
                 	<li><h3>Incluir</h3>
                         <ul>
-                            <li><a href="">Portifólio</a></li>
-                            <li><a href="">Clientes</a></li>
-                            <li><a href="">Empresa</a></li>
+                            <li><a href="inserir-portifolio.php">Portifólio</a></li>
+                            <li><a href="inserir-clientes.php">Clientes</a></li>
+                            <li><a href="inserir-empresa.php">Empresa</a></li>
                         </ul>
                     </li>
                     <li><h3>Editar</h3>
                         <ul>
-                            <li><a href="">Portifólio</a></li>
-                            <li><a href="">Clientes</a></li>
-                            <li><a href="">Empresa</a></li>
+                            <li><a href="editar-portifolio.php">Portifólio</a></li>
+                            <li><a href="editar-clientes.php">Clientes</a></li>
+                            <li><a href="editar-empresa.php">Empresa</a></li>
                         </ul>
                     </li>
                     <li><h3>Sistema e Configurações</h3>
                         <ul>
-                            <li><a href="">Usuários</a></li>
-                            <li><a href="">Sites Relacionados</a></li>
+                            <li><a href="usuarios.php">Usuários</a></li>
+                            <li><a href="sites-relacionados.php">Sites Relacionados</a></li>
                             <li><a href="">Apresentação</a></li>
-                            <li><a href="">Dados da Empresa</a></li>
+                            <li><a href="empresa.php">Dados da Empresa</a></li>
                         </ul>
                     </li>
                 </ul>

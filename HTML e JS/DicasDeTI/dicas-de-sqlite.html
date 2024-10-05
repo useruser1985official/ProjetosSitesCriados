@@ -125,7 +125,7 @@ sqlite3 sistema.db3 .dump &gt; backup.sql
     <li>Não suporta colunas inseridas em outras posições com <code>alter table</code>, apenas na última.</li>
     <li>Não existe <code>modify</code> nem <code>change</code>.</li>
     <li>Não dá para ter mais de um <code>drop column</code> ou <code>add column</code> em cada <code>alter table</code>, nem deletar chaves primárias.</li>
-    <li>Não dá pra usar <code>limit</code>.</li>
+    <li>Não dá pra usar <code>limit</code> em update e delete, apenas em select.</li>
     <li>Não existe <code>truncate</code>, <code>status</code>, <code>show</code> nem <code>explain</code>.</li>
     <li>Não existe <code>date_format</code> nem <code>str_to_date</code>.</li>
     <li>O operador <code>like</code> não diferencia maiúsculas de minúsculas, mas não reconhece acentos.</li>

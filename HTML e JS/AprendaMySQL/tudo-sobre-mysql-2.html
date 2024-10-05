@@ -403,6 +403,24 @@ order by nome;
 </code>
 </pre>
 
+<p>Podemos usar o <code>limit</code> para limitar a quantidade de linhas exibidas, e o <code>offset</code> para mostrar quantas ocorrências pulará:</p>
+
+<pre>
+<code>
+select nome, descricao from cursos where ano = '2017' limit 3;
+</code>
+</pre>
+
+<p>Com offset, que pulará as duas primeiras ocorrências do banco e contará a partir da 3ª:</p>
+
+<pre>
+<code>
+select nome, descricao from cursos where ano = '2017' limit 3 offset 2;
+</code>
+</pre>
+
+<p>PS: eles não precisam ser usados juntos, mas é bom ter uma condição ou ao menos uma ordenação para isso.</p>
+
 <p>Inclusive, podemos ver como funciona uma SQL Injection, onde ao passar <code>' or '1 = 1</code> (geralmente é usado aspas simples) num formulário retornaria todas as ocorrências do banco, ficando dessa forma:</p>
 
 <pre>

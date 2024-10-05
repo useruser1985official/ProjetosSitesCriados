@@ -292,8 +292,252 @@ create database biblioteca;
     </tr>
 </table>
 
+<h3>Criar Tabelas com Create Table</h3>
+
+<p>Para criar tabelas, vá no PgAdmin, vá no banco, em ferramentas e em ferramenta de consulta e digite esses comandos:</p>
+
+<pre>
+<code>
+create table clientes (
+    codigo int primary key,
+    nome varchar(20) not null,
+    sobrenome varchar(40) not null
+);
+</code>
+</pre>
+
+<p>PS: Dá pra criar de forma gráfica também.</p>
+
+<p>Crie essa tabela também: </p>
+
+<pre>
+<code>
+create table produtos (
+    codigo int primary key,
+    nome varchar(30) not null,
+    descricao text null
+    preco numeric check(preco &gt; 0) not null, -- Verifica se o preço é maior que zero
+    qtd_estoque smallint default 0
+);
+</code>
+</pre>
+
+<p>Pode ver na parte de tabelas (dentro de esquemas) que ambas as tabelas estão lá.</p>
+
+<p>Agora crie essa tabela para pedidos, no qual terá chaves estrangeiras, as quais serão feitas de duas formas:</p>
+
+<pre>
+<code>
+create table pedidos (
+    codigo serial primary key, -- O tipo serial cria um número que é incrementado
+    cod_cliente int not null references clientes(codigo),
+    cod_produto int not null,
+    qtd_vendida smallint not null,
+    foreign key(cod_produto) references produtos(codigo)
+);
+</code>
+</pre>
+
+<h3>Inserir Registros em Tabelas com Insert Into</h3>
+
+<p>Para inserir dados nas tabelas, usamos o comando insert into assim:</p>
+
+<pre>
+<code>
+insert into clientes (codigo, nome, sobrenome) values (1, 'Fulano', 'da Silva');
+</code>
+</pre>
+
+<p>PS: Se os dados inseridos for na mesma ordem das colunas no banco, podemos omitir os nomes das colunas.</p>
+
+<p>Insira mais dois cadastros:</p>
+
+<pre>
+<code>
+insert into clientes (codigo, nome, sobrenome) values (2, 'Beltrano', 'Silveira');
+insert into clientes (codigo, nome, sobrenome) values (3, 'Sicrano', 'Teixeira');
+</code>
+</pre>
+
+<p>Para vermos se os dados foram inseridos, use o select assim:</p>
+
+<pre>
+<code>
+select * from clientes;
+</code>
+</pre>
+
+<p>Vamos cadastrar produtos, da mesma forma, mas no caso vamos inserir vários cadastros de uma vez só:</p>
+
+<pre>
+<code>
+insert into produtos (codigo, nome, descricao, preco, qtd_estoque) values
+(1, Álcool Gel', 'Garrafa de álcool em gel de 1 litro', 12.90, 20),
+(2, 'Luvas de Látex', 'Caixa de luvas de látex com 100 unidades', 32.50, 25),
+(3, 'Pasta de Dentes', 'Tubo de pasta de dentes de 90g', 3.60, 12),
+(4, 'Sabonete', 'Sabonete antibacteriano de 90g', 3.50, 5),
+(5, 'Enxaguante Bucal', 'Antisséptico bucal de 500 ml', 17.00, 28);
+</code>
+</pre>
+
+<p>Para ver os dados, use o select da mesma forma:</p>
+
+<pre>
+<code>
+select * from produtos;
+</code>
+</pre>
+
+<p>Vamos inserir dados na tabela pedidos:</p>
+
+<pre>
+<code>
+insert into pedidos (cod_cliente, cod_produto, qtd_vendida) values -- Não se coloca o campo de serial
+(1, 2, 3),
+(2, 3, 2),
+(1, 3, 4);
+</code>
+</pre>
+
+<p>Dê um <code>select * from pedidos;</code> para ver os dados inseridos.</p>
+
+<h3>Como Realizar Consultas Simples em Tabelas com o Comando select</h3>
+
+<p>Para realizar consultas, como foi dito anteriormente, usamos o comando select. Podemos usar o asterisco para selecionar todas as colunas ou escrever as colunas desejadas:</p>
+
+<pre>
+<code>
+select * from clientes;
+</code>
+</pre>
+
+<p>Usando o nomes de uma coluna:</p>
+
+<pre>
+<code>
+select nome from clientes;
+</code>
+</pre>
+
+<p>Aí só aparecerá somente os dados referentes à coluna especificada.</p>
+
+<p>Para pegar dados de mais de uma coluna, fazemos assim:</p>
+
+<pre>
+<code>
+select nome, sobrenome from clientes;
+</code>
+</pre>
+
+<p>Inclusive, nem precisam estar na ordem dos dados na coluna:</p>
+
+<pre>
+<code>
+select sobrenome, nome from clientes;
+</code>
+</pre>
+
+<p>Vamos fazer um select em produtos, assim:</p>
+
+<pre>
+<code>
+select * from produtos;
+</code>
+</pre>
+
+<p>Pra pegar apenas os nomes dos produtos:</p>
+
+<pre>
+<code>
+select nome from produtos;
+
+-- Depois faça esse comando:
+
+select nome, descricao from produtos;
+
+-- E esse, fora da ordem:
+
+select nome, preco, descricao from produtos;
+</code>
+</pre>
+
+<p>PS: Podemos dividir os comandos em várias linhas.</p>
+
+<p>Fazendo o mesmo em pedidos:</p>
+
+<pre>
+<code>
+select * from pedidos;
+</code>
+</pre>
+
+<p>Claro que a tabela pedidos só retornará números referentes às chaves estrangeiras. Isso será tratado mais pra frente.</p>
+
+<h3>Como Filtrar Consultar com a Cláusula Where</h3>
+
+<p>Quando usamos o select sem nenhuma condição, ele retorna todos os registros que estão em determinada tabela. Para filtrarmos apenas determinados registros de uma tabela, usamos a cláusula <code>where</code>.</p>
+
+<p>Uma consulta básica, como sabemos, é assim:</p>
+
+<pre>
+<code>
+select * from clientes;
+</code>
+</pre>
+
+<p>O select acima retorna todos os registros da tabela clientes, para pegar um determinado registro da tabela, fazemos assim:</p>
+
+<pre>
+<code>
+select * from clientes where codigo = 1;
+</code>
+</pre>
+
+<p>No caso acima, ele só retornará o registro referente ao código específico. Caso ele não seja encontrado, ele não dá erro, mas não mostrará nada.</p>
+
+<p>Vamos ver um exemplo na tabela produtos:</p>
+
+<pre>
+<code>
+select * from produtos;
+</code>
+</pre>
+
+<p>Com a cláusula where:</p>
+
+<pre>
+<code>
+select nome, qtd_estoque from produtos where qtd_estoque &lt; 10;
+</code>
+</pre>
+
+<p>No caso, usamos um operador relacional, que são os mesmos de várias linguagens. No comando acima mostramos apenas os dados especificados dos produtos que o estoque está abaixo de 10.</p>
+
+<p>Veja outro exemplo:</p>
+
+<pre>
+<code>
+select nome, preco from produtos where preco &gt;= 15.00;
+
+-- Invertendo:
+select nome, preco from produtos where preco &lt; 15.00;
+</code>
+</pre>
+
+<p>Outro exemplo, na tabela de pedidos:</p>
+
+<pre>
+<code>
+-- Mostrando tudo:
+select * from pedidos;
+
+-- Filtrando:
+select cod_produto, qtd_vendida from pedidos where cod_cliente = 1;
+</code>
+</pre>
+
 <ul>
-    <li><a href="tudo-sobre-postresql-2.html">Continuação da Matéria!</a></li>
+    <li><a href="tudo-sobre-postgresql-2.html">Continuação da Matéria!</a></li>
 </ul>
 
         </div>

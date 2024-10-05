@@ -290,6 +290,7 @@ div.coluna{
 	padding-top: 5px;
 	width: 132.5px;
 	padding-left: 10px;
+	overflow: hidden;
 }
 
 div.linha:hover a{
@@ -305,4 +306,11 @@ section.info{
 	background-color: #ebcccc;
 	text-align: center;
 	color: #b94a48;
+}
+
+section.info-sucesso {
+	border: 1px solid #4ab948;
+	background-color: #ccebcc;
+	text-align: center;
+	color: #4ab948;
 }
