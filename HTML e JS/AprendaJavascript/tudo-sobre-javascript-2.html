@@ -2,9 +2,9 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="icon" href="_imagens/favicon.ico"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
         <title>Aprenda Javascript</title>
-        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="css/estilo.css"/>
     </head>
     <body>
         <div>
@@ -142,13 +142,13 @@ document.querySelector("span.bstn-h1-title").innerText = "O melhor curso de Java
 <pre>
 <code>
 function vermelho() {
-    document.getElementById("farol").src = "_imagens/sinal-vermelho.png";
+    document.getElementById("farol").src = "imagens/sinal-vermelho.png";
 }
 function amarelo() {
-    document.getElementById("farol").src = "_imagens/sinal-amarelo.png";
+    document.getElementById("farol").src = "imagens/sinal-amarelo.png";
 }
 function verde() {
-    document.getElementById("farol").src = "_imagens/sinal-verde.png";
+    document.getElementById("farol").src = "imagens/sinal-verde.png";
 }
 </code>
 </pre>
@@ -168,7 +168,7 @@ function verde() {
 <pre>
 <code>
 function sinal(estado) {
-    document.getElementById("farol").src = "_imagens/" + estado + ".png";
+    document.getElementById("farol").src = "imagens/" + estado + ".png";
 }
 </code>
 </pre>
@@ -219,7 +219,7 @@ function custoGas() {
 var quebrada = false;
 function mudaLampada(tipo) {
     if(!quebrada) {
-        document.getElementById("luz").src = "_imagens/" + tipo + ".jpg" ;
+        document.getElementById("luz").src = "imagens/" + tipo + ".jpg" ;
         if(tipo == "lampada-quebrada") {
             quebrada = true;
         }
@@ -232,7 +232,7 @@ function mudaLampada(tipo) {
 
 <pre>
 <code>
-&lt;img src="_imagens/lampada-apagada.jpg" onmouseover="mudaLampada('lampada-acesa')" onmouseout="mudaLampada('lampada-apagada')"<br/>onclick="mudaLampada('lampada-quebrada')" id="luz"/&gt;
+&lt;img src="imagens/lampada-apagada.jpg" onmouseover="mudaLampada('lampada-acesa')" onmouseout="mudaLampada('lampada-apagada')"<br/>onclick="mudaLampada('lampada-quebrada')" id="luz"/&gt;
 </code>
 </pre>
 

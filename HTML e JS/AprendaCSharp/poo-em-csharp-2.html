@@ -2,9 +2,9 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="icon" href="_imagens/favicon.ico"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
         <title>Aprenda C#</title>
-        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="css/estilo.css"/>
     </head>
     <body>
         <div>
@@ -200,7 +200,7 @@ public Humano() : base() {
 
 <p>E também podemos fazer sobreposição de destrutores normalmente.</p>
 
-<p>PS: Caso deseje que uma classe seja final (ou seja, que não possa ser herdada), coloque antes da classe a palavra sealed, algo como <code>sealed class NomeDaClasse</code>. Para métodos, usamos da mesma forma, algo como <code>sealed void nomeDoMetodo()</code>. No caso de atributos use const, sempre inicializada, como <code>const int numero = 5</code>.</p>
+<p>PS: Caso deseje que uma classe seja final (ou seja, que não possa ser herdada), coloque antes da classe a palavra sealed, algo como <code>sealed class NomeDaClasse</code>. Para métodos, usamos da mesma forma, algo como <code>sealed override void nomeDoMetodo()</code> (apenas métodos que sobrepõe outros podem ser selados). No caso de atributos use const, sempre inicializada, como <code>const int numero = 5</code>.</p>
 
 <h3>Acesso Protegido - Herança - Parte 3</h3>
 
@@ -271,7 +271,7 @@ carro.mostraChassis();
 
 <p>O de sobreposição, visto anteriormente, é quando um método, indicado como virtual, é substituído em uma classe descendente, onde ele tem o mesmo nome e é indicado por override.</p>
 
-<p>E como visto nos construtores, podemos criar métodos comuns usando o mesmo nome, desde que os parâmetros sejam diferentes, isso é o polimorfismo de sobrecarga, como nesse exemplo:</p>
+<p>E como visto nos construtores e nos campos compartilhados, podemos criar métodos comuns usando o mesmo nome, desde que os parâmetros sejam diferentes, isso é o polimorfismo de sobrecarga, como nesse exemplo:</p>
 
 <pre>
 <code>

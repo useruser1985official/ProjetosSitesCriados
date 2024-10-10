@@ -2,9 +2,9 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="icon" href="_imagens/favicon.ico"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
         <title>Aprenda Javascript</title>
-        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="css/estilo.css"/>
     </head>
     <body>
         <div>
@@ -43,7 +43,7 @@ onload = function() { // O window.onload inicia automaticamente a execução do 
 };
         
 function ligar() {
-    document.getElementById("luz").src = "_imagens/lampada-acesa.jpg";
+    document.getElementById("luz").src = "imagens/lampada-acesa.jpg";
 }
 </code>
 </pre>
@@ -57,12 +57,12 @@ onload = function() { // O window.onload inicia automaticamente a execução do 
 };
         
 function ligar() {
-    document.getElementById("luz").src = "_imagens/lampada-acesa.jpg";
+    document.getElementById("luz").src = "imagens/lampada-acesa.jpg";
     setTimeout("desligar()", 3000); // Passe os milésimos de segundos
 }
 
 function desligar() {
-    document.getElementById("luz").src = "_imagens/lampada-apagada.jpg";
+    document.getElementById("luz").src = "imagens/lampada-apagada.jpg";
 }
 </code>
 </pre>
@@ -244,7 +244,7 @@ onload = function() { // O window.onload inicia automaticamente a execução do 
 <pre>
 <code>
 function ligar() {
-    document.getElementById("luz").src = "_imagens/lampada-acesa.jpg";
+    document.getElementById("luz").src = "imagens/lampada-acesa.jpg";
     
     let nome = lerCookie("nome");
     

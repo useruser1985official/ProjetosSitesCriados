@@ -2,9 +2,9 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="icon" href="_imagens/favicon.ico"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
         <title>Aprenda C#</title>
-        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="css/estilo.css"/>
     </head>
     <body>
         <div>
@@ -232,7 +232,9 @@ class Caixa {
 </code>
 </pre>
 
-<p>PS: Podemos colocar um private no set ou no get caso queiramos que um deles seja restrito à classe.</p>
+<p>PS: O último método acima pode dar erro em objetos agregados, nesse caso use um dos dois modos anteriores.</p>
+
+<p>Inclusive, podemos colocar um private no set ou no get caso queiramos que um deles seja restrito à classe.</p>
 
 <p>E pra exibir:</p>
 
@@ -385,7 +387,7 @@ Console.WriteLine(vol.ToString());
 
 <p>Podemos ter sobrecarga de métodos construtores no C# também. Basicamente, como em qualquer outra função, é criar um segundo construtor (que obviamente, também terá o mesmo nome da classe), mas com parâmetros diferentes.</p>
 
-<p>No nosso exemplo, a classe Caixa terá o construtor padrão sem parâmetros (que adiciona 10 ao atributo lado automaticamente) e o segundo construtor que receberá um parâmetro para definiir esse parâmetro, dessa forma:</p>
+<p>No nosso exemplo, a classe Caixa terá o construtor padrão sem parâmetros (que adiciona 10 ao atributo lado automaticamente) e o segundo construtor que receberá um parâmetro para definiir esse mesmo atributo, dessa forma:</p>
 
 <pre>
 <code>
