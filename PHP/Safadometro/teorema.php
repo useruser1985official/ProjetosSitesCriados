@@ -25,7 +25,7 @@ $ano = (int)strip_tags(filter_input(INPUT_GET, "ano")) ?? 0;
     <head>
         <meta charset="UTF-8"/>
         <title>Teorema Safadão</title>
-        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="css/estilo.css"/>
     </head>
     <body>
         <div id="interface">
@@ -38,7 +38,7 @@ $ano = (int)strip_tags(filter_input(INPUT_GET, "ano")) ?? 0;
                 ?>
             </section>
             <section id="foto">
-                <img src="_imagens/wesley-safadao.png" alt="Wesley Safadão"/>
+                <img src="imagens/wesley-safadao.png" alt="Wesley Safadão"/>
             </section>
             <footer id="rodape">
                 <p><a href="https://www.youtube.com/watch?v=2u8gK6ZM3bQ" target="_blank">&copy; Curso Em Vídeo (2015)</a></p>

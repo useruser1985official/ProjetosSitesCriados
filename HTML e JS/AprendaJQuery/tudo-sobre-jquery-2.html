@@ -2,9 +2,9 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="icon" href="_imagens/favicon.ico"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
         <title>Aprenda JQuery</title>
-        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="css/estilo.css"/>
     </head>
     <body>
         <div>
@@ -45,7 +45,7 @@ $(function() {
 <pre>
 <code>
 $(function() {
-    $("img").attr("src", "_imagens/erro.png");
+    $("img").attr("src", "imagens/erro.png");
 });
 </code>
 </pre>
@@ -58,7 +58,7 @@ $(function() {
 <code>
 $(function() {
     $("img").on("error", function() {
-        $(this).attr("src", "_imagens/erro.png");
+        $(this).attr("src", "imagens/erro.png");
     });
 });
 </code>
@@ -85,7 +85,7 @@ $(function() {
     $("img").on("error", function() {
         var imagem = $(this).attr("src");
         alert("Imagem \"" + imagem + "\" Indisponível!");
-        $(this).attr("src", "_imagens/erro.png");
+        $(this).attr("src", "imagens/erro.png");
     });  
 });
 </code>

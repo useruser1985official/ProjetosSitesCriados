@@ -6,10 +6,10 @@ include_once "restricao.php";
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="icon" href="_imagens/favicon.ico"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
         <title>Dicas para Churrasco</title>
-        <link rel="stylesheet" href="_css/estilo.css"/>
-        <script src="_javascript/funcoes.js"></script>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script src="javascript/funcoes.js"></script>
     </head>
     <body>
         <div id="interface">

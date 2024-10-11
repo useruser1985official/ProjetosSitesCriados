@@ -2,9 +2,9 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="icon" href="_imagens/favicon.ico"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
         <title>Aprenda MySQL</title>
-        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="css/estilo.css"/>
     </head>
     <body>
         <div>
@@ -50,7 +50,7 @@ engine = innodb
 
 <p>No exemplo, temos dois bancos de dados distintos, que tem relacionamento entre si, no primeiro, dados de usuários no banco "gafanhotos", e no outro banco temos cursos. Mas no caso especificado, um usuário do banco gafanhotos poderá escolher um curso do banco cursos.</p>
 
-<img src="_imagens/gafanhotos.jpg" alt="Gafanhotos"/>
+<img src="imagens/gafanhotos.jpg" alt="Gafanhotos"/>
 
 <p>No exemplo da imagem, Gafanhotos prefere Cursos, o Gafanhotos é o lado 1, se invertesse, como Cursos é preferido por gafanhotos, Cursos seria o lado um (quem exporta é o lado 1, quem importa é o lado "N").</p>
 
@@ -225,7 +225,7 @@ select * from gafanhotos right join cursos on gafanhotos.cursopreferido = cursos
 
 <p>Veja abaixo um exemplo gráfico das SQL Joins:</p>
 
-<img src="_imagens/sql-joins.jpg" alt="SQL Joins"/>
+<img src="imagens/sql-joins.jpg" alt="SQL Joins"/>
 
 <p>PS: Não é possível usar <code>full join</code> ou <code>full outer join</code> em MySQL, mas ele existe em outros bancos baseados em SQL.</p>
 
@@ -247,7 +247,7 @@ where gafanhotos.cursopreferido = cursos.idcurso;
 
 <p>Nesse novo exemplo, vários gafanhotos podem ver vários cursos. Nesse caso,  o "N" (que ficava em ambos os lados), ficará no meio, e o "Assiste" será um nova entidade, e terá um "1" entre as entidades, assim:</p>
 
-<img src="_imagens/gafanhotos-2.jpg" alt="Gafanhotos 2"/>
+<img src="imagens/gafanhotos-2.jpg" alt="Gafanhotos 2"/>
 
 <p>No caso acima, o "Assiste" receberá duas chaves estrangeiras, que serão as primárias de gafanhotos e cursos.</p>
 
@@ -271,7 +271,7 @@ create table gafanhoto_assiste_curso (
 
 <p>Entenda primeiro a ligação que iremos fazer:</p>
 
-<img src="_imagens/gafanhotos-3.jpg" alt="Gafanhotos"/>
+<img src="imagens/gafanhotos-3.jpg" alt="Gafanhotos"/>
 
 <p>No caso acima, vários cursos estão sendo assistido por várias pessoas.</p>
 

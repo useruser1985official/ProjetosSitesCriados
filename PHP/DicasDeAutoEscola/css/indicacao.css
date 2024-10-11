@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+ul.album li#fotoI01 {
+    background: url("../placas/I_1.gif") no-repeat;
+    background-position: 50% 50%;
+    background-size: 80px auto;
+    background-color: white;
+}
+ul.album li#fotoI02 {
+    background: url("../placas/I_2.gif") no-repeat;
+    background-position: 50% 50%;
+    background-size: 80px auto;
+    background-color: white;
+}
+ul.album li#fotoI03 {
+    background: url("../placas/I_3.gif") no-repeat;
+    background-position: 50% 50%;
+    background-size: 80px auto;
+    background-color: white;
+}
+ul.album li#fotoI04 {
+    background: url("../placas/I_4.gif") no-repeat;
+    background-position: 50% 50%;
+    background-size: 80px auto;
+    background-color: white;
+}
+ul.album li#fotoI05 {
+    background: url("../placas/I_5.gif") no-repeat;
+    background-position: 50% 50%;
+    background-size: 80px auto;
+    background-color: white;
+}
+ul.album li#fotoI06 {
+    background: url("../placas/I_6.gif") no-repeat;
+    background-position: 50% 50%;
+    background-size: 80px auto;
+    background-color: white;
+}
+ul.album li#fotoI07 {
+    background: url("../placas/I_7.gif") no-repeat;
+    background-position: 50% 50%;
+    background-size: 80px auto;
+    background-color: white;
+}
+ul.album li#fotoI08 {
+    background: url("../placas/I_8.gif") no-repeat;
+    background-position: 50% 50%;
+    background-size: 80px auto;
+    background-color: white;
+}
+ul.album li#fotoI09 {
+    background: url("../placas/I_9.gif") no-repeat;
+    background-position: 50% 50%;
+    background-size: 80px auto;
+    background-color: white;
+}
+ul.album li#fotoI10 {
+    background: url("../placas/I_10.gif") no-repeat;
+    background-position: 50% 50%;
+    background-size: 80px auto;
+    background-color: white;
+}

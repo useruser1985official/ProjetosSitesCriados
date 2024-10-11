@@ -2,9 +2,9 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="icon" href="_imagens/favicon.ico"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
         <title>Tudo sobre Tecnologia da Informação</title>
-        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="css/estilo.css"/>
         <script></script>
     </head>
     <body>
@@ -40,10 +40,10 @@
     &lt;head&gt;
         &lt;meta charset="UTF-8"/&gt;
         &lt;title&gt;Título da Página em HTML&lt;/title&gt;
-        &lt;link rel="icon" href="_imagens/favicon.ico"/&gt;
+        &lt;link rel="icon" href="imagens/favicon.ico"/&gt;
         &lt;meta name="viewport" content="width=device-width, initial-scale=1"/&gt;
-        &lt;link rel="stylesheet" href="_css/estilo.css"/&gt;
-        &lt;script src="_javascript/funcoes.js"&gt;&lt;/script&gt;
+        &lt;link rel="stylesheet" href="css/estilo.css"/&gt;
+        &lt;script src="javascript/funcoes.js"&gt;&lt;/script&gt;
     &lt;/head&gt;
     &lt;body&gt;
         &lt;!--
@@ -65,7 +65,7 @@
     &lt;head&gt;
         &lt;meta charset="UTF-8"/&gt;
         &lt;title&gt;Título da Página em HTML&lt;/title&gt;
-        &lt;link rel="icon" href="_imagens/favicon.ico"/&gt;
+        &lt;link rel="icon" href="imagens/favicon.ico"/&gt;
         &lt;meta name="viewport" content="width=device-width, initial-scale=1"/&gt;
         &lt;style&gt;
             /* Isso é código CSS (comentários em CSS são feitos usando barra e asterisco) */
@@ -73,7 +73,7 @@
             body {
                 font-family: Arial, sans-serif;
                 color: white;
-                background: url("_imagens/fundo.png") center fixed repeat;
+                background: url("imagens/fundo.png") center fixed repeat;
                 background-color: black;
             }
         &lt;/style&gt;
@@ -185,7 +185,7 @@ tt
 
 <p>Para usar CSS, podemos usar estilo local em determinada tag usando o parâmetro <code>style</code> (sendo recomendada para pequenas configurações em tags específicas). O mais recomendado é usar arquivos CSS externos ou usando a tag <code>style</code> para configurar estilos.</p>
 
-<p>Usando a tag style ou arquivos CSS (coloque no head a tag <code>&lt;link rel="stylesheet" href="_css/estilo.css"/&gt;</code>):</p>
+<p>Usando a tag style ou arquivos CSS (coloque no head a tag <code>&lt;link rel="stylesheet" href="css/estilo.css"/&gt;</code>):</p>
 
 <pre>
 <code>
@@ -309,7 +309,7 @@ h1 {
 body {
     font-family: Arial, sans-serif;
     color: white;
-    background: url("_imagens/fundo.png") center repeat fixed; /* A ordem é cor, imagem, posição, repetição, tamanho (não funciona em todos os browsers), anexo */
+    background: url("imagens/fundo.png") center repeat fixed; /* A ordem é cor, imagem, posição, repetição, tamanho (não funciona em todos os browsers), anexo */
 }
 </code>
 </pre>
@@ -326,7 +326,7 @@ body {
 <code>
 body {
     background-color: gray;
-    background-image: url("../_imagens/fundo.png");
+    background-image: url("../imagens/fundo.png");
     background-size: 50px 50px;
     background-repeat: no-repeat;
     background-position: left center;
@@ -377,7 +377,7 @@ body {
 </code>
 </pre>
 
-<p>PS: Atenção as posições das pastas do site, caso existam, que deverão ser indicadas (como <code>_noticias/main.html</code>), e para voltar a pasta anterior use dois pontos (como <code>../index.html</code>).</p>
+<p>PS: Atenção as posições das pastas do site, caso existam, que deverão ser indicadas (como <code>noticias/main.html</code>), e para voltar a pasta anterior use dois pontos (como <code>../index.html</code>).</p>
 
 <p>No entanto, semanticamente, links internos deverão ter o target indicando <code>_self</code>, como por exemplo:</p>
 
@@ -396,8 +396,8 @@ body {
 <pre>
 <code>
 &lt;ul&gt;
-    &lt;li&gt;&lt;a href="_files/livro.pdf" download="livro.pdf" type="application/pdf"&gt;Baixar o livro em PDF&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="_files/livro.zip" download="livro.zip" type="application/zip"&gt;Baixar o livro em ZIP&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="files/livro.pdf" download="livro.pdf" type="application/pdf"&gt;Baixar o livro em PDF&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="files/livro.zip" download="livro.zip" type="application/zip"&gt;Baixar o livro em ZIP&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;      
 </code>
 </pre>

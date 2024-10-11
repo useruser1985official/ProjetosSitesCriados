@@ -11,9 +11,9 @@ $excl = $limpa->campo(filter_input(INPUT_GET, "excl")) ?? "";
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="icon" href="_imagens/favicon.ico"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
         <title>Tudo Sobre Quadrinhos</title>
-        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="css/estilo.css"/>
     </head>
     <body>
         <div id="interface">

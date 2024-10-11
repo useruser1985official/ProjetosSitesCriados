@@ -16,10 +16,10 @@
         <style>
             @font-face {
                 font-family: "LCD";
-                src: url("_fontes/LCDN.ttf");
+                src: url("fontes/LCDN.ttf");
             }
             body {
-                background: url("_imagens/<?php echo $bg?>.jpg") center top fixed no-repeat;
+                background: url("imagens/<?php echo $bg?>.jpg") center top fixed no-repeat;
                 color: white;
                 text-align: center;
                 overflow: hidden;

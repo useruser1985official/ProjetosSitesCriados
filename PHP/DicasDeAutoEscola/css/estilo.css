@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+body {
+    background: url("../imagens/fundo.jpg") center fixed no-repeat;
+    font-family: Arial;
+}
+div#interface {
+    background-color: rgba(208,208,0,0.85);
+    margin: -8px;
+    padding: 20px;
+    min-height: 750px;
+    box-shadow: 0px 0px 10px silver;
+}
+header {
+    margin-bottom: 25px;
+    height: 100px;
+    border-bottom: 2px solid goldenrod;
+}
+a {
+    color: rgb(64,64,64);
+    text-decoration: none;
+    text-shadow: 0px 0px 5px silver;
+}
+a:hover {
+    color: silver;
+    text-decoration: underline;
+    text-shadow: 0px 0px 5px gold;
+}
+h1 {
+    font-family: cursive;
+    font-size: 30pt;
+    font-weight: bold;
+}
+h2 {
+    font-family: Georgia;
+    font-size: 20pt;
+    color: rgb(48,48,0);
+}
+h3 {
+    font-family: Cambria;
+    font-size: 16pt;
+    color: rgb(60,60,0);
+}
+p {
+    text-align: justify;
+    text-indent: 20px;
+}
+form#contato {
+    width: 800px;
+}
+form#login {
+    margin: 0px auto;
+    width: 300px;
+}
+form fieldset {
+    border: 1px solid goldenrod;
+    box-shadow: 0px 0px 10px rgb(64,64,64);
+}
+form legend {
+    font-size: 16pt;
+    font-weight: bold;
+    color: rgb(48,48,48);
+    text-shadow: 0px 0px 10px goldenrod;
+}
+input, select, textarea {
+    font-family: Arial;
+    font-size: 11pt;
+    background-color: rgba(255,215,0,0.5);
+}
+form input:hover, form select:hover, form textarea:hover {
+    background-color: rgba(218,165,32,0.5);
+}
+form div {
+    margin: 20px;
+}
+form div input {
+    margin-right: 5px;
+    font-size: 13pt;
+    padding: 7px;
+}
+footer#rodape {
+    margin-top: 100px;
+    height: 100px;
+    border-top: 2px solid goldenrod;
+}
+iframe#farol {
+    position: absolute;
+    top: 0px;
+    left: 750px;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    width: 195px;
+    height: 225px;
+    border: none;
+}

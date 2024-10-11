@@ -19,7 +19,7 @@ mysqli_close($conexao);
     <head>
         <meta charset="UTF-8"/>
         <title>Sistema de Cadastro</title>
-        <link rel="stylesheet" href="_css/estilo.css"/>
+        <link rel="stylesheet" href="css/estilo.css"/>
     </head>
     <body>
         <div class="container">

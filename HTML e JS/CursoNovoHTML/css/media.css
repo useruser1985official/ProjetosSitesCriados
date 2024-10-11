@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+@media print {
+    body {
+        background-image: none;
+    }
+
+    img#print {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        background-image: url("../imagens/back-phone.jpg");
+    }
+    
+    img#phone {
+        display: block;
+    }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    body {
+        background-image: url("../imagens/back-tablet.jpg");
+    }
+
+    img#tablet {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    body {
+        background-image: url("../imagens/back-pc.jpg");
+    }
+
+    img#pc {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    body {
+        background-image: url("../imagens/back-tv.jpg");
+    }
+
+    img#tv {
+        display: block;
+    }
+}
