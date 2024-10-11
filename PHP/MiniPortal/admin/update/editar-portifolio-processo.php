@@ -2,13 +2,14 @@
     include "../funcao/funcao-atualizar.php";
     include "../funcao/funcao-select2.php";
     include "../../extensoes/url-amigavel.php";
+    include_once "../../extensoes/anti_injection.php";
 
-    $titulo = $_REQUEST["tit"];
+    $titulo = isset($_REQUEST["tit"]) ? antiInjection($_REQUEST["tit"]) : "";
     $url = url_amigavel($titulo);
-    $resumo = $_REQUEST["res"];
-    $conteudo = $_REQUEST["cont"];
-    $data = $_REQUEST["data"];
-    $id = $_REQUEST["id"];
+    $resumo = isset($_REQUEST["res"]) ? antiInjection($_REQUEST["res"]) : "";
+    $conteudo = isset($_REQUEST["cont"]) ? antiInjection($_REQUEST["cont"]) : "";
+    $data = isset($_REQUEST["data"]) ? antiInjection($_REQUEST["data"]) : date("Y-m-d");
+    $id = (int)$_REQUEST["id"];
 
     if($_FILES["img"]["name"] == false) {
         atualizar(array("titulo", "url", "resumo", "conteudo", "data"), array($titulo, $url, $resumo, $conteudo, $data), "portifolio", "where id = '$id'");

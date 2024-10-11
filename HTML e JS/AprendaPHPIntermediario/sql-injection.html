@@ -61,31 +61,14 @@ isset($_GET["id"]) ? (int)$_GET["id"] : 0;
 
 <pre>
 <code>
-function anti_injection($sql) {
-    $sql = preg_ireplace(preg_quote("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"), "", $sql); // Qualquer palavra da string especificad aqui será transformado em nada.
-    $sql = strip_tags($sql); // Retira as tags como as &lt;script&gt;&lt;/script&gt;
-    $sql = trim($sql); // Retira espaços
-    return $sql;
-}
-</code>
-</pre>
-
-<p>Ele também pode ser assim, funciona tão efetivamente e é mais fácil de entender:</p>
-
-<pre>
-<code>
-function anti_injection($texto) {  
+function anti_injection($sql) {  
     $lista = array("select", "update", "drop", "insert", "delete", "alter", "from", "where", "table", "tables", "database", ";", "--", "#", "%", "&amp;", "'", "\"", "(", ")", "&lt;", "&gt;", "[", "]", ":", "?", "`", "|", "*");
+    $sql = strip_tags($sql); 
+    $sql = str_ireplace($lista, "", $sql); 
+    $sql = htmlspecialchars($sql, ENT_QUOTES); 
+    $sql = trim($sql);
     
-    $tags = strip_tags($texto);
-    
-    $remove = str_ireplace($lista, "", $tags);
-    
-    $muda = htmlspecialchars($remove, ENT_QUOTES);
-    
-    $limpa = trim($muda);
-    
-    return $limpa;
+    return $sql;
 }
 </code>
 </pre>
@@ -102,7 +85,7 @@ $id = anti_injection(filter_input(INPUT_GET, "id"));
 
 <p>PS: O filter_input() funciona como os métodos get e post, só que com uma filtragem básica. O que vai nos parênteses é o name do parâmetro HTML a ser recebido.</p>
 
-<p>A função strip_tags() protege contra ataques XSS, o operador ternário com get_magic_quotes_gpc() protege contra injeções de SQL, pelo menos esses dois precisam estar na função anti injection.</p>
+<p>A função strip_tags() protege contra ataques XSS, pelo menos esse precisa estar na função anti injection.</p>
 
 <h3>SQL Injection via Formulário</h3>
 

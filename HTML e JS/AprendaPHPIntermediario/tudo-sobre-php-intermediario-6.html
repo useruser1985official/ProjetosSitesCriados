@@ -260,7 +260,7 @@ function deleta($tabela, $where = NULL) {
     $delete = "delete from $tabela $where";
 
     if($conexao = conectaSite()) {
-        // Deketou?
+        // Deletou?
         if(mysqli_query($conexao, $delete)) {
             fechaConexao($conexao); // Função de outro arquivo.
             return true;

@@ -1,4 +1,5 @@
-<?php 
+<?php
+    include_once "restricao.php";
     include "funcao/funcao-select.php";
 
     $consulta = select("clientes", "*", NULL, "order by nome asc");

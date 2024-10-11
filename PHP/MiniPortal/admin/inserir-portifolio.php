@@ -1,5 +1,8 @@
 <?php
-    $env = isset($_REQUEST["env"]) ? $_REQUEST["env"] : "";
+    include_once "restricao.php";
+    include_once "../extensoes/anti_injection.php";
+     
+    $env = isset($_REQUEST["env"]) ? antiInjection($_REQUEST["env"]) : "";
 ?>
 <!doctype html>
 <html lang="pt-BR">

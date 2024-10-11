@@ -1,7 +1,8 @@
 <?php
+    include_once "restricao.php";
     include "funcao/funcao-select.php";
 
-    $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : "";
+    $id = isset($_REQUEST["id"]) ? (int)$_REQUEST["id"] : 0;
 
     $consulta = select("user", "*", "where id = '$id'", "order by login asc");
 ?>

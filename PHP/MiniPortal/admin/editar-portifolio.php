@@ -1,8 +1,10 @@
 <?php
+    include_once "restricao.php";
     include "funcao/funcao-select.php";
+    include_once "../extensoes/anti_injection.php";
     
-    $env = isset($_REQUEST["env"]) ? $_REQUEST["env"] : "";
-    $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : "";
+    $env = isset($_REQUEST["env"]) ? antiInjection($_REQUEST["env"]) : "";
+    $id = isset($_REQUEST["id"]) ? (int)$_REQUEST["id"] : 0;
 
     $consulta = select("portifolio", "*", "where id = '$id'", "order by titulo asc");
 ?>

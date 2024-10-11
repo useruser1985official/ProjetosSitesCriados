@@ -1,7 +1,11 @@
 <?php 
+    include_once "restricao.php";
     include "funcao/funcao-select.php";
+    include_once "../extensoes/anti_injection.php";
 
     $consulta = select("portifolio", "*", NULL, "order by titulo asc");
+
+    $env = isset($_REQUEST["env"]) ? antiInjection($_REQUEST["env"]) : "";
 ?>
 <!doctype html>
 <html lang="pt-BR">
@@ -25,6 +29,16 @@
        <section class="centro">
             <h1>Portfólio</h1>
         
+            <?php if($env == "sucess"): ?>
+            <section class="info-sucesso">
+                <h1>Edição Concluída com Êxito!</h1>
+            </section>
+            <?php endif; ?>
+            <?php if($env == "erase"): ?>
+            <section class="info-sucesso">
+                <h1>Exclusão Concluída com Êxito!</h1>
+            </section>
+            <?php endif; ?>
             <div class="tabela">
                 <div class="linha">
                     <div class="coluna">Nº</div>
@@ -51,7 +65,7 @@
                     <div class="coluna">
                         <a href="editar-portifolio.php?id=<?php echo $consulta[$i]['id'] ?>">Editar</a>
                         -
-                        <a href="excluir-portifolio.php?id=<?php echo $consulta[$i]['id'] ?>">Excluir</a>
+                        <a href="excluir/excluir-portifolio.php?id=<?php echo $consulta[$i]['id'] ?>">Excluir</a>
                     </div>
                 </div>
                 <?php 

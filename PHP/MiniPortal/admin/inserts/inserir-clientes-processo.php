@@ -1,6 +1,7 @@
 <?php
     include "../funcao/funcao-inserir.php";
     include "../../extensoes/url-amigavel.php";
+    include_once "../../extensoes/anti_injection.php";
 
     $nome = $_REQUEST["nome"];
     $url = url_amigavel($nome);

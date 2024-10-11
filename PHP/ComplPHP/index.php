@@ -14,14 +14,10 @@
             <?php if($msg == "enviado"): ?>
             <h3>Mensagem Enviada!</h3>
             <?php else: ?>
-            <form method="post" action="formulario.php">
+            <form method="get" action="testes.php">
                 <label for="nome">Nome: </label><input type="text" name="nome" id="inome" required/>
                 <br/>
-                <label for="tel">Telefone: </label><input type="tel" name="tel" id="itel"/>
-                <br/>
-                <label for="mail">E-mail: </label><input type="email" name="mail" id="imail" required/>
-                <br/>
-                <label for="msg">Mensagem: </label><textarea name="msg" id="imsg"></textarea>
+                <label for="idade">Idade: </label><input type="number" name="idade" id="iidade" value="0" min="0" max="126"/>
                 <br/>
                 <input type="submit" value="Enviar"/>
             </form>

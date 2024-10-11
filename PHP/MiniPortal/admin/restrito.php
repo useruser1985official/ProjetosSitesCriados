@@ -1,3 +1,8 @@
+<?php
+    include_once "restricao.php";
+
+    $erro = isset($_REQUEST["erro"]) ? $_REQUEST["erro"] : "";
+?>
 <!doctype html>
 <html lang="pt-BR">
 	<head>
@@ -18,19 +23,25 @@
         </header>
         <div class="login"></div>
         <aside class="login">
+                <?php if($erro == "negado"): ?>
                 <section class="info">
                     <p><strong>Página restrita!</strong></p><p>É preciso ter uma senha válida para acessar o sistema!</p>
                 </section>
-        	<section class="login">
-            	<h1> Logar no Sistema</h1>
-                <form action="">
-                    <p><label for="login">Login.:</label>
-                    <input id="login" name="login" type="text" required></p>
-                    <p><label for="senha">Senha.:</label>
-                    <input id="senha" name="senha" type="password" required></p>
-                    <button>Entrar</button>
-                </form>
+                <?php endif; ?>
+                <?php if($erro == "usuario"): ?>
+                <section class="info">
+                    <p><strong>O usuário informado não existe!</strong></p><p>É preciso ter um usuário e senhas válidos para acessar o sistema!</p>
+                </section>
+                <?php endif; ?>
+                <?php if($erro == "senha"): ?>
+                <section class="info">
+                    <p><strong>Senha incorreta!</strong></p><p>É preciso ter um usuário e senhas válidos para acessar o sistema!</p>
+                </section>
+                <?php endif; ?>
                 
+                
+        	<section class="login">
+            	<h1>Usuário Logado</h1>
             </section>       
         </aside>
         <footer class="rodape">

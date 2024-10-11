@@ -1,11 +1,10 @@
 <?php
+	function antiInjection($sql){
+		$lista = array("select", "update", "drop", "insert", "delete", "alter", "from", "where", "table", "tables", "database", ";", "--", "#", "%", "&", "'", "\"", "(", ")", "<", ">", "[", "]", ":", "?", "`", "|", "*");
+		$sql = strip_tags($sql);
+		$sql = str_ireplace($lista, "", $sql);
+		$sql = htmlspecialchars($sql, ENT_QUOTES);
+		$sql = trim($sql);
 
-function anti_injection($sql){
-	$sql = preg_replace(sql_regcase("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"), "" ,$sql);
-	$sql = trim($sql);
-	$sql = strip_tags($sql);
-	$sql = (get_magic_quotes_gpc()) ? $sql : addslashes($sql);
-	return $sql;
-}
-
-?>
+		return $sql;
+	}

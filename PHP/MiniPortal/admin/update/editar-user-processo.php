@@ -1,10 +1,11 @@
 <?php
     include "../funcao/funcao-atualizar.php";
+    include_once "../../extensoes/anti_injection.php";
 
-    $login = $_REQUEST["nome"];
-    $senha = $_REQUEST["senha"];
+    $login = isset($_REQUEST["nome"]) ? antiInjection($_REQUEST["nome"]) : "";
+    $senha = isset($_REQUEST["senha"]) ? antiInjection($_REQUEST["senha"]) : "";
     $cripsenha = password_hash($senha, PASSWORD_BCRYPT);
-    $id = $_REQUEST["id"];
+    $id = (int)$_REQUEST["id"];
 
     if($senha == "") {
         atualizar("login", $login, "user", "where id = '$id'");

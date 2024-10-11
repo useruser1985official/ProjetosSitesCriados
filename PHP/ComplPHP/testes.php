@@ -1,6 +1,3 @@
-<?php
-    $cor = filter_input(INPUT_COOKIE, "bg") !== null ? filter_input(INPUT_COOKIE, "bg") : "black";
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -8,16 +5,16 @@
         <link rel="icon" href="imagens/favicon.ico"/>
         <link rel="stylesheet" href="css/estilo.css"/>
         <title>Complemento em PHP</title>
-        <style>
-            body {
-                background-color: <?php echo $cor; ?>;
-            }
-        </style>
     </head>
     <body>
         <div class="terminal">
             <?php
-                
+                include_once "funcoes.php";
+
+                $nome = isset($_GET["nome"]) ? antiInjection(filter_input(INPUT_GET, "nome")) : "";
+                $idade = isset($_GET["idade"]) ? (int)antiInjection(filter_input(INPUT_GET, "idade")) : 0;
+
+                echo "\"select * from tabela where nome = '$nome' and idade = $idade;\"";
             ?>
             <br/>
             <br/>
