@@ -1,3 +1,6 @@
+<?php 
+    $env = isset($_GET["env"]) ? trim(htmlspecialchars(strip_tags($_GET["env"]), ENT_QUOTES)) : "";
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -10,13 +13,21 @@
     <body>
         <div id="interface">
             <header id="cabecalho">
-                <h1><a href="index.html">Gerador de Loterias</a></h1>
+                <h1><a href="index.php">Gerador de Loterias</a></h1>
                 <img src="imagens/gastao.png" id="gastao" alt="Gastão"/>
             </header>
             
             <h2>Contato</h2>
+
+            <div id="mens">
+                <?php if($env == "sucess"): ?>
+                <h3 id="inf">ÊXITO! Mensagem Enviada com Sucesso!</h3>
+                <?php elseif($env == "error"): ?>
+                <h3 id="err">ERRO! Falha no Envio! Tente Novamente!</h3>
+                <?php endif; ?>
+            </div>
             
-            <form method="post" action="mailto:gerador@teste">
+            <form method="post" action="conclusao.php">
                 <fieldset id="contato">
                     <legend>Insira seus Dados no Formulário</legend>
                     <p><label for="cNome">Nome Completo: </label><input type="text" name="tNome" id="cNome" size="35" maxlength="120" placeholder="Coloque seu Nome Aqui" required autofocus/></p>
@@ -40,13 +51,13 @@
                     </p>
                     <fieldset id="jogos">
                         <legend>Jogos que Você Joga</legend>
-                            <input type="checkbox" name="tJog" id="cMeg" value="Mega-Sena"/><label for="cMeg">Mega-Sena</label>
-                            <input type="checkbox" name="tJog" id="cQui" value="Quina"/><label for="cQui">Quina</label>
-                            <input type="checkbox" name="tJog" id="cDup" value="Dupla-Sena"/><label for="cDup">Dupla-Sena</label>
+                            <input type="checkbox" name="tJog[]" id="cMeg" value="Mega-Sena"/><label for="cMeg">Mega-Sena</label>
+                            <input type="checkbox" name="tJog[]" id="cQui" value="Quina"/><label for="cQui">Quina</label>
+                            <input type="checkbox" name="tJog[]" id="cDup" value="Dupla-Sena"/><label for="cDup">Dupla-Sena</label>
                             <br/>
-                            <input type="checkbox" name="tJog" id="cLof" value="Lotofácil"/><label for="cLof">Lotofácil</label>
-                            <input type="checkbox" name="tJog" id="cLot" value="Lotomania"/><label for="cLot">Lotomania</label>
-                            <input type="checkbox" name="tJog" id="cTim" value="Timemania"/><label for="cTim">Timemania</label>
+                            <input type="checkbox" name="tJog[]" id="cLof" value="Lotofácil"/><label for="cLof">Lotofácil</label>
+                            <input type="checkbox" name="tJog[]" id="cLot" value="Lotomania"/><label for="cLot">Lotomania</label>
+                            <input type="checkbox" name="tJog[]" id="cTim" value="Timemania"/><label for="cTim">Timemania</label>
                         
                     </fieldset>
                     <p><label for="cMsg">Sua Mensagem:</label></p>

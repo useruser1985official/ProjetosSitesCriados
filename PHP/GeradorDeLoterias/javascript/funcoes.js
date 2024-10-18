@@ -21,3 +21,18 @@ function valida() {
     
     return true;
 }
+
+function validaAdm() {
+    if(document.getElementById("cLogin").value.trim() == "") {
+        alert("Você deve preencher o campo \"Login\"!");
+        document.getElementById("cLogin").focus();
+        return false;
+    }
+    else if(document.getElementById("cSenha").value.trim() == "") {
+        alert("Você deve preencher o campo \"Senha\"!");
+        document.getElementById("cSenha").focus();
+        return false;
+    }
+    
+    return true;
+}

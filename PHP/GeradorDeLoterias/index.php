@@ -26,7 +26,7 @@
             </menu>
             
             <footer id="rodape">
-                <p><a href="contato.html">Entre em Contato Conosco</a></p>
+                <p><a href="contato.php">Entre em Contato Conosco</a></p>
             </footer>
         </div>
     </body>

@@ -465,6 +465,22 @@ $ini = filter_input(INPUT_GET, "filtro") != null ? (int)filter_input(INPUT_GET, 
 
 <p>Isso é usado para evitar que invasores insiram códigos maliciosos entre tags, afim de tentar invadir o site.</p>
 
+<p>PS: Caso queira pegar múltiplos dados de um checkbox. coloque no name do input algo assim:</p>
+
+<pre>
+<code>
+name="opcoes[]"
+</code>
+</pre>
+
+<p>E ao capturar, use a função implode para unir o array em uma string:</p>
+
+<pre>
+<code>
+implode(" ", $_POST["opcoes"]);
+</code>
+</pre>
+
 <ul>
     <li><a href="tudo-sobre-php-1.html">Parte Anterior da Matéria!</a></li>
     <li><a href="tudo-sobre-php-3.html">Continuação da Matéria!</a></li>
