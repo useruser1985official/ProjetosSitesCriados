@@ -34,8 +34,6 @@ else  {
     header("location: admin.php?env=user");
 }
 
-
-
 /*
 // Inserir:
 

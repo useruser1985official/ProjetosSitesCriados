@@ -195,7 +195,7 @@ create database biblioteca;
     </tr>
     <tr>
         <td><code>money</code></td>
-        <td>64 bits, com sinal (2 63 valores). Para valores monetários</td>
+        <td>64 bits, com sinal (2<sup><small>63</small></sup> valores). Para valores monetários</td>
     </tr>
 </table>
 
@@ -246,7 +246,7 @@ create database biblioteca;
         <td>8 bytes, armazena data e hora com fuso horário, precisão de 1 microssegundo</td>
     </tr>
     <tr>
-        <td><code>time</code> [without time zone]</td>
+        <td><code>timestamp</code> [without time zone]</td>
         <td>8 bytes, armazena data e hora sem fuso horário, precisão de 1 microssegundo</td>
     </tr>
     <tr>
@@ -317,7 +317,7 @@ create table clientes (
 create table produtos (
     codigo int primary key,
     nome varchar(30) not null,
-    descricao text null
+    descricao text null,
     preco numeric check(preco &gt; 0) not null, -- Verifica se o preço é maior que zero
     qtd_estoque smallint default 0
 );

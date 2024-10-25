@@ -21,7 +21,7 @@ $env = isset($_GET["env"]) ? trim(htmlspecialchars(strip_tags($_GET["env"]), ENT
             <div id="mens">
                 <?php if($env == "sucess"): ?>
                 <h3>Êxito! Mensagem Enviada com Sucesso!</h3>
-                <?php elseif($env == "error"):?>
+                <?php elseif($env == "error"): ?>
                 <h3>ERRO! Falha no Envio! Tente Novamente!</h3>
                 <?php endif; ?>
             </div>

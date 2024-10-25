@@ -238,6 +238,10 @@
     <li>No geral, possui uma performance maior do que um firewall de software instalado em um servidor comum.</li>
 </ul>
 
+<p>Veja a imagem de um firewall de hardware:</p>
+
+<img src="imagens/firewall-hard.jpg" alt="Firewall de Hardware"/>
+
 <p>No firewall do Windows, podemos adicionar novas regras de entrada e saída, clicando com o botão direito na regra especificada, escolhendo o tipo de regra (como programa, porta, predefinida ou personalizada), a ação (permitir, permitir apenas se for segura ou bloquear a conexão), o escopo e o nome. Para excluir uma regra existente, basta clicar com o botão direito e excluir ela.</p>
 
 <p>Podemos também usar Firewall no Linux, no Ubuntu, por exemplo, podemos habilitar ele digitando <code>sudo ufw enable</code>. Para permitir tráfegos como por exemplo, os TCP e UDP na porta 22 (SSH), digitamos <code>sudo ufw allow 22</code> (ou pra apenas os TCP, <code>sudo ufw allow 22/tcp</code>), e para verificar a porta requerida do SSH, <code>sudo ufw allow ssh</code>. Para excluir um deles use algo tipo <code>sudo ufw delete allow 22</code>, pra verificar todas as especificações, <code>sudo ufw status</code>, e pra resetar tudo (e desativar) <code>sudo ufw reset</code>. Podemos também baixar uma interface gráfica pra ele, digitando <code>sudo apt-get install gufw</code>.</p>

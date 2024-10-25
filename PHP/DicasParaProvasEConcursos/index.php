@@ -33,6 +33,9 @@
 Falar das guerras mundiais, ditaduta militar, filósofos, inventos e inventores, e do mundo.
 -->
 
+            <footer>
+                <p><a href="contato.php">Entre em Contato Conosco!</a></p>
+            </footer>
         </div>
     </body>
 </html>
