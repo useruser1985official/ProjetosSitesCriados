@@ -144,7 +144,7 @@ private void btnDef_Click(object sender, EventArgs e) {
 
 <p>No projeto do instalador, vá em ApplicationFolder e adicione as pastas e os arquivos externos (como bancos SQLite). Podemos adicionar as DLLs faltantes também aí.</p>
 
-<p>Em Applications Folder, vá nas propriedades e em AlwaysCreate deixe true pra criar menus, deixe a opção DefaultLocation como [ProgramFilesFolder]\[ProductName] (retire o Manufactore). Em Gerenciador de Soluções vá nas propriedades dele. Em Author coloque seu nome, em Description coloque a Descrição, em Manufactore coloque seu nome também, em ProductName coloque o nome da pasta do programa, em Título coloque o nome do programa e em Version defina a versão. Clique no projeto do instalador, compile o instalador e ele já estará pronto (o arquivo é o com extensão .msi).</p>
+<p>Em Applications Folder, vá nas propriedades e em AlwaysCreate deixe true pra criar menus, deixe a opção DefaultLocation como [ProgramFilesFolder]\[ProductName] (retire o Manufactore). Em Gerenciador de Soluções, vá nas propriedades com o nome do projeto do instalador. Em Author coloque seu nome, em Description coloque a Descrição, em Manufactore coloque seu nome também, em ProductName coloque o nome da pasta do programa, em Título coloque o nome do programa e em Version defina a versão. Clique no projeto do instalador, compile o instalador e ele já estará pronto (o arquivo é o com extensão .msi).</p>
 
 <p>No caso de programas com SQLite, pode ser necessário adicionar essas linhas no arquivo csproj do projeto (arquivo de mesmo nome do projeto com a extensão csproj), na última linha antes do fechamento da tag Project:</p>
 

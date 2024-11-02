@@ -22,7 +22,7 @@ else {
         <script src="javascript/funcoes.js"></script>
     </head>
     <body>
-        <div id="cabecalho">
+        <div id="interface">
             <header>
                 <h1><a href="index.php">Introdução ao Plug.dj</a></h1>
             </header>

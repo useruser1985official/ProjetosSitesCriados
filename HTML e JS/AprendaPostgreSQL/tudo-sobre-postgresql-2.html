@@ -207,6 +207,28 @@ select nome, qtd_estoque from produtos where nome != 'Refrigerante';
 </code>
 </pre>
 
+<p>Temos também o operador <code>like</code>, para procurar algo parecido, assim:</p>
+
+<pre>
+<code>
+select nome from produtos where nome = 'Refrigerante';
+
+select nome from produtos where nome like '%a';
+
+select nome from produtos where nome like 'L%';
+</code>
+</pre>
+
+<p>A porcentagem significa de 0 a infinitos caracteres, podemos usar o <code>_</code> para exigir apenas um caractere antes ou depois, e podemos combinar a porcentagem e o underline, por exemplo:</p>
+
+<pre>
+<code>
+select nome from produtos where nome like 'Luvas_%';
+</code>
+</pre>
+
+<p>PS: Diferente de outros bancos, o operador like diferencia maiúsculas e minúsculas no PostgreSQL. Para não diferenciar, use <code>ilike</code> no lugar.</p>
+
 <h3>Operador Between e Intervalos em Consultas SQL</h3>
 
 <p>O operador <code>between</code> permite visualizar os cadastros dentro de um intervalo especificado dentro do mesmo. Ele é usado em conjunto com o <code>and</code>. Podemos usar também uma negação com <code>not</code> para ele não mostrar dados dentro do intervalo especificado.</p>
