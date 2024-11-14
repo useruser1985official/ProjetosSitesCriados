@@ -87,18 +87,18 @@ form p {
     margin: 5px;
 }
 
-form input, form select, form textarea {
+input, select, textarea {
     font-family: Cambria, serif;
     font-size: 12pt;
     background-color: rgba(0,48,0,0.7);
     color: white;
 }
 
-form input:hover, form select:hover, form textarea:hover {
+input:hover, select:hover, textarea:hover {
     background-color: rgba(0,32,0,0.7);
 }
 
-form span#botoes input {
+span.botoes input {
     height: 35px;
 }
 

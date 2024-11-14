@@ -2,11 +2,9 @@
 require_once "AdminDAO.php";
 require_once "AntiInjection.php";
 
-$limpa = new AntiInjection();
-
-$login = $limpa->campo(filter_input(INPUT_POST, "tLogin")) ?? "";
-$senha = $limpa->campo(filter_input(INPUT_POST, "tSenha")) ?? "";
-$lemb = $limpa->campo(filter_input(INPUT_POST, "tLemb")) ?? "";
+$login = AntiInjection::campo(filter_input(INPUT_POST, "tLogin")) ?? "";
+$senha = AntiInjection::campo(filter_input(INPUT_POST, "tSenha")) ?? "";
+$lemb = AntiInjection::campo(filter_input(INPUT_POST, "tLemb")) ?? "";
 
 if($login != "") {
     $dao = new AdminDAO();

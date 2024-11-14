@@ -1,15 +1,9 @@
 <?php
-include_once "dados.php";
-include_once "restricao.php";
+require_once "ContatoDAO.php";
+require_once "AntiInjection.php";
+require_once "restricao.php";
 
-$sql = "select * from contato order by data desc";
-$coment = mysqli_query($conexao, $sql);
-$row = mysqli_fetch_assoc($coment);
-$total = mysqli_num_rows($coment);
-
-mysqli_close($conexao);
-
-$excl = isset($_GET["excl"]) ? trim(htmlspecialchars(strip_tags($_GET["excl"]), ENT_QUOTES)) : "";
+$excl = AntiInjection::campo(filter_input(INPUT_GET, "excl")) ?? "";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -33,21 +27,9 @@ $excl = isset($_GET["excl"]) ? trim(htmlspecialchars(strip_tags($_GET["excl"]), 
                 <?php endif; ?>
 
                 <?php
-                    if($total > 0) {
-                        do {
-                            echo "<fieldset>";
-                            echo "<legend>" . date("d/m/Y", strtotime($row['data'])) . "</legend>";
-                            echo "<h3>{$row['nome']}</h3>";
-                            echo "<h4>{$row['email']} - {$row['sexo']}</h4>";
-                            echo "<pre>{$row['mensagem']}</pre>";
-                            echo "<input type=\"button\" value=\"Excluir\" onclick=\"location = 'excluir.php?id={$row['id']}'\"/>";
-                            echo "</fieldset>";
-                        }
-                        while($row = mysqli_fetch_assoc($coment));
-                    }
-                    else {
-                        echo "<h3>Nenhuma Mensagem Disponível no Banco de Dados!</h3>";
-                    }
+                    $dao = new ContatoDAO();
+
+                    $dao->buscar();
                 ?>
                         
                 <p><input type="submit" value="Sair" onclick="location = 'sair.php'"/></p>   

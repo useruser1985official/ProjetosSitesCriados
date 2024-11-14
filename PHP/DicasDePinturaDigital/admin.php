@@ -1,16 +1,18 @@
 <?php
-$env = isset($_GET["env"]) ? trim(htmlspecialchars(strip_tags($_GET["env"]), ENT_QUOTES)) : "";
+    require_once "AntiInjection.php";
 
-session_start();
+    $env = AntiInjection::campo(filter_input(INPUT_GET, "env")) ?? "";
 
-if(isset($_SESSION["DicasDePinturaDigital"]["logado"])) {
-    header("location: consultas.php");
-}
-else {
-    unset($_SESSION["DicasDePinturaDigital"]["logado"]);
+    session_start();
 
-    setcookie(session_name(), null, 0, "/");
-}
+    if(isset($_SESSION["DicasDePinturaDigital"]["logado"])) {
+        header("location: consultas.php");
+    }
+    else {
+        unset($_SESSION["DicasDePinturaDigital"]["logado"]);
+
+        setcookie(session_name(), null, 0, "/");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

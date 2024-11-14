@@ -1,25 +1,23 @@
 <?php
-include_once "dados.php";
+require_once "ContatoDAO.php";
+require_once "AntiInjection.php";
 
-$nome = isset($_POST["tNome"]) ? trim(htmlspecialchars(strip_tags($_POST["tNome"]), ENT_QUOTES)) : "";
-$mail = isset($_POST["tMail"]) ? trim(htmlspecialchars(strip_tags($_POST["tMail"]), ENT_QUOTES)) : "";
-$sexo = isset($_POST["tSex"]) ? trim(htmlspecialchars(strip_tags($_POST["tSex"]), ENT_QUOTES)) : "";
-$mensagem = isset($_POST["tMsg"]) ? trim(htmlspecialchars(strip_tags($_POST["tMsg"]), ENT_QUOTES)) : "";
+$nome = AntiInjection::campo(filter_input(INPUT_POST, "tNome")) ?? "";
+$mail = AntiInjection::campo(filter_input(INPUT_POST, "tMail")) ?? "";
+$sexo = AntiInjection::campo(filter_input(INPUT_POST, "tSex")) ?? "O";
+$msg = AntiInjection::campo(filter_input(INPUT_POST, "tMsg")) ?? "";
 $data = date("Y-m-d");
 
 if($mail != "") {
-    $sql = "insert into contato (id, nome, email, sexo, mensagem, data) values (default, '$nome', '$mail', '$sexo', '$mensagem', '$data')";
-    $salvar = mysqli_query($conexao, $sql);
+    $dao = new ContatoDAO();
+
+    if($dao->salvar($nome, $mail, $sexo, $msg, $data)) {
+        header("location: contato.php?env=sucess");
+    }
+    else {
+        header("location: contato.php?env=error");
+    }
 }
 else {
-    header("location: contato.php?env=error");
-}
-
-$linhas = mysqli_affected_rows($conexao);
-
-if($linhas == 0) {
-    header("location: contato.php?env=error");
-}
-else {
-    header("location: contato.php?env=sucess");
+    header("location: contato.php?env=warning");
 }

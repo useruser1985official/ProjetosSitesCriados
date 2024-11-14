@@ -1,6 +1,6 @@
 <?php
-include_once "ContatoDAO.php";
-include_once "restricao.php";
+require_once "ContatoDAO.php";
+require_once "restricao.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -27,7 +27,7 @@ $dao = new ContatoDAO();
 $dao->buscar();
 ?>
 
-<p><input type="submit" value="Sair" onclick="location = 'sair.php'"/></p>
+<p><span class="botoes"><input type="submit" value="Sair" onclick="location = 'sair.php'"/></span></p>
 
 </section>
             

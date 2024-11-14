@@ -10,6 +10,7 @@ class AdminDAO {
 
     public function salvar($login, $senha) {
         $sql = "insert into admin (login, senha, sal) values (?, ?, ?)";
+        $stmt = null;
 
         $sal = time();
         $salgada = $senha . $sal;
@@ -32,12 +33,14 @@ class AdminDAO {
             echo "ERRO: {$ex->getMessage()}";
         }
         finally {
-            FabricaConexao::closeConexao($this->con);
+            FabricaConexao::closeConexao($this->con, $stmt);
         }
     }
 
     public function buscar($login, $senha, $lemb) {
         $sql = "select * from admin where login = ? limit 1";
+        $stmt = null;
+        $rs = null;
 
         try {
             $stmt = $this->con->prepare($sql);
@@ -56,7 +59,7 @@ class AdminDAO {
             echo "ERRO: {$ex->getMessage()}";
         }
         finally {
-            FabricaConexao::closeConexao($this->con);
+            FabricaConexao::closeConexao($this->con, $stmt, $rs);
         }
     }
 
@@ -85,6 +88,7 @@ class AdminDAO {
 
     public function excluir($login) {
         $sql = "delete from admin where login = ?";
+        $stmt = null;
 
         try {
             $stmt = $this->con->prepare($sql);
@@ -101,7 +105,7 @@ class AdminDAO {
             echo "ERRO: {$ex->getMessage()}";
         }
         finally {
-            FabricaConexao::closeConexao($this->con);
+            FabricaConexao::closeConexao($this->con, $stmt);
         }
     }
 }

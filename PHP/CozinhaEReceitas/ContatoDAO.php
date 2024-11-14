@@ -10,7 +10,8 @@ class ContatoDAO {
     
     public function salvar($nome, $mail, $sexo, $moti, $mens, $novi, $data) {
         $sql = "insert into contato (nome, mail, sexo, motivo, mensagem, envio, data) values (?, ?, ?, ?, ?, ?, ?)";
-        
+        $stmt = null;
+
         try {
             $stmt = $this->con->prepare($sql);
             
@@ -30,13 +31,15 @@ class ContatoDAO {
             echo "ERRO: {$ex->getMessage()}";
         }
         finally {
-            FabricaConexao::closeConnection($this->con);
+            FabricaConexao::closeConnection($this->con, $stmt);
         }
     }
     
     public function buscar() {
         $sql = "select * from contato order by data desc";
-        
+        $stmt = null;
+        $rs = null;
+
         try {
             $stmt = $this->con->prepare($sql);
             
@@ -57,7 +60,7 @@ class ContatoDAO {
             echo "ERRO: {$ex->getMessage()}";
         }
         finally {
-            FabricaConexao::closeConnection($this->con);
+            FabricaConexao::closeConnection($this->con, $stmt, $rs);
         }
     }
     
@@ -71,14 +74,17 @@ class ContatoDAO {
             echo "<h6>Motivo: {$r['motivo']}</h6>";
             echo "<h6>Enviar Mensagens: {$r['envio']}</h6>";
             echo "<pre>{$r['mensagem']}</pre>";
+            echo "<span class=\"botoes\">";
             echo "<input type=\"button\" value=\"Excluir\" onclick=\"location = 'excluir.php?id={$r["id"]}'\"/>";
+            echo "</span>";
             echo "</fieldset>";
         }
     }
     
     public function excluir($id) {
         $sql = "delete from contato where id = ?";
-        
+        $stmt = null;
+
         try {
             $stmt = $this->con->prepare($sql);
             
@@ -92,7 +98,7 @@ class ContatoDAO {
             echo "ERRO: {$ex->getMessage()}";
         }
         finally {
-            FabricaConexao::closeConnection($this->con);
+            FabricaConexao::closeConnection($this->con, $stmt);
         }
     }
 }

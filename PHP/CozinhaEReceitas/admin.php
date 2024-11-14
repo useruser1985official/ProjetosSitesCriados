@@ -1,9 +1,7 @@
 <?php
 require_once "AntiInjection.php";
 
-$limpa = new AntiInjection();
-
-$env = $limpa->campo(filter_input(INPUT_GET, "env")) ?? "";
+$env = AntiInjection::campo(filter_input(INPUT_GET, "env")) ?? "";
 
 session_start();
 
@@ -48,7 +46,7 @@ else {
         <p><label for="cLogin">Login: </label><input type="text" name="tLogin" id="cLogin" size="15" maxlength="12" placeholder="Login" required autofocus/></p>
         <p><label for="cSenha">Senha: </label><input type="password" name="tSenha" id="cSenha" size="15" maxlength="12" placeholder="Senha" required/></p>
         <input type="checkbox" name="tLemb" id="cLemb" value="on" checked/><label for="cLemb"><span>Lembrar Sessão</span></label>
-        <p><span id="botoes"><input type="submit" value="Entrar" onclick="validaAdm()"/></span></p>
+        <p><span class="botoes"><input type="submit" value="Entrar" onclick="validaAdm()"/></span></p>
     </fieldset>
 </form>
 

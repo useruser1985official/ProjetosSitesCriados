@@ -1,9 +1,7 @@
 <?php
 require_once "AntiInjection.php";
 
-$limpa = new AntiInjection();
-
-$env = $limpa->campo(filter_input(INPUT_GET, "env")) ?? "";
+$env = AntiInjection::campo(filter_input(INPUT_GET, "env")) ?? "";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -51,7 +49,7 @@ $env = $limpa->campo(filter_input(INPUT_GET, "env")) ?? "";
             </p>
             <p><label for="cMsg">Sua Mensagem:</label><br/><textarea name="tMsg" id="cMsg" cols="45" rows="7" maxlength="1000" placeholder="Até 1000 Caracteres" required></textarea></p>
             <p><input type="checkbox" name="tNov" id="cNov" value="Sim" checked/><label for="cNov">Envie-me Mensagens sobre Novidades no Site</label></p>
-            <span id="botoes">
+            <span class="botoes">
                 <input type="submit" onclick="validar()" value="Enviar"/>
                 <input type="reset" value="Limpar"/>
             </span>

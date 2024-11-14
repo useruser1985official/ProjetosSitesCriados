@@ -67,13 +67,31 @@ ConnectionFactory::getConnection();
 
 <pre>
 <code>
-public static function closeConnection($con) {
+public static function closeConnection($con, $stmt = null, $rs = null) {
     if($con != null) {
         try {
             $con = null;
         }
         catch(PDOException $ex) {
-            echo "ERRO: " . $ex->getMessage();
+            echo "ERRO: {$ex->getMessage()}";
+        }
+    }
+
+    if($stmt != null) {
+        try {
+            $stmt = null;
+        }
+        catch(PDOException $ex) {
+            echo "ERRO: {$ex->getMessage()}";
+        }
+    }
+
+    if($rs != null) {
+        try {
+            $rs = null;
+        }
+        catch(PDOException $ex) {
+            echo "ERRO: {$ex->getMessage()}";
         }
     }
 }
@@ -161,7 +179,7 @@ class ProdutoDAO {
             echo "Erro: " . $ex;
         }
         finally { // Isso fecha a conexão
-            ConnectionFactory::closeConnection($this->con);
+            ConnectionFactory::closeConnection($this->con, $stmt);
         }
     }
 }
@@ -246,7 +264,7 @@ public function findAll() {
         echo "ERRO: {$ex->getMessage()}";
     }
     finally {
-        ConnectionFactory::closeConnection($this->con);
+        ConnectionFactory::closeConnection($this->con, $stmt, $rs);
     }
 
     return $produtos;
@@ -308,7 +326,7 @@ public function update($prod) {
         echo "Erro: " . $ex;
     }
     finally {
-        ConnectionFactory::closeConnection($this->con);
+        ConnectionFactory::closeConnection($this->con, $stmt);
     }
 }
 </code>
@@ -371,7 +389,7 @@ public function delete($prod) {
         echo "Erro: " . $ex;
     }
     finally {
-        ConnectionFactory::closeConnection($this->con);
+        ConnectionFactory::closeConnection($this->con, $stmt);
     }
 }
 </code>

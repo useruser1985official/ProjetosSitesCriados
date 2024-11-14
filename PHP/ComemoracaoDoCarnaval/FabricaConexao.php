@@ -15,10 +15,28 @@ class FabricaConexao {
         }
     }
 
-    public static function closeConexao($con) {
+    public static function closeConexao($con, $stmt = null, $rs = null) {
         if($con != null) {
             try {
                 unset($con);
+            }
+            catch(PDOException $ex) {
+                echo "ERRO: {$ex->getMessage()}";
+            }
+        }
+
+        if($stmt != null) {
+            try {
+                unset($stmt);
+            }
+            catch(PDOException $ex) {
+                echo "ERRO: {$ex->getMessage()}";
+            }
+        }
+
+        if($rs != null) {
+            try {
+                unset($rs);
             }
             catch(PDOException $ex) {
                 echo "ERRO: {$ex->getMessage()}";
