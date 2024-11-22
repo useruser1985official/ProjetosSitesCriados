@@ -1,9 +1,7 @@
 <?php
 require_once "AntiInjection.php";
 
-$sucess = new AntiInjection();
-
-$env = filter_input(INPUT_GET, "env") !== null ? $sucess->campo(filter_input(INPUT_GET, "env")) : "";
+$env = filter_input(INPUT_GET, "env") !== null ? AntiInjection::campo(filter_input(INPUT_GET, "env")) : "";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

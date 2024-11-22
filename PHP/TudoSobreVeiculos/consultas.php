@@ -1,13 +1,6 @@
 <?php
-include_once "dados.php";
-include_once "restricao.php";
-
-$sql_sel = "select * from contato order by data desc";
-$coment = mysqli_query($conexao, $sql_sel);
-$row = mysqli_fetch_assoc($coment);
-$total = mysqli_num_rows($coment);
-
-mysqli_close($conexao);
+require_once "ContatoDAO.php";
+require_once "restricao.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -29,21 +22,9 @@ mysqli_close($conexao);
 <h2>Consultas</h2>
 
 <?php
-if($total > 0) {
-    do {
-        echo "<fieldset>\n\t";
-        echo "<legend>" . date("d/m/Y", strtotime($row['data'])) . "</legend>\n\t";
-        echo "<h4>Nome: {$row['nome']}</h4>\n\t";
-        echo "<h5>E-mail: {$row['email']} - Idade: {$row['idade']} - Sexo: {$row['sexo']}</h5>\n\t";
-        echo "<pre>\n{$row['mensagem']}\n\t</pre>\n\t";
-        echo "<input type=\"button\" value=\"Excluir\" onclick=\"location = 'excluir.php?id={$row['id']}'\"/>\n";
-        echo "</fieldset>\n";
-    }
-    while($row = mysqli_fetch_assoc($coment));
-}
-else {
-    echo "<h3>Nenhuma Mensagem no Banco de Dados!</h3>";
-}
+    $dao = new ContatoDAO();
+
+    $dao->buscar();
 ?>
 
 <div id="botoes">

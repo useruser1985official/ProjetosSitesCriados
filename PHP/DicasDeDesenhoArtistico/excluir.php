@@ -2,9 +2,7 @@
 require_once "ContatoDAO.php";
 require_once "AntiInjection.php";
 
-$excl = new AntiInjection();
-
-$id = $excl->numero(filter_input(INPUT_GET, "id"));
+$id = AntiInjection::numero(filter_input(INPUT_GET, "id"));
 
 $dao = new ContatoDAO();
 

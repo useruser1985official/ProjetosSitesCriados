@@ -2,11 +2,9 @@
 require_once "AdminDAO.php";
 require_once "AntiInjection.php";
 
-$anti = new AntiInjection();
-
-$login = $anti->campo(filter_input(INPUT_POST, "tLogin")) ?? "";
-$pass = $anti->campo(filter_input(INPUT_POST, "tSenha")) ?? "";
-$lemb = $anti->campo(filter_input(INPUT_POST, "tLemb")) ?? "";
+$login = AntiInjection::campo(filter_input(INPUT_POST, "tLogin")) ?? "";
+$pass = AntiInjection::campo(filter_input(INPUT_POST, "tSenha")) ?? "";
+$lemb = AntiInjection::campo(filter_input(INPUT_POST, "tLemb")) ?? "";
 
 $conn = FabricaConexao::getConexao();
 

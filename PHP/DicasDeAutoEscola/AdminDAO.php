@@ -14,6 +14,8 @@ class AdminDAO {
         $sal = time();
         $salgada = $senha . $sal;
         $crip = sha1($salgada);
+
+        $stmt = null;
         
         try {
             $stmt = $this->con->prepare($sql);
@@ -31,13 +33,16 @@ class AdminDAO {
             echo "ERRO: {$ex->getMessage()}";
         }
         finally {
-            FabricaConexao::closeConnection($this->con);
+            FabricaConexao::closeConnection($this->con, $stmt);
         }
     }
     
     public function buscar($login, $senha, $lemb) {
         $sql = "select * from admin where login = ? limit 1";
         
+        $stmt = null;
+        $rs = null;
+
         try {
             $stmt = $this->con->prepare($sql);
             
@@ -54,7 +59,7 @@ class AdminDAO {
             echo "ERRO: {$ex->getMessage()}";
         }
         finally {
-            FabricaConexao::closeConnection($this->con);
+            FabricaConexao::closeConnection($this->con, $stmt, $rs);
         }
     }
     
@@ -84,6 +89,8 @@ class AdminDAO {
     public function excluir($login) {
         $sql = "delete from admin where login = ?";
         
+        $stmt = null;
+
         try {
             $stmt = $this->con->prepare($sql);
             
@@ -98,7 +105,7 @@ class AdminDAO {
             echo "ERRO: {$ex->getMessage()}";
         }
         finally {
-            FabricaConexao::closeConnection($this->con);
+            FabricaConexao::closeConnection($this->con, $stmt);
         }
     }
 }

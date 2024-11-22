@@ -1,9 +1,7 @@
 <?php
 require_once "AntiInjection.php";
 
-$limpa = new AntiInjection();
-
-$erro = filter_input(INPUT_GET, "erro") !== null ? $limpa->campo(filter_input(INPUT_GET, "erro")) : "";
+$erro = filter_input(INPUT_GET, "erro") !== null ? AntiInjection::campo(filter_input(INPUT_GET, "erro")) : "";
 
 session_start();
 

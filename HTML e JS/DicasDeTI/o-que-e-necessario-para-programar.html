@@ -52,6 +52,30 @@
 
 <p>PS: PHPStorm precisa ter o Java Instalado para funcionar. O Sublime Text para Linux pode ser baixado digitando <code>sudo apt install sublime-text</code>, o Notepad++ pode ser instalado com <code>sudo apt install notepad-plus-plus</code>.</p>
 
+<h3>Node.JS e Typescript</h3>
+
+<p>Para o Node, no Linux, digite <code>sudo apt install curl</code>, e em seguida execute esse script:</p>
+
+<pre>
+<code>
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+</code>
+</pre>
+
+<p>E termine instalando <code>sudo apt install nodejs</code>.</p>
+
+<p>No Windows e no Mac, basta instalar pelo instalador do site oficial.</p>
+
+<ul>
+    <li><a href="https://nodejs.org/en/download/prebuilt-installer" target="_blank">Download do Node.JS - Windows e Mac</a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</ul>
+
+<p>O Node não é usado apenas no Node.JS, ele também é necessário para usar com o Typescript. Para instalar o Typescript, depois de instalar o Node digite no terminal <code>npm install -g typescript</code>.</p>
+
 <h3>PHP e MySQL</h3>
 
 <p>Além do editor de texto (tal como o HTML, que é integrado ao PHP), precisamos de um servidor para nosso sistema, como o WAMP/LAMP/MAMP ou o XAMPP (no Linux basta digitar <code>sudo apt install php apache2 mysql-server phpmyadmin lamp-server^</code> sem esquecer do ^, e usar a pasta /var/www/html para as páginas). Um editor de banco como o MySQL Workbench é opcional.</p>
@@ -195,7 +219,7 @@
 
 <h3>Objective-C/Swift</h3>
 
-<p>Nessas linguagens só é possível trabalhar no Mac, usando o XCode configurado. Ele também é usado para programar em IOS. Como alternativa, podemos usar o Objective-C em Linux, desde que ele não use bibliotecas específicas do Mac, como o Cocoa. Para instalar no Linux use o comando <code>sudo apt-get install gcc gobjc gnustep-devel</code>.</p>
+<p>Nessas linguagens só é possível trabalhar no Mac, usando o XCode configurado. Ele também é usado para programar em IOS. Como alternativa, podemos usar o Objective-C em Linux, desde que ele não use bibliotecas específicas do Mac, como o Cocoa. Para instalar no Linux use o comando <code>sudo apt-get install gcc gobjc gnustep-devel</code>. Para o Swift, podemos programar online por esse site: <a href="https://www.tutorialspoint.com/compile_swift_online.php" target="_blank">https://www.tutorialspoint.com/compile_swift_online.php</a></p>
 
 <ul>
     <li><a href="https://xcodereleases.com/" target="_blank">Download do XCode - Mac</a></li>
@@ -206,6 +230,36 @@
     <li><a href="" target="_blank">Download</a></li>
     -->
 </ul>
+
+<h3>Rust</h3>
+
+<p>Para instalar o Rust, usamos o rustup via linha de comando. O rustup pode ser instalado no Windows do site oficial. Em Linux e Mac usamos esses comandos:</p>
+
+<pre>
+<code>
+curl https://sh.rustup.rs -sSf | sh
+</code>
+</pre>
+
+<p>E depois, podemos adicionar essa linha no path:</p>
+
+<pre>
+<code>
+export PATH="$HOME/.cargo/bin:$PATH"
+</code>
+</pre>
+
+<ul>
+    <li><a href="https://www.rust-lang.org/pt-BR/tools/install" target="_blank">Download do Rust - Windows</a></li>
+    <!--
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    <li><a href="" target="_blank">Download</a></li>
+    -->
+</ul>
+
+<p>Em qualquer sistema, para atualizar o Rust basta digitar no terminal <code>rustup update</code>.</p>
 
 <h3>Assembly</h3>
 

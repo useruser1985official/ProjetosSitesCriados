@@ -2,14 +2,12 @@
 include_once "ContatoDAO.php";
 require_once "AntiInjection.php";
 
-$contato = new AntiInjection();
-
-$nome = $contato->campo(filter_input(INPUT_POST, "tNome")) ?? "";
-$mail = $contato->campo(filter_input(INPUT_POST, "tMail")) ?? "";
-$opcao = $contato->campo(filter_input(INPUT_POST, "tOpcao")) ?? "";
-$idade = $contato->numero(filter_input(INPUT_POST, "tIdade")) ?? 0;
-$mens = $contato->texto(filter_input(INPUT_POST, "tMsg")) ?? "";
-$arq = $contato->texto(filter_input(INPUT_POST, "tArq")) ?? "";
+$nome = AntiInjection::campo(filter_input(INPUT_POST, "tNome")) ?? "";
+$mail = AntiInjection::campo(filter_input(INPUT_POST, "tMail")) ?? "";
+$opcao = AntiInjection::campo(filter_input(INPUT_POST, "tOpcao")) ?? "";
+$idade = AntiInjection::numero(filter_input(INPUT_POST, "tIdade")) ?? 0;
+$mens = AntiInjection::texto(filter_input(INPUT_POST, "tMsg")) ?? "";
+$arq = AntiInjection::texto(filter_input(INPUT_POST, "tArq")) ?? "";
 $data = date("Y-m-d");
 
 if($mail != "") {

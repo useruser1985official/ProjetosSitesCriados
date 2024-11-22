@@ -1,16 +1,18 @@
 <?php
-$env = htmlspecialchars(isset($_GET["env"])) ? trim(htmlspecialchars(strip_tags($_GET["env"]), ENT_QUOTES)) : "";
+    require_once "AntiInjection.php";
 
-session_start();
+    $env = AntiInjection::campo(filter_input(INPUT_GET, "env")) ?? "";
 
-if(isset($_SESSION["TudoSobreVeiculos"]["logado"])) {
-    header("location: consultas.php");
-}
-else {
-    unset($_SESSION["TudoSobreVeiculos"]["logado"]);
-    
-    setcookie(session_name(), null, 0, "/");
-}
+    session_start();
+
+    if(isset($_SESSION["TudoSobreVeiculos"]["logado"])) {
+        header("location: consultas.php");
+    }
+    else {
+        unset($_SESSION["TudoSobreVeiculos"]["logado"]);
+        
+        setcookie(session_name(), null, 0, "/");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

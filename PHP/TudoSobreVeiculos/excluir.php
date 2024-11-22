@@ -1,11 +1,14 @@
 <?php
-include_once "dados.php";
+require_once "ContatoDAO.php";
+require_once "AntiInjection.php";
 
-$id = (int)htmlspecialchars($_GET["id"], ENT_QUOTES);
+$id = AntiInjection::numero(filter_input(INPUT_GET, "id"));
 
-$sql_del = "delete from contato where id = '$id'";
-$excluir = mysqli_query($conexao, $sql_del);
+$dao = new ContatoDAO();
 
-mysqli_close($conexao);
-
-header("location: consultas.php?excl=sucess");
+if($dao->excluir($id)) {
+    header("location: consultas.php?excl=sucess");
+}
+else {
+    header("location: consultas.php?excl=error");
+}

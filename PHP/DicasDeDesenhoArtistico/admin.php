@@ -1,9 +1,7 @@
 <?php
 require_once "AntiInjection.php";
 
-$limpa = new AntiInjection();
-
-$env = $limpa->campo(filter_input(INPUT_GET, "env")) ?? "";
+$env = AntiInjection::campo(filter_input(INPUT_GET, "env")) ?? "";
 
 session_start();
 

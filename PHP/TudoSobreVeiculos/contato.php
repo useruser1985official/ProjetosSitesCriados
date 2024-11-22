@@ -1,5 +1,7 @@
 <?php
-$env = htmlspecialchars(isset($_GET["env"])) ? trim(htmlspecialchars(strip_tags($_GET["env"]), ENT_QUOTES)) : "";
+require_once "AntiInjection.php";
+
+$env = AntiInjection::campo(filter_input(INPUT_GET, "env")) ?? "";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

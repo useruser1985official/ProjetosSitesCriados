@@ -2,11 +2,9 @@
 include_once "AdminDAO.php";
 include_once "AntiInjection.php";
 
-$anti = new AntiInjection();
-
-$login = $anti->campo(filter_input(INPUT_POST, "tLogin")) ?? "";
-$senha = $anti->campo(filter_input(INPUT_POST, "tSenha")) ?? "";
-$lemb = $anti->campo(filter_input(INPUT_POST, "tLemb")) ?? "";
+$login = AntiInjection::campo(filter_input(INPUT_POST, "tLogin")) ?? "";
+$senha = AntiInjection::campo(filter_input(INPUT_POST, "tSenha")) ?? "";
+$lemb = AntiInjection::campo(filter_input(INPUT_POST, "tLemb")) ?? "";
 
 if($login != "") {
     $dao = new AdminDAO();

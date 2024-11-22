@@ -11,6 +11,8 @@ class ContatoDAO {
     public function salvar($nome, $mail, $mens, $data) {
         $sql = "insert into contato (nome, email, mensagem, data) values (?, ?, ?, ?)";
         
+        $stmt = null;
+
         try {
             $stmt = $this->con->prepare($sql);
             
@@ -26,13 +28,16 @@ class ContatoDAO {
             echo "ERRO: {$ex->getMessage()}";
         }
         finally {
-            FabricaConexao::closeConnection($this->con);
+            FabricaConexao::closeConnection($this->con, $stmt);
         }
     }
     
     public function buscar() {
         $sql = "select * from contato order by data desc";
         
+        $stmt = null;
+        $rs = null;
+
         try {
             $stmt = $this->con->prepare($sql);
             
@@ -53,7 +58,7 @@ class ContatoDAO {
             echo "ERRO: {$ex->getMessage()}";
         }
         finally {
-            FabricaConexao::closeConnection($this->con);
+            FabricaConexao::closeConnection($this->con, $stmt, $rs);
         }
     }
     
@@ -72,6 +77,8 @@ class ContatoDAO {
     public function excluir($id) {
         $sql = "delete from contato where id = ?";
         
+        $stmt = null;
+
         try {
             $stmt = $this->con->prepare($sql);
             
@@ -84,7 +91,7 @@ class ContatoDAO {
             echo "ERRO: {$ex->getMessage()}";
         }
         finally {
-            FabricaConexao::closeConnection($this->con);
+            FabricaConexao::closeConnection($this->con, $stmt);
         }
     }
 }
