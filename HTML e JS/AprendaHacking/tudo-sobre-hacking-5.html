@@ -26,6 +26,102 @@
             
 <h2>Tudo sobre Hacking Parte 5</h2>
 
+<h3>Google Hacking</h3>
+
+<p>O Google Hacking nada mais é que nós utilizarmos o Google para pesquisar coisas como sites vulneráveis, pesquisar dados, encontrar informações, pastas importantes, vulnerabilidades e etc.</p>
+
+<p>O Google indexa toda a internet da surface web e pega todos os links de todos os sites que encontra, incluindo dados confidenciais do mesmo, graças ao webcrawler do Google.</p>
+
+<p>Ao pesquisar <code>site:nomedosite.com.br</code> ele retornará o máximo de conteúdos apenas do site especificado (pode ser usado algo como <code>site:.pt</code> para procurar sites de Portugal, por exemplo), podendo colocar uma ou mais palavras chaves para procurar conteúdos específicos desse mesmo site, ou mesmo colocar o - na frente da palavra pra suprimir resultados com essa mesma palavra.</p>
+
+<p>Podemos pesquisar resultados que estejam numa URL que contenham tal sequência, por exemplo <code>inurl:.php?id=</code>, podendo substituir por cat ou outro dado de PHP. Isso ajuda a procurar sites vulneráveis.</p>
+
+<p>Podemos buscar por exemplo, algum erro de MySQL que apareça num texto de um site, como <code>intext:mysql_fetch_array()</code>, e podemos combinar com o inurl pra isso. Uma forma fácil de achar sites vulneráveis à SQL Injection é pesquisar <code>inurl:.php?cat= intext:syntax</code> (já que a palavra syntax é exibida em erros de SQL).</p>
+
+<p>PS: Além de inurl, intext, intitle, podemos usar <code>allinurl</code>, <code>allintext</code> e <code>allintitle</code> para procurar resultados com todas as palavras descritas, ao invés de uma só.</p>
+
+<p>Outra coisa muito comum é procurar um tipo específico de arquivo, como <code>filetype:sql</code> ou <code>ext:php</code>, que procura arquivos de banco de dados que podem estar em backup de sites. Muito comum procurar arquivos TXT, ZIP ou RAR que contenham back-up de dados. Podemos colocar o operador <code>OR</code> ou <code>|</code> para ele procurar resultado com um verbete ou o outro. Também podemos procurar um intervalo de números, como por exemplo <code>2012..2016</code> ou <code>numrange:2012-2016</code>.</p>
+
+<p>PS: Todos esses comandos podem ser combinados com outros, principalmente com palavras-chave para retornar resultados mais relevantes.</p>
+
+<p>Podemos também procurar coisas literais entre aspas (como <code>"Recuperar Senha"</code>), colocar um <q>*</q> como coringa (como <code>"Samuel * da Silva"</code>), suprimir algo da pesquisa com um <q>-</q> (como <code>vazamento de contas -água -luz</code>), entre outras coisas. Um truque que podemos usar é para descobrir servidores FTP, digitando <code>intext:"index of" inurl:ftp</code>.</p>
+
+<p>Podemos também pesquisar um e-mail para ver se ele foi exposto ou se ele é legítimo (caso seja um e-mail de alguma conta que envia spam ou phishing, por exemplo), simplesmente colando ele na pesquisa do Google.</p>
+
+<p>Nesse site temos muitas outras dicas que podemos usar para buscas no Google: <a href="https://tavernalinux.com/google-hacking-para-pentest-61604f8f8122" target="_blank">https://tavernalinux.com/google-hacking-para-pentest-61604f8f8122</a></p>
+
+<p>Aqui também temos alguns parâmetros que podemos usar no Google: <a href="https://escoladedados.org/tutoriais/operadores-de-busca-avancada/" target="_blank">https://escoladedados.org/tutoriais/operadores-de-busca-avancada/</a></p>
+
+<p>Veja alguns usos mais avançados de pesquisa no Google:</p>
+
+<pre>
+<code>
+"phpMyAdmin" "running on" inurl:main.php
+
+"@gmail.com"
+
+ext:php | ext:asp | ext:aspx | ext:jsp
+
+numrange:1-5
+
+intitle:"VNC Desktop" inurl:5900
+
+intitle:"remote desktop web connection"
+
+intitle:"index of" filetype:sql
+
+intitle:phpinfo()
+
+intitle:"index of /" backup
+
+filetype:log inurl:password.log
+
+filetype:properties inurl:db intext:password
+
+filetype:sql intext:password
+
+inurl:.php?id= "sql syntax"
+
+inurl:.php?id= "sql command"
+</code>
+</pre>
+
+<h3>Introdução ao SQL Injection</h3>
+
+<p>Um banco de dados é utilizado para armazenar informações. Programas que organizam e coletam essas informações são chamados de DBMS, como o MySQL. Para a organização e estruturação dessas informações é utilizada uma linguagem chamada SQL.</p>
+
+<p>SQL é a sigla inglesa de Structured Query Language, que significa, em português, Linguagem de Consulta Estruturada, uma linguagem padrão de gerenciamento de dados que interage com os principais bancos de dados baseados no modelo relacional, dentre eles: MySQL, PostgreSQL, Oracle, SQL Server, MariaDB, Acess, etc.</p>
+
+<p>Os sites com bancos de dados e alguma linguagem back-end, como o PHP, são chamados de dinâmicos, já os sites apenas com HTML, CSS e Javascript são chamados de estáticos. Facebook é um exemplo de site dinâmico.</p>
+
+<p>O SQL Injection é feito colocando algo que interfira no funcionamento normal da query do banco de dados, em sites que não filtram seus dados.</p>
+
+<p>Query do site:</p>
+
+<pre>
+<code>
+$sql = "select * from users where username = '" + $username + "' and password = '" + $password + "'";
+</code>
+</pre>
+
+<p>Colocamos no campo de username o "login" e "senha" <code>' or '1 = 1</code>, e a SQL vai entender algo diferente e gerar esse resultado:</p>
+
+<pre>
+<code>
+$sql = "select * from users where username = '' or '1 = 1' and password = '' or '1 = 1'";
+</code>
+</pre>
+
+<p>No caso acima, se o banco de dados não encontrar o usuário (que está vazio), ele verificará se 1 é igual é 1 e identificará a query como verdadeira e logará o site.</p>
+
+<p>No Google podemos pesquisar um site vulnerável com <code>inurl:.php?cat=</code>, no caso, vamos nesse site que é permitido usar pra testes: <a href="http://testphp.vulnweb.com/listproducts.php?cat=1" target="_blank">http://testphp.vulnweb.com/listproducts.php?cat=1</a></p>
+
+<p>No site acima, se passamos o número no parâmetro cat, ele mostrará fotos do site normalmente, mas se passar uma aspas simples, ele dará um erro de SQL, por criar uma query errada. Se o site mostrar erros, o site poderá ser vulnerável a SQL Injection.</p>
+
+<p>Agora vamos na seção de login, no mesmo site, e coloque nos campos de login e senha o comando <code>' or '1 = 1</code>. Ele logará, por causa do que a query entende como uma consulta válida.</p>
+
+<p>PS: O SQL Injection independe da linguagem do site ou tipo de banco de dados, funciona igual para qualquer um.</p>
+
 <h3>SQL Injection com Havij</h3>
 
 <p>Como visto, podemos descobrir se um site está vulnerável à SQL Injection tentando colocar no parâmetro da URL alguma coisa que interfira na query do SQL, como uma aspas simples.</p>

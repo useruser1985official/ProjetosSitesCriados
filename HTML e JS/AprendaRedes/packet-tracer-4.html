@@ -372,7 +372,7 @@
 
 <p>No lado do servidores, coloque cinco servidores: Os DHCP, cada um pra sua própria VLAN (10, 20 e 30), o quarto será um servidor DNS e o quinto um servidor WEB. Os servidores DNS e WEB serão da VLAN 10. Coloque um switch 2960 para ligar os servidores com o nome Coordenação.</p>
 
-<p>No setores, coloque um switch em cada setor (Secretaria, Sala dos Professores, Lab1 e Lab2), cada um com seu nome, e coloque um switch também interligando todos, com o nome IC. No setor de Alunos coloque um Access Point (AP-PT, em WAN Emulation).</p>
+<p>No setores, coloque um switch em cada setor (Secretaria, Sala dos Professores, Lab1 e Lab2 e Servidores), cada um com seu nome, e coloque um switch também interligando todos, com o nome IC. No setor de Alunos coloque um Access Point (AP-PT, em WAN Emulation).</p>
 
 <p>Como sabermos, um roteador wi-fi cria outra rede para se comunicar com os dispositivos wireless. Para não criar outra rede, utilizaremos um Access Point para isso. Ele também pode ter nome de rede configurado, assim como uma senha, indo em Config e Port 1, escolhemos a opção WPA2-PSK (a mais segura) com a encriptação AES.</p>
 
@@ -414,17 +414,15 @@
     <li><b>Nome:</b> Laboratório - Gateway e DNS Server <code>192.168.20.1</code> - Start IP <code>192.168.20.2</code> - Máscara Padrão C.</li>
 </ul>
 
-<p>No switch do Lab 1, coloque os computadores na VLAN 20.</p>
+<p>No switch do Lab 1, coloque os computadores na VLAN 20. Faça o mesmo em Lab 2.</p>
 
-<p>Faça o mesmo na VLAN 30, colocando a porta do switch ligada ao Access Point nessa VLAN.</p>
+<p>Faça o mesmo na VLAN 30, colocando a porta do switch ligada ao Access Point nessa VLAN. Faça o mesmo no switch dos servidores com o servidor DHCP dessa VLAN. Essa é a configuração dele:</p>
 
-<h3>Firewall básico</h3>
+<ul>
+    <li><b>Nome:</b> Alunos - Gateway e DNS Server <code>192.168.30.1</code> - Start IP <code>192.168.30.2</code> - Máscara Padrão C.</li>
+</ul>
 
-<p>Colocaremos dois computadores no cenário. O computador terá o IP <code>192.168.0.1</code> e a máscara padrão C. O outro terá o IP <code>192.168.0.2</code>. Mas as configurações no firewall faremos no PC 1.</p>
 
-<p>Veja se o serviço de firewall IPv4 está ligado, com o a porta FastEthernet, action Allow, protocolo ICMP, o IP do computador e a máscara padrão invertida em remote wildcard mask (<code>0.255.255.255</code>). Clique em Add para salvar. Vá de novo em action Allow, protocolo UDP, IP do computador, máscara padrão invertida, remote port como any e local port como 53 (DNS). Vá de novo em action Deny, protocolo TCP, IP do computador, máscara padrão invertida, remote port como any e local port 21 (FTP). Vá de novo em action Allow, protocolo TCP, IP do computador, máscara padrão invertida, remote port any, local port 443 (HTTPS). Podemos fazer isso com vários protocolos.</p>
-
-<p>No segundo computador, vá no prompt e tente dar um ping no primeiro e veremos que ele responde, no entanto, se conectarmos via FTP, ele não permitirá.</p>
 
 <ul>
     <li><a href="packet-tracer-3.html">Parte Anterior da Matéria!</a></li>

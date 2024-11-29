@@ -264,7 +264,7 @@
 
 <h3>Configurando Modem e Conexão com a Internet</h3>
 
-<p>Coloque um PC, um modem DSL, um servidor, um roteador 1941 e um servidor, ligados nessa mesma ordem com os cabeamentos especificados. Isso representará a conexão da internet (que terá muito mais roteadores e servidores após a nuvem).</p>
+<p>Coloque um PC, um modem DSL, uma nuvem, um roteador 1941 e um servidor, ligados nessa mesma ordem com os cabeamentos especificados. Isso representará a conexão da internet (que terá muito mais roteadores e servidores após a nuvem).</p>
 
 <p>PS: A nuvem representa daonde vem a internet, quando a operadora diz não ter portas para novas conexões, é porque falta essas portas. O roteador representa o roteador da operadora.</p>
 
@@ -272,7 +272,7 @@
 
 <p>Coloque no PC o IP <code>192.168.0.1</code> e no servidor o IP <code>172.16.0.1</code>, já que o roteador só conversa com redes diferentes. O gateway padrão da rede será o IP do roteador, que representaria o da operadora.</p>
 
-<p>O IP da porta do roteador da rede do PC e também será o gateway padrão do mesmo é <code>192.168.0.254</code>, e o IP da porta do servidor será <code>172.168.0.254</code>, e será o gateway padrão do mesmo.</p>
+<p>O IP da porta do roteador da rede do PC e também será o gateway padrão do mesmo é <code>192.168.0.254</code>, e o IP da porta do servidor será <code>172.16.0.254</code>, e será o gateway padrão do mesmo.</p>
 
 <p>Clique na nuvem e em Config, vá em DSL, escolha a porta ligada ao modem com a Ethernet (que seria a porta que ligará seu modem à internet), e adicione.</p>
 
@@ -354,6 +354,14 @@
 <p>Vá no Switch, em VLAN Database, você verá que todos os dispositivos estão na VLAN default. Podemos criar nossas próprias VLANS, numeradas entre 1 e 4095. No caso faremos a vlan1 Nº 10 e a vlan2 Nº 11 e adicionar. As portas da VLAN 1 não se comunicação com as da VLAN 2.</p>
 
 <p>Em cada porta, nós selecionamos a VLAN desejada na qual queremos que ela esteja.</p>
+
+<h3>Firewall básico</h3>
+
+<p>Colocaremos dois computadores no cenário. O computador terá o IP <code>192.168.0.1</code> e a máscara padrão C. O outro terá o IP <code>192.168.0.2</code> e a mesma máscara. Ligue ambos com um cabo Cross. Mas as configurações no firewall faremos no PC 1.</p>
+
+<p>Veja se o serviço de firewall IPv4 está ligado, com o a porta FastEthernet, action Allow, protocolo ICMP, o IP do computador e a máscara padrão invertida em remote wildcard mask (<code>0.255.255.255</code>). Clique em Add para salvar. Vá de novo em action Allow, protocolo UDP, IP do computador, máscara padrão invertida, remote port como any e local port como 53 (DNS). Vá de novo em action Deny, protocolo TCP, IP do computador, máscara padrão invertida, remote port como any e local port 21 (FTP). Vá de novo em action Allow, protocolo TCP, IP do computador, máscara padrão invertida, remote port any, local port 443 (HTTPS). Podemos fazer isso com vários protocolos.</p>
+
+<p>No segundo computador, vá no prompt e tente dar um ping no primeiro e veremos que ele responde, no entanto, se conectarmos via FTP, ele não permitirá.</p>
 
 <ul>
     <li><a href="packet-tracer-2.html">Parte Anterior da Matéria!</a></li>

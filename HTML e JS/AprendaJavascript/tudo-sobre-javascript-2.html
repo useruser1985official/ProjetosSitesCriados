@@ -337,6 +337,18 @@ document.getElementsByTagName("h1")[0].innerHTML = "Novo";
 
 <p>Existem outras opções para pegar dados como o da classe (<code>document.getElementsByClassName()</code>).</p>
 
+<p>Veja um exemplo de Olá Mundo usando esse recurso:</p>
+
+<pre>
+<code>
+&lt;h1 id="saida"&gt;&lt;/h1&gt;
+
+&lt;script&gt;
+document.getElementById("saida").textContent = "Olá, Mundo!";
+&lt;/script&gt;
+</code>
+</pre>
+
 <h3>Identificando e convertendo dados</h3>
 
 <p>O operador <code>typeof</code> é usado pra identificar tipos de dados e variáveis, por exemplo:</p>

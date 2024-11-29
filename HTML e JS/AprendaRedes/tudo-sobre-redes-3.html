@@ -121,21 +121,21 @@ forwarders {
 <code>
 @   IN  SOA Ubuntu-32.exemplodedominio.net. root.exemplodedominio.net. (
 
-            100         ; Serial
+            100             ; Serial
             604800          ; Refresh
             86400           ; Retry
             2419200         ; Expire
-            604800 )            ; Negative Cache TLL
+            604800 )        ; Negative Cache TLL
 ;
 exemplodedominio.net.   IN  NS  Ubuntu-32.exemplodedominio.net.
 exemplodedominio.net.   IN  A   192.168.1.200
 ;@  IN  A   127.0.0.1
 ;@  IN  AAAA    ::1
 
-Ubuntu-32   IN  A   192.168.1.200
+Ubuntu-32       IN  A   192.168.1.200
 roteador        IN  A   192.168.1.1
-vendas      IN  A   192.168.1.50
-www     IN  CNAME   exemplodedominio.net.
+vendas          IN  A   192.168.1.50
+www         IN  CNAME   exemplodedominio.net.
 </code>
 </pre>
 
@@ -145,16 +145,16 @@ www     IN  CNAME   exemplodedominio.net.
 <code>
 @   IN  SOA Ubuntu-32.exemplodedominio.net. root.exemplodedominio.net. (
 
-            1           ; Serial
+            1               ; Serial
             604800          ; Refresh
             86400           ; Retry
             2419200         ; Expire
-            604800 )            ; Negative Cache TLL
+            604800 )        ; Negative Cache TLL
 
 ;
     IN  NS  Ubuntu-32.
 1   IN  PTR roteador.exemplodedominio.net.
-50  IN  PTR vendas.exemplodedominio.net
+50  IN  PTR vendas.exemplodedominio.net.
 200 IN  PTR Ubuntu-32.exemplodedominio.net.
 </code>
 </pre>
