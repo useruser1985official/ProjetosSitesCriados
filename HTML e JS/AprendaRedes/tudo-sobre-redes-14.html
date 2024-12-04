@@ -32,6 +32,31 @@
             
 <h2>Tudo sobre Redes Parte 14</h2>
 
+<h3>Enumeração DNS</h3>
+
+<p>Todo site possui um IP válido na rede. O responsável por realizar a tradução de nome para IP e vice versa. Com a ferramenta apropriada poderemos levantar as seguintes informações através de um determinado alvo:</p>
+
+<ul>
+    <li>IP pelo qual o alvo responde.</li>
+    <li>Os ns do alvo.</li>
+    <li>Os mx do alvo.</li>
+</ul>
+
+<p>Existem diversos tipos diferentes de registros DNS disponíveis, no entanto, abaixo será mostrado apenas o que significam os mais comuns de serem encontrados durante o gerenciamento de um domínio:</p>
+
+<ul>
+    <li><b>A:</b> O A, também conhecido por hostname, é o registro central de um DNS, ele vincula um domínio ou subdomínio a um endereço IP direto.</li>
+    <li><b>AAAA:</b> Executa a mesma função de A, porém, para um endereço IPv6.</li>
+    <li><b>NS:</b> Name Server (Servidor de Domínio), especifica servidores DNS para o domínio ou subdomínio. Pelo menos, dois registros NS devem ser definidos para cada domínio. Geralmente, um principal e outro secundário.</li>
+    <li><b>CNAME:</b> Significa Canonical NAME. Especifica um apelido (alias) para o hostname (A). É uma forma de redirecionamento.</li>
+    <li><b>MX:</b> Sigla para Mail eXchanger. Aponta o servidor de e-mails. Pode-se especificar mais de um endereço, formando-se assim uma lista em ordem de prioridade para que haja alternativas no caso de algum e-mail não puder ser entregue.</li>
+    <li><b>PTR:</b> PoinTeR, aponta o domínio reverso a partir de um endereço IP.</li>
+    <li><b>SOA:</b> Start Of Authority. Indica o responsável por respostas autoritárias a um domínio, ou seja, o responsável pelo domínio. Também indica outras informações úteis como número serial da zona, replicação, etc.</li>
+    <li><b>TXT:</b> Refere-se a TeXT, o qual permite incluir um texto curto em um hostname. Técnica usada para implementar o SPF.</li>
+    <li><b>SPF:</b> Sender Policy Framework, é uma tentativa de controle de falsos e-mails. Permite ao administrador de um domínio definir os endereços das máquinas autorizadas a enviar mensagens neste domínio.</li>
+    <li><b>SRV:</b> Abreviação de SeRVice, permite definir localização de serviços disponíveis em um domínio, inclusive seus protocolos e portas.</li>
+</ul>
+
 <h3>O que é Torrent?</h3>
 
 <p>Torrent é a extensão dos arquivos compatíveis com o protocolo de compartilhamento BitTorrent, uma tecnologia criada pela empresa também chamada BitTorrent, introduzida em 2001. Ela funciona criando uma rede P2P entre todos os usuários do protocolo, com o intuito de distribuir arquivos entre todos os usuários da rede.</p>

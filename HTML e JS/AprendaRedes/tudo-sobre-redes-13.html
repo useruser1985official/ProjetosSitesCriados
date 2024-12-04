@@ -32,6 +32,66 @@
             
 <h2>Tudo sobre Redes Parte 13</h2>
 
+<h3>O Que é uma DMZ</h3>
+
+<p>DMZ, ou rede de perímetro/screened network, é uma zona intermediária entre a rede pública e a rede interna da empresa, criada com firewalls. Usada para dar acesso externo a serviços da empresa. Pode ser acessada tanto interna quanto externamente. Servidores na DMZ (Bastion Hosts) não acessam máquinas na rede interna, mas podem ser acessados por elas.</p>
+
+<p>Esse é o funcionamento de uma DMZ:</p>
+
+<ul>
+    <li>Tradicionalmente, uma zona desmilitarizada é uma zona "buffer" entre países, onde operações militares não são permitidas, como ocorre por exemplo na fronteira entre as duas Coréias.</li>
+    <li>Esse conceito foi importado em redes significando um perímetro de segurança no qual determinados equipamentos são colocados.</li>
+    <li>Essa zona "insegura" contém recursos que precisamos acessar, e que devem ser acessíveis também a partir do ambiente externo, que é o que a torna insegura.</li>
+    <li>Já a rede interna contém recursos valiosos para a empresa, como bancos de dados, arquivos confidenciais e outros elementos que não devem ser acessados por ninguém fora da organização.</li>
+    <li>Uma DMZ pode ser criada com um ou dois firewalls.</li>
+</ul>
+
+<p>Esses são uns exemplos de serviços em DMZ:</p>
+
+<ul>
+    <li>Servidor web.</li>
+    <li>Servidor DNS.</li>
+    <li>Servidor de e-mail</li>
+    <li>Servidor FTP.</li>
+    <li>Serviços de VoIP.</li>
+    <li>Banco de dados (bem específico).</li>
+    <li>Proxy reverso.</li>
+</ul>
+
+<p>Serviços que podem ser acessados a partir da internet são colocados dentro da DMZ.</p>
+
+<p>Dados importantes devem ser mantidos fora da DMZ, protegidos na rede interna.</p>
+
+<p>Veja como são as arquiteturas de DMZ:</p>
+
+<img src="imagens/arquiteturas.jpg" alt="Arquitetturas de DMZ"/>
+
+<p>No caso do dual firewall, é recomendado usar firewalls de fabricantes diferentes. Componente da estratégia de segurança denominada "defesa em profundidade" ao adicionar uma camada extra de segurança.</p>
+
+<p>Veja a imagem de um firewall:</p>
+
+<img src="imagens/firewall-hard.jpg" alt="Firewall de Hardware"/>
+
+<p>Podemos criar uma DMZ com o emprego dos seguintes equipamentos de rede:</p>
+
+<ul>
+    <li>Roteador com função DMZ integrada.</li>
+    <li>Firewall com função DMZ.</li>
+    <li>Firewall comuns em configuração dual (indicado).</li>
+    <li>Switch com VLAN.</li>
+</ul>
+
+<p>DMZ Host é uma configuração comumm em roteadores domésticos de banda larga. Não é uma DMZ real, mas sim um endereço na rede interna que recebe tráfego de rede específico, não direcionado para as demais estações na rede interna.</p>
+
+<p>Alguns problemas que podem surgir ao implementar uma DMZ em uma rede corporativa incluem:</p>
+
+<ul>
+    <li>A performance da rede pode sofrer impacto negativo.</li>
+    <li>Custo mais elevado, por conta de equipamentos e softwares adicionais.</li>
+    <li>Configuração e manutenção requerem especialistas.</li>
+    <li>Determinar o que proteger pode ser confuso.</li>
+</ul>
+
 <h3>Campos do Cabeçalho de um Pacote IPv6</h3>
 
 <p>Antes de mais nada, saiba que:</p>
@@ -463,31 +523,6 @@ sudo ip addr help
 sudo ip link set enp0s3 promisc on
 </code>
 </pre>
-
-<h3>Enumeração DNS</h3>
-
-<p>Todo site possui um IP válido na rede. O responsável por realizar a tradução de nome para IP e vice versa. Com a ferramenta apropriada poderemos levantar as seguintes informações através de um determinado alvo:</p>
-
-<ul>
-    <li>IP pelo qual o alvo responde.</li>
-    <li>Os ns do alvo.</li>
-    <li>Os mx do alvo.</li>
-</ul>
-
-<p>Existem diversos tipos diferentes de registros DNS disponíveis, no entanto, abaixo será mostrado apenas o que significam os mais comuns de serem encontrados durante o gerenciamento de um domínio:</p>
-
-<ul>
-    <li><b>A:</b> O A, também conhecido por hostname, é o registro central de um DNS, ele vincula um domínio ou subdomínio a um endereço IP direto.</li>
-    <li><b>AAAA:</b> Executa a mesma função de A, porém, para um endereço IPv6.</li>
-    <li><b>NS:</b> Name Server (Servidor de Domínio), especifica servidores DNS para o domínio ou subdomínio. Pelo menos, dois registros NS devem ser definidos para cada domínio. Geralmente, um principal e outro secundário.</li>
-    <li><b>CNAME:</b> Significa Canonical NAME. Especifica um apelido (alias) para o hostname (A). É uma forma de redirecionamento.</li>
-    <li><b>MX:</b> Sigla para Mail eXchanger. Aponta o servidor de e-mails. Pode-se especificar mais de um endereço, formando-se assim uma lista em ordem de prioridade para que haja alternativas no caso de algum e-mail não puder ser entregue.</li>
-    <li><b>PTR:</b> PoinTeR, aponta o domínio reverso a partir de um endereço IP.</li>
-    <li><b>SOA:</b> Start Of Authority. Indica o responsável por respostas autoritárias a um domínio, ou seja, o responsável pelo domínio. Também indica outras informações úteis como número serial da zona, replicação, etc.</li>
-    <li><b>TXT:</b> Refere-se a TeXT, o qual permite incluir um texto curto em um hostname. Técnica usada para implementar o SPF.</li>
-    <li><b>SPF:</b> Sender Policy Framework, é uma tentativa de controle de falsos e-mails. Permite ao administrador de um domínio definir os endereços das máquinas autorizadas a enviar mensagens neste domínio.</li>
-    <li><b>SRV:</b> Abreviação de SeRVice, permite definir localização de serviços disponíveis em um domínio, inclusive seus protocolos e portas.</li>
-</ul>
 
 <ul>
     <li><a href="tudo-sobre-redes-12.html">Parte Anterior da Matéria!</a></li>
