@@ -63,21 +63,21 @@
     </tr>
     <tr>
         <td>A</td>
-        <td>255.0.0.0</td>
-        <td>0.0.0.0</td>
-        <td>127.255.255.255</td>
+        <td><code>255.0.0.0</code></td>
+        <td><code>0.0.0.0</code></td>
+        <td><code>127.255.255.255</code></td>
     </tr>
     <tr>
         <td>B</td>
-        <td>255.255.0.0</td>
-        <td>128.0.0.0</td>
-        <td>191.255.255.255</td>
+        <td><code>255.255.0.0</code></td>
+        <td><code>128.0.0.0</code></td>
+        <td><code>191.255.255.255</code></td>
     </tr>
     <tr>
         <td>C</td>
-        <td>255.255.255.0</td>
-        <td>192.0.0.0</td>
-        <td>223.255.255.255</td>
+        <td><code>255.255.255.0</code></td>
+        <td><code>192.0.0.0</code></td>
+        <td><code>223.255.255.255</code></td>
     </tr>
 </table>
 
@@ -109,9 +109,9 @@
     <li>Resultado do AND: <code>11000000.10101000.00000001.00000000</code></li>
 </ul>
 
-<p>O endereço obtido corresponde à porção de rede do endereço IP (11000000.10101000.00000001.00000000). Convertendo esse endereço de volta para o decimal, obtemos o endereço 192.168.1.0, que é o endereço da rede a qual pertence o IP, note o final 0 o endereço, em vez de 61, que é o número que identifica o host dentro dessa rede.</p>
+<p>O endereço obtido corresponde à porção de rede do endereço IP (<code>11000000.10101000.00000001.00000000</code>). Convertendo esse endereço de volta para o decimal, obtemos o endereço <code>192.168.1.0</code>, que é o endereço da rede a qual pertence o IP, note o final 0 o endereço, em vez de 61, que é o número que identifica o host dentro dessa rede.</p>
 
-<p>Dentro de uma rede, dois endereços são especiais e nunca devem ser atribuídos a um host. São eles o endereço da rede em si, terminando em 0 (primeiro endereço, 192.168.1.0), e o endereço de broadcast, terminado em 255 (último endereço, no exemplo, seria o endereço 192.168.1.255). Assim, essa rede terá a capacidade para até 254 hosts, mais os endereços de rede e de broadcast, totalizando 256 endereços.</p>
+<p>Dentro de uma rede, dois endereços são especiais e nunca devem ser atribuídos a um host. São eles o endereço da rede em si, terminando em 0 (primeiro endereço, <code>192.168.1.0</code>), e o endereço de broadcast, terminado em 255 (último endereço, no exemplo, seria o endereço <code>192.168.1.255</code>). Assim, essa rede terá a capacidade para até 254 hosts, mais os endereços de rede e de broadcast, totalizando 256 endereços.</p>
 
 <p>Vejamos agora um segundo exemplo de aplicação de máscara de sub-rede, agora sem o uso de classes do endereçamento IP:</p>
 
@@ -137,9 +137,9 @@
     <li>Resultado do AND: <code>11000000.10101000.00000001.00100000</code></li>
 </ul>
 
-<p>O endereço obtido corresponde à porção de rede do endereço IP (11000000.10101000.00000001.00100000). Convertendo esse endereço de volta para decimal obtemos o endereço 192.168.1.32, que é o endereço da rede à qual pertence o IP. Note o final 32 do endereço, que fará com que essa rede acomode um número menor de hosts do que se fosse usada a máscara padrão (precisamente 30 hosts, mais rede e broadcast). O primeiro IP válido dessa sub-rede será o endereço 192.168.1.33.</p>
+<p>O endereço obtido corresponde à porção de rede do endereço IP (<code>11000000.10101000.00000001.00100000</code>). Convertendo esse endereço de volta para decimal obtemos o endereço <code>192.168.1.32</code>, que é o endereço da rede à qual pertence o IP. Note o final 32 do endereço, que fará com que essa rede acomode um número menor de hosts do que se fosse usada a máscara padrão (precisamente 30 hosts, mais rede e broadcast). O primeiro IP válido dessa sub-rede será o endereço <code>192.168.1.33</code>.</p>
 
-<p>Como são usados 27 bits para representar a porção de rede/sub-rede, também podemos representar essa rede omo 192.168.1.32/27, na notação CIDR.</p>
+<p>Como são usados 27 bits para representar a porção de rede/sub-rede, também podemos representar essa rede como <code>192.168.1.32/27</code>, na notação CIDR.</p>
 
 <p>A divisão em sub-redes é o processo de divisão de uma grande rede IP em múltiplas redes menores, com o propósito de aumentar sua performance, organização e segurança. Neste caso, deixamos de usar as máscaras padrão de classes e passamos a usar um esquema denominado CIDR (Classless Inter-Domain Routing), no qual a máscara a ser utilizada deve ser calculada de acordo com o endereço de rede original (a ser dividido) e o número de sub-redes ou hosts desejados.</p>
 
@@ -157,7 +157,38 @@
 
 <p>Da mesma forma, podemos fazer cálculos com outras classes e IPs.</p>
 
-<p>A notação CIDR basicamente é onde tem os primeiros números 1 em binário na porção de rede da máscara, por exemplo, a máscara 255.0.0.0 tem a notação /8, a máscara 255.255.0.0 tem a notação /16 e a máscara 255.255.255.0 tem a notação /24. Numa aplicação em outra máscara, a notação muda (como a máscara 255.255.255.224 tem a notação /27).</p>
+<p>A notação CIDR basicamente é onde tem os primeiros números 1 em binário na porção de rede da máscara, por exemplo, a máscara <code>255.0.0.0</code> tem a notação <code>/8</code>, a máscara <code>255.255.0.0</code> tem a notação <code>/16</code> e a máscara <code>255.255.255.0</code> tem a notação <code>/24</code>. Numa aplicação em outra máscara, a notação muda (como a máscara <code>255.255.255.224</code> tem a notação <code>/27</code>). Veja a tabelinha de como ficaria a notação dessa forma:</p>
+
+<table>
+    <tr>
+        <th>Máscara de Sub-Rede</th>
+        <th>Notação CIDR</th>
+    </tr>
+    <tr>
+        <td><code>255.255.255.128</code></td>
+        <td><code>/25</code></td>
+    </tr>
+    <tr>
+        <td><code>255.255.255.192</code></td>
+        <td><code>/26</code></td>
+    </tr>
+    <tr>
+        <td><code>255.255.255.224</code></td>
+        <td><code>/27</code></td>
+    </tr>
+    <tr>
+        <td><code>255.255.255.240</code></td>
+        <td><code>/28</code></td>
+    </tr>
+    <tr>
+        <td><code>255.255.255.248</code></td>
+        <td><code>/29</code></td>
+    </tr>
+    <tr>
+        <td><code>255.255.255.252</code></td>
+        <td><code>/30</code></td>
+    </tr>
+</table>
 
 <p>Assim, eliminamos e endereçamento por classes e conseguimos aprimorar a agregação de rotas.</p>
 
