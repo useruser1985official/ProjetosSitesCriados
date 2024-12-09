@@ -143,7 +143,7 @@
 
 <p>A divisão em sub-redes é o processo de divisão de uma grande rede IP em múltiplas redes menores, com o propósito de aumentar sua performance, organização e segurança. Neste caso, deixamos de usar as máscaras padrão de classes e passamos a usar um esquema denominado CIDR (Classless Inter-Domain Routing), no qual a máscara a ser utilizada deve ser calculada de acordo com o endereço de rede original (a ser dividido) e o número de sub-redes ou hosts desejados.</p>
 
-<p>O cálculo de máscaras de classe C é feito pela quantidade máxima de hosts (256) subtraído pelo outro número (no caso, 128, 192, 224, 240, 248 e 252), depois subtrai mais dois (o endereço da rede e o de broadcast). Por exemplo:</p>
+<p>O cálculo de máscaras de classe C é feito pela quantidade máxima de hosts (256) subtraído pelo outro número (no caso, 128, 192, 224, 240, 248, 252 e 254), depois subtrai mais dois (o endereço da rede e o de broadcast). Por exemplo:</p>
 
 <pre>
 <code>
@@ -188,7 +188,13 @@
         <td><code>255.255.255.252</code></td>
         <td><code>/30</code></td>
     </tr>
+    <tr>
+        <td><code>255.255.255.254</code></td>
+        <td><code>/31</code></td>
+    </tr>
 </table>
+
+<p>PS: Uma rede <code>/31</code> (<code>255.255.255.254</code>) não pode ser usada, pois ela só acomodaria um IP, e uma rede tem que acomodar no mínimo 3 IPs, contando o identificador de rede e o endereço de broadcast, portanto, só dá pra usar até o <code>/30</code> (<code>255.255.255.252</code>).</p>
 
 <p>Assim, eliminamos e endereçamento por classes e conseguimos aprimorar a agregação de rotas.</p>
 
