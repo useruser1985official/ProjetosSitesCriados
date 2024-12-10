@@ -323,7 +323,7 @@ ipconfig /renew
 
 <p>Para descobrir o MTU da interface, digitamos <code>netsh interface ipv4 show subinterfaces</code> (pode ser <code>ipv6</code> também).</p>
 
-<p>Para selecionar o tamanho em bytes dos pacotes enviados pelo ping, usamos o <code>/l</code> seguido do número (por exemplo, <code>ping /l 1500 www.google.com.br</code>). Para selecionar a quantidade de requisições use o parâmetro /n seguido do número, por exemplo <code>/n 6</code>. Para desativar a fragmentação de pacotes, usamos o <code>/f</code> junto, por exemplo, <code>ping /l 1500 /f www.google.com.br</code>. O parâmetro <code>/t</code> envia requisições infinitas.</p>
+<p>Para selecionar o tamanho em bytes dos pacotes enviados pelo ping, usamos o <code>/l</code> seguido do número (por exemplo, <code>ping /l 1500 www.google.com.br</code>). Para selecionar a quantidade de requisições use o parâmetro /n seguido do número, por exemplo <code>/n 6</code>. Para desativar a fragmentação de pacotes, usamos o <code>/f</code> junto, por exemplo, <code>ping /l 1500 /f www.google.com.br</code>. O parâmetro <code>/t</code> envia requisições infinitas (Use Ctrl Break para uma interrupção temporária e mostrar os pacotes enviados e recebidos, para interromper totalmente use Ctrl C).</p>
 
 <p>Podemos também usar parâmetros no tracert, como para aumentar a quantidade máxima de saltos com o /h, por exemplo <code>tracert /h 60 www.google.com.br</code>.</p>
 
@@ -333,15 +333,15 @@ ipconfig /renew
 
 <p>Ainda nos problemas de rede, podemos digitar o comando <code>netstat /a /n /b</code> para verificar todas as portas abertas, os IP's e os processos aos quais elas estão conectados.</p>
 
-<p>Para descobrir o endereço MAC, basta simplesmente usar <code>getmac</code> no prompt.</p>
+<p>Para descobrir o endereço MAC, basta simplesmente usar <code>getmac</code> no prompt. De forma mais detalhada, usamos <code>getmac /v /fo list</code>.</p>
 
-<p>Para vermos o cachê ARP, usamos <code>arp /a</code>. Para excluir ele usamos <code>arp /a /d</code>.</p>
+<p>Para vermos o cachê ARP, usamos <code>arp /a</code>. Para excluir ele usamos <code>arp /a /d</code> (ou um IP específico usando <code>arp /d 1.1.1.1</code>, substituir o 1.1.1.1 pelo IP desejado).</p>
 
 <p>Para resetar o catálogo do provedor winsock ao estado inicial, digite <code>nbtstat /R</code>, <code>nbtstat /RR</code> e <code>netsh winsock reset catalog</code>.</p>
 
 <p>Para resetar o proxy, digite <code>netsh advfirewall reset</code> e <code>netsh winhttp reset proxy</code>.</p>
 
-<p>Podemos usar <code>route print</code> para ver a rota da nossa rede. E também podemos adicionar e remover todas especificando o IP com <code>route add 192.168.0.0 mask 255.255.255.0 192.168.0.1</code> e <code>route delete 192.168.0.0</code>, respectivamente.</p>
+<p>Podemos usar <code>route print</code> para ver a rota da nossa rede. E também podemos adicionar e remover rotas especificando o IP com <code>route add 192.168.0.0 mask 255.255.255.0 172.16.0.1</code> (na ordem rede a ser acessada, máscara da mesma e gateway por qual vai acessar, use a opção <code>/p</code> para adicionar de forma permanente) e <code>route delete 192.168.0.0</code>, respectivamente.</p>
 
 <p>Podemos também utilizar o comando <code>nslookup</code> assim, para vermos dados sobre o servidor do site:</p>
 
