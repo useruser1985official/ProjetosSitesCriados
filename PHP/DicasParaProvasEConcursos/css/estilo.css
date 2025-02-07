@@ -95,9 +95,6 @@ pre {
     font-size: 13pt;
     font-weight: bold;
 }
-pre span {
-    text-decoration: underline;
-}
 
 span#cent h3 {
     text-align: center;

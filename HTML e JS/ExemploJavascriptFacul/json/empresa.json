@@ -1,7 +1,0 @@
-{
-    "funcionarios": [
-        {"nome": "José", "sobrenome": "da Silva", "idade": 23},
-        {"nome": "Ana", "sobrenome": "Gonzales", "idade": 33},
-        {"nome": "Sérgio", "sobrenome": "Parker", "idade": 18}
-    ]
-}

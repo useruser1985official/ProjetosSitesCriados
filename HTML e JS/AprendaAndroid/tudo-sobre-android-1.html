@@ -95,7 +95,22 @@ public class MainActivity extends AppCompatActivity {
 
 <p>PS: Para usar tags HTML num TextView, coloque no setText do elemento a classe Html e o método estático fromHtml, por exemplo <code>lblMens.setText(Html.fromHtml("&lt;b&gt;Olá, Mundo!&lt;/b&gt;"))</code> (importe <code>android.text.Html</code>).</p>
 
-<p>Para mudar a cor do botão, vá em BackgroundTint e mude a cor ali.</p>
+<p>Para mudar a cor do botão, vá em BackgroundTint e mude a cor ali. Para centralizar o TextView, coloque em gravity e em textAligiment center. Para que o estilo padrão não o sobreponha, retire no XML a linha <code>style="@style/Widget.AppCompat.Button"</code> e substitua por <code>style="@style/Widget.MaterialComponents.Button"</code>.</p>
+
+<p>Para ajustar na tela os componentes em ConstraintLayout, deixe o XML assim, no componente desejado:</p>
+
+<pre>
+<code>
+tools:layout_editor_absoluteX="76dp"
+tools:layout_editor_absoluteY="267dp"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toTopOf="parent"
+android:layout_marginStart="76dp"
+android:layout_marginTop="267dp"
+</code>
+</pre>
+
+<p>PS: Verifique se não tem algum atributo XML faltando em algum componente, se tiver, corriga eles, clicando na lâmpada e adicionando as correções.</p>
 
 <h3>Inserindo Componentes</h3>
 

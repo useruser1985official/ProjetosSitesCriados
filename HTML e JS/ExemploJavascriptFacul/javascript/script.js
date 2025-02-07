@@ -1,13 +1,3 @@
-var lat;
-var lon;
+var mensagem = "Olá, Mundo!";
 
-if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(posicao) {
-        console.log(posicao);
-
-        lat = posicao.coords.latitude;
-        lon = posicao.coords.longitude;
-
-        console.log(lat, lon);
-    });
-}
+alert(mensagem);

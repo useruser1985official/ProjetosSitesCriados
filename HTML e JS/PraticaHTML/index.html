@@ -5,40 +5,31 @@
         <title>T&iacute;tulo da P&aacute;gina em HTML</title>
         <link rel="icon" href="imagens/favicon.ico"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" href="css/estilo.css" media="all"/>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" media="all"/>
-        <script>
-            function clickMenu() {
-                if(menu.style.display == "block") {
-                    menu.style.display = "none";
-                }
-                else {
-                    menu.style.display = "block";
-                }
+        <style>
+            h1 {
+                font-family: Arial, sans-serif;
+                font-size: 30pt;
+                color: black;
             }
-
-            function mudouTam() {
-                if(innerWidth >= 768) {
-                    menu.style.display = "block";
-                }
-                else {
-                    menu.style.display = "none";
-                }
-            }
-        </script>
+        </style>
     </head>
-    <body onresize="mudouTam()">
+    <body>
         <main>
-            <h1>Revis&atilde;o de HTML5</h1>
+            <header>
+                <hgroup>
+                    <h1>T&iacute;tulo Principal</h1>
+                    <h2 style="font-family: Arial, sans-serif; color: blue">T&iacute;tulo Secund&aacute;rio</h2>
+                    <h3>T&iacute;tulo Terci&aacute;rio</h3>                    
+                </hgroup>
+            </header>
 
-            <span id="burger" class="material-icons" onclick="clickMenu()">menu</span>
-            
-            <nav id="menu">
-                <ul>
-                    <li><a href="index.html">P&aacute;gina Inicial</a></li>
-                    <li><a href="contato.html">Contato</a></li>
-                </ul>
-            </nav>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque doloribus totam nulla atque. Dolorum numquam et delectus, sunt facere fugiat explicabo itaque magnam nulla! Dolores ex similique itaque sapiente. Iste!</p>
+
+            <p>Texto em <strong>negrito</strong>, <em>it&aacute;lico</em>, <del>riscado</del> e <ins>sublinhado</ins>.</p>
+
+            <p>Google: <a href="https://www.google.com.br/" target="_blank">https://www.google.com.br/</a></p>
+
+            <hr/>
 
             <p>S&iacute;mbolos especiais:</p>
 
@@ -67,6 +58,7 @@
 &infin; -> &amp;infin;
 &plusmn; -> &amp;plusmn;
 &ne; -> &amp;ne;
+&times; -> &amp;times;
 &divide; -> &amp;divide;
 &pi; -> &amp;pi;
 &larr; -> &amp;larr;
@@ -81,6 +73,7 @@
 &Delta;
 &Lambda;
 &Larr;
+&Pi;
 
 &aacute;
 &agrave;
@@ -92,184 +85,7 @@
 &Eacute;
 &Otilde;
 </pre>
-
-            <h2>&#x1f596;&nbsp;&nbsp;&nbsp;&#x1fa98;</h2>
-
-            <p>Clique aqui para abrir o Google: <a href="https://www.google.com.br/" target="_blank">https://www.google.com.br/</a></p>
-
-            <p><a href="arquivos/html5-web.pdf" download="html5-web.pdf" type="application/pdf">Download do Livro</a></p>
-
-            <header id="cabecalho">
-
-            </header>
-
-            <picture>
-                <source media="(max-width: 540px)" srcset="imagens/luta-peq.jpg"/>
-                <source media="(max-width: 1000px)" srcset="imagens/luta-med.jpg"/>
-                <img src="imagens/luta-grd.jpg" alt="Luta"/>
-            </picture>
-
-            <!--
-                image/jpeg
-                image/png
-                image/gif
-            -->
-            <figure class="foto-leg">
-                <img src="imagens/farol.jpg" id="fig-ex"/>
-                <figcaption>
-                    <h3>Farol da Barra</h3>
-                    <p>Salvador - BA</p>
-                </figcaption>
-            </figure>
-
-            <div class="youtube">
-                <iframe src="https://www.youtube.com/embed/WRcs8rebZtA"></iframe>
-            </div>
-
-            <audio controls>
-                <source src="multimidia/hurricane.mp3" type="audio/mpeg"/>
-                <source src="multimidia/hurricane.ogg" type="audio/ogg"/>
-                <p>N&atilde;o &eacute; poss&iacute;vel reproduzir o &aacute;udio!</p>
-            </audio>
-
-            <br/>
-
-            <video controls poster="imagens/pica-pau-supermercado.png">
-                <source src="multimidia/pica-pau-supermercado.mp4" type="video/mp4"/>
-                <source src="multimidia/pica-pau-supermercado.webm" type="video/webm"/>
-                <p>N&atilde;o &eacute; poss&iacute;vel reproduzir o v&iacute;deo!</p>
-            </video>
-
-            <p>Aprendendo a codificar em <abbr title="Hypertext Markup Language (Linguagem de Marca&ccedil;&atilde;o de Hipertexto)">HTML</abbr>.</p>
-
-            <p><dfn title="Hypertext Markup Language">HTML</dfn> &eacute; uma linguagem de marca&ccedil;&atilde;o utilizada em p&aacute;ginas da web.</p>
-
-            <p><dfn title="Cascading Style Sheets">CSS</dfn> &eacute; uma linguagem de estilos que define a formata&ccedil;&atilde;o e estilos de tags HTML.</p>
-
-            <address>
-                As informa&ccedil;&otilde;es de contato s&atilde;o:<br/>
-                E-mail: <a href="mailto:contato@dicasdeti.com.br">contato@dicasdeti.com.br</a><br/>
-                Telefone: (01) 2345-6789
-            </address>
-
-            <p><bdo dir="rtl">Socorram-me, subi no &ocirc;nibus em Marrocos.</bdo></p>
-
-            <blockquote cite="http://localhost/DicasDeTI">
-                <p>Isso &eacute; uma cita&ccedil;&atilde;o longa sobre o exemplo da tag blockquote.</p>
-                <p>Mais informa&ccedil;&otilde;es pesquise sobre <cite>blockquote</cite>.</p>
-            </blockquote>
-
-            <p>Isso &eacute; uma cita&ccedil;&atilde;o curta sobre o exemplo da tag <q cite="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/q">q</q>.</p>
-
-            <button name="botao">Texto do Bot&atilde;o</button>
-
-            <details>
-                <summary>Detalhes sobre a tag details:</summary>
-                <p>Acesse o link: <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/details" target="_blank">https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/details</a></p>
-            </details>
-
-            <dl>
-                <dt>HTML</dt>
-                <dd>HTML &eacute; uma linguagem de marca&ccedil;&atilde;o utilizada em p&aacute;ginas da web.</dd>
-                <dt>CSS</dt>
-                <dd>CSS &eacute; uma linguagem de estilos que define a formata&ccedil;&atilde;o e estilos de tags HTML.</dd>
-            </dl>
-
-            <p>Para salvar o site nos seus favoritos utilize <kbd>Ctrl D</kbd>.</p>
-
-            <p>O texto tem uma parte destacada <mark>que &eacute; essa</mark>.</p>
-
-            Temperatura atual:<br/>
-            <meter min="-50" max="50" low="22" high="25" value="22">°C</meter>22°C
-            <hr/>
-            M&iacute;nima:<br/>
-            <meter min="-50" max="50" low="22" high="25" value="20">°C</meter>20°C
-            <hr/>
-            M&aacute;xima:<br/>
-            <meter min="-50" max="50" low="22" high="25" value="26">°C</meter>26°C
-
-            <br/>
-
-            <progress value="70" max="100">70%</progress>
-
-            <br/>
-
-            <ruby>
-                &#28450;<rp>(</rp><rt>Kan</rt><rp>)</rp>
-                &#23383;<rp>(</rp><rt>Ji</rt><rp>)</rp>
-            </ruby>
-
-            <p>A sa&iacute;da do c&oacute;digo ser&aacute; essa:</p>
-
-            <p><samp>Hello World!</samp></p>
-
-            <p>Isso &eacute; uma frase com fonte normal <small>e isso &eacute; com uma fonte pequena</small>.</p>
-
-            <p>Ela pode ser combinada com outras tags para gerar resultados como 10<sup><small>3</small></sup> e H<sub><small>2</small></sub>0.</p>
-
-            <button class="botao"><span>Clique Aqui!</span></button>
-
-            <p>O hor&aacute;rio da reuni&atilde;o &eacute; <time>20:00</time>.</p>
-
-            <p>O dia do evento &eacute; <time datetime="2023-06-01 14:00">1º de Junho</time>.</p>
-
-            <hr/>
-
-            <table id="t1">
-                <caption>Popula&ccedil;&atilde;o das Unidades Federativas</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Popula&ccedil;&atilde;o</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>S&atilde;o Paulo</td>
-                        <td class="num">45.919.049</td>
-                    </tr>
-                    <tr>
-                        <td>Minas Gerais</td>
-                        <td class="num">21.168.791</td>
-                    </tr>
-                    <tr>
-                        <td>Rio de Janeiro</td>
-                        <td class="num">17.264.943</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th scope="col">Total de Habitantes</th>
-                        <td class="num"><strong>210.147.125</strong></td>
-                    </tr>
-                </tfoot>
-            </table>
-
-            <br/>
-
-            <table id="t2">
-                <tr>
-                    <td>A</td>
-                    <td colspan="2">B</td>
-                </tr>
-                <tr>
-                    <td>D</td>
-                    <td>E</td>
-                    <td rowspan="3">F</td>
-                </tr>
-                <tr>
-                    <td>H</td>
-                    <td>I</td>
-                </tr>
-                <tr>
-                    <td>L</td>
-                    <td>M</td>
-                </tr>
-                <colgroup>
-                    <col class="cnome"/>
-                    <col class="cidade"/>
-                </colgroup>
-            </table>
+            <h1>&#x1F596; &#x1FA98;</h1>
         </main>
     </body>
 </html>
