@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+:root {
+    --cor0: #c5ebd6;
+    --cor1: #83e1ad;
+    --fonte-padrao: Arial, sans-serif;
+}
+
+* {
+    font-family: var(--fonte-padrao);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white !important;
+    background-color: var(--cor0);
+    background-image: url("../imagens/fundo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-attachment: fixed;
+}
+
+main {
+    background-color: rgba(0, 0, 16, 0.9);
+    padding: 25px;
+    box-shadow: white 0px 0px 10px;
+    border-radius: 40px;
+}
+
+div#teste {
+    height: 100vh;
+    width: calc(100% - 44px);
+}

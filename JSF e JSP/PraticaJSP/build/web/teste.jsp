@@ -15,5 +15,13 @@
         <jsp:useBean id="calcula" class="beans.CursoJSPBean" type="beans.CursoJSPBean" scope="page"/>
         
         <%= calcula.calcula(50) %>
+        <br/>
+        Nome: ${param.nome}
+        <br/>
+        Ano: ${param.ano}
+        <br/>
+        Sexo: ${param.sexo}
+        <br/>
+        ${sessionScope.user}
     </body>
 </html>

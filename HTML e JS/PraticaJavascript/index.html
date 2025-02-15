@@ -9,14 +9,12 @@
     <body>
         <div class="terminal">
             <script>
-                alert("Vamos fazer uma divisão!");
+                var frase = "Isso é uma String";
 
-                var numerador = prompt("Digite o numerador", "0");
-                var denominador = prompt("Digite o denominador", "0");
-
-                var resultado = eval(numerador) / eval(denominador);
-
-                alert(`O resultado da divisão de ${numerador} e ${denominador} é de ${resultado}!`);
+                document.write(`${frase.split("").reverse().join("")}<br/>`);
+                document.write(`${frase.concat(" e ela foi concatenada!")}<br/>`);
+                document.write(`${frase.split("")}<br/>`);
+                document.write(`${frase.includes("String")}<br/>`);
             </script>
         </div>
     </body>

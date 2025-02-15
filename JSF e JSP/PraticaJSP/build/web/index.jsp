@@ -5,13 +5,29 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <jsp:include page="cabecalho.jsp"/>
     <body>
-        <jsp:forward page="teste.jsp">
-            <jsp:param name="paramforward" value="Curso de JSP"/>
-        </jsp:forward>
+        <c:set var="numero" value="${100 / 2}"/>
+        
+        <c:if test="${numero >= 50}">
+            <c:redirect url="https://www.google.com.br/"/>
+        </c:if>
+        <c:if test="${numero < 50}">
+            <c:redirect url="http://www.javaavancado.com.br/"/>
+        </c:if>
+        
+        <form action="LoginServlet" method="post">
+            <label for="ilogin">Login: </label>
+            <input type="text" name="login" id="ilogin" size="40" maxlength="25" placeholder="Insira o Login"/>
+            <br/>
+            <label for="isenha">Senha: </label>
+            <input type="password" name="senha" id="isenha" size="40" maxlength="15" placeholder="Até 15 Dígitos"/>
+            <br/>
+            <input type="submit" value="Enviar"/>
+        </form>
         
         <jsp:include page="rodape.jsp"/>
     </body>
