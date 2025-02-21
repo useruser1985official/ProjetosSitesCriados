@@ -9,12 +9,16 @@
     <body>
         <div class="terminal">
             <script>
-                var frase = "Isso é uma String";
+                var numero = parseInt(prompt("Digite um número entre 50 e 500:", "0"));
 
-                document.write(`${frase.split("").reverse().join("")}<br/>`);
-                document.write(`${frase.concat(" e ela foi concatenada!")}<br/>`);
-                document.write(`${frase.split("")}<br/>`);
-                document.write(`${frase.includes("String")}<br/>`);
+                if(numero < 50 || numero > 500) {
+                    alert("Valor fora do intervalo especificado!");
+                }
+                else {
+                    for(let contador = 1; contador <= numero; contador++) {
+                        document.write(contador + "<br/>");
+                    }
+                }
             </script>
         </div>
     </body>

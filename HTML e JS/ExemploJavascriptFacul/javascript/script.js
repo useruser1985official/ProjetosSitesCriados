@@ -12,6 +12,9 @@ function primeiraEtapa(acertoProva, semCursado) {
     if((nota >= NOTA_MIN_APROV) && (semCursado >= QTD_SEMESTRES)) {
         return "Aprovado";
     }
+    else if(nota >= NOTA_MIN_APROV) {
+        return "Você foi incluído no banco de currículos";
+    }
     else {
         return "Reprovado";
     }
