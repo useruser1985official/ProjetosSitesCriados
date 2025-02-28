@@ -152,7 +152,7 @@ getSupportActionBar().hide();
 </code>
 </pre>
 
-<p>Se quiser bloquear totalmente a rotação de tela, em vez do configChanges, adicione <code>android:screenOrientation="portrait"</code> na tag activity.</p>
+<p>Se quiser bloquear totalmente a rotação de tela, em vez do configChanges, adicione <code>setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);</code> no método <code>onCreate</code>, no Java.</p>
 
 <p>Para o tema do celular (dark ou light) não mudar a cor do aplicativo, selecione o ConstraintLayout ou o LinearLayout em background. Não esqueça também de mudar a cor dos componentes, inclusive da letra em textColor (nem que tenha que editar diretamente no XML).</p>
 

@@ -13,5 +13,7 @@
     </head>
     <body>
         <h1>Acesso Liberado!</h1>
+        
+        <a href="cadastroUsuario.jsp">Cadastro de Usuário</a>
     </body>
 </html>

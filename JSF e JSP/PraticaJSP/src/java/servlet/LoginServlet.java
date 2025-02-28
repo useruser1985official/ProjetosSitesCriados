@@ -4,7 +4,7 @@
  */
 package servlet;
 
-import beans.ValidaUser;
+import dao.DAOLogin;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
     private static final long SERIALVERSION = 1L;
+    private DAOLogin dao = new DAOLogin();
     
     public LoginServlet() {
         super();
@@ -32,20 +33,23 @@ public class LoginServlet extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ValidaUser valUser = new ValidaUser();
-        
         String login = request.getParameter("login").trim();
         String senha = request.getParameter("senha").trim();
         
         RequestDispatcher dispatcher;
         
-        if(valUser.validarLoginSenha(login, senha)) {
-            dispatcher = request.getRequestDispatcher("acessoliberado.jsp");
+        try {
+            if(dao.validarLoginSenha(login, senha)) {
+                dispatcher = request.getRequestDispatcher("acessoliberado.jsp");
+            }
+            else {
+                dispatcher = request.getRequestDispatcher("acessonegado.jsp");
+            }
+            
+            dispatcher.forward(request, response);
         }
-        else {
-            dispatcher = request.getRequestDispatcher("acessonegado.jsp");
+        catch(Exception ex) {
+            System.err.println(ex.getMessage());
         }
-        
-        dispatcher.forward(request, response);
     }
 }

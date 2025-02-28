@@ -8,4 +8,12 @@
         <param-name>estado</param-name>
         <param-value>São Paulo</param-value>
     </context-param>
+    <filter>
+        <filter-name>filter</filter-name>
+        <filter-class>filter.FilterConnection</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
