@@ -22,7 +22,7 @@ window.wp = window.wp || {};
 	});
 
 	/**
-	 * Allows the Customizer to be overlayed on any page.
+	 * Allows the Customizer to be overlaid on any page.
 	 *
 	 * By default, any element in the body with the load-customize class will open
 	 * an iframe overlay with the URL specified.
@@ -106,7 +106,7 @@ window.wp = window.wp || {};
 		/**
 		 * Open the Customizer overlay for a specific URL.
 		 *
-		 * @param  string src URL to load in the Customizer.
+		 * @param string src URL to load in the Customizer.
 		 */
 		open: function( src ) {
 

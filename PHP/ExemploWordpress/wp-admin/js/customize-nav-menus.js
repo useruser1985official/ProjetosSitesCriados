@@ -2,7 +2,7 @@
  * @output wp-admin/js/customize-nav-menus.js
  */
 
-/* global _wpCustomizeNavMenusSettings, wpNavMenu, console */
+/* global menus, _wpCustomizeNavMenusSettings, wpNavMenu, console */
 ( function( api, wp, $ ) {
 	'use strict';
 
@@ -95,7 +95,7 @@
 	 * @since 4.7.0
 	 * @alias wp.customize.Menus.insertAutoDraftPost
 	 *
-	 * @param {object} params - Parameters for the draft post to create.
+	 * @param {Object} params - Parameters for the draft post to create.
 	 * @param {string} params.post_type - Post type to add.
 	 * @param {string} params.post_title - Post title to use.
 	 * @return {jQuery.promise} Promise resolved with the added post.
@@ -216,9 +216,9 @@
 				}
 			} );
 
-			// Clear the search results and trigger a `keyup` event to fire a new search.
+			// Clear the search results and trigger an `input` event to fire a new search.
 			this.$clearResults.on( 'click', function() {
-				self.$search.val( '' ).focus().trigger( 'keyup' );
+				self.$search.val( '' ).trigger( 'focus' ).trigger( 'input' );
 			} );
 
 			this.$el.on( 'input', '#custom-menu-item-name.invalid, #custom-menu-item-url.invalid', function() {
@@ -226,7 +226,7 @@
 			});
 
 			// Load available items if it looks like we'll need them.
-			api.panel( 'nav_menus' ).container.bind( 'expanded', function() {
+			api.panel( 'nav_menus' ).container.on( 'expanded', function() {
 				if ( ! self.rendered ) {
 					self.initList();
 					self.rendered = true;
@@ -234,7 +234,7 @@
 			});
 
 			// Load more items.
-			this.sectionContent.scroll( function() {
+			this.sectionContent.on( 'scroll', function() {
 				var totalHeight = self.$el.find( '.accordion-section.open .available-menu-items-list' ).prop( 'scrollHeight' ),
 					visibleHeight = self.$el.find( '.accordion-section.open' ).height();
 
@@ -387,7 +387,7 @@
 		 * @since 4.7.0 Changed function signature to take list of item types instead of single type/object.
 		 * @access private
 		 *
-		 * @param {Array.<object>} itemTypes List of objects containing type and key.
+		 * @param {Array.<Object>} itemTypes List of objects containing type and key.
 		 * @param {string} deprecated Formerly the object parameter.
 		 * @return {void}
 		 */
@@ -446,7 +446,7 @@
 						self.pages[ name ] = -1;
 						return;
 					} else if ( ( 'post_type:page' === name ) && ( ! availableMenuItemContainers[ name ].hasClass( 'open' ) ) ) {
-						availableMenuItemContainers[ name ].find( '.accordion-section-title > button' ).click();
+						availableMenuItemContainers[ name ].find( '.accordion-section-title > button' ).trigger( 'click' );
 					}
 					typeItems = new api.Menus.AvailableItemCollection( typeItems ); // @todo Why is this collection created and then thrown away?
 					self.collection.add( typeItems.models );
@@ -644,7 +644,7 @@
 				return;
 			}
 
-			if ( '' === $.trim( itemName.val() ) ) {
+			if ( '' === itemName.val().trim() ) {
 				itemName.addClass( 'invalid' );
 				itemName.focus();
 				return;
@@ -716,7 +716,7 @@
 
 			this.$el.find( '.selected' ).removeClass( 'selected' );
 
-			this.$search.focus();
+			this.$search.trigger( 'focus' );
 		},
 
 		// Closes the panel.
@@ -733,7 +733,7 @@
 			$( 'body' ).removeClass( 'adding-menu-items' );
 			$( '#available-menu-items .menu-item-handle.item-added' ).removeClass( 'item-added' );
 
-			this.$search.val( '' ).trigger( 'keyup' );
+			this.$search.val( '' ).trigger( 'input' );
 		},
 
 		// Add a few keyboard enhancements to the panel.
@@ -827,7 +827,7 @@
 		 */
 		ready: function() {
 			var panel = this;
-			panel.container.find( '.hide-column-tog' ).click( function() {
+			panel.container.find( '.hide-column-tog' ).on( 'click', function() {
 				panel.saveManageColumnsState();
 			});
 
@@ -905,7 +905,7 @@
 		 *
 		 * @since 4.3.0
 		 *
-		 * @param {String} id
+		 * @param {string} id
 		 * @param {Object} options
 		 */
 		initialize: function( id, options ) {
@@ -1107,7 +1107,7 @@
 			var section = this,
 				$title;
 
-			$title = section.container.find( '.accordion-section-title:first' );
+			$title = section.container.find( '.accordion-section-title button:first' );
 			$title.find( '.menu-in-location' ).remove();
 			_.each( themeLocationSlugs, function( themeLocationSlug ) {
 				var $label, locationName;
@@ -1131,6 +1131,8 @@
 				// Add attributes needed by wpNavMenu.
 				$( '#menu-to-edit' ).removeAttr( 'id' );
 				wpNavMenu.menuList.attr( 'id', 'menu-to-edit' ).addClass( 'menu' );
+
+				api.Menus.MenuItemControl.prototype.initAccessibility();
 
 				_.each( api.section( section.id ).controls(), function( control ) {
 					if ( 'nav_menu_item' === control.params.type ) {
@@ -1575,6 +1577,80 @@
 		},
 
 		/**
+		 * Set up the initial state of the screen reader accessibility information for menu items.
+		 *
+		 * @since 6.6.0
+		 */
+		initAccessibility: function() {
+			var control = this,
+				menu = $( '#menu-to-edit' );
+
+			// Refresh the accessibility when the user comes close to the item in any way.
+			menu.on( 'mouseenter.refreshAccessibility focus.refreshAccessibility touchstart.refreshAccessibility', '.menu-item', function(){
+				control.refreshAdvancedAccessibilityOfItem( $( this ).find( 'button.item-edit' ) );
+			} );
+
+			// We have to update on click as well because we might hover first, change the item, and then click.
+			menu.on( 'click', 'button.item-edit', function() {
+				control.refreshAdvancedAccessibilityOfItem( $( this ) );
+			} );
+		},
+
+		/**
+		 * refreshAdvancedAccessibilityOfItem( [itemToRefresh] )
+		 *
+		 * Refreshes advanced accessibility buttons for one menu item.
+		 * Shows or hides buttons based on the location of the menu item.
+		 *
+		 * @param {Object} itemToRefresh The menu item that might need its advanced accessibility buttons refreshed
+		 * 
+		 * @since 6.6.0
+		 */
+		refreshAdvancedAccessibilityOfItem: function( itemToRefresh ) {
+			// Only refresh accessibility when necessary.
+			if ( true !== $( itemToRefresh ).data( 'needs_accessibility_refresh' ) ) {
+				return;
+			}
+
+			var primaryItems, itemPosition, title,
+				parentItem, parentItemId, parentItemName, subItems, totalSubItems,
+				$this = $( itemToRefresh ),
+				menuItem = $this.closest( 'li.menu-item' ).first(),
+				depth = menuItem.menuItemDepth(),
+				isPrimaryMenuItem = ( 0 === depth ),
+				itemName = $this.closest( '.menu-item-handle' ).find( '.menu-item-title' ).text(),
+				menuItemType = $this.closest( '.menu-item-handle' ).find( '.item-type' ).text(),
+				totalMenuItems = $( '#menu-to-edit li' ).length;
+
+			if ( isPrimaryMenuItem ) {
+				primaryItems = $( '.menu-item-depth-0' ),
+				itemPosition = primaryItems.index( menuItem ) + 1,
+				totalMenuItems = primaryItems.length,
+				// String together help text for primary menu items.
+				title = menus.menuFocus.replace( '%1$s', itemName ).replace( '%2$s', menuItemType ).replace( '%3$d', itemPosition ).replace( '%4$d', totalMenuItems );
+			} else {
+				parentItem = menuItem.prevAll( '.menu-item-depth-' + parseInt( depth - 1, 10 ) ).first(),
+				parentItemId = parentItem.find( '.menu-item-data-db-id' ).val(),
+				parentItemName = parentItem.find( '.menu-item-title' ).text(),
+				subItems = $( '.menu-item .menu-item-data-parent-id[value="' + parentItemId + '"]' ),
+				totalSubItems = subItems.length,
+				itemPosition = $( subItems.parents( '.menu-item' ).get().reverse() ).index( menuItem ) + 1;
+
+				// String together help text for sub menu items.
+				if ( depth < 2 ) {
+					title = menus.subMenuFocus.replace( '%1$s', itemName ).replace( '%2$s', menuItemType ).replace( '%3$d', itemPosition ).replace( '%4$d', totalSubItems ).replace( '%5$s', parentItemName );
+				} else {
+					title = menus.subMenuMoreDepthFocus.replace( '%1$s', itemName ).replace( '%2$s', menuItemType ).replace( '%3$d', itemPosition ).replace( '%4$d', totalSubItems ).replace( '%5$s', parentItemName ).replace( '%6$d', depth );
+				}
+			}
+
+			$this.find( '.screen-reader-text' ).text( title );
+
+			// Mark this item's accessibility as refreshed.
+			$this.data( 'needs_accessibility_refresh', false );
+		},
+
+		/**
 		 * Override the embed() method to do nothing,
 		 * so that the control isn't embedded on load,
 		 * unless the containing section is already expanded.
@@ -1607,6 +1683,9 @@
 			}
 			control.renderContent();
 			control.deferred.embedded.resolve(); // This triggers control.ready().
+			
+			// Mark all menu items as unprocessed.
+			$( 'button.item-edit' ).data( 'needs_accessibility_refresh', true );
 		},
 
 		/**
@@ -1664,6 +1743,8 @@
 			$reorderNav = control.container.find( '.menu-item-reorder-nav' );
 			$reorderNav.find( '.menus-move-up, .menus-move-down, .menus-move-left, .menus-move-right' ).on( 'click', function() {
 				var moveBtn = $( this );
+				control.params.depth = control.getDepth();
+
 				moveBtn.focus();
 
 				var isMoveUp = moveBtn.is( '.menus-move-up' ),
@@ -1679,9 +1760,13 @@
 					control.moveLeft();
 				} else if ( isMoveRight ) {
 					control.moveRight();
+					control.params.depth += 1;
 				}
-
+				
 				moveBtn.focus(); // Re-focus after the container was moved.
+
+				// Mark all menu items as unprocessed.
+				$( 'button.item-edit' ).data( 'needs_accessibility_refresh', true );
 			} );
 		},
 
@@ -1819,10 +1904,10 @@
 				/*
 				 * If the menu item deleted is the only of its instance left,
 				 * remove the check icon of this menu item in the right panel.
-				 */ 
+				 */
 				_.each( addedItems, function( addedItem ) {
 					var menuItemId, menuItemControl, matches;
-						
+
 					// This is because menu item that's deleted is just hidden.
 					if ( ! $( addedItem ).is( ':visible' ) ) {
 						return;
@@ -1879,7 +1964,7 @@
 
 			// Ensure that whitespace is trimmed on blur so placeholder can be shown.
 			control.container.find( '.edit-menu-item-title' ).on( 'blur', function() {
-				$( this ).val( $.trim( $( this ).val() ) );
+				$( this ).val( $( this ).val().trim() );
 			} );
 
 			titleEl = control.container.find( '.menu-item-title' );
@@ -1888,7 +1973,8 @@
 				if ( ! item ) {
 					return;
 				}
-				trimmedTitle = $.trim( item.title );
+				item.title = item.title || '';
+				trimmedTitle = item.title.trim();
 
 				titleText = trimmedTitle || item.original_title || api.Menus.data.l10n.untitled;
 
@@ -2212,7 +2298,7 @@
 		 *
 		 * @private
 		 *
-		 * @param {Number} offset 1|-1
+		 * @param {number} offset 1|-1
 		 */
 		_changePosition: function( offset ) {
 			var control = this,
@@ -2272,7 +2358,7 @@
 		 *
 		 * @private
 		 *
-		 * @param {Number} offset 1|-1
+		 * @param {number} offset 1|-1
 		 */
 		_changeDepth: function( offset ) {
 			if ( 1 !== offset && -1 !== offset ) {
@@ -2655,7 +2741,7 @@
 		 * Notice that the UI aspects here are handled by wpNavMenu.initSortables()
 		 * which is called in MenuSection.onChangeExpanded()
 		 *
-		 * @param {object} menuList - The element that has sortable().
+		 * @param {Object} menuList - The element that has sortable().
 		 */
 		_setupSortable: function( menuList ) {
 			var control = this;
@@ -2712,6 +2798,9 @@
 
 						menuItemControl.setting.set( setting );
 					});
+
+					// Mark all menu items as unprocessed.
+					$( 'button.item-edit' ).data( 'needs_accessibility_refresh', true );
 				});
 
 			});
@@ -2854,7 +2943,7 @@
 		/**
 		 * Enable/disable the reordering UI
 		 *
-		 * @param {Boolean} showOrHide to enable/disable reordering
+		 * @param {boolean} showOrHide to enable/disable reordering
 		 */
 		toggleReordering: function( showOrHide ) {
 			var addNewItemBtn = this.container.find( '.add-new-menu-item' ),
@@ -2994,7 +3083,7 @@
 		/**
 		 * Add a new item to this menu.
 		 *
-		 * @param {object} item - Value for the nav_menu_item setting to be created.
+		 * @param {Object} item - Value for the nav_menu_item setting to be created.
 		 * @return {wp.customize.Menus.controlConstructor.nav_menu_item} The newly-created nav_menu_item control instance.
 		 */
 		addItemToMenu: function( item ) {
@@ -3135,9 +3224,9 @@
 	 *
 	 * @alias wp.customize.Menus.applySavedData
 	 *
-	 * @param {object} data
-	 * @param {array} data.nav_menu_updates
-	 * @param {array} data.nav_menu_item_updates
+	 * @param {Object} data
+	 * @param {Array} data.nav_menu_updates
+	 * @param {Array} data.nav_menu_item_updates
 	 */
 	api.Menus.applySavedData = function( data ) {
 
@@ -3394,7 +3483,7 @@
 	 * @alias wp.customize.Menus.getMenuItemControl
 	 *
 	 * @param {string} menuItemId
-	 * @return {object|null}
+	 * @return {Object|null}
 	 */
 	api.Menus.getMenuItemControl = function( menuItemId ) {
 		return api.control( menuItemIdToSettingId( menuItemId ) );
@@ -3403,7 +3492,7 @@
 	/**
 	 * @alias wp.customize.Menus~menuItemIdToSettingId
 	 *
-	 * @param {String} menuItemId
+	 * @param {string} menuItemId
 	 */
 	function menuItemIdToSettingId( menuItemId ) {
 		return 'nav_menu_item[' + menuItemId + ']';
@@ -3421,7 +3510,7 @@
 	function displayNavMenuName( name ) {
 		name = name || '';
 		name = wp.sanitize.stripTagsAndEncodeText( name ); // Remove any potential tags from name.
-		name = $.trim( name );
+		name = name.toString().trim();
 		return name || api.Menus.data.l10n.unnamed;
 	}
 

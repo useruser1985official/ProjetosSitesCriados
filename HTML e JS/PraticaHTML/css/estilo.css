@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web");
+
+@font-face {
+    font-family: "FonteLogo";
+    src: url("../fontes/bubblegum-sans-regular.otf");
+}
+
 :root {
     --cor0: #c5ebd6;
     --cor1: #83e1ad;
@@ -13,11 +20,7 @@
 body {
     font-family: Arial, sans-serif;
     color: white !important;
-    background-color: var(--cor0);
-    background-image: url("../imagens/fundo.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: left center;
+    background-image: radial-gradient(circle, blue, green, red);
     background-attachment: fixed;
 }
 
@@ -28,7 +31,7 @@ main {
     border-radius: 40px;
     width: 85%;
     min-width: 240px;
-    max-width: 800px;
+    max-width: 1150px;
     margin: auto;
 }
 
@@ -37,10 +40,20 @@ div#teste {
     width: calc(100% - 44px);
 }
 
+header#cabecalho h1 {
+    font-family: "FonteLogo", sans-serif;
+    font-size: 30pt;
+}
+
+header#cabecalho h2 {
+    font-family: "Titillium Web", sans-serif;
+    font-size: 16pt;
+}
+
 img {
     display: block;
     margin: auto;
-    width: 100%;
+    width: 90%;
 }
 
 img.redonda {
@@ -145,4 +158,63 @@ header#cabecalho {
     border-bottom: 1px #606060 solid;
     height: 150px;
     background: url("../imagens/logo-peq.jpg") no-repeat 0px 100px;
+}
+
+section#corpo {
+    display: block;
+    width: 700px;
+    float: left;
+    border-right: 1px solid white;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+
+aside#lateral {
+    display: block;
+    width: 400px;
+    float: right;
+}
+
+article#noticias h2 {
+    font-size: 12pt;
+    color: #606060;
+    background-color: #dddddd;
+    padding: 5px 0px 5px 10px;
+    margin: 10px 0px 10px 0px;
+}
+
+footer#rodape {
+    clear: both;
+    border-top: 1px solid white;
+}
+
+div.youtube {
+    margin: 0px -20px 30px -20px;
+    padding: 20px;
+    padding-bottom: 50%;
+    position: relative;
+}
+
+div.youtube iframe {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    border: 8px solid white;
+}
+
+iframe#spec {
+    width: 430px;
+    height: 280px;
+    border: none;
+}
+
+iframe#spec::-webkit-scrollbar {
+    display: none;
+}
+
+#borda {
+    border: 8px solid;
+    border-image: linear-gradient(135deg, red 0%, blue 90%) 1;
 }

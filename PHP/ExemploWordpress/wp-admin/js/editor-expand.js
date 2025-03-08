@@ -204,7 +204,7 @@
 			/**
 			 * Gets the offset of the editor.
 			 *
-			 * @return {Number|Boolean} Returns the offset of the editor
+			 * @return {number|boolean} Returns the offset of the editor
 			 * or false if there is no offset height.
 			 */
 			function mceGetCursorOffset() {
@@ -1552,7 +1552,7 @@
 				// Bind and unbind based on the distraction free writing focus.
 				$document.on( 'dfw-on.focus', mceBind ).on( 'dfw-off.focus', mceUnbind );
 
-				// Focuse the editor when it is the target of the click event.
+				// Focus the editor when it is the target of the click event.
 				editor.on( 'click', function( event ) {
 					if ( event.target === editor.getDoc().documentElement ) {
 						editor.focus();
