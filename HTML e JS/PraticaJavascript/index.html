@@ -9,16 +9,19 @@
     <body>
         <div class="terminal">
             <script>
-                var numero = parseInt(prompt("Digite um número entre 50 e 500:", "0"));
+                var numeros = [14, 23, 6, 38, 9, 13, 52, 7, 5];
 
-                if(numero < 50 || numero > 500) {
-                    alert("Valor fora do intervalo especificado!");
+                function ordenar(a, b) {
+                    return b - a;
                 }
-                else {
-                    for(let contador = 1; contador <= numero; contador++) {
-                        document.write(contador + "<br/>");
-                    }
+
+                numeros.sort(ordenar);
+
+                for(let i = 0; i < numeros.length; i++) {
+                    document.write(numeros[i] + "<br/>");
                 }
+
+                // Funções, colocar em script separado.
             </script>
         </div>
     </body>

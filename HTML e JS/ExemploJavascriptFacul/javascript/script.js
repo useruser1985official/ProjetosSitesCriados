@@ -1,23 +1,8 @@
-// Determina aprovados para a segunda etapa
+let soma = (n1, n2) => n1 + n2;
 
-function primeiraEtapa(acertoProva, semCursado) {
-    const NUM_QUESTOES = 20;
-    const NOTA_MIN_APROV = 0.7;
-    const QTD_SEMESTRES = 3;
+let valor1 = parseInt(prompt("Informe o primeiro número:", "0"));
+let valor2 = parseInt(prompt("Informe o segundo número:", "0"));
 
-    let nota = acertoProva / NUM_QUESTOES; // Calcula % nota
+let resultado = soma(valor1, valor2);
 
-    console.log(nota);
-
-    if((nota >= NOTA_MIN_APROV) && (semCursado >= QTD_SEMESTRES)) {
-        return "Aprovado";
-    }
-    else if(nota >= NOTA_MIN_APROV) {
-        return "Você foi incluído no banco de currículos";
-    }
-    else {
-        return "Reprovado";
-    }
-}
-
-alert(primeiraEtapa(14, 2));
+alert("O resultado da soma é " + resultado);

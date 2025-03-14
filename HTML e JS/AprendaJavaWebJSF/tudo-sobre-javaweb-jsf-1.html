@@ -24,7 +24,7 @@
 
 <h3>Hello Primefaces</h3>
 
-<p>Para criar um novo projeto, vá no Netbeans em Java Web e em Aplicação Web, e selecione o Apache Tomcat (ou o Glass Fish), e nos frameworks, escolha a opção JavaServerFaces, que deverá em configurações do padrão de URL do Servlet <code>*.jsf</code>. Observe que nas bibliotecas, deverá estar além do JDK, a biblioteca do servido (no caso, o Apache Tomcat) e o JSF 2.2 API e IMPL, que podem ser baixados daqui: <a href="http://www.java2s.com/Code/Jar/j/Downloadjsfapi219jar.htm" target="_blank">http://www.java2s.com/Code/Jar/j/Downloadjsfapi219jar.htm</a> e <a href="http://www.java2s.com/Code/Jar/j/Downloadjsfimpl219jar.htm" target="_blank">http://www.java2s.com/Code/Jar/j/Downloadjsfimpl219jar.htm</a></p>
+<p>Para criar um novo projeto, vá no Netbeans em Java Web e em Aplicação Web, e selecione o Apache Tomcat (ou o Glass Fish), e nos frameworks, não escolha a opção JavaServerFaces. Observe que nas bibliotecas, deverá estar além do JDK, a biblioteca do servido (no caso, o Apache Tomcat) e o JSF 2.2 API e IMPL, que podem ser baixados daqui: <a href="http://www.java2s.com/Code/Jar/j/Downloadjsfapi219jar.htm" target="_blank">http://www.java2s.com/Code/Jar/j/Downloadjsfapi219jar.htm</a> e <a href="http://www.java2s.com/Code/Jar/j/Downloadjsfimpl219jar.htm" target="_blank">http://www.java2s.com/Code/Jar/j/Downloadjsfimpl219jar.htm</a></p>
 
 <p>Dessa forma, ele executará como página principal a index.xhtml. Os arquivos XHTML são a fusão de XML com HTML, e são muito utilizados em Java Web.</p>
 
@@ -33,7 +33,7 @@
 <pre>
 <code>
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;!DOCTYPE html&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
 &lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"&gt;
 </code>
 </pre>
@@ -53,11 +53,11 @@
 
 <p>Observe que, nos arquivos, terão os arquivos na Página Web, que os arquivos do site tem que serão os mesmos dos arquivos de configuração, para não dar erros como os de CSS. Para o CSS do Apache Tomcat não sobreescrever o CSS do projeto, veja a pasta web dentro do build, que deverão ser os mesmos arquivos da pasta web, isso vale pro favicon e outros arquivos.</p>
 
-<p>Para continuarmos, vamos salvar o Primefaces no nosso projeto, baixando ele nesse link (baixe a versão 5, não a versão 6 ou superior): <a href="https://www.primefaces.org/downloads/" target="_blank">https://www.primefaces.org/downloads/</a></p>
+<p>Para continuarmos, vamos salvar o Primefaces no nosso projeto, baixando ele nesse link (baixe a versão 5, não a versão 6 ou superior): <a href="https://jitpack.io/p/primefaces/primefaces" target="_blank">https://jitpack.io/p/primefaces/primefaces</a></p>
 
 <p>Crie, no local dos arquivos do site (na mesma onde encontramos o nbproject, web e src), e salve o jar do Primefaces lá, e nas propriedades do site, em bibliotecas, vá em adicionar JAR/Pasta, adicione o JAR (não adicione a pasta, só o JAR dele).</p>
 
-<p>E no código HTML, adicione o link do XML do Primefaces assim: <code>xmlns:p="http://primefaces.org/ui</code></p>
+<p>E no código HTML, adicione o link do XML do Primefaces assim: <code>xmlns:p="http://primefaces.org/ui"</code></p>
 
 <p>Coloque um botão assim no XHTML:</p>
 
@@ -93,10 +93,22 @@
 
 <p>Existem várias tags que podemos usar com Primefaces, como a p:spinner, para valores numéricos. Temos também o f:convertNumber para convertermos números para, por exemplo, valor monetário.</p>
 
-<p>PS: Para bloquear o acesso às páginas xhtml (de forma que se acesse apenas ao resultado jsf delas), abra o arquivo web.xml dentro de WEB-INF e adicione esse código dentro da tag web-app, logo abaixo de welcome-file-list:</p>
+<p>PS: Para bloquear o acesso às páginas xhtml (de forma que se acesse apenas ao resultado jsf delas), abra o arquivo web.xml dentro de WEB-INF e adicione esse código dentro da tag web-app, logo abaixo da tag servlet:</p>
 
 <pre>
 <code>
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;Faces Servlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;*.jsf&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+&lt;session-config&gt;
+    &lt;session-timeout&gt;
+        30
+    &lt;/session-timeout&gt;
+&lt;/session-config&gt;
+&lt;welcome-file-list&gt;
+    &lt;welcome-file>index.jsf&lt;/welcome-file&gt;
+&lt;/welcome-file-list&gt;
 &lt;security-constraint&gt;
     &lt;display-name&gt;Restrict raw XHTML Documents&lt;/display-name&gt;
     &lt;web-resource-collection&gt;

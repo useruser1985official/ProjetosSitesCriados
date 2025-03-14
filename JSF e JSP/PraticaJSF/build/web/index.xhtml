@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Prática JSF</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:fieldset legend="Objetos">
+                <p:toolbarGroup>
+                    <p:commandButton value="Adicionar" action="#{carroBean.adicionar()}" update="@form"></p:commandButton>
+                </p:toolbarGroup>
+                <p:panelGrid columns="2">
+                    <h:outputLabel value="Modelo"></h:outputLabel>
+                    <p:inputText value="#{carroBean.car.modelo}"></p:inputText>
+                    <h:outputLabel value="Fabricante"></h:outputLabel>
+                    <p:inputText value="#{carroBean.car.fabricante}"></p:inputText>
+                    <h:outputLabel value="Cor"></h:outputLabel>
+                    <p:inputText value="#{carroBean.car.cor}"></p:inputText>
+                    <h:outputLabel value="Ano"></h:outputLabel>
+                    <p:inputMask mask="9999" value="#{carroBean.car.ano}"></p:inputMask>
+                </p:panelGrid>
+                <p:dataTable value="#{carroBean.carros}" var="carroForm">
+                    <p:column headerText="Modelo" sortBy="#{carroForm.modelo}">
+                        <h:outputText value="#{carroForm.modelo}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Fabricante">
+                        <h:outputText value="#{carroForm.fabricante}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Cor">
+                        <h:outputText value="#{carroForm.cor}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Ano">
+                        <h:outputText value="#{carroForm.ano}"></h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+        </h:form>
+    </h:body>
+</html>
