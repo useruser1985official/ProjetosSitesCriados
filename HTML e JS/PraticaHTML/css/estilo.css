@@ -20,7 +20,7 @@
 body {
     font-family: Arial, sans-serif;
     color: white !important;
-    background-image: radial-gradient(circle, blue, green, red);
+    background-image: radial-gradient(circle, white, blue);
     background-attachment: fixed;
 }
 
@@ -204,17 +204,34 @@ div.youtube iframe {
     border: 8px solid white;
 }
 
-iframe#spec {
-    width: 430px;
-    height: 280px;
-    border: none;
+div#radio {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    background: url("../imagens/radio.png") no-repeat;
+    background-size: 100%;
 }
 
-iframe#spec::-webkit-scrollbar {
-    display: none;
+div#tv {
+    width: 400px;
+    height: 275px;
+    margin: auto;
+    background: url("../imagens/tv.png") no-repeat;
+    background-size: 100%;
 }
 
-#borda {
-    border: 8px solid;
-    border-image: linear-gradient(135deg, red 0%, blue 90%) 1;
+audio#musica {
+    display: block;
+    position: relative;
+    left: 20px;
+    top: 75px;
+    width: 250px;
+}
+
+video#filme {
+    display: block;
+    position: relative;
+    left: 22px;
+    top: 20px;
+    width: 356px;
 }

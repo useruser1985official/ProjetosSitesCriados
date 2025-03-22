@@ -1,8 +1,36 @@
-let soma = (n1, n2) => n1 + n2;
+var hora = 8;
+var minutos = 20;
+var totalEntrevistas = 0;
+const SAIDA = 11;
 
-let valor1 = parseInt(prompt("Informe o primeiro número:", "0"));
-let valor2 = parseInt(prompt("Informe o segundo número:", "0"));
+var entrevistados = [
+    "João Mariano",
+    "Adélia de Souza",
+    "Fábio Almeida",
+    "Carla Silva",
+    "Paulo Arruda",
+    "Leonardo Rocha",
+    "Tiago de Lima",
+    "Patrícia de Lima",
+    "Fernanda Brito",
+    "Maria da Conceição"
+];
 
-let resultado = soma(valor1, valor2);
+entrevistados.sort();
 
-alert("O resultado da soma é " + resultado);
+for(let i = hora; i <= SAIDA; i++) {
+    if(i == 12 || i == 13) {
+        continue;
+    }
+
+    for(let j = 0; j < 60; j += minutos) {
+        totalEntrevistas++;
+
+        if(j == 0) {
+            console.log(i + ":" + j + "0", ":", entrevistados[totalEntrevistas - 1]);
+        }
+        else {
+            console.log(i + ":" + j, ":", entrevistados[totalEntrevistas - 1]);
+        }
+    }
+}

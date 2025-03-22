@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
 body {
-    background-color: rgb(128,36,0);
+    background-color: rgb(96,6,0);
     color: white;
 }
 div {
-    background-color: rgba(92,12,0,0.9);
+    background-color: rgba(3,0,0,0.9);
     margin: 5px;
     padding: 20px;
 }
