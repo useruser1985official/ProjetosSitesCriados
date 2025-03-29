@@ -5,10 +5,11 @@
         <title>T&iacute;tulo da P&aacute;gina em HTML</title>
         <link rel="icon" href="imagens/favicon.ico"/>
         <link rel="stylesheet" href="css/estilo.css"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>  
     </head>
     <body>
         <main>
+            <!-- Fazer novo estilo pro menu pra ficar responsivo -->
             <nav id="menu">
                 <h1>Menu Principal</h1>
                 <ul>
@@ -172,7 +173,82 @@
                 </div>
             </aside>
             <footer id="rodape">
-                <h1>Isso ficar&aacute; no rodap&eacute;.</h1>
+                <p>Aprendendo a codificar em <abbr title="Hypertext Markup Language (Linguagem de Marcação de Hipertexto)">HTML</abbr>.</p>
+            
+                <p><dfn title="Hypertext Markup Language">HTML</dfn> &eacute; uma linguagem de marca&ccedil;&atilde;o utilizada em p&aacute;ginas na web.</p>
+                <p><dfn title="Cascading Style Sheets">CSS</dfn> &eacute; uma linguagem de estilos que define a formata&ccedil;&atilde;o e estilos de tags HTML.</p>
+
+                <address>
+                    As informa&ccedil;&otilde;es de contato s&atilde;o:<br/>
+                    E-mail: <a href="mailto:contato@dicasdeti.com.br">contato@dicasdeti.com.br</a><br/>
+                    Telefone: (01) 2345-6789
+                </address>
+
+                <p><bdo dir="rtl">Socorram-me, subi no &ocirc;nibus em Marrocos</bdo>.</p>
+
+                <blockquote cite="http://localhost/DicasDeTI">
+                    <p>Isso &eacute; uma cita&ccedil;&atilde;o longa sobre o exemplo da tag blockquote.</p>
+                    <p>Mais informa&ccedil;&otilde;es pesquise sobre <cite>blockquote</cite>.</p>
+                </blockquote>
+
+                <p>Isso &eacute; uma cita&ccedil;&atilde;o curta sobre o exemplo da tag <q cite="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/q">q</q>.</p>
+
+                <button name="botao">Texto do Bot&atilde;o</button>
+
+                <br/>
+                <br/>
+
+                <details>
+                    <summary>Detalhes sobre a tag details:</summary>
+                    <p>Acesse o link: <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/details" target="_blank">https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/details</a></p>
+                </details>
+
+                <dl>
+                    <dt>HTML</dt>
+                    <dd>HTML &eacute; uma linguagem de marca&ccedil;&atilde;o utilizada em p&aacute;ginas na web.</dd>
+                    <dt>CSS</dt>
+                    <dd>CSS &eacute; uma linguagem de estilos que define a formata&ccedil;&atilde;o e estilos de tags HTML.</dd>
+                </dl>
+
+                <p>Para salvar o site nos seus favoritos utilize <kbd>Ctrl D</kbd>.</p>
+
+                <p>O texto tem uma parte destacada <mark>que &eacute; essa</mark>!</p>
+
+                Temperatura atual:<br/>
+                <meter min="-50" max="50" low="22" high="25" value="22">°C</meter>
+                <hr/>
+                M&iacute;nima:<br/>
+                <meter min="-50" max="50" low="22" high="25" value="20">°C</meter>
+                <hr/>
+                M&aacute;xima:<br/>
+                <meter min="-50" max="50" low="22" high="25" value="26">°C</meter>
+
+                <br/>
+
+                <progress value="70" max="100">70%</progress>
+
+                <br/>
+
+                <ruby>
+                    &#28450;<rp>(</rp><rt>Kan</rt><rp>)</rp>
+                    &#23383;<rp>(</rp><rt>Ji</rt><rp>)</rp>
+                </ruby>
+
+                <br/>
+
+                <p>A sa&iacute;da do c&oacute;digo ser&aacute; essa:</p>
+
+                <p><samp>Hello World!</samp></p>
+
+                <p>Isso &eacute; uma frase com fonte normal <small>e isso &eacute; com uma fonte pequena</small>.</p>
+
+                <p>Ela pode ser combinada com outras tags para gerar resultados como 10<sup><small>3</small></sup> e H<sub><small>2</small></sub>0.</p>
+            
+                <button class="botao"><span>Clique Aqui!</span></button>
+
+                <p>O hor&aacute; da reuni&atilde;o &eacute; <time>20:00</time>.</p>
+
+                <p>O dia do evento &eacute; <time datetime="2023-06-01 14:00">1º de Junho</time>.</p>
             </footer>
         </main>
     </body>

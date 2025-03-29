@@ -1,9 +1,5 @@
-function quadr(num) {
-    if(isNaN(num)) {
-        return "O valor digitado não é válido!";
-    }
+function obterGrana() {
+    let dinheiro = "moeda";
 
-    let q = num * num;
-
-    return q;
+    document.write(dinheiro + "<br/>");
 }
