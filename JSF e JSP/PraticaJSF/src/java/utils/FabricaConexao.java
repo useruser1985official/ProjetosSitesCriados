@@ -12,28 +12,31 @@ public class FabricaConexao {
     private static final String USUARIO = "postgres";
     private static final String SENHA = "admin";
     
-    public static Connection getConexao() {
+    public static Connection getConexao() throws ErroSistema {
         if(conexao == null) {
             try {
                 Class.forName("org.postgresql.Driver");
                 conexao = DriverManager.getConnection(URL_CONEXAO, USUARIO, SENHA);
             }
-            catch(SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(FabricaConexao.class.getName()).log(Level.SEVERE, null, ex);
+            catch(SQLException ex) {
+                throw new ErroSistema("Não foi Possível Conectar ao Banco de Dados!", ex);
+            }
+            catch(ClassNotFoundException ex) {
+                throw new ErroSistema("O Driver de Banco de Dados não foi Encontrado!", ex);
             }
         }
         
         return conexao;
     }
     
-    public static void fecharConexao() {
+    public static void fecharConexao() throws ErroSistema {
         if(conexao != null) {
             try {
                 conexao.close();
                 conexao = null;
             }
             catch(SQLException ex) {
-                Logger.getLogger(FabricaConexao.class.getName()).log(Level.SEVERE, null, ex);
+                throw new ErroSistema("Erro ao Fechar a Conexão com o Banco de Dados!", ex);
             }
         }
     }

@@ -130,7 +130,7 @@ catch(SQLException ex) {
 
 <pre>
 <code>
-public void adicionarMensagem(String sumario, String detalhe, FacesMessage.Severity tipoErro) { // O,´prte
+public void adicionarMensagem(String sumario, String detalhe, FacesMessage.Severity tipoErro) { // Importe
     FacesContext context = FacesContext.getCurrentInstance(); // Importe
     FacesMessage message = new FacesMessage(tipoErro, sumario, detalhe);
 
@@ -139,7 +139,7 @@ public void adicionarMensagem(String sumario, String detalhe, FacesMessage.Sever
 </code>
 </pre>
 
-<p>E adicione try catch nos outros métodos, e crie o deletar(), dessa forma:</p>
+<p>E adicione try catch nos outros métodos (retire a inicialização no atributo private de carD e deixe somente o do construtor), e crie o deletar(), dessa forma:</p>
 
 <pre>
 <code>
@@ -449,6 +449,7 @@ import classes.Carro;
 import dao.CarroDAO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import util.ErroSistema;
 
 @SessionScoped
 @ManagedBean
@@ -458,8 +459,14 @@ public class CarroBean extends CrudBean&lt;Carro, CarroDAO&gt; {
     @Override
     public CarroDAO getDao() {
         if(carD == null) {
-            carD = new CarroDAO();
+            try {
+                carD = new CarroDAO();
+            }
+            catch(ErroSistema ex) {
+                Logger.getLogger(CarroBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
         return carD;
     }
 
@@ -607,7 +614,7 @@ import util.FabricaConexao;
 public class UsuarioDAO implements CrudDAO&lt;Usuario&gt; {
     private Connection conexao = null;
 
-    public UsuarioDAO() {
+    public UsuarioDAO() throws ErroSistema {
         conexao = FabricaConexao.getConexao();
     }
 
@@ -703,8 +710,14 @@ public class UsuarioBean extends CrudBean&lt;Usuario, UsuarioDAO&gt; {
     @Override
     public UsuarioDAO getDao() {
         if(userD == null) {
-            userD = new UsuarioDAO();
+            try {
+                userD = new UsuarioDAO();
+            }
+            catch(ErroSistema ex) {
+                Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
         return userD;
     }
 
@@ -725,11 +738,11 @@ public class UsuarioBean extends CrudBean&lt;Usuario, UsuarioDAO&gt; {
     &lt;h:form&gt;
         &lt;p:messages autoUpdate="true" showDetail="true"&gt;&lt;/p:messages&gt;
         &lt;p:fieldset legend="Objetos"&gt;
-                &lt;p:toolbarGroup&gt;
-                    &lt;p:commandButton value="Novo" action="#{usuarioBean.novo()}" update="@form"&gt;&lt;/p:commandButton&gt;
-                    &lt;p:commandButton value="Salvar" action="#{usuarioBean.salvar()}" disabled="#{usuarioBean.busca == true}" update="@form"&gt;&lt;/p:commandButton&gt;
-                    &lt;p:commandButton value="Buscar" action="#{usuarioBean.buscar()}" update="@form"&gt;&lt;/p:commandButton&gt;
-                &lt;/p:toolbarGroup&gt;
+            &lt;p:toolbarGroup&gt;
+                &lt;p:commandButton value="Novo" action="#{usuarioBean.novo()}" update="@form"&gt;&lt;/p:commandButton&gt;
+                &lt;p:commandButton value="Salvar" action="#{usuarioBean.salvar()}" disabled="#{usuarioBean.busca == true}" update="@form"&gt;&lt;/p:commandButton&gt;
+                &lt;p:commandButton value="Buscar" action="#{usuarioBean.buscar()}" update="@form"&gt;&lt;/p:commandButton&gt;
+            &lt;/p:toolbarGroup&gt;
             &lt;p:panelGrid columns="2" rendered="#{usuarioBean.busca == false}"&gt;
                 &lt;h:outputLabel&gt;&lt;/h:outputLabel&gt;
                 &lt;p:inputText value="#{usuarioBean.entidade.login}"&gt;&lt;/p:inputText&gt;

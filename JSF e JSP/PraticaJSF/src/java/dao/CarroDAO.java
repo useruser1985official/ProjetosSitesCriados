@@ -9,18 +9,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import utils.ErroSistema;
 import utils.FabricaConexao;
 
-public class CarroDAO {
+public class CarroDAO implements CrudDAO<Carro> {
     private Connection conexao = null;
     
-    public CarroDAO() {
+    public CarroDAO() throws ErroSistema {
         conexao = FabricaConexao.getConexao();
     }
     
-    public void salvar(Carro car) {
+    @Override
+    public void salvar(Carro car) throws ErroSistema {
         String sql;
         
         try {
@@ -51,11 +51,12 @@ public class CarroDAO {
             FabricaConexao.fecharConexao();
         }
         catch(SQLException ex) {
-            Logger.getLogger(FabricaConexao.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ErroSistema("Erro ao Tentar Salvar!", ex);
         }
     }
     
-    public List<Carro> buscar() {
+    @Override
+    public List<Carro> buscar() throws ErroSistema {
         String sql = "select * from carro";
         
         try {
@@ -81,9 +82,22 @@ public class CarroDAO {
             return carros;
         }
         catch(SQLException ex) {
-            Logger.getLogger(FabricaConexao.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ErroSistema("Erro ao Buscar os Dados!", ex);
+        }
+    }
+    
+    @Override
+    public void deletar(Carro car) throws ErroSistema {
+        String sql = "delete from carro where id = ?";
+        
+        try {
+            PreparedStatement ps = conexao.prepareStatement(sql);
             
-            return null;
+            ps.setInt(1, car.getId());
+            ps.execute();
+        }
+        catch(SQLException ex) {
+            throw new ErroSistema("Erro ao Deletar o Carro!", ex);
         }
     }
 }

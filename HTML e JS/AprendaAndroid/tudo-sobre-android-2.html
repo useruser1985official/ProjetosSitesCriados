@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setVi(getLayoutInflater().inflate(R.layout.activity_main, null)); // Isso infla o XML
-        setContentView(this.getVi());
+        setContentView(this.getVi()); // Não alterar o outro setContentView, adicionar este.
         getSupportActionBar().hide();
     }
 

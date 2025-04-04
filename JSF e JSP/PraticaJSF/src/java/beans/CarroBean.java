@@ -2,44 +2,33 @@ package beans;
 
 import classes.Carro;
 import dao.CarroDAO;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import utils.ErroSistema;
 
 @SessionScoped
 @ManagedBean
-public class CarroBean {
-    private Carro car = new Carro();
-    private List<Carro> carros = new ArrayList<>();
-    private CarroDAO carD = new CarroDAO();
+public class CarroBean extends CrudBean<Carro, CarroDAO> {
+    private CarroDAO carD;
     
-    public void adicionar() {
-        carD.salvar(car);
-        car = new Carro();
+    @Override
+    public CarroDAO getDao() {
+        if(carD == null) {
+            try {
+                carD = new CarroDAO();
+            }
+            catch(ErroSistema ex) {
+                Logger.getLogger(CarroBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return carD;
     }
     
-    public void listar() {
-        carros = carD.buscar();
-    }
-    
-    public void editar(Carro c) {
-        car = c;
-    }
-
-    public Carro getCar() {
-        return car;
-    }
-
-    public void setCar(Carro car) {
-        this.car = car;
-    }
-
-    public List<Carro> getCarros() {
-        return carros;
-    }
-
-    public void setCarros(List<Carro> carros) {
-        this.carros = carros;
+    @Override
+    public Carro criarNovaEntidade() {
+        return new Carro();
     }
 }

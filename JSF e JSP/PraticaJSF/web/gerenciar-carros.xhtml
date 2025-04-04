@@ -16,24 +16,29 @@
         </h:form>
         <ui:insert name="corpo">
             <h:form>
+                <p:messages autoUpdate="true" showDetail="true"></p:messages>
                 <p:fieldset legend="Objetos">
                     <p:toolbarGroup>
-                        <p:commandButton value="Adicionar/Atualizar" action="#{carroBean.adicionar()}" update="@form"></p:commandButton>
-                        <p:commandButton value="Buscar" action="#{carroBean.listar()}" update="@form"></p:commandButton>
+                        <p:commandButton value="Novo" action="#{carroBean.novo()}" update="@form"></p:commandButton>
+                        <p:commandButton value="Salvar" action="#{carroBean.salvar()}" disabled="#{carroBean.busca == true}" update="@form"></p:commandButton>
+                        <p:commandButton value="Buscar" action="#{carroBean.buscar()}" update="@form"></p:commandButton>
                     </p:toolbarGroup>
-                    <p:panelGrid columns="2">
+                    <p:panelGrid columns="2" rendered="#{carroBean.busca == false}">
                         <h:outputLabel value="Modelo"></h:outputLabel>
-                        <p:inputText value="#{carroBean.car.modelo}"></p:inputText>
+                        <p:inputText value="#{carroBean.entidade.modelo}"></p:inputText>
                         <h:outputLabel value="Fabricante"></h:outputLabel>
-                        <p:inputText value="#{carroBean.car.fabricante}"></p:inputText>
+                        <p:inputText value="#{carroBean.entidade.fabricante}"></p:inputText>
                         <h:outputLabel value="Cor"></h:outputLabel>
-                        <p:inputText value="#{carroBean.car.cor}"></p:inputText>
+                        <p:inputText value="#{carroBean.entidade.cor}"></p:inputText>
                         <h:outputLabel value="Ano"></h:outputLabel>
-                        <p:inputMask mask="9999" value="#{carroBean.car.ano}"></p:inputMask>
+                        <p:inputMask mask="9999" value="#{carroBean.entidade.ano}"></p:inputMask>
                     </p:panelGrid>
-                    <p:dataTable value="#{carroBean.carros}" var="carroForm">
+                    <p:dataTable value="#{carroBean.entidadeList}" var="carroForm" rendered="#{carroBean.busca == true}">
                         <p:column>
                             <p:commandButton value="Editar" action="#{carroBean.editar(carroForm)}" update="@form"></p:commandButton>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="Deletar" action="#{carroBean.deletar(carroForm)}" update="@form"></p:commandButton>
                         </p:column>
                         <p:column headerText="Modelo" sortBy="#{carroForm.modelo}">
                             <h:outputText value="#{carroForm.modelo}"></h:outputText>
