@@ -10,8 +10,13 @@
     <body>
         <div class="terminal">
             <script>
-                document.write("Data: " + Date() + "<br/>");
-                document.write("Data em milissegundos: " + Date.now() + "<br/>");
+                onerror = erro;
+
+                alert(baixar());
+
+                function erro() {
+                    alert("Houve um erro!");
+                }
             </script>
         </div>
     </body>

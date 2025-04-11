@@ -4,12 +4,15 @@
         <meta charset="UTF-8"/>
         <title>T&iacute;tulo da P&aacute;gina em HTML</title>
         <link rel="icon" href="imagens/favicon.ico"/>
-        <link rel="stylesheet" href="css/estilo.css"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>  
+        <link rel="stylesheet" href="css/estilo.css" media="screen"/>
+        <link rel="stylesheet" href="css/impressora.css" media="print"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script src="javascript/script.js"></script>
     </head>
-    <body>
+    <body onresize="mudouTam()">
         <main>
-            <!-- Fazer novo estilo pro menu pra ficar responsivo -->
+            <span id="burger" class="material-icons" onclick="clickMenu()">menu</span>
             <nav id="menu">
                 <h1>Menu Principal</h1>
                 <ul>
@@ -26,6 +29,14 @@
                         <h3>T&iacute;tulo Terci&aacute;rio</h3>                    
                     </hgroup>
                 </header>
+
+                <div id="icons">
+                    <img src="imagens/icon-print.png" id="print" alt="Impressora"/>
+                    <img src="imagens/icon-phone.png" id="phone" alt="Smartphone"/>
+                    <img src="imagens/icon-tablet.png" id="tablet" alt="Tablet"/>
+                    <img src="imagens/icon-pc.png" id="pc" alt="PC"/>
+                    <img src="imagens/icon-tv.png" id="tv" alt="TV"/>
+                </div>
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque doloribus totam nulla atque. Dolorum numquam et delectus, sunt facere fugiat explicabo itaque magnam nulla! Dolores ex similique itaque sapiente. Iste!</p>
 
@@ -113,7 +124,11 @@
                     <li>Item 3</li>
                 </ul>
 
-                <img src="imagens/luta-grd.jpg" alt="Luta" class="redonda"/>
+                <picture>
+                    <source media="(max-width: 350px)" srcset="imagens/luta-peq.jpg" type="image/jpeg"/>
+                    <source media="(max-width: 600px)" srcset="imagens/luta-med.jpg" type="image/jpeg"/>
+                    <img src="imagens/luta-grd.jpg" alt="Luta" class="redonda"/>
+                </picture>
 
                 <br/>
 
@@ -151,9 +166,6 @@
                     <iframe src="https://www.youtube.com/embed/WRcs8rebZtA"></iframe>
                 </div>
 
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d116911.36561937444!2d-46.5108992!3d-23.694540800000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1741294638505!5m2!1spt-BR!2sbr" width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            
-                <br/>
                 <br/>
 
                 <div id="radio">

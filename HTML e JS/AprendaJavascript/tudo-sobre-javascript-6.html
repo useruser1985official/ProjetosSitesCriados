@@ -239,7 +239,7 @@ document.write(novaMatriz[2][0] + "&lt;br/&gt;");
 
 <pre>
 <code>
-var novaMatriz = [["Banana", "Maçã"],["Pera", "Abacate"],["Uva", "Tâmara"]];
+var novaMatriz = [["Banana", "Maçã"], ["Pera", "Abacate"], ["Uva", "Tâmara"]];
                 
 var valores = "";
 
@@ -359,7 +359,7 @@ try {
     var res = 50 / 0;
     
     if(res == "Infinity") {
-        throw new Error("Impossível Dividir por Zero");
+        throw new Error("Impossível Dividir por Zero"); // Isso criará uma exceção
     }
 }
 catch(ex) {
@@ -376,7 +376,7 @@ alert(res);
 <code>
 function divisao(n1, n2) {
     if(n2 == 0) {
-        throw new Error("É impossível Dividir por Zero!");
+        throw new Error("É impossível Dividir por Zero!"); // Isso criará uma exceção
     }
 
     return n1 / n2;
@@ -400,7 +400,7 @@ var num;
 try {
     num = parseInt(prompt("Digite um valor: "));
     if(num > 10) {
-        throw new Error("Valor inválido, o valor deverá ser até o máximo de 10!");
+        throw new Error("Valor inválido, o valor deverá ser até o máximo de 10!"); // Isso criará uma exceção
     }
     document.write("Valor Digitado: " + num);
 }
