@@ -41,11 +41,11 @@
 
 <p>Usando o graphicImage, o JSF é responsável por procurar a pasta e colocar o arquivo no seu site, sem ter que voltar ou avançar pastas.</p>
 
-<p>Outra forma, é usando o próprio Netbeans, vamos selecionar a tag toolbarGroup toda da página gerenciar-carros, clicar com o botão direito e ir em refatorar e em criar componente, esse componente terá o nome toolbarCrud, a pasta sccomp (dentro de resources), e o prefixo sc).</p>
+<p>Outra forma, é usando o próprio Netbeans, vamos selecionar a tag toolbarGroup toda da página gerenciar-carros, clicar com o botão direito e ir em refatorar e em criar componente, esse componente terá o nome toolbarCrud, a pasta ezcomp (dentro de resources), e o prefixo ez).</p>
 
-<p>Observe que no lugar da tag está a chamada do nosso componente (sc:toolbarGrud) e a importação na tag principal do XHTML,</p>
+<p>Observe que no lugar da tag está a chamada do nosso componente (ez:toolbarCrud) e a importação na tag principal do XHTML.</p>
 
-<p>No caso, os actions no nosso toolbar serão alterados para funcionar em todas as páginas. Nos XHTML de todo o site, como o controle-tela, coloque a tag sc:toolbarGrud e a importação da mesma no código principal.</p>
+<p>No caso, os actions no nosso toolbar serão alterados para funcionar em todas as páginas. Nos XHTML de todo o site, como o controle-tela, coloque a tag ez:toolbarCrud e a importação da mesma no código principal.</p>
 
 <p>No toolbarCrud coloque isso:</p>
 
@@ -61,7 +61,7 @@
 
 <pre>
 <code>
-&lt;sc:toolbarCrud crudBean="#{carroBean}"/&gt;
+&lt;ez:toolbarCrud crudBean="#{carroBean}"/&gt;
 </code>
 </pre>
 
@@ -91,9 +91,9 @@ action="cc.attrs.crudBean.novo()"
 
 <pre>
 <code>
-&lt;sc:toolbarCrud crudBean="#{carroBean}"&gt;
+&lt;ez:toolbarCrud crudBean="#{carroBean}"&gt;
     &lt;p:inputText value="Texto"&gt;&lt;/p:inputText&gt;
-&lt;/sc:toolbarCrud&gt;
+&lt;/ez:toolbarCrud&gt;
 </code>
 </pre>
 

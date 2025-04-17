@@ -30,7 +30,7 @@ public abstract class CrudBean<E, D extends CrudDAO> {
         }
     }
     
-    public void Editar(E ent) {
+    public void editar(E ent) {
         this.entidade = ent;
         mudaParaEditar();
     }

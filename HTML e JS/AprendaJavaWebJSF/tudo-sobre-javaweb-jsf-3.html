@@ -497,7 +497,7 @@ public class CarroBean extends CrudBean&lt;Carro, CarroDAO&gt; {
      &lt;h:outputLabel value="Ano"&gt;&lt;/h:outputLabel&gt;
      &lt;p:inputMask mask="9999" value="#{carroBean.entidade.ano}"&gt;&lt;/p:inputMask&gt;
  &lt;/p:panelGrid&gt;
- &lt;p:dataTable value="#{carroBean.entidadeList}" var="carroForm" rendered="#{carroBean.busca == true}"&gt;
+ &lt;p:dataTable value="#{carroBean.getEntidadeList()}" var="carroForm" rendered="#{carroBean.busca == true}"&gt;
 </code>
 </pre>
 
@@ -749,7 +749,7 @@ public class UsuarioBean extends CrudBean&lt;Usuario, UsuarioDAO&gt; {
                 &lt;h:outputLabel&gt;&lt;/h:outputLabel&gt;
                 &lt;p:password value="#{usuarioBean.entidade.senha}"&gt;&lt;/p:password&gt;
             &lt;/p:panelGrid&gt;
-            &lt;p:dataTable value="#{usuarioBean.entidadeList}" var="usuarioForm" rendered="#{usuarioBean.busca == true}"&gt;
+            &lt;p:dataTable value="#{usuarioBean.getEntidadeList()}" var="usuarioForm" rendered="#{usuarioBean.busca == true}"&gt;
                 &lt;p:column&gt;
                     &lt;p:commandButton value="Editar" action="#{usuarioBean.editar(usuarioForm)}" update="@form"&gt;&lt;/p:commandButton&gt;
                     &lt;p:commandButton value="Deletar" action="#{usuarioBean.deletar(usuarioForm)}" update="@form"&gt;&lt;/p:commandButton&gt;
