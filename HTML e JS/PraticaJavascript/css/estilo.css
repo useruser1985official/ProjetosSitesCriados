@@ -12,3 +12,12 @@ div.terminal {
     margin: 100px auto;
     padding: 10px;
 }
+
+#mais {
+    display: none;
+}
+
+#alerta {
+    display: none;
+    color: red;
+}

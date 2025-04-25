@@ -15,3 +15,10 @@ function mudouTam() {
         menu.style.display = "none";
     }
 }
+
+function calculo() {
+    let qtd = parseInt(document.getElementById("iqtd").value);
+    let tot = qtd * 1500;
+
+    document.getElementById("itot").value = tot;
+}

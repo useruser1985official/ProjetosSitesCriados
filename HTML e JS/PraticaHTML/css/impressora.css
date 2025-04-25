@@ -4,7 +4,7 @@ html {
     font-family: "Courier New", Courier, monospace;
 }
 
-ul, footer, nav, a, span#burger {
+ul, footer, nav, nav h1, a, span#burger {
     display: none;
 }
 

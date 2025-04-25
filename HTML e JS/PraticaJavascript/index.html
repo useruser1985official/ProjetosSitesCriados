@@ -9,15 +9,37 @@
     </head>
     <body>
         <div class="terminal">
-            <script>
-                onerror = erro;
+            <p>Não confunda anti-herói com vilão<span id="pontos">...</span><span id="mais">. O vilão é o inimigo do mocinho e o anti-herói é aquele cara de personalidade, que salva as pessoas, que vai atrás de seus objetivos, que movimenta o mundo, mas que se comporta de forma contrária aos heróis por não seguir as regras morais impostas pela sociedade. O lance dele é quebrar paradigmas, mas resolver os problemas.</span></p>
+        
+            <input type="button" value="Leia Mais" id="btLeia" onclick="leia()"/>
 
-                alert(baixar());
+            <br/>
+            <br/>
 
-                function erro() {
-                    alert("Houve um erro!");
-                }
-            </script>
+            <label for="isenha">Senha:</label><input type="password" name="senha" id="isenha" maxlength="8"/>
+            <span id="alerta">CAPS LOCK Ativado!</span>
+            <br/>
+            <input type="checkbox" name="most" id="imost" onclick="mostOculSenha()"/><label for="imost">Mostrar Senha</label>
+        
+            <br/>
+            <br/>
+
+            <form oninput="res.value = num.value">
+                0<input type="range" name="num" min="0" max="100" value="50"/>100
+                <br/>
+                <output name="res">50</output>
+            </form>
+
+            <br/>
+            <br/>
+
+            <form oninput="res.value = parseInt(n1.value) + parseInt(n2.value)">
+                <input type="number" name="n1" min="0" max="100" value="0"/>
+                +
+                <input type="number" name="n2" min="0" max="100" value="0"/>
+                =
+                <output name="res">0</output>
+            </form>
         </div>
     </body>
 </html>
