@@ -334,7 +334,9 @@ var obj = JSON.parse('{\
     ]\
 }');
 
-console.log(obj);
+for(let f of obj.funcionarios) {
+    document.write(`Nome: ${f.nome} ${f.sobrenome}. Idade: ${f.idade}.&lt;br/&gt;`);
+}
 </code>
 </pre>
 
@@ -350,13 +352,19 @@ var lat;
 var lon;
 
 if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(posicao) {
-        console.log(posicao);
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        lat = pos.coords.latitude;
+        lon = pos.coords.longitude;
 
-        lat = posicao.coords.latitude;
-        lon = posicao.coords.longitude;
+        document.write(`Latitude: ${lat}. Longitude: ${lon}.`);
 
-        console.log(lat, lon);
+        var acesso = confirm("Deseja ver o local no Google Maps?");
+
+        if(acesso) {
+            var maps = `https://www.google.com/maps?q=${lat},${lon}`;
+
+            open(maps, "_blank");
+        }
     });
 }
 </code>

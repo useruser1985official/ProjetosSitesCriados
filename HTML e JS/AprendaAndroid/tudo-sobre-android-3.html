@@ -407,7 +407,7 @@ public boolean onCreateOptionsMenu(Menu men) {
 
 <h3>Criando Strings para os Menus</h3>
 
-<p>Para mostrar o menu, basta remover o atributo do XML app:showAsAction de todos os itens.</p>
+<p>Para mostrar o menu, basta remover o atributo do XML <code>app:showAsAction</code> de todos os itens.</p>
 
 <p>Copie as tags item e mude os titler pra criarmos mais menus.</p>
 
@@ -415,7 +415,7 @@ public boolean onCreateOptionsMenu(Menu men) {
 
 <pre>
 <code>
-&lt;resources>
+&lt;resources&gt;
     &lt;string name="app_name"&gt;Cadastro de Clientes&lt;/string&gt;
     &lt;string name="action_settings"&gt;Settings&lt;/string&gt;
     &lt;string name="title_activity_act_cad_clientes"&gt;Clientes&lt;/string&gt;
@@ -453,6 +453,33 @@ public boolean onCreateOptionsMenu(Menu men) {
 </pre>
 
 <p>Aí ele pegará do arquivo o texto do label em strings.xml. Faça o mesmo nos outros itens com menu_acao2 e lbl_alterar, e menu_acao3 e lbl_excluir.</p>
+
+<p>Chame o componente toolbar no aplicativo:</p>
+
+<pre>
+<code>
+tbAct = (Toolbar)findViewById(R.id.tbAct); // importe androidx.appcompat.widget.Toolbar, e declare o atributo do tipo Toolbar no código
+
+setSupportActionBar(tbAct);
+</code>
+</pre>
+
+<p>E coloque esse método na classe:</p>
+
+<pre>
+<code>
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    int id = item.getItemId();
+
+    if(id == R.id.menu_acao1) {
+        return true;
+    }
+    
+    return super.onOptionsItemSelected(item);
+}
+</code>
+</pre>
 
 <ul>
     <li><a href="tudo-sobre-android-2.html">Parte Anterior da Matéria!</a></li>

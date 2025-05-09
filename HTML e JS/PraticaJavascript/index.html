@@ -9,37 +9,60 @@
     </head>
     <body>
         <div class="terminal">
-            <p>Não confunda anti-herói com vilão<span id="pontos">...</span><span id="mais">. O vilão é o inimigo do mocinho e o anti-herói é aquele cara de personalidade, que salva as pessoas, que vai atrás de seus objetivos, que movimenta o mundo, mas que se comporta de forma contrária aos heróis por não seguir as regras morais impostas pela sociedade. O lance dele é quebrar paradigmas, mas resolver os problemas.</span></p>
-        
-            <input type="button" value="Leia Mais" id="btLeia" onclick="leia()"/>
+            <script>
+                try {
+                    operacoes(5, 10);
+                }
+                catch(ex) {
+                    document.write(`<span style=\"color: red\">${ex.message}</span><br/>`);
+                }
 
-            <br/>
-            <br/>
+                linha();
 
-            <label for="isenha">Senha:</label><input type="password" name="senha" id="isenha" maxlength="8"/>
-            <span id="alerta">CAPS LOCK Ativado!</span>
-            <br/>
-            <input type="checkbox" name="most" id="imost" onclick="mostOculSenha()"/><label for="imost">Mostrar Senha</label>
-        
-            <br/>
-            <br/>
+                datas();
 
-            <form oninput="res.value = num.value">
-                0<input type="range" name="num" min="0" max="100" value="50"/>100
-                <br/>
-                <output name="res">50</output>
-            </form>
+                linha();  
 
-            <br/>
-            <br/>
+                try {
+                    document.write(divisao(50, 0));
+                }
+                catch(ex) {
+                    document.write(`<span style=\"color: red\">${ex.message}</span>`);
+                }
+                finally {
+                    document.write("<br/>Fim do tratamento!<br/>");
+                }
 
-            <form oninput="res.value = parseInt(n1.value) + parseInt(n2.value)">
-                <input type="number" name="n1" min="0" max="100" value="0"/>
-                +
-                <input type="number" name="n2" min="0" max="100" value="0"/>
-                =
-                <output name="res">0</output>
-            </form>
+                linha();
+
+                mens();
+
+                linha();
+
+                document.write(soma(10, 5));
+
+                linha();
+
+                var num = parseInt(prompt("Digite um número:", "0"));
+
+                try {
+                    if(isNaN(num)) {
+                        throw new TypeError("Não foi inserido um valor numérico!");
+                    }
+
+                    if(num > 10) {
+                        throw new Error("O número deve ser de até 10!");
+                    }
+
+                    document.write(`O valor é ${num}.<br/>`);
+                }
+                catch(ex) {
+                    document.write(`<span style=\"color: red\">${ex.message}</span><br/>`);
+                }
+                finally {
+                    document.write("Fim do tratamento!");
+                }
+            </script>
         </div>
     </body>
 </html>

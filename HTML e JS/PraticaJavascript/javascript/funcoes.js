@@ -1,39 +1,46 @@
-function leia() {
-    let pontos = document.getElementById("pontos");
-    let mais = document.getElementById("mais");
-    let btLeia = document.getElementById("btLeia");
+var linha = () => document.write("<hr/>");
 
-    if(pontos.style.display == "none") {
-        pontos.style.display = "inline";
-        mais.style.display = "none";
-        btLeia.value = "Leia Mais";
+var mens = () => document.write("Mensagem de Lambda!<br/>");
+var soma = (n1, n2) => n1 + n2;
+
+function operacoes(n1, n2) {
+    if(n1 >= n2) {
+        throw new Error("N1 deve ser menor que N2!");
     }
-    else {
-        pontos.style.display = "none";
-        mais.style.display = "inline";
-        btLeia.value = "Leia Menos";
-    }
+
+    document.write(`O número absoluto de ${n1} é ${Math.abs(n1)}.<br/>`);
+    document.write(`A raiz quadrada de ${n1} é ${Math.sqrt(n1).toFixed(3)}.<br/>`);
+    document.write(`A raiz cúbica de ${n1} é ${Math.cbrt(n1).toFixed(3)}.<br/>`);
+    document.write(`O quadrado de ${n1} é ${Math.pow(n1, 2)}.<br/>`);
+    document.write(`O cubo de ${n1} é ${Math.pow(n1, 3)}.<br/>`);
+    document.write(`${n1} elevado à ${n2}: ${Math.pow(n1, n2)}.<br/>`);
+    document.write(`Número aleatório entre ${n1} e ${n2}: ${Math.round(Math.random() * (n2 - n1) + n1)}.<br/>`);
 }
 
-function mostOculSenha() {
-    let senha = document.getElementById("isenha");
+function datas() {
+    var semana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
+    var meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
-    if(senha.type == "password") {
-        senha.type = "text";
-    }
-    else {
-        senha.type = "password";
-    }
+    var data = new Date();
+
+    var dia = data.getDate();
+    var mes = data.getMonth();
+    var ano = data.getFullYear();
+
+    var hora = data.getHours();
+    var minu = data.getMinutes();
+    var segu = data.getSeconds();
+
+    var ds = data.getDay();
+
+    document.write(`Hoje é dia ${dia} de ${meses[mes]} de ${ano}. ${semana[ds]}.<br/>`);
+    document.write(`A hora atual é ${("00" + hora).slice(-2)}:${("00" + minu).slice(-2)}:${("00" + segu).slice(-2)}.<br/>`)
 }
 
-document.addEventListener("keydown", function(event) {
-    let estado = event.getModifierState("CapsLock");
-    let alertaCaps = document.getElementById("alerta");
+function divisao(n1, n2) {
+    if(n2 == 0) {
+        throw new Error("É impossível dividir por zero!");
+    }
 
-    if(estado) {
-        alertaCaps.style.display = "inline";
-    }
-    else {
-        alertaCaps.style.display = "none";
-    }
-});
+    return n1 / n2;
+}
