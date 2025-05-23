@@ -121,6 +121,8 @@ mysqli_close($conexao);
 
 <p>Agora, no lado do Android, você precisa fazer uma requisição HTTP para o seu script PHP e processar a resposta. Para isso, vamos usar a biblioteca HttpURLConnection para fazer uma requisição POST ao seu script PHP.</p>
 
+<p>Coloque um Linear Layout com o campo de texto de id txtUser, e um campo de senha com a id txtSenha. Coloque os labels para indicar os mesmos campos e coloque um botão com a id btnLogin para acessar o banco de dados.</p>
+
 <p>Primeiro, você precisa garantir que o Android tenha permissão para acessar a internet. Adicione a permissão no seu arquivo AndroidManifest.xml:</p>
 
 <pre>
@@ -140,8 +142,8 @@ protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
 
-    editTextUsuario = (EditText)findViewById(R.id.editTextUsuario);
-    editTextSenha = (EditText)findViewById(R.id.editTextSenha);
+    txtUser = (EditText)findViewById(R.id.txtUser);
+    txtSenha = (EditText)findViewById(R.id.txtSenha);
 
     findViewById(R.id.btnLogin).setOnClickListener(new View.OnClickListener() {
         @Override
