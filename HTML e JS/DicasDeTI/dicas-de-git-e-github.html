@@ -99,6 +99,8 @@
 
 <p>Caso seja um novo upload para um repositório já existente e com arquivos, faça a inicialização, a adição e o commit (esqueça do remote add), depois digite os comandos <code>git branch -M master</code>, <code>git pull https://github.com/user/repo.git</code> e <code>git push https://github.com/user/repo.git master -f</code> (cuidado que ele sobrescreverá todos os arquivos, é recomendado clonar um repositório antes de atualizá-lo e upar tudo de uma vez). Caso queira remover um arquivo antes do upload, use o comando <code>git rm arquivo</code> (para diretórios use <code>git rm -rf diretorio</code>).</p>
 
+<p>Para resetar um commit, use o comando <code>git log</code> e pegue o hash do commit anterior ao que você quer remover, e digite <code>git reset --hard f4262eca0bfce38b97be748182a1e00a6dfc7502</code> e para sincronizar com o repositório remoto, digite <code>git push origin master --force</code>.</p>
+
         <footer>
             <p><a href="contato.html">Entre em Contato Conosco!</a></p>
         </footer>
