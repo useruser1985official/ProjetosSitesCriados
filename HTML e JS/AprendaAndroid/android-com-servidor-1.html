@@ -34,7 +34,7 @@ default collate utf8_general_ci;
 
 use appexemplo;
 
-create table usuarios (
+create table usuario (
     id int not null primary key auto_increment,
     nome varchar(70) not null,
     user varchar(35) unique not null,
@@ -60,7 +60,7 @@ if(!$conexao) {
     echo "Erro na Conexão!";
 }
 else {
-    echo "Conexão Criada com Sucesso!";
+    echo "Conexão Criada com Sucesso!"; // Remover esse else depois, pra não conflitar com o JSON
 }
 </code>
 </pre>
@@ -72,16 +72,21 @@ else {
 require_once "conexao.php";
 
 $nome = "Administrador";
-$usuario = "admin";
-$senha = "123";
+$user = "admin";
+$senha = sha1("123");
 
-$sql = "insert into usuarios (nome, user, senha) values ('$nome', '$usuario', '$senha');
+$sql = "insert into usuario (nome, user, senha) values ('$nome', '$user', '$senha');
 
-if(mysqli_query($conexao, $sql)) {
-    echo "Dados Inseridos com Sucesso!";
+if($user != "") {
+    if(mysqli_query($conexao, $sql)) {
+        echo "Dados Inseridos com Sucesso!";
+    }
+    else {
+        echo "Erro ao Registrar Dados: " . mysqli_error($conexao);
+    }
 }
 else {
-    echo "Erro ao Registrar Dados: " . mysqli_error($conexao);
+    echo "Nenhum Dado Inserido!";
 }
 </code>
 </pre>
@@ -93,27 +98,34 @@ else {
 require_once "conexao.php";
 
 // Recebe os dados do Android (POST)
-$usuario = $_POST["usuario"];
-$senha = $_POST["senha"];
+$user = isset($_POST["user"]) ? $_POST["user"] : "";
+$senha = isset($_POST["senha"] ? sha1($_POST["senha"]) : "";
 
-$sql = "select * from usuarios where user = '$usuario' AND senha = '$senha'";
+header("Content-Type: application/json");
 
-$result = mysqli_query($conexao, $sql);
+if($user != "") {
+    $sql = "select * from usuario where user = '$user' and senha = '$senha'";
 
+    $result = mysqli_query($conexao, $sql);
 
-if(mysqli_num_rows($result) == 1) {
-    $row = mysqli_fetch_assoc($result);
-    $nome = $row["nome"];
-    
-    // Retorna os dados para o Android (em formato JSON)
-    echo json_encode(array("status" => "sucesso", "nome" => $nome));
+    if(mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        $nome = $row["nome"];
+        
+        // Retorna os dados para o Android (em formato JSON)
+        echo json_encode(array("status" => "sucesso", "nome" => $nome));
+    }
+    else {
+        // Caso não encontre o usuário
+        echo json_encode(array("status" => "erro", "mensagem" => "Usuário ou senha incorretos!"));
+    }
+
+    mysqli_close($conexao);    
 }
 else {
-    // Caso não encontre o usuário
-    echo json_encode(array("status" => "erro", "mensagem" => "Usuário ou senha incorretos"));
+    // Caso nada seja enviado
+    echo json_encode(array("status" => "erro", "mensagem" => "Nenhum dado inserido!"));
 }
-
-mysqli_close($conexao);
 </code>
 </pre>
 
@@ -121,9 +133,11 @@ mysqli_close($conexao);
 
 <p>Agora, no lado do Android, você precisa fazer uma requisição HTTP para o seu script PHP e processar a resposta. Para isso, vamos usar a biblioteca HttpURLConnection para fazer uma requisição POST ao seu script PHP.</p>
 
-<p>Coloque um Linear Layout com o campo de texto de id txtUser, e um campo de senha com a id txtSenha. Coloque os labels para indicar os mesmos campos e coloque um botão com a id btnLogin para acessar o banco de dados.</p>
+<p>Coloque um Linear Layout com o campo de texto de id txtUser, e um campo de senha com a id txtSenha. Coloque os labels para indicar os mesmos campos e coloque um botão com a id btnEntr para acessar o banco de dados. Podemos também colocar um botão com a id btnLimp pra limpar os campos.</p>
 
-<p>Primeiro, você precisa garantir que o Android tenha permissão para acessar a internet. Adicione a permissão no seu arquivo AndroidManifest.xml:</p>
+<h3>Fazendo a Conexão do App com o Banco de Dados</h3>
+
+<p>Primeiro, você precisa garantir que o Android tenha permissão para acessar a internet. Adicione a permissão no seu arquivo AndroidManifest.xml, dentro da tag manifest, e fora de qualquer outra:</p>
 
 <pre>
 <code>
@@ -131,11 +145,21 @@ mysqli_close($conexao);
 </code>
 </pre>
 
-<p>Em seguida, crie uma função no seu Activity para enviar os dados de login (usuário e senha) para o PHP. Vamos usar AsyncTask para realizar a requisição de forma assíncrona:</p>
+<p>E na tag Application coloque isso, pra permitir conexões não seguras:</p>
+
+<pre>
+<code>
+android:usesCleartextTraffic="true"
+</code>
+</pre>
+
+<p>Em seguida, crie uma função no seu Activity para enviar os dados de login (usuário e senha) para o PHP:</p>
 
 <pre>
 <code>
 private EditText txtUser, txtSenha;
+private static final ExecutorService EXEC_SERVICE = Executors.newSingleThreadExecutor(); // importe java.util.concurrent.ExecutorService e  java.util.concurrent.Executors
+private static final Handler HAND = new Handler(Looper.getMainLooper()); // importe android.os.Looper
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -145,113 +169,131 @@ protected void onCreate(Bundle savedInstanceState) {
     txtUser = (EditText)findViewById(R.id.txtUser);
     txtSenha = (EditText)findViewById(R.id.txtSenha);
 
-    findViewById(R.id.btnLogin).setOnClickListener(new View.OnClickListener() {
+    findViewById(R.id.btnEntr).setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String usuario = txtUser.getText().toString();
-            String senha = txtSenha.getText().toString();
+            String user = txtUser.getText().toString().trim();
+            String senha = txtSenha.getText().toString().trim();
 
             // Chama a função que vai fazer a requisição ao PHP
-            new LoginTask().execute(usuario, senha);
+            realizarLogin(user, senha);
+        }
+    });
+
+    findViewById(R.id.btnLimp).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            txtUser.setText("");
+            txtSenha.setText("");
+            txtUser.requestFocus();
         }
     });
 }
 
-// AsyncTask para fazer a requisição HTTP ao PHP
-private class LoginTask extends AsyncTask&lt;String, Void, String&gt; {
-    @Override
-    protected String doInBackground(String... params) {
-        String usuario = params[0];
-        String senha = params[1];
+// Função que realiza o login
+private void realizarLogin(String user, String senha) {
+    EXEC_SERVICE.execute(() -> { 
+        // Realiza a requisição HTTP para o PHP
+        String response = realizarRequisicaoHttp(user, senha);
 
-        HttpURLConnection urlConnection = null;
-        BufferedReader in = null;
+        // Após o resultado, atualiza a UI na thread principal
+        HAND.post(() -> {
+            if(response != null && response.startsWith("{")) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    String status = jsonResponse.getString("status");
+
+                    if(status.equals("sucesso")) {
+                        String nome = jsonResponse.getString("nome");
+                        exibirMensagem("Bem-vindo, " + nome + ".");
+                    }
+                    else {
+                        String mensagem = jsonResponse.getString("mensagem");
+                        exibirMensagem(mensagem);
+                    }
+                }
+                catch(Exception ex) {
+                    ex.printStackTrace();
+                    exibirMensagem("Erro ao processar a resposta!");
+                }
+            }
+            else {
+                exibirMensagem("Erro de comunicação com o servidor!");
+            }
+        });
+    });
+}
+
+// Função que faz a requisição HTTP para o PHP
+private String realizarRequisicaoHttp(String user, String senha) {
+    HttpURLConnection urlConnection = null;
+    BufferedReader in = null;
+
+    try {
+        // URL do seu script PHP (ajuste conforme necessário)
+        URL host = new URL("http://192.168.0.3/NomeDoServidor/login.php");
+
+        // Abre a conexão HTTP
+        urlConnection = (HttpURLConnection)host.openConnection();
+
+        urlConnection.setRequestMethod("POST"); // Pode ser GET também, se for o caso.
+        urlConnection.setDoOutput(true);
+
+        // Envia os dados (usuário e senha) via POST
+        String data = "user=" + user + "&senha=" + senha;
+        OutputStream os = urlConnection.getOutputStream();
+
+        os.write(data.getBytes());
+        os.flush();
+
+        // Recebe a resposta do servidor
+        in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+        String inputLine;
+        StringBuilder resp = new StringBuilder();
+
+        while((inputLine = in.readLine()) != null) {
+            resp.append(inputLine);
+        }
+
+        return resp.toString();
+
+    }
+    catch(Exception ex) {
+        ex.printStackTrace();
+
+        return null;
+    }
+    finally {
+        if(urlConnection != null) {
+            urlConnection.disconnect();
+        }
+
         try {
-            // URL do seu script PHP (ajuste o IP ou domínio conforme necessário)
-            URL host = new URL("http://192.168.15.89/login.php");
-
-            // Abre a conexão HTTP
-            urlConnection = (HttpURLConnection)host.openConnection();
-            urlConnection.setRequestMethod("POST");
-            urlConnection.setDoOutput(true);
-
-            // Envia os dados (usuário e senha) via POST
-            String data = "usuario=" + usuario + "&senha=" + senha;
-            OutputStream os = urlConnection.getOutputStream();
-
-            os.write(data.getBytes());
-            os.flush();
-
-            // Recebe a resposta do servidor
-            in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-
-            while((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
+            if(in != null) {
+                in.close();
             }
-
-            return response.toString();
-
         }
-        catch(Exception ex) {
+        catch(IOException ex) {
             ex.printStackTrace();
-            
-            return null; // Caso ocorra uma exceção
-        }
-        finally {
-            if(urlConnection != null) {
-                urlConnection.disconnect();
-            }
-
-            try {
-                if(in != null) {
-                    in.close();
-                }
-            }
-            catch(IOException ex) {
-                ex.printStackTrace();
-            }
         }
     }
+}
 
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
+// Função para exibir mensagens na tela
+public void exibirMensagem(String mens) {
+    AlertDialog.Builder diag = new AlertDialog.Builder(MainActivity.this);
 
-        if(result != null) {
-            try {
-                // Verifica se a resposta foi sucesso
-                JSONObject jsonResponse = new JSONObject(result);
-                String status = jsonResponse.getString("status");
-
-                if(status.equals("sucesso")) {
-                    // Exibe o nome do usuário se o login for bem-sucedido
-                    String nome = jsonResponse.getString("nome");
-                    Toast.makeText(MainActivity.this, "Bem-vindo, " + nome, Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    // Exibe a mensagem de erro
-                    String mensagem = jsonResponse.getString("mensagem");
-                    Toast.makeText(MainActivity.this, mensagem, Toast.LENGTH_SHORT).show();
-                }
-            }
-            catch(Exception ex) {
-                ex.printStackTrace();
-                Toast.makeText(MainActivity.this, "Erro ao processar a resposta", Toast.LENGTH_SHORT).show();
-            }
-        }
-        else {
-            Toast.makeText(MainActivity.this, "Erro de comunicação com o servidor", Toast.LENGTH_SHORT).show();
-        }
-    }
+    diag.setMessage(mens.trim());
+    diag.setNeutralButton("Ok", null);
+    diag.show();
 }
 </code>
 </pre>
 
 <p>Abra o seu aplicativo no Android Studio e veja se a autenticação funciona corretamente. Quando o usuário inserir o nome de usuário e senha e clicar no botão de login, a resposta do servidor será processada e exibida.</p>
 
-<p>PS: No PHP, é bom usar tratamentos para evitar SQL Injection e XSS. Podemos utilizar PDO também na conexão ou mesmo outras linguagens no servidor, não faz diferença no aplicativo do Android Studio. Também é recomendado usar uma classe pra criptografar a senha no Android, e usar o mesmo algoritmo no PHP.</p>
+<p>PS: No PHP, é bom usar tratamentos para evitar SQL Injection e XSS. Podemos utilizar PDO também na conexão (é mais seguro que o MySQLI) ou mesmo outras linguagens no servidor (como Java, JS com Node, Python ou Asp.NET), além de outros bancos de dados relacionais (como PostgreSQL ou SQL Server), nada disso faz diferença no aplicativo do Android Studio, desde que processe uma requisição GET ou POST. Também é recomendado usar uma criptografia no PHP ou na linguagem do servidor escolhido (fizemos o básico com sha1, mas o próprio PHP tem opções mais seguras).</p>
 
 <ul>
     <!--<li><a href="android-com-servidor-2.html">Continuação da Matéria!</a></li>-->
