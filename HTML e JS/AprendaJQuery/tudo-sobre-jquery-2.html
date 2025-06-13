@@ -57,8 +57,14 @@ $(function() {
 <pre>
 <code>
 $(function() {
-    $("img").on("error", function() {
-        $(this).attr("src", "imagens/erro.png");
+    $("img").each(function() {
+        $(this).on("error", function() {
+            $(this).attr("src", "imagens/erro.png");
+        });
+
+        if(!this.complete || this.naturalWidth === 0) {
+            $(this).trigger("error");
+        }
     });
 });
 </code>
@@ -69,10 +75,16 @@ $(function() {
 <pre>
 <code>
 $(function() {
-    $("img").on("error", function() {
-        var imagem = $(this).attr("src");
-        alert("Imagem Indisponível!");
-    });  
+    $("img").each(function() {
+        $(this).on("error", function() {
+            var imagem = $(this).attr("src");
+            alert("Imagem Indisponível!");
+        });
+
+        if(!this.complete || this.naturalWidth === 0) {
+            $(this).trigger("error");
+        }
+    });
 });
 </code>
 </pre>
@@ -82,11 +94,17 @@ $(function() {
 <pre>
 <code>
 $(function() {
-    $("img").on("error", function() {
-        var imagem = $(this).attr("src");
-        alert("Imagem \"" + imagem + "\" Indisponível!");
-        $(this).attr("src", "imagens/erro.png");
-    });  
+    $("img").each(function() {
+        $(this).on("error", function() {
+            var imagem = $(this).attr("src");
+            alert("Imagem \"" + imagem + "\" Indisponível!");
+            $(this).attr("src", "imagens/erro.png");
+        });
+
+        if(!this.complete || this.naturalWidth === 0) {
+            $(this).trigger("error");
+        }
+    });
 });
 </code>
 </pre>
