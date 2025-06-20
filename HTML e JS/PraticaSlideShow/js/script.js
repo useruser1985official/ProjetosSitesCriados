@@ -13,7 +13,6 @@ $(function(){
         }
         else {
             $(".ativo").fadeOut().removeClass("ativo");
-
             $("#slide img:eq(0)").fadeIn().addClass("ativo");
         }
 
