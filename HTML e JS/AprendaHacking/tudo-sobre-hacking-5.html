@@ -214,7 +214,7 @@ sqlmap -u http://testphp.vulnweb.com/login.php --dbs --forms
 
 <p>O ataque Dos funciona da seguinte forma: Ele enviará solicitações HTTP incompletas ao servidor que deixa a conexão aberta esperando ela completar, mas estas nunca se completam e sobrecarregam o servidor, causando a negação de serviço, que faz derrubar o site.</p>
 
-<p>Para fazer um ataque Dos, baixe o script perl desse site: <a href="https://github.com/mattiasgeniar/slowloris/blob/master/slowloris.pl" target="_blank">https://github.com/mattiasgeniar/slowloris/blob/master/slowloris.pl</a></p>
+<p>Para fazer um ataque Dos, baixe o script perl do Slowloris clonando o repositório dele com <code>git clone https://github.com/mattiasgeniar/slowloris.git</code>.</p>
 
 <p>No diretório do programa, dê a permissão de execução pro script baixado e digite o comando <code>perl slowloris.pl -dns 192.168.0.15 -port 80</code>, substituindo pelo IP desejado e a porta, se necessário.</p>
 
@@ -242,7 +242,7 @@ nc -l -p 80
 
 <p>Primeiramente, caso não esteja no Kali, baixe o programa digitando <code>sudo apt-get install john</code>.</p>
 
-<p>Para testar a ferramenta, digite <code>john --test</code>.</p>
+<p>Para testar a ferramenta, digite <code>john --test</code>. Na primeira execução do John, ele criará na home um diretório oculto de nome .john, onde estará os arquivos de configuração e dados dos arquivos.</p>
 
 <p>Para quebrar a senha de usuário do sistema, digite, como root, <code>sudo john /etc/shadow</code>.</p>
 
@@ -250,7 +250,7 @@ nc -l -p 80
 
 <p>Salve as senhas num banco de dados da seguinte forma: <code>unshadow /etc/passwd /etc/shadow >> pass.db</code>. E depois dê o comando <code>john pass.db</code>.</p>
 
-<p>Para quebrar a senha de um arquivo ZIP ou PDF, podemos digitar <code>zip2john pasta.zip > hash.txt</code> para gerar o hash da senha. E depois tente usando o comando <code>john hash.txt --wordlist=senhas.txt</code>. O processo pra PDF é o mesmo, mudando apenas para <code>pdf2john</code>. Temos também outros utilitários para RAR e outros tipos de arquivos. Depois é só executar <code>john hash.txt --show</code> para ver a senha crackeada.</p>
+<p>Para quebrar a senha de um arquivo ZIP ou PDF, podemos digitar <code>zip2john pasta.zip > hash.txt</code> para gerar o hash da senha. E depois tente usando o comando <code>john hash.txt --wordlist=senhas.txt</code>. O processo pra PDF é o mesmo, mudando apenas para <code>pdf2john</code>. Temos também outros utilitários para RAR e outros tipos de arquivos. Quando ele descobrir a senha, ela aparecerá com uma cor destacada. Depois é só executar <code>john hash.txt --show</code> para ver a senha crackeada.</p>
 
 <p>PS: Em outras distros Linux, pode ser que não tenha os utilitários descritos acima, apenas o John. Nesse caso clone o repositório do John com <code>git clone https://github.com/openwall/john.git</code> e dentro da pasta run, rode os scripts Python equivalentes.</p>
 
@@ -258,13 +258,13 @@ nc -l -p 80
 
 <p>O Beef XSS trabalha da seguinte forma: De um lado tem a máquina atacante e do outro a vítima com o browser aberto. O painel do Beef vai inserir um script numa página que a vítima acessará e cairá num gancho, ou seja, será hookado, e o painel do atacante conseguirá enviar comandos pro navegador da vítima e controlar o mesmo.</p>
 
-<p>Para iniciar o Beef, clicamos no ícone dele. Abra o navegador e entre na URL do painel (UI URL, algo como <code>http://127.0.0.1:3000/ui/panel</code>) e digite na autenticação tanto pro login quanto pra senha, "beef".</p>
+<p>Para iniciar o Beef, clicamos no ícone dele. Abra o navegador e entre na URL do painel (UI URL, algo como <code>http://127.0.0.1:3000/ui/panel</code>) e digite na autenticação tanto pro login quanto pra senha, "beef". Ele pode exigir que mude a senha padrão.</p>
 
 <p>Ao abrir o Beef, tem ao lado os navegadores fisgados online e offline, veja também que tem as páginas modelo com script XSS para isso.</p>
 
 <p>Veja as legendas do módulo, que o verde é o mais seguro, porque a vítima não perceberá, por exemplo.</p>
 
-<p>Pegue o IP do seu computador (digitando ifconfig no Linux), e altere o IP do Hook de <code>http://127.0.0.1:3000/hook.js</code> para o IP do seu Linux.</p>
+<p>Pegue o IP do seu computador (digitando <code>ip addr show</code> no Linux), e altere o IP do Hook de <code>http://127.0.0.1:3000/hook.js</code> para o IP do seu Linux.</p>
 
 <p>A vítima tentará abrir a página enviada, e já será fisgada, poderemos ver ela no painel do Beef, identificada pelo seu IP.</p>
 
@@ -311,7 +311,7 @@ shell
 
 <p>Como sabemos, as senhas são guardados no banco de dados no formato de hash, e podemos usar geradores de hash para criptografar as mesmas.</p>
 
-<p>Para descobrir senhas usaremos o HashCat. Nativo no Kali Linux, ele pode ser instalado em outras distros com <code>sudo apt install hashcat ocl-icd-libopencl1 opencl-headers clinfo   beignet-opencl-icd mesa-opencl-icd lsb-core</code>.</p>
+<p>Para descobrir senhas usaremos o HashCat. Nativo no Kali Linux, ele pode ser instalado em outras distros com <code>sudo apt install hashcat ocl-icd-libopencl1 opencl-headers clinfo beignet-opencl-icd mesa-opencl-icd lsb-core</code>.</p>
 
 <p>Salve um arquivo com o nome hashes.txt com os hashs desejados. Podemos baixar um exemplo <a href="files/hashes.txt" target="_blank">aqui</a>!</p>
 
@@ -321,19 +321,51 @@ shell
 
 <p>Esses são os tipos de hashs: <a href="https://hashcat.net/wiki/doku.php?id=example_hashes" target="_blank">https://hashcat.net/wiki/doku.php?id=example_hashes</a></p>
 
-<p>Eles devem ser usados após o parâmetro -m, para MD5 o número é 0, SHA-1 o número é 100 e SHA-256 é 1400.</p>
+<p>Eles devem ser usados após o parâmetro <code>-m</code>, para MD5 o número é 0, SHA-1 o número é 100 e SHA-256 é 1400.</p>
 
-<p>O parâmetro -a indica o tipo de ataque, onde 0 é com wordlist, para fazer com bruteforce é 3, por exemplo:</p>
+<p>O parâmetro <code>-a</code> indica o tipo de ataque, onde 0 é com wordlist, para fazer com bruteforce é 3, por exemplo:</p>
 
 <pre>
 <code>
-sudo hashcat -a 3 -m 0 hashes.txt ????????
+sudo hashcat -a 3 -m 0 hashes.txt ?d?d?d?d?d?d?d?d
 </code>
 </pre>
 
-<p>Onde está ? é o tipo de caractere e sua quantidade, onde a interrogação é o coringa pra todos, os tipos de caracteres podem ser vistos dando um --help no hashcat.</p>
+<p>As máscaras usadas são essas para cada caractere:</p>
 
-<p>PS: Em quaisquer casos, pode ser necessário forçar com <code>--force</code>, e também executar como root.</p>
+<table>
+    <tr>
+        <th>Máscara</th>
+        <th>Tipo de Dado</th>
+    </tr>
+    <tr>
+        <td><code>?l</code></td>
+        <td>Letra minúscula</td>
+    </tr>
+    <tr>
+        <td><code>?u</code></td>
+        <td>Letra maiúscula</td>
+    </tr>
+    <tr>
+        <td><code>?d</code></td>
+        <td>Número</td>
+    </tr>
+    <tr>
+        <td><code>?s</code></td>
+        <td>Símbolo</td>
+    </tr>
+    <tr>
+        <td><code>?a</code></td>
+        <td>Qualquer caractere imprimível ASCII</td>
+    </tr>
+    <tr>
+        <td><code>?b</code></td>
+        <td>Byte (todos os 256 valores possíveis)</td>
+    </tr>
+</table>
+
+
+<p>PS: Em quaisquer casos, pode ser necessário forçar com <code>--force</code>, e também executar como root. Pode ser necessário também especificar <code>--self-test-disable</code>.</p>
 
 <p>Aqui temos outras dicas com outros tipos de hash: <a href="https://infosecwriteups.com/cracking-hashes-with-hashcat-2b21c01c18ec" target="_blank">https://infosecwriteups.com/cracking-hashes-with-hashcat-2b21c01c18ec</a></p>
 

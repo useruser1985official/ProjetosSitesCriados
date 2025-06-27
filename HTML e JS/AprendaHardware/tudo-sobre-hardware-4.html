@@ -194,7 +194,7 @@
 
 <h3>Instalando o Windows 10</h3>
 
-<p>Ligue o PC, nós veremos o setup do computador, que ainda está sem sistema operacional. Habilite o XMP, que identificará as características de memória RAM e a configurará automaticamente. Podemos fazer outros ajustes como o da velocidade dos coolers, por exemplo. Ajuste também a prioridade de boot para ele iniciar primeiro pelo pen-drive.</p>
+<p>Ligue o PC, nós veremos o setup do computador, que ainda está sem sistema operacional. Habilite o XMP, que identificará as características de memória RAM e a configurará automaticamente. Podemos fazer outros ajustes como o da velocidade dos coolers, por exemplo. Ajuste também a prioridade de boot para ele iniciar primeiro pelo pen-drive (pode ter que desativar o EFI para permitir isso).</p>
 
 <p>Desligue o PC, coloque o pen-drive e ligue de novo. Se for o caso, clique em F8 ou F12 para escolher o pen-drive para boot.</p>
 
@@ -206,13 +206,15 @@
 
 <p>Ele pedirá o local onde o Windows será instalado, no caso, escolheremos o nosso SSD para isso.</p>
 
-<p>No caso, nosso HD será particionado em duas partes iguais, para separar os arquivos de trabalho das de diversão.</p>
+<p>No caso, nosso SSD será particionado em duas partes iguais, para separar os arquivos de trabalho das de diversão.</p>
 
 <p>PS: O Windows, ao identificar outro Windows instalado na máquina, ele fará o back-up de tudo automaticamente.</p>
 
 <p>Instale o Windows no SSD e aguarde alguns minutos até terminar a instalação. Ele fará a atualização e reiniciará automaticamente.</p>
 
 <p>Após a instalação, escolha a região (país) como Brasil, o teclado como Português ABTN2, conecte a rede, se quiser baixar atualizações (pode ser configurada posteriormente), crie o nome do administrador, a senha e uma dica pra mesma. Não torne a Cortana a assistente pessoal (é tipo um "keylogger" da própria Microsoft), desative todas as opções nas configurações de privacidade (pois essas enviam dados pra Microsoft). Após a instalação ele iniciará automaticamente. Após isso podemos remover o pen-drive.</p>
+
+<p>PS: O Windows 10 pode exigir login na conta Microsoft para associar ela ao usuário do sistema. Caso não queira fazer isso, desative a internet até que a instalação seja concluída, que nesse caso ele criará a conta local no sistema. Podemos marcar a opção "Eu não tenho internet" também, para evitar o login na conta de e-mail.</p>
 
 <p>O Windows identificará os componentes e inicializará, os drivers são configurados automaticamente.</p>
 
@@ -224,7 +226,7 @@
 
 <p>Para quem não quer gastar com a licença de Windows e nem crackear o mesmo, podemos utilizar o Linux que é um SO totalmente livre. Temos várias distribuições Linux que podemos utilizar (por exemplo, Mint, Fedora, Debian e outros), no exemplo instalaremos o Ubuntu, que é uma das mais populares e mais simples de mexer.</p>
 
-<p>Primeiramente baixe a imagem ISO do Ubuntu, no exemplo, será o Ubuntu 16.04 LTS (que é de suporte longo) 64 bits. Baixe nesse link aqui: <a href="https://www.ubuntu.com/download/desktop" target="_blank">https://www.ubuntu.com/download/desktop</a></p>
+<p>Primeiramente baixe a imagem ISO do Ubuntu, no exemplo, será o Ubuntu 22.04 LTS (que é de suporte longo) 64 bits. Baixe nesse link aqui: <a href="https://www.ubuntu.com/download/desktop" target="_blank">https://www.ubuntu.com/download/desktop</a></p>
 
 <p>Como nossa máquina não terá drive de CD/DVD, usaremos um pen-drive para instalar o Linux, tal como fizemos com o Windows. Aproveitando o YUMI, que baixamos anteriormente, clique nele para criarmos nosso pen-drive para o Linux, selecione o pen-drive, formate ele em FAT32, escolha a opção da nossa imagem (no caso Ubuntu) e selecione nossa imagem, e espere ele criar as partições no pen-drive.</p>
 
@@ -234,15 +236,15 @@
 
 <p>Vamos instalar o Linux em uma máquina que já tem o Windows, para fazermos o dual-boot entre os dois sistemas.</p>
 
-<p>Entre no Windows, vá no Painel de Controle, vá em Hardware e em Opções de Energia, em Configurações do Sistema e em Configurações de Energia Adicionais, e vamos desabilitar a "ligar inicalização rápida" e desabilitar a opção "hibernar".</p>
+<p>Entre no Windows, vá no Painel de Controle, vá em Hardware e em Opções de Energia, em Configurações do Sistema e em Configurações de Energia Adicionais, e vamos desabilitar a "ligar inicialização rápida" e desabilitar a opção "hibernar". Pode ser necessário também rodar o comando <code>powercfg.exe /hibernate off</code> no CMD, como administrador.</p>
 
 <p>Vamos abrir o Gerenciamento de Disco, e veja na formatação de disco, o disco 0 (no caso o HD) e veja as partições dele, e diminua o volume da unidade onde o Windows está instalado, para criar um espaço vazio (cerca de metade), na qual será criada a partição do Linux.</p>
 
 <p>Agora pegaremos o pen-drive preparado pro Linux, plugaremos ele no computador e reiniciará, entre na BIOS (pode ser usando F1 ou F2, ao iniciar, dependendo do fabricante da placa-mãe), e coloque o pen-drive como o primeiro na prioridade de boot, e continue o boot.</p>
 
-<p>Ele abrirá o menu do Multiboot e escolha a opção Linux Distrubuitions, e escolha o sistema a ser instalado (o nosso Linux, no caso o Ubuntu).</p>
+<p>Ele abrirá o menu do Multiboot e escolha a opção Linux Distributions, e escolha o sistema a ser instalado (o nosso Linux, no caso o Ubuntu).</p>
 
-<p>Ele carregará o sistema e aparecerá a tela de instalação, escolha o idioma Português do Brasil, e escolha o Instalar o Ubuntu. Marque a opção instalar softwares de terceiros (wi-fi, Flash, MP3), não é necessário baixar atualizações no momento, podemos baixá-las posteriormente.</p>
+<p>Ele carregará o sistema e aparecerá a tela de instalação (escolha a opção Safe Graphics), escolha o idioma Português do Brasil, e escolha o Instalar o Ubuntu. Marque a opção instalar softwares de terceiros (wi-fi, Flash, MP3), não é necessário baixar atualizações no momento, podemos baixá-las posteriormente.</p>
 
 <p>Ele já detectará que o nosso computador tem o Windows instalado e deverá aparecer marcado, essa opção instalará na partição vazia criada anteriormente. Se tiver um entendimento melhor de particionamento, podemos escolher a Opção Avançada. Depois clique em Instalar Agora.</p>
 

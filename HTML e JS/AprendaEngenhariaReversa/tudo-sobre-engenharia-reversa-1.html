@@ -280,7 +280,7 @@ while(fread(&byte, sizeof(byte), 1, fp)) {
 
 <p>Agora usaremos o READPE para isso, após descompactar a pasta, abra o CMD, entre nela e digite <code>readpe C:\Users\Usuario\nomedoexecutavel.exe</code>, para vermos apenas os dados do cabeçalho MZ, digite <code>readpe -h dos executavel.exe</code>. Depois digite <code>readpe -h coff executavel.exe</code> para ver as informações sobre o cabeçalho PE offset. No coff mostra dados como a data que ele foi compilado, o tipo de máquina que ele foi compilado.</p>
 
-<p>No Hex Workshop, iremos até posição da DWORD (no caso a 100), e iremos até a posição que virá após a 0103 (ou seja, a 104 e 105). E veremos os bytes 4C 01, invertendo fica 01 4C, e o 14C signifca binário para máquinas i386 (ou seja, 32x).</p>
+<p>No Hex Workshop, iremos até posição da DWORD (no caso a 100), e iremos até a posição que virá após a 0103 (ou seja, a 104 e 105). E veremos os bytes 4C 01, invertendo fica 01 4C, e o 14C signifca binário para máquinas i386 (ou seja, 32 bits). No caso de executáveis de 64 bits, encontraremos 64 86, que invertido seria 86 64.</p>
 
 <p>Podemos gerar uma saída XML do programa, digitando <code>readpe --format xml -h coff nomedoexecutavel.exe>>dados.xml</code></p>
 
@@ -292,9 +292,9 @@ while(fread(&byte, sizeof(byte), 1, fp)) {
 
 <p>No Detected It Easy, em PE e em Sections, podemos ver as sessões dos executáveis, como a .data e o .text. Se o PE pode ser analogado como uma cômoda, as sessões são as gavetas.</p>
 
-<p>Dento das sections, podemos clicar em flags, em edit header e em characteristics, e vermos as permissões dos arquivos (no caso, ler e executar).</p>
+<p>Dento das sections, podemos clicar em uma dessas seções, e em Characteristics, e em Flags, e vermos as permissões dos arquivos (no caso, ler e executar).</p>
 
-<p>No PE, em Address of Entry Point, podemos ver o código assembly do programa, ou seja, o programa desassemblado.</p>
+<p>No PE, em Disassembler, podemos ver o código Assembly do programa, ou seja, o programa desassemblado.</p>
 
 <ul>
     <li><a href="tudo-sobre-engenharia-reversa-2.html">Continuação da Matéria!</a></li>
