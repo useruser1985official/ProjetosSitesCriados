@@ -141,7 +141,7 @@ portas = (20, 21, 22, 23, 25, 43, 53, 67, 68, 80, 110, 135, 137, 138, 139, 143, 
 print("-=" * 12)
 
 for p in portas:
-    cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criando objeto com IPv4 e TTCP
+    cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criando objeto com IPv4 e TCP
     cliente.settimeout(0.5) # Tempo de tentar a conexão
     codigo = cliente.connect_ex(("www.google.com.br", p)) # Conectando o cliente ao servidor através das portas da tupla, sendo 0 a conexão deu certo.
 
@@ -166,12 +166,13 @@ import socket
 
 serv = str(input("Coloque o link ou IP no site: "))
 
+# Tupla de portas:
 portas = (20, 21, 22, 23, 25, 43, 53, 67, 68, 80, 110, 135, 137, 138, 139, 143, 433, 443, 445, 465, 587, 993, 995, 1039, 1040, 3050, 3306, 5432, 8080)
 
 print("-=" * 30)
 
 for p in portas:
-    cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criando objeto com IPv4 e TTCP
+    cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criando objeto com IPv4 e TCP
     cliente.settimeout(0.5) # Tempo de tentar a conexão
     codigo = cliente.connect_ex((serv, p)) # Conectando o cliente ao servidor através das portas da tupla, sendo 0 a conexão deu certo.
 
@@ -216,7 +217,7 @@ dirb http://nomedosite.com -v
 </code>
 </pre>
 
-<p>O que retornar code <q>200</q> é o que existe, os inexistentes retornarão <q>404</q>.</p>
+<p>O que retornar code <q>200</q> ou <q>301</q> é o que existe, os inexistentes retornarão <q>404</q>.</p>
 
 <p>Só que o cloudflare não deixará rodar o Dirb e retornarão erros das pastas.</p>
 
