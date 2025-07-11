@@ -30,7 +30,7 @@
 
 <p>O segmento do tipo phdr é onde está o program header (entry 0). Os mais importantes no momento é os segmentos do tipo load, que serão carregados (mapeados) na memória, e dentro deles.</p>
 
-<p>Podemos ver as sessões do Assembler do programa digitando F6 e section header.</p>
+<p>Podemos ver as sessões do Assembly do programa digitando F6 e section header.</p>
 
 <p>A sessão PLT é como se fosse o import table do PE, que é onde ficam as chamadas para funções externas (de bibliotecas).</p>
 
@@ -38,7 +38,7 @@
 
 <p>Podemos olhar os códigos-fonte do programa em C. São os mesmos na sessão .symtab.</p>
 
-<p>Muitos das funções na .symtab são usados apenas para fins de debug, e são locais (mas tem alguns externos), enquanto na .dynsymm só teremos as funções externas. Podemos digitar no terminal <code>gdb -q ./keygenme</code> e digitar <code>break main</code> para colocar um breakpoint na função main do programa.</p>
+<p>Muitos das funções na .symtab são usados apenas para fins de debug, e são locais (mas tem alguns externos), enquanto na .dynsym só teremos as funções externas. Podemos digitar no terminal <code>gdb -q ./keygenme</code> e digitar <code>break main</code> para colocar um breakpoint na função main do programa.</p>
 
 <p>Se dermos no terminal o comando <code>strip -s keygenme</code>, ele suprimirá a função main, e não irá aparecer mais a sessão .symtab no programa. Nesse caso, podemos usar o comando do gdb de novo e tentar dar um break no main, que dará erro por não estar mais no programa.</p>
 
@@ -46,9 +46,9 @@
 
 <p>Volte aos sections headers e vá no .plt, que é onde estão os endereços das funções externas. Uma biblioteca dinâmica é carregada no sistema ao executar o programa, o printf por exemplo tá na libc. Digite o comando <code>nm keygenme | less</code> para vermos os símbolos do binário, onde veremos todas as bibliotecas das quais pertencem cada função.</p>
 
-<p>Digite <code>gdb -q ./keygenme</code> e dentro do programa, digite <code>disassemble main</code>, onde vemos o código assembler do main. Faça o mesmmo com printf e com o endereço do mesmo.</p>
+<p>Digite <code>gdb -q ./keygenme</code> e dentro do programa, digite <code>disassemble main</code>, onde vemos o código Assembly do main. Faça o mesmo com printf e com o endereço do mesmo.</p>
 
-<p>Entre no hte novamente, clique F6 e vá em elf/image, onde está o programa desassemblado. Digitando F8 podemos ver as funções em assembler, incluindo o main. A sessão .got.plt é onde estará o endereço real da função printf.</p>
+<p>Entre no hte novamente, clique F6 e vá em elf/image, onde está o programa desassemblado. Digitando F8 podemos ver as funções em Assembly, incluindo o main. A sessão .got.plt é onde estará o endereço real da função printf.</p>
 
 <h3>Linux Syscalls</h3>
 

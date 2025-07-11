@@ -295,7 +295,7 @@ typedef struct
 
 <p>O Entry Point é os bytes de 18 até 1B, de trás pra frente, no caso acima foi 00400450, podemos ver se é isso mesmo digitando <code>readelf -h programa</code> novamente e ver o endereço de ponto de entrada, que é 0x400450.</p>
 
-<p>Instale o programa hte digitando <code>sudo apt-get install ht</code> (é ht mesmo), e depois execute o comando <code>hte programa</code> para vermos os bytes dele no terminal, podemos ver os cabeçalhos e outras opções nele, como para que arquitetura o programa foi feito, entre outras coisas. Por esse programa podemos mudar o executável, como no byte da posição 10, que mudando para 03 ele mudará para biblioteca compartilhada (mas não será mais executável de forma alguma). Para usar as opções como salvar e editar, use as teclas F (F1, F2, F3, F4, etc.).</p>
+<p>Instale o programa hte digitando <code>sudo apt-get install ht</code> (é ht mesmo), e depois execute o comando <code>hte programa</code> para vermos os bytes dele no terminal, podemos ver os cabeçalhos e outras opções nele, como para que arquitetura o programa foi feito, entre outras coisas. Por esse programa podemos mudar o executável, como no byte da posição 10, que mudando para 03 ele mudará para biblioteca compartilhada (mas não será mais executável de forma alguma). Para usar as opções como salvar e editar, use as teclas F (F1, F2, F3, F4, etc.). Para sair tecle F10, Esc e 0, ou Ctrl C.</p>
 
 <p>Com isso podemos ver que, se um programa for corrompido, é porque alguém alterou algo no programa que fez ele parar de funcionar.</p>
 
