@@ -432,6 +432,12 @@ patator ssh_login host=192.168.119.8 user=nomedologin password=FILE0 0=wordlist.
 
 <p>Para ver os módulos disponíveis no Patator, apenas digite <code>patator</code> no terminal.</p>
 
+<p>PS: Assim como acontece com o <code>ssh_login</code>, podemos também usar outros módulos pra outros protocolos, como <code>ftp_login</code>, <code>smtp_login</code>, <code>imap_login</code>, <code>mysql_login</code>, sempre seguindo essa lógica, com algumas exceções, como o <code>http_fuzz</code> e o <code>unzip_pass</code>.</p>
+
+<p>Caso dê erro na versão do Patator do seu Linux, clone o repositório oficial com <code>git clone https://github.com/lanjelot/patator.git</code> e rode o script Python em src/patator.</p>
+
+<!--
+
 <h3>Consulta de Senhas na Deep Web</h3>
 
 <p>Os dois sites da Deep Web que contém zilhões de e-mails e senhas vazados, são esses:</p>
@@ -442,6 +448,8 @@ patator ssh_login host=192.168.119.8 user=nomedologin password=FILE0 0=wordlist.
 </ul>
 
 <p>Abra o Tor e acesse o segundo site especificado. Você pode realizar a pesquisa por um e-mail específico, domínio ou senha. O caractere "%" é um caractere coringa, no caso, e no e-mail e domínio, podemos usar "like" para parecido ou "=" para o termo exato (semelhante as pesquisas em SQL).</p>
+
+-->
 
 <ul>
     <li><a href="tudo-sobre-hacking-5.html">Parte Anterior da Matéria!</a></li>

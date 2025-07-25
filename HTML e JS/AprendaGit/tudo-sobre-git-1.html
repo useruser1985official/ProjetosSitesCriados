@@ -104,6 +104,22 @@ git config --global user.email
 </code>
 </pre>
 
+<p>Para definir a branch padrão, digite esse comando:</p>
+
+<pre>
+<code>
+git config --global init.defaultbranch master
+</code>
+</pre>
+
+<p>E para ver a mesma:</p>
+
+<pre>
+<code>
+git config --global init.defaultbranch
+</code>
+</pre>
+
 <p>Podemos ver esses e outros dados na configuração do Git, usando o comando <code>git config --list</code>.</p>
 
 <h3>Criando Repositórios</h3>
@@ -247,7 +263,7 @@ dist
 
 <p>Vamos clonar esse repositório para a nossa máquina com <code>git clone https://github.com/nomedousuario/Projeto-1.git</code>. Caso queira outro nome na pasta clonada, podemos colocar <code>git clone https://github.com/nomedousuario/Projeto-1.git NovoNomeDoProjeto</code>.</p>
 
-<p>Para puxar as alterações do projeto para o nosso repositório local, digite <code>git pull https://github.com/nomedousuario/Projeto-1.git master</code>. Podemos só buscar as informações sem alterar o repositório com <code>git fetch https://github.com/nomedousuario/Projeto-1.git master</code>.</p>
+<p>Podemos só buscar as informações sem alterar o repositório com <code>git fetch https://github.com/nomedousuario/Projeto-1.git master</code>, depois podemos dar um <code>git status</code> para ver se é necessário fazer o pull do repositório remoto (puxar). Para puxar as alterações do projeto para o nosso repositório local, digite <code>git pull https://github.com/nomedousuario/Projeto-1.git master</code>. . É recomendado primeiro usar o fetch, depois o pull.</p>
 
 <p>PS: Ao clonar um repositório, ele automaticamente colocará o repositório remoto clonado com o alias "origin". Para ter certeza, digite novamente <code>git remote -v</code>.</p>
 
@@ -263,13 +279,13 @@ dist
 
 <p>Vamos supor que Fulano começa a alterar o código, como adicionar um estilo CSS. Depois ele verá o status e adicionará, e o commit no caso ele fará com o seu e-mail, assim: <code>git commit -m "Alterando CSS" --author="Fulano &lt;fulano@gmail.com&gt;"</code>. Daí para enviar pro GitHub basta digitar <code>git push origin master</code> (lembrando que ao clonar ele automaticamente coloca o repositório no alias origin).</p>
 
-<p>Agora vamos pra Sicrano, supondo que ele iria começar a trabalhar no mesmo projeto. Para ele ver se o projeto teve alterações, digite <code>git pull origin master</code>, e ele vai puxar as últimas atualizações feitas no repositório remoto. Daí ele aproveita e faz outras alterações, pode ser no CSS mesmo, e daí ele vê o status, adicionará e commitará com <code>git commit -m "Nova Alteração no CSS" --author="Sicrano &lt;sicrano@gmail.com&gt;"</code>. Daí ele também fará o push com <code>git push origin master</code>.</p>
+<p>Agora vamos pra Sicrano, supondo que ele iria começar a trabalhar no mesmo projeto. Para ele ver se o projeto teve alterações, digite <code>git fetch origin master</code> e <code>git pull origin master</code>, e ele vai puxar as últimas atualizações feitas no repositório remoto. Daí ele aproveita e faz outras alterações, pode ser no CSS mesmo, e daí ele vê o status, adicionará e commitará com <code>git commit -m "Nova Alteração no CSS" --author="Sicrano &lt;sicrano@gmail.com&gt;"</code>. Daí ele também fará o push com <code>git push origin master</code>.</p>
 
 <p>PS: Isso estamos simulando numa mesma branch, mas é recomendado que cada desenvolvedor tenha sua própria branch para trabalhar.</p>
 
-<p>Aí você, como coordenador do projeto, você dará o <code>git pull origin master</code> para ver as alterações que os outros devs fizeram.</p>
+<p>Aí você, como coordenador do projeto, você dará o <code>git fetch origin master</code> e o <code>git pull origin master</code> para ver as alterações que os outros devs fizeram.</p>
 
-<p>Num projeto real, vários desenvolvedores podem estar no mesmo projeto, e aí é toda hora push e pull, além de ser necessário resolver conflitos, como exemplificado anteriormente.</p>
+<p>Num projeto real, vários desenvolvedores podem estar no mesmo projeto, e aí é toda hora fetch, push e pull, além de ser necessário resolver conflitos, como exemplificado anteriormente.</p>
 
 <h3>Fazendo Pull Request</h3>
 
@@ -285,7 +301,7 @@ dist
 
 <p>Para fundir, basta clicar em Merge Pull Request, e é recomendado fechar essa branch svg criada.</p>
 
-<p>Daí, no seu computador, basta dar um pull no repositório master pra sua máquina.</p>
+<p>Daí, no seu computador, basta dar um fetch e um pull no repositório master pra sua máquina.</p>
 
 <h3>Fazendo Fork de um Repositório</h3>
 

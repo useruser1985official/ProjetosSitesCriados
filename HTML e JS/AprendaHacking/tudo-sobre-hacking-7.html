@@ -67,7 +67,7 @@ $_GET["c"] que permitirá que passemos um parâmetro pela URL.
 
 <p>Para fazermos o mesmo com o site, primeiramente entre nesse site e pegue o IP público do seu computador: <a href="https://www.meuip.com.br/" target="_blank">https://www.meuip.com.br/</a></p>
 
-<p>Para funcionar precisaremos abrir a porta especificada no modem e roteador. Para isso vá em "Redirecionar Portas" e coloque as opções TCP/UDP, porta externa como 666, porta interna como 666, IP externo em branco. IP interno como 192.168.15.3 (o IP privado do seu computador). Pra testar o acesso as portas, use esse site: <a href="https://canyouseeme.org/" target="_blank">https://canyouseeme.org/</a></p>
+<p>Para funcionar precisaremos abrir a porta especificada no roteador. Para isso vá em "Redirecionar Portas" e coloque as opções TCP/UDP, porta externa como 666, porta interna como 666, IP externo em branco. IP interno como 192.168.15.3 (o IP privado do seu computador). Pra testar o acesso as portas, use esse site: <a href="https://canyouseeme.org/" target="_blank">https://canyouseeme.org/</a></p>
 
 <p>PS: Pode ser necessário abrir as portas no Firewall, tanto do roteador quanto do sistema.</p>
 
@@ -154,7 +154,7 @@ chown root:root /etc/rc.local
 
 <p>Agora vamos tentar encontrar outro servidor na mesma rede do computador invadido. Mesmo conseguindo acesso root ao servidor, não temos todos os privilégios por não ser tty, para isso basta usar aquele código Python acima.</p>
 
-<p>Agora temos o acesso root, podemos dar comandos de redes como <code>ifconfig</code>, <code>route -n</code> ou até mesmo fazer um scan, mas os servidores não costumam ter o Nmap instalado. Com isso podemos ver outros dispositivos na rede local.</p>
+<p>Agora temos o acesso root, podemos dar comandos de redes como <code>ip addr show</code>, <code>ip route</code> ou até mesmo fazer um scan, mas os servidores não costumam ter o Nmap instalado. Com isso podemos ver outros dispositivos na rede local.</p>
 
 <p>No servidor podemos encontrar na pasta /root o arquivo key.pem, que é usado para conexões SSH, podemos olhar também as crontabs, que é um arquivo que podemos especificar rotinas para o Linux executar, como o de um back-up, para usar ele digite <code>crontab -u nomedousuario -l</code>. Podemos ver inclusive o do root, caso ténhamos privilégio.</p>
 
@@ -194,7 +194,7 @@ cat ./-file00 ./-file01 ./-file02 ./-file03 ./-file04 ./-file05 ./-file06 ./-fil
 </code>
 </pre>
 
-<p>Como é um arquivo não legível por humanos, ele mostrará vários caracteres não imprimiveis. A senha é a que está com algo tipo <code>koReBOKuIDDepwhWk7jZC0RTdopnAYKh</code> (ignore o M antes).</p>
+<p>Como é um arquivo não legível por humanos, ele mostrará vários caracteres não imprimiveis. A senha é a que está com algo tipo <code>koReBOKuIDDepwhWk7jZC0RTdopnAYKh</code> com 32 caracteres (basta apenas usar o comando <code>echo -n "koReBOKuIDDepwhWk7jZC0RTdopnAYKh" | wc -c</code> para ver isso).</p>
 
 <p>No nível 5, procure um arquivo legível por humanos, de 1033 bytes e não executável. Na pasta inhere, digite esses comandos:</p>
 
@@ -208,7 +208,7 @@ cat ./maybehere07/.file2
 
 <p>Pegue a senha e vá pro nível 6. Vá avançando até chegar ao fim.</p>
 
-<h3>Realizando Ataques de Força Bruta em Formulário com Hydra.</h3>
+<h3>Realizando Ataques de Força Bruta em Formulário com Hydra</h3>
 
 <p>Vamos analisar o seguinte link, por exemplo: <a href="http://testphp.vulnweb.com/login.php" target="_blank">http://testphp.vulnweb.com/login.php</a></p>
 
