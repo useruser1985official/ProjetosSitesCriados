@@ -107,6 +107,8 @@
 
 <p>Para remover um repositório local, basta ir em Repository e em Remove.</p>
 
+<p>PS: Todas as branches são copiadas nos repositórios clonados, mas apenas a master é a que permanece ativa. Veremos isso mais pra frente.</p>
+
 <h3>Versionando seus Projetos Antigos</h3>
 
 <p>Para pegar um projeto antigo e versionar ele com Git, abra o GitHub Desktop, clique em File e em New Repository, da mesma forma, coloque o nome do repositório como antes. Caso você tenha uma organização, você pode escolher ela (isso é só pra quem tem empresas cadastradas no GitHub). Daí é só arrastar os códigos para a pasta do repositório e o GitHub Desktop já vai identificar as mudanças.</p>
@@ -136,12 +138,18 @@
 <p>Vamos testar criando uma issue no repositório acima, para formatar, basicamente fazemos assim, usando essas marcações:</p>
 
 <ul>
-    <li><code>### Título</code></li>
+    <li><code># Título 1</code></li>
+    <li><code>## Título 2</code></li>
+    <li><code>### Título 3</code></li>
+    <li><code>#### Título 4</code></li>
+    <li><code>##### Título 5</code></li>
+    <li><code>###### Título 6</code></li>
     <li><code>**Negrito**</code></li>
     <li><code>_Itálico_</code></li>
     <li><code>&gt; Citação</code></li>
     <li><code>`Código`</code></li>
     <li><code>[Link](https://nomedosite.com.br/)</code></li>
+    <li><code>![TextoAlternativo](https://linkdaimagem.com/imagem.png)</code></li>
     <li><code>@CitarUser</code></li>
 </ul>
 
@@ -174,6 +182,17 @@ else:
 </code>
 </pre>
 
+<p>E para listas:</p>
+
+<pre>
+<code>
+* Item 1
+* Item 2
+    * SubItem 1
+* Item 3
+</code>
+</pre>
+
 <p>Podemos também colocar emojis nos comentários, inclusive podemos usar código do Emojipedia, mas eles não podem ser usados nos títulos, nesse caso cole os emojis diretamente. Esse é um repositório com os emojis: <a href="https://github.com/ikatyang/emoji-cheat-sheet" target="_blank">https://github.com/ikatyang/emoji-cheat-sheet</a></p>
 
 <h3>Git Branches de Forma Fácil</h3>
@@ -188,19 +207,21 @@ else:
 
 <p>Vamos criar um repositório local de teste para nós exemplificarmos na prática. Vamos publicar ele no GitHub. Crie um código qualquer nele e commit ele no master, e depois publique no GitHub fazendo o push.</p>
 
-<p>Para criar uma nova branch localmente, vá em Branch e em New Branch e coloque o nome dela (por exemplo conteudo) e ele vai dar a opção para deixar as mudanças em master ou trazer minhas mudanças para conteúdo. Vamos da mesma forma fazer uma branch pra design, indo no mesmo local, só que dessa vez escolhemos de qual branch ele bifurcará, no caso, será também bifurcação da master.</p>
+<p>Para criar uma nova branch localmente, vá em Branch e em New Branch e coloque o nome dela (por exemplo conteudo) e ele vai dar a opção para deixar as mudanças em master ou trazer minhas mudanças para conteúdo. Faça as alterações na branch e faça o commit nela e depois publique com o push. Seus commits não interferirão na branch principal.</p>
+
+<p>Vamos da mesma forma fazer uma branch pra design, indo no mesmo local, só que dessa vez escolhemos de qual branch ele bifurcará, no caso, será também bifurcação da master.</p>
 
 <p>Na parte de cima podemos escolher qual a branch atual (current), para publicar no repositório remoto, basta ir em Publish Branch.</p>
 
 <p>Num projeto profissional, cada setor de um projeto (como design, front-end e back-end) pode ter sua própria branch pra mexer. Todas as branchs podem ser publicadas no repositório remoto, assim como acontece localmente.</p>
 
-<p>PS: Ao mudar a branch no GitHub Desktop, ele automaticamente atualizará o código no Sublime Text ou no VS Code.</p>
+<p>PS: Ao mudar a branch no GitHub Desktop, ele automaticamente atualizará o código no Sublime Text ou no VS Code. Outras IDEs também atualizarão seus códigos automaticamente.</p>
 
-<p>Vamos mexer na branch de design e fazer outras edições e faça seu commit e sua publicação, elas e seus commits não interfirão na branch principal nem na de conteúdo.</p>
+<p>Vamos mexer na branch de design e fazer outras edições e faça seu commit e sua publicação, elas e seus commits não interferirão na branch principal nem na de conteúdo.</p>
 
 <p>Vamos supor que o cara do design mexeu, por exemplo, no título, e o do conteúdo também mexeu. Isso pode gerar conflito na hora de fundir (merge).</p>
 
-<p>Para fazer um merge, coloque o master como Current Branch, e em Branch, clique em Merge into Current Branch e escolha a branch a ser fundida (no caso, a conteudo) com a master e clique em Create a Merge Commit. Esse merge é local, então deveremos fazer um push pro repositório remoto.</p>
+<p>Para fazer um merge, coloque o master como Current Branch, e em Branch, clique em Merge into Current Branch e escolha a branch a ser fundida (no caso, a conteudo) com a master e clique em Create a Merge Commit. Esse merge é local, então devemos fazer um push pro repositório remoto.</p>
 
 <p>Só que da mesma forma, o design também será fundido com o master, isso dará um conflito, e na hora de fundir o GitHub Desktop avisará isso. Clique normalmente em Create a Merge Commit e ele abrirá pra resolver o conflito, e você pode abrir no editor, que deixará os códigos destacados, e você poderá corrigir no editor. Daí é só voltar no GitHub Desktop e continuar o merge. Depois de tudo, podemos fazer o push pro repositório remoto.</p>
 
@@ -208,7 +229,7 @@ else:
 
 <h3>Hospedagem Grátis no GitHub Pages</h3>
 
-<p>Podemos hospedar sites estáticos simples (HTML, CSS e Javascript) no GitHub pages para que ele possa ser acessado online por outras pessoas.</p>
+<p>Podemos hospedar sites estáticos simples (HTML, CSS e Javascript) no GitHub Pages para que ele possa ser acessado online por outras pessoas.</p>
 
 <p>Para isso, vá no repositório no GitHub, vá em Settings, Pages e em Source, escolha Deploy from a Branch, e em Branch escolha a branch desejada para ser exibida (geralmente a master mesmo), e em Save. Espere um minuto e seu site estará num link como <code>https://usuariodogithub.github.io/NomeDoRepositorio/</code></p>
 
