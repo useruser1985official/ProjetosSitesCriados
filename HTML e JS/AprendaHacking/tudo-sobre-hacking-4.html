@@ -108,7 +108,7 @@
 
 <p>O processo para sniffar HTTP pode ser feito com o filtro <code>tcp.port == 80</code>, da mesma forma, com HTTPS usamos a porta 443, mas nesse caso o conteúdo estará criptografado.</p>
 
-<p>Numa rede baseada em switches, só poderemos capturar tráfego direcionado à nossa máquina, broadcasts e alguns multicasts. Dá pra configurar isso no switch com o espelhamento de portas, que copia o tráfego para a porta da sua estação. Um estouro de tabela MAC do switch também podemos fazer ele entrar em modo broadcast.</p>
+<p>Numa rede baseada em switches, só poderemos capturar tráfego direcionado à nossa máquina, broadcasts e alguns multicasts. Dá pra configurar isso no switch com o espelhamento de portas, que copia o tráfego para a porta da sua estação. Um estouro de tabela MAC do switch também pode fazer ele entrar em modo broadcast.</p>
 
 <h3>Scanning de redes com Nmap e Zenmap</h3>
 
@@ -145,7 +145,7 @@ nmap -sU -A -Pn -n -pU:19,53,123,161 --script=ntp-monlist,dns-recursion,snmp-sys
 nmap --script=mysql-brute 192.168.15.1
 
 # Fazer menos "ruídos" numa rede interna com um scan mais demorado:
-nmap -T0 --send-ip 192.168.15.1/24 # send-ip pode ser ignorado em redes externas
+nmap -T0 --send-ip 192.168.15.0/24 # send-ip pode ser ignorado em redes externas
 
 # Para ver as portas abertas em uma rede:
 nmap 192.168.15.0/24
@@ -345,7 +345,7 @@ reboot
 
 <p>Outra aplicação bastante util é o dmitry, que usamos no Kali digitando no terminal <code>dmitry -w nomeouipdesejado.com</code>.</p>
 
-<p>Para escanearmos um IP e suas portas, digitamos <code>dmitry -p -f 192.168.1.1</code>. Para salvar a saída desse comando use <code>dmitry -p -f 192.168.1.1 -o arquivodetexto.txt</code>.</p>
+<p>Para escanearmos um IP e suas portas, digitamos <code>dmitry -p -f 192.168.1.1</code>. Para salvar a saída desse comando use <code>dmitry -p -f 192.168.1.1 -o arquivodetexto</code>.</p>
 
 <p>PS: Para pegar o IP de um site, podemos colocar host seguido do nome dele, por exemplo, <code>host www.google.com.br</code>.</p>
 

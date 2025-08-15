@@ -138,7 +138,9 @@ git config --global init.defaultbranch
 
 <p>Para adicionar o arquivo pra ser rastreado pelo Git, digite <code>git add index.html</code>.</p>
 
-<p>Para remover um arquivo do rastreamento do Git, digite <code>git rm --cached index.html</code>. Pode ser necessário especificar <code>-rf</code> para excluir diretórios.</p>
+<p>Para remover um arquivo do rastreamento do Git, digite <code>git rm --cached index.html</code>. Pode ser necessário especificar <code>-rf</code> para excluir diretórios. Para restaurar o arquivo à área de staging após removê-lo do rastreamento digite <code>git restore --staged index.html</code>.</p>
+
+<p>Podemos também mover e renomear arquivos dentro do repositório, usando algo como <code>git mv index.html main.html</code> ou <code>git mv *.css css/</code>.</p>
 
 <p>No Projeto-2, inicie o Git com <code>git init</code> e crie mais arquivos, como o index.html e um de estilo.css, que pode estar numa pasta. Nesse caso, para adicionar todos os arquivos do diretório apenas com <code>git add .</code> (sem esquecer do ponto), para remover, podemos usar <code>git rm --cached *</code>.</p>
 
@@ -173,12 +175,12 @@ git log
 <ul>
     <li><code>checkout</code>: Um comando seguro, que não altera o histórico do Git. Permite navegar até um commit antigo ou mudar de branch. Pode ser usado para visualizar um estado anterior do projeto, mas não desfaz commits, apenas muda o ponto de trabalho temporariamente.</li>
     <li><code>revert</code>: Também seguro, pois não apaga nem reescreve o histórico. Cria um novo commit que desfaz as alterações de um commit anterior. É recomendado quando é necessário desfazer mudanças mantendo o histórico intacto, especialmente em projetos já compartilhados.</li>
-    <li><code>reset</code>: O comando mais arriscado, pois reescreve o histórico do Git. Pode remover completamente commits posteriores ao commit para o qual se está retornando. Se usado com --hard, também apaga alterações nos arquivos e no staging. Deve ser usado com cuidado, especialmente em repositórios compartilhados.</li>
+    <li><code>reset</code>: O comando mais arriscado, pois reescreve o histórico do Git. Pode remover completamente commits posteriores ao commit para o qual se está retornando. Se usado com <code>--hard</code>, também apaga alterações nos arquivos e no staging. Deve ser usado com cuidado, especialmente em repositórios compartilhados.</li>
 </ul>
 
-<p>Altere mais uns arquivos e crie mais uns três commits, para exemplificarmos melhor. Depois dê um <code>git status --oneline</code> para ver os commits.</p>
+<p>Altere mais uns arquivos e crie mais uns três commits, para exemplificarmos melhor. Depois dê um <code>git log --oneline</code> para ver os commits.</p>
 
-<p>Vamos voltar pro terceiro commit, pegar o código dele mostrado no status e digite dessa forma: <code>git checkout d874777</code>. Para desfazer essa alteração, digite <code>git checkout main</code> que ele fica novamente como antes. Para comprovar, digite <code>git status --oneline</code> de novo.</p>
+<p>Vamos voltar pro terceiro commit, pegar o código dele mostrado no log e digite dessa forma: <code>git checkout d874777</code>. Para desfazer essa alteração, digite <code>git checkout master</code> que ele fica novamente como antes. Para comprovar, digite <code>git log --oneline</code> de novo.</p>
 
 <p>Agora vamos voltar pro segundo commit, pegar o código dele também e digitar assim: <code>git revert c67f99d</code>. Ele vai adicionar um comentário nos arquivos de configuração, daí pra confirmar digite <code>:q</code>.</p>
 
@@ -204,7 +206,7 @@ dist
 
 <p>Quando criamos um repositório, automaticamente ele cria uma branch principal, geralmente chamada main ou master. Então podemos fazer uma branch, que no caso, é uma ramificação da branch principal, paralela à mesma, onde cada branch tem seus commits independentes. Cada desenvolvedor pode ter sua própria branch no mesmo projeto, e elas posteriormente podem ser fundidas à branch principal.</p>
 
-<p>Digite <code>git status</code> para ver o status do repositório e digite <code>git branch</code> para ver as branches no projeto, que no caso só teremos a master (principal). Para criar uma nova branch digitamos, por exemplo, <code>git branch</code> teste para criar uma branch de nome teste. Ao dar <code>git branch</code> de novo, ele mostrará as branches master e teste (a branch na qual estamos atualmente será destacada por um asterisco e de cor verde).</p>
+<p>Digite <code>git status</code> para ver o status do repositório e digite <code>git branch</code> para ver as branches no projeto, que no caso só teremos a master (principal). Para criar uma nova branch digitamos, por exemplo, <code>git branch teste</code> para criar uma branch de nome teste. Ao dar <code>git branch</code> de novo, ele mostrará as branches master e teste (a branch na qual estamos atualmente será destacada por um asterisco e de cor verde).</p>
 
 <p>Para mudar pra branch teste, digite <code>git checkout teste</code>. Para ver se ele mudou, digite <code>git branch</code> de novo. O checkout, além de trocar commits, também troca branches.</p>
 
@@ -224,7 +226,7 @@ dist
 
 <p>Para fundir a branch do Whatsapp, é o mesmo processo, na branch master, digite <code>git merge whatsapp</code>. Numa segunda fusão, ele poderá abrir o editor de configurações e nesse caso, basta digitar <code>:q</code>.</p>
 
-<p>Ao dar <code>git log</code> novamente, e mostrará incorporado à branch master, os commits das outras branches que foram fundidas com ela.</p>
+<p>Ao dar <code>git log</code> novamente, ele mostrará incorporado à branch master, os commits das outras branches que foram fundidas com ela.</p>
 
 <h3>Resolvendo Conflitos</h3>
 
@@ -232,9 +234,9 @@ dist
 
 <p>Ao fazer a fusão no master de novo com <code>git merge whatsapp</code>, ele dará um conflito de código, e não fundirá as branches. No caso você abrirá o editor, que marcará o código com os conflitos, para ser corrigido manualmente. Após a edição, veja o status, adicione e commite ele, e também podemos omitir a mensagem, pois o Git saberá que se trata de um conflito, então digite apenas <code>git commit</code>, ele abrirá os comentários de configuração, nesse caso digite <code>:q</code>, e ele concluirá a fusão.</p>
 
-<p>Vamos pra branch do Mercado Pago digitando <code>git checkout mercado-pago</code> e vamos editar o Javascript dele, add e commite ele, volte pro master com <code>git checkout master</code>, edite o mesmo Javascript do Mercado Pago, adicione e commite também. Vamos fundir novamente o branch do Mercado Pago com o master, digitando <code>git merge mercado-pago</code> e ele mostrará o conflito novamente. Resolva da mesma forma anterior.</p>
+<p>Vamos pra branch do Mercado Pago digitando <code>git checkout mercado-pago</code> e vamos editar o Javascript dele, adicione e commite ele, volte pro master com <code>git checkout master</code>, edite o mesmo Javascript do Mercado Pago, adicione e commite também. Vamos fundir novamente o branch do Mercado Pago com o master, digitando <code>git merge mercado-pago</code> e ele mostrará o conflito novamente. Resolva da mesma forma anterior.</p>
 
-<p>PS: Várias IDEs podem oferecer comparações sobre os conflitos dos códigos dos branches para serem corrigidas pela gente.</p>
+<p>PS: Várias IDEs podem oferecer comparações sobre os conflitos dos códigos dos branches para serem corrigidos pela gente.</p>
 
 <ul>
     <li><a href="tudo-sobre-git-2.html">Continuação da Matéria!</a></li>

@@ -51,6 +51,31 @@
 
 <p>PS: Ao clonar um repositório, ele automaticamente colocará o repositório remoto clonado com o alias "origin". Para ter certeza, digite novamente <code>git remote -v</code>. E os comandos push, fetch e pull podem ter a branch omitida, caso você queira fazer as tarefas na branch que você está atualmente, algo como <code>git push https://github.com/nomedousuario/NomeDoProjeto.git</code> ou <code>git push origin</code> (se você tiver na master ele fará o envio pra master, em uma branch criada ele enviará pra esta criada, etc.).</p>
 
+<p>Pode também ser necessário forçar o fetch e o pull em alguns casos. Para isso, podemos usar comandos como:</p>
+
+<pre>
+<code>
+git fetch --all
+git reset --hard origin/master
+</code>
+</pre>
+
+<p>Já para o push, podemos usar:</p>
+
+<pre>
+<code>
+git push origin master --force
+</code>
+</pre>
+
+<p>Ou, de forma mais segura:</p>
+
+<pre>
+<code>
+git push origin master --force-with-lease
+</code>
+</pre>
+
 <h3>Simulando Múltiplos Devs</h3>
 
 <p>Como já percebemos, num projeto do Git podemos ter vários desenvolvedores trabalhando, no caso, vamos simular múltiplos devs.</p>
