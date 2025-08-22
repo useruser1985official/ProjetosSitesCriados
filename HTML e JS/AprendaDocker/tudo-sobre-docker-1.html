@@ -20,6 +20,29 @@
             
 <h2>Tudo sobre Docker Parte 1</h2>
 
+<h3>O Que é Docker e Para Que Serve?</h3>
+
+<p>Imagina que você tem um software, como um app web, que está rodando em sua máquina local, e que você está desenvolvendo ele. Essa aplicação web não está disponível para todos por estar apenas no seu computador. Para ele ficar disponível na internet você tem que disponibilizar num servidor remoto onde ele será hospedado e terá um domínio, que poderá ser acessado por qualquer um em qualquer parte do mundo.</p>
+
+<p>O processo de disponibilizar um projeto web para uma máquina remota é um processo complexo, porque ele não é só apenas o código que a gente escreve, pois ele vai depender de muitas coisas como compilador/interpretador, banco de dados e várias outras coisas. Versões de software são necessárias e importantes. Vamos supor que temos um site com Node 16, e a máquina remota tem a versão 18, se uma máquina remota é pega do zero, nós teremos que instalar o Node e tudo mais que é necessária pro servidor funcionar, mas a diferença de versões pode dar alguns erros.</p>
+
+<p>Para resolver esses problemas, podemos ter um ambiente de desenvolvimento com todas as versões que precisarmos (no caso, o Node 16, e podemos ter outros recursos como o MongoDB na versão 10, etc.), aí ele ficará numa <q>caixinha</q> que pode ser levada pra qualquer lugar, no caso, o app web ficará atrelado a esse ambiente de desenvolvimento.</p>
+
+<p>Muitas vezes, o servidor não tem esses programas instalados por nós (como o Node e o Mongo DB), por isso pode acabar tendo diferença de versões e consequentemente, de compatibilidade. Quando outra pessoa baixar seu projeto, pode também ter esses problemas.</p>
+
+<p>Podemos também atualizar a versão do nosso software, mas pra atualizar teríamos que atualizar todas as máquinas envolvidas no processo, como o nosso servidor e tudo mais. Para resolver esses problemas que o Docker foi criado.</p>
+
+<p>Essa <q>caixinha</q> que exemplificamos anteriormente vamos chamar de contêiner, ele é como uma <q>mini-máquina</q> com tudo que precisa, um ambiente no qual temos tudo instalado e configurado, como, além dos arquivos, as versões específicas de linguagem back-end, banco de dados e tudo mais. Ela pode ser rodada em qualquer computador sem ele precisar ter esses programas instalados.</p>
+
+<p>PS: Os contêiners são diferentes de uma máquina virtual, pois esta pega parte dos recursos da máquina principal (como RAM, HD, etc.) e é como um computador isolado (como por exemplo, um Linux numa máquina virtual em um Windows), o que deixa mais pesado o sistema principal. Já o Docker, apesar de semelhante, ele compartilha do kernel apenas os recursos necessários e só instala o que é necessário pra aplicação (no exemplo, o Node e o Mongo, que vão utilizar apenas o que ele precisa da RAM, HD, etc., o que deixa o contêiner mais leve, pois não é um sistema inteiro, apenas tem o que precisamos).</p>
+
+<p>No caso dos contêiners, podemos apenas atualizar o Docker e o que ele precisa, o que torna muito mais fácil. Ele também pega apenas a quantidade de memória e disco que precisa, que não precisa ser pré-configurado como as máquinas virtuais.</p>
+
+<p>Um contêiner é uma instância executável de uma imagem (como o exemplo do app web com Node e Mongo). Você pode criar, iniciar, parar, mover ou excluir um contêiner usando a API Docker ou CLI. Ele pode ser executado em máquinas locais, virtuais ou nuvem. É portátil e pode ser executado em qualquer sistema operacional. Ele também está isolado de outros contêiners e executa seu próprio software, binários e configurações.</p>
+
+<p>Podemos isolar partes de um software em contêiners diferentes, como o app web, onde podemos ter, por exemplo, um contêiner pro front-end, outro pro back-end e outro pro banco de dados.</p>
+
+<p>Para instalar o Docker, siga essas instruções: <a href="https://docs.docker.com/engine/install/" target="_blank">https://docs.docker.com/engine/install/</a></p>
 
 <ul>
     <li><a href="tudo-sobre-docker-2.html">Continuação da Matéria!</a></li>

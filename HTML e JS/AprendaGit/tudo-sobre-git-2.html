@@ -35,11 +35,11 @@
     <li><b>SSH:</b> <code>git@github.com:nomedousuario/NomeDoProjeto.git</code></li>  
 </ul>
 
-<p>Para fazer o upload do seu repositório local pro GitHub, entre na pasta desse repositório e veja com <code>git status</code> o atual estado do repositório. Para fazer o "push" (enviar pro GitHub), digite <code>git push https://github.com/nomedousuario/NomeDoProjeto.git master</code> (ou a branch que quer enviar). Só com isso, todos os nossos arquivos serão enviados pro repositório remoto, incluindo os commits e tudo mais o que fizemos localmente.</p>
+<p>Para fazer o upload do seu repositório local pro GitHub, entre na pasta desse repositório e veja com <code>git status</code> o atual estado do repositório. Para fazer o <q>push</q> (enviar pro GitHub), digite <code>git push https://github.com/nomedousuario/NomeDoProjeto.git master</code> (ou a branch que quer enviar). Só com isso, todos os nossos arquivos serão enviados pro repositório remoto, incluindo os commits e tudo mais o que fizemos localmente.</p>
 
-<p>Agora, no nosso repositório, faça uma alteração no HTML, veja o status, adicione e commite o repositório. Até então, as alterações serão locais. Para ele sincronizar com o repositório remoto e digite <code>git push https://github.com/nomedousuario/NomeDoProjeto.git master</code>.</p>
+<p>Agora, no nosso repositório, faça uma alteração no HTML, veja o status, adicione e commite o repositório. Até então, as alterações serão locais. Para ele sincronizar com o repositório remoto digite <code>git push https://github.com/nomedousuario/NomeDoProjeto.git master</code>.</p>
 
-<p>Para não ficar copiando e colocando o link do repositório toda hora, podemos criar um alias para esse comando, utilizando <code>git remote add origin https://github.com//nomedousuario/Projeto-1.git</code>. Para ver se foi adicionado, digite <code>git remote -v</code>, ele mostrará o repositório para fetch (buscar) e push (enviar). Daí é só usar <code>git push origin master</code>.</p>
+<p>Para não ficar copiando e colando o link do repositório toda hora, podemos criar um alias para esse comando, utilizando <code>git remote add origin https://github.com/nomedousuario/Projeto-1.git</code>. Para ver se foi adicionado, digite <code>git remote -v</code>, ele mostrará o repositório para fetch (buscar) e push (enviar). Daí é só usar <code>git push origin master</code>.</p>
 
 <p>PS: Lembrando que onde está origin pode ser qualquer nome, mas geralmente origin é o mais usado.</p>
 
@@ -94,11 +94,11 @@ git push origin master --force-with-lease
 
 <p>Aí você, como coordenador do projeto, você dará o <code>git fetch origin master</code> e o <code>git pull origin master</code> para ver as alterações que os outros devs fizeram.</p>
 
-<p>Num projeto real, vários desenvolvedores podem estar no mesmo projeto, e aí é toda hora fetch, push e pull, além de ser necessário resolver conflitos, como exemplificado anteriormente.</p>
+<p>Num projeto real, vários desenvolvedores podem estar no mesmo projeto, e aí é toda hora fetch, pull e push, além de ser necessário resolver conflitos, como exemplificado anteriormente.</p>
 
 <h3>Fazendo Pull Request</h3>
 
-<p>Como já exemplificamos, não é recomendado fazer tudo no branch principal, e por isso é recomendado criar branches para cada coisa que será manipulada no repositório, e depois fundir elas com a branch principal.</p>
+<p>Como já exemplificamos, não é recomendado fazer tudo na branch principal, e por isso é recomendado criar branches para cada coisa que será manipulada no repositório, e depois fundir elas com a branch principal.</p>
 
 <p>Vamos continuar com dois devs simulados, você e o Sicrano. Vamos supor que o Sicrano vai criar uma nova branch, nós podemos usar o checkout com a opção -b para ele, além de criar, automaticamente ele muda pra mesma branch recém-criada, ficando assim: <code>git checkout -b svg</code>.</p>
 
@@ -108,13 +108,13 @@ git push origin master --force-with-lease
 
 <p>Sicrano poderá continuar adicionando e commitando nessa branch que ele criou. Vamos fazer mais uma alteração em algo, adicionar e commitar como Sicrano, e fazer o push.</p>
 
-<p>Para fundir, basta clicar em Merge Pull Request, e é recomendado fechar essa branch svg criada.</p>
+<p>Para fundir, basta clicar em Merge Pull Request, e é recomendado fechar essa branch criada.</p>
 
 <p>Daí, no seu computador, basta dar um fetch e um pull no repositório master pra sua máquina.</p>
 
 <h3>Fazendo Fork de um Repositório</h3>
 
-<p>Para contribuir com projetos de software livre, podemos fazer um fork de um repositório de outro usuário, que nada mais que é do que copiar um repositório pro seu perfil no GitHub.</p>
+<p>Para contribuir com projetos de software livre, podemos fazer um fork de um repositório de outro usuário, que nada mais é do que copiar um repositório pro seu perfil no GitHub.</p>
 
 <p>Para isso, vá no repositório desejado e clique em Fork. Lá você poderá alterar o nome, decidir se só copia a branch principal ou copia todas, etc. Depois clique em Create Fork.</p>
 
