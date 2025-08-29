@@ -1,0 +1,127 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Acme");
+@import url("https://fonts.googleapis.com/css?family=Gloria+Hallelujah");
+@import url("https://fonts.googleapis.com/css?family=Alegreya");
+
+body {
+    background: url("../imagens/fundo.jpg") center fixed repeat;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+div#interface {
+    background-color: rgba(23,32,120,0.85);
+    box-shadow: 0px 0px 7px silver;
+    margin: -8px;
+    padding: 10px;
+    min-height: 750px;
+}
+header {
+    border-bottom: 1px solid rgba(0,0,128,0.3);
+    height: 140px;
+}
+section#conteudo {
+    box-shadow: 0px 0px 7px silver;
+    padding: 15px;
+    min-height: 600px;
+    background-color: rgba(23,32,120,0.75);
+}
+h1 {
+    font-family: "Gloria Hallelujah", serif;
+    font-size: 34pt;
+    font-weight: bolder;
+    text-shadow: 0px 0px 13px silver;
+}
+h2 {
+    font-family: "Acme", sans-serif;
+    font-size: 20pt;
+    color: rgb(176,255,255);
+    text-shadow: 0px 0px 7px white;
+}
+h3 {
+    font-family: "Alegreya", serif;
+}
+a {
+    color: aqua;
+    text-decoration: none;
+}
+a:hover {
+    color: rgb(224,255,255);
+    text-decoration: underline;
+}
+menu {
+    padding: 40px;
+    list-style-type: square;
+}
+p {
+    text-indent: 50px;
+}
+img {
+    position: relative;
+    max-width: 400px;
+    max-height: 500px;
+    border: 10px solid rgba(16,0,120,0.65);
+    box-shadow: 0px 0px 7px white;
+}
+.direita {
+    float: right;
+}
+ul {
+    list-style-type: square;
+}
+div.env {
+    width: 450px;
+    margin: 0px auto;
+}
+div.env h4 {
+    color: white;
+    text-shadow: 0px 0px 5px black;
+    padding: 10px;
+    font-size: 18pt;
+    text-align: center;
+    box-shadow: 0px 0px 25px white;
+    border-radius: 15px;
+}
+div#war h4 {
+    background-color: rgba(255,255,0,0.65);
+}
+div#err h4 {
+    background-color: rgba(255,0,0,0.65);
+}
+div#suc h4 {
+    background-color: rgba(0,255,0,0.65);
+}
+form {
+    width: 450px;
+    margin: 10px auto;
+}
+form#acesso {
+    width: 200px;
+}
+fieldset {
+    padding: 15px;
+    border: 2px solid rgba(0,0,128,0.3);
+    box-shadow: 0px 0px 7px silver;
+}
+fieldset#mensagens {
+    margin: 10px auto;
+}
+input, textarea {
+    font-family: Arial;
+    font-size: 11pt;
+    background-color: rgba(60,92,160,0.3);
+    color: white;
+}
+input:hover, textarea:hover {
+    background-color: rgba(48,60,128,0.3);
+    color: white;
+}
+form span input {
+    padding: 5px 15px;
+}
+form p {
+    text-indent: 0px;
+}
+footer#rodape {
+    border-top: 1px solid rgba(0,0,128,0.3);
+    height: 140px;
+}

@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+body {
+    background: url("../imagens/fundo.jpg") center fixed repeat;
+    background-color: rgb(64,128,255);
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+div#interface {
+    background-color: rgba(0,0,64,0.85);
+    min-height: 755px;
+    margin: -8px;
+    padding: 10px;
+    box-shadow: 0px 0px 10px blue;
+}
+
+h1 {
+    font-size: 35pt;
+}
+
+hgroup h2 {
+    font-size: 20pt;
+}
+
+h2 {
+    font-size: 18pt;
+}
+
+a {
+    color: gray;
+    text-decoration: none;
+}
+
+a:hover {
+    color: silver;
+    text-decoration: underline;
+}
+
+header#cabecalho {
+    border-bottom: 1px solid blue;
+    height: 150px;
+}
+
+section#corpo {
+    min-height: 450px;
+}
+
+footer#rodape {
+    border-top: 1px solid blue;
+    height: 100px;
+}
+
+/* Estilo Formulário */
+
+form fieldset {
+    margin: 10px auto;
+    font-size: 13pt;
+}
+
+input, textarea {
+    font-family: Arial, sans-serif;
+    font-size: 12pt;
+    color: white;
+    background-color: rgba(0,0,128,0.6);
+}
+
+input:hover, textarea:hover {
+    background-color: rgba(0,0,192,0.6);
+}
+
+form#fContato fieldset {
+    width: 500px;
+    border-color: rgb(64,128,255);
+    box-shadow: 0px 0px 10px blue;
+}
+
+form#fContato fieldset#sexo {
+    width: 150px;
+    margin: 0px;
+}
+
+form#fContato fieldset legend {
+    font-weight: bolder;
+    font-size: 13pt;
+    color: rgb(64,128,255);
+    text-shadow: 0px 0px 10px blue;
+}
+
+div#botoes input {
+    width: 100px;
+    padding: 5px;
+}
+
+form#fContato fieldset {
+    width: 500px;
+    border-color: rgb(64,128,255);
+    box-shadow: 0px 0px 10px blue;
+}
+
+form#fLogin fieldset {
+    width: 250px;
+    border-color: rgb(64,128,255);
+    box-shadow: 0px 0px 10px blue;
+}
+
+div#mens {
+    text-align: center;
+}

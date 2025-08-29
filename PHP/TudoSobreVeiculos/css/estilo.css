@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+body {
+    background: url("../imagens/fundo.jpg") center fixed repeat;
+    font-family: Cambria, serif;
+    color: white;
+}
+div#interface {
+    background-color: rgba(16,16,16,0.8);
+    padding: 10px;
+    margin: -8px;
+    min-height: 750px;
+}
+header#cabecalho {
+    height: 150px;
+    border-bottom: 1px solid graytext;
+}
+section#conteudo {
+    min-height: 450px;
+}
+a {
+    color: gray;
+    text-decoration: none;
+}
+a:hover {
+    color: silver;
+    text-decoration: underline;
+}
+h1 {
+    font-size: 35px;
+}
+h2 {
+    font-size: 25px;
+}
+p {
+    text-indent: 20px;
+    text-align: justify;
+}
+img {
+    max-width: 500px;
+    border: 10px solid silver;
+    box-shadow: 0px 0px 10px white;
+}
+.direita {
+    float: right;
+    margin-left: 15px;
+}
+form fieldset {
+    width: 600px;
+    margin: 10px auto;
+}
+form#fLogin fieldset {
+    width: 150px;
+}
+form fieldset#sexo {
+    width: 120px;
+    margin: 0px;
+}
+form p {
+    text-indent: 0px;
+}
+input, textarea {
+    background-color: rgba(108,108,108,0.6);
+    color: white;
+    font-family: Cambria, serif;
+    font-size: 12pt;
+}
+input:hover, textarea:hover, input:hover {
+    background-color: rgba(72,72,72,0.6);
+}
+div#botoes input {
+    padding: 10px;
+}
+footer#rodape {
+    height: 100px;
+    border-top: 1px solid graytext;
+}
+div#mens {
+    max-width: 300px;
+    text-align: center;
+    box-shadow: 0px 0px 10px silver;
+    text-shadow: 0px 0px 7px black;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 20px;
+}
+div.exi {
+    background-color: rgba(0,255,0,0.75);
+}
+div.warn {
+    background-color: rgba(255,255,0,0.75);
+}
+div.err {
+    background-color: rgba(255,0,0,0.75);
+}

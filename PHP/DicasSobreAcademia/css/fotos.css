@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+ul#album {
+    width: 1000px;
+    margin: 0px auto;
+    padding: 100px;
+    overflow: hidden;
+    list-style-type: none;
+}
+ul#album li {
+    float: left;
+    width: 100px;
+    height: 150px;
+    margin: 5px;
+    border: 4px solid gray;
+    background-color: white;
+    box-shadow: 1px 1px 3px black;
+    -webkit-transition: all 0.5s;
+}
+ul#album li:hover {
+    -webkit-transform: scale(2.3);
+}
+ul#album li span {
+    opacity: 0;
+}
+ul#album li#foto01 {
+    background: url("../imagens/legging-01.jpg") no-repeat;
+    background-position: center bottom;
+    background-size: 100% auto;
+}
+ul#album li#foto02 {
+    background: url("../imagens/legging-02.jpg") no-repeat;
+    background-position: center bottom;
+    background-size: 100% auto;
+}
+ul#album li#foto03 {
+    background: url("../imagens/legging-03.jpg") no-repeat;
+    background-position: center bottom;
+    background-size: auto 100%;
+}
+ul#album li#foto04 {
+    background: url("../imagens/legging-04.jpg") no-repeat;
+    background-position: center bottom;
+    background-size: auto 100%;
+}
+ul#album li#foto05 {
+    background: url("../imagens/legging-05.jpg") no-repeat;
+    background-position: center bottom;
+    background-size: auto 100%;
+}
+ul#album li#foto06 {
+    background: url("../imagens/legging-06.jpg") no-repeat;
+    background-position: center bottom;
+    background-size: auto 100%;
+}
