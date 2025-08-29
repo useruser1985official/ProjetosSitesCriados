@@ -20,6 +20,106 @@
             
 <h2>Tudo sobre Wordpress Parte 1</h2>
 
+<h3>Instalando o WordPress no seu PC</h3>
+
+<p>Primeiramente, entre no site oficial do Wordpress pra baixar a última versão: <a href="https://wordpress.org/download/" target="_blank">https://wordpress.org/download/</a></p>
+
+<p>Com um ambiente com PHP e MySQL instalado, como o XAMPP, descompacte o ZIP no diretório do servidor (no caso do XAMPP, no Windows é em <code>C:\xampp\htdocs</code>). No seu ambiente MySQL, crie um banco de dados com o nome que será usado pelo Wordpress, dessa forma:</p>
+
+<pre>
+<code>
+create database site_wordpress
+default character set utf8
+default collate utf8_general_ci;
+</code>
+</pre>
+
+<p>Depois, para começar a instalação do Wordpress, acesse o link do seu site com <code>http://localhost/NomeDoProjeto</code>.</p>
+
+<p>Ao acessar o link, ele abrirá a página para escolher o idioma do site (no caso, Português do Brasil). Depois disso ele mostrará o que precisa do banco de dados (nome do banco, nome de usuário, senha, etc.). Na página seguinte coloque os seguintes dados:</p>
+
+<ul>
+    <li><b>Nome do Banco de Dados:</b> <code>site_wordpress</code>.</li>
+    <li><b>Nome de Usuário:</b> <code>root</code>.</li>
+    <li><b>Senha:</b> (Deixe vazio).</li>
+    <li><b>Servidor:</b> <code>localhost</code>.</li>
+    <li><b>Prefixo da Tabela:</b> <code>wp_</code>.</li>
+</ul>
+
+<p>O prefixo pode ser alterado e é até recomendado mudar pra evitar ataques nos quais os atacantes tentam acessar os bancos com prefixo padrão (wp). O nome de usuário padrão no XAMPP é <q>root</q> e a senha é vazia, mas se o servidor tiver outro nome de usuário e/ou senha, coloque estes. O servidor localhost é utilizado somente no caso de usar o XAMPP ou outro servidor local.</p>
+
+<p>Clique em Instalar Wordpress, e na próxima página em Instalar. Nas informações necessárias, coloque esses dados:</p>
+
+<ul>
+    <li><b>Título do Site:</b> <q>Site Wordpress</q>.</li>
+    <li><b>Nome de Usuário:</b> <code>admin</code>.</li>
+    <li><b>Senha:</b> <code>123</code>.</li>
+    <li><b>Seu email:</b> (coloque um e-mail válido).</li>
+</ul>
+
+<p>Na senha, marque a caixa <q>Confirmar o uso de uma senha fraca</q>. Num servidor real, é recomendado usar outro nome de usuário e uma senha bem mais forte. Como o site será local, não faz diferença marcar ou desmarcar <q>Evitar que mecanismos de busca indexem este site</q>.</p>
+
+<p>O e-mail deverá ser válido porque ele vai receber qualquer atualização sobre o seu site.</p>
+
+<p>Ao terminar a instalação, ele abrirá a página de login, onde você colocará o nome de usuário ou e-mail vinculado, e a senha que você escolheu. Ele abrirá o painel administrativo. Clicando acima você pode acessar um exemplo padrão de <q>Olá, Mundo</q> no seu site.</p>
+
+<h3>Instalando Temas e Plugins</h3>
+
+<p>Ao instalar o Wordpress, ele só vem com apenas dois plugins por padrão, Akismet Anti-spam e o Hello Dolly. A maioria das funcionalidades do Wordpress são adicionadas através de plugins, até mesmo coisas comuns como formulários de contato e coisas do tipo. Os instaladores automáticos instalados em servidores costumam vir com vários desses outros plugins.</p>
+
+<p>No caso, vamos em Plugins e excluir os dois plugins instalados por padrão, basta clicar em Excluir em cada um deles. Plugins desativados podem sobrecarregar o site e abrir brechas de segurança, além do inconveniente de atualizar algo que não está usando, por isso exclua todos os plugins que não usaremos, incluindo os dois que vieram por padrão.</p>
+
+<p>Primeiramente, vamos em Aparência e escolher um tema pro nosso site. Vamos escolher o tema Astra pro nosso site, vamos em Adicionar Tema e procurar esse tema pro nosso site. Depois de instalado, não ative ele ainda.</p>
+
+<p>PS: Não ative o tema principal de primeira, pois teremos que fazer alterações nele. Usaremos um tema filho baseado nesse Astra, que no caso será personalizado por nós mesmos.</p>
+
+<p>Para criar um tema filho, vamos nesse site aqui: <a href="https://wpastra.com/child-theme-generator/" target="_blank">https://wpastra.com/child-theme-generator/</a></p>
+
+<p>No modo simples, coloque o nome e em Generate, ele criará um ZIP que você deverá baixar. Voltando em Adicionar Temas, clique em Enviar Tema e envie seu ZIP pra ele. Você deverá ter o tema Astra instalado pra isso (pois um tema filho precisa do tema pai). Esse tema filho instalado que deverá ser ativado, não o Astra pai, pois o filho terá tudo que o pai tem, no entanto, as atualizações do tema principal não afetará nossa personalização no tema filho.</p>
+
+<p>PS: É recomendado excluir os temas não utilizados, menos o tema pai.</p>
+
+<p>Já para os plugins, vamos instalar o Classic Editor para podermos fazer nossa personalização no CSS. Basta ir em Plugins e Adicionar Plugins e procurar ele. </p>
+
+<p>Vamos instalar também os plugins MicroThemer Lite e Spectra Gutenberg Blocks.</p>
+
+<p>Ative primeiro o Editor Clássico, depois ative o Spectra (pois este depende do primeiro). Ele dará um erro ao ativar o Spectra, pois este exige o Editor de Blocos. Vá nas configurações do Editor Clássico e mude o editor padrão para Editor de Blocos. Podemos também marcar o <q>Sim</q> em <q>Permitir que os usuários alternem entre editores</q>. Depois de salvar, aí sim ative o Spectra.</p>
+
+<p>PS: Assim como os temas, também podemos enviar plugins para instalar no nosso site.</p>
+
+<p>Podemos instalar outros plugins, como o EWWW Image Optimizer, o Google Analytics, o WP Super Cache, WP Forms e o WPS Hide Login, entre outros, conforme sua necessidade.</p>
+
+<h3>Configurações Importantes</h3>
+
+<p>Em Configurações, vá em Geral e veja as configurações lá. Lá terá coisas como o título, o ícone do site (favicon), a descrição, o endereço, o e-mail de administração. Se o site estiver em um servidor online, deixe o link com <q>https</q> e não com <q>http</q>, para que ele só conecte criptografado. Num site num servidor local, isso não é necessário.</p>
+
+<p>Nos membros, deixe desmarcada a opção <q>Qualquer pessoa pode se registrar</q> caso você não queira que seu site tenha membros. Se for marcar, coloque a opção <q>Assinante</q> que é a mais <q>fraca</q> (que tem menos privilégios). As opções, do com menos privilégios pro mais privilégios, Assinante, Colaborador, Autor, Editor e Administrador.</p>
+
+<p>Vamos instalar o plugin WPS Hide Login, ele vai ocultar a página padrão de login (como a wp-login.php e o diretório wp-admin) para que os bots de invasão não tentem um ataque na sua senha, já que a página se tornará inacessível. Na parte de configurações, vamos alterar o nome <q>login</q> para um nome normalmente não usado por esses bots, como por exemplo, <q>gestao</q>. Aí a página estará num link tipo <code>http://localhost/SiteWordpress/gestao</code>. O link de baixo seria uma página de erro caso tentassem acessar o link padrão (mas este pode ser acessado depois de logarmos).</p>
+
+<p>Outras configurações ali presentes como a de membros, função padrão para novo usuário, idioma, fuso horário, etc.</p>
+
+<p>Ainda em Configurações, mas em Escrita, podemos configurar a categoria, formato padrão do post, etc.</p>
+
+<p>PS: É bom evitar configurar o <q>Publicar por e-mail</q>, pois o recomendado é usar o aplicativo do Wordpress para publicar via mobile.</p>
+
+<p>Nas configurações de Leitura, podemos escolher a opção da página inicial exibir os posts recentes ou uma página estática (no caso, escolheremos a segunda). Podemos escolher quantos posts por página (evite colocar muitos posts por página), mostrar resumo ou o texto completo de um post no feed e ali podemos configurar também a visibilidade nos mecanismos de busca.</p>
+
+<p>Nas configurações de Discussão, podemos configurar como e quem poderá publicar comentários. Para bloquear qualquer comentário, desmarque a opção <q>Permitir que pessoas enviem comentários em novos posts</q>. Qualquer alteração ali não afetará posts publicados anteriormente.</p>
+
+<p>Em Mídia, defina o tamanho da miniatura, médio e grande.</p>
+
+<p>Em Links Permanentes, em Estrutura de Links Permanentes, coloque o formato dos links (evite o padrão, o recomendado é o Nome do Post ou personalizar com categoria e nome do post). As categorias, assim como as tags, são adicionadas em Posts e Categorias/Tags. As categorias podem ter hierarquia, as tags não.</p>
+
+<p>Em Privacidade, podemos criar uma página de política de privacidade.</p>
+
+<p>Vamos instalar o plugin Imsanity, que dá uma otimizada nas imagens. Algumas configurações como o tamanho máximo das imagens e mídias, a qualidade do JPG, e se converte formatos como BMP e PNG para JPG. É recomendado não converter PNG caso você queira imagens com fundo transparente (mas lembrando que PNG, e também o BMP, costumam ter um tamanho maior que o JPG). Embaixo tem a opção de redimensionar as fotos antigas já postadas no site (atenção que não tem como desfazer essa ação).</p>
+
+<p>PS: Instale junto com o Imsanity, o plugin EWWW Image Optimizer.</p>
+
+<p>Nas configurações do Spectra, vamos em Blocos e ver os recursos que podem ser ativados ou desativados, podemos desativar, por exemplo, os Mapas do Google, caso não sejam usados. Algumas opções são pagas.</p>
+
+<p>Por fim, na configuração do EWWW Image Optimizer, podemos ver a configuração dele, que comprimirá ainda mais as imagens do blog. Este comprime inclusive PDFs. Ele pedirá algumas configurações iniciais no primeiro acesso.</p>
 
 <ul>
     <li><a href="tudo-sobre-wordpress-2.html">Continuação da Matéria!</a></li>

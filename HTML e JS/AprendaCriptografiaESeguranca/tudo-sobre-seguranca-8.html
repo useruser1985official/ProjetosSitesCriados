@@ -145,6 +145,28 @@ Algo relacionado ao seu time favorito (de futebol ou outro esporte qualquer).</l
 Palavras relacionadas a hobbies que você tenha.</li>
 </ul>
 
+<h3>Como Configurar o Certificado SSL (https) no seu Servidor</h3>
+
+<p>Geralmente, o SSL e o TLS são fornecidos por domínios e hospedagens pagos, mas alguns sites fornecem ele gratuitamente.</p>
+
+<p>Para configurar o SSL, vá no painel da hospedagem e vá em SSL, e em gerenciar, vá em Importar SSL, onde colocaremos o site.</p>
+
+<p>No site <a href="https://zerossl.com/" target="_blank">Zero SSL</a>, podemos ter um certificado SSL válido por 90 dias, o que basta pro aprendizado. Depois de criar uma conta no site, vá em Create Free SSL Certificate, coloque o domínio no seu site, e em SSL Certificate Setup. Em Validity, podemos configurar o tempo de validade do certificado. Em CSR & Contact, marque a opção Auto-Generate CSR, depois confirme o plano escolhido (no caso o gratuito).</p>
+
+<p>Na próxima tela, ele vai verificar o e-mail pra saber se o domínio realmente é seu. Depois de verificado, é só clicar em Install Certificate, que ele começara a gerar o certificado (que pode levar alguns minutos até uns dois dias), depois seu certificado estará disponível pra download e instalação. Ele será baixado num ZIP e cada arquivo dentro dele deverá ser aberto num editor de texto.</p>
+
+<p>Já no painel do seu domínio, vá em Importar SSL e cole os textos equivalentes do arquivo ZIP baixado, que são esses:</p>
+
+<ul>
+    <li>Certificado (CRT).</li>
+    <li>Chave Privada (Private Key).</li>
+    <li>Certificate Authority Bundle (CA Bundle).</li>
+</ul>
+
+<p>Depois de colar os textos, clique em Instalar SSL.</p>
+
+<p>PS: Esses conteúdos de forma nenhuma devem ser expostos ou compartilhados, por questão de segurança. O projeto para TLS (que é o recomendado atualmente pra HTTPS) é bem semelhante.</p>
+
 <ul>
     <li><a href="tudo-sobre-seguranca-7.html">Parte Anterior da Matéria!</a></li>
     <!--<li><a href="tudo-sobre-seguranca-9.html">Continuação da Matéria!</a></li>-->

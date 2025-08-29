@@ -44,6 +44,190 @@
 
 <p>Para instalar o Docker, siga essas instruções: <a href="https://docs.docker.com/engine/install/" target="_blank">https://docs.docker.com/engine/install/</a></p>
 
+<h3>Criando uma Imagem e um Contêiner Docker para uma API em NodeJS</h3>
+
+<p>Um contêiner em execução usa um sistema de arquivos isolado. Este sistema de arquivos isolado é fornecido por uma imagem, e a imagem deve conter tudo o que é necessários para executar um aplicativo: Todas as dependências, configurações, scripts, binários, etc. A imagem também contém outras configurações para o contêiner, como variáveis de ambiente, um comando padrão para executar e outros metadados.</p>
+
+<p>Aqui podemos ter alguns exemplos de imagens para o Docker: <a href="https://hub.docker.com/" target="_blank">https://hub.docker.com/</a></p>
+
+<p>No caso de usar no Ubuntu, adicione o docker como um usuário com o seguinte comando:</p>
+
+<pre>
+<code>
+sudo usermod -aG docker $USER
+</code>
+</pre>
+
+<p>Não esqueça de reiniciar o sistema.</p>
+
+<p>Vamos clonar o repositório de um projeto como exemplo com <code>git clone https://github.com/codethi/ThiCodeWallet.git</code>.</p>
+
+<p>Entre na pasta clonada, e depois em api (que no caso é o backend), e digite o comando <code>npm run dev</code>.</p>
+
+<p>PS: Caso haja problema com a versão do Node, entre no arquivo Dockerfile e deixe a linha do Node (geralmente a primeira) assim:</p>
+
+<pre>
+<code>
+FROM node:18
+</code>
+</pre>
+
+<p>Usar a opção latest pode dar erros de compatibilidade.</p>
+
+<p>E no mesmo arquivo adicione essa linha, debaixo dos outros RUN:</p>
+
+<pre>
+<code>
+RUN npm install --save-dev nodemon
+</code>
+</pre>
+
+<p>Depois rode esses comandos na ordem:</p>
+
+<pre>
+<code>
+npm install
+
+npm fund
+
+npm update
+</code>
+</pre>
+
+<p>Daí, pra montar e rodar a imagem, a qual chamaremos de <q>backend</q>, basta digitar esses comandos:</p>
+
+<pre>
+<code>
+docker build -t backend . # Não esqueça do ponto
+
+docker run -it backend
+</code>
+</pre>
+
+<p>PS: Para remover um contêiner, basta digitar <code>docker rm nomeouiddoconteiner</code>. Para remover todas as imagens e contêiners não usados, digite isso:</p>
+
+<pre>
+<code>
+docker container prune -f
+
+docker image prune -f
+</code>
+</pre>
+
+<p>Para remover um contêiner e suas imagens, digite isso:</p>
+
+<pre>
+<code>
+docker stop nomeouiddoconteiner
+
+docker kill nomeouiddoconteiner # Use para forçar o fim do processo
+
+docker rm nomeouiddoconteiner
+
+docker rmi nomeouiddoconteiner
+</code>
+</pre>
+
+<p>PS: Pode ser necessário especificar <code>-f</code> em qualquer um deles. Se algum contêiner ou imagem não puder ser deletada, dê um stop ou um kill na imagem conflitante.</p>
+
+<p>Abra um outro terminal, mas na pasta spa, que será nosso front-end.</p>
+
+<p>Para <q>dockerizar</q> um projeto, você colocará um arquivo com o nome Dockerfile, sem extensão nem nada dentro da pasta onde ficará o contêiner.</p>
+
+<p>Aqui vemos algumas dicas oficiais sobre dockerização: <a href="https://docs.docker.com/get-started/workshop/02_our_app/" target="_blank">https://docs.docker.com/get-started/workshop/02_our_app/</a></p>
+
+<p>Dentro da pasta api/src, crie um arquivo Dockerfile e inicialmente, coloque essa sintaxe:</p>
+
+<pre>
+<code>
+FROM node:lts-alpine
+WORKDIR /app
+COPY . .
+
+RUN yarn install --production
+
+CMD ["node", "src/index.js"]
+EXPOSE 3000
+</code>
+</pre>
+
+<p>Altere ele para isso aqui:</p>
+
+<pre>
+<code>
+FROM node:18
+WORKDIR /api
+COPY . .
+
+RUN rm -rf node_modules
+RUN npm install
+
+CMD ["npm", "start"]
+EXPOSE 5002
+</code>
+</pre>
+
+<p>Para ver as imagens de contêiner num diretório, apenas digite <code>docker image ls</code>. Ele costuma ter um contêiner chamado hello-world para testes.</p>
+
+<p>Num contêiner, ele já tem tudo que precisa pra rodar dentro dele, como no caso, a versão específica do Node, o MongoDB e outras coisas.</p>
+
+<p>Na pasta api, digite, numa outra janela, <code>docker run -dp 127.0.0.1:5002:5002 backend</code>. Para ver se ele tá funcionando, digite <code>docker ps</code>.</p>
+
+<p>Um contêiner é como se fosse outro programa que precisa de uma porta para acessar a internet, no caso a porta que escolhemos foi a 5002. No navegador, podemos digitar <code>http://localhost:5002/transactions</code> para acessar a pasta. No caso ele está rodando pelo Docker, e não pelo terminal, especificamente.</p>
+
+<p>Na pasta spa não tem nada rodando, mas ele precisará rodar para mostrar o front-end. Digite <code>npm run dev</code> pra isso. Se ele der erro, edite o Dockerfile dele assim:</p>
+
+<pre>
+<code>
+FROM node:18
+
+WORKDIR /spa
+COPY . .
+
+RUN rm -rf node_modules
+RUN npm i
+RUN npm install --save-dev vite
+
+CMD ["npm", "run", "dev"]
+
+EXPOSE 5173
+</code>
+</pre>
+
+<p>Depois rode esses comandos na ordem:</p>
+
+<pre>
+<code>
+npm install
+
+npm fund
+
+npm update
+</code>
+</pre>
+
+<p>Veja se o arquivo oculto .env está assim:</p>
+
+<pre>
+<code>
+VITE_API_BASE_URL=http://localhost:5002
+</code>
+</pre>
+
+<p>Daí, pra montar e rodar a imagem, a qual chamaremos de <q>frontend</q>, basta digitar esses comandos:</p>
+
+<pre>
+<code>
+docker build -t frontend . # Não esqueça do ponto
+
+docker run -it frontend
+</code>
+</pre>
+
+<p>Na pasta spa, digite, numa outra janela, <code>docker run -dp 127.0.0.1:5173:5173 frontend</code>.</p>
+
+<!-- Corrigir erro do front-end -->
+
 <ul>
     <li><a href="tudo-sobre-docker-2.html">Continuação da Matéria!</a></li>
 </ul>
