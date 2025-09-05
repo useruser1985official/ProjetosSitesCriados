@@ -633,6 +633,11 @@ $field_wrap_html = '<div id="opts-'.$section_name.'-'.$css_selector.'-'.$propert
 		// start variable line fields wrap
 		$html.= $variable_line ? '<div class="mt-variable-line"><div class="mt-vl-inner">' : '';
 
+
+		if ($property === 'snippet' || $property === 'text'){
+			$html.= $this->snippetHeader(); // . $this->htmlContentActionsMenu();
+		}
+
 		$input_wrap_html = '';
 
 		/*if ($property === 'text' || $property === 'snippet'){
@@ -736,8 +741,22 @@ $field_wrap_html = '<div id="opts-'.$section_name.'-'.$css_selector.'-'.$propert
 				$input_wrap_html.= '
 				<div class="snippet-choice">
 					<div class="snippet-choice-inner load-snippet-inner">
-						<span class="snippet-choice-option tvr-button" data-option="original" title="Edit original snippet (synced)">Edit original</span>
-						<span class="snippet-choice-option tvr-button tvr-blue" data-option="clone" title="Clone snippet (unsynced)">Create clone</span>
+						<span class="snippet-choice-option tvr-button" data-option="original" title="Edit original snippet (synced)">
+							'.$this->iconFont('chain', array(
+                              'adjacentText' => array(
+                                  'text' => 'Edit synced snippet',
+                                  'class' => 'mti-text'
+                              ),
+                            )).'
+						</span>
+						<span class="snippet-choice-option snippet-choice-clone tvr-button tvr-blue" data-option="clone" title="Detach as duplicate snippet (unsynced)">
+							'.$this->iconFont('copy', array(
+								'adjacentText' => array(
+									'text' => 'Detach as duplicate',
+									'class' => 'mti-text'
+								),
+							)).'
+						</span>
 
 					</div>
 					<div class="snippet-choice-inner set-aspect-inner">

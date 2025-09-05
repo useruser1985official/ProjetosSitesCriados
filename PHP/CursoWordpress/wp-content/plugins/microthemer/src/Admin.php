@@ -7055,7 +7055,20 @@ class Admin {
 			}*/
 
 
+    function snippetHeader(){
+	    return '
+        <div class="mt-snippet-header">
+            <div class="sync-snippet-options snippet-header-item" data-sync-state="synced">
+                <span class="snippet-sync-notify">Editing synced snippet:</span>
+                <span class="link detach-snippet" title="Detach as duplicate snippet (unsynced)" data-mtc="mod.MThtml.detachSyncedSnippet">detach</span>
+                <span class="snippet-detached">Detached!</span>
+                <span class="snippet-usage-count" data-usage-count="1" title="Usage count"  data-mtc="mod.MThtml.searchSnippetUsage"></span>
+            </div>
+        </div>';
+    }
+
     function snippetFooter(){
+
         return '
         <div class="mt-snippet-footer">
         
@@ -7074,14 +7087,14 @@ class Admin {
                     'data-mtc' => 'mod.MThtml.snippetAction',
                     'title' => esc_attr__('Beautify snippet', 'microthemer'),
                 ))
-               .$this->iconFont('bin', array(
+               .$this->iconFont('file-circle-plus-solid-full', array(
                     'class' => "snippet-action",
-                    'data-action' => 'delete',
+                    'data-action' => 'new',
                     'data-mtc' => 'mod.MThtml.snippetAction',
-                    'title' => esc_attr__('Delete snippet', 'microthemer'),
+                    'title' => esc_attr__('Create new snippet (without overwriting current)', 'microthemer'),
                 ))
                .'
-			   
+                  
 			    <span class="tvr-input-wrap tvr-field-input-wrap search-snippets-wrap">
                     <input type="text" rel="load_snippet" data-appto="#style-components" class="combobox has-arrows mt-load-snippet" placeholder="Search" />
                     <span class="combo-arrow tvr-field-arrow"></span>

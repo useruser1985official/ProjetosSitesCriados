@@ -1,5 +1,30 @@
 CHANGELOG
 
+= 7.5.1.5 (Sept 4th, 2025) =
+
+# Bugs fixed (Microthemer & Amender)
+* Clicking a folder search item did not always collapse the folders pane to make the editing fields visible.
+
+# Bugs fixed (Amender)
+* The rich text editor was not being cleared when using the new option to "Create new snippet (without overwriting current)".
+* Switching between html, innerHTML, and text aspects did not always copy the content to the new snippet type correctly.
+* Page content did not live update when deleting a snippet that was active on the current page.
+* Page content did not live update when disabling / un-disabling folders or selectors.
+
+= 7.5.1.4 (Sept 1st, 2025) =
+
+# Change (Amender)
+* The delete snippet icon has moved to the snippet search menu, for each snippet item listed.
+* Instead of the delete icon, there is a start new snippet icon (without overwriting the current snippet).
+
+# Enhancement (Amender)
+* The state of expanded vs collapsed snippet options persists across page refresh.
+* A notification displays when editing a synced snippet, with an option to detach it.
+
+# Bugs fixed (Amender)
+* Stale Amender snippets could linger in the wp_micro_content database table when publishing settings.
+* Empty snippets could accumulate without being cleaned.
+
 = 7.5.1.3 (August 25th, 2025) =
 
 # Bugs fixed (Amender)

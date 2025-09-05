@@ -291,7 +291,7 @@ trait SettingsTrait {
 
 		$microthemerActive = $this->supportGUICSS();
 
-		// They cannot publish Amender we no subscription
+		// They cannot publish Amender if no subscription
 		$unableToPublishAmender = $this->supportContent() && !$this->hasContentSubscription();
 
 		// They cannot publish anything if they are just using Amender free trial without Microthemer

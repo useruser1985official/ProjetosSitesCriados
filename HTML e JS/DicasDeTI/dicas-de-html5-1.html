@@ -118,8 +118,8 @@
 &lt;header&gt;&lt;/header&gt; - Para agrupar conteúdo num cabeçalho (não necessariamente só no cabeçalho principal do site).
 &lt;h1&gt;&lt;/h1&gt; - Representam níveis de títulos, sendo o h1 de maior importância, vai até o h6 (não confundir com letra grande e eles não precisam seguir uma ordem numérica).
 &lt;p&gt;&lt;/p&gt; - Define um parágrafo.
-&lt;b&gt;&lt;/b&gt; - Deixa o texto em negrito (para textos em destaque use &lt;strong&gt;&lt;/strong&gt;).
-&lt;i&gt;&lt;/i&gt; - Deixa o texto em itálico (para textos em ênfase use &lt;em&gt;&lt;/em&gt;).
+&lt;strong&gt;&lt;/b&gt; - Deixa o texto em negrito (destaque).
+&lt;em&gt;&lt;/em&gt; - Deixa o texto em itálico (ênfase).
 &lt;del&gt;&lt;/del&gt; - Para riscar palavras (mostrar conteúdo excluído).
 &lt;ins&gt;&lt;/ins&gt; - Para sublinhar palavras (mostrar conteúdo incluído).
 &lt;br/&gt; - Define uma quebra de linha.
@@ -470,7 +470,7 @@ input, textarea {
 
 <p>PS: Para importar outro arquivo CSS numa folha CSS, use no começo a diretiva <code>@import "folha.css"</code>. Se quiser definir algo como importante (como por exemplo, a cor de fundo, use algo como <code>background-color: red !important</code>.</p>
 
-<p>Apesar da possibilidade de usar a tags <code>&lt;i&gt;&lt;/i&gt;</code> para inclinar textos, podemos fazer isso em CSS com o <code>font-style</code>. Da mesma forma, o <code>&lt;b&gt;&lt;/b&gt;</code> pode ser substituído pelo <code>font-weight</code> mesmo existindo o <code>&lt;strong&gt;&lt;/strong&gt;</code>. Para sublinhar usamos a tag <code>&lt;ins&gt;&lt;/ins&gt;</code>, ou usamos totalmente o CSS, dessa forma:</p>
+<p>Apesar da possibilidade de usar a tag <q>i</q> para inclinar textos, podemos fazer isso em CSS com o <code>font-style</code>. Da mesma forma, o <q>b</q> pode ser substituído pelo <code>font-weight</code>. Para sublinhar usamos a tag <code>&lt;ins&gt;&lt;/ins&gt;</code>, ou usamos totalmente o CSS, dessa forma:</p>
 
 <pre>
 <code>
@@ -484,7 +484,7 @@ ul li {
 </code>
 </pre>
 
-<p>PS: O uso de tags ins, assim como o del, tem efeito semântico.</p>
+<p>PS: O uso de tag ins, assim como o del, tem efeito semântico. E as tags b e i devem ser evitadas, ainda mais que a i depois passou a ser usada para elementos visuais e até pra isso deve ser evitada.</p>
 
 <p>As opções que podem ser usadas no <code>font-weight</code> são, da mais fina à mais grossa, <code>lighter</code>, <code>normal</code>, <code>bold</code> e <code>bolder</code>. Podemos usar também um número entre 100 e 900.</p>
 
@@ -504,7 +504,7 @@ div ~ span /* Todos os elementos após o primeiro */
 </code>
 </pre>
 
-<p>Só lembrando que há diferença entre <code>&lt;b&gt;&lt;/b&gt;</code> e <code>&lt;strong&gt;&lt;/strong&gt;</code>, assim como <code>&lt;i&gt;&lt;/i&gt;</code> e <code>&lt;em&gt;&lt;/em&gt;</code>. As tags <code>strong</code> e <code>em</code> destacam o que estiver entre elas para mecanismos de pesquisa como algo relevante. As tags <code>b</code> e <code>i</code> só alteram visualmente.</p>
+<p>Só lembrando que há diferença entre apenas colocar o texto em negrito ou itálico e usar tags semânticas pra isso. As tags <code>&lt;strong&gt;&lt;/strong&gt;</code> e <code>&lt;em&gt;&lt;/em&gt;</code> destacam o que estiver entre elas para mecanismos de pesquisa como algo relevante.</p>
 
 <p>No <code>text-decoration</code> podemos riscar também usando o <code>line-through</code>, assim:</p>
 

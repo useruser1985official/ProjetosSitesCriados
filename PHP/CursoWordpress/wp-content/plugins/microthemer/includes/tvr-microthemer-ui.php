@@ -1738,6 +1738,7 @@ require_once('common-inline-assets.php');
                         </div>
                         ';
                     }
+                    $licenseShown = esc_attr__("License key shown in 'My Downloads'", 'microthemer');
 
                     // Microthemer license
                     $validated = !empty($this->preferences['buyer_validated']);
@@ -1748,8 +1749,8 @@ require_once('common-inline-assets.php');
 		                    ? '<a href="https://themeover.com/my-account/" target="_blank">Renew your subscription</a> to get the latest version of Microthemer. Then re-submit your license key.'
 		                    : esc_html__('Microthemer has been successfully unlocked.', 'microthemer')
                         )
-	                    : 'Optionally enter your <a href="https://themeover.com/my-account/" target="_blank">'
-	                      . esc_html__('license key', 'microthemer').'</a> if you have purchased a <a href="https://themeover.com/microthemer-pricing/" target="_blank">premium plan</a>';
+	                    : 'Optionally enter your <a href="https://themeover.com/my-account/?contentView=microthemer" target="_blank">'
+	                      . esc_html__('license key', 'microthemer').'</a> if you have purchased a <a href="https://themeover.com/pricing/?contentView=microthemer" target="_blank">premium plan</a>';
                     $differentKey = $validated && !$capped
 	                    ? '<p class="setup-section-intro">Unlock using a <span class="link reveal-unlock">'. esc_html__('different license key', 'microthemer').'.</span>
                         </p>'
@@ -1764,7 +1765,7 @@ require_once('common-inline-assets.php');
                     $inputLine = '
                     <ul class="form-field-list license-key-setup">
                          <li>
-                            <label class="text-label" title="'. esc_attr__("License key shown in 'My Downloads'", 'microthemer').'">'.
+                            <label class="text-label" title="'. $licenseShown.'">'.
                                  esc_html__('License key', 'microthemer').'
                             </label>
                             <input id="license-key-input" type="text" autocomplete="off" name="tvr_preferences[buyer_email]"
@@ -1788,10 +1789,13 @@ require_once('common-inline-assets.php');
 		                    'skip' => !$this->supportContent(),
 		                    'title' => 'Amender License',
 		                    'content' => '
+                            <p class="setup-section-intro">
+                                Optionally enter your <a href="https://themeover.com/my-account/?contentView=amender" target="_blank">license key</a> if you have purchased a <a href="https://themeover.com/pricing/?contentView=amender" target="_blank">premium plan</a>
+                            </p>
 		                    <div id="tvr_validate_form_amender">
 		                        <ul class="form-field-list license-key-setup">
                                      <li>
-                                        <label class="text-label">'.
+                                        <label class="text-label" title="'. $licenseShown.'">'.
                                             esc_html__('License key', 'microthemer').'
                                         </label>
                                         <input id="license-key-input" type="text" autocomplete="off" name="tvr_preferences[amender_buyer_email]"

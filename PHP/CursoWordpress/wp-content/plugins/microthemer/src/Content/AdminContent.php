@@ -529,6 +529,60 @@ class AdminContent {
 	function publishHTMLTable() {
 		global $wpdb;
 
+		try {
+			// Start transaction
+			$wpdb->query("START TRANSACTION");
+
+			// Insert new published rows only if they don't exist
+			$wpdb->query(
+				"INSERT IGNORE INTO $this->content_table 
+            (seq, slug, name, type, published, content, modified_at, aspect, meta, func_ref)
+            SELECT seq, slug, name, type, 1, content, modified_at, aspect, meta, func_ref
+            FROM $this->content_table
+            WHERE published = 0"
+			);
+
+			// Update existing published rows with new content
+			$wpdb->query(
+				"UPDATE $this->content_table t1
+            JOIN $this->content_table t2
+                ON t1.slug = t2.slug 
+                AND t1.type = t2.type
+                AND t1.published = 1
+                AND t2.published = 0
+            SET 
+                t1.name = t2.name,
+                t1.content = t2.content,
+                t1.modified_at = t2.modified_at,
+                t1.aspect = t2.aspect,
+                t1.meta = t2.meta,
+                t1.func_ref = t2.func_ref"
+			);
+
+			// Delete published rows that have no matching draft rows
+			$wpdb->query(
+				"DELETE t1 FROM $this->content_table t1
+            LEFT JOIN $this->content_table t2
+                ON t1.slug = t2.slug 
+                AND t1.type = t2.type
+                AND t2.published = 0
+            WHERE t1.published = 1
+              AND t2.slug IS NULL"
+			);
+
+			// Commit if everything worked
+			$wpdb->query("COMMIT");
+
+		} catch (\Exception $e) {
+			// Rollback on error
+			$wpdb->query("ROLLBACK");
+			$this->Admin->log('Publish Amender error', '<p>' . $e->getMessage() . '</p>');
+		}
+	}
+
+	/*function publishHTMLTable() {
+		global $wpdb;
+
 		// Insert new published rows only if they don't exist
 		$wpdb->query(
 			"INSERT IGNORE INTO $this->content_table 
@@ -554,24 +608,6 @@ class AdminContent {
             t1.meta = t2.meta,
             t1.func_ref = t2.func_ref"
 		);
-	}
-
-
-	/*function publishHTMLTable(){
-
-		global $wpdb;
-
-		$wpdb->query(
-			"INSERT INTO $this->content_table (slug, name, type, published, content, modified_at) 
-					SELECT slug, name, type, 1, content, modified_at
-					FROM $this->content_table
-					WHERE published = 0
-					ON DUPLICATE KEY UPDATE
-					    name = VALUES(name),
-					    content = VALUES(content),
-					    modified_at = VALUES(modified_at)"
-		);
-
 	}*/
 
 	// Copy and minify user and npm JS
@@ -767,7 +803,11 @@ class AdminContent {
 		}
 
 		// update mt_rich_text preference
-		$binaryPreferences = array('mt_rich_text', 'mt_rich_text_code');
+		$binaryPreferences = array(
+			'mt_rich_text',
+			'mt_rich_text_code',
+			'show_snippet_adv'
+		);
 		foreach ($binaryPreferences as $key){
 			if (isset($_GET[$key])) {
 				$this->Admin->savePreferences(array(

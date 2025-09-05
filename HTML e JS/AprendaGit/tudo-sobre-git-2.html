@@ -76,6 +76,8 @@ git push origin master --force-with-lease
 </code>
 </pre>
 
+<p>PS: Pode dar conflitos caso o usuário seja diferente do que estão logados nas credenciais. No Windows, remova as credenciais indo em Painel de Controle, Contas de Usuário, Gerenciador de Credenciais e em Credenciais do Windows. No Linux basta usar o comando <code>git credential-cache exit</code>, ou remover os arquivos/diretórios ~/.git-credentials ou ~/.config/git/credentials.</p>
+
 <h3>Simulando Múltiplos Devs</h3>
 
 <p>Como já percebemos, num projeto do Git podemos ter vários desenvolvedores trabalhando, no caso, vamos simular múltiplos devs.</p>

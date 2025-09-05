@@ -18,6 +18,7 @@ $TvrLang = array(
 	'add_mt_suggestions' => esc_html__('Add MT suggestions', 'microthemer'), // (hold shift for all properties)
 	'clear_mt_suggestions' => esc_html__('Clear MT suggestions (keeps recent & saved)', 'microthemer'),
 	'clear_single_suggestion' => esc_html__('Clear suggestion', 'microthemer'),
+	'delete_snippet' => esc_html__('Delete snippet', 'microthemer'),
 	'save_single_suggestion' => esc_html__('Save suggestion', 'microthemer'),
 	'unsave_single_suggestion' => esc_html__('Un-save suggestion', 'microthemer'),
 	'sampled' => esc_html__('Sampled values', 'microthemer'),

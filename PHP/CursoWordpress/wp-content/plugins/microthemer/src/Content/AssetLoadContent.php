@@ -535,7 +535,7 @@ class AssetLoadContent {
 			'amender-data',
 			'',
 			'inline',
-			'window.amender = ' . $inline_data . ";\n\n" . "console.log('Amender window', window.amender);"
+			'window.amender = ' . $inline_data . ";\n\n" // . "console.log('Amender config', window.amender);"
 		);
 
 		if ($this->debugAmends){
@@ -647,7 +647,7 @@ class AssetLoadContent {
 			'amender-functions',
 			'',
 			'inline_module',
-			$inlineFunctions . " console.log('Amender functions', window.AF);"
+			$inlineFunctions //. " console.log('Amender functions', window.AF);"
 		);
 
 		if ($this->debugAmends){

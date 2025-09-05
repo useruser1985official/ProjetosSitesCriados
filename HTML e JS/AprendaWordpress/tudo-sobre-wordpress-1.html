@@ -121,6 +121,199 @@ default collate utf8_general_ci;
 
 <p>Por fim, na configuração do EWWW Image Optimizer, podemos ver a configuração dele, que comprimirá ainda mais as imagens do blog. Este comprime inclusive PDFs. Ele pedirá algumas configurações iniciais no primeiro acesso.</p>
 
+<h3>Painel de Controle do Wordpress</h3>
+
+<p>Continuando, vamos ver os controles do painel do Wordpress. Ao logar no site, você verá que ele vai pro painel de controle do Wordpress. Ao acessar o site, terá acima uma barra com alguns controles para fazermos diretamente no site. Dali você pode postar no site, indo em Novo, entre outras coisas. Entrando num post, podemos editar o post no qual estamos atualmente.</p>
+
+<p>No painel de controle, podemos ir, ali em cima, em Opções de Tela e marcar ou desmarcar o que queremos que apareca nela.</p>
+
+<p>Em Atualizações, podemos ver se o Wordpress, os plugins, temas e traduções precisam ser atualizados.</p>
+
+<p>No painel, temos a aba de Posts e a de Páginas, mas elas não devem ser confundidas:</p>
+
+<ul>
+    <li>As páginas são geralmente acessadas por menus de navegação e contêm conteúdos estáticos, como <q>Contato</q>, <q>Sobre</q>, <q>Redes Sociais</q>, entre outros.</li>
+    <li>Os posts são usados para conteúdos dinâmicos, geralmente organizados de forma cronológica. Eles podem ter categorias (sem hierarquia entre os posts, mas as categorias podem ser hierárquicas) e tags associadas. </li>   
+</ul>
+
+<p>Na página principal, podemos configurar ela pra aparecer os posts mais recentes, como um blog mesmo, ou não aparecer.</p>
+
+<p>Em Mídia, temos a Biblioteca, onde podem estar documentos, imagens, áudio, vídeos, entre outros. Alguns inclusive podem ser editados diretamente dentro do Wordpress (mas as mudanças não podem ser revertidas).</p>
+
+<p>Em Comentários, você terá a administração dos mesmos, onde podemos aprovar, rejeitar, excluir, entre outras coisas, com os comentários.</p>
+
+<p>Em Aparência, nós configuramos os temas usados no site (onde, lembrando, devemos mexer no tema filho). Temos configurações para Personalizar, Widgets (como de agenda, categorias, etc.). Clique no pincelzinho ali em cima à esquerda. No Editor de Arquivos de Tema, podemos personalizar os mesmos. Podemos ir no tema do Astra, em Personalizar, em Post Type e em Blog/Arquivos, onde podemos escolher o layout (que será personalizado mais pra frente), e o Sidebar Layout (onde configuraremos o menu com os widgets).</p>
+
+<p>Em Usuários, podemos administrar os users do nosso site.</p>
+
+<p>Em Ferramentas, temos utilitários para converter categoria e tags, importar blogs do Blogger, Diagnóstico, etc.</p>
+
+<p>PS: Um erro comum do diagnóstico é a desativação do módulo obrigatório gd, para ativar no XAMPP, basta procurar no arquivo php.ini a linha <code>extension=gd</code> e remover o ponto-e-vírgula da frente dele.</p>
+
+<h3>Como Definir a Paleta de Cores para um Site</h3>
+
+<p>Para criar uma paleta de cores pro nosso site, vamos nesse site aqui: <a href="https://www.colourlovers.com/" target="_blank">https://www.colourlovers.com/</a></p>
+
+<p>Vamos supor que estamos criando um site para uma pizzaria. Vamos buscar por <q>pizza</q> no buscador do site acima e ver as paletas padrão para serem usadas. Vamos supor que escolhemos a seguinte paleta:</p>
+
+<table>
+    <tr>
+        <th>Código</th>
+        <th>Cor</th>
+    </tr>
+    <tr>
+        <td>#6d6d04</td>
+        <td style="background-color: #6d6d04">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr>
+        <td>#ebe4c4</td>
+        <td style="background-color: #ebe4c4"></td>
+    </tr>
+    <tr>
+        <td>#f1b42f</td>
+        <td style="background-color: #f1b42f"></td>
+    </tr>
+    <tr>
+        <td>#b44418</td>
+        <td style="background-color: #b44418"></td>
+    </tr>
+    <tr>
+    <tr>
+        <td>#d1a674</td>
+        <td style="background-color: #d1a674"></td>
+    </tr>           
+    </tr>
+</table>
+
+<p>Ali teremos o código das cores para serem usadas no nosso site, que pode ser pega no padrão RGB e o padrão hexadecimal. A proporção aproximada de quanto usar de cada cor também faz diferença.</p>
+
+<p>PS: Podemos pegar as cores manualmente com ferramentas como o conta-gotas do navegador ou com plugins específicos, principalmente quando um tema escolhido não está disponível.</p>
+
+<p>O site deverá ter uma paleta de cor compatível com as cores do logotipo, no entanto, não precisa ter apenas as cores do logo. Nesse site podemos upar uma imagem e ele criará uma paleta de cores compatível: <a href="https://paletadecores.com/" target="_blank">https://paletadecores.com/</a></p>
+
+<p>Esse site também é uma boa opção pra gerar paletas, onde podemos travar uma cor e deixar ele gerar ao pressionar a tecla de espaço: <a href="https://coolors.co/generate" target="_blank">https://coolors.co/generate</a></p>
+
+<h3>Como Escolher Fontes para um Site</h3>
+
+<p>Primeiramente, vamos no Google Fonts: <a href="https://fonts.google.com/" target="_blank">https://fonts.google.com/</a></p>
+
+<p>Ali, podemos escolher nossa fonte, em Filters e Preview podemos colocar uma frase padrão que queremos (como "Compre nossa Pizza") e vemos as fontes disponíveis, inclusive podendo ajustar tamanho, estilo, etc.</p>
+
+<p>PS: É recomendado usar fontes sem serifa para o site, e com serifa para impressão.</p>
+
+<p>Vamos supor que usaremos a fonte Josefin Sans para o conteúdo do site, e a  Berkshire Swash para o título (supondo que seria a fonte mais próxima da fonte do logo).</p>
+
+<p>As fontes do Google podem ser baixadas e inclusive instaladas no computador, no entanto, usaremos apenas a chamada pra elas no próprio Google Fonts. Basta ir no canto superior direito do site e clicar no <q>pacotinho</q> para ver as fontes selecionadas, e na fonte escolhida vá em Embed Code.</p>
+
+<p>A dica é usar uma fonte mais estilizada e chamativa pro logo, e uma mais discreta para o conteúdo.</p>
+
+<h3>Grandes Dicas para Imagens em Sites</h3>
+
+<p>Quando estamos pesquisando imagens no Google, devemos saber que várias delas tem direitos autorais e não podemos utilizar livremente só por estar lá. Quando a gente tira foto ou produz uma imagem como um desenho, nós temos o direito sobre ela, mas imagens aleatórias do Google não.</p>
+
+<p>Alguns sites pagos para pesquisar imagens para utilizarmos são o Adobe Stock (que dá 10 imagens gratuitas por mês, cumulativo) e o Shutterstock. Outros sites que podemos usar, que são gratuitos, são esses:</p>
+
+<ul>
+    <li>Pexels: <a href="https://www.pexels.com/" target="_blank">https://www.pexels.com/</a></li>
+    <li>Pixabay: <a href="https://pixabay.com/" target="_blank">https://pixabay.com/</a></li>
+    <li>Unsplash: <a href="https://unsplash.com/" target="_blank">https://unsplash.com/</a></li>   
+</ul>
+
+<p>PS: Uma dica, não use imagens grandes demais no site, um tamanho como 1920 x 1280 pode até ser usada como background, mas maiores que isso podem deixar o site lento. Em imagens que podem ser menores, podemos diminuir o tamanho das mesmas. Muitas vezes uma imagem nesses sites pode estar com algo como 5000 x 3500 ou até mais.</p>
+
+<p>Podemos redimensionar a imagem para um tamanho compatível com um programa como o Photoshop ou o Gimp, onde podemos escolher a qualidade (quanto melhor a qualidade, mais pesado a imagem fica) e o formato (prefira JPEG com alguma compressão para ficar mais leve, PNG apenas se precisar de transparência, e GIF apenas se tiver animações). Também é preferível redimensionar a imagem no computador com o Photoshop, Gimp ou outros semelhantes, pois o redimensionamento do Wordpress é melhor para pequenos ajustes no tamanho.</p>
+
+<h3>HTML Básico para Wordpress</h3>
+
+<p>Podemos inicialmente, editar a página com o editor clássico, que não permite inserir HTML na página, mas podemos inserir no título, por padrão, como uma tag strong para deixar o texto em negrito ou um br para quebrar o mesmo.</p>
+
+<p>PS: Podemos editar a página diretamente no site, quando estamos logados no mesmo como administrador.</p>
+
+<p>No editor clássico, na opção Visual, podemos formatar o post com negrito, itálico, colocar link, etc., mas na opção Código, podemos colocar HTML, como por exemplo:</p>
+
+<pre>
+<code>
+&lt;h1&gt;Título Principal&lt;/h1&gt;
+&lt;h2&gt;Subtítulo&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.google.com.br/&quot; target=&quot;_blank&quot;&gt;Clique Aqui para Abrir o Google&lt;/a&gt;.&lt;/p&gt;
+</code>
+</pre>
+
+<p>Além do HTML, podemos colocar formatações em CSS diretamente nas tags, além de outros símbolos HTML, como por exemplo:</p>
+
+<pre>
+<code>
+&lt;p&gt;Copyright &amp;copy; 2025. Todos os direitos reservados. &lt;span style=&quot;color: red&quot;&gt;Não copie nada sem autorização!&lt;/span&gt;&lt;/p&gt;
+</code>
+</pre>
+
+<p>Podemos colocar também ícones, esse é um site para colocarmos ícones, onde ele tem inclusive os códigos dos mesmos: <a href="https://fontawesome.com/icons" target="_blank">https://fontawesome.com/icons</a></p>
+
+<h3>Menus no Wordpress</h3>
+
+<p>Vamos começar a criar o topo do nosso site, no caso, vamos criar o menu primeiramente.</p>
+
+<p>No caso, vamos criar todas as páginas que usaremos no site.</p>
+
+<p>Lembre-se também que há diferença entre post e página, vamos criar páginas, que serão essas:</p>
+
+<ul>
+    <li>Home.</li>
+    <li>Cardápio.</li>
+    <li>Quem Somos.</li>
+    <li>Contato.</li>   
+</ul>
+
+<p>Para personalizar os menus, vá em Aparência e em Menus. Dê o nome pro menu (no caso, principal), marque a opçõe Menu Principal e desmarque as outras. Clique em Criar Menu. Ao lado, aparecerá os itens com as páginas que nós adicionaremos. Depois de adicionar, podemos reordenar eles (cuidado com as tabulações, pois são considerados submenus), não esqueça de clicar em Salvar Menu.</p>
+
+<p>Os menus vão ficar bagunçados no mobile, mas posteriormente podemos adaptar a responsividade para celulares.</p>
+
+<p>PS: Além das páginas, podemos colocar nos menus posts, categorias e links personalizados (isso usamos para criar menus com submenus).</p>
+
+<h3>Topo e Rodapé - Parte 1</h3>
+
+<p>Indo em Aparência e Personalizar, ou indo nas configurações do Astra, podemos personalizar nosso site.</p>
+
+<p>Vamos em Cabeçalho e clique no <q>Lápis</q> do nome do site, ali teremos a opção de colocar o Logo e o Título do Site. O logo deverá ser menor. Devemos colocar o título do site e a descrição, mas desmarque todos os dispositivos para visualização do título, para que apareça só o logo. Ali em baixo podemos definir a favicon do site. Em Design podemos definir o espaçamento do logo.</p>
+
+<p>Em Post Types e Blog/Arquivos, podemos escolher o layout do site. Em Global e Botões, podemos estilizar os botões, vamos definir a cor de fundo deles.</p>
+
+<h3>Topo e Rodapé - Parte 2</h3>
+
+<p>Em Personalizar e Rodapé, vamos remover o Copyright que vem por padrão. Ali podemos colocar o que precisarmos, como um HTML com as tags que quisermos.</p>
+
+<p>Em Global e em Contêiner, podemos ajustar a <q>caixa</q> do tamanho do site.</p>
+
+<p>Em Global e em Cores, podemos definir as cores do tema, como links e tudo mais. No mesmo local, em Surface Color, podemos definir o fundo do site.</p>
+
+<p>Em Cabeçalho, Menu Principal e Design, podemos configurar as cores do menu também. Ainda em Cabeçalho, em Cabeçalho Transparente, podemos configurar as cores do mesmo. No rodapé é a mesma coisa.</p>
+
+<p>Em Global e Tipografia, nós escolheremos a fonte do site, como o estilo, o tamanho e tudo mais.</p>
+
+<p>Nas Configurações da Página Inicial, para não querer um modelo de blog (que escolhe os posts recentes), escolha a opção <q>Uma Página Estática</q>, na qual escolheremos a Home.</p>
+
+<h3>Destaques do Site</h3>
+
+<p>Vamos fazer o home do site, vamos no Painel, em Páginas e vamos procurar a página do Home. Vamos usar o Editor de Blocos pra não perdermos as configurações.</p>
+
+<p>Nas Configurações do Astra, em Lateral e Sidebar Layout,  podemos desmarcar a opção de tirar a lateral. No editor, podemos clicar no título e clicar no <q>Olho</q> para o título não aparecer.</p>
+
+<p>Clique no <q>+</q> em <q>Digite / para Escolher um Bloco</q>, e em Spectra, clique em Container e escolha um layout, no caso, um que preencha a tela toda (Largura Completa).</p>
+
+<p>Nas configurações (não do Astra), em Bloco, escolha a tag HTML section, e escolha a largura 1200 e altura 650. Em Style e Spacing, no Padding, coloque 250 no topo, 250 embaixo, os outros deixa em 20. No mesmo lugar, em Background, clicamos em Imagem e colocamos a imagem da pizza, e vá em Custom e marque a opção Centralized Position, e em Attachment coloque Fixed, e o Repeat como No. Dependendo do site podemos alterar algumas dessas configurações. Em Size deixe em Cover.</p>
+
+<p>Em Overlay Type, podemos colocar uma cor por cima da imagem, e selecionar a opacidade da mesma, vamos colocar a cor preta com 0,45 a 0,7 de opacidade.</p>
+
+<p>Dentro da imagem do site, clique no <q>+</q> bem no centro e escolha o Info Box e coloque o texto. Para definir a cor do título, vá em Style e Title, para o conteúdo você vai em Description, o mesmo vale pra fonte e tamanho, que estão em Typograph. Em General e Image/Icon, podemos colocar uma imagem ou ícone ali. Em Style e Icon/Image selecionamos o tamanho do ícone ou imagem, preenchimento, etc.</p>
+
 <ul>
     <li><a href="tudo-sobre-wordpress-2.html">Continuação da Matéria!</a></li>
 </ul>
