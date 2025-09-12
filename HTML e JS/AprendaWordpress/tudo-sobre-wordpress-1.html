@@ -89,6 +89,8 @@ default collate utf8_general_ci;
 
 <p>Podemos instalar outros plugins, como o EWWW Image Optimizer, o Google Analytics, o WP Super Cache, WP Forms e o WPS Hide Login, entre outros, conforme sua necessidade.</p>
 
+<p>Lembrando que um plugin deve ser desativado antes de ser excluído, e pra usuários leigos em programação é melhor o Editor Clássico, já que neste basta apenas escrever e ele já faz tudo, inclusive com imagens e vídeos apenas colando os links dos mesmos, sem precisar de nenhum código HTML ou de outro tipo.</p>
+
 <h3>Configurações Importantes</h3>
 
 <p>Em Configurações, vá em Geral e veja as configurações lá. Lá terá coisas como o título, o ícone do site (favicon), a descrição, o endereço, o e-mail de administração. Se o site estiver em um servidor online, deixe o link com <q>https</q> e não com <q>http</q>, para que ele só conecte criptografado. Num site num servidor local, isso não é necessário.</p>
@@ -120,6 +122,8 @@ default collate utf8_general_ci;
 <p>Nas configurações do Spectra, vamos em Blocos e ver os recursos que podem ser ativados ou desativados, podemos desativar, por exemplo, os Mapas do Google, caso não sejam usados. Algumas opções são pagas.</p>
 
 <p>Por fim, na configuração do EWWW Image Optimizer, podemos ver a configuração dele, que comprimirá ainda mais as imagens do blog. Este comprime inclusive PDFs. Ele pedirá algumas configurações iniciais no primeiro acesso.</p>
+
+<p>PS: Caso o site <q>trave</q> no modo de manutenção, vá na raiz onde está instalado o site (no XAMPP em Windows é em C:\xampp\htdocs\NomeDoProjeto) e exclua o arquivo <q>.maintenance</q> dentro dele.</p>
 
 <h3>Painel de Controle do Wordpress</h3>
 
@@ -268,7 +272,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&g
 <ul>
     <li>Home.</li>
     <li>Cardápio.</li>
-    <li>Quem Somos.</li>
+    <li>Depoimentos.</li>
     <li>Contato.</li>   
 </ul>
 
@@ -313,6 +317,34 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&g
 <p>Em Overlay Type, podemos colocar uma cor por cima da imagem, e selecionar a opacidade da mesma, vamos colocar a cor preta com 0,45 a 0,7 de opacidade.</p>
 
 <p>Dentro da imagem do site, clique no <q>+</q> bem no centro e escolha o Info Box e coloque o texto. Para definir a cor do título, vá em Style e Title, para o conteúdo você vai em Description, o mesmo vale pra fonte e tamanho, que estão em Typograph. Em General e Image/Icon, podemos colocar uma imagem ou ícone ali. Em Style e Icon/Image selecionamos o tamanho do ícone ou imagem, preenchimento, etc.</p>
+
+<h3>Colunas e Caixas</h3>
+
+<p>Com o Editor de Blocos, vamos continuar editando a página home.</p>
+
+<p>Ao abrir a página, vemos que do lado, tem o número de revisões da página especificada. Ali vemos as coisas que foram alteradas e, se necessário, podemos reverter coisas modificadas no site.</p>
+
+<p>Vamos, abaixo da imagem, adicionar um Container, e escolher a opção que divide em três blocos de 33 / 33 / 33, que dividirá a seção em três colunas. Escolha o ajuste das colunas. Em Container Width, marque a opção Equal Height para ele preencher todos os blocos.</p>
+
+<p>Vamos colocar uma imagem de fundo nessas colunas, vá em Bloco, Style e Background e escolha uma imagem. Em Background, podemos escolher o alinhamento, se será scroll ou fixed. E em Overlay Type, escolhemos uma cor e a transparência dela, para o conteúdo ficar a fundo. Na primeira coluna, colocaremos uma Info Box e coloque os conteúdos nele. Da mesma forma, podemos estilizar, alinhar, pôr ícone, etc. Na segunda colocaremos uma imagem, como uma fatia de pizza em PNG transparente. Na terceira, colocaremos a imagem de um casal comendo pizza, na qual podemos colocar um cabeçalho, por exemplo, com o horário.</p>
+
+<p>PS: Evite colocar frases em editores como o Photoshop ou o Gimp, prefira colocar as frases através do Wordpress, pro Google indexar e também caso precise editar coisas como horário e contato.</p>
+
+<h3>Seção de Cardápio</h3>
+
+<p>Na página de cardápio, adicione um container e deixe ele com a opção Full Width, e dentro dele coloque um Info Box. Vamos fazer a seção de cardápio e faça a edições com os textos desejados.</p>
+
+<p>Embaixo dele, colocamos uma lista de preços, onde colocaremos nosso cardápio. Em Separator podemos escolher o estilo. No <q>+</q> logo abaixo, à direita, podemos adicionar mais itens. Em General, podemos ajustar as colunas desejadas. Podemos adicionar as imagens em cada item também.</p>
+
+<p>Para ajustar os textos com os preços, vamos usar o MicroThemer. Configure ele no painel, logo ele aparecerá na barra de configurações do site. Em dimensões, vamos diminuir a largura equivalente à div de cada item.</p>
+
+<p>Podemos personalizar o CSS do site também.</p>
+
+<h3>Seção de Depoimentos</h3>
+
+<p>Na página de Depoimentos, vamos colocar os depoimentos do site. Vamos colocar um container nele, vamos colocar com duas colunas acima e duas embaixo. Na primeira, vamos colocar de fundo uma imagem de aspas, com o Size Contain, e o Overlay Type com transparência. Na segunda, escrevemos o depoimento, usando a opção Testemonial. Podemos colocar uma imagem da pessoa que fez o depoimento, que por padrão, já ficará redondinha, mas podemos configurar isso em General e em Image, no mesmo lugar que colocamos as imagens.</p>
+
+<p>PS: Podemos copiar um elemento do Wordpress indo em duplicar.</p>
 
 <ul>
     <li><a href="tudo-sobre-wordpress-2.html">Continuação da Matéria!</a></li>
