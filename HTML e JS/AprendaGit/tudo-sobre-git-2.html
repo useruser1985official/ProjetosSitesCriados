@@ -20,7 +20,7 @@
             
 <h2>Tudo sobre Git Parte 2</h2>
 
-<h3>Iniciando com GitHub</h3>
+<h3>Iniciando com GitHub - Parte 1</h3>
 
 <p>O GitHub é um serviço de host para repositórios Git. Até o momento, nós criamos nosso repositório Git localmente, ele está apenas no seu computador, para isso nós teremos que colocar ele num repositório remoto, que no caso, usaremos o GitHub. Existem outros semelhantes como o GitLab, o BitBucket, o Phabricator, o Gogs, etc.</p>
 
@@ -37,11 +37,31 @@
 
 <p>Para fazer o upload do seu repositório local pro GitHub, entre na pasta desse repositório e veja com <code>git status</code> o atual estado do repositório. Para fazer o <q>push</q> (enviar pro GitHub), digite <code>git push https://github.com/nomedousuario/NomeDoProjeto.git master</code> (ou a branch que quer enviar). Só com isso, todos os nossos arquivos serão enviados pro repositório remoto, incluindo os commits e tudo mais o que fizemos localmente.</p>
 
+<p>Na primeira vez ele pode pedir login no GitHub, e no Windows ele abrirá o navegador padrão para você confirmar as credenciais do mesmo. No Linux, ele pedirá o login e senha pelo terminal, aí você vai no seu perfil em Settings, Developer Settings, Personal Access Tokens, Tokens Classic e em Generate New Token Classic, coloque um título e marque as opções desejadas e clique me Generate Token. Ele deve gerar um token parecido com esse: <code>ghp&#95;6Athi0nocpil6tuk14XOsOQlXyPr2NPPzgmD</code>.</p>
+
+<p>Para armazenar o token no seu sistema, digite esses comandos:</p>
+
+<pre>
+<code>
+git config --global credential.helper cache
+</code>
+</pre>
+
+<p>Ou, para armazenar permanentemente (no disco):</p>
+
+<pre>
+<code>
+git config --global credential.helper store
+</code>
+</pre>
+
 <p>Agora, no nosso repositório, faça uma alteração no HTML, veja o status, adicione e commite o repositório. Até então, as alterações serão locais. Para ele sincronizar com o repositório remoto digite <code>git push https://github.com/nomedousuario/NomeDoProjeto.git master</code>.</p>
 
 <p>Para não ficar copiando e colando o link do repositório toda hora, podemos criar um alias para esse comando, utilizando <code>git remote add origin https://github.com/nomedousuario/Projeto-1.git</code>. Para ver se foi adicionado, digite <code>git remote -v</code>, ele mostrará o repositório para fetch (buscar) e push (enviar). Daí é só usar <code>git push origin master</code>.</p>
 
 <p>PS: Lembrando que onde está origin pode ser qualquer nome, mas geralmente origin é o mais usado.</p>
+
+<h3>Iniciando com GitHub - Parte 2</h3>
 
 <p>De uma outra forma, criaremos um segundo repositório remoto no GitHub, da mesma forma do primeiro. Nesse caso criaremos o .gitignore e o README (que é usado como uma documentação do projeto).</p>
 
@@ -49,7 +69,7 @@
 
 <p>Podemos só buscar as informações sem alterar o repositório com <code>git fetch https://github.com/nomedousuario/Projeto-1.git master</code>, depois podemos dar um <code>git status</code> para ver se é necessário fazer o pull do repositório remoto (puxar). Para puxar as alterações do projeto para o nosso repositório local, digite <code>git pull https://github.com/nomedousuario/Projeto-1.git master</code>. É recomendado primeiro usar o fetch, depois o pull.</p>
 
-<p>PS: Ao clonar um repositório, ele automaticamente colocará o repositório remoto clonado com o alias "origin". Para ter certeza, digite novamente <code>git remote -v</code>. E os comandos push, fetch e pull podem ter a branch omitida, caso você queira fazer as tarefas na branch que você está atualmente, algo como <code>git push https://github.com/nomedousuario/NomeDoProjeto.git</code> ou <code>git push origin</code> (se você tiver na master ele fará o envio pra master, em uma branch criada ele enviará pra esta criada, etc.).</p>
+<p>PS: Ao clonar um repositório, ele automaticamente colocará o repositório remoto clonado com o alias <q>origin</q>. Para ter certeza, digite novamente <code>git remote -v</code>. E os comandos push, fetch e pull podem ter a branch omitida, caso você queira fazer as tarefas na branch que você está atualmente, algo como <code>git push https://github.com/nomedousuario/NomeDoProjeto.git</code> ou <code>git push origin</code> (se você tiver na master ele fará o envio pra master, em uma branch criada ele enviará pra esta criada, etc.).</p>
 
 <p>Pode também ser necessário forçar o fetch e o pull em alguns casos. Para isso, podemos usar comandos como:</p>
 
@@ -84,7 +104,7 @@ git push origin master --force-with-lease
 
 <p>Vamos abrir três terminais, onde um será você, o outro será Fulano e o outro será Sicrano.</p>
 
-<p>Vamos clonar o repositório Projeto-1 do GitHub digitando <code>git clone https://github.com/nomedousuario/Projeto-1 Projeto-1-Fulano</code> e depois fazer o mesmo com Sicrano.</p>
+<p>Vamos clonar o repositório Projeto-1 do GitHub digitando <code>git clone https://github.com/nomedousuario/Projeto-1.git Projeto-1-Fulano</code> e depois fazer o mesmo com Sicrano.</p>
 
 <p>No caso nós vamos salvar com nomes diferentes por exemplificar no mesmo computador, no entanto, num projeto real, cada um trabalharia num computador diferente e por isso, as pastas poderiam ter o nome original mesmo.</p>
 
@@ -120,7 +140,7 @@ git push origin master --force-with-lease
 
 <p>Para isso, vá no repositório desejado e clique em Fork. Lá você poderá alterar o nome, decidir se só copia a branch principal ou copia todas, etc. Depois clique em Create Fork.</p>
 
-<p>Daí, podemos clonar nosso repositório forkado com <code>git clone https://github.com/nossousuario/NomeDoProjeto.git</code>, fazemos as alterações, daí nós adicionamos, commitamos e damos o push pro seu repositório. Para mandar nossas modificações pro usuário criador original do repositório, clique em Contribute e depois em Pull Request, e siga as mesmas instruções ensinadas anteriormente.</p>
+<p>Daí, podemos clonar nosso repositório forkado com <code>git clone https://github.com/nossousuario/NomeDoProjeto.git</code>, fazemos as alterações, daí nós adicionamos, commitamos e damos o push pro seu repositório. Para mandar nossas modificações pro usuário criador original do repositório, clique em Contribute e depois em Open Pull Request, e siga as mesmas instruções ensinadas anteriormente.</p>
 
 <p>Só que dessa forma, não poderemos alterar diretamente o código, mas o dono do repositório original pode aprovar ou recusar suas mudanças, e caso aprove, aí sim ele será fundido pelo próprio dono, e você ficará como contribuidor.</p>
 
@@ -129,6 +149,63 @@ git push origin master --force-with-lease
 <p>Nós podemos também relatar bugs, sugerir melhorias e outros tipos de comentários em um repositório do GitHub.</p>
 
 <p>Para isso, vá no repositório desejado, em Issues e clique em New Issue, escreva o título e a descrição, e clique em Create.</p>
+
+<h3>Mostrando Diferenças com git diff e git show</h3>
+
+<p>O comando <code>git diff</code> é utilizado no Git para mostrar as diferenças entre versões de arquivos, seja entre o que está no repositório local e o que está no repositório remoto, ou entre o que você modificou e o que está na última versão confirmada (commit). Ele é muito útil para você inspecionar as mudanças que fez antes de confirmar (commit) ou antes de fazer o push para o repositório remoto.</p>
+
+<p>Aqui estão algumas das formas mais comuns de usar o git diff:</p>
+
+<p>Mostrar diferenças não confirmadas:</p>
+
+<pre>
+<code>
+git diff
+</code>
+</pre>
+
+<p>Comparar o estado atual de um arquivo com o último commit:</p>
+
+<pre>
+<code>
+git diff index.html
+</code>
+</pre>
+
+<p>Comparar as alterações entre o repositório local e o remoto:</p>
+
+<pre>
+<code>
+git diff origin/master
+</code>
+</pre>
+
+<p>Comparar dois commits:</p>
+
+<pre>
+<code>
+git diff c67f99d e0323fe
+</code>
+</pre>
+
+<p>É uma ferramenta muito poderosa para entender o que mudou, especialmente quando você está trabalhando com várias mudanças e não quer perder o controle do que foi alterado.</p>
+
+<p>Já o comando <code>git show</code> é usado para exibir informações sobre um commit específico no Git. Ele mostra o conteúdo do commit, incluindo a mensagem, as mudanças feitas e os detalhes do autor. Sintaxe básica:</p>
+
+<pre>
+<code>
+git show c67f99d
+</code>
+</pre>
+
+<p>Se você não passar um hash, o Git mostra o commit mais recente.</p>
+
+<p>Você também pode usar opções para personalizar a saída, como:</p>
+
+<ul>
+    <li><code>git show --stat</code>: Mostra um resumo das alterações no código.</li>
+    <li><code>git show --name-only</code>: Mostra apenas os nomes dos arquivos alterados.</li>    
+</ul>
 
 <ul>
     <li><a href="tudo-sobre-git-1.html">Parte Anterior da Matéria!</a></li>

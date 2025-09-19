@@ -216,7 +216,7 @@ dist
 
 <p>Para deletar uma branch, digite <code>git branch -d teste</code>, mas caso ela não seja fundida à branch master, ele não deixará excluir. Para forçar exclusão coloque o <q>D</q> maiúsculo, como <code>git branch -D teste</code>.</p>
 
-<p>Crie uma nova branch, por exemplo, <code>git branch mercado-pago</code>, e mais uma com <code>git branch whatsapp</code>, simulando dois funcionários trabalhando em diferentes coisas no mesmo programa. Para trabalharmos com a branch do Mercado Pago digitamos <code>git checkout mercado-pago</code>, e podemos, por exemplo, colocar um Javascript simulando o uso do mesmo, fazendo a adição e o commit. Mude para a branch do Whatsapp com <code>git checkout whatsapp</code> e veremos que nada colocado do Mercado Pago estará lá, adicione também um Javascript, adicione e commite também. Volte depois pro Mercado Pago com <code>git checkout mercado-pago</code>, e pra master com <code>git checkout master</code>.</p>
+<p>Crie uma nova branch, por exemplo, <code>git branch mercado-pago</code>, e mais uma com <code>git branch whatsapp</code>, simulando dois funcionários trabalhando em diferentes coisas no mesmo programa. Para trabalharmos com a branch do Mercado Pago digitamos <code>git checkout mercado-pago</code>, e podemos, por exemplo, colocar um Javascript simulando o uso do mesmo, fazendo a adição e o commit. Mude para a branch do Whatsapp com <code>git checkout whatsapp</code> e veremos que nada colocado do Mercado Pago estará ali, crie também um Javascript, adicione e commite também. Volte depois pro Mercado Pago com <code>git checkout mercado-pago</code>, e pra master com <code>git checkout master</code>.</p>
 
 <h3>Fundindo Branches</h3>
 
@@ -232,11 +232,11 @@ dist
 
 <p>Podemos continuar trabalhando numa branch mesmo depois dela ser fundida com outra. Vamos supor agora que vamos alterar um estilo na branch do Whatsapp. Primeiro vá pra essa branch com <code>git checkout whatsapp</code> e altere o CSS, como por exemplo, a cor de fundo do site, adicione e commite. Voltando na branch principal com <code>git checkout master</code>, vamos fazer outra alteração de cores no CSS, adicionamos e commitamos.</p>
 
-<p>Ao fazer a fusão no master de novo com <code>git merge whatsapp</code>, ele dará um conflito de código, e não fundirá as branches. No caso você abrirá o editor, que marcará o código com os conflitos, para ser corrigido manualmente. Após a edição, veja o status, adicione e commite ele, e também podemos omitir a mensagem, pois o Git saberá que se trata de um conflito, então digite apenas <code>git commit</code>, ele abrirá os comentários de configuração, nesse caso digite <code>:q</code>, e ele concluirá a fusão.</p>
+<p>Ao fazer a fusão no master de novo com <code>git merge whatsapp</code>, ele dará um conflito de código, e não fundirá as branches. No caso você abrirá o editor, que marcará o código com os conflitos, para ser corrigido manualmente. Após a edição, veja o status, adicione e commite ele, e também podemos omitir a mensagem, pois o Git saberá que se trata de um conflito, então, depois de adicionar, digite apenas <code>git commit</code>, ele abrirá os comentários de configuração, nesse caso digite <code>:q</code>, e ele concluirá a fusão.</p>
 
 <p>Vamos pra branch do Mercado Pago digitando <code>git checkout mercado-pago</code> e vamos editar o Javascript dele, adicione e commite ele, volte pro master com <code>git checkout master</code>, edite o mesmo Javascript do Mercado Pago, adicione e commite também. Vamos fundir novamente o branch do Mercado Pago com o master, digitando <code>git merge mercado-pago</code> e ele mostrará o conflito novamente. Resolva da mesma forma anterior.</p>
 
-<p>PS: Várias IDEs podem oferecer comparações sobre os conflitos dos códigos dos branches para serem corrigidos pela gente.</p>
+<p>PS: Várias IDEs podem oferecer comparações sobre os conflitos dos códigos dos branches para serem corrigidos manualmente.</p>
 
 <ul>
     <li><a href="tudo-sobre-git-2.html">Continuação da Matéria!</a></li>
