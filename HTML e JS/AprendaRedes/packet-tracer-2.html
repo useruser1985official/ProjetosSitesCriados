@@ -298,6 +298,8 @@ no shutdown
 exit
 
 exit
+
+copy running-config startup-config
 </code>
 </pre>
 
@@ -409,13 +411,51 @@ show ip route
 
 <p>Agora todo mundo tá vendo todo mundo. Volte ao prompt do primeiro PC e use o comando <code>tracert 192.168.3.10</code> para vermos a rota dele. Faça o mesmo no segundo PC com <code>tracert 192.168.1.10</code>. Dessa forma entendemos como funciona o traceroute, onde cada IP é um roteador onde passa para chegar ao endereço final.</p>
 
+<p>PS: Caso precise excluir uma rota estática num roteador, digite algo como <code>no ip route 192.168.3.0 255.255.255.0 192.168.2.2</code>.</p>
+
 <h3>Firewall: Listas de controle de acesso (ACL) no Cisco Packet Tracer</h3>
 
 <p>Coloque um PC com o IP <code>192.168.1.2</code> com o gateway <code>192.168.1.1</code>, e um roteador 2621XM ligado a ele com o IP <code>192.168.1.1</code> e máscara padrão C, mas do outro lado do roteador terá o IP <code>192.168.2.1</code> e a máscara <code>255.255.255.252</code> (outra rede). Coloque ao lado um firewall 5506 e no final, um servidor. No firewall, que será configurado por último, a porta ligada ao roteador terá a mesma máscara e o IP <code>192.168.2.2</code>. Do outro lado, será outra rede, com o IP do firewall sendo <code>192.168.3.1</code> e o servidor com o IP <code>192.168.3.2</code> com o gateway <code>192.168.3.1</code>, ambos com a máscara <code>255.255.255.252</code>.</p>
 
 <p>PS: Lembre-se que computadores e roteadores devem ser ligados com o cabo Cross.</p>
 
-<p>No roteador, vamos em config e coloque em Config, em RIP, adicione as redes <code>192.168.1.0</code> e <code>192.168.2.0</code>.</p>
+<p>No roteador, vamos em CLI, digite <q>n</q> na configuração do dialog e depois digite esses comandos para o configurar:</p>
+
+<pre>
+<code>
+enable
+
+conf t
+
+interface FastEthernet 0/0
+
+ip address 192.168.1.1 255.255.255.0
+
+no shutdown
+
+exit
+
+interface FastEthernet 0/1
+
+ip address 192.168.2.1 255.255.255.252
+
+no shutdown
+
+exit
+
+router rip
+
+network 192.168.1.0
+
+network 192.168.2.0
+
+exit
+
+exit
+</code>
+</pre>
+
+<p>O RIP (Routing Information Protocol) é um protocolo usado por roteadores para trocar informações sobre caminhos na rede.</p>
 
 <p>No servidor, habilite o HTTP para um teste.</p>
 

@@ -98,6 +98,8 @@
 
 <img src="imagens/roteador.jpg" alt="Roteador"/>
 
+<p>PS: Esses roteadores são bem diferentes dos roteadores wi-fi que encontramos em ambientes domésticos.</p>
+
 <h3>Protocolo ARP</h3>
 
 <p>O protocolo ARP fornece resolução dinâmica de endereços, que é um mapeamento entre as duas formas de endereçamento distintas: endereços IP, e qualquer outro tipo de endereço usado na camada de enlace. No caso dos quadros Ethernet, a camada de enlace usa o MAC Address (Media Access Control), endereço físico da interface. Permite obter o MAC Addres de uma interface a partir do seu Endereço IP.</p>
@@ -237,11 +239,15 @@
     <li>Já no Windows, são enviados datagramas ICMP do tipo Echo Request (o famoso Ping), e quando o dispositivo de origem recebe uma resposta Echo Reply, ele sabe que o pacote chegou ao seu destino.</li>
 </ul>
 
-<p>Para trabalharmos com isso, usamos (em Windows), usamos o comando <code>tracert</code>. No Linux substitua por <code>traceroute</code>.</p>
+<p>Para trabalharmos com isso, usamos (em Windows), usamos o comando <code>tracert</code>.</p>
 
 <p>Vamos abrir o prompt, digitando <code>tracert www.google.com.br</code> (ou outro site/IP).</p>
 
 <p>Digitando <code>tracert /?</code> você pode ver outras opções para usar como parâmetros. Por exemplo, podemos usar o parâmetro <code>/h</code> para escolher o número máximo de saltos (cujo padrão é 30), por exemplo: <code>tracert /h 15 www.google.com.br</code>. Ou forçar o uso de IPv4 com o parâmetro <code>/4</code> ou de IPv6 usando <code>/6</code>.</p>
+
+<p>Cada salto é um roteador (que pode não responder e aparecer tempo esgotado por estar com o firewall ou ICMP bloqueado, e aparecer apenas asteriscos, mas isso não indica problemas, geralmente).</p>
+
+<p>No Linux, o comando equivalente se chama <code>traceroute</code> e tem outros parâmetros. Para escolher a quantidade de máxima de saltos (como 15) use <code>-m 15</code>, pra forçar IPV4 use <code>-4</code> e IPV6 <code>-6</code>. Para ajuda use <code>--help</code>.</p>
 
 <h3>Como Funciona o Utilitário Ping</h3>
 
@@ -255,11 +261,13 @@
 
 <p>Além de mostrar o número de sequência, quando a mensagem de retorno Echo Reply é recebida, também são mostrados o TTL e o RTT calculado. O Ping calcula o RTT armazenando a hora na qual o pacote Echo Request é enviado na área de dados da mensagem ICMP. Então, quando a resposta Echo Reply é recebida, ele simplesmente subtrai esse valor de hora da hora atual (momento em que o datagrama é recebido). Erros e pacotes também são relatados pelo comando Ping.</p>
 
-<p>Para usarmos ele, usamos o comando <code>ping www.google.com.br</code> (substituindo pelo site/IP desejado).</p>
+<p>Para usarmos ele, usamos no prompt do Windows o comando <code>ping www.google.com.br</code> (substituindo pelo site/IP desejado).</p>
 
 <p>Digitando <code>ping /?</code> você pode ver outras opções para usar como parâmetros.</p>
 
 <p>Um exemplo de uso seria <code>ping /n 6 www.google.com.br</code>, para enviar seis requisições, ao invés do padrão 4. Outro exemplo seria colocar o parâmetro <code>/t</code> para enviar infinitas requisições no Windows, por exemplo <code>ping /t www.google.com.br</code>. Também podemos forçar o uso de IPv4 com o parâmetro <code>/4</code> ou de IPv6 usando <code>/6</code>.</p>
+
+<p>No Linux, o comando <code>ping</code> tem outros parâmetros, e por padrão manda requisições infinitas. Para escolher a quantidade de requisições (como 6) use <code>-c 6</code>, pra forçar IPV4 use <code>-4</code> e IPV6 <code>-6</code>. Para ajuda use <code>--help</code>.</p>
 
 <p>PS: O Ping é um comando para iniciar o teste de conectividade, apesar de algumas pessoas errarem, o Ping é apenas o comando, o tempo de milissegundos para o outro dispositivo se chama latência (o tempo máximo de latência deve ser de 45 ms, em média, no Brasil, quanto mais distante maior será a latência, como por exemplo, um servidor nos EUA).</p>
 

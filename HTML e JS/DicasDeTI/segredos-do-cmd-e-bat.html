@@ -327,7 +327,7 @@ ipconfig /renew
 
 <p>Podemos também usar parâmetros no tracert, como para aumentar a quantidade máxima de saltos com o /h, por exemplo <code>tracert /h 60 www.google.com.br</code>.</p>
 
-<p>PS: Tanto no ping quanto no tracert, pode ser necessário colocar <code>/4</code> para forçar IPv4 ou <code>/6</code> para forçar IPv6.</p>
+<p>PS: Tanto no ping quanto no tracert, pode ser necessário colocar <code>/4</code> para forçar IPv4 ou <code>/6</code> para forçar IPv6. Cada salto é um roteador (que é diferente dos roteadores domésticos), que pode não responder por bloqueio de firewall ou ICMP dos mesmos, e mostrar só asteriscos, mas que não significam problema exatamente.</p>
 
 <p>Para liberar o cache ARP, basta usar <code>netsh interface ip delete arpcache</code>, para excluir o cache de destino use <code>netsh interface ip delete destinationcache</code>, para resetar o TCP/IP usamos <code>netsh int ip reset all</code>.</p>
 

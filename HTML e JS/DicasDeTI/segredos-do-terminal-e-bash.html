@@ -289,7 +289,7 @@ ifconfig -a # Mostra informações detalhadas sobre todas as interfaces
 
 <p>Podemos também usar parâmetros no traceroute, como para aumentar a quantidade máxima de saltos com o -m, por exemplo <code>traceroute -m 60 www.google.com.br</code>.</p>
 
-<p>PS: Tanto no ping quanto no traceroute, pode ser necessário colocar <code>-4</code> para forçar IPv4 ou <code>-6</code> para forçar IPv6.</p>
+<p>PS: Tanto no ping quanto no traceroute, pode ser necessário colocar <code>-4</code> para forçar IPv4 ou <code>-6</code> para forçar IPv6. Cada salto é um roteador (que é diferente dos roteadores domésticos), que pode não responder por bloqueio de firewall ou ICMP dos mesmos, e mostrar só asteriscos, mas que não significam problema exatamente.</p>
 
 <!--
 
