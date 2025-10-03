@@ -1143,23 +1143,53 @@ class AdminContent {
 
 		$html = '';
 		$types = array(
+			'current' => 'Current Tabs',
 			'default' => 'Default Tabs',
-			'current' => 'Current Tabs'
 		);
 
+		$html.= '
+		<div id="group-management-tabs" class="query-tabs">';
+
 		foreach($types as $key => $title){
+			$active = $key === 'default' ? ' active' : '';
+			$html.= '<span class="mt-tab group-management-tab group-management-tab-'.$key.$active.'" rel="'.$key.'">'.$title.'</span>';
+		}
+
+		$html.= '
+		</div>';
+
+		foreach($types as $key => $title){
+			$show= $key === 'default' ? ' show' : '';
+			$addTab = esc_attr__('Add tab', 'microthemer');
 			$html.= '
-			<div class="html-tabs-'.$key.'">
-				<div class="mt-panel-header">
-			        <div class="mt-panel-title ui-draggable-handle">'.$title.'</div>                         
-			    </div>
+			<div class="group-management-field group-management-field-'.$key.$show.' hidden">
 			    <ul class="html-tabs-list-'.$key.'"></ul>
+			    <div class="add-tab-wrap">
+				     '.$this->Admin->iconFont('add', array(
+						'class' => 'group-management-add-tab group-tab-action-icon',
+						'adjacentText' => array(
+							'text' => $addTab,
+							'class' => 'mti-text group-management-add-tab group-tab-action-icon'
+						),
+					)).
+			        '<span class="mt-management-spacer"></span>'.
+			        $this->Admin->iconFont('undo', array(
+				        'class' => 'group-management-reset-tabs group-tab-action-icon',
+						'data-group-tab-action' => 'reset',
+				        'adjacentText' => array(
+					        'text' => esc_html__('Reset default tabs', 'microthemer'),
+					        'class' => 'mti-text group-management-reset-tabs group-tab-action-icon',
+					        'data-group-tab-action' => 'reset',
+				        ),
+			        )).'
+				</div>
+			   
 			</div>';
 		}
 
 		echo $this->Admin->context_menu_content(array(
 			'base_key' => 'group-html',
-			'title' => esc_html__('Amender Options', 'microthemer'),
+			'title' => esc_html__('Amender tabs', 'microthemer'),
 			'sections' => array(
 				$html
 			)

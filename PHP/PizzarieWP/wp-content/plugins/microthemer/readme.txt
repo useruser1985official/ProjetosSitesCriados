@@ -79,6 +79,14 @@ I've been happily developing Microthemer and supporting users of varying technic
 
 == Changelog ==
 
+= 7.5.1.6 (Sept 30th, 2025) =
+
+# Enhancements (Microthemer & Amender)
+* AI example prompts.
+
+# Enhancements (Amender)
+* Customize the default Amender change tabs.
+
 = 7.5.1.5 (Sept 4th, 2025) =
 
 # Bugs fixed (Microthemer & Amender)

@@ -552,10 +552,9 @@ arquivo.close()
 
 <pre>
 <code>
-arquivo = open("arquivo.txt", "rt")
+arquivo = open("arquivo.txt", "r")
 
-for l in arquivo:
-    print(l) # Atenção à identação
+print(arquivo.read())
 
 arquivo.close()
 </code>

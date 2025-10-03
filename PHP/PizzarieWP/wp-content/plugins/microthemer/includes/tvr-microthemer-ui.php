@@ -650,19 +650,22 @@ require_once('common-inline-assets.php');
                     <?php
 
                     // AI assistant
-                    echo $this->ui_toggle(
-	                    'ai_assistant',
-	                    esc_attr__('AI assistant', 'microthemer'),
-	                    esc_attr__('AI assistant', 'microthemer'),
-	                    0,
-	                    'ai-expand-toggle ' . $this->iconFont('chatbot-icon', array('onlyClass' => 1)),
-	                    'mt-ai-assistant',
-	                    array(
-		                    'dataAtts' => array(
-			                    'forpopup' => 'aiAssistant'
-		                    ),
-	                    )
-                    );
+                    if (empty($this->preferences['disable_ai'])){
+	                    echo $this->ui_toggle(
+		                    'ai_assistant',
+		                    esc_attr__('AI assistant', 'microthemer'),
+		                    esc_attr__('AI assistant', 'microthemer'),
+		                    0,
+		                    'ai-expand-toggle ' . $this->iconFont('chatbot-icon', array('onlyClass' => 1)),
+		                    'mt-ai-assistant',
+		                    array(
+			                    'dataAtts' => array(
+				                    'forpopup' => 'aiAssistant'
+			                    ),
+		                    )
+	                    );
+                    }
+
 
                     // settings
                     echo $this->iconFont('cog', array(
@@ -1229,6 +1232,12 @@ require_once('common-inline-assets.php');
                         <select id="ai-model" name="model" class="mt-select"></select>
 
                     </div>
+
+                    <span class="tvr-input-wrap tvr-field-input-wrap example-prompts">
+                        <input type="text" autocomplete="off" rel="recent_prompts" data-autofill="" data-appto="#combo-markup-do-not-clear" class="combobox has-arrows search-example-prompts" name="example_prompts" value="" placeholder="Example prompts">
+                        <span class="combo-arrow tvr-field-arrow"></span>
+                        <span class="mt-clear-field"></span>
+                    </span>
 
                     <textarea id="tvr-ai-prompt" class="tvr-ai-prompt" name="ai_prompt" placeholder="<?php echo $this->supportContent() ? 'Request a website change' : 'Request a style change'; ?>"></textarea>
                     <span id="ai-send-prompt" class="tvr-button ai-send-prompt">Send</span>

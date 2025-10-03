@@ -3258,11 +3258,11 @@ class Admin {
                 )).'
                 </div>
                 <div class="single-package-column">
-                    <span title="Add any JavaScript packages this snippet needs (optional)">JS dependencies</span>
+                    <span title="Add any JavaScript packages this snippet needs (optional)">Package</span>
                     '.$this->iconFont('cog', array(
                         'rel' => 'mt-enqueue-js',
                         'class' => 'show-dialog',
-                        'title' => esc_attr__('Manage packages', 'microthemer')
+                        'title' => esc_attr__('Manage installed packages', 'microthemer')
                     )).'
                 </div>
             </div>
@@ -7686,6 +7686,11 @@ class Admin {
 			// dialog footer only needs a subset of options
 			if ($subset === 'dialog-footer' and empty($arr2['dialog'])) continue;
 
+            // no need for AI option if they don't want AI
+            if ($item_key === 'dock_ai_right' && !empty($this->preferences['disable_ai'])){
+                continue;
+            }
+
 			// support nested panels (which we're not currently indenting)
 			if (!empty($arr2['nested'])){
 				$panel_set = $this->menu_panel_set(
@@ -7866,6 +7871,8 @@ class Admin {
 
 	function suggested_screen_layouts(){
 
+        $allowAI = empty($this->preferences['disable_ai']);
+
 		$sm = array(
 			//'expand_device_tabs' => 1,
 			'left_sidebar_columns' => 1,
@@ -7880,7 +7887,8 @@ class Admin {
             'right_sidebar_columns' => 1,
 		);
 		$lg = array_merge($md, array(
-			'dock_ai_right' => 1,
+			'dock_ai_right' => $allowAI ? 1 : 0,
+			'dock_settings_right' => $allowAI ? 0 : 1,
 		));
 		$xl = array_merge($lg, array(
 			'left_sidebar_columns' => 3,
@@ -7908,7 +7916,7 @@ class Admin {
 			),
 			'L' => array(
 				'size' => 2160,
-				'title' => esc_attr__('Inspection and settings', 'microthemer'),
+				'title' => esc_attr__('Right panel docked', 'microthemer'),
 				'on' => $lg
 			),
 			'XL' => array(
@@ -7918,7 +7926,7 @@ class Admin {
 			),
 			'XL2' => array(
 				'size' => 2560,
-				'title' => esc_attr__('Alt Multi-column', 'microthemer'),
+				'title' => esc_attr__('Multi-column', 'microthemer'),
 				'on' => $xl2
 			),
 		);
@@ -7939,6 +7947,9 @@ class Admin {
 				$checked = 'checked="checked"';
 			}
 
+            // Let's do away with the original XL layout with the options on the top, and just have XL2 (but display as just XL)
+            $displayKey = str_replace('2', '', $key);
+
 			$html.= '
                     <div>
                         <input type="radio" autocomplete="off" class="radio"
@@ -7948,7 +7959,7 @@ class Admin {
 					'data-preset' => $key,
 					'title' => $array['title']
 				)).'
-                        <span class="radio-label">'.$key.'</span>
+                        <span class="radio-label">'.$displayKey.'</span>
                     </div>';
 		}
 
@@ -8131,6 +8142,10 @@ class Admin {
 
 		$totalItems = count($this->preferences['layout'][$side]['items']);
 		$optionHTML = '';
+
+        /*if ($side === 'right' && !empty($this->preferences['disable_ai'])){
+	        $totalItems = $totalItems - 1;
+        }*/
 
 		for ($x = 1; $x <= $totalItems; $x++) {
 			$selected = intval($this->preferences['layout'][$side]['num_columns']) === $x

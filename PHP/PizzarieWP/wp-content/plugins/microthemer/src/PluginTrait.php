@@ -8,7 +8,7 @@ namespace Microthemer;
 
 trait PluginTrait {
 
-	var $version = '7.5.1.5';
+	var $version = '7.5.1.6';
 	var $db_chg_in_ver = '7.4.0.4';
 	var $minimum_wordpress = '5.6';
 	var $preferencesName = 'preferences_themer_loader';

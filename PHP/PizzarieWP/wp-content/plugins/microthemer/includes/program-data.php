@@ -749,6 +749,7 @@ $this->default_preferences = array(
 	"hover_inspect_off_initially" => 0,
 	"scroll_to_elements" => 1, // scroll to out of view elements in reposition_overlays
 	"autofocus_editor" => 0,
+	"disable_ai" => 0,
 	"wireframe_mode" => 0,
 	"code_font_size" => 14,
 	"current_revision" => 0,
@@ -760,6 +761,32 @@ $this->default_preferences = array(
 			'aspect' => 'text',
 		)
 		// todo - background, text_shadow & box_shadow (as separate), transition, animation, transform
+	),
+	"default_html_group_tabs" => array(
+		array(
+			'action' => 'replace',
+			'aspect' => 'text'
+		),
+		array(
+			'action' => 'add',
+			'aspect' => 'text'
+		),
+		array(
+			'action' => 'remove',
+			'aspect' => 'html'
+		),
+		array(
+			'action' => 'add',
+			'aspect' => 'class'
+		),
+		array(
+			'action' => 'add',
+			'aspect' => 'css'
+		),
+		array(
+			'action' => 'run',
+			'aspect' => 'jsFunction'
+		),
 	),
 	"npm_dependencies" => (object) array(),
 	"npm_dependencies_published" => (object) array(), // published
@@ -1313,6 +1340,8 @@ $this->modification = array(
 			'DOMContentLoaded',
 			'inview',
 			'inview_once',
+			'outview',
+			'outview_once',
 			'mouseenter',
 			'mouseover',
 			'mouseleave',
@@ -1483,7 +1512,47 @@ $this->modification = array(
 			'x-cloak',
 			'x-ignore',
 		),*/
-	))
+	)),
+	'recent_prompts' => $this->to_autocomplete_arr(array(
+
+		// Microthemer and Amender
+		__('CSS Styling', 'microthemer') => array(
+			'Double the font-size',
+			'Add a yellow/orange gradient',
+			'Increase the padding',
+			'Why aren\'t my styles having an effect?'
+		),
+
+		// Amender only, filter on the client-side if not supported
+		__('Text', 'microthemer') => array(
+			'Reword the text to sound more lighthearted',
+			'Add a "Take the tour" sub-heading',
+		),
+		__('Media', 'microthemer') => array(
+			'Add a video background of a whale swimming',
+			'Insert an image of a monkey jumping after this element',
+			'Replace this image with an image of a forest',
+		),
+		__('Animate', 'microthemer') => array(
+			'Slide the element up when it scrolls into view',
+			'Create a GSAP typewriter animation that reveals letters in sequence'
+		),
+		__('HTML', 'microthemer') => array(
+			'Add a testimonial section with basic styling',
+			'Insert a hero section after this header and style it with bold colors',
+			'Remove this element',
+		),
+		__('JavaScript', 'microthemer') => array(
+			'Add a "confirm" prompt when they click this',
+			'Make this link open in a new tab',
+			'Add a countdown timer after this element for '  . date('j M, Y', strtotime('+90 days'))
+		),
+
+		/*__('3D Effects', 'microthemer') => array(
+			'Add a 3d scene of some animated golden stars',
+			'Create a 3d scene of dust that gravitates towards mouse movement',
+		),*/
+	)),
 );
 
 

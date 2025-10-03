@@ -208,6 +208,10 @@ $this->display_log();
 			            'label' => __('Auto-focus the code editor cursor on element select', 'microthemer'),
 			            'explain' =>__('This saves time clicking on the code editor after selecting an element, but can also lead to accidental typing in the editor', 'microthemer')
 		            ),
+		            'disable_ai' => array(
+			            'label' => __('Disable the AI Assistant', 'microthemer'),
+			            'explain' =>__('Useful if you don\'t need AI and want the "Settings" panel included in the "L" layout preset.', 'microthemer')
+		            ),
 
 		            /*'tooltip_delay' => array(
 			            'label' => __('Tooltip delay time (in milliseconds)', 'microthemer'),
@@ -278,7 +282,10 @@ $this->display_log();
 			// yes no options
 			$yes_no = array(
 				'clean_uninstall' => array(
-					'label' => sprintf(__('Upon Uninstall, Delete ALL %s Data', 'microthemer'), $this->appName),
+					'label' => sprintf(
+                            __('Upon Uninstall, Delete ALL %s Data', 'microthemer'),
+						    'plugin'
+                    ),
 					'explain' => sprintf(__('%s database settings and the contents of the /micro-themes folder are not deleted by default when you uninstall %s. But they can be if you set this option to Yes.', 'microthemer'), $this->appName, $this->appName),
 				)
 			);

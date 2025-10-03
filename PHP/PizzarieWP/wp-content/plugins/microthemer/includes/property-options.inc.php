@@ -804,6 +804,16 @@ $propertyOptions['html']['selector'] = array(
 	'ref_desc' => "<p>A CSS selector that targets elements for modification.</p>",
 );
 
+// Store recent prompts - here so it works with the stores system
+$propertyOptions['html']['recent_prompts'] = array(
+	'short_label' => esc_html_x('Recent prompts', 'noun', 'microthemer'),
+	'label' => esc_attr_x('Recent prompts', 'noun', 'microthemer'),
+	'field-class' => 'hidden',
+	'defVal' => '',
+	'sug_values' => array(
+		'this' => 1
+	),
+);
 
 
 // font
