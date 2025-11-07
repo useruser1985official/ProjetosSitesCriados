@@ -176,6 +176,18 @@ print(semana[ds])
 
 <p>PS: No Python, a semana é contada a partir da Segunda, a partir do zero. Caso queira a data do dia no formato americano (YYYY-MM-DD), basta chamar <code>datetime.now().date()</code>.</p>
 
+<p>Podemos também formatar datas assim:</p>
+
+<pre>
+<code>
+from datetime import datetime
+
+data = datetime.now().strftime("Data: %Y/%m/%d - Hora: %H:%M:%S - Dia da Semana: %w")
+
+print(data)
+</code>
+</pre>
+
 <p>E também para gerar hashs de senhas:</p>
 
 <pre>
@@ -321,6 +333,8 @@ import emoji
 print(emoji.emojize("Olá Mundo! :earth_americas:"))
 </code>
 </pre>
+
+<p>PS: Podemos empacotar os scripts Python num exe pra ele ser executado no Windows sem o mesmo ter o interpretador Python, para isso use o pip para instalar o pacote <code>pyinstaller</code> e depois empacote o script especificado com o comando <code>pyinstaller -F Script.py</code>. Ele criará uma pasta chamada dist com o executável. Pra especificar um ícone, basta passar a opção <code>-i nomedoicone.ico</code>.</p>
 
 <h3>Manipulando Texto</h3>
 
