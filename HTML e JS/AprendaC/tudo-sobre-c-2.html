@@ -195,7 +195,30 @@ printf("Sinal Sonoro:\a \n");
 </code>
 </pre>
 
-<p>PS: Caso precise exibir o símbolo de porcentagem num printf, use a sequência de dois símbolos, igual se faz num BAT, no caso <code>%%</code>.</p>
+<p>Caso precise exibir o símbolo de porcentagem num printf, use a sequência de dois símbolos, igual se faz num BAT, no caso <code>%%</code>.</p>
+
+<p>Veja melhor como funciona o \r num programa:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+
+int main() {
+    for(int i = 0; i &lt; 10; i++) {
+        printf("\r%d", i);
+        sleep(1);
+    }
+
+    printf("\rFIM!\n");
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: As sequências de escape são compatíveis com muitas outras linguagens de programação, podendo da mesma forma serem utilizadas no Java, Python, C#, entre outras.</p>
 
 <h3>Função scanf - Lendo Dados a Partir do Teclado</h3>
 
