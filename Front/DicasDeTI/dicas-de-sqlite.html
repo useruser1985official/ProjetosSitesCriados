@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+
+<h2>Dicas com SQLite via Linha de Comando</h2>
+
+<p>O SQLite tem um banco de dados completo num mesmo arquivo, mais simples que bancos SQL como o MySQL ou o PostgreSQL, já que o SQLite não precisa subir um servidor, sendo utilizado em apenas um arquivo com extensão .db, .sqlite ou outra equivalente.</p>
+
+<p>No SQLite, o banco em si é o próprio arquivo, e nele temos as tabelas do banco. Podemos fazer os comandos básicos de CRUD no SQLite (como o select, insert, delete e update), além de alterações e exclusões de tabelas, e uso de chaves estrangeiras e joins. Também é possível criar e manipular views e triggers.</p>
+
+<p>Para criar um novo arquivo de banco de dados SQLite, digite isso:</p>
+
+<pre>
+<code>
+sqlite3 sistema.db3
+</code>
+</pre>
+
+<p>Para abrir o arquivo dentro do SQLite, faça assim:</p>
+
+<pre>
+<code>
+.open sistema.db3
+</code>
+</pre>
+
+<p>Depois, para criar tabelas via linha de comando, com esse arquivo aberto, dentro do SQLite, digite o código normalmente, por exemplo:</p>
+
+<pre>
+<code>
+create table contato (
+    id integer not null primary key autoincrement, -- No SQLite a declaração de primary key e autoincrement devem estar na mesma linha, e autoincrement não tem underline (_)
+    nome varchar(100) not null,
+    email varchar(70) unique not null,
+    mensagem text not null
+);
+</code>
+</pre>
+
+<p>Os dados que podem ser definidos nas colunas do SQLite basicamente são <code>integer</code>, <code>real</code>, <code>char</code> e <code>varchar</code> (com a quantidade de caracteres máximo), <code>text</code>, <code>date</code>, <code>time</code>, <code>datetime</code>, <code>boolean</code> e tipos <code>blob</code>. As constraints como <code>null</code>, <code>if exists</code> (ambos também com <code>not</code>, <code>unique</code>, <code>unsigned</code> e <code>autoincrement</code> (nesse caso, sem underline), podem ser usadas também.</p>
+
+<p>PS: Para limpar a tela do SQLite, basta digitar <code>.system cls</code> ou <code>.system clear</code> (dependendo se você está no Windows ou em sistema Unix). Também dá pra usar outros comandos do sistema.</p>
+
+<p>Também podemos usar códigos insert, update e delete da mesma forma, no entanto os inserts pode ser colocados num arquivo SQL, por exemplo:</p>
+
+<pre>
+<code>
+-- Salve um arquivo com esse código
+insert into contato (nome, email, mensagem) values
+('Fulano', 'fulano@gmail.com', 'Exemplo de Mensagem'),
+('Beltrano', 'beltrano@gmail.com', 'Exemplo de Mensagem'),
+('Sicrano', 'sicrano@gmail.com', 'Exemplo de Mensagem');
+</code>
+</pre>
+
+<p>E depois, importar pra base de dados criada assim:</p>
+
+<pre>
+<code>
+sqlite3 sistema.db3 &lt; arquivo.sql
+</code>
+</pre>
+
+<p>Depois usamos o select normalmente, podemos fazer diretamente dentro do SQLite, ou usando o nome do arquivo assim:</p>
+
+<pre>
+<code>
+sqlite3 sistema.db3 "select * from contato"
+</code>
+</pre>
+
+<p>Podemos usar chaves estrangeiras em SQLite também, mas estas não são habilitadas por padrão, nesse caso devemos colocar esse comando dentro do SQLite:</p>
+
+<pre>
+<code>
+pragma foreign_keys = on;
+</code>
+</pre>
+
+<p>PS: Não é possível adicionar chaves estrangeiras usando alter table, estas têm que ser criadas já na criação da tabela, com o create table.</p>
+
+<p>Para exibir os nomes das colunas, dentro do SQLite, digite isso:</p>
+
+<pre>
+<code>
+.header on
+</code>
+</pre>
+
+<p>Para escrever a saída de dados num arquivo, dentro do SQLite, digite isso:</p>
+
+<pre>
+<code>
+.output resultado.txt
+
+select * from contato;
+</code>
+</pre>
+
+<p>Para fazer um backup dos dados, digite isso:</p>
+
+<pre>
+<code>
+sqlite3 sistema.db3 .dump &gt; backup.sql
+</code>
+</pre>
+
+<p>Para fazer um banco de dados SQLite com mais conteúdos, importe <a href="files/cursos.sql" target="_blank">esse arquivo clicando aqui</a> e salve no banco de dados com o comando <code>sqlite3 sistema.db3 &lt; cursos.sql</code>. Ele tem as tabelas cursos e gafanhotos com chaves estrangeiras.</p>
+
+<p>Saiba também que:</p>
+
+<ul>
+    <li>Não existe <code>describe</code>, o <code>desc</code> é só para consultas descendentes em <code>select</code>.</li>
+    <li>Não suporta colunas inseridas em outras posições com <code>alter table</code>, apenas na última.</li>
+    <li>Não existe <code>modify</code> nem <code>change</code>.</li>
+    <li>Não dá para ter mais de um <code>drop column</code> ou <code>add column</code> em cada <code>alter table</code>, nem deletar chaves primárias.</li>
+    <li>Não dá pra usar <code>limit</code> em update e delete, apenas em select.</li>
+    <li>Não existe <code>truncate</code>, <code>status</code>, <code>show</code> nem <code>explain</code>.</li>
+    <li>Não existe <code>date_format</code> nem <code>str_to_date</code>.</li>
+    <li>O operador <code>like</code> não diferencia maiúsculas de minúsculas, mas não reconhece acentos.</li>
+    <li>Não dá pra alterar view com <code>alter view</code>, sendo necessária deletar e criar uma nova. Também não podemos adicionar, alterar e excluir índices com ele (para criar um índice basta usar <code>create index nome_do_indice on nome_da_tabela(nome_da_coluna)</code>, e excluir um índice simplesmente use <code>drop index nome_do_indice</code>).</li>
+    <li>Não existem as funções <code>div</code>, <code>mod</code>, <code>bin</code>, <code>oct</code>, <code>md5</code>, <code>sha1</code> e <code>database</code>. No entanto, existe a função <code>hex</code> para mostrar números hexadecimais, e a função <code>group_concat</code> só aceita dois argumentos (coluna e string separadora). Outras funções, como as matemáticas <code>ceiling</code>, <code>floor</code>, <code>pow</code> e <code>sqrt</code> existem normalmente.</li>
+    <li>Não podemos criar funções e procedimentos armazenados, apenas triggers.</li>
+</ul>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Python</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Python</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-python-1.html">Tudo sobre Python Parte 1!</a></li>
+                    <li><a href="tudo-sobre-python-2.html">Tudo sobre Python Parte 2!</a></li>
+                    <li><a href="tudo-sobre-python-3.html">Tudo sobre Python Parte 3!</a></li>
+                    <li><a href="tudo-sobre-python-4.html">Tudo sobre Python Parte 4!</a></li>
+                    <li><a href="tudo-sobre-python-5.html">Tudo sobre Python Parte 5!</a></li>
+                    <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
+                    <li><a href="tudo-sobre-python-7.html">Tudo sobre Python Parte 7!</a></li>
+                </menu>
+            </header>
+
+<h2>Exercícios - Parte 3</h2>
+
+<p>Faça um programa que mostre na tela uma contagem regressiva para o estouro de fogos de artifício, indo de 10 até 0, com uma pausa de 1 segundo entre eles, e mostre a mensagem com emoji de fogos:</p>
+
+<pre>
+<code>
+from time import sleep
+from emoji import emojize
+
+for i in range(10, 0, -1):
+    print(i)
+    sleep(1)
+
+print(emojize("\nFELIZ ANO NOVO!!!!!!! \033[31m:fireworks: \033[36m:fireworks: \033[35m:fireworks: \033[33m:fireworks: \033[34m:fireworks:"))
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que mostre na tela todos os números pares que estão no intervalo entre 1 e 50:</p>
+
+<pre>
+<code>
+for i in range(1, 50):
+    if i % 2 == 0:
+        print(i)
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que calcule a soma entre todos os números ímpares que são múltiplos de três que estão no intervalo de 1 e 500:</p>
+
+<pre>
+<code>
+s = 0
+c = 0
+for i in range(1, 500, 2):
+    if i % 3 == 0:
+        s += i
+        c += 1
+
+print("\nA soma entre todos os {} valores solicitados é {}.".format(c, s))
+</code>
+</pre>
+
+<hr/>
+
+<p>Refaça o desafio da tabuada (um dos primeiros), só que usando o laço for para isso:</p>
+
+<pre>
+<code>
+num = int(input("Digite um número para ver sua tabuada: "))
+print("\nTabuada de {}:\n".format(num))
+
+print("-" * 12)
+for t in range(1, 10 + 1):
+    print("{} x {:2} = {}".format(num, t, num * t))
+print("-" * 12)
+</code>
+</pre>
+
+<hr/>
+
+<p>Desenvolva um programa que leia seis números inteiros e mostre a soma apenas daqueles que forem pares. Se os valores digitados forem ímpares, serão desconsiderados.</p>
+
+<pre>
+<code>
+tot = 0
+cont = 0
+
+for s in range(0, 6):
+    n = int(input("Digite o {}º valor: ".format(s + 1)))
+    if n % 2 == 0:
+        tot += n
+        cont += 1
+print("\nVocê informou {} números, sendo {} pares, e a soma de todos os pares é {}.".format(s + 1, cont, tot))
+</code>
+</pre>
+
+<hr/>
+
+<p>Desenvolva um programa que leia o primeiro termo e a razão de uma PA. No final, mostre os 10 primeiros termos dessa progressão.</p>
+
+<pre>
+<code>
+pri = int(input("Primeiro Termo: "))
+raz = int(input("Razão: "))
+dec = pri + (10 - 1) * raz
+for c in range(pri, dec + raz, raz):
+    print("{}".format(c), end=" → ")
+print("ACABOU!")
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia um número inteiro e diga se ele é ou não um número primo:</p>
+
+<pre>
+<code>
+valor = int(input("Digite um número: "))
+print("Analisando o número {}".format(valor))
+print("Valores múltiplos: ", end="")
+tot = 0
+for i in range(1, valor + 1, 1):
+    if valor % i == 0:
+        exi = i
+        tot += 1
+        print("{} ".format(exi), end="")
+print("\nTotal de múltiplos: {}".format(tot))
+if tot == 2:
+    print("É Primo!")
+else:
+    print("Não é Primo!")
+</code>
+</pre>
+
+<p>Ou pode ser assim:</p>
+
+<pre>
+<code>
+valor = int(input("Digite um número: "))
+tot = 0
+for i in range(1, valor + 1, 1):
+    if valor % i == 0:
+        print("\033[32m", end="")
+        tot += 1
+    else:
+        print("\033[31m", end="")
+    print("{} ".format(i), end="")
+print("\n\033[mO número {} foi divisível {} vezes!".format(valor, tot))
+if tot == 2:
+    print("É Primo!")
+else:
+    print("Não é Primo!")
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie uma programa que leia uma frase qualquer e diga se ela é um palíndromo (pode ser lida igual de trás pra frente), desconsiderando os espaços(tirando eles):</p>
+
+<pre>
+<code>
+frase = str(input("Digite uma frase: ")).strip().upper()
+pal = frase.split()
+junt = "".join(pal)
+inv = ""
+for let in range(len(junt) - 1, -1, -1):
+    inv += junt[let]
+print("O inverso de {} é {}.".format(junt, inv))
+if inv == junt:
+    print("Temos um palíndromo!")
+else:
+    print("Não é palíndromo!")
+</code>
+</pre>
+
+<p>Ou pode ser assim:</p>
+
+<pre>
+<code>
+frase = str(input("Digite uma frase: ")).strip().upper()
+pal = frase.split()
+junt = "".join(pal)
+inv = junt[::-1]
+print("O inverso de {} é {}.".format(junt, inv))
+if inv == junt:
+    print("Temos um palíndromo!")
+else:
+    print("Não é palíndromo!")
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia o ano de nascimento de sete pessoas. No final, mostre quantas pessoas ainda não atingiram a maioridade e quantas já são maiores.</p>
+
+<pre>
+<code>
+from datetime import date
+atual = date.today().year
+totMai = 0
+totMen = 0
+for pess in range(1, 1 + 7):
+    nasc = int(input("Em que ano a {}ª pessoa nasceu? ".format(pess)))
+    idade = atual - nasc
+    if idade >= 18:
+        totMai += 1
+    else:
+        totMen += 1
+print("\nAo todo tivemos {} pessoas maiores de idade.".format(totMai))
+print("E também tivemos {} pessoas menores de idade.".format(totMen))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia o peso de cinco pessoas. No final, mostre qual foi o maior e o menor peso lidos.</p>
+
+<pre>
+<code>
+maior = 0
+menor = 0
+for p in range(1, 6):
+    peso = float(input("Peso da {}ª pessoa: ".format(p)))
+    if p == 1:
+        maior = peso
+        menor = peso
+    else:
+        if peso > maior:
+            maior = peso
+
+        # Outro Condicional:
+
+        if peso < menor:
+            menor = peso
+print("\nO maior peso lido foi de {}Kg".format(maior))
+print("O menor peso lido foi de {}Kg".format(menor))
+</code>
+</pre>
+
+<hr/>
+
+<p>Desenvolva um programa que leia o nome, idade e sexo de 4 pessoas. No final do programa mostre a média de idade do grupo, o nome do homem mais velho e quantas mulheres tem menos de 20 anos.</p>
+
+<pre>
+<code>
+soma = 0
+media = 0
+maiorHomem = 0
+velho = ""
+mulher20 = 0
+
+for p in range(1, 4 + 1):
+    print("-----{}ª Pessoa-----".format(p))
+    nome = str(input("Nome: ")).strip()
+    idade = int(input("Idade: "))
+    sexo = str(input("Sexo [M/F]: ")).strip()
+    soma += idade
+    if p == 1 and sexo in "Mm":
+        maiorHomem = idade
+        velho = nome
+    # Outra condição
+    if sexo in "Mm" and idade > maiorHomem:
+        maiorHomem = idade
+        velho = nome
+    # Outra condição
+    if sexo in "Ff" and idade < 20:
+        mulher20 += 1
+
+media = soma / 4
+print("A média de idade do grupo é de {}.".format(media))
+print("O homem mais velho tem {} anos e se chama {}.".format(maiorHomem, velho))
+print("Ao todo são {} mulheres com menos de 20 anos.".format(mulher20))
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia o sexo de uma pessoa, mas só aceite os valores M ou F, caso esteja errado, peça a digitação novamente até ter um valor correto.</p>
+
+<pre>
+<code>
+sexo = str(input("Qual o seu sexo? [M/F] ")).strip().upper()[0]
+
+while sexo not in "MmFf":
+    sexo = str(input("Dados Inválidos, por favor, informe o sexo com M ou F: ")).strip().upper()[0]
+
+print("\nSexo {} registrado com sucesso!".format(sexo))
+</code>
+</pre>
+
+<hr/>
+
+<p>Melhore o desafio no qual o computador "pensa" em um número entre 0 e 10. Só que agora o jogador vai tentar adivinhar até acertar, e mostre quantos palpites foram necessários para vencer</p>
+
+<pre>
+<code>
+from random import randint
+from time import sleep
+
+jog = 1
+comp = randint(0, 10)
+tent = 0
+
+print("-=-" * 18)
+print("Vou pensar em um número entre 0 e 10! Tente adivinhar!")
+print("-=-" * 18)
+
+while jog != comp:
+    tent += 1
+
+    jog = int(input("Em que número em pensei? "))
+    print("\nProcessando...\n")
+    sleep(5)
+
+    if jog == comp:
+        print("Parabéns, você acertou! Pensei realmente no número {}!".format(jog))
+    elif jog &lt; comp:
+        print("Você errou, eu pensei num número maior que {}.\n".format(jog))
+    else:
+        print("Você errou, eu pensei num número menor que {}.\n".format(jog))
+
+print("Foram {} tentativas até acertar.".format(tent))
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia dois valores e mostre na tela um menu com somar, multiplicar, maior, novos números e sair do programa, e exibir as operações solicitadas em cada caso.</p>
+
+<pre>
+<code>
+n1 = int(input("Primeiro valor: "))
+n2 = int(input("Segundo valor: "))
+opcao = 0
+
+while opcao != 5:
+    print("""
+[1] Somar
+[2] Multiplicar
+[3] Maior
+[4] Novos Números
+[5] Sair
+""")
+# O print não precisa ficar dentro da indentação, nesse caso.
+    opcao = int(input("Qual é a sua opção? "))
+    print("")
+    if opcao == 1:
+        soma = n1 + n2
+        print("A soma entre {} e {} é igual à {}.".format(n1, n2, soma))
+    elif opcao == 2:
+        multi = n1 * n2
+        print("O resultado entre {} e {} é igual à {}.".format(n1, n2, multi))
+    elif opcao == 3:
+        if n1 > n2:
+            maior = n1
+        else:
+            maior = n2
+        print("Entre {} e {} o maior é {}.".format(n1, n2, maior))
+    elif opcao == 4:
+        print("Informe os números novamente!\n")
+        n1 = int(input("Primeiro valor: "))
+        n2 = int(input("Segundo valor: "))
+    elif opcao == 5:
+        print("Finalizando...")
+    else:
+        print("Opção Inválida! Tente Novamente!\n")
+print("Fim do programa!")
+</code>
+</pre>
+
+<hr/>
+
+<p>Faça um programa que leia um número e mostre seu fatorial.</p>
+
+<pre>
+<code>
+cont = int(input("Digite o número do qual desejamos o fatorial: "))
+fat = 1
+
+if cont <= 0:
+    print("Não é possível calcular fatorial de número menor que 0!")
+    exit()
+
+print("\nO fatorial do número {} é: ".format(cont), end = "")
+
+while cont >= 1:
+    fat *= cont
+    print("{}".format(cont), end = "")
+    print(" x " if cont > 1 else " = ", end = "")
+    cont -= 1
+
+print(fat)
+</code>
+</pre>
+
+<p>Ou de forma mais simples, com uma função interna:</p>
+
+<pre>
+<code>
+from math import factorial
+
+cont = int(input("Digite o número do qual desejamos o fatorial: "))
+
+if cont <= 0:
+    print("Não é possível calcular fatorial de número menor que 0!")
+    exit()
+
+fat = factorial(cont)
+
+print("\nO fatorial do número {} é {}.".format(cont, fat))
+</code>
+</pre>
+
+<hr/>
+
+<p>Refaça o desafio que lemos o primeiro termo e a razão de uma PA, mostrando os 10 primeiros termos da progressão usando while.</p>
+
+<pre>
+<code>
+print("Gerador de PA")
+print("-=" * 10)
+pri = int(input("Primeiro Termo: "))
+raz = int(input("Razão do PA: "))
+ter = pri
+cont = 1
+while cont <= 10:
+    print("{} → ".format(ter), end = "")
+    ter += raz
+    cont += 1
+</code>
+</pre>
+
+<hr/>
+
+<p>Melhore o desafio anterior, perguntando pro usuário se ele quer mostrar mais alguns termos, o programa encerra quando ele disser que quer 0 termos.</p>
+
+<pre>
+<code>
+print("Gerador de PA")
+print("-=" * 10)
+pri = int(input("Primeiro Termo: "))
+raz = int(input("Razão do PA: "))
+ter = pri
+cont = 1
+tot = 0
+mais = 10
+
+while mais != 0:
+    tot += mais
+    while cont <= tot:
+        print("{} → ".format(ter), end = "")
+        ter += raz
+        cont += 1
+    mais = int(input("\nQuantos termos você quer mais? "))
+</code>
+</pre>
+
+<hr/>
+
+<p>Escreva um programa que leia um número inteiro e mostre na tela os primeiros elementos de uma Sequência de Fibonacci.</p>
+
+<pre>
+<code>
+t1 = 0
+t2 = 1
+cont = 3
+print("-" * 40)
+print("Sequência de Fibonacci")
+print("-" * 40)
+n = int(input("Quantos termos você quer mostrar? "))
+print("-" * 40)
+print("{} → {}".format(t1, t2), end="")
+while cont <= n:
+    t3 = t1 + t2
+    print(" → {}".format(t3), end="")
+    t1 = t2
+    t2 = t3
+    cont += 1
+print(" → FIM!")
+print("-" * 40)
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia vários números inteiros pelo teclado, o programa só para quando digitarem 999, que é a condição de parada. No final, mostre quantos números foram digitados e qual foi a soma entre eles.</p>
+
+<pre>
+<code>
+num = cont = soma = 0
+num = int(input("Digite um número [999 para parar]: "))
+while num != 999:
+    soma += num
+    cont += 1
+    num = int(input("Digite um número [999 para parar]: "))
+print("\nVocê digitou {} números e a soma entre eles foi {}.".format(cont, soma))
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie um programa que leia vários números inteiros pelo teclado, no final da execução, mostre a média entre todos os valores e qual foi o maior e o menos valor lido. O programa deve perguntas ao usuário se ele quer ou não continuar a digitar valores.</p>
+
+<pre>
+<code>
+resp = "S"
+soma = quant = med = mai = men = 0
+while resp in "Ss":
+    num = int(input("Digite um número: "))
+    soma += num
+    quant += 1
+    if quant == 1:
+        mai = men = num
+    else:
+        if num > mai:
+            mai = num
+        elif num < men:
+            men = num
+    resp = str(input("Quer continuar? [S/N] ")).strip()[0]
+med = soma / quant
+print("Você digitou {} números e a média deles é {}.".format(quant, med))
+print("O maior número digitado foi {} e o menor número é {}.".format(mai, men))
+</code>
+</pre>
+
+<ul>
+    <li><a href="exercicios-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="exercicios-4.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

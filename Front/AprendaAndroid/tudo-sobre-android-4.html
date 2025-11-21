@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Android</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Android</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-android-1.html">Tudo sobre Android Parte 1!</a></li>
+                    <li><a href="tudo-sobre-android-2.html">Tudo sobre Android Parte 2!</a></li>
+                    <li><a href="tudo-sobre-android-3.html">Tudo sobre Android Parte 3!</a></li>
+                    <li><a href="tudo-sobre-android-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Android Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Android Parte 4</h2>
+
+<h3>Exemplo de uso de SeekBar (Slider)</h3>
+
+<p>Vá em Widgets e coloque um SeekBar com a id sliUrg e um labem com a id lblUrg, dentro de layouts.</p>
+
+<p>Coloque isso na função onCreate:</p>
+
+<pre>
+<code>
+sliUrg = (SeekBar)findViewById(R.id.sliUrg); // Declare o atributo do tipo SeekBar
+lblUrg = (TextView)findViewById(R.id.lblUrg); // Idem, tipo TextView
+
+sliUrg.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+    @Override
+    public void onProgressChanged(SeekBar seek, int i, boolean b) {
+       lblUrg.setText(Integer.toString(i));
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seek) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seek) {
+
+    }
+});
+</code>
+</pre>
+
+<p>Podemos definir o valor máximo em all attributes.</p>
+
+<ul>
+    <li><a href="tudo-sobre-android-3.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-android-5.html">Continuação da Matéria!</a></li>-->
+</ul>
+        </div>
+    </body>
+</html>

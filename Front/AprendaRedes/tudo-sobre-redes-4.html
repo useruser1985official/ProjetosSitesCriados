@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html">Tudo sobre Redes Parte 13!</a></li>
+                    <li><a href="tudo-sobre-redes-14.html">Tudo sobre Redes Parte 14!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Redes Parte 4</h2>
+
+<h3>Introdução ao Roteamento de Redes</h3>
+
+<p>A internet é uma coleção de redes interconectadas, e os pontos de ligação são os roteadores. Estes, por sua vez, estão organizados de forma hierárquica, onde alguns roteadores são utilizados apenas para trocar dados entre grupos de redes controlados pela mesma autoridade administrativa, enquanto outros roteadores fazem também a comunicação entre as autoridades administrativas. A entidade que controla e administra um grupo de redes e roteadores chama se Sistema Autônomo [RFC 1930].</p>
+
+<p>O roteamento é a principal forma utilizada na Internet para a entrega de pacotes de dados entre hosts (equipamentos de rede de uma forma geral, incluindo computadores, roteadores, etc.). O modelo de roteamento utilizado é o do salto-por-salto (hop-by-hop), onde cada roteador que recebe um pacote de dados, abre-o, verifica o endereço de destino no cabeçalho IP, calcula o próximo salto que vai deixar o pacote um passo mais próximo de seu destino e entrega o pacote neste próximo salto. Este processo se repete e assim segue até a entrega do pacote ao seu destinatário. No entanto, para que este funcione, são necessários dois elementos: Tabelas de roteamento e protocolos de roteamento.</p>
+
+<p>Tabelas de roteamento são registros de endereços de destino associados ao número de saltos até ele, podendo conter várias outras informações.</p>
+
+<p>Protocolos de roteamento determinam o conteúdo das tabelas de roteamento, ou seja, são eles que ditam a forma como a tabela é montada e de quais informações ela é composta. Existem dois tipos de algoritmo atualmente em uso pelos protocolos de roteamento: O algoritmo baseado em Vetor de Distância (Distance-Vector Routing Protocols) e o algoritmo baseado no Estado de Enlace (Link State Routing Protocols).</p>
+
+<p>Esses são os tipos de roteamento:</p>
+
+<ul>
+    <li><b>Roteamento Interno:</b> Os roteadores utilizados para trocar informações dentro de Sistemas Autônomos são chamados roteadores internos (interior routers) e podem utilizar uma variedade de protocolos de roteamento interno (Interior Gateway Protocols - IGPs). Dentre eles estão: RIP, IGRP, EIGRP, OSPF e Integrated IS-IS.</li>
+    <li><b>Roteamento Externo:</b> Roteadores que trocam dados entre Sistemas Autônomos são chamados de roteadores externos (exterior routers), e estes utilizam o Exterior Gateway Protocol (EGP) ou o BGP (Border Gateway Protocol). Para este tipo de roteamento são considerados basicamente coleções de prefixos CIDR (Classless Inter Domain Routing) identificados pelo número de um Sistema Autônomo.</li>
+</ul>
+
+<h3>O que é o Roteamento?</h3>
+
+<p>Fazendo uma analogia, o roteamento funciona como um mapa onde as rotas são definidas e o roteador, equipamento responsável por fazer o roteamento, seria como um GPS que seleciona os melhores caminhos disponíveis para que esses dados cheguem da melhor forma ao seu destino.</p>
+
+<p>Para funcionar, o roteador precisa de informações como o endereço de destino e as rotas, que são, muitas vezes, encaminhadas por outros roteadores. Porém, além das diferentes funções dos roteadores, que podem ser usados apenas para trocar dados entre uma rede local, quanto para trocar dados entre outras redes, há ainda algumas diferenças na forma como o roteador transfere um pacote de dados.</p>
+
+<h4>Rotas Estáticas</h4>
+
+<p>Na rota estática, as rotas são definidas manualmente por um administrador da rede, neste tipo de roteamento, as rotas mudam muito lentamente, a depender do administrador da rede.</p>
+
+<h4>Rotas Dinâmicas</h4>
+
+<p>Na rota dinâmica, o roteador troca informações sobre as rotas com outros roteadores. Neste tipo, os caminhos mudam de acordo com a carga do tráfego ou da topologia da rede. Esse tipo de roteamento, apesar de conseguir mudanças mais rápidas na rota, é mais suscetível a problemas com loops e oscilações.</p>
+
+<h4>Rotas Diretas</h4>
+
+<p>São as rotas criadas quando colocamos diretamente um IP na interface.</p>
+
+<h3>Como as Rotas são Definidas</h3>
+
+<p>Diferente das pontes, roteadores possuem a capacidade de escolher o melhor caminho para encaminhar o pacote caso existam muitos caminhos que levem ao mesmo destino. Essa escolha obedece a certos critérios. O roteador pode também ouvir o tráfego e determinar quando uma rota está muito congestionada, nesse caso ele escolhe uma rota alternativa para encaminhar o pacote. Considere a figura abaixo:</p>
+
+<img src="imagens/rotas.jpg" alt="Rotas"/>
+
+<p>Observe que saindo de PC1 até chegar a PC4, existem 2 caminhos ou 2 rotas. Quando o pacote chega a R1 com destino a R4, ele tanto pode ser encaminhado por R2 ou R3. Qual rota R1 irá escolher para encaminhar o pacote? O roteador toma essa decisão baseado em certos parâmetros, que constam em sua tabela de roteamento.</p>
+
+<ul>
+    <li>Métrica (Número de saltos até a rede destino).</li>
+    <li>Distância administrativa (Custo da rota até a rede destino).</li>
+</ul>
+
+<p>Aquela rota que tiver o menor número de saltos será a escolhida. Caso o número de saltos seja igual para as duas situações, então aquela rota com o menor custo (menor distância administrativa) será a escolhida. Tendo por base a figura acima e de posse das informações da tabela, vamos ver qual será a rota escolhida, considerando que as rotas não estejam demasiadamente ocupadas.</p>
+
+<p>Observe que o número de saltos é o mesmo para as duas rotas (2). Para chegar a R4 em qualquer um dos caminhos é preciso passar por 2 roteadores a partir de R1, mas, observe que a distância administrativa indo por R3 é menor do que indo por R2.</p>
+
+<p>Logo o pacote será encaminhado através de R3 e não de R2.</p>
+
+<p>Se as distâncias administrativas fossem as mesmas, os pacotes seriam divididos entre as duas rotas.</p>
+
+<h3>Tipos de Roteadores</h3>
+
+<p>Os roteadores podem ser equipamentos externos dedicados com um sistema operacional proprietário como é o caso dos roteadores CISCO por exemplo, ou podem ser serviços que são adicionados a um sistema operacional de rede servidor, tal como o Windows 2000. A diferença entre um e outro está na disponibilidade de recursos, nas situações em que podem ser usados e no custo.</p>
+
+<p>Prefira sempre os roteadores externos, pois eles possuem melhor performance, um sistema operacional proprietário otimizado e uma série de recursos para configuração, monitoração e diagnóstico. O problema desses roteadores é seu custo elevado. Mas para redes pequenas em que custo é uma palavra chave, um servidor como o Windows 2000, fazendo o papel de roteador, apesar de não ter uma série de recursos disponíveis nos equipamentos de fabricantes, daria conta do recado perfeitamente.</p>
+
+<p>Veja a imagem de um roteador:</p>
+
+<img src="imagens/roteador.jpg" alt="Roteador"/>
+
+<p>PS: Esses roteadores são bem diferentes dos roteadores wi-fi que encontramos em ambientes domésticos.</p>
+
+<h3>Protocolo ARP</h3>
+
+<p>O protocolo ARP fornece resolução dinâmica de endereços, que é um mapeamento entre as duas formas de endereçamento distintas: endereços IP, e qualquer outro tipo de endereço usado na camada de enlace. No caso dos quadros Ethernet, a camada de enlace usa o MAC Address (Media Access Control), endereço físico da interface. Permite obter o MAC Addres de uma interface a partir do seu Endereço IP.</p>
+
+<p>Esses são os tipos de mensagens ARP:</p>
+
+<ul>
+    <li><b>ARP Request (Requisião ARP): </b>Mensagem enviada requisitando a resolução de um endereço IP em endereço físico.</li>
+    <li><b>ARP Reply (Resposta ARP): </b>Mensagem de resposta ao ARP Request, contendo o endereço físico resolvido.</li>
+</ul>
+
+<p>Esse são os formados do pacote ARP:</p>
+
+<ul>
+    <li><b>HTYPE (Hardware Type): </b>Especifica o tipo de protoco da rede, como Ehternet, cujo valor é 1.</li>
+    <li><b>PTYPE (Protocol Type): </b>Especifica o protocolo da camada de internet para o qual a requisição do ARP é direcionada. O valor para o protocolo IPv4 é 0x0800.</li>
+    <li><b>HLEN (Hardware Length): </b>Tamanho do endereço de hardware, em grupos de oito bits (octetos). Um MAC Address Ethernet tem o tamanho de 6.</li>
+    <li><b>PLEN (Protocol Length): </b>Tamanho, em octetos, do endereço específicado no campo PTYOE. Para o protocolo IPv4, o tamanho é 4.</li>
+    <li><b>OPER (Operation): </b>Tipo de operação que o transmissor está realizando, sendo o valor 1 para ARP Request, e 2 para ARP Reply.</li>
+    <li><b>SHA (Sender Address Hardware): </b>Endereço MAC do transmissor. Quando se trata de um pacote ARP Request, contém o endereço físico do remetente. Já em uma mensagem ARP Reply, contém o endereço físico procurado (resolvido).</li>
+    <li><b>SPA (Sender Protocol Address): </b>Endereço da camada de internet do remetente (IP).</li>
+    <li><b>THA (Target Hardware Address): </b>Endereço físico do destinatário pretendido. Esse campo é ignorado em um pacote ARP Request (por razões óbvias), e em um pacote ARP Reply contém o endereço físico do host que originou a requisição ARP.</li>
+    <li><b>TPA (Target Protocol Addres): </b>Endereço da camada de internet (IP) do destinatário pretendido.</li>
+</ul>
+
+<p>O cachê ARP mantém os mapeamentos de endereços mais recentes de IPs para endereços MAC na memória do host, possuindo um tempo de expiração para dada entrada no cache de alguns minutos a partir do momento em que a entrada foi adicionada. Podemos examinar o cache ARP usando o  comando <code>arp /a</code>.</p>
+
+<p>Para limpar o cache ARP, basta usar <code>netsh interface ip delete arpcache</code> ou <code>arp /a /d</code> (ou um IP específico usando <code>arp /d 0.0.0.0</code>). Depois podemos usar <code>netsh interface ip delete destinationcache</code> para excluir o cache de destino.</p>
+
+<p>A captura de pacotes ARP trocados entre dos hosts, é realizada por meio do comando ping, usando o software analisador de pacotes Wireshark.</p>
+
+<p>O ARP Probe são pacotes especiais ARP Request transmitidos em broadcast com o campo SPA (IP do remetente) contendo o valor 0.0.0.0. Utilizado por um host que solicitou um endereço IPv4 de um servidor DHCP, ou após a configuração manual de IP no host, para verificar se o IP atribuído já está em uso na rede.</p>
+
+<p>Existe também o protocolo RARP, que faz o inverso do ARP, associando um endereço lógico ao físico.</p>
+
+<p>Para retornar o catálogo do provedor winsock (o socket que faz o computador interagir com a rede) ao estado inicial, digite na ordem, <code>nbtstat /R</code>, <code>nbtstat /RR</code> e depois <code>netsh winsock reset catalog</code>.</p>
+
+<h3>Protocol ICMP</h3>
+
+<p>O protocolo ICMP é o protocolo de mensagens da internet, que comunica mensagens de erro, diagnóstico e outras condições que requeiram atenção em uma rede. O protocolo IP, que fornece o mecanismo para entrea de datagramas entre dispositivos, carece dessa funcionalidade, e por isso o ICMP foi criado.</p>
+
+<p>As mensagems ICMP são transmitidas em datagramas IP. Ela contém os campos tipo, código, checksum e conteúdo.</p>
+
+<p>As mensagens ICMP podem ser divididas em duas grandes classes:</p>
+
+<ul>
+    <li><b>Mensagens de Erro: </b>Usadas para informar um dispositivo transmissor que um erro ocorreu durante a transmissão do datagrama.</li>
+    <li><b>Mensagens de Informação (Consultas/Query): </b>São mensagens que permitem aos dispositivos trocarem informações entre si e realizarem determinados tipos de testes e diagnósticos.</li>
+</ul>
+
+<p>Essas são as regras específicas para mensagens, as mensagens ICMP não são geradas:</p>
+
+<ul>
+    <li>Como resposta à outra mensagem de erro. Isso evita o surgimento de loops infinitos de mensagens de erro. Porém, mensagens de erro podem ser geradas em resposta à mensagens de informação.</li>
+    <li>Resposta à datagramas de Broadcast ou Multicast.</li>
+    <li>Resposta à datagramas cujo endereço IP de origem não seja um endereço Unicast.</li>
+    <li>Em resposta à fragmentos de datagramas IP, exceto o primeiro, os demais fragmentos de um datagrama não geram mensagens de erro.</li>
+</ul>
+
+<p>Alguns tipo de códigos e mensagens:</p>
+
+<table>
+    <tr>
+        <th>Tipo</th>
+        <th>Código</th>
+        <th>Descrição</th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>Echo Reply (Resposta de Eco, usado pelo comando Ping)</td>
+    </tr>
+    <tr>
+        <td rowspan="5">3</td>
+        <td></td>
+        <td>Destino Inalcançável</td>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>Rede de Destino Inalcançável</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Host de Destino Inalcançável</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Protocolo de Destino Inalcançável</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Porta de Destino Inalcançável</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>0</td>
+        <td>Sourche Quench - Controle de Fluxo Elementar</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>0</td>
+        <td>Echo Request (Requisição de Eco, usado pelo comando Ping)</td>
+    </tr>
+    <tr>
+        <td rowspan="3">11</td>
+        <td></td>
+        <td>Tempo Excedido</td>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>TTL Igual à 0 Durante o Trânsito</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>TTL Igual à 0 Durante Reconstrução dos Fragmentos</td>
+    </tr>
+</table>
+
+<p>Mostramos o protocolo ICMP em ação usando os comandos <code>ping</code> e <code>tracert</code>, no prompt, seguido do IP ou domínio.</p>
+
+<p>O TTL é o tempo de vida do pacote, que existe para que ele não fique procurando eternamente um host, iniciando em 255 e vai diminuindo de 1 em 1 (decremento) até achar o host (ele vai de 255 a 0), se ele não achar antes de chegar a 0, ele dará tempo excedido e finalizará sua vida. Isso é usado no Ping e no Traceroute (sendo mais necessário neste último).</p>
+
+<h3>Como Funciona o Utilitário Traceroute</h3>
+
+<p>O Traceroute é uma ferramenta de diagnóstico que permite ver a rota que datagramas IP seguem quando são enviados de um host ao outro. Faz uso do protocolo ICMP e do campo TTL no cabeçalho IP do datagrama.</p>
+
+<p>O propósito do TTL é evitar que datagramas entrem em um loop de roteamento, quando um datagrama chega à um roteador, seu TTL é decrementado (-1) antes de ser encaminhado. Quando um roteador recebe um datagrama cujo TTL é igual à 0, ele o descarta e envia de volta ao host que o originou uma mensagem ICMP do tipo Tempo Excedido. Essa mensagem contém o endereço IP do roteador como endereço de origem.</p>
+
+<p>Para entendermos o funcionamento do Traceroute, precisamos saber que:</p>
+
+<ul>
+    <li>O Traceroute envia um datagrama com um TTL igual à do host de destino.</li>
+    <li>Ao chegar ao primeiro roteador no caminho, o TTL é decrementado, ficando com o valor zero, o datagrama é descartado e a mensagem "Tempo Excedido" é enviada de volta à origem.</li>
+    <li>Dessa forma, o primeiro roteador no caminho é identificado. Então o Traceroute envia um novo datagrama, desta vez com o TTL igual à 2, que decerementa o TTL para 1, e então será descartado no segundo roteador, e assim descobrimos o endereço IP deste roteador também.</li>
+    <li>Esse processo continua até que um datagrama chegue ao host de destino.</li>
+    <li>Ao chegar no host de destino, será gerado um erro ICMP do tipo "Porta Inalcançável", e então, o Traceroute differencia o recebimento de mensagens "Tempo Excedido" da mensagem "Porta Inalcançável" para quando parar.</li>
+    <li>Já no Windows, são enviados datagramas ICMP do tipo Echo Request (o famoso Ping), e quando o dispositivo de origem recebe uma resposta Echo Reply, ele sabe que o pacote chegou ao seu destino.</li>
+</ul>
+
+<p>Para trabalharmos com isso, usamos (em Windows), usamos o comando <code>tracert</code>.</p>
+
+<p>Vamos abrir o prompt, digitando <code>tracert www.google.com.br</code> (ou outro site/IP).</p>
+
+<p>Digitando <code>tracert /?</code> você pode ver outras opções para usar como parâmetros. Por exemplo, podemos usar o parâmetro <code>/h</code> para escolher o número máximo de saltos (cujo padrão é 30), por exemplo: <code>tracert /h 15 www.google.com.br</code>. Ou forçar o uso de IPv4 com o parâmetro <code>/4</code> ou de IPv6 usando <code>/6</code>.</p>
+
+<p>Cada salto é um roteador (que pode não responder e aparecer tempo esgotado por estar com o firewall ou ICMP bloqueado, e aparecer apenas asteriscos, mas isso não indica problemas, geralmente).</p>
+
+<p>No Linux, o comando equivalente se chama <code>traceroute</code> e tem outros parâmetros. Para escolher a quantidade de máxima de saltos (como 15) use <code>-m 15</code>, pra forçar IPV4 use <code>-4</code> e IPV6 <code>-6</code>. Para ajuda use <code>--help</code>.</p>
+
+<h3>Como Funciona o Utilitário Ping</h3>
+
+<p>O programa Ping é um utilitário que permite testar a conectividade entre dois hosts em uma rede. Ele funciona enviando uma mensagem ICMP do tipo Echo Request à um host, e espera o recebimento de uma mensagem ICMP do tipo Echo Reply em retorno (resumindo, ele envia uma mensagem que retornará num espaço de tempo).</p>
+
+<p>No geral, se não conseguirmos "pingar" um host, significa que não há conectivadade entre as máquinas envolvidas no processo. É um dos primeiros passos que tomamos para determinar qual o problema que afeta uma rede onde um ou mais hosts não conseguem se comunicar entre si, ou com a rede externa.</p>
+
+<p>O número de sequência se inicia em 1 e é incrementado cada vez que uma nova mensagem Echo Request é enviada. O Ping então mostra o número de sequência de cada datagrama retornado, de modo que podemos verificar se os pacotes se perderam, estão fora de ordem ou foram duplicados.</p>
+
+<p>Como sabemos, o protocolo IP é um serviço de entrega de datagramas do tipo "melhor esforço", de modo que qualquer uma dessas condições citadas pode vir à ocorrer.</p>
+
+<p>Além de mostrar o número de sequência, quando a mensagem de retorno Echo Reply é recebida, também são mostrados o TTL e o RTT calculado. O Ping calcula o RTT armazenando a hora na qual o pacote Echo Request é enviado na área de dados da mensagem ICMP. Então, quando a resposta Echo Reply é recebida, ele simplesmente subtrai esse valor de hora da hora atual (momento em que o datagrama é recebido). Erros e pacotes também são relatados pelo comando Ping.</p>
+
+<p>Para usarmos ele, usamos no prompt do Windows o comando <code>ping www.google.com.br</code> (substituindo pelo site/IP desejado).</p>
+
+<p>Digitando <code>ping /?</code> você pode ver outras opções para usar como parâmetros.</p>
+
+<p>Um exemplo de uso seria <code>ping /n 6 www.google.com.br</code>, para enviar seis requisições, ao invés do padrão 4. Outro exemplo seria colocar o parâmetro <code>/t</code> para enviar infinitas requisições no Windows, por exemplo <code>ping /t www.google.com.br</code>. Também podemos forçar o uso de IPv4 com o parâmetro <code>/4</code> ou de IPv6 usando <code>/6</code>.</p>
+
+<p>No Linux, o comando <code>ping</code> tem outros parâmetros, e por padrão manda requisições infinitas. Para escolher a quantidade de requisições (como 6) use <code>-c 6</code>, pra forçar IPV4 use <code>-4</code> e IPV6 <code>-6</code>. Para ajuda use <code>--help</code>.</p>
+
+<p>PS: O Ping é um comando para iniciar o teste de conectividade, apesar de algumas pessoas errarem, o Ping é apenas o comando, o tempo de milissegundos para o outro dispositivo se chama latência (o tempo máximo de latência deve ser de 45 ms, em média, no Brasil, quanto mais distante maior será a latência, como por exemplo, um servidor nos EUA).</p>
+
+<h3>Protocolo TCP - Campos do Cabeçalho</h3>
+
+<p>O protocolo TCP (Trasmission Control Protocol) é um protocolo da camada de transporte, que realiza um serviço de entrega de pacotes confiáveis, orientado à conexão.</p>
+
+<p>As principais funções realizadas pelo TCP são:</p>
+
+<ul>
+    <li>Estabelecer, manter e terminar conexões.</li>
+    <li>Fornecer confiabilidade.</li>
+    <li>Fornecer controlo de fluxo.</li>
+    <li>Multiplexação.</li>
+    <li>Endereçamento de aplicações.</li>
+    <li>Controle de congestionamento.</li>
+</ul>
+
+<p>Veja na ilustração abaixo como funciona o encapsulamento TCP:</p>
+
+<img src="imagens/encapsulamento.jpg" alt="Encapsulamento"/>
+
+<p>Pode ver que o segmento TCP é composto por um cabeçalho TCP (geralmente com 20 bytes, mas pode ter mais), e a área de dados TCP, que é as informações transmitidas (que podem ou não estar vazia). Tudo isso é um segmento TCP, encapsulado num datagrama IP, que também tem seu cabeçalho, da mesma forma.</p>
+
+<p>Veja abaixo a foto da estrutura do cabeçalho TCP:</p>
+
+<img src="imagens/cabecalho-tcp.jpg" alt="Cabeçalho TCP"/>
+
+<p>Essa é a descrição dos campos:</p>
+
+<ul>
+    <li><b>Número de Porta de Origem: </b>Número que identifica a aplicação (processo) que envia os dados.</li>
+    <li><b>Número de Porta de Destino: </b>Número que identifica a aplicação (processo) que deve receber os dados.</li>
+    <li><b>Número de Sequência: </b>Número que identifica o byte em um fluxo de dados do transmissor para o receptor.</li>
+    <li><b>Número de Confirmação: </b>Se a flag ACK estiver ativa, o valor desse campo será o próximo número de sequência que o destinatário respera receber.</li>
+    <li><b>Comprimento do Cabeçalho (Data Offset): </b>Tamanho do cabeçalho TCP em palavras de 32 bits.</li>
+    <li><b>Reservado (3 bits): </b>Para uso futuro. Consiste atualmente na sequência 000.</li>
+    <li><b>Flags (ECN - Explicit Congestion Notification): </b>Contendo NS (campo opcional adicionado ao ECN para proteger contra dissimulação acidental ou malicioso de pacotes marcados do transmissor), CWR (Congestion Window Reduced) e ECE (ECN - Echo, cuja função depende do valor da função SYN).</li>
+    <li><b>Flags (Bits de Controle): </b>Contendo URG (quando ativado, indica que o campo ponteiro de urgente é válido e o recurso transferência de dados com prioridade foi invocado), ACK (Bit de Confirmação. Quando ativado, indica que o segmento carrega uma mensagem de confirmação e que o valor do campo Número de Confirmação é válido, e carrega o próximo número de sequência esperado pelo host), PSH (Bit de Push. Quando ativado, indica que o transmissor do segmento usa o recurso TCP Push, o qual requisita que os dados do segmento sejam imediatamente transmitidos à aplicação no dispositivo de destino), RST (Bit de Reset. Quando ativado, indica que o transmissor encontrou um problema e deseja resetar a conexão), SYN (Bit de Sincronismo. Requisição para sincronizar números de sequência e estabelecer uma conexão entre dois hosts. O campo número de seqência contém o número de sequência inicial (ISN) do host que transmite o segmento) e FIN (Bit de Finalização. Quando ativado indica que o transmissor do segmento requisita que a conexão seja encerrada).</li>
+    <li><b>Tamanho da Janela: </b>O tamanho da janela de recepção indica o número de bytes que o transmissor deste segmento quer aceitar do host de destino, em cada transmissão.</li>
+    <li><b>Checksum: </b>Usado para verificação de erros do cabeçalho e dos dados transmitidos.</li>
+    <li><b>Ponteiro de Urgente: </b>Usado em conjunto com o flag URG para transferência de dados com prioridade.</li>
+    <li><b>Opções: </b>Campo opcional, que representa informações não cobertas pelos demais campos do cabeçalho TCP. Uma das opções mais comuns é o MSS (Maximun Segment Size).</li>
+</ul>
+
+<p>Em resumo:</p>
+
+<ul>
+    <li>O protocolo TCP fornece um serviço orientado à conexão, confável, na camada de transporte da pilha TCP/IP.</li>
+    <li>Os dados são empacotados em unidades denominadas segmentos.</li>
+    <li>As mensagens enviadas recebem uma confirmação de recebimento, além de serem reordenadas no host de destino, que também verifica a ocorrência de erros de transmissão.</li>
+    <li>Caso haja algum erro, os dados são retransmitidos e, caso hajam segmentos duplicados, são descartados.</li>
+    <li>Além disso, o protocolo TCP permite enviar dados de múltiplas aplicações multiplexadas.</li>
+    <li>Usa o mecanismo de portas de comunicação para determinar a qual aplicação enviar e entregar os dados transmitidos.</li>
+</ul>
+
+<ul>
+    <li><a href="tudo-sobre-redes-3.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-redes-5.html">Continuação da Matéria</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

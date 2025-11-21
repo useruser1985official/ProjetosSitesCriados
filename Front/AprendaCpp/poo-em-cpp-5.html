@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C++</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cpp-1.html">Tudo sobre C++ Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cpp-2.html">Tudo sobre C++ Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cpp-3.html">Tudo sobre C++ Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cpp-4.html">Tudo sobre C++ Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cpp-5.html">Tudo sobre C++ Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cpp-6.html">Tudo sobre C++ Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cpp-7.html">Tudo sobre C++ Parte 7!</a></li>
+                    <li><a href="tudo-sobre-cpp-8.html">Tudo sobre C++ Parte 8!</a></li>
+                    <li><a href="tudo-sobre-cpp-9.html">Tudo sobre C++ Parte 9!</a></li>
+                    <li><a href="tudo-sobre-cpp-10.html">Tudo sobre C++ Parte 10!</a></li>
+                    <li><a href="tudo-sobre-cpp-11.html">Tudo sobre C++ Parte 11!</a></li>
+                    <li><a href="tudo-sobre-cpp-12.html">Tudo sobre C++ Parte 12!</a></li>
+                    <li><a href="tudo-sobre-cpp-13.html">Tudo sobre C++ Parte 13!</a></li>
+                    <li><a href="tudo-sobre-cpp-14.html">Tudo sobre C++ Parte 14!</a></li>
+                    <li><a href="tudo-sobre-cpp-15.html">Tudo sobre C++ Parte 15!</a></li>
+                    <li><a href="tudo-sobre-cpp-16.html">Tudo sobre C++ Parte 16!</a></li>
+                </menu>
+            </header>
+
+<h2>Orientação a Objetos em C++ - Parte 5</h2> 
+
+<h3>Herança, Virtual, Override</h3>
+
+<p>Como sabemos, a herança é quando uma classe herda todas as características de outra classe. As classes herdeiras podem, além de herdar as características da classe pai, pode ter atributos e métodos próprios, além de sobreposição de alguns métodos.</p>
+
+<p>Crie a classe Veiculo novamente com esse código:</p>
+
+<pre>
+<code>
+class Veiculo {
+    public:
+        int velMax;
+        int rodas;
+
+        void imp();
+        
+        const char* getNome();
+        void setNome(const char* nome);
+        const char* getCor();
+        void setCor(const char* cor);
+    private:
+        const char* nome;
+        const char* cor;
+};
+</code>
+</pre>
+
+<p>Implementação dos métodos, incluindo os getters e setters:</p>
+
+<pre>
+<code>
+void Veiculo::imp() {
+    std::cout << "Nome...: " << this->nome << std::endl;
+    std::cout << "Cor....: " << this->cor << std::endl;
+    std::cout << "Rodas..: " << this->rodas << std::endl;
+    std::cout << "Vel Máx: " << this->velMax << std::endl << std::endl;
+}
+
+const char* Veiculo::getNome() {
+    return this->nome;
+}
+
+void Veiculo::setNome(const char* nome) {
+    this->nome = nome;
+}
+
+const char* Veiculo::getCor() {
+    return this->cor;
+}
+
+void Veiculo::setCor(const char* cor) {
+    this->cor = cor;
+}
+</code>
+</pre>
+
+<p>Como visto acima, nada de novo, o método imprimir está dentro da classe e pode acessar atributos privados.</p>
+
+<p>Agora crie a classe Carro, herdando de Veiculo:</p>
+
+<pre>
+<code>
+class Carro : public Veiculo {
+    public:
+        Carro();
+};
+</code>
+</pre>
+
+<p>Implementação do construtor:</p>
+
+<pre>
+<code>
+Carro::Carro() {
+    this->velMax = 160;
+    this->rodas = 4;
+    this->setNome("Carro");
+    this->setCor("Branco");
+}
+</code>
+</pre>
+
+<p>Note que as propriedades chamadas não são da classe Carro, e sim da classe que ela herdou, a Veiculo.</p>
+
+<p>Da mesma forma, podemos fazer igual em outras classes, como a Moto, que também herda de veículo:</p>
+
+<pre>
+<code>
+class Moto : public Veiculo {
+    public:
+        Moto();
+};
+</code>
+</pre>
+
+<p>Implementação do construtor:</p>
+
+<pre>
+<code>
+Moto::Moto() {
+    this->velMax = 200;
+    this->rodas = 2;
+    this->setNome("Moto");
+    this->setCor("Preta");
+}
+</code>
+</pre>
+
+<p>E da mesma forma, a classe Militar, que ganhará algumas propriedades novas:</p>
+
+<pre>
+<code>
+class Militar : public Veiculo {
+    public:
+        int municao;
+        bool armamento;
+        Militar(bool arma, int municao);
+};
+</code>
+</pre>
+
+<p>Implementação do construtor:</p>
+
+<pre>
+<code>
+Militar::Militar(bool arma, int municao) {
+    this->velMax = 150;
+    this->rodas = 6;
+
+    this->armamento = arma;
+    this->setNome("Tanque");
+    this->setCor("Verde");
+
+    if(arma) {
+        this->municao = municao;
+    }
+    else {
+        this->municao = 0;
+    }
+}
+</code>
+</pre>
+
+<p>Só que o método imp() não exibirá a munição e o armamento do Militar, para isso, voltamos em veículo e colocaremos o imp() na declaração como virtual, que permitirá sobreescrever o método em outras classes:</p>
+
+<pre>
+<code>
+class Veiculo {
+    public:
+        int velMax;
+        int rodas;
+
+        virtual void imp(); // Todo método que pode ser sobreposto deve ter o virtual na frente.
+        
+        const char* getNome();
+        void setNome(const char* nome);
+        const char* getCor();
+        void setCor(const char* cor);
+    private:
+        const char* nome;
+        const char* cor;
+};
+</code>
+</pre>
+
+<p>E na classe Militar, colocamos a palavra override no método imp (existente no C++11), que indica que ele está sobrepondo:</p>
+
+<pre>
+<code>
+class Militar : public Veiculo {
+    public:
+        int municao;
+        bool armamento;
+        Militar(bool arma, int municao);
+
+        void imp() override;
+};
+</code>
+</pre>
+
+<p>Dessa forma, a implementação do método imp sobreposto em Militar fica assim:</p>
+
+<pre>
+<code>
+void Militar::imp() {
+    std::cout << "Nome.......: " << this->getNome() << std::endl; // Use o getter devido ao encapsulamento
+    std::cout << "Cor........: " << this->getCor() << std::endl;
+    std::cout << "Rodas......: " << this->rodas << std::endl;
+    std::cout << "Vel Máx....: " << this->velMax << std::endl;
+    std::cout << "Armamento..: " << this->armamento << std::endl;
+    std::cout << "Municao....: " << this->municao << std::endl << std::endl;
+}
+</code>
+</pre>
+
+<p>PS: Pode ser assim também, chamando o método da classe pai junto com o método sobreposto:</p>
+
+<pre>
+<code>
+void Militar::imp() {
+    Veiculo::imp(); // Chamada do método da classe pai
+
+    std::cout << "Armamento..: " << this->armamento << std::endl;
+    std::cout << "Municao....: " << this->municao << std::endl << std::endl;
+}
+</code>
+</pre>
+
+<p>Em outras palavras, o virtual num método de uma classe pai indica que esse método será sobreposto em alguma classe herdeira. E a classe que sobreescrever o método deverá indicar com override.</p>
+
+<p>Um método sem o virtual não pode ser sobreposto, de forma que não precisa colocar final num método que não queiramos que seja substituído, apenas deixe ele sem nada (mas pode ser colocado na indicação algo como <code>void nomeDoMetodo() final</code>), para tornar a classe também final, use algo tipo <code>class NomeDaClasse final</code>, o final só pode ser usado em C++11. Todo método que poderá sobreposto deverá ter virtual indicando isso. Em atributos, coloque <code>const</code> na indicação da variável e inicialize dentro da classe mesmo.</p>
+
+<p>No código principal faça isso:</p>
+
+<pre>
+<code>
+Carro *c = new Carro();
+
+c->imp();
+
+Moto *m = new Moto();
+
+m->imp();
+
+Militar *t = new Militar(true, 500);
+
+t->imp();
+
+delete c;
+delete m;
+delete t;
+</code>
+</pre>
+
+<p>Lembrando que podemos colocar a tipagem como uma classe (geralmente abstrata), mas a declaração do objeto com new deve ser de uma classe não-abstrata que implemente ou herde os métodos dela, por exemplo:</p>
+
+<pre>
+<code>
+Veiculo *c = new Carro();
+
+c->imp();
+
+Veiculo *m = new Moto();
+
+m->imp();
+
+Veiculo *t = new Militar(true, 500);
+
+t->imp();
+
+delete c;
+delete m;
+delete t;
+</code>
+</pre>
+
+<p>Isso é útil para ganharmos em polimorfismo, onde podemos usar vários tipos de objetos em, por exemplo, parâmetros, desde que eles tenham a mesma classe pai em comum. Isso é o polimorfismo de inclusão.</p>
+
+<p>PS: Lembrando que, nesse caso, só poderemos usar os métodos declarados na classe pai, no caso, a Veiculo, mesmo que estes métodos sejam sobrepostos em classes herdeiras.</p>
+
+<h3>Protected x Private x Public</h3>
+
+<p>Já sabemos como utilizar o public e o private </p>
+
+<p>Criemos uma declaração assim pra exemplificar:</p>
+
+<pre>
+<code>
+class Veiculo {
+    public:
+        int rodas;
+        const char* nome;
+        
+    protected:
+        int portas;
+        const char* cor;
+        
+    private:
+        int velMax;
+        int potencia;
+};
+</code>
+</pre>
+
+<p>O public permite o acesso a qualquer parte do programa, o private permite o acesso apenas dentro da própria classe. O protected é meio que um meio-termo, pois permite acesso dentro de classes filhas.</p>
+
+<p>Veja um exemplo de chamada de métodos protegidos em heranca, numa classe Carro:</p>
+
+<pre>
+<code>
+class Carro : public Veiculo {
+    public:
+        Carro();
+};
+</code>
+</pre>
+
+<p>E implementação:</p>
+
+<pre>
+<code>
+Carro::Carro() {
+    this->velMax = 100; // Não podemos acessar
+    this->potencia = 150; // Não podemos acessar
+    this->rodas = 4;
+    this->nome = "Carro";
+    this->portas = 4;
+    this->cor = "Branco";
+}
+</code>
+</pre>
+
+<p>Como visto, a classe Carro permitiu acesso aos métodos protegidos porque ela herda de Veiculo, uma agregação entre objetos também não vai dar erro:</p>
+
+<pre>
+<code>
+class Moto {
+    public:
+        Carro *c;
+};
+</code>
+</pre>
+
+<p>Isso ocorre porque a classe Moto, mesmo não tenho herança, ele cria um elemento Carro dentro da classe.</p>
+
+<p>Mas se tentarmos acessar qualquer atributo ou método protegido em partes do programa fora da classe e de suas herdeiras, dará erro.</p>
+
+<ul>
+    <li><a href="poo-em-cpp-4.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="poo-em-cpp-6.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

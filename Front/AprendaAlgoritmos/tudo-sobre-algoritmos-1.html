@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Algoritmos</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Algoritmos</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Algoritmos Parte 1!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-2.html">Tudo sobre Algoritmos Parte 2!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-3.html">Tudo sobre Algoritmos Parte 3!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-4.html">Tudo sobre Algoritmos Parte 4!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-5.html">Tudo sobre Algoritmos Parte 5!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Algoritmos Parte 1</h2>
+
+<h3>O que é Algoritmo?</h3>
+
+<p>Um algoritmo é uma sequência de passos organizados e claros que servem para resolver um problema ou realizar uma tarefa. É como uma receita: Você segue cada passo, na ordem certa, até chegar ao resultado final. O computador só consegue trabalhar porque seguimos essa lógica passo a passo.</p>
+
+<p>Aqui vai um exemplo simples de algoritmo do cotidiano, usando o ato de tomar banho:</p>
+
+<ol>
+    <li>Entrar no banheiro.</li>
+    <li>Abrir o registro do chuveiro.</li>
+    <li>Ajustar a temperatura da água.</li>
+    <li>Molhar o corpo.</li>
+    <li>Aplicar sabonete e esfregar.</li>
+    <li>Enxaguar o corpo.</li>
+    <li>Aplicar shampoo e enxaguar.</li>
+    <li>Fechar o registro.</li>
+    <li>Secar-se com a toalha.</li>
+</ol>
+
+<p>Aqui vai um exemplo simples de algoritmo na computação, usando a lógica de funcionamento da calculadora do Windows ao realizar uma soma:</p>
+
+<ol>
+    <li>O usuário digita o primeiro número.</li>
+    <li>O programa armazena esse número na memória.</li>
+    <li>O usuário pressiona o botão <q>+</q>.</li>
+    <li>O programa aguarda o próximo número.</li>
+    <li>O usuário digita o segundo número.</li>
+    <li>O programa armazena esse número também.</li>
+    <li>O usuário pressiona <q>=</q>.</li>
+    <li>O programa realiza a operação: Primeiro número + segundo número.</li>
+    <li>O resultado é exibido na tela.</li>
+</ol>
+
+<p>Isso é um algoritmo: Passos claros, executados sempre na mesma ordem, até chegar ao resultado.</p>
+
+<h3>O que é Fluxograma?</h3>
+
+<p>Um fluxograma é uma forma gráfica de representar um algoritmo, usando símbolos (como caixas, setas e losangos) para mostrar o caminho que os passos seguem. Ele ajuda a visualizar a lógica de uma tarefa de maneira simples e organizada.</p>
+
+<p>Veja um fluxograma sobre a soma citada anteriormente:</p>
+
+<img src="imagens/fluxograma-exemplo.png" alt="Exemplo de Fluxograma" style="max-width: 350px"/>
+
+<p>Esses são os símbolos básicos de um fluxograma:</p>
+
+<img src="imagens/simbolos-fluxograma.png" alt="Símbolos Básicos Fluxograma" style="max-width: 350px"/>
+
+<p>Podemos usar um site como esse pra criar nossos próprios fluxogramas: <a href="https://app.diagrams.net/" target="_blank">https://app.diagrams.net/</a></p>
+
+<h3>O que é Portugol e Exemplo de Olá, Mundo!</h3>
+
+<p>Portugol é uma linguagem de pseudocódigo escrita em português, criada para ajudar iniciantes a aprender lógica de programação de forma simples. No Portugol Studio, você escreve programas usando comandos intuitivos, como <q>leia</q>, <q>escreva</q>, <q>se</q>, <q>enquanto</q>, etc.</p>
+
+<p>O código escrito para criar um programa é chamado de código-fonte. Ele fica salvo em um arquivo com uma extensão específica que o interpretador entende. No caso do Portugol Studio, a extensão usada é <q>.por</q>. Cada linguagem tem suas extensões específicas para seus arquivos de código-fonte.</p>
+
+<p>Para baixar o Portugol Studio, devemos ir nesse site, que tem opções para Windows, Linux e Mac: <a href="https://univali-lite.github.io/Portugol-Studio/" target="_blank">https://univali-lite.github.io/Portugol-Studio/</a></p>
+
+<p>Podemos também usar uma ferramenta online, que permite executar por qualquer dispositivo, até mesmo tablets e celulares: <a href="http://portugol.professorisidro.com.br:3000/ide" target="_blank">http://portugol.professorisidro.com.br:3000/ide</a></p>
+
+<p>A estrutura básica de um programa no Portugol é essa:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        
+    }
+}
+</code>
+</pre>
+
+<p>As chaves formam um bloco, indicando o que pertence à parte <q>programa</q> e o que pertence à função <q>inicio</q> (pense nos blocos como a <q>caixa</q> que guarda todo o conteúdo, e que um bloco pode estar dentro do outro).</p>
+
+<p>O bloco <code>programa</code> é a estrutura de onde o programa começa, onde tem uma função chamada <code>inicio</code> que é a que o interpretador do Portugol executa primeiramente por padrão, e basicamente nosso programa é feito dentro dela. Por padrão, toda função têm parênteses, que podem ou não receber argumentos, coisa que veremos mais pra frente.</p>
+
+<p>A função <code>escreva</code> serve para mostrar algo na tela. Tudo o que você colocar dentro dos parênteses dela, será exibido para o usuário. Por padrão, ela deve ser executada dentro de inicio. Como ela é uma invocação de uma função, não tem blocos com chaves.</p>
+
+<p>Exemplo resumido de <q>Olá, Mundo</q> no Portugol Studio:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        escreva("Olá, Mundo!")
+    }
+}
+</code>
+</pre>
+
+<p>O <q>Olá, Mundo!</q> fica entre aspas duplas porque é um texto (conhecido também como <q>cadeia de caracteres</q> na programação), e textos sempre precisam estar entre aspas duplas para o computador entender que aquilo não é um comando, e sim uma mensagem que deve ser mostrada exatamente como está escrita.</p>
+
+<p>PS: Dizem que, no mundo da programação, quem não conseguir fazer o código-fonte escrever <q>Olá, Mundo</q> na tela, nunca vai conseguir aprender essa tecnologia, por isso, por tradição, este é o primeiro programa a se fazer ao aprender uma nova linguagem.</p>
+
+<p>Veja o fluxograma do Olá, Mundo:</p>
+
+<img src="imagens/fluxograma-ola-mundo.png" alt="Fluxograma Olá, Mundo" style="max-width: 500px"/>
+
+<h3>Variáveis e Constantes</h3>
+
+<p>Variáveis são como caixinhas onde guardamos valores que podem mudar durante o programa. Por padrão, uma variável simples só pode guardar um valor por vez. O valor pode ser alterado em qualquer parte do programa, e nesse caso ele substitui o valor anterior. Uma variável pode ser inicializada com um valor pré-definido, mas isso não é obrigatório, podendo ter o valor atribuído em outras partes do programa.</p>
+
+<p>As constantes funcionam da mesma forma, no entanto, seu valor não pode ser alterado, e por isso, obrigatoriamente elas terão que ser inicializadas com um valor já atribuído, que é permanente.</p>
+
+<p>Por regra, as variáveis e constantes são locais, ou seja, elas só existem dentro de uma função, como no caso, a inicio. Podemos ter variáveis globais que são declaradas fora de funções e estas são vistas por todo o programa, mas isso será visto mais pra frente.</p>
+
+<p>Os tipos primitivos padrão das variáveis e constantes são esses:</p>
+
+<table>
+    <tr>
+        <th>Tipo Primitivo</th>
+        <th>Significado</th>
+        <th>Exemplos</th>
+    </tr>
+    <tr>
+        <td>Inteiro</td>
+        <td>Números inteiros</td>
+        <td><code>0</code>, <code>7</code>, <code>-15</code>, <code>200</code></td>
+    </tr>
+    <tr>
+        <td>Real</td>
+        <td>Números com casa decimal</td>
+        <td><code>3.14</code>, <code>9.85</code>, <code>-2.5</code></td>
+    </tr>
+    <tr>
+        <td>Caracter</td>
+        <td>Caracter único</td>
+        <td><code>'A'</code>, <code>'b'</code>, <code>'7'</code></td>
+    </tr>
+    <tr>
+        <td>Cadeia</td>
+        <td>Textos no geral</td>
+        <td><code>"Olá"</code>, <code>"Isso é um texto"</code></td>
+    </tr>
+    <tr>
+        <td>Lógico</td>
+        <td>Apenas Verdadeiro ou Falso</td>
+        <td><code>verdadeiro</code>, <code>falso</code></td>
+    </tr>  
+</table>
+
+<p>Note que a cada decimal dos números reais são representadas por um ponto, e não por uma vírgula, nas linguagens de programação.</p>
+
+<p>Note que os caracteres são representados sempre entre aspas, conforme explicado, pro computador saber que se trata de algo que deve ser exibido de forma literal. O <code>caracter</code> só guarda um caracter único e deve estar sempre entre aspas simples, já as cadeias de caracteres (textos) sempre deverão estar entre aspas duplas. Os outros tipos de dados (<code>inteiro</code>, <code>real</code> e <code>logico</code>) não devem ter aspas de nenhum tipo, caso um dado desses esteja entre aspas (como por exemplo, <code>"45"</code> ou <code>"falso"</code>) ele é considerado texto (ou seja, cadeia de caracteres).</p>
+
+<p>A nomeação de variáveis e constantes seguem determinadas regras:</p>
+
+<ul>
+    <li>Só pode usar letras, números e underline (<q>_</q>), no entanto, não pode começar com um número, sempre deve começar com uma letra. A partir do segundo caractere pode ter números e underlines.</li>
+    <li>Não pode ter espaços.</li>
+    <li>Não pode usar acentos ou caracteres especiais como <q>#</q>, <q>@</q>, <q>!</q>, etc.</li>
+    <li>Não pode usar palavras reservadas da linguagem (no caso do Portugol, são palavras como <code>funcao</code>, <code>escreva</code>, <code>se</code>, <code>enquanto</code> e outras que veremos mais pra frente, incluindo as palavras já vistas como <code>inteiro</code>, <code>caracter</code> e <code>logico</code>).</li>
+</ul>
+
+<p>Alguns nomes aceitos:</p>
+
+<pre>
+<code>
+idade
+n1
+soma
+preco
+total_vendas    
+</code>
+</pre>
+
+<p>Também, para identificação e leitura mais precisa, é ideal seguir também essas regras:</p>
+
+<ul>
+    <li>Deve ser tudo em minúscula, podendo identificar palavras compostas com a primeira maiúscula (técnica conhecida como CamelCase) ou dividir por underlines, como por exemplo <code>soma_total</code> ou <code>somaTotal</code>.</li>
+    <li>Constantes devem estar todas em maiúsculas para melhor identificação, podendo também ter palavras compostas divididas por underlines, como por exemplo <code>CPF</code> ou <code>TAXA_DESCONTO</code>.</li>
+    <li>Deve ter nomes coerentes com a utilização delas (por exemplo, guardar a idade de uma pessoa numa variável de nome <code>idade</code> faz mais sentido do que uma variável com o nome <code>x</code>).</li>
+</ul>
+
+<p>Usando os mesmos dados com variáveis:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro numero = 50
+        real numReal = 9.85
+        caracter letra = 'A'
+        cadeia frase = "Isso é um Texto"
+        logico valorLogico = verdadeiro
+        const cadeia CONSTANTE = "Isso é uma Constante"
+        
+        escreva(numero + "\n")
+        escreva(numReal + "\n")
+        escreva(letra + "\n")
+        escreva(frase + "\n")
+        escreva(valorLogico + "\n")
+        escreva(CONSTANTE + "\n")
+    }
+}
+</code>
+</pre>
+
+<p>Note que, no Portugol, para atribuir um valor a uma variável, devemos usar um símbolo de igual (<q>=</q>), no entanto, ele significa <q>atribuição</q>, pra comparar igualdade usamos outra forma que veremos mais pra frente. O <q>+</q> é para concatenar (juntar) dois valores numa só saída. A palavra-chave <q>const</q> define uma constante.</p>
+
+<p>Veja o fluxograma do código acima:</p>
+
+<img src="imagens/fluxograma-tipos-variaveis.png" alt="Fluxograma de Variáveis" style="max-width: 350px"/>
+
+<p>O <code>\n</code> é uma sequência de escape e é usado para quebrar a linha na saída da função escreva, e existem várias outras, como pra exibir aspas literais dentro de uma cadeia de caracteres, podemos usar <code>\'</code> ou <code>\"</code>. Como por exemplo:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        escreva("Exemplo de algo entre \"aspas\" num texto!\n")
+    }
+}
+</code>
+</pre>
+
+<p>Também podemos exibir os valores diretamente na função escreva, veja os mesmos valores acima, sem estarem atribuídos a variáveis:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        escreva(50 + "\n")
+        escreva(9.85 + "\n")
+        escreva('A' + "\n")
+        escreva("Isso é um texto" + "\n")
+        escreva(verdadeiro + "\n")
+    }
+}
+</code>
+</pre>
+
+<p>Lembrando o que foi citado acima, apenas caracter tem aspas simples e apenas cadeias de caracteres (textos) têm aspas duplas. Inteiros, reais e lógicos não têm aspas de nenhum tipo.</p>
+
+<p>PS: Numa concatenação de valores de tipos diferentes, como os textos com <q>\n</q> e os dados do lado esquerdo das mesmas, pode dar problemas em algumas linguagens, coisa que não costuma dar grandes problemas no Portugol. Veja por exemplo esse código:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        escreva(10 + "10")
+    }
+}
+</code>
+</pre>
+
+<p>Como ele vai identificar o segundo <q>10</q> como texto, por estar entre aspas duplas, ele apenas vai concatenar (juntar) os valores, exibindo <q>1010</q>, ao invés de fazer a soma.</p>
+
+<p>Se colocarmos os dois <q>10</q> entre aspas (no caso, <code>escreva("10" + "10")</code>), eles também seriam considerados textos e também retornaria <q>1010</q>.</p>
+
+<p>Apenas quando ambos estão sem aspas que eles realmente são considerados números e aí sim faria a soma (<code>escreva(10 + 10)</code> somaria os dois números, retornando 20).</p>
+
+<p>No entanto, várias das linguagens de programação contém técnicas para conversão de tipos de variáveis e dados no geral.</p>
+
+<h3>Comentários no Código</h3>
+
+<p>Comentários são textos dentro do código que não são executados pelo computador. Eles servem apenas para o programador explicar algo, deixar observações ou organizar melhor o código.</p>
+
+<p>Veja um exemplo de comentários em Portugol, no caso, de uma linha:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        // Esse é um comentário de uma linha
+        
+        escreva("Olá, Mundo!") // Isso escreve "Olá, Mundo" na tela
+    }
+}
+</code>
+</pre>
+
+<p>No código acima, tudo que estiver após as duas barras, não será executado pelo interpretador.</p>
+
+<p>Para fazer comentários de várias linhas, colocamos tudo entre os símbolos <q>/*</q> e <q>*/</q>, assim:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        /*
+         * Este é um comentário de várias linhas.
+         * Muitos programadores colocam um asterisco
+         * no começo de cada linha
+         * apenas para deixar o texto mais organizado.
+         * Porém, somente o primeiro no início e o último no final,
+         * junto com as barras, são realmente obrigatórios.
+         */
+        
+        escreva("Olá, Mundo!") // Exibe "Olá, Mundo!" na tela
+    }
+}
+</code>
+</pre>
+
+<p>PS: Por questões de boas práticas de programação, evite comentar coisas desnecessárias nos códigos. O ideal é comentar apenas funcionalidades ou coisas específicas para outros programadores saberem como estas funcionam.</p>
+
+<h3>Entrada de Dados</h3>
+
+<p>A entrada de dados é quando o programa pede uma informação ao usuário e guarda essa informação em uma variável. É como fazer uma pergunta e esperar a resposta para usar depois no algoritmo.</p>
+
+<p>No Portugol Studio, usamos a função <code>leia</code> para receber dados digitados pelo usuário e atribuí-los a uma variável.</p>
+
+<p>Veja um exmeplo com cada um dos tipos primitivos, adaptando um programa anterior:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro numero
+        real numReal
+        caracter letra
+        cadeia frase
+        
+        escreva("Digite um número inteiro: ")
+        leia(numero)
+        escreva("Digite um número real: ")
+        leia(numReal)
+        escreva("Digite uma única letra: ")
+        leia(letra)
+        escreva("Digite uma frase: ")
+        leia(frase)
+        
+        escreva(numero, "\n")
+        escreva(numReal, "\n")
+        escreva(letra, "\n")
+        escreva(frase, "\n")
+    }
+}
+</code>
+</pre>
+
+<p>Note que no código acima, as variáveis foram declaradas sem serem inicializadas, elas só passam a ter um valor atribuído ao lerem os dados de entrada preenchidos pelo usuário, com a função <code>leia</code>.</p>
+
+<p>Lembrando que o número real deve ser digitado com ponto, e não com vírgula. Note também que usamos a vírgula pra concatenar (juntar) os dados, ela é um opção mais recomendada que o <q>+</q>, pra evitar confusão com o operador de soma (que veremos mais pra frente).</p>
+
+<p>Veja o fluxograma do código acima:</p>
+
+<img src="imagens/fluxograma-entrada-variaveis.png" alt="Fluxograma de Entrada de Variáveis" style="max-width: 500px"/>
+
+<ul>
+    <li><a href="tudo-sobre-algoritmos-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

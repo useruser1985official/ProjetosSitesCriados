@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("../imagens/back-phone.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+main {
+    min-width: 240px;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: rgb(255, 255, 255, 0.9);
+}
+
+img#phone, img#tablet, img#print, img#pc, img#tv {
+    display: none;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+main {
+    width: 90%;
+    margin: auto;
+    max-width: 1000px;
+}
+
+header {
+    background-color: gray;
+}
+
+header > h1 {
+    padding: 10px;
+    text-align: center;
+}
+
+nav#menu {
+    display: block;
+}
+
+nav#menu > ul {
+    list-style-type: none;
+}
+
+nav#menu > ul > li > a {
+    display: block;
+    padding: 10px;
+    margin: 0px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    background-color: rgb(87, 87, 87);
+}
+
+nav#menu > ul > li:hover > a {
+    background-color: gray;
+}
+
+span#burguer {
+    background-color: rgb(48, 48, 48);
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+span#burguer:hover {
+    background-color: white;
+    color: black;
+}
+
+@media screen and (min-width: 768px) {
+    span#burguer {
+        display: none;
+    }
+    nav#menu > ul {
+        display: block;
+    }
+
+    nav#menu > ul > li {
+        display: inline-block;
+    }
+}

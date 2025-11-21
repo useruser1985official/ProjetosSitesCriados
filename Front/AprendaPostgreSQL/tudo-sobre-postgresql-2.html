@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda PostgreSQL</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda PostgreSQL</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-postgresql-1.html">Tudo sobre PostgreSQL Parte 1!</a></li>
+                    <li><a href="tudo-sobre-postgresql-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre PostgreSQL Parte 2!</a></li>
+                    <li><a href="tudo-sobre-postgresql-3.html">Tudo sobre PostgreSQL Parte 3!</a></li>
+                    <li><a href="tudo-sobre-postgresql-4.html">Tudo sobre PostgreSQL Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre PostgreSQL Parte 2</h2>
+
+<h3>Ordenar Resultados de Consultas com Order By</h3>
+
+<p>Podemos também ordenar os resultados de uma consulta por coluna, em ordem crescente ou decrescente.</p>
+
+<p>Primeiramente, vamos inserir mais uns produtos na tabela, assim:</p>
+
+<pre>
+<code>
+insert into produtos (codigo, nome, descricao, preco, qtd_estoque) values
+(6, 'Detergente', 'Detergente líquido 500 ml', 1.89, 32),
+(7, 'Leite Integral', 'Leite integral caixa de 1 litro', 4.60, 70),
+(8, 'Refrigerante', 'Garrafa de refrigerante de 600 ml', 3.70, 14),
+(9, 'Refrigerante', 'Garrafa de refrigerante de 1 litro', 6.89, 16),
+(10, 'Refrigerante', 'Lata de refrigerante de 350 ml', 2.99, 45);
+
+-- Esse insert é a parte, para vermos como funciona valores null,
+-- pois a descrição não foi especificada.
+insert into produtos (codigo, nome, preco, qtd_estoque) values (11, 'Margarina', 3.20, 8);
+
+-- Depois dê esse select:
+select * from produtos;
+</code>
+</pre>
+
+<p>Para pegar os valores ordenados, faça assim:</p>
+
+<pre>
+<code>
+select * from produtos order by nome; -- Por padrão, ele ordena em ordem crescente
+</code>
+</pre>
+
+<p>Invertendo a ordem, com outra coluna:</p>
+
+<pre>
+<code>
+select * from produtos order by qtd_estoque desc;
+</code>
+</pre>
+
+<p>Podemos filtrar também, dessa forma:</p>
+
+<pre>
+<code>
+select nome, preco from produtos order by nome;
+</code>
+</pre>
+
+<p>Note que os refrigerante ficaram fora de ordem de preços, para isso, fazemos uma segunda ordenação dentro da primeira:</p>
+
+<pre>
+<code>
+select nome, preco from produtos order by nome, preco;
+</code>
+</pre>
+
+<p>No caso, ele ordenará primeiro por nome, e dentro dos nomes, por preço.</p>
+
+<p>Faça essa ordenação:</p>
+
+<pre>
+<code>
+select nome, descricao from produtos order by descricao;
+</code>
+</pre>
+
+<p>Note que o último item é a margarina, que está com o valor null. Para os valores null aparecer antes, faça assim:</p>
+
+<pre>
+<code>
+select nome, descricao from produtos order by descricao nulls first; -- Pode ser last também
+</code>
+</pre>
+
+<p>Podemos usar o order junto com o where também, por exemplo:</p>
+
+<pre>
+<code>
+select nome, preco from produtos where preco &gt; 10.00 order by preco asc;
+
+-- Invertendo a ordem:
+select nome, preco from produtos where preco &gt; 10.00 order by preco desc;
+</code>
+</pre>
+
+<p>PS: O order vem depois do where.</p>
+
+<h3>Limit e Offset - Limitar Resultados de Consultas</h3>
+
+<p>O limit e o offset permitem obter uma parte específica das linhas retornadas por uma consulta SQL.</p>
+
+<p>É recomendado usar o order by com o limit e o offset, mas ele não é obrigatório.</p>
+
+<p>Vamos ver todos os produtos cadastrados:</p>
+
+<pre>
+<code>
+select * from produtos order by preco;
+</code>
+</pre>
+
+<p>Para vermos os quatro produtos mais baratos:</p>
+
+<pre>
+<code>
+select * from produtos order by preco limit 4;
+</code>
+</pre>
+
+<p>Nesse caso acima ele só mostrará os quatro produtos mais baratos.</p>
+
+<p>Para visualizarmos do terceiro ao quinto mais caro, usamos o offset dessa forma:</p>
+
+<pre>
+<code>
+select * from produtos order by preco desc limit 3 offset 2; -- Desconsidera os dois primeiros, contando a partir do terceiro.
+</code>
+</pre>
+
+<p>O offset pode ser usado sem depender do limit, nesse comando ele mostra a partir do terceiro até o fim:</p>
+
+<pre>
+<code>
+select * from produtos order by preco desc offset 2;
+</code>
+</pre>
+
+<p>Os valores padrões dos comandos limit e offset são <code>all</code> e <code>0</code>, respectivamente, mas estes são dispensáveis colocar, geralmente.</p>
+
+<p>Ao usar o limit sem o order, pode dar alguns problemas da exibição, por exemplo:</p>
+
+<pre>
+<code>
+select * from produtos limit 5;
+</code>
+</pre>
+
+<p>No caso acima, ele ordena pelo valor padrão, que é a chave primária.</p>
+
+<h3>Operadores de Comparação em Consultas SQL</h3>
+
+<p>Os operadores de comparação são usados para comparar dois valores e retornar um valor booleano, dependendo do resultado da comparação. Os operadores são os mesmos da maioria das linguagens de programação: <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>=</code> (nesse caso é um igual só) e <code>!=</code> (ou <code>&lt;&gt;</code>).</p>
+
+<p>Vamos ver um exemplo de consulta SQL com isso:</p>
+
+<pre>
+<code>
+select nome, preco from produtos where preco &gt; 12.00;
+</code>
+</pre>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+select nome, qtd_estoque from produtos where qtd_estoque &lt;= 20;
+</code>
+</pre>
+
+<p>Mais um, com o operador lógico <code>and</code>:</p>
+
+<pre>
+<code>
+select nome, qtd_estoque from produtos where qtd_estoque &lt;= 20 and qtd_estoque &gt; 10;
+</code>
+</pre>
+
+<p>Podemos também usar os operadores lógicos <code>or</code> e <code>not</code>, mas veremos isso mais pra frente.</p>
+
+<p>Vamos trazer todos os produtos:</p>
+
+<pre>
+<code>
+select nome, qtd_estoque from produtos;
+</code>
+</pre>
+
+<p>Para não mostrar nenhum cadastro de refrigerante, fazemos assim:</p>
+
+<pre>
+<code>
+select nome, qtd_estoque from produtos where nome != 'Refrigerante';
+</code>
+</pre>
+
+<p>Temos também o operador <code>like</code>, para procurar algo parecido, assim:</p>
+
+<pre>
+<code>
+select nome from produtos where nome = 'Refrigerante';
+
+select nome from produtos where nome like '%a';
+
+select nome from produtos where nome like 'L%';
+</code>
+</pre>
+
+<p>A porcentagem significa de 0 a infinitos caracteres, podemos usar o <code>_</code> para exigir apenas um caractere antes ou depois, e podemos combinar a porcentagem e o underline, por exemplo:</p>
+
+<pre>
+<code>
+select nome from produtos where nome like 'Luvas_%';
+</code>
+</pre>
+
+<p>PS: Diferente de outros bancos, o operador like diferencia maiúsculas e minúsculas no PostgreSQL. Para não diferenciar, use <code>ilike</code> no lugar.</p>
+
+<h3>Operador Between e Intervalos em Consultas SQL</h3>
+
+<p>O operador <code>between</code> permite visualizar os cadastros dentro de um intervalo especificado dentro do mesmo. Ele é usado em conjunto com o <code>and</code>. Podemos usar também uma negação com <code>not</code> para ele não mostrar dados dentro do intervalo especificado.</p>
+
+<p>Veja uma consulta padrão numa tabela:</p>
+
+<pre>
+<code>
+select * from produtos;
+</code>
+</pre>
+
+<p>Veja o uso dos operadores, com a cláusula where:</p>
+
+<pre>
+<code>
+select nome, preco from produtos where preco between 10.00 and 20.00;
+</code>
+</pre>
+
+<p>Mais um exemplo:</p>
+
+<pre>
+<code>
+select nome, preco from produtos where
+preco between 3.50 and 5.00 or
+preco between 10.00 and 20.00;
+</code>
+</pre>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+select nome, preco, qtd_estoque from produtos where
+preco between 2.00 and 6.00 and
+qtd_estoque &lt; 10;
+</code>
+</pre>
+
+<p>Também podemos usar negação, dessa forma:</p>
+
+<pre>
+<code>
+select nome, preco, qtd_estoque from produtos
+where preco between 5.00 and 12.00;
+
+-- Com negação:
+select nome, preco, qtd_estoque from produtos
+where preco not between 5.00 and 12.00;
+</code>
+</pre>
+
+<h3>Cláusula Update - Atualizar Dados Inseridos nas Tabelas</h3>
+
+<p>Com a declaração <code>update</code> podemos atualizar registros em uma tabela, como por exemplo, alguma informação cadastrada de forma errônea.</p>
+
+<p>Digite esse comando para ver os dados da tabela:</p>
+
+<pre>
+<code>
+select * from produtos;
+</code>
+</pre>
+
+<p>No exemplo, o registro <q>Margarina</q> não tem descrição (está como null). Para atualizar o campo, fazemos assim:</p>
+
+<pre>
+<code>
+update produtos set descricao = 'Pote de margarina vegetal' where codigo = 11;
+</code>
+</pre>
+
+<p>PS: Sempre use a cláusula where ao usar o update, para não atualizar todos os cadastros por acidente.</p>
+
+<p>Vamos alterar o preço de um produto:</p>
+
+<pre>
+<code>
+update produtos set preco = 3.95 where nome = 'Sabonete';
+</code>
+</pre>
+
+<p>PS: O recomendado é a cláusula where ser usada no id, mas como visto, podemos usar outras colunas, no entanto, o comando acima atualizaria o preço de todas as ocorrências contendo <q>Sabonete</q> no banco.</p>
+
+<p>Vamos fazer mais esse update, com cálculo:</p>
+
+<pre>
+<code>
+update produtos set qtd_estoque = qtd_estoque - 4 where preco &gt; 15.00;
+</code>
+</pre>
+
+<p>Como dissemos, sem a cláusula where temos que ter cuidado, mas nesse caso, faremos uma atualização do preço de todos os produtos da tabela, assim:</p>
+
+<pre>
+<code>
+update produtos set preco = round(preco * 1.10, 2); -- É o mesmo que acrescentar 10% ao preço.
+</code>
+</pre>
+
+<h3>Apagar Registro de uma Tabela no PostgreSQL com Delete From e Truncate Table</h3>
+
+<p>Uma das tarefas mais comuns em bancos de dados é apagar registros em uma tabela. Para isso usamos o <code>delete</code> e o <code>truncate</code>, cada um com suas diferenças.</p>
+
+<p>Vamos cadastrar mais alguns itens extras no nosso banco como exemplo:</p>
+
+<pre>
+<code>
+insert into produtos (codigo, nome, descricao, preco, qtd_estoque) values
+(12, 'Sabão em Pó', 'Caixa de sabão em pó de 1/2 Kg', 12.50, 5),
+(13, 'Biscoito', 'Pacote de biscoito integral 110 g', 3.45, 16),
+(14, 'Manteiga', 'Pote de manteiga 250 g', 8.70, 5);
+</code>
+</pre>
+
+<p>Dê um select em produtos para ver os registros.</p>
+
+<p>Para deletar um registro, usamos o código dele com where, de forma semelhante com o update, por exemplo:</p>
+
+<pre>
+<code>
+delete from produtos where codigo = 12;
+</code>
+</pre>
+
+<p>Podemos excluir também pelo nome:</p>
+
+<pre>
+<code>
+delete from produtos where nome = 'Manteiga';
+</code>
+</pre>
+
+<p>Para excluir vários registros, fazemos assim:</p>
+
+<pre>
+<code>
+delete from produtos where qtd_estoque &lt;= 5;
+</code>
+</pre>
+
+<p>No caso, ele excluirá todos os registros com menos de 5 unidades.</p>
+
+<p>PS: Cuidado ao utilizar condições que afetem mais de uma linha. E lembre-se que um delete sem where excluiria todos os registros da tabela.</p>
+
+<p>Para excluir todos os registros de uma tabela, inclusive, é melhor utilizar o <code>truncate</code>. Veja esse exemplo, na tabela pedidos:</p>
+
+<pre>
+<code>
+truncate table pedidos;
+</code>
+</pre>
+
+<p>Carregue novamente os dados na tabela pedidos, pois usaremos em aulas seguintes:</p>
+
+<pre>
+<code>
+insert into pedidos (cod_cliente, cod_produto, qtd_vendida) values
+(1, 2, 3),
+(2, 3, 2),
+(1, 3, 4),
+(2, 6, 3),
+(2, 5, 2),
+(3, 8, 5);
+</code>
+</pre>
+
+<h3>10 Exemplos de Funções de Agregação no PostgreSQL</h3>
+
+<p>As funções de agregação em SQL são usadas para computar um valor único a partir de um conjunto de valores de entrada.</p>
+
+<p>As funções básicas de agregação são essas:</p>
+
+<table>
+    <tr>
+        <th>Função</th>
+        <th>O que Ela Faz</th>
+    </tr>
+    <tr>
+        <td><code>count(x)</code></td>
+        <td>Conta itens em uma coluna</td>
+    </tr>
+    <tr>
+        <td><code>max(x)</code></td>
+        <td>Retorna o maior valor</td>
+    </tr>
+    <tr>
+        <td><code>min(x)</code></td>
+        <td>Retorna o menor valor</td>
+    </tr>
+    <tr>
+        <td><code>avg(x)</code></td>
+        <td>Retorna a média dos valores</td>
+    </tr>
+    <tr>
+        <td><code>sum(x)</code></td>
+        <td>Retorna a soma dos valores</td>
+    </tr>
+</table>
+
+<p>Usando a função <code>count</code>:</p>
+
+<pre>
+<code>
+select count(*) as "Quant. Clientes" from clientes; -- Use aspas duplas nesse exemplo
+
+select count(nome) from clientes;
+
+select count(nome) from produtos;
+
+select count(distinct nome) from produtos; -- O distinct não conta valores repetidos
+
+select count(*) from produtos where preco >= 10.00;
+</code>
+</pre>
+
+<p>PS: Com o nome de uma coluna, ele não conta valores nulos.</p>
+
+<p>Usando as outras funções:</p>
+
+<pre>
+<code>
+select max(preco) from produtos;
+
+select min(preco) from produtos;
+
+select sum(preco) from produtos;
+
+select avg(preco) from produtos;
+</code>
+</pre>
+
+<p>Para melhorar a visualização de valores com muitas casas decimais, usamos o <code>round</code>, assim:</p>
+
+<pre>
+<code>
+select round(avg(preco), 2) from produtos;
+
+select round(avg(preco), 2) from produtos where nome = 'Refrigerante';
+</code>
+</pre>
+
+<p>PS: Não é possível usar esses valores de agregação com nome de registros, esse comando abaixo, por exemplo, daria erro:</p>
+
+<pre>
+<code>
+select sum(preco), nome from produtos;
+</code>
+</pre>
+
+<p>Isso será corrigido mais pra frente, usando as cláusulas <code>group</code> e <code>having</code>.</p>
+
+<h3>Aliases com Cláusula As</h3>
+
+<p>Podemos dar um nome diferente a uma coluna ou tabela ao realizar uma consulta usando um alias. Ele não altera os nomes no banco, somente na visualização.</p>
+
+<p>Veja alguns exemplos abaixo:</p>
+
+<pre>
+<code>
+select nome as "Produto" from produtos where qtd_estoque > 5; -- Aspas duplas
+
+select nome as "Nome do Cliente", sobrenome as "Sobrenome do Cliente" from clientes as cl;
+
+select codigo as "Código do Pedido", qtd_vendida as "Quantidade" from pedidos as p order by "Quantidade" desc;
+</code>
+</pre>
+
+<p>Lembrando que os aliases em tabelas só aparecem em inner joins entre duas ou mais tabelas.</p>
+
+<p>PS: Podemos omitir o <q>as</q> em alguns casos, por exemplo:</p>
+
+<pre>
+<code>
+select nome "Produto" from produtos;
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-postgresql-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-postgresql-3.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

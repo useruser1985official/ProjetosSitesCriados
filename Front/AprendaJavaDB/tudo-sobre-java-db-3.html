@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java com Banco de Dados</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java com Banco de Dados</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-db-1.html">Tudo sobre Java com Banco de Dados Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-db-2.html">Tudo sobre Java com Banco de Dados Parte 2!</a></li>        
+                    <li><a href="tudo-sobre-java-db-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java com Banco de Dados Parte 3!</a></li>
+                    <li><a href="tudo-sobre-java-db-4.html">Tudo sobre Java com Banco de Dados Parte 4!</a></li>
+                    <li><a href="tudo-sobre-java-db-5.html">Tudo sobre Java com Banco de Dados Parte 5!</a></li>
+                    <li><a href="tudo-sobre-java-db-6.html">Tudo sobre Java com Banco de Dados Parte 6!</a></li>
+                    <li><a href="tudo-sobre-java-db-7.html">Tudo sobre Java com Banco de Dados Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java com Banco de Dados Parte 3</h2>
+
+<h3>Consulta - FK Chave Estrangeira usando Composição</h3>
+
+<p>No banco de dados, podemos fazer a consulta simplesmente dando <code>select * from produto as p inner join categoria as c on c.id = p.categoria_id</code>, para comparação.</p>
+
+<p>Caso queira renomear alguma coluna por ter nome igual, podemos "renomear" também com o as.</p>
+
+<p>Coloque em ProdutoDAO esse método de consulta:</p>
+
+<pre>
+<code>
+public List&lt;Produto&gt; findAll() { // Importe java.util.List
+    String sql = "select p.id as pid, p.descricao as pdesc, qtd, valor, categoria_id, c.id as cid, c.descricao as cdesc from produto p inner join categoria c on c.id = p.categoria_id";
+
+    PreparedStatement stmt = null;
+    ResultSet rs = null; // Importe java.sql.ResultSet
+
+    List&lt;Produto&gt; produtos = new ArrayList&lt;&gt;(); // Importe java.util.ArrayList
+
+    try {
+        stmt = con.prepareStatement(sql);
+        rs = stmt.executeQuery(); // Isso executa a query no banco.
+
+        while(rs.next()) { // Executa enquanto os dados forem true.
+            Produto prod = new Produto();
+
+            prod.setId(rs.getInt("pid"));
+            prod.setDescricao(rs.getString("pdesc"));
+            prod.setQtd(rs.getInt("qtd"));
+            prod.setValor(rs.getDouble("valor"));
+
+            Categoria cate = new Categoria(); // Importe
+            cate.setId(rs.getInt("cid"));
+            cate.setDescricao(rs.getString("cdesc"));
+
+            prod.setCate(cate);
+
+            produtos.add(prod);
+        }
+    }
+    catch(SQLException ex) {
+        System.err.println("ERRO: " + ex);
+    }
+    finally {
+        ConnectionFactory.closeConnection(con, stmt, rs);
+    }
+
+    return produtos;
+}
+</code>
+</pre>
+
+<p>Agora em ProdutoDAOTest, faça isso (coloque um @Ignore no método inserir antes):</p>
+
+<pre>
+<code>
+@Test
+public void listar() throws SQLException {
+    ProdutoDAO dao = new ProdutoDAO();
+
+    for(Produto p: dao.findAll()) {
+        System.out.print("Descrição Produto: " + p.getDescricao());
+        System.out.print(" - ");
+        System.out.println("Descrição Categoria: " + p.getCate().getDescricao());
+    }
+}
+</code>
+</pre>
+
+<h3>Melhorando DAO com View MySQL</h3>
+
+<p>Para isso, basta no SQL colocar esse comando assim:</p>
+
+<pre>
+<code>
+create view vw_produtocategoria as select p.id as pid, p.descricao as pdesc, qtd, valor, categoria_id, c.id as cid, c.descricao as cdesc from produto p inner join categoria c on c.id = p.categoria_id;
+</code>
+</pre>
+
+<p>Dessa forma, a consulta pode ser feita simplesmente dando <code>select * from vw_produtocategoria</code>.</p>
+
+<p>No método findAll em ProdutoDAO, basta substituir a SQL por isso aí acima. Depois é só executar o test.</p>
+
+<h3>Atualizar Registro com Composição</h3>
+
+<p>Em ProdutoDAO, adicione um método dessa forma:</p>
+
+<pre>
+<code>
+public boolean update(Produto prod) { // Importar model.bean.Produto
+    String sql = "update produto set descricao = ?, qtd = ?, valor = ?, categoria_id = ? where id = ?";
+
+    PreparedStatement stmt = null; // Importar;
+    
+    try {
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, prod.getDescricao());
+        stmt.setInt(2, prod.getQtd());
+        stmt.setDouble(3, prod.getValor());
+        stmt.setInt(4, prod.getCate().getId()); // Aqui pega o inteiro que está dentro da classe Categoria
+        stmt.setInt(5, prod.getId());
+        stmt.executeUpdate(); // Isso é responsável pelo insert, update e delete no banco.
+
+        return true;
+    }
+    catch(SQLException ex) {
+        System.err.println("Erro: " + ex);
+
+        return false;
+    }
+    finally { // Isso fecha a conexão
+        ConnectionFactory.closeConnection(con, stmt);
+    }
+}
+</code>
+</pre>
+
+<p>No ProdutoDAOTest, podemos usar um @Ignore do listar(), e coloque esse método abaixo dele:</p>
+
+<pre>
+<code>
+@Test
+public void atualizar() {
+    Categoria cate = new Categoria(); // Importe
+    cate.setId(1);
+
+    Produto prod = new Produto(); // Importe
+
+    prod.setDescricao("Farinha");
+    prod.setQtd(20);
+    prod.setValor(10);
+    prod.setCate(cate); // Aqui passamos o objeto
+    prod.setId(3);
+
+    ProdutoDAO dao = new ProdutoDAO();
+
+    if(dao.update(prod)) {
+        System.out.println("Salvo com Sucesso!");
+    }
+    else {
+        fail("Erro ao Salvar!");
+    }
+}
+</code>
+</pre>
+
+<h3>Deletar Registro com Composição</h3>
+
+<p>Coloque isso em ProdutoDAO: </p>
+
+<pre>
+<code>
+public boolean delete(Produto prod) { // Importar model.bean.Categoria
+    String sql = "delete from produto where id = ?";
+
+    PreparedStatement stmt = null; // Importar;
+
+    try {
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, prod.getId()); // Substituir pela id desejada
+        stmt.executeUpdate(); // Isso é responsável pelo insert, update e delete no banco.
+
+        return true;
+    }
+    catch(SQLException ex) {
+        System.err.println("Erro: " + ex);
+
+        return false;
+    }
+    finally { // Isso fecha a conexão
+        ConnectionFactory.closeConnection(con, stmt);
+    }
+}
+</code>
+</pre>
+
+<p>E no ProdutoDAOTest, coloque isso:</p>
+
+<pre>
+<code>
+@Test
+public void deletar() {
+    Produto prod = new Produto();
+    prod.setId(3);
+    ProdutoDAO dao = new ProdutoDAO();
+
+    if(dao.delete(prod)) {
+        System.out.println("Deletado com Sucesso!");
+    }
+    else {
+        fail("Erro ao Deletar!");
+    }
+}
+</code>
+</pre>
+
+<h3>Organizando Projeto no Netbeans</h3>
+
+<p>Para prosseguirmos, vamos usar interfaces gráficas para o Java.</p>
+
+<p>Crie um novo projeto Java e crie o pacote view, crie também os pacotes connection, model.bean e model.dao.</p>
+
+<p>Crie um frame com o nome ViewJTable, centralize, coloque o título e tudo mais, e nele crie um painel e cubra até um pouco menos da metade superior, nele coloque os labels e os campos para descrição, quantidade e preço, e um botão para cadastrar (variáveis dos campos serão txtDesc, txtQtd e txtPrec, e do botão será btnCadr).</p>
+
+<p>Crie um painel na parte de baixo e coloque uma tabela (variável paneProds) dentro dele e a redimensione, clique nela e com o botão direito, vá em conteúdo da tabela e em colunas, edite os nomes para Descrição, Quantidade e Preço (mantenha os tipos em Object, pois trabalharemos com objetos), tire a opção editável e exclua as colunas extras. No mesmo local, em linhas, exclua todas.</p>
+
+<p>PS: As tabelas já são incluídas com um painel de rolagem, não sendo necessário colocar outra.</p>
+
+<p>No action performed do Cadastrar, coloque esse código:</p>
+
+<pre>
+<code>
+private void btnCadrActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    if(!txtDesc.getText().trim().equals("") &amp;&amp; !txtQtd.getText().trim().equals("") &amp;&amp; !txtPrec.getText().trim().equals("")) {
+        DefaultTableModel dtmProds = (DefaultTableModel)paneProds.getModel(); // Isso pega o modelo da tabela, importe javax.swing.table.DefaultTableModel
+
+        Object dados[] = {txtDesc.getText().trim(), txtQtd.getText().trim(), txtPrec.getText().trim()}; // Isso pega os dados dos campos.
+
+        dtmProds.addRow(dados); // Isso envia os dados pra tabela.
+        
+        // Essas linhas apagam os dados escritos nos campos:
+            
+        txtDesc.setText("");
+        txtQtd.setText("");
+        txtPrec.setText("");
+    }
+    else {
+        JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Aviso", JOptionPane.WARNING_MESSAGE); // Importe javax.swing.JOptionPane
+    }     
+}
+</code>
+</pre>
+
+<p>No pacote model.bean, crie a classe Produtos e coloque esses dados para fazer a conexão:</p>
+
+<pre>
+<code>
+package model.bean;
+
+public class Produto {
+    private int id;
+    private String descricao;
+    private int qtd;
+    private double preco;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public int getQtd() {
+        return qtd;
+    }
+
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+}
+</code>
+</pre>
+
+<h3>Criando ConnectionFactory</h3>
+
+<p>Primeiro, no MySQL, crie o banco de dados assim:</p>
+
+<pre>
+<code>
+create database dbmercadinho
+default character set utf8
+default collate utf8_general_ci;
+
+use dbmercadinho;
+
+create table produto (
+    id int not null auto_increment,
+    descricao varchar(50) unique,
+    qtd int not null,
+    preco decimal not null,
+    primary key(id)
+)
+default charset = utf8;
+</code>
+</pre>
+
+<p>Vá em bibliotecas e adicione a biblioteca do Driver JDBC do MySQL, no projeto Java.</p>
+
+<p>Para criar a conexão, crie uma classe Java com o nome ConnectionFactory, no pacote connection, com esse código:</p>
+
+<pre>
+<code>
+package connection;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class ConnectionFactory {
+    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://localhost:3306/dbmercadinho";
+    private static final String USER = "root";
+    private static final String PASS = "";
+    
+    public static Connection getConnection() {
+        try {
+            return DriverManager.getConnection(URL, USER, PASS);
+        }
+        catch(SQLException ex) {
+            throw new RuntimeException("Erro na Conexão!", ex);
+        }
+    }
+    
+    public static void closeConnection(Connection con) {
+        try {
+            if(con != null) {
+                con.close();
+            }
+        }
+        catch(SQLException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void closeConnection(Connection con, PreparedStatement stmt) {
+        closeConnection(con);
+        
+        try {
+            if(stmt != null) {
+                stmt.close();
+            }
+        }
+        catch(SQLException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void closeConnection(Connection con, PreparedStatement stmt, ResultSet rs) {
+        closeConnection(con, stmt);
+        
+        try {
+            if(rs != null) {
+                rs.close();
+            }
+        }
+        catch(SQLException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }  
+}
+</code>
+</pre>
+
+<p>Caso esteja usando o PostgreSQL, adicione a biblioteca do Driver JDBC do PostgreSQL, e faça a ligação assim:</p>
+
+<pre>
+<code>
+private static final String DRIVER = "org.postgresql.jdbc";
+private static final String URL = "jdbc:postgresql://localhost:5432/dbmercadinho";
+private static final String USER = "postgres";
+private static final String PASS = "admin"; // Senha configurada
+</code>
+</pre>
+
+<h3>Criado DAO e Salvando Dados</h3>
+
+<p>No pacote model.dao, crie a classe ProdutoDAO, e coloque esse código:</p>
+
+<pre>
+<code>
+package model.dao;
+
+import connection.ConnectionFactory;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import model.bean.Produto;
+
+public class ProdutoDAO {
+    private Connection con = null; // Importar java.sql.Connection
+    
+    public ProdutoDAO() {
+        con = ConnectionFactory.getConnection(); // Importar connection.ConnectionFactory
+    }
+
+    public void create(Produto p) {
+        PreparedStatement stmt = null;
+        String sql = "insert into produto (descricao, qtd, preco) values (?, ?, ?)"; // Inserir os dados do MySQL.
+        
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, p.getDescricao());
+            stmt.setInt(2, p.getQtd());
+            stmt.setDouble(3, p.getPreco());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Salvo com Sucesso!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar!\n\n" + ex, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+}
+</code>
+</pre>
+
+<p>No frame ViewJTable, no action do botão Cadastrar, altere o código dessa forma:</p>
+
+<pre>
+<code>
+private void btnCadActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    if(!txtDesc.getText().trim().equals("") && !txtQtd.getText().trim().equals("") && !txtPrec.getText().trim().equals("")) {
+        Produto p = new Produto(); // Importe
+        ProdutoDAO dao = new ProdutoDAO(); // Importe
+
+        p.setDescricao(txtDesc.getText().trim());
+        p.setQtd(Integer.parseInt(txtQtd.getText().trim()));
+        p.setPreco(Double.parseDouble(txtPrec.getText().replace(",", ".").trim()));
+
+        dao.create(p);
+
+        // Isso limpa os campos:
+
+        txtDesc.setText("");
+        txtQtd.setText("");
+        txtPrec.setText("");
+    }
+    else {
+        JOptionPane.showMessageDialog(null, "Preencha todos os Campos!", "Aviso!", JOptionPane.WARNING_MESSAGE);
+    }      
+}
+</code>
+</pre>
+
+<p>PS: Esse código pode ser colocado dentro de um método de checkagem de login e sendo chamado no evento através da função, isso é possível fazer com a maioria desses códigos.</p>
+
+<ul>
+    <li><a href="tudo-sobre-java-db-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-java-db-4.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html">Tudo sobre Redes Parte 13!</a></li>
+                    <li><a href="tudo-sobre-redes-14.html">Tudo sobre Redes Parte 14!</a></li>
+                </menu>
+            </header>
+                           
+<h2>Cisco Packet Tracer - Parte 4</h2>
+
+<h3>Criando Cenários Complexos (InfraEstrutura)</h3>
+
+<p>Coloque dois servidores, um switch 2960, quatro roteadores 1941, mais um switch 2960, dois PCs e mais um servidor, uma nuvem, um modem DSL e mais um PC. Coloque um roteador wi-fi WRT300N, uma impressora e dois laptops.</p>
+
+<p>Separe os dois servidores e o primeiro switch num retângulo (representando servidores como os do Facebook ou do Google). Coloque os quatro roteadores e o outro switch dentro de outro retângulo (representando a rede da internet). Os dois PCs e o outro servidor num outro (representando a operadora). A nuvem fica livre (representando o poste/armário da rua). O modem e o terceiro PC num outro (representando a casa do cliente). Coloque o roteador wi-fi, a impressora e os dois laptops num outro (uma outra rede conectada à internet).</p>
+
+<p>No primeiro retângulo (servidores), ligue as portas do servidor nas portas Fast do switch da rede, e ligue uma porta Giga do switch no roteador à esquerda do segundo retângulo. Todos com o cabo Through.</p>
+
+<p>No segundo retângulo (internet), ligue o switch dele nos dois PCs e no servidor do retângulo abaixo. Ligue o mesmo switch com uma porta Giga no roteador de baixo e outra na nuvem, tudo com cabo Through, ligue a nuvem no modem do retângulo e ligue o modem ao PC dele.</p>
+
+<p>No último ligue a porta do roteador wi-fi à impressora. Os laptops vão se conectar a conectar via wi-fi. O roteador wi-fi deverá ter a porta Internet ligada ao roteador da direita.</p>
+
+<p>No caso dos roteadores, eles serão interligados como um losango, para criar uma rota estática, mas teremos que desligar eles e adicionar mais uma porta em cada um deles. Coloque a placa HWIC-2T em cada uma delas. No caso ele criará portas seriais. E ligue essas portas com um cabo serial DTE. Após isso ligue todas as interfaces dos roteadores.</p>
+
+<p>PS: O ideal é só ligar as portas do roteador que estão sendo usadas, por questão de segurança.</p>
+
+<p>Coloque um marcador com IP (como por exemplo, da faixa de <code>200.0.0.0</code>) e a máscara correspondente (no caso <code>255.255.255.224</code>) na rede do servidor. Os dois PCs e a rede com a nuvem, modem e o outro PC estarão na faixa <code>172.16.0.0</code> e máscara <code>255.255.255.192</code>. A rede à direita com o wi-fi coloque a rede <code>192.168.0.0</code> e máscara <code>255.255.255.192</code>.</p>
+
+<p>PS: Note que colocamos a rede 172.16 com uma máscara de um padrão de rede pequena, nesse caso é permitido pois ele não está na classe B e em nenhuma outra.</p>
+
+<p>Como os roteadores conectam redes diferentes, ele terá uma outra rede na qual o roteador de cima está, como por exemplo <code>10.0.0.0</code> com a máscara <code>255.255.255.252</code> ligada ao roteador da esquerda. E a rede <code>11.0.0.0</code> com a mesma máscara ligado ao roteador da direita. O roteador de baixo está ligado as redes do roteador da esquerda com <code>12.0.0.0</code> e a mesma máscara, e o da direita com <code>13.0.0.0</code> e a mesma máscara.</p>
+
+<h3>Determinando IPs e a Quantidade de Hosts por Rede</h3>
+
+<p>A máscara <code>255.255.255.192</code> permite acomodar 62 hosts. A máscara <code>255.255.255.224</code> permite acomodar 30 hosts. E a máscara <code>255.255.255.252</code> permite acomodar somente 2 hosts.</p>
+
+<p>O cálculo de máscaras de classe C é feito pela quantidade máxima de hosts (256) subtraído pelo outro número (no caso, 192, 224 e 252), depois subtrai mais dois (o endereço da rede e o de broadcast). Por exemplo:</p>
+
+<pre>
+<code>
+ 256
+<ins>-224</ins>
+  32
+<ins>  -2</ins>
+  30
+</code>
+</pre>
+
+<p>Lembrando que as três primeiras partes, referentes à rede, deve ser iguais, como por exemplo 200.0.0 deve ser iguais dentro da mesma rede. O mesmo vale pro 10.0.0, 172.16.0, etc. Isso ocorre devido às máscaras usadas nos nossos exemplos.</p>
+
+<p>Coloque na primeira rede, o IP <code>200.0.0.1</code> no primeiro servidor (representando o Facebook) e o IP <code>200.0.0.2</code> no segundo (representando o Google). A máscara de ambos é <code>255.255.255.224</code>. O gateway padrão de ambos é o do roteador à esquerda da segunda rede, com o IP <code>200.0.0.3</code>.</p>
+
+<p>Na parte com o modem e o PC, colocamos o IP <code>172.16.0.3</code>, máscara <code>255.255.255.192</code> e gateway <code>172.16.0.1</code> (roteador de baixo).</p>
+
+<h3>Servidor DHCP e Redes sem Fio</h3>
+
+<p>Na rede 172.16.0.0, vamos configurar o servidor como um servidor DHCP para distribuir IPs na sua rede local. Clique no servidor, e em Services, vá no DHCP, dê on na Interface e dê o nome <q>AulaPratica</q>, com o Gateway com o IP <code>172.16.0.1</code> (roteador de baixo), com o Start IP <code>172.16.0.2</code> e a máscara <code>255.255.255.192</code>. E na configuração de IP do servidor, coloque o IP <code>172.16.0.2</code>, máscara <code>255.255.255.192</code>, com o gateway padrão <code>172.16.0.1</code>. Depois disso vá nos computadores da rede e habilite o DHCP nas configurações de IP.</p>
+
+<p>Troque as placas de rede física dos dois laptops para placas wireless. Depois vá no roteador wi-fi, em Config e em Internet coloque a configuração do IP como estática com o IP <code>192.168.0.2</code> e máscara <code>255.255.255.192</code> com o gateway padrão <code>192.168.0.1</code>. Ele vai dar erro porque a porta LAN já está usando este IP, na rede criada pelo roteador à direita (o da rota estática). Vá em LAN e coloque o IP <code>192.168.1.1</code> com a mesma máscara, pois este será o IP do roteador da rota estática. Volte na Internet e coloque o IP 0.2 que ele permitirá agora. Lembre-se que o roteador sempre vai falar com duas redes diferentes, e por isso precisará de dois IPs diferentes, que não devem conflitar.</p>
+
+<p>No caso acima, o IPs da rede 192.168.0.0 é o que seria o <q>fornecido</q> pela operadora, e os da rede 192.168.1.0 é o que será enviado para os hosts da rede local.</p>
+
+<p>Em GUI e em Wireless, em Basic, configure a rede local com o modo Wireless-N Only, coloque o nome da rede e escolha um canal, como o 6, e o broadcast ligado para todos verem a rede. Em Wireless Security coloque o modo WPA2 Personal, com encriptação AES e a senha da rede. Daí basta ir nos laptops e conecte eles à nossa rede.</p>
+
+<p>PS: Se a impressora não conectar automaticamente à rede, coloque a opção DHCP nas configurações dela.</p>
+
+<h3>Configurando a Nuvem de Acesso</h3>
+
+<p>O modem não tem muito o que configurar, então vamos na nuvem, em DSL, na porta a qual o modem está conectada a nuvem e a que está comunicando com o switch que irá se conectar ao roteador.</p>
+
+<p>Para isso vá em Config e em DSL, selecione as portas especificadas e adicione. Veja que o computador consegue pegar o IP do servidor DHCP da rede dele.</p>
+
+<h3>Como Determinar os IPs dos Roteadores</h3>
+
+<p>No roteador da esquerda, coloque os seguintes IPs e máscaras:</p>
+
+<ul>
+    <li><b>Ligação Rede Esquerda:</b> <code>200.0.0.3</code> - <code>255.255.255.224</code></li>
+    <li><b>Ligação Roteador Cima:</b> <code>10.0.0.1</code> - <code>255.255.255.252</code></li>
+    <li><b>Ligação Roteador Baixo:</b> <code>12.0.0.1</code> - <code>255.255.255.252</code></li>
+</ul>
+
+<p>No roteador de cima:</p>
+
+<ul>
+    <li><b>Ligação Roteador Esquerda:</b> <code>10.0.0.2</code> - <code>255.255.255.252</code></li>
+    <li><b>Ligação Roteador Direita:</b> <code>11.0.0.1</code> - <code>255.255.255.252</code></li>
+</ul>
+
+<p>No roteador de baixo:</p>
+
+<ul>
+    <li><b>Ligação Roteador Esquerda:</b> <code>12.0.0.2</code> - <code>255.255.255.252</code></li>
+    <li><b>Ligação Roteador Direita:</b> <code>13.0.0.1</code> - <code>255.255.255.252</code></li>
+    <li><b>Ligação Rede Baixo:</b> <code>172.16.0.1</code> - <code>255.255.255.192</code></li>
+</ul>
+
+<p>No roteador da direita:</p>
+
+<ul>
+    <li><b>Ligação Roteador Cima:</b> <code>11.0.0.2</code> - <code>255.255.255.252</code></li>
+    <li><b>Ligação Roteador Baixo:</b> <code>13.0.0.2</code> - <code>255.255.255.252</code></li>
+    <li><b>Ligação Rede Direita:</b> <code>192.168.0.1</code> - <code>255.255.255.192</code></li>
+</ul>
+
+<h3>Interfaces de Rede e Configuração de IPs nos Roteadores</h3>
+
+<p>Vamos testar com a cartinha do servidor do Google até o roteador da esquerda. Teste em cada uma das redes até o roteador.</p>
+
+<p>PS: O roteador da rede do meio deverá ser o destino da cartinha, e nunca a origem, porque roteador comum não tem o <q>ping</q>.</p>
+
+<h3>Determinando as Redes Conectadas e Não Conectadas dos Roteadores</h3>
+
+<p>As redes conectadas no caso são as que os roteadores estão conectadas diretamente, como por exemplo, o roteador da esquerda com essas redes:</p>
+
+<ul>
+    <li><code>200.0.0.0</code> - <code>255.255.255.224</code></li>
+    <li><code>12.0.0.0</code> - <code>255.255.255.252</code></li>
+    <li><code>10.0.0.0</code> - <code>255.255.255.252</code></li>
+</ul>
+
+<p>Portanto, essas são as redes não conectadas diretamente à ele:</p>
+
+<ul>
+    <li><code>11.0.0.0</code> - <code>255.255.255.252</code></li>
+    <li><code>13.0.0.0</code> - <code>255.255.255.252</code></li>
+    <li><code>172.16.0.0</code> - <code>255.255.255.192</code></li>
+    <li><code>192.168.0.0</code> - <code>255.255.255.192</code></li>
+</ul>
+
+<p>No total são sete redes no nosso cenário.</p>
+
+<h3>Roteamento Estático</h3>
+
+<p>Como vimos, as redes conectadas diretamente entre os roteadores são as que os mesmos conhecem, mas eles não conseguem comunicar com as outras redes não-conectadas. Para isso precisaremos fazer o roteamento, no caso, o roteamento estático, para que ele possa chegar a outras redes.</p>
+
+<p>No caso, a rede <code>200.0.0.0</code> tem que se comunicar à rede <code>192.168.0.0</code>. Podemos configurar a rota nos roteadores.</p>
+
+<p>O roteamento estático passa por um caminho pré-determinado pelo administrador da rede, enquanto o roteamento dinâmico selecionará a melhor rota pra chegar à outra rede.</p>
+
+<p>Nos roteadores, vamos em Config e em Static, é onde definiremos nossas rotas.</p>
+
+<p>No roteador da esquerda, vamos colocar as redes não-conectadas, no caso, a rede <code>11.0.0.0</code> e a máscara <code>255.255.255.252</code>, que é a rede entre o roteador de cima e o da direita, que o da esquerda não está conectado diretamente. No caso, o caminho para chegar ao roteador da direita será o de cima (next hop).</p>
+
+<p>No caso da esquerda, ficará assim:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>11.0.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.252</code></li>
+    <li><b>Next Hop:</b> <code>10.0.0.2</code></li>
+</ul>
+
+<p>Lembrando que o Next Hop (próximo salto) é o roteador mais próximo. O melhor caminho no caso será o de cima.</p>
+
+<p>PS: Não esqueça de clicar em Add para salvar a rota no roteador.</p>
+
+<h3>Configurando as Rotas Estáticas nos Roteadores</h3>
+
+<h4>Roteador da Esquerda</h4>
+
+<p>Continuando a configuração, ainda no roteador da esquerda, colqoue essa configuração para ele se comunicar com o roteador de baixo:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>13.0.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.252</code></li>
+    <li><b>Next Hop:</b> <code>12.0.0.2</code></li>
+</ul>
+
+<p>No caso essas foram as configurações para chegar ao roteador da direita, por dois caminhos.</p>
+
+<p>Ainda no roteador da esquerda, coloque essa rota pra chegar na rede embaixo (a da <q>nuvem</q>:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>172.16.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.192</code></li>
+    <li><b>Next Hop:</b> <code>12.0.0.2</code></li>
+</ul>
+
+<p>PS: No caso acima, o mesmo next hop será para chegar em outra rede.</p>
+
+<p>E no da esquerda ainda terá também, para chegar à rede da direita:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>192.168.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.192</code></li>
+    <li><b>Next Hop:</b> <code>12.0.0.2</code></li>
+</ul>
+
+<p>No caso acima, ele só passará por baixo pra chegar na rede da direita. Podemos configurar também pra ele passar pelo roteador de cima:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>192.168.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.192</code></li>
+    <li><b>Next Hop:</b> <code>10.0.0.2</code></li>
+</ul>
+
+<h4>Roteador de Cima</h4>
+
+<p>Agora vamos pro roteador de cima, pra se comunicar com a rede da esquerda:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>200.0.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.224</code></li>
+    <li><b>Next Hop:</b> <code>10.0.0.1</code></li>
+</ul>
+
+<p>Para se comunicar com o roteador de baixo pelo da esquerda:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>12.0.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.252</code></li>
+    <li><b>Next Hop:</b> <code>10.0.0.1</code></li>
+</ul>
+
+<p>Para se comunicar com o roteador de baixo pelo da direita:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>12.0.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.252</code></li>
+    <li><b>Next Hop:</b> <code>11.0.0.2</code></li>
+</ul>
+
+<p>Para se comunicar com a rede de baixo da nuvem, passando pela esquerda:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>172.16.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.192</code></li>
+    <li><b>Next Hop:</b> <code>10.0.0.1</code></li>
+</ul>
+
+<p>Para se comunicar com a rede de baixo da nuvem, passando pela direita:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>172.16.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.192</code></li>
+    <li><b>Next Hop:</b> <code>11.0.0.2</code></li>
+</ul>
+
+<p>Para se comunicar com a rede da direita:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>192.168.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.192</code></li>
+    <li><b>Next Hop:</b> <code>11.0.0.2</code></li>
+</ul>
+
+<h4>Roteador da Direita</h4>
+
+<p>Vamos pro roteador da direita, colocando isso para ele se comunicar com a rede da esquerda, indo por cima:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>200.0.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.224</code></li>
+    <li><b>Next Hop:</b> <code>11.0.0.1</code></li>
+</ul>
+
+<p>Para se conectar ao roteador da esquerda indo por cima:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>10.0.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.252</code></li>
+    <li><b>Next Hop:</b> <code>11.0.0.1</code></li>
+</ul>
+
+<p>Para se conectar indo por baixo:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>12.0.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.252</code></li>
+    <li><b>Next Hop:</b> <code>13.0.0.1</code></li>
+</ul>
+
+<p>Para se conectar à rede de baixo da nuvem:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>172.16.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.192</code></li>
+    <li><b>Next Hop:</b> <code>13.0.0.1</code></li>
+</ul>
+
+<h4>Roteador de Baixo</h4>
+
+<p>Falta configurar depois o de baixo.</p>
+
+<p>Para se conectar à rede da esquerda:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>200.0.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.224</code></li>
+    <li><b>Next Hop:</b> <code>12.0.0.1</code></li>
+</ul>
+
+<p>Para se conectar ao roteador de cima, pela esquerda:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>10.0.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.252</code></li>
+    <li><b>Next Hop:</b> <code>12.0.0.1</code></li>
+</ul>
+
+<p>Para se conectar ao roteador de cima, pela direita:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>11.0.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.252</code></li>
+    <li><b>Next Hop:</b> <code>13.0.0.2</code></li>
+</ul>
+
+<p>Para se conectar à rede da direita:</p>
+
+<ul>
+    <li><b>Rede:</b> <code>192.168.0.0</code></li>
+    <li><b>Máscara:</b> <code>255.255.255.192</code></li>
+    <li><b>Next Hop:</b> <code>13.0.0.2</code></li>
+</ul>
+
+<h3>Configurando os Servidores e Testando o Roteamento</h3>
+
+<p>Teste a configuração transmitindo a cartinha do Google até o servidor da rede abaixo (DHCP).</p>
+
+<p>Configure os servidores do Google e Facebook. Vá em Services e HTTP e habilite as opções com On, e em DNS adicione no nome do site a URL, com o endereço IP em address.</p>
+
+<p>Vá no DHCP da outra rede e teste a conexão do site pelo prompt. Abra o navegador e digite o IP.</p>
+
+<p>PS: A configuração do DHCP não fornece o gateway padrão aos hosts. Para se comunicarem com a rede, teremos que configurar manualmente.</p>
+
+<h3>Quando Criar uma VLAN?</h3>
+
+<p>Como sabemos, as LANs são redes locais, vamos imaginar duas redes locais, cada rede local só podemos acessar ela dentro dessas mesmas redes especificadas.</p>
+
+<p>Numa mesma empresa, podemos ter dois setores diferentes, como o de marketing e o de financeiro, que serão redes locais diferentes. Para não termos que ter dois switches para dividirmos essas duas LANs, podemos dividir um mesmo switch (no caso, um switch gerenciável) para que ele divida as VLANs (LANs virtuais) de marketing e financeiro. Cada VLAN é identificada por IDs, que podem ir de 1 a 4096.</p>
+
+<p>No entanto, mesmo com as VLANs serem separadas, é possível fazer com que elas se conversem, ligando um cabo de uma VLAN a outra (podendo ser ambas no mesmo switch).</p>
+
+<h3>Como Interligar VLANs</h3>
+
+<p>Crie no Packet Tracer com os setores de secretaria, sala de professores, alunos, lab1 e lab2. No caso teremos 3 VLANs: A VLAN 10 do Administrativo (Secretaria e Sala de Professores), A VLAN 20 dos Laboratórios (lab1 e lab2) e a VLAN 32 dos Alunos. Ele também terá servidores ao lado num outro setor só pra eles.</p>
+
+<p>Criando VLANs, uma rede fica mais segura, pois uma VLAN, caso seja infectada, não atinge as outras, além de impedir o acesso de, por exemplo, a setores não-autorizados (como o de Alunos que não poderia acessar o Administrativo).</p>
+
+<p>Essas são as redes das VLANs:</p>
+
+<ul>
+    <li><b>VLAN 10:</b> <code>192.168.10.0</code></li>
+    <li><b>VLAN 20:</b> <code>192.168.20.0</code></li>
+    <li><b>VLAN 30:</b> <code>192.168.30.0</code></li>
+</ul>
+
+<p>No lado do servidores, coloque cinco servidores: Os DHCP, cada um pra sua própria VLAN (10, 20 e 30), o quarto será um servidor DNS e o quinto um servidor WEB. Os servidores DNS e WEB serão da VLAN 10. Coloque um switch 2960 para ligar os servidores com o nome Coordenação.</p>
+
+<p>No setores, coloque um switch em cada setor (Secretaria, Sala dos Professores, Lab1 e Lab2 e Servidores), cada um com seu nome, e coloque um switch também interligando todos, com o nome IC. No setor de Alunos coloque um Access Point (AP-PT, em WAN Emulation).</p>
+
+<p>Como sabermos, um roteador wi-fi cria outra rede para se comunicar com os dispositivos wireless. Para não criar outra rede, utilizaremos um Access Point para isso. Ele também pode ter nome de rede configurado, assim como uma senha, indo em Config e Port 1, escolhemos a opção WPA2-PSK (a mais segura) com a encriptação AES.</p>
+
+<p>Vamos montar os cabeamentos. Nos servidores, coloque os servidores nas portas 1, 2, 3 (VLANs 10, 20, 30), 4 (DNS) e 5 (WEB), todos com o cabo Through. Ligue uma das portas com o cabo Cross no switch central do outro lado, e deste ligue aos outros switches restantes. Use o Through apenas no Access Point.</p>
+
+<p>Coloque dois ou três computadores em cada setor. No setor dos alunos coloque dois laptops e um celular (não esqueça de trocar a placa de rede dos laptops poor placas wi-fi).</p>
+
+<p>No switch do servidor, vá em Config e VLAN Databases, crie essas e adicione elas:</p>
+
+<ul>
+    <li><b>VLAN 10:</b> Number 10 - Name ADMIN.</li>
+    <li><b>VLAN 20:</b> Number 20 - Name LAB.</li>
+    <li><b>VLAN 30:</b> Number 30 - Name ALUNOS.</li>
+</ul>
+
+<p>Nos outros switches, coloquem a mesma configuração.</p>
+
+<h3>Configurando VLANs com Trunk</h3>
+
+<p>Precisaremos com que os switches se comuniquem uns com os outros para que eles consigam separar as VLANs em cada uma delas.</p>
+
+<p>As portas que vamos colocar na VLAN 10, serão as ligadas aos switches e ao access point. Pois se elas não estiverem na mesma VLAN, não terá comunicação. A divisão das outras VLANs acontecerá em cada switch de cada setor.</p>
+
+<p>No modo acesso, só passará o acesso pela VLAN especificada. No modo trunk, todas as VLANs passarão o acesso por essa porta. No caso, as portas truncadas será as ligadas do switch do servidor ao central do outro lado.</p>
+
+<p>Coloque os computadores da secretaria na VLAN 10, e também a porta ligada ao switch central. No servidor DHCP 10, configure o servidor com a rede assim:</p>
+
+<ul>
+    <li><b>Nome:</b> Administrativo - Gateway e DNS Server <code>192.168.10.1</code> - Start IP <code>192.168.10.2</code> - Máscara Padrão C.</li>
+</ul>
+
+<p>PS: Não esqueça de colocar a mesma configuração do IP no servidor.</p>
+
+<p>Habilite o trunk em todas as portas onde os switches se comunicam um com o outro. A porta do Access Point não terá trunk por não ser switch, ela estará na VLAN 30 com access mesmo.</p>
+
+<p>No caso do DHCP do VLAN 20, a configuração é essa:</p>
+
+<ul>
+    <li><b>Nome:</b> Laboratório - Gateway e DNS Server <code>192.168.20.1</code> - Start IP <code>192.168.20.2</code> - Máscara Padrão C.</li>
+</ul>
+
+<p>No switch do Lab 1, coloque os computadores na VLAN 20. Faça o mesmo em Lab 2.</p>
+
+<p>Faça o mesmo na VLAN 30, colocando a porta do switch ligada ao Access Point nessa VLAN. Faça o mesmo no switch dos servidores com o servidor DHCP dessa VLAN. Essa é a configuração dele:</p>
+
+<ul>
+    <li><b>Nome:</b> Alunos - Gateway e DNS Server <code>192.168.30.1</code> - Start IP <code>192.168.30.2</code> - Máscara Padrão C.</li>
+</ul>
+
+
+
+<ul>
+    <li><a href="packet-tracer-3.html">Parte Anterior da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

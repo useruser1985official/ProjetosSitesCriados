@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Javascript</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Javascript</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-javascript-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Javascript Parte 1!</a></li>
+                    <li><a href="tudo-sobre-javascript-2.html">Tudo sobre Javascript Parte 2!</a></li>
+                    <li><a href="tudo-sobre-javascript-3.html">Tudo sobre Javascript Parte 3!</a></li>
+                    <li><a href="tudo-sobre-javascript-4.html">Tudo sobre Javascript Parte 4!</a></li>
+                    <li><a href="tudo-sobre-javascript-5.html">Tudo sobre Javascript Parte 5!</a></li>
+                    <li><a href="tudo-sobre-javascript-6.html">Tudo sobre Javascript Parte 6!</a></li>
+                    <li><a href="tudo-sobre-javascript-7.html">Tudo sobre Javascript Parte 7!</a></li>
+                    <li><a href="tudo-sobre-javascript-8.html">Tudo sobre Javascript Parte 8!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Javascript Parte 1</h2>
+            
+<h3>Tipos de Dados</h3>
+
+<p>Um bloco Javascript é definido no HTML assim:</p>
+
+<pre>
+<code>
+&lt;script&gt;
+// Todo código Javascript é escrito aqui dentro
+
+document.write("Olá, Mundo!"); // Comando de saída, escrito no documento
+&lt;/script&gt;
+</code>
+</pre>
+
+<p>Os principais dados usados em Javascript são esses:</p>
+
+<ul id="dados">
+    <li>Números inteiros: Números em geral como <code>10</code>.</li>
+    <li>Números de ponto flutuante: Números como casas decimais como <code>12.5</code>.</li>
+    <li>Strings: Tudo que for texto, colocado entre aspas, como <code>"Desenhar"</code>.</li>
+    <li>Booleanos ou lógicos: Apenas os valores <code>true</code> (verdadeiro) e <code>false</code> (falso), em alguns casos true é 1 e false é 0 ou vazio.</li>
+</ul>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+var num = 50;
+var real = 9.85;
+var frase = "Isso é uma String";
+var logico = true;
+</code>
+</pre>
+
+<p>Nas versões mais atuais, o ponto-e-vírgula no final das instruções (;) não é mais obrigatório em Javascript, mas ele continua sendo obrigatório em linguagens semelhantes como o C ou mesmo o Java.</p>
+
+<p>As concatenações em Javascript são feitas com o símbolo de <code>+</code>, e as atribuições são feitas com o símbolo de <code>=</code>, por exemplo:</p>
+
+<pre>
+<code>
+var carro = "Fusca";
+var combustivel = "gasolina";
+document.write("O seu " + carro + " é movido com " + combustivel + "!");
+</code>
+</pre>
+
+<p>Toda variável deve ser declarada com <code>var</code> na frente. Se utiliza também o <code>let</code>, que é para variáveis locais de blocos (como funções, condicionais e loops).</p>
+
+<p>Todo código Javascript é colocado dentro de tags <code>script</code>, em arquivos JS separados, chamados pela tag script no HTML (do modo <code>&lt;script src="js/arquivo.js"&gt;&lt;/script&gt;</code>), ou em eventos.</p>
+
+<p>Os comentários de uma linha se colocam ao lado de <code>//</code>, e de várias linhas entre <code>/* */</code>, por exemplo:</p>
+
+<pre>
+<code>
+// Comentário de uma linha
+
+/*
+Comentário
+de
+várias
+linhas
+*/
+</code>
+</pre>
+
+<p>PS: Javascript não é Java, são linguagens distintas, apesar de terem uma origem em comum que é o C.</p>
+
+<p>O objeto pai dos objetos DOM é o <code>window</code>, que é dispensável usar a declaração. Os métodos <code>alert</code>, <code>confirm</code>, etc., e os objetos <code>location</code>, <code>document</code>, <code>history</code>, etc., são todos filhos de window.</p>
+
+<h3>Funções Javascript em HTML</h3>
+
+<p>Ao colocar URL Javascript no atributo <code>href</code> no HTML, colocar junto com o <code>:</code> e o operador <code>void</code> (vazio), tanto faz colocar com ou sem parênteses (preferível colocar com parênteses, alguns colocam um 0 dentro deles e/ou completam com ponto e vírgula no final, mas não é obrigatório), por exemplo:</p>
+
+<pre>
+<code>    
+javascript:void()
+</code>
+</pre>
+
+<p>Isso chamará o Javascript "vazio".</p>
+
+<p>URLs Javascript se colocam no href como se fossem um link, seguido do evento (por exemplo, onclick), que deverá ter o nome da função, exemplo:</p>
+
+<pre>
+<code>
+&lt;a href="javascript:void()" onclick="funcTeste()"&gt;Texto do Link&lt;/a&gt;
+</code>
+</pre>
+
+<p>No Script da linha acima seria algo tipo:</p>
+
+<pre>
+<code>
+function funcTeste() {
+    alert("Esse é um Alerta!");
+}
+</code>
+</pre>
+
+<p>O Operador <code>func</code> no lugar de void também funciona (ou até mesmo sem nenhum operador, apenas com o : depois da inscrição), com ou sem ponto e vírgula no final, mas se colocar sem um deles, terá um erro de redirecionamento pra uma página inexistente. É mais aceitável usar mesmo <code>javascript:void()</code>. Não colocar outra palavra no lugar do javascript que dará erro de aplicação (pode até funcionar, mas redirecionará pra outra página exigindo instalação de aplicativo que não existe).</p>
+
+<p>Podemos também fazer injeções diretamente na barra de endereço do navegador, para fazer alguns testes, isso não altera nada no site, só você pode ver as mudanças. Para isso, basta colocar no navegador os comandos em JS seguidos de <code>javascript:</code></p>
+
+<p>Um teste em Injeção é usar uma página sem fundo CSS e colocar na barra <code>javascript:void(document.bgColor="blue")</code> (obviamente, podemos usar outras cores). Isso também pode ser usado em botões. Por exemplo:</p>
+
+<pre>
+<code>
+javascript:alert("A URL atual é: " + location.protocol + "//" + location.hostname + "/" + "\nA URL do endereço é: " + location.href + "\n" + "\nSe os nomes dos servidores não coincidirem, isso pode ser uma falsificação.")
+</code>
+</pre>
+
+<p>No caso acima, esses são os significados:</p>
+
+<pre>
+<code>
+location.protocol;  // Retorna o protocolo (http ou https, por exemplo.)
+location.hostname; // Retorna o nome do site.
+location.href; // O link no qual você está atualmente.
+</code>
+</pre>
+
+<p>Para "editar" uma página com Javascript, colocamos na injeção isso:</p>
+
+<pre>
+<code>
+javascript:document.body.contentEditable = "true"; document.designMode = "on"; void0
+</code>
+</pre>
+
+<p>Você pode usar na URL <code>"javascript:history.go(-1)"</code> para que o clique volte pra página anterior (ao colocar -1 entre os parênteses) ou vá pra seguinte (ao colocar 1 entre os parênteses), assim:</p>
+
+<pre>
+<code>
+&lt;a href="javascript:history.go(-1)"&gt;Voltar&lt;/a&gt;
+</code>
+</pre>
+
+<p>PS: O history.go pode ser trabalhado normalmente dentro de códigos script, com variáveis, condicionais, repetições, funções, etc., por exemplo:</p>
+
+<pre>
+<code>
+function volta() {
+    history.go(-1);
+}
+</code>
+</pre>
+
+<p>Como o history.go, é possível inserir qualquer script com clique diretamente na chamada Javascript:</p>
+
+<pre>
+<code>
+&lt;a href="javascript:alert('Teste')"&gt;Link&lt;/a&gt;
+
+&lt;a href="javascript:num1 = 6; num2 = 4; res = num1 + num2; alert(res)"&gt;Link&lt;/a&gt;
+
+&lt;a href="javascript:funcaoTeste()"&gt;Link&lt;/a&gt;
+</code>
+</pre>
+
+<p>Ao chamar função com evento, sempre colocar parênteses (até porque a função no script obrigatoriamente terá parênteses para funcionar), exemplo:</p>
+
+<pre>
+<code>
+onmouseover="funcao1()"
+</code>
+</pre>
+
+<p>Ponto e vírgula pode colocar só pra separar duas ou mais comandos JS em HTML, exemplo:</p>
+
+<pre>
+<code>
+&lt;a href="index.html" onclick="alert('Você já está na Página Inicial'); return false"&gt;Teste&lt;/a&gt;
+</code>
+</pre>
+
+<p>Para impedir redirecionamento, só é obrigatório <code>return false</code> quando for inserido num evento no HTML. Dentro do JS e tags script, não é necessário colocar, mas coloque por prevenção caso não existam outros comandos.</p>
+
+<p>PS: Quando quisermos pegar um valor de uma tag HTML, usamos o <code>this</code> (que significa auto-referência do objeto), seguido do parâmetro do qual ele pegará, por exemplo:</p>
+
+<pre>
+<code>
+&lt;input type="number" value="0" onclick="alert('O dobro de ' + this.value + ' é ' + (this.value * 2))"/&gt;
+</code>
+</pre>
+
+<p>O <code>this.value</code> pega o valor do input, qualquer valor modificado será pego.</p>
+
+<p>Além do value, também podemos pegar outros elementos. Para trabalhar com manipulação de imagens por eventos, se usa o <code>this.src</code> e o caminho da foto entre aspas simples, assim:</p>
+
+<pre>
+<code>
+&lt;img src="imagens/sao-paulo.jpg" alt="Teste" onmouseover="this.src = 'imagens/bahia.jpg'" <br/>onmouseout="this.src = 'imagens/sao-paulo.jpg'"/&gt;
+</code>
+</pre>
+
+<p>Se quisermos pegar o título da Guia em JS, usamos simplesmente o <code>document.title</code>, assim:</p>
+
+<pre>
+<code>
+document.write("Título da Janela aberta: " + document.title + ".");
+</code>
+</pre>
+
+<p>Outro exemplo com o <code>name</code>:</p>
+
+<pre>
+<code>
+function obrigatorio(x) {
+    if(x.value == "") {
+        alert("O campo " + x.name + " não pode ficar vazio!");
+    }
+}
+</code>
+</pre>
+
+<p>Input do código acima:</p>
+
+<pre>
+<code>
+&lt;input type="text" name="nome" onblur="obrigatorio(this)"/&gt;
+</code>
+</pre>
+
+<p>Veja que nesse código acima, o argumento this é passado num evento JS (seria o mesmo que <code>this.name</code>).</p>
+
+<p>E se quiser remover espaços desnecessário de uma string, use o método <code>trim()</code> na variável.</p>
+
+<h3>Variáveis e Constantes</h3>
+
+<p>Variáveis são elementos que retém e representam um valor ou expressão, as constantes agem do mesmo modo, só que estas devem sempre ter valores atribuídos a si que não podem ser alterados em nenhum momento do script, as variáveis nem sempre precisam ter um valor atribuído (que pode ser alterado), exemplo:</p>
+
+<pre>
+<code>
+var nome;
+const LUGAR = 10;
+</code>
+</pre>
+
+<p>Mesmo se alterarem valores das constantes em outras linhas do código, a constante não muda e não é reconhecida pelo script, exemplo:</p>
+
+<pre>
+<code>
+var nome;
+const LUGAR = 10;
+nome = prompt("Digite aqui");
+LUGAR = 15; // Não funciona em constante (retirar pra funcionar), se fosse variável modificaria para esse valor.
+document.write(nome + ", o número é " + LUGAR);
+</code>
+</pre>
+
+<p>PS: Variáveis podem ser modificadas nesse método. E não é necessário declarar ou inicializar variáveis em Javascript, e o tipo delas são identificadas automaticamente ao inserir os valores.</p>
+
+<p>Constantes são mais seguras para valores que não irão se alterar. Mas no geral, variáveis são mais usadas.</p>
+
+<h3>Operadores Aritméticos</h3>
+
+<p>Os operadores aritméticos em Javascript são esses:</p>
+
+<table>
+    <tr>
+        <th>Operador Aritmético</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>+</td>
+        <td>Soma</td>
+    </tr>
+    <tr>
+        <td>-</td>
+        <td>Subtração</td>
+    </tr>
+    <tr>
+        <td>*</td>
+        <td>Multiplicação</td>
+    </tr>
+    <tr>
+        <td>/</td>
+        <td>Divisão</td>
+    </tr>
+    <tr>
+        <td>&#37;</td>
+        <td>Módulo</td>
+    </tr>
+    <tr>
+        <td>++</td>
+        <td>Pré ou pós incremento</td>
+    </tr>
+    <tr>
+        <td>--</td>
+        <td>Pré ou pós decremento</td>
+    </tr>    
+</table>
+
+<p>Veja alguns exemplos de usos de valores:</p>
+
+<pre>
+<code>
+var a = 50;
+var b = 20;
+document.write("Valor de a: " + a + "&lt;br/&gt;");
+document.write("Valor de b: " + b + "&lt;br/&gt;");
+document.write("Soma: " + (a + b) + "&lt;br/&gt;");
+document.write("Subtração: " + (a - b) + "&lt;br/&gt;");
+document.write("Multiplicação: " + (a * b) + "&lt;br/&gt;");
+document.write("Divisão: " + (a / b) + "&lt;br/&gt;");
+document.write("Módulo: " + (a % b) + "&lt;br/&gt;");
+document.write("Incremento de " + a + ": " + (++a) + "&lt;br/&gt;");
+document.write("Decremento de " + b + ": " + (--b) + "&lt;br/&gt;");
+</code>
+</pre>
+
+<p>Observe também que o <code>++</code> e o <code>--</code> vem antes da variável, isso se chama pré-incremento/decremento (fazendo a conta antes da variável), quando vem depois da variável é pós-incremento/decremento (fazendo a conta depois da variável), a posição faz toda a diferença.</p>
+
+<p>Numa expressão única, pré e pós incremento/decremento não faz muita diferença, mas num comando de exibição ou expressão faz.</p>
+
+<p>Lembre-se sempre da ordem de precedência da matemática, que na ordem é parênteses <code>()</code>, multiplicação <code>*</code>, divisão <code>/</code> (incluindo módulo <code>%</code>), adição <code>+</code> e subtração <code>-</code>.</p>
+
+<p>Cuidado que o <code>+</code> também é usado pra concatenar valores. Para que os valores com + não sejam concatenados como strings, coloque as variáveis entre outros parênteses (por hábito, use em outras operações aritméticas), normalmente com a concatenação, por exemplo:</p>
+
+<pre>
+<code>
+var num1 = 3;
+var num2 = 5;
+alert("A soma de " + num1 + " mais " + num2 + " é " + (num1 + num2) + "!");
+</code>
+</pre>
+
+<p>Lembre-se também que <code>=</code> é atribuição. Para valores iguais se usa <code>==</code>.</p>
+
+<p>PS: Podemos também colocar atribuição com algum valor, como por exemplo <code>num += 2</code> ou <code>num -= 3</code>, que faça a atribuição e a operação juntos no mesmo comando. Concatenação com atribuição também pode ser colocada com o <code>+=</code>.</p>
+
+<h3>Métodos alert, document.write, confirm e prompt</h3>
+
+<p>O método <code>alert</code>, como visto, é usado para exibir uma caixa de alerta no navegador com a mensagem. O <code>document.write</code> faz o mesmo, mas em vez do alerta, escreve no documento (esse método aceita tags HTML), por exemplo:</p>
+
+<pre>
+<code>
+alert("Algo será escrito no documento!");
+document.write("Isso foi escrito com Javascript!&lt;br/&gt;");
+</code>
+</pre>
+
+<p>O método <code>confirm</code> é usado junto com o <code>if</code> e <code>else</code> (que pode ter outros códigos entre eles). Ele é como um alert, mas com duas opções, a de OK e a de Cancelar, por exemplo:</p>
+
+<pre>
+<code>
+var acesso = confirm("Esse site é para maiores de 18 anos, você realmente quer acessá-lo?");
+
+if(acesso == true) {
+    alert("Acesso permitido ao site! Bem-vindo!");
+    location = "index.html";
+}
+else {
+    alert("Você é de menor e não pode acessar o site! Desculpe!");
+    history.go(-1);
+}
+</code>
+</pre>
+
+<p>O método <code>prompt</code> age como um confirm, com uma caixa de texto pra digitar valores, que podem ser trabalhados em variáveis, por exemplo:</p>
+
+<pre>
+<code>
+alert("Vamos fazer uma divisão!");
+var numerador = prompt("Digite o numerador", "0");
+var denominador = prompt("Digite o denominador", "0");
+var resultado = eval(numerador) / eval(denominador);
+alert("O resultado da divisão de " + numerador + " e "+ denominador + " é de " + resultado + "!");
+</code>
+</pre>
+
+<p>PS: Podemos concatenar dessa forma também, usando <code>${}</code>, dessa forma:</p>
+
+<pre>
+<code>
+alert(`O resultado da divisão de ${numerador} e ${denominador} é de ${resultado}!`); // Nesse caso só dá certo com crases
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-javascript-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

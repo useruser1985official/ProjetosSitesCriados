@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Python</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Python</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-python-1.html">Tudo sobre Python Parte 1!</a></li>
+                    <li><a href="tudo-sobre-python-2.html">Tudo sobre Python Parte 2!</a></li>
+                    <li><a href="tudo-sobre-python-3.html">Tudo sobre Python Parte 3!</a></li>
+                    <li><a href="tudo-sobre-python-4.html">Tudo sobre Python Parte 4!</a></li>
+                    <li><a href="tudo-sobre-python-5.html">Tudo sobre Python Parte 5!</a></li>
+                    <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
+                    <li><a href="tudo-sobre-python-7.html">Tudo sobre Python Parte 7!</a></li>
+                </menu>
+            </header>
+
+<h2>Redes em Python - Parte 1</h2>
+
+<h3>Introdução ao Módulo Socket</h3>
+
+<p>Sockets são empregados para o envio de mensagens através de umam rede. São uma das formas mais comuns de IPC (Inter Process Communication). Nó virtual onde as entidades realizam comunicação inter-processos. As aplicações mais comuns para sockets são aplicações cliente-servidor, nas quais um servidor espera por conexões de clientes. Vamos trabalhar com sockets de internet (desenvolvido em Berkeley), os quais permitem comunicação entre hosts remotos. Um endereço de socket é uma combinação de IP com Nº de porta.</p>
+
+<p>O módulo socket do Python fornece uma interface para a API de sockets BSD. Seus principais métodos e funções são:</p>
+
+
+<table>
+    <tr>
+         <th>Método</th>
+         <th>Funcionamento do método</th>
+    </tr>
+    <tr>
+        <td><code>socket()</code></td>
+        <td>Cria o objeto socket.</td>
+    </tr>
+    <tr>
+        <td><code>bind(endereco)</code></td>
+        <td>Associa o socket servidor a um endereço.</td>
+    </tr>
+    <tr>
+        <td><code>listen([backlog])</code></td>
+        <td>Começa a escutar pedidos de conexão.</td>
+    </tr>
+    <tr>
+        <td><code>accept()</code></td>
+        <td>Aceita uma conexão de cliente.</td>
+    </tr>
+    <tr>
+        <td><code>connect(endereco)</code></td>
+        <td>Conecta um cliente a um endereço.</td>
+    </tr>
+    <tr>
+        <td><code>connect_ex(endereco)</code></td>
+        <td>Idem anterior, retornando um indicador de erro, em vez de uma exceção, na ocorrência da chamada do connect em baixo nível. Sendo 0 a conexão deu certo, outro número indica erro.</td>
+    </tr>
+    <tr>
+        <td><code>settimeout(tempo)</code></td>
+        <td>Tempo de tentar a conexão.</td>
+    </tr>
+    <tr>
+        <td><code>send(bytes[, flags])</code></td>
+        <td>Solicita o envio dos bytes pelo socket até que um certo conjunto de bytes seja enviado (buffer suficiente para garantir o envio).</td>
+    </tr>
+    <tr>
+        <td><code>recv(bufsize[, flags])</code></td>
+        <td>Lê os bytes recebidos, retornando-os em uma string, até o limite de buffer definido por buffsize.</td>
+    </tr>
+    <tr>
+        <td><code>recvfrom(bufsize[, flags])</code></td>
+        <td>Idem ao anterior, só que com UDP.</td>
+    </tr>
+    <tr>
+        <td><code>getpeername()</code></td>
+        <td>Retorna o endereço do socket remoto com o qual um socket local está associado.</td>
+    </tr>
+    <tr>
+        <td><code>getsockname()</code></td>
+        <td>Retorna o endereço do socket local.</td>
+    </tr>
+    <tr>
+        <td><code>close()</code>
+        <td>Fecha um socket, liberando todos os recursos alocados.</td>
+    </tr>
+</table>
+
+<p>A interface de sockets se diferencia pelos diferentes serviços que são fornecidos:</p>
+
+<ul>
+    <li><b>Interface de sockets de fluxo (stream)</b>: Define um serviço orientado a conexão confiável (sobre TCP). Dados enviados sem erros ou duplicação, e recebidos na mesma ordem em que foram enviados (SOCK_STREAM).</li>
+    <li><b>Interface de sockets de datagrama</b>: Define um serviço sem conexão (sobre UDP). Os datagramas são enviados como pacotes independentes. Não há garantias, pois os dados podem ser perdidos ou duplicados, e ainda chegarem fora de ordem (SOCK_DGRAM).</li>
+    <li><b>Interface de sockets brutos</b>: Permite acesso direto a protocolos na camada inferior, como por exemplo ICMP e IP. Exemplo de aplicação: Programa ping (SOCK_RAW).</li>
+</ul>
+
+<p>Essas são as constantes e atributos de sockets:</p>
+
+<ul>
+    <li><b>socket.family</b>: Família do socket criado.</li>
+    <li><b>socket.type</b>: Tipo do socket criado.</li>
+    <li><b>socket.proto</b>: Protocolo associado ao socket.</li>
+</ul>
+
+<p>Criamos um objeto socket usando o método <code>socket.socket()</code>, o qual recebe dois ou três parâmetros (um é opcional):</p>
+
+<ul>
+    <li><b>Família de Endereços</b>: <code>AF_INET</code> (endereço IPv4) e <code>AF_INET6</code> (IPv6).</li>
+    <li><b>Tipos de Socket</b>: <code>SOCK_STREAM</code> (para socket TCP) e <code>SOCK_DGRAM</code> (para UDP).</li>
+    <li><b>Protocolo</b>: Geralmente, zero.</li>
+</ul>
+
+<p>Essa é a sequência de chamadas à API socket (interação entre um cliente e servidor):</p>
+
+<img src="imagens/chamadas-socket.jpg" alt="Chamadas Socket"/>
+
+<h3>Scripts Cliente e Servidor com Módulo Socket</h3>
+
+<p>Esse é o código do script servidor.py:</p>
+
+<pre>
+<code>
+import socket
+
+host = "localhost" # Pode ser o IP também
+port = 50000
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criação do objeto, usando IPv4 e TCP.
+
+s.bind((host, port)) # Associando o socket ao endereço localhost e sua porta
+
+s.listen() # Escuta pedidos de conexão do cliente.
+
+print("Aguardando conexão de um cliente...")
+
+conn, ender = s.accept() # Aceita uma conexão de cliente.
+
+print(f"Conectado em {ender}.")
+
+while True:
+    data = conn.recv(1024) # Lê os bytes a serem recebidos e retorna uma string.
+
+    if not data:
+        print("Fechando a conexão!")
+        conn.close() # Fecha a conexão
+        break
+
+    conn.sendall(data) # Enviando de volta pro cliente os dados
+</code>
+</pre>
+
+<p>Esse é o código do script cliente.py:</p>
+
+<pre>
+<code>
+import socket
+
+host = "localhost" # Conectando ao mesmo IP
+port = 50000 # Porta de comunicação
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Criação do objeto, usando IPv4 e TCP.
+
+s.connect((host, port)) # Conecta o cliente ao servidor
+
+s.sendall(str.encode("Testando o envio de mensagens via socket em Python!")) # Enviando os dados pro servidor, o str.encode é para tratar acentuações.
+
+data = s.recv(1024) # Lê os bytes recebidos pelo servidor e retorna uma string.
+
+print(f"Mensagem ecoada: {data.decode()}") # Mensagem ecoada, com tratamento de acentuações.
+</code>
+</pre>
+
+<p>Rode primeiro o servidor e depois o cliente. Ele responderá por uma porta aleatória.</p>
+
+<h3>Cliente TCP e UDP</h3>
+
+<p>Para usarmos um cliente TCP simples com um site externo, como o Google, fazemos assim:</p>
+
+<pre>
+<code>
+import socket
+
+host = "www.google.com"
+port = 80
+
+# Criando um objeto de socket com TCP:
+cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Conectando o cliente:
+cliente.connect((host, port))
+
+# Enviando dados
+cliente.send(str.encode("GET / HTTP / 1.1 \r \nHost: google.com \n\r\n"))
+
+# Receber alguns dados
+resposta = cliente.recv(4096)
+
+print(resposta.decode())
+</code>
+</pre>
+
+<p>No código acima, criamos um objeto socket com endereço IPv4 e cliente TCP. Conectamos nosso cliente ao servidor do Google e enviamos alguns dados, que voltarão para nós e será impresso.</p>
+
+<p>Um cliente UDP não é muito diferente, fazemos apenas duas pequenas alterações para isso, como exemplificamos abaixo:</p>
+
+<pre>
+<code>
+import socket
+
+host = "127.0.0.1"
+port = 9999
+
+# Criando um objeto de socket com UDP:
+cliente = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+# Enviamos alguns dados:
+cliente.sendto(str.encode("AEIOU"), (host, port))
+
+# Recebemos alguns dados:
+endereco = cliente.recvfrom(4096)
+
+print(endereco)
+</code>
+</pre>
+
+<p>Como o UDP é um protocolo sem conexão (UDP é orientado a datagramas), usamos outros métodos, como o sendto() pra passar os dados e o recvfrom() para receber os dados. Veja o código de um servidor UDP:</p>
+
+<pre>
+<code>
+import socket
+
+host = "127.0.0.1"
+port = 9999
+
+mens = str.encode("Olá, Cliente UDP!")
+
+serv = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # IPv4 e UDP
+
+serv.bind((host, port))
+print("Servidor UDP ativo...")
+
+while True:
+    data = serv.recvfrom(1024)
+
+    msg = data[0].decode()
+    addr = data[1]
+
+    print(f"Mensagem do cliente: {msg}")
+    print(f"IP do cliente: {addr}")
+
+    serv.sendto(mens, addr)
+</code>
+</pre>
+
+<p>Rode o servidor primeiro e depois o cliente.</p>
+
+<ul>
+    <li><a href="redes-em-python-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

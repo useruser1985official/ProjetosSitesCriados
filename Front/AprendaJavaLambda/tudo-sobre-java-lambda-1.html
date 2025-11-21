@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java com Lambda</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java com Lambda</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-lambda-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java com Lambda Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-lambda-2.html">Tudo sobre Java com Lambda Parte 2!</a></li>
+                </menu>
+            </header>
+
+<h2>Tudo sobre Java com Lambda Parte 1</h2>
+
+<h3>Expressão Lambdas</h3>
+
+<p>No Java 8 foi adicionado as expressões Lambda. As expressões Lambda são métodos anônimos, só que esses métodos não são executados em si próprios. Elas também são chamadas de métodos anônimos. Basicamente são funções sem nome. Dessa forma, facilmente implementar mensagens de alto nível de abstração, que podem receber ou enviar blocos de código que se comportam de forma parecida com funções de ordem superior, encontrada de forma recorrente no paradigma funcional (operação que recebe outra operação, um comportamento por parâmetro, assim podendo executar internamente esse comportamento).</p>
+
+<p>As expressões Lambda se fala muito do paradigma funcional, você pode entender o paradigma funcional como uma forma de programar onde existe um conjunto de funções que podem ser verificadas para obter determinado resultado. Isso é um conceito da matemática que foi aplicado na programação, porém, a programação funcional é um termo que representa coisas diferentes para pessoas diferentes. Podemos perceberela, mas explicar não é muito fácil.</p>
+
+<p>As expressões Lambdas implementa os métodos que estão definidos em uma interface funcional. Utilizaremos muito para substituir a implementação da classe anônima, logo, com o advento das expressões Lambdas, conseguimos pegar as classes anônimas de forma mais elegante e que melhora a visibilidade do código.</p>
+
+<p>As interfaces funcionais são aquelas que contém somente um método abstrato, e assim, esse método especifica a finalidade dessa interface. Normalmente representarão apenas uma única ação, e acabam fornecendo um tipo alvo para as expressões Lambdas e a referências de métodos. Cada interface funcional sempre terá um método abstrato (chamado de método funcional da interface funcional), aonde o parâmetro da expressão Lambda e os tipos de retorno serão combinados e adaptados. Como veremos, as interfaces funcionais geralmente apresentarão a anotação <code>@FunctionalInterface</code>, mas ela não é pré-requisito pro JDK reconhecer as interfaces funcionais.</p>
+
+<p>Essas são as interfaces funcionais usadas:</p>
+
+<ul>
+    <li><code>Function</code>: Função que recebe um único argumento.</li>
+    <li><code>Predicate</code>: Função que recebe um único parâmetro e devolve um booleano.</li>
+    <li><code>Consumer</code>: Função que recebe um único parâmetro e não retorna nada.</li>
+</ul>
+
+<h3>Expressão Lambdas na Prática</h3>
+
+<p>Vamos criar um projeto novo no qual criaremos uma implementação da interface anônima Runnable (classe interna do Java):</p>
+
+<pre>
+<code>
+package expressaolambda;
+
+public class ExpressaoLambda {
+    public static void main(String[] args) {
+        System.out.println("=== Início do Teste ===");
+        
+        // Implementação da interface anônima Runnable sem Lambda:
+        
+        Runnable r1 = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Estudando a Expressão Lambda (Teste sem Lambda)!");
+            }           
+        }; // Não esqueça do ponto e vírgula aqui.
+    }
+}
+</code>
+</pre>
+
+<p>Para entender o que acontece, o Java tem uma interface padrão chamada Runnable, da qual é criada uma instância, essa interface possui apenas um método void chamado run (que é abstrato na interface), que deve ser implementado na instância criada.</p>
+
+<p>Para transformar em Lambda, usamos apenas os parênteses e a indicação da seta, colocando tudo numa linha só veja o exemplo abaixo, sem e com Lambda:</p>
+
+<pre>
+<code>
+package expressaolambda;
+
+public class ExpressaoLambda {
+    public static void main(String[] args) {
+        System.out.println("=== Início do Teste ===");
+        
+        // Implementação da interface anônima Runnable sem Lambda:
+        
+        Runnable r1 = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Estudando a Expressão Lambda (Teste sem Lambda)!");
+            }           
+        };
+        
+        // Implementação com Lambda:
+        
+        Runnable r2 = () -> System.out.println("Estudando a Expressão Lambda (Teste com Lambda)!");
+    }
+}
+</code>
+</pre>
+
+<p>Dessa forma, podemos facilitar a leitura e a criação de métodos, por diminuir a quantidade de linhas no programa. Os parênteses indicam a implementação do único método da interface padrão Runnable, run().</p>
+
+<p>Para invocar os métodos, faça da mesma forma que um objeto qualquer, dessa forma:</p>
+
+<pre>
+<code>
+r1.run();
+r2.run();
+</code>
+</pre>
+
+<p>Para entendermos a expressão Lambda, vamos ver as partes dela e o que cada uma faz:</p>
+
+<pre>
+<code>
+Runnable r2; // Declaração da variável do objeto.
+
+r2 = () // Os parênteses indica uma lista de argumentos (vazia ou não).
+-> // Seta que demarca que estamos trabalhando com Lambda
+System.out.println("Estudando Lambda!"); // Tudo que vier aqui é a parte programada, no caso, que implementa o método run da interface.
+</code>
+</pre>
+
+<p>PS: A variável já pode ser declarada e inicializada normalmente. Os parênteses são obrigatórios mesmo sem nenhum argumento. A expressão pode estar em uma só linha ou não.</p>
+
+<h3>Sintaxe do Lambda</h3>
+
+<p>Uma expressão Lambda descreve uma função anônima, por isso trabalhamos de forma muito semelhante de quando trabalhamos com uma função, ou seja, numa função Lambda também temos uma lista de parâmetros e também um bloco de instrução.</p>
+
+<p>Veja abaixo um exemplo simplificado de uma expressão Lambda:</p>
+
+<pre>
+<code>
+() -> x + y;
+</code>
+</pre>
+
+<p>No caso acima, os parênteses temos a lista de argumentos, sem nome. A seta que indica o uso de expressão Lambda, e tudo que vier depois dela é o bloco de instrução, que não é definido com o uso de chaves, e quando tem uma só instrução não precisa de indicação de retorno (mesmo querendo retornar algo). Além disso, não possuí nome e nem precisa da declaração throw para tratamento.</p>
+
+<p>As variáveis dos parâmetros podem ter tipos declarados, mas não é necessário, o próprio Java identificará isso, por exemplo:</p>
+
+<pre>
+<code>
+(int x) -> x + 10;
+(int x, int y) -> x + y;
+</code>
+</pre>
+
+<p>Podemos declarar utilizando chaves também, mas eles são dispensáveis em blocos de uma só linha, pois o JDK já entenderá que é um bloco:</p>
+
+<pre>
+<code>
+(int x, int y) -> {x + y};
+</code>
+</pre>
+
+<h3>Interfaces Funcionais</h3>
+
+<p>No Java 8, todas as interfaces com um só método declarado, são consideradas uma interface funcional (lembrando que os métodos declarados dentro de interfaces são abstratas por default). Até o Java 7 tinha que declarar os métodos como abstratos, no 8 foi dispensado isso.</p>
+
+<p>No caso do Java, as interfaces funcionais permitem que trabalhemos com expressões lambdas que necessitem retornar um valor e/ou que recebam algum parâmetro (já que a padrão da Runnable é void e sem parâmetros).</p>
+
+<p>Crie um programa com classe principal, e crie uma interface dentro na classe:</p>
+
+<pre>
+<code>
+package interfacefuncional;
+
+public class InterfaceFuncional {
+    // Interface funcional:
+    interface Num {
+        double getValue(); // Função que retornará um double
+    }
+            
+    public static void main(String[] args) {
+        
+    }
+}
+</code>
+</pre>
+
+<p>PS: É comum ter a indicação <code>@FunctionalInterface</code> em interfaces funcionais, mas não é obrigatório, já que o JDK identifica as interfaces funcionais automaticamente.</p>
+
+<p>Na interface acima, o método getValue() já é abstrato por default, e ela é uma interface funcional por ter só um método abstrato.</p>
+
+<p>Como estamos trabalhando com expressões Lambda, não temos como executar uma expressão Lambda em cima dela mesma, por isso, quando quisermos trabalhar com retorno de valores em Lambda, temos que fazer uso de uma interface (o Runnable mesmo é uma interface padrão do Java, mas não permite retorno).</p>
+
+<p>Crie uma variável no método principal, e uma expressão Lambda, assim:</p>
+
+<pre>
+<code>
+public static void main(String[] args) {
+    Num n;
+    n = () -> { // Implementação da função getValue() criada
+        return 333.11;
+    };
+
+    System.out.println(n.getValue());
+}
+</code>
+</pre>
+
+<p>Ou de forma mais simples:</p>
+
+<pre>
+<code>
+public static void main(String[] args) {
+    Num n;
+    n = () -> 333.11; // Implementação da função getValue() criada, não precisa indicar return nesse caso
+
+    System.out.println(n.getValue());
+}
+</code>
+</pre>
+
+<p>No exemplo acima, é criado uma instância da interface Num, que foi implementada pela expressão Lambda, e quando o método é invocado pelo System.out.prinln, a expressão Lambda é executada e o valor contido nela é retornado.</p>
+
+<p>Dessa forma, conseguimos transformar um segmento de código em um objeto, já que quando executamos, o corpo da expressão ainda não foi executado, ele só é executado quando invocamos o método definido da interface.</p>
+
+<p>Lembrando que as expressões Lambda devem ter o conteúdo de um tipo compatível com o retorno, no mesmo retorno acima, se colocarmos uma string, dará erro. O mesmo vale para passar atributos por parâmetros (claro, podemos passar parâmetros de tipos diferente do retorno).</p>
+
+<h3>Expressões Lambda 2</h3>
+
+<p>Continuando o exemplo anterior, vamos criar um novo objeto com Lambda dessa forma:</p>
+
+<pre>
+<code>
+package expressoeslambda;
+
+public class ExpressoesLambda {
+    @FunctionalInterface
+    interface Num {
+        double getValue();
+    }
+            
+    public static void main(String[] args) {
+        Num n1 = () -> 333.11;
+        Num n2 = () -> Math.random() * 100;
+        
+        System.out.println(n1.getValue());
+        System.out.println(n2.getValue());
+        System.out.println(n2.getValue());
+    }
+}
+</code>
+</pre>
+
+<p>No caso acima, o n1 seria uma expressão como uma constante, já a n2 é uma variante, se charmarmos o mesmo método mais de uma vez, gerará números diferentes.</p>
+
+<p>Crie uma interface funcional dentro da classe, dessa forma:</p>
+
+<pre>
+<code>
+@FunctionalInterface
+interface ValorNumeric {
+    boolean verif(int n);
+}
+</code>
+</pre>
+
+<p>E crie um objeto com expressão Lambda para verificarmos se o número é par:</p>
+
+<pre>
+<code>
+ValorNumeric isPar = (int num) -> num % 2 == 0;
+</code>
+</pre>
+
+<p>E depois invoque os métodos assim:</p>
+
+<pre>
+<code>
+package expressoeslambda;
+
+public class ExpressoesLambda {
+    @FunctionalInterface
+    interface Num {
+        double getValue();
+    }
+    
+    @FunctionalInterface
+    interface ValorNumeric {
+        boolean verif(int n);
+    }
+            
+    public static void main(String[] args) {
+        Num n1 = () -> 333.11;
+        Num n2 = () -> Math.random() * 100;
+        
+        System.out.println(n1.getValue());
+        System.out.println(n2.getValue());
+        System.out.println(n2.getValue());
+        
+        ValorNumeric isPar = (int num) -> num % 2 == 0;
+        
+        System.out.println(isPar.verif(89)); // Retorna false
+        System.out.println(isPar.verif(90)); // Retorna true
+    }
+}
+</code>
+</pre>
+
+<h3>Expressões Lambda 3</h3>
+
+<p>Continuando a aula anterior, criaremos uma nova interface com dois parâmetros, dessa forma:</p>
+
+<pre>
+<code>
+@FunctionalInterface
+interface Valores {
+    boolean divisao(int n1, int n2);
+}
+</code>
+</pre>
+
+<p>Crie também o objeto assim:</p>
+
+<pre>
+<code>
+Valores isDiv = (x, y) -> x % y == 0;
+</code>
+</pre>
+
+<p>PS: Note que acima nem precisamos declarar os tipos primitivos de x e y, o próprio compilador identificará os tipos. Mas se identificar o tipo de um, terá obrigatoriamente que definir o tipo de todos os outros (ou define tudo ou define nada)</p>
+
+<p>E faça a exibição dos métodos assim:</p>
+
+<pre>
+<code>
+System.out.println(isDiv.divisao(10, 2));
+System.out.println(isDiv.divisao(10, 3));
+</code>
+</pre>
+
+<p>Esse é o código completo:</p>
+
+<pre>
+<code>
+package expressoeslambda;
+
+public class ExpressoesLambda {
+    @FunctionalInterface
+    interface Num {
+        double getValue();
+    }
+    
+    @FunctionalInterface
+    interface ValorNumeric {
+        boolean verif(int n);
+    }
+    
+    @FunctionalInterface
+    interface Valores {
+        boolean divisao(int n1, int n2);
+    }
+            
+    public static void main(String[] args) {
+        Num n1 = () -> 333.11;
+        Num n2 = () -> Math.random() * 100;
+        
+        System.out.println(n1.getValue());
+        System.out.println(n2.getValue());
+        System.out.println(n2.getValue());
+        
+        ValorNumeric isPar = (int num) -> num % 2 == 0;
+        
+        System.out.println(isPar.verif(89)); // Retorna false
+        System.out.println(isPar.verif(90)); // Retorna true
+        
+        Valores isDiv = (x, y) -> x % y == 0;
+        System.out.println(isDiv.divisao(10, 2)); // Retorna true
+        System.out.println(isDiv.divisao(10, 3)); // Retorna false
+    }
+}
+</code>
+</pre>
+
+<p>PS: Também podemos fazer assim, nesse caso devemos colocar obrigatoriamente a expressão return:</p>
+
+<pre>
+<code>
+Valores expressao = (int x, int y) -> {
+    int w = x + y;
+    return w > 1000;
+};
+
+System.out.println(expressao.divisao(2000, 2));
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-java-lambda-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

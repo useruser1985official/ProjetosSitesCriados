@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Powershell</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Powershell</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-powershell-1.html">Tudo sobre Powershell Parte 1!</a></li>
+                    <li><a href="tudo-sobre-powershell-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Powershell Parte 2!</a></li>
+                    <li><a href="tudo-sobre-powershell-3.html">Tudo sobre Powershell Parte 3!</a></li>
+                    <li><a href="tudo-sobre-powershell-4.html">Tudo sobre Powershell Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Powershell Parte 2</h2>
+
+<h3>Operadores de Comparação</h3>
+
+<p>Diferentes das linguagens "C-like", no Powershell não é usado os operadores tipo &lt;, &gt;, &lt;=, !=, etc. Ele utiliza parâmetros específicos para isso, por exemplo:</p>
+
+<table>
+    <tr>
+        <td>-eq</td>
+        <td>Igual</td>
+    </tr>
+    <tr>
+        <td>-ne</td>
+        <td>Diferente</td>
+    </tr>
+    <tr>
+        <td>-lt</td>
+        <td>Menor que</td>
+    </tr>
+    <tr>
+        <td>-le</td>
+        <td>Menor que ou igual</td>
+    </tr>
+    <tr>
+        <td>-gt</td>
+        <td>Maior que</td>
+    </tr>
+    <tr>
+        <td>-ge</td>
+        <td>Maior que ou igual</td>
+    </tr>
+</table>
+
+<p>Isso ocorre porque alguns operadores tem outras funções, por exemplo, &gt; que é usado para escrever algo num arquivo.</p>
+
+<p>Veja alguns exemplos:</p>
+
+<pre>
+<code>
+3 -lt 10
+
+3 -le 2
+
+3 -le 3
+
+3 -gt 4
+
+88 -gt 4
+
+88 -ge 4
+
+"i" -eq "q"
+
+"i" -eq "w"
+
+"i" -eq "i"
+
+"i" -ne "i"
+
+"b" -ne "i"
+</code>
+</pre>
+
+<p>PS: Diferente de outras linguagens, o Powershell não é case-sensitive.</p>
+
+<p>Para forçar a diferenciação de maiúsculas e minúsculas, podemos fazer assim, colocando um c no parâmetro (o padrão é o i), dessa forma:</p>
+
+<pre>
+<code>
+"Fulano" -eq "fulano"
+
+"Fulano" -ceq "fulano"
+</code>
+</pre>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+[int64] -eq [int16]
+
+[int] -eq [int]
+</code>
+</pre>
+
+<p>Uma hashtable é uma tabela que armazenamos dados, fazemos assim:</p>
+
+<pre>
+<code>
+$ht = @{server = $true; conec = $false}
+
+$ht.GetType()
+
+$ht.server
+
+$ht.conec
+
+if($ht.conec -eq $true) {
+    "Servidor Conectado!"
+}
+else {
+    "Servidor Desconectado!"
+}
+
+$ht.conec = $true
+
+if($ht.conec -eq $true) {
+    "Servidor Conectado!"
+}
+else {
+    "Servidor Desconectado!"
+}
+</code>
+</pre>
+
+<p>Os dados de dentro das hashtables são chamados de chaves e valores.</p>
+
+<h3>Operadores Aritméticos</h3>
+
+<p>Os operadores aritméticos são os mesmos das outras linguagens (+, -, *, / e %), por exemplo:</p>
+
+<pre>
+<code>
+2 + 2
+
+1456564564654545645 + 15465165465145146
+
+15 / 3
+
+88 * 2
+
+10 / 3
+
+10 % 3
+</code>
+</pre>
+
+<p>Lembrando que o % retorna o resto da divisão. Qualquer número que o resto de 2 for 1 é ímpar, e se for 0 é par, o que podemos colocar numa condição, por exemplo:</p>
+
+<pre>
+<code>
+10 % 3
+
+10 % 2
+
+159 % 2
+
+159 % 2 -eq 0
+
+159 % 2 -eq 1
+</code>
+</pre>
+
+<p>Como em outras linguagens, temos também os parênteses, por exemplo:</p>
+
+<pre>
+<code>
+(2 + 2) * 5
+</code>
+</pre>
+
+<p>PS: Lembre-se da ordem de operação matemática, que é de parênteses, depois multiplicações, divisões e restos, e por último adições e subtrações.</p>
+
+<p>Outros exemplos:</p>
+
+<pre>
+<code>
+(2 + 2) * (3 + 2)
+
+((2 + 2) * (3 + 2) - 8)
+</code>
+</pre>
+
+<p>Lembrando que o + também é usado para concatenação, por exemplo:</p>
+
+<pre>
+<code>
+"Powershell" + " é " + "foda!"
+</code>
+</pre>
+
+<p>E podemos também repetir strings:</p>
+
+<pre>
+<code>
+"w" * 3
+</code>
+</pre>
+
+<p>Temos também métodos matemáticos para utilizar no Powershell, esses são alguns deles:</p>
+
+<ul>
+    <li><code>[Math]::Abs()</code> para pegar o valor absoluto de um número.</li>
+    <li><code>[Math]::Pow()</code> para criar uma potencialização entre dois números.</li>
+    <li><code>[Math]::Sqrt()</code> para mostrar a raiz quadrada.</li>
+    <li><code>[Math]::Round()</code> para mostrar o número arredondado para o inteiro mais próximo. Para cima se usa <code>[Math]::Ceiling()</code> e para baixo <code>[Math]::Floor()</code>.</li>
+</ul>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+[Math]::Abs(-50)
+
+[Math]::Sqrt(81)
+
+[Math]::Ceiling(3.5)
+
+[Math]::Floor(3.5)
+
+[Math]::Round(3.5)
+</code>
+</pre>
+
+<p>Para gerar números aleatórios fazemos assim:</p>
+
+<pre>
+<code>
+$numAle = [Random]::new()
+
+Write-Output $numAle.Next() # Gera qualquer número inteiro
+
+Write-Output $numAle.NextDouble() # Gera qualquer número real entre 0 e 1
+
+Write-Output $numAle.Next(1, 6) # Gera de 1 a 5
+</code>
+</pre>
+
+<h3>Sufixos de Multiplicadores Numéricos</h3>
+
+<p>Podemos fazer multiplicações, por exemplo, de MB e relacionados, por exemplo:</p>
+
+<pre>
+<code>
+1mb # Retorna a quantidades de bytes de 1 MB
+
+1mb / 2
+
+1gb / 100mb
+
+1mb + 1mb
+</code>
+</pre>
+
+<p>Podemos usar desde KB até PB.</p>
+
+<h3>Variáveis</h3>
+
+<p>Muitas vezes precisaremos armazenar dados na memória do computador, essas são as variáveis, que podem ser modificadas caso necessário.</p>
+
+<p>As variáveis precisam ter um nome, no caso do Powershell elas começam com um cifrão, e os tipos são definidos automaticamente, no caso do Powershell:</p>
+
+<pre>
+<code>
+$nome = "Fulano"
+
+$nome
+
+$cep = 00000000
+
+$cep
+</code>
+</pre>
+
+<p>Mas podemos forçar a tipagem de uma variável, por exemplo:</p>
+
+<pre>
+<code>
+[string]$nome = "Fulano"
+
+$nome.GetType()
+
+[int]$n = 1
+
+$n.GetType()
+</code>
+</pre>
+
+<h3>CMDLET para Variáveis</h3>
+
+<p>Podemos olhar quais comandos tem uma palavra no nome, podemos fazer assim:</p>
+
+<pre>
+<code>
+Get-Command *-Variable
+</code>
+</pre>
+
+<p>Isso pega o nome e valor da variável:</p>
+
+<pre>
+<code>
+$nome = "Fulano"
+
+Get-Variable nome
+</code>
+</pre>
+
+<p>Isso a criar e remover variável:</p>
+
+<pre>
+<code>
+New-Variable -Name teste -Value WPS
+
+$teste
+
+Remove-Variable teste
+</code>
+</pre>
+
+<p>PS: Temos também o <code>Set-Variable</code> que funciona de forma similar ao new, mas ele pode modificar o dado de uma variável já existente.</p>
+
+<h3>Constantes</h3>
+
+<p>Existe no Powershell o conceito de constante. As constantes também armazenam conteúdos, mas elas não podem ter o conteúdo alterado e por isso, devem ser inicializadas.</p>
+
+<p>Veja como criar uma constante:</p>
+
+<pre>
+<code>
+Set-Variable -Name PI -Value ([Math]::PI) -Option Constant
+
+# Ao invés de Constant pode ser usado ReadOnly
+
+$PI
+</code>
+</pre>
+
+<p>Dessa forma, a única forma de alterar o conteúdo é usar o Remove-Variable e criá-la novamente.</p>
+
+<h3>String Multilinha</h3>
+
+<p>Para criar strings multilinhas, fazemos assim:</p>
+
+<pre>
+<code>
+@"
+Isso é
+um exemplo
+de string
+multilinha!
+
+Não coloque
+nada na mesma
+linha das
+aspas e arrobas!
+"@
+</code>
+</pre>
+
+<p>Como visto acima, ele formata da mesma forma que foi escrita.</p>
+
+<p>Podemos atribuir a uma variável também, por exemplo:</p>
+
+<pre>
+<code>
+$trecho = @"
+Eu vou, atrás do trio elétrico vou.
+Dançar ao negro toque do agogô.
+Curtindo minha baianidade nagô, ô ô ô ô ô.
+
+Eu queria que essa fantasia fosse eterna.
+Quem sabe um dia a paz vence a guerra.
+E viver será só festejar.
+"@
+
+$trecho
+</code>
+</pre>
+
+<p>Dessa forma, podemos por exemplo, escrever código em outras linguagens e gerar um arquivo com ela, por exemplo:</p>
+
+<pre>
+<code>
+@"
+nome = "Fulano"
+print("Seu nome é {}.".format(nome))
+input("")
+"@ | Out-File -FilePath nome.py -Encoding utf8
+</code>
+</pre>
+
+<p>Na forma acima, ele gerará um arquivo py com código Python.</p>
+
+<h3>Comentários</h3>
+
+<p>Em programação, é muito importante sabermos como colocar comentários. No Powershell fazemos assim:</p>
+
+<pre>
+<code>
+# Nessa linha peço uma string e guardo na variável nome
+
+$nome = Read-Host "Digite seu nome"
+
+Write-Host "Seu nome é $nome"
+</code>
+</pre>
+
+<p>Como visto, usamos o <code>#</code> para comentários em Powershell.</p>
+
+<p>Para definir um comentário de várias linhas, fazemos assim:</p>
+
+<pre>
+<code>
+&lt;#
+Isso
+é
+um
+comentário
+de
+várias
+linhas!
+#&gt;
+</code>
+</pre>
+
+<h3>Manipulando Datas</h3>
+
+<p>O cmdlet Get-Date serve para dois propósitos básicos, retornar a data atual e manipular datas, executando ele da forma simples nos retorna data atual do sistema.</p>
+
+<p>Apenas digite <code>Get-Date</code> para pegar a data atual.</p>
+
+<p>Podemos formatar a data, por exemplo:</p>
+
+<pre>
+<code>
+# Exemplo de exibição no formato dd/mm/yyyy hh:mm:ss:
+
+Get-Date -Uformat "%d/%m/%Y %H:%M:%S"
+</code>
+</pre>
+
+<p>Exemplo mais complexo:</p>
+
+<pre>
+<code>
+$d = Get-Date -UFormat "%d"
+$m = Get-Date -UFormat "%m"
+$a = Get-Date -UFormat "%Y"
+
+$s = Get-Date -UFormat "%w"
+
+$hora = Get-Date -UFormat "%H:%M:%S"
+
+$meses = @("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro")
+$mes = $meses[$m - 1]
+
+$semana = @("Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado")
+$sem = $semana[$s]
+
+Write-Output "Hoje é dia $d de $mes de $a. $sem."
+Write-Output "A hora atual é $hora."
+</code>
+</pre>
+
+<p>O Get-Date também pode ser utilizado para converter uma string para um objeto de date, que pode ser útil para descobrirmos mais informações sobre uma data. Por exemplo:</p>
+
+<pre>
+<code>
+Get-Date "09/03/2020 19:42:53"
+</code>
+</pre>
+
+<p>Dessa forma transformando uma data de string em objeto podemos utilizar era em nossas operações de diversas formas como por exemplo comparar duas datas, como podem ver:</p>
+
+<pre>
+<code>
+$dataA = Get-Date "05/05/2012"
+
+$dataB = Get-Date "06/05/2012"
+
+$dataA -lt $dataB
+
+$dataB -gt $dataA
+</code>
+</pre>
+
+<p>Além dessas utilidades ele também serve para manipularmos as datas como por exemplo adicionando ou retirando tempo, por exemplo:</p>
+
+<pre>
+<code>
+$data = Get-Date
+
+$data.AddMinutes(480)
+
+$data.AddMinutes(-90)
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-powershell-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-powershell-3.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

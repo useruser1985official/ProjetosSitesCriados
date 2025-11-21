@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C#</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C#</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-csharp-1.html">Tudo sobre C# Parte 1!</a></li>
+                    <li><a href="tudo-sobre-csharp-2.html">Tudo sobre C# Parte 2!</a></li>
+                    <li><a href="tudo-sobre-csharp-3.html">Tudo sobre C# Parte 3!</a></li>
+                    <li><a href="tudo-sobre-csharp-4.html">Tudo sobre C# Parte 4!</a></li>
+                    <li><a href="tudo-sobre-csharp-5.html">Tudo sobre C# Parte 5!</a></li>
+                    <li><a href="tudo-sobre-csharp-6.html">Tudo sobre C# Parte 6!</a></li>
+                    <li><a href="tudo-sobre-csharp-7.html">Tudo sobre C# Parte 7!</a></li>
+                    <li><a href="tudo-sobre-csharp-8.html">Tudo sobre C# Parte 8!</a></li>
+                    <li><a href="tudo-sobre-csharp-9.html">Tudo sobre C# Parte 9!</a></li>
+                    <li><a href="tudo-sobre-csharp-10.html">Tudo sobre C# Parte 10!</a></li>
+                </menu>
+            </header>
+                           
+<h2>Orientação a Objetos em C# - Parte 2</h2>
+
+<h3>Herança - Parte 1</h3>
+
+<p>Herança é um conceito extremamente importante em orientação a objetos. Usamos a herança, por exemplo, para evitar repetição ao definirmos classes com características em comum e são relacionadas entre si. A herança é um relacionamento entre classes, que permite que uma classe adquira os membros de outra classe.</p>
+
+<p>Um exemplo clássico de herança seria a classificação de mamíferos no reino animal. Homens, baleias e gatos são mamíferos, que cimpartilham muitas características entre si, mas claramente possuem atriutos que os diferem uns dos outros. Como podemos modelar baleias, gatos e humanos em um software? Podemos criar classes distintas para cada animal, mas essas classes teriam muitos comportamentos (métodos) em comum entre eles, como respirar, mamar e reproduzir-se, o que ocasionaria repetição desnecessária de código. Usamos então herança para resolver esse problema.</p>
+
+<p>Podemos então criar uma classe chamada Mamifero que possua as funcionalidades comuns a todos os animais mamíferos, e então criar as classes Humano, Baleia e Gato, herando essas funcionalidades e também implementando as funcionalidades específicas de cada animal, como falar, nadar e arranhar.</p>
+
+<p>Para declarar uma herança, coloque após o nome da classe, dois pontos e o nome da classe da qual ela herdará. A classe derivada herda da classe base, e os métodos da classe base se tornam parte da classe derivada. Em C# uma classe pode derivar no máximo de uma classe base. Mas uma classe pode derivar de uma classe já derivada de outra.</p>
+
+<p>Veja a classe Mamifero abaixo:</p>
+
+<pre>
+<code>
+class Mamifero {
+    public void respirar() {
+        Console.WriteLine("Eu Respiro!");
+    }
+    public void mamar() {
+        Console.WriteLine("Eu Mamo");
+    }
+}
+</code>
+</pre>
+
+<p>O da classe Gato, herdando de Mamifero:</p>
+
+<pre>
+<code>
+class Gato : Mamifero {
+    public void arranhar() {
+        Console.WriteLine("Eu Arranho!");
+    }
+}
+</code>
+</pre>
+
+<p>E o da classe Humano, também herdando de Mamifero:</p>
+
+<pre>
+<code>
+class Humano : Mamifero {
+    public void falar() {
+        Console.WriteLine("Eu Falo!");
+    }
+}
+</code>
+</pre>
+
+<p>E no programa principal, podemos declarar normalmente, assim:</p>
+
+<pre>
+<code>
+Mamifero bicho = new Mamifero();
+Humano homem = new Humano();
+Gato bichano = new Gato();
+
+homem.falar();
+homem.respirar();
+
+bichano.arranhar();
+bichano.respirar();
+</code>
+</pre>
+
+<p>PS: Não é possível herança múltipla, mas podemos fazer uma ou mais implementações, separadas por vírgula, seria algo tipo <code>class NomeDaClasse2 : NomeDaClasse1, NomeDaInterface</code>, sempre separados por vírgulas, a indicação da classe sempre vem antes das interfaces. E é possível usar herança em interfaces, no caso de uma interface herdar os métodos de outras (em interfaces podemos ter herança de mais de uma interface).</p>
+
+<p>Também podemos chamar métodos da classe base nas classes filhas, usando a palavra-chave base, como por exemplo <code>base.nomeDoMetodo()</code>.</p>
+
+<h3>Métodos Virtuais e Override - Herança - Parte 2</h3>
+
+<p>Um método virtual é um método que pode ser sobreescrito em uma classe derivada. Isso significa que o método pode ser chamado e usado como foi originalmente escrito na classe base, mas também podemos escrever uma nova implementação dele que substitua o método original. Assim, os métodos são relacionados pois realizam tarefas similares, mas de forma específica em cada classe.</p>
+
+<p>Marcamos um método como virtual usando a palavra-chave <code>virtual</code>. Veja um exemplo de método, que será colocado na classe Mamifero:</p>
+
+<pre>
+<code>
+public virtual void lutar() { // Método virtual
+    Console.WriteLine("Mamíferos Lutam entre Si!");
+}
+</code>
+</pre>
+
+<p>Um método override (sobreescrever) é um método em uma classe derivada que pode declarar uma outra implementação de um método virtual da classe base. Lembrando que:</p>
+
+<ul>
+    <li>Um método virtual não pode ser privado.</li>
+    <li>As assinaturas do método virtual e do sobreescrito devem ser idênticas.</li>
+    <li>Só é possível sobreescrever métodos virtuais.</li>
+    <li>Um método sobreescrito é implicitamente virtual, pode ser sobreescrito em uma classe derivada.</li>
+</ul>
+
+<p>Podemos também tornar o método da classe mamífero abstrato, mas nesse caso a classe também terá a indicação abstract antes, o que não permitirá instanciar ela, apenas ser utilizada em heranças:</p>
+
+<pre>
+<code>
+abstract class Mamifero {
+    public abstract void lutar();
+	
+    public void respirar() {
+        Console.WriteLine("Eu Respiro!");
+    }
+    public void mamar() {
+        Console.WriteLine("Eu Mamo");
+    }
+}
+</code>
+</pre>
+
+<p>PS: Nem toda classe abstrata precisa ter métodos abstratos. E de certa forma, a interface é como uma classe puramente abstrata.</p>
+
+<p>Na classe Humano, podemos colocar uma nova implementação do método lutar(), dessa forma:</p>
+
+<pre>
+<code>
+public override void lutar() { // Método sobreescrito
+    Console.WriteLine("Humanos Lutam com Armas!");
+}
+</code>
+</pre>
+
+<p>E na classe Gato, também teremos que implementar o método lutar, assim:</p>
+
+<pre>
+<code>
+public override void lutar() {
+    Console.WriteLine("Gatos Lutam Arranhando!");
+}
+</code>
+</pre>
+
+<p>PS: Métodos abstratos também usam override, assim como os virtuais, mas métodos implementados de interfaces não se utiliza override. Mas qualquer um deles faz parte do polimorfismo.</p>
+
+<p>Lembrando que podemos colocar a tipagem como uma interface ou classe (de preferência abstrata), mas a declaração do objeto com new deve ser de uma classe não-abstrata que implemente ou herde os métodos dela, por exemplo:</p>
+
+<pre>
+<code>
+Mamifero bichano = new Gato();
+</code>
+</pre>
+
+<p>Isso é útil para ganharmos em polimorfismo, onde podemos usar vários tipos de objetos em, por exemplo, parâmetros, desde que eles tenham a mesma classe pai em comum. Isso é o polimorfismo de inclusão.</p>
+
+<p>E no programa principal, usamos assim:</p>
+
+<pre>
+<code>
+Mamifero homem = new Humano();
+Mamifero bichano = new Gato();
+
+homem.lutar();
+
+bichano.lutar();
+</code>
+</pre>
+
+<p>Como podemos ver, o método da classe Gato não foi alterado, apenas o da classe Humano. Isso é chamado de polimorfismo de sobreposição.</p>
+
+<p>Também podemos fazer que os construtores de classes pai sejam herdados pros construtores filhos, dessa forma:</p>
+
+<pre>
+<code>
+public Humano() : base() {
+    // Código a ser inicializado aqui.
+}
+</code>
+</pre>
+
+<p>PS: Caso existissem parâmetros, eles só seriam especificados os tipos de todos nos primeiros, no segundo parenteses iriam só os parâmetros da classe pai sem declaração de tipo. Seria algo tipo <code>public ClasseFilha(int n1, int n2) : base(n1)</code>.</p>
+
+<p>E também podemos fazer sobreposição de destrutores normalmente.</p>
+
+<p>PS: Caso deseje que uma classe seja final (ou seja, que não possa ser herdada), coloque antes da classe a palavra sealed, algo como <code>sealed class NomeDaClasse</code>. Para métodos, usamos da mesma forma, algo como <code>sealed override void nomeDoMetodo()</code> (apenas métodos que sobrepõe outros podem ser selados). No caso de atributos use const, sempre inicializada, como <code>const int numero = 5</code>.</p>
+
+<h3>Acesso Protegido - Herança - Parte 3</h3>
+
+<p>Métodos e campos públicos em uma classe são acessíveis a todos. Já os privados são acessíveis apenas à classe em si. Porém, às vezes, é importante que uma classe base permita que as classes derivadas acessem alguns de seus membros, ao mesmo tempo em que esconde esses membros de outras classes fora da hierarquia de herança. Neste caso, usamos a palavra <code>protected</code>.</p>
+
+<p>Se uma classe X é derivada de uma classe derivada Y, ela pode acessar os membros protegidos de Y. Já uma classe W, não derivada, não poderá acessar os membros protegidos da classe Y.</p>
+
+<p>Crie a classe Veiculo, dessa forma:</p>
+
+<pre>
+<code>
+class Veiculo { // Classe base
+    protected string placa; // Campo protegido
+    private string chassis;
+    public int portas;
+
+    public Veiculo() { // Construtor
+        this.placa = "AAA-0000";
+        this.chassis = "00000000000";
+        this.portas = 4;
+    }
+
+    public void mostraChassis() {
+        Console.WriteLine("O chassis é {0}", this.chassis); // this.chassis só é acessível dentro da própria classe
+    }
+}
+</code>
+</pre>
+
+<p>PS: O this vai ser substituído pelo nome do objeto. Ele verifica um atributo dentro de um método da própria classe e será substituído pela classe chamadora.</p>
+
+<p>E crie a classe Automovel, que herda de veículo:</p>
+
+<pre>
+<code>
+class Automovel : Veiculo {
+    public void dadosAuto() {
+        Console.WriteLine("A placa do auto é {0}", this.placa);
+    }
+}
+</code>
+</pre>
+
+<p>No caso acima, na classe Automovel não podemos usar o atributo chassis, mas podemos invocar pelo método que criamos.</p>
+
+<p>No programa principal, podemos colocar isso:</p>
+
+<pre>
+<code>
+Automovel meuCarro = new Automovel();
+
+meuCarro.dadosAuto();
+meuCarro.mostraChassis();
+
+Console.WriteLine(meuCarro.portas.ToString());
+
+Veiculo carro = new Veiculo();
+
+carro.mostraChassis();
+</code>
+</pre>
+
+<p>PS: Além de public, private e protected, um atributo ou método em C# pode ser declarado como <code>internal</code> (disponível para classes dentro do mesmo Assembly) e <code>private protected</code> (disponível para a mesma classe e derivadas dentro do mesmo Assembly).</p>
+
+<h3>Polimorfismo</h3>
+
+<p>Basicamente, existem dois tipos de polimorfismo em C#, o de sobreposição e o de sobrecarga.</p>
+
+<p>O de sobreposição, visto anteriormente, é quando um método, indicado como virtual, é substituído em uma classe descendente, onde ele tem o mesmo nome e é indicado por override.</p>
+
+<p>E como visto nos construtores e nos campos compartilhados, podemos criar métodos comuns usando o mesmo nome, desde que os parâmetros sejam diferentes, isso é o polimorfismo de sobrecarga, como nesse exemplo:</p>
+
+<pre>
+<code>
+class Microondas {
+    public void ligar(int minuto, int segundo) {
+        if(minuto > 0 || segundo > 0) {
+            Console.WriteLine("A comida estará pronta em {0}:{1:00}M.", minuto, segundo);
+        }
+        else {
+            Console.WriteLine("Escolha um tempo maior que 0:00.");
+        }
+    }
+
+    public void ligar(string alimento) {
+        if(alimento.ToLower().Equals("pipoca")) {
+            Console.WriteLine("Vamos estourar pipoca!");
+        }
+        else if(alimento.ToLower().Equals("bolo de caneca")) {
+            Console.WriteLine("Vamos fazer bolo de caneca!");
+        }
+        else {
+            Console.WriteLine("ERRO! Alimento desconhecido!");
+        }
+    }
+
+    public void ligar(bool descongelar) {
+        if(descongelar) {
+            Console.WriteLine("Vamos descongelar o alimento!");
+        }
+        else {
+            Console.WriteLine("ERRO! Não poderei descongelar o alimento!");
+        }
+    }
+</code>
+</pre>
+	
+<p>Na invocação no método principal, ele será diferenciado pelo tipo de parâmetro:</p>
+
+<pre>
+<code>
+Microondas micro = new Microondas();
+
+micro.ligar(3, 30);
+micro.ligar("Pipoca");
+micro.ligar(true);
+</code>
+</pre>
+
+<h3>Agregação de Objetos</h3>
+
+<p>Vamos supor essa classe:</p>
+
+<pre>
+<code>
+class Pilha {
+    private string marca;
+    private int carga;
+
+    public Pilha(string marca) {
+         this.marca = marca;
+         this.carga = 100;
+    }
+
+    public void apresentacao() {
+         Console.WriteLine($"A marca da pilha é {this.marca}.");
+         Console.WriteLine($"A carga da pilha é {this.carga}%.");
+    }
+
+    public string Marca {
+        get => marca;
+        set => marca = value;
+    }
+
+    public int Carga {
+        get => carga;
+        set => carga = value;
+    }
+}
+</code>
+</pre>
+
+<p>Nós podemos fazer relacionamentos entre classes diferentes, veja por exemplo a classe abaixo, que tem um atributo do "tipo" da classe acima:</p>
+
+<pre>
+<code>
+class Aparelho {
+    private Pilha pl;
+
+    public Aparelho(Pilha pl) {
+        this.pl = pl;
+    }
+
+    public void ligado() {
+        if(this.pl.Carga > 0) { // Getter do objeto Pilha
+            Console.WriteLine($"O aparelho está ligado e a carga da pilha é de {this.pl.Carga}%!");
+        }
+        else {
+            Console.WriteLine($"A pilha do aparelho está sem carga!");
+        }
+    }
+
+    public Pilha Pl {
+        get => pl;
+        set => pl = value;
+    }
+}
+</code>
+</pre>
+
+<p>Aí podemos chamar os objetos assim:</p>
+
+<pre>
+<code>
+Pilha ray = new Pilha("Rayovac");
+
+ray.apresentacao();
+
+Aparelho controle = new Aparelho(ray);
+
+controle.ligado();
+
+Console.WriteLine($"A carga da pilha é de {controle.Pl.Carga}%!");
+</code>
+</pre>
+
+<h3>Criando Tipos Genéricos</h3>
+
+<p>Podemos criar também "tipos genéricos" em C#, usando apenas uma letra maiúscula, que nos permite configurar os tipos usados.</p>
+
+<p>Veja um exemplo simples de uso:</p>
+
+<pre>
+<code>
+class Program {
+    private class Generico&lt;E&gt; { // Classe interna privada, com parâmetro de tipagem.
+        private E entidade;
+
+        public E Entidade {
+            get => this.entidade;
+            set => this.entidade = value;
+        }
+    }
+
+    static void Main(string[] args) {
+        Generico&lt;string&gt; texto = new Generico&lt;string&gt;();
+
+        texto.Entidade = "Exemplo de String!";
+
+        Console.WriteLine(texto.Entidade);
+
+        Generico&lt;int&gt; numero = new Generico&lt;int&gt;();
+
+        numero.Entidade = 50;
+
+        Console.WriteLine(numero.Entidade);
+
+        Console.Read();
+    }
+}
+</code>
+</pre>
+
+<p>PS: Podemos criar normalmente uma classe externa com tipos genéricos, basta adaptar o código acima.</p>
+
+<p>Caso use mais de um tipo genérico, coloque dentro da mesma tag, separados por vírgulas. Em heranças e implementações, caso a classe a ser herdada ou a interface a ser implementada tenha tipos genéricos, a classe herdeira ou implementadora deverá ter o mesmo tipo (por exemplo, se a interface for <code>interface NomeDaInterface&lt;E&gt;</code>, a classe que a implementa deverá ter o tipo a ser recebido indicado, como por exemplo <code>class NomeDaClasse : NomeDaInterface&lt;Int32&gt;</code>, e nesse caso o objeto criado será <code>NomeDaInterface&lt;Int32&gt; objeto = new NomeDaClasse()</code>. Caso não declare o tipo genérico e queira que ele seja declarado na criação do objeto, coloque a extensão ou implementação (no caso seria <code>class NomeDaClasse&lt;E&gt; : NomeDaInterface&lt;E&gt;</code>), e nesse caso o objeto criado será <code>NomeDaInterface&lt;ClasseInvolucro&gt; objeto = new NomeDaClasse&lt;ClasseInvolucro&gt;()</code>. Esse é o conceito de polimorfismo paramétrico.</p>
+
+<ul>
+    <li><a href="poo-em-csharp-1.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="poo-em-csharp-3.html">Continuação da Matéria!</a></li>-->
+</ul>
+
+        </div>
+    </body>
+</html>

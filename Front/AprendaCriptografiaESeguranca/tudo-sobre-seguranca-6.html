@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Criptografia e Segurança</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Criptografia e Segurança</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-seguranca-1.html">Tudo sobre Criptografia e Segurança Parte 1!</a></li>
+                    <li><a href="tudo-sobre-seguranca-2.html">Tudo sobre Criptografia e Segurança Parte 2!</a></li>
+                    <li><a href="tudo-sobre-seguranca-3.html">Tudo sobre Criptografia e Segurança Parte 3!</a></li>
+                    <li><a href="tudo-sobre-seguranca-4.html">Tudo sobre Criptografia e Segurança Parte 4!</a></li>
+                    <li><a href="tudo-sobre-seguranca-5.html">Tudo sobre Criptografia e Segurança Parte 5!</a></li>
+                    <li><a href="tudo-sobre-seguranca-6.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Criptografia e Segurança Parte 6!</a></li>
+                    <li><a href="tudo-sobre-seguranca-7.html">Tudo sobre Criptografia e Segurança Parte 7!</a></li>            
+                    <li><a href="tudo-sobre-seguranca-8.html">Tudo sobre Criptografia e Segurança Parte 8!</a></li>
+                </menu>
+            </header>
+        
+<h2>Tudo sobre Criptografia e Segurança Parte 6</h2>
+
+<h3>O que é SSL e o Certisign</h3>
+
+<p>Novas tecnologias estão sendo cada vez mais usadas e implementadas para controles de acesso, tais como assinaturas digitais que garantes que o acesso vem mesmo da pessoa em questão.</p>
+
+<p>A segurança também é um fator decisivo na aquisião e retenção de possíveis clientes dos vários sites online.</p>
+
+<p>A segurança na transmissão de dados é um dos empecilhos para concretização de compras na rede pelo internauta e na divulgação de seus dados pessoais, como RG, CPF e número do cartão de crédito.</p>
+
+<p>Um dos recursos mais utilizados para realização de negócios na internet entre comerciantes e clientes é a criptografia.</p>
+
+<p>Um recurso de segurança muito popular é o Secure Socket Layer (SSL), comercializado pela Certisign, no Brasil. Esse protocolo garante a privacidade da transação, pois as informações transmitidas são criptografadas e somente o usuário e o servidor da empresa envolvidos no processo podem decodificar seu conteúdo.</p>
+
+<p>O link do Certisign é esse: <a href="https://www.certisign.com.br/" target="_blank">https://www.certisign.com.br/</a></p>
+
+<p>Secure Socket Layer (SSL) é um padrão global em tecnologia de segurança desenvolvida pela Netscape em 1994. Ele cria um canal criptografado entre um servidor web e um navegador (browser) para garantir que todos os dados transmitidos sejam sigilosos e seguros. Milhões de consumidores reconhecem o "cadeado dourado" que aparece nos navegadores quando estão acessando um website seguro. </p>
+
+<p>Quando escolher ativar o SSL no seu servidor web você terá que responder algumas questões sobre a identidade do seu site (ex. a URL) e da sua empresa (ex. a Razão Social e o endereço). Seu servidor web então criará duas chaves criptográficas - a Chave Privada (Private Key) e a Chave Pública (Public Key). Sua Chave Privada não possui esse nome à toa - ela deve ser mantida privada e segura. Já a Chave Pública não necessita ser secreta e deve ser colocada na CSR (Certificate Signing Request) - um arquivo de dados contendo os detalhes do site e da empresa. Você deverá enviar esta CSR através do formulário de solicitação no site da certificadora, seus dados serão validados e se estiverem corretos seu certificado digital será emitido.</p>
+
+<p>Seu servidor web irá associar o certificado emitido com a sua Chave Privada. Seu servidor irá estebelecer um link criptografado entre seu website e o navegador do seu consumidor.</p>
+
+<p>Em resumo, SSL é um tipo de segurança digital que permite a comunicação criptografada entre um site e um navegador. Atualmente a tecnologia se encontra depreciada e está sendo completamente substituída pelo TLS.</p>
+
+<p>TLS é a sigla de Transport Layer Security, ou seja, um protocolo de segurança cuja finalidade é facilitar a segurança e privacidade de dados de dados na internet.</p>
+
+<p>Isso ocorre a partir do momento em que o TLS criptografa a comunicação entre os computadores e o servidor de hospedagem no momento em que um site é acessado. Contudo, sua aplicação também pode ser feita para criptografar mensagens de e-mail, Voip, entre outros meios de comunicação.</p>
+
+<p>HTTPS é o uso do HTTP protegido por TLS/SSL.</p>
+
+<p>Existem outros sites que geram certificados SSL para sites, incluindo as próprias hospedagens, que podem ser pagas ou gratuitas, esse site fala como migrar um site para HTTPS: <a href="https://rockcontent.com/blog/como-migrar-seu-site-para-https/" target="_blank">https://rockcontent.com/blog/como-migrar-seu-site-para-https/</a></p>
+
+<h3>Como Instalar o Nmap e Zenmap no Linux</h3>
+
+<p>O Nmap é um software scanner de rede que é empregado para descobrir portas, serviços, computadores ativos, etc., ele faz isso enviando determinados pacotes pra rede e avaliando as respostas recebidas.</p>
+
+<p>Para instalar ele no Linux, digitamos simplemente esses comandos:</p>
+
+<pre>
+<code>
+sudo apt-get update
+
+sudo apt-get install nmap
+</code>
+</pre>
+
+<p>Para usarmos ele, no terminal digite <code>nmap 192.168.1.1</code> (substituindo pelo IP/site desejado).</p>
+
+<p>Para instalarmos a interface gráfica Zenmap, digite esse comando:</p>
+
+<pre>
+<code>
+sudo apt-get install zenmap
+</code>
+</pre>
+
+<p>Caso dê algum problema, baixe o código-fonte (tar.bz2) e pegue a pasta referente ao Zenmap, e execute o arquivo de mesmo nome, com o Python.</p>
+
+<p>Indo nos programas do sistema, procure o Zenmap e execute ele como root.</p>
+
+<p>Na caixa do alvo, colocamos o IP ou site desejado, o tipo de scanner. Colocamos o mesmo endereço do roteador como exemplo e um scan rápido (quick scan).</p>
+
+<p>PS: Podemos digitar o comando no Zenmap também.</p>
+
+<p>Também existe Nmap e Zenmap para outros sistemas Linux, além do Windows e Mac. Podemos baixar essas versões aqui: <a href="https://nmap.org/download.html" target="_blank">https://nmap.org/download.html</a></p>
+
+<h3>O que é um Backdoor?</h3>
+
+<p>O backdoor é um recurso utilizado por diversos malwares para garantir acesso remoto ao sistema ou à rede infectada. Para esse fim, os códigos maliciosos podem explorar falhas críticas não documentadas existentes em programas instalados, falhas características de softwares desatualizados ou do firewall, para abrir portas do roteador. Alguns backdoors podem ser explorados por sites maliciosos, através de vulnerabilidades existentes nos navegadores. As falhas podem garantir acesso completo ou parcial ao sistema por um cracker, sendo utilizadas para a instalação de outros malwares ou para o roubo de dados.</p>
+
+<p>Em outras palavras, backdoor é um método de entrada deixado pelo cracker para que ele possa acessar livremente o sistema novamente com mais facilidade, já que ele já o explorou anteriormente.</p>
+
+<p>O NetBus é um exemplo clássico de backdoor, sendo usado por diversos crackers na década de 1990 e início do século XXI. Nos últimos anos, uma das pragas do tipo mais disseminadas é o backdoor Brifost. Outros famosos backdoors são o c99Shell, WebShell e RST.</p>
+
+<p>Para proteger-se, mantenha atualizados os sistemas e os módulos que compõem todos os serviços, e deixe o firewall ativo. Outra forma de proteção de computadores pessoais é o IDS, sistema de detecção de intrusão, na sigla em inglês.</p>
+
+<h3>O que é o Shouder Surfing?</h3>
+
+<p>O surfe de ombro, ou shoulder surfing em inglês, é uma técnica utilizada por pessoas mal-intencionadas para roubar informações valiosas de uma determinada pessoa ou organização.</p>
+
+<p>Essa prática conhecida como visual hacking, é um ato utilizado para coletar informações por meios visuais e que não requer habilidades com computadores ou qualquer outro tipo de tecnologia.</p>
+
+<p>Imagine o seguinte cenário, você precisa da segunda via de um boleto e entra em contato com a empresa para solicitar, imediatamente será necessário confirmar algumas informações para emitir o documento.</p>
+
+<p>Enquanto você fornece os dados, alguém por perto pode escutar sua conversa. Mesmo que não esteja ouvindo a pessoa do outro lado da ligação é possível deduzir a pergunta através da sua resposta. Após essa coleta de informações, o mal-intencionado pode se passar por você, com o seu nome, CPF, telefone, e-mail e endereço. Em posse destas informações já é possível ter uma conduta maliciosa, fingir ser outra pessoa e fraudar algum serviço oficial que seja utilizado por você com frequência.</p>
+
+<p>Este exemplo esclarece as possibilidades de fraudes que podem ocorrer. Esta solicitação da segunda via do boleto poderia ser efetuada através de outro meio como app, website etc., porém em uma análise mais aprofundada, percebemos os riscos em fornecer dados pessoais (sensíveis) em ambientes públicos ou em locais onde não conhecemos quem nos cerca. Por isso, é crucial ter cuidados ao fornecer informações.</p>
+
+<p>Ser observado enquanto digita no celular é uma sensação que todos nós já passamos, o problema é quando isso deixa de ser impressão e passa a ser real.</p>
+
+<p>Muitos observadores fazem isso em filas, transporte público ou até na rua, basta uma brecha para ter seus dados escutados ou lidos.</p>
+
+<p>Em um cybercafé, no trabalho ou local público, ter alguém de olho na sua tela é comum, seja por pura curiosidade ou má intenção. Fique atento ao se logar e evite clicar na <q>descoberta de senha</q> após inserir a password, pois isso facilita o trabalho do invasor.</p>
+
+<p>Seja na fila, no trabalho ou no banco evite ao máximo a exposição de suas informações, fique atento ao ambiente e observe ao seu redor. E se possível, prefira fornecer informações suas em locais reservados. Isso irá mitigar esse tipo de ataque, pois a maior vulnerabilidade está em como os usuários utilizam os sistemas e não nos próprios sistemas.</p>
+
+<h3>O que é Phishing?</h3>
+
+<p>Phishing se refere a um conjunto de técnicas empregadas por bandidos digitais com o intuito de enganar usuários para que eles forneçam inadvertidamente informações sigilosas e valiosas.  Geralmente, este tipo de ataque começa com o recebimento de um e-mail falso, ou ainda outra forma de comunicação cujo intuito seja enganar a vítima, como uma mensagem instantânea.</p>
+
+<p>A mensagem enviada é forjada para se parecer com uma mensagem legítima, proveniente de uma fonte confiável ao usuário. Caso a vítima caia na armadilha, poderá ter informações confidenciais roubadas, comumente fornecendo esses dados em um website falso. Algumas vezes também é feito o download de software malicioso para o computador da vítima.</p>
+
+<p>O phishing é um exemplo clássico de técnica de Engenharia Social empregada para enganar usuários de sistemas de computador.</p>
+
+<p>Existem várias formas de se realizar ataques de phishing, dependendo de como é realizado e de quem são os alvos. Os mais comuns são os seguintes:</p>
+
+<ul>
+    <li><b>Whaling</b> - Quando um ataque de phishing tem por alvo uma figura de grande importância, como o diretor de uma grande empresa, o ataque é também conhecido como "whaling", que significa basicamente "pesca à baleia", pelo porte do usuário-alvo e alta possibilidade de retorno da "operação". Este é um ataque de periculosidade elevada, devido à categoria de informações que podem ser obtidas.</li>
+    <li><b>Pharming</b> - Uma outra forma de phishing bastante comum é chamada de "Pharming", na qual os usuários são redirecionados a um website falso, mas que aparenta ser legítimo. Às vezes nem é necessário que o usuário clique em um link malicioso – é possível alterar registros DNS na máquina da vítima ou no servidor de hospedagem do site de modo a redirecionar as requisições de acesso ao site para uma página falsa, mesmo que o endereço correto do website seja digitado no navegador. É preciso tomar muito cuidado e sempre inspecionar minuciosamente o endereço que está sendo acessado, pois normalmente um endereço falso difere de um legítimo por diferenças mínimas, como um simples caractere.</li>
+    <li><b>Spear Phishing</b> - Também existe o conceito de Spear Phishing ("Pesca com Arpão"), no qual o alvo são indivíduos específicos, em vez de um grande grupo de pessoas aleatórias. Para tal, os atacantes podem pesquisar informações sobre o alvo em redes sociais e em outros locais, de modo a coletar informações suficientes para personalizar a comunicação empregada no ataque – o que a torna muito mais autêntica, e passível de êxito.</li>
+    <li><b>Clone Phishing</b> - Neste tipo de ataque um e-mail legítimo, recebido anteriormente e contendo um anexo ou link tem seu conteúdo e endereços de destinatários recebidos alterados para criar um e-mail praticamente idêntico ou ainda totalmente clonado. O anexo ou link enviado no email é substituído por uma versão maliciosa e, enviado a partir de um endereço de email falsificado para que pareça ser proveniente do remetente original.</li>
+</ul>
+
+<p>Na maior parte dos casos, meliantes querem obter vantagens financeiras, e fazem isso roubando números de cartão de crédito, senhas de acesso a bancos ou outros tipos de dados do gênero. Algumas vezes o phishing é empregado para obter dados de acesso a uma corporação, obtendo esses dados de funcionários incautos, como por exemplo dados de login em sistemas.</p>
+
+<p>Além disso, é possível que um ataque de phishing seja escalado para um ataque mais elaborado, como por exemplo a implantação de ransomware nos computadores de uma empresa.</p>
+
+<h3>O Que é Malware?</h3>
+
+<p>Malware é qualquer software ou trecho de código escrito com o intuito de ser prejudicial a sistemas, indivíduos e organizações.</p>
+
+<p>No geral os malwares são criados para:</p>
+
+<ul>
+    <li>Roubar dados e informações importantes.</li>
+    <li>Extorquir dinheiro.</li>
+    <li>Danificar sistemas e prejudicar o funcionamento de dispositivos.</li>
+    <li>Causar prejuízos a uma empresa.</li>
+    <li>Testar a segurança.</li>
+    <li>Como armas cibernéticas.</li>
+</ul>
+
+<p>Esses são os tipos mais conhecidos de malware:</p>
+
+<ul>
+    <li>Vírus</li>
+    <li>Cavalos de Tróia</li>
+    <li>Spyware</li>
+    <li>Worms</li>
+    <li>Ransonware</li>
+    <li>Bootnets</li>
+    <li>Rootkit</li>
+    <li>Keylogger</li>
+    <li>Adware</li>
+    <li>Cryptojacking (Cripto Mineração Maliciosa)</li>
+    <li>Exploits</li>
+</ul>
+
+<p>No geral, malwares infectam as máquinas das vítimas por meio de cavalos de tróia (trojans), links em e-mail de phishing e downloads fraudulentos.</p>
+
+<p>Podem infectar quaisquer tipos de equipamentos, como:</p>
+
+<ul>
+    <li>PCs e Notebookes</li>
+    <li>Smartphones</li>
+    <li>Smart TVs</li>
+    <li>Tablets</li>
+    <li>Dispositivos IoT</li>
+</ul>
+
+<p>Os principais vetores de infecção dos malwares são:</p>
+
+<ul>
+    <li>E-mails de Phishing</li>
+    <li>Anexos de E-mail Maliciosos</li>
+    <li>Links em Documentos (tipo Office)</li>
+    <li>Download de Programas e Arquivos</li>
+    <li>Navegação em Sites Específicos (drive-by)</li>
+    <li>Pen-drives e Mídias Removíveis (menos comum).</li>
+</ul>
+
+<p>Essas são algumas estatísticas:</p>
+
+<ul>
+    <li>38% dos malwares de escondem em arquivos do pacote MS Office.</li>
+    <li>Um vazamento de dados causado por malware pode custar 3,86 milhões de Dólares pra empresas.</li>
+    <li>Este ano (2019) as empresas devem pagar 11,5 bilhões de Dólares em resgates de ransomware.</li>
+    <li>Prejuízo global com malware deve chegar a 6 trilhões de Dólares em 2021.</li>
+    <li>Cerca de 24000 apps maliciosos são bloqueados por dia nas lojas de apps para smartphones.</li>
+    <li>70% das empresas não estão preparadas para enfrentar sequer o mais leve ataque.</li>
+    <li>60% dos ataques são direcionados a pequenas empresas.</li>
+    <li>90% dos ataques se iniciam com um e-mail de phishing.</li>
+</ul>
+
+<p>Como detectar infecções:</p>
+
+<ul>
+    <li>Lentidão "inexplicável" no sistema.</li>
+    <li>Antivírus para de funcionar ou ser atualizado.</li>
+    <li>Travamentos constantes.</li>
+    <li>Arquivos que somem ou aumentam de tamanho.</li>
+    <li>CPU com alta % de uso/ventoinha.</li>
+    <li>Aumento na atividade de rede/internet.</li>
+    <li>Desligamentos repentinos.</li>
+    <li>Página inicial do navegador muda, e links não levam ao destino esperado.</li>
+</ul>
+
+<p>Como se proteger de malware:</p>
+
+<ul>
+    <li>Não confiar em desconhecidos online.</li>
+    <li>Tomar cuidado com ataques de engenharia social.</li>
+    <li>Verificar cuidadosamente tudo o que você baixa em sua máquina.</li>
+    <li>Somente instalar softwares provenientes de fontes confiáveis.</li>
+    <li>Cuidado triplo com os sites que visita.</li>
+    <li>Não clicar em links de e-mail que sejam suspeitos ou não-solicitados.</li>
+    <li>Sempre manter o firewall ativado.</li>
+    <li>Possui sempre back-up de seus arquivos importantes.</li>
+    <li>Manter o sistema operacional sempre atualizado.</li>
+    <li>E claro, usar antivírus sempre atualizado no computador.</li>
+</ul>
+
+<p>Como se livrar de malwares:</p>
+
+<ul>
+    <li>Identificar e conter a propagação da infecção.</li>
+    <li>Identificar o malware.</li>
+    <li>Eliminar o malware das máquinas com ferramentas apropriadas (antivírus/antimalware).</li>
+    <li>Escanear o sistema completamente.</li>
+    <li>Se necessário, instalar ferramentas para remoção de malware específico.</li>
+    <li>Após remover o malware, trocar todas as suas senhas, do computador e de serviços online.</li>
+    <li>Reinstalar o SO (se totalmente infectado).</li>
+    <li>Restaurar back-up dos arquivos.</li>
+</ul>
+
+<p>Podemos escanear os arquivos pra verificar se eles tem malwares passando o antivírus, mas também temos outras opções como sites voltado pra isso, tipo esse: <a href="https://www.virustotal.com/" target="_blank">https://www.virustotal.com/</a></p>
+
+<h3>Chaveiro Digital e Assinaturas com GPG no Linux</h3>
+
+<p>O GnuPG é um programa de software de criptografia híbrida, porque usa uma combinação de criptografia de chave simétrica (privada), e criptografia de chave assimétrica (pública) para facilitar a troca segura de chaves.</p>
+
+<p>As chaves públicas resultantes podem ser trocadas com outros usuários de diversas maneiras. Elas devem sempre ser trocadas cuidadosamente para evitar falsificação de identidade. Também é possível adicionar uma assinatura digital à mensagem, para que a integridade e o remetente da mensagem possam ser validados.</p>
+
+<p>Como sabemos, para criptografar um arquivo com senha, fazemos assim e ele pedirá a senha:</p>
+
+<pre>
+<code>
+gpg -c arquivo.txt
+</code>
+</pre>
+
+<p>Para descriptografar um arquivo, basta isso:</p>
+
+<pre>
+<code>
+gpg arquivo.txt.gpg
+</code>
+</pre>
+
+<p>PS: Se quiser ver o conteúdo de algum arquivo ao invés de salvá-lo descriptografado, use o comando <code>gpg -d arquivo.txt.gpg</code>.</p>
+
+<p>Se ele for criptografado com sua chave pública, ele pedirá a senha de sua chave privada. Se for criptografado com senha, ele pedirá esta.</p>
+
+<p>O chaveiro digital de um usuário é a reunião de todas as chaves de interesse de tal usuário. Esse chaveiro, geralmente, contém o par de chaves do usuário (pública e privada) e as chaves públicas de outros usuários. O chaveiro digital de cada usuário fica armazenado em ~/.gnupg e pode ser visto com esse comando:</p>
+
+<pre>
+<code>
+gpg --list-keys
+</code>
+</pre>
+
+<p>PS: Se quiser listar apenas as chaves públicas, use <code>--list-public-keys</code>, assim como para listar apenas as privadas, use <code>--list-secret-keys</code></p>
+
+<p>Para criar um par de chaves (pública e privada), utilize esse comando:</p>
+
+<pre>
+<code>
+gpg --gen-key
+</code>
+</pre>
+
+<p>Para criar um par de chaves completo, utilize esse comando:</p>
+
+<pre>
+<code>
+gpg --full-generate-key
+</code>
+</pre>
+
+<p>Para listar as assinaturas existentes em uma chave, utilize esse comando (substituindo pelo número da chave, o mais comprido em hexa:</p> 
+
+<pre>
+<code>
+gpg --list-sigs 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB
+</code>
+</pre>
+
+<p>Para exportar a sua chave pública como asc (para disponibilizar na Internet, por exemplo), utilize o comando:</p>
+
+<pre>
+<code>
+gpg -a --export 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB > arquivo.asc
+</code>
+</pre>
+
+<p>Para exportar a sua chave privada (perigoso) como asc, utilize o comando:</p>
+
+<pre>
+<code>
+gpg -a --export-secret-keys 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB > arq.asc
+</code>
+</pre>
+
+<p>Para importar uma chave pública ou privada de um arquivo, fazemos assim:</p>
+
+<pre>
+<code>
+gpg --import chave.asc
+</code>
+</pre>
+
+<p>Para importar uma chave pública do servidor, é assim:</p>
+
+<pre>
+<code>
+gpg --keyserver pool.sks-keyservers.net --recv-keys 0x416F061063FEE659
+</code>
+</pre>
+
+<p>PS: Caso o servidor acima não funcione, tente o servidor <code>pgpkeys.mit.edu</code>, <code>keys.openpgp.org</code> ou <code>keyserver.ubuntu.com</code>.</p>
+
+<p>Podemos também procurar uma chave usando o e-mail associado à ela, assim:</p>
+
+<pre>
+<code>
+gpg --auto-key-locate nodefault,wkd --locate-keys email@servico.com
+</code>
+</pre>
+
+<p>Para criar um certificado de revogação:</p>
+
+<pre>
+<code>
+gpg --gen-revoke 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB > 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB-revcert.rev
+</code>
+</pre>
+
+<p>PS: Sempre crie o arquivo de revogação de chave após criar a chave.</p>
+
+<p>Para revogar uma chave, basta importar ela:</p>
+
+<pre>
+<code>
+gpg --import 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB-revcert.rev
+</code>
+</pre>
+
+<p>Para remover uma chave privada do chaveiro:</p>
+
+<pre>
+<code>
+gpg --delete-secret-keys 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB
+</code>
+</pre>
+
+<p>Para remover uma chave pública do chaveiro:</p>
+
+<pre>
+<code>
+gpg --delete-keys 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB
+</code>
+</pre>
+
+<p>Para alterar a frase senha de uma chave, utilize o comando:</p>
+
+<pre>
+<code>
+gpg --edit-key 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB password
+</code>
+</pre>
+
+<p>Depois digite <code>save</code> e dê enter.</p>
+
+<p>Colocar chave pública no servidor online:</p>
+
+<pre>
+<code>
+gpg --keyserver pool.sks-keyservers.net --send-key 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB
+</code>
+</pre>
+
+<p>Para determinar a confiabilidade de cada chave, execute o comando:</p>
+
+<pre>
+<code>
+gpg --update-trustdb
+</code>
+</pre>
+
+<p>Para alterar a confiabilidade de uma chave, digite isso:</p>
+
+<pre>
+<code>
+gpg --edit-key user@email.com
+</code>
+</pre>
+
+<p>Digite <code>trust</code> para modificar a confiabilidade, para sair do gpg digite <code>save</code> (ou <code>quit</code>) e <code>help</code> para ajuda.</p>
+
+<p>A opção edit-key também pode ser usada pra renovar a data de expiração de uma chave, incluindo as já expiradas, usando os comandos <code>expire</code> para alterar os dados, e depois <code>save</code>.</p>
+
+<p>Para listar as chaves, mostrando as assinaturas de cada chave, utilize o comando:</p>
+
+<pre>
+<code>
+gpg --list-sigs
+</code>
+</pre>
+
+<p>Para listar as impressões digitais de cada chave (fingerprint):</p>
+
+<pre>
+<code>
+gpg --fingerprint
+</code>
+</pre>
+
+<p>Para assinar uma chave pública de outra pessoa com sua chave privada, utilize o comando:</p>
+
+<pre>
+<code>
+gpg --sign-key 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB
+</code>
+</pre>
+
+<p>Para assinar arquivos digitalmente (no caso, arquivos de texto), usamos esse comando (com uma chave privada criada, obviamente):</p>
+
+<pre>
+<code>
+gpg -s --clearsign arquivo.txt
+</code>
+</pre>
+
+<p>Para assinar arquivos binários, usamos esse comando (com uma chave privada criada também):</p>
+
+<pre>
+<code>
+gpg --detach-sign arquivo.tar.xz
+</code>
+</pre>
+
+<p>Para checar a assinatura de um arquivo de texto, usamos esse comando:</p>
+
+<pre>
+<code>
+gpg --verify arquivo.txt.asc
+</code>
+</pre>
+
+<p>No caso de arquivos binários, no entanto, fazemos assim:</p>
+
+<pre>
+<code>
+gpg --verify arquivo.tar.xz{.sig,}
+</code>
+</pre>
+
+<p>Você pode atualizar as informações de chaves digitando:</p>
+
+<pre>
+<code>
+gpg --refresh-keys
+</code>
+</pre>
+
+<p>Você pode puxar informações de um servidor de chaves específico usando:</p>
+
+<pre>
+<code>
+gpg --keyserver pool.sks-keyservers.net --refresh-keys
+</code>
+</pre>
+
+<p>Para criptografar um arquivo com a chave pública de outro usuário, faça assim:</p>
+
+<pre>
+<code>
+gpg -er usuario@email arquivo.txt
+</code>
+</pre>
+
+<p>O comando que segue, pode ser usado para assinar seu arquivo com sua chave privada e, em seguida, criptografá-lo com a chave pública do destinatário:</p>
+
+<pre>
+<code>
+gpg -ser usuario@email arquivo.txt
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-seguranca-5.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-seguranca-7.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

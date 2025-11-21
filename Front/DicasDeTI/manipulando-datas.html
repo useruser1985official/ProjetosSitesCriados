@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Manipulando Datas</h2>
+
+<ul>
+    <li><a href="#javascript">Datas em Javascript</a></li>
+    <li><a href="#php">Datas em PHP</a></li>
+    <li><a href="#java">Datas em Java</a></li>
+    <li><a href="#c">Datas em C</a></li>
+    <li><a href="#cpp">Datas em C++</a></li>
+    <li><a href="#python">Datas em Python</a></li>
+    <li><a href="#csharp">Datas em C#</a></li>
+</ul>
+
+<h3 id="javascript">Javascript</h3>
+
+<p>Em Javascript, podemos usar o objeto Date assim:</p>
+
+<pre>
+<code>
+var semana = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+
+var hoje = new Date();
+
+var dia = hoje.getDate();
+var mes = hoje.getMonth() + 1;
+var ano = hoje.getFullYear();
+
+var ds = hoje.getDay();
+
+var hora = hoje.getHours();
+var minuto = hoje.getMinutes();
+var segundo = hoje.getSeconds();
+
+document.write(dia + "/" + mes + "/" + ano);
+document.write("&lt;br/&gt;");
+document.write(hora + ":" + minuto + ":" + segundo);
+document.write("&lt;br/&gt;");
+document.write(semana[ds]);
+</code>
+</pre>
+
+<h3 id="php">PHP</h3>
+
+<p>Em PHP, podemos fazer assim:</p>
+
+<pre>
+<code>
+$semana = array("Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado");
+
+date_default_timezone_set("America/Sao_Paulo");
+
+echo date("d/m/Y");
+echo "&lt;br/&gt;";
+echo date("H:i:s");
+echo "&lt;br/&gt;";
+echo $semana[date("w")];
+</code>
+</pre>
+
+<h3 id="java">Java</h3>
+
+<p>No Java é dispensável o uso de arrays para os dias da semana, basta apenas colocar assim, usando o objeto Date:</p>
+
+<pre>
+<code>
+package horadosistema;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+public class HoraDoSistema {
+    public static void main(String[] args) {
+        Date atual = new Date();
+        SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formataHora = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat formataSemana = new SimpleDateFormat("EEEE");
+        System.out.println(formataData.format(atual));
+        System.out.println(formataHora.format(atual));
+        System.out.println(formataSemana.format(atual));
+    }
+}
+</code>
+</pre>
+
+<p>PS: Com 3 E ou menos, ele exibe a semana abreviado, com 4 E ou mais, exibe completo. 2 M exibe o número do mês, 3 M exibe o nome do mês abreviado, e 4 ou mais exibe o nome do mês completo.</p>
+
+<h3 id="c">C</h3>
+
+<p>Para manipular datas em C, podemos fazer assim (importe time.h):</p>
+
+<pre>
+<code>
+char data[9];
+
+printf("\n%s", _strdate(data));
+</code>
+</pre>
+
+<p>Caso deseje formatar datas e horas, faça isso:</p>
+
+<pre>
+<code>
+char* semana[7] = {"Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"};
+char sem[2];
+char data[20];
+char hora[20];
+
+struct tm *timeinfo;
+time_t hoje;
+
+time(&hoje);
+timeinfo = localtime(&hoje);
+
+strftime(sem, 2, "%w", timeinfo);
+
+strftime(data, 20, "%d/%m/%Y", timeinfo);
+
+strftime(hora, 20, "%H:%M:%S", timeinfo);
+
+int ds = strtol(sem, NULL, 10);
+
+printf("%s\n", semana[ds]);
+printf("%s\n", data);
+printf("%s\n", hora);
+</code>
+</pre>
+
+<h3 id="cpp">C++</h3>
+
+<p>Em C++ 11 podemos manipular assim:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;chrono&gt;
+#include &lt;ctime&gt;
+
+using namespace std;
+using namespace chrono;
+
+int main() {
+    time_t atual = system_clock::to_time_t(system_clock::now()); // Exibe com ctime(&atual)
+
+    string data(10, ' ');
+    strftime(&data[0], data.size() + 1, "%d/%m/%Y", localtime(&atual));
+
+    string hora(8, ' ');
+    strftime(&hora[0], hora.size() + 1, "%H:%M:%S", localtime(&atual));
+
+    string ds(1, ' ');
+    strftime(&ds[0], ds.size() + 1, "%w", localtime(&atual));
+
+    string semana[7] = {"Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"};
+
+    cout << data << endl;
+    cout << hora << endl;
+    cout << semana[stoi(ds)] << endl;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Podemos até criar uma classe baseada no uso dessas bibliotecas (nesse caso inclua iostream, chrono e ctime no arquivo h):</p>
+
+<pre>
+<code>
+using namespace std;
+using namespace chrono;
+
+class Date {
+public:
+    string now();
+    string week();
+    string day();
+    string month();
+    string year();
+    string hours();
+    string minutes();
+    string seconds();
+private:
+    static time_t atual;
+    static string semana[7];
+    int ds;
+
+    string manip(int quant, char* tex);
+};
+
+time_t Date::atual = system_clock::to_time_t(system_clock::now());
+string Date::semana[7] = {"Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"};
+
+string Date::now() {
+    return ctime(&atual);
+}
+
+string Date::manip(int quant, char* tex) {
+    string data(quant, ' ');
+    strftime(&data[0], data.size() + 1, tex, localtime(&atual));
+
+    return data;
+}
+
+string Date::week() {
+    ds = stoi(this->manip(1, "%w"));
+
+    return semana[ds];
+}
+
+string Date::day() {
+    return this->manip(2, "%d");
+}
+
+string Date::month() {
+    return this->manip(2, "%m");
+}
+
+string Date::year() {
+    return this->manip(4, "%Y");
+}
+
+string Date::hours() {
+    return this->manip(2, "%H");
+}
+
+string Date::minutes() {
+    return this->manip(2, "%M");
+}
+
+string Date::seconds() {
+    return this->manip(2, "%S");
+}
+</code>
+</pre>
+
+<p>Dessa forma, podemos simplesmente chamar assim no programa principal (dê o include do arquivo Date.h):</p>
+
+<pre>
+<code>
+Date dataAtual;
+
+cout << "O dia da semana é: " << dataAtual.week() << endl;
+
+cout << "O dia de hoje é: ";
+cout << dataAtual.day() << "/" << dataAtual.month() << "/" << dataAtual.year() << endl;
+
+cout << "A hora atual é: ";
+cout << dataAtual.hours() << ":" << dataAtual.minutes() << ":" << dataAtual.seconds() << endl;
+</code>
+</pre>
+
+<h3 id="python">Python</h3>
+
+<p>Em Python, podemos manipular usando a biblioteca datetime, dessa forma:</p>
+
+<pre>
+<code>
+from datetime import datetime
+
+dia = datetime.now().day
+mes = datetime.now().month
+ano = datetime.now().year
+
+ds = datetime.now().weekday()
+
+hora = datetime.now().hour
+minuto = datetime.now().minute
+segundo = datetime.now().second
+
+semana = ("Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo")
+
+print("{:0>2}/{:0>2}/{}".format(dia, mes, ano))
+print("{:0>2}:{:0>2}:{:0>2}".format(hora, minuto, segundo))
+print(semana[ds])
+</code>
+</pre>
+
+<p>PS: No Python, a semana é contada a partir da Segunda, a partir do zero. Caso queira a data do dia no formato americano (YYYY-MM-DD), basta chamar <code>datetime.now().date()</code>.</p>
+
+<h3 id="csharp">C#</h3>
+
+<p>Como no Java, no C# é dispensável o uso de arrays para os dias da semana, basta apenas colocar assim, usando o objeto DateTime:</p>
+
+<pre>
+<code>
+namespace HoraDoSistema {
+    class Program {
+        static void Main(string[] args) {
+            DateTime atual = DateTime.Now;
+            string formataData = atual.ToString("dd/MM/yyyy");
+            string formataHora = atual.ToString("HH:mm:ss");
+            string formataSem = atual.ToString("dddd");
+
+            Console.WriteLine(formataData);
+            Console.WriteLine(formataHora);
+            Console.WriteLine(formataSem);
+        }
+    }
+}
+</code>
+</pre>
+
+<p>PS: Com 3 d ele exibe a semana abreviado, com 4 d, exibe completo.</p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

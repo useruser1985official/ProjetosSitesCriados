@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Android</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Android</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-android-1.html">Tudo sobre Android Parte 1!</a></li>
+                    <li><a href="tudo-sobre-android-2.html">Tudo sobre Android Parte 2!</a></li>
+                    <li><a href="tudo-sobre-android-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Android Parte 3!</a></li>
+                    <li><a href="tudo-sobre-android-4.html">Tudo sobre Android Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Android Parte 3</h2>
+
+<h3>Jogo da Velha - Traçando a Linha na Finalização do Jogo</h3>
+
+<p>Em res, values, crie um values resource file XML com o nome cor e esse código:</p>
+
+<pre>
+<code>
+&lt;resources&gt;
+    &lt;color name="red"&gt;#FF0000&lt;/color&gt;
+&lt;/resources&gt;
+</code>
+</pre>
+
+<p>Crie esse método no Java:</p>
+
+<pre>
+<code>
+public void mudaQuad(int btn, int cor) {
+    this.getQuad(btn).setTextColor(this.getResources().getColor(cor));
+}
+</pre>
+</code>
+
+<p>E altere o if de finalizado assim:</p>
+
+<pre>
+<code>
+if(s1.equals(s2) && s2.equals(s3)) {
+    this.mudaQuad(estadoFinal[x][0], R.color.red);
+    this.mudaQuad(estadoFinal[x][1], R.color.red);
+    this.mudaQuad(estadoFinal[x][2], R.color.red);
+
+    Toast.makeText(this.getVi().getContext(), "O Jogo Acabou!", Toast.LENGTH_LONG).show();
+}
+</code>
+</pre>
+
+<h3>Jogo da Velha - Configurações Após a Finalização do Jogo</h3>
+
+<p>Altere o método finalizado assim:</p>
+
+<pre>
+<code>
+public boolean finalizado() {
+    for(int x = 0; x <= 7; x++) { // Arrays são contados a partir do zero
+        // Recupera os valores do botão:
+        String s1 = this.getQuad(estadoFinal[x][0]).getText().toString();
+        String s2 = this.getQuad(estadoFinal[x][1]).getText().toString();
+        String s3 = this.getQuad(estadoFinal[x][2]).getText().toString();
+
+        if(!s1.equals("") && !s2.equals("") && !s3.equals("")) {
+            if(s1.equals(s2) && s2.equals(s3)) {
+                this.mudaQuad(estadoFinal[x][0], R.color.red);
+                this.mudaQuad(estadoFinal[x][1], R.color.red);
+                this.mudaQuad(estadoFinal[x][2], R.color.red);
+
+                Toast.makeText(this.getVi().getContext(), "O Jogo Acabou!", Toast.LENGTH_LONG).show();
+
+                return true;
+            }
+        }
+    }
+    return false;
+}
+</code>
+</pre>
+
+<p>E altere o método clickQuad assim:</p>
+
+<pre>
+<code>
+public void clickQuad(View v) {
+    if(!this.finalizado()) {
+        if(((Button)v).getText().equals("")) {
+            if(this.getLastPlay().equals(XIS)) {
+                ((Button)v).setText(BOLA);
+
+                this.setLastPlay(BOLA);
+            }
+            else {
+                ((Button)v).setText(XIS);
+
+                this.setLastPlay(XIS);
+            }
+        }
+        else {
+            Toast.makeText(this.getVi().getContext(), "Escolha outro Botão", Toast.LENGTH_LONG).show();
+        }
+
+        this.finalizado();
+    }
+}
+</code>
+</pre>
+
+<p>No arquivo cor.xml criado, adicione essa tag:</p>
+
+<pre>
+<code>
+&lt;color name="blue"&gt;#000088&lt;/color&gt;
+</code>
+</pre>
+
+<p>No Java criamos essa função:</p>
+
+<pre>
+<code>
+public void resetaCor() {
+    for(int i = 1; i <= 9; i++) {
+        if(this.getQuad(i) != null) {
+            this.mudaQuad(i, R.color.blue);
+        }
+    }
+}
+</code>
+</pre>
+
+<p>E no método novoJogo coloque a invocação da função, assim:</p>
+
+<pre>
+<code>
+public void novoJogo(View v) {
+    this.ativarQuad(true);
+    
+    this.resetaCor();
+
+    for(int i = 1; i <= 9; i++) {
+        if(this.getQuad(i) != null) {
+            this.getQuad(i).setText("");
+        }
+    }
+}
+</code>
+</pre>
+
+<h3>Jogo da Velha - Definindo quem inicia com X e com O</h3>
+
+<p>Primeiro adicione no jogo dois radiobuttons dentro de um radiogroup, com os valores X e O, e as ids rbX e rbO.</p>
+
+<p>No Java, no método novoJogo, coloque isso no final da função:</p>
+
+<pre>
+<code>
+RadioButton rbX = this.getVi().findViewById(R.id.rbX);
+RadioButton rbO = this.getVi().findViewById(R.id.rbO);
+
+// Sempre o oposto do que queremos aqui:
+
+if(rbX.isChecked()) {
+    this.setLastPlay(BOLA);
+}
+else if(rbO.isChecked()) {
+    this.setLastPlay(XIS);
+}
+</code>
+</pre>
+
+<h3>Criando Projeto de Cadastro</h3>
+
+<p>Abra um projeto novo com o nome Cadastro de Clientes, escolha as opções
+recomendadas e aguarde.</p>
+
+<p>No arquivo XML, mude o tipo de layout para LinearLayout, e no desenho do layout coloque um PlainText, um ImageButton (sem imagem) e um ListView. Veja se o Layout tá com a orientação vertical.</p>
+
+<p>Coloque um layout horizontal dentro dele, deixe ele como o primeiro e arraste o edit text e o botão  pra ele.</p>
+
+<p>Para os componentes ficarem 100% na largura e altura independente do celular, coloque as opções layout-width e layout-height como match_parent.</p>
+
+<p>PS: Mantenha a action bar nesse projeto. Pra mudar a cor dele, coloque isso no onCreate:</p>
+
+<pre>
+<code>
+getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#AAAAAA"))); // importe
+</code>
+</pre>
+
+<h3>Personalizando Componentes</h3>
+
+<p>Como visto, o match_parent ocupa o máximo de espaço, de forma contrária, o wrap_content ocupa o mínimo, que seria o tamanho do componente. Coloque o layout com o text e o button como wrap_content na largura.</p>
+
+<p>O listview deverá estar como match_parent em ambas</p>
+
+<p>No imagebutton, vá nas propriedades em src e altere a imagem de adicionar da paleta do programa.</p>
+
+<p>Indo na pasta app &gt; src &gt; main &gt; res, dentro de qualquer pasta ou criando uma nova, podemos colocar qualquer imagem que queiramos colocar no lugar.</p>
+
+<h3>Personalizando Ícones do Projeto</h3>
+
+<p>Na pasta app &gt; src &gt; main &gt; res podemos colocar um novo ícone e adicionar ele no botão do nosso projeto, na propriedade src, e o escolhemos em mipmap.</p>
+
+<p>PS: O tamanho deve ser pequeno, não pode ter espaços no nome e é preferível o nome começar com ic_launcher.</p>
+
+<h3>Fundo do Botão Transparente</h3>
+
+<p>Altere os ids dos componentes para txtPesq, btnAdd e lstCont.</p>
+
+<p>Para deixar o botão com fundo transparente, vá em background e mude a cor dele.</p>
+
+<h3>Criando a Tela de Cadastro de Clientes</h3>
+
+<p>Crie uma nova activity do tipo Empty Activity pro nosso projeto (clique na pasta e vá em new) e coloque o nome ActCadClientes</p>
+
+<p>PS: Desmarque a opção Launcher Activity.</p>
+
+<p>Na nova activity, veja se ele está como Linear Layout e ajuste a orientação para vertical.</p>
+
+<p>Adicione outro linear layout, e dentro dele adicione um label o texto nome.</p>
+
+<p>PS: Veja se o layout gravity não está em center.</p>
+
+<p>Coloque um plain text e coloque a id txtNome, copie esse linear Layout e copie ele quatro vezes.</p>
+
+<p>No segundo coloque telefone e exclua o plain text, e coloque um phone text. Coloque um layout horizontal e arraste pra dentro dele o phone text e um spinner.</p>
+
+<h3>Adicionando os Spinners Botões de Opções</h3>
+
+<p>Podemos ajustar a largura e a altura dos componentes telefone e o spinner, com números a partir do 1 pra ajustar.</p>
+
+<p>Coloque as ids txtTel e cxTel nos componentes.</p>
+
+<p>Copie o layout com o telefone e coloque abaixo deste, com a palavra e-mail e copie de novo para endereço.</p>
+
+<p>Copie o nome e faça o mesmo para observações. Coloque as ids especificadas em todos.</p>
+
+<h3>Criando Evento do Botão para Chamar Cadastros</h3>
+
+<p>Faça essas alterações na classe MainActivity:</p>
+
+<pre>
+<code>
+public class MainActivity extends AppCompatActivity implements View.OnClickListener { // Coloque a implementação
+    private ImageButton btnAdd; // Importe android.widget.*
+    private EditText txtPesq;
+    private ListView lstCont;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main); // Aqui mostra qual activity ele está ligado
+
+        btnAdd = (ImageButton)findViewById(R.id.btnAdd);
+        txtPesq = (EditText)findViewById(R.id.txtPesq);
+        lstCont = (ListView)findViewById(R.id.lstCont);
+        
+        btnAdd.setOnClickListener(this);
+    }
+
+    // Método da interface implementado para clique:
+
+    @Override
+    public void onClick(View v) {
+        Intent it = new Intent(this, ActCadClientes.class); // Coloque o nome da activity a ser chamada seguido de class, importe android.content.*.
+
+        startActivity(it);
+    }
+}
+</code>
+</pre>
+
+<h3>Programando o Act de Cadastro</h3>
+
+<p>Vamos agora no ActCadClientes.java, e alteramos o código assim:</p>
+
+<pre>
+<code>
+public class ActCadClientes extends AppCompatActivity {
+    private EditText txtNome; // Importe android.widget.*
+    private EditText txtTel;
+    private EditText txtMail;
+    private EditText txtEnd;
+    private EditText txtObs;
+    private Spinner cxTel;
+    private Spinner cxMail;
+    private Spinner cxEnd;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_act_cad_clientes);
+
+        txtNome = (EditText)findViewById(R.id.txtNome);
+        txtTel = (EditText)findViewById(R.id.txtTel);
+        txtMail = (EditText)findViewById(R.id.txtMail);
+        txtEnd = (EditText)findViewById(R.id.txtEnd);
+        txtObs = (EditText)findViewById(R.id.txtObs);
+        cxTel = (Spinner)findViewById(R.id.cxTel);
+        cxMail = (Spinner)findViewById(R.id.cxMail);
+        cxEnd = (Spinner)findViewById(R.id.cxEnd);
+    }
+}
+</code>
+</pre>
+
+<h3>Criando os Arrays para Alimentar Spinners</h3>
+
+<p>Primeiramente, vamos criar, abaixo de endereço, mais um componente pra data com um campo e um spinner, e coloque as ids txtData e cxData. Adicione a chamada deles na activity.</p>
+
+<p>Crie os arrays assim:</p>
+
+<pre>
+<code>
+private ArrayAdapter&lt;String&gt; adpTipoTel;
+private ArrayAdapter&lt;String&gt; adpTipoMail;
+private ArrayAdapter&lt;String&gt; adpTipoEnd;
+private ArrayAdapter&lt;String&gt; adpTipoData;
+</code>
+</pre>
+
+<p>E dentro da função onCreate, os inicialize assim:</p>
+
+<pre>
+<code>
+adpTipoTel = new ArrayAdapter&lt;&gt;(this, android.R.layout.simple_spinner_item);
+adpTipoMail = new ArrayAdapter&lt;&gt;(this, android.R.layout.simple_spinner_item);
+adpTipoEnd = new ArrayAdapter&lt;&gt;(this, android.R.layout.simple_spinner_item);
+adpTipoData = new ArrayAdapter&lt;&gt;(this, android.R.layout.simple_spinner_item);
+
+adpTipoTel.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+adpTipoMail.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+adpTipoEnd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+adpTipoData.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+</code>
+</pre>
+
+<h3>Alimentando os Spinners</h3>
+
+<p>Para associar os spinnert aos arrays, fazemos assim, dentro da função onCreate:</p>
+
+<pre>
+<code>
+cxTel.setAdapter(adpTipoTel);
+cxMail.setAdapter(adpTipoMail);
+cxEnd.setAdapter(adpTipoEnd);
+cxData.setAdapter(adpTipoData);
+
+adpTipoTel.add("Celular");
+adpTipoTel.add("Fixo");
+adpTipoTel.add("Trabalho");
+
+adpTipoMail.add("Pessoal");
+adpTipoMail.add("Trabalho");
+
+adpTipoEnd.add("Casa");
+adpTipoEnd.add("Trabalho");
+
+adpTipoData.add("Cadastro");
+adpTipoData.add("Compra");
+</code>
+</pre>
+
+<h3>Criando um Menu para o Cad Clientes</h3>
+
+<p>Crie em res, a pasta menu e um arquivo de recursos de menu com o nome menu_act_cad_clientes.xml, e deixe o XML dele assim:</p>
+
+<pre>
+<code>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.cadastrodeclientes.ActCadClientes"&gt;
+    &lt;item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="Configurações"
+        app:showAsAction="never"/&gt;
+&lt;/menu&gt;
+</code>
+</pre>
+
+<p>No Java, coloque esse método na classe da Activity:</p>
+
+<pre>
+<code>
+@Override
+public boolean onCreateOptionsMenu(Menu men) {
+    MenuInflater infl = getMenuInflater();
+    infl.inflate(R.menu.menu_act_cad_clientes, men);
+
+    return true;
+}
+</code>
+</pre>
+
+<h3>Criando Strings para os Menus</h3>
+
+<p>Para mostrar o menu, basta remover o atributo do XML <code>app:showAsAction</code> de todos os itens.</p>
+
+<p>Copie as tags item e mude os titler pra criarmos mais menus.</p>
+
+<p>No arquivo strings.xml, em resources, podemos colocar os labels assim:</p>
+
+<pre>
+<code>
+&lt;resources&gt;
+    &lt;string name="app_name"&gt;Cadastro de Clientes&lt;/string&gt;
+    &lt;string name="action_settings"&gt;Settings&lt;/string&gt;
+    &lt;string name="title_activity_act_cad_clientes"&gt;Clientes&lt;/string&gt;
+    &lt;string name="lbl_nome"&gt;Nome&lt;/string&gt;
+    &lt;string name="lbl_telefone"&gt;Telefone&lt;/string&gt;
+    &lt;string name="lbl_email"&gt;E-mail&lt;/string&gt;
+    &lt;string name="lbl_endereco"&gt;Endereço&lt;/string&gt;
+    &lt;string name="lbl_observacoes"&gt;Observações&lt;/string&gt;
+    &lt;string name="lbl_data"&gt;Data Cadastro&lt;/string&gt;
+&lt;/resources&gt;
+</code>
+</pre>
+
+<p>Esse arquivo acima é útil para, por exemplo, podermos facilmente mudar o idioma dos aplicativos.</p>
+
+<p>Colocamos dentro da tag resources também essas tags, pros nossos menus:</p>
+
+<pre>
+<code>
+&lt;string name="lbl_salvar"&gt;Salvar&lt;/string&gt;
+&lt;string name="lbl_alterar"&gt;Alterar&lt;/string&gt;
+&lt;string name="lbl_excluir"&gt;Excluir&lt;/string&gt;
+</code>
+</pre>
+
+<p>Aí no primeiro item, no menu_act_cad_clientes.xml, alteramos a tag assim:</p>
+
+<pre>
+<code>
+&lt;item
+    android:id="@+id/menu_acao1"
+    android:orderInCategory="100"
+    android:title="@string/lbl_salvar"/&gt;
+</code>
+</pre>
+
+<p>Aí ele pegará do arquivo o texto do label em strings.xml. Faça o mesmo nos outros itens com menu_acao2 e lbl_alterar, e menu_acao3 e lbl_excluir.</p>
+
+<p>Chame o componente toolbar no aplicativo:</p>
+
+<pre>
+<code>
+tbAct = (Toolbar)findViewById(R.id.tbAct); // importe androidx.appcompat.widget.Toolbar, e declare o atributo do tipo Toolbar no código
+
+setSupportActionBar(tbAct);
+</code>
+</pre>
+
+<p>E coloque esse método na classe:</p>
+
+<pre>
+<code>
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    int id = item.getItemId();
+
+    if(id == R.id.menu_acao1) {
+        return true;
+    }
+    
+    return super.onOptionsItemSelected(item);
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-android-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-android-4.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

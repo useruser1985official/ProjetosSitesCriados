@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Introdução aos Softwares Livres</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div id="interface">
+            <h1><a href="index.html">Introdução aos Softwares Livres</a></h1>
+
+            <h2>LibreOffice Essencial</h2>
+
+            <h3>Writer (Word)</h3>
+
+            <p>Como sabemos, podemos escrever títulos e parágrafos num documento Word, podemos também selecionar o alinhamento (esquerda, central ou direita), o tamanho e estilo das letras (negrito, itálico, sublinhado, riscado), o tipo de fonte e a cor das mesmas (tanto da letra em si quanto do fundo).</p>
+
+            <p>Para inserir uma imagem, podemos clicar em "Inserir Figura" e escolher ela, podemos redimensionar e escolher o alinhamento dela também. Podemos também inserir uma caixa de texto dentro da figura (a caixa pode ser inserida em outras partes do documento também e pode ser alinhada, tanto verticalmente como horizontalmente, além do texto poder ser formatado igual aos outros do documento). Também podemos pôr borda na figura, inclusive escolhendo o estilo de borda e a cor da mesma.</p>
+
+            <p>Podemos também inserir um gráfico, e clicando com o botão direito e indo em "Tabela de Dados", podemos colocar os itens do mesmo. Clicando com o botão direito no gráfico podemos ir em "Formatar Parede" e em Área, personalizamos o fundo do mesmo. Clicando com o botão direito em uma das barras do gráfico e indo em "Formatar Séries de Dados", podemos fazer o mesmo com a cor deles. Também podemos colocar borda no gráfico.</p>
+
+            <p>Outra coisa que podemos inserir é uma tabela, onde nós escolhemos a quantidade de linhas e colunas desejadas, e depois podemos adicionar ou excluir da tabela já criada, clicando com o botão direito. Podemos redimensionar as células, mesclar ou desmesclar elas e da mesma forma podemos estilizar e alinhar as palavras dele.</p>
+
+            <p>Clicando com o botão direito na página, podemos selecionar um estilo para a página, indo em Estilo de Página Padrão e em Área, onde podemos escolher cores, gradiente, figura, entre outras opções. Em Transparência, podemos escolher o grau de transparência do fundo selecionado.</p>
+
+            <p>Para manter a compatibilidade entre o Word e o Writer, salve como Documento Word 2010-365, onde ele terá a extensão .doc ou .docx.</p>
+
+            <p>PS: Qualquer documento no Libreoffice pode ser salvo com senha ou criptografado com chave GPG. Ele também permite exportar diretamente como PDF.</p>
+
+            <h3>Calc (Excel)</h3>
+
+            <p>Basicamente, para fazemos os cálculos, usamos as células equivalentes com os cálculos na sintaxe como <code>=a2 + a3</code>. Os operadores são esses:</p>
+
+            <table>
+                <tr>
+                    <th>Operador</th>
+                    <th>Significado</th>
+                </tr>
+                <tr>
+                    <td>+</td>
+                    <td>Soma</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>Subtração</td>
+                </tr>
+                <tr>
+                    <td>*</td>
+                    <td>Multiplicação</td>
+                </tr>
+                <tr>
+                    <td>/</td>
+                    <td>Divisão</td>
+                </tr>
+            </table>
+
+            <p>Podemos criar uma tabela da seguinte forma:</p>
+
+            <table>
+                <tr>
+                    <th></th>
+                    <th>A</th>
+                    <th>B</th>
+                </tr>
+                <tr>
+                    <th>1</th>
+                    <td>Valor 1:</td>
+                    <td><code>10</code></td>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <td>Valor 2:</td>
+                    <td><code>5</code></td>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <td>Soma:</td>
+                    <td><code>=b1 + b2</code></td>
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <td>Subtração:</td>
+                    <td><code>=b1 - b2</code></td>
+                </tr>
+                <tr>
+                    <th>5</th>
+                    <td>Multiplicação:</td>
+                    <td><code>=b1 * b2</code></td>
+                </tr>
+                <tr>
+                    <th>6</th>
+                    <td>Divisão:</td>
+                    <td><code>=int(b1 / b2)</code></td>
+                </tr>
+            </table>
+
+            <p>PS: Os parênteses podem ser usados, seguindo a ordem de precedência da matemática, primeiro parênteses (do mais interno pro mais externo), depois multiplicações e divisões, e depois adições e subtrações.</p>
+
+            <p>Como vimos acima, usamos a função int para converter a divisão para um número inteiro. Podemos usar várias funções, com nomes em português mesmo, como as de potência, raiz, entre outras. Veja como usar elas e suas formas de usar:</p>
+
+            <table>
+                <tr>
+                    <th>Operação</th>
+                    <th>Exemplo</th>
+                </tr>
+                <tr>
+                    <td>Inteiro</td>
+                    <td><code>=int(9,85)</code></td>
+                </tr>
+                <tr>
+                    <td>Absoluto</td>
+                    <td><code>=abs(-5)</code></td>
+                </tr>
+                <tr>
+                    <td>Potência</td>
+                    <td><code>=potência(10; 2)</code></td>
+                </tr>
+                <tr>
+                    <td>Raiz</td>
+                    <td><code>=raiz(9)</code></td>
+                </tr>
+                <tr>
+                    <td>Módulo</td>
+                    <td><code>=mod(10; 3)</code></td>
+                </tr>
+                <tr>
+                    <td>Soma (dois ou mais números)</td>
+                    <td><code>=soma(10; 5)</code></td>
+                </tr>
+                <tr>
+                    <td>Média (dois ou mais números)</td>
+                    <td><code>=média(10; 5)</code></td>
+                </tr>
+            </table>
+
+            <p>A função soma também é usada para somar mais células. Vamos supor numa planilha sobre somas de itens de uma lista de compras, podemos somar conteúdo de várias células dentro de uma sequência, tanto horizontal como vertical, como por exemplo <code>=soma(b1:b10)</code> para uma soma das células b1, b2, b3, etc., até a b10. Da mesma forma, podemos tirar média com a função <code>=média(b1:b10)</code>.</p>
+
+            <p>Além disso, podemos estilizar as células escolhendo a cor dos caracteres e do fundo (nesse caso ele ficará sem bordas, mas podemos selecionar uma na cor que quisermos indo em "Bordas"). Também podemos usar a maioria das coisas que usamos no Writer com as letras, como o negrito e o itálico, tamanho, tipo de letra da fonte, alinhamento, etc. Também podemos redimensionar as colunas e mesclar ou desmesclar as células.</p>
+
+            <p>Podemos também formatar valores numéricos com casas decimais, como por exemplo como porcentagem ou como moeda. E podemos inserir um gráfico baseado nas células da planilha, incluindo formatando o estilo e as cores do mesmo.</p>
+
+            <p>Na parte de baixo, podemos mudar o nome da planilha.</p>
+
+            <p>Para manter a compatibilidade entre o Excel e o Calc, salve como Documento Excel 2010-365, onde ele terá a extensão .xls ou .xlsx.</p>
+
+            <h3>Impress (PowerPoint)</h3>
+
+            <p>Ao criar um novo documento Impress, ele pedirá para você selecionar um modelo ou começar um em branco. No exemplo, criaremos um em branco.</p>
+
+            <p>No Painel de Slides, no lado esquerdo, vamos adicionar mais um slide, no nosso exemplo, usaremos apenas dois, podendo ter muito mais. Podemos inclusive, do lado direito, em Propriedades, escolher o layout do slide.</p>
+
+            <p>Vamos no lado direito, ir em "Inserir Figura" e colocar uma imagem de fundo nos slides. Também podemos fazer isso clicando com o botão direito e indo em "Propriedades do Slide", onde também podemos escolher cor, gradiente, entre outras opções.</p>
+
+            <p>Tudo que podemos usar na formatação do Writer, podemos usar no Impress, inserir imagens, tabelas, gráficos, formatar textos (alinhamento, fonte, tamanho, cor, etc.) e tudo mais. Isso fica no lado direito, em propriedades (clique no texto do layout para ver as propriedades dele).</p>
+
+            <p>No lado direito, em Transição de Slides, podemos escolher a animação de transição de um pra outro e o tempo da mesma, e depois que quantos segundo ele avançará pro outro slide (ou podemos escolher "Ao Clicar no Mouse"). Podemos aplicar isso a um ou a todos os slides.</p>
+
+            <p>Indo em "Apresentação de Slides", podemos reproduzir nossa apresentação.</p>
+
+            <p>Para manter a compatibilidade entre o PowerPoint e o Impress, salve como Documento PowerPoint 2010-365, onde ele terá a extensão .ppt ou .pptx.</p>
+        </div>
+    </body>
+</html>

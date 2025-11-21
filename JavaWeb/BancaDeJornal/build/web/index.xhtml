@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Sistema de Banca de Jornal</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </h:head>
+    <h:body>
+        <div id="interface">
+            <header id="cabecalho">
+                <h1><a href="index.jsf">Sistema de Banca de Jornal</a></h1>
+                
+                <!--
+                <nav id="menu">
+                    <ul>
+                        <li><a href="index.jsf">Cadastrar Revista</a></li>
+                        <li><a href="catalogo.jsf">Catálogo de Revistas</a></li>
+                    </ul>
+                </nav>
+                -->
+            </header>
+            
+            <h2>Cadastro</h2>
+            
+            <h:form>
+                <p:panelGrid columns="2">
+                    <h:outputLabel for="cNom" value="Nome da Revista: "></h:outputLabel><p:inputText id="cNom" value="#{catalogoBean.cat.nomeRevista}"></p:inputText>
+                    <h:outputLabel for="cNum" value="Número da Edição: "></h:outputLabel><p:spinner min="0" max="10000" id="cNum" value="#{catalogoBean.cat.numeroEdicao}"></p:spinner>
+                    <h:outputLabel for="cEdi" value="Editora: "></h:outputLabel><p:inputText id="cEdi" value="#{catalogoBean.cat.editora}"></p:inputText>
+                    <h:outputLabel for="cGen" value="Gênero da Revista: "></h:outputLabel><p:inputText id="cGen" value="#{catalogoBean.cat.generoRevista}"></p:inputText>
+                    <h:outputLabel for="cQua" value="Quantidade: "></h:outputLabel><p:spinner min="0" max="100" id="cQua" value="#{catalogoBean.cat.quantidade}"></p:spinner>
+                    <h:outputLabel for="cPre" value="Preço por Unidade: "></h:outputLabel><p:spinner id="cPre" min="0" max="1000" stepFactor="0.01" value="#{catalogoBean.cat.precoUnidade}"></p:spinner>
+                </p:panelGrid>
+                <p:commandButton value="Novo" action="#{catalogoBean.novo()}" update="@form"></p:commandButton>
+                <p:commandButton value="Salvar/Atualizar" action="#{catalogoBean.adicionar()}" update="@form"></p:commandButton>
+                <p:commandButton value="Buscar" action="#{catalogoBean.listar()}" update="@form"></p:commandButton>
+               <!--<p:messages autoUpdate="true" showDetail="true"></p:messages>-->
+                <p:dataTable value="#{catalogoBean.catalogos}" var="catalogoForm">
+                    <p:column>
+                        <p:commandButton value="Editar" action="#{catalogoBean.editar(catalogoForm)}" update="@form"></p:commandButton>
+                    </p:column>
+                    <p:column>
+                        <p:commandButton value="Deletar" action="#{catalogoBean.deletar(catalogoForm)}" update="@form"></p:commandButton>
+                    </p:column>
+                    <p:column headerText="Nome da Revista" sortBy="#{catalogoForm.nomeRevista}">
+                        <h:outputText value="#{catalogoForm.nomeRevista}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Nº da Edição" sortBy="#{catalogoForm.numeroEdicao}">
+                        <h:outputText value="#{catalogoForm.numeroEdicao}"></h:outputText>
+                    </p:column> 
+                    <p:column headerText="Editora" sortBy="#{catalogoForm.editora}">
+                        <h:outputText value="#{catalogoForm.editora}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Gênero da Revista" sortBy="#{catalogoForm.generoRevista}">
+                        <h:outputText value="#{catalogoForm.generoRevista}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Quantidade" sortBy="#{catalogoForm.quantidade}">
+                        <h:outputText value="#{catalogoForm.quantidade}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Preço Unidade R$" sortBy="#{catalogoForm.precoUnidade}">
+                        <h:outputText value="#{catalogoForm.precoUnidade}"><f:convertNumber minFractionDigits="2"/></h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+    </h:body>
+</html>

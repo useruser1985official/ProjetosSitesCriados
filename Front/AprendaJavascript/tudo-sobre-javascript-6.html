@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Javascript</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Javascript</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-javascript-1.html">Tudo sobre Javascript Parte 1!</a></li>
+                    <li><a href="tudo-sobre-javascript-2.html">Tudo sobre Javascript Parte 2!</a></li>
+                    <li><a href="tudo-sobre-javascript-3.html">Tudo sobre Javascript Parte 3!</a></li>
+                    <li><a href="tudo-sobre-javascript-4.html">Tudo sobre Javascript Parte 4!</a></li>
+                    <li><a href="tudo-sobre-javascript-5.html">Tudo sobre Javascript Parte 5!</a></li>
+                    <li><a href="tudo-sobre-javascript-6.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Javascript Parte 6!</a></li>
+                    <li><a href="tudo-sobre-javascript-7.html">Tudo sobre Javascript Parte 7!</a></li>
+                    <li><a href="tudo-sobre-javascript-8.html">Tudo sobre Javascript Parte 8!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Javascript Parte 6</h2>
+
+<h3>Objeto Date - Trabalhando com Data e Hora</h3>
+
+<p>O objeto <code>Date</code> é um objeto embutido do Javascript que permite trabalhar com data e hora. Com ele, podemos armazenar datas e realizar operações sobre elas, por meio dos métodos do objeto.</p>
+
+<p>As datas em JS são baseadas em um valor de tempo que corresponde ao número de milissegundos decorridos desde 01 de Janeiro de 1970, às 00:00:00 (chamado de Época Unix). Datas anteriores à essa são armazenadas na forma negativa de milissegundos.</p>
+
+<p>A faixa de datas suportadas pelo JS é de 100 milhões de dias anteriores a 01/01/1970 até 100 milhões de dias. Os objetos Date em JS somente podem ser instanciados chamando-se seu construtor (ou seja, usando o comando new).</p>
+
+<p>Caso o objeto Date seja invocado como uma função (sem o operador new), será retornada uma string contendo a data e hora atuais.</p>
+
+<p>Para criar um objeto Date temos quatro formas:</p>
+
+<p>Datas e horas atuais, basta não usar nenhum argumento:</p>
+
+<pre>
+<code>
+var data = new Date();
+document.write(data);
+</code>
+</pre>
+
+<p>Valor da data em milissegundos (contando a partir de 01/01/1970 00:00:00):</p>
+
+<pre>
+<code>
+var data = new Date(1458542651569);
+document.write(data);
+</code>
+</pre>
+
+<p>Atribuindo uma data com ano, mês, dia (e também horas, minutos, segundos e etc.,) nessa ordem. Lembre-se que Janeiro começa do 0, e não do 1, e se o ano for passado com dois dígitos será interpretadp algo entre 1900 e 1999:</p>
+
+<pre>
+<code>
+var data = new Date(1990, 0, 25);
+document.write(data);
+</code>
+</pre>
+
+<p>Passando a data em uma string de formato específico:</p>
+
+<pre>
+<code>
+var data = new Date("2004/09/25");
+document.write(data);
+</code>
+</pre>
+
+<p>Também podemos usar diretamente o parâmetro num método, assim:</p>
+
+<pre>
+<code>
+document.write("Data: " + Date() + "&lt;br/&gt;");
+document.write("Data em milissegundos: " + Date.now() + "&lt;br/&gt;");
+</code>
+</pre>
+
+<p>PS: Observe que o <code>Date.now()</code> retorna a data em milissegundos.</p>
+
+<p>Pra calcular a data aproximada de um número de milissegundos, você divide por 1000, depois por 86400 (número de segundo de um dia), e depois por 365 (dias de um ano, sem contar os bissextos) e soma 1970.</p>
+
+<h3>Objeto Date - Métodos Set e Get</h3>
+
+<p>Os métodos set do objeto Date são utilizados para alterar partes da data e hora armazenadas. A tabela a seguir mostra os métodos setters mais comuns do objeto Date:</p>
+
+<table>
+    <tr>
+        <th>Método</th>
+        <th>Descrição</th>
+    </tr>
+    <tr>
+        <td>setDate()</td>
+        <td>Configura o dia do mês, entre 1 e 31</td>
+    </tr>
+    <tr>
+        <td>setFullYear()</td>
+        <td>Configura o ano (4 dígitos)</td>
+    </tr>
+    <tr>
+        <td>setHours()</td>
+        <td>Configura a hora, entre 0 e 23</td>
+    </tr>
+    <tr>
+        <td>setMilliseconds()</td>
+        <td>Configura os milissegundos, entre 0 e 999</td>
+    </tr>
+    <tr>
+        <td>setMinutes()</td>
+        <td>Configura os minutos da hora, entre 0 e 59</td>
+    </tr>
+    <tr>
+        <td>setMonth()</td>
+        <td>Configura o mês, entre 0 e 11 (começa do 0)</td>
+    </tr>
+    <tr>
+        <td>setSeconds()</td>
+        <td>Configura os segundos do minuto, entre 0 e 59</td>
+    </tr>
+    <tr>
+        <td>setTime()</td>
+        <td>Configura os milissegundos decorridos desde 01/01/1970 00:00:00</td>
+    </tr>
+</table>
+
+<p>Os métodos Get funcionam do mesmo modo, apenas trocando o Set por Get (o Set muda e o Get pega).</p>
+
+<p>PS: No Get também podemos pegar o dia da semana com o <code>getDay()</code>, contado a partir do 0.</p>
+
+<p>Veja a seguir, os métodos Get num script:</p>
+
+<pre>
+<code>
+var mes = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+var semana = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+var hoje = new Date();
+document.write("Exibindo os valores iniciais de data e hora no navegador:&lt;br/&gt;");
+document.write("Dia do mês: " + hoje.getDate() + "&lt;br/&gt;");
+document.write("Mês: " + mes[hoje.getMonth()] + "&lt;br/&gt;");
+document.write("Ano (2 dígitos): " + (hoje.getYear() % 100) + "&lt;br/&gt;");
+document.write("Ano (4 dígitos): " + hoje.getFullYear() + "&lt;br/&gt;");
+document.write("Dia da semana: " + semana[hoje.getDay()] + "&lt;br/&gt;");
+document.write("Hora: " + hoje.getHours() + "&lt;br/&gt;");
+document.write("Minutos: " + hoje.getMinutes() + "&lt;br/&gt;");
+document.write("Segundos: " + hoje.getSeconds() + "&lt;br/&gt;");
+document.write("Millissegundos: " + hoje.getMilliseconds() + "&lt;br/&gt;");
+</code>
+</pre>
+
+<p>PS: O fato de poder usar um array para configurar o nome dos meses talvez explique o porquê dos meses serem contados a partir do 0, e não do 1, o mesmo vale pra semanas. O <code>getYear()</code> retorna números acima do 100 a partir do ano 2000, sendo necessário colocar o <code>% 100</code> para ele exibir o ano com dois dígitos corretamente.</p>
+
+<p>O mesmo código acima pode ser usado junto com uma função para passar datas por formulários (os document.write podem ser retirados):</p>
+
+<pre>
+<code>
+function alteraData() {
+    hoje.setDate(document.getElementById("dia").value);
+    hoje.setMonth(document.getElementById("mes").value - 1);
+    hoje.setFullYear(document.getElementById("ano").value);
+    alert("Data: " + semana[hoje.getDay()] + ", " + hoje.getDate() + " de " + mes[hoje.getMonth()] + " de " + hoje.getFullYear());
+}
+</code>
+</pre>
+
+<p>Código HTML do formulário para os códigos acima:</p>
+
+<pre>
+<code>
+&lt;form name="datas" action="javascript:void()"&gt;
+    &lt;p&gt;Dia: &lt;input type="number" id="dia" min="1" max="31" step="1" value="1"/&gt;&lt;/p&gt;
+    &lt;p&gt;Mês: 
+    &lt;select name="meses" id="mes"&gt;
+        &lt;option value="1" selected&gt;Janeiro&lt;/option&gt;
+        &lt;option value="2"&gt;Fevereiro&lt;/option&gt;
+        &lt;option value="3"&gt;Março&lt;/option&gt;
+        &lt;option value="4"&gt;Abril&lt;/option&gt;
+        &lt;option value="5"&gt;Maio&lt;/option&gt;
+        &lt;option value="6"&gt;Junho&lt;/option&gt;
+        &lt;option value="7"&gt;Julho&lt;/option&gt;
+        &lt;option value="8"&gt;Agosto&lt;/option&gt;
+        &lt;option value="9"&gt;Setembro&lt;/option&gt;
+        &lt;option value="10"&gt;Outubro&lt;/option&gt;
+        &lt;option value="11"&gt;Novembro&lt;/option&gt;
+        &lt;option value="12"&gt;Dezembro&lt;/option&gt;
+    &lt;/select&gt;&lt;/p&gt;
+    &lt;p&gt;Ano: &lt;input type="number" id="ano" min="1900" max="2100" step="1" value="1900"/&gt;&lt;/p&gt;
+    &lt;input type="button" value="Alterar Data" onclick="alteraData()"/&gt;
+&lt;/form&gt;
+</code>
+</pre>
+
+<p>Veja outro código, onde consultamos datas:</p>
+
+<pre>
+<code>
+var mes = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+var semana = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+var hoje = new Date(); // Data atual.
+var novaData = new Date(2014, 0, 15); // Data atribuída.
+var mili = new Date(1488569383588); // Contagem de milissegundos.
+var dataStr = new Date("2014/1/15"); // Passando data por string.
+document.write("Millissegundos desde 01/01/1970 00:00:00: " + hoje.getTime() + "&lt;br/&gt;");
+document.write("Ano obtido pela contagem de milissegundos: " + mili.getFullYear() + "&lt;br/&gt;");
+document.write("Data atribuída na criação do objeto: " + novaData.getDate() + " de " + mes[novaData.getMonth()] + " de " + novaData.getFullYear() + "&lt;br/&gt;");
+document.write("Data passada por string: " + dataStr.getDate() + " de " + mes[dataStr.getMonth()] + " de " + dataStr.getFullYear() + "&lt;br/&gt;");
+document.write("Data passada por string: " + dataStr.getDate() + "/" + (dataStr.getMonth() + 1) + "/" + (dataStr.getYear() % 100) + "&lt;br/&gt;");
+document.write("Data passada por string em milissegundos: " + dataStr.getTime() + "&lt;br/&gt;");
+</code>
+</pre>
+
+<p>PS: Ao passar como string, ele interpreta como o mês (exemplo, 10 é Outubro mesmo).</p>
+
+<h3>Array - Criando Matrizes</h3>
+
+<p>As matrizes são arrays bidimensionais (arrays dentro de arrays). Veja um exemplo de matriz:</p>
+
+<pre>
+<code>
+var novaMatriz = [["Banana", "Maçã"],
+                  ["Pera", "Abacate"],
+                  ["Uva", "Tâmara"]];
+
+document.write(novaMatriz[2][0] + "&lt;br/&gt;");
+</code>
+</pre>
+
+<p>Como visto acima, para ler um array dentro de uma matriz, usa-se os colchetes, o primeiro representa a linha/bloco desejado, e o segundo, o conteúdo que deseja verificar (sempre contando a partir do 0).</p>
+
+<p>PS: Para verificar todos os elementos, basta não indicar os colchetes, apenas colocar o nome da matriz sem nada, igual uma variável).</p>
+
+<p>Para exibir os elementos numa tabelinha, podemos colocar estruturas for e condicionais if e else pra isso:</p>
+
+<pre>
+<code>
+var novaMatriz = [["Banana", "Maçã"], ["Pera", "Abacate"], ["Uva", "Tâmara"]];
+                
+var valores = "";
+
+for(let l = 0; l &lt; 3; l++) {
+    for(let c = 0; c &lt; 2; c++) {
+        if(c &lt; 2 - 1) {
+            valores += novaMatriz[l][c] + " ";
+        }
+        else {
+            valores += novaMatriz[l][c] + "&lt;br/&gt;";
+        }
+    }
+}
+document.write("Conteúdo da matriz:&lt;br/&gt;" + valores);
+</code>
+</pre>
+
+<p>No caso acima, o que está dentro dos colchetes da matriz são as variáveis.</p>
+
+<p>Veja um exemplo mais complexo, no qual colocamos várias estruturas de repetição, para escolhermos quais e quantos números terão numa matriz, e exibirá numa tabela em alert:</p>
+
+<pre>
+<code>
+var linhas = parseInt(prompt("Digite a quantidade de linhas desejadas na matriz!", "1"));
+var colunas = parseInt(prompt("Digite a quantidade de colunas desejadas na matriz!", "1"));
+alert("Criar uma matriz de " + linhas + " linhas por " + colunas + " colunas.");
+
+var matriz2 = [];
+
+for(let i = 0; i &lt; linhas; i++) {
+    matriz2[i] = [];
+    for(let j = 0; j &lt; colunas; j++) {
+        matriz2[i][j] = "";
+    }
+}
+
+for(let l = 0; l &lt; linhas; l++) {
+    for(let c = 0; c &lt; colunas; c++) {
+        matriz2[l][c] = prompt("Digite um valor para inserir na matriz: [" + l + "][" + c + "]:", "0");
+    }
+}
+
+var valores2 = "";
+
+for(let l = 0; l &lt; linhas; l++) {
+    for(let c = 0; c &lt; colunas; c++) {
+        if(c &lt; colunas - 1) {
+            valores2 += matriz2[l][c] + " ";
+        }
+        else {
+            valores2 += matriz2[l][c] + "\n";
+        }
+    }
+}
+
+alert("Conteúdo da matriz2:\n" + valores2);
+</code>
+</pre>
+
+<h3>Tratamento de Erros em Javascript</h3>
+
+<p>O try catch finally são utilizados para tratar erros.</p>
+
+<p>No bloco <code>try</code> nós inserirmos a rotina que queremos tratar o provável erro que aconteça (não que ela irá obrigatoriamente gerar um erro, e sim uma rotina que seja passível de geração de erro), que caso aconteça, será tratado pra não passar ele no programa ou não mostrar uma mensagem padrão do sistema, o que permite também um feedback melhor pro usuário do ocorrido.</p>
+
+<p>Quando acontece o erro no try, ele para a execução do bloco imediatamente, passa pro <code>catch</code> e passa essa exceção gerada pra ele, e dentro do bloco do catch é onde o erro será tratado propriamente dito, onde podemos interceptar a exceção e realizar o tratamento mais adequado ao programa.</p>
+
+<p>Independente se ocorrer um erro ou não, o <code>finally</code> será executado, ele não é obrigatório.
+
+<p>Esse é a estrutura básica de um try catch:</p>
+
+<pre>
+<code>
+try {
+    document.write("Mensagem de Teste"); // É executado
+}
+catch(ex) {
+    document.write("ERRO"); // Não é executado
+}
+</code>
+</pre>
+
+<p>No código acima, apenas o que está no try será executado, já que o código dentro dele está certo, o que está no catch não será executado (o parâmetro dentro dos parênteses do catch pode ter qualquer nome).</p>
+
+<p>Mas vamos provocar um erro proposital, escrevendo errado o document.write do try, que provocará a exceção de erro:</p>
+
+<pre>
+<code>
+try {
+    document.writ("Mensagem de Teste"); // Não será executado, já que criou uma exceção de erro.
+}
+catch(ex) {
+    document.write("ERRO"); // Será executado
+}
+</code>
+</pre>
+
+<p>Podemos colocar também a opção console.log para mostrar o erro (que será visto somente no inspecionar elemento do navegador). Também colocamos uma mensagem que mostrará o tipo de erro:</p>
+
+<pre>
+<code>
+try {
+    document.writ("Mensagem de Teste");
+}
+catch(ex) {
+    document.write("ERRO:" + ex.message);
+    console.log("Mensagem de erro: " + ex.message);
+}
+</code>
+</pre>
+
+<p>PS: Alguns erros o Javascript já trata sem precisar dessa estrutura, como por exemplo, ao tentar fazer uma divisão por 0, que retorna Infinity, mas podemos tratar ele assim:</p>
+
+<pre>
+<code>
+try {
+    var res = 50 / 0;
+    
+    if(res == "Infinity") {
+        throw new Error("Impossível Dividir por Zero"); // Isso criará uma exceção
+    }
+}
+catch(ex) {
+    res = ex.message;
+}
+
+alert(res);
+</code>
+</pre>
+
+<p>Ou dessa forma, com a exceção dentro de uma função:</p>
+
+<pre>
+<code>
+function divisao(n1, n2) {
+    if(n2 == 0) {
+        throw new Error("É impossível Dividir por Zero!"); // Isso criará uma exceção
+    }
+
+    return n1 / n2;
+}
+
+try {
+    document.write(divisao(50, 0));
+}
+catch(ex) {
+    document.write(ex.message);
+}
+</code>
+</pre>
+
+<p>Vamos gerar um erro manualmente, num exemplo onde uma variável não poderá receber um valor maior do que 10, definido por nós mesmos:</p>
+
+<pre>
+<code>
+var num;
+
+try {
+    num = parseInt(prompt("Digite um valor: "));
+    if(num > 10) {
+        throw new Error("Valor inválido, o valor deverá ser até o máximo de 10!"); // Isso criará uma exceção
+    }
+    document.write("Valor Digitado: " + num);
+}
+catch(ex) {
+    document.write("ERRO: " + ex.message);
+}
+</code>
+</pre>
+
+<p>No caso acima, o que fez criar a exceção, foi o método <code>throw new Error()</code>, pode ver que ele nem terminou de executar o código e já pulou pro catch.</p>
+
+<p>No finally, ele exibirá a mensagem independente se o erro ocorrer ou não:</p>
+
+<pre>
+<code>
+var num;
+
+try {
+    num = parseInt(prompt("Digite um valor: "));
+    if(num > 10) {
+        throw new Error("Valor inválido, o valor deverá ser até o máximo de 10!"); // Isso criará uma exceção
+    }
+    document.write("Valor Digitado: " + num);
+}
+catch(ex) {
+    document.write("ERRO: " + ex.message);
+}
+finally {
+    document.write("&lt;br/&gt;Fim do tratamento");
+}
+</code>
+</pre>
+
+<p>Existem outros tipos de erros que são tratados, como o <code>ReferenceError</code> para variáveis inexistentes, e o <code>TypeError</code> para erros de atribuição. Mas como o Javascript é dinamicamente tipado, costuma ter apenas um bloco catch com o parâmetro sem tipo definido, mas sempre recebe um objeto de erro.</p>
+
+<p>PS: Também podemos usar o manipulador de eventos <code>onerror</code> para manipular erros:</p>
+
+<pre>
+<code>
+onerror = erro; // Nome da função invocada caso ocorra o erro.
+
+alert(baixar()); // A função baixar não existe!
+
+function erro(){
+    alert("Houve um erro!");
+}
+</code>
+</pre>
+
+<p>Mas mesmo assim, é mais recomendado usar o try catch mesmo por ser um recurso mais moderno.</p>
+
+<ul>
+    <li><a href="tudo-sobre-javascript-5.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-javascript-7.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

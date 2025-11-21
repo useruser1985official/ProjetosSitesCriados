@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Algoritmos</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Algoritmos</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-1.html">Tudo sobre Algoritmos Parte 1!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Algoritmos Parte 2!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-3.html">Tudo sobre Algoritmos Parte 3!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-4.html">Tudo sobre Algoritmos Parte 4!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-5.html">Tudo sobre Algoritmos Parte 5!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Algoritmos Parte 2</h2>
+
+<h3>Operadores Aritméticos</h3>
+
+<p>Os operadores aritméticos são símbolos usados para realizar contas matemáticas dentro do programa, como somar, subtrair, multiplicar e dividir valores.</p>
+
+<p>No Portugol, os operadores aritméticos são praticamente os mesmos usados na matemática e em outras linguagens de programação. Sendo esses:</p>
+
+<table>
+    <tr>
+        <th>Operador</th>
+        <th>Significado</th>        
+    </tr>
+    <tr>
+        <td><code>+</code></td>
+        <td>Soma</td>       
+    </tr>
+    <tr>
+        <td><code>-</code></td>
+        <td>Subtração</td>        
+    </tr>
+    <tr>
+        <td><code>*</code></td>
+        <td>Multiplicação</td>       
+    </tr>
+    <tr>
+        <td><code>/</code></td>
+        <td>Divisão</td>        
+    </tr>
+    <tr>
+        <td><code>%</code></td>
+        <td>Resto da Divisão</td>        
+    </tr>
+</table>
+
+<p>Veja um exemplo de programa no Portugol onde ele realiza todas essas operações:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro n1, n2
+        inteiro soma, subs, mult, divi, rest
+        
+        escreva("Digite o primeiro número: ")
+        leia(n1)
+        escreva("Digite o segundo número: ")
+        leia(n2)
+        
+        soma = n1 + n2
+        subs = n1 - n2
+        mult = n1 * n2
+        divi = n1 / n2
+        rest = n1 % n2
+        
+        escreva("A soma entre ", n1, " e ", n2, " é igual a ", soma, ".\n")
+        escreva("A subtração entre ", n1, " e ", n2, " é igual a ", subs, ".\n")
+        escreva("A multiplicação entre ", n1, " e ", n2, " é igual a ", mult, ".\n")
+        escreva("A divisão entre ", n1, " e ", n2, " é igual a ", divi, " com resto de ", rest, ".\n")
+    }
+}
+</code>
+</pre>
+
+<p>PS: Note que podemos declarar mais uma variável na mesma linha, contanto que elas sejam do mesmo tipo.</p>
+
+<p>Veja um fluxograma desse código acima:</p>
+
+<img src="imagens/fluxograma-operadores-aritmeticos.png" alt="Fluxograma de Operadores Aritméticos" style="max-width: 650px"/>
+
+<p>Como no caso acima, a variável <code>divi</code> ali em cima, retorna a divisão inteira por, obviamente, ela ter sido declarada como <code>inteiro</code>. Para retornar um número real, declare a mesma como <code>real</code>. Veja um exemplo de um programa simples, onde ele analisa a nota de um aluno:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        real n1, n2, media
+        
+        escreva("Digite a primeira nota: ")
+        leia(n1)
+        escreva("Digite a segunda nota: ")
+        leia(n2)
+        
+        media = (n1 + n2) / 2
+        
+        escreva("A média entre as notas é de ", media, ".\n")
+    }
+}
+</code>
+</pre>
+
+<p>Note que, no caso acima, ele fará a soma primeiro por estar dentro dos parênteses, pela ordem de precedência da matemática, tudo que estiver entre parênteses será calculado primeiro, do mais interno pro mais externo. Depois do que está dentro dos parênteses, serão feitos os cálculos das multiplicações, divisões e restos. Por último, serão feitos as somas e subtrações.</p>
+
+<p>Esse é um resumo da ordem dos operadores aritméticos:</p>
+
+<table>
+    <tr>
+        <th>Ordem</th>
+        <th>Operador</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td><code>()</code></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td><code>* / %</code></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td><code>+ -</code></td>
+    </tr>
+</table>
+
+<p>PS: Podemos inverter um valor de positivo pra negativo e vice-versa, apenas colocando um <q>-</q> na frente da variável, por exemplo:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro numero = 10
+        
+        inteiro negativo = -numero
+        
+        escreva(negativo, "\n")
+        
+        inteiro positivo = -negativo
+        
+        escreva(positivo, "\n")
+    }
+}
+</code>
+</pre>
+
+<p>Assim como podemos fazer a atribuição junto com a operação matemática, veja um exemplo pra soma:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro num
+        
+        escreva("Digite o número você quer adicionar à 10: ")
+        leia(num)
+        
+        num += 10 // É o mesmo que: num = num + 10
+        
+        escreva("A soma total é ", num, ".\n")
+    }
+}
+</code>
+</pre>
+
+<p>Seguindo a mesma regra, esses são os operadores matemáticos combinados com a atribuição:</p>
+
+<table>
+    <tr>
+        <th>Operador</th>
+        <th>Significado</th>        
+    </tr>
+    <tr>
+        <td><code>+=</code></td>
+        <td>Soma com Atribuição</td>       
+    </tr>
+    <tr>
+        <td><code>-=</code></td>
+        <td>Subtração com Atribuição</td>        
+    </tr>
+    <tr>
+        <td><code>*=</code></td>
+        <td>Multiplicação com Atribuição</td>       
+    </tr>
+    <tr>
+        <td><code>/=</code></td>
+        <td>Divisão com Atribuição</td>        
+    </tr>
+    <tr>
+        <td><code>%=</code></td>
+        <td>Resto da Divisão com Atribuição</td>        
+    </tr>
+</table>
+
+<p>Saiba também o que significa incremento e decremento em programação:</p>
+
+<ul>
+    <li>Incrementar um número significa aumentá-lo, geralmente de 1 em 1.</li>
+    <li>Decrementar um número significa diminuí-lo, também normalmente de 1 em 1.</li>    
+</ul>
+
+<p>Veja um exemplo simples de uso:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro i = 0
+        
+        i++ // O mesmo que i = i + 1 ou i += 1
+        
+        escreva(i, "\n")
+        
+        i-- // O mesmo que i = i - 1 ou i -= 1
+        
+        escreva(i, "\n")
+    }
+}
+</code>
+</pre>
+
+<p>Ou, de forma mais simples, incrementando/decrementando ao exibir:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro i = 0
+        
+        escreva(i++, "\n")
+        escreva(i--, "\n")
+    }
+}
+</code>
+</pre>
+
+<p>PS: Nas linguagens oficiais, como o C e semelhantes, pode ser que o <q>++</q> e o <q>--</q> tenham que vir antes da variável caso vá exibí-las, para ele fazer a operação antes de exibir a mesma, como no exemplo, seria <code>++i</code> e <code>--i</code>. Nem todas as linguagens suportam esse operador, como o Python.</p>
+
+<p>Lembrando que o Portugol não têm bibliotecas para cálculos matemáticos, como para números absolutos, raízes, potências e números aleatórios. Como também não têm outros tipos de bibliotecas comuns em outras linguagens, como pra datas e pra inversão de textos, por exemplo. Mas a maioria das linguagens têm esses recursos. E parte deles podemos criar nós mesmos dentro do Portugol, utilizando funções (que veremos mais pra frente).</p>
+
+<h3>Operadores Relacionais</h3>
+
+<p>Os operadores relacionais são usados para comparar valores. Eles sempre retornam <code>verdadeiro</code> ou <code>falso</code>.</p>
+
+<p>Aqui estão os principais, de forma resumida:</p>
+
+
+<table>
+    <tr>
+        <th>Operador Relacional</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td><code>==</code></td>
+        <td>Igualdade. Verifica se dois valores são iguais.</td>
+    </tr>
+    <tr>
+        <td><code>!=</code></td>
+        <td>Diferente. Verifica se dois valores são diferentes.</td>
+    </tr>
+    <tr>
+        <td><code>&lt;</code></td>
+        <td>Menor. Verifica se o valor da esquerda é menor que o da direita.</td>
+    </tr>
+    <tr>
+        <td><code>&gt;</code></td>
+        <td>Maior. Verifica se o valor da esquerda é maior que o da direita.</td>
+    </tr>
+    <tr>
+        <td><code>&lt;=</code></td>
+        <td>Menor ou Igual. Verifica se o valor da esquerda é menor ou igual ao da direita.</td>
+    </tr>
+    <tr>
+        <td><code>&gt;=</code></td>
+        <td>Maior ou Igual. Verifica se o valor da esquerda é maior ou igual ao da direita.</td>
+    </tr>
+</table>
+
+<p>Veja um exemplo simples de uso:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro n1, n2
+        
+        escreva("Digite o primeiro número: ")
+        leia(n1)
+        escreva("Digite o segundo número: ")
+        leia(n2)
+        
+        escreva("Os dois números são iguais? ", n1 == n2, ".\n")
+        escreva("Os dois números são diferentes? ", n1 != n2, ".\n")
+        escreva("O primeiro número é menor do que o segundo? ", n1 &lt; n2, ".\n")
+        escreva("O primeiro número é maior do que o segundo? ", n1 &gt; n2, ".\n")
+        escreva("O primeiro número é menor ou igual ao segundo? ", n1 &lt;= n2, ".\n")
+        escreva("O primeiro número é maior ou igual ao segundo? ", n1 &gt;= n2, ".\n")
+    }
+}
+</code>
+</pre>
+
+<p>Esses operadores, geralmente são usados com estruturas condicionais e de repetição, que veremos mais pra frente. Note que o operador de igualdade usa dois símbolos de igual (<code>==</code>), já que um igual sozinho representa atribuição.</p>
+
+<p>Veja um fluxograma desse código acima:</p>
+
+<img src="imagens/fluxograma-operadores-relacionais.png" alt="Fluxograma de Operadores Relacionais" style="max-width: 500px"/>
+
+<p>Algumas pessoas têm dificuldade pra saber qual é o símbolo de menor e qual é o de maior. Podemos usar a analogia da boca de jacaré pra saber qual é o símbolo, no exemplo, o jacaré é guloso e abre sempre a boca pro maior. Veja a imagem abaixo:</p>
+
+<img src="imagens/simbolos-jacare.png" alt="Símbolos de Menor, Igual e Maior com Jacaré" style="max-width: 350px"/>
+
+<p>No caso acima, seria representado assim:</p>
+
+<pre>
+<code>
+3 &lt; 4
+
+9 &gt; 6
+</code>
+</pre>
+
+<p>Outra forma de lembrar qual é o símbolo de maior e menor é pensar assim:</p>
+
+<ul>
+    <li>A ponta do símbolo (a parte menor que parece uma setinha) sempre aponta para o número menor.</li>
+    <li>A parte aberta (a parte maior) sempre fica voltada para o número maior.</li>
+</ul>
+
+<h3>Operadores Lógicos</h3>
+
+<p>Em algoritmos, os operadores lógicos são usados para combinar ou modificar expressões booleanas (lógica, ou seja, <code>verdadeiro</code> ou <code>falso</code>).</p>
+
+<p>Veja um exemplo simples com o <code>e</code>, que só é verdadeiro quando as duas condições forem verdadeiras:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro num
+        
+        escreva("Digite um número: ")
+        leia(num)
+        
+        escreva("O número digitado é igual a 10 e é par? ", num == 10 e num % 2 == 0, ".\n")
+    }
+}
+</code>
+</pre>
+
+<p>PS: Saiba sempre que pra verificar se um número é par, verificamos se o resto dele dividido por dois é igual a zero, caso o resto seja um, ele é ímpar (por exemplo, o resto de 10 dividido por 2 é 0, o resto de 9 dividido por 2 é 1).</p>
+
+<p>O mesmo código acima, só que com o <code>ou</code>, que é verdadeiro quando pelo menos uma das condições for verdadeira:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro num
+        
+        escreva("Digite um número: ")
+        leia(num)
+        
+        escreva("O número digitado é igual a 10 ou é par? ", num == 10 ou num % 2 == 0, ".\n")
+    }
+}
+</code>
+</pre>
+
+<p>Já o <code>nao</code>, apenas faz a inversão do valor lógico (ou seja, verdadeiro vira falso e falso vira verdadeiro):</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        logico chovendo = verdadeiro // Experimente trocar por falso
+        
+        escreva("Posso ficar sem guarda-chuva? ", nao chovendo, "\n")
+    }
+}
+</code>
+</pre>
+
+<p>As tabelas <q>verdade</q> do <code>e</code>, <code>ou</code> e <code>nao</code> são essas:</p>
+
+<table style="float: left">
+    <caption>Tabela Verdade do <q><code>e</code></q></caption>
+    <tr>
+        <th>Operando 1</th>
+        <th>Operando 2</th>
+        <th>Resultado</th>
+    </tr>
+    <tr>
+        <td><code>falso</code></td>
+        <td><code>falso</code></td>
+        <td><code>falso</code></td>
+    </tr>
+    <tr>
+        <td><code>falso</code></td>
+        <td><code>verdadeiro</code></td>
+        <td><code>falso</code></td>
+    </tr>
+    <tr>
+        <td><code>verdadeiro</code></td>
+        <td><code>falso</code></td>
+        <td><code>falso</code></td>
+    </tr>
+    <tr>
+        <td><code>verdadeiro</code></td>
+        <td><code>verdadeiro</code></td>
+        <td><code>verdadeiro</code></td>
+    </tr>
+</table>
+
+<table style="float: left; margin-left: 25px;">
+    <caption>Tabela Verdade do <q><code>ou</code></q></caption>
+    <tr>
+        <th>Operando 1</th>
+        <th>Operando 2</th>
+        <th>Resultado</th>
+    </tr>
+    <tr>
+        <td><code>falso</code></td>
+        <td><code>falso</code></td>
+        <td><code>falso</code></td>
+    </tr>
+    <tr>
+        <td><code>falso</code></td>
+        <td><code>verdadeiro</code></td>
+        <td><code>verdadeiro</code></td>
+    </tr>
+    <tr>
+        <td><code>verdadeiro</code></td>
+        <td><code>falso</code></td>
+        <td><code>verdadeiro</code></td>
+    </tr>
+    <tr>
+        <td><code>verdadeiro</code></td>
+        <td><code>verdadeiro</code></td>
+        <td><code>verdadeiro</code></td>
+    </tr>
+</table>
+
+<br/>
+
+<table style="margin: auto auto 75px 625px">
+    <caption>Tabela Verdade do <q><code>nao</code></q></caption>
+    <tr>
+        <th>Operando</th>
+        <th>Resultado</th>
+    </tr>
+    <tr>
+        <td><code>falso</code></td>
+        <td><code>verdadeiro</code></td>
+    </tr>
+    <tr>
+        <td><code>verdadeiro</code></td>
+        <td><code>falso</code></td>
+    </tr>
+</table>
+
+<ul>
+    <li><a href="tudo-sobre-algoritmos-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-algoritmos-3.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

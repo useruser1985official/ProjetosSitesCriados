@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C++ com QT Creator</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++ com QT Creator</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cppqt-1.html">Tudo sobre C++ com QT Creator Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cppqt-2.html">Tudo sobre C++ com QT Creator Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cppqt-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C++ com QT Creator Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cppqt-4.html">Tudo sobre C++ com QT Creator Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cppqt-5.html">Tudo sobre C++ com QT Creator Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cppqt-6.html">Tudo sobre C++ com QT Creator Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cppqt-7.html">Tudo sobre C++ com QT Creator Parte 7!</a></li>
+                </menu>
+            </header>
+          
+<h2>Tudo sobre C++ com QT Creator Parte 3</h2>
+
+<h3>Radiobutton</h3>
+
+<p>Diferente do checkbox, que permite escolher várias opções, o radiobutton permite escolher apenas uma opção dentro de um grupo.</p>
+
+<p>Abra um novo projeto e coloque três radiobuttons para cores, três para transportes e três para linguagens de programação (que serão colocados dentro de um groupbox), e alinhe cada grupo num layout vertical. Cada grupo usará uma técnica diferente. Coloque também um botão e mude as variáveis de todos.</p>
+
+<p>Pelo fato de cada grupo ter sido organizado num layout, já deixará os radiobuttons nos grupos que eles foram alinhados. Também podemos escolher uma opção marcada como padrão em cada grupo, marcando checked nas propriedades.</p>
+
+<p>Adicione o slot de clicked do botão, e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnVerif_clicked() {
+    QString msg, cor, transp, prog;
+    int numTr = 0;
+
+    msg = "";
+
+    // Grupo 1:
+
+    if(ui->radVerm->isChecked()) {
+        cor = "Vermelho";
+    }
+    else if(ui->radVerd->isChecked()) {
+        cor = "Verde";
+    }
+    else if(ui->radAzul->isChecked()) {
+        cor = "Azul";
+    }
+
+    // Grupo 2:
+
+    if(ui->radAv->isChecked()) {
+        numTr = 1;
+    }
+    else if(ui->radCar->isChecked()) {
+        numTr = 2;
+    }
+    else if(ui->radNav->isChecked()) {
+        numTr = 3;
+    }
+
+    switch(numTr) {
+        case 1:
+            transp = "Avião";
+            break;
+        case 2:
+            transp = "Carro";
+            break;
+        case 3:
+            transp = "Navio";
+            break;
+        default:
+            transp = "Nenhum";
+            break;
+    }
+
+    // Grupo 3:
+
+    QVector&lt;bool&gt; lings; // Inclua QVector
+
+    lings.push_back(ui->radCpp->isChecked());
+    lings.push_back(ui->radCsh->isChecked());
+    lings.push_back(ui->radJav->isChecked());
+
+    if(lings[0]) {
+        prog = "C++";
+    }
+    else if(lings[1]) {
+        prog = "C#";
+    }
+    else if(lings[2]) {
+        prog = "Java";
+    }
+
+    // Exibição:
+
+    msg = "Cor: " + cor + "\nTransporte: " + transp + "\nLinguagem: " + prog;
+
+    QMessageBox::information(this, "Mensagem", msg); // Inclua QMessagebox
+}
+</code>
+</pre>
+
+<h3>Inserindo Imagens nos Formulários</h3>
+
+<p>Para inserir imagens, podemos utilizar um label, coloque um e aumente ele, em pixmap, selecione a imagem desejada.</p>
+
+<p>Para que a imagem não seja cortada e se ajuste automaticamente, marque a opção scaledContent.</p>
+
+<p>Podemos fazer também via código, colocando assim, num outro label, esse código no construtor:</p>
+
+<pre>
+<code>
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+    
+    QPixmap logo("C:\\Users\\imagem.jpg"); // Inclua QPixmap, cuidado com a barra, coloque seu caminho.
+    
+    ui->lblImg->setPixmap(logo);
+}
+</code>
+</pre>
+
+<p>PS: Para a imagem se redimensionar sem interferir na label, podemos alterar o parâmetro assim:</p>
+
+<pre>
+<code>
+ui->lblImg->setPixmap(logo.scaled(100, 100, Qt::KeepAspectRatio));
+</code>
+</pre>
+
+<p>Crie agora um botão, adicione um slot e o clicked dele, para alterarmos a imagem ao clicar nele, e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnImg_clicked() {
+    QPixmap img("C:\\Users\\picture.jpg"); // Inclua QPixmap, cuidado com a barra coloque tem caminho.
+
+    ui->lblImg->setPixmap(img.scaled(100, 100, Qt::KeepAspectRatio));    
+}
+</code>
+</pre>
+
+<p>PS: É recomendável criar um arquivo de recurso para inserir imagens no programa.</p>
+
+<h3>Barra de Menus e Barra de Ferramentas</h3>
+
+<p>Crie um novo projeto, caso ele não tenha a menu bar, adicione uma clicando no botão direito e em create menu bar.</p>
+
+<p>Para adicionar um menu, clique em type here duas vezes e escreva o texto Arquivo. Nos itens dele coloque Novo, Salvar, Editar e Sair (observe que as opções type here ou add separator não aparecerão na compilação, são apenas para uso da criação dos menus). Crie ao lado outro menu com o texto Editar e um item com Pesquisar.</p>
+
+<p>PS: Abaixo do formulário, na IDE, tem as opções para mudarmos os nomes e variáveis dos itens, altere as variáveis. Nessa área é que criaremos os slots e colocaremos os ícones.</p>
+
+<p>Para colocar ícones, adicione um arquivo de recursos, indo em new file, qt e add resource file, e colocando o prefixo /icons, aí adicionamos os arquivos de ícones.</p>
+
+<p>Para adicionar os ícones, vá nos itens e em edit, vá em icon e em add resource, e escolha os ícones desejados.</p>
+
+<p>PS: Na tool bar (adicione caso ela ainda não exista, com o botão direito), podemos adicionar atalhos para esses itens do menu, simplesmente arrastando da barra de status da IDE os itens para dentro dela. Aparecerá apenas os ícones referentes à eles.</p>
+
+<p>Crie um novo formulário no mesmo projeto, indo no botão direito, em qt, e qt design form class, e coloque um label qualquer nele.</p>
+
+<p>No mainwindow.cpp, inclua o h do novo formulário (com #include "novoform.h").</p>
+
+<p>No item novo, adicione no slot do item novo o triggered() esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_itNov_triggered() {
+    NovoForm formulario;
+    
+    formulario.exec();
+}
+</code>
+</pre>
+
+<p>No caso de Main Window:</p>
+
+<pre>
+<code>
+void MainWindow::on_itNov_triggered() {
+    NovoForm *formulario = new NovoForm(this);
+    
+    formulario->show();
+}
+</code>
+</pre>
+
+<p>Nos outros simplesmente colocaremos mensagens, veja um exemplo para o item salvar:</p>
+
+<pre>
+<code>
+void MainWindow::on_itSalv_triggered() {
+    QMessageBox::information(this, "Salvo", "Salvo com Sucesso!"); // Inclua QMessageBox
+}
+</code>
+</pre>
+
+<p>Faça o mesmo com os outros itens.</p>
+
+<p>Pra sair, pode ser simplesmente assim:</p>
+
+<pre>
+<code>
+void MainWindow::on_itSair_triggered() {
+    QApplication::quit();
+    
+    // Também pode ser simplesmente close();
+}
+</code>
+</pre>
+
+<h3>Combobox - Caixa de Listagem</h3>
+
+<p>Crie um novo projeto e coloque um botão e uma combobox nele, e edite as variáveis, para inserir itens nele, clique com o botão direito e vá em edit itens. Vamos colocar algumas lingagens de programação nele.</p>
+
+<p>No botão, edite o nome e coloque no slot de clicked dele esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnClick_clicked() {
+    QMessageBox::about(this, "Cursos", ui->cxItens->currentText()); // Inclua QMessageBox
+}
+</code>
+</pre>
+
+<p>Apague os itens pra deixar a caixa de listagem vazia, pois agora iremos adicionar através de código.</p>
+
+<p>Para adicionar via código, basta colocar o método addItem no construtor, assim:</p>
+
+<pre>
+<code>
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+    
+    ui->cxItens->addItem("C++");
+    ui->cxItens->addItem("PHP");
+    ui->cxItens->addItem("C#");
+    ui->cxItens->addItem("Javascript");   
+}
+</code>
+</pre>
+
+<p>E seguindo esse raciocínio, podemos utilizar um vetor e um laço para adicionar os itens, dessa forma:</p>
+
+<pre>
+<code>
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+    
+    QString cursos[4] = {"C++", "PHP", "C#", "Javascript"};
+
+    for(int i = 0; i < 4; i++) {
+        ui->cxItens->addItem(cursos[i]);
+    }
+}
+</code>
+</pre>
+
+<p>Agora, adicione um arquivo de recursos, adicione o prefixo /icons, e em add files, adicione os ícones na mesma pasta do projeto.</p>
+
+<p>Para adicionar ícones via código, alteramos o código assim:</p>
+
+<pre>
+<code>
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+
+    QString cursos[4] = {"C++", "PHP", "C#", "Javascript"};
+    QString icones[4] = {":/icons/files/cpp.png", ":/icons/files/php.png", ":/icons/files/csharp.png", ":/icons/files/js.png"}; // Inclua QIcon
+
+    for(int i = 0; i < 4; i++) {
+        ui->cxItens->addItem(QIcon(icones[i]), cursos[i]);
+    }
+}
+</code>
+</pre>
+
+<p>PS: Podemos adicionar elementos usando o insertItem assim, no construtor:</p>
+
+<pre>
+<code>
+ui->cxItens->insertItem(3, "HTML");
+// Com ícones: ui->cxItens->insertItem(3, QIcon(":/icons/files/html.png"), "HTML");
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-cppqt-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-cppqt-4.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

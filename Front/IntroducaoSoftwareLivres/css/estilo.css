@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+body {
+    background: url("../imagens/fundo.png") center fixed repeat;
+    background-color: rgb(255, 0, 255);
+}
+
+div#interface {
+    background-color: rgba(16, 16, 64, 0.95);
+    color: white;
+    margin: -8px;
+    padding: 25px;
+    min-height: 750px;
+}
+
+a {
+    color: rgb(190, 255, 203);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(190, 194, 255);
+    text-decoration: underline;
+}
+
+table {
+    border: 1px solid white;
+    border-spacing: 0px;
+}
+
+th {
+    color: rgb(16, 16, 64, 0.95);
+    background-color: white;
+}
+
+th, td {
+    border: 1px solid white;
+    padding: 5px;
+}
+
+code {
+    color: rgb(0, 255, 128);
+}

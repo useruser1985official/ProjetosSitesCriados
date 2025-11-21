@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Python</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Python</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-python-1.html">Tudo sobre Python Parte 1!</a></li>
+                    <li><a href="tudo-sobre-python-2.html">Tudo sobre Python Parte 2!</a></li>
+                    <li><a href="tudo-sobre-python-3.html">Tudo sobre Python Parte 3!</a></li>
+                    <li><a href="tudo-sobre-python-4.html">Tudo sobre Python Parte 4!</a></li>
+                    <li><a href="tudo-sobre-python-5.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Python Parte 5!</a></li>
+                    <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
+                    <li><a href="tudo-sobre-python-7.html">Tudo sobre Python Parte 7!</a></li>
+                </menu>
+            </header>
+           
+<h2>Tudo sobre Python Parte 5</h2>
+
+<h3>Listas - Parte 1</h3>
+
+<p>Como visto anteriormente, ficamos sabendo que as tuplas são variáveis compostas que usamos para guardar vários dados. Por exemplo, colocamos uma tupla lanche dessa forma:<p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim")
+print(lanche[2]) # Exibirá a pizza
+</code>
+</pre>
+
+<p>Mas se criarmos uma nova atribuição à qualquer posição da tupla, ele não aceitará, pelo fato da tupla ser imutável.<p>
+
+<p>Nesse caso usamos as listas, que podem ser modificadas, dessa forma:</p>
+
+<pre>
+<code>
+lanche = ["hambúrguer", "suco", "pizza", "pudim"]
+lanche[3] = "picolé"
+print(lanche)
+</code>
+</pre>
+
+<p>Visualmente, a diferença é que a lista usa colchetes, enquanto a tupla usava parênteses. Na verdade, as listas são mais próximas aos arrays em outras linguagens.<p>
+
+<p>PS: Nas listas também podemos colocar variáveis de diferentes tipos na mesma lista.</p>
+
+<p>Só que para adicionar um novo item à lista, usamos métodos do objeto de lista, o <code>append()</code> para colocar itens no final, e o <code>insert()</code> para colocar numa posição especifica, por exemplo:</p>
+
+<pre>
+<code>
+lanche = ["hambúrguer", "suco", "pizza", "pudim"]
+lanche[3] = "picolé"
+lanche.append("cookie") # Adiciona uma nova posição no final
+lanche.insert(0, "cachorro-quente") # Adiciona o item na posição especificada
+print(lanche)
+</code>
+</pre>
+
+<p>E para excluir um elemento, podemos usar del, pop ou remove, dessas formas:<p>
+
+<pre>
+<code>
+del lanche[3] # del() é usado para excluir objetos
+lanche.pop(3) # pop() exclui o último elemento quando não tem parâmetro de índices
+lanche.remove("pizza") # remove() exclui pelo nome do item
+</code>
+</pre>
+
+<p>PS: O <code>pop()</code> é usado pra remover o último item da lista, mas pode receber como parâmetro a posição do índice. Sem parâmetros, ele remove o último item da lista.<p>
+
+<p>Podemos usar um if para verificar se existe um item:</p>
+
+<pre>
+<code>
+lanche = ["hambúrguer", "suco", "pizza", "pudim"]
+lanche[3] = "picolé"
+if "pizza" in lanche:
+    lanche.remove("pizza")
+print(lanche)
+</code>
+</pre>
+
+<p>Assim como as tuplas, podemos também fazer o fatiamento, onde ele mostra apenas parte dos elementos da lista, assim:</p>
+
+<pre>
+<code>
+lanche = ["hambúrguer", "suco", "pizza", "pudim"]
+print(lanche[0:2])
+</code>
+</pre>
+
+<p>PS: No caso acima, ele não mostrará o elemento 2, e sim parará nesse elemento, no caso ele exibe os elementos 0 e 1 (hambúrguer e suco).</p>
+
+<p>Temos também outros tipos de fatiamento assim:</p>
+
+<pre>
+<code>
+lanche = ["hambúrguer", "suco", "pizza", "pudim"]
+print(lanche[1:]) # Mostra do elemento 1 até o final
+print(lanche[-1]) # Mostra o último elemento, se for -2 é o penúltimo e etc.
+</code>
+</pre>
+
+<p>Podemos também usar o <code>list()</code> para criar listas, e usar um <code>range()</code> para preencher ela, veja um exemplo onde ele é usado:<p>
+
+<pre>
+<code>
+valores = list(range(4, 11)) # Preenche a lista com valores de 4 até 10, não confunda com as posições
+
+print(valores)
+</code>
+</pre>
+
+<p>Podemos também ordenar os valores numéricos de um array com o método <code>sort()</code>, assim:<p>
+
+<pre>
+<code>
+valores = [8, 2, 5, 4, 9, 3, 0]
+valores.sort()
+print(valores)
+</code>
+</pre>
+
+<p>PS: Pra ordenar em ordem inversa, passe um parâmetro no <code>sort()</code>, assim:<p>
+
+<pre>
+<code>
+valores.sort(reverse = True)
+</code>
+</pre>
+
+<p>Podemos usar também o <code>len()</code> pra retornar a quantidade de índices da lista:<p>
+
+<pre>
+<code>
+len(valores)
+</code>
+</pre>
+
+<p>E normalmente, podemos utilizar outros elementos assim:</p>
+
+<pre>
+<code>
+print(valores.count(5))
+print(valores.index(2))
+</code>
+</pre>
+
+<p>O método count, só lembrando, ele conta quantas vezes determinado elemento aparece numa variável composta. O index mostra a posição da primeira ocorrência do elemento.</p>
+
+<p>Se tentarmos mudar uma tupla o valor de índice de uma tupla, ela dará erro, por exemplo:</p>
+
+<pre>
+<code>
+num = (2, 5, 9, 1) # Tupla
+
+num[2] = 3 # Dará Erro
+
+print(num)
+</code>
+</pre>
+
+<p>Mas uma lista podemos mudar normalmente, dessa forma:</p>
+
+<pre>
+<code>
+num = [2, 5, 9, 1] # Lista
+
+num[2] = 3
+
+print(num)
+</code>
+</pre>
+
+<p>Só que, diferente dos arrays em outras linguagens como o PHP e Javascript, não podemos adicionar valores dessa forma:</p>
+
+<pre>
+<code>
+num = [2, 5, 9, 1]
+
+num[2] = 3
+num[4] = 7 # Dará Erro
+
+print(num)
+</code>
+</pre>
+
+<p>Nesse caso, usamos o <code>append()</code>, assim:</p>
+
+<pre>
+<code>
+num = [2, 5, 9, 1]
+
+num[2] = 3
+num.append(7)
+
+print(num)
+</code>
+</pre>
+
+<p>E podemos ordenar tudo depois com o <code>sort()</code>:<p>
+
+<pre>
+<code>
+num = [2, 5, 9, 1]
+
+num[2] = 3
+num.append(7)
+
+num.sort()
+
+print(num)
+</code>
+</pre>
+
+<p>Podemos também reverter o <code>sort()</code>, inserir um valor novo numa posição (no caso a 2) com o <code>insert()</code> e exibir os elementos dela com o <code>len()</code>, assim:<p>
+
+<pre>
+<code>
+num = [2, 5, 9, 1]
+
+num[2] = 3
+num.append(7)
+
+num.sort(reverse = True)
+
+num.insert(2, 0) # Valor 0 na posição 2
+
+print(num)
+print(f"Essa lista tem {len(num)} valores.")
+</code>
+</pre>
+
+<p>E eliminando valores também, com o <code>pop()</code>:<p>
+
+<pre>
+<code>
+num = [2, 5, 9, 1]
+
+num[2] = 3
+num.append(7)
+
+num.sort(reverse = True)
+
+num.insert(2, 0) # Valor 0 na posição 2
+
+num.pop() # Remove o último
+num.pop(2) # Remove o valor da posição 2
+
+print(num)
+print(f"Essa lista tem {len(num)} valores.")
+</code>
+</pre>
+
+<p>Também podemos usar o <code>remove()</code> pra remover procurando pelo conteúdo:<p>
+
+<pre>
+<code>
+num.remove(2)
+</code>
+</pre>
+
+<p>PS: Ele só remove o primeiro elemento encontrado, caso tenha mais um 2 na lista, ele não eliminará os outros, apenas o primeiro. Mas podemos usar um laço para remover todos, por exemplo: <p>
+
+<pre>
+<code>
+for i in range(0, len(num)):
+    if 2 in num:
+        num.remove(2)
+</code>
+</pre>
+
+<p>Além disso, podemos usar as condições para ele verificar se existe um elemento, por exemplo:</p>
+
+<pre>
+<code>
+num = [2, 5, 9, 1, 2, 2, 2]
+
+num[2] = 3
+num.append(7)
+
+num.sort(reverse = True)
+
+num.insert(2, 0) # Valor 0 na posição 2
+
+if 4 in num:
+    num.remove(4)
+else:
+    print("Não Achei o Número 4!")
+
+print(num)
+</code>
+</pre>
+
+<p>Basicamente, uma lista vazia pode ser criada dessas duas formas:</p>
+
+<pre>
+<code>
+valores = []
+valores = list()
+</code>
+</pre>
+
+<p>Podemos mudar a exibição dos valores, assim:</p>
+
+<pre>
+<code>
+valores = []
+
+valores.append(5)
+valores.append(9)
+valores.append(4)
+
+for v in valores:
+    print(f"{v}...", end="")
+</code>
+</pre>
+
+<p>Ou usando o enumerate, que pega os valores das posições da lista:<p>
+
+<pre>
+<code>
+valores = list()
+
+valores.append(5)
+valores.append(9)
+valores.append(4)
+
+for c, v in enumerate(valores):
+    print(f"Na posição {c} encontramos o valor {v}!")
+</code>
+</pre>
+
+<p>Podemos ler valores do teclado também, assim:</p>
+
+<pre>
+<code>
+valores = list()
+
+for cont in range(0, 5):
+    valores.append(int(input("Digite um valor: ")))
+
+print("\n")
+
+for c, v in enumerate(valores):
+    print(f"Na posição {c} encontramos o valor {v}!")
+</code>
+</pre>
+
+<p>Para excluir todos os itens de uma lista, use o método <code>clear()</code>, assim:</p>
+
+<pre>
+<code>
+valores.clear()
+</code>
+</pre>
+
+<p>Podemos atribuir o conteúdo de uma lista a outra, assim:</p>
+
+<pre>
+<code>
+a = [2, 3, 4, 7]
+b = a
+
+b[2] = 8
+
+print(f"Lista A: {a}")
+print(f"Lista B: {b}")
+</code>
+</pre>
+
+<p>Só que tem um detalhe, nesse método acima, ele faz uma ligação, e altera tanto o valor da mesma posição na lista a quanto da b.<p>
+
+<p>Para simplesmente copiar uma lista sem ligação, coloque um [:] depois da variável da lista a ser copiada, por exemplo:</p>
+
+<pre>
+<code>
+a = [2, 3, 4, 7]
+b = a[:]
+
+b[2] = 8
+
+print(f"Lista A: {a}")
+print(f"Lista B: {b}")
+</code>
+</pre>
+
+<p>Uma maneira muito elegante de criar uma lista é usando a list comprehension. Também chamada de listcomp, é uma forma pythônica de criar uma lista com uso de um objeto iterável.</p>
+
+<p>Esse tipo de técnica é utilizado quando, dada uma sequência, deseja-se criar uma nova sequência, porém com as informações originais transformadas ou filtradas por um critério.</p>
+
+<p>Os comandos for-in são obrigatórios.</p>
+
+<p>As variáveis item e lista dependem do nome dado no programa. Veja um exemplo de sintaxe utilizando a listcomp:</p>
+
+<pre>
+<code>
+print([2 * x for x in range(10)])
+</code>
+</pre>
+
+<h3>Listas - Parte 2</h3>
+
+<p>Como sabemos, uma lista é mutável, e ela é declarada assim:</p>
+
+<pre>
+<code>
+dados = list()
+</code>
+</pre>
+
+<p>Sabemos também que usamos o append() para adicionar elementos, independente do tipo delas:</p>
+
+<pre>
+<code>
+dados.append("Sérgio")
+dados.append(25)
+</code>
+</pre>
+
+<p>E também sabemos que um print com o índice do elemento da lista, assim:</p>
+
+<pre>
+<code>
+print(dados[0])
+print(dados[1])
+</code>
+</pre>
+
+<p>Mas vamos aprender um novo método de copiar estruturas de listas, no caso, a estrutura toda, fazemos dessa forma:</p>
+
+<pre>
+<code>
+pessoas = list()
+pessoas.append(dados[:])
+</code>
+</pre>
+
+<p>Nesse caso, quando colocamos apenas os dois pontos dentro dos colchetes, ele copia toda a lista e coloca dentro dessa lista (ou seja, uma lista dentro de outra).</p>
+
+<p>PS: Lembre do método de fatiamento de elementos usando os dois pontos, como já fizemos em strings, por exemplo.</p>
+
+<p>E da mesma forma, podemos colocar outros elementos em outros índices da lista pessoa.</p>
+
+<p>Podemos fazer também dessa forma:</p>
+
+<pre>
+<code>
+pessoas = [["Sérgio", 25], ["Maria", 19], ["João", 32]]
+</code>
+</pre>
+
+<p>Pode ver que esse negócio de listas compostas é bem parecido com as matrizes de outras linguagens de programação.</p>
+
+<p>Dessa forma, para exibir, usamos dois índices, o índice da lista "de fora" primeiro e a "de dentro" depois:</p>
+
+<pre>
+<code>
+print(pessoas[0][0])
+print(pessoas[1][1])
+print(pessoas[2][0])
+</code>
+</pre>
+
+<p>Se dermos apenas um índice para exibição, ele vai entender que o índice é a lista externa, e tudo que tiver dentro desse índice será exibido (no caso, a lista interna dentro dele):</p>
+
+<pre>
+<code>
+print(pessoas[1])
+</code>
+</pre>
+
+<p>Vamos considerar um programa onde declaramos uma lista simples, e adicionamos um nome e um número:</p>
+
+<pre>
+<code>
+teste = list()
+
+teste.append("Gustavo")
+teste.append(40)
+
+print(teste)
+</code>
+</pre>
+
+<p>E criaremos uma outra lista, denominada galera, que recebera dentro dela a lista teste:</p>
+
+<pre>
+<code>
+teste = list()
+
+teste.append("Gustavo")
+teste.append(40)
+
+galera = list()
+galera.append(teste)
+
+print(galera)
+</code>
+</pre>
+
+<p>Dessa forma, criamos uma lista composta.</p>
+
+<p>Só que tem um detalhe, caso mudemos os elementos da lista teste (a interna) e depois damos outro append, ele mudará o elemento nas duas posições da lista galera, como podem ver:</p>
+
+<pre>
+<code>
+teste = list()
+
+teste.append("Gustavo")
+teste.append(40)
+
+galera = list()
+galera.append(teste)
+
+teste[0] = "Maria"
+teste[1] = 22
+
+galera.append(teste)
+
+print(galera)
+</code>
+</pre>
+
+<p>Isso nós já vimos anteriormente, porque as duas listas criam uma ligação através do append, por isso, é necessário colocar os colchetes com os dois pontos pra copiar a lista completamente.</p>
+
+<pre>
+<code>
+teste = list()
+
+teste.append("Gustavo")
+teste.append(40)
+
+galera = list()
+galera.append(teste[:])
+
+teste[0] = "Maria"
+teste[1] = 22
+
+galera.append(teste[:])
+
+print(galera)
+</code>
+</pre>
+
+<p>No caso acima sim, dá certo.</p>
+
+<p>Essa é uma forma de declaração de listas compostas, e também as formas de exibir a mesma:</p>
+
+<pre>
+<code>
+galera = [["João", 19], ["Ana", 33], ["Joaquim", 13], ["Maria", 45]]
+
+print(galera) # Exibe a lista composta toda
+print(galera[0]) # Exibe a lista dentro do índice 0 da galera.
+print(galera[0][0]) # Exibe o primeiro item do índice 0 da galera.
+</code>
+</pre>
+
+<p>Podemos usar laços for para exibir as listas:</p>
+
+<pre>
+<code>
+galera = [["João", 19], ["Ana", 33], ["Joaquim", 13], ["Maria", 45]]
+
+for p in galera:
+    print(p)
+    
+print("")
+
+for p in galera:
+    print(p[0])
+</code>
+</pre>
+
+<p>Incluindo for aninhado:</p>
+
+<pre>
+<code>
+galera = [["João", 19], ["Ana", 33], ["Joaquim", 13], ["Maria", 45]]
+
+for l in range(0, 4):
+    for c in range(0, 2):
+        if c < 2 - 1:
+            print(galera[l][c], end=" ")
+        else:
+            print(galera[l][c])
+</code>
+</pre>
+
+<p>Podemos também fazer assim, onde galera tem dados da lista dado dentro:</p>
+
+<pre>
+<code>
+galera = list()
+dado = list()
+
+for c in range(0, 5):
+    dado.append(str(input("Nome: ")))
+    dado.append(int(input("Idade: ")))
+    galera.append(dado[:])
+    dado.clear()
+
+print(galera)
+</code>
+</pre>
+
+<p>PS: Não esqueça do índice com dois pontos para copiar.</p>
+
+<p>Veja o programa acima com mais recursos:</p>
+
+<pre>
+<code>
+galera = list()
+dado = list()
+mai = men = 0 # Atribuição dupla, só permitida em variáveis simples.
+
+for c in range(0, 5):
+    dado.append(str(input("Nome: ")))
+    dado.append(int(input("Idade: ")))
+    galera.append(dado[:])
+    dado.clear()
+
+for p in galera:
+    if p[1] >= 18:
+        print(f"{p[0]} é maior de idade!")
+        mai += 1
+    else:
+        print(f"{p[0]} é menor de idade!")
+        men += 1
+
+print(f"\nTemos {mai} maiores e {men} menores.")
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-python-4.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-python-6.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

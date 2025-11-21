@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Engenharia Reversa</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Engenharia Reversa</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-engenharia-reversa-1.html">Tudo sobre Engenharia Reversa Parte 1!</a></li>
+                    <li><a href="tudo-sobre-engenharia-reversa-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Engenharia Reversa Parte 2!</a></li>
+                    <li><a href="tudo-sobre-engenharia-reversa-3.html">Tudo sobre Engenharia Reversa Parte 3!</a></li>
+                    <li><a href="tudo-sobre-engenharia-reversa-4.html">Tudo sobre Engenharia Reversa Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Engenharia Reversa Parte 2</h2>
+
+<h3>Executável PE - Seções e Endereçamento</h3>
+
+<p>Abrindo o programinha Crackme, vemos que ele tem um desafio de login e senha para ser quebrado. Vamos abrir esse programinha no Detect It Easy.</p>
+
+<p>Novamente falando do cabecalho PE, vá nessa opção no DIE e vá em Dos Header, ali vemos que os programas PE começam com o mesmo cabeçalho do DOS (que é 5a4d). Se vermos o mesmo programa no Hex Workshop, veremos que ele começa com 4D 5A, que são os mesmos bytes, representando MZ. Lembrando que eles ficam numa ordem reversa, como podemos ver os outros bytes do programa, como o 0050, que no Hex aparece 50 00, compare todos os bytes em ambos os programas.</p>
+
+<p>O último campo do programa é de 4 bytes, que são os números 00000100 que aparecem no DIE. No editor Hex, encontramos esses mesmos bytes nas posiçõs de 3C a 3F (ou aproximada), que terá 00 01 00 00. Esse é o final do cabeçalho DOS. Do lado aparece o número que ele seria no decimal. Esse campo indica onde está a assinatura PE, então iremos até a posição 100, que terá os bytes 50 45 00 00.</p>
+
+<p>No PE, vamos em NT Headers, onde está a assinatura PE. Veremos que estará em File Header, em Machine, o número 014c, veremos então no Hex que logo após a assinatura PE, tem justamente os bytes 4C 01, isso é o início do cabeçalho do arquivo (cabeçalho coff), que é a máquina que ele vai rodar. O 014c é os sistemas 32 bits (8664 seria os sistemas 64 bits). Outros campos importantes são o NumberOfSessions e o TimeDateStamp</p>
+
+<p>Quando todos os cabeçalhos do File Header acabam, ele passa para o Optional Header, ali tem outros campos como o Magic e o AddressOfEntryPoint, que é onde o binário vai começar a executar, e o ImageBase que é um padrãozinho para binários no Windows.</p>
+
+<p>Em File Headers, vamos em NumberOfSessions, as sessões são como as gavetas de uma cômoda, e cada sessão é colocado um tipo de dados diferentes. O cada cabeçalho das sessões tem campos diferentes pra cada uma. O binário mesmo está da flags pra trás.</p>
+
+<p>No Hex. podemos procurar o cabeçalho CODE procurando o texto dele ao lado , onde deverpa estar aproximadamente nas posições entre 1F8 e 1FF, são reservados sempre 8 bytes para o nome. Logo após ele, teremos o endereço dela, representado por 00 10, que no DIE teremos o 1000 em CODE V.size. Logo após vem o DATA, da mesma forma. Todas essas sessões cada uma tem uma função. Essas sessões são definidas pelo compilador, que podem variar, mas o comum é ter o CODE (a codificação), o DATA (para dados), etc.</p>
+
+<p>Quando compilamos um programa em C, por exemplo, as variáveis ficariam numa sessão de dados, o if e o printf seria na sessão de código, já que eles gerarão o código assembly que faz essa chamada. Assim entendemos melhor pra quê servem as sessões. Normalmente as sessões de dados são dados que inclusive podem ser escritos, podemos por exemplo alterar um ponteiro num programa em C, por exemplo.</p>
+
+<p>Vamos supor esse simples programa em C:</p>
+
+<pre>
+<code>
+int a = 1;
+
+char s[] = "um nome qualquer";
+
+if(a > 4) {
+    printf("%s\n", s);
+}
+
+s[2] = 'c';
+</code>
+</pre>
+
+<p>Essa alteração fará ser escrito "umcnome qualquer".</p>
+
+<p>Quando o loader carrega um binário no Windows, ele pega essas sessões e as lê, e faz um mapeamento delas em memória, ao mapear elas, ele define as flags que ela vai ter, e estar flags tem permissões que vão funcionar em memória. Na flag do CODE, por exemplo, podemos clicar em Flags com o botão direito e ir em Edit Header, e depois em Characteristics, ali podemos ver todas as permissões que essa flag tem, como as de leitura e execução. As permissões de memória todas começam com MEM. Olhando a flag de DATA, nas suas características terá as permissões de leitura e gravação (o que permite coisas como alterar um dado no programa). Temos outras sessões também como a .rsrc, que contém os arquivos internos do programa, como os de ícones, representados por bytes em hexadecimal (podemos ver isso clicando no .rsrc com o botão direito e indo em HEX, e podemos pegar fazer um DUMP da mesma, da mesma forma). No começo do DIE, podemos ir em Resource, que mostrará todos os arquivos do programa, como ícones.</p>
+
+<p>Voltando no DIE em PE, em NT Headers e Optional Header, vamos em AdressOfEntryPoint, que aponta para um endereço que está naquela sessão, veremos que ele inicia em 1000, em Sections, veremos que em V.Address em CODE terá também 1000. Essa é a primeira sessão a ser executada.</p>
+
+<p>No começo do DIE, o ImageBase seria o arquivo em si quando está em memória, e ele irá para o endereço 400000 (padrão dos executáveis 32 bits, mas esse é só um padrão que ele ocuparia caso nenhum outro programa o estivesse usando). A soma do EntryPoint (1000) com o ImageBase (400000), poderemos ver no assembly dele 401000 (clicando na setinha ao lado em EntryPoint), nesse endereço teremos os bytes 6A00, e sua interpretação em Assembly.</p>
+
+<h3>Win32 API</h3>
+
+<p>No DIE, em import, podemos ver as DLLs das quais o programa depende para funcionar. Duas DLLs são bastante utilizadas no Windows, a KERNEL32.dll (presente em todos os binários PE, ela que chama as funções do kernel pra executar uma ação), e a USER32.dll (que tem funções "mais a cara" do usuário, que gera padrões de janelas, etc.). Resumindo, a API do Windows é o conjunto de funções que são oferecidas por determinadas DLLs. Aqui podemos ler mais sobre as APIs, inclusive pra componentes específicos como buttons e checkbox, e as DLLs das quais eles dependem: <a href="https://docs.microsoft.com/pt-br/windows/win32/apiindex/windows-api-list" target="_blank">https://docs.microsoft.com/pt-br/windows/win32/apiindex/windows-api-list</a></p>
+
+<p>São graças as DLLs que os programas em Windows ficam sempre com a "mesma carinha", diferente do Linux que não segue um padrão.</p>
+
+<p>Vamos supor esse programa em C:</p>
+
+<pre>
+<code>
+#include &lt;windows.h&gt;
+
+int main() {
+    MessageBox(NULL, "Testando a Windows API", "Info", 2);
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>Ele gerará uma janela com três botões (abortar, tentar, ignorar). No lugar do número podemos colocar também as constanteda biblioteca. Basicamente, essas são as informações sobre o programa em C: <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-messagebox" target="_blank">https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-messagebox</a></p>
+
+<p>No programa em C, uma MessageBox é chamada diretamente, em alguma linguagem como C#, Delphi ou Java, ele chama também essa biblioteca do C.</p>
+
+<h3>Imports Table</h3>
+
+<p>Tanto no Windows quanto no Linux, existem uma coisa chamada biblioteca compartilhada (no Windows são as DLL e no Linux geralmente são o SO e o LD). Quando escrevemos por exemplo um programa em C, a função interna printf chama uma biblioteca que permite a impressão do conteúdo no programa.</p>
+
+<p>O Windows já disponibiliza uma API que tem as funções para criar as janelas dos programas, por isso ela sempre ficam iguaizinhas.</p>
+
+<p>Quando analisamos um programa (como aquele crackme) no DIE, podemos ver que na janela dele tem um botão escrito imports, onde vemos todas as DLL dele, onde cada uma delas faz uma função diferente, essas DLLs são presentes nativamente no sistema. Podemos ver em PE e Directories, onde ficam os diretórios de dados (no PE o padrão é 16). O Export é mais usados em DLL que exporta funções para serem utilizadas, depois vem o Import, que é uma tabela onde todos os nomes de funções e DLLs estão. Se faltar uma DLL o programa não funcionará, já que antes do programa ser carregado ele procura no sistema elas.</p>
+
+<p>Sabendo de quais DLLs ele depende, podemos descobrir o que o programa faz. Isso vemos no DIE, abaixo, ao clicar nas DLLs, onde vemos as funções que cada uma faz.</p>
+
+<p>No Detect it Easy, podemos ir em Import e ver as DLLs das quais o programa depende.</p>
+
+<p>Agora, baixe esse programa aqui: <a href="https://sourceforge.net/projects/x64dbg/files/snapshots/snapshot_2018-11-27_12-40.zip/download" target="_blank">https://sourceforge.net/projects/x64dbg/files/snapshots/snapshot_2018-11-27_12-40.zip/download</a></p>
+
+<p>Abra o executável dentro desse programa. Podemos ver as funções do programa dentro do debug, onde estão coisas como as DLL que ele depende, etc. Dê o run no programa para isso.</p>
+
+<p>Para entender algumas instruções Assembly, leia esse artigo: <a href="http://numaboa.com.br/informatica/tutos/assembly/1122-instrucoes-comuns" target="_blank">http://numaboa.com.br/informatica/tutos/assembly/1122-instrucoes-comuns</a></p>
+
+<p>PS: Atenção ao ver o debug para vermos se estamos olhando o programa executável em si ou alguma DLL que ele depende.</p>
+
+<p>Ao fazer a engenharia reversa num programa, nós procuramos apenas a parte que queremos alterar, e não o programa inteiro. Por exemplo: Se o programa tem uma chamada de erro, olhamos e alteramos somente essa parte.</p>
+
+<p>Podemos pesquisar o que uma função do programa faz no Google, que deve retornar, por exemplo, a de MessageBox. Podemos alterar os números do endereço para, por exemplo, mudar o MessageBox de Warning para Information, por exemplo.</p>
+
+<h3>Executável ELF - Apresentação</h3>
+
+<p>Enquanto os executáveis do Windows geralmente são PE, os executáveis em Linux e sistemas Unix em geral (BSD, Mac OS, etc.) são os ELF.</p>
+
+<p>Se dermos o comando <code>file</code> num executável no Linux, podemos ver os dados desse programa. Veja por exemplo <code>file /bin/ls</code>.</p>
+
+<p>Dê o comando <code>view /usr/include/elf.h</code> para vermos as definições (macros, estruturas, etc.) de um programa ELF. Isso é um arquivo header de C.</p>
+
+<p>Podemos ver por exemplo, as diferenças de definição de programas de 32 e 64 bits.</p>
+
+<p>No começo desse cabeçalho, vemos as definições dos bytes, assim:</p>
+
+<pre>
+<code>
+#define EI_MAG0         0               /* File identification byte 0 index */
+#define ELFMAG0         0x7f            /* Magic number byte 0 */
+
+#define EI_MAG1         1               /* File identification byte 1 index */
+#define ELFMAG1         'E'             /* Magic number byte 1 */
+
+#define EI_MAG2         2               /* File identification byte 2 index */
+#define ELFMAG2         'L'             /* Magic number byte 2 */
+
+#define EI_MAG3         3               /* File identification byte 3 index */
+#define ELFMAG3         'F'             /* Magic number byte 3 */
+
+/* Conglomeration of the identification bytes, for easy testing as a word.  */
+#define ELFMAG          "\177ELF"
+#define SELFMAG         4
+</code>
+</pre>
+
+<p>Veja que as definições ELF estão lá, é isso que todo executável de sistemas Unix deverá ter. O <code>\177ELF</code> são os primeiros 4 bytes do programa.</p>
+
+<p>Dê o comando <code>hd -n32 /bin/ls</code> para ver que os primeiros 4 bytes do programa ls são representados exatamente por um ponto e ELF (cuja representação em hexadecimal é 45 4c 46).</p>
+
+<p>Agora observe essa linha do mesmo cabeçalho anterior:</p>
+
+<pre>
+<code>
+#define EI_CLASS        4               /* File class byte index */
+#define ELFCLASSNONE    0               /* Invalid class */
+#define ELFCLASS32      1               /* 32-bit objects */
+#define ELFCLASS64      2               /* 64-bit objects */
+#define ELFCLASSNUM     3
+</code>
+</pre>
+
+<p>Isso acima identifica a classificação do arquivo, cujo 0 é inválido, 1 é 32 bits e 2 é 64 bits. Um pouco mais abaixo podemos ver onde esses números estarão:</p>
+
+<pre>
+<code>
+#define EI_DATA         5               /* Data encoding byte index */
+#define ELFDATANONE     0               /* Invalid data encoding */
+#define ELFDATA2LSB     1               /* 2's complement, little endian */
+#define ELFDATA2MSB     2               /* 2's complement, big endian */
+#define ELFDATANUM      3
+</code>
+</pre>
+
+<p>Onde está comentado como complement, está o 2. Dando o comando hd no mesmo arquivo novamente, veremos que após os bytes referentes ao ELF, está justamente 02, o que identifica o programa como sendo de 64 bits.</p>
+
+<p>Nessa linha, podemos ver as várias versões de Unix que o programa rodaria:</p>
+
+<pre>
+<code>
+#define EI_OSABI        7               /* OS ABI identification */
+#define ELFOSABI_NONE           0       /* UNIX System V ABI */
+#define ELFOSABI_SYSV           0       /* Alias.  */
+#define ELFOSABI_HPUX           1       /* HP-UX */
+#define ELFOSABI_NETBSD         2       /* NetBSD.  */
+#define ELFOSABI_GNU            3       /* Object uses GNU ELF extensions.  */
+#define ELFOSABI_LINUX          ELFOSABI_GNU /* Compatibility alias.  */
+#define ELFOSABI_SOLARIS        6       /* Sun Solaris.  */
+#define ELFOSABI_AIX            7       /* IBM AIX.  */
+#define ELFOSABI_IRIX           8       /* SGI Irix.  */
+#define ELFOSABI_FREEBSD        9       /* FreeBSD.  */
+#define ELFOSABI_TRU64          10      /* Compaq TRU64 UNIX.  */
+#define ELFOSABI_MODESTO        11      /* Novell Modesto.  */
+#define ELFOSABI_OPENBSD        12      /* OpenBSD.  */
+#define ELFOSABI_ARM_AEABI      64      /* ARM EABI */
+#define ELFOSABI_ARM            97      /* ARM */
+#define ELFOSABI_STANDALONE     255     /* Standalone (embedded) application */
+</code>
+</pre>
+
+<p>Observe essas estruturas:</p>
+
+<p></p>
+
+<pre>
+<code>
+typedef struct
+{
+  unsigned char e_ident[EI_NIDENT];     /* Magic number and other info */
+  Elf32_Half    e_type;                 /* Object file type */
+  Elf32_Half    e_machine;              /* Architecture */
+  Elf32_Word    e_version;              /* Object file version */
+  Elf32_Addr    e_entry;                /* Entry point virtual address */
+  Elf32_Off     e_phoff;                /* Program header table file offset */
+  Elf32_Off     e_shoff;                /* Section header table file offset */
+  Elf32_Word    e_flags;                /* Processor-specific flags */
+  Elf32_Half    e_ehsize;               /* ELF header size in bytes */
+  Elf32_Half    e_phentsize;            /* Program header table entry size */
+  Elf32_Half    e_phnum;                /* Program header table entry count */
+  Elf32_Half    e_shentsize;            /* Section header table entry size */
+  Elf32_Half    e_shnum;                /* Section header table entry count */
+  Elf32_Half    e_shstrndx;             /* Section header string table index */
+} Elf32_Ehdr;
+
+typedef struct
+{
+  unsigned char e_ident[EI_NIDENT];     /* Magic number and other info */
+  Elf64_Half    e_type;                 /* Object file type */
+  Elf64_Half    e_machine;              /* Architecture */
+  Elf64_Word    e_version;              /* Object file version */
+  Elf64_Addr    e_entry;                /* Entry point virtual address */
+  Elf64_Off     e_phoff;                /* Program header table file offset */
+  Elf64_Off     e_shoff;                /* Section header table file offset */
+  Elf64_Word    e_flags;                /* Processor-specific flags */
+  Elf64_Half    e_ehsize;               /* ELF header size in bytes */
+  Elf64_Half    e_phentsize;            /* Program header table entry size */
+  Elf64_Half    e_phnum;                /* Program header table entry count */
+  Elf64_Half    e_shentsize;            /* Section header table entry size */
+  Elf64_Half    e_shnum;                /* Section header table entry count */
+  Elf64_Half    e_shstrndx;             /* Section header string table index */
+} Elf64_Ehdr;
+</code>
+</pre>
+
+<p>O tamanho de e_type é 2 bytes, e aqui embaixo temos os dados referentes à ele:</p>
+
+<pre>
+<code>
+/* Legal values for e_type (object file type).  */
+
+#define ET_NONE         0               /* No file type */
+#define ET_REL          1               /* Relocatable file */
+#define ET_EXEC         2               /* Executable file */
+#define ET_DYN          3               /* Shared object file */
+#define ET_CORE         4               /* Core file */
+#define ET_NUM          5               /* Number of defined types */
+#define ET_LOOS         0xfe00          /* OS-specific range start */
+#define ET_HIOS         0xfeff          /* OS-specific range end */
+#define ET_LOPROC       0xff00          /* Processor-specific range start */
+#define ET_HIPROC       0xffff          /* Processor-specific range end */
+</code>
+</pre>
+
+<p>Na engenharia reversa, lidaremos mais com os programas que tem os bytes 2 (executáveis) e 3 (bibiotecas compartilhadas).</p>
+
+<p>Quando damos o comando hd no arquivo /bin/ls, vemos algo do tipo:</p>
+
+<pre>
+<code>
+00000000  7f 45 4c 46 02 01 01 00  00 00 00 00 00 00 00 00  |.ELF............|
+00000010  03 00 3e 00 01 00 00 00  50 58 00 00 00 00 00 00  |..>.....PX......|
+00000020
+</code>
+</pre>
+
+<p>Cada linha (que seria como um array) tem 16 bytes, contados em hexadecimal (a posição 10, 20, etc. são na base 16). Observe que o primeiro byte da segunda linha (00000010), é 03, que identifica que o arquivo é uma biblioteca compartilhada, esse número poderia ser 02 que é o executável.</p>
+
+<p>Em algumas versões do Debian e derivados (Ubuntu, Kali, Mint, etc.), para que o sistema tire proveito da randonização de memória, os programas do sistema tem o PIE ativado, por isso eles são biblioteca compartilhada, e nesses sistemas o compilador gcc/g++ gera por padrão esse citado, sendo necessário colocar -no-pie para gerar um executável. Para vermos isso, digite <code>gcc -v</code> e procure a linha --enable-default-pie.</p>
+
+<p>Dando o comando file no programa, podemos ver se ele é executável ou biblioteca compartilhada, ou vendo pelo comando hd o byte especificado.</p>
+
+<p>Podemos baixar as libs digitando <code>sudo apt-get install gcc-multilib</code>.</p>
+
+<p>Nós vidos como se utiliza o readpe no Windows, ele já é instalado por padrão no Linux, então podemos utilizar ele também para analisar programas Windows dentro do Linux. Ele também tem instalado o readelf, que permite analisarmos executáveis ELF no Linux, digitando por exemplo <code>readelf -h programa</code>. Podemos ver mais dados do programa digitando <code>readelf -a programa | less</code>, como por exemplo os cabeçalhos em Assembly, e as flags. Podemos digitar também <code>strings programa</code> para vermos as strings dele, como os cabeçalhos em Assembly. Podemos ver detalhes do programa digitando <code>ldd programa</code>.</p>
+
+<p>Dando um hd no programa, podemos ver por exemplo, o Entry Point (endereço de ponto de entrada) dele, vamos supor que seja essa a saída dele:</p>
+
+<pre>
+<code>
+00000000  7f 45 4c 46 02 01 01 00  00 00 00 00 00 00 00 00  |.ELF............|
+00000010  02 00 3e 00 01 00 00 00  50 04 40 00 00 00 00 00  |..>.....P.@.....|
+00000020
+</code>
+</pre>
+
+<p>O Entry Point é os bytes de 18 até 1B, de trás pra frente, no caso acima foi 00400450, podemos ver se é isso mesmo digitando <code>readelf -h programa</code> novamente e ver o endereço de ponto de entrada, que é 0x400450.</p>
+
+<p>Instale o programa hte digitando <code>sudo apt-get install ht</code> (é ht mesmo), e depois execute o comando <code>hte programa</code> para vermos os bytes dele no terminal, podemos ver os cabeçalhos e outras opções nele, como para que arquitetura o programa foi feito, entre outras coisas. Por esse programa podemos mudar o executável, como no byte da posição 10, que mudando para 03 ele mudará para biblioteca compartilhada (mas não será mais executável de forma alguma). Para usar as opções como salvar e editar, use as teclas F (F1, F2, F3, F4, etc.). Para sair tecle F10, Esc e 0, ou Ctrl C.</p>
+
+<p>Com isso podemos ver que, se um programa for corrompido, é porque alguém alterou algo no programa que fez ele parar de funcionar.</p>
+
+<ul>
+    <li><a href="tudo-sobre-engenharia-reversa-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-engenharia-reversa-3.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

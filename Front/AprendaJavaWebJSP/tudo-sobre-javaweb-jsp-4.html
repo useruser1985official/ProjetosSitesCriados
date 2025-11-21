@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java Web JSP</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java Web JSP</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsp-1.html">Tudo sobre Java Web JSP Parte 1!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsp-2.html">Tudo sobre Java Web JSP Parte 2!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsp-3.html">Tudo sobre Java Web JSP Parte 3!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsp-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java Web JSP Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java Web JSP Parte 4</h2>
+
+<h3>Inserindo Usuário - Parte 1</h3>
+
+<p>Crie, na página acessoliberado.jsp esse link:</p>
+
+<pre>
+<code>
+&lt;a href=&quot;cadastroUsuario.jsp&quot;&gt;Cadastro de Usu&aacute;rio&lt;/a&gt;
+</code>
+</pre>
+
+<p>Crie essa página com esse formulário:</p>
+
+<pre>
+<code> 
+&lt;form method=&quot;post&quot; action=&quot;salvarUsuario&quot;&gt;
+    &lt;table&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Login:&lt;/td&gt;
+            &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;tLogin&quot; id=&quot;cLogin&quot; maxlength=&quot;20&quot;/&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Senha:&lt;/td&gt;
+            &lt;td&gt;&lt;input type=&quot;password&quot; name=&quot;tSenha&quot; id=&quot;cSenha&quot; maxlength=&quot;20&quot;/&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Salvar&quot;/&gt;
+&lt;/form>
+</code>
+</pre>
+
+<p>Crie uma servlet com o nome SalvarUsuario e altere a respectiva linha assim:</p>
+
+<pre>
+<code>
+@WebServlet("/salvarUsuario")
+</code>
+</pre>
+
+<p>No pacote dao, crie essa classe:</p>
+
+<pre>
+<code>
+package dao;
+
+import beans.ValidaUser;
+import connection.SingleConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class DAOUsuario {
+    private Connection conexao;
+    
+    public DAOUsuario() {
+        conexao = SingleConnection.getConexao();
+    }
+    
+    public void salvar(ValidaUser usuario) {
+        String sql = "insert into usuario (login, senha) values (?, ?)";
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = conexao.prepareStatement(sql);
+
+            stmt.setString(1, usuario.gettLogin());
+            stmt.setString(2, usuario.gettSenha());
+
+            stmt.execute();
+            
+            conexao.commit();
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+            
+            try {
+                conexao.rollback();
+            }
+            catch(SQLException ex1) {
+                ex1.printStackTrace();
+            }
+        }
+    }
+}
+</code>
+</pre>
+
+<p>E após colocar no começo do servlet a declaração <code>private DAOUsuario dao = new DAOUsuario();</code>, altere o método doPost do servlet assim:</p>
+
+<pre>
+<code>
+@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String login = request.getParameter("tLogin").trim();
+    String senha = CriptSenha.encripta(request.getParameter("tSenha").trim(), "SHA-1"); // Importe
+
+    ValidaUser user = new ValidaUser(); // Importe
+
+    user.settLogin(login);
+    user.settSenha(senha);
+
+    dao.salvar(user);
+}
+</code>
+</pre>
+
+<h3>Inserindo Usuário - Parte 2</h3>
+
+<p>Agora precisamos fazer o redirecionamento, para isso, vá na classe UsuarioDAO e adicione esse método:</p>
+
+<pre>
+<code>
+public List&lt;ValidaUser&gt; listar() throws Exception { // Importe
+    List&lt;ValidaUser&gt; lista = new ArrayList&lt;&gt;(); // Importe
+
+    String sql = "select * from usuario";
+
+    PreparedStatement stmt = conexao.prepareStatement(sql);
+    ResultSet rs = stmt.executeQuery(); // Importe
+
+    while(rs.next()) {
+        ValidaUser bean = new ValidaUser();
+
+        bean.settLogin(rs.getString("login"));
+        bean.settSenha(rs.getString("senha"));
+
+        lista.add(bean);
+    }
+
+    return lista;
+}
+</code>
+</pre>
+
+<p>Adicione essas linhas no método doPost do servlet Usuario, abaixo do salvar:</p>
+
+<pre>
+<code>
+try {
+    RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp"); // Importe
+
+    request.setAttribute("usuarios", dao.listar());
+
+    view.forward(request, response);
+
+}
+catch(Exception ex) {
+    ex.printStackTrace();
+}
+</code>
+</pre>
+
+<p>Agora, na página cadastroUsuario.jsp, adicione isso no começo da página:</p>
+
+<pre>
+<code>
+&lt;%@taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot; %&gt;
+</code>
+</pre>
+
+<p>E na mesma página crie essa tabela:</p>
+
+<pre>
+<code>
+&lt;table&gt;
+    &lt;c:forEach items=&quot;${usuarios}&quot; var=&quot;user&quot;&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;c:out value=&quot;${user.tLogin}&quot;&gt;&lt;/c:out&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;c:out value=&quot;${user.tSenha}&quot;&gt;&lt;/c:out&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/c:forEach&gt;
+&lt;/table&gt;
+</code>
+</pre>
+
+<p>PS: A lista só carrega após salvar um usuário.</p>
+
+<ul>
+    <li><a href="tudo-sobre-javaweb-jsp-3.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-javaweb-jsp-5.html">Continuação da Matéria!</a></li>-->
+</ul>
+        </div>
+    </body>
+</html>

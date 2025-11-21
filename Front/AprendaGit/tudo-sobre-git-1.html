@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Git</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Git</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-git-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Git Parte 1!</a></li>
+                    <li><a href="tudo-sobre-git-2.html">Tudo sobre Git Parte 2!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Git Parte 1</h2>
+
+<h3>O que é Git?</h3>
+
+<p>Git é um software para rastrear alterações em qualquer conjunto de arquivos, geralmente usado para coordenar o trabalho entre programadores que desenvolvem código-fonte de forma colaborativa durante o desenvolvimento de software. Seus objetivos incluem velocidade, integridade de dados e suporte para fluxos de trabalhos não-lineares distribuídos.</p>
+
+<p>Vamos supor que temos um projeto, como um site, e nosso cliente peça alterações no visual do mesmo, por exemplo. Nós alteramos e modificamos o projeto. Vamos supor que de repente nosso cliente acaba voltando a querer a primeira versão do projeto, se nós fizemos muitas modificações, fica difícil encontrarmos versões mais antigas. Podemos fazer o versionamento criando pastas ou ZIPs com várias versões, inclusive com um arquivo de texto citando as alterações, mas isso acumularia muito arquivos e consumiria muito espaço em disco. É para resolver todos esses problemas que o Git existe.</p>
+
+<p>Com o Git, podemos, de forma mais inteligente:</p>
+
+<ul>
+    <li>Salvar múltiplas revisões do mesmo projeto em um único diretório. Sem ter v1, v2, v2_final, etc.</li>
+    <li>Trocar de versões em um simples comando.</li>
+    <li>Trabalhar simultaneamente em 2 ou mais <q>features</q> diferentes sem bagunçar o código original do projeto.</li>
+    <li>Colaborar com outros programadores no mesmo time.</li>
+</ul>
+
+<p>Os nossos projetos serão hospedados remotamente num servidor, no caso, no GitHub.</p>
+
+<p>GitHub Inc. é um provedor de hospedagem na internet para desenvolvimento de software e controle de versão usando Git. Ele oferece o controle de versão distribuída e a funcionalidade de gerenciamento de código-fonte do Git, além de seus próprios recursos.</p>
+
+<p>No GitHub, nós podemos:</p>
+
+<ul>
+    <li><q>Hostear</q> o seu código em um local seguro.</li>
+    <li>Compartilhar seu projeto facilmente com outros devs.</li>
+    <li>Outros devs podem colaborar com o seu projeto.</li>
+    <li>Entre outras coisas.</li>
+</ul>
+
+<h3>Conceitos Básicos do Git</h3>
+
+<p>Essencialmente, Git repositório é um diretório chamado .git (oculto) dentro do seu projeto.</p>
+
+<p>Este repositório rastreia todas as mudanças feitas nos arquivos do seu projeto, construindo um histórico ao longo do tempo.</p>
+
+<p>O commit é como se fosse uma marcação histórica no qual seu projeto já está com alguma parte importante definida (como, por exemplo, adicionando forma de pagamento, ou adicionando integração com Whatsapp). É de forma parecida com as fases salvas de um jogo de videogame. Para um commit ser realizado, alguma coisa no projeto deverá ser modificada para isso, os estados, são esses:</p>
+
+<ul>
+    <li><b>Modified:</b> Arquivos alterados.</li>
+    <li><b>Staged:</b> Arquivos prontos para serem enviados.</li>
+    <li><b>Commited:</b> Arquivos salvos (<q>commitados</q>).</li>
+</ul>
+
+<p>PS: Os commits são feitos no repositório local, antes de serem enviados para o repositório remoto (push).</p>
+
+<p>As branches são uma linha do tempo no projeto principal, cuja branch principal geralmente é a master ou main, e desta deriva outras linhas do tempo paralelas, que não interferem uma na outra, e que podem ser fundidas na branch principal.</p>
+
+<h3>Clonando Repositórios e Configuração de Usuário</h3>
+
+<p>Para clonar um repositório, basta copiar o link do mesmo no GitHub e escrever no terminal <code>git clone https://github.com/nomedousuario/NomeDoRepositorio.git</code>. Podemos clonar nossos próprios repositórios e também repositórios de outros usuários.</p>
+
+<p>PS: Ao clonar um repositório, ele clonará todas as branches do mesmo, mas apenas a master estará verificada (checkout) e ativa. Não se preocupe com isso agora.</p>
+
+<p>Para entrar com seu e-mail e usuário do GitHub no seu repositório Git na máquina local, digite esses comandos:</p>
+
+<pre>
+<code>
+git config --global user.name "Nome do Usuário"
+
+git config --global user.email "nomedeusuario@servidor.com"
+</code>
+</pre>
+
+<p>Para deslogar depois, basta digitar:</p>
+
+<pre>
+<code>
+git config --global --unset user.name
+
+git config --global --unset user.email
+</code>
+</pre>
+
+<p>Esses dados serão armazenados num arquivo .gitconfig que ficará no diretório do usuário do seu sistema (como C:\Users\NomeDoUsuario no Windows e /home/NomeDoUsuario no Linux).</p>
+
+<p>Para verificar os usuários inseridos, faça assim:</p>
+
+<pre>
+<code>
+git config --global user.name
+
+git config --global user.email
+</code>
+</pre>
+
+<p>Para definir a branch padrão, digite esse comando:</p>
+
+<pre>
+<code>
+git config --global init.defaultbranch master
+</code>
+</pre>
+
+<p>E para ver a mesma:</p>
+
+<pre>
+<code>
+git config --global init.defaultbranch
+</code>
+</pre>
+
+<p>Podemos ver esses e outros dados na configuração do Git, usando o comando <code>git config --list</code>.</p>
+
+<h3>Criando Repositórios</h3>
+
+<p>Para ver a versão do Git instalada, digite <code>git --version</code>.</p>
+
+<p>Para criar um repositório, primeiramente crie duas pastas, pode ser pelo terminal mesmo, com os nomes Projeto-1 e Projeto-2 (evite acentuação e espaços).</p>
+
+<p>Dentro do diretório Projeto-1, digite <code>git init</code> para iniciar um novo repositório nela, ele criará uma pasta oculta com o nome <q>.git</q> dentro dessa pasta, onde estará as configurações do repositório. Por enquanto não mexeremos no Projeto-2. A branch padrão será a main ou a master (depois criaremos outras).</p>
+
+<p>No repositório Projeto-1, vamos criar um arquivo, por exemplo, index.html, com algum código básico. Esse arquivo e quaisquer outros inseridos nesse repositório, serão monitorados pelo Git, que identificará quaisquer alterações neles, por mínimas que sejam.</p>
+
+<h3>Colocando Arquivos no Stage</h3>
+
+<p>Para ver o estado atual do repositório local, digite <code>git status</code>. Ele mostrará se o repositório tem arquivos sendo monitorados e commits realizados. No caso ele mostrará que tem arquivos que ainda não estão sendo rastreados pelo Git (no caso, nosso index.html) e nenhum commit.</p>
+
+<p>Para adicionar o arquivo pra ser rastreado pelo Git, digite <code>git add index.html</code>.</p>
+
+<p>Para remover um arquivo do rastreamento do Git, digite <code>git rm --cached index.html</code>. Pode ser necessário especificar <code>-rf</code> para excluir diretórios. Para restaurar o arquivo à área de staging após removê-lo do rastreamento digite <code>git restore --staged index.html</code>.</p>
+
+<p>Podemos também mover e renomear arquivos dentro do repositório, usando algo como <code>git mv index.html main.html</code> ou <code>git mv *.css css/</code>.</p>
+
+<p>No Projeto-2, inicie o Git com <code>git init</code> e crie mais arquivos, como o index.html e um de estilo.css, que pode estar numa pasta. Nesse caso, para adicionar todos os arquivos do diretório apenas com <code>git add .</code> (sem esquecer do ponto), para remover, podemos usar <code>git rm --cached *</code>.</p>
+
+<h3>Fazendo Commits</h3>
+
+<p>Remova o Projeto-2 e deixe apenas o Projeto-1, nesse projeto, vamos adicionar os arquivos com <code>git add .</code> (não esqueça do ponto, que significa <q>tudo</q>), caso não seja adicionado e vamos colocar um ponto no tempo desse projeto, que vamos chamar de <q>commitar</q>.</p>
+
+<p>Para fazer o commit, digite <code>git commit -m "Motivo do Commit"</code>. Veja o status de novo com <code>git status</code> para ver se o commit foi executado com êxito.</p>
+
+<p>Para ver o histórico de commits, basta digitar no terminal <code>git log</code>. Ele mostrará o autor do commit, a data do mesmo e seu hash. Para sair da tela basta digitar <q>q</q>. Para ver resumido, digite <code>git log --oneline</code>.</p>
+
+<p>Coloque um conteúdo básico no HTML e no CSS, para eles serem alterados. Novamente, digite esses comandos na ordem:</p>
+
+<pre>
+<code>
+git status
+
+git add index.html
+
+git commit -m "Adicionando Conteúdo HTML"
+
+git status
+
+git log
+</code>
+</pre>
+
+<h3>Desfazendo Commit</h3>
+
+<p>Como sabemos, cada commit é um ponto no histórico do seu repositório. Há necessidade de voltar a um commit anterior ao último. Existem três formas de desfazer um commit:</p>
+
+<ul>
+    <li><code>checkout</code>: Um comando seguro, que não altera o histórico do Git. Permite navegar até um commit antigo ou mudar de branch. Pode ser usado para visualizar um estado anterior do projeto, mas não desfaz commits, apenas muda o ponto de trabalho temporariamente.</li>
+    <li><code>revert</code>: Também seguro, pois não apaga nem reescreve o histórico. Cria um novo commit que desfaz as alterações de um commit anterior. É recomendado quando é necessário desfazer mudanças mantendo o histórico intacto, especialmente em projetos já compartilhados.</li>
+    <li><code>reset</code>: O comando mais arriscado, pois reescreve o histórico do Git. Pode remover completamente commits posteriores ao commit para o qual se está retornando. Se usado com <code>--hard</code>, também apaga alterações nos arquivos e no staging. Deve ser usado com cuidado, especialmente em repositórios compartilhados.</li>
+</ul>
+
+<p>Altere mais uns arquivos e crie mais uns três commits, para exemplificarmos melhor. Depois dê um <code>git log --oneline</code> para ver os commits.</p>
+
+<p>Vamos voltar pro terceiro commit, pegar o código dele mostrado no log e digite dessa forma: <code>git checkout d874777</code>. Para desfazer essa alteração, digite <code>git checkout master</code> que ele fica novamente como antes. Para comprovar, digite <code>git log --oneline</code> de novo.</p>
+
+<p>Agora vamos voltar pro segundo commit, pegar o código dele também e digitar assim: <code>git revert c67f99d</code>. Ele vai adicionar um comentário nos arquivos de configuração, daí pra confirmar digite <code>:q</code>.</p>
+
+<p>Para resetar tudo e que nada fique no histórico, podemos pegar um código do commit e digitar assim: <code>git reset e0323fe</code>. Mas no entanto, caso tenhamos alterado o arquivo nos editores, devemos fazer um novo add e um novo commit para essas alterações. Para resetar totalmente, inclusive commits posteriores, digitamos <code>git reset 0551f68 --hard</code> (esse comando deve ser usado com cautela).</p>
+
+<h3>Ignorando Arquivos</h3>
+
+<p>Podemos configurar o Git para que ele não monitore determinados arquivos do repositório, isso é feito num arquivo chamado .gitignore dentro dele. Vamos, por exemplo, criar um robots.txt e colocar ele pra ser ignorado.</p>
+
+<p>Para isso, crie o arquivo .gitignore e adicione essas linhas:</p>
+
+<pre>
+<code>
+robots.txt
+*.gif
+dist
+</code>
+</pre>
+
+<p>No caso, o primeiro é um arquivo robots.txt, o segundo pra todos os arquivos GIF no diretório, e o dist no caso seria outro diretório dentro do repositório.</p>
+
+<h3>Criando Branches</h3>
+
+<p>Quando criamos um repositório, automaticamente ele cria uma branch principal, geralmente chamada main ou master. Então podemos fazer uma branch, que no caso, é uma ramificação da branch principal, paralela à mesma, onde cada branch tem seus commits independentes. Cada desenvolvedor pode ter sua própria branch no mesmo projeto, e elas posteriormente podem ser fundidas à branch principal.</p>
+
+<p>Digite <code>git status</code> para ver o status do repositório e digite <code>git branch</code> para ver as branches no projeto, que no caso só teremos a master (principal). Para criar uma nova branch digitamos, por exemplo, <code>git branch teste</code> para criar uma branch de nome teste. Ao dar <code>git branch</code> de novo, ele mostrará as branches master e teste (a branch na qual estamos atualmente será destacada por um asterisco e de cor verde).</p>
+
+<p>Para mudar pra branch teste, digite <code>git checkout teste</code>. Para ver se ele mudou, digite <code>git branch</code> de novo. O checkout, além de trocar commits, também troca branches.</p>
+
+<p>Tudo que fizermos na branch teste não afetará em nada a branch master. Vamos por exemplo, criar um arquivo Javascript, adicionar e dar commit nele. Digite <code>git log --oneline</code> para vermos os commits realizados no repositório.</p>
+
+<p>Ao digitar <code>git checkout master</code> pra voltar pra branch principal, veremos que nada foi alterado (no caso, não terá arquivos Javascript). Ao dar <code>git log --oneline</code> de novo ele não terá o commit do Javascript.</p>
+
+<p>Para deletar uma branch, digite <code>git branch -d teste</code>, mas caso ela não seja fundida à branch master, ele não deixará excluir. Para forçar exclusão coloque o <q>D</q> maiúsculo, como <code>git branch -D teste</code>.</p>
+
+<p>Crie uma nova branch, por exemplo, <code>git branch mercado-pago</code>, e mais uma com <code>git branch whatsapp</code>, simulando dois funcionários trabalhando em diferentes coisas no mesmo programa. Para trabalharmos com a branch do Mercado Pago digitamos <code>git checkout mercado-pago</code>, e podemos, por exemplo, colocar um Javascript simulando o uso do mesmo, fazendo a adição e o commit. Mude para a branch do Whatsapp com <code>git checkout whatsapp</code> e veremos que nada colocado do Mercado Pago estará ali, crie também um Javascript, adicione e commite também. Volte depois pro Mercado Pago com <code>git checkout mercado-pago</code>, e pra master com <code>git checkout master</code>.</p>
+
+<h3>Fundindo Branches</h3>
+
+<p>Continuando nosso assunto de branches, vamos fundir as duas branches criadas anteriormente. Digite <code>git branch</code> para ver as branches e a branch atual. Digite <code>git checkout whatsapp</code> para ver as alterações.</p>
+
+<p>Para fundir as branches, devemos ir na branch de destino (a que receberá a outra branch), no caso, fundiremos a branch do Mercado Pago com a principal (master). Digite <code>git checkout master</code> para isso, e para fundir o Mercado Pago com a master, digite <code>git merge mercado-pago</code>.</p>
+
+<p>Para fundir a branch do Whatsapp, é o mesmo processo, na branch master, digite <code>git merge whatsapp</code>. Numa segunda fusão, ele poderá abrir o editor de configurações e nesse caso, basta digitar <code>:q</code>.</p>
+
+<p>Ao dar <code>git log</code> novamente, ele mostrará incorporado à branch master, os commits das outras branches que foram fundidas com ela.</p>
+
+<h3>Resolvendo Conflitos</h3>
+
+<p>Podemos continuar trabalhando numa branch mesmo depois dela ser fundida com outra. Vamos supor agora que vamos alterar um estilo na branch do Whatsapp. Primeiro vá pra essa branch com <code>git checkout whatsapp</code> e altere o CSS, como por exemplo, a cor de fundo do site, adicione e commite. Voltando na branch principal com <code>git checkout master</code>, vamos fazer outra alteração de cores no CSS, adicionamos e commitamos.</p>
+
+<p>Ao fazer a fusão no master de novo com <code>git merge whatsapp</code>, ele dará um conflito de código, e não fundirá as branches. No caso você abrirá o editor, que marcará o código com os conflitos, para ser corrigido manualmente. Após a edição, veja o status, adicione e commite ele, e também podemos omitir a mensagem, pois o Git saberá que se trata de um conflito, então, depois de adicionar, digite apenas <code>git commit</code>, ele abrirá os comentários de configuração, nesse caso digite <code>:q</code>, e ele concluirá a fusão.</p>
+
+<p>Vamos pra branch do Mercado Pago digitando <code>git checkout mercado-pago</code> e vamos editar o Javascript dele, adicione e commite ele, volte pro master com <code>git checkout master</code>, edite o mesmo Javascript do Mercado Pago, adicione e commite também. Vamos fundir novamente o branch do Mercado Pago com o master, digitando <code>git merge mercado-pago</code> e ele mostrará o conflito novamente. Resolva da mesma forma anterior.</p>
+
+<p>PS: Várias IDEs podem oferecer comparações sobre os conflitos dos códigos dos branches para serem corrigidos manualmente.</p>
+
+<ul>
+    <li><a href="tudo-sobre-git-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

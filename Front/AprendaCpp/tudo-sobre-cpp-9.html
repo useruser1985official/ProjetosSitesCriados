@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C++</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cpp-1.html">Tudo sobre C++ Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cpp-2.html">Tudo sobre C++ Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cpp-3.html">Tudo sobre C++ Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cpp-4.html">Tudo sobre C++ Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cpp-5.html">Tudo sobre C++ Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cpp-6.html">Tudo sobre C++ Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cpp-7.html">Tudo sobre C++ Parte 7!</a></li>
+                    <li><a href="tudo-sobre-cpp-8.html">Tudo sobre C++ Parte 8!</a></li>
+                    <li><a href="tudo-sobre-cpp-9.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C++ Parte 9!</a></li>
+                    <li><a href="tudo-sobre-cpp-10.html">Tudo sobre C++ Parte 10!</a></li>
+                    <li><a href="tudo-sobre-cpp-11.html">Tudo sobre C++ Parte 11!</a></li>
+                    <li><a href="tudo-sobre-cpp-12.html">Tudo sobre C++ Parte 12!</a></li>
+                    <li><a href="tudo-sobre-cpp-13.html">Tudo sobre C++ Parte 13!</a></li>
+                    <li><a href="tudo-sobre-cpp-14.html">Tudo sobre C++ Parte 14!</a></li>
+                    <li><a href="tudo-sobre-cpp-15.html">Tudo sobre C++ Parte 15!</a></li>
+                    <li><a href="tudo-sobre-cpp-16.html">Tudo sobre C++ Parte 16!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C++ Parte 9</h2>
+
+<h3>Ponteiros - Parte 3</h3>
+
+<p>Para trabalharmos com funções que alteram o valor de uma variável, precisamos usar os ponteiros, independente do escopo da função.</p>
+
+<p>Crie esse código com essa função aqui:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+void somar(int var, int valor); // Não esqueça do protótipo
+
+int main() {
+    int num = 0;
+
+    somar(num, 15);
+
+    cout << num << endl; // Não será alterado
+
+    return 0;
+}
+
+void somar(int var, int valor) {
+    var += valor;
+}
+</code>
+</pre>
+
+<p>No caso acima, ele continuará retornando 0 por causa do escopo das variáveis, que foram criadas em endereços diferentes.</p>
+
+<p>Para utilizar sempre o mesmo endereço, precisaremos criar ponteiros, no caso, serão nas variáveis var dos parâmetros da função, e indicar o endereço de num, que ficará assim:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+void somar(int *var, int valor); // Não esqueça do protótipo
+
+int main() {
+    int num = 0;
+
+    somar(&num, 15);
+
+    cout << num << endl;
+
+    return 0;
+}
+
+void somar(int *var, int valor) {
+    *var += valor;
+}
+</code>
+</pre>
+
+<p>Da forma acima fará a função corretamente, já que ela trabalhará no mesmo endereço de num, alterando o valor corretamente.</p>
+
+<p>Com arrays, não precisaremos indicar o endereço na invocação da função e nem ponteiros nas posições dos vetores, apenas nos parâmetros, dessa forma:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+void iniVet(int *v);
+
+int main() {
+    int vetor[5];
+
+    iniVet(vetor);
+
+    for(int i = 0; i < 5; i++) {
+        cout << vetor[i] << endl;
+    }
+
+    return 0;
+}
+
+
+void iniVet(int *v) {
+    v[0] = 1;
+    v[1] = 2;
+    v[2] = 3;
+    v[3] = 4;
+    v[4] = 5;
+}
+</code>
+</pre>
+
+<p>Se tirar o ponteiro do parâmetro, ele dará erro.</p>
+
+<p>A função que recebe o vetor como parâmetro poderia ser declarada também como <code>void iniVet(int v[])</code>.</p>
+
+<p>Para entendermos que o uso de ponteiros e referência independe do escopo, veja esse código aqui sem ponteiros e referências:</p>
+
+<pre>
+<code>
+void testar(int n1, int n2);
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+    
+    int n1 = 10;
+    int n2 = 20;
+
+    cout << "Valores antes de chamar a função: ";
+    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+
+    testar(n1, n2);
+
+    cout << "Valores depois de chamar a função: ";
+    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+
+    return 0;
+}
+
+void testar(int n1, int n2) {
+    n1 = -1;
+    n2 = -2;
+
+    cout << "Valores dentro da função testar: " << endl;
+    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+}
+</code>
+</pre>
+
+<p>Agora o mesmo com os ponteiros e referências:</p>
+
+<pre>
+<code>
+int testar(int *n1, int *n2);
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+    
+    int n1 = 10;
+    int n2 = 20;
+
+    cout << "Valores antes de chamar a função: ";
+    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+
+    testar(&n1, &n2);
+
+    cout << "Valores depois de chamar a função: ";
+    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+
+    return 0;
+}
+
+int testar(int *n1, int *n2) {
+    *n1 = -1;
+    *n2 = -2;
+
+    cout << "Valores dentro da função testar: " << endl;
+    cout << "n1 = " << *n1 << " e n2 = " << *n2 << endl;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: Podemos ter também ponteiros duplos, isso é chamado de indireção múltipla, veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+int num = 50;
+int *pont; // Ponteiro normal
+int **duplPont; // Ponteiro de ponteiro
+
+pont = &amp;num; // Aponta pra num
+duplPont = &amp;pont; // Aponta pra pont, que aponta pra num, ele não aponta diretamente pra num.
+
+cout << "Endereço de num.........................................: " << &num << endl;
+cout << "Conteúdo de num.........................................: " << num << endl;
+cout << "Endereço de pont........................................: " << &pont << endl;
+cout << "Endereço apontado por pont..............................: " << pont << endl;
+cout << "Conteúdo apontado por pont..............................: " << *pont << endl;
+cout << "Endereço de duplPont....................................: " << &duplPont << endl;
+cout << "Endereço apontado por duplPont..........................: " << duplPont << endl;
+cout << "Endereço apontado por pont que é apontado por duplPont..: " << *duplPont << endl;
+cout << "Conteúdo apontado por pont que é apontado por duplPont..: " << **duplPont << endl;
+
+delete pont;
+delete duplPont;
+</code>
+</pre>
+
+<h3>Alocação Dinâmica de Memória</h3>
+
+<p>A alocação de memória é útil para reservar a quantidade necessária de memória RAM para o nosso programa, sem desperdício nem falta.</p>
+
+<p>Para começar, criaremos um programa sem alocação, dessa forma:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+int main() {
+    char nome[50];
+
+    cout << "Digite o nome: ";
+    cin >> nome;
+    cout << nome;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Mas tem um problema, caso colocarmos um nome com espaço, ele imprimirá apenas o primeiro nome, já que o char ignora tudo que vem após espaços (espaço é considerado caractere terminador).</p>
+
+<p>Para contornar isso, usaremos o fgets (também usado em C), dessa forma (importe cstdio):</p>
+
+<pre>
+<code>
+int main() {
+    char nome[50];
+
+    cout << "Digite o nome: ";
+    fgets(nome, 50, stdin); // Importe cstdio
+
+    // Isso é pra remover a quebra de linha:
+    size_t len;
+    len = strlen(nome); // Inclua cstring
+
+    if(nome[len - 1] == '\n') nome[--len] = 0;
+
+    cout << nome;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Mas até então, não mexemos com alocação de memória.</p>
+
+<p>O problema da alocação, está no nosso array de char, que reservou espaço para 50 caracteres na memória, e ao colocar um nome com menos caracteres, teremos espaços sendo perdidos e ocupados inutilmente (no caso, seriam sempre 50 bytes), e se colocarmos algo com mais de 50 caracteres, ele ocupará mais espaço do que o reservado, que pode ser um problema para o sistema operacional.</p>
+
+<p>Para trabalharmos com alocação de memória, precisaremos usar a função malloc, que necessita da biblioteca cstdlib. Teremos também que transformar a variável char num ponteiro, sem indicar o número de espaços, dessa forma:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt; // Para fgets
+#include &lt;cstdlib&gt; // Para malloc
+#include &lt;cstring&gt; // Para strlen
+
+using namespace std;
+
+int main() {
+    char *nome;
+    nome = (char*)malloc(sizeof(char));
+
+    cout << "Digite o nome: ";
+    scanf("\n"); // Isso é apenas para evitar que os dados inseridos não sejam lidos, pode funcionar também colocando no lugar fflush(stdin).
+    fgets(nome, sizeof(nome), stdin);
+
+    // Isso é pra remover a quebra de linha:
+    size_t len;
+    len = strlen(nome); // Inclua cstring
+
+    if(nome[len - 1] == '\n') nome[--len] = 0;
+
+    cout << nome;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Pode ver que acima, precisamos colocar um ponteiro em char, e atribuir à variável a função malloc, que também precisou de um typecast com ponteiro para retornar um valor. A função sizeof retorna o tamanho da variável armazenada.</p>
+
+<p>PS: Há quem coloque mais alguma multiplicação ou soma dentro do malloc para reservar um espacinho a mais na memória, mas cuidado pra não desperdicar espaço demais, prefira a soma nesse caso, assim:</p>
+
+<pre>
+<code>
+nome = (char*)malloc(sizeof(char) + 1);
+</code>
+</pre>
+
+<p>Ou podemos criar uma nova realocação após usar o malloc com o <code>realloc</code>, assim:</p>
+
+<pre>
+<code>
+nome = (char*)realloc(nome, sizeof(char) + 4);
+</code>
+</pre>
+
+<p>Para excluir um ponteiro ou memória alocada, use o free, dessa forma:</p>
+
+<pre>
+<code>
+free(nome);
+</code>
+</pre>
+
+<p>Em C++, portanto, é mais comum usar o delete para excluir ponteiros e alocações, dessa forma:</p>
+
+<pre>
+<code>
+delete nome;
+</code>
+</pre>
+
+<h3>Unions</h3>
+
+<p>As unions se declaram de forma parecida com as structs, mas ela ocupa menos espaço na memória.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+union exemplo {
+    int inteiro;
+    char caractere;
+};
+</code>
+</pre>
+
+<p>As variáveis do unions ocupam o mesmo endereço de memória.</p>
+
+<p>Vamos comparar uma union e uma struct:</p>
+
+<pre>
+<code>
+union estrutura01 {
+    int inteiro;
+    char caractere;
+    float decimal;
+};
+
+struct estrutura02 {
+    int inteiro2;
+    char caractere2;
+    float decimal2;
+};
+</code>
+</pre>
+
+<p>E na função principal, faça isso:</p>
+
+<pre>
+<code>
+cout << "União: " << sizeof(estrutura01) << endl;
+cout << "Estrutura: " << sizeof(estrutura02) << endl;
+</code>
+</pre>
+
+<p>Dessa forma vemos a comparação entre o tamanho da union e da struct.</p>
+
+<p>PS: As unions podem ser utilizadas dentro de structs ou de outras unions também.</p>
+
+<h3>Typedef em C++</h3>
+
+<p>Como fizemos com as enuns, podemos criar nossos "tipos" próprio com qualquer tipo primitivo, struct, union, etc.</p>
+
+<p>Veja um exemplo de uso logo abaixo:</p>
+
+<pre>
+<code>
+typedef int inteiro;
+typedef float flutuante;
+typedef char caractere;
+typedef const char* texto;
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+
+    inteiro num = 50;
+    flutuante real = 9.85;
+    caractere letra = 'A';
+    texto frase = "Introdução à Typedef em C++";
+
+    cout << num << endl;
+    cout << real << endl;
+    cout << letra << endl;
+    cout << frase << endl;
+
+    return 0;
+}
+</code>
+</pre>
+
+<h3>Printf e Scanf</h3>
+
+<p>Os comandos printf e scanf na verdade são utilizados em C, mas eles podem ser usados em C++ também.</p>
+
+<p>Veja um exemplo abaixo (para usar eles usamos a biblioteca stdio.h ou cstdio):</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt; // Para printf e scanf
+
+using namespace std;
+
+int main() {
+    printf("Uma frase qualquer!\nCurso de C++");
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Com o printf, podemos usar sequências de escape e máscaras de formatação também. A \n pula uma linha e a \0 delimita o final da string.</p>
+
+<p>Vamos trabalhar com variáveis em outro exemplo, onde colocamos as máscaras, que servem de referência da variável:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt; // Para printf e scanf
+
+using namespace std;
+
+int main() {
+    int num1 = 123;
+
+    printf("Valor da variável: %d\n", num1);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>E podemos colocar mais de uma variável e máscara no mesmo printf, sempre respeitando a ordem (incluindo de tipos):</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt; // Para printf e scanff
+
+using namespace std;
+
+int main() {
+    int num1, num2, num3;
+    num1 = 1;
+    num2 = 2;
+    num3 = 3;
+
+    printf("Valor das variáveis: \n%d\n%d\n%d\n", num1, num2, num3);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Veja algumas máscaras de formatação, no C chamadas de especificadores de conversão:</p>
+
+<table>
+    <tr>
+        <th>Máscara</th>
+        <th>Tipo de Dado</th>
+        <th>Descrição</th>
+    </tr>
+    <tr>
+        <td>%d</td>
+        <td>int</td>
+        <td>Número Inteiro Decimal com Sinal</td>
+    </tr>
+    <tr>
+        <td>%c</td>
+        <td>char</td>
+        <td>Caractere Único</td>
+    </tr>
+    <tr>
+        <td>%f</td>
+        <td>float ou double</td>
+        <td>Número Decimal (Real ou de Ponto Flutuante)</td>
+    </tr>
+    <tr>
+        <td>%i</td>
+        <td>int</td>
+        <td>Número Inteiro Decimal (Diferentes na Entrada e Saída de Dados)</td>
+    </tr>
+    <tr>
+        <td>%ld</td>
+        <td>long int</td>
+        <td>Número Inteiro Longo</td>
+    </tr>
+    <tr>
+        <td>%e</td>
+        <td>float ou double</td>
+        <td>Número Real Exponencial (Científico)</td>
+    </tr>
+    <tr>
+        <td>%E</td>
+        <td>float ou double</td>
+        <td>Número Real Exponencial (Científico)</td>
+    </tr>
+    <tr>
+        <td>%o</td>
+        <td>int</td>
+        <td>Número Inteiro em Formato Octal sem Sinal</td>
+    </tr>
+    <tr>
+        <td>%x</td>
+        <td>int</td>
+        <td>Número Inteiro em Formato Hexadecimal sem Sinal. Caracteres de a a f</td>
+    </tr>
+    <tr>
+        <td>%X</td>
+        <td>int</td>
+        <td>Número Inteiro em Formato Hexadecimal sem Sinal. Caracteres de A a F</td>
+    </tr>
+    <tr>
+        <td>%u</td>
+        <td>int</td>
+        <td>Número Inteiro Decimal sem Sinal</td>
+    </tr>
+    <tr>
+        <td>%h ou %l</td>
+        <td>---</td>
+        <td>Colocado Antes de um Especificador Inteiro para Indicar Valor Short ou Long</td>
+    </tr>
+    <tr>
+        <td>%L</td>
+        <td>---</td>
+        <td>Colocado Antes de um Especificador de Ponto Flutuante para indicar valor Long Double</td>
+    </tr>
+    <tr>
+        <td>%s</td>
+        <td>char</td>
+        <td>Cadeia de Caracteres (String ou Ponto pra char)</td>
+    </tr>
+	<tr>
+        <td>%p</td>
+        <td>pointer</td>
+        <td>Ponteiros</td>
+    </tr>
+</table>
+
+<p>Veja outro exemplo:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt; // Para printf e scanf
+
+using namespace std;
+
+int main() {
+    char nome[3]; // Array de char
+
+    nome[0] = 'A';
+    nome[1] = 'B';
+    nome[2] = 'C';
+
+    printf("Valor da variável: %s", nome);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Para ler do teclado usando scanf, a forma é parecida, mas devemos colocar a variável com o operador &amp;, que indica o endereço da variável:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt; // Para printf e scanf
+
+using namespace std;
+
+int main() {
+    int num1, num2, num3;
+
+    printf("Digite um valor: ");
+    scanf("%d", &num1);
+
+    printf("Valor da variável: %d", num1);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Podemos também usar mais de uma entrada no mesmo scanf, mas não é recomendado:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt; // Para printf e scanf
+
+using namespace std;
+
+int main() {
+    int num1, num2, num3;
+    char nome[10];
+
+    printf("Digite um número e uma string: ");
+    scanf("%d %s", &num1, &nome);
+
+    printf("Valor das variáveis: \n%d\n%s\n", num1, nome);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Veja mais um exemplo:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt; // Para printf e scanf
+
+using namespace std;
+
+int main() {
+    char nome[10];
+    int ano;
+
+    printf("Digite seu nome: ");
+    scanf("%s", &nome);
+    printf("Informe o ano de nascimento: ");
+    scanf("%d", &ano);
+
+    printf("\nNome: %s\nAno: %d", nome, ano);
+
+    return 0;
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-cpp-8.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-cpp-10.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

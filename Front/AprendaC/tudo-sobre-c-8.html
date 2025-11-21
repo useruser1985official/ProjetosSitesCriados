@@ -1,0 +1,456 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-c-1.html">Tudo sobre C Parte 1!</a></li>
+                    <li><a href="tudo-sobre-c-2.html">Tudo sobre C Parte 2!</a></li>
+                    <li><a href="tudo-sobre-c-3.html">Tudo sobre C Parte 3!</a></li>
+                    <li><a href="tudo-sobre-c-4.html">Tudo sobre C Parte 4!</a></li>
+                    <li><a href="tudo-sobre-c-5.html">Tudo sobre C Parte 5!</a></li>
+                    <li><a href="tudo-sobre-c-6.html">Tudo sobre C Parte 6!</a></li>
+                    <li><a href="tudo-sobre-c-7.html">Tudo sobre C Parte 7!</a></li>
+                    <li><a href="tudo-sobre-c-8.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C Parte 8!</a></li>
+                    <li><a href="tudo-sobre-c-9.html">Tudo sobre C Parte 9!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C Parte 8</h2>
+
+<h3>Estrutura de Dados - Pilha</h3>
+
+<p>O Stack (pilha) é como um tubo fechado de um lado e aberto de outro, onde o primeiro elemento inserido é o último a sair e vice-versa. Alguns dos exemplos em que uma pilha pode ser usada é em mecanismos de desfazer/refazer de editores, navegação entre páginas web, etc.</p>
+
+<p>Veja como implementamos uma pilha em C:</p>
+
+<p>Estruturas e chamadas das funções:</p>
+
+<pre>
+<code>
+struct pilha {
+    int topo; // Posição do elemento.
+    int capa;
+    float *prElem;
+};
+
+void criarPilha(struct pilha *p, int c);
+int estaVazia(struct pilha *p);
+int estaCheia(struct pilha *p);
+void empilhar(struct pilha *p, float v);
+float desempilhar(struct pilha *p);
+float retornaTopo(struct pilha *p);
+</code>
+</pre>
+
+<p>Implementações das funções:</p>
+
+<pre>
+<code>
+void criarPilha(struct pilha *p, int c) {
+    p->topo = -1;
+    p->capa = c;
+    p->prElem = (float*)malloc(c * sizeof(float));
+}
+
+int estaVazia(struct pilha *p) {
+    if(p->topo == -1) {
+        return 1;
+    }
+
+    return 0;
+}
+
+int estaCheia(struct pilha *p) {
+    if(p->topo == p->capa - 1) {
+        return 1;
+    }
+
+    return 0;
+}
+
+void empilhar(struct pilha *p, float v) {
+    p->topo++;
+    p->prElem[p->topo] = v;
+}
+
+float desempilhar(struct pilha *p) {
+    float aux = p->prElem[p->topo];
+    p->topo--;
+
+    return aux;
+}
+
+float retornaTopo(struct pilha *p) {
+    return p->prElem[p->topo];
+}
+</code>
+</pre>
+
+<p>Código principal:</p>
+
+<pre>
+<code>
+struct pilha pl;
+int capac, op;
+float valor;
+
+printf("Capacidade da pilha? ");
+scanf("%d", &capac);
+
+criarPilha(&pl, capac);
+
+while(1) { // Loop infinito
+    printf("\n1 - Empilhar (push)");
+    printf("\n2 - Desempilhar (pop)");
+    printf("\n3 - Mostrar o Topo (top)");
+    printf("\n4 - Sair (exit)\n");
+    printf("\nOpção? ");
+    scanf("%d", &op);
+
+    switch(op) {
+        case 1: // push
+            if(estaCheia(&pl) == 1) {
+                printf("\nPILHA CHEIA!\n");
+            }
+            else {
+                printf("\nValor? ");
+                scanf("%f", &valor);
+                empilhar(&pl, valor);
+            }
+            break;
+        case 2: // pop
+            if(estaVazia(&pl) == 1) {
+                printf("\nPILHA VAZIA!\n");
+            }
+            else {
+                valor = desempilhar(&pl);
+                printf("\n%.1f desempilhado!\n", valor);
+            }
+            break;
+        case 3: // top
+            if(estaVazia(&pl) == 1) {
+                printf("\nPILHA VAZIA!\n");
+            }
+            else {
+                valor = retornaTopo(&pl);
+                printf("\nTopo: %.1f\n", valor);
+            }
+            break;
+        case 4:
+            exit(0);
+            break;
+        default:
+            printf("\nOPÇÃO INVÁLIDA!\n");
+            break;
+    }
+}
+</code>
+</pre>
+
+<p>PS: Podemos mudar o tipo de float para qualquer outro.</p>
+
+
+<h3>Estrutura de Dados - Fila</h3>
+
+<p>Diferente das pilhas, que funcionam como um "tubo", onde o último elemento é adicionado e somado até encher o tubo, as filas, os primeiros elementos saem à medida que entram novos, na verdade, as filas funcionam como "túneis". Em resumo, nas pilhas o último elemento é o primeiro a sair e vice-versa, nas filas o primeiro que entra é o primeiro que sai. Alguns dos exemplos em que uma fila pode ser usada é em controle de documentos (para impressão, por exemplo), troca de mensagem entre dispositivos numa rede, etc.</p>
+
+<p>Veja como implementamos uma fila em C:</p>
+
+<p>Estruturas e chamadas das funções:</p>
+
+<pre>
+<code>
+struct fila {
+    int capac;
+    float *dados;
+    int prim;
+    int ult;
+    int itens;
+};
+
+void criarFila(struct fila *f, int c);
+void inserir(struct fila *f, int v);
+int remover(struct fila *f);
+int estaVazia(struct fila *f);
+int estaCheia(struct fila *f);
+void mostrarFila(struct fila *f);
+</code>
+</pre>
+
+<p>Implementações das funções:</p>
+
+<pre>
+<code>
+void criarFila(struct fila *f, int c) {
+    f->capac = c;
+    f->dados = (float*)malloc(f->capac * sizeof(float));
+    f->prim = 0;
+    f->ult = -1;
+    f->itens = 0;
+}
+
+void inserir(struct fila *f, int v) {
+    if(f->ult == f->capac - 1) {
+        f->ult = -1;
+    }
+
+    f->ult++;
+    f->dados[f->ult] = v;
+    f->itens++; // Item inserido
+}
+
+int remover(struct fila *f) {
+    int temp = f->dados[f->prim++];
+
+    if(f->prim == f->capac) {
+        f->prim = 0;
+    }
+
+    f->itens--; // Item retirado
+
+    return temp;
+}
+
+int estaVazia(struct fila *f) {
+    return f->itens == 0;
+}
+
+int estaCheia(struct fila *f) {
+    return f->itens == f->capac;
+}
+
+void mostrarFila(struct fila *f) {
+    int cont, i;
+
+    for(cont = 0, i = f->prim; cont < f->itens; cont++) {
+        printf("%.2f\t", f->dados[i++]);
+
+        if(i == f->capac) {
+            i = 0;
+        }
+    }
+
+    printf("\n\n");
+}
+
+</code>
+</pre>
+
+<p>Código principal:</p>
+
+<pre>
+<code>
+int op, capa;
+float valor;
+struct fila fl;
+
+printf("Capacidade da fila? ");
+scanf("%d", &capa);
+
+criarFila(&fl, capa);
+
+while(1) { // Loop infinito
+    printf("\n1 - Inserir Elemento (enqueue)");
+    printf("\n2 - Remover Elemento (dequeue)");
+    printf("\n3 - Mostrar Fila (peek)");
+    printf("\n4 - Sair (exit)\n");
+    printf("\nOpção? ");
+    scanf("%d", &op);
+
+    switch(op) {
+        case 1: // enqueue
+            if(estaCheia(&fl)) {
+                printf("\nFILA CHEIA!\n");
+            }
+            else {
+                printf("\nValor? ");
+                scanf("%f", &valor);
+                inserir(&fl, valor);
+            }
+            break;
+        case 2: // dequeue
+            if(estaVazia(&fl)) {
+                printf("\nFILA VAZIA!\n");
+            }
+            else {
+                valor = remover(&fl);
+                printf("\n%.1f removido!\n", valor);
+            }
+            break;
+        case 3: // peek
+            if(estaVazia(&fl)) {
+                printf("\nFILA VAZIA!\n");
+            }
+            else {
+                printf("\nConteúdo da fila: ");
+                mostrarFila(&fl);
+            }
+            break;
+        case 4:
+            exit(0);
+            break;
+        default:
+            printf("\nOPÇÃO INVÁLIDA!\n");
+            break;
+    }
+}
+</code>
+</pre>
+
+<p>PS: Podemos mudar o tipo de float para qualquer outro.</p>
+
+<h3>Estrutura de Dados - Lista Encadeada</h3>
+
+<p>Uma lista encadeada é uma estrutura de dados formada por elementos chamados nodos, onde cada nodo contém um valor e um ponteiro para o próximo nodo da lista. Diferentemente de um vetor fixo, a lista cresce dinamicamente, alocando memória conforme novos elementos são adicionados.</p>
+
+<p>Veja como implementamos uma lista em C:</p>
+
+<p>Estruturas e chamadas das funções:</p>
+
+<pre>
+<code>
+struct nodo {
+    float valor;
+    struct nodo *prox;
+};
+
+struct lista {
+    struct nodo *inicio;
+};
+
+void criarLista(struct lista *l);
+void inserirLista(struct lista *l, float v);
+float removerLista(struct lista *l);
+int estaVaziaLista(struct lista *l);
+void mostrarLista(struct lista *l);
+</code>
+</pre>
+
+<p>Implementação das funções:</p>
+
+<pre>
+<code>
+void criarLista(struct lista *l) {
+    l->inicio = NULL;
+}
+
+void inserirLista(struct lista *l, float v) {
+    struct nodo *novo = (struct nodo*) malloc(sizeof(struct nodo));
+    novo->valor = v;
+    novo->prox = NULL;
+
+    if(l->inicio == NULL) {
+        l->inicio = novo;
+    } else {
+        struct nodo *aux = l->inicio;
+        while(aux->prox != NULL) {
+            aux = aux->prox;
+        }
+        aux->prox = novo;
+    }
+}
+
+float removerLista(struct lista *l) {
+    if(l->inicio == NULL) {
+        printf("Lista vazia!\n");
+        return -1; // valor de erro
+    }
+
+    struct nodo *temp = l->inicio;
+    float valor = temp->valor;
+    l->inicio = l->inicio->prox;
+    free(temp);
+    return valor;
+}
+
+int estaVaziaLista(struct lista *l) {
+    return l->inicio == NULL;
+}
+
+void mostrarLista(struct lista *l) {
+    struct nodo *aux = l->inicio;
+    while(aux != NULL) {
+        printf("%.2f\t", aux->valor);
+        aux = aux->prox;
+    }
+    printf("\n\n");
+}
+</code>
+</pre>
+
+<p>Código principal:</p>
+
+<pre>
+<code>
+int main() {
+    int op;
+    float valor;
+    struct lista lst;
+
+    criarLista(&lst);
+
+    while(1) {
+        printf("\n1 - Inserir Elemento (push)");
+        printf("\n2 - Remover Elemento (pop)");
+        printf("\n3 - Mostrar Lista (show)");
+        printf("\n4 - Sair (exit)\n");
+        printf("\nOpção? ");
+        scanf("%d", &op);
+
+        switch(op) {
+            case 1: // push
+                printf("\nValor? ");
+                scanf("%f", &valor);
+                inserirLista(&lst, valor);
+                break;
+            case 2: // pop
+                if(estaVaziaLista(&lst)) {
+                    printf("\nLISTA VAZIA!\n");
+                } else {
+                    valor = removerLista(&lst);
+                    printf("\n%.1f removido!\n", valor);
+                }
+                break;
+            case 3: // show
+                if(estaVaziaLista(&lst)) {
+                    printf("\nLISTA VAZIA!\n");
+                } else {
+                    printf("\nConteúdo da lista: ");
+                    mostrarLista(&lst);
+                }
+                break;
+            case 4:
+                exit(0);
+            default:
+                printf("\nOPÇÃO INVÁLIDA!\n");
+                break;
+        }
+    }
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: Podemos mudar o tipo de float para qualquer outro.</p>
+
+
+
+<ul>
+    <li><a href="tudo-sobre-c-7.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-c-9.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

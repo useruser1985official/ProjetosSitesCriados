@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Linux</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Linux</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-linux-1.html">Tudo sobre Linux Parte 1!</a></li>
+                    <li><a href="tudo-sobre-linux-2.html">Tudo sobre Linux Parte 2!</a></li>
+                    <li><a href="tudo-sobre-linux-3.html">Tudo sobre Linux Parte 3!</a></li>
+                    <li><a href="tudo-sobre-linux-4.html">Tudo sobre Linux Parte 4!</a></li>
+                    <li><a href="tudo-sobre-linux-5.html">Tudo sobre Linux Parte 5!</a></li>
+                    <li><a href="tudo-sobre-linux-6.html">Tudo sobre Linux Parte 6!</a></li>
+                </menu>
+            </header>
+
+<h2>Shell Scripting - Parte 1</h2>
+
+<h3>Introdução e Conceitos Básicos</h3>
+
+<p>O shell é um programa de usuário, que oferecem uma interface personalizável para seu sistema. Além disso, os shells são uma interface de texto e interativa para o sistema operacional (intérprete de comandos), são um ambiente de execução de outros programas, consistindo em um número de variáveis de ambiente, e oferecem suas linguagens de programação, programas completos podem ser escritos nas linguagens do shell.</p>
+
+<p>Os shells são personalizáveis, podendo-se ajustar ao ambiente operacional. São distintos do kernel. Executados para uso interativo pelos usuários, para uso não-interativo pelo sistema. Usam vários arquivos de configuração para seus ambientes operacionais. Podem ser executados dentro de outros shells.</p>
+
+<p>Alguns exemplos de shells são o sh, bash, hsh, csh, tcsh, etc., você pode instalar shells extras usando por exemplo <code>sudo apt-get install csh</code>. O shell padrão é o bash.</p>
+
+<p>Ao digitar csh no terminal, mudamos para o shell, algumas coisas mudam como variáveis e comandos, mas muitos dos comandos permanecem os mesmos.</p>
+
+<h3>Variáveis de Ambiente e Comandos env, unset e echo</h3>
+
+<p>Vários programas precisam de informações sobre o usuário e suas preferências para poderem rodar. Para evitar que você tenha de passar esses dados a cada comando que executa (por exemplo, caminhos de diretórios de bibliotecas), o shell cria um ambiente operacional composto de inúmeras variáveis. Essas variáveis contém valores que são usados pelos programas e por outros shells. Há dois tipos de variáveis de ambiente, as globais e as do shell (locais).</p>
+
+<p>Variáveis de ambiente são como variáveis globais, pois podem ser passadas a todos os subprocessos do shell, incluindo outros shells. Exemplos:</p>
+
+<table>
+    <tr>
+        <th>Variável</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>PATH</td>
+        <td>Lista de Diretórios de Programas Executáveis</td>
+    </tr>
+    <tr>
+        <td>USER</td>
+        <td>Nome do Usuário Logado</td>
+    </tr>
+    <tr>
+        <td>TERM</td>
+        <td>Tipo de Terminal ou Janela de Terminal em Uso</td>
+    </tr>
+    <tr>
+        <td>HOME</td>
+        <td>Diretório Home do Usuário Atual</td>
+    </tr>
+    <tr>
+        <td>UID</td>
+        <td>UID do Usuário Atual</td>
+    </tr>
+    <tr>
+        <td>RANDOM</td>
+        <td>Gera um Número Aleatório</td>
+    </tr>
+    <tr>
+        <td>LANG</td>
+        <td>Idioma, Especificado como Locale</td>
+    </tr>
+</table>
+
+<p>Os comandos <code>env</code> e <code>printenv</code> mostram as variáveis de ambiente no terminal. Para criar uma variável global, crie uma local e depos exporte-a com o comando <code>export</code>.</p>
+
+<p>Digitando <code>env</code>, nós vemos as variáveis de ambiente do Linux.</p>
+
+<p>As variáveis do shell são como variáveis locais, pois são específicas do shell atual. Outros programas e shells não as herdam, por exemplo <code>SECONDS</code> (número de segundos desde que o shell foi iniciado), e <code>SHELL</code>, que indica o shell em uso atualmente.</p>
+
+<p>Podemos criar uma variável nova digitando algo como <code>NOME=valor</code> no terminal, e verificamos seu valor com o comando echo, como <code>echo $NOME</code>.</p>
+
+<p>Podemos disposinibilizar a variável criada para outros shells ou programas com o comando <code>export</code>, como no caso <code>export $NOME</code>. E podemos remover uma variável de ambiente com o comando <code>unset</code>, como <code>unset $NOME</code>.</p>
+
+<p>Digite esses comandos no shell (ignore a parte após o #):</p>
+
+<pre>
+<code>
+echo $SECONDS
+
+bash # Nova sessão do bash
+
+echo $SECONDS
+
+exit
+
+echo $SECONDS
+
+echo $SHELL
+</code>
+</pre>
+
+<p>Um shell pode chamar outro shell e cada um terá suas variáveis locais com nome diferente.</p>
+
+<p>Agora digite esses comandos, da mesma forma (pode ignorar tudo escrito ao lado de #):</p>
+
+<pre>
+<code>
+teste="teste" # Cria uma variável local e atribui valor
+
+echo $teste # Mostra o conteúdo da variável criada
+
+bash # Cria um novo Processo bash filho
+
+ps # Mostra os dois processos
+
+echo $teste # Mostra o conteúdo da variável criada
+
+exit # VOlta para o processo-pai
+
+ps # Mostra o processo único rodando agora
+
+echo $teste # Mostra o conteúdo da variável criada
+
+export $teste # Exporta a variável teste
+
+bash # Cria um novo Processo bash filho
+
+ps # Mostra os dois processos
+
+echo $teste # Mostra o conteúdo da variável criada
+</code>
+</pre>
+
+<h3>Arrays - Variáveis de Ambiente com Múltiplos Valores</h3>
+
+<p>Variáveis de Ambiente podem ser usadas com arrays (variáveis que podem armazenar múltiplos valores). Para configurar um array, liste os seus valores entre parênteses, por exemplo:</p>
+
+<pre>
+<code>
+testearray=(laranja morango acerola abacaxi)
+</code>
+</pre>
+
+<p>Para acessar um elemento no array, use seu número de índice (entre colchetes) contanto a partir de zero (todo o conteúdo entre chaves), como <code>echo ${testearray[1]}</code>, para mostrar todo o conteúdo do array, use o asterisco no lugar do índice.</p>
+
+<p>PS: Diferente dos arrays de outra linguagens, não separaramos os índices do array por vírgulas, e sim por espaços. E caso mostre o array diretamente (<code>echo $testearray</code>) ele só mostrará o primeito índice do mesmo.</p>
+
+<p>Digite no terminal esses comandos:</p>
+
+<pre>
+<code>
+echo $testearray
+
+echo ${testearray[1]}
+
+echo ${testearray[2]}
+
+echo ${testearray[3]}
+
+echo ${testearray[*]}
+
+</code>
+</pre>
+
+<p>Para alterar valores de uma posição específica, usamos algo como <code>testearray[2]=banana</code>, pra remover itens individuais usamos <code>unset testearray[2]</code> e pra remover o array todo, <code>unset testearray[*]</code>.</p>
+
+<p>Podemos também iniciar o array assim:</p>
+
+<pre>
+<code>
+pares=()
+
+pares[0]=0
+
+pares[1]=2
+
+pares[2]=4
+
+pares[3]=6
+
+pares[4]=8
+
+for i in ${pares[*]}; do
+    echo -n "${i} "
+done
+
+echo
+</code>
+</pre>
+
+<p>Para ordenar arrays, podemos fazer esse algoritmo:</p>
+
+<pre>
+<code>
+tam=10
+
+numeros=(7 4 6 2 1 9 3 5 0 8)
+
+for cont in $(seq 1 1 $tam); do
+    for i in $(seq 0 1 $[$tam - 2]); do
+        if [ ${numeros[$i]} -gt ${numeros[$i + 1]} ]; then
+            aux=${numeros[$i]}
+            numeros[$i]=${numeros[$i + 1]}
+            numeros[$i + 1]=$aux
+        fi
+    done
+done
+
+echo "Elementos do array em ordem crescente:"
+
+echo
+
+for i in $(seq 0 1 $[$tam - 1]); do
+    echo ${numeros[$i]}
+done
+</code>
+</pre>
+
+<h3>Aliases e Funções no Bash</h3>
+
+<p>É possível definir um alias para um comando ou sequência de comandos usados com frequência. Também permite modificar o comportamento padrão de um comando. Para listar os alieases criados digite <code>alias</code> sem parâmetros. Por padrão, os aliases são locais ao shell e não são repassados a outros programas. Para excluir um alias criado, use <code>unalias nomedoalias</code>.</p>
+
+<p>Digite esses comandos no terminal:</p>
+
+<pre>
+<code>
+cat /etc/passwd # Lê o arquivo de configuração especificado
+
+alias mo="more" # Criação do alias, que permitirá lermos todo o conteúdo
+
+alias # Lista os alias do sistema, inclusive o criado agora
+
+cat /etc/passwd | mo # Uso do alias na leitura do mesmo arquivo
+</code>
+</pre>
+
+<p>PS: Esses alias são criados quando o usuário inicializa o sistema, por estarem em arquivos de configuração.</p>
+
+<p>Outro exemplo de criação de alias, com um comando de listar pastas simplificado:</p>
+
+<pre>
+<code>
+alias lsl="ls -l"
+
+lsl
+</code>
+</pre>
+
+<p>E para excluir os alias, faça assim:</p>
+
+<pre>
+<code>
+unalias mo
+
+unalias lsl
+</code>
+</pre>
+
+<p>O bash também permite trabalhar com funções, que são parecidas com os aliases, mas em vez de comandos, temos pequenos programas, por exemplo:</p>
+
+<pre>
+<code>
+# Função criada:
+
+palavra() {
+    cd ~
+    echo "Linha acrescentada">>teste.txt    
+}
+
+# Para exibir a função:
+
+palavra
+</code>
+</pre>
+
+<p>Para ver as funções criadas no bash digite <code>typeset -f | less</code>.</p>
+
+<p>As funções são locais, usadas apenas na sessão de execução, mas é possível colocar elas em arquivos de configurações.</p>
+
+<p>PS: Podemos dar um <code>ls -a</code> para vermos os arquivos ocultos da pasta home, onde muitos deles são de configuração.</p>
+
+<h3>Arquivos de Configuração profile, bashrc e outros</h3>
+
+<p>Variáveis de ambientes, funções e aliases podem ser configurados automaticamente pelo bash com o uso de alguns arquivos de configuração, de modo a definir o ambientes operacional ao iniciar o sistema. Cada arquivo de configuração tem um escopo e momento de uso definidos, e o arquivo usado depende do método usado para iniciar o bash. Há três formas de se iniciar um bash:</p>
+
+<ul>
+    <li>Como um shell de login padrão na inicialização.</li>
+    <li>Como um shell interativo que não é o shell de login.</li>
+    <li>Como um shell não-interativo para rodas um script.</li>
+</ul>
+
+<p>Alguns dos arquivos de configuração são os localizados em /etc, como /etc/profile (arquivo de inicialização, executado durante o login e válido para todo o sistema, contém variáveis de ambiente e programas de inicialização), /etc/bashrc ou /etc/bash.bashrc (arquivo de inicialização, válido para todo o sistema, executado pelo .bashrc do usuário para cada shell bash inidicado. Contém funções e aliases. E vários arquivos no home do usuário, como ~/.bash_profile (executado após o /etc/profile durante o login) e o ~/.bashrc (executado automaticamente quando o bash é iniciado interativamente).</p>
+
+<p>Quando nos logamos no sistema Linux, o shell bash é iniciado em um shell de login. Esse shell procura por quatro arquivos de inicialização para processar seus comandos, na seguinte ordem:</p>
+
+<pre>
+<code>
+/etc/profile
+~/.bash_profile
+~/.bash_login
+~/.profile
+</code>
+</pre>
+
+<p>Para vermos o arquivo /etc/profile, digite <code>cat /etc/profile | less</code>.</p>
+
+<p>Quando o bash é iniciado como um shell interativo, ele não processa o arquivo /etc/profile, em vez disso, ele tenta executar o arquivo .bashrc no diretório do usuário atual. O arquivo bashrc pode ser usado para que o usuário insira aliases personalizados e funções de scripts pessoais. Também executa o arquivo global /etc/bashrc ou /etc/bash.bashrc, o qual configura algumas variáveis de ambiente locais.</p>
+
+<p>Para vermos o arquivo .bashrc, digite <code>cat ~/.bashrc | less</code>.</p>
+
+<p>O shell não-interativo é o shell iniciado para executar um script (shell script). Quando um shell é iniciado em modo não interativo, ele verifica a variável de ambiente BASH_ENV para descobrir se há comandos de inicialização a executar. Por padrão, o valor desta variável não é configurado.</p>
+
+<p>Em resumo, quando você se loga no sistema Linux, o shell bash acessa o arquivo de inicialização /etc/profile, e também os arquivos de inicialização locais do seu usuário, presentes no diretório home (.bash_login, .profile e .bash_profile). Esses arquivos locais são todos opcionis e podem ser personalizados pelo usuário para incluir variáveis de ambiente e scripts de inicialização.</p>
+
+<p>PS: Podemos criar nossos próprios scripts e programas em <code>/etc/init.d</code> para inicializar com o sistema, para isso, coloque o script nesse diretório e digite esses comandos:</p>
+
+<pre>
+<code>
+sudo chmod 755 /etc/init.d/meuscript
+
+sudo update-rc.d meuscript defaults
+</code>
+</pre>
+
+<h3>Criando Scripts Simples - Comando echo</h3>
+
+<p>É possível encadear múltiplos comandos em sequência no bash, bastanto para isso separá-los com um ponto-e-vírgula, por exemplo <code>cd /; ls -l</code>. Essa sequência pode ser considerada como um script do shell ultra-simples. Claro que toda vez que for necessária a execução dessa sequência, devem-se digitar todos os comandos novamente. Para evitar esse problema, criaremos arquivos de script contendo os comandos que queremos executar.</p>
+
+<p>Para criar um arquivo de script, use um edito de texto de sua preferência e crie um arquivo. A primeira tarefa é especificar qual shell será usado na primeira linha do arquivo (geralmente é <code>#!/bin/bash</code>). O símbolo # representa uma linha de comentário, exceto na primeira linha do arquivo, onde a combinação #! indica o shell que rodará o script. Ele não precisa ter extensão, mas normalmente usa a extensão .sh para os identificar.</p>
+
+<p>Após especificar o shell podemos entrar com os comandos a serem executados, juntamente com os comentários necessário, por exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Este é o meu primeiro script do BASH
+
+cd /
+
+ls -l
+</code>
+</pre>
+
+<p>Após digitar os comandos desejados no arquivo de script, salve-o com o nome desejado. É então necessário dar permissão de execução ao script, caso contrário ele não rodará (com <code>chmod +x meuscript.sh</code>). Opcionalmente, adicione também o script a algum diretório presente na variável PATH, ou adicione o diretório que contém a essa variável. Assim dá pra rodar o script chamando-o pelo nome (<code>meuscript.sh</code>). Para rodar o script no local onde ele está, faça como um programa (<code>./meuscript.sh</code>).</p>
+
+<p>Podemos também editar o arquivo, no final dele coloque essa linha:</p>
+
+<pre>
+<code>
+echo "Esta foi a listagem de arquivos e diretórios dentro da raiz"
+</code>
+</pre>
+
+<p>O echo mostrará a mensagem no terminal.</p>
+
+<p>PS: Para executar comando após o echo na mesma linha, podemos colocar antes da aspas o parâmetro -n, por exemplo</p>
+
+<pre>
+<code>
+echo -n "O usuário logado no momento é "
+
+whoami
+</code>
+</pre>
+
+<h3>Usando Variáveis nos Scripts</h3>
+
+<p>Nós podemos usar variáveis nos nossos scripts, tanto variáveis de ambientes quanto de usuários. Veha um exemplo de um script que mostra informações do usuário atualmente logado:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Informações sobre o usuário:
+
+echo "Usuário: $USER"
+
+echo "Diretório home: $HOME"
+
+echo "UID do usuário: $UID"
+</code>
+</pre>
+
+<p>No script acima, foram usadas variáveis de ambiente do Linux. Observe que mesmo entre as aspas, as variáveis são identificadas por ter o $ na frente (isso é comum em várias linguagens cujas variáveis começam com cifrão, como o Perl e o PHP).</p>
+
+<p>Você pode criar suas próprias variáveis dentro de um script; Variáveis de usuário podem conter até 20 caracteres no nome, e são case-sensitive. O shell determina automaticamente o tipo das variáveis criadas. As variáveis criadas pelo usuário são desalocadas quando termina a execução do script.</p>
+
+<p>Veja um exemplo de criação de variáveis para idade e nome:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Teste de variáveis
+
+idade=25
+
+nome="Mônica"
+
+echo "$nome tem $idade anos de idade."
+</code>
+</pre>
+
+<p>No caso acima, a variável idade é int e a nome é string (por isso deve estar entre aspas).</p>
+
+<p>Da mesma forma, podemos mudar o nome e a idade da variável.</p>
+
+
+<p>Podemos colocar variáveis de usuário e de ambiente no mesmo script, por exemplo:</p>
+
+<pre>
+<code>
+#!/bin/bash
+
+# Teste de variáveis
+
+echo "Teste de Variáveis de Usuário"
+
+nome="Carlos"
+
+echo "-----------------------------------"
+
+echo "|                                 |"
+
+echo "| O usuário $nome tem o UID $UID |"
+
+echo "-----------------------------------"
+</code>
+</pre>
+
+<ul>
+    <li><a href="shell-script-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

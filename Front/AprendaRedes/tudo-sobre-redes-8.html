@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html">Tudo sobre Redes Parte 13!</a></li>
+                    <li><a href="tudo-sobre-redes-14.html">Tudo sobre Redes Parte 14!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Redes Parte 8</h2>
+
+<h3>Tipos de Registros DNS - Resource Records</h3>
+
+<p>Os Resource Records são registros no banco de dados DNS que descrevem as características da zona ou do domínio, e também definem os tipos de dados armazenados no banco DNS. Há mais de 30 tipos de registros disponíveis, como endereço IP, aliases, etc.</p>
+
+<p>Veja um exemplo de arquivo de definição de zona de exemplo:</p>
+
+<pre>
+<code>
+$TTL 86400; Diretiva para TTL padrão
+teste.com IN SOA admin.teste.com root.teste.com (
+500;        Serial Number
+604800;     Refresh
+86400;      Retry
+2419200;    Expire
+60  );      TTL Mínimo
+
+// admin = nome do servidor DNS
+// teste.com = nome do domínio
+
+teste.com	IN NS    admin.teste.com.
+
+teste.com   IN A     192.168.1.200
+;@          IN A     127.0.0.1
+;@          IN AAAA  ::1
+admin       IN A     192.168.1.200
+
+name        IN CNAME name.teste.com
+</code>
+</pre>
+
+<p>Os registros de endereços definem o endereço IP de um host. Mapeiram FQDN para IP. São os egisros mais consultados para resolução de nomes. A é endereço IPv4, e AAAA é o endereço IPv6. Um exemplo seria <code>www.google.com.br. IN A 172.217.29.131</code>.</p>
+
+<p>O registro SOA (Start of Authority) está em toda zona. Esse registro contém campos TTL, classe e tipo, servidor autoritativo, pessoa responsável, serial number, refresh, retry, expire e TTL mínimo.</p>
+
+<p>Veja pra que serve cada intem do registro SOA:</p>
+
+<ul>
+    <li><b>Serial Number: </b>Mostra quantas vezes a zona foi atualizada. Permite definir se é necessário realizar uma transferência de zona entre um servidor primário e secundário (por comparação de números seriais).</li>
+    <li><b>Refresh: </b>Mostra de quanto em quanto tempo o servidor secundário da zona verifica se a zona foi alterada.</li>
+    <li><b>Retry: </b>Quanto tempo após enviar uma requisição de transferência de zona o servidor secundário espera por uma resposta do servidor mestre antes de tentar novamente.</li>
+    <li><b>Expire: </b>Quanto tempo após enviar uma requisição de transferência de zona o servidor secundário continua a responder a consultas antes de descartas sua própria zona (zona invalidada).</li>
+    <li><b>TTL Mínimo: </b>Se aplica aos registros na zona quando um TTL não é especificado em um registro de recurso.</li>
+</ul>
+
+<p>O registro de nameserver (NS) indica os servidores autoritativos para a zona, e também os servidores primário e secundário especificados no RR SOA. Também indica servidores para as zonas delegadas. Toda zona tem ao menos um registro NS na zona raiz (root).</p>
+
+<p>O nome canônico (CNAME) é um alias (apelido) de um outro registro, nomes secundários, útil para registrar diversos serviços em um mesmo servidor no banco de dados do DNS. Por exemplo: <code>www IN CNAME google.com.br</code> ou <code>ftp IN CNAME google.com.br</code>.</p>
+
+<p>O mail exchanger record (MX) é o nome de domínio DNS para um servidor de e-mail. Por exemplo <code>IN MX mail.google.com.br</code>.</p>
+
+<p>O pointer record (PTR) é um registro de ponteiro, faz o processo inverso para A ou AAAA, mapeia IP para FQDN e está presente em um arquivo de zona reversa. Veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+$ORIGIN 1.168.192.IN-ADDR-ARPA.; diretiva de nome base
+1   IN PTR roteador.teste.com
+200 IN PTR admin.teste.com
+50  IN PTR vendas.teste.com
+</code>
+</pre>
+
+<p>O registro service resource record (SRV) permite especificar a localização de servidores para um protocolo, serviço ou donínio DNS específico. Por exemplo, registros que especificam quais hosts são os servidores web em uma rede. Sempre tem o formato _Serviço._Protocolo.Nome TTL Class SRV Prioridade Peso Porta Alvo, por exemplo <code>_http._tcp.teste.com. 32 IN SRV 10 0 80 webserver.admin.teste.com</code>.</p>
+
+<p>O registro TXT permite associar um texto arbitrário com um hostname, é possível ter vários registros TXT para um mesmo hostname. Por exemplo <code>admin.teste.com. IN TXT "CEO: admin@teste.com.br"</code>.</p>
+
+<h3>O que é um Endereço IP Privado</h3>
+
+<p>Para entendermos bem, veja a imagem abaixo:</p>
+
+<img src="imagens/ip-publico-ip-privado.jpg" alt="IP Privado e Público"/>
+
+<p>Na imagem acima, o que está do lado esquerdo do tracejado é a parte pública, ligada a internet, que tem o IP público válido na internet (geralmente atribuído pelo provedor), não sendo usado em redes internas.</p>
+
+<p>Do lado direito, está a parte privada, dentro da nossa rede local, onde usamos IPs privados nas nossas máquinas. Esses IPs não conflitam com os IPs públicos.</p>
+
+<p>O NAT do modem converte o IP público da operadora para o IP privado usado na rede local.</p>
+
+<p>A IANA (Internet Assigned Numbers Authority) reserva blocos de endereços IP para uso em redes internas, sendo um bloco para redes classe A, um para classe B e outro para classe C, como segue:</p>
+
+
+<table>
+    <tr>
+        <th></th>
+        <th>IP Inicial</th>
+        <th>IP Final</th>
+    </tr>
+    <tr>
+        <td>Classe A</td>
+        <td><code>10.0.0.0</code></td>
+        <td><code>10.255.255.255</code></td>
+    </tr>
+    <tr>
+        <td>Classe B</td>
+        <td><code>172.16.0.0</code></td>
+        <td><code>172.31.255.255</code></td>
+    </tr>
+    <tr>
+        <td>Classe C</td>
+        <td><code>192.168.0.0</code></td>
+        <td><code>192.168.255.255</code></td>
+    </tr>
+</table>
+
+<p>Todas máquinas tem algum desses IPs, seja uma rede comporativa ou doméstica, a classe C geralmente é usada para pequenas redes.</p>
+
+<p>Cada bloco desses tem uma capacidade diferente com relação ao número de hosts que pode suportar. por exemplo, o primeiro bloco (10.0.0.0) pode comportar mais de 16 milhões de endereços IP, ao passo que o bloco classe C (192.168.0.0) pode acomodar um pouco mais de 65 mil hosts.</p>
+
+<p>Por este motivo podemos ter, literalmente, IPs ilimitados para configuração de redes locais diversas.</p>
+
+<p>Por exemplo: Meu provedor de Internet atribui ao meu roteador um endereço IP público, digamos, <code>186.45.123.69</code> este IP é único no mundo.  Porém, eu possuo cinco dispositivos que precisam acessar a Internet em minha rede interna. Como conseguir isso se só possuo um endereço IP público?</p>
+
+<p>Para resolver este problema, atribuo endereços IP privados aos meus dispositivos (PC, notebook, tablet, etc.), e compartilho o IP público único que possuo entre todos eles. Quem faz a atribuição desses IPs é o roteador (ou outro dispositivo configurado como gateway padrão), via DHCP, o qual também realiza o compartilhamento do IP público.</p>
+
+<p>Em sua casa você pode ter também diversos dispositivos em sua rede doméstica acessando a Internet, cada um com um IP privado - e que podem ser os mesmos IPs privados que os equipamentos da minha rede! - pois o que importa para o acesso á Internet é o IP público atribuído, que será diferente do meu.</p>
+
+<p>Há também um quarto bloco de endereços IP privados, chamado de APIPA (Automatic Private IP Addressing), cujo intervalo de endereços vai de <code>169.254.0.0</code> até <code>169.254.255.255</code>, e é usado para autoconfiguração de endereços IP quando um servidor DHCP não está presente na rede local. Com um IP nessa faixa, não conseguimos acessar a internet (o que ajuda a identificar problemas de conexão), mas podemos acessar outras máquinas na mesma rede local.</p>
+
+<p>O mais comum é o Endereço de loopback, na faixa de endereços de <code>127.0.0.0</code> até <code>127.255.255.255</code> (o mais usado é o <code>127.0.0.1</code>), que é, basicamente, usado para realizar testes no adaptador de rede. Os endereços na faixa de <code>0.0.0.0</code> até <code>0.255.255.255</code> também são reservados, mas sem uma aplicação específica.</p>
+
+<p>Dê um <code>ipconfig</code> no prompt para verificar a configuração dos IPs do computador.</p>
+
+<h3>O que é o Protocolo DHCP</h3>
+
+<p>O DHCP (portas 67 e 68) é um protocolo de serviço TCP/IP que permite executar configuração dinâmica de hosts em uma rede. É sucessor do BOOTP. Permite conceder endereços IP, máscaras de sub-rede, gateway padrão, servidores DNS e muitas outras configurações aos hosts.</p>
+
+<p>Em termos gerais, o protocolo DHCP permite configurar dinamicamente os clientes da seguinte forma:</p>
+
+<ul>
+    <li>Um cliente de rede envia um pacote UDP em broadcast com um pedido de serviço DHCP.</li>
+    <li>Os servidores DHCP disponíveis recebem esse pacote e respondem com diversas configurações como IP, máscara, gateway, DNS, etc.</li>
+</ul>
+
+<p>Basicamente, o cliente faz um requisição DHCP e o servidor envia uma resposta DHCP,</p>
+
+<p>A alocação do DHCP pode ser feita de três formas:</p>
+
+<ul>
+    <li><b>Automático:</b> IPs são atribuídos pelo servidor aos clientes na rede (sempre os mesmos).</li>
+    <li><b>Dinâmico:</b>Semelhante ao automático, mas com o tempo de uso de IPs restrito (lease).</li>
+    <li><b>Estática:</b>Endereços MAC de hosts são associados a IPs no servido para que sempre seja oferecido o mesmo IP ao host (reserva).</li>
+</ul>
+
+<p>O DHCP usa as mesmas portas atribuídas pelo IANA ao protocolo BOOTP:</p>
+
+<ul>
+    <li>UDP 67 para envio de dados do cliente ao servidor.</li>
+    <li>UDP 68 para dados enviados do servidor ao cliente.</li>
+</ul>
+
+<p>A operação do DHCP ocorre em quatro fases: Descoberta (DHCPDISCOVER), Oferta de Concessão (DHCPOFFER), Requisição (DHCPREQUEST) e Confirmação de Concessão (DHCPACK).</p>
+
+<p>O cliente envia mensagens de broadcast para a rede em busca de um servidor DHCP. Conteúdo básico da mensagem:</p>
+
+<pre>
+<code>
+srcAddr=0.0.0.0, srcPort=68 dstAddr=255.255.255.255, dstPort=67
+</code>
+</pre>
+
+<p>E o MAC Address do cliente.</p>
+
+<p>Após o servidor receber a requisição DHCP de um cliente, é enviada por ele uma mensagem DHCPOFFER. Conteúdo da mensagem:</p>
+
+<pre>
+<code>srcAddr=IP do servidor, srcPort=67, dstAddr=255.255.255.255, dstPort=68
+</code>
+</pre>
+
+<p>Além do:</p>
+
+<ul>
+    <li>MAC Address do Cliente.</li>
+    <li>IP oferecido pelo servidor, mais a máscara de subrede e duração da concessão.</li>
+</ul>
+
+<p>O cliente então responde com uma DHCPREQUEST, requerendo as configurações oferecidas. Conteúdo básico da mensagem:</p>
+
+<pre>
+<code>
+srcAddr=0.0.0.0, srcPort=68, dstAddr=255.255.255.255, dstPort=67
+</code>
+</pre>
+
+<p>O servidor é identificado pelo IP, contido no campo de opções de DHCP da mensagem.</p>
+
+<p>Quando o servidor recebe a mensagem DHCPREQUEST do cliente, envia um pacote DHCPACK a este com as configurações oferecidas, finalizando a configuração DHCP. O cliente verifica se o endereço fornecido não está em uso enviando um pacote ARP para a rede. Conteúdo básico da mensagem:</p>
+
+<pre>
+<code>srcAddr=IP do servidor, srcPort=67, dstAddr=255.255.255.255, dstPort=68
+</code>
+</pre>
+
+<p>Basicamente, o cliente manda o DHCPDISCOVER pro servidor, que devolve o DHCPOFFER, o cliente aceitando devolve o DHCPREQUEST e o servidor devolve o DHCPACK (aceitando a oferta e fornece o IP e outras configurações).</p>
+
+<p>A concessão (lease time) é o tempo pelo qual um host pode usar as configurações recebidas. Antes do término da concessão, o cliente DHCP pode solicitar sua renovação por um período de tempo igual.</p>
+
+<p>Após decorridos 50% do tempo de concessão, o host inicia o processo de solicitação de renovação, enviando pacotes DHCP para o servidor e pedindo a renovação de sua concessão atual. Caso o servidor DHCP não responda à solicitação de renovação, ao atingir 75% do período de concessão, o host inicará o processo de obtenção de IP a partir de outros servidores (possivelmente) presentes na rede.</p>
+
+<p>Veja o formato da mensagem DHCP logo abaixo:</p>
+
+<img src="imagens/mensagem-dhcp.jpg" alt="Mensagem DHCP"/>
+
+<p>Os campos da mensagem DHCP são esses:</p>
+
+<ul>
+    <li><b>OP:</b> Operation Code. Especifica se a mensagem é uma requisição (request - 1) ou uma resposta (reply - 2).</li>
+    <li><b>HTYPE:</b> Especifica o tipo de hardware de rede (Ethernet, HDLC, Frame Relay, ATM, etc).</li>
+    <li><b>HLEN:</b> Hardware Adress Length. Tamanho do endereço de hardware (MAC). Exemplo: Ethernet = tipo 1, tamanho 6.</li>
+    <li><b>HOPS:</b> Usado por agentes de relay para controlar o encaminhamento de mensagens DHCP.</li>
+    <li><b>ID da Transação (XID):</b> Contém um número inteiro de 32 bits usado pelos clientes para sincronizar respostas com solicitações.</li>
+    <li><b>Segundos:</b> Número de segundos desde que o cliente tentou adquirir ou renovar uma concessão.</li>
+    <li><b>Flags:</b> Se um cliente não souber seu próprio IP ao enviar sua requisição, a flag terá o valor 1. Indica ao servidor se sua resposta deve ser enviada em broadcast.</li>
+    <li><b>Endereço IP do Cliente (ClAddr):</b> IP conhecido do cliente, configurado em 0 se o cliente não possuir IP.</li>
+    <li><b>Seu Endereço IP (YlAddr):</b> IP que o servidor está atribuindo ao cliente.</li>
+    <li><b>Endereço IP do Servidor (SlAddr):</b> Endereço IP do servidor que o cliente deve usar na sequência de boot (pode ou não o próprio DHCP).</li>
+    <li><b>Endereço IP do Roteador (GlAddr):</b> Endereço IP do roteador que roteia mensagens DHCP (Relay Agent).</li>
+    <li><b>Endereço de Hardware do Cliente (CHAddr):</b> Endereço MAC do cliente.</li>
+    <li><b>Hostname do Servidor (SName):</b> Nome do servidor DHCP.</li>
+    <li><b>Boot File Name:</b> Usado para especificar um caminho de arquivo de boot.</li>
+</ul>
+
+<p>Sobre o campo de opções DHCP, cada opção consiste em um campo de código de um byte e um campo de comprimento de um byte também, seguido por alguns octetos de dados que descrevem a opção.</p>
+
+<table>
+    <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Comprimento</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Máscara de Sub-rede</td>
+        <td>4 Octetos</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Roteadores (Gateway)</td>
+        <td>Múltiplos de 4 Octetos</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Servidores DNS</td>
+        <td>Múltiplos de 4 Octetos</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Servidores de Log</td>
+        <td>Múltiplos de 4 Octetos</td>
+    </tr>
+    <tr>
+        <td>15</td>
+        <td>Nome de Domínio</td>
+        <td>1 Octeto, no Mínimo</td>
+    </tr>
+    <tr>
+        <td>28</td>
+        <td>Endereço de Broadcast</td>
+        <td>4 Octetos</td>
+    </tr>
+    <tr>
+        <td>37</td>
+        <td>TTL Padrão TCP</td>
+        <td>1 Octeto</td>
+    </tr>
+    <tr>
+        <td>42</td>
+        <td>Servidores NTP</td>
+        <td>Múltiplos de 4 Octetos</td>
+    </tr>
+    <tr>
+        <td>48</td>
+        <td>Servidores de Fontes x Window System</td>
+        <td>Múltiplos de 4 Octetos</td>
+    </tr>
+    <tr>
+        <td>69</td>
+        <td>Servidores SMTP</td>
+        <td>Múltiplos de 4 Octetos</td>
+    </tr>
+    <tr>
+        <td>70</td>
+        <td>Servidores POP3</td>
+        <td>Múltiplos de 4 Octetos</td>
+    </tr>
+    <tr>
+        <td>58</td>
+        <td>Tempo de Renovação de Concessão</td>
+        <td>Múltiplos de 4 Octetos</td>
+    </tr>
+</table>
+
+<p>Veja uns Exemplos de Opções, que podem ser identificadas pelos códigos:</p>
+
+<table>
+    <tr>
+        <th>Código da Opção</th>
+        <th>Comprimento</th>
+        <th>Dados</th>
+    </tr>
+    <tr>
+        <td>03</td>
+        <td>04</td>
+        <td><code>192.168.1.1</code></td>
+    </tr>
+    <tr>
+        <td>06</td>
+        <td>04</td>
+        <td><code>192.168.1.100</code></td>
+    </tr>
+    <tr>
+        <td>42</td>
+        <td>04</td>
+        <td><code>200.160.0.8</code></td>
+    </tr>
+</table>
+
+<p>O tipo de mensagem DHCP também é determinado no campo de opções pelos seguintes campos e valores: Código 53, comprimento 1 e dados (que é o valor que identifica a mensagem DHCP enviada).</p>
+
+<p>Veja os tipos de mensagens DHCP logo abaixo:</p>
+
+<img src="imagens/tipos-dhcp.jpg" alt="Tipos DHCP"/>
+
+<p>O endereço de auto-configuração (APIPA) trata-se do endereço IP de auto-configuração de hosts, que são os endereços da faixa <code>169.254.0.1</code> até <code>169.254.255.254</code>. Caso um host esteja utilizando um endereço dessa faixa, provavelmente trata-se de problemas de comunicação com o servidor DHCP.</p>
+
+<p>Um endereço IP dinâmico pode ser reservado para uso exclusivo de um host, no processo conhecido como reserva de IP. Para isso o servidor DHCP registra em uma tabela o endereço MAC do host e o IP que ele utilizará. Desta forma, o endereço deste host nunca mudará e não necessitará de configuração manual por parte de usuário.</p>
+
+<p>Um escopo DHCP nada mais é do que a faixa de IPs que serão distribuídos a uma sub-rede em particular, mais uma máscara de sub-rede, por exemplo: Faixa de <code>192.168.1.20</code> a <code>192.168.1.40</code>, com máscara de sub-rede <code>255.255.255.0</code>. Cada sub-rede terá seu próprio escopo DHCP.</p>
+
+<p>No servidor podemos verificar o nome das máquinas conectadas, seus IPs Privados, MAC e a concessão das mesmas.</p>
+
+<ul>
+    <li><a href="tudo-sobre-redes-7.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-redes-9.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

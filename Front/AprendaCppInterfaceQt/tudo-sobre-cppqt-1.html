@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C++ com QT Creator</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++ com QT Creator</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cppqt-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C++ com QT Creator Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cppqt-2.html">Tudo sobre C++ com QT Creator Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cppqt-3.html">Tudo sobre C++ com QT Creator Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cppqt-4.html">Tudo sobre C++ com QT Creator Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cppqt-5.html">Tudo sobre C++ com QT Creator Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cppqt-6.html">Tudo sobre C++ com QT Creator Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cppqt-7.html">Tudo sobre C++ com QT Creator Parte 7!</a></li>
+                </menu>
+            </header>
+          
+<h2>Tudo sobre C++ com QT Creator Parte 1</h2>
+
+<h3>Primeiro Programa em QT</h3>
+
+<p>Para abrir o QT, vá em New Project, e em Qt Widgets Application, defina o nome e local do projeto, selecione o qmake em Build System, deixe apenas o Mingw e selecione em Debug o Mingw e veja os arquivos formados pelo projeto.</p>
+
+<p>Para programar o formulário, será no mainwindow.cpp, e o mainwindow.ui é onde desenhamos o formulário.</p>
+
+<p>Arraste um botão (pushbutton) e um label pro formulário, veja que, ao clicar no elemento, ao lado aparece as propriedades, que iremos mexer, vamos alterar as propriedades do texto em textLabel, incluindo a frase escrita. Faça o mesmo no botão.</p>
+
+<p>PS: Observe que tudo que alteramos ali, é alterado no XML do formulário.</p>
+
+<p>Note que o main.cpp é o que vai exibir o formulário, a programação é feita em mainwindow, onde temos os métodos implementados da classe MainWindow() (declarados em mainwindow.h).</p>
+
+<p>Se quiser, mude os names das variáveis do label e botão (respectivalemente, lblText e btnClick).</p>
+
+<p>Para programar o botão, vá em Go To Slot e selecione a opção clicked(). Ele vai criar um método na classe MainWindow para programarmos o botão. Cujo código é esse:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnClick_clicked() {
+    ui->lblText->setText("Olá Mundo!");
+}
+</code>
+</pre>
+
+<p>Podemos criar um segundo botão para alterar o mesmo label, com uma outra mensagem.</p>
+
+<p>Podemos mudar o título do programa, indo nas propriedades do formulário, em Window Title. Para impedir que o programa maximize, clique com o botão direito na janela, vá em Size Constraints e ajuste os valores Set Minimun Size e Set Maximum Size deixando-os iguais. Para escolher um ícone pro programa podemos ir em Window Icon e Choose File (o ideal é colocar o ícone na mesma pasta, criar um arquivo de recursos pro ícone e adicionar por ele).</p>
+
+<p>PS: Podemos colocar no construtor o método move para centralizar o frame, assim:</p>
+
+<pre>
+<code>
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+
+    move(screen()->geometry().center() - frameGeometry().center()); // Inclua QScreen
+}
+</code>
+</pre>
+
+<h3>Sinais e Slots</h3>
+
+<p>Os sinais é como os eventos (como o de click), e os slots é as ações (respostas) aos sinais.</p>
+
+<p>Crie um novo projeto e no formulário, adicione um botão com o texto fechar, na barra superior da IDE, no segundo botãozinho, clique nele pra entrar no modo de edição de sinal, dê uma leve arrastada no botão e solte dentro do formulário.</p>
+
+<p>Na janela que aparecer, marque clicked(), show signals e close(), salve e construa o programa.</p>
+
+<p>PS: Isso pode ser usado com qualquer elemento do formulário.</p>
+
+<p>Isso também pode ser feito manualmente, fazendo assim no construtor do mainwindow:</p>
+
+<pre>
+<code>
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+    
+    connect(ui->btnClose, SIGNAL(clicked()), this, SLOT(close()));
+}
+</code>
+</pre>
+
+<p>Os parâmetros são, respectivamente, o nome do botão do objeto, o sinal, o formulário em si (this) e a ação.</p>
+
+<p>E podemos também, facilmente criar um evento pra esse botão, indo em Go To Slot, clicked e no código do botão, apenas colocar isso:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnClose_clicked() {
+    close();
+}
+</code>
+</pre>
+
+<p>Adicione um segundo botão (com o texto mudar cor) e um label, e mude as variáveis deles.</p>
+
+<p>Em label, podemos procurar a propriedade stylesheet e mudar a cor usando CSS, onde podemos colocar algo assim:</p>
+
+<pre>
+<code>
+background-color: #005500;
+color: #ffffff;
+</code>
+</pre>
+
+<p>E para mudar a cor com o botão, vá no botão de cor, Go To Slot e Clicked, e no evento dele, colocar isso:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnColor_clicked() {
+    QString css = "background-color: #ff0000; color:#000000";
+    ui->lblText->setStyleSheet(css);
+}
+</code>
+</pre>
+
+<h3>Caixas de Mensagens</h3>
+
+<p>Num novo projeto, abra um formulário e coloque um botão, se quiser aumente o tamanho dele e coloque o texto Mensagens. Coloque o slot e o clicked(), no código, coloque isso:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnMens_clicked() {
+    QMessageBox::about(this, "CFB Cursos", "Curso de QT Creator"); // inclua QMessageBox
+}
+</code>
+</pre>
+
+<p>O about não exibe nenhum ícone. Para entender, os parâmetros são o próprio formulário, o título da janela e o texto do corpo, respectivamente.</p>
+
+<p>Podemos usar também o aboutQT, que mostra as informações do QT, assim:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnMens_clicked() {
+    QMessageBox::aboutQt(this, "CFB Cursos"); // inclua QMessageBox
+}
+</code>
+</pre>
+
+<p>O critical, que é usado para erros:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnMens_clicked() {
+    QMessageBox::critical(this, "CFB Cursos", "Exemplo de ERRO!"); // inclua QMessageBox
+}
+</code>
+</pre>
+
+<p>O information, usado pra informações diversas:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnMens_clicked() {
+    QMessageBox::information(this, "CFB Cursos", "Exemplo de INFO!"); // inclua QMessageBox
+}
+</code>
+</pre>
+
+<p>O question, que exibe uma pergunta com opções sim e não, que podem ser trabalhadas:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnMens_clicked() {
+    QMessageBox::question(this, "CFB Cursos", "Exemplo de PERGUNTA!"); // inclua QMessageBox
+}
+</code>
+</pre>
+
+<p>E o warning, usado para alertas de avisos:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnMens_clicked() {
+    QMessageBox::warning(this, "CFB Cursos", "Exemplo de AVISO!"); // inclua QMessageBox
+}
+</code>
+</pre>
+
+<p>Veja um exemplo de trabalho com a caixa de perguntas:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnMens_clicked() {
+    QMessageBox::StandardButton verif; // inclua QMessageBox
+    QString opc;
+
+    verif = QMessageBox::question(this, "Pergunta", "Escolha um Botão!");
+
+    opc = (verif == QMessageBox::Yes) ? "SIM" : "NÃO";
+    
+    QMessageBox::information(this, "Info", "Escolheu o " + opc + "!");
+}
+</code>
+</pre>
+
+<h3>Criando Métodos para Slots</h3>
+
+<p>Abra num novo projeto, um formulário com um label e um botão. Para adicionar um sinal ao label, clique no segundo botão da barra superior da IDE e arraste o botao para o label. escolha o clicked() e marque show signals, mas note que não tem um método para mudar texto.</p>
+
+<p>Para mudar o texto, vá no mainwindow.h e coloque esse método:</p>
+
+<pre>
+<code>
+public slots:
+    void mudaTexto();
+</code>
+</pre>
+
+<p>E no mainwindow.cpp, coloque isso:</p>
+
+<pre>
+<code>
+void MainWindow::mudaTexto() {
+    ui->lblText->setText("Texto Modificado!");
+}
+</code>
+</pre>
+
+<p>Também altere o construtor assim:</p>
+
+<pre>
+<code>
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+    
+    connect(ui->btnClick, SIGNAL(clicked()), this, SLOT(mudaTexto()));
+}
+</code>
+</pre>
+
+<p>Compile e execute.</p>
+
+<h3>Layout</h3>
+
+<p>Abra um novo projeto, e coloque uns quatro botões nele. Note que os botões ficam desalinhados, mas isso resolvemos usando o layout.</p>
+
+<p>Temos vários tipos de layout, no exemplo, colocaremos um vertical, e colocaremos os botões dentro dele, dessa forma, eles são realinhados todos junto com o layout, facilitando a organização.</p>
+
+<p>Coloque um horizontal e coloque mais alguns botões nele, faça o mesmo no grid (que ordena lateral e abaixo). Podemos adicionar os elementos diretamente nele.</p>
+
+<p>No form, o padrão é duas colunas, ideal para formulários, com um label e um campo de texto (line edit) do lado, por exemplo.</p>
+
+<p>Podemos também, colocar um layout horizontal dentro de um layout vertical, facilitando ainda mais a organização.</p>
+
+<p>PS: O layout por padrão é fixo, independente da alteração do tamanho da página.</p>
+
+<p>Apage todos os layouts e coloque alguns botões. Clicando no formulário com o botão direito, escolha o layout (no caso horizontal), esse layout será redimensionado automaticamente, e podemos adicionar os elementos de forma que fiquem organizados. Podemos colocar um grid também.</p>
+
+<p>Com o formulário como grid, coloque outro layout dele, horizontal, e podemos clicar com o botão direito nesse layout, altere para vertical. Adicione outros layouts verticais e adicione mais botões neles.</p>
+
+<p>Delete todos os elementos, mas deixe o formulário no modo grid ainda, e adicione 9 botões.</p>
+
+<p>Selecione todos os botões, e em SizePolicy, nas propriedades, coloque Vertical Policy como preferred. Dessa forma os botões se redimisionam totalmente ao tamanho da tela.</p>
+
+<p>Coloque um layout form na lateral dos botões, e coloque um label e um line text</p>
+
+<p>Apague todos os elementos de novo, e volte pro layout padrão (break).</p>
+
+<p>Adicione um label e um line text, selecione os dois e veja que na barra da IDE, temos també as opções de criar um layout padrão pra eles, como o horizontal.</p>
+
+<p>Apague tudo, deixando apenas o layout com o label e o line text, e crie mais um label e um line text abaixo dele, e coloque no layout horizontal, e faça o mesmo para três botões abaixo dele. E coloque os três layouts dentro de um vertical, tudo pela barra acima.</p>
+
+<p>Do lado esquerdo dos botões, dentro do layout deles, coloque um horizontal space, que definirá o espaço dele, que pode ser alterado nas propriedades. Da mesma forma, podemos adicionar espaçamento vertical entre os layout dos labels e dos botões.</p>
+
+<p>Crie mais dois labels e dois line texts, iguais aos outros, coloque num layout horizontal cada um deles e coloque no layout vertical igual os outros. Pra ficarmos com quatro iguais. Na barra superior, no quarto elemento, podemos escolher a ordem de tabulação do foco do elemento.</p>
+
+<h3>Criando e Abrindo Novos Formulários</h3>
+
+<p>Crie um novo projeto, e clique na pasta do nosso projeto, e em  Add New, vá em Qt e em Designer Form Class e selecione o modelo (que será o Dialog without Buttons, mas pode ser o Main Windows), e defina um nome pra classe, que pode ser Janela2. Note que ele cria o janela2.h, janela2.cpp e o janela2.ui (do formulário).</p>
+
+<p>No formulário principal (mainwindow), coloque um botão com o texto abrir janela. Adicione o slot com sinal clicked(), e no mainwindow.cpp, coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnAbrir_clicked() {
+    Janela2 form2; // inclua janela2.h com aspas 
+    
+    form2.exec();
+}
+</code>
+</pre>
+
+<p>Se for usar MainWindow, faça assim:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnAbrir_clicked() {
+    Janela2 *form2 = new Janela2(this); // inclua janela2.h com aspas 
+
+    form2->show();
+}
+</code>
+</pre>
+
+
+
+<p>Podemos também fazer diferente, ao disponibilizar isso para o programa todo, coloque isso no mainwindow.h, ao invés do mainwindow.cpp.</p>
+
+<p>No mainwindow.h, faça assim:</p>
+
+<pre>
+<code>
+private:
+    Ui::MainWindow *ui;
+    
+    Janela2 *form2; // Não esqueça do ponteiro e nem do include de janela2
+};
+</code>
+</pre>
+
+<p>E no mainwindow.cpp, altere o método assim:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnAbrir_clicked() {
+    form2 = new Janela2(this);
+
+    form2->show();
+}
+</code>
+</pre>
+
+<h3>Armazenando Dados Digitados no Formulário em Variáveis</h3>
+
+<p>Abra um novo projeto, com três labels, três line text e dois botões, organizando dentro de um layout horizontal cada um deles. E colocando um espaço horizontal do lado esquerdo e direitos dos botões. E organize todos os layouts num outro layout, vertical e aumente o tamanho do layout vertical.</p>
+
+<p>Os labels terão os textos Nome, Telefone e Email, e os botões, Mostrar e Limpar.</p>
+
+<p>Altere das variáveis dos elementos, txtNome, txtTel e txtMail, e btnMost e btnLimp</p>
+
+<p>Adicione no slot do mostrar o clicked(), e coloque isso no código dele:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnMost_clicked() {
+    QString nome = ui->txtNome->text();
+    QString fone = ui->txtTel->text();
+    QString mail = ui->txtMail->text();
+    
+    QMessageBox::information(this, "Dados Digitados", "Nome: " + nome + "\nTelefone: " + fone + "\nE-mail: " + mail); // Importe QMessageBox
+}
+</code>
+</pre>
+
+<p>Isso acima exibe os dados numa caixinha.</p>
+
+<p>Agora adicione o slot do botão limpar com clicked() e adicione esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnLimp_clicked() {
+    ui->txtNome->clear();
+    ui->txtTel->clear();
+    ui->txtMail->clear();
+    
+    ui->txtNome->setFocus();
+}
+</code>
+</pre>
+
+<p>PS: Podemos usar o método <code>trimmed()</code> do objeto QString para remover espaços desnecessários. No caso acima ficaria assim:</p>
+
+<pre>
+<code>
+QString nome = ui->txtNome->text().trimmed();
+QString fone = ui->txtTel->text().trimmed();
+QString mail = ui->txtMail->text().trimmed();
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-cppqt-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

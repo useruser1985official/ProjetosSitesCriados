@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Criptografia e Segurança</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Criptografia e Segurança</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-seguranca-1.html">Tudo sobre Criptografia e Segurança Parte 1!</a></li>
+                    <li><a href="tudo-sobre-seguranca-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Criptografia e Segurança Parte 2!</a></li>
+                    <li><a href="tudo-sobre-seguranca-3.html">Tudo sobre Criptografia e Segurança Parte 3!</a></li>
+                    <li><a href="tudo-sobre-seguranca-4.html">Tudo sobre Criptografia e Segurança Parte 4!</a></li>
+                    <li><a href="tudo-sobre-seguranca-5.html">Tudo sobre Criptografia e Segurança Parte 5!</a></li>
+                    <li><a href="tudo-sobre-seguranca-6.html">Tudo sobre Criptografia e Segurança Parte 6!</a></li>
+                    <li><a href="tudo-sobre-seguranca-7.html">Tudo sobre Criptografia e Segurança Parte 7!</a></li>            
+                    <li><a href="tudo-sobre-seguranca-8.html">Tudo sobre Criptografia e Segurança Parte 8!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Criptografia e Segurança Parte 2</h2>
+
+<h3>Encriptar arquivos com GnuPG no Linux</h3>
+
+<p>No Linux, usamos o GnuPG para criptografar dados, colocar assinatura digital e gerenciamento de chaves de criptografia.</p>
+
+<p>Pegue um arquivo comum, como um de texto, e vamos criptografar ele com esse programa, que usa uma chave privada (simétrica) com algoritmo o CAST5.</p>
+
+<p>Vá no terminal do Linux e digite para ler o arquivo no terminal <code>cat teste.txt</code>, e pra encriptar o arquivo, digite esse comando:</p>
+
+<pre>
+<code>
+gpg -c teste.txt
+</code>
+</pre>
+
+<p>Ele cria um diretório, um arquivo de configuração e um "chaveiro" com as chaves e pede pra criar uma senha. O arquivo criado terá um .gpg depois da extensão. Se quiser ver o conteúdo do arquivo criptografado, use o cat novamente.</p>
+
+<p>Para desencriptar, digite isso no comando:</p>
+
+<pre>
+<code>
+gpg teste.txt.gpg
+</code>
+</pre>
+
+<p>Ele pedirá a senha e desencriptará ele.</p>
+
+<h3>Enviando E-Mails Criptografados e Assinados</h3>
+
+<p>Primeiramente tenha o certificado criado com as chaves públicas e privadas com seu e-mail.</p>
+
+<p>No Thunderbird, instale a extensão Enigmail, que é integrada ao GPG. Ative e reinicie o Thunderbird, ele abrirá a configuração de e-mail, ele achará a chave de criptografia do seu chaveiro, além de opção para criar uma nova.</p>
+
+<p>No seu e-mail no Thunderbird, crie uma nova mensagem qualquer, em cima tem uma mensagem avisando que a mensagem não está assinada nem criptografada, clique em Enigmail e marque as opções Criptografar e/ou Assinar Mensagem. Do lado dele temos os atalhos para Criptografar, Assinar e Anexar Chave Pública.</p>
+
+<p>Mesmo se o destinatário não tiver chave pública, podemos marcar nosso e-mail remetente e criptografar ou assinar. Podemos criptografar apenas a mensagem ou também os anexos (atenção que a chave pública enviada será como anexo também, e não deve ser criptografada).</p>
+
+<p>No e-mail destinatário, ao clicarmos no e-mail recebido ele pedirá a chave pública e descriptografar normalmente.</p>
+
+<p>A resposta também será criptografada, ao responder o remetente.</p>
+
+<p>Podemos também salvar e adicionar a chave pública ao chaveiro.</p>
+
+<h3>SSH - Conceitos Básicos e Conexão por Senha no Linux</h3>
+
+<p>SSH (Secure Shell) é um protocolo de comunicação seguro que permite o envio de comandos e o controle remoto de um host por meio de uma conexão criptografada. O SSH possui uma arquitetura cliente/servidor, e está disponível em praticamente todas as plataformas, como Linux, Mac OS X, BSD, Windows, etc.</p>
+
+<p>O protocolo SSH cuida da autenticação, criptografia e integridade dos dados transmitidos em uma rede.</p>
+
+<ul>
+    <li><b>Autenticação</b> -  Determina a identidade de alguém de forma confiável.</li>
+    <li><b>Criptografia</b> - Os dados são "embaralhados" de modo a se tornarem ininteligíveis para todos, exceto os destinatários.</li>
+    <li><b>Integridade</b> - Garantia de que os dados transmitidos cheguem inalterados.</li>
+</ul>
+
+<p>O OpenSSH é uma versão gratuita do SSH. É desenvolvido pelo projeto OpenBSD (mas é disponível para várias plataformas), e podemos encontrá-lo em <a href="https://www.openssh.com/" target="_blank">https://www.openssh.com/</a>.</p>
+
+<p>Para instalar ele, vamos usar o apt mesmo, digitando isso pro cliente:</p>
+
+<pre>
+<code>
+sudo apt-get install openssh-client
+</code>
+</pre>
+
+<p>E isso pra instalar o servidor:</p>
+
+<pre>
+<code>
+sudo apt-get install openssh-server
+</code>
+</pre>
+
+<p>No servidor, inicie o serviço dele digitando <code>sudo service ssh start</code>.</p>
+
+<p>E para conectar a partir do cliente, use o nome de usuário e o IP privado (ou nome do host) dele, assim (em modo root):</p>
+
+<pre>
+<code>
+ssh -l nomedoservidor 192.168.1.129
+</code>
+</pre>
+
+<p>PS: Podemos dar um ping antes no IP do servidor, pra ver se ele está respondendo.</p>
+
+<p>Ao tentar fazer a conexão, ele pedirá a senha, e logará no sistema do servidor, que aparecerá no terminal do cliente. Para sair digite <code>exit</code> ou <code>logout</code>.</p>
+
+<p>PS: Pode ser necessário ter que liberar a porta 22 no Firewall do servidor.</p>
+
+<p>Se olharmos na pasta /etc/ssh do servidor, corretamente configurado, temos os arquivos de configuração ssh_config e sshd_config, que são a configuração do cliente e servidor, respectivamente.</p>
+
+<p>Voltando ao servidor, entre nesse diretório e abra esses arquivos pelo terminal, que vemos as portas, protocolos usados, autenticações, etc.</p>
+
+<p>Quando um cliente SSH se conecta a um servidor, cada um prova sua identidade ao outro. O servidor autentica o cliente e o cliente também autentica o servidor com o uso de criptografia de chave pública. Cada servidor SSH possui uma chave de identificação, chamada de hostkey, usada para identificar-se para os clientes.</p>
+
+<p>Observe no arquivo em /root ou /home, no cliente, que temos um diretório com o nome .ssh, que tem um arquivo com criptografia que identifica os servidores conhecidos pelo cliente, para conexão.</p>
+
+<p>PS: Lembre-se que o cliente é quem acessa, e o servidor quem é o acessado.</p>
+
+<h3>SSH - Conexão por Chave Pública e Criptografia Assimétrica no Linux</h3>
+
+<p>Podemos nos conectar por senha a um servidor SSH. Porém, senhas apresentam problemas como:</p>
+
+<ul>
+    <li>Para que uma senha seja segura, deve ser longa e aleatória (são difíceis de memorizar).</li>
+    <li>Senhas podem ser capturadas se o host de destino for comprometido.</li>
+    <li>Os sistemas operacionais geralmente só suportam uma senha por conta de usuário, o que é um problema para contas que são compartilhadas por mais de um usuário (root, por exemplo).</li>
+</ul>
+
+<p>Para eliminar esses problemas, o SSH suporta autenticação de chave pública, usando chaves criptográficas.</p>
+
+<p>Esse é o processo de autenticação:</p>
+
+<ol>
+    <li>O cliente solicita uma conexão com o servidor em uma conta de usuário específica.</li>
+    <li>O servidor responde enviando um desafio ao cliente, para que este prove sua identidade.</li>
+    <li>O cliente recebe o desafio, gera um autenticador usando sua chave privada, e o envia ao servidor.</li>
+    <li>O servidor verifica o autenticador recebido e a conta solicitada usando a chave pública do usuário para determinar a autenticidade da conexão, liberando ou não o acesso.</li>
+</ol>
+
+<p>Para usarmos esse esquema, precisamos de: Um par de chaves e um passphrase para protegê-las, e instalar a chave pública do usuário no servidor.</p>
+
+<p>Entrando no Linux cliente, entre no SSH igual anteriormente, com acesso root, mas com a opção -v, que mostrará na tela os passos que está executando:</p>
+
+<pre>
+<code>
+ssh -vl nomedoservidor 192.168.1.129
+</code>
+</pre>
+
+<p>Para usar a autenticação criptográfica primeiro devemos gerar um par de chaves. Usaremos o programa ssh-keygen para gerar chaves DSA ou RSA. No cliente basta digitar <code>ssh-keygen -t rsa</code>. O programa criará o diretório local (~/.ssh) se ele não existir ainda e armazenará as chaves criadas em dois arquivos nele. Por padrão, os nomes das chaves serão id_rsa e id_rsa.pub.</p>
+
+<p>Para isso, no cliente, digite isso:</p>
+
+<pre>
+<code>
+ssh-keygen -t rsa
+</code>
+</pre>
+
+<p>Ele gerará a chave rsa e criará o arquivo id_rsa (que pode ser alterado o nome, para não alterar é só dar enter sem escrever nada), digite uma passphrase (frase-chave) e dê enter. Ele gerará uma "imagem" aleatória para isso.</p>
+
+<p>PS: Prefira RSA ao invés de DSA, já que esta última não está mais sendo aceita.</p>
+
+<p>E no cliente, digite isso, na pasta ~/.ssh, para copiar o arquivo do cliente para o servidor: </p>
+
+<pre>
+<code>
+scp id_rsa.pub nomedoservidor@192.168.1.129: # Não esqueça dos dois pontos
+</code>
+</pre>
+
+<p>PS: Se definiu o arquivo pub com nome diferente, coloque esse nome.</p>
+
+<p>No acesso ao servidor (via SSH mesmo), em /home, digite isso:</p>
+
+<pre>
+<code>
+cat id_rsa.pub>>~/.ssh/authorized_keys
+
+cat ~/.ssh/authorized_keys
+</code>
+</pre>
+
+<p>O primeiro comando escrito acima pega o conteúdo do id_rsa e escreve no arquivo de chaves autorizadas para conexão.</p>
+
+<p>Pra finalizar, digite <code>logout</code> pra voltar à máquina cliente. E agora tente logar no servidor novamente com <code>ssh -l nomedoservidor 192.168.1.129</code>. Ele não pedirá mais a senha do outro computador, pedirá a passphrase, que é a chave pública que foi criada e adicionada ao servidor.</p>
+
+<p>A autenticação de chave pública é mais segura que a autenticação por senha porque são necessários dois componentes secretos (o arquivo de chave no disco e a passphrase), nem a passphrase e nem a chave privada são enviadas ao host remoto, apenas o autenticador gerado com elas, e chaves criptográficas geradores por computador são muito mais difícies de adivinhar do que chaves criadas por pessoas.</p>
+
+<p>O OpenSSH inclui um programa chamado ssh-copy-id que instala uma chave pública automaticamente em um servidor remoto com um comando, escrevendo no ~/.ssh/autorize_keys ssh-copy-id -i arquivo_chave usuario@servidor, por exemplo, digitamos no cliente <code>ssh-copy-id -i id_rsa.pub nomedoservidor@192.168.1.129</code>.</p>
+
+<p>Cada vez que nos conectamos ao servidor SSH precisamos redigitar a passphrase. Porém, se usarmos um agente SSH poderemos nos identificar apenas uma vez, e o ssh (e o scp) podem se "lembrar" de nossa identidade até efetuarmos logout do cliente, por exemplo.</p>
+
+<p>Um agente é um programa que mantém chaves privadas na memória e fornecem serviçoes de autenticação a clientes SSH. O agente usado pelo OpenSSH é o ssh-agent.</p>
+
+<p>Voltando ao cliente, digite isso (fora do SSH), para iniciar o ssh-agente no shell que estamos usando:</p>
+
+<pre>
+<code>
+ssh-agent $SHELL
+
+ssh-add
+</code>
+</pre>
+
+<p>Ele vai pedir o passphrase, digita ela e aí ele não a pedirá mais até fazermos logout no cliente. Para ver se a chave foi carregada, digite <code>ssh-add -l</code> (fora do SSH, no cliente).</p>
+
+<p>Conecta novamente ao servidor, ele não pedirá mais a senha enquanto estivermos nessa sessão.</p>
+
+<p>PS: Não use isso quanto tiver fora do acesso da máquina cliente, por questões de segurança.</p>
+
+<p>Pra apagar uma chave da memória, digite fora do SSH, no cliente, <code>ssh-add -d id_rsa</code> (ou o nome dela, caso seja outro), pra apagar todas, digite <code>ssh-add -D</code>.</p>
+
+<h3>SSH - Usando SCP Para Transferência de Arquivos entre Hosts Linux</h3>
+
+<p>O comando SCP (Secure Copy) é um programa utilizado para copiar arquivos de forma segura entre dois hosts numa rede, usando o SSH para transferência segura dos dados.</p>
+
+<p>Entre no servidor e pegue o ip dele, usando o ifconfig para isso. e o nome do usuário do mesmo.</p>
+
+<p>Na máquina cliente, dê um ping no IP do servidor, e veja se ele está respondendo.</p>
+
+<p>Crie um arquivo qualquer, como um de texto, na máquina cliente. E na máquina cliente, digite isso:</p>
+
+<pre>
+<code>
+scp arquivo.txt nomedoservidor@192.168.1.189:/home/usuario
+</code>
+</pre>
+
+<p>No caso, o que vai após o IP do servidor, é a pasta onde será salvo o arquivo.</p>
+
+<p>Ele pedirá a confirmação da conexão, a senha e transferirá o arquivo até lá.</p>
+
+<p>Também podemos transferir do servidor para o cliente, e use outro arquivo do servidor.</p>
+
+<p>Para baixar algo do servidor, faça isso no cliente:</p>
+
+<pre>
+<code>
+scp nomedoservidor@192.168.1.189:servidor.txt servidor.txt
+
+ls
+
+cat servidor.txt
+
+mkdir TesteSCP
+
+mv arquivo.txt /TesteSCP/
+mv servidor.txt /TesteSCP/
+</code>
+</pre>
+
+<p>No código acima, o padrão é a pasta /home/nomedoservidor, se for baixar de outro diretório, especifique ele após os dois pontos, o segunto nome é o nome que ele terá no cliente após o download.</p>
+
+<p>Para copiar do cliente para o servidor da pasta criada, fazemos assim:</p>
+
+<pre>
+<code>
+scp -r TesteSCP nomedoservidor@192.168.1.189:~/Imagens
+</code>
+</pre>
+
+<p>No servidor, podemos ver, na pasta especificada, que o diretório todo foi transferido, com todos os arquivos juntos.</p>
+
+<p>Outras opções do scp:</p>
+
+<ul>
+    <li><code>scp -Cv</code> - Comprimir arquivos antes de enviar.</li>
+    <li><code>scp -c nomedometodo</code> - Escolher método de criptografia a ser usado, como 3des, aes-128 e blowfish.</li>
+    <li><code>scp -P numerodaporta</code> - Trocar a porta padrão para troca de arquivos.</li>
+</ul>
+
+<h3>Tor Browser Bundle - Baixando, Verificando e Rodando no Linux</h3>
+
+<p>O projeto Tor é uma organização que conduz pesquisa e desenvolvimento em privacidade e anonimidade online. A ideia central do Tor é impedir que outras pessoas descubram sua localização, seus hábitos de navegação, mascarar sua identidade, etc.</p>
+
+<p>Para baixar o navegador tor, acesse esse site e escolha a opção referente ao seu sistema (no caso, o Linux): <a href="https://www.torproject.org/pt-BR/download/languages/" target="_blank">https://www.torproject.org/pt-BR/download/languages/</a></p>
+
+<p>Na página de download, existem algumas dicas e sugestões para usar o TOR corretamente e com segurança. Aqui vemos como verificar a assinatura dele: <a href="https://www.torproject.org/docs/verifying-signatures" target="_blank">https://www.torproject.org/docs/verifying-signatures</a></p>
+
+<p>Baixe também o arquivo de chave do TOR, na mesma página. Com os dois arquivos na mesma pasta, digite isso:</p>
+
+<pre>
+<code>
+gpg --auto-key-locate nodefault,wkd --locate-keys torbrowser@torproject.org
+</code>
+</pre>
+
+<p>Depois, assine a chave pública com sua chave privada, assim:</p>
+
+<pre><code>
+gpg --sign-key 5A4F5F4F5452677F32E55A17D0ACBC71C8C023AB
+</code>
+</pre>
+
+<p>Depois, para verificar se o pacote TOR realmente é o original, faça isso:</p>
+
+<pre>
+<code>
+gpg --verify tor-browser-linux32-3.5.3_pt-BR.tar.xz{.asc,}
+</code>
+</pre>
+
+<p>Veja se aparece "assinatura correta de "The Tor Browser Developers", que mostrará que o pacote é verídico.</p>
+
+<p>Para instalar, rode esses comandos:</p>
+
+<pre>
+<code>
+tar -xpvf tor-browser-linux32-3.5.3_pt-BR.tar.xz
+</code>
+</pre>
+
+<p>Entre no diretório do programa, e ver se aparece o start-tor-browser, que é o que inicializa o navegador, posteriormente, ele pode ser adicionado à um atalho ou ao lançador.</p>
+
+<p>Abrindo o Tor, aparecerá as configurações do navegador, que deverão ser feitas para permitir o acesso.</p>
+
+<p>Quando ele terminar, ele abrirá uma página de boas-vindas, mostrando seu IP anônimo e outras dicas para usar o Tor com segurança. A página em questão é essa: <a href="https://check.torproject.org/?lang=pt_BR" target="_blank">https://check.torproject.org/?lang=pt_BR</a></p>
+
+<ul>
+    <li><a href="tudo-sobre-seguranca-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-seguranca-3.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

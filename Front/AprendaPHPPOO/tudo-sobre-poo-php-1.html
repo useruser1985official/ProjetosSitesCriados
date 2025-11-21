@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda POO PHP</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda POO PHP</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-poo-php-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre POO PHP Parte 1!</a></li>
+                    <li><a href="tudo-sobre-poo-php-2.html">Tudo sobre POO PHP Parte 2!</a></li>
+                    <li><a href="tudo-sobre-poo-php-3.html">Tudo sobre POO PHP Parte 3!</a></li>
+                    <li><a href="tudo-sobre-poo-php-4.html">Tudo sobre POO PHP Parte 4!</a></li>
+                    <li><a href="tudo-sobre-poo-php-5.html">Tudo sobre POO PHP Parte 5!</a></li>
+                    <li><a href="tudo-sobre-poo-php-6.html">Tudo sobre POO PHP Parte 6!</a></li>
+                    <li><a href="tudo-sobre-poo-php-7.html">Tudo sobre POO PHP Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre POO PHP Parte 1</h2>
+
+<h3>Criando Classes e Objetos em PHP</h3>
+
+<p>Os objetos podem ser materiais (físicas) ou abstratos que pode ser percebida pelos sentidos e descritos por meio de suas características (atributos), seus comportamentos (métodos) e seu estado atual (status). Pode incluir desde coisas como carro, pessoa ou coisas como datas, horário e etc.</p>
+
+<p>Veja por exemplo, uma caneta, que pode ser um objeto e uma classe, no caso, a caneta física em si é o objeto (o que foi oriundo), e a classe é o modelo que foi criado para poder classificar uma caneta (a palavra <code>class</code> vem de classificação). A classe é a idealização de uma caneta (o que uma caneta tem pra ser uma caneta, como modelo, cor, ponta e etc.), e o objeto caneta foi a instanciação (criação) dessa classe.</p>
+
+<p>No PHP ele permite trabalhar diretamente com a classe no mesmo documento, podendo ter duas ou mais classes no mesmo documento. Mas não é recomendado, então sempre crie arquivos específicos por hábito. Em outras linguagens Orientadas a Objetos (como o Java), isso não é possível.</p>
+
+<p>Além do arquivo principal (no exemplo, index.php), crie uma classe em PHP com o nome Caneta.php (com a primeira em maiúscula, pascalcase permitido, pois será também o nome dela). Ficará assim:</p>
+
+<pre>
+<code>
+class Caneta {
+    
+}
+</code>
+</pre>
+
+<p>E dentro coloque as variáveis referentes aos atributos da caneta (lembrando que variáveis em PHP não se indica tipos e começam com cifrão). Dessa forma:</p>
+
+<pre>
+<code>
+class Caneta {
+    var $modelo;
+    var $cor;
+    var $ponta;
+    var $carga;
+    var $tampada;
+}
+</code>
+</pre>
+
+<p>E dentro dela, os métodos (funções) rabiscar, tampar e destampar. Ficará assim:</p>
+
+<pre>
+<code>
+class Caneta {
+    var $modelo;
+    var $cor;
+    var $ponta;
+    var $carga;
+    var $tampada;
+    
+    function rabiscar() {
+        
+    }
+    
+    function tampar() {
+        
+    }
+    
+    function destampar() {
+        
+    } 
+}
+</code>
+</pre>
+
+<p>E no index.php, basta chamar o arquivo com <code>require_once()</code> e criar (instanciar) o objeto como uma variável (<code>$c1</code>), usando <code>new Caneta()</code> pra chamar a classe, assim:</p>
+
+<pre>
+<code>
+require_once "Caneta.php";
+    
+$c1 = new Caneta(); // A variável $c1 na verdade é um objeto.
+</code>
+</pre>
+
+<p>Podemos mexer também nos atributos da caneta, dessa forma:</p>
+
+<pre>
+<code>
+require_once "Caneta.php";
+
+$c1 = new Caneta();
+
+$c1->cor = "Azul";
+$c1->ponta = 0.5;
+$c1->tampada = false;
+
+var_dump($c1);
+</code>
+</pre>
+
+<p>No caso, coloca após a variável do objeto, uma "setinha" e o atributo (sem cifrão) com os dados. Para exibir os dados do objeto, use <code>var_dump()</code> ou <code>print_r()</code>.</p>
+
+<p>PS: Lembrando que, dependendo da versão do PHP, valores booleanos mostram 1 pra verdadeiro e fica vazio para falso.</p>
+
+<p>Voltando à classe Caneta, coloque um echo dentro da função rabiscar, assim:</p>
+
+<pre>
+<code>
+function rabiscar() {
+    echo "&lt;p&gt;Estou rabiscando...&lt;/p&gt;";
+}
+</code>
+</pre>
+
+<p>E na index, chame o método assim:</p>
+
+<pre>
+<code>
+require_once "Caneta.php";
+
+$c1 = new Caneta();
+
+$c1->cor = "Azul";
+$c1->ponta = 0.5;
+$c1->tampada = false;
+
+$c1->rabiscar();
+
+// var_dump($c1);
+</code>
+</pre>
+
+<p>Agora, voltando na classe Caneta, coloque dentro do método rabiscar um condicional:</p>
+
+<pre>
+<code>
+function rabiscar() {
+    if($this->tampada == true) {
+        echo "&lt;p&gt;ERRO! Não posso rabiscar!&lt;/p&gt;";
+    }
+    else {
+        echo "&lt;p&gt;Estou rabiscando...&lt;/p&gt;";
+    }
+}
+</code>
+</pre>
+
+<p>Agora veja o resultado em index novamente, mudando o "tampada" de false pra true.</p>
+
+<p>PS: O $this vai ser substituído pelo nome do objeto. Ele verifica um atributo ou método na própria classe e será substituído pela classe chamadora.</p>
+
+<p>Essa é a vantagem da programação orientada a objetos, ele cria programas menores, por "espalhar" e gerar códigos em arquivos separados, que fazemos com que se relacionam entre si.</p>
+
+<p>Voltando à classe Caneta, criaremos as funções tampar e destampar, usando o $this também, dessa forma:</p>
+
+<pre>
+<code>
+function tampar() {
+    $this->tampada = true;
+}
+
+function destampar() {
+    $this->tampada = false;
+} 
+</code>
+</pre>
+
+<p>E da mesma forma, chame as funções no index:</p>
+
+<pre>
+<code>
+require_once "Caneta.php";
+
+$c1 = new Caneta();
+
+$c1->cor = "Azul";
+$c1->ponta = 0.5;
+$c1->tampada = false;
+$c1->tampar();
+
+var_dump($c1);
+</code>
+</pre>
+
+<p>Sem apagar o primeiro objeto, crie um segundo com outros dados, por exemplo:</p>
+
+<pre>
+<code>
+$c2 = new Caneta();
+$c2->cor = "Verde";
+$c2->carga = 50;
+$c2->tampar();
+
+var_dump($c2);
+</code>
+</pre>
+
+<p>Com isso, podemos ver que os dois objetos, apesar de vierem da mesma classe, são totalmente distintos e não tem ligação entre si. Isso são instâncias diferentes de uma mesma classe.</p>
+
+<p>Quando uma classe tá criada, podemos utilizar ela nos projetos à vontade, o POO permite reaproveitamento de código, uma das vantagens da orientação à objetos.</p>
+
+<p>Caso queira retornar o nome da classe em PHP, use o método <code>get_class($this)</code>.</p>
+
+<p>Faça como exercício, pegue dois objetos, um real e um abstrato (por exemplo, um carro e uma aula), e crie atributos e métodos dele, da mesma forma da caneta.</p>
+
+<h3>Configurando Visibilidade de Atributos e Métodos</h3>
+
+<p>Como visto, temos esse diagrama de classes, onde colocamos todos os atributos e os métodos dela:</p>
+
+<table style="float: left;">
+    <tr>
+        <th>Caneta</th>
+    </tr>
+    <tr>
+        <td>
+            + modelo<br/>
+            + cor<br/>
+            - ponta<br/>
+            # carga<br/>
+            # tampada<br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            + escrever()<br/>
+            + rabiscar()<br/>
+            + pintar()<br/>
+            - tampar()<br/>
+            - destampar()<br/>
+        </td>
+    </tr>
+</table>
+
+<table style="margin: 120px auto auto 120px">
+    <caption>Significado da tabela ao lado</caption>
+    <tr>
+        <th>Símbolo</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>+</td>
+        <td>Público (public)</td>
+    </tr>
+    <tr>
+        <td>-</td>
+        <td>Privado (private)</td>
+    </tr>
+    <tr>
+        <td>#</td>
+        <td>Protegido (protected)</td>
+    </tr>
+</table>
+
+<p>Voltando ao código anterior, com a classe Caneta, vamos criar um novo objeto com a caneta.</p>
+
+<p>E na classe, vamos ver a visibilidade dos atributos, por padrão. eles são públicos (ou seja, podem ser mexidos em qualquer lugar), no exemplo estamos usando var. Mas para trabalharmos com encapsulamento, futuramente, precisaremos definir explicitamente os atributos que serão públicos, privados e protegidos.</p>
+
+<p>De acordo com o diagrama, vamos substituir o var pela visibilidade específica de cada atributo, dessa forma:</p>
+
+<pre>
+<code>
+public $modelo;
+public $cor;
+private $ponta;
+protected $carga;
+protected $tampada;
+</code>
+</pre>
+
+<p>E também nos métodos:</p>
+
+<pre>
+<code>
+public function rabiscar() {
+    if($this->tampada == true) {
+        echo "&lt;p&gt;ERRO! Não posso rabiscar!&lt;/p&gt;";
+    }
+    else {
+        echo "&lt;p&gt;Estou rabiscando...&lt;/p&gt;";
+    }
+}
+private function tampar() {
+    $this->tampada = true;
+}
+
+private function destampar() {
+    $this->tampada = false;
+} 
+</code>
+</pre>
+
+<p>E no index, coloque isso:</p>
+
+<pre>
+<code>
+require_once "Caneta.php";
+
+$c1 = new Caneta();
+
+$c1->modelo = "Bic Cristal";
+$c1->cor = "Azul";
+// $c1->ponta = 0.6;
+// $c1->carga = 50;
+// $c1->tampada = true;
+    
+print_r($c1);
+</code>
+</pre>
+
+<p>PS: O protected é pra quando você não quer deixar um atributo public, mas você quer compartilhar ele com as subclasses (é um intermediário entre public e private). E a supertag PHP pode estar dentro de tags pre ao usar var_dump() ou print_r().</p>
+
+<p>Pode ver que, no caso acima, podemos mexer nos atributos modelo e cor, que são públicos, mas na ponta, que é privado, não podemos colocar nada, senão dará erro, ele só pode ser alterado dentro da classe. O mesmo vale pra atributos protegidos (no caso, a carga e a tampada).</p>
+
+<p>O mesmo vale para os métodos tampar() e destampar(), apenas o método rabiscar() pode ser chamado por ser público.</p>
+
+<p>Mas aí que tá o pulo do gato, se colocarmos os métodos tampar() e destampar() públicos, poderemos alterar o atributo "tampada", mesmo sendo protegidos, pela função estar dentro da mesma classe (só a mesma classe pode mexer em atributos privados dentro dela).</p>
+
+<p>Lembrando que o true e false de tampada são 1 e vazio no PHP.</p>
+
+<p>Isso é como uma caixa registradora de um mercado, quando você compra um produto, o atendente é público (você tem acesso), e a caixa registradora é protegida (você não tem acesso), mas o atendente tem acesso à ela e com isso, você pode dar o dinheiro ao atendente e ele pode te dar o troco.</p>
+
+<p>Os atributos também podem ser inicializados de forma padrão dentro da classe, como por exemplo <code>protected $carga = 100</code>. Se o atributo for um objeto, pode ser algo tipo <code>private $objeto = new NomeDaClasse()</code>. Mas não são muito usados, a não ser que sejam atributos finais (não existentes em PHP, pois utilizamos constantes) ou estáticos.</p>
+
+<h3>Métodos Getter, Setter e Construtor</h3>
+
+<p>O método getter é o método acessor (que pega), ele acessa um determinado atributo mantendo a segurança de acesso à ele. Para entender, pense como uma pessoa que precisa saber quantos documentos (atributos) tem em uma estante (objeto e classe), a pessoa A tem 5 e a pessoa B tem 12, e tem outros documentos lá. O método getter seria como um funcionário intermediário numa mesa, que tem acesso à essa estante, e as outras pessoas não. Método que, apesar de impedir o acesso diretamente, é mais seguro e útil. Não é obrigatório, mas no mercado é muito utilizado em programação.</p>
+
+<p>O método setter é o método modificadores (que muda), ele modifica coisas que estão no objeto mantendo a segurança do atributo. Pensando na mesma situação, a pessoa A chegou na estante e ele tem 5 documentos lá e quer colocar mais um documento dele, mas nada garante que ele ou outra pessoa coloque no lugar certo ou mexa em outros. O método setter também seria como um funcionário intermediário numa mesa, com acesso à essa estante, da mesma forma da anterior. Impede o acesso diretamente e é mais seguro e útil. Eles tem que receber parâmetros pra isso.</p>
+
+<p>O método construtor é o que constrói algo sem que o usuário faça uma chamada, já com as propriedades dos atributos desejados (como azul, Bic Cristal, tampada usando o exemplo da caneta), que podem ser mudados depois.</p>
+
+<p>Voltando à classe Caneta, veremos os métodos getter, setter e construtor. Primeiro veja o diagrama que utilizaremos:</p>
+
+<table>
+    <tr>
+        <th>Caneta</th>
+    </tr>
+    <tr>
+        <td>
+            + modelo<br/>
+            - ponta<br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            + getModelo()<br/>
+            + setModelo(m)<br/>
+            + getPonta()<br/>
+            + setPonta(p)<br/>
+        </td>
+    </tr>
+</table>
+
+<p>Apague tudo na classe Caneta e no index. Em Caneta.php escreva isso:</p>
+
+<pre>
+<code>
+class Caneta {
+    public $modelo;
+    private $ponta;
+    
+    public function getModelo() {
+        return $this->modelo;
+    }
+    public function setModelo($m) {
+        $this->modelo = $m;
+    }
+    public function getPonta() {
+        return $this->ponta;
+    }
+    public function setPonta($p) {
+        $this->ponta = $p;
+    }
+}
+</code>
+</pre>
+
+<p>E no index, deixe apenas isso pra criar o objeto:</p>
+
+<pre>
+<code>
+require_once "Caneta.php";
+
+$c1 = new Caneta();
+    
+print_r($c1);
+</code>
+</pre>
+
+<p>Aí, coloque depois da criação do objeto, isso, para mudar o conteúdo dos atributos usando o setter, assim:</p>
+
+<pre>
+<code>
+$c1 = new Caneta();
+$c1->setModelo("BIC");
+// $c1->modelo = "MontBlanc";
+$c1->setPonta(0.5);
+// $c1->ponta = 0.4;
+    
+print_r($c1);
+</code>
+</pre>
+
+<p>Pode ver que o método setter modifica sempre as propriedades do atributo mesmo se forem privados, se acessarmos diretamente, só conseguiremos mudar se o atributo for público. Como a mesa exemplificada acima. Tente mudar ali em cima as partes comentadas.</p>
+
+<p>Para exibir, usamos o método getter num echo normalmente, dessa forma, no lugar do print_r():</p>
+
+<pre>
+<code>
+echo "Eu tenho uma caneta {$c1->getModelo()} de ponta {$c1->getPonta()}.";
+</code>
+</pre>
+
+<p>Ele mostrará o objeto criado atualmente com as propriedades atribuídas. Esse uso de métodos públicos getters e setters para alterar atributos privados é o principal passo pro encapsulamento, e esses métodos também podem ser privados, para evitar que se façam alterações no código (é bastante comum deixarem só o getter público, sem ao menos criar um método setter).</p>
+
+<p>PS: Métodos getters e setters de atributos estáticos, também deverão ser estáticos, e seguir a regra de não usar o $this e sim o self.</p>
+
+<p>Para usarmos o método construtor em POO, usaremos a função <code>__construct()</code> (com duas underlines mesmo), que criará propriedades automaticamente no objeto, dessa forma:</p>
+
+<pre>
+<code>
+public function __construct() {
+    $this->cor = "Azul";
+}
+</code>
+</pre>
+
+<p>O código completo ficaria assim:</p>
+
+<pre>
+<code>
+class Caneta {
+    private $modelo;
+    private $cor;
+    private $ponta;
+    private $tampada;
+    
+    public function __construct() {
+        $this->cor = "Azul";
+        $this->tampar();
+    }
+    public function tampar() {
+        $this->tampada = true;
+    }
+    public function destampar() {
+        $this->tampada = false;
+    }
+    
+    public function getModelo() {
+        return $this->modelo;
+    }
+    public function setModelo($m) {
+        $this->modelo = $m;
+    }
+    public function getPonta() {
+        return $this->ponta;
+    }
+    public function setPonta($p) {
+        $this->ponta = $p;
+    }
+}
+</code>
+</pre>
+
+<p>E no index, apenas isso:</p>
+
+<pre>
+<code>
+require_once "Caneta.php";
+
+$c1 = new Caneta();
+
+print_r($c1);
+</code>
+</pre>
+
+<p>Dessa forma, já criamos os objetos com propriedades nos atributos automaticamente.</p>
+
+<p>Agora, alteraremos o método construtor, dessa forma:</p>
+
+<pre>
+<code>
+public function __construct($m, $c, $p) {
+    $this->modelo = $m;
+    $this->cor = $c;
+    $this->ponta = $p;
+    $this->tampar();
+}
+</code>
+</pre>
+
+<p>E no index, podemos fazer isso, passando os parâmetros:</p>
+
+<pre>
+<code>
+require_once "Caneta.php";
+
+$c1 = new Caneta("BIC", "Azul", 0.5);
+$c2 = new Caneta("Pilot", "Verde", 1.0);
+
+print_r($c1);
+print_r($c2);
+</code>
+</pre>
+
+<p>Dessa forma, usando o mesmo construtor, podemos criar infinitos objetos. E com a classe pronta, fica muito mais simples criar quantos objetos precisar.</p>
+
+<p>PS: No Netbeans é possível criar os métodos clicando no botão direito, mas é bom manter a prática de escrever manualmente.</p>
+
+<p>Lembrando que no PHP não é possível fazer sobrecarga de métodos construtores (que é mais de um método construtor com parâmetros e códigos diferentes) por ser dinamicamente tipado.</p>
+
+<p>Existem também os destrutores em PHP, que são métodos usados para destruir um objeto antes do final da execução (o PHP destroi todos os objetos no final da execução por padrão). Em PHP usamos assim:</p>
+
+<pre>
+<code>
+public function __destruct() {
+    echo "Objeto Destruído!"; // Aqui pode ser colocado qualquer mensagem.
+}
+</code>
+</pre>
+
+<p>E para destruir um objeto, fazemos assim:</p>
+
+<pre>
+<code>
+unset($c1);
+</code>
+</pre>
+
+<p>PS: Toda classe cria seus construtores e destrutores padrões, que não recebem nem contém valor algum, quando estes não são especificados nela.</p>
+
+<h3>Métodos e Atributos Estáticos</h3>
+
+<p>No PHP é possível criar métodos estáticos, que é quando podemos chamar um método de uma classe sem precisar criar um objeto, sem usar o new, apenas chamando o nome da classe seguido do método, na sintaxe <code>NomeDaClasse::nomeDoMetodo()</code>.</p>
+
+<p>No código, apenas coloque <code>static</code> antes do tipo da função que deseja ser acessada de tal forma, dentro da classe. O static pode também ser usado em atributos (sempre inicializados dentro da classe), e no código principal chamamos diretamente junto com o nome da classe, como por exemplo <code>NomeDaClasse::$nomeDoAtributo = $conteudo</code>. (lembrando que nesse caso, mudaremos o conteúdo do atributo da classe e todos os objetos criados por ela serão alterados, por compartilhamento, independente da alteração ser dentro ou fora da classe). Nesse caso, dentro da classe, ao invés do $this->, usamos <code>self::</code> nos atributos estáticos.</p>
+
+<p>Veja um exemplo de uso de métodos e atributos estáticos numa classe denominada Lampada:</p>
+
+<pre>
+<code>
+class Lampada {
+    private static $preco = 9.50;
+    private static $acesa = false;
+
+    public static function custo() {
+        printf("A lâmpada custa R$ %.2f.&lt;br/&gt;", self::$preco);
+
+        // Note que não usamos this para exibir atributos estáticos e sim self.
+    }
+
+    public static function acender() {
+        echo "A lâmpada está acesa!&lt;br/&gt;";
+        self::$acesa = true;
+    }
+
+    public static function apagar() {
+        echo "A lâmpada está apagada!&lt;br/&gt;";
+        self::$acesa = false;
+    }
+}
+</code>
+</pre>
+
+<p>E no código principal:</p>
+
+<pre>
+<code>
+require_once "Lampada.php";
+
+Lampada::custo(); // Método estático.
+
+Lampada::acender();
+Lampada::apagar();
+</code>
+</pre>
+
+<p>PS: Não é recomendado chamar atributos e métodos estáticos através de objetos (tanto que algumas linguagens nem permitem isso), pois são atributos e métodos da classe, por isso devem ser chamados diretamente através dela.</p>
+
+<p>Também podemos fazer novas atribuições em atributos estáticos no código principal, desde que sejam públicos, e toda instância feita por ele também é alterada, por exemplo:</p>
+
+<pre>
+<code>
+Lampada::$preco = 7.25; // Atributo estático
+</code>
+</pre>
+
+<p>O static, teoricamente, significa que só uma alocação de memória é criada para esse atributo ou método, não tendo duas cópias na memória em simultâneo.</p>
+
+<p>Em outras palavras, o static manipula os atributos e métodos na classe toda, não apenas em uma instância, e todo objeto criado com ela também terá essa alteração. São atributos e métodos globais.</p>
+
+<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados.</p>
+
+<ul>
+    <li><a href="tudo-sobre-poo-php-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

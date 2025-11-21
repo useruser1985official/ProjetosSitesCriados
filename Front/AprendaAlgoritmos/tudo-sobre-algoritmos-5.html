@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Algoritmos</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Algoritmos</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-1.html">Tudo sobre Algoritmos Parte 1!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-2.html">Tudo sobre Algoritmos Parte 2!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-3.html">Tudo sobre Algoritmos Parte 3!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-4.html">Tudo sobre Algoritmos Parte 4!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-5.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Algoritmos Parte 5!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Algoritmos Parte 5</h2>
+
+<h3>Funções com Retorno</h3>
+
+<p>Para não ficarmos presos ao formato de exibição, podemos fazer com que uma função retorne um valor.</p>
+
+<p>Funções com retorno são blocos de código que realizam uma tarefa e devolvem um resultado. Diferente de um procedimento (que só executa algo), a função sempre retorna um valor, como um número, um texto, um cálculo, etc.</p>
+
+<p>Toda função com retorno deve declarar o tipo que ela devolve logo após a palavra <code>funcao</code>, como no exemplo abaixo, <code>funcao inteiro</code>:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        escreva(multi(10, 5)) // Invocando a função e exibindo o valor retornado com escreva
+    }
+    
+    funcao inteiro multi(inteiro n1, inteiro n2) {
+        retorne n1 * n2
+    }
+}
+</code>
+</pre>
+
+<p>Como visto acima, a função só termina (e devolve um valor) quando encontra o comando <code>retorne</code>. O valor retornado deve ser do mesmo tipo declarado na função. Veja um exemplo com cadeia:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro num
+        cadeia ex
+        
+        escreva("Digite um número de 0 a 9 para ver ele escrito por extenso: ")
+        leia(num)
+        
+        ex = numeroPorExtenso(num) // Invocando função que retorna valor e guardando numa variável
+        
+        escreva("Número ", num, " por extenso: ", ex, ".\n")
+    }
+    
+    funcao cadeia numeroPorExtenso(inteiro numero) {
+        cadeia exten
+        
+        escolha(numero) {
+            caso 0:
+                exten = "Zero"
+                pare
+            caso 1:
+                exten = "Um"
+                pare
+            caso 2:
+                exten = "Dois"
+                pare
+            caso 3:
+                exten = "Três"
+                pare
+            caso 4:
+                exten = "Quatro"
+                pare
+            caso 5:
+                exten = "Cinco"
+                pare
+            caso 6:
+                exten = "Seis"
+                pare
+            caso 7:
+                exten = "Sete"
+                pare
+            caso 8:
+                exten = "Oito"
+                pare
+            caso 9:
+                exten = "Nove"
+                pare
+            caso contrario:
+                exten = "Fora do intervalo"
+                pare  
+        }
+        
+        retorne exten
+    }
+}
+</code>
+</pre>
+
+<p>Note acima, que apesar da função receber um valor <code>inteiro</code>, ela retorna uma <code>cadeia</code>. Elas podem ter tipos de parâmetros diferentes do tipo de retorno.</p>
+
+<p>Os parâmetros também podem ser de vários tipos diferentes, e uma função dessas também pode não ter parâmetros (mas não são tão usadas devido à pouca utilidade).</p>
+
+<p>Note também que uma função que retorna um valor pode ser atribuída a uma variável, desde que sejam do mesmo tipo. Veja mais um exemplo simples:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        logico checa
+        inteiro alg
+        
+        escreva("Digite um número qualquer: ")
+        leia(alg)
+        
+        checa = ePar(alg)
+        
+        se(checa) { // É o mesmo que checa == verdadeiro
+            escreva("É par!\n")
+        }
+        senao {
+            escreva("É ímpar!\n")
+        }
+    }
+    
+    funcao logico ePar(inteiro num) {
+        retorne num % 2 == 0
+    }
+}
+</code>
+</pre>
+
+<p>PS: Um procedimento vazio também pode ter a instrução <code>retorne</code> sem nada. Nesse caso, ele só termina a execução do procedimento naquele ponto que a instrução é encontrada. Veja um exemplo simples:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro alg
+        
+        escreva("Digite um número de 1 a 9: ")
+        leia(alg)
+        
+        mostraNum(alg)
+    }
+    
+    funcao mostraNum(inteiro num) { // Procedimento vazio
+        se(num < 1 ou num > 9) {
+            escreva("ERRO: ", num, " está fora do intervalo!\n")
+            
+            retorne // Encerra o procedimento nesse ponto.
+        }
+        
+        escreva("O número ", num, " está dentro do intervalo especificado!\n")
+    }
+}
+</code>
+</pre>
+
+<h3>Escopo de Variáveis em Funções e Procedimentos</h3>
+
+<p>O escopo de uma variável determina onde ela pode ser usada dentro do programa. Existem dois tipos principais: Variáveis globais e variáveis locais.</p>
+
+<h4>Variáveis Globais</h4>
+
+<p>São variáveis criadas fora de qualquer função ou procedimento, diretamente dentro da estrutura programa. Isso significa que elas podem ser acessadas por qualquer função ou procedimento do programa. Por exemplo:</p>
+
+<pre>
+<code>
+programa {
+    inteiro contGlobal = 0  // Variável global
+
+    funcao inicio() {
+        contGlobal += 1 // Variável global sendo incrementada
+        
+        escreva("Contador no inicio: ", contGlobal, "\n") // Mostra 1
+        
+        mostrarContador() // Ao ser invocada, incrementa a variável global e mostra 2
+    }
+
+    funcao mostrarContador() {
+        contGlobal += 1 // Variável global sendo incrementada
+        
+        escreva("Contador no procedimento: ", contGlobal, "\n")
+    }
+}
+</code>
+</pre>
+
+<p>Ou seja, a variável <code>contGlobal</code> pode ser usada tanto na função principal <code>inicio</code> quanto em <code>mostrarContador</code>, além de qualquer outra que poderia ser criada dentro desse mesmo programa.</p>
+
+<h4>Variáveis Locais</h4>
+
+<p>São variáveis criados dentro de uma função ou procedimento. Só podem ser usadas dentro dessa função e não existem fora dela. Por exemplo:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro numero = 10   // Variável local de inicio
+        
+        escreva("Número dentro do inicio: ", numero, "\n") // Exibe a variável local com 10
+        
+        mostrarNumero() // Invocando a função exemplo, que tem outra variável de mesmo nome e mostra o 50 que está nela
+    }
+
+    funcao mostrarNumero() {
+        inteiro numero = 50   // Variável local de mostrarNumero, não é a mesma de inicio
+        
+        escreva("Número dentro de mostrarNumero: ", numero, "\n")
+    }
+}
+</code>
+</pre>
+
+<p>A variável <code>numero</code> criada dentro de <code>inicio</code> só existe ali. O <code>numero</code> dentro de <code>exemplo</code> é uma variável diferente, mesmo tendo o mesmo nome. Uma função não consegue acessar a variável local da outra.</p>
+
+<h3>Funções Recursivas</h3>
+
+<p>Recursividade é quando uma função chama ela mesma para resolver um problema. É como pedir ajuda para si mesmo, repetindo a tarefa, mas com um problema menor a cada vez, até chegar a um ponto em que não precisa mais chamar. Pense assim: <q>Faça isso. Se ainda não terminar, faça de novo, mas com uma parte menor do problema</q>.</p>
+
+<p>Para a recursividade funcionar bem, sempre precisamos de duas coisas:</p>
+
+<ul>
+    <li><b>Caso Base: </b>Quando a função deve parar.</li>
+    <li><b>Chamado Recursivo:</b>Quando a função chama ela mesma.</li>
+</ul>
+
+<p>Veja esse exemplo de uso, pra calcular o fatorial de um número:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro num, fat
+        
+        escreva("Digite um número maior que 1 para ver seu fatorial: ")
+        leia(num)
+        
+        fat = fatorial(num) // Invocando a função
+        
+        escreva("Fatorial de 5 é: ", fat)
+    }
+    
+    funcao inteiro fatorial(inteiro n) {
+        se(n <= 1) { // Quando n for 1 ou menor, ele apenas retorna 1 e para de executar o código
+            retorne 1
+        }
+        
+        // Chamado recursivo: A função chama ela mesma
+        retorne n * fatorial(n - 1)
+    }
+}
+</code>
+</pre>
+
+<p>PS: O fatorial de um número é o resultado da multiplicação dele pelos números menores que ele, descendo até o 1, (como <q>5 &times; 4 &times; 3 &times; 2 &times; 1 = 120</q>).</p>
+
+<p>No caso acima, ao invés de usarmos laços de repetição, usamos a função recursiva para calcular o fatorial. No entanto, isso não significa que um substitui o outro.</p>
+
+<h3>Considerações Finais e Exemplos de Exercícios</h3>
+
+<p>As dicas daqui, são basicamente para linguagens imperativas e estruturadas, e podem ser adaptadas para qualquer linguagem que sigam e suportem esses paradigmas, como por exemplo:</p>
+
+<ul>
+    <li>Javascript.</li>
+    <li>PHP.</li>
+    <li>Java.</li>
+    <li>C/C++.</li>
+    <li>C#.</li>
+    <li>Python.</li>
+</ul>
+
+<p>Essas linguagens dizem ao computador como fazer algo, passo a passo, como executar comandos em ordem, usar variáveis, condições, laços, funções, etc., da seguinte forma:</p>
+
+<ul>
+    <li>Primeiro faça isso.</li>
+    <li>Depois aquilo.</li>
+    <li>Repita tal coisa.</li>
+    <li>Se isso acontecer, faça aquilo.</li>
+</ul>
+
+<p>As linguagens estruturadas são as que usam estruturas de controles claras, como estruturas condicionais (<code>se</code> e <code>senao</code>, <code>escolha</code>), de repetição (<code>enquanto</code>, <code>para</code>), além de funções e procedimentos.</p>
+
+<p>Veja alguns exemplos de exercícios que podemos fazer com esses algoritmos:</p>
+
+<ul>
+    <li><b>Números Primos em um Intervalo: </b>Ler dois números e exibir todos os números primos entre eles.</li>
+    <li><b>Inverter um Vetor: </b>Ler 10 valores em um vetor e depois exibir o vetor invertido sem usar funções prontas.</li> 
+    <li><b>Soma dos Dígitos de um Número: </b>Ler um número inteiro grande e somar todos os seus dígitos (por exemplo: <q>257 -> 2 + 5 + 7 = 14</q>).</li> 
+    <li><b>Estatísticas de Turma: </b>Ler várias notas até que o usuário digite um valor sentinela (por exemplo: -1). Calcular maior, menor, média e quantidade de alunos.</li>
+    <li><b>Cálculo de Potência sem usar operador de potência: </b>Calcular 2 ^ 10 usando apenas multiplicações em laço.</li>
+    <li><b>Matriz 3 × 3, Soma das Diagonais: </b>edir valores, armazenar na matriz e somar diagonal principal e secundária.</li>P
+    <li><b>Frequência de Números: </b>Ler vários números e dizer quantas vezes cada um aparece. Pode ser com vetor ou com lógica própria.</li>
+    <li><b>Cálculo de Fatorial com Laço: </b>Sem recursão, usando apenas <code>enquanto</code> ou <code>para</code>.</li>
+    <li><b>Calculadora com Menu Repetitivo: </b>Criar um menu com opções (somar, subtrair, dividir...) que só termina quando o usuário escolher <q>sair</q>.</li>
+    <li><b>Algoritmo de Fibonacci até N (sem recursão): </b>Gerar toda a sequência até chegar ao valor máximo escolhido pelo usuário.</li> 
+</ul>
+
+<p>Podemos também criar funcionalidades para coisas comuns nas linguagens de programação que não existem em Portugol, como por exemplo:</p>
+
+<ul>
+    <li>Números absolutos.</li>
+    <li>Raízes (quadrada e cúbica).</li>
+    <li>Potências.</li>
+    <li>Arredondamento (pra cima, pra baixo e pro mais próximo).</li>
+    <li>Mínimo e máximo.</li>
+</ul>
+
+<h3>Tipagem de Dados das Linguagens</h3>
+
+<p>Basicamente, podemos ter dois tipos de tipagem de dados em linguagens de programação: A estática e a dinâmica. Veja as diferenças abaixo:</p>
+
+<h4>Tipagem Estática</h4>
+
+<p>É quando você precisa declarar o tipo da variável antes de usar, e esse tipo não muda durante o programa.</p>
+
+<ul>
+    <li>O tipo é verificado antes da execução (em tempo de compilação).</li>
+    <li>Erros de tipo são detectados mais cedo.</li>
+    <li>O código costuma ser mais seguro, porém mais rígido.</li>
+    <li>Exemplos de linguagens com tipagem estática: C, C++, C#, Java, Objective-C.</li>
+</ul>
+
+<p>Exemplo de código simples em C:</p>
+
+<pre>
+<code>
+char nome[] = "Fulano";
+int idade = 25;
+
+printf("Nome: %s.\n", nome);
+printf("Idade: %d.\n", idade);
+</code>
+</pre>
+
+<p>O Portugol mesmo segue essa sintaxe:</p>
+
+<pre>
+<code>
+cadeia nome = "Fulano"
+inteiro idade = 25
+
+escreva("Nome: ", nome, ".\n")
+escreva("Idade: ", idade, ".\n")
+</code>
+</pre>
+
+<h4>Tipagem Dinâmica</h4>
+
+<p>É quando o tipo da variável é definido automaticamente pelo valor atribuído, sem declarar o tipo antes.</p>
+
+<ul>
+    <li>A variável pode mudar de tipo durante a execução.</li>
+    <li>O tipo é verificado durante o programa (tempo de execução).</li>
+    <li>É mais flexível e fácil de escrever, porém mais sujeito a erros.</li>
+    <li>Exemplos de linguagens com tipagem dinâmica: Javascript, PHP, Perl, Ruby, Python.</li>
+</ul>
+
+<p>Veja um exemplo em Python:</p>
+
+<pre>
+<code>
+nome = "Fulano"
+idade = 25
+
+print("Nome: {}.".format(nome))
+print("Idade: {}.".format(idade))
+</code>
+</pre>
+
+<p>No caso acima, as variáveis <code>nome</code> e <code>idade</code> poderiam ter atribuídos a elas um dado de outro tipo sem grandes problemas.</p>
+
+<p>PS: Não confunda tipagem estática e dinâmica com tipagem forte e fraca, são conceitos diferentes. Geralmente as linguagens tipadas estaticamente são fortes, mas nem toda linguagem tipada dinamicamente é fraca (Python e Ruby, por exemplo, são dinâmicas e fortes).</p>
+
+<h3>Intepretação e Compilação de Linguagens</h3>
+
+<p>Basicamente, existem três tipos de linguagens: Compiladas, interpretadas e virtualizadas. Vejam as diferenças abaixo:</p>
+
+<h4>Linguagens Compiladas</h4>
+
+<p>O código é traduzido inteiro de uma vez para código de máquina antes de rodar. Esse processo é feito por um compilador.</p>
+
+<ul>
+    <li><b>Vantagem: </b>O resultado é um arquivo executável muito rápido.</li>
+    <li><b>Desvantagem: </b>Precisa compilar toda vez que fizer mudanças.</li>
+    <li><b>Resumo: </b>Mais rápidas, mas exigem compilação.</li>
+</ul>
+
+<p>Alguns exemplos de linguagens são C, C++, Pascal, Fortran.</p>
+
+<p>O processo é esse:</p>
+
+<img src="imagens/processo-compilacao.png" alt="Processo de Compilação" style="max-width: 650px"/>
+
+<h4>Linguagens Interpretadas</h4>
+
+<p>O código é lido e executado linha por linha, enquanto o programa está rodando. Quem faz isso é um interpretador.</p>
+
+<ul>
+    <li><b>Vantagem: </b>Mais fáceis de testar e alterar rapidamente.</li>
+    <li><b>Desvantagem: </b>Costumam ser mais lentas que as compiladas.</li>
+    <li><b>Resumo: </b>Executam diretamente sem compilar, são práticas mas menos rápidas.</li>
+</ul>
+
+<p>Alguns exemplos de linguagens são Python, Ruby, PHP, Javascript, R.</p>
+
+<p>O processo é esse:</p>
+
+<img src="imagens/processo-interpretacao.png" alt="Processo de Interpretação" style="max-width: 350px"/>
+
+<h4>Linguagens Virtualizadas</h4>
+
+<p>O código é compilado, mas não para o código da máquina real. Ele vira um código intermediário (bytecode). Esse bytecode roda dentro de uma máquina virtual (tipo um <q>emulador</q>). Pode se dizer que ele é um meio-termo entre as compiladas e as interpretadas.</p>
+
+<ul>
+    <li><b>Vantagem: </b>Roda em vários sistemas sem mudar o código.</li>
+    <li><b>Neutro: </b>Velocidade geralmente fica entre compiladas e interpretadas.</li>
+    <li><b>Desvantagem: </b>Também precisa compilar toda vez que fizer mudanças.</li>
+    <li><b>Resumo: </b>Compilam para um código intermediário que roda em uma máquina virtual, garantindo portabilidade.</li>
+</ul>
+
+<p>Alguns exemplos de linguagens são Java, C#, Visual Basic, Lua, Kotlin.</p>
+
+<p>O processo é esse:</p>
+
+<img src="imagens/processo-virtualizacao.png" alt="Processo de Virtualização" style="max-width: 650px"/>
+
+<h3>Paradigmas de Programação</h3>
+
+<p>Como citado, no curso de algoritmos nós vimos a programação básica, que foca nos paradigmas imperativo e estruturado. No entanto, existem outros paradigmas que podemos encontrar nas linguagens de programação, veja abaixo os principais:</p>
+
+<h4>Paradigma Estruturado/Imperativo</h4>
+
+<p>Organiza o programa em blocos lógicos usando sequência, decisão e repetição. Foca em passo a passo, parecido com algoritmos.</p>
+
+<ul>
+    <li><b>Resumo: </b>Programa seguindo um fluxo lógico com estruturas como if (se) e while (enquanto).</li>
+    <li><b>Exemplos: </b>C, Perl, Pascal, Algol.</li>
+</ul>
+
+<h4>Paradigma Orientado a Objetos (OO)</h4>
+
+<p>Código baseado em objetos, que representam coisas do mundo real. Cada objeto tem atributos (dados) e métodos (funções). Ajuda a organizar projetos grandes através de classes, herança e outros conceitos.</p>
+
+<ul>
+    <li><b>Resumo: </b>Programa é organizado como um conjunto de objetos que interagem entre si.</li>
+    <li><b>Exemplos: </b>Java, C#, C++, Python, PHP (suporta mas não é totalmente OO), Javascript (OO baseada em protótipos), Kotlin, Objective-C, Swift, Smalltalk.</li>
+</ul>
+
+<p>PS: O paradigma orientado a objetos não tem nada a ver com o código-objeto gerado na compilação de programas, é apenas uma forma diferente de codificar. Não confunda as coisas.</p>
+
+<h4>Paradigma Funcional</h4>
+
+<p>Foca em funções puras, sem alterar variáveis fora delas. Evita <q>estado</q> e usa recursão ao invés de laços. Costuma gerar código mais previsível.</p>
+
+<ul>
+    <li><b>Resumo: </b>Tudo é baseado em funções e imutabilidade.</li>
+    <li><b>Exemplos: </b>Haskell, Elixir, R, Javascript (suporta, mas não é totalmente funcional), Lisp.</li>
+</ul>
+
+<h4>Paradigma de Baixo Nível</h4>
+
+<p>Linguagens mais próximas do hardware, que permitem controle direto da memória e do processador. Muito rápido, mas mais difícil de usar e menos abstrato.</p>
+
+<ul>
+    <li><b>Resumo: </b>Programação próxima da máquina, mais rápida e mais complexa.</li>
+    <li><b>Exemplos: </b>Assembly.</li>
+</ul>
+
+<p>PS: Algumas linguagens de nível mais alto, como o C, C++ e Pascal, permitem algumas coisas mais próximas do hardware, mas não são classificadas como baixo nível. No geral, apenas Assembly é classificada mesmo como tal, já que outras já estão indo pra código de máquina literal baseados em binários (os famosos 0 e 1 da computação)</p>
+
+<p>Essas foram as primeiras linguagens:</p>
+
+<ul>
+    <li><b>Baixo Nível: </b>Assembly.</li>
+    <li><b>De Todas (Alto Nível): </b>Fortran (há quem diga que é o Plankalkül).</li>
+    <li><b>Estruturada: </b>Algol.</li>
+    <li><b>Funcional: </b>Lisp.</li>
+    <li><b>Orientada a Objetos: </b>Simula 67, amadureceu com Smalltalk.</li>
+</ul>
+
+<ul>
+    <li><a href="tudo-sobre-algoritmos-4.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-algoritmos-6.html">Continuação da Matéria!</a></li>-->
+</ul>
+        </div>
+    </body>
+</html>

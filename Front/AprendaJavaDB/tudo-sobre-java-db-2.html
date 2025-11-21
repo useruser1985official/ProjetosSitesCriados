@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java com Banco de Dados</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java com Banco de Dados</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-db-1.html">Tudo sobre Java com Banco de Dados Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-db-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java com Banco de Dados Parte 2!</a></li>
+                    <li><a href="tudo-sobre-java-db-3.html">Tudo sobre Java com Banco de Dados Parte 3!</a></li>
+                    <li><a href="tudo-sobre-java-db-4.html">Tudo sobre Java com Banco de Dados Parte 4!</a></li>
+                    <li><a href="tudo-sobre-java-db-5.html">Tudo sobre Java com Banco de Dados Parte 5!</a></li>
+                    <li><a href="tudo-sobre-java-db-6.html">Tudo sobre Java com Banco de Dados Parte 6!</a></li>
+                    <li><a href="tudo-sobre-java-db-7.html">Tudo sobre Java com Banco de Dados Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java com Banco de Dados Parte 2</h2>
+
+<h3>Testando com JUnit - Inserir</h3>
+
+<p>Com o botão direito, clique na classe CategoriaDAO, e em ferramentas, vai em atualizar testes, marque o Framework JUnit e desmarque todas as opções de código gerado, público, privado e etc.</p>
+
+<p>PS: Nas versões mais recentes do Netbeans o JUnit 4 deve ser acionado e retirado o 5 que está bugado, é só ir em Bibliotecas, adicionar biblioteca e escolher JUnit 4. Caso não esteja adicionado, adicione na biblioteca de testes a biblioteca Hamcrest. Podemos baixar também daqui: <a href="http://www.java2s.com/Code/Jar/j/Downloadjunit4482jar.htm" target="_blank">http://www.java2s.com/Code/Jar/j/Downloadjunit4482jar.htm</a></p>
+
+<p>Exclua o método criado abaixo de @Test, e crie um novo nesse mesmo local, com o nome inserir:</p>
+
+<pre>
+<code>
+@Test
+public void inserir() {
+
+}   
+</code>
+</pre>
+
+<p>Esse é o código completo do Test:</p>
+
+<pre>
+<code>
+package model.dao;
+
+import java.sql.SQLException;
+import model.bean.Categoria;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class CategoriaDAOTest {    
+    public CategoriaDAOTest() {
+        
+    }
+
+    @Test
+    public void inserir() throws SQLException {
+        Categoria cat = new Categoria("Roupas"); // Importar
+        CategoriaDAO dao = new CategoriaDAO();
+        
+        if(dao.save(cat)) {
+            System.out.println("Salvo com Sucesso!");
+        }
+        else {
+            fail("Erro ao Salvar!");
+        }
+    }   
+}
+</code>
+</pre>
+
+<p>No banco de dados, crie uma banco com o nome dbloja e uma tabela com o nome categoria, com a coluna descricao, assim:</p>
+
+<pre>
+<code>
+create database dbloja
+default character set utf8
+default collate utf8_general_ci;
+
+create table categoria (
+    id int not null auto_increment,
+    descricao varchar(30) unique,
+    primary key(id)
+)
+default charset = utf8;
+
+create table produto (
+    id int not null auto_increment,
+    descricao varchar(50) unique,
+    qtd int not null,
+    valor decimal(10, 2) not null,
+    categoria_id int not null,
+    primary key(id),
+    foreign key(categoria_id) references categoria(id)
+)
+default charset = utf8;
+</code>
+</pre>
+
+<p>Caso use o PostgreSQL, crie a coluna id do tipo serial, que faz o autoincremento, use character varying ao invés de varchar (apenas o character completa com espaços fixos, para evitar isso use character varying), use double precision para o decimal e integer para int.</p>
+
+<p>Para executar um arquivo de teste, tecle Shift e F6. Verifique se o servidor está ativo e conectado.</p>
+
+<h3>Anotações JUnit</h3>
+
+<p>Vamos ver agora algumas anotações do JUnit úteis para a organização e para a execução dos procedimentos de teste em classes Java:</p>
+
+<ul>
+    <li><code>@Test</code>: Usada para sinalizar que o método anotado é um método de teste.</li>
+    <li><code>@AfterAll</code>: Usada para sinalizar que o método anotado deve ser executado após todos os testes na classe de teste atual.</li>
+    <li><code>@AfterEach</code>: Para sinalizar que o método anotado deve ser executado após cada método @Test, @RepeatedTest, @ParameterizedTest, @TestFactory e @TestTemplate na classe de teste atual.</li>
+    <li><code>@BeforeAll</code>: Usada para sinalizar que o método anotado deve ser executado antes de todos os testes na classe de teste atual.</li>
+    <li><code>@BeforeEach</code>: Usada para sinalizar que o método anotado deve ser executado antes de cada método @Test, @RepeatedTest, @ParameterizedTest, @TestFactory e @TestTemplate na classe de teste atual.</li>
+    <li><code>@RepeatTest</code>: Usada para sinalizar que o método anotado é um método de modelo de teste que deve ser repetido um número específico de vezes com um nome de exibição configurável.</li>
+</ul>
+
+<h3>Criando DAO - Buscar Todos</h3>
+
+<p>Esse é o método para podermos ver o que está no banco pelo Java, coloque isso em CategoriaDao:</p>
+
+<pre>
+<code>
+public List&lt;Categoria&gt; findAll() { // Importe java.util.List
+    String sql = "select * from categoria";
+
+    PreparedStatement stmt = null;
+    ResultSet rs = null; // Importe java.sql.ResultSet
+
+    List&lt;Categoria&gt; categorias = new ArrayList&lt;&gt;(); // Importe java.util.ArrayList
+
+    try {
+        stmt = con.prepareStatement(sql);
+        rs = stmt.executeQuery(); // Isso executa a query no banco.
+
+        while(rs.next()) { // Executa enquanto os dados forem true.
+            Categoria cate = new Categoria();
+
+            cate.setId(rs.getInt("id"));
+            cate.setDescricao(rs.getString("descricao"));
+            categorias.add(cate);
+        }
+    }
+    catch(SQLException ex) {
+        System.err.println("ERRO: " + ex);
+    }
+    finally {
+        ConnectionFactory.closeConnection(con, stmt, rs);
+    }
+
+    return categorias;
+}
+</code>
+</pre>
+
+<h3>Testando com JUnit - Buscar Todos</h3>
+
+<p>Para testar, coloque no CategoriaDAOTest esse código:</p>
+
+<pre>
+<code>
+@Test
+public void listar() throws SQLException {
+    CategoriaDAO dao = new CategoriaDAO();
+
+    for(Categoria c: dao.findAll()) {
+        System.out.println("Descrição: " + c.getDescricao());
+    }
+}
+</code>
+</pre>
+
+<p>PS: Coloque uma anotação <code>@Ignore</code> (importe) no método inserir, abaixo da @Test para ele não ser executado nesse teste.</p>
+
+<h3>Criando DAO - Update</h3>
+
+<p>De forma parecida com o save, o método update será quase igual, com algumas poucas alterações, coloque em CategoriaDAO:</p>
+
+<pre>
+<code>
+public boolean update(Categoria cate) { // Importar model.bean.Categoria
+    String sql = "update categoria set descricao = ? where id = ?";
+
+    PreparedStatement stmt = null; // Importar;
+
+    try {
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, cate.getDescricao());
+        stmt.setInt(2, cate.getId()); // Substituir pela id desejada
+        stmt.executeUpdate(); // Isso é responsável pelo insert, update e delete no banco.
+
+        return true;
+    }
+    catch(SQLException ex) {
+        System.err.println("Erro: " + ex);
+
+        return false;
+    }
+    finally { // Isso fecha a conexão
+        ConnectionFactory.closeConnection(con, stmt);
+    }
+}
+</code>
+</pre>
+
+<p>Além do fato de alterar os dados da sql, devemos colocar um método setInt e passar os parâmetros por ele.</p>
+
+<p>E no CategoriaDAOTest, coloque isso:</p>
+
+<pre>
+<code>
+@Test
+public void atualizar() throws SQLException {
+    Categoria cat = new Categoria("Acessórios em Geral");
+    cat.setId(1);
+    CategoriaDAO dao = new CategoriaDAO();
+
+    if(dao.update(cat)) {
+        System.out.println("Atualização Realizada com Sucesso!");
+    }
+    else {
+        fail("Erro ao Salvar!");
+    }
+}
+</code>
+</pre>
+
+<p>Teste o arquivo de teste, usando Shift e F6.</p>
+
+<h3>Criando DAO - Delete</h3>
+
+<p>Assim como no update, o delete também utiliza uma forma parecida, como pode ver (coloque em CategoriaDAO): </p>
+
+<pre>
+<code>
+public boolean delete(Categoria cate) { // Importar model.bean.Categoria
+    String sql = "delete from categoria where id = ?";
+
+    PreparedStatement stmt = null; // Importar;
+
+    try {
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, cate.getId()); // Substituir pela id desejada
+        stmt.executeUpdate(); // Isso é responsável pelo insert, update e delete no banco.
+
+        return true;
+    }
+    catch(SQLException ex) {
+        System.err.println("Erro: " + ex);
+
+        return false;
+    }
+    finally { // Isso fecha a conexão
+        ConnectionFactory.closeConnection(con, stmt);
+    }
+}
+</code>
+</pre>
+
+<p>E no CategoriaDAOTest, coloque isso:</p>
+
+<pre>
+<code>
+@Test
+public void deletar() throws SQLException {
+    Categoria cat = new Categoria();
+    cat.setId(1);
+    CategoriaDAO dao = new CategoriaDAO();
+
+    if(dao.delete(cat)) {
+        System.out.println("Deletado com Sucesso!");
+    }
+    else {
+        fail("Erro ao Deletar!");
+    }
+}
+</code>
+</pre>
+
+<h3>Inserir FK Chave Estrangeira usando Composição</h3>
+
+<p>No mesmo projeto, vá no pacote model.dao e crie uma nova classe Java com o nome ProdutoDAO</p>
+
+<pre>
+<code>
+import connection.ConnectionFactory;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import model.bean.Produto;
+
+public class ProdutoDAO {
+    private Connection con = null; // Importar java.sql.Connection
+    
+    public ProdutoDAO() {
+        con = ConnectionFactory.getConnection(); // Importar connection.ConnectionFactory
+    }
+    
+    public boolean save(Produto prod) { // Importar model.bean.Produto
+        String sql = "insert into produto (descricao, qtd, valor, categoria_id) values (?, ?, ?, ?)";
+        
+        PreparedStatement stmt = null; // Importar;.
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, prod.getDescricao());
+            stmt.setInt(2, prod.getQtd());
+            stmt.setDouble(3, prod.getValor());
+            stmt.setInt(4, prod.getCate().getId()); // Aqui pega o inteiro que está dentro da classe Categoria
+            stmt.executeUpdate(); // Isso é responsável pelo insert, update e delete no banco.
+        
+            return true;
+        }
+        catch(SQLException ex) {
+            System.err.println("Erro: " + ex);
+            
+            return false;
+        }
+        finally { // Isso fecha a conexão
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Como vimos, cada tipo de dado passado para a SQL, precisa ter um método específico para o tipo dele.</p>
+
+<p>Agora vá em criar e atualizar testes, e coloque isso em ProdutoDAOTest:</p>
+
+<pre>
+<code>
+import model.bean.Categoria;
+import model.bean.Produto;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class ProdutoDAOTest {
+    
+    public ProdutoDAOTest() {
+        
+    }
+
+    @Test
+    public void inserir() {
+        Categoria cate = new Categoria(); // Importe
+        cate.setId(1);
+        
+        Produto prod = new Produto(); // Importe
+        
+        prod.setDescricao("Feijão");
+        prod.setQtd(20);
+        prod.setValor(10);
+        prod.setCate(cate); // Aqui passamos o objeto
+        
+        ProdutoDAO dao = new ProdutoDAO();
+        
+        if(dao.save(prod)) {
+            System.out.println("Salvo com Sucesso!");
+        }
+        else {
+            fail("Erro ao Salvar!");
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Agora dê Shift F6 para testar.</p>
+
+<ul>
+    <li><a href="tudo-sobre-java-db-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-java-db-3.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

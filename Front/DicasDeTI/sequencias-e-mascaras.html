@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Sequências e Máscaras de Formatação</h2>
+
+<h3>Sequências de Escape</h3>
+
+<p>Diversas linguagens de programação utilizam seqüências de escape. Elas servem geralmente para inserir um caractere especial numa string.</p>
+
+<p>Veja algumas sequências de escape mais usadas:</p>
+            
+<table>
+    <tr>
+        <th>Sequência de Escape</th>
+        <th>Representa</th>
+    </tr>
+    <tr>
+        <td>\a</td>
+        <td>Emitir Campainha</td>
+    </tr>
+    <tr>
+        <td>\b</td>
+        <td>Backspace</td>
+    </tr>
+    <tr>
+        <td>\f</td>
+        <td>Avanço de Página</td>
+    </tr>
+    <tr>
+        <td>\n</td>
+        <td>Coloca o Cursor numa Nova Linha</td>
+    </tr>
+    <tr>
+        <td>\r</td>
+        <td>Coloca o Cursor no Início da Linha Atual</td>
+    </tr>
+    <tr>
+        <td>\t</td>
+        <td>Inserir Tabulação Horizontal</td>
+    </tr>
+    <tr>
+        <td>\v</td>
+        <td>Inserir Tabulação Vertical</td>
+    </tr>
+    <tr>
+        <td>\'</td>
+        <td>Aspas Simples</td>
+    </tr>
+    <tr>
+        <td>\"</td>
+        <td>Aspas Duplas</td>
+    </tr>
+    <tr>
+        <td>\\</td>
+        <td>Barra Invertida</td>
+    </tr>
+    <tr>
+        <td>\?</td>
+        <td>Ponto de Interrogação Literal</td>
+    </tr>
+    <tr>
+        <td>\ ooo</td>
+        <td>Caractere ASCII em Notação Octal</td>
+    </tr>
+    <tr>
+        <td>\x hh</td>
+        <td>Caractere ASCII em Notação Hexadecimal</td>
+    </tr>
+    <tr>
+        <td>\x hhhh</td>
+        <td>Caractere Unicode em Notação Hexadecimal</td>
+    </tr>
+	<tr>
+        <td>\0</td>
+        <td>Caractere Delimitador de Final de String</td>
+    </tr>
+</table>
+
+<h3>Máscaras de Formatação</h3>
+
+<p>Essas são as máscaras de formatação, também usadas em diversas linguagens que contenham a saída "printf" (tipo C, C++, PHP e Java):</p>
+
+<table>
+    <tr>
+        <th>Máscara</th>
+        <th>Tipo de Dado</th>
+        <th>Descrição</th>
+    </tr>
+    <tr>
+        <td>%d</td>
+        <td>int</td>
+        <td>Número Inteiro Decimal com Sinal</td>
+    </tr>
+    <tr>
+        <td>%c</td>
+        <td>char</td>
+        <td>Caractere Único</td>
+    </tr>
+    <tr>
+        <td>%f</td>
+        <td>float ou double</td>
+        <td>Número Decimal (Real ou de Ponto Flutuante)</td>
+    </tr>
+    <tr>
+        <td>%i</td>
+        <td>int</td>
+        <td>Número Inteiro com Decimal (Diferentes na Entrada e Saída de Dados)</td>
+    </tr>
+    <tr>
+        <td>%ld</td>
+        <td>long int</td>
+        <td>Número Inteiro Longo</td>
+    </tr>
+    <tr>
+        <td>%e</td>
+        <td>float ou double</td>
+        <td>Número Real Exponencial (Científico)</td>
+    </tr>
+    <tr>
+        <td>%E</td>
+        <td>float ou double</td>
+        <td>Número Real Exponencial (Científico)</td>
+    </tr>
+    <tr>
+        <td>%o</td>
+        <td>int</td>
+        <td>Número Inteiro em Formato Octal sem Sinal</td>
+    </tr>
+    <tr>
+        <td>%x</td>
+        <td>int</td>
+        <td>Número Inteiro em Formato Hexadecimal sem Sinal. Caracteres de a a f</td>
+    </tr>
+    <tr>
+        <td>%X</td>
+        <td>int</td>
+        <td>Número Inteiro em Formato Hexadecimal sem Sinal. Caracteres de A a F</td>
+    </tr>
+    <tr>
+        <td>%u</td>
+        <td>int</td>
+        <td>Número Inteiro Decimal sem Sinal</td>
+    </tr>
+    <tr>
+        <td>%h ou %l</td>
+        <td>---</td>
+        <td>Colocado Antes de um Especificador Inteiro para Indicar Valor Short ou Long</td>
+    </tr>
+    <tr>
+        <td>%L</td>
+        <td>---</td>
+        <td>Colocado Antes de um Especificador de Ponto Flutuante para indicar valor Long Double</td>
+    </tr>
+    <tr>
+        <td>%s</td>
+        <td>char</td>
+        <td>Cadeia de Caracteres (String ou Ponto pra char)</td>
+    </tr>
+    <tr>
+        <td>%b</td>
+        <td>boolean</td>
+        <td>Valores Booleanos (Só Funciona em Java)</td>
+    </tr>
+	<tr>
+        <td>%p</td>
+        <td>pointer</td>
+        <td>Ponteiros (Só funciona em C e C++)</td>
+    </tr>
+</table>
+
+<p>PS: Quando usar máscaras para strings (exceto no caso de variáveis), use sempre aspas simples nos valores caso as máscaras estejam dentro de aspas duplas, e vice-versa. Caso precise exibir um símbolo de porcentagem, use <code>%%</code> para exibir um símbolo desse.</p>
+
+<p>Também podemos usar modificações nas máscaras especificando as precisões:</p>
+
+<table>
+    <tr>
+        <th>Máscara</th>
+        <th>Modificação</th>
+        <th>Descrição</th>
+    </tr>
+    <tr>
+        <td>%d</td>
+        <td>%+d</td>
+        <td>Mostra o Sinal de Positivo, se Houver</td>
+    </tr>
+    <tr>
+        <td>%d</td>
+        <td>%.0d</td>
+        <td>Completa com Zeros à Esquerda</td>
+    </tr>
+    <tr>
+        <td>%f</td>
+        <td>%+f</td>
+        <td>Mostra o Sinal de Positivo, se Houver</td>
+    </tr>
+    <tr>
+        <td>%f</td>
+        <td>%.0f</td>
+        <td>O Número Entre o Ponto e o f Será o Limite de sua Precisão</td>
+    </tr>
+    <tr>
+        <td>%o</td>
+        <td>%#o</td>
+        <td>Completa o Número Octal com Zero</td>
+    </tr>
+    <tr>
+        <td>%x</td>
+        <td>%#x</td>
+        <td>Mostra Indicador de Hexadecimal (0x)</td>
+    </tr>
+    <tr>
+        <td>%s</td>
+        <td>%.0s</td>
+        <td>Delimita a Quantidade de Caracteres Exibidos</td>
+    </tr>
+</table>
+
+<p>PS: Para pré-definir o tamanho de um campo, podemos colocar o número com os espaços desejados entre o número e o especificador, como por exemplo, <code>%4c</code>. Se o valor à ser mostrado for menor, será alinhado à direita (ou à esquerda, se usarmos valores negativos) e o restante será ocupado por espaços (que sempre serão os mesmos). Se for maior, só exibirá os primeiros caracteres à ocuparem os campos.</p>
+
+<p>Podemos também combinar os tamanhos de campos com as precisões, como por exemplo <code>%10.5d</code>. No caso, o primeiro número é o tamanho e o segundo é a precisão.</p>
+            
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

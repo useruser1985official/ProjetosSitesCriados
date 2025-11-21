@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C#</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C#</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-csharp-1.html">Tudo sobre C# Parte 1!</a></li>
+                    <li><a href="tudo-sobre-csharp-2.html">Tudo sobre C# Parte 2!</a></li>
+                    <li><a href="tudo-sobre-csharp-3.html">Tudo sobre C# Parte 3!</a></li>
+                    <li><a href="tudo-sobre-csharp-4.html">Tudo sobre C# Parte 4!</a></li>
+                    <li><a href="tudo-sobre-csharp-5.html">Tudo sobre C# Parte 5!</a></li>
+                    <li><a href="tudo-sobre-csharp-6.html">Tudo sobre C# Parte 6!</a></li>
+                    <li><a href="tudo-sobre-csharp-7.html">Tudo sobre C# Parte 7!</a></li>
+                    <li><a href="tudo-sobre-csharp-8.html">Tudo sobre C# Parte 8!</a></li>
+                    <li><a href="tudo-sobre-csharp-9.html">Tudo sobre C# Parte 9!</a></li>
+                    <li><a href="tudo-sobre-csharp-10.html">Tudo sobre C# Parte 10!</a></li>
+                </menu>
+            </header>
+                           
+<h2>C# com Banco de Dados Parte 2</h2>
+
+<h3>Restringindo o Acesso aos Menus</h3>
+
+<p>O menu de Login não terá restrição, mas criaremos menus que serão restritos pelo nível de acesso do usuário. </p>
+
+<p>Crie o menu Manutenção e o item Banco de Dados no form principal, e também o menu Usuários com os itens Novo Usuário e Gestão de Usuários, e o menu Alunos com o item Novo Aluno, altere os names deles. Os mmenus Manutenção e Usuários serão restritos.</p>
+
+<p>No evento do Banco de Dados, coloque esse código:</p>
+
+<pre>
+<code>
+if(Global.logado) {
+    if(Global.nivel >= 3) {
+        // Procedimentos padrões e serem inseridos posteriormente.
+    }
+    else {
+        MessageBox.Show("Acesso Não-Permitido!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+}
+else {
+    MessageBox.Show("É Necessário ter um Usuário Logado!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+}
+</code>
+</pre>
+
+<p>Faça o mesmo nos itens Novo Usuário e Gestão de Usuários, mas com o nível 2.</p>
+
+<p>No item novo aluno, faça assim:</p>
+
+<pre>
+<code>
+if(Global.logado) {
+    // Procedimentos padrões:
+}
+else {
+    MessageBox.Show("É Necessário ter um Usuário Logado!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+}
+</code>
+</pre>
+
+<p>Teste mudando o cadastro do SQLite o nível do usuário inserido.</p>
+
+<h3>Tela de Cadastro de Usuários - Parte 1</h3>
+
+<p>Crie a tela Windows Form para cadastro de usuários com o nome NovoUsuario. Crie os labels e caixas de textos para Nome, Usuário, Senha (coloque o password Char), Status (Pode ser um combobox) e Nível (esse use um numeric up down). Altere os names deles. No combobox teremos os itens A (ativo), B (bloqueado) e D (desligado). Adicione os botões Novo, Salvar e Cancelar e mude os names deles.</p>
+
+<p>PS: No combobox, para definir um item como padrão, coloque no construtor do form Novo Usuário, a linha <code>cbStat.SelectedIndex = 2;</code> (contado a partir do zero).</p>
+
+<p>No form principal, mude o código do evento novo usuário assim:</p>
+
+<pre>
+<code>
+if(Global.logado) {
+    if(Global.nivel >= 2) {
+        NovoUsuario novoUser = new NovoUsuario();
+
+        novoUser.ShowDialog();
+    }
+    else {
+        MessageBox.Show("Acesso Não-Permitido!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+}
+else {
+    MessageBox.Show("É Necessário ter um Usuário Logado!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+}
+</code>
+</pre>
+
+<p>Voltando ao form Novo Usuário, vamos fazer de maneiras diferentes as inserções de dados no banco.</p>
+
+<p>Crie uma classe com o nome Usuario, assim:</p>
+
+<pre>
+<code>
+class Usuario {
+    public int id;
+    public string nome;
+    public string username;
+    public string senha;
+    public string status;
+    public int nivel;
+}
+</code>
+</pre>
+
+<p>No form Novo Usuário, coloque o evento nos botões. Esse é o código do botão Salvar:</p>
+
+<pre>
+<code>
+Usuario user = new Usuario();
+
+user.nome = txtNome.Text.Trim();
+user.username = txtUser.Text.Trim();
+user.senha = CriptSenha.encripta(txtSenha.Text.Trim(), "SHA-1");
+user.status = cbStat.Text.ToCharArray()[0].ToString();
+user.nivel = (int)numNiv.Value;
+</code>
+</pre>
+
+<h3>Tela de Cadastro de Usuários - Parte 2</h3>
+
+<p>Na classe Banco, coloque esse método:</p>
+
+<pre>
+<code>
+// Funções do form Novo Usuário:
+
+public static void novoUser(Usuario user) {
+    if(existUser(user)) {
+        MessageBox.Show("Username já Existe!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    
+        return;
+    }
+
+    try {
+        SQLiteCommand comando = conexaoBanco().CreateCommand();
+
+        comando.CommandText = "insert into usuario (nome, username, senha, status, nivel) values (@nome, @username, @senha, @status, @nivel)";
+
+        comando.Parameters.AddWithValue("@nome", user.nome);
+        comando.Parameters.AddWithValue("@username", user.username);
+        comando.Parameters.AddWithValue("@senha", user.senha);
+        comando.Parameters.AddWithValue("@status", user.status);
+        comando.Parameters.AddWithValue("@nivel", user.nivel);
+        
+        comando.ExecuteNonQuery();
+
+        MessageBox.Show("Novo Usuário Inserido!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        conexaoBanco().Close();
+    }
+    catch(Exception ex) {
+        MessageBox.Show($"ERRO: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        conexaoBanco().Close();
+    }
+}
+
+public static bool existUser(Usuario user) {
+    bool res;
+    SQLiteDataAdapter dataAp = null;
+    DataTable dataTab = new DataTable();
+    SQLiteCommand comando = conexaoBanco().CreateCommand();
+
+    comando.CommandText = "select * from usuario where username = @username";
+
+    comando.Parameters.AddWithValue("@username", user.username);
+
+    comando.CommandType = CommandType.Text;
+
+    dataAp = new SQLiteDataAdapter(comando.CommandText, conexaoBanco());
+
+    dataAp.SelectCommand = comando;
+
+    dataAp.Fill(dataTab);
+
+    if(dataTab.Rows.Count == 1) {
+        res = true;
+    }
+    else {
+        res = false;
+    }
+
+    conexaoBanco().Close();
+
+    return res;
+}
+</code>
+</pre>
+
+<p>Continuando o código anterior, complete o código do evento de Salvar:</p>
+
+<pre>
+<code>
+Usuario user = new Usuario();
+
+user.nome = txtNome.Text.Trim();
+user.username = txtUser.Text.Trim();
+user.senha = CriptSenha.encripta(txtSenha.Text.Trim(), "SHA-1");
+user.status = cbStat.Text.ToCharArray()[0].ToString();
+user.nivel = (int)numNiv.Value;
+
+if(!txtNome.Text.Trim().Equals("") && !txtUser.Text.Trim().Equals("") && !txtSenha.Text.Trim().Equals("")) {
+    Banco.novoUser(user);
+}
+else {
+    MessageBox.Show("Preencha Todos os Campos!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+}
+</code>
+</pre>
+
+<p>No evento do novo, basta colocar isso:</p>
+
+<pre>
+<code>
+txtNome.Clear();
+txtUser.Clear();
+txtSenha.Clear();
+cbStat.Text = "Desligado";
+numNiv.Value = 1;
+
+txtNome.Focus();
+</code>
+</pre>
+
+<p>E no do Cancelar basta dar um <code>this.Close()</code>.</p>
+
+<h3>Form de Gestão de Usuários - Parte 1</h3>
+
+<p>Adicione um formulário Windows Form no projeto com o nome GestaoUsuarios. Copie os labels, campos e etc (menos os botões). do Novo Usuário para o Gestão Usuários. Coloque um campo com o id txtId, que terá o tabStop como false e ReadOnly com true. Coloque um panel com o dock bottom e acima dele, logo abaixo dos campos, coloque um DataGridView. Dentro do panel colocar os botões Novo Salvar e Excluir. Altere o name do DataGridView para dgvUser e desabilite todas as opções marcadas na "setinha".</p>
+
+<p>Adicione também no construtor de gestão de usuários a linha <code>cbStat.SelectedIndex = 2;</code>.</p>
+
+<p>No Form principal, altere o evento de Gestão de Usuários assim:</p>
+
+<pre>
+<code>
+if(Global.logado) {
+    if(Global.nivel >= 2) {
+        GestaoUsuarios gestUser = new GestaoUsuarios();
+
+        gestUser.ShowDialog();
+    }
+    else {
+        MessageBox.Show("Acesso Não-Permitido!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+}
+else {
+    MessageBox.Show("É Necessário ter um Usuário Logado!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="csharp-com-db-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="csharp-com-db-3.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

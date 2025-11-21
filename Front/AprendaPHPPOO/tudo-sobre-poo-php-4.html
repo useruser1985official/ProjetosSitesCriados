@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda POO PHP</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda POO PHP</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-poo-php-1.html">Tudo sobre POO PHP Parte 1!</a></li>
+                    <li><a href="tudo-sobre-poo-php-2.html">Tudo sobre POO PHP Parte 2!</a></li>
+                    <li><a href="tudo-sobre-poo-php-3.html">Tudo sobre POO PHP Parte 3!</a></li>
+                    <li><a href="tudo-sobre-poo-php-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre POO PHP Parte 4!</a></li>
+                    <li><a href="tudo-sobre-poo-php-5.html">Tudo sobre POO PHP Parte 5!</a></li>
+                    <li><a href="tudo-sobre-poo-php-6.html">Tudo sobre POO PHP Parte 6!</a></li>
+                    <li><a href="tudo-sobre-poo-php-7.html">Tudo sobre POO PHP Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre POO PHP Parte 4</h2>
+
+<h3>Exercício prático POO em PHP</h3>
+
+<p>Para esse exercício, faremos um encapsulamento com a classe Pessoa, uma agregação entre essa classe e a classe Livro, e uma interface. Veja o diagrama abaixo:</p>
+
+<table style="float: left">
+    <tr>
+        <th>Pessoa</th>
+    </tr>
+    <tr>
+        <td>
+            - nome<br/>
+            - idade<br/>
+            - sexo<br/>
+        </td>
+    </tr>
+    <tr>
+        <td>+ fazerAniver()</td>
+    </tr>
+</table>
+
+<table style="float: left; margin-left: 10px">
+    <tr>
+        <th>Livro</th>
+    </tr>
+    <tr>
+        <td>
+            - titulo<br/>
+            - autor<br/>
+            - totPaginas<br/>
+            - pagAtual<br/>
+            - aberto<br/>
+            - leitor<br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            + detalhes()<br/>
+        </td>
+    </tr>
+</table>
+
+<table style="margin: auto auto 50px 250px">
+    <tr>
+        <th>
+            &lt;&lt;interface&gt;&gt;<br/>
+            Publicacao
+        </th>
+    </tr>
+    <tr>
+        <td>
+            + abrir()<br/>
+            + fechar()<br/>
+            + folhear(p)<br/>
+            + avancarPag()<br/>
+            + voltarPag()<br/>
+        </td>
+    </tr>
+</table>
+
+<br/>
+
+<p>Crie os arquivos de classes Pessoa.php, Livro.php e o de interface Publicacao.php.</p>
+
+<p>Esse é o código da interface Publicacao:</p>
+
+<pre>
+<code>
+interface Publicacao {
+    public function detalhes();
+    public function abrir();
+    public function fechar();
+    public function folhear($p);
+    public function avancarPag();
+    public function voltarPag();
+}
+</code>
+</pre>
+
+<p>Esse é o código da classe Pessoa:</p>
+
+<pre>
+<code>
+class Pessoa {
+    private $nome;
+    private $idade;
+    private $sexo;
+    
+    public function fazerAniver() {
+        $this->idade++;
+    }
+    
+    public function __construct($nome, $idade, $sexo) {
+        $this->nome = $nome;
+        $this->idade = $idade;
+        $this->sexo = $sexo;
+    }
+    
+    public function __destruct() {
+        echo "Objeto Pessoa Destruído!&lt;br/&gt;";
+    }
+
+    public function getNome() {
+        return $this->nome;
+    }
+
+    public function getIdade() {
+        return $this->idade;
+    }
+
+    public function getSexo() {
+        return $this->sexo;
+    }
+
+    public function setNome($nome) {
+        $this->nome = $nome;
+    }
+
+    public function setIdade($idade) {
+        $this->idade = $idade;
+    }
+
+    public function setSexo($sexo) {
+        $this->sexo = $sexo;
+    }
+}
+</code>
+</pre>
+
+<p>E esse é o código da classe Livro:</p>
+
+<pre>
+<code>
+require_once "Pessoa.php";
+require_once "Publicacao.php";
+
+class Livro implements Publicacao {
+    private $titulo;
+    private $autor;
+    private $totPaginas;
+    private $pagAtual;
+    private $aberto;
+    private $leitor;
+
+    public function detalhes() {
+        echo "Livro " . $this->titulo . " escrito por " . $this->autor . ".";
+        if($this->aberto == true) {
+            echo "&lt;br/&gt;O livro está aberto!";
+            echo "&lt;br/&gt;Páginas: " . $this->totPaginas . ", página atual " . $this->pagAtual . ".";
+            echo "&lt;br/&gt;Sendo lido por " . $this->leitor->getNome() . ".";
+            echo "&lt;br/&gt;De idade de " . $this->leitor->getIdade() . " anos.";
+            echo "&lt;br/&gt;E de sexo " . $this->leitor->getSexo() . ".";
+        }
+        else {
+            echo "&lt;br/&gt;O livro está fechado no momento!";
+        }
+    }
+    
+    public function abrir() {
+        $this->aberto = true;
+    }
+
+    public function avancarPag() {
+        if($this->getAberto() == true) {
+            if($this->getPagAtual() < $this->getTotPaginas()) {
+                $this->setPagAtual($this->getPagAtual() + 1);
+            } 
+        }
+    }
+
+    public function fechar() {
+        $this->aberto = false;
+    }
+
+    public function folhear($p) {
+        if($this->getAberto() == true) {
+            if($p > $this->totPaginas) {
+                $this->setPagAtual($this->getTotPaginas());
+            }
+            else if($p < 0) {
+                $this->setPagAtual(0);
+            }
+            else {
+                $this->pagAtual = $p;
+            }
+        }
+    }
+
+    public function voltarPag() {
+        if($this->getAberto() == true) {
+            if($this->getPagAtual() > 0) {
+                $this->setPagAtual($this->getPagAtual() - 1);
+            } 
+        }
+    }
+    
+    public function __construct($titulo, $autor, $totPaginas, $leitor) {
+        $this->titulo = $titulo;
+        $this->autor = $autor;
+        $this->totPaginas = $totPaginas;
+        $this->leitor = $leitor;
+        $this->aberto = false;
+        $this->pagAtual = 0;
+    }
+    
+    public function __destruct() {
+        unset($this->leitor); // Destruindo objeto no destrutor
+
+        echo "Objeto Livro Destruído!&lt;br/&gt;";
+    }
+
+    public function getTitulo() {
+        return $this->titulo;
+    }
+
+    public function getAutor() {
+        return $this->autor;
+    }
+
+    public function getTotPaginas() {
+        return $this->totPaginas;
+    }
+
+    public function getPagAtual() {
+        return $this->pagAtual;
+    }
+
+    public function getAberto() {
+        return $this->aberto;
+    }
+
+    public function getLeitor() {
+        return $this->leitor;
+    }
+
+    public function setTitulo($titulo) {
+        $this->titulo = $titulo;
+    }
+
+    public function setAutor($autor) {
+        $this->autor = $autor;
+    }
+
+    public function setTotPaginas($totPaginas) {
+        $this->totPaginas = $totPaginas;
+    }
+
+    public function setPagAtual($pagAtual) {
+        $this->pagAtual = $pagAtual;
+    }
+
+    public function setAberto($aberto) {
+        $this->aberto = $aberto;
+    }
+
+    public function setLeitor($leitor) {
+        $this->leitor = $leitor;
+    }
+}
+</code>
+</pre>
+
+<p>E no index, coloque isso:</p>
+
+<pre>
+<code>
+require_once "Livro.php"; // Não é necessário carregar também Pessoa.php.
+
+$p[0] = new Pessoa("Sérgio", 22, "M");
+$p[1] = new Pessoa("Maria", 31, "F");
+
+$l[0] = new Livro("PHP Básico", "José da Silva", 300, $p[0]);
+$l[1] = new Livro("POO com PHP", "Maria de Souza", 500, $p[0]);
+$l[2] = new Livro("PHP Avançado", "Ana Paula", 800, $p[1]);
+
+$l[2]->abrir();
+$l[2]->folhear(305); // Aqui se passa parâmetros;
+$l[2]->avancarPag();
+$l[2]->detalhes();
+
+unset($p);
+unset($l);
+</code>
+</pre>
+
+<p>Teste outros "livros", outras funções.</p>
+
+<p>PS: Tente colocar como privados os getters e setters.</p>
+
+<h3>Herança - Parte 1</h3>
+
+<p>Como sabemos, a POO tem três pilares, Encapsulamento, Herança e Polimorfismo (representados pelas letras EHP). O segundo que vamos tratar é a herança.</p>
+
+<p>O conceito herança é o de mãe e filha, se definimos uma classe como mãe, todas as classes filhas herdam suas características e comportamentos.</p>
+
+<p>A herança permite basear uma nova classe na definição de uma outra classe previamente existente. A classe filha é criada baseada na classe mãe já existente.</p>
+
+<p>Lembra do objeto Caneta? Vamos supor uma caneta esferográfica comum, e queiramos fazer uma caneta com luzinha, vamos pegar a caneta já pronta (classe mãe), e colocaremos a luzinha nela (classe filha), mantendo as características e comportamentos da caneta (de escrever, ter tinta, etc.), para isso usamos uma caneta já pronta e adicionamos esses recursos.</p>
+
+<p>Vamos supor que temos três pessoas, um aluno, um professor e um funcionário. Alguns atributos e métodos em comum entre eles colocaremos numa classe separada, que será a superclasse (progenitora ou mãe), e o Aluno, Professor e Funcionario serão subclasses (filhas). Veja o diagrama delas abaixo:</p>
+
+<table>
+    <caption>Classe Mãe</caption>
+    <tr>
+        <th>Pessoa</th>
+    </tr>
+    <tr>
+        <td>
+            - nome<br/>
+            - idade<br/>
+            - sexo<br/>
+        </td>
+    </tr>
+    <tr>
+        <td> + fazerAniver()</td>
+    </tr>
+</table>
+
+<p>Classes filhas:</p>
+
+<table style="float: left">
+    <tr>
+        <th>Aluno</th>
+    </tr>
+    <tr>
+        <td>
+            - matr<br/>
+            - curso<br/>
+        </td>
+    </tr>
+    <tr>
+        <td>+cancelarMatr()</td>
+    </tr>
+</table>
+
+<table style="float: left; margin-left: 10px">
+    <tr>
+        <th>Professor</th>
+    </tr>
+    <tr>
+        <td>
+            - especialidade<br/>
+            - salario<br/>
+        </td>
+    </tr>
+    <tr>
+        <td>+ receberAumento(aum)</td>
+    </tr>
+</table>
+
+<table style="margin: auto auto 50px 250px">
+    <tr>
+        <th>Funcionario</th>
+    </tr>
+    <tr>
+        <td>
+            - setor<br/>
+            - trabalhando<br/>
+        </td>
+    </tr>
+    <tr>
+        <td>+ mudarTrabalho()</td>
+    </tr>
+</table>
+
+<p>Vamos usar a classe Pessoa que criamos na aula anterior para isso. Mas elimine o método construtor dela.</p>
+
+<p>Para ele "herdar" elementos de outra classe, usamos o <code>extends</code> (extender), como veremos abaixo, na criação do arquivo Aluno.php com a classe Aluno:</p>
+ 
+<pre>
+<code>
+require_once "Pessoa.php";
+
+class Aluno extends Pessoa {
+    private $matr;
+    private $curso;
+    
+    public function cancelarMatr() {
+        echo "&lt;p&gt;Matrícula será cancelada!&lt;/p&gt;";
+    }
+
+    public function getMatr() {
+        return $this->matr;
+    }
+    public function getCurso() {
+        return $this->curso;
+    }
+    public function setMatr($matr) {
+        $this->matr = $matr;
+    }
+
+    public function setCurso($curso) {
+        $this->curso = $curso;
+    }
+}
+</code>
+</pre>
+
+<p>E fazer o mesmo com Professor.php:</p>
+
+<pre>
+<code>
+require_once "Pessoa.php";
+
+class Professor extends Pessoa {
+    private $especialidade;
+    private $salario;
+    
+    public function receberAumento($aum) {
+        $this->salario += $aum;
+    }
+    
+    public function getEspecialidade() {
+        return $this->especialidade;
+    }
+
+    public function getSalario() {
+        return $this->salario;
+    }
+
+    public function setEspecialidade($especialidade) {
+        $this->especialidade = $especialidade;
+    }
+
+    public function setSalario($salario) {
+        $this->salario = $salario;
+    }
+}
+</code>
+</pre>
+
+<p>E com funcionário:</p>
+
+<pre>
+<code>
+require_once "Pessoa.php";
+
+class Funcionario extends Pessoa {
+    private $setor;
+    private $trabalhando;
+    
+    public function mudarTrabalho() {
+        $this->trabalhando = !$this->trabalhando;
+    }
+    
+    public function getSetor() {
+        return $this->setor;
+    }
+
+    public function getTrabalhando() {
+        return $this->trabalhando;
+    }
+
+    public function setSetor($setor) {
+        $this->setor = $setor;
+    }
+
+    public function setTrabalhando($trabalhando) {
+        $this->trabalhando = $trabalhando;
+    }
+}
+</code>
+</pre>
+
+<p>E esse é o código do index:</p>
+
+<pre>
+<code>
+require_once "Aluno.php";
+require_once "Professor.php";
+require_once "Funcionario.php";
+
+$p1 = new Pessoa();
+$p2 = new Aluno();
+$p3 = new Professor();
+$p4 = new Funcionario();
+
+$p1->setNome("Sérgio");
+$p2->setNome("Maria");
+$p3->setNome("Cláudio");
+$p4->setNome("Fabiana");
+
+$p1->setSexo("M");
+$p4->setSexo("F");
+
+$p2->setCurso("Informática");
+$p3->setSalario(2500.75);
+$p4->setSetor("Estoque");
+
+// Esses métodos não funcionarão, apenas nos objetos especificados, altere os objetos associados:
+
+$p1->receberAumento(550.20);
+$p2->mudarTrabalho();
+$p4->cancelarMatr();
+
+print_r($p1);
+print_r($p2);
+print_r($p3);
+print_r($p4);
+</code>
+</pre>
+
+<p>Aí podemos entender o que é herança, onde podemos criar objetos com alguns atributos padrão (no caso, Pessoa), e outros com especialidades. </p>
+
+<p>No index, tente colocar outros "setter" pra todos os atributos.</p>
+
+<p>PS: Não é possível uma mesma classe ter herança de mais de uma classe (herança múltipla), o que pode é uma classe ter uma herança e uma ou mais implementações de interfaces, seria algo tipo <code>class NomeDaClasse2 extends NomeDaClasse1 implements NomeDaInterface</code>, a indicação da classe sempre vem antes das interfaces. E é possível usar o extends em interfaces, no caso de uma interface herdar os métodos de outras (em interfaces podemos ter herança de mais de uma interface).</p>
+
+<ul>
+    <li><a href="tudo-sobre-poo-php-3.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-poo-php-5.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

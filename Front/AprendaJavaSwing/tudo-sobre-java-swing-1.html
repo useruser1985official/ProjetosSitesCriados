@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java com Interface Swing</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java com Interface Swing</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-swing-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java com Interface Swing Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-swing-2.html">Tudo sobre Java com Interface Swing Parte 2!</a></li>
+                    <li><a href="tudo-sobre-java-swing-3.html">Tudo sobre Java com Interface Swing Parte 3!</a></li>
+                </menu>
+            </header>
+
+<h2>Tudo sobre Java com Interface Swing Parte 1</h2>
+
+<h3>Criando Tela de Login (JFrame)</h3>
+
+<p>Crie um novo projeto, desmarque a opção de classe principal, e crie um pacote para colocar as telas e outro pra colocar as imagens.</p>
+
+<p>Crie um novo JFrame com o nome TelaLogin, e coloque nele um JPanel (painel), de forma que ele cubra um pouco mais da metade do frame. Agora coloque, dentro do painel, um label (escrito Login, clique nele com o botão direito para editar) e um campo de texto pro login (variável txtLogin), e também outro label (escrito senha) e um campo de senha para a senha (variável txtSenha). Coloque também um botão com o texto Entrar (variável btnEntr).</p>
+
+<p>No frame, fora do painel, coloque um label para colocar a imagem (clicando com o botão direito em propriedades, em icon e selecionando ela no pacote que ela está), e apague o texto do label.</p>
+
+<p>PS: Cuidado com a centralização dos componentes, principalmente imagens, para não desalinharem ao maximixar, para isso, deixe as laterais do layout como "redimensionável", clicando com o botão direito.</p>
+
+<p>No botão, clique em Action e em Action Performed, e coloque esse código, só para testarmos:</p>
+
+<pre>
+<code>
+private void btnEntrActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    if(txtLogin.getText().trim().equals("usuario") && String.valueOf(txtSenha.getPassword()).trim().equals("1234")) {
+        JOptionPane.showMessageDialog(null, "Bem-vindo", "Login", JOptionPane.INFORMATION_MESSAGE); // Importe javax.swing.JOptionPane
+    }
+    else {
+        JOptionPane.showMessageDialog(null, "Acesso Negado", "Login", JOptionPane.ERROR_MESSAGE);
+    }
+}
+</code>
+</pre>
+
+<p>PS: Veja que tivermos que formar uma criação de String no txtSenha, porque o campo de senha envia um vetor de char, mas o Java precisa trabalhar com string, nesse caso.</p>
+
+<p>Para verificar o resultado, dê Shift F6.</p>
+
+<p>PS: Caso queira que, além do botão, ele seja executado ao clicar enter, podemos usar o evento Key e KeyPressed nas caixas de texto, numéricas e outros, e escolher dentro do método a tecla que deverá ser pressionada, assim:</p>
+
+<pre>
+<code>
+private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {                                    
+    if(evt.getKeyCode() == KeyEvent.VK_ENTER) { // Podemos utilizar outra tecla aqui, importe java.awt.event.KeyEvent
+        // Coloque o mesmo código aqui.
+    }
+}  
+</code>
+</pre>
+
+<h3>Centralizando e Colocando Título do JFrame</h3>
+
+<p>Para colocar título no frame, clicamos nas propriedades do Frame, e em Title colocamos o título desejado. Lá também tem a opção resizable, na qual podemos desmarcar para impedir que o frame seja redimensionado.</p>
+
+<p>Já para centralizar o frame, nas propriedades, vamos em código e marcar a opção Gerar Centralizado.</p>
+
+<p>PS: Há quem prefira fazer esses processos manualmente, já que alguns acusam as IDEs de Java de deixarem o programador "preguiçoso", esse é o código, que deverá ser colocado no construtor do frame:</p>
+
+<pre>
+<code>
+public TelaLogin() {
+    initComponents();
+    setLocationRelativeTo(null); // Para centralizar
+    setTitle("Título"); // Para colocar título
+    setResizable(false); // Para não redimensionar
+}
+</code>
+</pre>
+
+<h3>Barra de Menu JMenuBar</h3>
+
+<p>Crie um novo frame com o nome TelaPrincipal, siga os passos para centralizar, não redimensionar e colocar título.</p>
+
+<p>Pega uma Barra de Menu, e coloque os itens como Arquivo, Usuários, Clientes e Sobre (os dois primeiros podem ser editados, os outros adicionados mediante a paleta ou clicando com o botão direito). Podemos da mesma forma que os itens, colocar separadores.</p>
+
+<p>Através da paleta ou do clique com botão direito, coloque os itens de menu em cada menu, de forma que fiquem assim:</p>
+
+<ul>
+    <li><b>Arquivo:</b> Sair</li>
+    <li><b>Usuários:</b> Cadastrar, Alterar, Excluir, Pesquisar</li>
+    <li><b>Clientes:</b> Cadastrar, Alterar, Excluir, Pesquisar</li>
+    <li><b>Sobre:</b> Não terá Nada (seria pra chamar outro frame).</li>
+</ul>
+
+<p>PS: Nos menus e nos itens de menu podemos colocar ícones, da mesma forma que colocamos as imagens em labels e outros elementos. Coloque ícones em todos os menus e seus itens.</p>
+
+<p>Também podemos adicionar atalhos em itens de menus (como algum seguido de Ctrl ou Alt), indo em propriedades e Accelerator, independente do tipo de menu.</p>
+
+<h3>Janelas Internas JInternalFrame</h3>
+
+<p>Copie a tela principal, com os nomes TelaPrincipalMDI e TelaPrincipalSDI, que usaremos para projetos futuros.</p>
+
+<p>Crie um JInternalFrame (este será aberto dentro de outro frame), com o nome TelaCadastroUsuario. Dentro dele, coloque um painel e o estenda ao tamanho total da tela. Nela coloque os labels com os nomes Usuário, Senha e Confirmar Senha, e coloque um campo de texto para usuário (variável txtUser), e dois campos de senha para senha e confirmar senha (variáveis txtSenha e txtConf, respectivamente). Coloque também um botão pra salvar (variável btnSalv).</p>
+
+<p>Note também que esse frame não tem um método main, por isso não poderemos executar, mesmo com o shift. Teremos que chamar ele por outro frame que não seja internal.</p>
+
+<p>Para chamar o JInternalFrame, pegue o TelaPrincipalMDI, e coloque nela um painel da área de trabalho (desktop pane), e coloque no frame MDI até cobrir ele todo. e coloque a variável paneCadr.</p>
+
+<p>No TelaPrincipalMDI, clique no menu Usuário e em Cadastrar, clique com o botão direito e vá em Action e Action Perfomed, e coloque esse código:</p>
+
+<pre>
+<code>
+TelaCadastroUsuario telaCadUser = new TelaCadastroUsuario();
+
+paneCadr.add(telaCadUser);
+
+telaCadUser.setVisible(true);
+</code>
+</pre>
+
+<h3>Aplicação SDI - JFrame</h3>
+
+<p>Crie um JFrame com o nome TelaCadastroUsuarioSDI, e coloque o painel,  os labels e campos de texto e senha exatamente iguais ao do MDI (pode até copiar o painel diretamente e colar).</p>
+
+<p>No TelaPrincipalSDI, clique no menu Usuário e em Cadastrar, clique com o botão direito e vá em Action e Action Perfomed, e coloque esse código:</p>
+
+<pre>
+<code>
+new TelaCadastroUsuarioSDI().setVisible(true);
+</code>
+</pre>
+
+<p>PS: Caso queira que a tela principal não feche ao fechar também o frame de cadastro, vá no TelaCadastroUsuarioSDI e coloque na opção defaultCloseOperation a opção DISPOSE.</p>
+
+<h3>Máscaras CPF, Telefone e Data</h3>
+
+<p>Primeiramente, crie um JFrame com o nome TelaCadastroCliente, aumente o tamanho dele e coloque um painel que cubra toda a extensão dele.</p>
+
+<p>Por cima, coloque outro painel que cubra a metade superior dele, e nesse painel, em propriedades, vá na opção border e escolha a borda com título, e no título coloque o texto "dados pessoais".</p>
+
+<p>Dentro dele coloque os labels e campos para nome, data, CPF e uma caixa de combinação (tipo select) pro sexo. Só que o de data e de CPF será o campo formatado.</p>
+
+<p>Para mudar os dados da caixa de combinação, clique nela com o botão direito, e em propriedades, em model, coloque as opções, separadas por linha.</p>
+
+<p>Crie outro painel, na parte de baixo, com borda com título, com o título Contato. Nele coloque os labels e os campos telefone, celular (esses dois serão formatados) e e-mail.</p>
+
+<p>Para colocar as máscaras, clicamos no campo com o botão direito, vai em propriedades e em formattedFactory, em máscara e em personalizado. No campo formatado, colocaremos os campos, onde os números a serem inseridos são representados por hashtags e os outros símbolos são apenas pra formatação, não sendo considerados ou podendo ser apagados no programa.</p>
+
+<p>Esses são os exemplos que usaremos nesse frame (podendo ser usado várias outras combinações):</p>
+
+<ul>
+    <li><b>Data: </b><code>##/##/####</code></li>
+    <li><b>CPF: </b><code>###.###.###-##</code></li>
+    <li><b>Telefone: </b><code>(##) ####-####</code></li>
+    <li><b>Celular: </b><code>(##) #####-####</code></li>
+</ul>
+
+<p>PS: A hashtag (#) só aceita números, para letras usamos ?, letras e números usamos A, qualquer coisa usamos * e hexadecimais usamos H. Uma máscara de placas de veículos poderia ser <code>???-####</code>, por exemplo.</p>
+
+<p>Coloque, fora dos paineis menores, logo abaixo, um botão pra salvar.</p>
+
+<p>Altere os nomes das variáveis dos campos (tfNome, tfData, tfCPF, cxSex, tfTel, tfCel e tfMail).</p>
+
+<p>Coloque esse código no método action do botão:</p>
+
+<pre>
+<code>
+private void btnSalvActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    JOptionPane.showMessageDialog(null, "Nome: " + tfNome.getText().trim() + "\nSexo: " + cxSex.getSelectedItem().toString(), "Notificação", JOptionPane.INFORMATION_MESSAGE); // Importe javax.swing.JOptionPane
+
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Importe java.time.format.DateTimeFormatter
+    LocalDate dataUSA = LocalDate.parse(tfData.getText().trim(), formato); // Import java.time.LocalDate
+    System.out.println(dataUSA);
+
+    JOptionPane.showMessageDialog(null, "Data Formato Brasileiro: " + tfData.getText().trim() + "\nData Formato Americano: " + dataUSA, "Datas", JOptionPane.INFORMATION_MESSAGE);
+
+    long cpfNum = Long.parseLong(tfCPF.getText().trim().replaceAll("[^0-9]", ""));
+
+    JOptionPane.showMessageDialog(null, "CPF em String: " + tfCPF.getText().trim() + "\nCPF em Long: " + cpfNum, "CPF", JOptionPane.INFORMATION_MESSAGE);
+}
+</code>
+</pre>
+
+<p>Podemos criar outras formatações, algumas a própria IDE nos fornece de opção, como pra formatar moedas.</p>
+
+<p>PS: Note que tivemos que converter os dados da caixa de combinação para String, porque esse componente envia um objeto, o que pode dar erro em algumas situações como as com banco de dados. O mesmo vale para converter a data, que são armazenadas nos bancos com padrão americano. Fizemos um método também para converter o número de CPF para um número long, caso deseje que seja colocado assim no banco, pode ser aplicado aos telefones também.</p>
+
+<h3>Usando CardLayout</h3>
+
+<p>Crie um JFrame com o nome TelaCardLayout, e nela coloque um menu bar com o nome Telas e dois itens, Outubro Rosa e Novembro Azul, e as variáveis equivalentes.</p>
+
+<p>Coloque um painel com a variável paneCard e preencha o frame todo com ele, e em definir Layout, clique na opção Layout do Cartão, e coloque acima dele outros dois paineis e faça o mesmo, só que esses dois paineis deverão ser filhos do principal, altere as variáveis deles para paneAzul e paneRosa. Para colocar as cores equivalentes, so ir em background e escolhê-las</p>
+
+<p>Nas propriedades do paneRosa e paneAzul, defina os nomes do cartão como tela1 e tela2.</p>
+
+<p>Esse é o código dos menus:</p>
+
+<pre>
+<code>
+private void itOutRosaActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    CardLayout c1 = (CardLayout)paneCard.getLayout(); // Importe java.awt.CardLayout
+
+    c1.show(paneCard, "tela1");
+}
+
+private void itNovAzulActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    CardLayout c1 = (CardLayout)paneCard.getLayout();
+
+    c1.show(paneCard, "tela2");
+}     
+</code>
+</pre>
+
+<p>Isso é útil também para quem quer fazer duas ou mais telas nessas opções, com componentes e funções diferentes, por exemplo.</p>
+
+<h3>Criando JPopupMenu</h3>
+
+<p>Primeiro, crie um novo frame com o nome TelaPopupMenu, nela que criaremos um menu pop-up (aquele que aparece ao clicarmos com o botão direito.</p>
+
+<p>Coloque um campo de texto (variável txtMens), e um Menu Pop-up no frame (não se assuste se nada aparecer), então, para adicionarmos itens, iremos em navegador para achar ele, alteramos a variável para menuPop, e em adicionar da paleta, adicione os itens de menu, no caso, serão três.</p>
+
+<p>Para exibir o menu, clique no frame, e nos Eventos, vá em Mouse e em MouseReleased (que é o clique do botão direito). Veja o código abaixo:</p>
+
+<pre>
+<code>
+private void formMouseReleased(java.awt.event.MouseEvent evt) {                                   
+    if(evt.isPopupTrigger()) { // Retorna um valor booleano
+        menuPop.show(this, 50, 50); // Os números definem a posição do popup.
+    }
+}
+</code>
+</pre>
+
+<p>PS: Caso queira que o pop-up apareça no local clicado, basta alterar o código dessa forma:</p>
+
+<pre>
+<code>
+menuPop.show(this, evt.getX(), evt.getY()); 
+</code>
+</pre>
+
+<p>Lembrando que, caso queira que esse menu apareça dentro de algum componente, como um painel ou campo, no lugar do this colocamos a variável referente a esse objeto, e coloque o evento do mouse no componente desejado, no caso poderia ser assim:</p>
+
+<pre>
+<code>
+menuPop.show(txtMens, 200, evt.getY()); 
+</code>
+</pre>
+
+<p>Dessa forma, podemos por exemplo, criar os itens copiar e selecionar tudo, crie os itens de menu com esses nomes, coloque o atalho de teclado no Accelerator (em propriedades, no caso seria Ctrl C e Ctrl A, respectivamente) e altere o nome das variáveis. Coloque também um campo de texto no frame com a variável txtMens.</p>
+
+<p>Esse é o código para copiar o texto do campo para a área de transferência do PC:</p>
+
+<pre>
+<code>
+txtMens.copy();
+</code>
+</pre>
+
+<p>Esse é para recortar:</p>
+
+<pre>
+<code>
+txtMens.cut();
+</code>
+</pre>
+
+<p>Para selecionar tudo em um campo de texto, basta isso:</p>
+
+<pre>
+<code>
+txtMens.grabFocus();
+
+txtMens.selectAll();
+</code>
+</pre>
+
+<p>Esse é um exemplo que poderíamos usar para colar:</p>
+
+<pre>
+<code>
+txtMens.paste();
+</code>
+</pre>
+
+<p>E esse é um método que poderia ser criado para excluir texto:</p>
+
+<pre>
+<code>
+try {
+    String texto = txtMens.getSelectedText();
+
+    String recorte = txtMens.getText().replace(texto, ""); // Não coloque o trim
+
+    txtMens.setText(recorte);
+}
+catch(NullPointerException ex) {
+    // Pode deixar vazio mesmo
+}
+</code>
+</pre>
+
+<h3>Criando Tela de Login com JDialog</h3>
+
+<p>Crie uma JFrame com um botão denominado TelaEntrada para fazermos nosso projeto. Essa tela não estará clicável enquanto nossa tela de login estiver aberta, de forma semelhante aos JOptionPane.</p>
+
+<p>Para criar a tela dessa forma, crie no pacote view um Form JDialog com o nome TelaLoginModal, e nela crie um painel, e os campos de login, senha e botão iguais à outra tela de login (pode até copiar o painel diretamente e colar nele). Também, como nos frames, podemos centralizar, colocar título e impedir o redimensionamento nos JDialogs também.</p>
+
+<p>No código do TelaLoginModal, coloque as variáveis acima do construtor dele, dessa forma:</p>
+
+<pre>
+<code>
+public String login;
+public String senha;
+
+public TelaLoginModal(java.awt.Frame parent, boolean modal) {
+    super(parent, modal);
+    initComponents();
+}
+</code>
+</pre>
+
+<p>E no método do botão, coloque isso:</p>
+
+<pre>
+<code>
+private void btnEntrActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    login = txtLogin.getText().trim();
+    senha = String.valueOf(txtSenha.getPassword()).trim();
+        
+    if(login.equals("admin") && senha.equals("123")) {
+        JOptionPane.showMessageDialog(null, "Bem-vindo", "Login", JOptionPane.INFORMATION_MESSAGE); // Importe javax.swing.JOptionPane
+    
+        this.dispose(); // Isso fecha a janela JDialog
+    }
+    else {
+        JOptionPane.showMessageDialog(null, "Acesso Negado", "Login", JOptionPane.ERROR_MESSAGE);
+    }
+} 
+</code>
+</pre>
+
+<p>Voltando ao frame TelaEntrada, crie um label com a variável txtUser só pra vermos o nome do usuário logado.</p>
+
+<p>E no action do botão do TelaEntrada, coloque esse código:</p>
+
+<pre>
+<code>
+private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    TelaLoginModal tlm = new TelaLoginModal(this, true);
+
+    tlm.setVisible(true);
+
+    txtUser.setText("Bem-Vindo, " + tlm.login + ".");
+}                                        
+</code>
+</pre>
+
+<p>Agora dê shift F6 no TelaEntrada pra testar.</p>
+
+<h3>Melhorias Tela de Login JDialog</h3>
+
+<p>Continuando o projeto anterior, vamos fazer umas melhorias, uma delas é bloquear o botão de fechar do Jdialog (que por default é usado um método dispose, que não fecha o frame junto).</p>
+
+<p>Para mostrar de cara a tela de login, ao iniciar o frame TelaEntrada, basta recortar os comandos do método do botão e colocar no construtor, assim:</p>
+
+<pre>
+<code>
+public TelaEntrada() {
+    initComponents();
+
+    TelaLoginModal tlm = new TelaLoginModal(this, true);
+
+    tlm.setVisible(true);
+
+    txtUser.setText("Bem-Vindo, " + tlm.login + ".");
+}
+</code>
+</pre>
+
+<p>Dessa forma, o botão do TelaEntrada pode até ser excluído.</p>
+
+<p>Para bloquear o botão de fechar do JDialog, coloque o método setDefaultCloseOperation com o valor 0, assim:</p>
+
+<pre>
+<code>
+public TelaLoginModal(java.awt.Frame parent, boolean modal) {
+    super(parent, modal);
+    initComponents();
+
+    this.setDefaultCloseOperation(0);
+}
+</code>
+</pre>
+
+<p>E agora, coloque um botão com o nome Cancelar, e coloque apenas isso:</p>
+
+<pre>
+<code>
+System.exit(0);
+</code>
+</pre>
+
+<h3>Barra de Rolagem JScrollPane</h3>
+
+<p>Em alguns casos, como os de dispositivos com telas pequenas, o frame pode ficar menor e alguns componetes não estarem aparecendo, isso é facilmente resolvido com um scrollpane.</p>
+
+<p>Crie um JFrame com o nome TelaCadastroClienteScroll, e nele coloque um painel de rolagem e expanda ele pro tamanho total do frame, aí volte pro TelaCadastroCliente e copie o painel com todos os elementos e cole no TelaCadastroClienteScroll</p>
+
+<ul>
+    <li><a href="tudo-sobre-java-swing-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

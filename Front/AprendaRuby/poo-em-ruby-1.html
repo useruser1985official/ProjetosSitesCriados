@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Ruby</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Ruby</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-ruby-1.html">Tudo sobre Ruby Parte 1!</a></li>
+                    <li><a href="tudo-sobre-ruby-2.html">Tudo sobre Ruby Parte 2!</a></li>
+                    <li><a href="tudo-sobre-ruby-3.html">Tudo sobre Ruby Parte 3!</a></li>
+                    <li><a href="tudo-sobre-ruby-4.html">Tudo sobre Ruby Parte 4!</a></li>
+                </menu>
+            </header>
+
+<h2>Orientação a Objetos em Ruby - Parte 1</h2>
+
+<h3>Criando Classes e Objetos</h3>
+
+<p>Para criar uma classe, basicamente fazemos assim:</p>
+
+<pre>
+<code>
+class Telefone
+
+end
+</code>
+</pre>
+
+<p>PS: As classes em Ruby nunca são fecchadas, mesmo as padrões, e podem ser adicionadas novos atributos e métodos, mas não é recomendado fazer isso.</p>
+
+<p>Para criar um objeto dessa classe, basta isso:</p>
+
+<pre>
+<code>
+tel = Telefone.new # Pode ser com ou sem parênteses
+</code>
+</pre>
+
+<p>Podemos adicionar atributos e métodos na classe, assim:</p>
+
+<pre>
+<code>
+class Telefone
+    attr_writer :numero, :operadora
+
+    def dados
+        puts "O número é #{@numero} e a operadora é a #{@operadora}."
+    end
+end
+</code>
+</pre>
+
+<p>O <code>@</code> é como o "this" de outras linguagens, ou seja, auto-referência ao objeto criado. O <code>attr_writer</code> permite a gente escrever no atributo.</p>
+
+<p>PS: O arroba só funciona em atributos. Para métodos use <code>self.</code>.</p>
+
+<p>Dessa forma, podemos fazer as modificações no objeto assim:</p>
+
+<pre>
+<code>
+tel = Telefone.new
+
+tel.numero = "123-4567"
+tel.operadora = "Vivo"
+
+tel.dados
+</code>
+</pre>
+
+<p>Quando criamos uma classe, temos mais trabalho para fazê-la, mas depois que ela está pronta, podemos criar quantos objetos precisarmos vindos dessa mesma classe, e o programa principal fica mais simples, menor e mais natural. Os objetos criados dessa mesma classe são independentes entre si e o status de um não interfere no outro. Essa é uma das vantagens da orientação a objetos.</p>
+
+<p>PS: Caso precise declarar um objeto como nulo, use <code>nil</code>. E para pegar o nome da classe, use <code>self.class</code>.</p>
+
+<h3>Encapsulamento e Construtor</h3>
+
+<p>Para marcar atributos como privados, fazemos assim, usando o modificador <code>private</code>:</p>
+
+<pre>
+<code>
+class Telefone
+    attr_writer :numero, :operadora
+    private :numero, :operadora
+
+    def dados
+        puts "O número é #{@numero} e a operadora é a #{@operadora}."
+    end
+end
+</code>
+</pre>
+
+<p>Dessa forma, só poderemos mexer nele através de métodos getters e setters. Os métodos getters são definidos colocando nos atributos <code>attr_reader</code>, os setters com <code>attr_writer</code> e ambos com <code>attr_accessor</code>, por exemplo:</p>
+
+<pre>
+<code>
+class Telefone
+    attr_accessor :numero, :operadora
+
+    def dados
+        puts "O número é #{@numero} e a operadora é a #{@operadora}."
+    end   
+end
+</code>
+</pre>
+
+<p>E chamamos normalmente assim:</p>
+
+<pre>
+<code>
+tel = Telefone.new
+
+tel.numero = "123-4567"
+tel.operadora = "Vivo"
+
+tel.dados
+</code>
+</pre>
+
+<p>Para explicitar o encapsulamento, podemos colocar os atributos e métodos como <code>public</code> (padrão), <code>protected</code> ou <code>private</code>, assim:</p>
+
+<pre>
+<code>
+class Telefone
+    attr_accessor :numero, :operadora
+    private :numero, :operadora
+
+    public
+    def dados
+        puts "O número é #{@numero} e a operadora é a #{@operadora}."
+    end   
+end
+</code>
+</pre>
+
+<p>Para definirmos um construtor, usamos o método initialize, assim:</p>
+
+<p></p>
+
+<pre>
+<code>
+class Telefone
+    attr_accessor :numero, :operadora
+    private :numero, :operadora
+
+    public
+    def dados
+        puts "O número é #{@numero} e a operadora é a #{@operadora}."
+    end
+
+    def initialize(numero, operadora)
+        @numero = numero
+        @operadora = operadora
+    end
+end
+</code>
+</pre>
+
+<p>E na criação do objeto:</p>
+
+<pre>
+<code>
+tel = Telefone.new("123-4567", "Vivo")
+
+tel.dados
+</code>
+</pre>
+
+<h3>Atributos e Métodos Estáticos</h3>
+
+<p>Os atributos estáticos são definidos com dois arrobas e um getter e setter com o mesmo nome. Os métodos estáticos são os que obrigatoriamente terem <code>self.</code> na frente. Veja um exemplo:</p>
+
+<pre>
+<code>
+class Numeros
+    attr_accessor :num
+    @@num = 50
+
+    def self.apresentacao
+        puts "O número é #{@@num}."
+    end
+
+    def self.num
+        @@num
+    end
+
+    def self.num=(n)
+        @@num = n
+    end
+end
+</code>
+</pre>
+
+<p>E para exibir:</p>
+
+<pre>
+<code>
+Numeros.num = 100
+
+Numeros.apresentacao
+</code>
+</pre>
+
+<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados.</p>
+
+<h3>Herança</h3>
+
+<p>Vamos considerar a seguinte classe:</p>
+
+<pre>
+<code>
+class Veiculo
+    attr_accessor :modelo, :potencia
+    private :modelo, :potencia
+
+    def apresentacao
+        puts "O #{self.class.to_s.downcase} é do modelo #{@modelo}, potência #{@potencia}."
+    end
+
+    def initialize(modelo, potencia)
+        @modelo = modelo
+        @potencia = potencia
+    end
+end
+</code>
+</pre>
+
+<p>Para fazer uma herança, basta colocar o operador <code>&lt;</code> seguido do nome da classe Pai. Caso tenha sobreposição de construtor ou outro método, use o <code>super</code>. Veja um exemplo:</p>
+
+<pre>
+<code>
+class Carro &lt; Veiculo
+    def initialize(modelo, potencia)
+        super(modelo, potencia)
+    end
+end
+</code>
+</pre>
+
+<p>Instanciação da classe:</p>
+
+<pre>
+<code>
+fusca = Carro.new("Fusca", 1.6)
+
+fusca.apresentacao
+</code>
+</pre>
+
+<p>A mesma classe Veiculo pode gerar outras classes, como por exemplo Moto e Onibus.</p>
+
+<p>PS: O Ruby não suporta herança múltipla, mas podemos simular usando um include, dessa forma:</p>
+
+<pre>
+<code>
+class Carro &lt; Veiculo
+    include Transporte
+end
+</code>
+</pre>
+
+<h3>Abstração e Polimorfismo</h3>
+
+<p>Podemos simular classes e métodos abstratos, assim:</p>
+
+<pre>
+<code>
+class Energia
+    def ligar
+        raise NotImplementedError, "Implemente o método \"ligar\"!"
+    end
+
+    def desligar
+        raise NotImplementedError, "Implemente o método \"desligar\"!"
+    end
+end
+</code>
+</pre>
+
+<p>E as classes herdeiras:</p>
+
+<pre>
+<code>
+class Lampada &lt; Energia
+    # Métodos sobrepostos
+    def ligar
+        puts "A Lâmpada está acesa!"
+    end
+
+    def desligar
+        puts "A Lâmpada apagou!"
+    end
+end
+</code>
+</pre>
+
+<p>A outra classe:</p>
+
+<pre>
+<code>
+class Televisao &lt; Energia
+    # Métodos sobrepostos
+    def ligar
+        puts "A TV está ligada!"
+    end
+
+    def desligar
+        puts "A TV desligou!"
+    end
+end
+</code>
+</pre>
+
+<p>A instanciação:</p>
+
+<pre>
+<code>
+lamp = Lampada.new
+
+lamp.ligar
+lamp.desligar
+
+tv = Televisao.new
+
+tv.ligar
+tv.desligar
+</code>
+</pre>
+
+<p>No entanto, o melhor é simular uma interface com a gem, assim:</p>
+
+<pre>
+<code>
+require "interface"
+
+Energia = interface {
+    required_methods :ligar, :desligar
+}
+</code>
+</pre>
+
+<p>E as classes implementadoras:</p>
+
+<pre>
+<code>
+class Lampada
+    def ligar
+        puts "A Lâmpada está acesa!"
+    end
+
+    def desligar
+        puts "A Lâmpada apagou!"
+    end
+
+    implements Energia
+end
+</code>
+</pre>
+
+<p>A outra classe:</p>
+
+<pre>
+<code>
+class Televisao
+    def ligar
+        puts "A TV está ligada!"
+    end
+
+    def desligar
+        puts "A TV desligou!"
+    end
+
+    implements Energia
+end
+</code>
+</pre>
+
+<p>PS: Qualquer método pode ser sobreposto, caso chame ele na classe filha, use o método <code>super.nomeDoMetodo()</code> para isso. As classes com métodos abstratos e interfaces não podem ser instanciadas.</p>
+
+<h3>Agregação de Objetos</h3>
+
+<p>Vamos supor essa classe:</p>
+
+<pre>
+<code>
+class Pilha
+    attr_accessor :marca, :carga
+
+    public
+    def initialize(marca)
+        @marca = marca
+        @carga = 100
+    end
+
+    public
+    def apresentacao
+        puts "A marca da pilha é #{@marca}."
+        puts "A carga da pilha é #{@carga}%."
+    end
+end
+</code>
+</pre>
+
+<p>Nós podemos fazer relacionamentos entre classes diferentes, veja por exemplo a classe abaixo, que tem um atributo do "tipo" da classe acima:</p>
+
+<pre>
+<code>
+class Aparelho
+    attr_accessor :pl
+
+    public
+    def initialize(pl)
+        @pl = pl
+    end
+
+    public
+    def ligado
+        if @pl.carga > 0 then # Getter do objeto Pilha
+            puts "O aparelho está ligado e a carga da pilha é de #{@pl.carga)}%!"
+        else
+            puts "A pilha do aparelho está sem carga!"
+        end
+    end
+end
+</code>
+</pre>
+
+<p>Aí podemos chamar os objetos assim:</p>
+
+<pre>
+<code>
+ray = Pilha.new("Rayovac")
+
+ray.apresentacao
+
+controle = Aparelho.new(ray)
+
+controle.ligado
+
+puts "A carga da pilha é de #{controle.pl.carga}%!"
+</code>
+</pre>
+
+<!--
+<ul>
+    <li><a href="poo-em-ruby-0.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="poo-em-ruby-2.html">Continuação da Matéria!</a></li>
+</ul>
+-->
+
+        </div>
+    </body>
+</html>

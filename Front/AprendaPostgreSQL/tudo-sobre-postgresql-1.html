@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda PostgreSQL</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda PostgreSQL</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-postgresql-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre PostgreSQL Parte 1!</a></li>
+                    <li><a href="tudo-sobre-postgresql-2.html">Tudo sobre PostgreSQL Parte 2!</a></li>
+                    <li><a href="tudo-sobre-postgresql-3.html">Tudo sobre PostgreSQL Parte 3!</a></li>
+                    <li><a href="tudo-sobre-postgresql-4.html">Tudo sobre PostgreSQL Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre PostgreSQL Parte 1</h2>
+
+<h3>Comandos Básicos do Utilitário PSQL</h3>
+
+<p>Apesar de geralmente usarmos a interface gráfica para criar e manipular bancos de dados, podemos utilizar a linha de comando do PSQL para isso.</p>
+
+<p>Se você estiver no Linux, abra o terminal e digite <code>psql --version</code> para ver a versão, e <code>psql --help</code> para ver a ajuda. Para logar no SQL digite o nome de usuário e psql, assim:</p>
+
+<pre>
+<code>
+sudo -i -u postgres
+
+psql
+</code>
+</pre>
+
+<p>No caso do Windows, basta abrir o utilitário diretamente, colocar o usuário e senha configurados, que ele abrirá no banco de dados padrão (postgres). Se o path estiver configurado você pode logar digitando no CMD <code>psql -U postgres</code>.</p>
+
+<p>Os comandos são definidos com uma barra na frente, para configurar uma senha para o usuário, digite o comando <code>\password</code>. Para limpar a tela, use Ctrl L (no terminal do Linux). Para vermos os comandos SQL disponíveis, digite <code>\h</code>.</p>
+
+<p>Digite o comando <code>\h create role</code>, esse comando é para ver a ajuda para criar novos usuários. Para vermos os comandos administrativos, digite <code>\?</code>.</p>
+
+<p>Para listar os bancos de dados disponíveis, digite <code>\l</code>. Para ver os privilégios do usuário logado, digite <code>\du</code>.</p>
+
+<p>Para acessar outro banco de dados, basta colocar <code>\c nomedobanco</code>. Estando dentro do banco, para ver as tabelas, digitamos <code>\d</code>. Para ver as tabelas administrativas e visões do postgres, digite <code>\dS</code>.</p>
+
+<p>Para alternar entre o terminal padrão do sistema e o do postgresql, digite <code>\!</code>, mas se der <code>exit</code>, ele não fechará a janela, e voltará ao psql. Podemos também rodar o comando do sistema operacional digitando <code>\! nomedocomando</code> (como pra limpar a tela no Windows, digitando <code>\! cls</code>). Para sair do PSQL definitivamente digite <code>\q</code>.</p>
+
+<h3>Configurar Acesso por Senha no PSQL para o PostreSQL</h3>
+
+<p>Vamos supor que existe o usuário <q>eu</q> no nosso sistema, se a gente logar digitando <code>psql</code>, ele logará com esse usuário padrão do sistema, que não existe no Postgres. Para configurarmos ele, podemos logar com o usuário configurado com o banco (no caso, postgres) para configurarmos o usuário <q>eu</q> (usuário no linguajar do Postgres é chamado <q>role</q>).</p>
+
+<p>Para ver os privilégios do usuário logado, digite <code>\du</code>. E para ver as informações digite <code>\conninfo</code>.</p>
+
+<p>Para configurar uma senha para o usuário <q>postgres</q> (que pode estar sem a senha configurada), digite <code>\password</code> e coloque a nova senha. Após configurado, na próxima vez que logar ele pedirá a senha, mas ele continuará logando direto por ser uma configuração padrão do Postgres que <q>confia</q> no usuário logado. Para exigir o pedido de senha, digite <code>show hba_file;</code> para ver onde está o arquivo de configuração da senha no sistema. Use um editor de texto comum para editar, mas com privilégio de superusuário, e altere essa linha:</p>
+
+<pre>
+<code>
+# Database administrative login by Unix domain socket
+local   all             postgres                            peer
+</code>
+</pre>
+
+<p>Para alterar, basta mudar o <code>peer</code> para <code>md5</code> (pode ser <code>scram-sha-256</code> também). Também existe o <code>trust</code>, que confia em qualquer usuário para logar no Postgres sem senha. Depois reinicie o serviço do Postgres (no caso do Linux, digite no terminal <code>sudo systemctl restart postgresql</code>. Depois disso tente logar novamente digitando <code>psql -U postgres</code>.</p>
+
+<h3>Como Criar e Excluir Usuários com createuser e dropuser</h3>
+
+<p>Os comandos <code>createuser</code> e <code>dropuser</code> são wrappers para criar usuários no Postgres. Um wrapper é usado dentro do Postgres para simplificar comandos do SQL.</p>
+
+<p>No Linux, logue como o usuário do Postgres no terminal (não no PSQL), em Windows isso não funcionará. Digite o comando <code>createuser -dPs nomedouser</code>. No caso, o <q>d</q> é o privilégio pra criar bancos de dados, o <q>P</q> para criar com senha e o <q>s</q> para criar como superusuário. Para ver se ele foi criado mesmo, digite <code>\du</code>.</p>
+
+<p>Ao tentar logar no Postgres com o novo usuário, ele dará erro por causa da opção <q>peer</q>. Então vamos voltar no arquivo pg_hba.conf (digitando <code>show hba_file;</code> para vermos onde ele está) e procurar a linha referente aos usuários e o adicione, assim:</p>
+
+<pre>
+<code>
+# Database administrative login by Unix domain socket
+local   all             postgres                            md5
+local   all             nomedouser                          md5
+</code>
+</pre>
+
+<p>Reinicie o serviço do Postgres e tente logar novamente. Ele pedirá a senha. Mas ainda ele não vai encontrar a mesma por não ter um banco com este nome (pois por padrão ele tem um banco com o nome do usuário). Nesse caso digite <code>psql -U nomedouser postgres</code> para ele entrar com o banco existente.</p>
+
+<p>PS: Dentro do PSQL, o nome que aparece ao lado é o banco atual, não o usuário, para ver o usuário logado, digite <code>\conninfo</code>.</p>
+
+<p>Para excluir um usuário do sistema do Postgres, usamos esse comando fora do PSQL, logado como outro usuário: <code>dropuser nomedousuario</code>, ele pedirá a senha do banco logado (não o que será excluído).</p>
+
+<p>PS: Se ele tiver privilégios ou propriedades em bancos, tabelas e etc. específicos, não conseguiremos excluir os usuários vinculários.</p>
+
+<h3>Criar e Excluir Bancos de Dados com PSQL e pgAdmin</h3>
+
+<p>Para criar algo no banco de dados usamos o comando <code>create</code>, que pode ser um banco, tabela, trigger, etc., no caso, digitamos simplesmente isso:</p>
+
+<pre>
+<code>
+create database teste;
+</code>
+</pre>
+
+<p>PS: Não esqueça do ponto-e-vírgula (;) depois de cada instrução.</p>
+
+<p>Podemos também criar com opções, dessa forma:</p>
+
+<pre>
+<code>
+create database teste2
+with owner = postgres
+encoding = 'utf8'
+lc_collate = 'portuguese_brazil.1252'
+lc_ctype = 'portuguese_brazil.1252'
+tablespace = pg_default
+connection limit -1; # O limite é definido aqui, -1 significa ilimitado.
+</code>
+</pre>
+
+<p>Mas essas opções acima são as opções padrão, então não precisa usar o comando longo, a não ser que você queira alterar alguns deles.</p>
+
+<p>Já existem alguns bancos padrões do Postgres, como os denominados <q>template</q>, que são modelos para novos bancos e nunca devem ser excluídos.</p>
+
+<p>Primeiramente, vamos criar via PSQL dessa forma, após logar no mesmo:</p>
+
+<pre>
+<code>
+create database teste;
+</code>
+</pre>
+
+<p>Para dar privilégios a um usuário, podemos usar o comando <code>grant</code>, como por exemplo esse para um usuário poder fazer tudo no novo banco de dados criado:</p>
+
+<pre>
+<code>
+grant all on database teste to nomedouser;
+</code>
+</pre>
+
+<p>Para excluir privilégios do usuário, use o <code>grant revoke</code>.</p>
+
+<p>Para excluir um banco de dados, basta usar apenas <code>drop database teste;</code>.</p>
+
+<p>Nas aulas seguintes, vamos usar o banco biblioteca. Vamos criar ele assim:</p>
+
+<pre>
+<code>
+create database biblioteca;
+</code>
+</pre>
+
+<p>Podemos fazer as operações no PGAdmin, que acessamos de forma gráfica. Ao ver no banco que escolhermos, vemos os comandos usados para criá-lo, de forma longa. Indo em Bancos de Dados e clicando com o botão direito, podemos criar um banco de dados de forma gráfica, sem precisar digitar comandos. Indo em SQL, no banco especificado, podemos digitar comandos como por exemplo, o select (tipo <code>select datname from pg_database;</code> para mostrar dados padrão do Postgres).</p>
+
+<h3>Tipos de Dados</h3>
+
+<p>O PostgreSQL possui uma rica variedade de tipos de dados que podem ser empregados na definição de colunas em tabelas.</p>
+
+<p>Esses tipos englobam os domínios numérico, texto, data e hora, geométrico, booleano, endereçamento de redes, enumeração, e até mesmo tipos definidos pelo usuário, com o uso da declaração <code>create type</code>.</p>
+
+<p>Veremos a seguir alguns dos tipos mais comuns usados em Postgres:</p>
+
+<table>
+    <caption>Tipos Numéricos</caption>
+    <tr>
+        <th>Tipo</th>
+        <th>Aplicação</th>
+    </tr>
+    <tr>
+        <td><code>smallint</code></td>
+        <td>Inteiros de 2 bytes</td>
+    </tr>
+    <tr>
+        <td><code>int</code></td>
+        <td>Inteiros de 4 bytes</td>
+    </tr>
+    <tr>
+        <td><code>bigint</code></td>
+        <td>Inteiros de 8 bytes</td>
+    </tr>
+    <tr>
+        <td><code>numeric(precisao, escala)</code></td>
+        <td>Números de ponto flutuante, onde: Precisão = Nº de dígitos total. Escala = Nº de Casas Decimais</td>
+    </tr>
+    <tr>
+        <td><code>real</code></td>
+        <td>32 bits, até 6 dígitos decimais de precisão</td>
+    </tr>
+    <tr>
+        <td><code>double precision</code></td>
+        <td>64 bits, variável, até 15 dígitos de precisão</td>
+    </tr>
+    <tr>
+        <td><code>serial</code></td>
+        <td>32 bits de tamanho, com sinal, números sequenciais</td>
+    </tr>
+    <tr>
+        <td><code>big serial</code></td>
+        <td>64 bits de tamanho, com sinal, números sequenciais</td>
+    </tr>
+    <tr>
+        <td><code>money</code></td>
+        <td>64 bits, com sinal (2<sup><small>63</small></sup> valores). Para valores monetários</td>
+    </tr>
+</table>
+
+<br/>
+
+<table>
+    <caption>Tipos de String</caption>
+    <tr>
+        <th>Tipo</th>
+        <th>Aplicação</th>
+    </tr>
+    <tr>
+        <td><code>text</code></td>
+        <td>Varchar de tamanho ilimitado. Tipo preferido para strings</td>
+    </tr>
+    <tr>
+        <td><code>char(n)</code>, <code>character(n)</code></td>
+        <td>Caracteres de tamanho fixo, com padding (preenchimento) e n caracteres</td>
+    </tr>
+    <tr>
+        <td><code>varchar(n)</code></td>
+        <td>Varchar de tamanho limitado a até n caracteres</td>
+    </tr>
+</table>
+
+<br/>
+
+<table>
+    <caption>Tipos de Data e Hora</caption>
+    <tr>
+        <th>Tipo</th>
+        <th>Aplicação</th>
+    </tr>
+    <tr>
+        <td><code>date</code></td>
+        <td>4 bytes, apenas datas, precisão de 1 dia</td>
+    </tr>
+    <tr>
+        <td><code>time</code> [without time zone]</td>
+        <td>8 bytes, hora sem fuso horário, com precisão de 1 microssegundo</td>
+    </tr>
+    <tr>
+        <td><code>time</code> [with time zone]</td>
+        <td>12 bytes, armazena data e hora com fuso horário, precisão de 1 microssegundo</td>
+    </tr>
+    <tr>
+        <td><code>timestamp</code> [with time zone]</td>
+        <td>8 bytes, armazena data e hora com fuso horário, precisão de 1 microssegundo</td>
+    </tr>
+    <tr>
+        <td><code>timestamp</code> [without time zone]</td>
+        <td>8 bytes, armazena data e hora sem fuso horário, precisão de 1 microssegundo</td>
+    </tr>
+    <tr>
+        <td><code>interval</code></td>
+        <td>16 bytes, armazena faixas de tempo, com precisão de 1 microssegundo</td>
+    </tr>
+</table>
+
+<br/>
+
+<table>
+    <caption>Outros Tipos</caption>
+    <tr>
+        <th>Tipo</th>
+        <th>Aplicação</th>
+    </tr>
+    <tr>
+        <td><code>boolean</code></td>
+        <td>Tipo lógico, 8 bits (1 byte) - Valores true (1/yes/on) ou false (0/no/off)</td>
+    </tr>
+    <tr>
+        <td><code>cidr</code></td>
+        <td>7 ou 19 bytes - Endereços de rede IPv4 ou IPv6, como 192.168.14.0/24</td>
+    </tr>
+    <tr>
+        <td><code>inet</code></td>
+        <td>7 ou 19 bytes - Endereços de hosts IPv4 ou IPv6, como 192.168.14.22/32</td>
+    </tr>
+    </tr>
+    <tr>
+        <td><code>macaddr</code></td>
+        <td>6 bytes (48 bits), como 00:22:33:44:55:b2 ou 0022.3344.55b2</td>
+    </tr>
+    <tr>
+        <td>Geometric Types</td>
+        <td>Armazenar informações relacionadas com figuras geométricas, como linhas, círculos, polígonos, pontos, caminhos, etc.</td>
+    </tr>
+    <tr>
+        <td>Tipos de Enumeração</td>
+        <td>Criados pelo usuário, para conjunto de valores estáticos</td>
+    </tr>
+    <tr>
+        <td><code>tsvector</code>/<code>tsquery</code></td>
+        <td>Tipos para busca completa de texto em documentos</td>
+    </tr>
+</table>
+
+<h3>Criar Tabelas com Create Table</h3>
+
+<p>Para criar tabelas, vá no PgAdmin, vá no banco, em ferramentas e em ferramenta de consulta e digite esses comandos:</p>
+
+<pre>
+<code>
+create table clientes (
+    codigo int primary key,
+    nome varchar(20) not null,
+    sobrenome varchar(40) not null
+);
+</code>
+</pre>
+
+<p>PS: Dá pra criar de forma gráfica também.</p>
+
+<p>Crie essa tabela também: </p>
+
+<pre>
+<code>
+create table produtos (
+    codigo int primary key,
+    nome varchar(30) not null,
+    descricao text null,
+    preco numeric check(preco &gt; 0) not null, -- Verifica se o preço é maior que zero
+    qtd_estoque smallint default 0
+);
+</code>
+</pre>
+
+<p>Pode ver na parte de tabelas (dentro de esquemas) que ambas as tabelas estão lá.</p>
+
+<p>Agora crie essa tabela para pedidos, no qual terá chaves estrangeiras, as quais serão feitas de duas formas:</p>
+
+<pre>
+<code>
+create table pedidos (
+    codigo serial primary key, -- O tipo serial cria um número que é incrementado
+    cod_cliente int not null references clientes(codigo),
+    cod_produto int not null,
+    qtd_vendida smallint not null,
+    foreign key(cod_produto) references produtos(codigo)
+);
+</code>
+</pre>
+
+<h3>Inserir Registros em Tabelas com Insert Into</h3>
+
+<p>Para inserir dados nas tabelas, usamos o comando insert into assim:</p>
+
+<pre>
+<code>
+insert into clientes (codigo, nome, sobrenome) values (1, 'Fulano', 'da Silva');
+</code>
+</pre>
+
+<p>PS: Se os dados inseridos for na mesma ordem das colunas no banco, podemos omitir os nomes das colunas.</p>
+
+<p>Insira mais dois cadastros:</p>
+
+<pre>
+<code>
+insert into clientes (codigo, nome, sobrenome) values (2, 'Beltrano', 'Silveira');
+insert into clientes (codigo, nome, sobrenome) values (3, 'Sicrano', 'Teixeira');
+</code>
+</pre>
+
+<p>Para vermos se os dados foram inseridos, use o select assim:</p>
+
+<pre>
+<code>
+select * from clientes;
+</code>
+</pre>
+
+<p>Vamos cadastrar produtos, da mesma forma, mas no caso vamos inserir vários cadastros de uma vez só:</p>
+
+<pre>
+<code>
+insert into produtos (codigo, nome, descricao, preco, qtd_estoque) values
+(1, Álcool Gel', 'Garrafa de álcool em gel de 1 litro', 12.90, 20),
+(2, 'Luvas de Látex', 'Caixa de luvas de látex com 100 unidades', 32.50, 25),
+(3, 'Pasta de Dentes', 'Tubo de pasta de dentes de 90g', 3.60, 12),
+(4, 'Sabonete', 'Sabonete antibacteriano de 90g', 3.50, 5),
+(5, 'Enxaguante Bucal', 'Antisséptico bucal de 500 ml', 17.00, 28);
+</code>
+</pre>
+
+<p>Para ver os dados, use o select da mesma forma:</p>
+
+<pre>
+<code>
+select * from produtos;
+</code>
+</pre>
+
+<p>Vamos inserir dados na tabela pedidos:</p>
+
+<pre>
+<code>
+insert into pedidos (cod_cliente, cod_produto, qtd_vendida) values -- Não se coloca o campo de serial
+(1, 2, 3),
+(2, 3, 2),
+(1, 3, 4);
+</code>
+</pre>
+
+<p>Dê um <code>select * from pedidos;</code> para ver os dados inseridos.</p>
+
+<h3>Como Realizar Consultas Simples em Tabelas com o Comando select</h3>
+
+<p>Para realizar consultas, como foi dito anteriormente, usamos o comando select. Podemos usar o asterisco para selecionar todas as colunas ou escrever as colunas desejadas:</p>
+
+<pre>
+<code>
+select * from clientes;
+</code>
+</pre>
+
+<p>Usando o nomes de uma coluna:</p>
+
+<pre>
+<code>
+select nome from clientes;
+</code>
+</pre>
+
+<p>Aí só aparecerá somente os dados referentes à coluna especificada.</p>
+
+<p>Para pegar dados de mais de uma coluna, fazemos assim:</p>
+
+<pre>
+<code>
+select nome, sobrenome from clientes;
+</code>
+</pre>
+
+<p>Inclusive, nem precisam estar na ordem dos dados na coluna:</p>
+
+<pre>
+<code>
+select sobrenome, nome from clientes;
+</code>
+</pre>
+
+<p>Vamos fazer um select em produtos, assim:</p>
+
+<pre>
+<code>
+select * from produtos;
+</code>
+</pre>
+
+<p>Pra pegar apenas os nomes dos produtos:</p>
+
+<pre>
+<code>
+select nome from produtos;
+
+-- Depois faça esse comando:
+
+select nome, descricao from produtos;
+
+-- E esse, fora da ordem:
+
+select nome, preco, descricao from produtos;
+</code>
+</pre>
+
+<p>PS: Podemos dividir os comandos em várias linhas.</p>
+
+<p>Fazendo o mesmo em pedidos:</p>
+
+<pre>
+<code>
+select * from pedidos;
+</code>
+</pre>
+
+<p>Claro que a tabela pedidos só retornará números referentes às chaves estrangeiras. Isso será tratado mais pra frente.</p>
+
+<h3>Como Filtrar Consultar com a Cláusula Where</h3>
+
+<p>Quando usamos o select sem nenhuma condição, ele retorna todos os registros que estão em determinada tabela. Para filtrarmos apenas determinados registros de uma tabela, usamos a cláusula <code>where</code>.</p>
+
+<p>Uma consulta básica, como sabemos, é assim:</p>
+
+<pre>
+<code>
+select * from clientes;
+</code>
+</pre>
+
+<p>O select acima retorna todos os registros da tabela clientes, para pegar um determinado registro da tabela, fazemos assim:</p>
+
+<pre>
+<code>
+select * from clientes where codigo = 1;
+</code>
+</pre>
+
+<p>No caso acima, ele só retornará o registro referente ao código específico. Caso ele não seja encontrado, ele não dá erro, mas não mostrará nada.</p>
+
+<p>Vamos ver um exemplo na tabela produtos:</p>
+
+<pre>
+<code>
+select * from produtos;
+</code>
+</pre>
+
+<p>Com a cláusula where:</p>
+
+<pre>
+<code>
+select nome, qtd_estoque from produtos where qtd_estoque &lt; 10;
+</code>
+</pre>
+
+<p>No caso, usamos um operador relacional, que são os mesmos de várias linguagens. No comando acima mostramos apenas os dados especificados dos produtos que o estoque está abaixo de 10.</p>
+
+<p>Veja outro exemplo:</p>
+
+<pre>
+<code>
+select nome, preco from produtos where preco &gt;= 15.00;
+
+-- Invertendo:
+select nome, preco from produtos where preco &lt; 15.00;
+</code>
+</pre>
+
+<p>Outro exemplo, na tabela de pedidos:</p>
+
+<pre>
+<code>
+-- Mostrando tudo:
+select * from pedidos;
+
+-- Filtrando:
+select cod_produto, qtd_vendida from pedidos where cod_cliente = 1;
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-postgresql-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

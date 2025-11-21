@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java Web JSF</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java Web JSF</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsf-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java Web JSF Parte 1!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsf-2.html">Tudo sobre Java Web JSF Parte 2!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsf-3.html">Tudo sobre Java Web JSF Parte 3!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsf-4.html">Tudo sobre Java Web JSF Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java Web JSF Parte 1</h2>
+
+<h3>Hello Primefaces</h3>
+
+<p>Para criar um novo projeto, vá no Netbeans em Java Web e em Aplicação Web, e selecione o Apache Tomcat (ou o Glass Fish), e nos frameworks, não escolha a opção JavaServerFaces. Observe que nas bibliotecas, deverá estar além do JDK, a biblioteca do servido (no caso, o Apache Tomcat) e o JSF 2.2 API e IMPL, que podem ser baixados daqui: <a href="http://www.java2s.com/Code/Jar/j/Downloadjsfapi219jar.htm" target="_blank">http://www.java2s.com/Code/Jar/j/Downloadjsfapi219jar.htm</a> e <a href="http://www.java2s.com/Code/Jar/j/Downloadjsfimpl219jar.htm" target="_blank">http://www.java2s.com/Code/Jar/j/Downloadjsfimpl219jar.htm</a></p>
+
+<p>Dessa forma, ele executará como página principal a index.xhtml. Os arquivos XHTML são a fusão de XML com HTML, e são muito utilizados em Java Web.</p>
+
+<p>Basicamente, a diferença entre um arquivo XHTML e de um HTML comum, é o fato de no começo, ter um bloco de indicação de XML, e na tag principal do HTML, ter a indicação do link do XML com o xmlns (XML attributes), dessa forma:</p>
+
+<pre>
+<code>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"&gt;
+</code>
+</pre>
+
+<p>No entanto, é comum encontrarmos as tags em XHTML assim, devido ao xmlns adicionado com o h:</p>
+
+<pre>
+<code>
+&lt;h:head&gt;
+
+&lt;/h:head&gt;
+&lt;h:body&gt;
+
+&lt;/h:body&gt;
+</code>
+</pre>
+
+<p>Observe que, nos arquivos, terão os arquivos na Página Web, que os arquivos do site tem que serão os mesmos dos arquivos de configuração, para não dar erros como os de CSS. Para o CSS do Apache Tomcat não sobreescrever o CSS do projeto, veja a pasta web dentro do build, que deverão ser os mesmos arquivos da pasta web, isso vale pro favicon e outros arquivos.</p>
+
+<p>Para continuarmos, vamos salvar o Primefaces no nosso projeto, baixando ele nesse link (baixe a versão 5, não a versão 6 ou superior): <a href="https://jitpack.io/p/primefaces/primefaces" target="_blank">https://jitpack.io/p/primefaces/primefaces</a></p>
+
+<p>Crie, no local dos arquivos do site (na mesma onde encontramos o nbproject, web e src), e salve o jar do Primefaces lá, e nas propriedades do site, em bibliotecas, vá em adicionar JAR/Pasta, adicione o JAR (não adicione a pasta, só o JAR dele).</p>
+
+<p>E no código HTML, adicione o link do XML do Primefaces assim: <code>xmlns:p="http://primefaces.org/ui"</code></p>
+
+<p>Coloque um botão assim no XHTML:</p>
+
+<pre>
+<code>
+&lt;p:button value="Enviar"&gt;&lt;/p:button&gt;
+</code>
+</pre>
+
+<p>O botão já tem um estilo próprio devido a biblioteca do Primefaces.</p>
+
+<p>Abra também uma tag p:panelGrid com o atributo columns de valor 2, e coloque o button dentro dele.</p>
+
+<p>Abra dentro do panelGrid, um h:outputLabel, com for indiciando a id nome e o value Nome, e abaixo dele, um p:inputText com a id nome.</p>
+
+<p>PS: o paneGrid funciona de forma parecida com as tabelas, assim como o outputLabel funciona de forma parecida com o label e asim por diante.</p>
+
+<p>Esse seria o código criados dessa forma, veja abaixo:</p>
+
+<pre>
+<code>
+&lt;h:form&gt;
+    &lt;p:panelGrid columns="2"&gt;
+        &lt;h:outputLabel for="nome" value="Nome"&gt;&lt;/h:outputLabel&gt;
+        &lt;p:inputText id="nome"&gt;&lt;/p:inputText&gt;
+        &lt;h:outputLabel for="sobrenome" value="Sobrenome"&gt;&lt;/h:outputLabel&gt;
+        &lt;p:inputText id="sobrenome"&gt;&lt;/p:inputText&gt;
+        &lt;p:button value="Enviar"&gt;&lt;/p:button&gt;
+    &lt;/p:panelGrid&gt;
+&lt;/h:form&gt;
+</code>
+</pre>
+
+<p>Existem várias tags que podemos usar com Primefaces, como a p:spinner, para valores numéricos. Temos também o f:convertNumber para convertermos números para, por exemplo, valor monetário.</p>
+
+<p>PS: Para bloquear o acesso às páginas xhtml (de forma que se acesse apenas ao resultado jsf delas), abra o arquivo web.xml dentro de WEB-INF e adicione esse código dentro da tag web-app, logo abaixo da tag servlet:</p>
+
+<pre>
+<code>
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;Faces Servlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;*.jsf&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+&lt;session-config&gt;
+    &lt;session-timeout&gt;
+        30
+    &lt;/session-timeout&gt;
+&lt;/session-config&gt;
+&lt;welcome-file-list&gt;
+    &lt;welcome-file>index.jsf&lt;/welcome-file&gt;
+&lt;/welcome-file-list&gt;
+&lt;security-constraint&gt;
+    &lt;display-name&gt;Restrict raw XHTML Documents&lt;/display-name&gt;
+    &lt;web-resource-collection&gt;
+        &lt;web-resource-name&gt;XHTML&lt;/web-resource-name&gt;
+        &lt;url-pattern&gt;*.xhtml&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint/&gt;
+&lt;/security-constraint&gt;
+</code>
+</pre>
+
+<p>Caso não ache o arquivo web.xml, copie ele do diretório onde está instalado o Apache, em webapps/ROOT/WEB-INF.</p>
+
+<p>Se o programa não rodar, exclua o arquivo xml localizado em conf\Catalina\localhost e a pasta localizada em work\Catalina\localhost com o nome do projeto, dentro do diretório onde o Apache Tomcat está instalado.</p>
+
+<p>PS: Para o CSS do Apache Tomcat não sobreescrever o CSS do projeto, veja a pasta web dentro do build, que deverão ser os mesmos arquivos da pasta web, isso vale pro favicon e outros arquivos.</p>
+
+<p>Para excluir a favicon padrão do Apache, exclua ele na pasta webapps/ROOT</p>
+
+<p>Por padrão, o Netbeans pede como senha do Apache Tomcat o Login "tomcat" e a senha "admin", para alterar a senha, altere o arquivo tomcat80 (no Windows é localizado em AppData\Roaming\Netbeans\8.2\). Não esqueça de configurar a senha no arquivo tomcat-users.xml (localizado na pasta conf do Apache).</p> 
+
+<p>Para executar o servidor Tomcat sem abrir o Netbeans, execute o arquivo startup.bat em Windows ou startup.sh no Linux, e mantenha ele executando. Para interromper o funcionamento basta interromper a execução do script. Quando for colocar o site no ar, coloqueo arquivo WAR dentro da pasta WEBAPPS do Tomcat.</p>
+
+<p>PS: A partir da versão 10 do Apache Tomcat, os pacotes <q>javax.faces.*</q> foram substituídos por <code>jakarta.faces.*</code>. Ele necessitará desses Jars aqui, no caso:</p>
+
+<ul>
+    <li><a href="https://search.maven.org/artifact/jakarta.faces/jakarta.faces-api/3.0.0/jar" target="_blank">https://search.maven.org/artifact/jakarta.faces/jakarta.faces-api/3.0.0/jar</a></li>
+    <li><a href="https://mvnrepository.com/artifact/com.sun.faces/jsf-impl/3.0.0.SP01" target="_blank">https://mvnrepository.com/artifact/com.sun.faces/jsf-impl/3.0.0.SP01</a></li>
+</ul>
+
+<h3>Hello Managed Bean</h3>
+
+<p>Nessa aula criaremos o Managed Bean, que é o código Java que servirá para auxiliar na criação das telas do JSF, ou seja, intermediará os códigos Java e XML, como por exemplo, ao criar ações para botões e passar dados pro Java.</p>
+
+<p>Nos pacotes de código-fonte, crie um pacote Java chamado beans e dentro dele uma classe com o nome NomesBean, e coloque esse código:</p>
+
+<pre>
+<code>
+package beans;
+
+import javax.faces.bean.ManagedBean;
+
+@ManagedBean // Anotação que deve ser importada de javax.faces.bean.ManagedBean
+public class NomesBean {
+
+}
+</code>
+</pre>
+
+<p>Na anotação ManagerBean, que indicará o uso do mesmo, ele sempre gerará um name pro XHTML igual o da classe, apesar de ser configurável dentro do Java (utilizando <code>@ManagedBean(name = "nomeNovo")</code>).</p>
+
+<p>Devemos também colocar uma anotação de escopo de sessão, que definirá o tempo de sessão do nosso site, ou seja, o tempo que a classe ficará na memória do nosso site. Veja o uso abaixo:</p>
+
+<pre>
+<code>
+package beans;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@SessionScoped // Anotação que deve ser importada de javax.faces.bean.SessionScoped
+@ManagedBean
+public class NomesBean {
+
+}
+</code>
+</pre>
+
+<p>Observe que no arquivo web.xml, em WEB-INF, tem uma tág session-timeout, que define o tempo de encerramento de sessões em minutos, sem mexer em nada dentro do site (um exemplo disso é os sistemas bancários, que encerram o acesso dentro de alguns minutos sem mexer o site, até por segurança, um dos motivos dos sites de bancos serem em Java.</p>
+
+<p>Esse é o código completo, com os métodos getters e setters:</p>
+
+<pre>
+<code>
+package beans;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@SessionScoped
+@ManagedBean
+public class NomesBean {
+    private String nome;
+    private String sobrenome;
+    private String mensagem;
+    
+    public void dizerOla() {
+        mensagem = "Olá, " + nome + " " + sobrenome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+}
+</code>
+</pre>
+
+<p>Para chamar os elementos do Java no XHTML, abra um atributo value, e dentro dele uma hashtag com chaves, e dentro dele o nome do managerBean (mesmo nome da classe, só que com a primeira minúscula), acompanhados dos métodos ou atributos desejados da classe, dessa forma:</p>
+
+<pre>
+<code>
+&lt;p:inputText id="nome" value="#{nomesBean.nome}"&gt;&lt;/p:inputText&gt;
+</code>
+</pre>
+
+<p>Faça o mesmo no sobrenome.</p>
+
+<p>Só que, para podermos enviar dados pro Java, o panelGrid todo, com todos os elementos, deverão estar no meio de tags h:form.</p>
+
+<p>E para enviarmos os dados, precisaremos usar o p:commandButton ao invés do button, com o bean e a função, dessa forma:</p>
+
+<pre>
+<code>
+&lt;p:commandButton value="Enviar" action="#{nomesBean.dizerOla()}" update="msg"&gt;&lt;/p:commandButton&gt;
+</code>
+</pre>
+
+<p>PS: O Update impede que tenhamos que carregar a página para executar o processo, isso é possível graças ao Ajax.</p>
+
+<p>E para exibir, usaremos o h:outputText assim:</p>
+
+<pre>
+<code>
+&lt;h:outputText id="msg" value="#{nomesBean.mensagem}"&gt;&lt;/h:outputText&gt;
+</code>
+</pre>
+
+<p>Lembrando que temos que recompilar os arquivos Java ao fazer alterações no Java (não é necessário quando alteramos apenas o XHTML). Assim como o PHP, os códigos Java não são visíveis do lado cliente, sendo totalmente interpretados pelo servidor (que tem uma JVM integrada), o que dispensa o usuário de ter Java instalado no PC para acessar. Uma coisa que torna o Java mais seguro, é o fato dele ser compilado, e não interpretado, por isso é mais seguro para sites como os de banco e do governo, pelo fato dos hackers não poderem ter acesso ao código-fonte.</p>
+
+<p>PS: A maioria das classes de pacotes padrões usadas no Java funcionam em web, mas algumas não funcionam por conter código exclusivamente para aplicações Java desktop, como por exemplo:</p>
+
+<table>
+    <tr>
+        <th>Pacotes e Classes do Java 8</th>
+    </tr>
+    <tr>
+        <td>java.util.Scanner</td>
+    </tr>
+    <tr>
+        <td>java.awt.*</td>
+    </tr>
+    <tr>
+        <td>javax.swing.*</td>
+    </tr>
+    <tr>
+        <td>javafx.*</td>
+    </tr>
+</table>
+
+<p>No entanto, temos vários pacotes usados exclusivamente na web.</p>
+
+<h3>Lista de Objetos</h3>
+
+<p>Exclua o formulário da aula anterior e abra uma tag p:fieldset com o legend Objetos</p>
+
+<p>Crie uma classe com o nome Carro (num outro pacote só pra classes), que terá esse código:</p>
+
+<pre>
+<code>
+package classes;
+
+public class Carro {
+    private Integer id;
+    private String modelo;
+    private String fabricante;
+    private String cor;
+    private String ano;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
+    }
+}
+</code>
+</pre>
+
+<p>PS: A classe invólucro Integer é mais interessante por manter o valor "null", diferente do tipo int que o padrão é 0.</p>
+
+<p>E para o Bean, crie uma classe com o nome CarroBean, no pacote beans:</p>
+
+<pre>
+<code>
+package beans;
+
+import classes.Carro;
+import java.util.ArrayList;
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@SessionScoped
+@ManagedBean
+public class CarroBean {
+    private Carro car = new Carro();
+    private List&lt;Carro&gt; carros = new ArrayList&lt;&gt;();
+    
+    public void adicionar() {
+        carros.add(car);
+        car = new Carro();
+    }
+
+    public Carro getCar() {
+        return car;
+    }
+
+    public void setCar(Carro car) {
+        this.car = car;
+    }
+
+    public List&lt;Carro&gt; getCarros() {
+        return carros;
+    }
+
+    public void setCarros(List&lt;Carro&gt; carros) {
+        this.carros = carros;
+    }
+}
+</code>
+</pre>
+
+<p>E no gerenciar-carro.xhtml, crie essa estrutura:</p>
+
+<pre>
+<code>
+&lt;h:form&gt;
+    &lt;p:fieldset legend="Objetos"&gt;
+        &lt;p:toolbarGroup&gt;
+            &lt;p:commandButton value="Adicionar" action="#{carroBean.adicionar()}" update="@form"&gt;&lt;/p:commandButton&gt;
+        &lt;/p:toolbarGroup&gt;
+        &lt;p:panelGrid columns="2"&gt;
+            &lt;h:outputLabel value="Modelo"&gt;&lt;/h:outputLabel&gt;
+            &lt;p:inputText value="#{carroBean.car.modelo}"&gt;&lt;/p:inputText&gt;
+            &lt;h:outputLabel value="Fabricante"&gt;&lt;/h:outputLabel&gt;
+            &lt;p:inputText value="#{carroBean.car.fabricante}"&gt;&lt;/p:inputText&gt;
+            &lt;h:outputLabel value="Cor"&gt;&lt;/h:outputLabel&gt;
+            &lt;p:inputText value="#{carroBean.car.cor}"&gt;&lt;/p:inputText&gt;
+            &lt;h:outputLabel value="Ano"&gt;&lt;/h:outputLabel&gt;
+            &lt;p:inputMask mask="9999" value="#{carroBean.car.ano}"&gt;&lt;/p:inputMask&gt;
+        &lt;/p:panelGrid&gt;
+        &lt;p:dataTable value="#{carroBean.carros}" var="carroForm"&gt;
+            &lt;p:column headerText="Modelo" sortBy="#{carroForm.modelo}"&gt;
+                &lt;h:outputText value="#{carroForm.modelo}"&gt;&lt;/h:outputText&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText="Fabricante"&gt;
+                &lt;h:outputText value="#{carroForm.fabricante}"&gt;&lt;/h:outputText&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText="Cor"&gt;
+                &lt;h:outputText value="#{carroForm.cor}"&gt;&lt;/h:outputText&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText="Ano">
+                &lt;h:outputText value="#{carroForm.ano}"&gt;&lt;/h:outputText&gt;
+            &lt;/p:column&gt;
+        &lt;/p:dataTable&gt;
+    &lt;/p:fieldset&gt;
+&lt;/h:form&gt;
+</code>
+</pre>
+
+<p>PS: Observe que criamos uma variável local em dataTable, com o atributo var. O sortBy nas colunas define a ordenação dos elementos.</p>
+
+<ul>
+    <li><a href="tudo-sobre-javaweb-jsf-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

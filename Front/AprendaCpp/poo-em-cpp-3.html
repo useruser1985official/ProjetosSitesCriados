@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C++</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cpp-1.html">Tudo sobre C++ Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cpp-2.html">Tudo sobre C++ Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cpp-3.html">Tudo sobre C++ Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cpp-4.html">Tudo sobre C++ Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cpp-5.html">Tudo sobre C++ Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cpp-6.html">Tudo sobre C++ Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cpp-7.html">Tudo sobre C++ Parte 7!</a></li>
+                    <li><a href="tudo-sobre-cpp-8.html">Tudo sobre C++ Parte 8!</a></li>
+                    <li><a href="tudo-sobre-cpp-9.html">Tudo sobre C++ Parte 9!</a></li>
+                    <li><a href="tudo-sobre-cpp-10.html">Tudo sobre C++ Parte 10!</a></li>
+                    <li><a href="tudo-sobre-cpp-11.html">Tudo sobre C++ Parte 11!</a></li>
+                    <li><a href="tudo-sobre-cpp-12.html">Tudo sobre C++ Parte 12!</a></li>
+                    <li><a href="tudo-sobre-cpp-13.html">Tudo sobre C++ Parte 13!</a></li>
+                    <li><a href="tudo-sobre-cpp-14.html">Tudo sobre C++ Parte 14!</a></li>
+                    <li><a href="tudo-sobre-cpp-15.html">Tudo sobre C++ Parte 15!</a></li>
+                    <li><a href="tudo-sobre-cpp-16.html">Tudo sobre C++ Parte 16!</a></li>
+                </menu>
+            </header>
+
+<h2>Orientação a Objetos em C++ - Parte 3</h2> 
+
+<h3>Classes, Get e Set</h3>
+
+<p>Crie um novo projeto e nele, um novo arquivo de cabeçalho com o nome classes.h.</p>
+
+<p>Note que nesse caso, teremos alguns atributos privados, que só podem ser manipulados pela própria classe (encapsulamento), para isso teremos que criar métodos getters e setters para podermos usar eles.</p>
+
+<pre>
+<code>
+#ifndef CLASSES_H_INCLUDED
+#define CLASSES_H_INCLUDED
+#include &lt;iostream&gt;
+
+class Veiculo {
+    public:
+        int velocidade;
+        int tipo;
+        Veiculo(int tp); // Construtor
+    private:
+        std::string nome;
+        int velMax;
+        bool ligado;
+};
+
+Veiculo::Veiculo(int tp) {
+    if(tp == 1) {
+        this->velMax = 200;
+        this->nome = "Carro";
+    }
+    else if(tp == 2) {
+        this->velMax = 250;
+        this->nome = "Moto";
+    }
+    else if(tp == 3) {
+        this->velMax = 150;
+        this->nome = "Caminhão";
+    }
+}
+
+#endif // CLASSES_H_INCLUDED
+
+</code>
+</pre>
+
+<p>E pra tentar executar na principal:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Veiculo *v1 = new Veiculo(1);
+    
+    v1->velMax = 250; // Não é possível alterar por ser privado.
+
+    cout << v1->velMax; // Não é possível executar por ser privado.
+
+    delete v1;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Como visto, esse código acima dará erro por tentarmos manipular atributos privados. Para isso, criamos um método getter e setter. Adicione isso no Classes.h:</p>
+
+<pre>
+<code>
+const int Veiculo::getVelMax() {
+    return velMax;
+}
+void Veiculo::setVelMax(int vm) {
+    velMax = vm;
+}
+</code>
+</pre>
+
+<p>PS: Não esqueça de colocar na classe a declaração dos métodos em público, assim:</p>
+
+<pre>
+<code>
+const int getVelMax();
+void setVelMax(int vm);
+</code>
+</pre>
+
+<p>E agora poderemos executar normalmente assim:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Veiculo *v1 = new Veiculo(1);
+
+    v1->setVelMax(250);
+
+    cout << v1->getVelMax();
+
+    delete v1;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Agora podem ver que funciona normalmente. Isso torna o código mais seguro, já que o atributo é privado, mas pode ser alterado pelo método por ser público e este alterar dentro da classe.</p>
+
+<p>PS: O <code>const</code> não é obrigatório no getter, mas garante mais segurança, sempre coloque em todos os  getters manipulados. O const em POO é para métodos que não alterarão nenhum atributo, pode ser usado em qualquer método, mas de preferência é usado em métodos getters.</p>
+
+<p>Veja outro exemplo, com mais objetos:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Veiculo *v1 = new Veiculo(1);
+    Veiculo *v2 = new Veiculo(2);
+    Veiculo *v3 = new Veiculo(3);
+
+    cout << v1->getVelMax() << endl;
+    cout << v2->getVelMax() << endl;
+    cout << v3->getVelMax() << endl;
+
+    delete v1;
+    delete v2;
+    delete v3;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Caso não queira que podemos alterar pelo método setter também, coloque ele como privado na classe.</p>
+
+<p>Crie também os métodos setter e getters ligado públicos, para alterar o atributo ligado, assim:</p>
+
+<pre>
+<code>
+const bool Veiculo::getLigado() {
+    return ligado;
+}
+void Veiculo::setLigado(int l) {
+    if(l == 1) {
+        ligado = true;
+    }
+    else if(l == 0) {
+        ligado = false;
+    }
+}
+</code>
+</pre>
+
+<p>Dentro da classe:</p>
+
+<pre>
+<code>
+const bool getLigado();
+void setLigado(int l);
+</code>
+</pre>
+
+<p>Crie também um método para visualizarmos o estado dos carros:</p>
+
+<pre>
+<code>
+void Veiculo::estado() {
+    if(this->getLigado()) {
+        std::cout << "Veículo " << nome << " está ligado!" << std::endl;
+    }
+    else {
+        std::cout << "Veículo " << nome << " está desligado!" << std::endl;
+    }
+}
+</code>
+</pre>
+
+<p>E no arquivo principal podemos fazer isso:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Veiculo *v1 = new Veiculo(1);
+    Veiculo *v2 = new Veiculo(2);
+    Veiculo *v3 = new Veiculo(3);
+
+    v1->setLigado(1);
+    v2->setLigado(0);
+    v3->setLigado(1);
+
+    cout << v1->getVelMax() << endl;
+    cout << v2->getVelMax() << endl;
+    cout << v3->getVelMax() << endl;
+
+    v1->estado();
+    v2->estado();
+    v3->estado();
+
+    delete v1;
+    delete v2;
+    delete v3;
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: O public permite acesso em qualquer parte do programa, o private só permite acesso na classe da qual ela pertence, e ainda existe o protected, que só permite acesso na classe e nas filhas dela (é um meio-termo entre public e private).</p>
+<h3>Classes e Herança</h3>
+
+<p>Com a herança, uma classe pode herdar propriedades de outras classes, podendo ter outras adicionadas.</p>
+
+<p>Vamos criar um novo projeto e um file com as classes. Esse é o código da classe:</p>
+
+<pre>
+<code>
+class Veiculo {
+    public:
+        int vel;
+        int blind;
+        int rodas;
+    private:
+        int tipo;
+        int velMax;
+        bool arma;
+};
+</code>
+</pre>
+
+<p>No caso acima, a classe Veiculo (classe pai) é genérica, e classes como Moto e Carro (filhas) herdam características da mesma.</p>
+
+<p>Vamos criar a classe Moto, assim:</p>
+
+<pre>
+<code>
+class Moto : public Veiculo {
+    
+};
+</code>
+</pre>
+
+<p>No caso acima, ele já está herdando as coisas de Veiculo, mas sem adicionar mais nada, isso é a herança pobre.</p>
+
+<p>No arquivo principal, crie o objeto assim:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Moto *v1 = new Moto();
+
+    delete v1;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Ou assim, de forma que usaremos apenas o que for descrito na classe pai, ganhando em polimorfismo:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Veiculo *v1 = new Moto();
+
+    delete v1;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Agora, crie o construtor na classe Moto, inicializando os atributos públicos assim:</p>
+
+<pre>
+<code>
+class Moto : public Veiculo {
+    public:
+        Moto(); // Construtor
+};
+
+Moto::Moto() {
+    vel = 0;
+    blind = 0;
+    rodas = 2;    
+}
+</code>
+</pre>
+
+<p>E no arquivo principal:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Veiculo *v1 = new Moto();
+    
+    cout << v1->rodas << endl;
+
+    delete v1;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Para alterarmos os atributos privados, faremos métodos setters na classe Veiculo, e também um método para exibição, de forma que ficará assim:</p>
+
+<pre>
+<code>
+class Veiculo {
+    public:
+        int vel;
+        int blind;
+        int rodas;
+        // Setters
+        void setTipo(int tp);
+        void setVelMax(int vm);
+        void setArma(bool ar);
+        void imp();
+    private:
+        int tipo;
+        int velMax;
+        bool arma;
+};
+
+void Veiculo::imp() {
+    std::cout << "Tipo de veículo: " << tipo << std::endl;
+    std::cout << "Velocidade máxima: " << velMax << std::endl;
+    std::cout << "Quantidade de rodas: " << rodas << std::endl;
+    std::cout << "Blindagem: " << blind << std::endl;
+    std::cout << "Armamento: " << arma << std::endl;
+    std::cout << "------------------------" << std::endl;
+}
+
+void Veiculo::setTipo(int tp) {
+    tipo = tp;
+}
+void Veiculo::setVelMax(int vm) {
+    velMax = vm;
+}
+void Veiculo::setArma(bool ar) {
+    arma = ar;
+}
+</code>
+</pre>
+
+<p>E no construtor da Moto, basta colocar a chamada dos métodos setters:</p>
+
+<pre>
+<code>
+class Moto : public Veiculo {
+    public:
+        Moto(); // Construtor
+};
+
+Moto::Moto() {
+    vel = 0;
+    blind = 0;
+    rodas = 2;
+    setTipo(1);
+    setVelMax(120);
+    setArma(false);
+}
+</code>
+</pre>
+
+<p>No método principal, podemos fazer assim:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Veiculo *v1 = new Moto();
+
+    v1->imp();
+
+    delete v1;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Crie agora, outra classe que herdará de veículo, a classe Carro, assim:</p>
+
+<pre>
+<code>
+class Carro : public Veiculo {
+    public:
+        Carro(); // Construtor
+};
+
+Carro::Carro() {
+    vel = 0;
+    blind = 0;
+    rodas = 4;
+    setTipo(2);
+    setVelMax(200);
+    setArma(false);
+}
+</code>
+</pre>
+
+<p>E também a classe Tanque, da mesma forma:
+
+<pre>
+<code>
+class Tanque : public Veiculo {
+    public:
+        Tanque(); // Construtor
+};
+
+Tanque::Tanque() {
+    vel = 0;
+    blind = 1;
+    rodas = 8;
+    setTipo(3);
+    setVelMax(160);
+    setArma(true);
+}
+</code>
+</pre>
+
+<p>E no método principal:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include "Classes.h"
+
+using namespace std;
+
+int main() {
+    Veiculo *v1 = new Moto();
+    Veiculo *v2 = new Carro();
+    Veiculo *v3 = new Tanque();
+
+    v1->imp();
+    v2->imp();
+    v3->imp();
+
+    delete v1;
+    delete v2;
+    delete v3;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Em C++ também podemos fazer heranças múltiplas, que é quando uma classe herda de mais de uma classe ao mesmo tempo, faríamos algo assim:</p>
+
+<pre>
+<code>
+class Herdeira : public Classe1, public Classe2 {
+
+};
+</code>
+</pre>
+
+<p>E nas classes filhas de outras, também podemos fazer o "super", que é a herança de construtores de classes pais, dessa forma:</p>
+
+<pre>
+<code>
+Classe2::Classe2(int n1, int n2, int n3) : Classe1(n1, n2) { // Indica a classe pai, no segundo parenteses são só os parâmetros do construtor da classe pai sem declaração de tipo.
+    this->num3 = n3;
+}
+</code>
+</pre>
+
+<p>Caso tenha herança múltipla, os construtores de ambas as classes pais deverão ser indicadas após os dois pontos, separadas por vírgulas.</p>
+
+<ul>
+    <li><a href="poo-em-cpp-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="poo-em-cpp-4.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

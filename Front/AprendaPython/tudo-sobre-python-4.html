@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Python</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Python</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-python-1.html">Tudo sobre Python Parte 1!</a></li>
+                    <li><a href="tudo-sobre-python-2.html">Tudo sobre Python Parte 2!</a></li>
+                    <li><a href="tudo-sobre-python-3.html">Tudo sobre Python Parte 3!</a></li>
+                    <li><a href="tudo-sobre-python-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Python Parte 4!</a></li>
+                    <li><a href="tudo-sobre-python-5.html">Tudo sobre Python Parte 5!</a></li>
+                    <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
+                    <li><a href="tudo-sobre-python-7.html">Tudo sobre Python Parte 7!</a></li>
+                </menu>
+            </header>
+           
+<h2>Tudo sobre Python Parte 4</h2>
+
+<h3>Estrutura de Repetição While</h3>
+
+<p>A estrutura de repetição <code>while</code> (enquanto) realiza um teste lógico no início do loop, e cada vez que o teste retornar verdadeiro, os comandos associados ao laço são executados. Se retornar falso, o laço é encerrado e o processamento volta para o fluxo principal do programa.</p>
+
+<p>Vamos supor novamente o personagem de videogame da aula anterior, mas dessa vez não sabemos quantos passos ele terá que fazer para pegar a maçã. Nesse mesmo "chão" tem alguns buracos aleatórios no lugar de algumas plataformas, aí colocaremos também moedas em algumas plataformas, nesse caso, usamos um condicional if dentro do while (não esqueça da indentação).</p>
+
+<p>O mesmo exemplo usado em for antes, faremos em while, assim:</p>
+
+<pre>
+<code>
+c = 1
+while c < 10:
+    print(c)
+    c += 1
+</code>
+</pre>
+
+<p>Como visto, podemos usar o while quando sabemos o limite também, mas isso não faz ele mais rápido que o for (e o for usaria menos linhas). Mas quando não sabemos o limite, só dá pra usar o while.</p>
+
+<p>O exemplo abaixo, só é possível com while:</p>
+
+<pre>
+<code>
+n = 1
+while n != 0:
+    n = int(input("Digite um valor: "))
+print("Parou!")
+</code>
+</pre>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+r = "S"
+while r == "S":
+    n = int(input("Digite um valor: "))
+    r = str(input("Quer continuar? [S/N] ")).upper()
+print("Parou!")
+</code>
+</pre>
+
+<p>Dependerá muito da situação se usaremos for ou while.</p>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+n = 1
+par = impar = 0
+while n != 0:
+    n = int(input("Digite um valor: "))
+    if n != 0:
+        if n % 2 == 0:
+            par += 1
+        else:
+            impar += 1
+print("Você digitou {} números pares e {} números ímpares.".format(par, impar))
+</code>
+</pre>
+
+<h3>Interrompendo Repetições While</h3>
+
+<p>Lembrando do personagem de videogame da aula anterior, que não sabia quantos passos ele teria que dar para pegar a maçã. Nesse mesmo "chão" tinha alguns buracos aleatórios no lugar de algumas plataformas, e também tinha moedas para pegar. Só que nesse exemplo, ao invés de maçãs, teria uma plataforma flutuando com um troféu, que significaria o fim do jogo por ser o prêmio do vencedor, no caso ele pularia, pegaria o troféu e pararia (para não cair do buraco). Para isso, usamos a opção <code>break</code>.</p>
+
+<p>O break é usado para interromper um laço while, que pode durar pra sempre, dependendo da condição do mesmo.</p>
+
+<p>Veja um exemplo de laço while infinito:</p>
+
+<pre>
+<code>
+cont = 1
+while True:
+    print(cont, "→ ", end="")
+print("Acabou")
+</code>
+</pre>
+
+<p>Outro exemplo, com uma flag de parada:</p>
+
+<pre>
+<code>
+n = s = 0
+while n != 999:
+    n = int(input("Digite um número: "))
+    s += n
+print("A soma vale {}".format(s))
+</code>
+</pre>
+
+<p>No exemplo acima, a flag de parada é o número 999. Mas nesse caso, o 999 não deve ser considerado, e subtrair o número a flag (999) é um tremenda gambiarra, nesse caso que utilizamos o break.</p>
+
+<p>Para isso, utilizaremos um while infinito, com a condição true, e dentro, um if com o break, assim:</p>
+
+<pre>
+<code>
+n = s = 0
+while True:
+    n = int(input("Digite um número: "))
+    if n == 999:
+        break
+    s += n
+print("A soma vale {}".format(s))
+</code>
+</pre>
+
+<p>Existe também em Python, o continue, menos usado, que apenas ignora o código e reinicia a execução:</p>
+
+<pre>
+<code>
+num = 0
+
+while num < 30:
+    num += 1
+    if num % 2 == 0:
+        continue
+    print("Nº {}.".format(num))
+</code>
+</pre>
+
+<p>PS: No Python 3.6 e superiores, usamos as fstrings, assim, apenas colocando um f antes das aspas, ao invés o format:</p>
+
+<pre>
+<code>
+print(f"A soma vale {s}")
+</code>
+</pre>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+nome = "José"
+idade = 33
+salario = 987.3
+print(f"O {nome} tem {idade} anos e ganha R$ {salario:.2f}.")
+</code>
+</pre>
+
+<p>As formatações também funcionam normalmente, como visto acima.</p>
+
+<h3>Tuplas</h3>
+
+<p>Em Python, assim como em qualquer linguagem, a variável é um espaço na memória, por exemplo:</p>
+
+<pre>
+<code>
+lanche = "hambúrguer"
+print(lanche)
+</code>
+</pre>
+
+<p>Ou seja, no caso acima, a string "hambúrguer" ocupa um determinado espaço da memória, se atribuirmos abaixo novamente a variável lanche com o suco, esta última substituirá o espaço que antes era do hambúrguer, podemos até testar com o print assim:</p>
+
+<pre>
+<code>
+lanche = "hambúrguer"
+lanche = "suco"
+print(lanche)
+</code>
+</pre>
+
+<p>Mas tem os casos que queremos ter mais de um espaço na mesma variável, vamos supor que no exemplo, queremos uma variável com o nome lanche com quatro espaços, para hambúrguer, suco, pizza e pudim, pra um lanche completo. Nesse caso utilizamos as tuplas (de forma semelhante aos vetores em outras linguagens).</p>
+
+<p>Só pra entender, as variáveis comuns, que só cabem um valor, são chamadas de variáveis simples. As tuplas, listas e etc., que podem guardar mais de um valor, são chamadas de variáveis compostas.</p>
+
+<p>Veja um exemplo de uso de tuplas em Python:</p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim")
+</code>
+</pre>
+
+<p>PS: Em muitos exercícios das aulas anteriores, podíamos ter utilizado as tuplas.</p>
+
+<p>Para acessar as tuplas, usamos índices contados a partir do zero, no caso, a tupla lanche tem quatro elementos ordenados de 0 a 3.</p>
+
+<p>PS: As strings no Python também são variáveis compostas, uma palavra como "Café" é uma lista onde cada letra ocupa um índice, onde no 0 está o "C", no 1 está o "a" e assim por diante, por isso é possível manipular strings em operações como fatiamento.</p>
+
+<p>Se colocarmos uma variável composta no print, ele vai mostrar todas os dados dele assim:</p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim")
+print(lanche)
+</code>
+</pre>
+
+<p>Mas para exibir um elemento específico, usamos o índice entre colchetes assim:</p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim")
+print(lanche[2])
+</code>
+</pre>
+
+<p>E podemos também fazer o fatiamento, onde ele mostra apenas parte dos elementos da tupla, assim:</p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim")
+print(lanche[0:2])
+</code>
+</pre>
+
+<p>PS: No caso acima, ele não mostrará o elemento 2, e sim parará nesse elemento, no caso ele exibe os elementos 0 e 1 (hambúrguer e suco).</p>
+
+<p>Temos também outros tipos de fatiamento assim:</p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim")
+print(lanche[1:]) # Mostra do elemento 1 até o final
+print(lanche[-1]) # Mostra o último elemento, se for -2 é o penúltimo e etc.
+</code>
+</pre>
+
+<p>Temos também o len que lê a quantidade de espaços de uma tupla:</p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim")
+print(len(lanche))
+</code>
+</pre>
+
+<p>E para lermos todos os elementos, usamos um laço for dessa forma:</p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim")
+for i in lanche: # Isso é como um for iterator
+    print(i)
+</code>
+</pre>
+
+<p>PS: No caso acima, não usamos o range, apenas o nome da tupla e consequentemente, usamos apenas a variável i dele, isso é o uso do for com iterador, usado apenas em vetores e equivalentes.</p>
+
+<p>Lembrando que as tuplas são imutáveis, ou seja, não podemos substituir ou remover um índice de uma tupla.</p>
+
+<p>Basicamente, para definir uma tupla, usamos os parênteses, para listas os colchetes e para dicionários as chaves.</p>
+
+<p>As tuplas, mesmo não utilizando parênteses, o Python 3.6 reconhece como tuplas, veja o uso sem parênteses, assim:</p>
+
+<pre>
+<code>
+lanche = "hambúrguer", "suco", "pizza", "pudim"
+</code>
+</pre>
+
+<p>No caso da exibição, os índices sempre são exibidos com colchetes, por exemplo:</p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim")
+
+print(lanche[-2])
+print(lanche[1:3])
+print(lanche[:2])
+</code>
+</pre>
+
+<p>Se tentarmos substituir algum índice, dará erro:</p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim")
+
+lanche[1] = "refrigerante" # Dará erro
+</code>
+</pre>
+
+<p>E usando um for iterator assim:</p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim")
+
+for i in lanche:
+    print(f"Eu vou comer {i}")
+    
+print("Comi pra caramba!")
+</code>
+</pre>
+
+<p>Podemos adicionar ou alterar elementos nas tuplas, mas só na inicialização, por exemplo:</p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim", "batata-frita")
+
+for i in lanche:
+    print(f"Eu vou comer {i}")
+    
+print("Comi pra caramba!")
+</code>
+</pre>
+
+<p>Podemos usar também o len num for comum e os índices, assim:</p>
+
+<pre>
+<code>
+lanche = ("hambúrguer", "suco", "pizza", "pudim", "batata-frita")
+
+for i in range(0, len(lanche)):
+    print(f"Eu vou comer {lanche[i]}")
+
+print("Comi pra caramba!")
+</code>
+</pre>
+
+<p>PS: Lembrando que o range ignora o último elemento, mas no caso de usar len não faz diferença, já que ele conta a quantidade de elementos (no caso 5), e não os índices (no caso de 0 a 4), por isso são exibidos até o 4 e não é preciso fazer outras alterações, pode ser exibido assim também:</p>
+
+<pre>
+<code>
+for i in range(0, 5):
+    print(f"Eu vou comer {lanche[i]}")
+</code>
+</pre>
+
+<p>Podemos também usar o enumerate, que exibe o elemento e a posição assim:</p>
+
+<pre>
+<code>
+for p, c in enumerate(lanche):
+    print(f"Eu vou comer {c} na posição {p}")
+</code>
+</pre>
+
+<p>Podemos exibir ele em ordem, usando o método sorted assim:</p>
+
+<pre>
+<code>
+print(sorted(lanche))
+print(lanche)
+</code>
+</pre>
+
+<p>PS: Como visto acima, o sorted não altera a tupla, por ser imutável, apenas faz uma exibição em ordem numa lista.</p>
+
+<p>Podemos unir uma ou mais tuplas assim:</p>
+
+<pre>
+<code>
+a = (2, 5, 4)
+b = (5, 8, 1, 2)
+c = a + b
+
+print(c)
+</code>
+</pre>
+
+<p>No caso acima, ele criou uma terceira tupla com os elementos das duas primeiras.</p>
+
+<p>E normalmente, podemos utilizar outros elementos assim:</p>
+
+<pre>
+<code>
+print(len(c))
+print(c.count(5))
+print(c.index(2))
+print(c.index(2, 1)) # Aqui não mostra a 1ª posição que se encontra o 2 e mostra a seguinte
+</code>
+</pre>
+
+<p>O método count, só lembrando, ele conta quantas vezes determinado elemento aparece numa variável composta. O index mostra a posição da primeira ocorrência do elemento.</p>
+
+<p>Diferente dos vetores em linguagens como Java e C, as tuplas podem ter dados de tipos diferentes dentro delas, por exemplo:</p>
+
+<pre>
+<code>
+pessoa = ("Sérgio", 45, "M", 78.9)
+</code>
+</pre>
+
+<p>Não podemos deletar ou alterar um elemento da tupla, mas podemos deletar ela toda usando o método del, assim:</p>
+
+<pre>
+<code>
+del(pessoa)
+</code>
+</pre>
+
+<p>PS: O método del pode ser utilizado para deletar qualquer elemento do Python.</p>
+
+<p>Podemos também usar o <code>tuple()</code> para criar tuplas, e usar um <code>range()</code> para preencher ela, assim:<p>
+
+<pre>
+<code>
+valores = tuple(range(4, 11)) # Preenche a tupla com valores de 4 até 10, não confunda com as posições
+
+print(valores)
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-python-3.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-python-5.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

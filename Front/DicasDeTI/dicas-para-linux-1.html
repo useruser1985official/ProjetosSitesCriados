@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+
+<h2>Dicas para Linux Parte 1</h2>
+
+<h3>Instalação de Programas</h3>
+
+<h4>Via Terminal</h4>
+
+<p>Para atualizar ou instalar programas, digite <code>apt-get</code> como root, e utilizando o nome do programa, assim:</p>
+
+<pre>
+<code>
+sudo apt-get install nomedoprograma
+</code>
+</pre>
+
+<p>PS: Caso não queira que peça confirmação para instalação, use o parâmetro <code>-y</code>.</p>
+
+<p>Lembrando que o comando <code>sudo</code> dá uma permissão temporária de root para tarefas que exijam o superusuário. Caso você esteja usando o Debian e não encontre o sudo, basta instalar e habilitar ele com esses comandos (como root):</p>
+
+<pre>
+<code>
+apt-get update
+
+apt-get install sudo
+
+adduser nomedeusuario sudo
+
+shutdown -r now
+</code>
+</pre>
+
+<p>Para desinstalar, o mesmo processo, substituindo install por remove (o parâmetro purge remove as dependências):</p>
+
+<pre>
+<code>
+sudo apt-get --purge remove nomedoprograma
+</code>
+</pre>
+
+<p>PS: Podemos remover programas instalados por deb dessa forma também.</p>
+
+<p>Podemos ver o cache dele para vermos o nome exato do programa pra baixar, por exemplo:</p>
+
+<pre>
+<code>
+sudo apt-cache search nomedoprograma
+</code>
+</pre>
+
+<p>Para vermos os dados sobre o programa, fazemos assim:</p>
+
+<pre>
+<code>
+sudo apt-cache show nomedoprograma
+</code>
+</pre>
+
+<p>Para vermos as dependências de um programa, fazemos assim:</p>
+
+<pre>
+<code>
+sudo apt-cache depends nomedoprograma
+</code>
+</pre>
+
+<p>Lembrando que atualmente, as opções apt-get e apt-cache podem ser resumidas somente para <code>apt</code>, como <code>apt install nomedoprograma</code>.</p>
+
+<p>PS: Para podermos instalar arquivos, comente em <code>/etc/apt/sources.list</code> a parte /media/cd-rom para não pedir disco de instalador.</p>
+
+<p>Para adicionar um usuário como sudo, edite o arquivo em <code>/etc/sudoers</code>, e coloque esse trecho de código:</p>
+
+<pre>
+<code>
+nomedousuario	ALL=(ALL:ALL) ALL
+</code>
+</pre>
+
+<h4>Instalar Pacotes Tar</h4>
+
+<p>Se for instalar programas baixados em arquivos tar:</p>
+
+<pre>
+<code>
+cd ~/Downloads
+
+# Isso descompactará o pacote tar:
+
+tar -zxvf nomedopacote.tar.gz
+
+sudo mv nomedodiretoriodoprograma /opt/
+
+# Isso é pra criar um link para acessarmos diretamente o programa pelo terminal:
+
+sudo ln -s /opt/nomedodiretoriodoprograma/nomedoprograma /usr/bin/nomedoprograma
+
+rm nomedopacote.tar.gz
+</code>
+</pre>
+
+<p>O comando ln -s cria um link para a pasta /usr/bin, de forma que possamos abrir ele usando o terminal apenas digitando o nome do programa.</p>
+
+<p>Esse processo pode ser usado para instalar programas (caso já estejam compilados) na pasta <code>/opt</code>, por exemplo, onde ele ficará acessível a todos os usuários.</p>
+
+<p>PS: Se conter um arquivo install ou readme, olhe ele para ver se a forma de instalar pode ter alguma diferença, como dependências ou comandos específicos. A documentação do desenvolvedor no site oficial também pode ter informações do tipo.</p>
+
+<p>Só lembrando de que o tar é apenas um arquivador, as extensões xz, bz2, gz e etc., são as compactações usadas nos arquivos, que se tiverem em c, cpp e h, e tiverem um makefile, eles não foram compilados (são apenas códigos-fontes). Quanto tiverem arquivos so, sh e executáveis (sem extensões, geralmente), ele já está compilado. Sempre olhe dentro da pasta descompactada para ver os tipos de arquivos dentro dela.</p>
+
+<p>Caso o pacote tar venha com os códigos-fonte pra compilar, use esses comandos para compilar o programa (pode demorar um pouco), após mover ele pro diretório definitivo (como o /opt):</p>
+
+<pre>
+<code>
+# Os processos do configure e make são apenas para programas não compilados:
+
+./configure
+
+make
+
+make clean
+
+sudo make install
+</code>
+</pre>
+
+<p>Nesses casos podemos ignorar os comandos de mover pra /opt e criar link, pois estes costumam ser incluídos já no makefile do programa.</p>
+
+<p>Alguns pacotes não tem o configure (apesar de que pode estar com o nome do programa, nesse caso use o comando com o nome), só pular pro make, se já estiver compilado e tiver um makefile, vá pro make install. O tar é um arquivador e a extensão (tipo gz, xz ou bz2) é o compactador, então teoricamente pode ter qualquer tipo de arquivo dentro dele, como códigos-fontes pra compilar, programas prontos, ou outros tipos de arquivos como pacotes deb e scripts sh.</p>
+
+<p>Alguns arquivos tar já vem com os programas compilados, nesses não é necessário usar o configure, apenas o make ou pode até usar diretamente, mas pode ser necessário dar o chmod pra execução. Caso o configure não rode, use o comando <code>./configure --prefix=/usr/local --with-slang=/goodies/lib</code>. Podemos usar o <code>./configure --disable-pacote</code> para desabilitar algum pacote não instalado. Pode ser necessário usar <code>cmake</code> no lugar de make.</p>
+
+<p>PS: Ao usar o configure, pode ter algum pacote não instalado no sistema, nesse caso de um apt-get no pacote e depois tente rodar o configure, tente também um <code>sudo apt-get -f install</code>.</p>
+
+<p>Para deinstalar é só ir no diretório onde ele se localiza e dar <code>make uninstall</code>.</p>
+
+<p>PS: Para compilar corretamente é necessário ter instalado o build-essential, usando um <code>sudo apt-get install build-essential</code>, que contém as ferramentas necessárias, incluindo o gcc e g++. Também é necessário instalar o zlib, com <code> sudo apt-get install zlib</code>, <code> sudo apt-get install zlib-devel</code>, ou já faça tudo com <code> sudo apt-get install build-essential libglib2.0-dev libgtk2.0-dev libxml2-dev openbsd-inetd ckermit libgtk-3-dev checkinstall</code>.</p>
+
+<p>Lembrando que cara tipo de arquivo tem seu comando específico para descompactar, como podem ver:</p>
+
+<ul>
+    <li><code>tar -xvf nomedoarquivo.tar.xz</code> - Descompacta tar.xz</li>
+    <li><code>tar -zxvf nomedoarquivo.tar.gz</code> - Descompacta tar.gz e tgz</li>
+    <li><code>tar -jxvf nomedoarquivo.tar.bz2</code> - Descompacta tar.bz2</li>
+</ul>
+
+<h4>Criar Atalhos</h4>
+
+<p>No Ubuntu podemos criar atalhos dessa forma:</p>
+
+<pre>
+<code>
+cd ~/Desktop
+
+touch nomedolancador.desktop
+
+chmod +x nomedolancador.desktop
+</code>
+</pre>
+
+<p>E editar o lançador criado, com esse código aqui, substituindo pelas partes desejadas:</p>
+
+<pre>
+<code>
+[Desktop Entry]
+Name=NomeDoPrograma
+Type=Application
+Exec=/usr/bin/nomedoprograma
+Icon=/usr/share/icons/gnome/48x48/caminhodaimagem.png 
+</code>
+</pre>
+
+<p>Caso queira um atalho com acesso root, faça ele assim:</p>
+
+<pre>
+<code>
+[Desktop Entry]
+Name=NomeDoPrograma
+Type=Application
+TryExec=su-to-root
+Exec=su-to-root -X -c /usr/bin/nomedoprograma
+Icon=/usr/share/icons/gnome/48x48/caminhodaimagem.png 
+</code>
+</pre>
+
+<p>Um lançador para diretórios também pode ser feito, da seguinte forma:</p>
+
+<pre>
+<code>
+[Desktop Entry]
+Name=NomeDoDiretorio
+Type=Link
+URL=file:///usr/bin/
+Icon=folder
+</code>
+</pre>
+
+<p>PS: Se colocarmos o atalho na pasta padrão (que é <code>/usr/local/share/applications</code>), ele aparecerá na lista de aplicativos normalmente.</p>
+
+<p>Caso queira criar um atalho para uma programa instalado pelo repositório, veja as pastas que os executáveis e as imagens estão digitando <code>whereis nomedoaplicativo</code> (geralmente é em <code>/usr/bin</code> e <code>/usr/lib</code>, respectivamente. Também podemos colocar um ícone padrão do sistema, como o "folder" no código acima, que pode ser o nome do aplicativo, por exemplo.</p>
+
+<h4>Usando Pacotes deb e o dpkg</h4>
+
+<p>As principais distros são baseadas na Debian, como o Ubuntu, Kali, Parrot e Mint. Esses sistemas usam os instaladores deb e o dpkg para os instalar.</p>
+
+<p>Se for um arquivo deb, apenas digite <code>sudo dpkg -i nomedopacote.deb</code> ou clique com o botão direito no arquivo e selecione a opção instalar pacote. Pode ser necessário baixar algumas dependências antes. O mesmo serve pra atualizar um pacote já instalado.</p>
+
+<p>Se formos instalar um arquivo rpm em sistemas baseados em Debian, instale o alien e digite <code>sudo alien nomedopacote.rpm</code> e depois <code>sudo dpkg -i nomedopacote.deb</code>.</p>
+
+<p>Ao instalar deb, ele já instalará os arquivos nas pastas específicas, assim como o apt pelo repositório. É parecido com os apk do Android.</p>
+
+<p>Para remover um arquivo deb, digite <code>sudo dpkg -r nomedoaplicativo</code>, ou use o apt para isso.</p>
+
+<p>Para listar os pacotes deb instalados, digite <code>dpkg -l</code> (podendo usar também <code>dpkg -l | wc -l</code>). Para listar um pacote específico, digite <code>dpkg -l nomedopacote</code> ou <code>apt list nomedopacote</code>.</p>
+
+<p>Para reconfigurar o dpkg, digite <code>sudo dpkg --configure -a</code>.</p>
+
+<h4>Outras Formas de Instalar Programas</h4>
+
+<p>Para instalar um arquivo sh, basta dar permissão de execução com <code>sudo chmod +x nomedoscript.sh</code> e rodar ele com <code>sudo ./nomedoscript.sh</code>. O processo com arquivos run, bin, appimage ou sem extensão (mas que seja executável ou script) é o mesmo. Pode ser necessário instalar dependências caso a instalação dê erro.</p>
+
+<p>Um arquivo .AppImage pode ser executado diretamente sem instalar e sem dar permissões, no entanto, requer um pouco de cautela ao executar esses tipos de programas.</p>
+
+<p>Algumas distros como o Ubuntu tem loja de aplicativos, onde podemos baixar diretamente vários programas, podemos procurar por exemplo, o BleachBit (limpador de sistema para Linux) e instalar sem dificuldades.</p>
+
+<h4>Adicionando Repositórios</h4>
+
+<p>Para adicionar um repositório, podemos fazer algo assim (esse exemplo é pro Java):</p>
+
+<pre>
+<code>
+sudo add-apt-repository ppa:linuxuprising/java
+sudo apt-get update
+sudo apt-get install oracle-java14-installer
+</code>
+</pre>
+
+<p>Para remover é só digitar <code>sudo add-apt-repository http://ppa.launchpad.net/linuxuprising/java/ubuntu --remove</code>.</p>
+
+<p>Para corrigir erros no download do Java, primeiramente pegue o link do download certo e seu checksum no site da Oracle: <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank">https://www.oracle.com/java/technologies/javase-downloads.html</a></p>
+
+<p>Tente instalar o Java pelo repositório normalmente, depois edite o arquivo localizado em <code>/var/lib/dpkg/info/</code> com o nome <code>oracle-java14-installer.postinst</code> (ou versão equivalente) como root, e altere essa linha para o checksum da versão especificada do Java:</p>
+
+<pre>
+<code>
+SHA256SUM_TGZ="927cfcfff502c5e73db33bb6fee7f29f62bd0e831233fd78cd58a5b998bc73be"
+</code>
+</pre>
+
+<p>E no mesmo arquivo, altere a versão e a versão menor aqui:</p>
+
+<pre>
+<code>
+JAVA_VERSION=14.0.1
+JAVA_VERSION_2nd_PART=
+JAVA_VERSION_MINOR=7
+</code>
+</pre>
+
+<p>E corrija o restante do link aqui (no caso, o hash do link):</p>
+
+<pre>
+<code>
+PARTNER_URL="http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}+${JAVA_VERSION_MINOR}/664493ef4a6946b186ff29eb326336a2/$FILENAME"
+</code>
+</pre>
+
+<p>Caso não consiga atualizar por esse método, copie o conteúdo do pacote tar.gz na pasta <code>java-14-oracle</code> ou equivalente em <code>/usr/lib/jvm</code>. Ou jogue o tar.gz na pasta <code>/var/cache/oracle-jdk14-installer-local</code> ou equivalente.</p>
+
+<h4>Baixando um deb pelo Terminal</h4>
+
+<p>Também é possível baixar arquivos de um servidor pro Linux com o comando <code>wget</code>, veja um exemplo pra baixar o otimizador Stacer, para instalação posterior:</p>
+
+<pre>
+<code>
+wget https://github.com/oguzhaninan/Stacer/releases/download/v1.0.6/Stacer_1.0.6_i386.deb -O stacer.deb
+</code>
+</pre>
+
+<p>PS: É possível baixar qualquer tipo de conteúdo dessa forma.</p>
+
+<h3>Atualização do Sistema</h3>
+
+<p>Para atualizar o sistema, usamos esses comandos:</p>
+
+<pre>
+<code>
+sudo apt-get -f install
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get -u dist-upgrade
+sudo apt-get clean
+sudo apt-get autoclean
+sudo apt-get autoremove
+</code>
+</pre>
+
+<p>Atualmente, podendo ser também só com apt, assim:</p>
+
+<pre>
+<code>
+sudo apt install -f
+sudo apt update
+sudo apt upgrade
+sudo apt dist-upgrade
+sudo apt clean
+sudo apt autoclean
+sudo apt autoremove
+</code>
+</pre>
+
+<p>PS: O dist-upgrade pode ser substituído por <code>full-upgrade</code>.</p>
+
+<p>O comando <code>update</code> apenas atualiza a lista de programas a atualizar, para atualizar os mesmos usamos os comandos <code>upgrade</code> e <code>dist-upgrade</code>.</p>
+
+<p>Esteja atento as diferenças:</p>
+
+<ul>
+    <li><code>apt-get upgrade</code> - Atualiza apenas o que tem uma nova versão.</li>
+    <li><code>apt-get dist-upgrade</code> - Atualiza o que tem uma nova versão e instala e remove pacotes de forma inteligente, atualiza também o kernel.</li>
+    <li><code>do-release-upgrade</code> - Executado após o dist-upgrade, para atualizar a versão do sistema.</li>
+</ul>
+
+<p>PS: Caso apareça algum erro tipo "não foi possível obter trava /var/lib/dpkg/lock", execute <code>sudo rm /var/lib/dpkg/lock</code> (coloque o caminho que aparecer no erro). Mas o recomendado é matar o processo, usando <code>kill -9 1503</code> (o número do processo mostrado).</p>
+
+<p>Para listar os pacotes já instalados, use o comando <code>sudo apt list --installed</code> ou <code>dpkg -l</code>. Para listar os pacotes digite <code>apt list</code> e para lista os pacotes a atualizar, digite <code>apt list --upgradable</code>.</p>
+
+<p>Se tiver problemas com atualizações de repositórios, digite <code>sudo rm -r /var/lib/apt/lists/* -vf</code>.</p>
+
+<p>Ao dar erro em busca de arquivos, tente dar um update ou digite <code>sudo apt-get upgrade --fix-missing</code> (podendo fazer também com dist-upgrade).</p>
+
+<p>Se algum pacote não atualizar com upgrade nem dist-upgrade, apenas dê um <code>sudo apt install nomedopacote</code> para forçar a atualização.</p>
+
+<p>Se aparecer problemas com dependências de arquivos ao instalar, execute esses comandos:</p>
+
+<pre>
+<code>
+sudo apt-get clean
+sudo apt-get update
+sudo dpkg --configure -a
+sudo apt-get install -f
+sudo apt --fix-broken install
+sudo rm /var/cache/debconf/*.dat 
+</code>
+</pre>
+
+<p>Em algumas situações, principalmente ao instalar arquivos DEB, as dependências já são corrigidas com o sudo apt-get install -f. Dependendo do caso, pode ser necessário rodar <code>sudo dpkg --reconfigure -a</code>, podendo também ser especificado um pacote específico (o mesmo vale para o configure).</p>
+
+<p>PS: O apt-get clean também é usado para limpar arquivos de instalação já usados, pode ser usado apt-get autoclean também, ou autoremove para remover pacotes não usados.</p>
+
+<h3>Limpando RAM</h3>
+
+<p>Para limpar a RAM do Linux, use esses comandos na ordem:</p>
+
+<pre>
+<code>
+sudo sync
+
+sudo sysctl vm.drop_caches=3
+
+sudo sh -c 'echo 3>/proc/sys/vm/drop_caches'
+</code>
+</pre>
+
+<h3>Distros Baseadas em Red Hat</h3>
+
+<p>As dicas dessa página foram em sua maioria, usadas em distros baseadas em Debian (como Ubuntu, Mint, Kali, Parrot), mas a maioria consegue também ser aplicada em distros baseadas em Red Hat (como Fedora, CentOS, OpenSUSE, Oracle Linux), no entanto, essas últimas não utilizam o apt-get e nem o dpkg, e sim o yum e o rpm.</p>
+
+<p>Para atualizar distros baseadas em Red Hat, digite esses comandos:</p>
+
+<pre>
+<code>
+yum check-update # Checa o que tem pra atualizar
+yum upgrade # Atualiza os programas
+yum upgrade system-upgrade # Atualiza os programas e o sistema
+yum clean packages # Limpa os pacotes em cache
+yum clean all # Limpa os pacotes já baixados
+yum autoremove # Remove pacotes não usados
+</code>
+</pre>
+
+<p>Para instalar um pacote específico digite <code>yum install nomedopacote</code>, para remover digite <code>yum remove nomedopacote</code>, e para procurar um pacote, <code>yum search nomedopacote</code>. Para listar os pacotes, digite <code>yum list</code> e se for listar um determinado pacote, use o comando <code>yum list nomedopacote</code>. Para listar pacotes a atualizar use <code>yum list --updates</code> e para listar os pacotes já instalados, digite <code>yum list --installed</code>.</p>
+
+<p>Para instalar um pacote rpm baixado, use o comando <code>rpm -i nomedopacote.rpm</code> (pode ser necessário instalar dependências antes), para atualizar um pacote use o comando <code>rpm -U nomedopacote.rpm</code> e para remover um pacote digite <code>rpm -e nomedopacote</code> (sem a extensão mesmo).</p>
+
+<p>Para listar os pacotes já instalados, use o comando <code>rpm -qa</code>.</p>
+
+<p>Em distros baseadas em Red Hat, também podemos usar o programa Alien para converter deb para rpm, digitando o comando <code>alien --to-rpm nomedopacote.deb</code> como root, e depois pra instalar use normalmente <code>rpm -i nomedopacote.rpm</code>.</p>
+
+<p>Hoje temos como opção também o gerenciador de pacotes dnf, cujos comandos básicos são esses:</p>
+
+<pre>
+<code>
+dnf check-update # Verifica atualizações
+dnf upgrade # Atualiza os programas
+dnf system-upgrade # Atualiza o sistema
+dnf clean packages # Limpa os pacotes em cache
+dnf clean all # Limpa os pacotes já baixados
+dnf autoremove # Remove pacotes não usados
+
+dnf install nomedopacote # Instala um pacote
+dnf remove nomedopacote # Remove um pacote
+dnf search nomedopacote # Procura um pacote
+dnf list # Lista os pacotes disponíveis
+dnf info nomedopacote # Mostra informações sobre um pacote
+dnf check-update # Também lista os pacotes a atualizar
+dnf list installed # Lista os pacotes instalados
+</code>
+</pre>
+
+<p>PS: Todos os comandos devem ser executados como root.</p>
+
+<h3>Diretórios Importantes do Sistema</h3>
+
+<p>Esses são os diretórios mais importantes do Linux e sistemas baseados em Unix:</p>
+
+<ul>
+    <li><b>/bin</b>: Binários essenciais ao sistema.</li>
+    <li><b>/boot</b>: Arquivos do processo de inicialização.</li>
+    <li><b>/cdrom</b>: Ponto de montagem para CD-Rom (mas o padrão é o /media).</li>
+    <li><b>/dev</b>: Arquivos de dispositivos.</li>
+    <li><b>/etc</b>: Arquivos de configuração, tipo o "registro" do Linux (veja mais clicando <a href="http://www.uniriotec.br/~morganna/guia/dir_etc.html" target="_blank">aqui</a>).</li>
+    <li><b>/home</b>: Referente à usuários do sistema.</li>
+    <li><b>/lib</b>: Bibliotecas essenciais partilhadas.</li>
+    <li><b>/lost</b>: Arquivos recuperados.</li>
+    <li><b>/media</b>: Diretórios que montam CDs, DVDs, partições e pen-drives inseridos.</li>
+    <li><b>/mnt</b>: Montagem de sistemas temporários.</li>
+    <li><b>/opt</b>: Pacotes opcionais (geralmente usado para instalar programas, principalmente tarballs).</li>
+    <li><b>/proc</b>: Onde encontra-se o kernel e arquivos de processo.</li>
+    <li><b>/root</b>: O "home" do superusuário root.</li>
+    <li><b>/run</b>: Arquivos temporários de aplicativos.</li>
+    <li><b>/sbin</b>: Arquivos binários de administração.</li>
+    <li><b>/srv</b>: Serviçoes de dados (como o de um servidor, onde ficam os arquivos).</li>
+    <li><b>/tmp</b>: Arquivos temporários, apagados em todo boot.</li>
+    <li><b>/usr</b>: Contém aplicativos usados pelos usuários, e não pelo sistema.</li>
+    <li><b>/var</b>: Arquivos de dados variáveis, é como o usr, mas com permissão de escrita para arquivos.</li>
+</ul>
+
+<p>PS: Os diretórios são reconhecidos como arquivos no Linux.</p>
+
+<p>O Android (que também usa Kernel Linux) também possuí a maioria desses diretórios (exceto /boot, /cdrom, /home, /mnt, /opt, /run, /srv, /usr e /var) não acessíveis em sistemas sem root, e tem outras pastas como a <b>/cache</b> (armazenamento de dados pra execução), <b>/data</b> (dados), <b>/init</b> (inicialização), <b>/sdcard</b> (cartão SD), <b>/storage</b> (área de armazenamento) e <b>/system</b> (sistema).</p>
+
+<p>PS: A pasta <code>/opt</code>: Pode ser usado para instalar arquivos de downloads.</p>
+
+<p>Para mover entre pastas usamos <code>cd</code> (igual no DOS), para exibir conteúdo do diretório <code>ls</code>.</p>
+
+<p>O arquivo <code>~/.bashrc</code> é onde está o path do usuário, onde podemos adicionar variáveis de ambiente colocando <code>export PATH=$PATH:/caminhododiretorios/</code>, e em <code>/etc/bash.bashrc</code> podemos colocar outras variáveis de ambiente, na sintaxe <code>NOMEDAVARIAVEL=conteudo</code>. Podemos também colocar outros diretórios no path de forma global no arquivo <code>/etc/environment</code>, separado por dois pontos (como <code>:/caminhododiretorio</code>).</p>
+
+<p>PS: Evite colocar caminhos com espaços.</p>
+
+<p><a href="dicas-para-linux-2.html">Parte 2 da Matéria</a></p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java Web JSF</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java Web JSF</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsf-1.html">Tudo sobre Java Web JSF Parte 1!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsf-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java Web JSF Parte 2!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsf-3.html">Tudo sobre Java Web JSF Parte 3!</a></li>
+                    <li><a href="tudo-sobre-javaweb-jsf-4.html">Tudo sobre Java Web JSF Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java Web JSF Parte 2</h2>
+
+<h3>Criando Templates</h3>
+
+<p>Os templates são como uma "casca" que usaremos em nosso site, aplicando em todas as telas do nosso sistema, dessa forma, alterando apenas o template, alteramos a página toda de uma só vez.</p>
+
+<p>Crie um novo XHTML com o nome template para isso, de forma que tenha mais um atributo xmlns, assim:</p>
+
+<pre>
+<code>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"&gt;
+    &lt;h:head&gt;
+        &lt;title&gt;Sistema Carros&lt;/title&gt;
+    &lt;/h:head&gt;
+    &lt;h:body&gt;
+    
+    &lt;/h:body&gt;
+&lt;/html&gt;
+</code>
+</pre>
+
+<p>E coloque essa estrutura nele:</p>
+
+<pre>
+<code>
+&lt;h1&gt;Sistema Carros&lt;/h1&gt;
+&lt;hr/&gt;
+&lt;ui:insert name="corpo"&gt;
+
+&lt;/ui:insert&gt;
+</code>
+</pre>
+
+<p>E no index, podemos suprimir o head e o body, chamando ele apenas com o atributo template dentro de tags decorate, assim:</p>
+
+<pre>
+<code>
+&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;ui:decorate xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.cor/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="templates.xhtml"&gt;
+    
+&lt;/ui:decorate&gt;
+</code>
+</pre>
+
+<p>Dessa forma, ele usará apenas o XML para as páginas, nada de HTML, mas para aparecer conteúdo, devemos colocar mais elementos na página index, no caso, o define, com o mesmo name do insert do template, dessa forma:</p>
+
+<pre>
+<code>
+&lt;ui:define name="corpo"&gt;
+    &lt;h1&gt;Bem-vindo ao Sistema&lt;/h1&gt;
+&lt;/ui:define&gt;
+</code>
+</pre>
+
+<p>Podemos ter mais de um insert no template, desde que tenham nomes diferentes.</p>
+
+<p>Mas também podemos usar insert sem names no template, e usar um span no index, sem as tags define, assim:</p>
+
+<pre>
+<code>
+&lt;h1&gt;Bem-vindo ao Sistema&lt;/h1&gt;
+&lt;span>Sistema&lt;/span&gt;
+</code>
+</pre>
+
+<p>No template, podemos criar um menu assim (abaixo do h1 com Sistema Carros):</p>
+
+<pre>
+<code>
+&lt;h:form&gt;
+    &lt;p:menubar&gt;
+        &lt;p:menuitem value="Home" url="index.jsf"&gt;&lt;/p:menuitem&gt;
+        &lt;p:menuitem value="Gerenciar" url="gerenciar-carros.jsf"&gt;&lt;/p:menuitem&gt;
+    &lt;/p:menubar&gt;
+&lt;/h:form&gt;
+</code>
+</pre>
+
+<p>Todas as páginas aplicadas, terão os elemento aplicados nas páginas jsf, para aplicar em todas, basta usar as tags ui:decorate.</p>
+
+<h3>Banco de Dados - Parte 1</h3>
+
+<p>Para adicionar o banco de dados ao nosso projeto, vá em bibliotecas e adicione a biblioteca do Driver de MySQL (ou do banco que será usado, como o PostgreSQL). O do PostgreSQL pode ser baixado daqui: <a href="https://jdbc.postgresql.org/download/" target="_blank">https://jdbc.postgresql.org/download/</a></p>
+
+<p>No SQL, crie o banco e a tabela com esses comandos:</p>
+
+<pre>
+<code>
+create database sistema_carros
+default character set utf8
+default collate utf8_general_ci;
+
+use sistema_carros;
+
+create table carro (
+    id int not null auto_increment,
+    modelo varchar(50) not null,
+    fabricante varchar(20) not null,
+    cor varchar(20) not null,
+    ano date,
+    primary key(id)
+)
+default charset = utf8;
+</code>
+</pre>
+
+<p>Vamos voltar ao nosso projeto de carros, com o mesmo formulário anterior.</p>
+
+<p>Crie uma nova classe (num novo pacote denominado util), chamada FabricaConexao, com esse código:</p>
+
+<pre>
+<code>
+package util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class FabricaConexao {
+    private static Connection conexao; // Importe
+    private static final String URL_CONEXAO = "jdbc:mysql://localhost:3306/sistema_carros"; // Se for postgre é jdbc:postgresql://localhost:5432/sistema_carros
+    private static final String USUARIO = "root";
+    private static final String SENHA = ""; 
+
+    public static Connection getConexao() {
+        if(conexao == null) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver"); // Se for Postgre, coloque org.postgresql.Driver
+                conexao = DriverManager.getConnection(URL_CONEXAO, USUARIO, SENHA); // Importe
+            }
+            catch(SQLException | ClassNotFoundException ex) { // Importe
+                Logger.getLogger(FabricaConexao.class.getName()).log(Level.SEVERE, null, ex);
+            }   
+        }
+        return conexao;
+    }
+      
+    public static void fecharConexao() {
+        if(conexao != null) {
+            try {
+                conexao.close();
+                conexao = null;
+            }
+            catch(SQLException ex) {
+                Logger.getLogger(FabricaConexao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+}
+</code>
+</pre>
+
+<p>E crie um pacote com o nome DAO e uma classe com o nome CarroDAO, dessa forma:</p>
+
+<pre>
+<code>
+package dao;
+
+import classes.Carro;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import util.FabricaConexao;
+
+public class CarroDAO {
+    private Connection conexao = null;
+
+    public CarroDAO() {
+        conexao = FabricaConexao.getConexao();
+    }
+
+    public void salvar(Carro car) {
+        String sql = "insert into carro (modelo, fabricante, cor, ano) values (?, ?, ?, ?)";
+
+        try {
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            
+            Calendar ano = Calendar.getInstance(); // Importar
+            ano.set(Integer.parseInt(car.getAno()), 0, 1);
+            
+            ps.setString(1, car.getModelo());
+            ps.setString(2, car.getFabricante());
+            ps.setString(3, car.getCor());
+            ps.setDate(4, new Date(ano.getTimeInMillis())); // Importe Java.sql.Date
+            
+            ps.execute();
+            
+            FabricaConexao.fecharConexao();
+        }
+        catch(SQLException ex) {
+            Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+}
+</code>
+</pre>
+
+<p>PS: Note que não precisamos usar new para criar o objeto conexao, por causa do static na outra classe. Não é necessário recebermos um retorno, por isso usamos o execute() ao invés do executeQuery(), nesse caso.</p>
+
+<p>Volte na classe CarroBean e adicione a chamada da classe CarroDAO, assim:</p>
+
+<pre>
+<code>
+public void adicionar() {
+    carros.add(car);
+    new CarroDAO().salvar(car); // Importe
+    car = new Carro();
+}
+</code>
+</pre>
+
+<p>Dessa forma, tudo que colocarmos no nosso formulário já será salvo, sem precisar alterar o XHTML.</p>
+
+<h3>Banco de Dados - Parte 2</h3>
+
+<p>Primeiramente, vamos em Carro e adicione os métodos equals e hashcode, clicando com o botão direito.</p>
+
+<p>Depois, volte em CarroDAO e coloque esse método:</p>
+
+<pre>
+<code>
+public List&lt;Carro&gt; buscar() { // Importe
+    String sql = "select * from carro";
+
+    try {
+        PreparedStatement ps = conexao.prepareStatement(sql);
+        ResultSet results = ps.executeQuery(); // Importe
+        List&lt;Carro&gt; carros = new ArrayList&lt;&gt;(); // Importe
+
+        while(results.next()) {
+            Carro car = new Carro();
+
+            Calendar ano = Calendar.getInstance();
+            ano.setTime(results.getDate("ano"));
+
+            car.setId(results.getInt("id")); // Isso pega o valor da coluna id da tabela.
+            car.setModelo(results.getString("modelo"));
+            car.setFabricante(results.getString("fabricante"));
+            car.setCor(results.getString("cor"));
+            car.setAno(String.valueOf(ano.get(Calendar.YEAR)));
+
+            carros.add(car);
+        }
+        return carros;
+    }
+    catch(SQLException ex) {
+        Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        return null;
+    }
+}
+</code>
+</pre>
+
+<p>E na Carro Bean, adicione o método listar e faça algumas alterações:</p>
+
+<pre>
+<code>
+private Carro car = new Carro();
+private List&lt;Carro&gt; carros = new ArrayList&lt;&gt;();
+private CarroDAO carD = new CarroDAO(); // Colocamos o objeto fora dos métodos pra não ter que criarmos ele toda hora
+
+public void adicionar() {
+    carros.add(car);
+    carD.salvar(car);
+    car = new Carro();
+}
+
+public void listar() {
+    carros = carD.buscar();
+}
+</code>
+</pre>
+
+<p>E no xhtml, coloque esse botão, ao lado do adicionar:</p>
+
+<pre>
+<code>
+&lt;p:commandButton value="Buscar" action="#{carroBean.listar()}" update="@form"&gt;&lt;/p:commandButton&gt;
+</code>
+</pre>
+
+<p>Volte em CarroBean e coloque esse método:</p>
+
+<pre>
+<code>
+public void editar(Carro c) {
+    car = c;
+}
+</code>
+</pre>
+
+<p>E no XHTML, dentro da tag dataTable, como o primeiro elemento dele, essas tags:</p>
+
+<pre>
+<code>
+&lt;p:column&gt;
+    &lt;p:commandButton value="Editar" action="#{carroBean.editar(carroForm)}" update="@form"&gt;&lt;/p:commandButton&gt;
+&lt;/p:column&gt;
+</code>
+</pre>
+
+<p>E no CarroDAO, altere o método salvar dessa forma:</p>
+
+<pre>
+<code>
+public void salvar(Carro car) {
+    String sql;
+
+    try {
+        PreparedStatement ps;
+
+        if(car.getId() == null) {
+            sql = "insert into carro (modelo, fabricante, cor, ano) values (?, ?, ?, ?)";
+
+            ps = conexao.prepareStatement(sql);
+        }
+        else {
+            sql = "update carro set modelo = ?, fabricante = ?, cor = ?, ano = ? where id = ?";
+
+            ps = conexao.prepareStatement(sql);
+            ps.setInt(5, car.getId());
+        }
+        
+        Calendar ano = Calendar.getInstance(); // Importar
+        ano.set(Integer.parseInt(car.getAno()), 0, 1);
+
+        ps.setString(1, car.getModelo());
+        ps.setString(2, car.getFabricante());
+        ps.setString(3, car.getCor());
+        ps.setDate(4, new Date(ano.getTimeInMillis())); // Importe Java.sql.Date
+        ps.execute();
+
+        FabricaConexao.fecharConexao();
+    }
+    catch(SQLException ex) {
+        Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
+    }  
+}
+</code>
+</pre>
+
+<p>Em CarroBean, exclua o método <code>carros.add(car)</code> em adicionar, para não causar confusão na visualização, já que este não interfere no banco do nosso site.</p>
+
+<p>Podemos mudar também o value do button Adicionar para Adicionar/Atualizar.</p>
+
+<ul>
+    <li><a href="tudo-sobre-javaweb-jsf-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-javaweb-jsf-3.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

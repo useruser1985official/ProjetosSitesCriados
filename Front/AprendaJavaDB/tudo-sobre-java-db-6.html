@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java com Banco de Dados</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java com Banco de Dados</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-db-1.html">Tudo sobre Java com Banco de Dados Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-db-2.html">Tudo sobre Java com Banco de Dados Parte 2!</a></li>        
+                    <li><a href="tudo-sobre-java-db-3.html">Tudo sobre Java com Banco de Dados Parte 3!</a></li>
+                    <li><a href="tudo-sobre-java-db-4.html">Tudo sobre Java com Banco de Dados Parte 4!</a></li>
+                    <li><a href="tudo-sobre-java-db-5.html">Tudo sobre Java com Banco de Dados Parte 5!</a></li>
+                    <li><a href="tudo-sobre-java-db-6.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java com Banco de Dados Parte 6!</a></li>
+                    <li><a href="tudo-sobre-java-db-7.html">Tudo sobre Java com Banco de Dados Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java com Banco de Dados Parte 6</h2>
+
+<h3>Validação Completa do Eleitor</h3>
+
+<p>Primeiro, vamos colocar no action do salvar esse código:</p>
+
+<pre>
+<code>
+private void btnSalvActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    if(txtNome.getText().equals("")) {
+        System.out.println("Campo Vazio!");
+    }
+    else {
+        System.out.println("Campo Preenchido!");
+    }
+}
+</code>
+</pre>
+
+<p>O problema, é que dessa forma, ao colocar só espaços, ele acusa como preenchido, que seria salvo no banco de dados.</p>
+
+<p>Como visto anteriormente, para remover os espaços, basta colocar o trim(), dessa forma:</p>
+
+<pre>
+<code>
+private void btnSalvActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    if(txtNome.getText().trim().equals("")) {
+        System.out.println("Campo Vazio!");
+    }
+    else {
+        System.out.println("Campo Preenchido!");
+    }
+}  
+</code>
+</pre>
+
+<p>Dessa forma, evitamos que salvem dados vazios.</p>
+
+<p>A validação completa seria essa:</p>
+
+<pre>
+<code>
+private void btnSalvActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    if(txtNome.getText().trim().equals("") || txtCPF.getText().trim().length() != 14 || txtCEP.getText().trim().length() != 9 || txtRua.getText().trim().equals("") || txtBair.getText().trim().equals("")) {
+        System.out.println("Preencha Todos os Campos!");
+    }
+    else {
+        System.out.println("Campo Preenchido!");
+    }
+}
+</code>
+</pre>
+
+<p>Para validar completamente, seria esse código:</p>
+
+<pre>
+<code>
+private void btnSalvActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    if(txtNome.getText().trim().equals("") || txtCPF.getText().trim().length() != 14 || txtCEP.getText().trim().length() != 9 || txtRua.getText().trim().equals("") || txtBair.getText().trim().equals("")) {
+        JOptionPane.showMessageDialog(null, "Preencha Todos os Campos!", "Alerta", JOptionPane.WARNING_MESSAGE); // Importe javax.swing.JOptionPane
+    }
+    else {
+        // Onde usaremos para inserir dados no banco.
+    }
+}
+</code>
+</pre>
+
+<p>Faça o mesmo nos outros frames.</p>
+
+<h3>Modelo Relacional</h3>
+
+<p>Para criarmos o banco de dados, coloque esse código no SQL, onde criaremos todas as tabelas necessárias, inclusive com as chaves estrangeiras:</p>
+
+<pre>
+<code>
+create database dburna
+default character set utf8
+default collate utf8_general_ci;
+
+create table usuario (
+    id int unique not null auto_increment,
+    login varchar(45),
+    senha varchar(45),
+    primary key(id)
+)
+default charset = utf8;
+
+create table partido (
+    id int unique not null auto_increment,
+    nome varchar(20),
+    primary key(id)
+)
+default charset = utf8;
+
+create table candidato (
+    id int unique not null auto_increment,
+    nome varchar(100),
+    numero int,
+    partido_id int not null,
+    primary key(id),
+    foreign key(partido_id) references partido(id)
+)
+default charset = utf8;
+
+create table eleitor (
+    id int unique not null auto_increment,
+    nome varchar(100),
+    cpf varchar(14),
+    cep varchar(9),
+    rua varchar(200),
+    bairro varchar(45),
+    numero int,
+    primary key(id)
+)
+default charset = utf8;
+
+create table urna (
+    id int unique not null auto_increment,
+    datahora datetime,
+    candidato_id int not null,
+    eleitor_id int not null,
+    voto int,
+    primary key(id),
+    foreign key(candidato_id) references candidato(id),
+    foreign key(eleitor_id) references eleitor(id)
+)
+default charset = utf8;
+</code>
+</pre>
+
+<h3>Iniciando Model</h3>
+
+<p>Volte no projeto Java, e crie um pacote com o nome model.bean, onde ficarão as Javabeans do nosso projeto, nele crie uma classe com o nome Partido, que terá esse código:</p>
+
+<pre>
+<code>
+package model.bean;
+
+public class Partido {
+    private int id;
+    private String nome;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+}
+</code>
+</pre>
+
+<p>E em model.bean, crie também a clase candidato, com esse código:</p>
+
+<pre>
+<code>
+package model.bean;
+
+public class Candidato {
+    private int id;
+    private String nome;
+    private int numero;
+    private Partido part;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public Partido getPart() {
+        return part;
+    }
+
+    public void setPart(Partido part) {
+        this.part = part;
+    }
+}
+</code>
+</pre>
+
+<p>Faça também os beans de outras tabelas, seguindo o mesmo molde, para Urna, Eleitor e Usuario. Lembrando que aonde tiver chave estrangeira, nós colocaremos no atributo a classe criada, e podemos ter acesso aos métodos dela (como visto em Partido, logo acima).</p>
+
+<p>PS: Na classe Urna, podemos declarar a data como Date, importando o pacote do Java.util.Date. Veja um exemplo de uso disso no terminal mesmo:</p>
+
+<pre>
+<code>
+java.sql.Date data;
+
+try {
+    SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");
+    Date muda = formata.parse("15/02/1999"); // Importe java.util.Date
+    data = new java.sql.Date(muda.getTime()); // aqui é sql mesmo
+}
+catch(ParseException ex) {
+    ex.printStackTrace();
+
+    data = null;
+}
+
+System.out.println(data.toString());
+</code>
+</pre>
+
+<p>Para transformar uma data de SQL no formato yyyy-MM-dd em java.sql.Date, use o método Date.valueOf() dessa classe. Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy"); // Importe java.text.SimpleDateFormat
+String dataForm = formataData.format(Date.valueOf("2019-07-23")); // Importe java.sql.Date
+
+System.out.println(dataForm);
+</code>
+</pre>
+
+<p>Esse código acima serve pra converter as datas do formato yyyy-MM-dd (padrão do SQL) para dd/MM/yyyy.</p>
+
+<p>Porém, para apenas pegar a data atual no formato yyyy-MM-dd antes de guardar na SQL, fazemos assim:</p>
+
+<pre>
+<code>
+Date atual = new Date(); // Importa de java.util.Date
+java.sql.Date data = new java.sql.Date(atual.getTime());
+</code>
+</pre>
+
+<h3>Adicionando Bibliotecas e Criando Conexão</h3>
+
+<p>Adicione a biblioteca do MySQL ou PostgreSQL no projeto. Crie a classe ConnectionFactory num pacote connection com esse código:</p>
+
+<pre>
+<code>
+package connection;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+// Isso define os dados pra conexão:
+
+public class ConnectionFactory {
+    private static final String DRIVER = "com.mysql.jdbc";
+    private static final String URL = "jdbc:mysql://localhost:3306/dburna";
+    private static final String USER = "root";
+    private static final String PASS = "";
+    
+    // Isso cria a conexão:
+    
+    public static Connection getConnection() { // Importar java.sql.Connection
+        try {
+            return DriverManager.getConnection(URL, USER, PASS); // Importar
+        }
+        catch(SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    // Isso fecha a conexão:
+    
+    public static void closeConnection(Connection con) {
+        if(con != null) {
+            try {
+                con.close();
+            }
+            catch(SQLException ex) {
+                System.err.println("ERRO: " + ex.getMessage()); // Esse imprime em vermelho!
+            }
+        }
+    }
+    
+    public static void closeConnection(Connection con, PreparedStatement stmt) { // Importar java.sql.PreparedStatement
+        if(stmt != null) {
+            try {
+                stmt.close();
+            }
+            catch(SQLException ex) {
+                System.err.println("ERRO: " + ex.getMessage());
+            }
+        }
+        
+        closeConnection(con); // Invocação do primeiro método, que fecha a tal conexão.
+    }
+    
+    public static void closeConnection(Connection con, PreparedStatement stmt, ResultSet rs) { // Importar java.sql.ResultSet
+        if(rs != null) {
+            try {
+                rs.close();
+            }
+            catch(SQLException ex) {
+                System.err.println("ERRO: " + ex.getMessage());
+            }
+        }
+        
+        closeConnection(con, stmt); // Invocação do segundo método, que fecha a tal conexão.  
+    }   
+}
+</code>
+</pre>
+
+<p>No caso de PostgreSQL:</p>
+
+<pre>
+<code>
+private static final String DRIVER = "org.postgresql.jdbc";
+private static final String URL = "jdbc:postgresql://localhost:5432/dburna";
+private static final String USER = "postgres";
+private static final String PASS = "admin"; // A senha configurada
+</code>
+</pre>
+
+<h3>Criando DAO - Inserir Usuário</h3>
+
+<p>Crie um pacote com o nome model.dao e a classe UsuarioDAO, com esse código:</p>
+
+<pre>
+<code>
+package model.dao;
+
+import connection.ConnectionFactory;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import model.bean.Usuario;
+
+public class UsuarioDAO {
+    private Connection con = null; // Importar java.sql.Connection
+    
+    public UsuarioDAO() {
+        con = ConnectionFactory.getConnection(); // Importar connection.ConnectionFactory
+    }
+
+    public void create(Usuario u) {
+        PreparedStatement stmt = null;
+        String sql = "insert into usuario (login, senha) values (?, ?)"; // Inserir os dados do SQL.
+        
+        try {
+            stmt = con.prepareStatement(sql);
+
+            stmt.setString(1, u.getLogin());
+            stmt.setString(2, u.getSenha());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Salvo com Sucesso!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar!\n\n" + ex, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+}
+</code>
+</pre>
+
+<p>PS: Podemos criptografar as senhas, usando a classe CriptSenha criada nos projetos anteriores.</p>
+
+<p>Para inserir o usuário, coloque isso no método do click do botão de View Login:</p>
+
+<pre>
+<code>
+Usuario user = new Usuario(); // Importe
+UsuarioDAO dao = new UsuarioDAO(); // Importe
+        
+user.setLogin(txtLogin.getText().trim());
+user.setSenha(String.valueOf(txtSenha.getPassword()).trim()); // Não criptografe aqui
+        
+dao.create(user);
+</code>
+</pre>
+
+<p>No UsuarioDAO, faça o método checkLogin assim:</p>
+
+<pre>
+<code>
+public boolean checkLogin(String login, String senha) {
+    PreparedStatement stmt = null;
+    ResultSet rs = null; // Importe
+    String sql = "select * from usuario where login = ? and senha = ?";
+            
+    boolean checkagem = false;
+
+    try {
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, login);
+        stmt.setString(2, senha); // A criptografia vai aqui
+                
+        rs = stmt.executeQuery();
+
+        if(rs.next()) {
+            checkagem = true;
+        }
+    }
+    catch(SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Erro ao Autenticar!\n\n" + ex, "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+
+    return checkagem;
+}
+</code>
+</pre>
+
+<p>Na tela de Login, coloque esse código no evento do botão:</p>
+
+<pre>
+<code>
+UsuarioDAO dao = new UsuarioDAO();
+
+if(dao.checkLogin(txtLogin.getText().trim(), new String(txtSenha.getPassword()).trim())) {
+    new ViewPrincipal().setVisible(true);
+    this.dispose();
+}
+else {
+    JOptionPane.showMessageDialog(null, "Acesso Negado!", "Erro", JOptionPane.ERROR_MESSAGE);
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-java-db-5.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-java-db-7.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

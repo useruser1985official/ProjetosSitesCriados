@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java com Interface Swing</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java com Interface Swing</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-swing-1.html">Tudo sobre Java com Interface Swing Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-swing-2.html">Tudo sobre Java com Interface Swing Parte 2!</a></li>
+                    <li><a href="tudo-sobre-java-swing-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java com Interface Swing Parte 3!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java com Interface Swing Parte 3</h2>
+
+<h3>Agrupando JRadioButton</h3>
+
+<p>Crie um novo frame com o nome TelaRadioButton, e coloque nele dois botões de rádio, com os nomes masculino e feminino, e coloque as variáveis como radMasc e radFem, respectivamente.</p>
+
+<p>Só que o problema, é que ele vai deixar marcar as duas opções, quando o certo é só marcar uma. Para resolver isso, coloque no frame um grupo de botões, e coloque como variável o nome grupoRad, visualmente não veremos esse grupo no frame, então teremos que alterar no navegador do Netbeans.</p>
+
+<p>E no construtor do frame, basta colocar isso:</p>
+
+<pre>
+<code>
+public FrameRadio() {
+    initComponents();
+    grupoRad.add(radMasc);
+    grupoRad.add(radFem);
+}
+</code>
+</pre>
+
+<p>PS: Caso deseje que um deles já inicialize marcado por padrão, clique no botão de rádio desejado, vá em propriedades e marque a caixa selected.</p>
+
+<p>Caso queira adicionar os elementos dos botões de rádio à uma função chamada por algum evento, podemos fazer assim:</p>
+
+<pre>
+<code>
+private void btnClickActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    if(radMasc.isSelected()) {
+        System.out.println("Masculino");
+    }
+    else if(radFem.isSelected()) {
+        System.out.println("Feminino");
+    }
+}
+</code>
+</pre>
+
+<h3>Utilizando Checkbox</h3>
+
+<p>Crie um novo frame com o nome TelaCheckbox, coloque título e faça os ajustes, e coloque nele dois checkbos com os títulos Java e PHP, e suas respectivas variáveis (cbJava e cbPHP), coloque também um botão.</p>
+
+<p>No evento do botão, coloque esse título aqui:</p>
+
+<pre>
+<code>
+private void btnClickActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    System.out.println("Java: " + cbJava.isSelected());
+    System.out.println("PHP: " + cbPHP.isSelected());
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-java-swing-2.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-javaswing-4.html">Continuação da Matéria!</a></li>-->
+</ul>
+        </div>
+    </body>
+</html>

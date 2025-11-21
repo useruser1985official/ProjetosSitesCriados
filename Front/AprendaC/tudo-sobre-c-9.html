@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-c-1.html">Tudo sobre C Parte 1!</a></li>
+                    <li><a href="tudo-sobre-c-2.html">Tudo sobre C Parte 2!</a></li>
+                    <li><a href="tudo-sobre-c-3.html">Tudo sobre C Parte 3!</a></li>
+                    <li><a href="tudo-sobre-c-4.html">Tudo sobre C Parte 4!</a></li>
+                    <li><a href="tudo-sobre-c-5.html">Tudo sobre C Parte 5!</a></li>
+                    <li><a href="tudo-sobre-c-6.html">Tudo sobre C Parte 6!</a></li>
+                    <li><a href="tudo-sobre-c-7.html">Tudo sobre C Parte 7!</a></li>
+                    <li><a href="tudo-sobre-c-8.html">Tudo sobre C Parte 8!</a></li>
+                    <li><a href="tudo-sobre-c-9.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C Parte 9!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C Parte 9</h2>
+
+<h3>Manipulando Strings</h3>
+
+<p>No C, temos a biblioteca string.h que permite manipular arrays de char (já que string mesmo não existe em C).</p>
+
+<p>Vamos supor esse código aqui:</p>
+
+<pre>
+<code>
+// Isso dará erro:
+char frase[20] = "Isso é uma string";
+char copia[20] = *frase;
+
+printf("%s\n", copia);
+</code>
+</pre>
+
+<p>Por serem arrays, não é possível copiar conteúdos de um array de char para outro. Nesse caso usamos o método <code>strcpy</code>, assim:</p>
+
+<pre>
+<code>
+char frase[20] = "Isso é uma string";
+char copia[20];
+
+strcpy(copia, frase); // Inclua string.h
+
+printf("%s\n", copia);
+</code>
+</pre>
+
+<p>Para concatenar, fazemos assim, usando o <code>strcat</code>:</p>
+
+<pre>
+<code>
+char frase[50] = "Isso é uma string";
+
+strcat(frase, " com mais alguma coisa!"); // Inclua string.h
+
+printf("%s\n", frase);
+</code>
+</pre>
+
+<p>E para retornar a quantidade de caracteres usamos o <code>strlen</code>, assim:</p>
+
+<pre>
+<code>
+char frase[20] = "Isso é uma string";
+
+int tam = strlen(frase);
+
+printf("Tamanho do array de char: %d\n", tam);
+</code>
+</pre>
+
+<p>Para ver se uma string está vazia, use a função <code>strlen()</code>, assim:</p>
+
+<pre>
+<code>
+char* nome = "";
+
+printf("Nome está vazio? %s\n", !strlen(nome) ? "true" : "false");
+</code>
+</pre>
+
+<p>Podemos usar o <code>strcmp</code> para comparar conteúdos de strings:</p>
+
+<pre>
+<code>
+char *f1 = "Frase 1";
+char *f2 = "Frase 2";
+
+char *resul = !strcmp(f1, f2) ? "iguais" : "diferentes";
+
+printf("As frases são %s.\n", resul);
+</code>
+</pre>
+
+<p>Se o resultado de strcmp for zero, as strings são iguais, se for menor o conteúdo é menor e se for maior que 0 o conteúdo é maior.</p>
+
+<p>Para encontrar uma palavra numa string, fazemos assim, com o método <code>strstr</code>:</p>
+
+<pre>
+<code>
+char frase[20] = "Isso é uma string";
+
+char *resul = strstr(frase, "string");
+
+if(resul != NULL) {
+    printf("A palavra foi encontrada!\n");
+}
+else {
+    printf("Não existe essa palavra na string!\n");
+}
+</code>
+</pre>
+
+<p>Para dividir uma string, usamos o método <code>strtok</code> assim:</p>
+
+<pre>
+<code>
+char frase[20] = "Isso é uma string";
+char *divi;
+
+divi = strtok(frase, " ");
+
+while(divi != NULL) {
+    printf("%s\n", divi);
+
+    divi = strtok(NULL, " ");
+}
+</code>
+</pre>
+
+<p>Para inverter, não usamos essa biblioteca, mas um algoritmo, como podemos ver:</p>
+
+<pre>
+<code>
+char frase[20] = "Isso é uma string";
+char invert[20];
+
+int tam = strlen(frase) - 1;
+int j = 0;
+
+for(int i = tam; i >= 0; i--) {
+    invert[j] = frase[i];
+    j++;
+}
+
+invert[j] = '\0'; // Finaliza string
+
+printf("%s\n", invert);
+</code>
+</pre>
+
+<p>E para eliminar espaços excessivos de uma string, implementamos essa função simples:</p>
+
+<pre>
+<code>
+char* trim(char *s) {
+    int i;
+
+    while(isspace(*s)) s++;
+    for(i = strlen(s) - 1; isspace(s[i]); i--);
+    s[i + 1] = '\0';
+
+    return s;
+}
+</code>
+</pre>
+
+<p>E usamos assim:</p>
+
+<pre>
+<code>
+char frase[20] = "Isso é uma string";
+
+printf("%s\n", trim(frase));
+</code>
+</pre>
+
+<p>Podemos criar funções com o <code>toupper()</code> para transformar o texto em maiúscula, podemos fazer o mesmo com minúsculas usando <code>tolower()</code>, assim:</p>
+
+<pre>
+<code>
+// Inclua string.h e ctype.h
+
+char* maiuscula(char* texto);
+char* minuscula(char* texto);
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+    
+    char *frase = "Uma Frase";
+    char *maius, *minus;
+    
+    printf("%s\n", frase);
+    
+    maius = maiuscula(frase);
+    
+    printf("%s\n", maius);
+    
+    minus = minuscula(frase);
+    
+    printf("%s\n", minus);
+    
+    return 0;
+}
+
+char* maiuscula(char* texto) {
+    unsigned long int tam = strlen(texto); 
+
+    char aux[tam]; 
+
+    for(int i = 0; i < tam; i++) {
+        aux[i] = toupper(texto[i]); 
+    }
+    
+    aux[tam] = '\0';
+
+    texto = aux;
+    
+    return texto;
+}
+
+char* minuscula(char* texto) {
+    unsigned long int tam = strlen(texto); 
+
+    char aux[tam]; 
+
+    for(int i = 0; i < tam; i++) {
+        aux[i] = tolower(texto[i]); 
+    }
+    
+    aux[tam] = '\0';
+
+    texto = aux;
+    
+    return texto;
+}
+</code>
+</pre>
+
+<h3>Variável Global e Local com Mesmo Nome</h3>
+
+<p>Na linguagem C, para conseguirmos acessar o valor de uma variável global, dentro de uma função que possui uma variável local com mesmo nome, devemos usar a instrução extern (Manzano, 2015). Veja no exemplo, que foi necessário criar uma nova variável chamada <q>b</q>, com um bloco de instruções, que atribui a nova variável o valor <q>externo</q> de x:</p>
+
+<pre>
+<code>
+int x = 10;
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+
+    int x = -1;
+    int b;
+
+    {
+        extern int x;
+        b = x;
+    }
+
+    printf("Valor de x: %d\n", x);
+    printf("Valor de b (x global): %d\n", b);
+
+    return 0;
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-c-8.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-c-10.html">Continuação da Matéria!</a></li>-->
+</ul>
+
+        </div>
+    </body>
+</html>

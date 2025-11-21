@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-c-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C Parte 1!</a></li>
+                    <li><a href="tudo-sobre-c-2.html">Tudo sobre C Parte 2!</a></li>
+                    <li><a href="tudo-sobre-c-3.html">Tudo sobre C Parte 3!</a></li>
+                    <li><a href="tudo-sobre-c-4.html">Tudo sobre C Parte 4!</a></li>
+                    <li><a href="tudo-sobre-c-5.html">Tudo sobre C Parte 5!</a></li>
+                    <li><a href="tudo-sobre-c-6.html">Tudo sobre C Parte 6!</a></li>
+                    <li><a href="tudo-sobre-c-7.html">Tudo sobre C Parte 7!</a></li>
+                    <li><a href="tudo-sobre-c-8.html">Tudo sobre C Parte 8!</a></li>
+                    <li><a href="tudo-sobre-c-9.html">Tudo sobre C Parte 9!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C Parte 1</h2>
+
+<h3>Primeiro Programa em C</h3>
+
+<p>Todo programa em C começa com uma estrutura parecida com essa:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+    
+}
+</code>
+</pre>
+
+<p>Os <code>#include</code> são diretivas que incluem arquivos de cabeçalho (bibliotecas) antes da compilação do programa, cada biblioteca é usada para uma função específica, nos casos mais comuns, o <code>stdio.h</code> é um padrão para entrada e saída de dados (como para escrever algo na tela ou pegar algo digitado pelo usuário), e o <code>stdlib.h</code> envolve a alocação de memória e controle de processos.</p>
+
+<p>O <code>main</code> é a principal função do programa, geralmente declarado com o tipo de retorno <code>int</code>. Num dos próximos exemplos, usaremos <code>void</code> (vazio), que não retorna nada.</p>
+
+<p>Mas ao usar o int no método, precisaremos usar o <code>return 0</code> para indicar o fim do programa. Com int podemos controlar melhor o retorno por causa desse parâmetro, útil pra uso com outras aplicações.</p>
+
+<p>Para compilar programas e ele pausar antes de fechar, você pode colocar <code>system("pause")</code> (em Windows) ou <code>getchar()</code>, no final do programa, antes do retorno (lembrando que comandos system necessitam da biblioteca <code>stdlib.h</code>).</p>
+
+<p>Nesse exemplo, vamos criar um Olá Mundo, um com int e outro com void. Para isso usamos o <code>printf</code>, dessa forma:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt; // Entrada e saída, necessário para printf() e getchar()
+#include &lt;stdlib.h&gt; // Controle de memória e processos
+
+int main() {
+    printf("Olá Mundo!"); // Elemento do stdio.h
+    
+    getchar(); // Usada para o programa não fechar após a execução.
+    return 0; // Retorna 0, pois int retorna um valor inteiro.
+}
+</code>
+</pre>
+
+<p>PS: Como observado, muitos comandos utilizados no C e em outras linguagens semelhantes, necessitam ser finalizados com ponto-e-vírgula (;). Isso se manteve em várias outras linguagens descendentes do C, como o Java e o PHP.</p>
+
+<p>Exemplo com void:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void main() {
+    printf("Olá Mundo!");
+}
+</code>
+</pre>
+
+<p>Os comentários de uma linha se colocam ao lado de <code>//</code>, e de várias linhas entre <code>/* */</code>, por exemplo:</p>
+
+<pre>
+<code>
+// Comentário de uma linha
+
+/*
+Comentário
+de
+várias
+linhas
+*/
+</code>
+</pre>
+
+<p>No próximo exemplo, vamos declarar e usar algumas variáveis para fazermos uma soma:</p>
+
+<pre>
+<code>
+int main(void) {
+    int num1, num2, soma;
+    printf("Digite o primeiro número: ");
+    scanf("%d", &amp;num1);
+    printf("Digite o segundo número: ");
+    scanf("%d", &amp;num2);
+    
+    soma = num1 + num2;
+    
+    printf("Soma: %d", soma);
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>No exemplo acima, o <code>scanf</code> é usado para capturar entradas de teclados, com máscaras de formatação (<code>%</code>) e com <code>&amp;</code> ao lado da variável que será capturada.</p>
+
+<p>Também pode ser usado <code>puts</code> no lugar do printf, mas ele não permitirá usar máscaras de formatação, por isso caiu em desuso.</p>
+
+<p>PS: Caso você tenha configurado corretamente o path do Mingw no seu Windows, você pode criar diretamente arquivos com extensão c e compilar ele usando os comandos <code>gcc main.c -o nomedoprograma</code> (no Linux é o mesmo processo, apenas omitindo a extensão ou usando alguma extensão genérica, pode ser necessário usar o parâmetro <code>-no-pie</code> para gerar um executável, sendo que o padrão de algumas distribuições são <code>-pie</code> que gera a biblioteca compartilhada). Caso tenha mais de um arquivo do mesmo projeto, execute o comando <code>gcc -c nomedoarquivo.c</code> nos outros arquivos pra compilá-los e depois <code>gcc main.c nomedoarquivo.o -o nomedoprograma</code> no main pra montar. Pode ser necessário colocar o parâmetro <code>-lm</code> para forçar inclusão de bibliotecas, como as de operações matemáticas. Caso esteja num sistema 64 bits e queira compilar para 32 bits, use o parâmetro <code>-m32</code> (o default é <code>-m64</code>). Pode ser necessário instalar as dependências (instale o gcc-multilib).</p>
+
+<p>Para resolver problemas com acentuações em programas utilizamos o setlocale, dessa forma:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;locale.h&gt;
+
+int main() {
+    setlocale(LC_ALL, "portuguese"); // Inclua locale.h
+    printf("Essa é uma frase com acentuação!\n");
+   
+    return 0;
+}
+</code>
+</pre>
+
+<p>Dessa forma, resolvemos o problema com caracteres em idiomas latinos. Em algumas IDEs não exigem o locale incluído para isso.</p>
+
+<h3>Tipos de Dados</h3>
+
+<p>Os dados são as informações a serem processadas por um computador. Podem ser classificados em várias categorias, dependendo de suas características. Veja abaixo:</p>
+
+<ul>
+    <li>Tipos Básicos</li>
+    <li>Tipos de Enumeração</li>
+    <li>Tipo Void</li>
+    <li>Tipos Derivados (Structs, Arrays, Ponteiros, Unions, etc.)</li>
+</ul>
+
+<p>Tipos Básicos consistem em tipos aritméticos inteiros e de ponto-flutuante. Veja abaixo os tipos primitivos:</p>
+
+<table>
+    <tr>
+        <th>Tipo</th>
+        <th>Tamanho</th>
+        <th>Faixa de Valores</th>
+    </tr>
+    <tr>
+        <td>char</td>
+        <td>1 byte</td>
+        <td>-128 a 127</td>
+    </tr>
+    <tr>
+        <td>unsigned char</td>
+        <td>1 byte</td>
+        <td>0 a 255</td>
+    </tr>
+    <tr>
+        <td>signed char</td>
+        <td>1 byte</td>
+        <td>-128 a 127</td>
+    </tr>
+    <tr>
+        <td>int</td>
+        <td>4 bytes</td>
+        <td>-2147483648 a 2147483647</td>
+    </tr>
+    <tr>
+        <td>unsigned int</td>
+        <td>4 bytes</td>
+        <td>0 a 4294967295</td>
+    </tr>
+    <tr>
+        <td>short</td>
+        <td>2 bytes</td>
+        <td>-32,768 a 32,767</td>
+    </tr>
+    <tr>
+        <td>unsigned short</td>
+        <td>2 bytes</td>
+        <td>0 a 65,535</td>
+    </tr>
+    <tr>
+        <td>long</td>
+        <td>4 bytes</td>
+        <td>-2147483648 a 2147483647</td>
+    </tr>
+    <tr>
+        <td>long long</td>
+        <td>8 bytes</td>
+        <td>-9223372036854775808 a 9223372036854775807</td>
+    </tr>
+    <tr>
+        <td>unsigned long</td>
+        <td>4 bytes</td>
+        <td>0 a 4294967295</td>
+    </tr>
+    <tr>
+        <td>float</td>
+        <td>4 bytes</td>
+        <td>3.4E-38 a 3.4E+38 (até 6 casas decimais)</td>
+    </tr>
+    <tr>
+        <td>double</td>
+        <td>8 bytes</td>
+        <td>1.7E-308 a 1.7E+308 (até 15 casas decimais)</td>
+    </tr>
+    <tr>
+        <td>long double</td>
+        <td>16 bytes</td>
+        <td>3.4E-4932 a 1.1E+4932 (até 19 casas decimais)</td>
+    </tr>
+    <tr>
+        <td>bool</td>
+        <td>1 byte</td>
+        <td>true/false</td>
+    </tr>
+    <tr>
+        <td>char[]</td>
+        <td>1 byte por caractere</td>
+        <td>Textos em Geral</td>
+    </tr>
+</table>
+
+<p>PS: Letras únicas em char se coloca entre aspas simples, cadeias de caracteres se coloca entre aspas duplas.</p>
+
+<p>Para descobrirmos o tamanho de um tipo de variável no C, usamos o operador <code>sizeof</code>. Veja um exemplo:</p>
+
+<pre>
+<code>
+int main(void) {
+    printf("Tamanho de Armazenamento do Int: %d bytes.\n", sizeof(int));
+    printf("Tamanho de Armazenamento do Short: %d bytes.\n", sizeof(short));
+    printf("Tamanho de Armazenamento do Long: %d bytes.\n", sizeof(long));
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>Não há um tipo lógico definido na linguagem C original, portém a partir do padrão ISO C99 é possível usar o tipo (mais precisamente, macro) <code>bool</code>.</p>
+
+<p>No geral, em C, o valor inteiro 1 é considerado como <code>true</code> e o inteiro 0 como <code>false</code>. Qualquer outro número é considerado verdadeiro (true).</p>
+
+<p>Para usarmos o tipo lógico bool, precisamos incluir a biblioteca <code>stdbool.h</code> no código do programa.</p>
+
+<p>PS: Caso esteja usando uma versão mais antiga do C que não suporte tipos booleanos, podemos "criar" um tipo lógico com o seguinte código:</p>
+
+<pre>
+<code>
+typedef enum {false = 0, true = 1} logico;
+</code>
+</pre>
+
+<p>Já os tipos literais são tratados em C como valores numéricos, e não como literais. Cada caractere possui um correspondente numérico, obedecendo geralmente a tabela ASCII de caracteres.</p>
+
+<p>Em C temos o tipo <code>char</code> para representar um caractere literal. Seu tamanho é de 1 byte, possuindo então valores entre 0 e 255.</p>
+
+<p>Caso precisemos armazenar uma cadeia de caracteres (string), usamos arrays do tipo char. Um caractere nulo, representado por <code>\0</code>, sempre indicará o final da cadeia (e ele conta no tamanho da cadeia). Podemos também usar <code>char*</code> (vetor de char com ponteiro) para strings.</p>
+
+<p>Para converter tipos em C, podemos fazer assim:</p>
+
+<pre>
+<code>
+float real = 4.8;
+int num = (int)real;
+</code>
+</pre>
+
+<p>PS: Isso de colocar o tipo entre parênteses, é chamado de typecast, pode ser feito com qualquer tipo pra forçar uma conversão, mas só funciona quando é de tipos semelhantes (como forçar conversão de float para int, por exemplo).</p>
+
+<p>No caso de strings, podemos usar a função atoi pra isso (importe stdlib.h):</p>
+
+<pre>
+<code>
+char* frase = "90";
+int novo = atoi(frase);
+</code>
+</pre>
+
+<p>Também podemos usar o strtol para converter string em int (em qualquer base numérica), dessa forma, sem necessitar de importação:</p>
+
+<pre>
+<code>
+char* frase = "90";
+int novo = strtol(frase, NULL, 10); // O primeiro é a variável a ser convertida, o último número é a base numérica (no caso, a decimal)
+</code>
+</pre>
+
+<p>Para converter int em string, usamos o sprintf assim:</p>
+
+<pre>
+<code>
+int numero = 50;
+char texto[10];
+
+sprintf(texto, "%i", numero); // Sempre na ordem: Variável string a receber o valor, tipo de número convertido e o número.
+printf("%s\n", texto);
+</code>
+</pre>
+
+<p>PS: O sprintf também pode ser usado para concatenar variáveis de diferentes tipos numa variável só, por exemplo:</p>
+
+<pre>
+<code>
+int hora = 10;
+int minuto = 25;
+    
+char relogio[100];
+    
+sprintf(relogio, "A hora passada foi %.2d:%.2d.", hora, minuto);
+printf("%s\n", relogio);
+</code>
+</pre>
+
+<h3>Declaração de Variáveis</h3>
+
+<p>Uma variável é uma localização na memória do computador que é utilizada para armazenar temporariamente os dados que são utilizados durante o programa.</p>
+
+<p>As variáveis possuem algumas características, como identificação, endereço, tipo, tamanho e valor (conteúdo). Elas só podem ter letras, números e underlines, deve iniciar com letra e não deve ser nenhuma palavra reservada.</p>
+
+<p>Para que uma variável possa ser usada em um programa, ela deve primeiro ser declarada, para que seja reservado espaço na memória para armazenamento dos seus dados. Elas devem ser declaradas no início do programa, mas dependendo do caso pode ser declarada em outras partes do código.</p>
+
+<p>Veja abaixo umas declarações de variáveis:</p>
+
+<pre>
+<code>
+int a, b, c;
+char letra;
+float valor, aumento;
+double patrimonio;
+int x = 0;
+typedef enum {false = 0, true = 1} bool;
+bool ferias = false;
+float salario, juros = 0.08;
+</code>
+</pre>
+
+<p>PS: O char só permite um caracter, e deve se usar aspas simples, mas array ou ponteiro de char para strings, devem usar aspas duplas.</p>
+
+<p>Além da atribuição comum, você pode ter atribuições múltiplas, como essa:</p>
+
+<pre>
+<code>
+y = x = 10;
+</code>
+</pre>
+
+<p>PS: Esse tipo de atribuição também funciona em qualquer linguagem descendente do C, como o Java, o PHP e mesmo o Python.</p>
+
+<p>Veja alguns exemplos de atribuições de variáveis:</p>
+
+<pre>
+<code>
+int main(void) {
+    int idade;
+    float salario, valor;
+    
+    idade = 25;
+    valor = 4500.50;
+    salario = valor;
+    printf("Idade: %d\n", idade);
+    printf("E o salário: %f\n", salario);
+    
+    return 0;
+}
+</code>
+</pre>
+
+<h3>Função printf - Exibindo Dados na Saída</h3>
+
+<p>A função <code>printf</code> mostra dados formatados na tela do computador. Esses dados podem ou não estarem armazenados em variáveis. Veja um exemplo de sintaxe:</p>
+
+<pre>
+<code>
+printf("Exemplo com máscara %d", variavel_ou_dado);
+</code>
+</pre>
+
+<p>O que está entre aspas descreve o formato da saída, e os argumentos com as variáveis ou dados (opcionais) correspondem a cada sequência na mesma (com uso de máscaras na primeira parte, que referencia a variável).</p>
+
+<p>A função printf pode, entre outras coisas:</p>
+
+<ul>
+    <li>Arredondar valores de ponto flutuante com um número de casas decimais desejado.</li>
+    <li>Alinhar colunas de números um abaixo do outro.</li>
+    <li>Alinhar à direita ou esquerda as saídas.</li>
+    <li>Representar números de ponto flutuantes em forma exponencial (notação científica).</li>
+    <li>Inserir caracteres e textos em posições específicas.</li>
+    <li>Mostrar qualquer tipo de dados em campos com tamanho e precisão fixos.</li>
+</ul>
+
+<p>Veja algumas máscaras de formatação, no C chamadas de especificadores de conversão:</p>
+
+<table>
+    <tr>
+        <th>Máscara</th>
+        <th>Tipo de Dado</th>
+        <th>Descrição</th>
+    </tr>
+    <tr>
+        <td>%d</td>
+        <td>int</td>
+        <td>Número Inteiro Decimal com Sinal</td>
+    </tr>
+    <tr>
+        <td>%c</td>
+        <td>char</td>
+        <td>Caractere Único</td>
+    </tr>
+    <tr>
+        <td>%f</td>
+        <td>float ou double</td>
+        <td>Número Decimal (Real ou de Ponto Flutuante)</td>
+    </tr>
+    <tr>
+        <td>%i</td>
+        <td>int</td>
+        <td>Número Inteiro Decimal (Diferentes na Entrada e Saída de Dados)</td>
+    </tr>
+    <tr>
+        <td>%ld</td>
+        <td>long int</td>
+        <td>Número Inteiro Longo</td>
+    </tr>
+    <tr>
+        <td>%e</td>
+        <td>float ou double</td>
+        <td>Número Real Exponencial (Científico). Letras minúsculas.</td>
+    </tr>
+    <tr>
+        <td>%E</td>
+        <td>float ou double</td>
+        <td>Número Real Exponencial (Científico). Letras maiúsculas.</td>
+    </tr>
+    <tr>
+        <td>%o</td>
+        <td>int</td>
+        <td>Número Inteiro em Formato Octal sem Sinal</td>
+    </tr>
+    <tr>
+        <td>%x</td>
+        <td>int</td>
+        <td>Número Inteiro em Formato Hexadecimal sem Sinal. Caracteres de a a f</td>
+    </tr>
+    <tr>
+        <td>%X</td>
+        <td>int</td>
+        <td>Número Inteiro em Formato Hexadecimal sem Sinal. Caracteres de A a F</td>
+    </tr>
+    <tr>
+        <td>%u</td>
+        <td>int</td>
+        <td>Número Inteiro Decimal sem Sinal</td>
+    </tr>
+    <tr>
+        <td>%h ou %l</td>
+        <td>---</td>
+        <td>Colocado Antes de um Especificador Inteiro para Indicar Valor Short ou Long</td>
+    </tr>
+    <tr>
+        <td>%L</td>
+        <td>---</td>
+        <td>Colocado Antes de um Especificador de Ponto Flutuante para indicar valor Long Double</td>
+    </tr>
+    <tr>
+        <td>%s</td>
+        <td>char</td>
+        <td>Cadeia de Caracteres (String ou Ponto pra char)</td>
+    </tr>
+	<tr>
+        <td>%p</td>
+        <td>pointer</td>
+        <td>Ponteiros</td>
+    </tr>
+</table>
+
+<p>PS: A maioria delas também funcionam em algumas linguagens baseadas em C, como C++, PHP e Java, ao usar print formatado. E valores booleanos utilizam a máscara de inteiro, já que ele é reconhecido como 1 pra true e 0 pra false (apesar de no Java a máscara <code>%b</code> funciona pra booleanos, mas não funciona em outras linguagens). Caso precise exibir um símbolo de porcentagem, use <code>%%</code> para exibir um símbolo desse.</p>
+
+<p>Veja uma aplicação prática de algumas delas:</p>
+
+<pre>
+<code>
+int main(void) {
+    printf("d: %d\n", 603);
+    printf("d: %d\n", -603);
+    printf("i: %i\n", 603);
+    printf("o: %o\n", 603);
+    printf("u: %u\n", -603);
+    printf("u: %u\n", 603);
+    printf("x: %x\n", 603);
+    printf("X: %X\n", 603);
+    printf("f: %f\n", 6032101.75);
+    printf("e: %e\n", 6032101.75);
+    printf("e: %e\n", -6032101.75);
+    printf("E: %E\n", 6032101.75);
+    printf("s: %s\n", "String de Exercício");
+    printf("c: %c\n", 'T');
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: Os caracteres (char) únicos são representadas por aspas simples, as máscaras permanecem usando duplas. Os textos em array usam aspas duplas. No padrão da linguagem C, o último caractere de um vetor de char é o <code>\0</code>, que é adicionado automaticamente pelo compilador.</p>
+
+<p>Veja outro exemplo de formatação, mais simples, no qual usamos mais de uma máscara de formatação no mesmo printf:</p>
+
+<pre>
+<code>
+int main(void) {
+    int a, b;
+    a = 12;
+    b = 30;
+    
+    printf("O valor de a é %d e o de b vale %d", a, b);
+
+    return 0;
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-c-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

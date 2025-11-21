@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(128,128,128);
+    color: rgb(60,60,60);
+}
+
+div#interface {
+    box-shadow: 0px 0px 10px white;
+    background-color: rgba(255,255,255,0.8);
+    margin: 0px;
+    padding: 15px;
+    min-height: 750px;
+}
+header#cabecalho {
+    height: 150px;
+    border-bottom: 1px solid gray;
+}
+a {
+    color: rgb(32,32,32);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+nav#menu {
+    position: relative;
+    top: 53px;
+}
+nav#menu ul {
+    list-style-type: none;
+}
+nav#menu ul li {
+    float: left;
+    padding: 10px;
+    background-color: gray;
+}
+nav#menu ul li a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+nav#menu ul li:hover a {
+    text-decoration: underline;
+}
+form fieldset {
+    margin: 5px auto;
+    width: 800px;
+    border: 1px solid gray;
+}
+form fieldset#instrumento {
+    width: 175px;
+    margin: 0px;
+}
+form fieldset legend {
+    font-weight: bolder;
+}
+form input, form select {
+    font-size: 12pt;
+    background-color: rgba(232,232,232,0.7);
+}
+form input:hover, form select:hover {
+    background-color: rgba(192,192,192,0.7);
+}
+form input.botao {
+    background-color: silver;
+    padding: 15px;
+}

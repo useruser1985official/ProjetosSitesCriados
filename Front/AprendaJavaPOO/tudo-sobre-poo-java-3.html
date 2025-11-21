@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda POO Java</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda POO Java</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-poo-java-1.html">Tudo sobre POO Java Parte 1!</a></li>
+                    <li><a href="tudo-sobre-poo-java-2.html">Tudo sobre POO Java Parte 2!</a></li>
+                    <li><a href="tudo-sobre-poo-java-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre POO Java Parte 3!</a></li>
+                    <li><a href="tudo-sobre-poo-java-4.html">Tudo sobre POO Java Parte 4!</a></li>
+                    <li><a href="tudo-sobre-poo-java-5.html">Tudo sobre POO Java Parte 5!</a></li>
+                    <li><a href="tudo-sobre-poo-java-6.html">Tudo sobre POO Java Parte 6!</a></li>
+                    <li><a href="tudo-sobre-poo-java-7.html">Tudo sobre POO Java Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre POO Java Parte 3</h2>
+
+<h3>Objetos Compostos em Java</h3>
+
+<p>Para fazermos um relacionamento entre classes, vamos supor o Objeto lutador, com esses atributos e métodos e suas visibilidades:</p>
+
+<table>
+    <tr>
+        <th>Lutador</th>
+    </tr>
+    <tr>
+        <td>
+            - nome<br/>
+            - nacionalidade<br/>
+            - idade<br/>
+            - altura<br/>
+            - peso<br/>
+            - categoria<br/>
+            - vitórias<br/>
+            - derrotas<br/>
+            - empates<br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            + apresentar()<br/>
+            + status()<br/>
+            + ganharLuta()<br/>
+            + perderLuta()<br/>
+            + empatarLuta()<br/>
+        </td>
+    </tr>
+</table>
+
+<p>Crie um novo projeto Java com classe principal, e nele crie uma classe com o nome Lutador, que terá esse código:</p>
+
+<pre>
+<code>
+package ultracombatpoo;
+
+public class Lutador {
+    private String nome;
+    private String nacionalidade;
+    private int idade;
+    private float altura;
+    private float peso;
+    private String categoria;
+    private int vitorias;
+    private int derrotas;
+    private int empates;
+    
+    public void apresentar() {
+        System.out.println("-----------------------------");
+        System.out.print("CHEGOU A HORA! O lutador " + this.getNome());
+        System.out.print(" veio diretamente de " + this.getNacionalidade());
+        System.out.println(", tem " + this.getIdade() + " anos e pesa " + this.getPeso() + "kg.");
+        System.out.print("Ele tem " + this.getVitorias() + " vitórias, ");
+        System.out.println(this.getDerrotas() + " derrotas e " + this.getEmpates() + " empates.");
+    } 
+    public void status() {
+        System.out.println("-----------------------------");
+        System.out.print(this.getNome() + " é um peso " + this.getCategoria());
+        System.out.print(" e já ganhou " + this.getVitorias() + " vezes, ");
+        System.out.print("perdeu " + this.getDerrotas() + " vezes e ");
+        System.out.println("empatou " + this.getEmpates() + " vezes.");
+    }
+    public void ganharLuta() {
+        this.setVitorias(this.getVitorias() + 1);
+        // this.vitorias = this.vitorias + 1;
+    }
+    public void perderLuta() {
+        this.setDerrotas(this.getDerrotas() + 1);
+    }
+    public void empatarLuta() {
+        this.setEmpates(this.getEmpates() + 1);
+    }
+
+    public Lutador(String no, String na, int id, float al, float pe, int vi, int de, int em) {
+        this.nome = no;
+        this.nacionalidade = na;
+        this.idade = id;
+        this.altura = al;
+        this.setPeso(pe);
+        this.vitorias = vi;
+        this.derrotas = de;
+        this.empates = em;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNacionalidade() {
+        return nacionalidade;
+    }
+
+    public void setNacionalidade(String nacionalidade) {
+        this.nacionalidade = nacionalidade;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public float getAltura() {
+        return altura;
+    }
+
+    public void setAltura(float altura) {
+        this.altura = altura;
+    }
+
+    public float getPeso() {
+        return peso;
+    }
+
+    public void setPeso(float peso) {
+        this.peso = peso;
+        this.setCategoria();
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    private void setCategoria() { // Não terá parâmetros e será privado.
+        if(this.peso <= 52.2) {
+            this.categoria = "Inválido";
+        }
+        else if(this.peso > 52.2 && this.peso <= 70.3) {
+            this.categoria = "Leve";
+        }
+        else if(this.peso > 70.3 && this.peso <= 83.9) {
+            this.categoria = "Médio";
+        }
+        else if(this.peso > 83.9 && this.peso <= 120.2) {
+            this.categoria = "Pesado";
+        }
+        else {
+            this.categoria = "Inválido";
+        }
+    }
+
+    public int getVitorias() {
+        return vitorias;
+    }
+
+    public void setVitorias(int vitorias) {
+        this.vitorias = vitorias;
+    }
+
+    public int getDerrotas() {
+        return derrotas;
+    }
+
+    public void setDerrotas(int derrotas) {
+        this.derrotas = derrotas;
+    }
+
+    public int getEmpates() {
+        return empates;
+    }
+
+    public void setEmpates(int empates) {
+        this.empates = empates;
+    }
+}
+</code>
+</pre>
+
+<p>Lembrando que no método construtor, não terá o atributo "categoria", pois ela será calculada automaticamente pelo nosso programa.</p>
+
+<p>E na classe principal, coloque isso:</p>
+
+<pre>
+<code>
+package ultracombatpoo;
+
+public class UltraCombatPoo {
+    public static void main(String[] args) {
+        Lutador l[] = new Lutador[6]; // Uso de Array em Java.
+
+        l[0] = new Lutador("Pretty Boy", "França", 30, 1.75f, 68.9f, 11, 2, 1); // Precisa passar os parâmetros referentes.
+        l[1] = new Lutador("Putscript", "Brasil", 29, 1.68f, 57.8f, 14, 2, 3);
+        l[2] = new Lutador("SnapShadow", "EUA", 35, 1.65f, 80.9f, 12, 2, 1);
+        l[3] = new Lutador("Dead Code", "Austrália", 28, 1.93f, 81.6f, 13, 0, 2);
+        l[4] = new Lutador("UFOCobol", "Brasil", 37, 1.70f, 119.3f, 5, 4, 3);
+        l[5] = new Lutador("Nerdaart", "EUA", 30, 1.81f, 105.7f, 12, 2, 4);
+
+        l[0].perderLuta();
+        l[0].apresentar();
+        l[0].status();
+    }
+}
+</code>
+</pre>
+
+<p>Nesse caso, um evento dispara outro evento e o segundo automaticamente configura um atributo. As variáveis foram colocadas em um array (que começa sempre com 0). A setCategoria() não pode ser chamada por ser privada.</p>
+
+<p>Teste outros "lutadores", e os outros métodos.</p>
+
+<h3>Agregação entre Objetos em Java</h3>
+
+<p>Continuando a aula anterior, com os lutadores, usaremos a agregação entre as classes, que é a relação entre uma classe e outra. Veja o diagrama da classe Luta:</p>
+
+<table>
+    <tr>
+        <th>Luta</th>
+    </tr>
+    <tr>
+        <td>
+        - desafiado<br/>
+        - desafiante<br/>
+        - rounds<br/>
+        - aprovada<br/>
+        </td>
+    </tr>
+    <tr>
+        <td> 
+        + marcarLuta(l1, l2)<br/>
+        + lutar()<br/>
+        </td>
+    </tr>
+</table>
+
+<p>No caso, a classe Luta terá atributos e funções que farão a disputas entre eles.</p>
+
+<p>A classe Lutador não será alterada, e na classe principal só deixe a criação dos objetos (lutadores), sem as invocações das funções.</p>
+
+<p>PS: No Java, sempre devemos usar classes em arquivos separados pra facilitar o reuso.</p>
+
+<p>Esse é o código da classe Luta, que deverá ser criada:</p>
+
+<pre>
+<code>
+package ultracombatpoo;
+
+import java.util.Random;
+
+public class Luta {
+    private Lutador desafiado; // No lugar do tipo, usamos a classe criada.
+    private Lutador desafiante; // Mesmo caso acima.
+    private int rounds;
+    private boolean aprovada;
+    
+    public void marcarLuta(Lutador l1, Lutador l2) {
+        if(l1.getCategoria().equals(l2.getCategoria()) && !l1.equals(l2)) { // Comparação tipo !=, mas com classes é recomendado usar equals.
+            this.aprovada = true;
+            this.desafiado = l1;
+            this.desafiante = l2;
+        }
+        else {
+            this.aprovada = false;
+            this.desafiado = null;
+            this.desafiante = null;
+        }
+    }
+    
+    public void lutar() {
+        if(this.aprovada) {
+            System.out.println("### DESAFIADO ###");
+            this.desafiado.apresentar();
+            System.out.println("### DESAFIANTE ###");
+            this.desafiante.apresentar();
+            
+            Random aleatorio = new Random(); // Não esqueça da importação.
+            int vencedor = aleatorio.nextInt(3); // Gerará números de 0 a 2.
+            
+            switch(vencedor) {
+                case 0:
+                    // Empate
+                    System.out.println("Empate!");
+                    this.desafiado.empatarLuta();
+                    this.desafiante.empatarLuta();
+                    break;
+                case 1:
+                    // Desafiado Vence
+                    System.out.println(this.desafiado.getNome() + " vence!");
+                    this.desafiado.ganharLuta();
+                    this.desafiante.perderLuta();
+                    break;
+                case 2:
+                    // Desafiante Vence
+                    System.out.println(this.desafiante.getNome() + " vence!");
+                    this.desafiado.perderLuta();
+                    this.desafiante.ganharLuta();
+                    break;
+            }
+        }
+        else {
+            System.out.println("Luta não pode acontecer!");
+        }
+    }
+
+    public Lutador getDesafiado() {
+        return desafiado;
+    }
+
+    public void setDesafiado(Lutador desafiado) {
+        this.desafiado = desafiado;
+    }
+
+    public Lutador getDesafiante() {
+        return desafiante;
+    }
+
+    public void setDesafiante(Lutador desafiante) {
+        this.desafiante = desafiante;
+    }
+
+    public int getRounds() {
+        return rounds;
+    }
+
+    public void setRounds(int rounds) {
+        this.rounds = rounds;
+    }
+
+    public boolean getAprovada() {
+        return aprovada;
+    }
+
+    public void setAprovada(boolean aprovada) {
+        this.aprovada = aprovada;
+    }
+}
+</code>
+</pre>
+
+<p>E na classe principal, basta colocar isso:</p>
+
+<pre>
+<code>
+package ultracombatpoo;
+
+public class UltraCombatPoo {
+    public static void main(String[] args) {
+        Lutador l[] = new Lutador[6];
+
+        l[0] = new Lutador("Pretty Boy", "França", 30, 1.75f, 68.9f, 11, 2, 1); // Precisa passar os parâmetros referentes
+        l[1] = new Lutador("Putscript", "Brasil", 29, 1.68f, 57.8f, 14, 2, 3);
+        l[2] = new Lutador("SnapShadow", "EUA", 35, 1.65f, 80.9f, 12, 2, 1);
+        l[3] = new Lutador("Dead Code", "Austrália", 28, 1.93f, 81.6f, 13, 0, 2);
+        l[4] = new Lutador("UFOCobol", "Brasil", 37, 1.70f, 119.3f, 5, 4, 3);
+        l[5] = new Lutador("Nerdaart", "EUA", 30, 1.81f, 105.7f, 12, 2, 4);
+        
+        Luta uec01 = new Luta();
+
+        uec01.marcarLuta(l[0], l[1]);
+        uec01.lutar();
+
+        uec01.getDesafiado().status();
+        uec01.getDesafiante().status();
+    }
+}
+</code>
+</pre>
+
+<p>Agora teste, mudando os números dos arrays para mudar as lutas, pra ver se podem ou não acontecer e etc.</p>
+
+<ul>
+    <li><a href="tudo-sobre-poo-java-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-poo-java-4.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

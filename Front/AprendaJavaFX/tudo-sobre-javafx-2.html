@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java FX</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java FX</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-javafx-1.html">Tudo sobre Java FX Parte 1!</a></li>
+                    <li><a href="tudo-sobre-javafx-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java FX Parte 2!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java FX Parte 2</h2>
+
+<h3>Alert</h3>
+
+<p>Para criar um aplicativo com Alert, crie um JavaFX com FXML, e coloque um botão, no botão coloque o onAction e uma ID (por exemplo btnAlert).</p>
+
+<p>No Controller dele, coloque o objeto Alert, dessa forma:</p>
+
+<pre>
+<code>
+public class FXMLDocumentController implements Initializable {
+    
+    @FXML
+    private Button btnAlert;
+    
+    @FXML
+    private void clicouBotao(ActionEvent event) {
+        Alert al = new Alert(Alert.AlertType.ERROR); // Isso cria o alerta, importe javafx.scene.control.Alert
+        al.setTitle("Título do Alerta"); // Isso define o título da janela.
+        al.setHeaderText("Título do Cabeçalho"); // Isso define o título do cabeçalho
+        al.setContentText("Conteúdo do Alerta"); // Isso define o conteúdo do alerta.
+        al.show(); // Isso exibe o alerta.
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }     
+}
+</code>
+</pre>
+
+<p>PS: No lugar do ERROR, temos também outras opções, como INFORMATION e WARNING</p>
+
+<h3>ListViews</h3>
+
+<p>Crie um novo projeto JavaFX com FXML, clique no FXML para abrir o Scene Builder e crie o Anchor Pane e coloque um ListView nele, coloque no lado esquerdo do frame, e coloque na ListView a id categorias.</p>
+
+<p>Copie também a classe Categoria, criada na aula de Combobox (verifique se ela tem o método toString(), senão o crie).</p>
+
+<p>Coloque esse código no document controller do projeto:</p>
+
+<pre>
+<code>
+public class FXMLDocumentController implements Initializable {
+    
+    @FXML
+    private ListView&lt;Categoria&gt; categorias; // Importar javafx.scene.control.ListView
+    
+    @FXML
+    private List&lt;Categoria&gt; cats = new ArrayList&lt;&gt;(); // Importe
+    
+    @FXML
+    private ObservableList&lt;Categoria&gt; obsCats; // Importe
+    
+    public void carregarCategorias() {
+        Categoria categoria1 = new Categoria(1, "Bebidas"); // Importe do seu pacote
+        Categoria categoria2 = new Categoria(2, "Comidas");
+
+        cats.add(categoria1);
+        cats.add(categoria2);
+
+        obsCats = FXCollections.observableArrayList(cats); // Importe
+
+        categorias.setItems(obsCats);
+    } 
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        carregarCategorias(); // Invocação do método criado.
+    }      
+}
+</code>
+</pre>
+
+<p>Pode ver que a maior parte do código é bem parecida com o que criamos em Combobox.</p>
+
+<h3>Spinner</h3>
+
+<p>Abra um novo projeto Java FX e coloque nele um spinner e um botão nele, e coloque suas respectivas IDs.</p>
+
+<p>Altere o documento FXML dessa forma (inclua no cabeçalho <code>&lt;?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?&gt;</code>):</p>
+
+<pre>
+<code>
+&lt;Spinner fx:id="spNum" editable="true"&gt;
+    &lt;valueFactory&gt;
+        &lt;SpinnerValueFactory.IntegerSpinnerValueFactory/&gt;
+    &lt;/valueFactory&gt;
+&lt;/Spinner&gt;
+</code>
+</pre>
+
+<p>Altere a função em DocumentController assim:</p>
+
+<pre>
+<code>
+public class FXMLDocumentController implements Initializable {
+    
+    @FXML
+    private Spinner spNum; // Importe
+    
+    @FXML
+    private void iniciarSpinner() {
+        spNum.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0)); // mínimo, máximo e inicial, Importe
+    }
+    
+    @FXML
+    private void clicouBotao(ActionEvent event) {
+        System.out.println(spNum.getValue()); // Saída do Spinner
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        iniciarSpinner();
+    }      
+}
+</code>
+</pre>
+
+<h3>Slider</h3>
+
+<p>Num novo projeto, coloque um slider e um label com suas respectivas IDs (sliNum e lblNum), no slider, coloque os valores mínimos, máximos e padrão como 0, 100 e 0.</p>
+
+<p>No código do DocumentController, coloque isso:</p>
+
+<pre>
+<code>
+public class FXMLDocumentController implements Initializable {
+    
+    @FXML
+    private Label lblNum; // Importe
+    
+    @FXML
+    private Slider sliNum; // Importe
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        sliNum.addEventFilter(MouseEvent.MOUSE_DRAGGED, event ->
+            lblNum.setText(Integer.toString((int)sliNum.getValue()))
+        ); // Isso muda o valor ao arrastar o slider, importe javafx.scene.input.MouseEvent
+    }
+}
+</code>
+</pre>
+
+<h3>Menus em Java FX</h3>
+
+<p>Abra um novo projeto Java FX e vá nos controls e coloque nele um MenuBar, com os menus arquivo e usuários. Podemos editar e excluir esses itens e documents, ou adicionar mais colocando Menu.</p>
+
+<p>Para colocar itens nos menus, vamos em menu e colocamos o MenuItem, arrastando ele pro menu em documents. Em arquivo colocaremos sair, e em usuários colocaremos os itens cadastrar, alterar, excluir e pesquisar.</p>
+
+<p>PS: Da mesma forma que os itens, podemos colocar separadores nos menus.</p>
+
+<p>No evento do item sair, colocamos a id itSair, o evento clicouItem, e no FXMLDocumentController, colocamos apenas isso:</p>
+
+<pre>
+<code>
+@FXML
+private void clicouItem(ActionEvent event) {
+    Alert al = new Alert(Alert.AlertType.WARNING); // Importe javafx.scene.control.Alert
+
+    al.setTitle("Aviso");
+    al.setHeaderText("Aviso do Sistema!");
+    al.setContentText("O Aplicativo será Fechado!");
+    al.show();
+
+    al.setOnCloseRequest((e) -> Platform.exit()); // Importe javafx.application.Platform     
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-javafx-1.html">Parte Anterior da Matéria!</a></li>
+    <!-- <li><a href="tudo-sobre-javafx-3.html">Continuação da Matéria!</a></li> -->
+</ul>
+        </div>
+    </body>
+</html>

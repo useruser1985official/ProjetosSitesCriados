@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Powershell</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Powershell</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-powershell-1.html">Tudo sobre Powershell Parte 1!</a></li>
+                    <li><a href="tudo-sobre-powershell-2.html">Tudo sobre Powershell Parte 2!</a></li>
+                    <li><a href="tudo-sobre-powershell-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Powershell Parte 3!</a></li>
+                    <li><a href="tudo-sobre-powershell-4.html">Tudo sobre Powershell Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Powershell Parte 3</h2>
+
+<h3>Caracteres de Escape - Parte 1</h3>
+
+<p>O Powershell também tem caracteres de escape, só que diferente de outras linguagens, ele não usa a barra invertida, já que esta é usada para separar nomes de pastas. Ele utiliza crases (`).</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+Write-Host "Instituto de Scripts`0" # Fim de linha
+
+Write-Host "Alerta: `a" # Aviso sonoro
+
+Write-Host "Uma frase de exemplo`n" # Pula de linha
+</code>
+</pre>
+
+<p>Basicamente são os mesmos usados nas outras linguagens, apenas substituindo o \ pelo `, como `n, `", `t, etc.</p>
+
+<h3>Write-Host</h3>
+
+<p>Podemos utilizar parâmetros no Write-Host, por exemplo:</p>
+
+<pre>
+<code>
+Write-Host "Fulano"
+
+Write-Host -Object (Get-Date)
+</code>
+</pre>
+
+<p>Veja outros usos para esse comando:</p>
+
+<pre>
+<code>
+Write-Host "Fulano" -f Red -b Black # Isso muda a cor
+
+Write-Host "Fulano" "Beltrano" -Separator "_"
+
+Write-Host @("Fulano", "Beltrano") -Separator "`n"
+</code>
+</pre>
+
+<h3>Operadores Lógicos</h3>
+
+<p>Os operadores lógicos como &&, || e ! não funcionam no Powershell, por estes serem característicos do C e semelhantes. No Powershell usamos <code>-and</code>, <code>-or</code> e <code>-not</code>.</p>
+
+<p>Veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+(3 -eq 3) -and (3 -eq 3)
+
+(3 -eq 3) -and (3 -eq 3) -and (4 -gt 5)
+
+(3 -eq 3) -or (3 -eq 3) -or (4 -gt 5)
+
+-not (3 -eq 3)
+
+-not (4 -gt 5)
+</code>
+</pre>
+
+<p>Como sabemos, no and tudo tem que ser verdadeiro pra retornar true, no or só necessita que apenas uma das expressões sejam verdadeiras para retornar true, e o not inverte a condição.</p>
+
+<h3>Estruturas de Decisão If e Else</h3>
+
+<p>A estrutura do if e else no Powershell é bem parecida com a das linguagens C-like, por exemplo:</p>
+
+<pre>
+<code>
+if(1 -lt 5) {
+    "1 é menor que 5"
+}
+
+# Outra condição
+
+if(5 -lt 8) {
+    "5 é menor que 8"
+}
+</code>
+</pre>
+
+<p>Ou seja, se no if a condição for verdadeira, ela será executada, senão ela não executará, ou poderá executar o que está no else, por exemplo:</p>
+
+<pre>
+<code>
+if(1 -lt 5) {
+    "1 é menor que 5"
+}
+else {
+    "1 não é menor que 5"
+}
+
+# Outra condição
+
+if(5 -lt 8) {
+    "5 é menor que 8"
+}
+else {
+    "5 não é menor que 8"
+}
+</code>
+</pre>
+
+<p>Agora baixe esse arquivo de texto para executarmos um teste: <a href="files/arq.txt">Clique Aqui</a></p>
+
+<p>E no Powershell digite o comando <code>Select-String -Path .\arq.txt -Pattern "gosto de bolo"</code>, veja que ele retorna a linha e o conteúdo do arquivo. Então no script ps1 fazemos assim:</p>
+
+<pre>
+<code>
+if(Get-ChildItem .\arq.txt | Select-String "gosto de bolo") {
+    "Ele gosta de bolo sim!"
+}
+else {
+    "Ele não gosta de bolo!"
+}
+</code>
+</pre>
+
+<p>Podemos por exemplo, usar ifs aninhados também:</p>
+
+<pre>
+<code>
+$u = Read-Host "Usuário"
+
+$s = Read-Host "Senha"
+
+if($u -eq "Admin") {
+    if($s -eq "123") {
+        "Login Aceito!"
+    }
+    else {
+        "Senha Incorreta!"
+    }
+}
+else {
+    "Login Inválido!"
+}
+</code>
+</pre>
+
+<p>E o elseif:</p>
+
+<pre>
+<code>
+$num = [int](Read-Host "Digite um número")
+
+if($num % 2 -eq 0) {
+    "$num é par!"
+}
+elseif($num % 2 -eq 1) {
+    "$num é ímpar!"
+}
+else {
+    "Valor inválido!"
+}
+</code>
+</pre>
+
+<h3>Estrutura de Decisão Switch</h3>
+
+<p>Já o Switch, funciona dessa forma:</p>
+
+<pre>
+<code>
+$cor = "branco"
+
+switch($cor) {
+    "azul" {
+        "Você escolheu azul!"
+        break
+    }
+    "preto" {
+        "Você escolheu preto!"
+        break
+    }
+    "rosa" {
+        "Você escolheu rosa!"
+        break
+    }
+    "amarelo" {
+        "Você escolheu amarelo!"
+        break
+    }
+    "verde" {
+        "Você escolheu verde!"
+        break
+    }
+    "branco" {
+        "Você escolheu branco!"
+        break
+    }
+    default {
+        "Você escolheu outra cor!"
+        break
+    }
+}
+</code>
+</pre>
+
+<p>PS: Caso tenha mais de uma opção pro mesmo caso, faça assim:</p>
+
+<pre>
+<code>
+{$_ -in "vermelho", "vinho"} {
+    "Você escolheu tons de vermelho!"
+    break
+}
+</code>
+</pre>
+
+<p>Outro exemplo: </p>
+
+<pre>
+<code>
+$dia = (Get-Date).DayOfWeek.value__
+
+switch($dia) {
+    0 {
+        "Hoje é Domingo!"
+        break
+    }
+    1 {
+        "Hoje é Segunda-Feira!"
+        break
+    }
+    2 {
+        "Hoje é Terça-Feira!"
+        break
+    }
+    3 {
+        "Hoje é Quarta-Feira!"
+        break
+    }
+    4 {
+        "Hoje é Quinta-Feira!"
+        break
+    }
+    5 {
+        "Hoje é Sexta-Feira!"
+        break
+    }
+    6 {
+        "Hoje é Sábado!"
+        break
+    }
+    default {
+        "Dia Inválido!"
+        break
+    }
+}
+</code>
+</pre>
+
+<p>PS: O break não é obrigatório no Powershell, mas ele é usado para evitar que seja escolhido mais de uma condição dentro do switch.</p>
+
+<h3>Estruturas de Repetição</h3>
+
+<p>A estrutura de repetição while também existe no powershell, veja um exemplo de uso:</p>
+
+<pre>
+<code>
+$n = 1
+
+while($n -le 10) {
+    Write-Host $n
+
+    $n++
+}
+</code>
+</pre>
+
+<p>Também podemos usar o break e o continue nos laços:</p>
+
+<pre>
+<code>
+$n = 0
+
+while($true) {
+    $n++
+
+    if($n -eq 11) {
+        continue
+    }
+    elseif($n -eq 15) {
+        break
+    }
+
+    Write-Host $n
+}
+</code>
+</pre>
+
+<p>Temos também o do while, que garante pelo menos uma execução, independente da condição:</p>
+
+<pre>
+<code>
+$n = 0
+
+do {
+    Write-Host $n
+
+    $n++
+}
+while($n -le 10)
+</code>
+</pre>
+
+<p>E temos o for, onde controlamos melhor a quantidade de repetições:</p>
+
+<pre>
+<code>
+for($i = 0; $i -lt 10; $i++) {
+    "Volta $i"
+}
+</code>
+</pre>
+
+<h3>Vetores e Matrizes</h3>
+
+<p>Também podemos definir vetores no Powershell:</p>
+
+<pre>
+<code>
+$numeros = 12, 88, 59, 43, 92, 75, 33
+
+for($i = 0; $i -lt $numeros.Length; $i++) {
+    $numeros[$i] +  "`n"
+}
+</code>
+</pre>
+
+<p>Também podemos usar um foreach pra isso: </p>
+
+<pre>
+<code>
+$numeros = 12, 88, 59, 43, 92, 75, 33
+
+foreach($n in $numeros) {
+    "$n"
+}
+</code>
+</pre>
+
+<p>Como podemos inicializar com um contador, por exemplo:</p>
+
+<pre>
+<code>
+$numeros = 1..10
+
+foreach($n in $numeros) {
+    "$n"
+}
+</code>
+</pre>
+
+<p>Com strings, já fazemos assim:</p>
+
+<pre>
+<code>
+$nomes = @("Fulano", "Beltrano", "Sicrano")
+
+foreach($n in $nomes) {
+    "$n"
+}
+</code>
+</pre>
+
+<p>Mas essa forma pode ser usada para números também:</p>
+
+<pre>
+<code>
+$numeros = @(12, 88, 59, 43, 92, 75, 33)
+</code>
+</pre>
+
+<p>O Powershell permite misturar tipos dentro dos arrays.</p>
+
+<p>Veja um exemplo de matriz, com vários tipos de dados:</p>
+
+<pre>
+<code>
+$pessoas = @(("Fulano", 30, 1.6),
+             ("Beltrano", 17, 1.7),
+             ("Sicrano", 26, 1.71))
+
+for($l = 0; $l -lt 3; $l++) {
+    for($c = 0; $c -lt 3; $c++) {
+        Write-Host -NoNewline $pessoas[$l][$c] " "
+    }
+    ""
+}
+</code>
+</pre>
+
+<p>Mas podemos forçar uma tipagem de dados também:</p>
+
+<pre>
+<code>
+[string]$letras = @('A', 'B', 'C')
+
+$letras += 'D'
+</code>
+</pre>
+
+<p>E também podemos usar o objeto ArrayList, assim:</p>
+
+<pre>
+<code>
+Using Assembly System.Collections
+
+$lista = [System.Collections.ArrayList]::new()
+
+$lista.AddRange(('A', 'B', 'C')) # Adiciona vários itens
+
+$lista.Add('D') # Adiciona um item
+
+$lista.Contains('A') # Verifica se um item existe
+
+$lista.Capacity # Capacidade de Dados
+
+$lista.Count # Tamanho de dados
+
+"`n"
+
+foreach($l in $lista) {
+    $l
+}
+
+# Isso força conversão de array comum pra arraylist:
+
+$novaLista = [System.Collections.ArrayList]@('A', 'E', 'I', 'O', 'U')
+</code>
+</pre>
+
+<p>Para ordenar arrays, podemos fazer assim:</p>
+
+<pre>
+<code>
+$numeros = @(7, 4, 6, 2, 1, 9, 3, 5, 0, 8)
+
+$numeros | Sort-Object
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-powershell-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-powershell-4.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

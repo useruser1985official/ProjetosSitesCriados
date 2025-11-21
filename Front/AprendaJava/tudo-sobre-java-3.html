@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-1.html">Tudo sobre Java Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-2.html">Tudo sobre Java Parte 2!</a></li>
+                    <li><a href="tudo-sobre-java-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java Parte 3!</a></li>
+                    <li><a href="tudo-sobre-java-4.html">Tudo sobre Java Parte 4!</a></li>
+                    <li><a href="tudo-sobre-java-5.html">Tudo sobre Java Parte 5!</a></li>
+                    <li><a href="tudo-sobre-java-6.html">Tudo sobre Java Parte 6!</a></li>
+                    <li><a href="tudo-sobre-java-7.html">Tudo sobre Java Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java Parte 3</h2>
+
+<h3>Estruturas Condicionais - Parte 1</h3>
+
+<p>Como visto antes, o condicional simples é feito apenas com a declaração <code>if</code> (significando "se") é usado para especificar um bloco de código que deverá ser executado, ao retornar true. Veja um exemplo no qual ele exibirá parabéns à uma média de nota maior que 9:</p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in); // Adicionar Importação
+System.out.print("Primeira Nota: ");
+float n1 = teclado.nextFloat();
+System.out.print("Segunda Nota: ");
+float n2 = teclado.nextFloat();
+float m = (n1 + n2) / 2;
+System.out.println("Sua média foi " + m);
+if(m > 9) {
+    System.out.println("Parabéns! ;)");
+}
+</code>
+</pre>
+
+<p>O condicional composto é feito com o if junto com o <code>else</code> (significando "senão"), que executa um segundo bloco de código ao retornar false. Veja esse exemplo baseado no código anterior:</p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in); // Adicionar Importação
+System.out.print("Em que ano você nasceu? ");
+int nasc = teclado.nextInt();
+int idade = 2017 - nasc;
+if(idade >= 18) {
+    System.out.println("Maior de Idade!");
+}
+else {
+    System.out.println("Menor de Idade!");
+}
+</code>
+</pre>
+
+<p>Vamos criar um Swing para verificar se o número é par ou ímpar. Veja o código:</p>
+
+<pre>
+<code>
+int valor = (int)numVal.getValue();
+if(valor % 2 == 0) {
+    lblRes.setText("O número é Par!");
+}
+else {
+    lblRes.setText("O número é Ímpar!");
+}
+</code>
+</pre>
+
+<p>Vamos fazer um Swing, no qual criaremos um programa para exibir equações de segundo grau.</p>
+
+<p>Nesse caso, no botão de eventos, vamos criar nas caixas numéricas e ir em Change e em StateChange. Isso fará que o número mude ao mexer no controle giratório. Veja como faremos em um deles:</p>
+
+<pre>
+<code>
+lblA.setText(numA.getValue().toString());
+</code>
+</pre>
+
+<p>Faça o mesmo nos labels e caixas B e C.</p>
+
+<p>Abaixo, criaremos um botão pra calcular o Delta e um painel com os resultados.</p>
+
+<p>PS: Para o painel não aparecer antes do cálculo, apenas coloque isso no construtor, abaixo de initcomponents():</p>
+
+<pre>
+<code>
+panRes.setVisible(false);
+</code>
+</pre>
+
+<p>Para voltar a exibir, usamos o mesmo código acima com o valor true. Ele será inserido no evento do botão, no caso.</p>
+
+<p>Veja a aplicação do código anterior mais o código dos cálculos:</p>
+
+<pre>
+<code>
+int a = Integer.parseInt(numA.getValue().toString());
+int b = Integer.parseInt(numB.getValue().toString());
+int c = Integer.parseInt(numC.getValue().toString());
+
+double d = Math.pow(b, 2) - 4 * a * c;
+
+lblDel.setText(String.format("%.1f", d));
+
+if(d &lt; 0) {
+    lblRai.setText("Não existem!");
+}
+else {
+    lblRai.setText("Existem!");
+}
+
+panRes.setVisible(true);
+</code>
+</pre>
+
+<h3>Estrutura Condicional - Parte 2</h3>
+
+<p>Temos também as estruturas condicionais compostas aninhadas no Java, que são simplesmente, condições dentro de outras, por exemplo:</p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in);
+System.out.print("Insira seu ano de nascimento: ");
+int nasc = teclado.nextInt();
+int idade = 2017 - nasc; // Prefira pegar o ano atual do sistema.
+if(idade < 16) {
+    System.out.println("Não Vota!");
+}
+else {
+    if((idade >= 16 && idade < 18) || (idade > 70)) {
+        System.out.println("Voto Opcional!");
+    }
+    else {
+        System.out.println("Voto Obrigatório!");
+    }
+}
+</code>
+</pre>
+
+<p>Você também pode usar else if para simplificar o código, veja um exemplo parecido com o acima, em Swing:</p>
+
+<pre>
+<code>
+int nasc = (int)numAn.getValue();
+int i = 2017 - nasc; // Prefira pegar o ano atual do sistema.
+if(i < 16) {
+    lblRes.setText("Não Vota!");
+}
+else if((i >= 16 && i < 18) || (i > 70)) {
+    lblRes.setText("Voto Opcional!");
+}
+else {
+    lblRes.setText("Voto Obrigatório!");
+}
+lblIda.setText(Integer.toString(i));
+</code>
+</pre>
+
+<p>Além do if e else, temos também a estrutura condicional switch e case</p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in); // Importar
+System.out.print("Quantas pernas? ");
+int pernas = teclado.nextInt();
+String tipo;
+System.out.print("Isso é um(a)");
+switch(pernas) {
+    case 1:
+        tipo = "Saci";
+        break;
+    case 2:
+        tipo = "Bípede";
+        break;
+    case 3:
+        tipo = "Tripé";
+        break;
+    case 4:
+        tipo = "Quadrúpede";
+        break;
+    case 6:
+        tipo = "Inseto";
+        break;
+    case 8:
+        tipo = "Aracnídeo";
+        break;
+    default:
+        tipo = "ET";
+        break;
+}
+System.out.println(tipo);
+</code>
+</pre>
+
+<p>Nos exercícios, vamos fazer um Swing que mostrará os tipos de triângulo, que usará os objetos slider (controle deslizante, tipo o range, para escolher os valores máximos e mínimos, vá em propriedades). Ele também terá um painel com os resultados (para esconder, só ver anteriormente, no método construtor).</p>
+
+<p>Em cada slide, usaremos o evento change, para mostrar o número ao mexer nele. Esse é o código de um deles:</p>
+
+<pre>
+<code>
+lblA.setText(Integer.toString(sliA.getValue()));
+</code>
+</pre>
+
+<p>No construtor, coloque isso, abaixo de initComponents():</p>
+
+<pre>
+<code>
+panRes.setVisible(false);
+</code>
+</pre>
+
+<p>Esse é o código que fará as operações:</p>
+
+<pre>
+<code>
+int a = sliA.getValue();
+int b = sliB.getValue();
+int c = sliC.getValue();
+
+if(a < b + c && b < a + c && c < a + b) {
+    lblSta.setText("Formam um Triângulo!");
+    if(a == b && b == c) {
+        lblTip.setText("Equilátero!");
+    }
+    else if(a != b && b != c && c != a) {
+        lblTip.setText("Escaleno!");
+    }
+    else {
+        lblTip.setText("Isósceles!");
+    }
+}
+else {
+    lblSta.setText("Não Formam um Triângulo!");
+    lblTip.setText("------");
+}
+
+panRes.setVisible(true);
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-java-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-java-4.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

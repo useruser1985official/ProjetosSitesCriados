@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C#</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C#</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-csharp-1.html">Tudo sobre C# Parte 1!</a></li>
+                    <li><a href="tudo-sobre-csharp-2.html">Tudo sobre C# Parte 2!</a></li>
+                    <li><a href="tudo-sobre-csharp-3.html">Tudo sobre C# Parte 3!</a></li>
+                    <li><a href="tudo-sobre-csharp-4.html">Tudo sobre C# Parte 4!</a></li>
+                    <li><a href="tudo-sobre-csharp-5.html">Tudo sobre C# Parte 5!</a></li>
+                    <li><a href="tudo-sobre-csharp-6.html">Tudo sobre C# Parte 6!</a></li>
+                    <li><a href="tudo-sobre-csharp-7.html">Tudo sobre C# Parte 7!</a></li>
+                    <li><a href="tudo-sobre-csharp-8.html">Tudo sobre C# Parte 8!</a></li>
+                    <li><a href="tudo-sobre-csharp-9.html">Tudo sobre C# Parte 9!</a></li>
+                    <li><a href="tudo-sobre-csharp-10.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C# Parte 10!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C# Parte 10</h2>
+
+<h3>Criando um Browser</h3>
+
+<p>Crie um projeto Windows Form e coloque um componente Web Browser nele. Note que ele ocupa todo o formulário, para isso, clique na setinha e em Desencaixar do Contâiner Pai, ocupe quase todo o frame deixando um espacinho acima, e mude o Dock para Bottom. Mude o name dele para brPrinc.</p>
+
+<p>Acima do WebBrowser, coloque um componente textBox e os botões Ir, Home, Voltar, Próximo, Parar, Atualizar, Pesquisar e Definir Home. Altere os names deles.</p>
+
+<p>Dentro da classe, crie esse método:</p>
+
+<pre>
+<code>
+private void navegar() {
+    if(!txtUrl.Text.Trim().Equals("")) {
+        brPrinc.Navigate(txtUrl.Text.Trim());
+    } 
+    else {
+        MessageBox.Show("Digite algo na URL!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        txtUrl.Focus();
+    }
+}
+</code>
+</pre>
+
+<p>Aí é só adicionar esse método no evento click do botão Ir, e no evento KeyDown do txtUrl, coloque isso:</p>
+
+<pre>
+<code>
+private void txtUrl_KeyDown(object sender, KeyEventArgs e) {
+    if(e.KeyCode == Keys.Enter) {
+        navegar();
+    }
+}
+</code>
+</pre>
+
+<p>No evento de Home, coloque isso:</p>
+
+<pre>
+<code>
+private void btnHome_Click(object sender, EventArgs e) {
+    // Crie uma variável local de nome home para isso, do tipo string com o valor null
+    if(home == null) {
+        brPrinc.GoHome();
+    }
+    else {
+        brPrinc.Navigate(home);
+    }
+}
+</code>
+</pre>
+
+<p>Adicione esses eventos manualmente no código, para habilitar os botões apenas quando tiver o voltar e o próximo:</p>
+
+<pre>
+<code>
+private void brPrinc_CanGoBackChanged(object sender, EventArgs e) { // Tem que seguir essa regra de nome
+    btnVolt.Enabled = brPrinc.CanGoBack;
+}
+
+private void brPrinc_CanGoForwardChanged(object sender, EventArgs e) { // Idem acima
+    btnProx.Enabled = brPrinc.CanGoForward;
+}
+</code>
+</pre>
+
+<p>E nos eventos de clique de Voltar e Próximo, faça isso:</p>
+
+<pre>
+<code>
+private void btnVolt_Click(object sender, EventArgs e) {
+    brPrinc.GoBack();
+}
+
+private void btnProx_Click(object sender, EventArgs e) {
+    brPrinc.GoForward();
+}
+</code>
+</pre>
+
+<p>Eventos de Parar, Atualizar e Pesquisar:</p>
+
+<pre>
+<code>
+private void btnPar_Click(object sender, EventArgs e) {
+    brPrinc.Stop();
+}
+
+private void btnAtu_Click(object sender, EventArgs e) {
+    brPrinc.Refresh();
+}
+
+private void btnPesq_Click(object sender, EventArgs e) {
+    brPrinc.GoSearch();
+}
+</code>
+</pre>
+
+<p>E no Definir Home, coloque isso:</p>
+
+<pre>
+<code>
+private void btnDef_Click(object sender, EventArgs e) {
+    home = txtUrl.Text.Trim();
+}
+</code>
+</pre>
+
+<p>PS: A Home padrão do programa é o MSN.</p>
+
+<h3>Criando Instalador</h3>
+
+<p>Para criar o instalador do programa C#, baixe o programa daqui: <a href="https://marketplace.visualstudio.com/items?itemName=visualstudioclient.MicrosoftVisualStudio2017InstallerProjects" target="_blank">https://marketplace.visualstudio.com/items?itemName=visualstudioclient.MicrosoftVisualStudio2017InstallerProjects</a></p>
+
+<p>Depois de instalado, abra o projeto desejado e em Gerenciador de Soluções, vá em adicionar projeto e procure a opção Setup Wizard, crie uma pasta com o nome "instalador" dentro do projeto e salve o projeto lá. Clique em Avançar e escolha a opção Setup Windows Application. Na janela que abrir, marque a opção "Saída Primária" pelo menos, mas pode marcar a maioria (só deixe desmarcado "Arquivos de Origem", "Símbolos de Depuração" e "Arquivos de Documentação"). Em Avançar, adicione os arquivos externos de DLL (em C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\PrivateAssemblies\x86\) dentro de pastas com o nome x86 ou x64 (assim como bancos de dados SQLite, XML, etc., no caso de banco de dados é a DLL SQLite.Interop.dll). Vá em concluir.</p>
+
+<p>No projeto do instalador, vá em ApplicationFolder e adicione as pastas e os arquivos externos (como bancos SQLite). Podemos adicionar as DLLs faltantes também aí.</p>
+
+<p>Em Applications Folder, vá nas propriedades e em AlwaysCreate deixe true pra criar menus, deixe a opção DefaultLocation como [ProgramFilesFolder]\[ProductName] (retire o Manufactore). Em Gerenciador de Soluções, vá nas propriedades com o nome do projeto do instalador. Em Author coloque seu nome, em Description coloque a Descrição, em Manufactore coloque seu nome também, em ProductName coloque o nome da pasta do programa, em Título coloque o nome do programa e em Version defina a versão. Clique no projeto do instalador, compile o instalador e ele já estará pronto (o arquivo é o com extensão .msi).</p>
+
+<p>No caso de programas com SQLite, pode ser necessário adicionar essas linhas no arquivo csproj do projeto (arquivo de mesmo nome do projeto com a extensão csproj), na última linha antes do fechamento da tag Project:</p>
+
+<pre>
+<code>
+&lt;PropertyGroup&gt; 
+    &lt;ContentSQLiteInteropFiles&gt;true&lt;/ContentSQLiteInteropFiles&gt;
+    &lt;CopySQLiteInteropFiles&gt;false&lt;/CopySQLiteInteropFiles&gt;
+    &lt;CleanSQLiteInteropFiles&gt;false&lt;/CleanSQLiteInteropFiles&gt;
+    &lt;CollectSQLiteInteropFiles&gt;false&lt;/CollectSQLiteInteropFiles&gt;
+&lt;/PropertyGroup&gt;
+</code>
+</pre>
+
+<p>PS: Para adicionar o atalho no Desktop e Menu, deixe o AlwaysCreate como true em ambas as pastas, em Application Folders, crie o atalho para a Saída Primária e arraste eles pra User's Desktop e User's Programs Menu (configure o ícone do programa o caminho do executável e o target para Saída Primária).</p>
+
+<ul>
+    <li><a href="tudo-sobre-csharp-9.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-csharp-11.html">Continuação da Matéria!</a></li>-->
+</ul>
+
+        </div>
+    </body>
+</html>

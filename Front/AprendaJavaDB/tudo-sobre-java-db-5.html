@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java com Banco de Dados</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java com Banco de Dados</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-db-1.html">Tudo sobre Java com Banco de Dados Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-db-2.html">Tudo sobre Java com Banco de Dados Parte 2!</a></li>        
+                    <li><a href="tudo-sobre-java-db-3.html">Tudo sobre Java com Banco de Dados Parte 3!</a></li>
+                    <li><a href="tudo-sobre-java-db-4.html">Tudo sobre Java com Banco de Dados Parte 4!</a></li>
+                    <li><a href="tudo-sobre-java-db-5.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java com Banco de Dados Parte 5!</a></li>
+                    <li><a href="tudo-sobre-java-db-6.html">Tudo sobre Java com Banco de Dados Parte 6!</a></li>
+                    <li><a href="tudo-sobre-java-db-7.html">Tudo sobre Java com Banco de Dados Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java com Banco de Dados Parte 5</h2>
+
+<h3>Preenchendo JCombobox e Recuperando Valores</h3>
+
+<p>Crie um novo frame com o nome ViewCombobox, coloque uma caixa de combinação e um botão. Na caixa de combinação, coloque o nome da variável como cbProds, e nas proprieades dele, vá em model e apague os "itens" dele, ainda lá, em código, e em parâmetros do tipo, coloque &lt;Object&gt;, já que passaremos um objeto pra ele. Mude também o nome do botão.</p>
+
+<p>Na forma que trabalharemos, o ID será pego diretamente da caixa de combinação.</p>
+
+<p>No código do frame, no construtor dele, coloque esse código:</p>
+
+<pre>
+<code>
+public ViewCombobox() {
+    initComponents();
+
+    ProdutoDAO dao = new ProdutoDAO(); // Importe
+
+    for(Produto p: dao.read()) {
+        cbProds.addItem(p);
+    }
+}
+</code>
+</pre>
+
+<p>Só que no caso acima, ele retorna os nomes dos pacotes, das classes e os números dos hashcodes.</p>
+
+<p>Para solucionar isso, vá em model.bean, e na classe Produto, crie um método toString() com esse código, sobrepondo o código original:</p>
+
+<pre>
+<code>
+@Override
+public String toString() {
+    return getDescricao();
+}
+</code>
+</pre>
+
+<p>E no método de action do botão, coloque isso:</p>
+
+<pre>
+<code>
+private void btnPegActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    Produto prod = (Produto)cbProds.getSelectedItem();
+
+    JOptionPane.showMessageDialog(null, "ID: " + prod.getId() + "\nDescrição: " + prod.getDescricao(), "Id e Descrição", JOptionPane.INFORMATION_MESSAGE);
+}  
+</code>
+</pre>
+
+<h3>Tela de Login Personalizada</h3>
+
+<p>Agora vamos colocar em prática tudo aprendido até agora, criando uma urna em Java.</p>
+
+<p>Crie um novo projeto, marque a opção "Usar pasta dedicada para armazenar bibliotecas", na pasta ./lib, e desmarque a opção de classe principal.</p>
+
+<p>Crie um pacote com nome view e crie o frame com o nome ViewLogin, centralize, mas não tire o redimensionamento, e coloque o título de Área de Acesso.</p>
+
+<p>Aumente um pouco o frame e coloque um painel que cubra o tamanho todo do frame, e coloque no painel a cor branca.</p>
+
+<p>Coloque outro painel, mas cubra cerca de <sup>1</sup>/<sub>3</sub> da parte superior dele, e coloque a cor azul claro.</p>
+
+<p>Na parte branca, coloque um campo de texto (txtLogin) e um de senha (txtSenha), e os labels indicando eles, e um botão para entrar. Veja também o redimensionamento de forma de que os campos e botões fiquem no meio da tela.</p>
+
+<p>Para personalizar o botão, aumente ele um pouco, e em background altere a cor para azul, podemos mudar a cor da letra em foreground também (o background não funciona em alguns modelos de frame como o Windows).</p>
+
+<p>Crie um pacote para colocar imagens, e cole um ícone para login e uma imagem para usuários. Nas propriedades do botão, coloque o ícone de login (se quiser o ícone do lado direito da frase, nas propriedades do texto do botão, é só colocar left em HorizontalTextPosition).</p>
+
+<p>Na parte azul, coloque o ícone de usuário e o centralize (se for o caso, coloque center em HorizontalAlignament também). Embaixo dele coloque um label com o texto Área de Acesso, configure a fonte e tamanho da letra e o centralize também.</p>
+
+<h3>Checando Login</h3>
+
+<p>Dentro da classe ViewLogin, crie um método com esse código:</p>
+
+<pre>
+<code>
+public boolean checkLogin(String login, String senha) {
+    return login.equals("usuario") && senha.equals("senha");
+}
+</code>
+</pre>
+
+<p>Crie a tela ViewPrincipal, mas não mexa nela por enquanto.</p>
+
+<p>No action do botão do ViewLogin, podemos fazer a verificação dessa forma:</p>
+
+<pre>
+<code>
+private void btnEntrActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    if(this.checkLogin(txtLogin.getText().trim(), String.valueOf(txtSenha.getPassword()).trim())) {
+        new ViewPrincipal().setVisible(true);
+        this.dispose();
+    }
+    else {
+        JOptionPane.showMessageDialog(null, "Dados Inválidos", "Erro de Autenticação", JOptionPane.WARNING_MESSAGE); // Importe javax.swing.JOptionPane
+    }
+}
+</code>
+</pre>
+
+<h3>Tipos de Mensagens</h3>
+
+<p>Podemos também personalizar as mensagens do JOptionPane, com quatro parâmentros, como visto, podemos também colocar título e o ícone da mensagem, muitos utilizam apenas com dois parâmetros, onde definimos só a frase.</p>
+
+<p>Podemos colocar números no lugar das constantes dos ícones, dessa forma:</p>
+
+<pre>
+<code>
+JOptionPane.showMessageDialog(null, "Dados Inválidos", "Erro de Autenticação", 0);
+</code>
+</pre>
+
+<h3>Tela Principal</h3>
+
+<p>Na tela ViewPrincipal, centralize, coloque título, tire o redimensionamento e aumente ele.</p>
+
+<p>Coloque um painel e o expanda totalmente, e deixe ele branco, e copie o painel azul com as imagens e títulos do login para ele, mudando a frase para tela principal e o ícone.</p>
+
+<p>Na parte branca, crie três botoões, denominados eleitor, urna e candidado, aumente e mude as cores deles e o posicione corretamente. Coloque ícones nos botões e alinhe eles à direita.</p>
+
+<p>Teste com shift F6.</p>
+
+<h3>JMenuBar</h3>
+
+<p>No ViewPrincipal, coloque uma Barra de Menu, e nela coloque os menus Arquivo, Eleitor, Candidato e Partido.</p>
+
+<p>Em Arquivo, coloque o item Sair, que terá esse código no action:</p>
+
+<pre>
+<code>
+private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    System.exit(0);
+}
+</code>
+</pre>
+
+<p>PS: No item de menu, podemos clicar em atalho e colocar um atalho de tecla, como Shift S.</p>
+
+<h3>Exercício - Padrão de Telas</h3>
+
+<p>Como exercício, crie um padrão de telas, com o painel branco, um painel superior azul com um ícone e o label com partidos. O nome da classe será ViewPartido.</p>
+
+<p>Copie, mudando as imagens e nomes, ViewCandidato, ViewEleitor e ViewUrna.</p>
+
+<h3>Criando Tela de Partidos</h3>
+
+<p>Abra o frame ViewPartido, e coloque na parte branca um painel de rolagem, e deixe ele na metade direita da parte branca, e dentro dele, coloque uma tabela.</p>
+
+<p>Na metade esquerda, coloque um painel (painel comum mesmo), e dentro dele um label pra indicar nome, um campo de texto (txtNome) e três botões, denominados novo, excluir e salvar.</p>
+
+<h3>Criando Tela de Candidatos</h3>
+
+<p>Igual foi feita com a tela de partidos, coloque um painel e dentro dele uma tabela. No lado esquerdo crie um painel comum.</p>
+
+<p>No painel comum, coloque um campo de texto pra nome, uma caixa de combinação (select) para partidos e um controle giratório para o número, e os botões novo, excluir e salvar.</p>
+
+<h3>Criando Tela de Eleitores</h3>
+
+<p>Igual às duas telas anteriores, crie um painel comun na metade branca direita, coloque uma tabela, e no lado esquerdo coloque um painel normal.</p>
+
+<p>No painel esquerdo, coloque um campo de texto pra nome, um campo formatado para CPF, um campo formatado para CEP, um campo de texto para rua, um campo de texto para bairro e um controle giratório para número, e os botões novo, excluir e salvar.</p>
+
+<p>Vá formatando os campos formatados também, para adiantar.</p>
+
+<p>PS: Provavelmente será necessário aumentar o frame para baixo, para caber tudo.</p>
+
+<h3>Botões e Ícones</h3>
+
+<p>Os botões novo, excluir e salvar podem ser estilizados com ícones, da mesma forma, indo em icon nas propriedades de cada um.</p>
+
+<p>As cores e fonte de letra também podem ser alteradas.</p>
+
+<h3>Criando View Urna</h3>
+
+<p>Na parte branca, coloque dois paineis comuns nas duas metades, e na metade esquerda coloque um campo formatado para CPF, um campo de texto para números, os labels correspondentes e os botões branco, corrige e confirma, configure as cores igual de uma urna mesmo.</p>
+
+<p>Na metade direita, coloque um label com o nome e um campo de texto, nas propriedades do campo de texto desabilite ele desmarcando a opção enable.</p>
+
+<h3>Máscara de CPF</h3>
+
+<p>Para colocarmos a máscara em campos formatados é simples, vá em propriedades e em formatterFactory, e em máscara vá em personalizado, lá você seleciona o tipo de máscara a ser usada.</p>
+
+<p>Esses são os exemplos que usaremos nesse frame (podendo ser usado várias outras combinações):</p>
+
+<ul>
+    <li><b>Data: </b><code>##/##/####</code></li>
+    <li><b>CPF: </b><code>###.###.###-##</code></li>
+    <li><b>Telefone: </b><code>(##) ####-####</code></li>
+    <li><b>Celular: </b><code>(##) #####-####</code></li>
+</ul>
+
+<p>PS: A hashtag (#) só aceita números, para letras usamos ?, letras e números usamos A, qualquer coisa usamos * e hexadecimais usamos H. Uma máscara de placas de veículos poderia ser <code>???-####</code>, por exemplo.</p>
+
+<h3>Validar Campo Vazio de JFormattedTextField</h3>
+
+<p>Como os dados de campos formatados, como os de CPF e CEP, acabam passando outros caracteres como traços, e por padrão, os espaços pré-definidos são passados a mesma quantidade de caracteres mesmo enviados sem dados (o de CEP por exemplo, sempre passará 9 caracteres, contando o traço e os espaços não preenchidos).</p>
+
+<p>Vamos por exemplo, em ViewEleitor, criar um action para testar o campo de CPF, colocando esse código de teste:</p>
+
+<pre>
+<code>
+private void btnSalvActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    System.out.println(txtCPF.getText().length());
+}
+</code>
+</pre>
+
+<p>Independente do que passarmos, sempre dará 14 caracteres, para remover os espaços em brancos, use o trim(), assim:</p>
+
+<pre>
+<code>
+private void btnSalvActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    System.out.println(txtCPF.getText().trim().length());
+} 
+</code>
+</pre>
+
+<p>Com isso, podemos fazer uma validação, dessa forma:</p>
+
+<pre>
+<code>
+private void btnSalvActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    if(txtCPF.getText().trim().length() < 14) {
+        System.out.println("CPF Vazio");
+    }
+    else {
+        System.out.println(txtCPF.getText());
+        txtCPF.setText("");
+    }
+}
+</code>
+</pre>
+
+<p>Ou melhorar a validação assim:</p>
+
+<pre>
+<code>
+private void btnSalvActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    if(txtCPF.getText().trim().length() < 14 || txtNome.getText().trim().equals("")) {
+        System.out.println("Campos Vazios");
+    }
+    else {
+        System.out.println(txtCPF.getText());
+        txtCPF.setText("");
+    }
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-java-db-4.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-java-db-6.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

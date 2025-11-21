@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Perl</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Perl</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-perl-1.html">Tudo sobre Perl Parte 1!</a></li>
+                    <li><a href="tudo-sobre-perl-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Perl Parte 2!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Perl Parte 2</h2>
+
+<h3>Datas em Perl</h3>
+
+<p>Para manipular datas em Perl, precisamos importar o POSIX qw(strftime), e usar máscaras para as datas, assim:</p>
+
+<pre>
+<code>
+use POSIX qw(strftime);
+
+my $data = strftime "%d/%m/%Y", localtime; # Dia, mês e ano.
+my $hora = strftime "%H:%M:%S", localtime; # Hora, minuto e segundo.
+my $sem = strftime "%w", localtime; # Pega a posição da semana contada a partir de Domingo, do zero.
+
+print "$data\n";
+print "$hora\n";
+print "$sem\n";
+</code>
+</pre>
+
+<p>Podemos até formatar a semana usando um array, ficando dessa forma:</p>
+
+<pre>
+<code>
+use POSIX qw(strftime);
+
+my $data = strftime "%d/%m/%Y", localtime;
+my $hora = strftime "%H:%M:%S", localtime;
+my $sem = strftime "%w", localtime;
+
+my @semana = ("Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado");
+
+print "$data\n";
+print "$hora\n";
+print "$semana[$sem]\n";
+</code>
+</pre>
+
+<h3>Funções Aritméticas</h3>
+
+<p>Também temos funções aritméticas em Perl, descritas abaixo:</p>
+    
+<p>A função <code>abs()</code> é para pegar o valor absoluto de uma variável (valores sem traço negativo).</p>
+
+<p>A função <code>sqrt()</code> é para mostrar a raiz quadrada.</p>
+
+<p>A função <code>int()</code> é para pegar a parte inteira de um número (não confundir com arredondamento).</p>
+
+<p>A função <code>rand()</code> é para gerar um número aleatório.</p>
+
+<p>Veja todos os códigos acima funcionando:</p>
+
+<pre>
+<code>
+my $n1 = 5;
+my $n2 = 10;
+my $real = 4.5;
+
+printf "Número absoluto de %d: %d.\n", $n1, abs($n1);
+printf "Raiz quadrada de %d: %.4f.\n", $n1, sqrt($n1);
+printf "Parte inteira de %.1f: %d.\n", $real, int($real);
+printf "Número aleatório entre %d e %d: %d.\n", $n1, $n2, rand(($n2 + 1) - $n1) + $n1;
+</code>
+</pre>
+
+<p>Veja como usar o aleatório:</p>
+
+<pre>
+<code>
+printf "%d\n", rand(5); # Gera de 0 a 4
+printf "%d\n", rand(5) + 1; # Gera de 1 a 5
+printf "%d\n", rand((14 + 1) - 12) + 12; # Gera de 12 a 14
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-perl-1.html">Parte Anterior da Matéria!</a></li>
+    <!-- <li><a href="tudo-sobre-perl-3.html">Continuação da Matéria!</a></li> -->
+</ul>
+
+        </div>
+    </body>
+</html>

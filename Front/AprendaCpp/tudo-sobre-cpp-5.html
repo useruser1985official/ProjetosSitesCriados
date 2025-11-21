@@ -1,0 +1,417 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C++</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cpp-1.html">Tudo sobre C++ Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cpp-2.html">Tudo sobre C++ Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cpp-3.html">Tudo sobre C++ Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cpp-4.html">Tudo sobre C++ Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cpp-5.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C++ Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cpp-6.html">Tudo sobre C++ Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cpp-7.html">Tudo sobre C++ Parte 7!</a></li>
+                    <li><a href="tudo-sobre-cpp-8.html">Tudo sobre C++ Parte 8!</a></li>
+                    <li><a href="tudo-sobre-cpp-9.html">Tudo sobre C++ Parte 9!</a></li>
+                    <li><a href="tudo-sobre-cpp-10.html">Tudo sobre C++ Parte 10!</a></li>
+                    <li><a href="tudo-sobre-cpp-11.html">Tudo sobre C++ Parte 11!</a></li>
+                    <li><a href="tudo-sobre-cpp-12.html">Tudo sobre C++ Parte 12!</a></li>
+                    <li><a href="tudo-sobre-cpp-13.html">Tudo sobre C++ Parte 13!</a></li>
+                    <li><a href="tudo-sobre-cpp-14.html">Tudo sobre C++ Parte 14!</a></li>
+                    <li><a href="tudo-sobre-cpp-15.html">Tudo sobre C++ Parte 15!</a></li>
+                    <li><a href="tudo-sobre-cpp-16.html">Tudo sobre C++ Parte 16!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C++ Parte 5</h2>
+
+<h3>Jogo da Forca</h3>
+
+<p>Vamos criar um jogo da forca, veja o código abaixo:</p>
+
+<pre>
+<code>
+char palavra[30], letra[1], secret[30]; // Arrays que armazenarão dados, letra por letra.
+int tam, i, chances, certos;
+bool acerto;
+
+chances = 6;
+tam = 0;
+i = 0;
+acerto = false;
+certos = 0;
+
+cout << "Digite a palavra secreta (até 30 letras): ";
+cin >> palavra; // Isso insere a palavra secreta.
+system("cls"); // clear no Linux. Importe cstdlib.
+    
+while(palavra[i] != '\0') { // Essa estrutura procurá se tem letras nas posições das palavras.
+    i++;
+    tam++;
+}
+
+for(i = 0; i < 30; i++) {
+    secret[i] = '_'; // Isso criará linhas no lugar das palavras.
+}
+
+while((chances > 0) && (certos < tam)) {
+    cout << "Chances Restantes: " << chances << "\n";
+    cout << "Palavra Secreta: ";
+    for(i = 0; i < tam; i++) {
+        cout << secret[i];
+    }
+    cout << "\n\nDigite uma Letra: ";
+    cin >> letra[0];
+    for(i = 0; i < tam; i++) {
+        if(palavra[i] == letra[0]) {
+            acerto = true;
+            secret[i] = palavra[i]; // Isso revela a letra na posição desejada.
+            certos++;
+        }
+    }
+    if(!acerto) {
+        chances--;
+    }
+    acerto = false;
+    system("cls"); // clear no Linux.
+}
+if(certos == tam) {
+    cout << "A palavra \"" << palavra << "\" foi revelada!\n\n";
+    cout << "Você venceu, parabéns!";
+}
+else {
+    cout << "A palavra secreta era \"" << palavra << "\"!\n\n";
+    cout << "Infelizmente você perdeu!";
+}
+</code>
+</pre>
+
+<h3>Argumentos para a função main, argc e argv</h3>
+
+<p>Para entender o funcionamento de passagem de parâmetros para a função main, que é que, quando a gente chama um programa através do prompt pelo nome, podemos enviar um valor, que pode ser tratado dentro do programa através de dois parâmetros, basicamente, que são o <code>argc</code> e <code>argv</code>.</p>
+
+<p>A função main tem basicamente, duas variáveis que servem de propriedades para argumentos, a <code>int argc</code>, que guarda a quantidade de parâmetros informados (1, 2, 3, etc), e a <code>char *argv[]</code>, que é um array que serve como ponteiro para a matriz de caracteres, que armazena os argumentos.</p>
+
+<p>Veja um exemplo de programa que receberá um parâmetro pelo prompt e ele tratará ele dentro dos parênteses da função main.</p>
+
+<pre>
+<code>
+int main(int argc, char *argv[]) {
+    cout << argv[0] << "\n\n";
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: Por default, o primeiro argumento é o nome do programa, que é exibido quando não é passado nenhum argumento.</p>
+
+<p>A diferença assim é que podemos chamar o programa pelo terminal passando um parâmetro com o nome do programa, sem precisar o ".exe" no final (por exemplo aplicacaocpp ao invés de aplicacaocpp.exe). E podemos passar outros parâmetros junto com o programa.</p>
+
+<p>Veja o mesmo programa com o array alterado, coloque algo tipo "nomedaaplicacao qualquerpalavra", a palavra informada após o programa será exibida:</p>
+
+<pre>
+<code>
+int main(int argc, char *argv[]) {
+    cout << argv[1] << "\n\n";
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: Podemos passar mais de um argumento da mesma forma, como "nomedaaplicacao palavra1 palavra2". Também podemos exibir a quantidade de parâmetros:</p>
+
+<pre>
+<code>
+int main(int argc, char *argv[]) {
+    cout << argv[2] << "\n\n";
+    cout << argc << "\n\n";
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: O argc exibirá a quantidade de parâmetros, se passsar quatro, por exemplo, será exibido quatro de 0 à 3, o primeiro é o nome do programa.</p>
+
+<p>Com o programa sabendo quais parâmetros ele recebeu, podemos fazer programas nos quais podem tomar decisões específicas. Veja um exemplo:</p>
+
+<pre>
+<code>
+int main(int argc, char *argv[]) {
+    if(argc > 1) {
+        if(!strcmp(argv[1], "sol")) { // Importar cstring.
+            cout << "Vou ao clube.\n\n";
+        }
+        else if(!strcmp(argv[1], "nublado")) {
+            cout << "Vou ao cinema.\n\n";
+        }
+        else {
+            cout << "Vou ficar em casa.\n\n";
+        }
+    }
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: A função <code>strcmp()</code> compara se as strings são iguais, e retornam 0 (false) nesse caso. Por isso tem que colocar o operador NOT antes dele para retornar true (1) e o if e else funcionarem corretamente.</p>
+
+<p>Nessa situação, você pode criar um atalho ao programa compilado com o argumento, indo em propriedades, destino e colocar o argumento após o "exe", da mesma forma.</p>
+
+<h3>Funções - Parte 1</h3>
+
+<p>Uma função permite que você determine um trecho de código que executa uma tarefa específica e que você reutilize esse trecho de código sempre que necessário, sem a necessidade de recriar ou redigitar aquele código. As funções são os recursos mais importante em C++ e estão presentes em grande parte das linguagens de programação.</p>
+
+<p>O próprio main do C++ é uma função, assim como coisas como cout e cin, mas essas são funções internas da linguagem.</p>
+
+<p>O correto é criar as funções depois da função main, mas não é obrigatório, ela pode vir antes.</p>
+
+<p>Veja um exemplo abaixo, no caso a função será void, que não retornará nada:</p>
+
+<pre>
+<code>
+void texto();
+
+int main() {
+    texto();
+    
+    return 0;
+}
+
+void texto() {
+    cout << "Introdução à Funções em C++\n";
+}
+</code>
+</pre>
+
+<p>Para chamar a função, colocamos a chamada dentro do main. Mas tem que ser indicada antes do int main, para avisar o programa que existem funções, mas ele só é executado dentro do int main.</p>
+
+<p>Dessa forma, podemos chamar a mesma função mais de uma vez, como podem ver:</p>
+
+<pre>
+<code>
+void texto();
+
+int main() {
+    texto();
+    texto();
+    texto();
+    
+    return 0;
+}
+
+void texto() {
+    cout << "Introdução à Funções em C++\n";
+}
+</code>
+</pre>
+
+<p>Ou mesmo usando um laço de repetição, por exemplo:</p>
+
+<pre>
+<code>
+void texto();
+
+int main() {
+    for(int i = 0; i < 10; i++) {
+        texto();
+    }
+    
+    return 0;
+}
+
+void texto() {
+    cout << "Introdução à Funções em C++\n";
+}
+</code>
+</pre>
+
+<p>Veja outro exemplo no qual passamos parâmetros:</p>
+
+<pre>
+<code>
+void soma(int n1, int n2);
+
+int main() {
+    soma(15, 5); // Números passados.
+    
+    return 0;
+}
+
+void soma(int n1, int n2) {
+    cout << "Soma dos valores: " << n1 + n2 << "\n";
+}
+</code>
+</pre>
+
+<p>Outro exemplo, usando int ao invés de void:</p>
+
+<pre>
+<code>
+using namespace std;
+
+int soma2(int n1, int n2);
+
+int main() {
+    int res;
+    
+    res = soma2(175, 25);
+    
+    cout << "Valor de res: " << res << "\n";
+    
+    return 0;
+}
+
+int soma2(int n1, int n2) {
+    return n1 + n2;
+}
+</code>
+</pre>
+
+<p>O mesmo código acima, com a função sendo invocada diretamente no cout:</p>
+
+<pre>
+<code>
+int soma2(int n1, int n2);
+
+int main() {
+    cout << "Valor de res: " << soma2(175, 25) << "\n";
+    
+    return 0;
+}
+
+int soma2(int n1, int n2) {
+    return n1 + n2;
+}
+</code>
+</pre>
+
+<p>PS: O return indica quando a função retorna um valor, e deverá ser do mesmo tipo do valor retornado (como int, string, float, boolean ou nome de classe ou struct), por isso, obviamente, não é utilizado no void. Também é possível colocar as funções antes do main, nesse caso não é necessário indicar ela, mas não é recomendado fazer assim.</p>
+
+<p>Veja outro exemplo mais complexo, onde declaramos um array, e depois fazemos uma função que criará outro array e receberá os valores do primeiro na invocação:</p>
+
+<pre>
+<code>
+void tr(string tra[]);
+
+int main() {
+    string transp[4] = {"Carro", "Moto", "Barco", "Avião"};
+    
+    tr(transp);
+    
+    return 0;
+}
+
+void tr(string tra[]) {
+    for(int i = 0; i < 4; i++) {
+        cout << tra[i] << "\n";
+    }
+}
+</code>
+</pre>
+
+<p>PS: Nos parâmetros também podemos passar arrays, passando a variável com ponteiro, algo tipo <code>funcao(int* vetorpassado)</code>.</p>
+
+<p>Podemos facilmente criar métodos úteis, como esse pra remover espaços desnecessário de uma string:</p>
+
+<pre>
+<code>
+string trim(string &str);
+
+int main() {
+    string texto = "         teste     ";
+
+    cout << trim(texto) << endl;
+
+    return 0;
+}
+
+string trim(string &str) {
+    size_t first = str.find_first_not_of(' ');
+    size_t last = str.find_last_not_of(' ');
+    
+    return str.substr(first, (last - first + 1));
+}
+</code>
+</pre>
+
+<h3>Sobrecarga de Funções</h3>
+
+<p>A sobrecarga de funções é nada mais do que ter duas ou mais funções com o mesmo nome dentro do mesmo programa. Isso é possível em C++ desde que as funções possuam argumentos de entrada diferente.</p>
+
+<p>Para entendermos, vamos primeiro fazer uma chamada simples de função:</p>
+
+<pre>
+<code>
+void soma();
+
+int main() {
+    soma();
+
+    return 0;
+}
+
+void soma() {
+    int n1, n2, res;
+    n1 = 10;
+    n2 = 20;
+
+    res = n1 + n2;
+    cout << "Soma de " << n1 << " com " << n2 << " é igual à " << res << ".\n\n";
+}
+
+</code>
+</pre>
+
+<p>Agora veja com uma segunda função, com parâmetros diferentes:</p>
+
+<pre>
+<code>
+void soma(int n1, int n2);
+void soma();
+
+int main() {
+    soma(20, 30); // Executará a primeira função.
+    soma(); // Executará a segunda função.
+
+    return 0;
+}
+
+void soma(int n1, int n2) {
+    int res;
+    res = n1 + n2;
+    cout << "Soma de " << n1 << " com " << n2 << " é igual à " << res << ".\n\n";
+}
+
+void soma() {
+    int n1, n2, res;
+    n1 = 10;
+    n2 = 20;
+
+    res = n1 + n2;
+    cout << "Soma de " << n1 << " com " << n2 << " é igual à " << res << ".\n\n";
+}
+</code>
+</pre>
+
+<p>Como visto no código acima, temos duas funções com o mesmo nome, a primeira com passagem de parâmetros e a segunda sem nenhum. A função main identifica qual função é qual pela diferença de parâmetros passados.</p>
+
+<ul>
+    <li><a href="tudo-sobre-cpp-4.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-cpp-6.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

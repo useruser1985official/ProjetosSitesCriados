@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C++ com QT Creator</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++ com QT Creator</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cppqt-1.html">Tudo sobre C++ com QT Creator Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cppqt-2.html">Tudo sobre C++ com QT Creator Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cppqt-3.html">Tudo sobre C++ com QT Creator Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cppqt-4.html">Tudo sobre C++ com QT Creator Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cppqt-5.html">Tudo sobre C++ com QT Creator Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cppqt-6.html">Tudo sobre C++ com QT Creator Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cppqt-7.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C++ com QT Creator Parte 7!</a></li>
+                </menu>
+            </header>
+          
+<h2>Tudo sobre C++ com QT Creator Parte 7</h2>
+
+<h3>QDesktopServices - Abrindo Programas, Arquivos ou Sites</h3>
+
+<p>Abra um novo projeto no QT e adicione dois push buttons, um pra abrir um site e outro pra abrir um programa específico. Aumente o tamanho dos botões e mude os names deles.</p>
+
+<p>Adicione o slot clicked no botão de site e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnSite_clicked() {
+    QString link = "https://www.google.com.br";
+    
+    QDesktopServices::openUrl(QUrl(link)); // Inclua QDesktopServices e QUrl
+}
+</code>
+</pre>
+
+<p>PS: Ele abrirá o site no navegador padrão do sistema.</p>
+
+<p>Adicione o slot clicked do segundo botão e coloque esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnAdob_clicked() {
+    QString caminho = "file:///C:/Program Files/Adobe/Acrobat Reader DC/Reader/AcroRd32.exe";
+
+    QDesktopServices::openUrl(QUrl(caminho)); // Inclua QDesktopServices e QUrl    
+}
+</code>
+</pre>
+
+<p>Podemos adicionar mais um botão para abrir outro programa, coloque o slot clicked com esse código:</p>
+
+<pre>
+<code>
+void MainWindow::on_btnCalc_clicked() {
+    QString caminho = "file:///C:/Windows/System32/calc.exe";
+
+    QDesktopServices::openUrl(QUrl(caminho)); // Inclua QDesktopServices e QUrl
+}
+</code>
+</pre>
+
+<p>PS: Isso pode ser usado para qualquer tipo de arquivo. E não use as barras invertidas (\), mesmo se forem sequências de escape duplas. Mesmo em ambientes Windows, use a barra normal (/).</p>
+
+<p>No Linux, caso isso não funcione, pode usar o QProcess (inclua esta biblioteca no mainwindow.h), dessa forma:</p>
+
+<pre>
+<code>
+QProcess::execute("/usr/bin/gnome-calculator");
+</code>
+</pre>
+
+<h3>Splash Screen</h3>
+
+<p>Para criar uma splash screen, coloque num projeto uma pasta com uma imagem. Vá em add new file, em QT e em QT Resource File, crie um nome e dentro dele, vá em add e add prefix o nome splash, e adicione o caminho da imagem.</p>
+
+<p>Dessa vez, vamos no arquivo main.cpp (arquivo principal), dentro do método main, e modificaremos esse código assim:</p>
+
+<pre>
+<code>
+QApplication a(argc, argv);
+
+QSplashScreen *telaSplash = new QSplashScreen(); // Inclua QSplashScreen
+
+telaSplash->setPixmap(QPixmap(":/splash/_imagens/arquivo.png")); // Path do arquivo de recursos, inclua QPixmap
+
+telaSplash->show();
+
+MainWindow w;
+
+QTimer::singleShot(2000, telaSplash, SLOT(close())); // Inclua QTimer, parâmetro em milissegundos
+
+QTimer::singleShot(2000, &w, SLOT(show())); // Coloca o endereço por não ter sido criado com ponteiro.
+
+// w.show();
+
+return a.exec();
+</code>
+</pre>
+
+<h3>Fazendo Deploy no Programa</h3>
+
+<p>Para rodar o programa fora do QT, escolha Release na hora de compilar, vai na pasta Release, onde estará o arquivo e pegue o caminho do programa e vá no shell do compilador correspondente e vá na mesma pasta, e digite <code>windeployqt.exe .</code> (não esqueça do ponto), ele criará as bibliotecas necessárias para ele rodar, que deverão estar na mesma pasta do programa.</p>
+
+<p>Caso deseje fazer manualmente, copie as dlls da pasta bin e os plugins da pasta plugin do compilador (no caso, o debug, em mingw, dentro da pasta Qt), e coloque na mesma pasta do executável. Para deletar as DLLs e plugins não úteis para o programa, na pasta dele, abra o programa e exclua esses arquivos, o que não for excluído é o que ele está usando. Faça o deploy dessa forma caso for projeto com banco de dados.</p>
+
+<p>PS: Podemos adicionar a pasta do windeployqt no Path do Windows, colocando o caminho <code>C:\Qt\6.2.2\mingw_64\bin</code>.</p>
+
+<p>No Linux, adicione essas variáveis de ambiente em /etc/bash.bashrc:</p>
+
+<pre>
+<code>
+QTDIR=/opt/Qt/6.2.2/gcc_64
+QT_STYLE_OVERRIDE=adwaita
+QT_QPA_PLATFORMTHEME=gnome
+QT_QPA_PLATFORM=wayland
+QT_DEBUG_PLUGINS=1
+</code>
+</pre>
+
+<p>No projeto do programa, coloque no arquivo .pro referente, no final dele, essa linha:</p>
+
+<pre>
+<code>
+unix: {
+    QMAKE_LFLAGS_RPATH=
+    QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\'" -no-pie
+}
+</code>
+</pre>
+
+<p>PS: A flag "-no-pie" é pra compilar um executável ao invés de uma biblioteca compartilhada. Ela pode ser omitida.</p>
+
+<p>Na pasta do projeto compilado, rode o comando <code>chrpath -r \$ORIGIN NomeDoPrograma</code> (o comando chrpath modifica os locais onde o programa procurará as bibliotecas). Após isso rode esses comandos no terminal:</p>
+
+<pre>
+<code>
+rm *.o
+
+rm *.h
+
+rm *.cpp
+
+rm Makefile
+
+sudo cp -r /opt/Qt/Tools/QtCreator/lib/Qt/lib/* "$PWD"
+
+sudo cp -r /opt/Qt/Tools/QtCreator/lib/Qt/plugins/* "$PWD"
+
+sudo cp -r /opt/Qt/6.2.2/gcc_64/lib/* "$PWD"
+
+sudo cp -r /opt/Qt/6.2.2/gcc_64/plugins/* "$PWD"
+
+sudo chown -R eu:eu *
+
+cd platforms
+
+chrpath -r \$ORIGIN/.. libqxcb.so
+
+cd ..
+</code>
+</pre>
+
+<p>O comando acima copiará todos os SO para o diretório do aplicativo, mas nem todos eles serão utilizados efetivamente, para colocar apenas os arquivos necessários, podemos usar esse script SH aqui para isso (<a href="files/qtdeploy.sh" target="_blank">Clique Aqui para Baixar</a>), coloque ele no mesmo diretório do programa.</p>
+
+<p>No Linux, podemos também usar o linuxdeployqt para isso, da mesma forma que o windeployqt.exe, baixamos ele daqui: <a href="https://github.com/probonopd/linuxdeployqt/releases" target="_blank">https://github.com/probonopd/linuxdeployqt/releases</a></p>
+
+<p>PS: Em quaisquer sistema, caso faça deploy de aplicativo com banco de dados, veja se a pasta "sqldrivers" está no diretório do aplicativo. Outras pastas com drivers podem ser necessárias também.</p>
+
+<h3>Criando um Instalador pros Programas</h3>
+
+<p>Primeiramente, vai nesse link e baixa o instalador pra plataforma especificada: <a href="https://download.qt.io/official_releases/qt-installer-framework/" target="_blank">https://download.qt.io/official_releases/qt-installer-framework/</a></p>
+
+<p>Depois de instalar, coloque o path no seu sistema para a pasta (no caso do Windows é <code>C:\Qt\QtIFW3.1.1\bin</code>)</p>
+
+<p>PS: O instalador framework vem por padrão nas versões mais recentes do QT, procure ela dentro da pasta do qt em tool.</p>
+
+<p>Vá na pasta examples, dentro da pasta do framework, e copie a pasta startmenu e edite o nome para instalador. Dentro dessa pasta, entre na pasta config e edite o arquivo config.xml de forma que essas linhas fiquem assim:</p>
+
+<pre>
+<code>
+&lt;Name&gt;Nome do Instalador do Programa&lt;/Name&gt;
+&lt;Version&gt;1.0.0&lt;/Version&gt;
+&lt;Title&gt;Nome do Programa&lt;/Title&gt;
+&lt;Publisher&gt;Nome do Publicador&lt;/Publisher&gt;
+&lt;StartMenuDir&gt;Nome do Programa&lt;/StartMenuDir&gt;
+&lt;TargetDir&gt;@ApplicationsDirX86@/NomeDaPasta&lt;/TargetDir&gt;
+</code>
+</pre>
+
+<p>PS: O HomeDir é a pasta home do usuário, se quiser direcionar para a pasta Program Files, use as  variáveis <code>@ApplicationsDirX86@</code> para programas de 32 bits e <code>@ApplicationsDirX64@</code> para programas de 64 bits.</p>
+
+<p>Entre na pasta packages, org.qtproject.ifw.example (ou equivalente) e em data, exclua o que tiver dentro dele e coloque tudo que tiver na pasta do programa em QT já com o deploy realizado lá dentro.</p>
+
+<p>Em meta, dentro da org.qtproject.ifw.example, abra o package.xml e edite ele assim:</p>
+
+<pre>
+<code>
+&lt;DisplayName&gt;Nome do Programa&lt;/DisplayName&gt;
+&lt;Description&gt;Nome do Programa&lt;/Description&gt;
+&lt;Version&gt;1.0.0&lt;/Version&gt;
+</code>
+</pre>
+
+<p>Na mesma pasta, abra o installscript.qs, e altere o final  dessa forma:</p>
+
+<pre>
+<code>
+component.addOperation("CreateShortcut", "@TargetDir@/nomedoexecutavel.exe", "@StartMenuDir@/nomedoexecutavel.lnk",
+</code>
+</pre>
+
+<p>PS: Para personalizar o ícone, coloque a pasta do ícone dentro do diretório data, onde estará o programa.</p>
+
+<p>E no arquivo installscript.qs, altere a determinada linha assim:</p>
+
+<pre>
+<code>
+iconPath=@TargetDir@/images/meuicone.ico
+</code>
+</pre>
+
+<p>PS: Pode ser também o ícone do próprio programa (é até preferível):</p>
+
+<pre>
+<code>
+iconPath=@TargetDir@/nomedoexecutavel.exe
+</code>
+</pre>
+
+<p>Na pasta do instalador, temos o README, abra ele e copie esse comando:</p>
+
+<pre>
+<code>
+binarycreator --offline-only -c config/config.xml -p packages installer
+</code>
+</pre>
+
+<p>Vamos no menu do QT e abrir o console do mingw e ir até dentro da pasta do instalador e digite esse comando acima, com o nome do instalador, assim:</p>
+
+<pre>
+<code>
+binarycreator --offline-only -c config/config.xml -p packages nomedoinstaladordoprograma
+</code>
+</pre>
+
+<p>Daí é só esperar e pegar esse instalador pra instalar o programa.</p>
+
+<p>Caso deseje desinstalar o programa, basta executar o maintenancetool.exe ou ir na lista de programas do Windows.</p>
+
+<p>PS: Podemos adicionar a pasta do binarycreator no Path do Windows, colocando o caminho <code>C:\Qt\Tools\QtInstallerFramework\4.3\bin\</code>.</p>
+
+<ul>
+    <li><a href="tudo-sobre-cppqt-6.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-cppqt-8.html">Continuação da Matéria!</a></li>-->
+</ul>
+
+        </div>
+    </body>
+</html>

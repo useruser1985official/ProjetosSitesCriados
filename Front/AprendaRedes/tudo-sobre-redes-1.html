@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html">Tudo sobre Redes Parte 13!</a></li>
+                    <li><a href="tudo-sobre-redes-14.html">Tudo sobre Redes Parte 14!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Redes Parte 1</h2>
+
+<h3>Componentes de uma rede, LAN, WAN</h3>
+
+<p>Uma rede é um conjunto de dispositivos ligados que podem trocar informações entre si (não apenas computadores, mas também impressoras, servidores, câmeras de vigilância, smartphones e etc.), além de compartilhar recursos e aplicativos.</p>
+
+<p>Um exemplo é um compartilhamento de impressora, que pode ser acessada diretamente pelos computadores, ou pode ter um computador na rede que vai ser o servidor de impressão. Isso vale pra outras coisas como banco de dados e aplicativos.</p>
+
+<p>Essas são as partes que compões uma rede:</p>
+
+<ul id="lista">
+    <li><b>Computadores Cliente:</b> Também chamados de estações de trabalho. É o computador do usuário final.</li>
+    <li><b>Servidores:</b> São os computadores que compartilham algum recurso como discos para armazenamentos de dados ou impressoras. Em um servidor normalmente roda um sistema operacional de rede como o Windows Server 2008 ou uma versão de Linux como o Red Hat ou o Ubuntu Enterprise.</li>
+    <li><b>Interfaces de rede:</b> Hoje computadores como desktop e notebook vem de fábrica com uma "placa de rede" incorporada.</li>
+    <li><b>Cabos:</b> A maior parte das redes hoje utilizam um tipo de cabo de rede do tipo UTP, outras opções como cabo coaxial e fibra óptica são encontradas de acordo com a necessidade da rede.</li>
+    <li><b>Switches e Roteadores:</b> Switches ligam dispositivos entre si e roteadores conectam redes diferentes. Falaremos sobre eles mais pra frente.</li>
+    <li><b>Redes sem fio:</b> Antenas, placas de rede para redes sem fio, pontos de acesso e outros dispositivos são encontrados facilmente hoje em dia.</li>
+</ul>
+
+<p>PS: Nesses servidores ficam também programas como o Apache Web Server e o Microsoft Exchange.</p>
+
+<p>Quando usamos o conceito de LAN e WAN, não exatamente falamos do tamanho da rede.</p>
+
+<p>Quando falamos de LAN, estamos falando de uma rede de área local, mas não necessariamente uma rede pequena, mas sim uma rede interna (como por exemplo, os computadores de estão numa mesma rede, o roteador e o modem).</p>
+
+<p>Já a WAN, é uma rede interligada de lugares distantes (por exemplo, uma rede LAN em São Paulo ligada numa rede em Recife), o que permite controlar computadores mesmo por essa distância (como um acesso remoto). A WAN também incluí o acesso a internet à qualquer site (como o seu computador e o servidor do Google, por exemplo).</p>
+
+<h3>Topologias</h3>
+
+<p>Topologia basicamente é a forma de como os dispositivos ficam dispostos na rede, como se fosse o "desenho" da rede:</p>
+
+<p>As topologias mais comuns são:</p>
+
+<ul>
+    <li><b>Barramento:</b> Todos os dispositivos são ligados no mesmo cabo, que precisa de uma terminação em cada uma das pontas (onde não tem dispositivo, tem um terminador para não dar interferência).</li>
+    <li><b>Anel:</b> Um dispositivo é ligado um ao outro sem terminação, como um "anel" mesmo.</li>
+    <li><b>Estrela:</b> Os dispositivos são conectados através de um dispositivo concentrador (muitas vezes um roteador ou switch). O mais comum.</li>
+    <li><b>Malha:</b> Não é muito usada em redes pequenas, os nós nela tem mais de uma conexão</li>
+    <li><b>Híbrida:</b> Quando usamos mais de uma topologia juntas (tipo por exemplo, barramento estrela).</li>
+</ul>
+
+<p>Veja abaixo o desenho de algumas topologias:</p>
+
+<img src="imagens/topologias.png" alt="Topologias"/>
+
+<h3>Modelo OSI</h3>
+
+<p>O modelo OSI descreve as regras que padronizam os diversos componentes em uma rede para que os dispositivos consigam se comunicar. O modelo OSI é dividido em sete camadas:</p>
+
+<ul>
+    <li><b>Aplicação:</b> Interfaces com aplicativos (tudo que o usuário mexe no computador que acessa a rede, como navegadores, através de regras de protocolos).</li>
+    <li><b>Apresentação:</b> Formatos e criptografia (quando vemos por exemplo, uma foto que é transmitida na rede e é interpretada por um formato, como JPG ou PNG. Criptografia já é algo mais a segurança).</li>
+    <li><b>Sessão:</b> Controle de sessões entre aplicativos (quando acessamos um outro computador remotamente, por exemplo, quando começa e termina a sessão, etc.).</li>
+    <li><b>Transporte:</b> Conexão entre hosts/portas (dessas conexões define se estas serão confiáveis, e se usará TCP ou UDP). Já sobre as portas, é o identificador do host do computador ou servidor.</li>
+    <li><b>Rede:</b> Endereço lógico e roteamento (endereço lógico nada mais é que o IP, que toda máquina tem). Roteamento é quando acessamos um servidor através de roteadores, não os da nossa LAN.</li>
+    <li><b>Enlace:</b> Endereço Físico (isso é referente ao endereço MAC) e verificação de erros.</li>
+    <li><b>Física:</b> Hardware e sinal elétrico (hardware é a placa de rede e os conectores. O sinal elétrico é nada mais que a tensão da rede telefônica).</li>
+</ul>
+
+<p>PS: As camadas são contadas de baixo pra cima nesse caso, a primeira é a Física, a segunda é a Enlace e assim por diante.</p>
+
+<h3>Introdução ao TCP/IP</h3>
+
+<p>TCP/IP é um conjunto de protocolos de comunicação e começou a ser desenvolvido pelo departamento de defesa americano de onde vem o termo DoD.</p>
+
+<p>O TCP/IP é dividido em quatro camadas:</p>
+
+<table>
+    <tr>
+        <th>TCP/IP</th>
+        <th>Referente ao Modelo OSI</th>
+    </tr>
+    <tr>
+        <td rowspan="3">Aplicação</td>
+        <td>Aplicação</td>
+    </tr>
+    <tr>
+        <td>Apresentação</td>
+    </tr>
+    <tr>
+        <td>Sessão</td>
+    </tr>
+    <tr>
+        <td>Transporte (Host-to-Host)</td>
+        <td>Transporte</td>
+    </tr>
+    <tr>
+        <td>Rede (Internet)</td>
+        <td>Rede</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Física (Acesso à Rede)</td>
+        <td>Enlace</td>
+    </tr>
+    <tr>
+        <td>Física</td>
+    </tr>
+</table>
+
+<p>Veja alguns exemplos dos protocolos em pilhas de TCP/IP:</p>
+
+<table>
+    <tr>
+        <th>Camadas</th>
+        <th>Protocolos</th>
+    </tr>
+    <tr>
+        <td>Aplicação</td>
+        <td>HTTP, SMTP, IMAP, FTP, SIP, SSH, Telnet</td>
+    </tr>
+    <tr>
+        <td>Transporte (Host-to-Host)</td>
+        <td>TCP, UDP</td>
+    </tr>
+    <tr>
+        <td>Rede (Internet)</td>
+        <td>IPv4, IPv6</td>
+    </tr>
+    <tr>
+        <td>Física (Acesso à Rede)</td>
+        <td>ARP, Ethernet, FDDI</td>
+    </tr>
+</table>
+
+<p>PS: A camada física no TCP/IP engloba as camadas 1 e 2 do OSI, mas elas tratam de coisas diferentes.</p>
+
+<p>Enquanto o TCP (Transmission Control Protocol) organiza os pacotes, ele também utiliza o sistema de reconhecimento da informação para verificar se os dados estão íntegros. Outro protocolo presente nesta camada é o UDP (User Datagram Protocol) que é utilizado quando dados menos importantes são transmitidos, tipicamente em requisições DNS. Isto porque o UDP não possui as funcionalidades de reorganização das informações nem de verificação da integridade dos dados. No entanto, ele é bem mais rápido do que o TCP.</p>
+
+<p>Para redefinir o TCP/IP do computador, use o comando <code>netsh int ip reset all</code> e reinicie o PC.</p>
+
+<p>Para vermos os IPs abertos no computador, suas respectivas portas e o tipo de protocolo usado (TCP ou UDP), usamos o comando <code>netstat /a /n /b</code> (no Linux use como parâmetro <code>-ane</code>).</p>
+
+<h3>Definições do Protocolo TCP/IP</h3>
+
+<p>Para isso, podemos definir a função de cada uma das camadas do protocolo TCP/IP como:</p>
+
+<ul>
+    <li><b>Aplicação:</b> Nesta camada define-se como os programas vão se comunicar com as diversas aplicações disponíveis nas redes. Ainda é de responsabilidade desta camada efetuar o gerenciamento da interface pela qual o usuário vai interagir com a aplicação.</li>
+    <li><b>Transporte (Host-to-Host):</b> É idêntica à camada de transporte do modelo de referência OSI, ou seja, responsável por prover, gerenciar e encerrar uma conexão ponto a ponto. Ao efetuar o gerenciamento da conexão, visa-se garantir a integridade dos dados pelo sequenciamento dos pacotes segmentados para efetuar o envio/recebimento das mensagens.</li>
+    <li><b>Rede (Internet):</b> Tem o mesmo objetivo da camada de rede do modelo de referência OSI, sendo responsável por definir o endereçamento dos dispositivos por meio do IP e garantir o roteamento dos pacotes nas redes.</li>
+    <li><b>Física (Acesso à Rede):</b> Desempenha a mesma função das camadas de enlace e física do modelo de referência OSI. Efetua o monitoramento do tráfego e analisa o endereçamento de hardware antes da transmissão pelo meio físico.</li>
+</ul>
+
+<p>Podemos destacar algumas semelhanças entre o modelo OSI e o protocolo TCP/IP:</p>
+
+<ul>
+    <li>Divisão em camadas.</li>
+    <li>As camadas de transporte e rede são equivalentes.</li>
+    <li>A comutação de pacotes é definida no modelo e efetuada no protocolo.</li>
+    <li>Os profissionais de redes necessitam conhecer ambos.</li>
+</ul>
+
+<h3>Endereço IP</h3>
+
+<p>O endereço IP é o endereço lógico que cada dispositivo na rede deverá ter, por exemplo, computadores, roteadores, tables, smarthphones, etc.</p>
+
+<p>Existe duas formas de colocar o endereço IP na máquina, uma é manualmente, onde entramos na configuração do dispositivo e colocamos o endereço IP, e a outra é através de um servidor DHCP (pode ser uma máquina ou servidor com Windows, Linux, roteador, etc.), que vai atribuir um IP à cada dispositivo que entrar na rede.</p>
+
+<p>Um endereço de IP é formado por quatro números, cada um passando de 001 à 255, como por exemplo, <code>192.168.0.2</code>.</p>
+
+<p>Um IP necessita de uma máscara de subrede, como <code>255.255.255.0</code>, no caso, a máscara, os números 255 indica que o número corresponde ao IP no mesmo ponto (com o exemplo acima seria <code>192.168.0</code> no primeiro) seria de endereço de rede, já os últimos números são referentes ao host (dispositivos). Por exemplo, um computador teria o IP <code>192.168.0.2</code>, seria o computador 2 na rede <code>192.168.0</code>, e o três seria <code>192.168.0.3</code>, e assim por diante, se alterar um deles para, por exemplo, <code>192.168.1.2</code>, ele já faria parte de outra rede. Todos usariam a mesma máscara <code>255.255.255.0</code>.</p>
+
+<p>Pra facilitar a criação de redes, foram estabelecidos alguns padrões, por exemplo, quando tivermos uma rede, ela terá uma classe padrão. Veja as classes logo abaixo:</p>
+
+<ul>
+    <li><b>Classe A: </b> Primeiro octeto entre 1 e 126.<br/>Em binário, o primeiro bit do primeiro octeto é 0.<br/>A máscara padrão é <code>255.0.0.0</code>.<br/>Um exemplo é <code>10.0.0.2</code>.<br/><br/></li>
+    <li><b>Classe B: </b> Primeiro octeto entre 128 e 191.<br/>Em binário, o primeiro bit do primeiro octeto é 1 e o segundo é 0.<br/>A máscara padrão é <code>255.255.0.0</code>.<br/>Um exemplo é <code>172.16.0.13</code>.<br/><br/></li>
+    <li><b>Classe C: </b> Primeiro octeto entre 192 e 223.<br/>Em binário, os primeiros dois bits do primeiro octeto é 1 e o terceiro é 0.<br/>A máscara padrão é <code>255.255.255.0</code>.<br/>Um exemplo é <code>192.168.0.3</code>.<br/></li>
+</ul>
+
+<p>PS: Note que faltou o 127, ele é usado para loopback, que explicaremos logo abaixo.</p>
+
+<p>Temos também os vários tipos de endereços à serem usados pelo IP:</p>
+
+<ul>
+    <li><b>Endereço Público: </b>Endereço IP fornecido pelas operadoras para acesso à internet.</li>
+    <li><b>Endereço Privado: </b>Usados em redes internas, com os padrões de classes acima (classe A de <code>10.0.0.0</code> à <code>10.255.255.255</code>, classe B de <code>172.16.0.0</code> à <code>172.31.255.255</code> e classe C de <code>192.168.0.0</code> à <code>192.168.255.255</code>). Tipo um ramal de telefone.</li>
+    <li><b>Endereço Loopback: </b>Usado para testes de diagnóstico no próprio dispositivo, usando o <code>127.x.x.x</code> (sua máscara é da classe A, <code>255.0.0.0</code>).</li>
+    <li><b>Endereço de Auto-Configuração (APIPA): </b>Ele é usado quando o computador não consegue pegar um endereço IP, por exemplo, ao usar um DHCP. Ele usa o <code>169.254.x.x</code> (sua máscara é da classe B, <code>255.255.0.0</code>).</li>
+</ul>
+
+<p>Para ver o IP privado no Windows, vá em Configurações e em Status de Rede e clique nas Propriedades da interface desejada (no caso, a Ethernet), lá estará o IP e outras informações como o MAC address. Podemos ver esses conteúdos também no prompt de comando digitando <code>ipconfig /all</code>.</p>
+
+<p>Para fazer o mesmo no Linux, clique no ícone de rede e vá em Configurações, lá estarão esses dados, que podemos também ver pelo terminal, digitando <code>sudo ip addr show</code>.</p>
+
+<p>Para ver, portanto, o IP público, acesse um site como esse: <a href="https://meuip.com.br/" target="_blank">https://meuip.com.br/</a></p>
+
+<p>Podemos verificar nosso IP e ver a localização de qualquer IP por esse site: <a href="https://www.localizaip.com.br/" target="_blank">https://www.localizaip.com.br/</a></p>
+
+<h3>Portas TCP e UDP</h3>
+
+<p>Em redes de computadores, uma porta é um software de aplicação específica ou processo específico servindo de ponto final de comunicações em um sistema operacional hospedeiro de um computador. Uma porta tem associação com o endereço de IP do hospedeiro, assim como o tipo de protocolo usado para comunicação. O propósito das portas é para singularmente identificar aplicações e processos de um único computador e assim possibilitá-los a compartilhar uma única conexão física com uma rede de comutação de pacotes, como a internet.</p>
+
+<p>Imagine que as duas partes do endereço IP (a parte referente à rede e a parte referente ao host) correspondem ao CEP da rua e ao número do prédio. Um carteiro só precisa destas duas informações para entregar uma carta. Mas, dentro do prédio moram várias pessoas. O CEP e número do prédio só vão fazer a carta chegar até a portaria. Daí em diante é preciso saber o número do apartamento. É aqui que entram as famosas portas TCP.</p>
+
+<p>Ao todo, é possível usar 65536 portas TCP e UDP, começando em 1. Tanto no protocolo TCP como no UDP, é comum o uso das portas de 1 a 1024, já que a aplicação destas é padronizada pela IANA (Internet Assigned Numbers Authority).</p>
+
+<p>Essas são algumas das portas mais usadas:</p>
+
+<table>
+    <tr>
+        <th>Protocolo</th>
+        <th>Porta Padrão</th>
+        <th>Serviço</th>
+        <th>Protocolo de Comunicação</th>
+    </tr>
+    <tr>
+        <td>HTTP</td>
+        <td>80<br/>8080</td>
+        <td>Navegação web (processamento de HTML)</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td>HTTPS</td>
+        <td>443</td>
+        <td>Navegação web (processamento de HTML) com criptografia</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td rowspan="2">SMTP</td>
+        <td>25<br/>587</td>
+        <td>Envio de e-mails</td>
+        <td>TCP/UDP</td>
+    </tr>
+    <tr>
+        <td>465</td>
+        <td>Envio de e-mails com criptografia</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td rowspan="2">IMAP</td>
+        <td>143</td>
+        <td>Recebimento de e-mails<br/></td>
+        <td>TCP/UDP</td>
+    </tr>
+    <tr>
+        <td>993</td>
+        <td>Recebimento de e-mails com criptografia</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td rowspan="2">POP</td>
+        <td>110<br/></td>
+        <td>Recebimento de e-mails</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td>995</td>
+        <td>Recebimento de e-mails com criptografia</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td>MSSQL</td>
+        <td>1039<br/>433<br/>1040</td>
+        <td>Banco de dados SQL Server</td>
+        <td>TCP/UDP</td>
+    </tr>
+    <tr>
+        <td>MYSQL</td>
+        <td>3306</td>
+        <td>Banco de dados MySQL</td>
+        <td>TCP/UDP</td>
+    </tr>
+    <tr>
+        <td>PGSQL</td>
+        <td>5432</td>
+        <td>Banco de dados Postgre</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td>FIREBIRD</td>
+        <td>3050</td>
+        <td>Banco de dados Firebird</td>
+        <td>TCP/UDP</td>
+    </tr>
+    <tr>
+        <td>DNS</td>
+        <td>53</td>
+        <td>Consulta de DNS</td>
+        <td>TCP/UDP</td>
+    </tr>
+    <tr>
+        <td>WHOIS</td>
+        <td>43</td>
+        <td>Consulta de whois</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td rowspan="2">FTP</td>
+        <td>21</td>
+        <td>Comandos FTP<br/>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td>20</td>
+        <td>Transmissão de arquivos FTP</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td>SSH</td>
+        <td rowspan="2">22</td>
+        <td>Acesso SSH</td>
+        <td rowspan="2">TCP/UDP</td>
+    </tr>
+    <tr>
+        <td>SFTP</td>
+        <td>FTP com criptografia</td>
+    </tr>
+    <tr>
+        <td>TELNET</td>
+        <td>23</td>
+        <td>Acesso remoto telnet</td>
+        <td>TCP/UDP</td>
+    </tr>
+    <tr>
+        <td>SVN</td>
+        <td>3690</td>
+        <td>Controle de versões subversion</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td rowspan="2">DHCP</td>
+        <td>67</td>
+        <td>Envio de dados do cliente ao servidor</td>
+        <td>UDP</td>
+    </tr>
+    <tr>
+        <td>68</td>
+        <td>Recebimento de dados do servidor ao cliente</td>
+        <td>UDP</td>
+    </tr>
+    <tr>
+        <td>SNMP</td>
+        <td>161<br/>162</td>
+        <td>Gerenciamento de redes</td>
+        <td>TCP/UDP</td>
+    </tr>
+    <tr>
+        <td>RIP</td>
+        <td>520<br/>521</td>
+        <td>Roteamento que não requer conexões</td>
+        <td>UDP</td>
+    </tr>
+    <tr>
+        <td>RDP</td>
+        <td>3389</td>
+        <td>Acesso Remoto do Windows</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td>SKYPE</td>
+        <td>81</td>
+        <td>Protocolo Skype</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td>VNC</td>
+        <td>5900</td>
+        <td>Acesso Remoto VNC</td>
+        <td>TCP</td>
+    </tr>
+    <tr>
+        <td>RTP</td>
+        <td>5004<br/>5005</td>
+        <td>Streaming de Áudio e Vídeo</td>
+        <td>UDP</td>
+    </tr>
+    <tr>
+        <td>SIP</td>
+        <td>5060</td>
+        <td>Responsável pelas Sessões de Comunicações</td>
+        <td>TCP/UDP</td>
+    </tr>
+    <tr>
+        <td>NTP</td>
+        <td>123</td>
+        <td>Responsável pela Sincronização de Horário</td>
+        <td>UDP</td>
+    </tr>
+</table>
+
+<p>Basicamente, essas são algumas funções mais detalhadas dos protocolos mais usados:</p>
+
+<ul>
+    <li><b>FTP</b> – File Transfer Protocol, permite a transferência de arquivos entre dois computadores através de login e senha.</li>
+    <li><b>SMTP</b> – Simple Mail Transfer Protocol, é utilizado para o transporte de e-mail, sendo que o SMTP é uma aplicação utilizada para transporte e não um meio de transporte. Por isso ele se localiza na camada de Aplicação.</li>
+    <li><b>HTTP</b> – Hypertext Transfer Protocol, é utilizado para transportar páginas HTML de servidores web para navegadores. O protocolo é utilizado para realizar a comunicação entre servidores WEB e Navegadores instalados em computadores cliente.</li>
+    <li><b>DHCP</b> – Dynamic Host Configuration Protocol, é um método de designar endereços IPs para os computadores conectados na rede. Ele é um serviço baseado no servidor que designa automaticamente endereços IPs para cada computador que entra na rede. Este método não exige que você tenha que entrar em cada computador e informar o IP, facilitando mudanças de redes. O DHCP pode executar todas as funções do BOOTP.</li>
+    <li><b>POP3</b> – Post Office Protocol Version 3, é utilizado por usuários clientes para acessar uma conta de email em um servidor e pegar o e-mail. Como no SMTP, esta não é uma camada de transporte.</li>
+    <li><b>IMAP4</b> – Internet Mail Access Protocol Version 4, é um substituto para o POP3, diferente deste último, o IMAP se mantém conectado a fim de sincronizar as mensagens recebidas em tempo real.</li>
+    <li><b>Telnet</b> - É utilizado para abrir uma sessão remota em outro computador. Ele se baseia em TCP para o transporte e é definido pela RFC854.</li>
+</ul>
+
+<p>Podemos ver a lista de protocolos eaqui: <a href="https://pt.wikipedia.org/wiki/Lista_de_portas_dos_protocolos_TCP_e_UDP" target="_blank">https://pt.wikipedia.org/wiki/Lista_de_portas_dos_protocolos_TCP_e_UDP</a></p>
+
+<p>Abaixo, veja alguns provedores de e-mail e seus respectivos protocolos:</p>
+
+<table>
+    <tr>
+        <th>Provedor</th>
+        <th>Protocolo</th>
+    </tr>
+    <tr>
+        <td><code>imap.mail.yahoo.com</code></td>
+        <td>IMAP</td>
+    </tr>
+    <tr>
+        <td><code>pop.mail.yahoo.com</code></td>
+        <td>POP</td>
+    </tr>
+    <tr>
+        <td><code>smtp.mail.yahoo.com</code></td>
+        <td>SMTP</td>
+    </tr>
+    <tr>
+        <td><code>imap.gmail.com</code></td>
+        <td>IMAP</td>
+    </tr>
+    <tr>
+        <td><code>pop.gmail.com</code></td>
+        <td>POP</td>
+    </tr>
+    <tr>
+        <td><code>smtp.gmail.com</code></td>
+        <td>SMTP</td>
+    </tr>
+    <tr>
+        <td><code>outlook.office365.com</code></td>
+        <td>IMAP/POP</td>
+    </tr>
+    <tr>
+        <td><code>smtp-mail.outlook.com</code></td>
+        <td>SMTP</td>
+    </tr>
+    <tr>
+        <td><code>imap.terra.com.br</code></td>
+        <td>IMAP</td>
+    </tr>
+    <tr>
+        <td><code>pop.terra.com.br</code></td>
+        <td>POP</td>
+    </tr>
+    <tr>
+        <td><code>smtp.terra.com.br</code></td>
+        <td>SMTP</td>
+    </tr>
+    <tr>
+        <td><code>imap.bol.com.br</code></td>
+        <td>IMAP</td>
+    </tr>
+    <tr>
+        <td><code>pop3.bol.com.br</code></td>
+        <td>POP</td>
+    </tr>
+    <tr>
+        <td><code>smtps.bol.com.br</code></td>
+        <td>SMTP</td>
+    </tr>
+</table>
+
+<h3>Unicast, Broadcast e Multicast</h3>
+
+<p>Sempre que se tem um ou mais dispositivos na rede (por exemplo, computadores), temos várias formas de comunicação entre eles.</p>
+
+<p>Um desses métodos é o método Unicast, que um computador se comunica com apenas um outro computador especificamente e estabelece a comunicação apenas com esse dispositivo específico na rede (por exemplo, numa troca de arquivos).</p>
+
+<p>Outra forma de comunicação é a Broadcast, nesse caso a informação é enviada à todos os dispositivos ao mesmo tempo.</p>
+
+<p>Temos também a Multicast, que a informação é enviada para um grupo específico de dispotivos selecionados. Os outros fora do grupo não recebem as informações.</p>
+
+<h3>Camada de Enlace</h3>
+
+<p>A camada de Enlace (ou Data Link Layer) é a segunda camada do modelo OSI e, entre outras coisas, é responsável por traduzir as informações da camada de rede em bits para que então sejam enviadas pela camada física.</p>
+
+<p>Essa camada é dividida em duas sub-camadas como podemos ver abaixo:</p>
+
+<ul>
+    <li>Controle de Link Lógico (LCC).</li>
+    <li>Controle de Acesso ao Meio (MAC).</li>
+</ul>
+
+<p>Nessa camada, as mensagens são formatadas em pedaços chamados frames ou quadros, que contém endereços de origem e destino.</p>
+
+<p>A subcamada MAC (Media Access Control) diz como os dados serão colocados no meio físico e define qual o endereço físico do dispositivo. Outras coisas como notificação de erro, controle de fluxo e a ordem em que os quadros serão enviados podem ser descritos aqui.</p>
+
+<p>A outra subcamada, a LLC (Logical Link Control), deve conhecer qual protocolo estará atuando na camada de rede. Quando o host recebe o quadro, o cabeçalho presente no LLC dirá para onde aquele quadro deverá ser destinado. Essa subcamada também pode fornecer controle de fluxo e sequência de bits de cotrole.</p>
+
+<h3>Endereço MAC</h3>
+
+<p>O MAC Address também é conhecido como "endereço físico" e está gravado em um chip na placa de rede.</p>
+
+<p>O endereço MAC é um endereço de 48 bits sempre escrito em hexadecimal, como por exemplo <code>00-23-10-35-00-3B</code>.</p>
+
+<p>Ao invés de traços, às vezes é esrito com dois pontos entre os números, como <code>00:23:10:35:00:3B</code>.</p>
+
+<p>O endereço MAC é dividido em duas partes, sendo que a primeira identifica o fabricante (podendo até serem substituir pelo nome do mesmo) e a segunda identifica apenas aquela placa de rede.</p>
+
+<p>As três partes de um quadro MAC, na verdade um frame:</p>
+
+<table>
+    <tr>
+        <td>Cabeçalho</td>
+        <td rowspan="3">Dados</td>
+        <td rowspan="3">Trailer</td>
+    </tr>
+    <tr>
+        <td>MAC Origem</td>
+    </tr>
+    <tr>
+        <td>MAC Destino</td>
+    </tr>
+</table>
+
+<p>O cabeçalho tem as informações sobre o frame (entre eles, o MAC de origem e o MAC de destino. Os dados informa o que está sendo enviado, e o trailer tem informações de verificação (se ele foi alterado ou não durante o envio).</p>
+
+<p>PS: Você pode ver o endereço MAC digitando <code>ipconfig /all</code> ou <code>getmac /v /fo list</code> no Prompt do Windows, procure por endereço físico. No Linux use <code>ifconfig -a</code>.</p>
+
+<p>Veja a imagem de uma placa de rede:</p>
+
+<img src="imagens/placa-de-rede.jpg" alt="Placa de Rede"/>
+
+<h3>Switch L2 - Broadcast</h3>
+
+<p>Anteriormente sobre a camada de enlace, diferente enrtre unicast, multicast e broadcast e MAC, aqui entenderemos como o Switch trabalha numa rede.</p>
+
+<p>Veja um exemplo de rede, com o Switch no meio (não confundir com roteador ou modem) e os computadores, cada um com seu MAC:</p>
+
+<img src="imagens/broadcast.jpg" alt="Broadcast"/>
+
+<p>Vamos supor que cada computador tenha nomes de A, B, C e D, e que o computador A queira conversar com o B e não sabe qual é o tal computador, ele manda pra rede um broadcast usando o protocolo ARP, que pergunta quem é o computador B, que irá responder.</p>
+
+<p>No momento que o computador A entra em contato com o B, o Switch lerá o quadro que tem o endereço MAC de origem e o MAC de destino. Quando ele lê o MAC de origem, imediatamente ele grava o mesmo na memória (chamada CAM), que tem uma tabela que escreve o MAC de origem e associa com a porta no qual o tal computador está. O mesmo ocorre com o computador de destino e seu MAC, que o Switch perguntará para todos na rede qual é o tal MAC até que o B responda.</p>
+
+<p>Vamos supor que o computador C mande um frame unicast para o B, já sabendo o MAC do B, nesse caso ele não precisa perguntar pros outros computadores qual é o B por já saber qual o MAC e a porta dele. Isso evita transmissão de mensagem pros computadores errados e por isso, é mais seguro.</p>
+
+<p>O Domínio de Broadcast é até aonde o broadcast chega, vamos supor que a imagem acima tenha 100 computadores, se qualquer um deles mandar um broadcast pra rede, todos os computadores ligados na rede vão escutar o broadcast. O Domínio de Broadcast é até aonde chega o broadcast (por exemplo, um Switch de 96 portas manda de uma das máquinas para as outras 95 portas).</p>
+
+<p>Quando um dispositivo quer contatar outro na rede, ele vai usar o protocolo ARP pra perguntar se este dispositivo está na rede. Mesmo se um dos computadores mandar uma mensagem unicast pra outro, o Switch manda um broadcast para descobrir o MAC de destino, caso ele ainda não saiba.</p>
+
+<ul>
+    <li><a href="tudo-sobre-redes-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

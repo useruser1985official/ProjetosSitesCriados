@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html">Tudo sobre Redes Parte 13!</a></li>
+                    <li><a href="tudo-sobre-redes-14.html">Tudo sobre Redes Parte 14!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Redes Parte 11</h2>
+
+<h3>Camada de Link de Dados do Modelo OSI</h3>
+
+<p>A camada de link de dados, ou enlace (modelo OSI, camada 2) tem por função principal fornecer transferência de dados nó a nó, ou seja, realizar a ligação entre dois nós conectados em rede. Responde a requisições de serviço da camada de rede e emite requisições de serviço para a camada física. Corresponde à camada de interface de rede/física na pilha TCP/IP.</p>
+
+<p>Podemos descrever as camadas que compões a pilha TCP/IP em termos do modelo OSI. A camada de internet TCP/IP é, na verdade, um subconjunto da camada de acesso à rede (física) do modelo OSI.</p>
+
+<table>
+    <tr>
+        <th>TCP/IP</th>
+        <th>Referente ao Modelo OSI</th>
+    </tr>
+    <tr>
+        <td rowspan="3">Aplicação</td>
+        <td>Aplicação</td>
+    </tr>
+    <tr>
+        <td>Apresentação</td>
+    </tr>
+    <tr>
+        <td>Sessão</td>
+    </tr>
+    <tr>
+        <td>Transporte</td>
+        <td>Transporte</td>
+    </tr>
+    <tr>
+        <td>Rede (Internet)</td>
+        <td>Rede</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Física</td>
+        <td>Enlace</td>
+    </tr>
+    <tr>
+        <td>Física</td>
+    </tr>
+</table>
+
+<p>Essas são as funções da camada de link de dados:</p>
+
+<ul>
+    <li>Realiza endereçamento físico de dispositivos de rede.</li>
+    <li>Detecta e tenta corrigir erros que possam ocorrer na camada física.</li>
+    <li>Define protocolo para controle de fluxo entre os nós.</li>
+    <li>Sinalização de início e fim de transmissão de quadros.</li>
+    <li>Gera um código para reconhecimento de erros de transmissão de dados (checksum).</li>
+</ul>
+
+<p>A camada de link de dados é dividida em duas subcamadas pelo padrão IEEE 802:</p>
+
+<ul>
+    <li><b>MAC</b> - Medium Access Control (controle de acesso ao meio). Controle como os dispositivos na rede obtém acesso a um meio de transmissão, com permissão para trasmitir dados.</li>
+    <li><b>LLC</b> - Logical Link Control. Identifica e encapsula protocolos de camada de rede, e controla verificação de erros e sincronismo de quadros.</li>
+</ul>
+
+<p>Sobre o endereçamento físico (MAC address):</p>
+
+<ul>
+    <li>O endereço MAC é responsável pela identificação única dos dispositivos em uma rede, consistindo em um endereço de 48 bits gravado em uma ROM presente na interface física de rede.</li>
+    <li>MACs são atribuídos às NICs pelo fabricantes, e permitem identificar o fabricante da placa por meio de um número de identificação registrado.</li>
+    <li>Exemplo de endereço MAC: <code>30-e4-db-9f-a3-48</code>.</li>
+</ul>
+
+<p>Veja uma NIC (placa de rede) logo abaixo:</p>
+
+<img src="imagens/placa-de-rede.jpg" alt="Placa de Rede"/>
+
+<p>Sobre o quadro (frame):</p>
+
+<ul>
+    <li>O PDU na camada 2 é chamado de quadro (tamanho configurável) ou ainda célula (tamanho fixo).</li>
+    <li>Caso o pacote de dados recebido da camada de rede for maior que o tamanho do quadro em uso na rede, ele será dividido em tantos quadros quantos necessários para transmitir o pacote na íntegra.</li>
+</ul>
+
+<p>Veja como funciona os quadros (frames):</p>
+
+<img src="imagens/quadros-enlace.jpg" alt="Quadros Enlace"/>
+
+<p>Estrutura de um quadro ethernet (frame):</p>
+
+<table>
+    <tr>
+        <td>Preâmbulo<br/>7 bytes</td>
+        <td>SFD<br/>1 byte</td>
+        <td>MAC Destino<br/>6 bytes</td>
+        <td>MAC Origem<br/>6 bytes</td>
+        <td>Comprimento<br/>2 bytes</td>
+        <td>Dados e Pad<br/>46 a 1500 bytes</td>
+        <td>FCS<br/>4 bytes</td>
+    </tr>
+</table>
+
+<p>Sobre essa estrutura:</p>
+
+<ul>
+    <li><b>Preâmbulo</b> - Marca o início do quadro. São sete bytes 10101010. Com o SFD forma um padrão de sincronismo: Ao encontrar sete bytes 10101010 e um byte 10101011, o dispositivo receptor sabe estar diante do início de um quadro.</li>
+    <li><b>SFD (Start of Frame Delimiter)</b> - É um quadro 10101011.</li>
+    <li><b>MAC de Destino</b> - Endereço MAC da placa de rede de destino.</li>
+    <li><b>MAC de Origem</b> - Endereço MAC da placa de rede de origem.</li>
+    <li><b>Comprimento</b> - Nº de bytes transmitidos no campo de dados do quadro.</li>
+    <li><b>Dados</b> - Dados enviados pela camada LLC.</li>
+    <li><b>Pad</b> - Se o campo de dados tiver menos de 46 bytes, são inseridos zeros para completar os 46 bytes.</li>
+    <li><b>FCS (Frame Check Sequence)</b> - Controle de correção de dados.</li>
+</ul>
+
+<p>Alguns dos dispositivos que operam na camada de enlace do modelo OSI incluem switches, access points, NICs e bridges.</p>
+
+<p>A imagem a seguir lista alguns dos protocolos da camada de enlace mais comuns (Modelo TCP/IP):</p>
+
+<img src="imagens/protocolos-enlace.jpg" alt="Protocolos Enlace"/>
+
+<h3>Camada Física do Modelo OSI</h3>
+
+<p>Como lembrando, o modelo OSI é composto por sete camadas (numeradas de 1 a 7, de baixo pra cima):</p>
+
+<table>
+    <tr>
+        <td>Camada de Aplicação</td>
+    </tr>
+    <tr>
+        <td>Camada de Apresentação</td>
+    </tr>
+    <tr>
+        <td>Camada de Sessão</td>
+    </tr>
+    <tr>
+        <td>Camada de Transporte</td>
+    </tr>
+    <tr>
+        <td>Camada de Rede</td>
+    </tr>
+    <tr>
+        <td>Camada de Link de Dados</td>
+    </tr>
+    <tr>
+        <td>Camada Física</td>
+    </tr>
+</table>
+
+<p>A camada física (modelo OSI, camada 1) tem por função principal a transmissão e recepção de dados digitais (bits) entre um dispositivo e um meio de transmissão físico. Responde a requisições de serviço da camada de enlace e emite/recebe sinais de e para o meio físico. Corresponde à camada física na pilha TCP/IP.</p>
+
+<p>Podemos descrever as camadas que compõe a pilha TCP/IP em termos do modelo OSI. Veja abaixo:</p>
+
+<table>
+    <tr>
+        <th>TCP/IP</th>
+        <th>Referente ao Modelo OSI</th>
+    </tr>
+    <tr>
+        <td rowspan="3">Aplicação</td>
+        <td>Aplicação</td>
+    </tr>
+    <tr>
+        <td>Apresentação</td>
+    </tr>
+    <tr>
+        <td>Sessão</td>
+    </tr>
+    <tr>
+        <td>Transporte</td>
+        <td>Transporte</td>
+    </tr>
+    <tr>
+        <td>Rede (Internet)</td>
+        <td>Rede</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Física</td>
+        <td>Enlace</td>
+    </tr>
+    <tr>
+        <td>Física</td>
+    </tr>
+</table>
+
+<p>A transmissão de dados é feita de camada para camada, e os dados de aplicação da máquina A é passado por todas as camadas, passa pelo caminho de comunicação e passa por todas as camadas da máquina B até chegar na camada de aplicação dela, como visto na imagem abaixo:</p>
+
+<img src="imagens/transmissao.jpg" alt="Transmissão OSI"/>
+
+<p>Os meios de transmissão são o meio físico para a propagação de sinais de telecomunicações, os tipos principais são: Cabos metálicos, coaxial, par trançado, fibras ópticas e ondas de rádio.</p>
+
+<p>Essas são as funções da camada física:</p>
+
+<ul>
+    <li>Entrega bit-a-bit ou símbolo-a-símbolo.</li>
+    <li>Especificação mecânica de conectores elétricos e cabos.</li>
+    <li>Especificação elétrica de níveis de sinal de linhas de transmissão e impedância.</li>
+    <li>Interfaces de rádio, alocação de frequências do espectro eletromagnético.</li>
+    <li>Modulação de multiplexação de sinais.</li>
+    <li>Comutação de circuitos.</li>
+    <li>Controle de fluxo e sinalização start-stop.</li>
+    <li>Não inclui o meio onde os dados trafegam.</li>
+</ul>
+
+<p>Sobre a codificação de sinais:</p>
+
+<ul>
+    <li>Os níveis lógicos que representam bits são codificados em sinais elétricos ou eletromagnéticos para transmissão por um meio.</li>
+    <li>Essa conversão é feita por meio da codificação dos sinais.</li>
+    <li>Existem diversos sistemas de codificação, como Manchester, 4B/5B, MLT-3, 4D-PAM-5, etc.</li>
+</ul>
+
+<p>Alguns dos dispositivos que operam na camada física do modelo OSI incluem: Placas de rede (NIC), modems, hubs, repetidores e conversores de fibra.</p>
+
+<p>A imagem a seguir lista alguns dos protocolos da camada física mais comuns (modelo TCP-IP):</p>
+
+<img src="imagens/protocolos-fisica.jpg" alt="Protocolos Física"/>
+
+<p>Resumindo:</p>
+
+<ul>
+    <li>Trata da sinalização de rede, e conversão de bits digitais em sinais elétricos, ópticos ou ondas eletromagnéticas para envio por meio de transmissão utilizados, carregando os dados de um ponto a outro da rede.</li>
+    <li>Define aspectos mecânicos e elétricos da rede. Especifica níveis de tensão, taxas de transmissão, distâncias máximas, esquemas de modulação, frequência de dispositivos wireless e tipos de conectores físicos, entre outros.</li>
+    <li>Nesta camada temos cabos, conectores, antenas, hubs, modems e placas de rede atuando. Define especificações de modos de transmissão: Simplex, half duplex e full duplex.</li>
+</ul>
+
+<h3>Cabeamento Estruturado</h3>
+
+<p>Cabeamento estruturado é o conjunto que envolve componentes e arquitetura de cabeamento de dados para comunicações, especificado por normas e padrões, e adotado de forma voluntária pelos fabricantes e empresas. Assim, podemos construir uma infraestrutura de cabeamento de telecomunicações (telefonia e dados) que consista em elementos padronizados, ou seja, uma rede estruturada de dados. Podemos dizer que um cabeamento estruturado é uma infraestrutura de cabeamento bem organizada.</p>
+
+<p>Uma infraestrutura de cabeamento estruturada bem planejada e instalada fornece uma série de benefícios, tais como:</p>
+
+<ul>
+    <li>Performance melhorada e previsível.</li>
+    <li>Flexibilidade para acomodar alterações de layout, quantidade e tipo de dispositivos, de forma rápida e controlada.</li>
+    <li>Fornece redundância.</li>
+    <li>Aumento da disponibilidade da rede e elementos associados, como o Data Center.</li>
+    <li>Diminui o tempo necessário para encontrar problemas de conectividade.</li>
+    <li>Simplifica a instalação e a manutenção da infraestrutura de comunicações, principalmente quando a quantidade de equipamentos for grande, além de tornar flexível sua alteração e atualização.</li>
+    <li>Permite que sejam usados equipamentos de diferentes fabricantes com total interoperabilidade.</li>
+    <li>Com uma rede estruturada, é possível compartilhar os caminhos de dados com outros tipos de transmissão, como telefonia, vídeo, som ambiente, sensores e alarmes, etc.</li>
+</ul>
+
+<p>Um sistema de cabeamento estruturado é instalado em sistemas de piso ou sistemas aéreos de canaletas e dutos (aparentes ou embutidos). Deve seguir requisitos mínimos relacionados a distâncias, arquitetura de interligação, padrões de pinagem e transmissão e interconectividade.</p>
+
+<p>Um sistema de cabeamento estruturado completo é composto por seis subsistemas:</p>
+
+<ul>
+    <li>Entrada de facilidades.</li>
+    <li>Sala de equipamentos.</li>
+    <li>Cabeamento backbone (vertical).</li>
+    <li>Cabeamento horizontal.</li>
+    <li>Salas de telecomunicações.</li>
+    <li>Área de trabalho.</li>
+</ul>
+
+<p>A entrada de facilidades é o espaço reservado para receber os cabos de entrada das operadores de serviço (telefonia, TV a cabo, etc.) e outros serviços externos, onde estes serão conectados à rede interna. Inclui hardware de conexão e equipamentos de proteção.</p>
+
+<p>A sala de equipamentos é o espaço dentro do edifício que acomoda terminações e equipamentos de telecomunicações. É onde são feitas as conexões entre os cabeamentos que vão para a sala de telecomunicações. Inclui main, intermediate e horizontal cross-connects.</p>
+
+<p>O cabeamento vertical interliga as salas de telecomunicações instaladas nos andares de um edifício comercial, ou vários edifícios a uma sala de equipamentos. Também chamado de cabeamento primário. Pode empregar cabeamento metálico de par trançado ou fibra óptica.</p>
+
+<p>A sala de telecomunicações é o espaço reservado que contém o ponto de transição entre o cabeamento vertical e o cabeamento horizontal, podendo abrigar equipamentos ativos como switches e também patch panels. Pode ser uma armário de telecomunicações em vez de uma sala, dependendo do tamanho da estrutura.</p>
+
+<p>A área de trabalho é a área interna que possui pontos de telecomunicação e energia elétrica para a conexão dos equipamentos dos usuários. Cada área de trabalho deve possuir duas tomadas de conexão (telecomunicações).</p>
+
+<p>Um sistema de cabeamento estruturado é constituído de um conjunto de elementos que podem incluir: Cabos metálicos e de fibra óptica, patch panels, dutos, painéis e tomadas, racks, cabos e patch cords, conectores, etc.</p>
+
+<p>Veja a imagem de um rack de equipamentos:</p>
+
+<img src="imagens/rack.jpg" alt="Rack"/>
+
+<h3>O que são Meios de Transmissão</h3>
+
+<p>Como lembramos, o dados são transmitidos de tal forma no modelo OSI:</p>
+
+<img src="imagens/transmissao.jpg" alt="Transmissão OSI"/>
+
+<p>O meio de transmissão é o meio físico para a propagação de sinais de telecomunicações. Trata-se do caminho físico por onde trafegam informações, entre um transmissor e um receptor. Canal de comunicações por meio do qual os dados são enviados de um lugar a outro. Os meios de transmissão podem ser classificados em vários tipos, dependendo da natureza do meio físico empregado.</p>
+
+<p>Basicamente, existem dois meios de transmissão:</p>
+
+<ul>
+    <li><b>Guiados</b>: Com cabos (meio sólido), como coaxial, par trançado e fibra óptica.</li>
+    <li><b>Não-Guiados</b>: Sem fios, como rádio, IR e microondas.</li>
+</ul>
+
+<p>Abaixo veremos alguns dos meios guiados:</p>
+
+<p>O cabo coaxial consiste em dois fios condutores, sendo um o condutor dos sinais e o outro uma malha de blindagem que o rodeia, isolada. Esse conjunto é inserido dentro de uma capa isolante. O cabo coaxial mais comum, de nome 10Base2, usa um conector do tipo BNC. Esse tipo de cabo possui impedância (Z), medida em ohms (&#8486;). Trata-se da soma de três grandezas: Resistência elétrica, reatância capacitiva e reatância indutiva. A impedância influencia na reflexão de sinais entre dois dispositivos conectados. Para redes locais, seu valor padrão é de 50 &#8486;.</p>
+
+<p>As vantagens do cabo coaxial são:</p>
+
+<ul>
+    <li>Por ser blindado, pode ser mais longo que cabos de par trançado comuns.</li>
+    <li>Pode transmitir sinais de alta largura de banda.</li>
+    <li>Possui boa imunidade a ruídos eletromagnéticos.</li>
+    <li>Seu custo de instalação é baixo.</li>
+</ul>
+
+<p>Já as desvantagens:</p>
+
+<ul>
+    <li>Se quebra e apresenta mau contato com relativa frequência, por não ser flexível.</li>
+    <li>Normalmente empregado em topologia barramento, que traz dificuldade de expansão e manutenção da rede.</li>
+    <li>Necessita de terminador de impedância.</li>
+    <li>Devido a sua espessura, é difícil passar esse tipo de cabo por canaletas e dutos.</li>
+    <li>Se o cabo se rompe, pode interromper toda a rede.</li>
+</ul>
+
+<p>O cabo de par trançado possui 4 pares de fios isolados, no qual cada par consiste em dois fios enrolados um ao redor do outro para evitar interferência mútua e diafonia (daí o nome "par trançado"). Existem dois tipos principais: UTP (sem blindagem) e STP (com blindagem).</p>
+
+<p>A fibra óptica é um fio fino e leve, transparente, usado para transmitir dados por meio de pulsos de luz (laser/LED). Evita interferência eletromagnética sem a necessidade de blindagens metálicas. O sinal é menos atenuado, e assim é possível usar cabos muito mais longos. As fibras ópticas atingem altas taxas de transferência de dados.</p>
+
+<p>As fibras ópticas encontram inúmeras aplicações atualmente, entre elas:</p>
+
+<ul>
+    <li>Redes de backbone.</li>
+    <li>Conexão de banda larga de alta velocidade à internet.</li>
+    <li>Conexão de alta velocidade entre servidores e SAN.</li>
+    <li>Cabos submarinos.</li>
+    <li>Aplicações militares e sensoriamento remoto.</li>
+</ul>
+
+<p>Existem algumas desvantagens no uso de fibras ópticas em redes de dados, como:</p>
+
+<ul>
+    <li>Instalação e manutenção são difíceis.</li>
+    <li>Seu custo é bem maior em comparação com cabos metálicos.</li>
+    <li>Trata-se de um meio frágil, que pode se romper com certa facilidade.</li>
+    <li>Necessita de hardware de conexão e transmissão especial.</li>
+    <li>Unidirecional, necessita duas fibras para TX e RX.</li>
+</ul>
+
+<p>Veja como são os tipos de cabos descritos:</p>
+
+<img src="imagens/tipos-de-cabos.jpg" alt="Tipos de Cabos"/>
+
+<p>Agora veremos os meios de transmissão não-guiados:</p>
+
+<p>As transmissões wireless são tecnologias que permitem a transmissão de dados sem o uso de fios, por meio não-guiado. Os dados são transmitidos por meio de ondas eletromagnéticas (rádio, IR, microondas) que se propagam pelo espaço.</p>
+
+<p>Existem vários padrões de redes sem fio, como:</p>
+
+<ul>
+    <li><b>Wi-Fi</b>: Redes LAN sem fio.</li>
+    <li><b>Bluetooth</b>: Comunicação entre dispositivos / Redes PAN.</li>
+    <li><b>WiMAX</b>: Internet de longo alcance sem fios.</li>
+    <li><b>Satélite</b></li>
+    <li><b>IrDA</b>: Conexão de dados em infravermelho.</li>
+    <li><b>Redes 3G/4G/5G</b></li>
+</ul>
+
+<p>Essas são as vantagens das redes wireless:</p>
+
+<ul>
+    <li>Permitem o acesso em locais remotos, onde não é possível passar cabos.</li>
+    <li>Ampliação da rede é extremamente simples, desde que o equipamento suporte tráfego adicional.</li>
+    <li>Novos padrões possuem taxa de transferência elevada.</li>
+</ul>
+
+<p>E essas são as desvantagens:</p>
+
+<ul>
+    <li>Problemas de segurança e privacidade são comuns.</li>
+    <li>Taxa de transmissão de dados pode ser limitada em relação à meios de transmissão guiados (cabos metálicos e fibras ópticas).</li>
+    <li>Sinais podem ser atenuados por obstáculos, como paredes, necessitando de repetidores.</li>
+</ul>
+
+<p>As transmissões sem fio podem se dar por três tipos de meios nãp-guiados (ondas eletromagnéticas):</p>
+
+<ul>
+    <li><b>Ondas de Rádio</b>: Atinge longas distâncias e penetram em paredes. Transmissão multicast de AM e FM, TV e telefones sem fio.</li>
+    <li><b>Microondas</b>: Área de cobertura variável, dependente da antena e potência. Comunicação móvel, comunicação via satélite, redes WLAN. Usa antenas direcionais.</li>
+    <li><b>Infravermelho</b>: Curtíssimas distâncias, em uso com dispositivos alinhados. Não atravessa obstáculos. Usada em conjunto com mouses e teclados sem fio.</li>
+</ul>
+
+<p>O Wi-Fi são redes locais que não utilizam cabos para comunicação entre os hosts. Usa um equipamento central comutador chamado de "Access Point". O AP funciona como um switch wireless. As redes Wi-Fi operam em padrões de transmissão distintos, como a, b, g, n, e ac. Código IEEE do padrão Wi-Fi é 802.11. O padrão mais atual hoje é 802.11ac.</p>
+
+<p>O access point é um dispositivo de comunicação utilizado em redes wireless locais WLANs, que age como um equipamento transmissor e receptor de sinais de rádio, funcionando como uma espécie de switch sem fio. Comunica-se com uma rede cabeada, fornecendo às estações acesso à infra de rede do local, e à internet, por meio de comunicação via rádio.</p>
+
+<p>Veja a imagem de um Access Point:</p>
+
+<img src="imagens/access-point.png" alt="Ponto de Acesso"/>
+
+<ul>
+    <li><a href="tudo-sobre-redes-10.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-redes-12.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Engenharia Reversa</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Engenharia Reversa</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-engenharia-reversa-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Engenharia Reversa Parte 1!</a></li>
+                    <li><a href="tudo-sobre-engenharia-reversa-2.html">Tudo sobre Engenharia Reversa Parte 2!</a></li>
+                    <li><a href="tudo-sobre-engenharia-reversa-3.html">Tudo sobre Engenharia Reversa Parte 3!</a></li>
+                    <li><a href="tudo-sobre-engenharia-reversa-4.html">Tudo sobre Engenharia Reversa Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Engenharia Reversa Parte 1</h2>
+
+<h3>Como Funciona a Engenharia Reversa</h3>
+
+<p>A engenharia reversa é uma técnica onde basicamente nós desconstruímos softwares para sabermos como eles funcionam. Existem outros tipos de engenharia reversa, como a de hardware, por exemplo, ou até mesmo de armas, como as usadas em tempos de guerra.</p>
+
+<p>Basicamente, engenharia reversa é a técnica para entender como um trecho de código funciona sem possuir seu código aplicável em diversas áreas da tecnologia como análise de malware, reimplementação de software e protocolos, correção de bugs, análise de vulnerabilidades, adição e alteração de recursos no software, proteções anti-pirataria, etc.</p>
+
+<p>Quando um programa tradicional é construído, o resultado final é um arquivo executável que possui uma série de instruções em código de máquina para que o processador de determinada arquitetura possa executar. Com ajuda de software específicos, profissionais com conhecimentos dessa linguagem (em nosso caso, Assembly) podem entender como o programa funciona e, assim, estudá-lo ou até fazer alterações no mesmo.</p>
+
+<p>Dentro do Linux, abra o terminal e verifique se os programas vim, gcc e make estão instalados.</p>
+
+<p>Abra o vim no terminal mesmo e crie um programa simples em C com esse código:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+    printf("Olá Mundo!\n");
+    return 0;
+}
+</code>
+</pre>
+
+<p>Compile ele digitando <code>make programa</code> (sem o .c mesmo) e aguarde. Após isso execute ele digitando <code>./programa</code>.</p>
+
+<p>Programas compilados, como os feitos em C, utilizam uma função com um argumento para por exemplo, imprimir um texto, como a printf, que é uma função de um código de uma biblioteca nativa do C.</p>
+
+<p>Para verificar estas bibliotecas, digite o comando <code>ldd programa</code>.</p>
+
+<p>Agora instale o programa ltrace (digitando <code>sudo apt-get install ltrace</code>, que usaremos para vermos como é a chamada de biblioteca do programa, para isso digite <code>ltrace ./programa</code>. No exemplo ele poderá mostrar a função puts, que seria o printf simples do C.</p>
+
+<p>Pra entendermos como funciona, o executáel criado chamou a biblioteca do C, que chamou o kernel, este que realmente escreveu a mensagem na tela. Ou seja, quem escreve a mensagem realmente não é o executável nem a biblioteca, isso é função apenas do kernel e de suas syscalls (chamadas de sistema).</p>
+
+<p>Para ver essas bibliotecas e todas as syscalls que ele chama no kernel, usamos <code>strace ./programa</code> (se não tiver instale ele). A syscall chamada pra escrever é a write.</p>
+
+<p>O processador ele precisa entender uma linguagem específica, já que ele trabalha com entradas e saídas de dados. A linguagem é a Assembly, já que os dados quando entra, ele faz as operações e gera uma saída. Veja por exemplo o nosso programa é compilado pra um processador específicos (como o 32 bits ou 64 bits). Para ver esses dados do programa, digite <code>file programa</code>.</p>
+
+<p>Em outras palavras, essa diferença de arquitetura de processadores que faz com que determinados programas não rode em determinados processadores, além da diferença de sistemas operacionais, já que o Linux fala com o kernel de um modo diferente do Windows, que fala diferente do Mac e assim por diante.</p>
+
+<p>Todo arquivo com sequência de bytes são chamados de binários, por exemplo, o código-fonte que criamos em C será entendido pelo compilador as instruções e transformará o código num binário executável, ou seja, que o processador e o sistema operacional entenda, no nosso exemplo, para Linux de 32 bits. Se rodarmos o comando cat no programa aparecerá um monte de caracteres imcompreensível por nós.</p>
+
+<p>Para montarmos os programas usamos assemblers (que é o compilador) e para desmontarmos usamos disassemblers, um exemplo de desassembler é o objdump, que podemos usar digitando algo como <code>objdump -d programa | less</code>.</p>
+
+<p>Dessa forma, sabendo como os bits se comportam, podemos alterar o programa para que ele funcione diferente, mudando as instruções das informações para o processador. Isso dá pra fazer com vários tipos de programas, de várias plataformas.</p>
+
+<p>Podemos entender por exemplo, que um arquivo de 32 bits tem 4 bytes. Isso será falado mais pra frente.</p>
+
+<p>Da mesma forma, linguagens interpretadas como o Python, tem o interpretador em C (no caso do Linux, está em /usr/bin/python), que chamará a biblioteca que chamará a syscall no kernel e executará o programa.</p>
+
+<h3>Sistemas de Numeração</h3>
+
+<p>Podemos comparar o computador (ou melhor, o seu microprocessador) como uma calculadora gigante, já que a base dele é com números.</p>
+
+<p>A forma que os humanos usam para contar é o sistema decimal, com dez números (0, 1, 2, 3, 4, 5, 6, 7, 8 e 9), antes da existência de algarismos e da escrita, era usada uma referência como por exemplo, pedrinhas pra contar ovelhas.</p>
+
+<p>Basicamente, os números são símbolos, e podemos usar outros símbolos para contar.</p>
+
+<p>No decimal, ao chegar no 9, adicionamos o 1 ao lado do 0 (ficando um 10) e passamos a usar dois algarismos pra representar os números, até chegar em 99, aí adicionamos mais um ficando 100 e assim por diante, sempre que estourar as possibilidades. Basicamente o sistema decimal que todos conhecemos é esse.</p>
+
+<p>Podemos fazer algumas dessas contagens diretamente no terminal do Linux, assim:</p>
+
+<pre>
+<code>
+echo {0..9}
+
+echo {10..99}
+</code>
+</pre>
+
+<p>Existem várias bases numéricas além da decimal, dentro da computação usamos o binário, o hexadecimal e o octal, com bases em 2, 16 e 8, respectivamente.</p>
+
+<p>O sistema binário, com dois algarismos (0 e 1), é usado em eletrônica por poder representar dois estados (como aberto e fechado, desligado e ligado, true e false). A contagem funciona da mesma forma, com as regras de estourar o limite com apenas esses números, indo em 0, 1, 10, 11, 100, 101, 110, 111, etc.</p>
+
+<p>Podemos criar outras bases como a base 4, com quatro símbolos, mas quando mais símbolos temos para um sistema numérico, menos algarismos usaremos para representá-lo.</p>
+
+<p>Outro sistema usado é o octal, usado por exemplo, em permissões de arquivos para Linux, com oito números (0, 1, 2, 3, 4, 5, 6 e 7), funcionando da mesma forma.</p>
+
+<p>Podemos criar nossas próprias bases inclusive com outros símbolos, por exemplo:</p>
+
+<pre>
+<code>
+M = 0
+B = 1
+I = 2
+N = 3
+
+Contagem de a partir do 0 nesse sistema:
+
+M, B, I, N, BM, BB, BI, BN, IM, IB, II, IN...
+</code>
+</pre>
+
+<p>Outro sistema muito usado é o hexadecimal, com 16 dígitos (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E e F), nesse sistema são pego as seis primeiras letras do alfabeto, mas eles são considerados números. A contagem é da mesma forma, ao terminar as possibilidades, adiciona um número a esquerda e continua.</p>
+
+<p>Abriremos o Python do nosso sistema (independente de qual seja), e digitamos esses comandos:</p>
+
+<pre>
+<code>
+print(10) # Retorna 10 decimal.
+
+print(0b10) # Retorna 2 (10 é lido como binário e retorna 2 em decimal).
+
+print(0o10) # Retorna 8 (10 é lido com octal e retorna 8 em decimal).
+
+print(0x10) # Retorna 16 (10 é lido com hexadecimal e retorna 16 em decimal).
+</code>
+</pre>
+
+<p>Treine como exemplo, as contagens de 0 a 10 em decimal convertido em binário, 0 a 20 em decimal convertido em hexadecimal, e 0 a 15 em decimal convertido para octal.</p>
+
+<h3>Arquivos</h3>
+
+<p>Na prática, qualquer sequência de bits são considerado arquivos, representados de forma binária. Um arquivo como 10101010 seria um arquivo de um byte (que tem 8 bits). Todo arquivo que tem no computador tem conteúdo binário, seja executável, texto, música, foto, etc.</p>
+
+<p>Um arquivo os bytes são armazenados um do lado do outro, sem espaço nem nada. O menor arquivo que conseguimos ccriar é o de um byte.</p>
+
+<p>Um arquivo com 11111111 11111111 11111111 seria representado como FF FF FF em hexadecimal. Podemos ver os arquivos em bytes digitando <code>hd nomedoarquivo</code>, que mostrará em hexadecimal, podemos usar <code>od nomedoarquivo</code> pra ver em octal. Ambos mostram também os dados binários.</p>
+
+<p>Cada byte tem 256 possibilidades possíveis, de 0 a 255 (2<sup>8</sup>), representado em hexadecimal de 0 a FF e em binário de 00000000 a 11111111.</p>
+
+<p>Lembrando que a extensão não quer dizer nada pra definir o tipo de arquivo não é a extensão, só serve pro sistema operacional saber com qual programa abrirá ele. O que define um tipo de arquivo é o cabeçalho, a estrutura dele (mimetype). No Linux podemos usar <code>file nomedoarquivo</code> para vermos essas informações.</p>
+
+<p>Podemos pegar apenas uma parte dos bytes do arquivo, por exemplo <code>hd -n32 /bin/ls</code>, que pegará apenas os 32 primeiros bytes do arquivo especificado. Observe esse código abaixo:</p>
+
+<pre>
+<code>
+00000000  7f 45 4c 46 01 01 01 00  00 00 00 00 00 00 00 00  |.ELF............|
+00000010  03 00 03 00 01 00 00 00  16 3e 00 00 34 00 00 00  |.........>..4...|
+00000020
+</code>
+</pre>
+
+<p>No caso acima, exibimos 32 bytes (20 em hexadecimal), e cada linha terá 16 bytes, o primeiro é o bytes 0, depois o 1 até chegar no F. O ELF é o formato dos executáveis do Linux (não confunda com extensão).</p>
+
+<p>Para ver os dados sobre o arquivo no Linux, digite <code>stat nomedoarquivo</code>.</p>
+
+<p>Como exercício, treine vendo os bytes de arquivos e suas posições (por exemplo, 11A e 4B9) usando o comando hd.</p>
+
+<h3>Arquivos Binários</h3>
+
+<p>Como sabemos, a extensão do arquivo não quer dizer nada em alguns sistemas, e sim os tipos dele que definem isso (mimetypes). O que influencia nisso é o conteúdo dele.</p>
+
+<p>Pra começar, crie um arquivo de texto qualquer usando o comando <code>echo Teste>>arquivo.txt</code>. Depois dê um <code>hd arquivo.txt</code> para vermos pelo visualizador hexa os bytes do arquivo, esse é o conteúdo real desse arquivo. Para vermos os bytes do arquivo, digite <code>wc -c arquivo.txt</code>, podemos dar um <code>ls -l</code> também. Dessa forma sabemos que todos os arquivos são binários.</p>
+
+<p>Só que muitas vezes, quando falamos de arquivos binários estamos nos referindo a programas (arquivos executáveis).</p>
+
+<p>Como exemplo, pegaremos novamente aquele código em C e daremos o comando <code>hd arquivo.c</code> para ver o conteúdo hexa dele. Podemos ver que ele também é identificado por bytes e também é binário, mas ele é apenas um código-fonte que o computador não entende como um programa, e sim como texto. Compile o programa com o comando <code>gcc arquivo.c -o arquivo -no-pie</code> e dê o comando <code>hd arquivo</code> nesse executável, este sim chamado de binário por ser um arquivo executável. Veremos que tem muito mais bytes que o código.</p>
+
+<p>PS: Por consideramos mesmo os arquivos binários os executáveis, que estes se localizam na pasta /bin, no Linux.</p>
+
+<p>Os programas (executáveis) são basicamente divididos em duas sessões principais, a .data (dados do programa) e a .text (o código, podendo ser .code em alguns casos). Isso é visto muito em códigos em Assembly. Até mesmos nos bytes isso é separado, mesmo que não percebamos.</p>
+
+<p>Dentro de um programa compilado podemos encontrar os dados utilizados para criar ele, e o código dele, daí podemos alterar esses mesmos códigos para modificarmos o programa. Vamos supor que mudamos um byte de 50 para 51, ele escreverá outra coisa. Mesmo não sendo recomendado, podemos editar por um editor de texto como o vi mesmo.</p>
+
+<h3>Strings de Texto</h3>
+
+<p>As strings de texto de um arquivo dizem muito sobre ele, por isso é importante conhecer isso. Os textos basicamente não existem pro computador, já que o que ele entende mesmo é números binários, para tornar um texto legível pra nós tem que haver uma relação entre isso.</p>
+
+<p>Por exemplo, crie um arquivo de texto digitando <code>echo Alguma coisa>>teste.txt</code>, e vendo o conteúdo em bytes dele digitando <code>hd teste.txt</code>, o verdadeiro conteúdo do arquivo são esses bytes mostrados em hexa, podemos ver por exemplo, 6d representando um "m", a frase é representada cada letra por um byte.</p>
+
+<p>Ao dar um comando cat no arquivo, ele já interpretará como um texto e exibirá o conteúdo do texto. Podemos ver os caracteres e sua representação em bytes digitando <code>man ascii</code> no terminal do Linux. Podemos digitar <code>echo -c \\x44</code> para ver que isso é interpretado como um D. Esses caracteres ASCII são usados largamente em vários casos, como os caracteres alt do Windows. <a href="javascript:void()" onclick="open('files/tabela-ascii.pdf', 'pdf', 'scrollbars = no, width = 800, height = 650')" >Clique aqui para ver a tabela ASCII completa.</a></p>
+
+<p>Digitando <code>file arquivo.txt</code> podemos ver que o arquivo é identificado como ASCII text.</p>
+
+<p>Voltando ao programa em C que fizemos, e dê o comando cat no código-fonte para vermos o conteúdo do texto, e depois dê o comando hd no código-fonte para vermos o conteúdo em bytes dele. Sabendo disso, podemos analisar um código-fonte e vermos quantas puladas de linha existem nele, procurando os bytes 0a dentro do programa, e ao lado ele é representado por m ponto, já que o ponto representa caracteres não gráficos (atenção que o ponto é exibido mas é representado por 2e).</p>
+
+<p>Dê o comando hd no programa compilado, podemos ver que dentro dele temos algumas strings mais ou menos compreensíveis no meio de outros não compreensíveis. Se alterarmos um desses bytes, o programa terá outro comportamento. Para encontrarmos todas as strings dentro de um arquivo e suas posições, digitamos <code>strings -t x arquivo</code> (ele não é 100% preciso, mas encontra a maioria delas). Por padrão, ele não mostra strings com 3 ou menos caracteres, para ver elas digitamos <code>strings -n 3 -t x arquivo</code>. Podemos ver as funções de print do C digitando <code>man isprint</code> que checa se os caracteres são imprimíveis.</p>
+
+<p>Faça um programa simples em C que realize um cálculo, por exemplo:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+    int i = 65;
+    i = i + 2;
+
+    printf("%d\n", i);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Compile o programa e dê o comando hd no executável.</p>
+
+<p>O valor 65 estará como um byte 65 (não o número 65 decimal, mas 65 em hexa), que é o mesmo representante de m, podemos digitar no terminal <code>strings -n 1 programa | grep ^m</code> para procurar no programa todas as strings que começam com m. Faça o mesmo, trocando o m pelo o, já que um dos o é o 67.</p>
+
+<p>Faça um novo programa em C com esse código:</p>
+
+<pre>
+<code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(int argc, char *argv[]) {
+    FILE *fp = fopen(argv[1], "rb");
+    unsigned char byte;
+
+    while(fread(&byte, sizeof(byte), 1, fp)) {
+        printf("%c ", byte);
+    }
+
+    printf("\n");
+    fclose(fp);
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Esse programa pega um arquivo como argumento e lê de byte em byte esse arquivo e imprime na tela. Compile ele e rode o programa com algum arquivo de texto, pode ser até o código-fonte dele mesmo, por exemplo <code>./programa programa.c</code>.</p>
+
+<p>Como exercício, edite esse programa que só imprima os bytes de caracteres legíveis (que começa em 20 e termina em 7E). Use com uma condição if, como essa:</p>
+
+<pre>
+<code>
+while(fread(&byte, sizeof(byte), 1, fp)) {
+    if(byte >= 0x20 && byte <= 0x7e) {
+        printf("%c ", byte);
+    }
+}
+</code>
+</pre>
+
+<p>Dessa forma, com esse programa, conseguimos ver apenas a parte legível de, por exemplo, programas executáveis compilados.</p>
+
+<p>Para exercitar, pegue apenas os caracteres maiúsculos e só os minúsculos, por exemplo.</p>
+
+<h3>Executável PE - Apresentação</h3>
+
+<p>Agora, como trabalharemos no Windows, precisaremos baixar dois programas, primeiramente baixe e instale o Hex Workshop nesse link: <a href="https://download.cnet.com/Hex-Workshop/3000-2352_4-10004918.html" target="_blank">https://download.cnet.com/Hex-Workshop/3000-2352_4-10004918.html</a></p>
+
+<p>Baixe também o PE Tools, este não precisa instalar, basta descompactar e usar: <a href="https://github.com/horsicq/DIE-engine/releases" target="_blank">https://github.com/horsicq/DIE-engine/releases</a></p>
+
+<p>Baixe também o READPE aqui, ele também não precisa instalar: <a href="https://sourceforge.net/projects/pev/files/pev-0.80/pev-0.80-win32.zip/download" target="_blank">https://sourceforge.net/projects/pev/files/pev-0.80/pev-0.80-win32.zip/download</a></p>
+
+<p>E baixe também o Detect it Easy, que também não precisa instalar: <a href="https://ntinfo.biz/" target="_blank">https://ntinfo.biz/</a></p>
+
+<p>Baixe o PEStudio, que também não precisa instalar: <a href="https://www.winitor.com/download2" target="_blank">https://www.winitor.com/download2</a></p>
+
+<p>E por último, baixe um programinha de teste de quebra de chave: <a href="https://www.mentebinaria.com.br/files/file/19-crackme-do-cruehead/" target="_blank">https://www.mentebinaria.com.br/files/file/19-crackme-do-cruehead/</a></p>
+
+<p>Os executáveis no Windows seguem um formato específico, existe vários, mas o mais conhecido é o PE. Esse formato é definido pela Microsoft, e pode rodar em várias arquiteturas do Windows.</p>
+
+<p>Abrindo um executável no Hex Workshop, podemos ver como o arquivo é por dentro. Basicamente um arquivo PE começa com o cabeçalho MZ do DOS.</p>
+
+<p>Os dois primeiros bytes (4D e 5A) são a representação em ASCII do MZ, que é o que faz esse arquivo um executável PE. Se editarmos um desses dois bytes, o programa será alterado e não funcionará corretamente.</p>
+
+<p>Abra o programa crackme, e procure a posição 3C e olhe os quatro bytes (no caso aqui é 3C até 3F), onde encontramos uma DWORD de 4 bytes, que indica outra parte que está o cabeçalho PE, se tiver por exemplo 00 01 00 00, inverta os bytes, ficando 00 00 01 00, ou seja, 100 em hexadecimal, que é 256 no decimal. Vá até a posição 100 (ou a especificada no hexa) e pegue os bytes de 100 a 103, deverá ter algo como 00 10 09 00, isso é a assinatura do programa.</p>
+
+<p>Quando um programa é executado, ele lê as informações do cabeçalho, vai até o offset 3c e lê esse ponteiro, que é a posição onde está a assinatura, se alterarmos qualquer um desses bytes, o programa será alterado e não funcionará.</p>
+
+<p>Agora usaremos o READPE para isso, após descompactar a pasta, abra o CMD, entre nela e digite <code>readpe C:\Users\Usuario\nomedoexecutavel.exe</code>, para vermos apenas os dados do cabeçalho MZ, digite <code>readpe -h dos executavel.exe</code>. Depois digite <code>readpe -h coff executavel.exe</code> para ver as informações sobre o cabeçalho PE offset. No coff mostra dados como a data que ele foi compilado, o tipo de máquina que ele foi compilado.</p>
+
+<p>No Hex Workshop, iremos até posição da DWORD (no caso a 100), e iremos até a posição que virá após a 0103 (ou seja, a 104 e 105). E veremos os bytes 4C 01, invertendo fica 01 4C, e o 14C signifca binário para máquinas i386 (ou seja, 32 bits). No caso de executáveis de 64 bits, encontraremos 64 86, que invertido seria 86 64.</p>
+
+<p>Podemos gerar uma saída XML do programa, digitando <code>readpe --format xml -h coff nomedoexecutavel.exe>>dados.xml</code></p>
+
+<p>Abra o Detected It Easy, coloque o caminho do executável pra escanear, e em PE ele mostrará todos os dados igual o readpe, olhe todas as opções dentro de PE. Ele também pode editar arquivos executáveis.</p>
+
+<p>Dentro do PEStudio, podemos também ver os dados do arquivo da mesma forma, em file-header. Inclusive ele também verifica se o arquivo tem malwares.</p>
+
+<p>No PE Tools, podemos abrir um executável indo em Tools e PE Editor, e em File Header temos os dados sobre o programa também.</p>
+
+<p>No Detected It Easy, em PE e em Sections, podemos ver as sessões dos executáveis, como a .data e o .text. Se o PE pode ser analogado como uma cômoda, as sessões são as gavetas.</p>
+
+<p>Dento das sections, podemos clicar em uma dessas seções, e em Characteristics, e em Flags, e vermos as permissões dos arquivos (no caso, ler e executar).</p>
+
+<p>No PE, em Disassembler, podemos ver o código Assembly do programa, ou seja, o programa desassemblado.</p>
+
+<ul>
+    <li><a href="tudo-sobre-engenharia-reversa-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

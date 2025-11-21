@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-c-1.html">Tudo sobre C Parte 1!</a></li>
+                    <li><a href="tudo-sobre-c-2.html">Tudo sobre C Parte 2!</a></li>
+                    <li><a href="tudo-sobre-c-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C Parte 3!</a></li>
+                    <li><a href="tudo-sobre-c-4.html">Tudo sobre C Parte 4!</a></li>
+                    <li><a href="tudo-sobre-c-5.html">Tudo sobre C Parte 5!</a></li>
+                    <li><a href="tudo-sobre-c-6.html">Tudo sobre C Parte 6!</a></li>
+                    <li><a href="tudo-sobre-c-7.html">Tudo sobre C Parte 7!</a></li>
+                    <li><a href="tudo-sobre-c-8.html">Tudo sobre C Parte 8!</a></li>
+                    <li><a href="tudo-sobre-c-9.html">Tudo sobre C Parte 9!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C Parte 3</h2>
+
+<h3>Condicionais If, Else e Else If</h3>
+
+<p>A instrução <code>if</code> tem por finalidade tomar uma decisão de acordo com o resultado de uma condição (teste lógico).</p>
+
+<p>Se o teste retorna verdadeiro, as instruções contidas entre as chaves serão executadas, caso contrário, nada ocorre.</p>
+
+<p>Veja um exemplo simples:</p>
+
+<pre>
+<code>
+float n1, n2;
+float med;
+
+printf("Digite a primeira nota: ");
+scanf("%f", &n1);
+printf("Digite a segunda nota: ");
+scanf("%f", &n2);
+med = (n1 + n2) / 2;
+
+if(med >= 7) {
+    printf("\nAluno Aprovado!");
+}
+</code>
+</pre>
+
+<p>Nesse caso abaixo, além do if, temos o <code>else</code>. Essa instrução tem por finalidade tomar uma decisão de acordo com o resultado de uma condição (teste lógico).</p>
+
+<p>Se o teste retorna verdadeiro, as instruções codificadas entre as chaves do if serão executadas. Se o teste retorna falso, as instruções contidas entre as chaves do else serão executadas.</p>
+
+<p>Veja o código anterior com o else incluído:</p>
+
+<pre>
+<code>
+float n1, n2;
+float med;
+
+printf("Digite a primeira nota: ");
+scanf("%f", &n1);
+printf("Digite a segunda nota: ");
+scanf("%f", &n2);
+med = (n1 + n2) / 2;
+
+if(med >= 7) {
+    printf("\nAluno Aprovado!");
+}
+else {
+    printf("\nAluno Reprovado!");
+}
+</code>
+</pre>
+
+<p>Já o else if é usado quando é necessário verificar condições sucessivas onde uma ação é executada se um conjunto anterior de ações for satisfatório.</p>
+
+<p>Veja o código anterior com o else if incluído:</p>
+
+<pre>
+<code>
+float n1, n2;
+float med;
+
+printf("Digite a primeira nota: ");
+scanf("%f", &n1);
+printf("Digite a segunda nota: ");
+scanf("%f", &n2);
+med = (n1 + n2) / 2;
+
+if(med >= 7) {
+    printf("\nAluno Aprovado!");
+}
+else {
+    if(med >= 5 && med < 7) {
+        printf("\nAluno em Recuperação!");
+    }
+    else {
+        printf("\nAluno Reprovado!");
+    }
+}
+</code>
+</pre>
+
+<p>Podemos simplificar o código com o <code>else if</code>, dessa forma:</p>
+
+<pre>
+<code>
+float n1, n2;
+float med;
+
+printf("Digite a primeira nota: ");
+scanf("%f", &n1);
+printf("Digite a segunda nota: ");
+scanf("%f", &n2);
+med = (n1 + n2) / 2;
+
+if(med >= 7) {
+    printf("\nAluno Aprovado!");
+}
+else if(med >= 5 && med < 7) {
+    printf("\nAluno em Recuperação!");
+}
+else {
+    printf("\nAluno Reprovado!");
+}
+</code>
+</pre>
+
+<h3>Comando Goto</h3>
+
+<p>O comando <code>goto</code> (vai para) que direciona o ponteiro de execução do nosso programa, quando ele encontra o goto, ele vai até o label indicado em qualquer ponto do programa (criado apenas com o nome e dois pontos), e o goto apenas usará o nome do label que indicará.</p>
+
+<p>Veja um exemplo do uso do goto:</p>
+
+<pre>
+<code>
+float n1, n2, med;
+char opc; // Variável usada no label.
+
+inicio: // Label, indicado com dois pontos.
+
+printf("Digite a primeira nota: ");
+scanf("%f", &n1);
+
+printf("Digite a segunda nota: ");
+scanf("%f", &n2);
+
+med = (n1 + n2) / 2;
+
+if(med >= 7) {
+    printf("\nAprovado!\n)";
+}
+else if(med >= 5 && med < 7) {
+    printf("\nRecuperação\n");
+}
+else {
+    printf("\nReprovado\n");
+}
+
+printf("\nDeseja Digitar Outras Notas? [S/N]: ");
+fflush(stdin);
+scanf("\n%c", &opc);
+
+if((char)toupper(opc) == 'S') { // Inclua ctype.h pro toupper
+    system("cls"); // Adicione stdlib.h, são os comandos do terminal do sistema operacional à ser compilado.
+
+    goto inicio; // Indicação do Label.
+}
+</code>
+</pre>
+
+<p>PS: Note que usamos o método toupper() para transformar a letra em maiúscula, e fazemos o mesmo com tolower() para transformar em minúscula (lembrando que em ambos os caso usamos o typecast de char e incluímos a biblioteca ctype.h).</p>
+
+<h3>Condicional de Chaveamento - Switch e Case</h3>
+
+<p>A declaração condicional <code>switch</code> (chaveamento) é usada quando é preciso realizar diferentes ações baseadas em distintas condições. Pra simplificar o código, geralmente se usa no lugar de um condicional aninhado.</p>
+
+<p>O <code>case</code> é o valor comparado com a expressão, se corresponder, o código associado será executado. O <code>break</code> garante que a estrutura seja finalizada ao encontrar uma correspondência. E o <code>default</code> é o bloco de códigos que será executado se nenhum caso corresponder à expressão.</p>
+
+<p>Veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+int num;
+
+printf("Insira um número de 1 à 6: ");
+scanf("%d", &num);
+
+switch(num) {
+    case 1:
+        printf("Pito!\n");
+        break;
+    case 2:
+        printf("Duque!\n");
+        break;
+    case 3:
+        printf("Terno!\n");
+        break;
+    case 4:
+        printf("Quadra!\n");
+        break;
+    case 5:
+        printf("Quina!\n");
+        break;
+    case 6:
+        printf("Sena!\n");
+        break;
+    default:
+        printf("Opção Inválida!\n");
+        break;
+}
+</code>
+</pre>
+
+<h3>Estrutura de Repetição - While</h3>
+
+<p>Em muitos casos é necessário repetir um trecho de programa diversas vezes. Nesse caso podemos usar um loop que efetue essa repetição de código quantas vezes forem necessários. Os loops também são chamados de laços de repetição.</p>
+
+<p>A estrutura <code>while</code> realiza um teste lógico no início do loop, e cada vez que o teste retorna verdadeiro, os comandos associados à ele são executados. Quando o teste retornar falso, o laço é encerrado e o processamento volta para o fluxo principal do programa.</p>
+
+<p>Veja um exemplo de uso do while:</p>
+
+<pre>
+<code>
+int cont = 1;
+    
+while(cont <= 10) {
+    printf("%d\n", cont);
+    cont++;
+}
+</code>
+</pre>
+
+<p>Veja outro exemplo mais complexo:</p>
+
+<pre>
+<code>
+int cont;
+float not, med, tot;
+tot = 0;
+cont = 1;
+
+while(cont <= 4) {
+    printf("Digite a %dª nota: ", cont);
+    scanf("%f", &amp;not);
+    tot = tot + not;
+    cont++;
+}
+
+med = tot / 4;
+printf("Nota média: %.2f\n", med);
+</code>
+</pre>
+
+<p>Imagine um caso do qual precisamos escrever um algoritmo que processe um conjunto de dados repetidas vezes, mas não sabemos de antemão quantas vezes o loop deve ser executado. Nesse caso, precisamos usar uma técnica para controlar o número de repetições realizadas. Para isso, usaremos uma flag, que é uma variável utilizada como "sentinela", a qual determinará quando o laço while deve ser encerrado.</p>
+
+<p>Veja um exemplo disso:</p>
+
+<pre>
+<code>
+int cont;
+float val, med, tot;
+tot = 0;
+cont = 0;
+
+printf("Digite um valor (-1 para encerrar): ");
+scanf("%f", &val);
+
+while(val != -1) {
+    tot = tot + val;
+    cont++;
+    printf("Digite um valor (-1 para encerrar): ");
+    scanf("%f", &val);
+}
+
+med = tot / cont;
+
+printf("\nValor médio: %.2f.\n", med);
+</code>
+</pre>
+
+<p>PS: Essa estrutura funciona também em outras linguagens que se originaram do C, como o Java, PHP e Javascript.</p>
+
+<p>Podemos utilizar também, nos laços, o break, que interrompe um laço, e o continue, que interrompe uma execução sem interromper o laço, assim:</p>
+
+<pre>
+<code>
+int v = 0;
+
+while(true) { // inclua stdbool.h
+    v++;
+    if(v == 11) {
+        continue;
+    }
+    else if(v == 15) {
+        break;
+    }
+    printf("Nº %d\n", v);
+}
+</code>
+</pre>
+
+<h3>Estrutura de Repetição - Do While</h3>
+
+<p>Outra forma de criar repetição é a <code>do while</code>, significando repita. Diferente do while, a do while é colocada no final, praticamente o contrário dela.</p>
+
+<p>Veja um exemplo do uso dela:</p>
+
+<pre>
+<code>
+int cont;
+float not, med, tot;
+tot = 0;
+cont = 1;
+
+do {
+    printf("Digite a %dª nota: ", cont);
+    scanf("%f", &amp;not);
+    tot = tot + not;
+    cont++;
+}
+while(cont <= 4);
+
+med = tot / 4;
+printf("Nota média: %.2f\n", med);
+</code>
+</pre>
+
+<p>PS: Pode ver que, por esse fator, o comando do será executado, e só depois ele testará, independente do valor recebido. O que garante que pelo menos uma vez, o bloco de comandos é executado.</p>
+
+<h3>Estrutura de Repetição - For</h3>
+
+<p>O <code>for</code> permite construir estruturas de loop para casos que se conhece de antemão o número de repetições que devem ser realizadas (por exemplo, se soubermos de antemão que o laço deve se repetir 10 vezes, podemos usar essa estrutura).</p>
+
+<p>Veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+int cont;
+
+for(cont = 1; cont <= 10; cont++) {
+    printf("%d\n", cont);
+}
+</code>
+</pre>
+
+<p>Veja outro exemplo:</p>
+
+<pre>
+<code>
+int cont;
+float not, med, tot;
+tot = 0;
+
+for(cont = 1; cont <= 4; cont++) {
+    printf("Digite a %dª nota: ", cont);
+    scanf("%f", &amp;not);
+    tot = tot + not;
+}
+
+med = tot / 4;
+printf("Nota média: %.2f\n", med);
+</code>
+</pre>
+
+<p>Veja outro exemplo, no qual o usuário deverá finalizar o programa após teclar uma letra:</p>
+
+<pre>
+<code>
+int cont;
+char cod;
+float not, med, tot;
+tot = 0;
+cod = 'S';
+
+while((char)toupper(cod) == 'S') { // importe ctype.h
+    system("cls");
+
+    for(cont = 1; cont <= 4; cont++) {
+        printf("Digite a %dª nota: ", cont);
+        scanf("%f", &amp;not);
+        tot = tot + not;
+    }
+    med = tot / 4;
+    printf("Nota média: %.2f\n", med);
+    tot = 0;
+    not = 0;
+    printf("Deseja calcular outra média? [S/N]");
+    fflush(stdin);
+    scanf("\n%c", &cod);
+}
+</code>
+</pre>
+
+<p>PS: Como estamos usando máscaras para char, precisamos usar aspas simples nos valores.</p>
+
+<ul>
+    <li><a href="tudo-sobre-c-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-c-4.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

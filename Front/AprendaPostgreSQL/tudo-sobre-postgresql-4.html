@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda PostgreSQL</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda PostgreSQL</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-postgresql-1.html">Tudo sobre PostgreSQL Parte 1!</a></li>
+                    <li><a href="tudo-sobre-postgresql-2.html">Tudo sobre PostgreSQL Parte 2!</a></li>
+                    <li><a href="tudo-sobre-postgresql-3.html">Tudo sobre PostgreSQL Parte 3!</a></li>
+                    <li><a href="tudo-sobre-postgresql-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre PostgreSQL Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre PostgreSQL Parte 4</h2>
+
+<h3>Como Criar e Usar Materialized Views no PostgreSQL</h3>
+
+<p>Como sabemos, uma view é uma tabela virtual (lógica) cujo conteúdo é baseado no retorno de uma consulta pré-definida, realizada em uma ou mais tabelas (ou outras views), mas que não contém os dados em si.</p>
+
+<p>Materialized view é um objeto de banco de dados que armazena o resultado de uma consulta de forma persistente. É uma tabela auxiliar que permite maior performance no acesso aos dados.</p>
+
+<p>Veja essa consulta com inner join, por exemplo:</p>
+
+<pre>
+<code>
+select cl.nome, pr.nome, pe.qtd_vendida from pedidos pe inner join clientes cl
+on pe.cod_cliente = cl.codigo
+inner join produtos pr
+on pe.cod_produto = pr.codigo
+order by cl.nome;
+</code>
+</pre>
+
+<p>Para criar uma materializade view, fazemos assim:</p>
+
+<pre>
+<code>
+create materialized view view_compras as
+select cl.nome as nome_cliente, pr.nome as nome_produto, pe.qtd_vendida from pedidos pe inner join clientes cl
+on pe.cod_cliente = cl.codigo
+inner join produtos pr
+on pe.cod_produto = pr.codigo
+order by cl.nome
+with no data; -- Not data cria a view vazia.
+</code>
+</pre>
+
+<p>Aí, podemos fazer uma consulta nessa view assim:</p>
+
+<pre>
+<code>
+select * from view_compras;
+</code>
+</pre>
+
+<p>Só que ele dará erro por não ter sido recarregada, por isso devemos recarregar ela, assim:</p>
+
+<pre>
+<code>
+refresh materialized view view_compras;
+
+select * from view_compras;
+</code>
+</pre>
+
+<p>PS: Ao alterar algo na tabela, devemos atualizar a materialized view também.</p>
+
+<p>Para alterar uma view, fazemos assim:</p>
+
+<pre>
+<code>
+alter materialized view view_compras
+rename column nome_produto to produto;
+
+select * from view_compras;
+</code>
+</pre>
+
+<p>Para excluir ela, fazemos assim:</p>
+
+<pre>
+<code>
+drop materialized view view_compras;
+</code>
+</pre>
+
+<h3>Backup e Restauração de Banco de Dados PostgreSQL com pg_dump</h3>
+
+<p>Para fazer o backup de um banco de dados, como o da biblioteca exemplificado anteriormente, podemos usar a forma gráfica, clicando no botão direito no banco. Mas nesse exemplo usaremos o terminal.</p>
+
+<p>PS: Você precisa ter permissão para manipular o banco de dados. Acesse o PSQL com o usuário do Postgres com permissões.</p>
+
+<p>Abra o PG_Dump na pasta desejada com esse comando:</p>
+
+<pre>
+<code>
+pg_dump -U postgres biblioteca &gt; biblioteca_back.bkp
+</code>
+</pre>
+
+<p>PS: Dependendo do tamanho do banco, pode demorar um pouco.</p>
+
+<p>Vamos excluir o banco para podermos restaurar ele, digitando no PSQL esse comando:</p>
+
+<pre>
+<code>
+drop database biblioteca;
+</code>
+</pre>
+
+<p>Ele dará erro por ele está sendo acessado por outros usuários, então vamos desconectar esse banco para podermos excluir ele, além de revogar a conexão, assim:</p>
+
+<pre>
+<code>
+revoke connect on database biblioteca from public;
+
+select pg_terminate_backend(pg_stat_activity.pid) from pg_stat_activity
+where pg_stat_activity.datname = 'biblioteca';
+
+drop database biblioteca;
+</code>
+</pre>
+
+<p>PS: Dentro do PSQL, use o comando <code>\l</code> para visualizar os bancos.</p>
+
+<p>Para restaurar o backup, no PSQL crie um novo banco manualmente com o mesmo nome:</p>
+
+<pre>
+<code>
+create database biblioteca template template0;
+</code>
+</pre>
+
+<p>E depois restaurar assim, na linha de comando:</p>
+
+<pre>
+<code>
+psql -U postgres biblioteca &lt; biblioteca_back.bkp;
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-postgresql-3.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-postgresql-5.html">Continuação da Matéria!</a></li>-->
+</ul>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Criptografia e Segurança</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Criptografia e Segurança</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-seguranca-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Criptografia e Segurança Parte 1!</a></li>
+                    <li><a href="tudo-sobre-seguranca-2.html">Tudo sobre Criptografia e Segurança Parte 2!</a></li>
+                    <li><a href="tudo-sobre-seguranca-3.html">Tudo sobre Criptografia e Segurança Parte 3!</a></li>
+                    <li><a href="tudo-sobre-seguranca-4.html">Tudo sobre Criptografia e Segurança Parte 4!</a></li>
+                    <li><a href="tudo-sobre-seguranca-5.html">Tudo sobre Criptografia e Segurança Parte 5!</a></li>
+                    <li><a href="tudo-sobre-seguranca-6.html">Tudo sobre Criptografia e Segurança Parte 6!</a></li>
+                    <li><a href="tudo-sobre-seguranca-7.html">Tudo sobre Criptografia e Segurança Parte 7!</a></li>            
+                    <li><a href="tudo-sobre-seguranca-8.html">Tudo sobre Criptografia e Segurança Parte 8!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Criptografia e Segurança Parte 1</h2>
+
+<h3>Introdução e Princípios Básicos</h3>
+
+<p>Criptografia é o estudo a aplicação de técnicas para comunicação e armazenamento seguro de dados em sistemas computacionais e outros como telefonia e televisão.</p>
+
+<p>A palavra "criptografia" vem do grego "kyptós" e "graphein", significando escrita oculta.</p>
+
+<p>Para estudar criptografia, é importante conhecer os termos chave, veja alguns deles:</p>
+
+<ul>
+    <li><b>Texto Plano/Puro: </b>Dados não-encriptados (não precisa ser literalmente textos, mas tudo que possa ser visto).</li>
+    <li><b>Texto Cifrado: </b>Dados encriptados (mesmo caso acima, não precisa ser literalmente textos).</li>
+    <li><b>Chave (Key): </b>Dados utilizados para encriptar um texto plano, ou desencriptar um texto cifrado.</li>
+    <li><b>Algoritmo de Criptografia: </b>Método matemático empregado para encriptar ou desencriptar dados com o uso das chaves de criptografia.</li>
+</ul>
+
+<p>Encriptação é a conversão de dados legíveis para um formato ilegível (texto cifrado) por pessoas não-autorizadas, usando uma chave e um algoritmo criptográfico. Seu objetivo é proteger a privacidade ao armazenarmos dados ou trocarmos informações de outras pessoas. O receptor da mensagem encriptada pode decriptá-la e ler seu conteúdo, no formato original.</p>
+
+<p>Desencriptação é o processo inverso da encriptação, ou seja, a transformação de dados encriptados (ilegíveis em dados legíveis, usando uma chave e um algoritmo criptográfico (cifra)).</p>
+
+<p>Criptoanálise é o processo de transformação de dados cifrados (encriptados) em dados legívels (decriptados) sem que se conheça a chave de encriptação. Portanto, trata-se de "quebrar" a encriptação dos dados para obter acesso ao conteúdo das mensagens, porém, com o intuito de descobrir falhas nos algoritmos para torná-los mais seguros, validá-los ou descartá-los (por exemplo, criptografia wep). Criptologia é o estudo científico da criptografia (arte de criar mensagens cifradas) e da criptoanálise (arte de desvendar as mensagens cifradas).</p>
+
+<p>Esses são os requerimentos de segurança em comunicações:</p>
+
+<ul>
+    <li>Autenticação</li>
+    <li>Integridade</li>
+    <li>Confidencialidade</li>
+    <li>Não-Repúdio</li>
+</ul>
+
+<p>Autenticação é um princípio importante. Ela assegura que a mensagem foi realmente originada pelo remetente, e não por outra pessoa.</p>
+
+<p>Integridade é outro conceito importante, que é o que diz respeito ao conteúdo as informações trocadas entre transmissor e receptor. Deve-se garantir que o conteúdo da mensagem chegue íntegro ao seu destino, ou, seja, que não seja alterado de nenhuma forma no meio do caminho.</p>
+
+<p>Confidencialidade significa que a informação não está disponível para pessoas e processos que não tenham autorização para acessá-la e utiizá-la.</p>
+
+<p>Não-Repúdio também é importante, já que deve-se também evitar que uma mensagem, após ter sido enviada, seja repudiada pelo transmissor (ele não poderá negar que a transmitiu). Para isso podemos utilizar, por  exemplo, assinaturas digitais, que estudaremos mais pra frente.</p>
+
+<h3>Tipos - Simétrica, Assimétrica e Funções de Hash</h3>
+
+<p>Basicamente, há três tipos de técnicas de criptografia:</p>
+
+<ul>
+    <li>Criptografia de Chave Privada ou Simétrica.</li>
+    <li>Criptografia de Chave Pública ou Assimétrica.</li>
+    <li>Funções de Hash.</li>
+</ul>
+
+<p>A criptografia de chave privada utiliza uma única chave. O emissor utiliza essa chave para encriptar a mensagem, e o receptor utiliza a mesa chave para decriptá-la (chave compartilhada - shared key). Por utilizar a mesma chave na encriptação e decriptação, trata-se de uma técnica de criptografia simétrica (que é usada no modo stream. Exemplos de algoritmos conhecidos são <code>DES</code>, <code>3DES</code>, <code>Blowfish</code>, <code>AES</code>, <code>OTP</code> (One-Time-Pad)).</p>
+
+<p>Veja abaixo como funciona a chave privada (simétrica):</p>
+
+<img src="imagens/privada.jpg" alt="Simétrica"/>
+
+<p>Na criptografia de chave pública, usamos duas chaves distintas, de modo a obtermos comunicação segura através de canais de comunicação inseguros. Trata-se de uma técnica de criptografia assimétrica pelo fato de usar um par de chaves diferentes (onde um transmissor e receptor possuem chaves diferentes, com tamanhos que variam entre 512 e 2048 bits, usadas em modo de bloco. Exemplos de algoritmos são <code>DSA</code>, <code>RSA</code> e <code>GPG</code>).</p>
+
+<p>Veja abaixo como funciona a chave pública (assimétrica):</p>
+
+<img src="imagens/publica.jpg" alt="Assimétrica"/>
+
+<p>Cada participante possuí uma chave pública e uma privada. A chave privada é secreta, e só o proprietário a conhece, ao passo que a chave pública é compartilhada com todos que se comunicarão conosco. Por exemplo: Fábio quer se comunicar com Ana de forma segura, então Fábio encripta a mensagem com a chave pública de Ana, de modo que a mensagem só pode ser aberta usando-se a chave privada de Ana (que só ela possuí).</p>
+
+<p>A técnica de hash não utiliza uma chave como as técnicas vistas anteriormente, utiliza um valor de hash de tamanho fixo, o qual é computado sobre o texto plano. São usadas para verificar a integridade dos dados para garantir que não tenham sido inadveridamente alterados. Verificações de senha podem usar funções de hash também, assim como downloads de arquivos como ISO (alguns exemplos de funções de hash utilizadas atualmente incluem são <code>MD5</code>, <code>SHA1</code> e <code>SHA256</code>).</p>
+
+<p>Basicamente, a definição é isso:</p>
+
+<p>A chave pública (assimétrica) é compartilhada a outros usuários para que possa ser verificadas as assinaturas e integridade de arquivos e mensagens, ou criptografar arquivos e mensagens para que possam ser abertos pela sua chave privada.</p>
+<p>Já a chave privada (simétrica) deve ser guardada com você, e é usada para criptografar e assinar arquivos e mensagens, além de descriptografar mensagens encriptadas com sua chave pública.</p>
+<p>E o hash é um valor de tamanho fixo, geralmente em hexadecimal, computado sobre uma frase ou arquivo, que sempre gerará o mesmo valor, desde que não seja alterada absolutamente nada nessas mesmas frases ou arquivos, por mínimo que seja.</p>
+
+<p>Veja nesse site o uso de alguns dos principais algoritmos de criptografia, desde a Cifra de César até os Hashs, além de conversão de números e várias outras coisas: <a href="https://www.onlinecryptographytools.com/" target="
+    ">https://www.onlinecryptographytools.com/</a></p>
+
+<h3>Revisão e Operações Lógicas AND, OR, NOT e XOR</h3>
+
+<p>Uma operação lógica é uma operação em álgebra booleana (com valores binários - bits), que podem ser 0 ou 1.</p>
+
+<p>As operações lógicas mais comuns são o <code>AND</code>, <code>OR</code>, <code>NOT</code> e <code>XOR</code>. No caso, o true e false são tratadas como 1 e 0, respectivamente.</p>
+
+<p>A operação XOR possuí uma propriedade importante, de modo que é reversível, muito utilizada em algoritmos criptográficos.</p>
+
+<p>Por exemplo:</p>
+
+<table>
+    <tr>
+        <td></td>
+        <th>AND</th>
+        <th>OR</th>
+        <th>XOR</th>
+    </tr>
+    <tr>
+        <th>Primeiro:</th>
+        <td>1001</td>
+        <td>1001</td>
+        <td>1001</td>
+    </tr>
+    <tr>
+        <th>Segundo:</th>
+        <td>0101</td>
+        <td>0101</td>
+        <td>0101</td>
+    </tr>
+    <tr>
+        <th>Resultado:</th>
+        <td>0001</td>
+        <td>1101</td>
+        <td>1100</td>
+    </tr>
+</table>
+
+<p>PS: O NOT seria apenas a inversão, por exemplo, 1001 viraria 0110.</p>
+
+<h3>Web Crawler e Arquivo robots.txt</h3>
+
+<p>Um webcrawler (rastreador web) é um bot (robô) da internet que navega sistematicamente pelas páginas da web com o propósito de indexá-las. Também é conhecido pelo nome de Web Spider.</p>
+
+<p>O webcrawler utiliza uma lista inicial de URLs para visitar, que são conhecidas como seeds (sementes). Ele identifica todos os hyperlinks nessas URLs, e os adiciona à lista de URLs à visitar. As páginas visitadas são copiadas para serem processadas posteriormente com o intuito de indexá-las. Os motores de busca utilizam webcrawlers para manterem seus bancos de dados atualizados. Um exemplo é o webcrawler usado pelo Google para indexar as páginas da web para construir a busca do mesmo, o Googlebot. Nesse endereço é possível ler as informações sobre esse webcrawler: <a href="https://support.google.com/webmasters/answer/182072" target="_blank">https://support.google.com/webmasters/answer/182072</a></p>
+
+<p>Um arquivo <code>robots.txt</code> restringe acesso dos robôs webcrawlers a um site. Os webcrawlers, antes de indexar um novo site descoberto, verificam se ele possui um arquivo robots.txt que os impeçam de acessar determinadas páginas. Nesse website encontramos informações sobre como criar e utilizar um arquivo robots.txt: <a href="https://support.google.com/webmasters/answer/156449" target="_blank">https://support.google.com/webmasters/answer/156449</a></p>
+
+<p>A sintaxe de um robots.txt costuma ser essa:</p>
+
+<pre>
+<code>
+# Tudo com hashtag é comentário.
+
+User-agent: *
+
+Disallow: /
+</code>
+</pre>
+
+<p>No caso acima, ambos são coringas para bloquear geral, no User-agent colocamos os sites de busca especificados, e em Disallow, as pastas que não devem ser indexadas.</p>
+
+<p>Esse site te ajuda a criar robots.txt: <a href="http://www.marketingdebusca.com.br/robots-txt/" target="_blank">http://www.marketingdebusca.com.br/robots-txt/</a></p>
+
+<h3>O que é a Deep Web</h3>
+
+<p>Antes de entendermos a Deep Web, precisamos entender a Surface Web (Web da Superfície), que trata-se da web que conhecemos, cujos sites são indexados normalmente pelos motores de busca, como o Google, Yahoo!, Bing, etc. Um site como <code>https://www.facebook.com/</code> é um exemplo de site que pertence a Surface Web.</p>
+
+<p>A Deep Web se refere ao conteúdo da web que não é visível na Surface Web, conteúdo esse não-indexado pelos mecanismos de busca convencionais. Acredita-se que a mior parte da informação da web esteja em sites que são gerados dinamicamente, os quais não são encontrados usando-se os mecanismos de busca comuns. Geralmente terminam com .onion ao invés de .com.</p>
+
+<p>Na Deep Web, as páginas são dinâmicas, e são isoladas (portando, inacessível ao webcrawlers), são privados (protegidos com login e senha), o conteúdo fica em servidores FTP e o acesso é limitado.</p>
+
+<p>A Deep Web opera de tal forma que a navegação por suas páginas se dá de forma anônima. É muito difícil, quase impossível, rastrear seu conteúdo ou descobrir quem acessa qual página.</p>
+
+<p>Um estudo realizado em 2001 diz que existiam na época cerca de 7500 TB de dados na Deep Web. Em 2004, outro estudo detectou a existência de mais de 300 mil sites na Deep Web ao redor do mundo. Acredita-se que hoje em dia, a Deep Web seja mais de 500 vezes maior que a web da superfície.</p>
+
+<p>A Web é como um iceberg, a pontinha que enxergamos é a Surface Web, e a maior parte, escondida, seria a Deep Web.</p>
+
+<p>Em tese, devido ao anonimato ao se procurar algo na Deep Web, é possível visualizar ou adquirir itens e "serviços" ilegais, como armas, drogas e pornografia infantil. Atividades criminosas encontrariam uma forma segura e anônima de proliferar nesse ambiente. Porém, a Deep Web também é utilizada de muitas formas positivas, como a divulgação de violações de direitos humanos em países com altos níveis de censura, por exemplo, ou simplesmente a navegação anônima.</p>
+
+<p>Para acessar a Deep Web você precisará de um software especial habilitado para isso, como navegadores web específicos ou plugins para navegadores convencionais. O exemplo mais conhecido desse tipo de software é o Tor. Ao usar um software como esse, você estará totalmente anônimo e não será possível descobrir quem você é ou onde está localizado, e não é possível monitorar o que você faz na web.</p>
+
+<h3>Cifras Simétricas e OTP</h3>
+
+<p>Um sistema de cifragem simétrico utiliza a mesma chave para encriptar e desencriptar os dados. Também é conhecido pelos nomes de Criptografia de Chave Privada ou Chave Compartilhada. Esse sistema pode utilizar cifragem de fluxo ou de bloco.</p>
+
+<p>Uma cifra é definida sobre um par de algoritmos de encriptação (E) e desencriptação (D), onde:</p>
+
+<pre>
+<code>
+c = E(k, m)
+
+m = D(k, c)
+</code>
+</pre>
+
+<p>No caso acima, as letras significam:</p>
+
+<ul>
+    <li><code>m</code>: Texto plano (mensagem).</li>
+    <li><code>c</code>: Texto cifrado (encriptado).</li>
+    <li><code>k</code>: Chave criptográfica.</li>
+    <li><code>E</code>: Algoritmo de encriptação.</li>
+    <li><code>D</code>: Algoritmo de desencriptação.</li>
+</ul>
+
+<p>Podemos relaciona os dois algoritmos da seguinte forma:</p>
+
+<pre>
+<code>
+m = D(k, E(k, m)) // Equação e consistência
+</code>
+</pre>
+
+<p>Então, para satisfazer a equação de consistência:</p>
+
+<pre>
+<code>
+∀mЄM, kЄK: D(k, E(k, m)) = m
+</code>
+</pre>
+
+<p>O algoritmo E é frequentemente randomizado, ao passo que o algoritmo D é sempre determinístico.</p>
+
+<p>PS: Lembrando que <code>Є</code> significa "pertence", e o <code>∀</code> significa "para todos". Veja alguns desses símbolos aqui: <a href="http://www.somatematica.com.br/simbolos3.php" target="_blank">http://www.somatematica.com.br/simbolos3.php</a></p>
+
+<p>Um exemplo de algoritmo simétrico é o One Time Pade (OTP). A chave é uma string de bits aleatória, com pelo menos o mesmo tamanho da mensagem em si:</p>
+
+<pre>
+<code>
+C = E(k, m) = K ⊕ m
+</code>
+</pre>
+
+<p>PS: O <code>⊕</code> é o símbolo do XOR.</p>
+
+<p>Veja um exemplo de OTP:</p>
+
+<pre>
+<code>
+C = E(k, m) = K ⊕ m
+</code>
+</pre>
+
+<table>
+    <tr>
+        <th>Mensagem</th>
+        <td>1000110</td>
+    </tr>
+    <tr>
+        <th>Chave</th>
+        <td>1100011</td>
+    </tr>
+    <tr>
+        <th>C</th>
+        <td>0100101</td>
+    </tr>
+</table>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+M = D(k, c) = K ⊕ c
+</code>
+</pre>
+
+<table>
+    <tr>
+        <th>Texto cifrado C</th>
+        <td>0100101</td>
+    </tr>
+    <tr>
+        <th>Chave</th>
+        <td>1100011</td>
+    </tr>
+    <tr>
+        <th>Mensagem</th>
+        <td>1000110</td>
+    </tr>
+</table>
+
+<p>Exemplo OTP: Prova</p>
+
+<pre>
+<code>
+D(k, E(k, m)) = D(k, k ⊕ m) =
+
+k ⊕ (k ⊕ m) = (k ⊕ k) ⊕ m =
+
+0 ⊕ m = m
+</code>
+</pre>
+
+<p>O algoritmo OTP é muito rápido, porém, necessita de chaves muito longas (do tamanho da mensagem).</p>
+
+<h3>Cifras de Fluxo (Stream Ciphers)</h3>
+
+<p>A Stream Cipher trata-se de uma cifra de chave simétrica que combina os bits do texto plano com um fluxo de bits pseudoaleatório, um a um. Assim, cada dígito da mensagem é encriptado pela combinação com um dígito do fluxo de bits, originando assim o texto encriptado. Usa-se muito a operação XOR para realizar a combinação.</p>
+
+<p>As cifras de fluxo usam a ideia da cifra OTP (One Time Pad), a qual usa um fluxo de bits (keystream) de dígitos totalmente aleatórios. Porém, uma crifra de fluxo usa uma chave de tamanho muito menor para gerar essa keystream, como 64 ou 128 bits. Essa chave é usada para gerar um keystream pseudoaleatório que será combinado com o texto plano para gerar o texto cifrado.</p>
+
+<p>Veja um exemplo:</p>
+
+<table>
+    <tr>
+        <th>Texto plano</th>
+        <td>1001 0100 1001 0010 1001</td>
+    </tr>
+    <tr>
+        <th>Keystream</th>
+        <td>0100 1010 0100 1001 0010</td>
+    </tr>
+    <tr>
+        <th>Texto Cifrado Gerado</th>
+        <td>1101 1110 1101 1011 1011</td>
+    </tr>
+</table>
+
+<br/>
+
+<img src="imagens/fluxo.jpg" alt="Fluxo"/>
+
+<p>Alguns exemplos de cifras de fluxo são o <code>RC4</code>, <code>Salsa20</code> e <code>SEAL</code>.</p>
+
+<h3>Cifras de Bloco (Block Ciphers)</h3>
+
+<p>Essa cifragem opera sobre blocos de dados, o texto plano é dividido em blocos pelo algoritmo, o qual opera sobre cada bloco de forma independente. Cada bloco recebe uma chave independente e gera diferentes blocos cifrados.</p>
+
+<p>No entanto, a cifra de bloco apresenta um problema: Se o mesmo bloco de texto se repetir, o texto cifrado será igual, o que pode gerar um padrão de repetição, identificável por um invasor. Esse problema pode ser resolvido usando-se um modo de realimentação.</p>
+
+<p>Um modo de realimentação comum é o CBC (Cipher Block Chaining, ou Cifra de Blocos por Encadeamento), a qual funciona fazendo XOR no bloco atual de texto plano com o bloco anterior de texto cifrado.</p>
+
+<p>Para o primeiro bloco (que não tem anterior), é feito XOR com um vetor de inicialização (IV, que significa Initialization Vector).</p>
+
+<p>Veja um exemplo detalhado:</p>
+
+<img src="imagens/bloco.jpg" alt="Bloco"/>
+
+<p>Alguns dos exemplos de cifras de bloco são <code>IDEA</code>, <code>RC5</code>, <code>RC6</code>, <code>AES</code>, <code>Blowfish</code>, <code>CAST</code>, <code>Rijndael</code> e <code>3DES.</code></p>
+
+<ul>
+    <li><a href="tudo-sobre-seguranca-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

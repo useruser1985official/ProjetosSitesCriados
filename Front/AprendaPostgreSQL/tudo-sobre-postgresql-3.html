@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda PostgreSQL</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda PostgreSQL</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-postgresql-1.html">Tudo sobre PostgreSQL Parte 1!</a></li>
+                    <li><a href="tudo-sobre-postgresql-2.html">Tudo sobre PostgreSQL Parte 2!</a></li>
+                    <li><a href="tudo-sobre-postgresql-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre PostgreSQL Parte 3!</a></li>
+                    <li><a href="tudo-sobre-postgresql-4.html">Tudo sobre PostgreSQL Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre PostgreSQL Parte 3</h2>
+
+<h3>Consultas em Duas ou Mais Tabelas com Inner Join</h3>
+
+<p>Cláusulas join (junções) são usadas para combinar dados provenientes de duas ou mais tabelas em um único conjunto de resultados, baseado em condições de join especificadas.</p>
+
+<ul>
+    <li><code>inner join</code>: Retorna linhas quando houver pelo menos uma correspondência em ambas as tabelas.</li>
+    <li><code>outer join</code>: Retorna linhas mesmo quando não houver pelo menos uma correspondência em uma das tabelas (ou ambas). O outer join divide-se em <code>left join</code>, <code>right join</code> e <code>cross join</code>.</li>
+</ul>
+
+<p>Sobre a cláusula <code>on</code>:</p>
+
+<ul>
+    <li>A cláusula <code>on</code> determina a condição de join, que indica como as tabelas devem ser comparadas.</li>
+    <li>No geral, a comparação ocorre por meio de um relacionamento entre chave primárias na primeira tabela e chave estrangeira na segunda tabela.</li>
+</ul>
+
+<p>Uma condição de join nomeia uma coluna em cada tabela envolvida no join e indica como as colunas devem ser comparadas.</p>
+
+<p>No geral, usamos o operador <q>=</q> para obter linhas com colunas correspondentes. É comum usar o relacionamento de PK de uma tabela com FK de outra tabela.</p>
+
+<p>Nome de coluna qualificado: Nome da coluna precedido pelo nome da tabela a qual pertence, separados por um ponto. Usamos nomes de colunas qualificados para identificar a qual tabela cada campo envolvido pertence. Isso evita erro de ambiguidade caso uma coluna tenha o mesmo nome em duas tabelas diferentes.</p>
+
+<p>No caso, as tabelas clientes e produtos tem relacionamento com a tabela pedidos, sendo que esta última tem como chave estrangeira as chaves primárias das duas primeiras tabelas.</p>
+
+<p>Para retornar os nomes dos produtos que estão incluídos em todos os pedidos. Vamos fazer assim:</p>
+
+<pre>
+<code>
+select * from pedidos; -- Só retornará os números equivalente às chaves especificadas.
+
+-- Inner join:
+select pedidos.codigo, produtos.nome, pedidos.qtd_vendida from pedidos inner join produtos
+on pedidos.cod_produto = produtos.codigo; -- Relacionamento
+
+-- Com Alias:
+select pe.codigo, pr.nome, pe.qtd_vendida from pedidos pe inner join produtos pr
+on pe.cod_produto = pr.codigo
+where pe.codigo = 9; -- Com where
+</code>
+</pre>
+
+<p>Para fazer com três tabelas, fazemos assim:</p>
+
+<pre>
+<code>
+select pe.codigo, cl.nome, pr.nome, pe.qtd_vendida from pedidos pe inner join produtos pr
+on pe.cod_produto = pr.codigo
+inner join clientes cl
+on pe.cod_cliente = cl.codigo
+where pe.codigo = 9;
+
+select pe.codigo, cl.nome, pr.nome from pedidos pe inner join produtos pr
+on pe.cod_produto = pr.codigo
+inner join clientes cl
+on pe.cod_cliente = cl.codigo
+where cl.codigo = 1;
+</code>
+</pre>
+
+<p>Veja como funcionam as joins:</p>
+
+<img src="imagens/sql-joins.jpg" alt="SQL Joins"/>
+
+<h3>Como Criar e Executar Views</h3>
+
+<p>View (exibição/visão) é uma tabela virtual (estrutura de dados) baseada no conjunto de resultados de uma consulta SQL, criada a partir de um conjunto de tabelas (ou outras views) presentes no banco, que servem com tabelas-base.</p>
+
+<p>Mostra sempre resultados de dados atualizados, pois o motor do banco de dados recria os dados toda vez que um usuário consulta a visão.</p>
+
+<p>Aplicação das views:</p>
+
+<ul>
+    <li>Simplificar o acesso a dados que estão armazenados em múltiplas tabelas relacionadas.</li>
+    <li>Implementar segurança nos dados de uma tabela, por exemplo criando uma visão que limite os dados que podem ser acessados, por meio de uma cláusula where.</li>
+    <li>Prover isolamento de uma aplicação da estrutura específica de tabelas do banco acessado.</li>
+</ul>
+
+<p>Vamos supor essa join:</p>
+
+<pre>
+<code>
+select cl.nome as cliente, pr.nome as produto, pe.qtd_vendida as quantidade,
+pe.codigo as pedido, round(pr.preco * pe.qtd_vendida, 2) as fatura
+from pedidos pe inner join clientes cl
+on pe.cod_cliente = cl.codigo
+inner join produtos pr
+on pe.cod_produto = pr.codigo;
+</code>
+</pre>
+
+<p>Para simplificar a consulta acima, podemos criar uma view para fazer a consulta acima, ao invés de digitar essa join a todo momento que precisar dela.</p>
+
+<p>Abaixo, criaremos uma view:</p>
+
+<pre>
+<code>
+create view vendas as
+select cl.nome as cliente, pr.nome as produto, pe.qtd_vendida as quantidade,
+pe.codigo as pedido, round(pr.preco * pe.qtd_vendida, 2) as fatura
+from pedidos pe inner join clientes cl
+on pe.cod_cliente = cl.codigo
+inner join produtos pr
+on pe.cod_produto = pr.codigo;
+</code>
+</pre>
+
+<p>PS: Podemos ver em alguns casos <code>create or replace view</code>. Nesse caso ele substituirá a view existente, caso já exista.</p>
+
+<p>Assim, podemos fazer a consulta diretamente pela view, assim:</p>
+
+<pre>
+<code>
+select * from vendas;
+
+-- Podemos usar outras combinações também:
+select cliente, pedido from vendas;
+
+select cliente, round(sum(fatura), 2) from vendas group by cliente;
+</code>
+</pre>
+
+<p>Podemos alterar as propriedades da view (e não o código), como por exemplo, para renomear ela:</p>
+
+<pre>
+<code>
+alter view vendas rename to faturas;
+
+select * from faturas;
+</code>
+</pre>
+
+<p>Para deletar uma view, basta usar <code>drop view nomedaview;</code>, podendo usar o <code>if exists</code> e o <code>cascade</code>, caso essa view dependa de outras.</p>
+
+<h3>Como usar Array em Colunas de Tabelas no PostgreSQL</h3>
+
+<p>Um array é um estrutura de dados que pode ter vários dados dentr dele, separados por índices, um vetor é um array de uma dimensão.</p>
+
+<p>Vamos criar uma nova tabela, assim:</p>
+
+<pre>
+<code>
+create table escala_trabalho (
+    codigo smallint,
+    escala char(3)[] -- Os colchetes define um array
+);
+</code>
+</pre>
+
+<p>PS: Em SQL, o primeiro índice do array é 1, e não 0, como costuma ser em programação.</p>
+
+<p>Inserindo dados:</p>
+
+<pre>
+<code>
+insert into escala_trabalho (codigo, escala) values
+(1, '{"SEG", "TER", "QUA"}'),
+(2, '{"QUI", "SEX", "SAB"}'),
+(3, '{"SEG", "QUA", "SEX"}');
+</code>
+</pre>
+
+<p>E fazendo a consulta:</p>
+
+<pre>
+<code>
+select * from escala_trabalho;
+
+select escala from escala_trabalho where codigo = 2;
+
+-- Para pegar o primeiro dia da semana que cada funcionário trabalha:
+select codigo, escala[1] from escala_trabalho;
+
+-- Para pegar quem trabalha na quarta-feira:
+select codigo from escala_trabalho where 'QUA' = any(escala); -- Não inverta
+</code>
+</pre>
+
+<p>Para alterar um array, fazemos assim:</p>
+
+<pre>
+<code>
+update escala_trabalho set escala = array['TER', 'QUI', 'SAB'] where codigo = 3; -- Pode ser dessa forma, que é o ANSI SQL, ou da forma anterior
+</code>
+</pre>
+
+<h3>Exemplos de Operadores Aritméticos no PostgreSQL</h3>
+
+<p>Podemos usar operadores aritméticos no PostgreSQL. Os operadores usados são os mesmos de várias outras linguagens (+, -, *, / e %). Mas podemos também usar esses operadores especificos do Postgre:</p>
+
+<table>
+    <tr>
+        <th>Operador</th>
+        <th>Significado</th>
+        <th>Sintaxe</th>
+    </tr>
+    <tr>
+        <td>-</td>
+        <td>Menos Unário</td>
+        <td><code>-valor</code></td>
+    </tr>
+    <tr>
+        <td>^</td>
+        <td>Exponenciação</td>
+        <td><code>valor1 ^ valor 2</code></td>
+    </tr>
+    <tr>
+        <td>|/</td>
+        <td>Raiz Quadrada</td>
+        <td><code>|/ valor</code></td>
+    </tr>
+    <tr>
+        <td>||/</td>
+        <td>Raiz Cúbica</td>
+        <td><code>||/ valor</code></td>
+    </tr>
+    <tr>
+        <td>@</td>
+        <td>Valor Absoluto</td>
+        <td><code>@ valor</code></td>
+    </tr>
+</table>
+
+<p>PS: Lembre-se sempre da ordem de precedência da matemática.</p>
+
+<p>Veja uns exemplos de uso direto no SQL:</p>
+
+<pre>
+<code>
+select 10 + 12 as resultado;
+
+select -10 + 12 as resultado;
+
+select 10 + 6 * 3 as resultado; -- Multiplicação é feita primeiro.
+
+select (10 + 6) * 3 as resultado; -- Parênteses é feito primeiro.
+
+select 18 % 2 as resultado;
+
+select 18 % 4 as resultado;
+
+select 10 ^ 2 as resultado; -- 10 elevado ao quadrado.
+
+select 6.02 * 10 ^ 23; -- Exponenciação é feita primeiro.
+
+select 6.02e+23 * 5 as resultado;
+
+select |/ 144 as resultado;
+
+select |/ 170 as resultado;
+
+select ||/ 170 as resultado;
+
+select ||/ 27 as resultado;
+</code>
+</pre>
+
+<p>Para fazer cálculos com os valores das colunas de uma tabela, fazemos assim:</p>
+
+<pre>
+<code>
+select * from produtos;
+
+select preco * 5 from produtos where codigo = 5;
+
+select round(preco / 100, 2) as "Custo de uma Luva" from produtos where nome = 'Luvas de Látex';
+
+select round(sum(preco * qtd_estoque), 2) from produtos;
+</code>
+</pre>
+
+<h3>Criar Tabelas Herdadas no PostgreSQL (OO em Bancos de Dados)</h3>
+
+<p>Apesar do SQL ser uma linguagem estruturada, o PostgreSQL tem suporte a algumas características da programação orientada a objetos, como as heranças entre tabelas.</p>
+
+<p>Crie essa tabela:</p>
+
+<pre>
+<code>
+-- Tabela base, que será herdada por outras:
+create table publicacao (
+    id serial constraint pk_id_pub primary key,
+    nome varchar(50),
+    data_pub date,
+    idioma varchar(25)
+);
+</code>
+</pre>
+
+<p>Para criar tabelas que herdem características da tabela acima, usamos a cláusula <code>inherits</code> com o nome da tabela a ser herdada. Veja como faremos abaixo:</p>
+
+<pre>
+<code>
+create table livros (
+    isbn13 char(13) unique,
+    tipo_capa varchar(20),
+    edicao smallint
+) inherits(publicacao); -- Ela terá todas as colunas da tabela publicação
+
+create table revistas (
+    issn char(8),
+    numero smallint,
+    unique(issn, numero) -- Aplicando em duas colunas
+) inherits(publicacao); -- Herdando também de publicação
+</code>
+</pre>
+
+<p>Inserindo e selecionando dados na primeira tabela:</p>
+
+<pre>
+<code>
+insert into publicacao (nome, data_pub, idioma) values ('Le Monde', '20220411', 'Francês'); -- Inserindo um jornal francês
+
+select * from publicacao;
+</code>
+</pre>
+
+<p>Se selecionarmos as tabelas livros e revistas, veremos todas as colunas, inclusive as herdadas, que vêm primeiro. Mas no momento elas estão vazias.</p>
+
+<p>Vamos inserir um cadastro em livros:</p>
+
+<pre>
+<code>
+insert into livros (nome, data_pub, idioma, isbn13, tipo_capa, edicao) values
+('50 Ideias de Química', '20220202', 'Português', '9786555356519', 'Brochura', 2);
+
+select * from livros;
+</code>
+</pre>
+
+<p>PS: Se olharmos em publicação, veremos que o mesmo cadastro inserido no livro está em publicação. Ou seja: As tabelas pai recebem os dados equivalentes das tabelas filhas.</p>
+
+<p>Vamos fazer o mesmo com revistas:</p>
+
+<pre>
+<code>
+insert into revistas (nome, data_pub, idioma, issn, numero) values
+('Saber Eletrônica', '19971201', 'Português', '01016717', 299);
+
+insert into revistas (nome, data_pub, idioma, issn, numero) values
+('Eletrônica Total', '19981101', 'Português', '01016717', 299); -- Essa não será inserida devido a constraint unique
+
+select * from revistas;
+
+select * from publicacao;
+</code>
+</pre>
+
+<p>Podemos alterar uma tabela que é herdada, e todas as tabelas filhas receberão essa alteração. Veja abaixo:</p>
+
+<pre>
+<code>
+alter table publicacao
+add column n_paginas smallint;
+
+select * from publicacao;
+
+select * from livros;
+
+select * from revistas;
+</code>
+</pre>
+
+<p>PS: A coluna alterada vai aparecer nas tabelas filhas, mas como a última coluna.</p>
+
+<p>Vamos fazer uma atualização na tabela publicação:</p>
+
+<pre>
+<code>
+update publicacao set data_pub = '20200415' where id = 3;
+</code>
+</pre>
+
+<p>Na tabela revista, que herda de publicação, também aparecerá alterada. Podemos alterar diretamente nela também.</p>
+
+<h3>Como Usar Tipo JSON em Colunas no PostgreSQL</h3>
+
+<p>JSON é o acrônimo de Javascript Object Notation. Formato aberto e popular para representação e troca de dados, assim como XML e YAML (porém mais leve e simples). É fácil para humanos ler e editar esse formato, e simples para os computadores processarem e gerarem dados JSON. É independente de linguagem de programação.</p>
+
+<p>Um documento (objeto) JSON é um conjunto não-ordenado de dados armazenados em um par <code>"nome": "valor"</code> (campo), que inicia e termina com chaves (<code>{}</code>). Todos os nomes-chave são englobados em aspas duplas, e são separados de seus valores por dois-pontos. Os pares (campos) são separados um do outro por vírgulas.</p>
+
+<p>Veja um exemplo de um documento JSON:</p>
+
+<pre>
+<code>
+{
+    "chave1": "string",
+    "chave2": 12,
+    "chave3": [
+        "string", 21.50, "string"
+    ],
+    "chave4": true,
+    "chave5": {
+        "chave6": "valor"
+    }
+}
+</code>
+</pre>
+
+<p>Podemos criar campos do tipo JSON em PostgreSQL, como veremos abaixo:</p>
+
+<pre>
+<code>
+create table peds (
+    id serial not null primary key,
+    pedido json not null
+);
+
+-- Inserindo dados:
+insert into peds (pedido) values
+('{"comprador": "Fábio", "produtos": {"bebida": "Suco de Caju", "comida": "Pizza de Atum"}}'),
+('{"comprador": "Mônica", "produtos": {"bebida": "Água Tônica", "comida": "Beirute"}}'),
+('{"comprador": "Lauro", "produtos": {"bebida": "Campari", "comida": "Espaguete"}}'),
+('{"comprador": "Henrique", "produtos": {"bebida": "Coca-Cola", "comida": "Feijoada"}}');
+</code>
+</pre>
+
+<p>Para fazer as consultas, fazemos assim:</p>
+
+<pre>
+<code>
+select * from peds;
+
+-- Retornando nomes dos compradores em formato JSON:
+select pedido -&gt; 'comprador' as "Comprador" from peds;
+
+-- Retornando a parte de texto (atenção na setinha):
+select pedido -&gt;&gt; 'comprador' as "Comprador" from peds;
+
+-- Retornando as bebidas, que estão dentro de outra chave:
+select pedido -&gt; 'produtos' -&gt;&gt; 'bebida' as "Bebidas Vendidas" from peds;
+
+-- Ver quem comprou Coca-Cola:
+select pedido -&gt;&gt; 'comprador' as "Comprador" from peds
+where pedido -&gt; 'produtos' -&gt;&gt; 'bebida' = 'Coca-Cola';
+</code>
+</pre>
+
+<p>Veja as funções do JSON:</p>
+
+<pre>
+<code>
+select json_each(pedido) from peds; -- Retorna as chaves e seus valores.
+
+select json_each_text(pedido) from peds; -- Retorna os valores no formato de texto.
+
+select json_object_keys(pedido -&gt; 'produtos') from peds; -- Retorna os nomes das chaves dos produtos (ele repete)
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-postgresql-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-postgresql-4.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

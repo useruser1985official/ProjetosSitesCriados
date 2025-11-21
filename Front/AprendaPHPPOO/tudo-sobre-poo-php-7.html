@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda POO PHP</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda POO PHP</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-poo-php-1.html">Tudo sobre POO PHP Parte 1!</a></li>
+                    <li><a href="tudo-sobre-poo-php-2.html">Tudo sobre POO PHP Parte 2!</a></li>
+                    <li><a href="tudo-sobre-poo-php-3.html">Tudo sobre POO PHP Parte 3!</a></li>
+                    <li><a href="tudo-sobre-poo-php-4.html">Tudo sobre POO PHP Parte 4!</a></li>
+                    <li><a href="tudo-sobre-poo-php-5.html">Tudo sobre POO PHP Parte 5!</a></li>
+                    <li><a href="tudo-sobre-poo-php-6.html">Tudo sobre POO PHP Parte 6!</a></li>
+                    <li><a href="tudo-sobre-poo-php-7.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre POO PHP Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre POO PHP Parte 7</h2>
+
+<h3>Projeto Final em PHP - Parte 2</h3>
+
+<p>Na segunda parte do exercício, faremos a ligação das classes Video e Gafanhotos, usando uma classe com o nome Visualizacao. Esse é o diagrama dela:</p>
+
+<table>
+    <tr>
+        <th>Visualizacao</th>
+    </tr>
+    <tr>
+        <td>
+            - espectador<br/>
+            - filme
+        </td>
+    </tr>
+    <tr>
+        <td>
+            + avaliar()<br/>
+            + avaliar(nota)<br/>
+            + avaliar(porc)
+        </td>
+    </tr>
+</table>
+
+<p>PS: Lembrando que no PHP não existe sobrecarga, vamos usar uma "gambiarra" pra burlar isso.</p>
+
+<p>Veja o código de Visualizacao:</p>
+
+<pre>
+<code>
+require_once "Video.php";
+require_once "Gafanhoto.php";
+
+class Visualizacao {
+    private $espectador;
+    private $filme;
+    
+    public function __construct($espectador, $filme) {
+        $this->espectador = $espectador;
+        $this->filme = $filme;
+        $this->filme->setViews($this->filme->getViews() + 1);
+        $this->espectador->setTotAssistido($this->espectador->getTotAssistido() + 1);
+    }
+    
+    public function __destruct() {
+        unset($this->espectador);
+        unset($this->filme);
+
+        echo "Objeto Visualizacao Destruído!&lt;br/&gt;";
+    }
+
+    public function getEspectador() {
+        return $this->espectador;
+    }
+
+    public function getFilme() {
+        return $this->filme;
+    }
+
+    public function setEspectador($espectador) {
+        $this->espectador = $espectador;
+    }
+
+    public function setFilme($filme) {
+        $this->filme = $filme;
+    }
+}
+</code>
+</pre>
+
+<p>E no index, podemos fazer isso:</p>
+
+<pre>
+<code>
+require_once "Visualizacao.php";
+
+$v = array();
+
+array_push($v, new Video("Aula 1 de POO"));
+array_push($v, new Video("Aula 12 de PHP"));
+array_push($v, new Video("Aula 15 de HTML5"));
+
+$g = array();
+
+array_push($g, new Gafanhoto("Jubileu", 22, "M", "Jubi"));
+array_push($g, new Gafanhoto("Creuza", 12, "F", "Creuzita"));
+
+$vis = array();
+
+array_push($vis, new Visualizacao($g[0], $v[2]));
+array_push($vis, new Visualizacao($g[0], $v[1]));
+
+print_r($vis[0]);
+print_r($vis[1]);
+
+unset($v);
+unset($g);
+unset($vis);
+</code>
+</pre>
+
+<p>Agora faremos o polimorfismo de sobrecarga (que na prática, não existem em PHP). Terá três tipos de avaliação, por like, por nota e por porcentagem de vídeos assistidos.</p>
+
+<p>Abaixo do método construtor em Visualização, apenas poste isso:</p>
+
+<pre>
+<code>
+public function avaliar() {
+    $this->filme->setAvaliacao(5);
+}
+
+public function avaliarNota($nota) {
+    $this->filme->setAvaliacao($nota);
+}
+
+public function avaliarPorc($porc) {
+    $nova = 0;
+    if($porc <= 20) {
+        $nova = 3;
+    }
+    else if($porc > 20 && $porc <= 50) {
+        $nova = 5;
+    }
+    else if($porc > 50 && $porc <= 90) {
+        $nova = 8;
+    }
+    else {
+        $nova = 10;
+    }
+    $this->filme->setAvaliacao($nova);
+}
+</code>
+</pre>
+
+<p>Mas tem um porém, várias pessoas podem ver o vídeo, e dessa forma ele fará que a última avaliação que prevaleça. Para resolver isso, criaremos uma forma dele criar uma média de avaliações.</p>
+
+<p>Na classe Video, em public function setAvaliacao, modificaremos pra isso:</p>
+
+<pre>
+<code>
+public function setAvaliacao($avaliacao) {
+    $media = ($this->avaliacao + $avaliacao) / $this->views;
+    $this->avaliacao = $media;
+}
+</code>
+</pre>
+
+<p>Como podemos ver, podemos personalisar os métodos getter e setter, nem sempre precisamos "aceitar" tudo que o Netbeans nos sugere.</p>
+
+<p>E no index, para exibir, faremos isso:</p>
+
+<pre>
+<code>
+require_once "Visualizacao.php";
+
+$v = array();
+
+array_push($v, new Video("Aula 1 de POO"));
+array_push($v, new Video("Aula 12 de PHP"));
+array_push($v, new Video("Aula 15 de HTML5"));
+
+$g = array();
+
+array_push($g, new Gafanhoto("Jubileu", 22, "M", "Jubi"));
+array_push($g, new Gafanhoto("Creuza", 12, "F", "Creuzita"));
+
+$vis = array();
+
+array_push($vis, new Visualizacao($g[0], $v[2]));
+array_push($vis, new Visualizacao($g[0], $v[1]));
+
+$vis[0]->avaliar();
+$vis[1]->avaliarPorc(85.0);
+
+print_r($vis[0]);
+print_r($vis[1]);
+
+unset($v);
+unset($g);
+unset($vis);
+</code>
+</pre>
+
+<p>PS: Também utilizamos objetos para ligar o PHP com banco de dados, como por exemplo, o uso de PDO.</p>
+
+<ul>
+    <li><a href="tudo-sobre-poo-php-6.html">Parte Anterior da Matéria!</a></li>
+    <!-- <li><a href="tudo-sobre-poo-php-8.html">Continuação da Matéria!</a></li> -->
+</ul>
+        </div>
+    </body>
+</html>

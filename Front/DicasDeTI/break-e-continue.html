@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+
+<h2>Break e Continue</h2>
+
+<p>O comando break serve para determinar uma quebra de estrutura, ou seja, ele faz com que, por exemplo, um loop (repetição) pare. No comando switch, por exemplo, ele determina que não pode ser executado o case seguinte, e assim por diante.</p>
+
+<p>Continue também é muito utilizado em estruturas e repetição e sua função é ignorar o código, e não sair como acontece com o break.</p>
+
+<p>O uso de ambos, em estruturas de repetição, deve ser feita após o incremento/decremento, e antes da exibição (print), como por exemplo:</p>
+
+<pre>
+<code>
+volta = 0;
+
+while(volta < 25) {
+    volta++;
+    if(volta == 13 || volta == 16) {
+        continue;
+    }
+    else if(volta == 24) {
+        break;
+    }
+    printf("Volta Nº %d\n", volta);
+}
+</code>
+</pre>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

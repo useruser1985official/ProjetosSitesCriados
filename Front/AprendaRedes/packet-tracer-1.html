@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html">Tudo sobre Redes Parte 13!</a></li>
+                    <li><a href="tudo-sobre-redes-14.html">Tudo sobre Redes Parte 14!</a></li>
+                </menu>
+            </header>
+                           
+<h2>Cisco Packet Tracer - Parte 1</h2>
+
+<h3>Introdução ao Cisco Packet Tracer - Parte 1</h3>
+
+<p>Primeiramente, entre nesse site, faça uma conta e faça o download do programa pro seu sistema operacional e instale. O link é esse: <a href="https://skillsforall.com/pt/resources/lab-downloads?courseLang=pt-BR" target="_blank">https://skillsforall.com/pt/resources/lab-downloads?courseLang=pt-BR</a></p>
+
+<p>O Cisco Packet Tracer é um programa gratuito que permite simular uma criação de redes.
+
+<p>Logue com sua conta e abra o programa. Basicamente, o programa funciona <q>arrastando</q> componentes, que ficam na parte de baixo do programa.</p>
+
+<p>Para começar, vá em Network Devices, em WAN Emulation, e coloque uma "nuvem" (PT-Cloud, representa a web) e um Modem DSL. Para ligá-los, vá no "raio" (Connections) onde escolhermos os tipos de cabos, no caso escolhermos phone (o cabo da linha). Clique na nuvem (modem 4, representa a porta disponível para internet da operadora) e depois no modem (porta 0). Isso representa a instalação do técnico da operadora.</p>
+
+<p>PS: Podemos clicar duas vezes no dispositivo e ver as configurações físicas, atributos e etc. do mesmo, e também podemos editar o nome dos equipamentos em Config e Display Name. Para apagar algo, como um cabo ou um dispositivo, clique em delete, acima nas opções, e quando o cursor virar um <q>X</q>, clique no local a ser removido.</p>
+
+<p>Em Network Devices, em Wireless Devices, escolha  WRT300N. Em End Devices, escolha dois PCs. Escolha o cabo Cooper Straigth-Through (cabo normal Ethernet) e ligue o roteador (porta Internet, equivalente a porta WAN) ao modem (porta 1).</p>
+
+<p>Clique no roteador, na janela que abrir, vá em GUI, Wireless e Basic Wireless Settings, altere o nome da rede e clique em Save Settings. Veja também a aba Setup (onde escolhemos coisas como a configuração automática DHCP, o IP e a máscara, etc.). Ainda em Wireless, na aba Wireless Security, podemos escolher senha pro wi-fi (onde a opção recomendada é WPA2 Personal, a senha deve ter de 8 a 63 caracteres), não esqueça de salvar.</p>
+
+<p>Escolha o cabo Straigh-Through e ligue o primeiro PC (fast Ethernet) ao roteador (num Ethernet qualquer, no caso o 1). Espere ele sumir a bolinha amarela (broadcast) e ficar com as setinhas verdes, que indicam a conexão realizada. Faça o mesmo com o segundo. Clique em um dos computadores, podemos ligar e desligar ele na tela de opção, trocar a placa de rede, etc. Na aba Desktop podemos ter acesso ao sistema operacional do computador, clique em IP Configuration, onde podemos configurar o IP como DHCP ou estático (deixe DHCP).</p>
+
+<p>Caso deseje ligar mais de quatro dispositivos via cabo na sua rede, ligue um cabo Straigh-Through numa porta Ethernet do roteador a um switch (como o 2960), em Network Devices e Switches, e ligue os dispositivos nas portas do switch, inclusive podemos interligar dois ou mais switches para aumentar a quantidade de portas disponíveis.</p>
+
+<p>PS: Podemos colocar um sniffer entre um computador (seja PC, laptop ou servidor) e outro dispositivo para <q>farejar</q> o tráfego de rede igual fazemos com programas como o TCPDump ou o Wireshark. No caso, ele seria como um programa colocado dentro do próprio computador e não um dispositivo específico.</p>
+
+<p>Para ligar um PC ou laptop no wi-fi, vá em Physical, desligue ele, e troque a placa de rede por uma wireless, arrastando pro lado. Abra a opção PC Wireless em Desktop, coloque a senha e conecte.</p>
+
+<p>Para fazer a conexão wi-fi com o celular, vá em Config, coloque no SSID o nome da rede, autenticação coloca a mesma do wi-fi (no caso é WPA2-PSK) e escolha a configuração de IP DHCP.</p>
+
+<p>Vamos na aba Simulation para testar a conectividade dos computadores. Vá em Edit Filters e na janela que abrir, podemos escolher os protocolos, no caso, escolheremos o ICMP. Clique na <q>cartinha</q> logo acima e clique no PC 1 e depois no 2. Clique em Play e veja se a carta vai de um PC ao outro e depois volta.</p>
+
+<p>PS: Podemos ir em Physical e ver como seria uma simulação de um lugar real, como um escritório ou uma cidade, por exemplo. Num escritório ou casa, podemos arrastar os equipamentos para os locais do mesmo. Ele inclusive considera as paredes para rede wi-fi.</p>
+
+<h3>Introdução ao Cisco Packet Tracer - Parte 2</h3>
+
+<p>Agora vamos simular um servidor de um site, para isso arraste os seguintes equipamentos:</p>
+
+<ul>
+    <li>Server (em End Devices).</li>
+    <li>Switch (em Network Services).</li>
+    <li>PC (em End Devices).</li>
+    <li>Laptop (em End Devices).</li>
+</ul>
+
+<p>Em Connections, vá em Straigh-Through e clique no PC (fast Ethernet) e ligue num Ethernet do switch. Faça o mesmo no laptop. Use o mesmo cabo pra ligar uma das portas do switch no servidor.</p>
+
+<p>Clique no servidor, na janela que abrir vá em Desktop e em IP Configuration e coloque um IP privado estático (como <code>10.0.0.1</code>) e sua máscara de subrede. Pra configurar o servidor como um servidor DHCP, vá em Services, em DHCP e coloque os seguintes itens:</p>
+
+<ul>
+    <li><b>Service:</b> On</li>
+    <li><b>Default Gateway:</b> <code>10.0.0.1</code></li>
+    <li><b>DNS Server:</b> <code>10.0.0.1</code></li>
+    <li><b>Start IP:</b> <code>10.0.0.2</code></li>
+</ul>
+
+<p>Abra o PC, vá em Desktop e em IP Configuration, e selecione o DHCP. Ele escolherá o IP automaticamente para ele. Faça o mesmo no laptop. Se ele estiver conectado, ele entregará o IP da rede do servidor, se ele não tiver acesso ele terá um IP com <code>169.254</code> no começo, que indica falha de DHCP e não terá acesso à internet.</p>
+
+<p>Vamos fazer o nosso servidor ser um servidor HTTP também com domínio e tudo., clique nele, vá em Services e em DNS e em name, coloque o nome do nosso <q>site</q> (como www.exemplodesite.com) e o address como <code>10.0.0.1</code>, e coloque On no DNS Service. Clique em HTTP e escolha o index.html e edite o documento (podemos inclusive importar arquivos como imagens e colocar via tags, para isso vá em import). Neste caso, o site estará disponível apenas na rede local.</p>
+
+<p>Para disponibilizar para a web, coloque uma nuvem Cloud (Network Services e WAN Emulation), o modem (mesmo local) e o pc (End Devices) numa outra rede. Ligue o PC no modem com o cabo Through e ligue o modem à nuvem com o cabo Phone. Ligue a nuvem com o cabo Cross-Over (Ethernet) e ligue no switch (Ethernet) da primeira rede. Espere a auto-configuração e clique na nuvem, vá em Config e DSL e adicione as portas lá, salve. Depois vá no PC na outra rede e coloque a configuração DHCP no ip dele (em Desktop), ele pegará o IP do servidor e entrará na rede dele.</p>
+
+<p>Remova o cabo do segundo PC, e coloque um roteador wireless (Network Services, Wireless Devices e WRT300N), ligue o PC no roteador com um cabo Through (na porta Ethernet 1). Use o mesmo cabo para ligar a porta Internet do roteador à porta do modem. Ele agora pegará o DHCP do roteador (com um IP diferente do servidor).</p>
+
+<p>PS: Não confunda o roteador wireless com o access point, o roteador wireless cria outra rede na qual os dispositivos wireless se conectam, podendo inclusive ser protegida por senha. O access point apenas compartilha a rede cabeada com dispositivos wireless, como um switch wireless. Ambos podem ter rede e senhas configuradas, indo em Config e escolhendo a opção WPA2-PSK</p>
+
+<p>Podemos configurar outras coisas no servidor, como um firewall, em Desktop, nesse caso, colocamos as seguintes configurações (não esqueça de colocar On antes):</p>
+
+<ul>
+    <li><b>Action:</b> Coloque Allow (permitir) ou Deny (negar).</li>
+    <li><b>Protocol:</b> Coloque o protocolo a impedir.</li>
+    <li><b>Remote IP:</b> Coloque a rede do IP (como <code>192.168.0.0</code>).</li>
+    <li><b>Remote Wildcard Mask:</b> Coloque a máscara ao contrário (como <code>0.255.255.255</code>).</li>
+    <li><b>Remote Port:</b> Coloque a porta (escreva any para qualquer porta).</li>
+    <li><b>Local Port:</b> Coloque a porta local.</li>
+</ul>
+
+<p>Depois é só adicionar, no caso, poderiamos adicionar várias adições para cada protocolo.</p>
+
+<h3>Nível Básico - Parte 1</h3>
+
+<p>Crie uma rede pequena, com os seguintes itens:</p>
+
+<ul>
+    <li>PC 0 (em End Devices).</li>
+    <li>PC 1 (idem acima).</li>
+    <li>Server (idem acima).</li>
+    <li>Switch (em Network Services).</li>
+</ul>
+
+<p>Ligue os dispositivos assim:</p>
+
+<ul>
+    <li>Through do PC 0 (Fast Ethernet) ao Switch (Fast Ethernet 0).</li>
+    <li>Through do PC 1 (idem) ao Switch (idem, no 1).</li>
+    <li>Through do Servidor (idem) ao Switch (idem, no 2).</li>
+</ul>
+
+<p>Clique no PC 0, em Config, no Fast Ethernet (placa de rede dele) e coloque o IP estático <code>192.168.1.3</code> com máscara <code>255.255.255.0</code>. Faça o mesmo no PC 1 com o IP <code>192.168.1.4</code> (eles devem estar na mesma rede, se colocar 192.168.2.x por exemplo, ele estará fora da rede.</p>
+
+<p>No servidor coloque o IP <code>192.168.2.10</code>. Ele fará parte de outra rede diferente dos dois PCs (que estão na rede 1), o switch tá na rede 2 com o servidor.</p>
+
+<p>Abra o PC no Desktop e em terminal ou prompt de comando (simulando Linux e Windows, dê o comando <code>ping 192.168.1.4</code> e vê se o outro computador responde. Faça o mesmo com o servidor e veremos que ele não responde.</p>
+
+<h3>Nível Básico - Parte 2 - Simulando um Servidor DHCP</h3>
+
+<p>Faça um novo projeto igual ao anterior, com um Laptop a mais. Mas não configure nada como anteriormente.</p>
+
+<p>Vamos no servidor e em Config, na placa de rede coloque o IP estático <code>192.168.0.1</code> e sua máscara padrão. Depois vá em Services e DHCP, veja se o Start IP está como <code>192.168.0.0</code> e o Máximo de Users com 255, e não esqueça de dar ON no DHCP.</p>
+
+<p>Depois clique nos dispositivos e em Config, na placa de rede, coloque a opção DHCP que ele encontrará o IP automaticamente.</p>
+
+<p>Muitos equipamentos vem de fábrica com o DHCP ativo, e para ver se existe conectividade, use o comando ping.</p>
+
+<h3>Nível Básico - Parte 3</h3>
+
+<p>Continuando o projeto anterior. Vamos no servidor, em Config e HTTP, abra o index.html e faça as edições para um exemplo de site. Deixe como On.</p>
+
+<p>Entre em um dos computadores, acesse o Desktop e o navegador e acesse o IP do servidor por ele.</p>
+
+<p>Coloque mais um laptop e entre no Config dele, na placa de rede. Coloque um IP aleatório como 172.16.0.1 e ligue ele com o Through ao switch. Veremos que ele não conseguirá acessar o site pelo IP do servidor. Tente dar um ping e ele também não responderá. Para resolver isso, basta ligar o DHCP dele que o servidor dará um IP pra ele.</p>
+
+<h3>Nível Básico - Parte 4</h3>
+
+<p>Adicione um PC, um Laptop (ambos em End Devices), dois switches (ambos em Network Services) e mais um PC e um Laptop do outro lado.</p>
+
+<p>No primeiro PC, coloque em Desktop e IP Configuration, o IP <code>192.168.0.2</code>. No laptop faça o mesmo com o IP <code>192.168.0.4</code>. No segundo PC coloque <code>192.168.0.6</code> e no segundo laptop coloque <code>192.168.0.12</code>. Ligue com o cabo Through os primeiros computadores no primeiro switch e os últimos no segundo. Ligue os dois switchs com o cabo Cross.</p>
+
+<p>Clique no Envelopinho e clique no PC 1 enviando pro Laptop 2, do outro lado, e veja se ele envia. Veja que ao lado aparece os protocolos usados, ao clicar em Simulation. Clique em um dos protocolos para ver mais detalhes sobre os mesmos.</p>
+
+<h3>Configurando Data, Hora e Senha para o Modo Privilegiado</h3>
+
+<p>Vamos configurar a hora e data do switch e colocar senha para proteger o modo privilegiado.</p>
+
+<p>Coloque um switch do tipo 2960, clique nele e vá em CLI, dê enter e coloque os comandos <code>enable</code> para entrar no modo privilegiado, e para ver o relógio digite <code>show clock</code>, e para editar coloque <code>clock ?</code> e ele nos guiará, coloque esses comandos assim, a medida que for sugerido:</p>
+
+<pre>
+<code>
+clock set ?
+
+clock set 22:30:05 ?
+
+clock set 22:30:05 2 ?
+
+clock set 22:30:05 2 FEB ?
+
+clock set 22:30:05 2 FEB 2014
+</code>
+</pre>
+
+<p>Faça isso até alterar a data toda, que aparecerá <code>&lt;cr&gt;</code> ao terminar. Para ver se alterou mesmo, digite <code>show clock</code> novamente.</p>
+
+<p>Para salvar a configuração, digite <code>copy running-config startup-config</code> e clique enter sem digitar nada. Ele salvará com o nome startup-config</p>
+
+<p>Para configurar a senha, digite isso:</p>
+
+<pre>
+<code>
+configure terminal
+
+enable password 123
+
+exit
+
+show running-config
+</code>
+</pre>
+
+<p>O problema é que o running-config mostra a senha literal, para criptografar a senha, faça assim:</p>
+
+<pre>
+<code>
+configure terminal
+
+enable secret senha
+
+exit
+
+show running-config
+</code>
+</pre>
+
+<p>Nesse caso ele só usara a senha secreta, descartando a primeira.</p>
+
+<h3>Colocando Senha na Porta de Console do Switch</h3>
+
+<p>Continuando o projeto anterior, coloque um laptop com o cabo Console em RS 232 (porta serial) e ligue no switch, em Console. Clique no laptop, em Desktop e Terminal (não o prompt), configure o terminal sem alterar nada. Ele abrirá a linha de comando da configuração do switch. Isso mostra que, ao conectar esse tipo de cabo, qualquer um pode invadir o switch através do console.</p>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+enable
+
+configure terminal
+
+line console 0
+
+login
+</code>
+</pre>
+
+<p>Ele tem o login, mas não tem senha, então para colocar a senha digitamos isso:</p>
+
+<pre>
+<code>
+password 123
+
+exit
+
+exit
+</code>
+</pre>
+
+<p>Para salvar a configuração, digite <code>copy running-config startup-config</code> e clique enter sem digitar nada. Dê <code>exit</code> e saia de tudo.</p>
+
+<p>Abra o Laptop em Desktop e o terminal normalmente, ele pedirá a senha agora.</p>
+
+<h3>Configurando a Interface Vlan</h3>
+
+<p>Apague o cabo de Console e ligue o cabo Through e ligue nas portas Ethernet dos equipamentos.</p>
+
+<p>No laptop, em Desktop, vamos em IP Configuration e colocar o IP <code>192.168.0.10</code>.</p>
+
+<p>Abra o switch e em CLI, digite a senha e esses comandos:</p>
+
+<pre>
+<code>
+enable
+
+conf t
+
+interface vlan1
+
+ip address 192.168.0.100 ?
+
+ip address 192.168.0.100 255.255.255.0
+
+no shutdown
+
+exit
+
+exit
+
+copy running-config startup-config
+</code>
+</pre>
+
+<p>Entre no laptop e em Desktop, no prompt, digite <code>telnet 192.168.0.100</code>. Ele não conectará.</p>
+
+<p>Volte no CLI do switch e coloque esses comandos, para habilitar a conexão entre dois dispositivos:</p>
+
+<pre>
+<code>
+conf t
+
+line vty ?
+
+line vty 0 ?
+
+line vty 0 1
+</code>
+</pre>
+
+<p>Configure a senha assim:</p>
+
+<pre>
+<code>
+login
+
+password senha
+
+exit
+
+exit
+</code>
+</pre>
+
+<p>Volte ao prompt do laptop e tente conectar. Ele conectará normalmente agora.</p>
+
+<p>Digite o comando <code>show running-config</code>, veremos que a senha não está criptografada. Para criptografar, digite esses comandos:</p>
+
+<pre>
+<code>
+conf t
+
+service password-encryption
+
+exit
+
+show running-config
+</code>
+</pre>
+
+<p>Todas as senhas que estavam aparecendo, serão ocultas.</p>
+
+<h3>Configurando o Switch para Acesso SSH</h3>
+
+<p>Como o Telnet não é um protocolo muito seguro, vamos configurar o switch para acesso via SSH. No mesmo projeto, digite esses comandos:</p>
+
+<pre>
+<code>
+enable
+
+conf t
+
+hostname nomedohost
+
+ip domain-name nomedodominio.com
+
+crypto key generate rsa
+
+2048
+
+ip ssh version 2
+
+line vty 0 1
+
+transport input ssh
+
+exit
+
+exit
+</code>
+</pre>
+
+<p>No prompt do laptop, digite <code>ssh -l nomedohost.nomedodominio.com 192.168.0.100</code>, coloque a senha e acesse o switch pelo SSH.</p>
+
+<h3>Criando VLans</h3>
+
+<p>Tire o laptop anterior e deixe só o switch. Coloque um PC e um laptop de um lado, e um PC e um laptop do outro. Abra o primeiro PC, em Desktop e IP Configuration, coloque o IP <code>192.168.0.11</code>. Faça o mesmo com os outros computadores, com os IPs <code>192.168.0.12</code> de um lado, e <code>192.168.1.11</code> e <code>192.168.1.12</code> no outro lado.</p>
+
+<p>Ligue com um cabo Through os computadores ao switch (os dois primeiros nas portas 1 e 2 e os outros dois nas portas 11 e 12). Coloque o painel de simulação e mande uma mensagem do PC 1 ao Laptop 1.</p>
+
+<p>Para criar a VLAN (configuração que não tem nos computadores, geralmente). Isso a gente configura no switch.</p>
+
+<p>Entre no switch e em CLI, digite esses comandos:</p>
+
+<pre>
+<code>
+enable
+
+conf t
+
+vlan 10
+
+name mkt
+
+exit
+
+vlan 11
+
+name fin
+
+exit
+
+interface range FastEthernet 0/1 - 10
+
+switchport mode access
+
+switchport access vlan 10
+
+no shutdown
+
+exit
+
+interface range FastEthernet 0/11 - 20
+
+switchport mode access
+
+switchport access vlan 11
+
+no shutdown
+
+exit
+
+exit
+</code>
+</pre>
+
+<p>Assim, criaremos as VLan 10 (marketing) e VLan11 (financeiro)</p>
+
+<p>A primeira VLan vai da porta 1 a 10, e a segunda da porta 11 ao 20.</p>
+
+<p>Para ver as VLans, digite <code>show vlan brief</code>. As portas que não ficaram em nenhuma VLan ficarão na default, as outras VLAN serão as criadas (mkt e fin).</p>
+
+<h3>Configurando Porta Trunk</h3>
+
+<p>Crie um novo projeto com três computadores, um switch 2950-24 do lado esquerdo, um switch 2960 do lado direito e mais três computadores do lado direito. Configure os computadores com os seguintes IPs:</p>
+
+<p>Lado esquerdo (portas 1, 2 e 11):</p>
+
+<ul>
+    <li><code>192.168.10.1</code></li>
+    <li><code>192.168.10.2</code></li>
+    <li><code>192.168.20.1</code></li>
+</ul>
+
+<p>Ligue com o cabo Through no primeiro switch.</p>
+
+<p>Lado direito (portas 1, 11 e 12):</p>
+
+<ul>
+    <li><code>192.168.10.3</code></li>
+    <li><code>192.168.20.2</code></li>
+    <li><code>192.168.20.3</code></li>
+</ul>
+
+<p>Ligue o mesmo tipo de cabo no segundo switch.</p>
+
+<p>Use o cabo Cross e ligue nas últimas portas de ambos os switches (porta 24).</p>
+
+<p>Na CLI do primeiro switch e do segundo switch, digite esses comandos:</p>
+
+<pre>
+<code>
+enable
+
+configure terminal
+
+vlan 10
+
+name lab-1
+
+exit
+
+vlan 20
+
+name lab-2
+
+exit
+
+interface range FastEthernet 0/1 - 10
+
+switchport mode access
+
+switchport access vlan 10
+
+no shutdown
+
+exit
+
+interface range FastEthernet 0/11 - 20
+
+switchport mode access
+
+switchport access vlan 20
+
+no shutdown
+
+exit
+
+exit
+
+show vlan brief
+
+copy running-config startup-config
+</code>
+</pre>
+
+<p>Para configurar a porta trunk (no caso, a 24), entre no primeiro switch e digite esses comandos, e faça o mesmo no segundo:</p>
+
+<pre>
+<code>
+enable
+
+conf t
+
+interface FastEthernet 0/24
+
+switchport mode trunk
+
+no shutdown
+
+exit
+
+exit
+
+show interface trunk
+
+copy running-config startup-config
+</code>
+</pre>
+
+<p>No último comando, veremos a porta truncada e as VLans habilitadas.</p>
+
+<p>Nesse caso, os computadores estão nas redes <code>192.168.10</code> e <code>192.168.20</code>, mesmo que ambas estejam em switches diferentes, mas estão truncados.</p>
+
+<p>Pra testar, entre no prompt do PC <code>192.168.10.1</code> e dê um ping no PC <code>192.168.10.3</code>, ele vai responder mesmo estando em switches diferentes.</p>
+
+<ul>
+    <li><a href="packet-tracer-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

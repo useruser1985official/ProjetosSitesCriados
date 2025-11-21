@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+
+<h2>Destrutores e Sobreposição de Construtor (Super) em POO</h2>
+
+<h3>Uso de Destrutores</h3>
+            
+<p>Destrutores realizam a função inversa dos construtores, são funções invocadas quando um objeto está para "morrer". Caso um objeto tenha recursos alocados, destrutores devem liberar tais recursos. Por exemplo, se o construtor de uma classe alocou uma variável dinamicamente com new (exceto Python), o destrutor correspondente deve liberar o espaço ocupado por esta variável com o operador delete (ou equivalente).</p> 
+
+<p>O destrutor não tem parâmetros e não tem tipo de retorno. Na verdade são mais usados para exibir mensagens, já que toda classe automaticamente tem um destrutor padrão, assim como tem um construtor padrão, mesmo que ambos não sejam declarados. Sua declaração na assinatura da classe é feita dessas seguintes formas:</p>
+
+<h4>Destrutor em PHP</h4>
+
+<pre>
+<code>
+public function __destruct() {
+    echo "Objeto Destruído!";
+}
+</code>
+</pre>
+
+<p>Chamando assim no programa principal (ele automaticamente é destruído no final da execução, usamos isso quando queremos destruir o objeto antes):</p>
+
+<pre>
+<code>
+unset($nomeDoObjeto);
+</code>
+</pre>
+
+<h4>Destrutor em Python</h4>
+
+<pre>
+<code>
+def __del__(self):
+    print(f"Objeto {self} destruído!")
+</code>
+</pre>
+
+<p>Chamando assim no programa principal (ele automaticamente é destruído no final da execução, usamos isso quando queremos destruir o objeto antes):</p>
+
+<pre>
+<code>
+del nomeDoObjeto
+</code>
+</pre>
+
+<h4>Destrutor em C++</h4>
+
+<pre>
+<code>
+NomeDaClasse::~NomeDaClasse() {
+    std::cout << "Objeto Destruído!" << std::endl;
+}
+</code>
+</pre>
+
+<p>PS: Note que o destrutor é indicado pelo mesmo nome da classe precedido por um til.</p>
+
+<p>Chamado assim no programa principal:</p>
+
+<pre>
+<code>
+delete nomeDoObjeto;
+</code>
+</pre>
+
+<p>Em qualquer uma delas, não é necessário ter um destrutor para usar o delete ou equivalente, mas eles podem ser usado para indicar alguma mensagem, por exemplo.</p>
+
+<p>PS: O Java não possuí destrutores, pois ele apenas "esquece" os objetos não utilizados, não é necessário a coleta de lixo nele (teoricamente seria fazer uma nova atribuição ao objeto como null, mas daria erro de compilação). Apesar do Python e do PHP também fazerem isso, nestes é possível destruir um objeto antes da final da execução do programa. Em C# é até possível criar um destrutor de forma parecida com o C++ (mesmo nome da classe após o til, mas sem o public na frente), mas também não necessita coleta nem utiliza delete.</p>
+
+<h3>Sobreposição (Super) em Construtores</h3>
+
+<p>É possível chamar construtores de classes pais nos construtores das classes filhas, veja como fazer abaixo:</p>
+
+<h4>Super em PHP</h4>
+
+<pre>
+<code>
+public function __construct($n1, $n2, $n3) {
+    parent::__construct($n1, $n2); // Parâmetros da classe pai.
+    $this->num3 = n3;
+}
+</code>
+</pre>
+
+<p>PS: Na herança em PHP, o parent:: sempre faz referência a classe pai.</p>
+
+<h4>Super em Python</h4>
+
+<pre>
+<code>
+def __init__(self, n1, n2, n3):
+    super().__init__(n1, n2) # Parâmetros da classe pai.
+    self.num3 = n3
+</code>
+</pre>
+
+<p>PS: Na herança em Python, o super sempre faz referência a classe pai, mesmo se não for pra herança.</p>
+
+<h4>Super em C++</h4>
+
+<pre>
+<code>
+Classe2::Classe2(int n1, int n2, int n3) : Classe1(n1, n2) { // Indica o nome da classe pai, no segundo parenteses são só os parâmetros da classe pai sem declaração de tipo.
+    this->num3 = n3;
+}
+</code>
+</pre>
+
+<h4>Super em Java</h4>
+
+<pre>
+<code>
+public Classe2(int n1, int n2, int n3) {
+    super(n1, n2); // Parâmetros da classe pai, sem declaração de tipos
+    this.num3 = n3;
+}
+</code>
+</pre>
+
+<p>PS: Na herança em Java, o super sempre faz referência a classe pai.</p>
+
+<h4>Super em C#</h4>
+
+<pre>
+<code>
+public Classe2(int n1, int n2, int n3) : base(n1, n2) { // No segundo parenteses são só os parâmetros da classe pai sem declaração de tipo.
+    this.num3 = n3;
+}
+</code>
+</pre>
+
+<p>PS: Na herança em C#, o base sempre faz referência a classe pai.</p>
+
+<p>PS: Em qualquer linguagem que tenha destrutores, é possível fazer a sobreposição deles também, nesse caso se faz normalmente como se tivesse sobrepondo qualquer método comum. O PHP pode exigir o uso de <code>parent::__destruct()</code>.</p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

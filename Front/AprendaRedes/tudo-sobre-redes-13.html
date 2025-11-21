@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Redes Parte 13!</a></li>
+                    <li><a href="tudo-sobre-redes-14.html">Tudo sobre Redes Parte 14!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Redes Parte 13</h2>
+
+<h3>O Que é uma DMZ</h3>
+
+<p>DMZ, ou rede de perímetro/screened network, é uma zona intermediária entre a rede pública e a rede interna da empresa, criada com firewalls. Usada para dar acesso externo a serviços da empresa. Pode ser acessada tanto interna quanto externamente. Servidores na DMZ (Bastion Hosts) não acessam máquinas na rede interna, mas podem ser acessados por elas.</p>
+
+<p>Esse é o funcionamento de uma DMZ:</p>
+
+<ul>
+    <li>Tradicionalmente, uma zona desmilitarizada é uma zona "buffer" entre países, onde operações militares não são permitidas, como ocorre por exemplo na fronteira entre as duas Coréias.</li>
+    <li>Esse conceito foi importado em redes significando um perímetro de segurança no qual determinados equipamentos são colocados.</li>
+    <li>Essa zona "insegura" contém recursos que precisamos acessar, e que devem ser acessíveis também a partir do ambiente externo, que é o que a torna insegura.</li>
+    <li>Já a rede interna contém recursos valiosos para a empresa, como bancos de dados, arquivos confidenciais e outros elementos que não devem ser acessados por ninguém fora da organização.</li>
+    <li>Uma DMZ pode ser criada com um ou dois firewalls.</li>
+</ul>
+
+<p>Esses são uns exemplos de serviços em DMZ:</p>
+
+<ul>
+    <li>Servidor web.</li>
+    <li>Servidor DNS.</li>
+    <li>Servidor de e-mail</li>
+    <li>Servidor FTP.</li>
+    <li>Serviços de VoIP.</li>
+    <li>Banco de dados (bem específico).</li>
+    <li>Proxy reverso.</li>
+</ul>
+
+<p>Serviços que podem ser acessados a partir da internet são colocados dentro da DMZ.</p>
+
+<p>Dados importantes devem ser mantidos fora da DMZ, protegidos na rede interna.</p>
+
+<p>Veja como são as arquiteturas de DMZ:</p>
+
+<img src="imagens/arquiteturas.jpg" alt="Arquitetturas de DMZ"/>
+
+<p>No caso do dual firewall, é recomendado usar firewalls de fabricantes diferentes. Componente da estratégia de segurança denominada "defesa em profundidade" ao adicionar uma camada extra de segurança.</p>
+
+<p>Veja a imagem de um firewall:</p>
+
+<img src="imagens/firewall-hard.jpg" alt="Firewall de Hardware"/>
+
+<p>Podemos criar uma DMZ com o emprego dos seguintes equipamentos de rede:</p>
+
+<ul>
+    <li>Roteador com função DMZ integrada.</li>
+    <li>Firewall com função DMZ.</li>
+    <li>Firewall comuns em configuração dual (indicado).</li>
+    <li>Switch com VLAN.</li>
+</ul>
+
+<p>DMZ Host é uma configuração comumm em roteadores domésticos de banda larga. Não é uma DMZ real, mas sim um endereço na rede interna que recebe tráfego de rede específico, não direcionado para as demais estações na rede interna.</p>
+
+<p>Alguns problemas que podem surgir ao implementar uma DMZ em uma rede corporativa incluem:</p>
+
+<ul>
+    <li>A performance da rede pode sofrer impacto negativo.</li>
+    <li>Custo mais elevado, por conta de equipamentos e softwares adicionais.</li>
+    <li>Configuração e manutenção requerem especialistas.</li>
+    <li>Determinar o que proteger pode ser confuso.</li>
+</ul>
+
+<h3>Campos do Cabeçalho de um Pacote IPv6</h3>
+
+<p>Antes de mais nada, saiba que:</p>
+
+<ul>
+    <li>O IPv6 é a versão mais atual do protocolo IP.</li>
+    <li>Emprega endereços de 128 bits, o que significa 2<sup><small>128</small></sup> endereços distintos para hosts: 340.282.366.920.938.463.374.607.431.768.211.456 endereços.</li>
+    <li>Substitui o IPv4 para eliminar problema de esgotamento de endereços disponíveis.</li>
+    <li>Suporta payload maior, aumentando throughput e eficiência.</li>
+    <li>Menos vulnerável a escaneamento de IPs e outras atividades maliciosas.</li>
+    <li>Especificação principal: RFC 2460.</li>
+</ul>
+
+<p>A seguir temos a estrutura de um pacote IPv6:</p>
+
+<img src="imagens/estrutura-ipv6.jpg" alt="Estrutura IPv6"/>
+
+<ul>
+    <li>Um pacote IPv6 é composto por um cabeçalho IPv6 mais um payload (conteúdo).</li>
+    <li>O payload consiste no PDU (Protocol Data Unit) da camada superior mais cabeçalhos de extensão opcionais.</li>
+</ul>
+
+<p>Os campos do cabeçalho IPv6 são esses:</p>
+
+<ul>
+    <li>Versão.</li>
+    <li>Classe de Tráfego.</li>
+    <li>Identificador de Fluxo.</li>
+    <li>Tamanho do Conteúdo.</li>
+    <li>Próximo Cabeçalho.</li>
+    <li>Limite de Encaminhamento.</li>
+    <li>Endereço IP de Origem.</li>
+    <li>Endereço IP de Destino.</li>
+</ul>
+
+<p>A ilustração a seguir mostra a estrutura de campos de um IPv6:</p>
+
+<img src="imagens/cabecalho-ipv6.jpg" alt="Cabeçalho IPv6"/>
+
+<p>O cabeçalho IPv6 tem 8 campos, 40 bytes como tamanho fixo, porém permite cabeçalhos de extensão.</p>
+
+<p>Sobre os campos e suas funções:</p>
+
+<table>  
+    <tr>
+        <th>Campo</th>
+        <th>Função</th>
+    </tr>
+    <tr>
+        <td>Versão</td>
+        <td>Versão do protocolo. Valor 6. 4 bits</td>
+    </tr>
+    <tr>
+        <td>Classe de Tráfego</td>
+        <td>Classe ou prioridade do pacote IPv6. 8 bits</td>
+    </tr>
+    <tr>
+        <td>Identificador de Fluxo</td>
+        <td>Rotular pacotes que pertencem ao mesmo fluxo de dados, de modo a requisitar manipulação especial por roteadores IPv6 intermediários. 20 bits</td>
+    </tr>
+    <tr>
+        <td>Tamanho do Conteúdo</td>
+        <td>Tamanho total da carga (payload). 16 bits</td>
+    </tr>
+    <tr>
+        <td>Próximo Cabeçalho</td>
+        <td>Tipo de cabeçalho de extensão imediatamente após o cabeçalho IP básico. 8 bits</td>
+    </tr>
+    <tr>
+        <td>Limite de Encaminhamento</td>
+        <td>Indica o número máximo de nós IPv6 intermediários que o pacote pode atravessar. 8 bits</td>
+    </tr>
+    <tr>
+        <td>Endereço IP de Origem</td>
+        <td>Endereço IP do remetente original do pacote. Tamanho: 128 bits</td>
+    </tr>
+    <tr>
+        <td>Endereço IP de Destino</td>
+        <td>Endereço IP do destinatário original do pacote. Tamanho: 128 bits</td>
+    </tr>
+</table>
+
+<p>Mudanças do pacote IPv6 em relação à IPv4:</p>
+
+<table>
+    <tr>
+        <th>IPv4</th>
+        <th>IPv6</th>
+    </tr>
+    <tr>
+        <td>Versão</td>
+        <td>Igual, mas com números diferentes para versão</td>
+    </tr>
+    <tr>
+        <td>Comprimento do Cabeçalho IP</td>
+        <td>Campo removido no IPv6, o cabeçalho IPv6 possui tamanho fixo de 40 bytes</td>
+    </tr>
+    <tr>
+        <td>Tipo de Serviço</td>
+        <td>Substituído pelo campo Classe de Tráfego</td>
+    </tr>
+    <tr>
+        <td>Tamanho Total</td>
+        <td>Tamanho do conteúdo (Payload Length), que mostra apenas o tamanho do payload</td>
+    </tr>
+    <tr>
+        <td>Identificação, Flags de Fragmentação, Offset de Fragmento</td>
+        <td>Removidos no IPv6. As informações sobre fragmentação estão em um cabeçalho de extensão</td>
+    </tr>
+    <tr>
+        <td>TTL (Time to Live)</td>
+        <td>Substituído pelo campo Limite de Salto</td>
+    </tr>
+    <tr>
+        <td>Protocolo</td>
+        <td>Substituído pelo campo Próximo Cabeçalho</td>
+    </tr>
+    <tr>
+        <td>Checksum do Cabeçalho</td>
+        <td>Removido no IPv6. Verificações de erro são realizadas na camada de link de dados</td>
+    </tr>
+    <tr>
+        <td>Endereço de Origem</td>
+        <td>Igual, mas contendo um endereço de 128 bits</td>
+    </tr>
+    <tr>
+        <td>Endereço de Destino</td>
+        <td>Igual, mas contendo um endereço de 128 bits</td>
+    </tr>
+    <tr>
+         <td>Opções</td>
+         <td>Removido no IPv6. As opções IPv4 foram substituídas pelos cabeçalhos de extensão</td>
+     </tr>
+ </table>
+
+<p>Informações opcionais são tratadas em cabeçalhos de extensão no IPv6. Não há quantidade máxima ou tamanho fixo para esses cabeçalhos.</p>
+
+<p>Seis cabeçalhos de extensão são definidos pelas especificações do IPv6. Novos cabeçalhos podemm ser definidos sem que seja preciso alterar os cabeçalhos base.</p>
+
+<p>IPv6 e IPv4 coexistirão por muitos anos. Veja alguns dos impactos previstos nesse longo período de transição:</p>
+
+<ul>
+    <li><b>Falhas:</b> Os administradores devem efetuar um plano de contingência para que as redes continuem operando com IPv4 e IPv6.</li>
+    <li><b>Contabilização:</b> Deve-se recalcular os limites de utilização dos recursos, pois, com os dois protocolos em operação, o consumo muda em relação às redes somente com IPv4.</li>
+    <li><b>Configuração:</b> Para permitir que os dois protocolos possam conviver nas redes, é necessário diversas configurações.</li>
+    <li><b>Desempenho:</b> Com a mudança de cenário (redes com os dois protocolos operando), o desempenho da rede necessita de adaptações para garantia do acordo de nível de serviço (Service Level Agreement – SLA).</li>
+    <li><b>Segurança:</b> O administrador deve optar por alguma técnica que garanta a interoperabilidade, sem que gere riscos à segurança da rede e/ou usuários.</li>
+</ul>
+
+<h3>Comandos ip no Linux</h3>
+
+<p>Os comandos <code>ip</code> são usados para mostrar e configurar parâmetros de rede para as interfaces em uma máquina.</p>
+
+<p>Há dois conjuntos principais de programas para a configuração de rede no Linux: os pacotes net-tools e <code>iproute2</code>.</p>
+
+<p>Os antigos programas do conjunto net-tools (como o clássico ifconfig) pertencem ao sistema de redes Linux NET-3. A maioria está obsoleta atualmente.</p>
+
+<p>Já os programas do pacote iproute2 (como o ip, tratado neste tutorial), são o sistema de configuração de rede atual do Linux. O iproute2 consiste em uma série de utilitários, dos quais o ip é o foco desse nosso artigo, mas além do ip, outros utilitários que compõem o pacote iproute2 são:</p>
+
+<pre>
+<code>
+ss
+bridge
+rtmon
+nstat
+tc
+devlink
+</code>
+</pre>
+
+<p>E vários outros.</p>
+
+<p>A tabela a seguir mostra os principais objetos disponíveis para uso com os comandos ip, suas abreviações e função:</p>
+
+<table>
+    <tr>
+        <th>Objeto</th>
+        <th>Abreviação</th>
+        <th>Função</th>
+    </tr>
+    <tr>
+        <td>address</td>
+        <td>a, addr</td>
+        <td>Endereço em um dispositivo (IPv4 ou IPv6)</td>
+    </tr>
+    <tr>
+        <td>addrlabel</td>
+        <td>addrl</td>
+        <td>Configuração de rótulo para seleção de endereço</td>
+    </tr>
+    <tr>
+        <td>link</td>
+        <td>l</td>
+        <td>Dispositivo de rede</td>
+    </tr>
+    <tr>
+        <td>maddress</td>
+        <td>m, maddr</td>
+        <td>Endereço multicast</td>
+    </tr>
+    <tr>
+        <td>mroute</td>
+        <td>mr</td>
+        <td>Entrada de cache de roteamento multicast</td>
+    </tr>
+    <tr>
+        <td>neighbour</td>
+        <td>n, neigh</td>
+        <td>Entrada de cache ARP ou NDISC</td>
+    </tr>
+    <tr>
+        <td>rule</td>
+        <td>ru</td>
+        <td>Regra no banco de políticas de roteamento</td>
+    </tr>
+    <tr>
+        <td>tunnel</td>
+        <td>t</td>
+        <td>Túnel sobre IP</td>
+    </tr>
+</table>
+
+<p>No dia-a-dia de trabalho do administrador de redes Linux, é mais comum o uso dos objetos <code>address</code> e <code>link</code>, por se tratarem de objetos usados na configuração direta de endereçamento e interfaces de rede físicas, mas é importante conhecer todos eles, pois em algum momento eles podem ser necessários.</p>
+
+<h4>Exemplos</h4>
+
+<p>Vejamos alguns exemplos de aplicação do comando ip para gerenciamento de parâmetros de rede em um servidor (ou estação). Note que para executar a maior parte dos comandos é necessário possuir privilégios de administrador:</p>
+
+<p>Mostrar as interfaces de rede disponíveis no computador:</p>
+
+<pre>
+<code>
+sudo ip link show
+</code>
+</pre>
+
+<p>Ver os ips das interfaces de rede:</p>
+
+<pre>
+<code>
+sudo ip addr show
+
+# Ou simplesmente:
+
+sudo ip a
+</code>
+</pre>
+
+<p>Ver somente informações sobre o protocolo IPv4 nas interfaces:</p>
+
+<pre>
+<code>
+sudo ip -4 a
+</code>
+</pre>
+
+<p>Para o protocolo IPv6:</p>
+
+<pre>
+<code>
+sudo ip -6 a
+</code>
+</pre>
+
+<p>Reiniciar a máquina ou o serviço de rede após.</p>
+
+<p>Desabilitar uma interface de rede, como a enp0s3:</p>
+
+<pre>
+<code>
+sudo ip link set enp0s3 down
+</code>
+</pre>
+
+<p>Para reabilitar a mesma:</p>
+
+<pre>
+<code>
+sudo ip link set enp0s3 up
+</code>
+</pre>
+
+<p>Ver o ip de uma interface específica, como a enp0s3:</p>
+
+<pre>
+<code>
+sudo ip addr ls enp0s3
+
+# Ou
+
+sudo ip addr show enp0s3
+</code>
+</pre>
+
+<p>Ver estatísticas de comunicação (tx e rx) de uma interface específica (opção <code>-s</code>):</p>
+
+<pre>
+<code>
+sudo ip -s link show enp0s3
+</code>
+</pre>
+
+<p>Atribuir um endereço IP a uma interface específica:</p>
+
+<pre>
+<code>
+sudo ip addr add 192.168.12.100/26 dev enp0s3
+</code>
+</pre>
+
+<p>PS: Esta configuração é perdida ao reiniciar o sistema. Para mantê-la, editar o arquivo de configuração <code>/etc/network/interfaces</code> (Debian e derivados) ou os arquivos em <code>/etc/sysconfig/network-scripts/</code> (Red Hat e derivados).</p>
+
+<p>Excluir um endereço IP de uma interface específica:</p>
+
+<pre>
+<code>
+sudo ip addr del 192.168.12.100/26 dev enp0s3
+</code>
+</pre>
+
+<p>Ajustar o nome da interface de rede enp0s3 para eth0:</p>
+
+<pre>
+<code>
+sudo ip link set enp0s3 name eth0
+</code>
+</pre>
+
+<p>Verificar as rotas de rede (tabela de roteamento):</p>
+
+<pre>
+<code>
+sudo ip route show
+</code>
+</pre>
+
+<p>Adicionar uma rota estática:</p>
+
+<pre>
+<code>
+sudo ip route add 10.20.30.0/26 via 192.168.100.10 dev enp0s3
+</code>
+</pre>
+
+<p>PS: Esta configuração é perdida ao reiniciar o sistema. Para mantê-la, editar o arquivo de configuração <code>/etc/network/interfaces</code> (Debian e derivados) ou os arquivos em <code>/etc/sysconfig/network-scripts/</code> (Red Hat e derivados).</p>
+
+<p>Por exemplo, no Debian, adicionamos a linha:</p>
+
+<pre>
+<code>
+up ip route add 10.20.30.0/26 via 192.168.100.10 dev enp0s3
+</code>
+</pre>
+
+<p>Ao arquivo <code>/etc/network/interfaces</code> para adicionar a rota estática de forma permanente.</p>
+
+<p>Remover uma rota estática:</p>
+
+<pre>
+<code>
+sudo ip route del 10.20.30.0/26
+</code>
+</pre>
+
+<p>Adicionar um endereço de gateway padrão geral</p>
+
+<pre>
+<code>
+sudo ip route add default via 192.168.100.10
+</code>
+</pre>
+
+<p>Se o gateway padrão para a rede já existir, será emitida uma mensagem de erro.</p>
+
+<p>Configurar um endereço MAC em uma interface:</p>
+
+<pre>
+<code>
+sudo ip link set dev enp0s3 address 00:0a:75:20:f5:bd
+</code>
+</pre>
+
+<p>Alterar o MTU em uma interface. Por exemplo, aplicar um MTU de 9000 na interface enp0s3:</p>
+
+<pre>
+<code>
+sudo ip link set mtu 9000 dev enp0s3
+</code>
+</pre>
+
+<p>Geralmente alteramos o MTU em redes gigabit para permitir o tráfego de Jumbo Frames (quadros jumbo), de modo a aumentar a performance de transmissão da rede.</p>
+
+<p>Consultar a tabela ARP:</p>
+
+<pre>
+<code>
+sudo ip neigh
+</code>
+</pre>
+
+<p>Consultar a tabela ARP de um interface específica:</p>
+
+<pre>
+<code>
+sudo ip neigh show dev enp0s3
+</code>
+</pre>
+
+<p>Visualizar a ajuda dos comandos ip:</p>
+
+<pre>
+<code>
+sudo ip help
+</code>
+</pre>
+
+<p>Ou ainda, visualizar a ajuda apenas dos comandos de endereçamento:</p>
+
+<pre>
+<code>
+sudo ip addr help
+</code>
+</pre>
+
+<p>Habilitar o modo promíscuo na interface enp0s3:</p>
+
+<pre>
+<code>
+sudo ip link set enp0s3 promisc on
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-redes-12.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-redes-14.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

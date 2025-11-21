@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C++</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cpp-1.html">Tudo sobre C++ Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cpp-2.html">Tudo sobre C++ Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cpp-3.html">Tudo sobre C++ Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cpp-4.html">Tudo sobre C++ Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cpp-5.html">Tudo sobre C++ Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cpp-6.html">Tudo sobre C++ Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cpp-7.html">Tudo sobre C++ Parte 7!</a></li>
+                    <li><a href="tudo-sobre-cpp-8.html">Tudo sobre C++ Parte 8!</a></li>
+                    <li><a href="tudo-sobre-cpp-9.html">Tudo sobre C++ Parte 9!</a></li>
+                    <li><a href="tudo-sobre-cpp-10.html">Tudo sobre C++ Parte 10!</a></li>
+                    <li><a href="tudo-sobre-cpp-11.html">Tudo sobre C++ Parte 11!</a></li>
+                    <li><a href="tudo-sobre-cpp-12.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C++ Parte 12!</a></li>
+                    <li><a href="tudo-sobre-cpp-13.html">Tudo sobre C++ Parte 13!</a></li>
+                    <li><a href="tudo-sobre-cpp-14.html">Tudo sobre C++ Parte 14!</a></li>
+                    <li><a href="tudo-sobre-cpp-15.html">Tudo sobre C++ Parte 15!</a></li>
+                    <li><a href="tudo-sobre-cpp-16.html">Tudo sobre C++ Parte 16!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C++ Parte 12</h2>
+
+<h3>Iterator</h3>
+
+<p>Basicamente, um iterator serve para navegar dentro de uma coleção de dados, ou seja, vai apontar para determinado item de um conteiner (como o vector).</p>
+
+<p>Primeiro, crie um vector básico assim:</p>
+
+<pre>
+<code>
+int main() {
+    vector&lt;string&gt; produtos; // Importe vector
+
+    produtos.push_back("mouse");
+    produtos.push_back("teclado");
+    produtos.push_back("monitor");
+    produtos.push_back("gabinete");
+    produtos.push_back("caixa");
+    
+    cout << produtos[0] << endl;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Para navegarmos pelos elementos do vector, usaremos o iterator assim:</p>
+
+<pre>
+<code>
+int main() {
+    vector&lt;string&gt; produtos; // Importe vector
+
+    produtos.push_back("mouse");
+    produtos.push_back("teclado");
+    produtos.push_back("monitor");
+    produtos.push_back("gabinete");
+    produtos.push_back("caixa");
+
+    vector&lt;string&gt;::iterator it; // Iterator
+
+    cout << produtos[0] << endl;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Para retornar o primeiro elemento, usamos o método begin(), e para exibir, a variável com ponteiro, assim:</p>
+
+<pre>
+<code>
+int main() {
+    vector&lt;string&gt; produtos; // Importe vector
+
+    produtos.push_back("mouse");
+    produtos.push_back("teclado");
+    produtos.push_back("monitor");
+    produtos.push_back("gabinete");
+    produtos.push_back("caixa");
+
+    vector&lt;string&gt;::iterator it; // Iterator
+    
+    it = produtos.begin(); // Retorna o primeiro elemento do vector
+
+    cout << *it << endl; // Não esqueça do ponteiro
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Também podemos usar o end(), para retornar a quantidade de elementos do vector, para exibir o último elemento em si, subtraia um, assim:</p>
+
+<pre>
+<code>
+it = produtos.end() - 1;
+</code>
+</pre>
+
+<p>Para navegar entre todos os elementos, podemos usar as opções advance(), next() e prev() (não exclusivo de vector e iteradores, também muito usados em listas), por exemplo:</p>
+
+<pre>
+<code>
+it = produtos.begin();
+advance(it, 3); // Imprime o índice 3
+
+cout << *it << endl; // Não esqueça do ponteiro
+</code>
+</pre>
+
+<p>Ou o next diretamente como ponteiro, indicando quantos elementos avançaremos:</p>
+
+<pre>
+<code>
+it = produtos.begin();
+
+cout << *next(it, 2) << endl; // Não esqueça do ponteiro
+</code>
+</pre>
+
+<p>O mesmo vale pro prev, usando end() ao invés de begin():</p>
+
+<pre>
+<code>
+it = produtos.end();
+
+cout << *prev(it, 1) << endl; // Não esqueça do ponteiro
+</code>
+</pre>
+
+<p>E para exibir todos os elementos, podemos fazer assim:</p>
+
+<pre>
+<code>
+int main() {
+    vector&lt;string&gt; produtos; // Importe vector
+
+    produtos.push_back("mouse");
+    produtos.push_back("teclado");
+    produtos.push_back("monitor");
+    produtos.push_back("gabinete");
+    produtos.push_back("caixa");
+
+    vector&lt;string&gt;::iterator it; // Iterator
+
+    for(it = produtos.begin(); it != produtos.end(); it++) {
+        cout << *it << endl;
+    }
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: Podemos declarar o iterator diretamente nos parâmetros do for também.</p>
+
+<h3>Tratamento de Erros com Try Catch</h3>
+
+<p>Quando criamos um código que pode gerar um erro, podemos tratá-lo colocando ele dentro de um bloco try catch. Quando o que está sendo executado dentro do try dá erro, ele pula para o bloco catch, onde podemos tratar o erro, por exemplo fechando o programa para evitar travamentos ou exibindo uma mensagem personalizada.</p>
+
+<p>Vamos primeiramente, criar um vector dentro de um try catch, assim (não esqueça de importar vector pro vector e stdexcept para o try catch):</p>
+
+<pre>
+<code>
+int main() {
+    vector&lt;int&gt; num(5); // Importe vector
+
+    num.at(7) = 10; // Teste posições existentes e inexistentes.
+    
+    cout << num[0] << endl;
+    
+    try {// Importe stdexcept
+        
+    }
+    catch(exception &ex) { // Aqui teremos o & indicando endereço
+
+    }
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Nosso vector tem 5 posições, ao colocarmos uma posição inexistente no at() (por exemplo, 7), ele dará erro, como não estamos usando o try catch, disparará um aviso de erro padrão do C++ e travará o programa. Mas até o momento, nosso código não foi tratado.</p>
+
+<p>Ao colocar o código errado dentro do try, ele não gerará mais esse erro, veja como fazer:</p>
+
+<pre>
+<code>
+int main() {
+    vector&lt;int&gt; num(5); // Importe vector
+
+    try {// Importe stdexcept
+        num.at(7) = 10;
+
+        cout << num[0] << endl;
+    }
+    catch(exception &ex) {
+
+    }
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Note que na forma acima, o erro foi tratado, ele não foi executado por ter dado erro, mas não travou por isso. Podemos exibir uma mensagem usando o método what() do exception, por exemplo, dessa forma:</p>
+
+<pre>
+<code>
+int main() {
+    vector&lt;int&gt; num(5); // Importe vector
+
+    try {// Importe stdexcept
+        num.at(7) = 10;
+
+        cout << num[0] << endl;
+    }
+    catch(exception &ex) {
+        cerr << "ERRO: " << ex.what() << endl; // cerr é usado para exibir erros, nesse caso import fstream
+    }
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Veja que ele não trava dessa forma.</p>
+
+<p>Lembrando que num vector, quando adicionamos 5 posições, elas são numeradas de 0 a 4, se adicionar ou exibir uma posição inexistente (no caso, o 5), ele dará erro). Quando o código não dá erros, ele executa normalmente.</p>
+
+<p>Temos ocasiões que é necessário gerarmos uma exceção de erro, para testar isso, faremos uma função nova para divisões, assim:</p>
+
+<pre>
+<code>
+double dividir(double num, double dem); // Não esqueça do protótipo da função
+
+int main() {
+    double n1, n2;
+
+    cout << "Digite o numerador: ";
+    cin >> n1;
+    cout << "Digite o denominador: ";
+    cin >> n2;
+
+    cout << dividir(n1, n2) << endl;
+
+    return 0;
+}
+
+double dividir(double num, double dem) {
+    return num / dem;
+}
+</code>
+</pre>
+
+<p>Mas como sabemos, é impossível dividir por zero, e em C++ costuma retornar o valor inf, nesse caso, vamos tratar o erro assim:</p>
+
+<pre>
+<code>
+int main() {
+    double n1, n2;
+
+    cout << "Digite o numerador: ";
+    cin >> n1;
+    cout << "Digite o denominador: ";
+    cin >> n2;
+
+    cout << endl;
+
+    try {
+        cout << dividir(n1, n2) << endl;
+    }
+    catch(exception &ex) {
+        cerr << "ERRO: " << ex.what() << endl;
+    }
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Só que tem um detalhe, mesmo se dividirmos algum número por zero, ele não será passado o erro pro catch, então devemos ir na função dividir() e criar nosso próprio aviso de erro usando o throw, assim:</p>
+
+<pre>
+<code>
+double dividir(double num, double dem) {
+    if(dem == 0) {
+        throw "Tentativa de divisão por ZERO";
+    }
+    
+    return num / dem;
+}
+</code>
+</pre>
+
+<p>E na função principal, mudaremos o catch assim:</p>
+
+<pre>
+<code>
+try {
+    cout << dividir(n1, n2) << endl;
+}
+catch(const char* msg) {
+    cerr << "ERRO: " << msg << endl;
+}
+</code>
+</pre>
+
+<p>Dessa forma, podemos criar outras exceções sem fazer mais alterações no try catch, por exemplo:</p>
+
+<pre>
+<code>
+double dividir(double num, double dem) {
+    if(dem == 0) {
+        throw "Impossível a divisão por ZERO";
+    }
+    
+    // Outra condição
+    
+    if(num < dem) {
+        throw "Numerador Tem que Ser Maior que o Denominador!";
+    }
+
+    return num / dem;
+}
+</code>
+</pre>
+
+<p>PS: Essa condição com o throw pode ser colocada no bloco try diretamente. E também podemos ter mais de uma cláusula catch no mesmo try.</p>
+
+<ul>
+    <li><a href="tudo-sobre-cpp-11.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-cpp-13.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

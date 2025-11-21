@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Algoritmos</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Algoritmos</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-1.html">Tudo sobre Algoritmos Parte 1!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-2.html">Tudo sobre Algoritmos Parte 2!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-3.html">Tudo sobre Algoritmos Parte 3!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Algoritmos Parte 4!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-5.html">Tudo sobre Algoritmos Parte 5!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Algoritmos Parte 4</h2>
+
+<h3>Laços de Repetição</h3>
+
+<p>Existem três tipos de laços de repetição, basicamente. As estruturas de repetição servem para repetir instruções no código automaticamente. Elas usam uma condição lógica (verdadeiro ou falso) e continuam repetindo enquanto essa condição for verdadeira. Isso é útil para repetir cálculos, mostrar listas de números, pedir dados várias vezes, etc.</p>
+
+<h4>Enquanto</h4>
+
+<p>O <code>enquanto</code> é um laço que repete enquanto a condição for verdadeira. A condição é verificada antes de executar o bloco. Use quando não sabemos quantas vezes vai repetir.</p>
+
+<p>Veja um exemplo simples:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro num, cont = 0 // Atribui 0 a num e a cont
+        
+        escreva("Digite um número: ")
+        leia(num)
+        
+        enquanto(cont &lt;= num) {
+            escreva(cont, "\n")
+            cont++
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Veja o fluxograma desse código:</p>
+
+<img src="imagens/fluxograma-while.png" alt="Fluxograma de Estrutura While" style="max-width: 500px"/>
+
+<h4>Faça Enquanto</h4>
+
+<p>É parecido com o enquanto, mas no <code>faca enquanto</code> o bloco é executado pelo menos uma vez, pois a condição só é verificada depois. Use quando queremos garantir que o código rode ao menos uma vez.</p>
+
+<p>Veja um exemplo:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro num, cont = 0 // Atribui 0 a num e a cont
+        
+        escreva("Digite um número: ")
+        leia(num)
+        
+        faca {
+            escreva(cont, "\n")
+            cont++
+        }
+        enquanto(cont &lt;= num)
+    }
+}
+</code>
+</pre>
+
+<p>No código acima, mesmo que digitemos um número negativo (que geraria a condição falsa), o laço é executado uma vez porque isso é verificado depois da execução do mesmo.</p>
+
+<p>Veja o fluxograma do código acima:</p>
+
+<img src="imagens/fluxograma-do-while.png" alt="Fluxograma de Estrutura Do While" style="max-width: 500px"/>
+
+<h4>Para</h4>
+
+<p>O <code>para</code> é um laço com controle automático, ideal quando sabemos exatamente quantas vezes queremos repetir. Tem três partes divididas por ponto-e-vírgula: início, condição, passo.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro num
+        
+        escreva("Digite um número: ")
+        leia(num)
+        
+        para(inteiro i = 0; i &lt;= num; i++) { // Dividido em três partes por ponto-e-vírgula: Início, condição e passo.
+            escreva(i, "\n")
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Veja o fluxograma desse código:</p>
+
+<img src="imagens/fluxograma-for.png" alt="Fluxograma de Estrutura For" style="max-width: 500px"/>
+
+<p>PS: Tome muito cuidado com laços infinitos, pois podem fazer uma execução no programa que nunca vai terminar, e pode travar seu programa.</p>
+
+<p>Em laços de repetição, principalmente os infinitos, podemos encontrar o <code>pare</code> e o <q>continue</q>, que funcionam assim:</p>
+
+<ul>
+    <li><q>continue</q>: Pula para a próxima repetição do laço. Ou seja, ignora o restante do código dentro do enquanto e volta para o início do loop.</li>
+    <li><code>pare</code>: Interrompe o laço enquanto. Sai completamente do loop, como se ele tivesse terminado.</li>
+</ul>
+
+<p>No entanto, o <q>continue</q> não existe por padrão no Portugol Studio, mas a maioria das linguagens o têm.</p>
+
+<p>Veja um exemplo de um <code>enquanto</code> infinito, mas que é controlado e tem uma condição de parada com <code>pare</code>:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro num, cont = 0
+        
+        escreva("Digite um número: ")
+        leia(num)
+        
+        enquanto(verdadeiro) { // Laço infinito
+            cont++
+            
+            se(cont &gt; num) { // Entra na condição e interrompe o laço com pare
+                pare
+            }
+            
+            // Outro se, independente
+            
+            se(cont % 2 == 0) { // Simulando o continue que não existe no Portugol Studio, para escrever só os pares
+                escreva(cont, "\n")
+            }  
+        }
+    }
+}
+
+</code>
+</pre>
+
+<h3>Vetores e Matrizes</h3>
+
+<p>Um array (também chamado de vetor quando é unidimensional) é uma variável composta, é como uma caixinha que guarda várias informações do mesmo tipo usando um único nome. Em vez de criar várias variáveis separadas, você cria uma variável que armazena várias posições. Cada posição de um vetor é chamado de índice e é contado a partir do 0.</p>
+
+<p>Veja um exemplo simples de uso de um vetor:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        caracter vogais[5]
+        
+        vogais[0] = 'A'
+        vogais[1] = 'E'
+        vogais[2] = 'I'
+        vogais[3] = 'O'
+        vogais[4] = 'U'
+        
+        
+        escreva(vogais[0], "\n")
+        escreva(vogais[1], "\n")
+        escreva(vogais[2], "\n")
+        escreva(vogais[3], "\n")
+        escreva(vogais[4], "\n")
+    }
+}
+</code>
+</pre>
+
+<p>Inclusive, podemos, de forma mais inteligente, uma um laço <code>para</code> pra que não precise repetir código (aí vemos a utilidade dos laços de repetição):</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        caracter vogais[5]
+        
+        vogais[0] = 'A'
+        vogais[1] = 'E'
+        vogais[2] = 'I'
+        vogais[3] = 'O'
+        vogais[4] = 'U'
+        
+        para(inteiro i = 0; i &lt; 5; i++) {
+            escreva(vogais[i], "\n")
+        }
+    }
+}
+</code>
+</pre>
+
+<p>No caso acima, nós declaramos a variável composta com 5 posições, e preenchemos cada uma das posições com um valor único, e depois exibimos cada uma dessas posições.</p>
+
+<p>Veja um exemplo com inteiros e ordenação dos dados em ordem crescente:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        const inteiro TAM = 7
+        inteiro dezenas[TAM]
+        inteiro i, aux, cont
+        
+        dezenas[0] = 20
+        dezenas[1] = 50
+        dezenas[2] = 10
+        dezenas[3] = 40
+        dezenas[4] = 70
+        dezenas[5] = 30
+        dezenas[6] = 60
+        
+        escreva("\nArray na ordem original:\n\n")
+        
+        para(i = 0; i &lt; TAM; i++) {
+            escreva(dezenas[i], "\n")
+        }
+        
+        // Ordenando array com modo "bubblesort":
+        
+        para(cont = 1; cont &lt; TAM; cont++) {
+            para(i = 0; i &lt; TAM - 1; i++) {
+                se(dezenas[i] &gt; dezenas[i + 1]) {
+                    aux = dezenas[i]
+                    dezenas[i] = dezenas[i + 1]
+                    dezenas[i + 1] = aux
+                }
+            }
+        }
+        
+        escreva("\nArray ordenado:\n\n")
+        
+        para(i = 0; i &lt; TAM; i++) {
+            escreva(dezenas[i], "\n")
+        }
+    }
+}
+</code>
+</pre>
+
+<p>PS: Note que temos dois laços <code>para</code> aninhados. Quando você tem um <code>para</code> dentro de outro <code>para</code>, o funcionamento acontece assim:</p>
+
+<ol>
+    <li>O laço de fora começa e executa uma volta.</li>
+    <li>Para cada volta do laço de fora, o laço de dentro roda completamente do início ao fim.</li>
+    <li>Quando o laço de dentro termina, o laço de fora avança para a próxima repetição.</li>
+    <li>Isso se repete até o laço de fora acabar.</li>    
+</ol>
+
+<p>Temos também os arrays bidimensionais, conhecidos também como matrizes. Matrizes são como tabelas dentro do seu programa. Enquanto um vetor tem apenas uma linha de valores, a matriz possui linhas e colunas.</p>
+
+<p>Podemos utilizar matrizes para organizar dados em formato de tabela, como notas de alunos, horários, etc.</p>
+
+<p>Veja um exemplo de matriz com números, onde os pares ficam em uma linha, e os ímpares em outra linha, além dos para aninhados para exibir os mesmos:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro numeros[2][5]
+        
+        // Linha 0
+        numeros[0][0] = 0
+        numeros[0][1] = 2
+        numeros[0][2] = 4
+        numeros[0][3] = 6
+        numeros[0][4] = 8
+        
+        // Linha 1
+        numeros[1][0] = 1
+        numeros[1][1] = 3
+        numeros[1][2] = 5
+        numeros[1][3] = 7
+        numeros[1][4] = 9
+        
+        para(inteiro l = 0; l &lt; 2; l++) { // Linhas
+            para(inteiro c = 0; c &lt; 5; c++) { // Colunas
+                escreva(numeros[l][c], " ") // Não pula linha, só dá espaço
+            }
+            escreva("\n") // Pula de linha, executado após o para inteiro terminar o laço dele
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Aí, ele exibirá como em uma tabela mesmo.</p>
+
+<p>No caso das matrizes, o primeiro número representa a linha, e o segundo a coluna.</p>
+
+<h3>Procedimentos sem Retorno</h3>
+
+<p>Até agora, usamos apenas procedimentos e funções internas do próprio Portugol Studio, como a <code>escreva</code>, <code>leia</code> e a função <code>inicio</code>, que conforme explicado, é a função padrão que o interpretador executa primeiro por padrão. No entanto, podemos criar nossos próprios procedimentos e funções.</p>
+
+<p>Um procedimento serve para organizar o código e evitar repetições. Você chama o procedimento, ele faz alguma coisa (mostrar uma mensagem, calcular algo, limpar a tela, etc.) e termina ali, sem retornar resultado.</p>
+
+<p>No Portugol Studio, um procedimento normalmente usa a palavra <code>funcao</code>. Veja um exemplo simples de criação de um procedimento. Ele deve ser criado fora da função <code>inicio</code>, mas dentro da estrutura <code>programa</code>:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        saudacao() // Aqui a função é invocada, ou seja, executada
+    }
+    
+    funcao saudacao() {
+        escreva("Bom dia!")
+    }
+}
+</code>
+</pre>
+
+<p>No caso acima, o procedimento <code>saudacao</code> deve ser chamado dentro da função principal (<code>inicio</code>) para ser executado. A chamada é feita usando o nome do procedimento seguido de parênteses. A chamada pode ser chamada também de execução ou invocação de um procedimento.</p>
+
+<p>Uma vez criada a função ou procedimento, ela pode ser chamada quantas vezes precisarmos, por exemplo:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        saudacao() // Invocação 1
+        saudacao() // Invocação 2
+        saudacao() // Invocação 3
+    }
+    
+    funcao saudacao() {
+        escreva("Bom dia!")
+    }
+}
+</code>
+</pre>
+
+<p>PS: Podemos usar um laço de repetição no exemplo acima também.</p>
+
+<p>Podemos também passar parâmetros para um procedimento, como variáveis. No exemplo abaixo, criamos um procedimento que recebe um nome e exibe uma saudação personalizada. Quando chamamos o procedimento, enviamos o nome como argumento. Veja o código acima alterado:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        saudacao("Fulano") // Mostra Bom dia pra Fulano
+        saudacao("Beltrano") // Faz o mesmo com Beltrano
+        saudacao("Sicrano") // E com Sicrano
+    }
+    
+    funcao saudacao(cadeia nome) {
+        escreva("Bom dia, ", nome, "!\n")
+    }
+}
+</code>
+</pre>
+
+<p>Exemplo com números:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        soma(10, 5)
+    }
+    
+    funcao soma(inteiro n1, inteiro n2) {
+        escreva("A soma é ", (n1 + n2), "!\n")
+    }
+}
+</code>
+</pre>
+
+<p>PS: Note que colocamos a soma entre parênteses, pra não causar conflitos no interpretador Portugol, que pode confundir o operador da soma com concatenação.</p>
+
+<p>Por padrão, um procedimento não retorna nada, por isso é considerado uma função <q>vazia</q>.</p>
+
+<p>A nomeação de procedimentos e funções seguem basicamenteas mesmas regras de variáveis e constantes (e consequentemente, parâmetros):</p>
+
+<ul>
+    <li>Só pode usar letras, números e underline (<q>_</q>), no entanto, não pode começar com um número, sempre deve começar com uma letra. A partir do segundo caractere pode ter números e underlines.</li>
+    <li>Não pode ter espaços.</li>
+    <li>Não pode usar acentos ou caracteres especiais como <q>#</q>, <q>@</q>, <q>!</q>, etc.</li>
+    <li>Não pode usar palavras reservadas da linguagem (no caso do Portugol, são palavras como <code>funcao</code>, <code>escreva</code>, <code>se</code>, <code>enquanto</code> e outras que veremos mais pra frente, incluindo as palavras já vistas como <code>inteiro</code>, <code>caracter</code> e <code>logico</code>).</li>
+    <li>Devem ser sempre usadas com parênteses no final do nome, sem espaços, independente de terem ou não parâmetros, como por exemplo <code>enviar()</code>.</p>
+</ul>
+
+<p>Também, para identificação e leitura mais precisa, é ideal seguir também essas regras:</p>
+
+<ul>
+    <li>Deve ser tudo em minúscula, podendo identificar palavras compostas com a primeira maiúscula (técnica conhecida como CamelCase) ou dividir por underlines, como por exemplo <code>cadastrar_usuario()</code> ou <code>cadastrarUsuario()</code>.</li>
+    <li>Deve ter nomes coerentes com a utilização delas (por exemplo, fazer divisão com uma função chamada <code>divisao()</code> faz mais sentido do que uma função com o nome <code>x()</code>).</li>
+</ul>
+
+<ul>
+    <li><a href="tudo-sobre-algoritmos-3.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-algoritmos-5.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

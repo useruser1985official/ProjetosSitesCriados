@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Algoritmos</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Algoritmos</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-1.html">Tudo sobre Algoritmos Parte 1!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-2.html">Tudo sobre Algoritmos Parte 2!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Algoritmos Parte 3!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-4.html">Tudo sobre Algoritmos Parte 4!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-5.html">Tudo sobre Algoritmos Parte 5!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Algoritmos Parte 3</h2>
+
+<h3>Estruturas de Decisão Simples</h3>
+
+<p>O comando <code>se</code> é usado quando você quer que o programa tome uma decisão. Ele verifica uma condição (uma comparação) e só executa um bloco de código se essa condição for verdadeira. Por padrão ele recebe um valor lógico (<code>verdadeiro</code> ou <code>falso</code>).</p>
+
+<p>O <code>senao</code> é usado para dizer o que o programa deve fazer caso a condição não seja verdadeira.</p>
+
+<p>É como se o computador estivesse seguindo um caminho:</p>
+
+<ul>
+    <li><b>Se algo for verdade:</b> Faça isso.</li>
+    <li><b>Senão:</b> Faça outra coisa.</li>    
+</ul>
+
+<p>Podemos usar o <code>se</code> sozinho, por exemplo:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro num
+        
+        escreva("Digite um número: ")
+        leia(num)
+        
+        se(num % 2 == 0) { // Verifica se é par
+            escreva("O número ", num, " é par.\n")
+        }
+    }
+}
+</code>
+</pre>
+
+<p>Veja o fluxograma do código acima:</p>
+
+<img src="imagens/fluxograma-se.png" alt="Fluxograma de Estrutura de Decisão Se" style="max-width: 500px"/>
+
+<p>Mas o <code>senao</code>, deve estar sempre acompanhado do <code>se</code> equivalente:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro num
+        cadeia verif
+        
+        escreva("Digite um número: ")
+        leia(num)
+        
+        se(num % 2 == 0) { // Verifica se é par
+            verif = "par"
+        }
+        senao { // Esse bloco é executado caso o se receba falso
+            verif = "ímpar"
+        }
+        
+        escreva("O número ", num, " é ", verif, ".\n")
+    }
+}
+</code>
+</pre>
+
+<p>Ou seja, caso use o <code>se</code>, o <code>senao</code> pode ou não estar presente, pois este último trata o contrário de <code>se</code>.</p>
+
+<p>Veja o fluxograma do código acima:</p>
+
+<img src="imagens/fluxograma-se-senao.png" alt="Fluxograma de Estruturas de Decisão" style="max-width: 500px"/>
+
+<h3>Estruturas de Decisão Compostas</h3>
+
+<p>Podemos colocar um <code>se</code> dentro de outro <code>se</code>. Isso é útil quando só queremos fazer a segunda verificação se a primeira condição for verdadeira. Veja um exemplo:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro idade
+        cadeia voto
+        
+        escreva("Digite sua idade: ")
+        leia(idade)
+        
+        se(idade &lt; 18 ou idade &gt;= 70) { // Faz a primeira verificação
+            se(idade &lt; 16) { // Só é executado se o de cima for verdadeirao
+                voto = "proibido"
+            }
+            senao {
+                voto = "opcional"
+            }
+        }
+        senao {
+            voto = "obrigatório"
+        }
+        
+        escreva("Na idade de ", idade, " anos o voto é ", voto, ".\n")
+    }
+}
+</code>
+</pre>
+
+<p>O segundo <code>se</code> só funciona dentro do primeiro. Eles são independentes, mas o de dentro depende do de fora para ser executado. Esse tipo de estrutura <code>se</code> chama <q>se aninhado</q>. Um outro bloco <code>se</code> pode ser colocado dentro do <code>senao</code> também.</p>
+
+<p>Veja o fluxograma desse código:</p>
+
+<img src="imagens/fluxograma-se-senao-aninhado.png" alt="Fluxograma de Estruturas de Decisão Aninhada" style="max-width: 500px"/>
+
+<p>Podemos testar várias condições diferentes, uma depois da outra, usando o <code>senao se</code>, como por exemplo:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro idade
+        cadeia fase
+        
+        escreva("Digite sua idade: ")
+        leia(idade)
+        
+        se(idade < 10) {
+            fase = "infância"
+        }
+        senao se(idade >= 10 e idade < 13) {
+            fase = "pré-adolescência"
+        }
+        senao se(idade >= 13 e idade < 18) {
+            fase = "adolescência"
+        }
+        senao se(idade >= 18 e idade < 65) {
+            fase = "fase adulta"
+        }
+        senao {
+            fase = "fase idosa"
+        }
+        
+        escreva("Na idade de ", idade, " anos, você está na ", fase, ".\n")
+    }
+}
+</code>
+</pre>
+
+<p>Podemos ter quantos <code>senao se</code> quisermos. Eles são testados de cima para baixo. Assim que um deles for verdadeiro, os demais nem são testados. Tanto os <code>senao se</code> quanto o último <code>senao</code> são opcionais.</p>
+
+<h3>Estrutura de Decisão Múltipla</h3>
+
+<p>A estrutura <code>escolha</code> funciona como um menu de opções. Ela verifica o valor de uma variável e executa apenas o caso que combina com esse valor. É útil quando você precisa testar vários valores possíveis para a mesma variável.</p>
+
+<p>Veja um exemplo de uso:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        inteiro dia
+        cadeia verif
+        
+        escreva("Digite um número pra ver o dia da semana: ")
+        leia(dia)
+        
+        escolha(dia) {
+            caso 1:
+                verif = "domingo"
+                pare
+            caso 2:
+                verif = "segunda-feira"
+                pare
+            caso 3:
+                verif = "terça-feira"
+                pare
+            caso 4:
+                verif = "quarta-feira"
+                pare
+            caso 5:
+                verif = "quinta-feira"
+                pare
+            caso 6:
+                verif = "sexta-feira"
+                pare
+            caso 7:
+                verif = "sábado"
+                pare
+            caso contrario:
+                verif = "dia inválido"
+                pare
+        }
+        
+        escreva("O ", dia, "º dia da semana é ", verif, ".\n")
+    }
+}
+</code>
+</pre>
+
+<p>Note que, ao final de cada <code>caso</code>, devemos colocar <code>pare</code> para que a estrutura escolha seja finalizada. O <code>pare</code> no último <code>caso</code> (no caso, o <code>caso contrario</code>), pode ser omitido.</p>
+
+<p>Podemos ter quantos caso quisermos, o <code>caso contrario</code> só é executado caso nenhum dos valores sejam encontrados, e ele é opcional (tal como o <code>senao</code>).</p>
+
+<p>Veja o fluxograma do código acima:</p>
+
+<img src="imagens/fluxograma-escolha-caso.png" alt="Fluxograma de Estrutura de Decisão Múltipla" style="max-width: 650px"/>
+
+<p>Podemos testar mais de um caso de uma só vez, como por exemplo:</p>
+
+<pre>
+<code>
+programa {
+    funcao inicio() {
+        caracter letra
+        cadeia fonema
+        
+        escreva("Digite uma única letra: ")
+        leia(letra)
+        
+        escolha(letra) {
+            caso 'A':
+            caso 'a':
+            caso 'E':
+            caso 'e':
+            caso 'I':
+            caso 'i':
+            caso 'O':
+            caso 'o':
+            caso 'U':
+            caso 'u':
+                fonema = "vogal"
+                pare
+            caso contrario:
+                fonema = "consoante ou não é uma letra"
+                pare
+        }
+        
+        escreva("A letra ", letra, " é ", fonema, ".\n")
+    }
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-algoritmos-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-algoritmos-4.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

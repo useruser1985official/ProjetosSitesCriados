@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Redes</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Redes</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-redes-1.html">Tudo sobre Redes Parte 1!</a></li>
+                    <li><a href="tudo-sobre-redes-2.html">Tudo sobre Redes Parte 2!</a></li>
+                    <li><a href="tudo-sobre-redes-3.html">Tudo sobre Redes Parte 3!</a></li>
+                    <li><a href="tudo-sobre-redes-4.html">Tudo sobre Redes Parte 4!</a></li>
+                    <li><a href="tudo-sobre-redes-5.html">Tudo sobre Redes Parte 5!</a></li>
+                    <li><a href="tudo-sobre-redes-6.html">Tudo sobre Redes Parte 6!</a></li>
+                    <li><a href="tudo-sobre-redes-7.html">Tudo sobre Redes Parte 7!</a></li>
+                    <li><a href="tudo-sobre-redes-8.html">Tudo sobre Redes Parte 8!</a></li>
+                    <li><a href="tudo-sobre-redes-9.html">Tudo sobre Redes Parte 9!</a></li>
+                    <li><a href="tudo-sobre-redes-10.html">Tudo sobre Redes Parte 10!</a></li>
+                    <li><a href="tudo-sobre-redes-11.html">Tudo sobre Redes Parte 11!</a></li>
+                    <li><a href="tudo-sobre-redes-12.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Redes Parte 12!</a></li>
+                    <li><a href="tudo-sobre-redes-13.html">Tudo sobre Redes Parte 13!</a></li>
+                    <li><a href="tudo-sobre-redes-14.html">Tudo sobre Redes Parte 14!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Redes Parte 12</h2>
+
+<h3>Equipamentos de Rede - Introdução e Principais Tipos</h3>
+
+<p>Como sabemos, numa rede temos vários tipos de equipamentos além dos computadores, então vamos ver uma breve introdução de alguns dos principais equipamentos.</p>
+
+<h4>NIC (Placa de Rede)</h4>
+
+<p>A placa de rede opera nos níveis 1 e 2 do OSI. Suas funções são:</p>
+
+<ul>
+    <li>Interligar o equipamento com a rede (cabeada/wireless).</li>
+    <li>Converter sinais elétricos em pacotes de dados.</li>
+    <li>Determinar se os pacotes são destinados ao computador.</li>
+    <li>Converter dados em sinais elétricos para transmissão pela rede.</li>
+</ul>
+
+<p>Veja a imagem das placas de rede, uma cabeada e outra wireless:</p>
+
+<img src="imagens/placa-de-rede.jpg" alt="Placa de Rede"/>
+
+<img src="imagens/placa-de-rede-wireless.jpg" alt="Placa de Rede Wireless"/>
+
+<h4>Switch (Comutador)</h4>
+
+<p>Um switch é um equipamento de rede que permite interconectar dispositivos em uma rede de computadores usando comutação de pacotes para receber, processar e encaminhar quadros ao dispositivo de destino. Sobre ele:</p>
+
+<ul>
+    <li>O switch é um equipamento concentrador, que encaminha os pacotes para o dispositivo ou grupo de dispositivos de destino, em vez de encaminhar os pacotes para todos os nós da rede, como ocorrem com os hubs.</li>
+    <li>Aprende os endereços físicos dos nós e os associa às suas portas para uso posterior.</li>
+    <li>Encaminha os quadros para seus destinos usando técnicas como Store and Forward, Cut-through, Fragment Free e Adaptive Switching.</li>
+</ul>
+
+<p>O switch, em uma rede com topologia estrela, é o dispositivo central, de onde sai todos as conexões para os computadores.</p>
+
+<p>Veja a imagem de um switch:</p>
+
+<img src="imagens/switch.jpg" alt="Switch"/>
+
+<h4>Roteador</h4>
+
+<p>Equipamento que efetua o encaminhamento de pacotes entre redes de computadores distintas. Os pacotes de dados são encaminhados de um roteador ao outro até atingir o dispositivo de destino, ou sejam, descartados. Os roteadores efetuam a leitura dos pacotes IP, podendo analisar o conteúdo de seus cabeçalhos, e então tomar decisões baseando-se nos dados lidos.</p>
+
+<p>Veja a imagem de um roteador:</p>
+
+<img src="imagens/roteador.jpg" alt="Roteador"/>
+
+<h4>Roteador de Banda Larga</h4>
+
+<p>Comum em ambientes domésticos, compartilha sua conexão com a internet a todos os dispositivos conectados a ele. Quase todos os roteadores banda larga possuem um switch integrado (geralmente de 4 portas), permitindo conectar os computadores da sua rede diretamente ao roteador sem a necessidade de qualquer periférico extra. A maioria também possui um access point integrado.</p>
+
+<p>Veja a imagem de um roteador banda larga:</p>
+
+<img src="imagens/roteador-wireless.jpg" alt="Roteador Banda Larga"/>
+
+<h4>Access Point (AP)</h4>
+
+<p>Access point (ponto de acesso) é um dispositivo utilizado em redes sem fio locais (WLANs), que age como um equipamento transmissor e receptor de sinais de rádio, operando como uma espécie de switch sem fio. O AP se conecta a uma rede cabeada, fornecendo as estações conectadas acesso à infra de rede do local, e à internet.</p>
+
+<p>Veja a imagem de um ponto de acesso:</p>
+
+<img src="imagens/access-point.png" alt="Access Point"/>
+
+<h4>Modulador/Demodulador (Modem)</h4>
+
+<p>Equipamento que converte um sinal modulado de um padrão específico para outro padrão, para que possam ser transmitidos por um meio específico. Por exemplo, transformar dados digitais em sinais elétricos para transmissão de dados via banda larga.</p>
+
+<p>Veja a imagem de um modem DSL:</p>
+
+<img src="imagens/modem-dsl.jpg" alt="Modem DSL"/>
+
+<h4>Repetidor</h4>
+
+<p>Dispositivo de rede usado para regenerar ou replicar um sinal enfraquecido. São empregados para reforçar sinais distorcidos por perdas na transmissão. Um repetidor digital é capaz de reconstruir um sinal e retransmiti-lo, permitindo estender a área de alcance da rede. Opera na camada física da rede.</p>
+
+<p>Veja a imagem de um repetidor:</p>
+
+<img src="imagens/repetidor.png" alt="Repetidor"/>
+
+<h4>Firewall</h4>
+
+<p>Sistema de hardware ou software cuja função é proteger uma rede de ameaças provenientes de outra rede, como a internet, e de outros hosts na própria rede. Controla o tráfego de dados entre as redes de acordo com as regras pré-estabelecidas (as políticas de segurança). Apenas o tráfego autorizado poderá atravessar o firewall.</p>
+
+<p>Veja a imagem de um firewall:</p>
+
+<img src="imagens/firewall-hard.jpg" alt="Firewall"/>
+
+<h4>Servidores</h4>
+
+<p>Computadores especiais que fornecem serviços e dados aos usuários de uma rede, incluindo aos computadores clientes. Existem inúmeros tipos de servidores, tais como:</p>
+
+<ul>
+    <li>Servidores de arquivo e impressão.</li>
+    <li>Servidor de banco de dados.</li>
+    <li>Servidores DHCP e DNS.</li>
+    <li>Servidor de aplicações.</li>
+    <li>Servidor web/FTP.</li>
+    <li>Servidor de domínio.</li>
+</ul>
+
+<p>Veja a imagem de um servidor:</p>
+
+<img src="imagens/servidor.jpg" alt="Servidor"/>
+
+<h4>Balanceador de Carga</h4>
+
+<p>Um load balancer redireciona requisições de clientes de rede para servidores, de modo a maximizar a velocidade e capacidade de uso da rede. Suas principais funções são:</p>
+
+<ul>
+    <li>Distribuir requisições de clientes ou a carga de rede de forma eficiente entre diversos servidores.</li>
+    <li>Assegurar alta disponibilidade e confiabilidade, evitando congestionamento de serviços.</li>
+    <li>Fornecer flexibilidade para expansão ou manutenção dos servidores.</li>
+</ul>
+
+<h4>Network Attached Storage (NAS)</h4>
+
+<p>Um NAS é um dispositivo de armazenamento de dados conectado a uma rede local, que permite o acesso a esses dados pelos usuários. É uma solução de baixo custo para armazenamento e compartilhamento de arquivos em redes locais, operando como uma espécie de "nuvem" pública, porém local.</p>
+
+<h4>Racks</h4>
+
+<p>Chassis de metal (armação) usadas para armazenar equipamentos de rede conectados. Muito comum em data centes, pode ser encontrado em diversos tamanhos, sempre medido em uma unidade chamada "U", que corresponde a uma altura de 1,75 polegadas (44,45MM), assim indicando o número de equipamentos que podem ser instalados no rack. A largura de um rack é padronizada em 19 polegadas (48,26CM).</p>
+
+<p>Veja a imagem de um rack:</p>
+
+<img src="imagens/rack.jpg" alt="Rack"/>
+
+<h4>Patch Panel</h4>
+
+<p>Hardware de conexão empregado em racks para realizar a conexão entre o cabeamento secundário de uma rede e os switches da rede local. Trata-se de um painel de conectores RJ-45 fêmea afixado em um rack. Da parte traseira do patch panel partem cabos que se conectam aos diverso equipamentos da rede. Cada conector do patch panel é chamado de porta.</p>
+
+<h4>Meios de Transmissão</h4>
+
+<p>Meio físico para a propagação de sinais de telecomunicações. Caminho físico por onde trafegam informações, entre um transmissor e um receptor. Os meios de transmissão podem ser classificados em vários tipos, dependendo da natureza do meio físico empregado. Os meios de transmissão mais usados são os guiados (coaxial, par trançado, fibra óptica) e os não-guiados (rádio, IR e microondas).</p>
+
+<p>Veja a imagem dos tipos de cabos mais comuns:</p>
+
+<img src="imagens/tipos-de-cabos.jpg" alt="Tipo de Cabos"/>
+
+<p>As melhores marcas de equipamentos são: Cisco, Hewlett Packard (HP), MikroTik, Ubiquiti, Aruba, Linksys, Netgear, Intelbras e TP-Link.</p>
+
+<h3>Qual a Diferença Entre Switch e Roteador</h3>
+
+<p>Um switch é um equipamento de rede que permite interconectar dispositivos em uma rede de computadores, usando comutação de pacotes para receber, processar e encaminhas quadros ao dispositivo de destino. Possui múltiplas portas para a conexão de dispositivos ethernet em uma rede local.</p>
+
+<p>O switch funciona assim:</p>
+
+<ul>
+    <li>O switch é um equipamento concentrador, que encaminha os pacotes para o dispositivo ou grupo de dispositivos de destino, em vez de simplesmente encaminhar os pacotes para todos os nós da rede, como ocorria com os hubs.</li>
+    <li>Armazena endereços MAC dos dispositivos em uma tabela de comutação, associando-os à porta onde estão conectados. Assim é possível encaminhar os dados diretamente do transmissor ao receptor.</li>
+    <li>Encaminha os quadros para seus destinos usando técnicas como Store and Forward, Cut-Through, Fragment Free e Adaptive Switching.</li>
+</ul>
+
+<p>Numa rede com topologia estrela, o switch estaria no centro dela.</p>
+
+<p>Veja a imagem de um switch:</p>
+
+<img src="imagens/switch.jpg" alt="Switch"/>
+
+<p>O roteador é o equipamento que efetua o encaminhamento de pacotes entre redes de computadores distintas, baseado em endereços IP. Os roteadores efetual a leitura dos pacotes IP, podendo analisar o conteúdo de seus cabeçalhos, e então tomar decisões baseando-se nos dados lidos. Os pacotes podem ser então encaminhados de um roteador a outro até atingir o dispositivo de destino, ou serem descartados.</p>
+
+<p>Essas são outras funções que um roteador faz:</p>
+
+<ul>
+    <li>Realizar NAT (Network Address Translation), para acesso à internet às estações na rede local.</li>
+    <li>Atribuir endereços IP a dispositivos via DHCP (Gateway Padrão).</li>
+    <li>Auxiliar na segurança da rede por meio de filtragem de pacotes.</li>
+</ul>
+
+<p>Veja a imagem de um roteador:</p>
+
+<img src="imagens/roteador.jpg" alt="Roteador"/>
+
+<p>Um switch tem muitas portas, enquanto um roteador tem poucas portas, geralmente 4.</p>
+
+<p>Temos também o roteador de banda larga, comum em ambientes domésticos, compartilha sua conexão com a internet a todos os dispositivos conectados. Quase todos os roteadores possuem um switch integrado (geralmente de 4 portas), permitindo conectar os computadores da sua rede diretamente ao roteador sem a necessidade de qualquer periférico extra. Muitos também possuem Access Point integrado.</p>
+
+<p>Veja a imagem de um roteador banda larga:</p>
+
+<img src="imagens/roteador-wireless.jpg" alt="Roteador Banda Larga"/>
+
+<p>Numa rede, os dispositivos são disponibilizados, a partir da internet pública, são o modem, roteador e switch, nessa ordem, que liga os computadores.</p>
+
+<table>
+    <tr>
+        <th>Característica</th>
+        <th>Switch</th>
+        <th>Roteador</th>
+    </tr>
+    <tr>
+        <td><b>Camada de Rede</b></td>
+        <td>2 ou 3</td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td><b>Escopo de Rede</b></td>
+        <td>LAN</td>
+        <td>LAN/MAN/WAN</td>
+    </tr>
+    <tr>
+        <td><b>Função</b></td>
+        <td>Conecta dispostivos em uma LAN, gerencia VLANs</td>
+        <td>Comuta redes distintas, ou LAN e modem</td>
+    </tr>
+    <tr>
+        <td><b>Formatos de dados transmitidos</b></td>
+        <td>Quadro (L2) ou Pacote (L3)</td>
+        <td>Pacote</td>
+    </tr>
+        <td><b>Endereço de Rede</b></td>
+        <td>MAC Address</td>
+        <td>Endereço IP</td>
+    </tr>
+    <tr>
+        <td><b>Número de Portas</b></td>
+        <td>Pode ser grande: De 4 a 48 ou mais, em modelos enterprise</td>
+        <td>Pequeno: 2, 4 ou 8, geralmente</td>
+    </tr>
+    <tr>
+        <td><b>Faz NAT?</b></td>
+        <td>Não</td>
+        <td>Sim</td>
+    </tr>
+</table>
+
+<p>Resumindo, um switch só se conecta numa mesma rede, o roteador só se conecta com redes diferentes.</p>
+
+<h3>O que é um Modem e Diferença para um Roteador</h3>
+
+<p>Modem é um dispositivo que codifica e decodifica dados (modula/demodula sinais) de modo que eles possam ser transmitidos entre uma rede LAN e uma WAN, geralmente para acesso à internet.</p>
+
+<p>O funcionamento de um modem é assim: Ele é um dispositivo que modula um sinal de portadora analógica para codificar informações digitais e demodula o sinal para decodificar as informações transmitidas.</p>
+
+<p>Modulação e demodulação são operações nas quais um sinal é codificado para transmissão e decodificado na recepção de voz ou dados, com o emprego de modems e sistemas de codificação variados.</p>
+
+<p>Os tipos de modems mais comuns são esses:</p>
+
+<ul>
+    <li><b>Dial-Up</b>: Linha discada, conexão por cabo telefônico, equipamento interno ou externo. Sinal de internet oferecido pela companhia telefônica. Modems típicos. Sistema em desuso.</li>
+    <li><b>DSL</b>: Digital Subscriber Line (Linha Digital de Assinante). Conexão por cabo telefônico, banda larga. Sinal de internet oferecido pela companhia telefônica.</li>
+    <li><b>Cable Modem</b>: Conexão por cabo coaxial, banda larga. O sinal de internet é comumente fornecedi junto com sinais de TV a cabo.</li>
+</ul>
+
+<p>O modem discado, são modems típicos, permitiam a conexão à internet por meio de uma linha discada, com velocidade típica de até 56 kbps. Internos ao PC (onboard/offboard) ou externos. Veja a imagem de uma antiga placa de fax-modem:</p>
+
+<img src="imagens/placa-de-fax-modem.jpg" alt="Placa de Fax-Modem"/>
+
+<p>Já os modems de banda larga, são modems que permitem a conexão de uma rede local à internet por meio de uma conexão de alta velocidade (banda larga). Os dois tipos mais comuns são DSL (Digital Subscriber Line) e Cable Modem.</p>
+
+<p>Os modems DSL são modems que permitem a conexão da rede local à internet usando conexão dedicada de alta velocidade por linha telefônica. Conexão depende da distância. Existem algumas variantes dessa tecnologia como ADSL (mais comum), SDSL, HDSL e VDSL. Veja a imagem de um modem ADSL:</p>
+
+<img src="imagens/modem-dsl.jpg" alt="Modem DSL"/>
+
+<p>Os modems a cabo (coaxial) empregam redes de transmissão de TV a cabo para trafegar a conexão à internet, com compartilhamento de banda entre usuários. Conexão não depende de distância.</p>
+
+<p>Temos também os modens de fibra óptica, mas estes não são chamados assim, e sim de terminais de rede óptica. Isso ocorre porque eles trabalham de forma diferente, transformando sinais ópticos em elétricos/digitais e vice-versa.</p>
+
+<p>A diferença de um modem para roteador, é que o roteador compartilha a conexão com a internet com os dispositivos conectados à rede interna. Quase todos os roteadores banda larga possuem switch integrado (geralmente de 4 portas), para conectar computadores da rede diretamente à rede sem necessidade de outros equipamentos. Muitos também possuem access point integrado para para conexão sem fio. Veja a imagem de um roteador banda larga:</p>
+
+<img src="imagens/roteador-wireless.jpg" alt="Roteador Banda Larga"/>
+
+<p>O gateway trata-se de um dispositivo que combina ambas as funções, contendo um modem e roteador integrados. Muitas vezes possui também um switch integrado, geralmente com 4 portas, e um access point para conexão wi-fi à LAN, além de outras funcionalidades. Veja a imagem de um gateway:</p>
+
+<img src="imagens/gateway.jpg" alt="Gateway"/>
+
+<p>O modem wireless/pen modem é o seguinte: Telefone celulares que acessam a internet possuem um modem embutido que traduz os sinal de ondas de rádio usados para comunicação com as torres de telefonia. Também é possível usar um modem 3G/4G USB para permitir acesso à internet em um PC ou notebook.</p>
+
+<p>Um modem típico não filtra os dados que passam por ele, portanto não possui um sistema de segurança integrado. Alguns equipamentos, porém, possuem mecanismos de segurança embutidos, principalmente appliances que concentram vários dispositivos em um. Conexão via cable modem é compartilhada, e, apesar de criptografada, ainda pode ser um problema potencial de segurança.</p>
+
+<p>Veja o comparativo modem x roteador:</p>
+
+<table>
+    <tr>
+        <th>Característica</th>
+        <th>Modem</th>
+        <th>Roteador</th>
+    </tr>
+    <tr>
+        <td><b>Camada de Rede</b></td>
+        <td>1</td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td><b>Escopo de Rede</b></td>
+        <td>WAN/LAN</td>
+        <td>LAN/MAN/WAN</td>
+    </tr>
+    <tr>
+        <td><b>Função</b></td>
+        <td>Conexão a internet/WAN por meio da transmissão de dados<br/>via cabo coaxial ou linhas telefônicas (par trançado).</td>
+        <td>Comuta redes distintas, ou LAN e modem.</td>
+    </tr>
+    <tr>
+        <td><b>Formato de Dados Transmitidos</b></td>
+        <td>Pacote</td>
+        <td>Pacote</td>
+    </tr>
+    <tr>
+        <td><b>Endereço de Rede</b></td>
+        <td>Nenhum/Endereço IP</td>
+        <td>Endereços IP (WAN + LAN)</td>
+    </tr>
+    <tr>
+        <td><b>Número de Portas</b></td>
+        <td>Duas. Uma conecta ao provedor/WAN e outra ao roteador/computador.</td>
+        <td>Pequeno: 2, 4, 8</td>
+    </tr>
+    <tr>
+        <td><b>Faz NAT?</b></td>
+        <td>Não</td>
+        <td>Sim</td>
+    </tr>
+</table>
+
+<ul>
+    <li><a href="tudo-sobre-redes-11.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-redes-13.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

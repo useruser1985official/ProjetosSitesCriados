@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Objective-C</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Objective-C</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-objectivec-1.html">Tudo sobre Objective-C Parte 1!</a></li>
+                    <li><a href="tudo-sobre-objectivec-2.html">Tudo sobre Objective-C Parte 2!</a></li>
+                    <li><a href="tudo-sobre-objectivec-3.html">Tudo sobre Objective-C Parte 3!</a></li>
+                    <li><a href="tudo-sobre-objectivec-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Objective-C Parte 4!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Objective-C Parte 4</h2>
+
+<h3>Structs</h3>
+
+<p>As structs funcionam exatamente da mesma forma que em C. Veja um exemplo:</p>
+
+<pre>
+<code>
+struct endereco {
+    char rua[50];
+    int numero;
+    long int cep;
+    char bairro[30];
+};
+
+int main(int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    struct endereco novo;
+
+    printf("Digite a rua: ");
+    fgets(novo.rua, 50, stdin);
+    printf("Digite o número: ");
+    scanf("%d", &novo.numero);
+    printf("Digite o CEP: ");
+    scanf("%ld", &novo.cep);
+    printf("Digite o bairro: ");
+    fflush(stdin);
+    scanf("\n");
+    fgets(novo.bairro, 30, stdin);
+
+    NSLog(@"Rua: %s", novo.rua);
+    NSLog(@"Número: %d", novo.numero);
+    NSLog(@"CEP: %ld", novo.cep);
+    NSLog(@"Bairro: %s", novo.bairro);
+
+    [pool drain];
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: Podemos usar também, no lugar de struct, union (que ocupam menos espaços, mas usam o mesmo endereço de memória), veja um exemplo:</p>
+
+<pre>
+<code>
+union exemplo {
+    int inteiro;
+    char caractere;
+};
+</code>
+</pre>
+
+<h3>Enum</h3>
+
+<p>As enums também são utilizadas de forma idêntica à do C, como podem ver:</p>
+
+<pre>
+<code>
+typedef enum {pito = 1, duque, terno, quadra, quina, sena} domino;
+
+int main(int argc, const char *argv[]) {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    domino dados = pito;
+
+    printf("Digite o número do dado: ");
+    scanf("%d", &dados);
+
+    if(dados >= pito && dados <= sena) {
+        switch(dados) {
+            case pito:
+                NSLog(@"%d - Pito", dados);
+                break;
+            case duque:
+                NSLog(@"%d - Duque", dados);
+                break;
+            case terno:
+                NSLog(@"%d - Terno", dados);
+                break;
+            case quadra:
+                NSLog(@"%d - Quadra", dados);
+                break;
+            case quina:
+                NSLog(@"%d - Quina", dados);
+                break;
+            case sena:
+                NSLog(@"%d - Sena", dados);
+                break;
+        }
+    }
+    else {
+        NSLog(@"Dado Inválido!");
+    }
+
+    [pool drain];
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: Caso não inicialize o primeiro item do enum, ele receberá o valor 1.</p>
+
+<p>Podemos também correr os itens do enum num loop:</p>
+
+<pre>
+<code>
+int i;
+for(i = pito; i <= sena; i++) {
+    NSLog(@"%d", dados);
+    dados++;
+}
+</code>
+</pre>
+
+<h3>Escrevendo e Lendo Arquivos</h3>
+
+<p>Para escrever arquivos em Objective-C, podemos fazer assim:</p>
+
+<pre>
+<code>
+char entr[50];
+
+printf("Digite algo pra adicionar no arquivo: ");
+fgets(entr, 50, stdin);
+
+NSFileManager *gerenc = [NSFileManager defaultManager];
+
+NSString *text = [[NSString alloc] initWithUTF8String: entr];
+NSData *dados = [text dataUsingEncoding: NSUTF8StringEncoding];
+
+[gerenc createFileAtPath: @"arquivo.txt" contents: dados attributes: nil];
+</code>
+</pre>
+
+<p>Só que, caso o arquivo já exista, ele sobrescreverá o que está escrito. Para ele não sobrescrever, faça assim:</p>
+
+<pre>
+<code>
+char entr[50];
+
+printf("Digite algo pra adicionar no arquivo: ");
+fgets(entr, 50, stdin);
+
+// Esse modo não cria novo arquivo:
+NSFileHandle *arquivo;
+NSMutableData *dados;
+
+dados = [NSMutableData dataWithBytes: entr length: strlen(entr)];
+arquivo = [NSFileHandle fileHandleForUpdatingAtPath: @"arquivo.txt"];
+
+[arquivo seekToFileOffset: 10];
+[arquivo writeData: dados];
+[arquivo closeFile];
+</code>
+</pre>
+
+<p>Para ler também é simples:</p>
+
+<pre>
+<code>
+NSString *arquivo = [NSString stringWithContentsOfFile: @"arquivo.txt"];
+
+NSLog(@"%@", arquivo);
+</code>
+</pre>
+
+<h3>Argumentos para main, argc e argv</h3>
+
+<p>Quando usamos passagem de parâmetros para a função main, podemos chamar um programa através do terminal pelo nome, podendo enviar um valor, que pode ser tratado dentro do programa através de dois parâmetros, <code>argc</code> e <code>argv</code>, na função main.</p>
+
+<p>A <code>int argc</code> guarda a quantidade de parâmetros informados (1, 2, 3, etc), e a <code>char *argv[]</code> é um array que serve como ponteiro para a matriz de caracteres que armazena os argumentos.</p>
+
+<p>Veja um exemplo de programa que receberá um parâmetro (rodando pelo terminal):</p>
+
+<pre>
+<code>
+#import &lt;Foundation/Foundation.h&gt;
+
+int main(int argc, const char *argv[]) {
+    int cont = 1;
+
+    NSLog(@"Argumentos: %d", argc);
+
+    while(cont < argc) {
+        NSLog(@"Parâmetro Nº%d: %s", cont, argv[cont]);
+        cont++;
+    }
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: O primeiro argumento sempre é o nome do programa, que é exibido quando não é passado nenhum outro argumento.</p>
+
+<p>Assim podemos chamar o programa pelo terminal passando um parâmetro com o nome do programa. E podemos passar outros parâmetros junto com o programa. Isso é útil para programas como navegadores.</p>
+
+
+<ul>
+    <li><a href="tudo-sobre-objectivec-3.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="tudo-sobre-objectivec-5.html">Continuação da Matéria!</a></li>-->
+</ul>
+        </div>
+    </body>
+</html>

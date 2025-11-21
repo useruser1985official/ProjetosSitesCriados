@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Python</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Python</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-python-1.html">Tudo sobre Python Parte 1!</a></li>
+                    <li><a href="tudo-sobre-python-2.html">Tudo sobre Python Parte 2!</a></li>
+                    <li><a href="tudo-sobre-python-3.html">Tudo sobre Python Parte 3!</a></li>
+                    <li><a href="tudo-sobre-python-4.html">Tudo sobre Python Parte 4!</a></li>
+                    <li><a href="tudo-sobre-python-5.html">Tudo sobre Python Parte 5!</a></li>
+                    <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
+                    <li><a href="tudo-sobre-python-7.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Python Parte 7!</a></li>
+                </menu>
+            </header>
+           
+<h2>Tudo sobre Python Parte 7</h2>
+
+<h3>Funções - Parte 2</h3>
+
+<p>A interactive help (ajuda interativa) é algo fácil de ser usado em Python, já que tem a função nativa <code>help()</code>. Podemos ir direto no console Python e digitar isso para o visualizarmos, aí ele entrará no modo help e podemos digitar o nome da função ou atributo interno do Python (por exemplo, o print, o input, o len e o datetime). Ao digitar <code>quit</code> ele sairá desse modo.</p>
+
+<p>Podemos também colocar a ajuda diretamente no script, com a função ou atributo especificado dentro dos parênteses (por exemplo, <code>help(print)</code>.</p>
+
+<p>Podemos imprimir o documento da função ou atributo digitando ele, seguido de __doc__, como por exemplo, <code>print(input.__doc__)</code>.</p>
+
+<p>As docstrings são basicamente, as strings de documentação, como a que acabamos de ver com a função __doc__.</p>
+
+<p>Vamos supor que exista uma função chamada contador com três parâmetros, para início, fim e passo, por exemplo:</p>
+
+<pre>
+<code>
+def contador(i, f, p):
+    c = i
+    while c <= f:
+        print(f"{c} ", end="")
+        c += p
+
+    print("FIM!")
+
+contador(2, 10, 2)
+</code>
+</pre>
+
+<p>Como nós que criamos a função, sabemos como funciona, mas se outro programador ver essa mesma função, poderá não saber como ela funciona exatamente.</p>
+
+<p>Para criar uma docstring, basta colocar dentro da função, antes de qualquer código, um comentário de várias linhas, assim:</p>
+
+<pre>
+<code>
+def contador(i, f, p):
+    """
+    -> Faz uma contagem e mostra na tela.
+    Parâmetro i: Início da Contagem.
+    Parâmetro f: Fim da Contagem.
+    Parâmetro p: Passo da Contagem.
+    """
+    c = i
+    while c <= f:
+        print(f"{c} ", end="")
+        c += p
+
+    print("FIM!")
+
+contador(2, 10, 2)
+
+help(contador)
+</code>
+</pre>
+
+<p>PS: Podemos colocar outros comentários dentro dessas aspas, que aparecerá no help também.</p>
+
+<p>Podemos também usar parâmetros opcionais, para entendermos como funciona, vamos supor uma função soma, assim:</p>
+
+<pre>
+<code>
+def somar(a, b, c):
+    s = a + b + c
+    print(f"A soma vale {s}.")
+
+somar(3, 2, 5)
+</code>
+</pre>
+
+<p>Se colocarmos menos de três parâmetros, ele dará erro, para isso, podemos colocar atribuições padrão nos parâmetros, por exemplo:</p>
+
+<pre>
+<code>
+def somar(a = 0, b = 0, c = 0):
+    s = a + b + c
+    print(f"A soma vale {s}.")
+
+somar(3, 2, 5)
+somar(8, 4)
+somar(7)
+somar()
+</code>
+</pre>
+
+<p>Nesse caso, se ele não receber nenhum valor, ele será atribuído à zero, se receber ele será substituído pelo valor passado.</p>
+
+<p>PS: Nem todos os parâmetros precisam ser inicializados, nesse caso, coloque os parâmetros nos à direita.</p>
+
+<p>Podemos também, na mesma função acima, definir qual valor será passado em cada parâmetro, independente da ordem, por exemplo:</p>
+
+<pre>
+<code>
+somar(b = 4, c = 2)
+somar(c = 3, a = 2)
+</code>
+</pre>
+
+<p>Escopo é o local onde ela existe, se ela existirá no programa todo ou dentro de alguma função.</p>
+
+<p>Veja um exemplo de uso de variável global:</p>
+
+<pre>
+<code>
+def teste():
+    print(f"Na função teste, n vale {n}.")
+
+n = 2 # Variável Global
+
+print(f"No programa principal, n vale {n}.")
+teste()
+</code>
+</pre>
+
+<p>Pode ver que n existe no programa todo, por isso é uma variável global, acessada dentro e fora da função.</p>
+
+<p>Vamos criar uma variável local da função teste, assim:</p>
+
+<pre>
+<code>
+def teste():
+    x = 8 # Variável Local
+    
+    print(f"Na função teste, n vale {n}.")
+    print(f"Na função teste, x vale {x}.")
+
+n = 2 # Variável Global
+
+print(f"No programa principal, n vale {n}.")
+print(f"No programa principal, x vale {x}.") # Dará erro porque a variável x é local da função.
+teste()
+</code>
+</pre>
+
+<p>Como visto acima, o programa não conseguiu acessar x fora da função teste, ela só existe dentro dela. Remova o print do x fora da função e funcionará normalmente.</p>
+
+<p>PS: Variáveis de parâmetros também são locais da função.</p>
+
+<p>Veja outro exemplo:</p>
+
+<pre>
+<code>
+def teste2(b):
+    b += 4 # Variável Local
+    c = 2 # Variável Local
+    print(f"A dentro vale {a}.")
+    print(f"B dentro vale {b}.")
+    print(f"C dentro vale {c}.")
+
+a = 5 # Variável Global
+
+teste2(a)
+print(f"A fora vale {a}.")
+</code>
+</pre>
+
+<p>Como visto acima, a não se alterou e é acessível tanto pra função quanto pra fora dela, e tem escopo global. As b e c são de escopo local.</p>
+
+<p>Caso criemos uma variável a dentro da função, ela será outra variável, de escopo local, por exemplo:</p>
+
+<pre>
+<code>
+def teste2(b):
+    a = 8 # Variável Local, Não é o Mesmo a do Programa Principal
+    b += 4 # Variável Local
+    c = 2 # Variável Local
+    print(f"A dentro vale {a}.")
+    print(f"B dentro vale {b}.")
+    print(f"C dentro vale {c}.")
+
+a = 5 # Variável Global
+
+teste2(a)
+print(f"A fora vale {a}.")
+</code>
+</pre>
+
+<p>Como visto acima, o a da função local tem valor diferente do a global.</p>
+
+<p>Podemos também indicar que a variável é global dentro da função, de forma que ele não crie outra local com o mesmo nome, assim:</p>
+
+<pre>
+<code>
+def teste2(b):
+    global a
+    a = 8 # Variável Global Alterada.
+    b += 4 # Variável Local
+    c = 2 # Variável Local
+    print(f"A dentro vale {a}.")
+    print(f"B dentro vale {b}.")
+    print(f"C dentro vale {c}.")
+
+a = 5 # Variável Global
+
+teste2(a)
+print(f"A fora vale {a}.")
+</code>
+</pre>
+
+<p>No caso acima, o a global é alterado para 8 ao chamar a função. O b recebeu o parâmetro antes do a ser alterado.</p>
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+def funcao():
+    n1 = 4
+    print(f"N1 dentro vale {n1}.")
+
+n1 = 2
+funcao()
+print(f"N1 fora vale {n1}.")
+</code>
+</pre>
+
+<p>No caso acima, o n1 de dentro da função também não é o mesmo n1 do programa principal.</p>
+
+<p>As funções também podem retornar valores, usando a palavra <code>return</code>, vamos voltar à função somar, como estava:</p>
+
+<pre>
+<code>
+def somar(a = 0, b = 0, c = 0):
+    s = a + b + c
+    print(f"A soma vale {s}.")
+
+somar(3, 2, 5)
+somar(1, 7)
+somar(4)
+</code>
+</pre>
+
+<p>Alterada com retorno, ficaria assim:</p>
+
+<pre>
+<code>
+def somar(a = 0, b = 0, c = 0):
+    s = a + b + c
+    return s
+
+print(somar(3, 2, 5))
+</code>
+</pre>
+
+<p>Aí, a função receberá um valor de retorno, e pode ser usada como uma variável, sendo atribuída a uma variável comum ou colocada no print.</p>
+
+<p>PS: Qualquer tipo de valor pode ser retornado, como string, inteiro, booleano, listas, dicionários, objetos, etc.</p>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+def somar(a = 0, b = 0, c = 0):
+    s = a + b + c
+    return s
+
+r1 = somar(3, 2, 5)
+r2 = somar(1, 7)
+r3 = somar(4)
+
+print(f"Meus cálculos deram {r1}, {r2} e {r3}.")
+</code>
+</pre>
+
+<p>Vamos fazer um programa pra calcular fatoriais:</p>
+
+<pre>
+<code>
+def fatorial(num = 1):
+    f = 1 # Local
+
+    for c in range(num, 0, -1):
+        f *= c
+
+    return f
+
+n = int(input("Digite um número: "))
+
+print(f"O fatorial de {n} é igual à {fatorial(n)}.")
+</code>
+</pre>
+
+<p>Podemos fazer assim com a função acima:</p>
+
+<pre>
+<code>
+f1 = fatorial(5)
+f2 = fatorial(4)
+f3 = fatorial()
+
+print(f"Os resultados são {f1}, {f2} e {f3}.")
+</code>
+</pre>
+
+<p>Outro exemplo, com valores booleanos:</p>
+
+<pre>
+<code>
+def par(n = 0):
+    if n % 2 == 0:
+        return True
+    else:
+        return False
+
+num = int(input("Digite um número: "))
+print(par(num))
+</code>
+</pre>
+
+<p>Usando a mesma função acima, podemos exibir assim:</p>
+
+<pre>
+<code>
+if par(num): # O mesmo que par(num) == True
+    print("É Par!")
+else:
+    print("É Ímpar!")
+</code>
+</pre>
+
+<p>Temos também as expressões Lambda em Python, que são pequenas funções sem nome, usadas com uma variável, dessa forma:</p>
+
+<pre>
+<code>
+mensagem = lambda: print("Expressão Lambda Exibida com Sucesso!")
+
+mensagem() # Exibição de lambda
+</code>
+</pre>
+
+<p>Quando precisar usar uma expressão Lambda com retorno, nem precisa indicar return, e quando tiver parâmetros basta escrever eles após a palavra lambda, separados por vírgulas, assim:</p>
+
+<pre>
+<code>
+produto = lambda n1, n2: n1 * n2
+
+print(f"O resultado da multiplicação é {produto(5, 2)}.") # Exibição de lambda com retorno
+</code>
+</pre>
+
+<h3>Módulos e Pacotes</h3>
+
+<p>Imagina que temos um programa grande, como o de um cadastro, se colocássemos todas as funções num arquivo só seria complicado pra entender e mantê-lo, pra isso surgiu os módulos, que nos permite dividir um programa grande.</p>
+
+<p>Vamos supor a seguinte função:</p>
+
+<pre>
+<code>
+num = int(input("Digite um número: "))
+
+fat = fatorial(num)
+
+print(f"O fatorial de {num} é {fat}.")
+</code>
+</pre>
+
+<p>A função fatorial não existe no Python, teremos que criá-la, e faríamos assim:</p>
+
+<pre>
+<code>
+def fatorial(n):
+    f = 1
+    
+    for c in range(1, n + 1):
+        f *= c
+
+    return f
+</code>
+</pre>
+
+<p>Até agora, colocamos tudo isso num arquivo só.</p>
+
+<p>Mas vamos supor que no mesmo programa temos mais funções, por exemplo:</p>
+
+<pre>
+<code>
+def fatorial(n):
+    f = 1
+
+    for c in range(1, n + 1):
+        f *= c
+
+    return f
+
+def dobro(n):
+    return n * 2
+
+def triplo(n):
+    return n * 3
+
+num = int(input("Digite um número: "))
+
+fat = fatorial(num)
+
+print(f"O fatorial de {num} é {fat}.")
+print(f"O dobro de {num} é {dobro(num)}.")
+</code>
+</pre>
+
+<p>Dessa forma, podemos criar os módulos, fazemos isso criando um arquivo no projeto (por exemplo, uteis.py), e colocando as funções dentro dele:</p>
+
+<pre>
+<code>
+def fatorial(n):
+    f = 1
+
+    for c in range(1, n + 1):
+        f *= c
+
+    return f
+
+def dobro(n):
+    return n * 2
+
+def triplo(n):
+    return n * 3
+</code>
+</pre>
+
+<p>E para importar, faça da mesma forma que outros módulos, colocando o nome do arquivo seguido da função, assim:</p>
+
+<pre>
+<code>
+import uteis
+
+num = int(input("Digite um número: "))
+
+fat = uteis.fatorial(num)
+
+print(f"O fatorial de {num} é {fat}.")
+print(f"O dobro de {num} é {uteis.dobro(num)}.")
+</code>
+</pre>
+
+<p>Podemos também importar funções específicas assim:</p>
+
+<pre>
+<code>
+from uteis import fatorial, dobro
+
+num = int(input("Digite um número: "))
+
+fat = fatorial(num)
+
+print(f"O fatorial de {num} é {fat}.")
+print(f"O dobro de {num} é {dobro(num)}.")
+</code>
+</pre>
+
+<p>PS: Apesar de possível, não é recomendado importar duas ou mais funções de um módulo separando por vírgulas.</p>
+
+<p>Podemos observar que usamos isso de forma parecida com o uso de módulos nativos do Python, como o math e o datetime.</p>
+
+<p>As vantagens da modularização são várias, como organização do código, facilidade na manutenção, ocultação de código detalhado, reutilização em outros projetos, etc.</p>
+
+<p>Temos também os pacotes no Python, que são como as bibliotecas de outras linguagens.</p>
+
+<p>Caso os módulos também fiquem muito grandes, podemos separar em vários arquivos, que podem ser juntados em pacotes (por exemplo, o uteis pode ser um pacote com vários módulos separados, como o de números, strings, datas e cores, etc.)</p>
+
+<p>Dentro do Python, assim como todo arquivo Python é um módulo, toda pasta é um pacote, e dentro do pacote podemos ter outros pacotes (por exemplo, o uteis pode ter pastas para arquivos de números, strings, etc). Cada pacote tem dentro dele um arquivo chamado __init__.py, que é onde temos nossos módulos.</p>
+
+<p>Dentro do Pycharm, exclua o arquivo uteis.py e crie um pacote Python com o nome de uteis. Dentro de uteis, crie outros pacotes com o nomes especificados acima.</p>
+
+<p>Vamos no pacote numeros e coloque as funções dentro dele, e no arquivo principal altere dessa forma:</p>
+
+<pre>
+<code>
+from uteis import numeros
+
+num = int(input("Digite um número: "))
+
+fat = numeros.fatorial(num)
+
+print(f"O fatorial de {num} é {fat}.")
+print(f"O dobro de {num} é {numeros.dobro(num)}.")
+</code>
+</pre>
+
+<h3>Tratamento de Erros e Exceções</h3>
+
+<p>Vamos supor um exemplo de erro (por exemplo, usar <code>primt(x)</code>), isso é um erro de sintaxe, mas também tem casos que mesmo sem esse tipo de problema, o programa dá algum erro, vamos supor por exemplo:</p>
+
+<pre>
+<code>
+print(x)
+</code>
+</pre>
+
+<p>Como a variável x não foi inicializada, ele vai dar um erro semântico, e no PyCharm aparece os erros vermelhos, que é o significado do erro. Nesse caso é chamado de exceção, e no caso foi a "NameError".</p>
+
+<p>Veja outro exemplo que soltará uma exceção, caso não seja inserido um número:</p>
+
+<pre>
+<code>
+n = int(input("Número: "))
+print(f"Você digitou o número {n}.")
+</code>
+</pre>
+
+<p>Ele soltará a exceção "ValueError", nesse caso.</p>
+
+<p>Outro exemplo que pode dar exceção:</p>
+
+<pre>
+<code>
+a = int(input("Numerador: "))
+b = int(input("Denominador: "))
+r = a / b
+print(f"O resultado é {r}.")
+</code>
+</pre>
+
+<p>Ao colocar denominador "0", ele dará a exceção "ZeroDivisionError".</p>
+
+<p>Veja esse outro exemplo, que gerará o erro "TypeError":</p>
+
+<pre>
+<code>
+r = 2 / "2"
+</code>
+</pre>
+
+<p>Esse exemplo dará um "IndexError":</p>
+
+<pre>
+<code>
+lst = [3, 6, 4]
+print(lst[3])
+</code>
+</pre>
+
+<p>Ao tentar importar um módulo que não existe, gerará a exceção "ModuleNotFoundError".</p>
+
+<p>Resumindo, as exceções são mensagens disparadas ao ter um erro semântico no programa, que interromperá a execução dele e mostrará um aviso dela.</p>
+
+<p>Existem muitas exceções em Python, mas a maioria das exceções conseguimos identificar ao fazermos nossos programas com esses erros, e posteriormente tratá-las. Elas são filhas da classe Exception no Python.</p>
+
+<p>Pra tratar exceções em Python, usamos a estrutura try except, dessa forma:</p>
+
+<pre>
+<code>
+try:
+    # Código a tentar ser executado
+except:
+    # Código a ser executado caso o try tenha uma falha
+else:
+    # Código a ser executado caso o try não dê erro
+finally:
+    # Código a ser executado sempre
+</code>
+</pre>
+
+<p>Eles sempre tem que estar nessa ordem, try, except, else e finally, mas else e finally são opcionais.</p>
+
+<p>Veja como ficará o programa de divisão assim:</p>
+
+<pre>
+<code>
+try:
+    a = int(input("Numerador: "))
+    b = int(input("Denominador: "))
+    r = a / b
+except:
+    print("Infelizmente deu erro! :(")
+else:
+    print(f"O resultado é {r:.1f}.")
+finally:
+    print("Volte Sempre!")
+</code>
+</pre>
+
+<p>No caso acima, o erro foi tratato e se tentarmos dividir por zero ou inserir uma string, ele exibirá a nossa mensagem.</p>
+
+<p>Podemos jogar a exceção numa variável, assim:</p>
+
+<pre>
+<code>
+try:
+    a = int(input("Numerador: "))
+    b = int(input("Denominador: "))
+    r = a / b
+except Exception as erro:
+    print(f"Problema encontrado foi {erro.__class__}.")
+else:
+    print(f"O resultado é {r:.1f}.")
+finally:
+    print("Volte Sempre!")
+</code>
+</pre>
+
+<p>Toda estrutura try pode ter mais de um except, cada um com seu erro especificado, ao invés de colocar um except genérico, por exemplo:</p>
+
+<pre>
+<code>
+try:
+    a = int(input("Numerador: "))
+    b = int(input("Denominador: "))
+    r = a / b
+except (ValueError, TypeError):
+    print("Tivemos um problema com os tipos!")
+except ZeroDivisionError:
+    print("Não é possível dividir por zero!")
+except KeyboardInterrupt:
+    print("Não foram informados os dados.")
+except Exception as erro:
+    print(f"O erro encontrado foi {erro.__class__}.")
+else:
+    print(f"O resultado é {r:.1f}.")
+finally:
+    print("Volte Sempre!")
+</code>
+</pre>
+
+<p>PS: Ao testar um programa com exceções, teste fazendo o certo primeiro, pra depois provocar as exceções.</p>
+
+<p>Veja esse exemplo com arquivos:</p>
+
+<pre>
+<code>
+try:
+    arquivo = open("arquvo.txt", "rt")
+
+    for l in arquivo:
+        print(l)
+
+    arquivo.close()
+except:
+    print("Arquivo não Encontrado!")
+</code>
+</pre>
+
+<p>Podemos também criar nossas próprias condições para exceções, usando um if e o comando <code>raise</code>, assim:</p>
+
+<pre>
+<code>
+try:
+    sexo = str(input("Digite o sexo [M/F]: ")).strip().upper()[0]
+
+    if sexo not in "MmFf":
+        raise Exception("Não foi inserido um sexo válido!")
+except Exception as erro:
+    print(erro)
+else:
+    print(f"O sexo digitado foi {sexo}.")
+</code>
+</pre>
+
+<p>No caso acima, ele tentará executar o programa, e caso o sexo inserido não seja M ou F, ele lançará a exceção Exception e interromperá a execução no try, passando a executar o except especificado.</p>
+
+<p>O ideal é colocar o raise numa função, dessa forma:</p>
+
+<pre>
+<code>
+def verifSexo(sexo):
+    if sexo not in "MmFf":
+        raise Exception("Não foi inserido um sexo válido!")
+
+    print(f"O sexo digitado foi {sexo}.")
+
+try:
+    s = str(input("Digite o sexo [M/F]: ")).strip().upper()[0]
+
+    verifSexo(s)
+except Exception as erro:
+    print(erro)
+</code>
+</pre>
+
+<p>PS: É interessante colocar a cor vermelha nas exceções criadas.</p>
+
+<ul>
+    <li><a href="tudo-sobre-python-6.html">Parte Anterior da Matéria!</a></li>
+    <!-- <li><a href="tudo-sobre-python-8.html">Continuação da Matéria!</a></li> -->
+</ul>
+
+        </div>
+    </body>
+</html>

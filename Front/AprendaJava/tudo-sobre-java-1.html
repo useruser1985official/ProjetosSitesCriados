@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-2.html">Tudo sobre Java Parte 2!</a></li>
+                    <li><a href="tudo-sobre-java-3.html">Tudo sobre Java Parte 3!</a></li>
+                    <li><a href="tudo-sobre-java-4.html">Tudo sobre Java Parte 4!</a></li>
+                    <li><a href="tudo-sobre-java-5.html">Tudo sobre Java Parte 5!</a></li>
+                    <li><a href="tudo-sobre-java-6.html">Tudo sobre Java Parte 6!</a></li>
+                    <li><a href="tudo-sobre-java-7.html">Tudo sobre Java Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java Parte 1</h2>
+
+<h3>Começando a Programar em Java</h3>
+
+<p>Todo programa em Java é composto de pacotes, definidos com <code>package</code>, mas o que realmente importa é que toda classe Java tem que ter o cabeçalho da classe, definido com <code>public class</code> (classe pública). Dentro do bloco da classe criamos o método (função) principal (<code>public static void main</code>). Veja a estrutura básica de um programa em Java:</p>
+
+<pre>
+<code>
+package primeiroprograma;
+
+public class PrimeiroPrograma {
+    public static void main(String[] args) {
+        
+    }
+}
+</code>
+</pre>
+
+<p>No caso acima, o public static void main nada mais é do que um método (função) público, estático, vazio e principal. O <code>public static</code> indica que o método deverá ser toalmente acessível e estático. O <code>void</code> indica que o método não dará retorno nenhum. O <code>main</code> é o nome do método e indica que é principal. O <code>String[] args</code> é um vetor que o método main recebe como argumento.</p>
+
+<p>Cuidado com os usos de minúsculas e maiúsculas no Java, pois determinadas coisas já são diferenciadas por isso, por exemplo:</p>
+
+<ul>
+    <li>Pacotes = Todas minúsculas.</li>
+    <li>Classes e Interfaces = Primeira maiúscula (pascalcase permitido).</li>
+    <li>Métodos, Atributos e Variáveis = primeira minuscula e camelcase.</li>
+    <li>Constantes = Todas maiúsculas (recomendado, não obrigatório).</li>
+</ul>
+    
+<p>O comando pra escrever na tela (nesse caso, no prompt ou num programa), usamos o comando <code>System.out.print()</code>.</p>
+
+<p>Para criar um programa Java simples, abrimos um novo projeto e criamos a classe principal normalmente. O comando básico é o primeiro acima, mas as IDEs costumam o escrever automaticamente.</p>
+
+<p>Veja o comando para executar uma frase no Prompt com o comando System.out.print:</p>
+
+<pre>
+<code>
+package primeiroprograma;
+
+public class PrimeiroPrograma {
+    public static void main(String[] args) {
+        System.out.print("Olá, Mundo!");
+    }
+}
+</code>
+</pre>
+
+<p>Depois é só executar para testar. Se funcionar, pode ser construído e executado em qualquer sistema que tenha o JRE instalado.</p>
+
+<p>PS: você pode escrever <code>sout</code> e teclar o tab que aparecerá System.out.println. Se fizer o mesmo com <code>psvm</code> Aparecerá a estrutura básica do método principal. O System.out.println pula uma linha, mas tirando isso, é a mesma coisa que System.out.print. Lembrando também que este e vários outros comandos devem ser finalizados com ponto-e-vírgula (;), pois é um padrão que existe desde a linguagem C.</p>
+
+<p>Os comentários de uma linha se colocam ao lado de <code>//</code>, e de várias linhas entre <code>/* */</code>, por exemplo:</p>
+
+<pre>
+<code>
+// Comentário de uma linha
+
+/*
+Comentário
+de
+várias
+linhas
+*/
+</code>
+</pre>
+
+<p>Para importar datas, podemos usar o código assim (não esqueça dos imports <code>java.util.Date</code> e <code>java.text.SimpleDateFormat</code>, mas a própria IDE vai sugerir as importações):</p>
+
+<pre>
+<code>
+package horadosistema;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+public class HoraDoSistema {
+    public static void main(String[] args) {
+        Date atual = new Date();
+        SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy"); // Formata data, se colocar 3 M ele exibe o nome abreviado, e 4 ou mais exibe o nome completo.
+        SimpleDateFormat formataHora = new SimpleDateFormat("HH:mm:ss"); // Formata hora, se quiser formato 12 horas, coloque os dois hh minúsculos, uma letra a exibe o AM/PM.
+        SimpleDateFormat formataSemana = new SimpleDateFormat("EEEE"); // Exibe o dia da semana por extenso, com 3 E ou menos  exibe abreviado.
+        System.out.print("A data do sistema é: ");
+        System.out.println(formataData.format(atual));
+        System.out.println(formataSemana.format(atual));
+        System.out.print("A hora do sistema é: ");
+        System.out.println(formataHora.format(atual)); 
+    }
+}
+</code>
+</pre>
+
+<p>PS: O new identifica a criação de um objeto.</p>
+
+<p>Caso for usar uma palavra dentro do SimpleDateFormat, coloque aspas simples pra ele não confundir com os caracteres de formatação, assim:</p>
+
+<pre>
+<code>
+SimpleDateFormat formataData = new SimpleDateFormat("EEEE',' dd 'de' MMMM 'de' yyyy");
+</code>
+</pre>
+
+<p>Use o exemplo acima para mostrar o idioma do sistema e a resolução da tela.</p>
+
+<p>Para exibir o idioma (não esqueça da importação para <code>java.util.Locale</code>):</p>
+
+<pre>
+<code>
+package idiomadosistema;
+
+import java.util.Locale;
+
+public class IdiomaDoSistema {
+    public static void main(String[] args) {
+        Locale loc = Locale.getDefault();
+        
+        System.out.println(loc.getDisplayLanguage().substring(0, 1).toUpperCase() + loc.getDisplayLanguage().substring(1)); // Exibe inteiro, esse é um macete pra deixar só a primeira letra maiúscula.
+        System.out.println(loc.getLanguage().toUpperCase()); // Exibe abreviado.
+        
+        // O método deixa só a primeira maiúscula
+        // O método toUpperCase() deixa todas maiúsculas.
+    }
+}
+</code>
+</pre>
+
+<p>Para exibir a resolução da tela:</p>
+
+<pre>
+<code>
+package resolucaodatela;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+public class ResolucaoDaTela {
+    public static void main(String[] args) {
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension d = tk.getScreenSize();
+        System.out.println(d.width + " x " + d.height);
+    }
+}
+</code>
+</pre>
+
+<p>Após construir o programa, ele só poderá ser executado na linha de comando, ao clicar nele, é provável que ele execute e feche. Para executar, você deve ir na linha de comando, procurar o caminho do arquivo (com o comando <code>cd</code>) e executar o executável com o comando <code>java -jar</code>, dessa forma:</p>
+
+<pre>
+<code>
+java -jar OlaMundo.jar
+</code>
+</pre>
+
+<p>Lembrando que essa não é a única forma de criar programas Java.</p>
+
+<p>O Java não é usado só em computador, o System.out pode ser qualquer saída. O Java é utilizado também em celulares (principalmente os mais antigos), placares, letreiros, decodificadores de sinais, velocímetros eletrônicos ou relógios compatíveis, além de poder rodar em qualquer sistema operacional. Teoricamente, qualquer sistema que tenha uma Java Virtual Machine rodaria os programas Java (pacotes com extensão jar contendo classes compiladas class), o que possibilita criarmos um programa Java em Windows e ele poder rodar num Linux ou num Mac, por exemplo. O próprio Android tem seus aplicativos feitos em Java (só que nesse caso ele gera um pacote de extensão apk com classes compiladas dex, e é interpretado na máquina virtual do Android Dalvik) e possuí outras bibliotecas.</p>
+
+<p>PS: Você pode criar arquivos de classe java numa pasta (pacote) e compilar sem IDE. Para isso, crie uma pasta, que será o pacote, e um arquivo java que será a classe (como Teste.java). Vá até ao diretório da pasta e digite o comando <code>javac teste/Teste.java</code> (substituindo pelo nome do pacote e da classe, caso tenha mais de um arquivo no mesmo pacote, execute apenas o que tiver o método main), ele compilará para um arquivo CLASS que pode ser executado diretamente via terminal, usando algo tipo <code>java teste/Teste</code>, e para isso devemos configurar o path corretamente. Para gerar o Jar dessa classe, digite <code>jar cfe Teste.jar teste/Teste teste/Teste.class</code>. Para ver a versão do Java instalada, digite <code>java -version</code>.</p>
+
+<h3>Introdução ao Java Swing e JavaFX</h3>
+
+<p>O Java funciona por pacotes, é meio que como um carro popular (que só vem o básico, e outros itens você vai adicionando). Todo carro básico tem por exemplo, volante, mas não vem por exemplo, com ar-condicionado, que tem que ser adicionado. Vendo o Java como um carro popular, os pacotes que já existem não precisam importar (como para fazer contas), mas os que não possuí pode ser importado (apenas o pacote <code>java.lang</code> é carregado automaticamente por padrão), na verdade, a maioria deve ser importada.</p>
+
+<p>Com o pacote Swing, você pode criar interfaces gráficas. Ele é um sucessor do AWT (que ainda é usado), mas este se comporta de maneira diferente em outros sistemas que não sejam o Windows.</p>
+
+<p>As interfaces gráficas também são feitas baseadas em orientação a objetos, pois elas são criadas facilmente graças ao conceito de herança.</p>
+
+<p>Para criar um programa Java com Swing, cria-se o projeto da mesma forma anterior, mas sem criar a classe principal (essa será definida ao testar a execução do programa pela primeira vez). Nos pacotes de códigos-fontes, clique no Pacote Default com o botão direito, em Novo e em Outros, escolha Forms Gui Swing e Form JFrame. Defina o nome da Classe (primeira maiúscula com pascalcase) e do Pacote (todas em minusculas). A janela será aberta para configurar o layout dela e o código-fonte.</p>
+
+<p>Após definir os nomes das variáveis, você poderá mexer no código-fonte.</p>
+
+<p>PS: Se quiser evitar que o aplicativo tenha a janela redimensionada, clique no iframe e desmarque a opção "resizable" (que pode também ser feita com o <code>this.setResizable(false)</code>, abaixo de initComponents(), no construtor). Se quiser colocar título na janela do programa Java Swing, coloque <code>this.setTitle("Título Desejado")</code> abaixo do InitComponents() dentro do construtor, no código (também é possível pelas propriedades do frame). Da mesma forma, pra centralizar, coloque <code>setLocationRelativeTo(null)</code> no mesmo local (ou nas propriedades vá em código e marque a opção de centralizar). E no mesmo local, para mudar a cor de fundo do frame, colocamos <code>getContentPane().setBackground(Color.BLUE)</code> (substituindo pela cor desejada), mas é recomendado usar um painel pra isso.</p>
+
+<p>No exemplo abaixo, você clicará com o botão direito sobre o botão do frame para definir o evento (vá em Eventos, Action e ActionPerformed, onde está o nome da variável).</p>
+
+<p>Ele criará um código grande para definir o layout da janela, mas essa será a parte do código que você precisará digitar pra exibir uma mensagem no programa:</p>
+
+<pre>
+<code>
+private void cliqueBotaoActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    labelMensagem.setText("Olá, Mundo");
+} 
+</code>
+</pre>
+
+<p>O JavaFX é uma evolução do Swing, não é tão usada, mas futuramente será mais usada, ele ainda não é compatível com todos os dispositivos. O JavaFX cria interfaces mais complexas que o Swing.</p>
+
+<p>Abra um novo projeto JavaFX e escolha Aplicação FXML do JavaFX (pode escolher a classe normalmente). Essa aplicação permite unir Java com HTML, CSS e XML. Ele criará vários arquivos, inclusive um FXML, clique duas vezes nele para abrir o Java Scene Builder para poder criar as janelas. Se ele não criar, crie o AnchorPane, que criará o painel (frame) para o sistema (que pode ser navegador, celular e etc.), da mesma forma, labels e botões são escolhidos.</p>
+
+<p>PS: Não Esqueça de ir no Code alterar os nomes das IDs. Só depois disso você salva. Você pode editar diretamente o XML se for o caso.</p>
+
+<p>No Document Controller, você criará algo assim, abaixo do primeiro @FXML:</p>
+
+<pre>
+<code>
+@FXML
+private Label labelMensagem;
+@FXML
+private Button botaoClicar;
+</code>
+</pre>
+
+<p>PS: No código acima, terá que adicionar a importação do botão para JavaFX, será algo assim:</p>
+
+<pre>
+<code>
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+</code>
+</pre>
+
+<p>No Scene Builder, em Code, coloque em OnAction o nome do evento do botão (no exemplo, será "clicouBotao").</p>
+
+<p>Na IDE, ainda em Document Controller, coloque abaixo do segundo @FXML isso:</p>
+
+<pre>
+<code>
+@FXML
+private void clicouBotao(ActionEvent event) {
+    labelMensagem.setText("Olá, Mundo!");
+}
+</code>
+</pre>
+
+<p>PS: Tanto no Swing quanto no FX podemos também mudar a cor do nosso label, usando constantes, por exemplo:</p>
+
+<pre>
+<code>
+labelMensagem.setForeground(Color.RED); // Importe java.awt.Color
+</code>
+</pre>
+
+<p>Execute, se funcionar, pode compilar ele.</p>
+
+<p>Lembrando que caso o programa não abra ao executar, vá no documento FXML e na tag Anchor Pane, coloque <code>fx:controller="nomedopacotedoprojeto.FXMLDocumentController"</code>. Ou dentro o Scene, vá em Controller e Controller Class.</p>
+
+<p>PS: Caso não queira que o aplicativo seja maximixado, coloque isso na classe principal java (com o nome do aplicativo), no método start. No mesmo local, podemos colocar um título:</p>
+
+<pre>
+<code>
+stage.setScene(scene);
+stage.setResizable(false);
+stage.setTitle("Olá Mundo!");
+stage.show();
+</code>
+</pre>
+
+<p>Vamos num exemplo, fazer um programa em Swing onde ele pega o horário do sistema, e inseriremos imagens no programa. Crie o projeto Swing e o frame normalmente. Depois, nos Pacotes de Códigos-fonte, crie um novo pacote para as imagens.</p>
+
+<p>Para colocar imagem, crie um label e em Icon, procure a imagem no seu computador, importe ela para o pacote de imagens, logo ela será carregada no frame. Não esqueça de clicar em "Importar Arquivo para o Projeto" e verificar se ela está no pacote criado pra imagens!</p>
+
+<p>Veja abaixo o código para o botão funcionar (não esqueça das importações):</p>
+
+<pre>
+<code>
+private void botaoClicarActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    Date atual = new Date();
+    SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat formataHora = new SimpleDateFormat("HH:mm:ss");
+    labelData.setText(formataData.format(atual));
+    labelHora.setText(formataHora.format(atual));
+}
+</code>
+</pre>
+
+<p>Lembrando que para pegar o arquivo JAR pronto, após compilar, basta ir na pasta de projetos da IDE, e procurar ele na pasta dist (geralmente), e ele poderá ser executado em qualquer sistema com JRE instalado, e clicando diretamente nele.</p>
+
+<p>Faça os exercícios de pegar Idioma do Sistema e Resolução de Tela igual no anterior, mas em Java Swing. E colocando imagens também.</p>
+
+<p>PS: Mesmo que o java.lang seja carregado por padrão, podemos fazer uma importação direta de algum objeto ou classe. Veja um exemplo de importação direta do objeto out:</p>
+
+<pre>
+<code>
+import static java.lang.System.out; // Nesse caso tem que colocar o static no caso de métodos ou atributos estáticos, na maioria dos casos não se coloca o static
+
+public class Teste {
+    public static void main(String[] args) {
+        out.println("Olá, Mundo!");
+    }
+}
+</code>
+</pre>
+
+<h3>Tipos Primitivos e Manipulação de Dados</h3>
+
+<p>Existem três maneiras básicas para fazer declarações de tipos primitivos no Java. Pra atribuir uma idade, por exemplo, fazemos dessas formas:</p>
+
+<p>Maneira mais simples, com a declaração no início:</p>
+
+<pre>
+<code>
+int idade = 3;
+float sal = 1825.54f;
+char letra = 'G';
+boolean casado = false;
+</code>
+</pre>
+
+<p>PS: Observe que números reais tem que ter o <code>f</code> no final, em Java. O <code>char</code> não permite mais de uma letra e tem que usar aspas simples.</p>
+
+<p>Declaração especificando com typecast (para considerar o número como inteiro, número com ponto como real e assim por diante):</p>
+
+<pre>
+<code>
+int idade = (int)3;
+float sal = (float)1825.54;
+char letra = (char)'G';
+boolean casado = (boolean)false;
+</code>
+</pre>
+
+<p>Usando classes (nesse caso eles são objetos, não variáveis comuns):</p>
+
+<pre>
+<code>
+Integer idade = new Integer(3);
+Float sal = new Float(1825.54);
+Character letra = new Character('G');
+Boolean casado = new Boolean(false);
+</code>
+</pre>
+
+<p>Na última, <code>Integer</code>, <code>Float</code>, <code>Character</code> e <code>Boolean</code> não são tipos, são classes. O <code>new</code> indica que o conteúdo não é uma variável, e sim a criação de um objeto. O número será considerado inteiro e colocado dentro do objeto, o mesmo acontece com as outras classes. O nome que se dá a esse tipo de classe é Wrapper Class (wrapper é invólucro).</p>
+
+<p>PS: Evite de criar variáveis com Classes usando o new desnecessariamente, pois caso ele estivesse num loop, ele criará novas instâncias do mesmo objeto em cada repetição, que deixará o programa pesado. Podemos usar a classe invólucro e iniciar como um tipo primitivo comum nesse caso, dessa forma:</p>
+
+<pre>
+<code>
+Integer idade = 3;
+Float sal = 1825.54f;
+Character letra = 'G';
+Boolean casado = false;
+</code>
+</pre>
+
+<p>Veja uma tabela com os tipos suportados pelo Java:</p>
+
+<table>
+    <tr>
+        <th>Família</th>
+        <th>Tipo Primitivo</th>
+        <th>Classe Invólucro</th>
+        <th>Tamanho</th>
+        <th>Exemplo</th>
+    </tr>
+    <tr>
+        <td class="negrito">Lógico</td>
+        <td>boolean</td>
+        <td>Boolean</td>
+        <td>1 bit</td>
+        <td>true</td>
+    </tr>
+    <tr>
+        <td class="negrito" rowspan="2">Literais</td>
+        <td>char</td>
+        <td>Character</td>
+        <td>1 byte</td>
+        <td>'A'</td>
+    </tr>
+    <tr>
+        <td>-</td>
+        <td>String</td>
+        <td>1 byte por letra</td>
+        <td>"Java"</td>
+    </tr>
+    <tr>
+        <td class="negrito" rowspan="4">Inteiros</td>
+        <td>byte</td>
+        <td>Byte</td>
+        <td>1 byte</td>
+        <td>127</td>
+    </tr>
+    <tr>
+        <td>short</td>
+        <td>Short</td>
+        <td>2 bytes</td>
+        <td>32767</td>
+    </tr>
+    <tr>
+        <td>int</td>
+        <td>Integer</td>
+        <td>4 bytes</td>
+        <td>2147483</td>
+    </tr>
+    <tr>
+        <td>long</td>
+        <td>Long</td>
+        <td>8 bytes</td>
+        <td>2<sup>63</sup></td>
+    </tr>
+    <tr>
+        <td class="negrito" rowspan="2">Reais</td>
+        <td>float</td>
+        <td>Float</td>
+        <td>4 bytes</td>
+        <td>3.4e<sup>+38</sup></td>
+    </tr>
+    <tr>
+        <td>double</td>
+        <td>Double</td>
+        <td>8 bytes</td>
+        <td>1.8e<sup>+308</sup></td>
+    </tr>
+</table>
+
+<p>Podem ver que, para guardar strings, não usamos tipos, e sim a classe <code>String</code>, ela não tem limite de tamanho e tem que usar aspas duplas. Em tipo <code>byte</code> e classe <code>Byte</code> não dá pra armazenar números maiores que 127, na tabela acima, inclusive, estão os números máximos de todos. Esses vários tipos primitivos existem para o caso de criar aplicativos para pequenos aparelhos (como um pequeno relógio em Java) ou aplicativos maiores, para economizar dados, se preciso.</p>
+
+<p>PS: As classes invólucros devem ser utilizadas em casos como parâmetros de entidades genéricas, quando precisamos de métodos estáticos dessas classes e principalmente quando precisamos atribuir <code>null</code> à variável, já que, por elas serem classes, permitem valores nulos, coisas que os tipos primitivos comuns não permitem.</p>
+
+<p>Agora vamos mostrar saída de dados usando os tipos primitivos, usando o simples método, faça uma aplicação Java nova, assim:</p>
+
+<pre>
+<code>
+public static void main(String[] args) {
+    float nota = 8.5f;
+    System.out.println("A nota é " + nota);
+}
+</code>
+</pre>
+
+<p>Também podemos usar o comando <code>System.out.printf</code> para formatar números, usando o <code>%f</code>, dessa forma:</p>
+
+<pre>
+<code>
+System.out.printf("A nota é %f\n", nota);
+</code>
+</pre>
+
+<p>E também podemos formatar a quantidade de números decimais usando a máscara com o número de casas e a letra f, dessa forma:</p>
+
+<pre>
+<code>
+System.out.printf("A nota é %.2f\n", nota);
+</code>
+</pre>
+
+<p>PS: Esse uso da porcentagem para formatação se chama máscara de formatação. E note também que nesse caso deve se usar vírgulas ao invés de mais, porque não é concatenação e sim formatação. E note que o <code>\n</code> é para quebrar a linha, essas já são chamadas de sequências de escape e podem ser usadas em qualquer situação. Todas são originárias da linguagem C e são usadas em várias outras descendentes, como o próprio Java.</p>
+
+<p>As máscaras também podem ser usadas em outros casos, como nesse:</p>
+
+<pre>
+<code>
+public static void main(String[] args) {
+    String nome = "Gustavo";
+    float nota = 8.5f;
+    System.out.printf("A nota de %s é %.1f\n", nome, nota);
+}
+</code>
+</pre>
+
+<p>Podemos utilizar <code>format</code> no lugar de <code>printf</code>, dessa forma:</p>
+
+<pre>
+<code>
+System.out.format("A nota de %s é %.1f\n", nome, nota);
+</code>
+</pre>
+
+<p>Existe também o <code>String.format()</code>, que funciona do mesmo modo, ele é usado dentro de métodos de componentes Swing, JavaFX, JOptionPane e outros.</p>
+
+<p>Essas são algumas das máscaras aceitas em Java:</p>
+
+<table>
+    <tr>
+        <th>Máscara</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>%d</td>
+        <td>Valor decimal (positivo ou negativo)</td>
+    </tr>
+    <tr>
+        <td>%u</td>
+        <td>Valor decimal sem sinal (só positivo)</td>
+    </tr>
+    <tr>
+        <td>%f</td>
+        <td>Valor real</td>
+    </tr>
+    <tr>
+        <td>%s</td>
+        <td>String</td>
+    </tr>
+    <tr>
+        <td>%c</td>
+        <td>Caractere único</td>
+    </tr>
+    <tr>
+        <td>%b</td>
+        <td>Valor booleano</td>
+    </tr>
+</table>
+
+<p>PS: Em qualquer situação de uso de Strings, para transformar os caracteres em maiúsculos, usamos o método <code>toUpperCase()</code> do objeto String, da mesma forma para minúsculos usamos o <code>toLowerCase()</code>, como por exemplo:</p>
+
+<pre>
+<code>
+String frase = "Um Texto Qualquer";
+
+System.out.println("Em minúsculas: " + frase.toLowerCase());
+System.out.println("Em maiúsculas: " + frase.toUpperCase());
+</code>
+</pre>
+
+<p>Para fazer o mesmo com char, use os métodos do mesmo nome da classe <code>Character</code>, assim:</p>
+
+<pre>
+<code>
+char letra = 'a';
+        
+letra = Character.toUpperCase(letra); // Convertendo pra maiúsculaa
+        
+System.out.println(letra);
+        
+letra = Character.toLowerCase(letra); // Convertendo novamente pra minúscula
+        
+System.out.println(letra);
+</code>
+</pre>
+
+<p>Agora vamos ver como faz para mostrar entrada de dados, o que não vem por padrão do Java.</p>
+
+<p>Para isso, vamos importar a classe <code>java.util.Scanner</code> e criar um objeto com o comando <code>Scanner</code>. Veja um exemplo na prática:</p>
+
+<pre>
+<code>
+import java.util.Scanner;
+
+public class TiposPrimitivos {
+    public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in, "CP1252");
+        System.out.print("Digite o nome do aluno:");
+        String nome = teclado.nextLine();
+        System.out.print("Digite a nota do aluno:");
+        float nota = teclado.nextFloat();
+        System.out.printf("A nota de %s é %.1f\n", nome, nota);
+    } 
+}
+</code>
+</pre>
+
+<p>PS: Evite carregar todas as classes de um determinado pacote sem necessidade, isso ocorre usando algo como <code>import java.util.*;</code> (asterisco é um coringa pra "todos"), mas isso deixa o programa mais pesado.</p>
+
+<p>Lembre-se dos métodos para ler importações, como descrito na tabelinha acima. Veja alguns exemplos:</p>
+
+<pre>
+<code>
+int idade = teclado.nextInt();
+float salario = teclado.nextFloat();
+String nome = teclado.nextLine();
+String login = teclado.next();
+char letra = teclado.next().charAt(0);
+</code>
+</pre>
+
+<p>O <code>nextLine()</code> pega uma linha inteira, e o <code>next()</code> apenas a primeira palavra. E pode ser necessário colocar como parâmetro do Scanner o charset para mostrar acentos, que pode ser <code>ISO-8859-1</code>, <code>CP850</code> ou <code>CP1252</code>, como por exemplo <code>Scanner(System.in, "CP1252")</code>.</p>
+
+<p>PS: Caso o nextLine() não seja reconhecido, coloque outro nextLine() (não coloque next()) sem atribuir à nenhuma variável, antes do nextLine() da variável que deu erro. Isso é comum acontecer após usar números antes de strings. E se quiser remover espaços desnecessário de uma string, use o método <code>trim()</code> na variável.</p>
+
+<p>Diferente de outras linguagens, o Java tem incompatibilidade entre tipos, principalmente de famílias diferentes, como nos valores numéricos e strings (que não são resolvidos com typecasts). Para resolver isso, convertemos os valores com classes invólucros.</p>
+
+<p>Exemplo que converte int para String:</p>
+
+<pre>
+<code>
+int idade = 30;
+String valor = Integer.toString(idade);
+System.out.println(valor);
+</code>
+</pre>
+
+<p>Outro exemplo, que converte String para int:</p>
+
+<pre>
+<code>
+String valor = "30";
+int idade = Integer.parseInt(valor);
+System.out.println(idade);
+</code>
+</pre>
+
+<p>Terceiro exemplo, que converte String para float:</p>
+
+<pre>
+<code>
+String valor = "30.5";
+float idade = Float.parseFloat(valor);
+System.out.println(idade);
+</code>
+</pre>
+
+<p>Temos também outras opções, como a <code>Float.toString()</code> (que converte float para String), <code>Boolean.parseBoolean()</code> (que converte String para boolean), <code>Boolean.toString()</code> (que converte boolean para String) e outras opções parecidas para double e outros tipos.</p>
+
+<p>Podemos converter uma string de uma moeda para float também, dessa forma:</p>
+
+<pre>
+<code>
+String dinheiro = "R$ 125,94";
+
+float grana = Float.parseFloat(dinheiro.replace(",", ".").replace("R$", "").trim());
+
+System.out.println(grana);
+</code>
+</pre>
+
+<p>PS: O método replace é utilizado basicamente para trocar alguma parte de alguma string por outra. Ele substitui todas as ocorrências de uma string.</p>
+
+<p>Podemos também inverter uma string, dessa forma:</p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in, "CP1252");
+
+System.out.print("Digite o Texto a ser Invertido: ");
+String texto = teclado.nextLine();
+
+StringBuilder frase = new StringBuilder(texto);
+String invertida = frase.reverse().toString();
+
+System.out.println(invertida);
+</code>
+</pre>
+
+<p>Podemos usar o método <code>trim()</code> para remover espaços de strings, assim:</p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in, "CP1252");
+System.out.print("Digite uma frase: ");
+String texto = teclado.nextLine().trim();
+
+System.out.println(texto);
+</code>
+</pre>
+
+<p>O método <code>substring</code> seleciona determinados caracteres de uma string, contados a partir do zero até um número limite, o <code>indexOf</code> pode determinar esse limite:</p>
+
+<pre>
+<code>
+String frase = "Estude Java! É Muito Legal!";
+
+String selec = frase.substring(0, frase.indexOf("!"));
+
+System.out.println(selec);
+</code>
+</pre>
+
+<p>Para encontrar uma palavra em uma String, use o método <code>contains</code>, assim:</p>
+
+<pre>
+<code>
+String frase = "Estude Java! É Muito Legal!";
+
+if(frase.contains("Java")) {
+    System.out.println("Palavra encontrada.");
+}
+else {
+    System.out.println("Palavra não encontrada.");
+}
+</code>
+</pre>
+
+<p>Para ver se uma string está vazia, use o método <code>isEmpty()</code> do objeto, assim:</p>
+
+<pre>
+<code>
+String nome = "";
+
+System.out.println("Nome está vazio? " + nome.isEmpty());
+</code>
+</pre>
+
+<p>PS: Isso não verifica valores null, para isso use <code>nome == null</code>.</p>
+
+<p>Para ver a quantidade de caracteres de uma string, use o método <code>length()</code> do objeto, assim:</p>
+
+<pre>
+<code>
+String frase = "Exemplo de String";
+
+System.out.println("Quantidade de caracteres: " + frase.length());
+</code>
+</pre>
+
+<p>Podemos concatenar strings usando o método concat, assim:</p>
+
+<pre>
+<code>
+String frase = "Isso é uma String";
+        
+System.out.println(frase.concat(" com mais algo!"));
+</code>
+</pre>
+
+<p>Para converter uma string em array de char, basta usar o método do objeto string <code>toCharArray()</code>, e pro contrário usamos o método <code>String.valueOf</code>, assim:</p>
+
+<pre>
+<code>
+String frase = "Isso é uma String!";
+
+char[] vetor = frase.toCharArray(); // Convertendo pra array de char
+
+String novo = String.valueOf(vetor); // Convertendo array de char em string
+</code>
+</pre>
+
+<p>Para dividir uma string ao encontrar um delimitador, podemos fazer assim:</p>
+
+<pre>
+<code>
+String frase = "Exemplo de Frase";
+String dividido[] = frase.split(" "); // Pode ser qualquer caractere.
+
+System.out.println(dividido[0]);
+</code>
+</pre>
+
+<p>Para criar constantes, basta declarar como uma variável, com <code>static final</code> no começo (que impedirá que ela seja modificada, o static indica que só terá uma cópia dessa variável na memória, o final impede a alteração do atributo) e sempre a coloque inicializada, elas geralmente são escritas em maiúsculas, assim:</p>
+
+<pre>
+<code>
+static final double PI = 3.14159265359;
+</code>
+</pre>
+
+<p>PS: As constantes são declaradas dentro da classe, mas fora do método principal e de qualquer outro método.</p>
+
+<p>Agora vamos fazer um Java Swing, de forma que coloquemos dois números para somar, crie um frame e no botão, vá em Action Permorfed para isso, dessa vez usaremos o método getter, vamos ver um exemplo:</p>
+
+<pre>
+<code>
+private void btnSomaActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    int n1 = Integer.parseInt(txtN1.getText());
+    int n2 = Integer.parseInt(txtN2.getText());
+    int s = n1 + n2;
+    lblResultado.setText(Integer.toString(s));
+} 
+</code>
+</pre>
+
+<p>PS: Lembre-se que <code>get</code> é pra pegar o texto, e <code>set</code> é pra mudar.</p>
+
+<p>Vamos criar uma nova aplicação de Java Swing, para calcular idade (com imagens). Mas ao invés de caixa de texto, vamos usar caixas numéricas.</p>
+
+<p>PS: Caixas numéricas podem ser configuradas, nas propriedades, como o <code>model</code>, que é pra definir o modelo de controle numérico, como data, números e listas, além de valores mínimos e máximos.</p>
+
+<p>No modelo sugerido, colocaremos também uma propriedade que pegue o ano atual do sistema.</p>
+
+<p>Para pegar o ano do sistema, fazemos assim, no construtor:</p>
+
+<pre>
+<code>
+public NovoFrame() {
+    initComponents();
+    Calendar anoSys = Calendar.getInstance();
+    int anoAt = anoSys.get(Calendar.YEAR);
+    lblSys.setText(Integer.toString(anoAt));
+}
+</code>
+</pre>
+
+<p>E apenas isso você colocará no evento do botão:</p>
+
+<pre>
+<code>
+int anoNs = Integer.parseInt(numAn.getValue().toString());
+Calendar anoSys = Calendar.getInstance();
+int anoAt = anoSys.get(Calendar.YEAR);
+int idade = anoAt - anoNs;
+lblIdade.setText(Integer.toString(idade));
+</code>
+</pre>
+
+<p>Não esqueça da importação <code>java.util.Calendar</code>. É só compilar.</p>
+
+<p>PS: Caso queira que, além do botão, ele seja executado ao clicar enter, podemos usar o evento Key e KeyPressed nas caixas de texto, numéricas e outros, e escolher dentro do método a tecla que deverá ser pressionada, assim:</p>
+
+<pre>
+<code>
+private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {                                    
+    if(evt.getKeyCode() == KeyEvent.VK_ENTER) { // Podemos utilizar outra tecla aqui, importe java.awt.event.KeyEvent
+        // Coloque o mesmo código aqui.
+    }
+}  
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-java-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Hacking</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Hacking</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-hacking-1.html">Tudo sobre Hacking Parte 1!</a></li>
+                    <li><a href="tudo-sobre-hacking-2.html">Tudo sobre Hacking Parte 2!</a></li>
+                    <li><a href="tudo-sobre-hacking-3.html">Tudo sobre Hacking Parte 3!</a></li>
+                    <li><a href="tudo-sobre-hacking-4.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Hacking Parte 4!</a></li>
+                    <li><a href="tudo-sobre-hacking-5.html">Tudo sobre Hacking Parte 5!</a></li>
+                    <li><a href="tudo-sobre-hacking-6.html">Tudo sobre Hacking Parte 6!</a></li>
+                    <li><a href="tudo-sobre-hacking-7.html">Tudo sobre Hacking Parte 7!</a></li>
+                    <li><a href="tudo-sobre-hacking-8.html">Tudo sobre Hacking Parte 8!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Hacking Parte 4</h2>
+
+<h3>Diferenças entre Proxy, VPN e Tor</h3>
+
+<p>A conexão comum com a internet é do usuário pra internet e da internet pro servidor, e vice-versa. O seu roteador tem um IP externo, e manda um sinal com as informações para outros roteadores no mundo, basicamente isso é a internet. Só que dessa forma, o servidor sabe suas informações pessoais, como IP externo, sistema operacional e etc., que pode ser usado por pessoas mal-intencionadas pra invadir seu computador.</p>
+
+<p>O proxy é um servidor que fica entre o computador cliente e a internet, que utiliza uma criptografia, camuflando seu IP, dificultando a identificação do computador pelo servidor. Mas poucos proxies gratuitos não te espionam, muitos deles são armadilhas e só oferecem proteção para internet, não na rede interna, os serviços podem armazenar logs e os gratuitos geralmente não utilizam criptografia. Aqui encontramos alguns proxies de uso gratuito, é só colocar o IP e a porta corresponde nas conexões do seu sistema: <a href="https://www.us-proxy.org/" target="_blank">https://www.us-proxy.org/</a></p>
+
+<p>A VPN é uma outra rede na qual a nos conectamos, e essa rede conecta a internet, criptografando tudo através de um tunelamento, deixando seus dados mais seguros, tanto na rede interna quanto a externa, ela também mascara o IP, muitos usam VPN para camuflar o IP em sites como os de jogos. As boas VPNs possuem alto custo, as gratuitas são lentas e geralmente caem, podem armazenar logs e são instáveis.</p>
+
+<p>O TOR ele é, a grosso modo, uma rede que usamos proxies aleatórios ao conectarmos nele, ele não é uma VPN por não ter privacidade, apenas anonimidade, alguns nós são monitorados e mesmo assim podem identificar nosso IP verdadeiro. Ele pode conectar em poucos ou milhares de nós, que podem ou não estarem sendo monitorados. O ponto de conexão final na última retransmissão da cadeia pode ser comprometido se o site soliticado não usar SSL. A saída é criptografada, mas a entrada não, e desacelera a internet.</p>
+
+<p>O anonimato ideal é com o HD criptografado, usar software livre (evite uso de software pirata), VPN + TOR + HTTPS, não usar o Google como buscador, usar um avatar online (identidade fake), tails OS & Whonix e usar bitcoin ou semelhantes.</p>
+
+<p>Esse é um do sites onde podemos usar VPN: <a href="https://www.vpngate.net/en/" target="_blank">https://www.vpngate.net/en/</a></p>
+
+<p>Para usar a VPN, baixe o arquivo correspondente a sua VPN (no Linux geralmente é OpenVPN). O tráfego é melhor por UDP.</p>
+
+<h3>Como Camuflar IP no Linux</h3>
+
+<p>Entre nesse site e baixe um dos arquivos de VPN, que virão num arquivo ZIP: <a href="https://www.vpnbook.com/freevpn" target="_blank">https://www.vpnbook.com/freevpn</a></p>
+
+<p>Extraia os arquivos digitando <code>unzip vpnbook.zip</code> e edite o nome deles para tcp80, tcp443, udp53 e udp25000 para cada arquivo correspondente.</p>
+
+<p>No terminal, entre na pasta extraída e digite <code>sudo openvpn tcp80.ovpn</code>, coloque o username e senha especificados no mesmo site e espere o programa exibira confirmação.</p>
+
+<h3>O que é a Deep Web? Como acessar a rede Tor</h3>
+
+<p>A deep Web é a denominação dada a qualquer conteúdo que não pode ser acessado pelos dispositivos de busca e não podem ser encontrados utilizando sistemas de busca, como áreas restritas (inclusive páginas administrativas de sites comuns), redes fechadas e páginas sem ligações, ou seja, não é só o que está na rede TOR.</p>
+
+<p>A rede Tor (Onion) utiliza um sistema de tunelamento de tráfego para garantir anonimato a serviços Web tanto a usuários como servidores. O tunelamentos cria links entre os nós da rede e então te direciona ao servidor, escondendo a origem e IP do usuário e do servidor.</p>
+
+<p>Abra o navegador e vá no site do Tor, baixe ele e o instale. Na primeira vez que tentarmos usar o navegador, ele pedirá algumas configurações.</p>
+
+<p>Um site que todo mundo que está começando a navegar na Deep Web deve acessar é o Hidden Wiki, que possuí vários links de sites da Deep Web para acessarmos: <a href="http://zqktlwiuavvvqqt4ybvgvi7tyo4hjl5xgfuvpdf6otjiycgwqbym2qad.onion/wiki/Main_Page" target="_blank">http://zqktlwiuavvvqqt4ybvgvi7tyo4hjl5xgfuvpdf6otjiycgwqbym2qad.onion/wiki/Main_Page</a></p>
+
+<p>Esse é um dos sites de pesquisa da Deep Web: <a href="http://xmh57jrknzkhv6y3ls3ubitzfqnkrwxhopf5aygthi7d6rplyvk3noyd.onion/" target="_blank">http://xmh57jrknzkhv6y3ls3ubitzfqnkrwxhopf5aygthi7d6rplyvk3noyd.onion/</a></p>
+
+<p>Esse site é um fórum brasileiro de perguntas: <a href="http://xh6liiypqffzwnu5734ucwps37tn2g6npthvugz3gdoqpikujju525yd.onion/" target="_blank">http://xh6liiypqffzwnu5734ucwps37tn2g6npthvugz3gdoqpikujju525yd.onion/</a></p>
+
+<p>Muitos dos sites existentes por lá, são de coisas ilegais como pedofilia, venda de drogas, mas também tem muito conteúdo hacker por lá.</p>
+
+<h3>Entenda o Heartbleed Bug - Vulnerabilidade OpenSSL</h3>
+
+<p>O Transport Layer Security (TLS) e o seu antecessor, Secure Sockets Layer (SSL), são protocolos criptográficos que conferem segurança de comunicação na internet para serviços como e-mail, navegação por páginas e outros tipos de transferência de dados. É o "https" de sites seguros, que criptografa os dados, impedindo que um hacker "sniffe" esses dados.</p>
+
+<p>A vulnerabilidade acontece na requisição dos bytes do servidor. Por exemplo, o cliente envia uma requisição "Olá" com 5 bytes, e o servidor responde o Olá com 5 bytes. Mas o hacker pode enviar esse mesmo olá com 64 KB (o máximo que é suportado), e o servidor fica confuso, ao ponto de mandar outros dados que estão na memória dele de volta, como dados de usuário, senhas, chaves de criptografia, etc.</p>
+
+<p>Algumas versões do OpenSSL foram afetadas, mas não foram todas., e por dois anos sites famosos como Facebook, Google e etc. ficaram vulneráveis por isso.</p>
+
+<p>Esse site testa os sites e suas respectivas portas vulneráveis no serviço SSL: <a href="https://www.ssllabs.com/ssltest/" target="_blank">https://www.ssllabs.com/ssltest/</a></p>
+
+<h3>Descobrindo IPs pelo Facebook e Skype</h3>
+
+<p>Quando conversamos pelo Skype, ele está conectado diretamente ao computador da pessoa, o que facilita a descoberta do IP do usuário. O Facebook, por sua vez, envia pro servidor antes de mandar pro outro usuário, o que dificulta a descoberta.</p>
+
+<p>Para o Skype, descobrimos usando o comando <code>netstat -a -n</code>. Onde, no endereço Externo, estará o IP do usuário (feche as outras aplicações que se conectam à internet antes). Para ver os processos que estão usando esses IPs e portas, digite o comando com o parâmetro /b (-e no Linux). Hoje em dia o netstat no Linux foi substituído por <code>ss -all</code>.</p>
+
+<p>No Facebook e outros sites, já que isso não funciona, temos que usar uma engenharia social, no caso, entraremos no site IP Logger, colocaremos um link qualquer nele, e enviar o link encurtado pra pessoa, que não perceberá porque o redirecionamento é normal, mas o site fornece pra você um link onde vemos o IP dos usuários que o acessaram, além dos navegadores, sistemas operacionais e hostnames. O site é esse: <a href="https://iplogger.org/" target="_blank">https://iplogger.org/</a></p>
+
+<p>PS: Alguns podem estranhar esse link, então o link pode ser encurtada num site, e quem clicar nele não perceberá, esse site é um que pode ser usado: <a href="https://twixar.com/" target="_blank">https://twixar.com/</a></p>
+
+<p>O IP pode ser por exemplo, descoberto sua localização através desse site: <a href="https://www.localizaip.com.br/" target="_blank">https://www.localizaip.com.br/</a></p>
+
+<h3>Verificando a Rede com o Wireshark</h3>
+
+<p>Podemos usar o Wireshark como sniffer da nossa rede.</p>
+
+<p>A barbatana do tubarão indica a captura de pacotes da nossa rede. Vemos vários dados como endereços IP de destino e origem, protocolos e etc.</p>
+
+<p>Para pegar informações de um determinado IP, usamos no filtro <code>ip.addr == 192.168.0.1</code>, para vermos apenas resultados com esse determinado IP de origem, digitamos <code>ip.src == 192.168.0.1</code>, e pegar esse IP de destino, <code>ip.dst == 192.168.0.1</code>.</p>
+
+<p>Para colocar algo que queremos que não seja exibido, usamos o mesmo filtro, mas com um ponto de exclamação, que significa negação, por exemplo <code>!(ip.addr == 192.168.0.1)</code>. E para não mostrar tráfegos de um determinado protocolo, podemos usar <code>not tcp</code>, para mais de um, <code>not tcp and not arp</code>. Podemos usar o operador <code>or</code> também.</p>
+
+<h3>Capturando Senhas com Wireshark</h3>
+
+<p>Abra o Wireshark e selecione sua interface para ele sniffar o tráfego de rede. Entre no site alvo e logue nele com alguma conta qualquer.</p>
+
+<p>Dê um stop no Wireshark, digite Ctrl F, filtre os pacotes "http", escolha "package details" e procure a string "senha" ou equivalente, ele localizará os dados do formulário e o exibirá.</p>
+
+<p>Ele também pode sniffar o tráfego de redes sem fio e capturar senhas digitadas por exemplo, em wi-fi.</p>
+
+<p>O processo para sniffar HTTP pode ser feito com o filtro <code>tcp.port == 80</code>, da mesma forma, com HTTPS usamos a porta 443, mas nesse caso o conteúdo estará criptografado.</p>
+
+<p>Numa rede baseada em switches, só poderemos capturar tráfego direcionado à nossa máquina, broadcasts e alguns multicasts. Dá pra configurar isso no switch com o espelhamento de portas, que copia o tráfego para a porta da sua estação. Um estouro de tabela MAC do switch também pode fazer ele entrar em modo broadcast.</p>
+
+<h3>Scanning de redes com Nmap e Zenmap</h3>
+
+<p>O Nmap é um scanner de redes, que escaneia o tráfego de um IP desejado, em busca de portas ou serviços abertos, e tenta fornecer o máximo de informações sobre o alvo.</p>
+
+<p>Ele é presente por padrão no Kali Linux, pode ser baixados em outras distros Linux pelo terminal, e tem versão para Windows também.</p>
+
+<p>Na linha de comando, chamaremos o Nmap com um alvo, que pode ser um site ou IP, por exemplo <code>nmap www.google.com.br</code>, ele mostrará o ping, os IPs disponíveis pra esse servidor, vê as 1000 portas mais importantes e se elas estão abertas, as portas usadas pelo IP e outras informações.</p>
+
+<p>No Nmap, podemos usar outras opções como a intensidade do scan (usando as opções <code>-T0</code>, <code>-T1</code> até <code>-T5</code> que é a mais forte), a detecção de sistema operacional (usando <code>-A</code>) e o modo verbose (com <code>-v</code>). Um exemplo combinando todos seria <code>nmap -T4 -A -v google.com</code>.</p>
+
+<p>PS: Caso o servidor a ser escaneado esteja com o ping desabilitado, use o parâmetro <code>-Pn</code> junto.</p>
+
+<p>Podemos usar o Zenmap, do mesmo programa, que tem uma interface gráfica pra ajudar nos scanners. Podemos colocar o alvo da mesma forma e escolher as configurações do scanner. Nele aparece outras informações como o sistema operacional usado pelo servidor, a topologia da rede, o traceroute e outros detalhes. Teste colocando um site, como o Google mesmo, no alvo e clique em scan.</p>
+
+<p>Portas de e-mail como SMTP (25, 587, 465), IMAP (143 e 993) e POP (110 e 995) indicam que um servidor de e-mail está sendo executado. Porta 53 indica um servidor DNS em execução. Porta 21 indica que o FTP está em execução. O mesmo vale pra serviços como HTTP, SSH, Telnet e outros. As portas 135, 137, 138, 139 e 445 mostram um host Windows desprotegido.</p>
+
+<p>Podemos usar scripts internos do Nmap para fazer mais coisas, além de outros comandos, por exemplo:</p>
+
+<pre>
+<code>
+# Detectando falhas em servidores utilizando verbose:
+nmap -sS -v -Pn -A --open --script=vuln 192.168.15.1
+
+# Burlar firewall em rede externa:
+nmap -f -sV -A 192.168.15.1 # Ocorre a fragmentação
+nmap -sS -sV -A 192.168.15.1 # Faz varreduras do tipo SYN
+nmap -Pn -sV -A 192.168.15.1 # Não envia pacotes ICMP (ping)
+
+# Buscando falhas de DDoS:
+nmap -sU -A -Pn -n -pU:19,53,123,161 --script=ntp-monlist,dns-recursion,snmp-sysdescr 192.168.15.1
+
+# Fazendo bruteforce no banco de dados do alvo:
+nmap --script=mysql-brute 192.168.15.1
+
+# Fazer menos "ruídos" numa rede interna com um scan mais demorado:
+nmap -T0 --send-ip 192.168.15.0/24 # send-ip pode ser ignorado em redes externas
+
+# Para ver as portas abertas em uma rede:
+nmap 192.168.15.0/24
+
+# Para descobrir os IPs de uma rede especificada, use esse comando:
+nmap -sP 192.168.15.0/24
+
+# Para descobrir o sistema operacional de um host:
+nmap -O 192.168.15.1
+</code>
+</pre>
+
+<h3>Identificando Ícones do Zenmap</h3>
+
+<p>Em Topologia, vemos os hosts dessa forma:</p>
+
+<ul>
+    <li><b>Círculo</b>: Computadores normais (desktop, servidores ou impressoras).</li>
+    <li><b>Retângulo</b>: Dispositivos de rede, como switches ou roteadores.</li>
+</ul>
+
+<p>E as cores:</p>
+
+<ul>
+    <li><b>Verde</b>: Até três portas abertas.</li>
+    <li><b>Amarelo</b>: Três a seis.</li>
+    <li><b>Vermelho</b>: Mais de seis.</li>
+</ul>
+
+<p>E nos detalhes da máquina, onde aparece o símbolo do sistema operacional do servidor (Windows, Linux, FreeBSD, etc.). Abaixo dele aparecerá um outro símbolo, que pode ser esses:</p>
+
+<ul>
+    <li><b>Cofre</b>: Máximo duas portas abertas.</li>
+    <li><b>Baú</b>: Três ou quatro portas abertas.</li>
+    <li><b>Caixa</b>: Cinco ou seis portas abertas.</li>
+    <li><b>Queijo</b>: Sete ou oito portas abertas.</li>
+    <li><b>Bomba</b>: Mais de oito portas abertas.</li>
+</ul>
+
+<h3>Como acessar a DeepWeb com Segurança - Instalando Tor no Linux</h3>
+
+<p>Apesar de podermos utilizar Tor no Windows, não é recomendado, já que o Linux é mais seguro para acesso ao Deep Web.</p>
+
+<p>Lembre-se que é necessário proteger o roteador e o modem para isso, retirando o acesso à eles, digitando o ip para descobrir o IP do seu roteador, em Gateway Padrão, nas opções do roteador, procure algo como access control, e deixe apenas o prootocolo HTTP. Também mude a senha padrão do roteador pra isso (já que em muitos deles, por padrão, o usuário e senha é "admin").</p>
+
+<p>Para baixar o Tor, basta ir no site do Tor Project e baixar o pacote tar.xz, que já tem os arquivos compilados e prontos para usar. Verifique se a pasta descompactada tem o acesso permitido ao usuário.</p>
+
+<p>PS: O Tor não roda por padrão como root, mas distros como o Kali Linux sempre estão logadas como root. Então podemos alterar o script start-browser-tor e procurar a mensagem de impedir acesso ao root, e retire a mensagem e o exit.</p>
+
+<p>Ao abrir, ele pedirá algumas configurações na primeira vez que abrirmos ele, como as de proxy e coisas do tipo.</p>
+
+<p>Para entrar na Deep Web, devemos manter também o sistema atualizado.</p>
+
+<p>É melhor não deixarmos permitir Javascript, cookies e flash, pois são usados para rastrear suas atividades.</p>
+
+<p>A Deep Web pode ter seus dados interceptados por hackers, por isso o tráfego sempre passa por vários servidores, de modo que o IP seja sempre diferente e o verdadeiro fique oculto.</p>
+
+<p>Tome cuidado ao baixar arquivos pela Deep Web (nunca os execute enquanto o Tor está aberto), evite uso de outros programas que acessem sua rede (como o Utorrent), e evite troca de informações em sites que não contenham o HTTPS.</p>
+
+<p>PS: Não confunda anonimidade com privacidade, pois este último não existe na Deep Web, apenas a anonimidade.</p>
+
+<p>Evite usar os mesmos nomes de usuário na Deep Web, pra evitar rastreamento, e sempre mude a conexão de usuário, pra mudar o IP.</p>
+
+<h3>Descobrir senha WiFi com WEP</h3>
+
+<p>Tente conectar na sua placa de rede wi-fi no Linux, e veja com o ip se existe uma interface com o nome wlan0 ou algo parecido.</p>
+
+<p>Baixe o aircrack no seu Linux digitando <code>sudo apt-get install aircrack-ng</code> (o Kali já o tem por padrão).</p>
+
+<p>Digite o comando <code>airmon-ng start wlan0</code> (ou o nome do dispositivo wireless).</p>
+
+<p>Espere aparecer a mensagem "monitor mode enabled on mon0" (o nome da interface criada pode mudar).</p>
+
+<p>Digite <code>airodump-ng mon0</code> (ou a interface criada anteriormente). Ele mostrará várias redes com suas informações, como o BSSID (endereço MAC dos roteadores), o PWR (número que quanto maior, está mais próximo de você), o CH (canal que o roteador transmite), o ENC (que mostra o tipo de proteção, e OPN quando a rede é aberta) e o ESSID (nome da rede).</p>
+
+<p>Para filtrar os conteúdos da rede escolhida pro ataque, use <code>airodump-ng -w videoaula -c 6 --bssid AA:BB:CC:11:22:33 mon0</code>, onde o parâmetro -w é o nome do arquivo, o -c é o canal, o bssid é o MAC, seguido da interface criada por nós.</p>
+
+<p>Observer que mostram outros dados, como o Station, que mostra o MAC dos dispositivos conectados à essa rede (baseado nisso o roteador pode filtrar MACs para impedir ou permitir acessos).</p>
+
+<p>Caso ocorra algum bug, basta desligar sua placa de rede, digitando <code>ip link set down wlan0</code>, substituindo pela interface da placa wi-fi. E execute novamente o comando de filtro.</p>
+
+<p>Digite o comando <code>aireplay-ng -1 0 -a AA:BB:CC:11:22:33 -e "Nome da Rede Wi-fi" mon0</code> para ligar o seu computador ao roteador baseando numa vulnerabilidade (-a é o MAC com o BSSID do roteador, -e o nome da Rede, seguido da interface criada).</p>
+
+<p>Para inserir mais pacotes e acelerar o ataque, digite o comando <code>aireplay-ng -3 -b AA:BB:CC:11:22:33 mon0</code>, novamente com o BSSID da rede e a interface criada.</p>
+
+<p>Quando ele pegar os pacores arp, dê o comando <code>aircrack-ng videoaula-01.cap</code>. Tente várias vezes até conseguir, já que nas primeiras tentativas ele pode falhar, ele mostrará a senha, que pode ser uma palavra ou estar em hexadecimal. Nesse caso podemos usar a senha para entrar na rede (caso tenha desligado a placa, dê um <code>ip link set up</code> nela).</p>
+
+<p>PS: Caso a senha seja em hexadecimal, tire os pontos.</p>
+
+<h3>Como explorar OpenSSL Heartbleed Bug Exploit</h3>
+
+<p>Agora vamos explorar vulnerabilidades em sites que tenham o OpenSSL vulnerável (sites com HTTPS). Para isso vamos precisar de um exploit para isso, baixando aqui (feito em Python): <a href="https://www.exploit-db.com/exploits/32764/" target="_blank">https://www.exploit-db.com/exploits/32764/</a></p>
+
+<p>Baixe também um honeypot para testarmos essa mesma vulnerabilidade, aqui (em Perl): <a href="https://packetstormsecurity.com/files/126068/Heartbleed-Honeypot-Script.html" target="_blank">https://packetstormsecurity.com/files/126068/Heartbleed-Honeypot-Script.html</a></p>
+
+<p>No Linux, que já tem o interpretador Python e Perl, salve os dois scripts.</p>
+
+<p>Execute o Honeypot, clicando no terminal <code>perl honeypot.pl</code>, ele vai ficar piscando, o que é o sinal de execução, minimize o terminal.</p>
+
+<p>Abra outro terminal e rode o exploit digitando <code>python heartbleet.py</code> para ver o help dele. Para rodar, coloque o IP, da forma <code>python heartbleed.py 127.0.0.1</code> (no caso, o IP do Localhost do nosso PC, que está rodando o Perl). Ele retornará várias informações da memória do servidor, que não deveriam ter sido retornadas, geralmente informações aleatórias, mas que podem ter nomes de usuários, senhas e etc.</p>
+
+<p>Esse exploit rouba as informações da memória do servidor que roda uma versão vulnerável do OpenSSL.</p>
+
+<h3>Como mudar o MAC Address no Linux e Windows</h3>
+
+<p>Como tem sistemas que bloqueiam o acesso a determinados endereços MAC (como por exemplo, redes Wi-fi), podemos burlar estes mesmos sistemas mudando nosso endereço físico.</p>
+
+<p>Para mudar o MAC Address no Linux, primeiro abra o terminal e digite <code>ip addr show</code> para ver os dados da rede, em HWaddr estará o atual endereço gravado na sua placa de rede.</p>
+
+<p>Primeiro desabilite a placa de rede, pegue o nome dela e desligue a placa com o comando <code>ip link set down wlan0</code> (substitua pela interface desejada). Para mudar o MAC, digite <code>macchanger -r wlan0</code> e seu MAC estará alterado, e mostrará os MACs permanente (o real), o antigo e o novo. Após isso ligue a rede com <code>ip link set up wlan0</code> e dê outro ip para ver se realmente mudou.</p>
+
+<p>Para escolher o MAC desejado pra placa, desabilite a placa, digite <code>macchanger -m 00:11:22:AA:BB:CC wlan0</code> (ou o novo MAC desejado), ele atribuirá novo MAC inclusive com um fabricante aleatório. Reabilite a placa e veja com ip pra ver se mudou de novo.</p>
+
+<p>Caso tente conectar a uma rede wi-fi, mesmo aberta, mas não consiga, ela pode ter restringido seu MAC, nesse caso, vamos digitar <code>airmon-ng start wlan0</code> e ele criará uma nova interface que monitorará as conexões no ar, para usar ela, digite <code>airodump-ng mon0</code> (substituindo pela nova interface), ele mostrará todos os sinais dos roteadores e seus MACs.</p>
+
+<p>Pegue o MAC do roteador desejado e veja abaixo, em STATION, veja o MAC de algum dispositivo conectado à essa rede, que vamos tentar copiar. Podemos fazer isso com o macchanger, mas vamos fazer de outra forma, indo nas conexões do Linux em editar, na conexão da rede Wi-fi desejada, em Wireless e em EDIT, terá lá a opção clonar MAC Address e insira o MAC do dispositivo autorizado lá. Agora ele conseguirá fazer a conexão. Por esse motivo, deixar rede aberta não traz nenhuma segurança.</p>
+
+<p>Para voltar ao MAC original da sua placa, digite algo tipo <code>macchanger -p wlan0</code>.</p>
+
+<p>Para mudar o MAC no Windows, precisaremos do programa TMAC, que pode ser baixado aqui: <a href="https://technitium.com/tmac/" target="_blank">https://technitium.com/tmac/</a></p>
+
+<p>Abra o TMAC como administrador e na parte de cima ele mostrará todas as placas de rede do Windows, clique na rede desejada, digite o MAC e clique em Change Now. Para ver se o MAC mudou, dê um ipconfig /all ou um getmac no CMD.</p>
+
+<p>PS: No Windows, por sua restrição, o MAC tem sempre que começar com 02 para redes Wi-fi.</p>
+
+<h3>Como Instalar e Rodar Kali Linux num Pen-Drive</h3>
+
+<p>Podemos instalar o Kali num pen-drive, que roda o sistema por ele, só que ele perde todas as informações ao desligar o PC.</p>
+
+<p>Primeiro, pegue um pen-drive de pelo menos 4 GB e formate em fat32. Baixe uma ISO do Kali de 32 bits e baixe esse programa pra podermos deixar o pen-drive bootável: <a href="https://sourceforge.net/projects/win32diskimager/" target="_blank">https://sourceforge.net/projects/win32diskimager/</a></p>
+
+<p>Execute o programinha como administrador, selecione a ISO e instale o sistema no pen-drive.</p>
+
+<p>Pra iniciar o Kali, conecte o pen-drive e na BIOS, coloque o dispositivo USB como primário para dar boot.</p>
+
+<p>Pra iniciar pelo pen-drive, ao abrir as opções do Kali, você escolhe a opção Live para rodar ele pelo dispositivo USB.</p>
+
+<h3>Criando Pen-Drive Persistente com Kali</h3>
+
+<p>Para criar um pen-drive com persistência, teremos que baixar primeiramente esse programa: <a href="https://www.minitool.com/partition-manager/partition-wizard-home.html" target="_blank">https://www.minitool.com/partition-manager/partition-wizard-home.html</a></p>
+
+<p>Após instalar o MiniTool Partition Wizard, e nas opções, clique no disco referente ao pen-drive, vá em Move/Reside e crie a parte não alocada dele, e coloque em Partition Label o nome "persistence", em minúsculas, Create As como Primary e File System como Ext4. Vá em Apply e aguarde.</p>
+
+<p>Dê o boot escolha a opção Live USB Persistence, considerando que a partição nova se chama sdb2, digite esses comandos na ordem:</p>
+
+<pre>
+<code>
+fdisk -l
+
+mkdir -p /mnt/UUI
+
+mount /dev/sdb2 /mnt/UUI
+
+echo "/ union">>/mnt/UUI/persistence.conf
+
+umount /dev/sdb2
+
+reboot
+</code>
+</pre>
+
+<p>Desse modo, sempre que iniciar, escolha Live USB Persistence.</p>
+
+<p>PS: O Pen-drive deverá ter no mínimo 8 GB.</p>
+
+<h3>Descobrir Senha Wi-Fi com WPA e WPA2 (Método WPS)</h3>
+
+<p>Como sabemos, muitos roteadores tem a opção WPS, que permite conectar à rede facilmente, sem a necessidade de saber a senha.</p>
+
+<p>No Kali Linux, veja se a placa de rede Wi-fi está conectada e abra o terminal e dê o ip pra ver se a placa foi reconhecida.</p>
+
+<p>Coloque a placa no modo monitor, usando o comando <code>airmon-ng start wlan0</code> (substitua pela interface da placa), ele criará uma interface pra monitorar.</p>
+
+<p>Escaneie o ar digitando (substituindo pela interface criada) <code>airodump-ng mon0</code>, e ele exibirá as redes de Wi-fi disponíveis, com os tipos de criptografia (OPN é aberto, pegue uma WPA2 pro exemplo).</p>
+
+<p>Agora usaremos o programa Bully, digite <code>bully</code> para ver as opções dele.</p>
+
+<p>Usaremos o BSSID e o canal da rede que iremos atacar, digitando <code>bully -b 00:11:22:AA:BB:CC -c 11 mon0</code>, onde -b é o BSSID (MAC do roteador) desejado, -c é o canal que ele está, seguido da interface criada. Ele pode ser parado e continuado graças à um arquivo gerado em /root/.bully/pins, se quiser começar do zero exclua esse arquivo.</p>
+
+<p>Podemos identificar o PIN do roteador digitando <code>bully -b 00:11:22:AA:BB:CC -c 11 -p 0000000 -B --force mon0</code> (substituindo o número de -p pelo PIN), a partir do PIN podemos achar a senha da rede.</p>
+
+<h3>Footprint de Servidores com Whois</h3>
+
+<p>Footprint é reconhecer a "pegada" do servidor, ou seja, os dados dele. O site para isso é esse aqui: <a href="https://who.is/" target="_blank">https://who.is/</a></p>
+
+<p>Coloque um site qualquer para ver os dados do site, não tem apenas IP, sistema operacional e etc., mas até mesmo telefone, endereço, CPF/CNPJ, etc.</p>
+
+<p>Pelo número do documento, podemos saber, por exemplo, quantos domínios estão registrados com esse mesmo documento, e fatalmente, a chance de estarem no mesmo servidor é grande, principalmente pra pequenos sites.</p>
+
+<p>Mas esse site é melhor pra domínios internacionais, para sites brasileiros, esse funciona melhor, e de forma mais completa, como pra ver informações de contato: <a href="https://registro.br/2/whois" target="_blank">https://registro.br/2/whois</a></p>
+
+<p>PS: Esse site registro.br também é onde compramos os domínios de sites.</p>
+
+<p>Dentro do Kali Linux, temos também o whois, que podemos digitar <code>whois nomeouipdosite.com</code>. E para pegar as informações da tabela DNS usamos <code>dig -t any nomeouipdosite.com</code>.</p>
+
+<p>Podemos dar um ping no nome do site para vermos se o IP bate.</p>
+
+<p>Outra aplicação bastante util é o dmitry, que usamos no Kali digitando no terminal <code>dmitry -w nomeouipdesejado.com</code>.</p>
+
+<p>Para escanearmos um IP e suas portas, digitamos <code>dmitry -p -f 192.168.1.1</code>. Para salvar a saída desse comando use <code>dmitry -p -f 192.168.1.1 -o arquivodetexto</code>.</p>
+
+<p>PS: Para pegar o IP de um site, podemos colocar host seguido do nome dele, por exemplo, <code>host www.google.com.br</code>.</p>
+
+<h3>Fingerprint de Servidores com Nmap e Nikto</h3>
+
+<p>O fingerprint seria o mesmo que pegar a "digital" dos servidores. Ou seja, todos os dados do servidor, como portas abertas, versão do banco de dados, sistema operacional e muito mais.</p>
+
+<p>Primeiro, entraremos nesse site dedicado a intrusão, com várias vulnerabilidades: <a href="http://testphp.vulnweb.com/" target="_blank">http://testphp.vulnweb.com/</a></p>
+
+<p>No seu navegador, vá nas ferramentas do desenvolvedor, em network e recarregue a página com ele aberto. Ele mostrará tudo que está aberto, clique no nome do site (em file com /) após carregado, e procure a opção headers. Ali veremos alguns dados como a versão do PHP, do servidor da web e a segurança de alguns dados. Já dá pra descobrir falhas baseadas nessas versões desatualizadas.</p>
+
+<p>Pra pegar mais detalhes, podemos usar o Nmap, no Zenmap, vá no Menu Perfil, em New Profile or Command, crie um perfil com o nome Fingerprint Webserver, e em Scan adiciona as opções Operating System Detection e Version Detection, e coloque o Timing Template como Normal.</p>
+
+<p>Pegue o nome do site e coloque no Target, e coloque em Profile a opção Fingerprint Webserver.</p>
+
+<p>PS: Na criação/edição de perfis, podemos colocar scripts, e o Nmap tem vários prontos pra retornar outros dados do servidor, como pra ver se a página é vulnerável pra ataques XSS ou de SQL Injection, por exemplo, no exemplo colocaremos o http-headers. Podemos também salvar o scan num arquivo.</p>
+
+<p>Podemos também usar a ferramenta Nikto para procurar vulnerabilidades, vá no Kali Linux e digite o comando <code>nikto -h testphp.vulnweb.com</code>, ele mostrará os dados e também mostrará vulnerabilidades.</p>
+
+<p>Para usar outra porta que não seja a padrão (80), digite <code>nikto -h nomedosite.com -p 21,443</code>, podendo ser uma ou várias portas. Podemos também usar um proxy, usando a sintaxe <code>nikto -h nomedosite.com -p 21 -useproxy 189.98.78.54:234</code>.</p>
+
+<ul>
+    <li><a href="tudo-sobre-hacking-3.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-hacking-5.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

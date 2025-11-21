@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Qual é a diferença entre FAT32, exFAT, e NTFS?</h2>
+
+<p>Quando você vai formatar um disco rígido, pendrive, cartão SD e etc., o Windows lhe perguntará qual o sistema de arquivos a unidade irá usar, isto é, NTFS, FAT32 e exFat. Não sabe a diferença entre esses sistemas de arquivos? Nós mostramos para você!</p>
+
+<h3>FAT32</h3>
+
+<p>O FAT32 é o sistema de arquivos mais antigo dessa lista. Foi introduzido no Windows 95 para substituir o FAT16, ainda mais antigo.</p>
+
+<p>O fato de ele ser o mais velho lhe algumas vantagens e desvantagens. Por exemplo, por ser o mais velho, é o sistema de arquivos padrão. Isso faz com ele seja compatível com computadores mais antigos e com quase todos os dispositivos que tenham uma porta USB. A maioria dos Drivers Flash, como um pendrive, por exemplo, vem formatado com FAT32.</p>
+
+<p>No entanto, há limitações quem vem com a idade. Ele não suporta arquivos individuais com mais de 4GB de tamanho – isso é o máximo. Também, uma partição com FAT32 não pode ser maior que 8TB. Portanto, você não vai querer usar esse sistema de arquivos em uma unidade interna.</p>
+
+<p><b>Compatibilidade:</b> Funciona em todas as versões do Windows, MAC, Linux, consoles de games e com praticamente qualquer dispositivo que tenha uma porta USB.</p>
+
+<p><b>Limites:</b> 4GB de tamanho máximo de um arquivo e 8TB de tamanho máximo para uma partição.</p>
+
+<p><b>Uso ideal:</b> É ideal para drivers removíveis por causa da sua alta compatibilidade.</p>
+
+<h3>NTFS</h3>
+
+<p>O NTFS é o sistema de arquivos que o Windows moderno gosta de usar. Quando você faz uma instalação do Windows, o mesmo formata a unidade com o NTFS. Esse sistema de arquivos possui limites enormes para tamanho de arquivos e partições. Ele surgiu pela primeira vez em versões domésticas do Windows com o Windows XP.</p>
+
+<p>O NTFS ainda possui muitos outros recursos modernos como permissões de arquivos para segurança, recuperação rápida de erros caso o sistema trave, criptografia e etc. A sua partição do Windows provavelmente está usando o NTFS. Caso você possua outro HD ou pretende criar uma nova partição no seu disco rígido, deve usar o sistema de arquivos NTFS para estes.</p>
+
+<p>No entanto, esse sistema de arquivos também possui uma limitação. Ele não é compatível com outros sistemas operacionais. O NTFS irá trabalhar perfeitamente com as versões mais recentes do Windows, pelo menos até o XP, mas tem compatibilidade limitada com as versões anteriores a esta. Por padrão, o MAC pode apenas ler as unidades com NTFS, escrever não é possível. Algumas distribuições Linux podem escrever, mas outras não. Com relação aos consoles, o PlayStation da Sony não suporta o NTFS. Até mesmo o Xbox 360 da Microsoft não pode ler unidades NTFS.</p>
+
+<p><b>Compatibilidade:</b> Funciona com todas as versões do Windows. O MAC apenas ler as unidades NTFS. Algumas distribuições do Linux pode escrever nesse sistema de arquivos, outras podem apenas ler, caso necessário podemos instalar a compatibilidade usando <code>sudo apt-get install ntfs-3g</code>. Com exceção do Xbox One, outros consoles provavelmente não irão suportar o NTFS.</p>
+
+<p><b>Limites:</b> Sem limites de tamanho de arquivos e partições.</p>
+
+<p><b>Uso ideal:</b> É ideal para ser usando no sistema operacional Windows.</p>
+
+<h3>ExFat</h3>
+
+<p>O exFat foi introduzido em 2006 e foi adicionado em versões mais antigas do Windows como o Windows XP e Vista.</p>
+
+<p>Se trata de um sistema de arquivos otimizado para drivers flash. Foi projetado para ser uma espécie de FAT32, sem os limites de tamanho e sem a sobrecarga extra de recursos do NTFS. Como o NTFS, o exFat tem limites enormes de tamanho de arquivos individuais e tamanho de partição. Isso significa que você pode armazenar arquivos maiores que 4GB em um pendrive ou cartão SD. O exFat é uma atualização do FAT32 e com certeza é a melhor opção para unidade flash externas.</p>
+
+<p>Outra vantagem do exFat é que ele é mais compatível que o NTFS. Enquanto você pode apenas ler unidades NTFS em um MAC, o mesmo oferece suporte de leitura e escrita completa para o exFat. No caso do Linux, é possível ter acesso a unidades exFat instalando softwares apropriados para isso (bastando usar o comando <code>sudo apt-get install exfat-fuse exfat-utils</code>).</a></p>
+
+<p>Embora o exFat seja compatível com MAC e alguns outros dispositivos, esse sistema ainda não é compatível com quase tudo como o FAT32. O Xbox 360 não é compatível, já o Xbox One sim! O PlayStation 3 não suporta o exFat, mas o PlayStation 4 sim!</p>
+
+<p><b>Compatibilidade:</b> Funciona com todas as versões do Windows e com versões mais modernas no MAC OS X, no entanto, requer um software adicional para Linux.</p>
+
+<p><b>Limites:</b> Sem limites de tamanho de arquivos e partições.</p>
+
+<p><b>Uso ideal:</b> É ideal para unidades flash USB e outras unidades externas, especialmente se você precisa de arquivos maiores que 4GB.</p>
+
+<h3>Outros Sistemas</h3>
+
+<p>Além desses sistemas, existem também o exT4 (usado geralmente em Linux), APFS (usado nos sistemas da Apple), UDF (usado geralmente em DVDs de vídeo e de arquivos), CDFS (formato de CD de áudio), etc. Geralmente esses formatos já são criados na formatação de qualquer um desses sistemas ou discos.</p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

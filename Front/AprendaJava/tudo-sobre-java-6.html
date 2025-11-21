@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Java</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Java</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-java-1.html">Tudo sobre Java Parte 1!</a></li>
+                    <li><a href="tudo-sobre-java-2.html">Tudo sobre Java Parte 2!</a></li>
+                    <li><a href="tudo-sobre-java-3.html">Tudo sobre Java Parte 3!</a></li>
+                    <li><a href="tudo-sobre-java-4.html">Tudo sobre Java Parte 4!</a></li>
+                    <li><a href="tudo-sobre-java-5.html">Tudo sobre Java Parte 5!</a></li>
+                    <li><a href="tudo-sobre-java-6.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Java Parte 6!</a></li>
+                    <li><a href="tudo-sobre-java-7.html">Tudo sobre Java Parte 7!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Java Parte 6</h2>
+
+<h3>Métodos</h3>
+
+<p>O Java não tem uma palavra específica para funções e procedimentos, eles os chamam de métodos, e não existe uma palavra chave que os indiquem (diferente de por exemplo, o PHP, que tem o function, e se retornar valor é uma função, senão é um procedimento).</p>
+
+<p>No caso, para indicar um procedimento em Java, usaremos o void (que é vazio, pra indicar que não terá retorno).</p>
+
+<p>PS: O próprio método principal do Java (public static void main) indica um procedimento.</p>
+
+<p>Esse é o código que colocaremos antes ou depois do void principal, ele deverá ter a indicação de que é um método estático com o <code>static</code>, tal como o método principal:</p>
+
+<pre>
+<code>
+static void soma(int a, int b) {
+    int s = a + b;
+    System.out.println(s);
+}
+</code>
+</pre>
+
+<p>E pra chamar o procedimento, colocamos apenas isso dentro do método principal:</p>
+
+<pre>
+<code>
+System.out.println("Começou o programa!");
+soma(5, 2);
+</code>
+</pre>
+
+<p>Observe que o método é executado depois, mesmo com o procedimento ter sido antes, pois por regra, o método main é o primeiro a ser executado.</p>
+
+<p>PS: Os parâmetros não são obrigatórios ter em todas as funções e procedimentos, mas caso tenham, tem que ser passados todos eles nas invocações, e não é possível inicializar esses mesmos parâmetros com valores padrão, o melhor é usar a sobrecarga, que veremos mais pra frente.</p>
+
+<p>Para chamar funções em Java, é de forma parecida com os procedimentos, apenas declarando o tipo primitivo de retorno, no lugar do void (antes ou depois do método principal):</p>
+
+<pre>
+<code>
+static int soma(int a, int b) {
+    int s = a + b;
+    return s;
+}
+</code>
+</pre>
+
+<p>Não esqueça do retorno com a variável dentro do método.</p>
+
+<p>E dentro do método principal, basta apenas fazer isso:</p>
+
+<pre>
+<code>
+System.out.println("Começou o programa!");
+int sm = soma(5, 2);
+System.out.println("A soma vale: " + sm);
+</code>
+</pre>
+
+<p>Nesse caso, o próprio código verá a melhor maneira de exibir, o método do cálculo só se responsabilizou pelo cálculo mesmo, a exibição foi cuidada apenas pelo método principal.</p>
+
+<p>PS: Tem casos que a declaração static não é obrigatória num método. Nos casos acima, é devido ao método main ser estático, e por isso só pode trabalhar com métodos estáticos.</p>
+
+<p>Também podemos fazer sobrecarga de métodos no Java, que é quando temos dois ou mais métodos com o mesmo nome, mas com parâmetros diferentes, por exemplo:</p>
+
+<pre>
+<code>
+static void saudacao(String nome) {
+    System.out.println("Olá, " + nome + "!");
+}
+
+static void saudacao() {
+    System.out.println("Olá, visitante!");
+}
+
+public static void main(String[] args) {
+    saudacao("José");
+    saudacao("Cláudia");
+    saudacao();
+}
+</code>
+</pre>
+
+<p>Podemos ter várias combinações com métodos de mesmo nome com parâmetros diferentes, como uma com char e outra com int, uma com boolean e outra sem nada, etc., mas os parâmetros precisam ser de combinações de tipos diferentes, independente do tipo de retorno do método.</p>
+
+<p>Agora vamos ver uma iniciação em POO, pra isso vamos criar outro projeto com a classe principal.</p>
+
+<p>Vamos criar uma segunda Classe Java com o nome Operacoes, no mesmo pacote Java (essa não terá o public static void main). Ele automaticamente criará uma classe pública com o nome Operacoes, vamos trabalhar dentro dela.</p>
+
+<p>Dentro da classe pública, criaremos um método no qual vai retornar uma string. Veja o código que vai dentro da classe pública Operacoes:</p>
+
+<pre>
+<code>
+public static String contador(int ini, int fim) {
+    String stri = "";
+    for(int cont = ini; cont <= fim; cont++) {
+        stri += cont + " ";
+    }
+    return stri;
+}
+</code>
+</pre>
+
+<p>Para chamar o método na primeira classe, colocaremos o nome da classe e o método após o ponto, no método principal da primeira. Veja o código:</p>
+
+<pre>
+<code>
+System.out.println("Vai começar a Contagem!");
+System.out.println(Operacoes.contador(1, 5));
+</code>
+</pre>
+
+<p>PS: No caso acima, o método contador deverá também ser estático, ou dará erro, e de preferência, público. O static permite chamar a função de uma classe sem precisar criar um objeto.</p>
+
+<p>Vamos criar um programa que mostre fatoriais, para isso criaremos, outro programa com classe principal, e nele vamos criar outra classe chamada Fatorial.</p>
+
+<p>Observe que nesse caso, o Fatorial é uma classe de criação de objeto, o que facilitará o código e a formação do programa.</p>
+
+<p>Esse é o código completo da segunda classe, observe que alguns atributos serão privados (encapsulados), nesse caso:</p>
+
+<pre>
+<code>
+public class Fatorial {
+    private int num = 0;
+    private int fat = 1;
+    private String form = "";
+    
+    public void setValor(int n) {
+        num = n;
+        int f = 1;
+        String s = "";
+        for(int cont = n; cont > 1; cont--) {
+            f *= cont;
+            s += cont + " x ";
+        }
+        s += "1 = ";
+        fat = f;
+        form = s;
+    }
+    public int getFatorial() {
+        return fat;
+    }
+    public String getFormula() {
+        return form;
+    }
+}
+</code>
+</pre>
+
+<p>E na primeira classe, colocamos apenas isso:</p>
+
+<pre>
+<code>
+Fatorial f = new Fatorial();
+f.setValor(5);
+System.out.print(f.getFormula());
+System.out.println(f.getFatorial());
+</code>
+</pre>
+
+<p>A classe Fatorial criada nesse programa pode ser reaproveitada em outros projetos, graças à orientação à objetos.</p>
+
+<p>Da mesma forma, faremos um novo programa em Swing.</p>
+
+<p>Para usarmos a classe encapsulada, pegamos a classe Fatorial do primeiro projeto e arrastamos pro pacote java "classes" do segundo projeto (segure o Ctrl pra copiar), clique em refatorar para a classe do segundo projeto.</p>
+
+<p>No frame, colocaremos um objeto giratório, um botão e dois labels para calcular o fatorial. Esse é o código do evento do botão:</p>
+
+<pre>
+<code>
+int n = Integer.parseInt(numVal.getValue().toString());
+Fatorial f = new Fatorial();
+f.setValor(n);
+lblCont.setText(f.getFormula());
+lblFat.setText(Integer.toString(f.getFatorial()));
+</code>
+</pre>
+
+<p>Essa é a vantagem da orientação à objetos, podemos reaproveitar o código em outros projetos.</p>
+
+<p>PS: Nos parâmetros também podemos passar arrays, passando a variável com colchetes, algo tipo <code>funcao(int vetorpassado[])</code>.</p>
+
+<h3>Tratamento de Erros com Try Catch</h3>
+
+<p>O try catch finally são utilizados para tratar erros. No bloco <code>try</code> nós inserirmos a rotina que queremos tratar o provável erro que acontecer. Quando ele acontece o erro no try, para a execução do bloco imediatamente, passa pro <code>catch</code> e passa essa exceção gerada pra ele, onde o erro será tratado propriamente dito, onde podemos interceptar a exceção e realizar o tratamento mais adequado ao programa. O <code>finally</code> sempre será executado, ele não é obrigatório.
+
+<p>Esse é a estrutura básica de um try catch:</p>
+
+<pre>
+<code>
+try {
+    System.out.println("Mensagem de Teste"); // É executado
+}
+catch(Exception ex) {
+    System.err.println("ERRO"); // Não é executado
+}
+</code>
+</pre>
+
+<p>No código acima, apenas o que está no try será executado, já que o código dentro dele está certo, o que está no catch não será executado (o parâmetro dentro dos parênteses do catch pode ser qualquer um).</p>
+
+<p>PS: Podemos usar tanto new Exception quanto new Error. Muitos erros o Java trata automaticamente, mas é preferível tratar para evitar travamentos e melhorar a exibição dos mesmos, e existem outros tratamentos também, como o <code>SQLException</code> e o <code>NumberFormatException</code>, esses dois são respectivamente, para tratamento de erros em bancos de dados e de valores não numéricos. Note também que o <code>System.err.println()</code> imprime em vermelho, por isso é usado pra erros.</p>
+
+<p>Podemos, por exemplo, usar o <code>ArithmeticException</code> para tratar erros de divisão por zero:</p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in, "CP1252"); // Importe
+int num1, num2, res;
+
+System.out.print("Digite o dividendo: ");
+num1 = teclado.nextInt();
+System.out.print("Digite o divisor: ");
+num2 = teclado.nextInt();
+
+try {
+    res = num1 / num2;
+    System.out.println(res);
+}
+catch(ArithmeticException ex) {
+    System.err.println("ERRO: Não é Possível Dividir por Zero!");
+}
+</code>
+</pre>
+
+<p>Podemos também lançar a exceção em uma função, veja um exemplo com a exceção ArithmeticException:</p>
+
+<pre>
+<code>
+static float divisao(int n1, int n2) {
+    if(n2 == 0) {
+        throw new ArithmeticException("É impossível Dividir por Zero!");
+    }
+
+    return n1 / n2;
+}
+</code>
+</pre>
+
+<p>E no método principal:</p>
+
+<pre>
+<code>
+try {
+    System.out.println(divisao(50, 0));
+}
+catch(ArithmeticException ex) {
+    System.err.println(ex.getMessage());
+}
+</code>
+</pre>
+
+<p>PS: Caso a exceção seja colocada numa função, pode ser necessário colocar <code>throws Exception</code> (ou equivalente) após a declaração da função, que obrigatoriamente tem que ter um bloco try catch ao ser utilizada.</p>
+
+<p>Como visto acima, podemos também gerar um erro manualmente, veja um exemplo onde uma variável não poderá receber um valor maior do que 10, definido por nós mesmos:</p>
+
+<pre>
+<code>
+int num;
+Scanner teclado = new Scanner(System.in, "CP1252"); // Importe
+
+try {
+    System.out.print("Digite um valor: ");
+    num = teclado.nextInt();
+    if(num > 10) {
+        throw new Exception("Valor inválido, o valor deverá ser até o máximo de 10!");
+    }
+    System.out.println("Valor Digitado: " + num);
+}
+catch(Exception ex) {
+    System.err.println("ERRO: " + ex.getMessage());
+}
+finally {
+    System.out.println("Fim do tratamento");
+}
+</code>
+</pre>
+
+<p>No caso acima, o que fez criar a exceção, foi o método <code>throw new Exception()</code>, pode ver que ele nem terminou de executar o código e já pulou pro catch. No finally, ele exibirá a mensagem independente se o erro ocorrer ou não.</p>
+
+<p>Dessa forma, podemos fazer um tratamento melhor pra alguns erros, como o de raiz quadrada:</p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in, "CP1252");
+int num;
+double raiz;
+
+try {
+    System.out.print("Digite um número para ver a raiz: ");
+    num = teclado.nextInt();
+
+    raiz = Math.sqrt(num);
+
+    if(Double.isNaN(raiz)) { // Importe
+        throw new Exception("Não Existe Raiz Quadrada de Número Negativo!");
+    }
+
+    System.out.println("A raiz quadrada de " + num + " é " + raiz);
+}
+catch(Exception ex) {
+    System.err.println("ERRO: " + ex.getMessage());
+}
+</code>
+</pre>
+
+<p>Como exercício, crie um exemplo de tratamento de erros com números com Swing, com um campo de texto e um botão, integrado com JOptionPane, onde ele emite um alerta quando não for inserido um número, esse é o código do evento do botão:</p>
+
+<pre>
+<code>
+try {
+    if(txtNum.getText().equals("")) {
+        throw new Exception("Não foi Inserido Nenhum Dado!");
+    }
+
+    int num = Integer.parseInt(txtNum.getText());
+
+    JOptionPane.showMessageDialog(null, "O número digitado é " + num + "\nO dobro dele é " + (num * 2) + "\nO quadrado dele é " + Math.pow(num, 2) + "\nO cubo dele é " + Math.pow(num, 3), "Resultado", JOptionPane.INFORMATION_MESSAGE);
+}
+catch(NumberFormatException ex) {
+    JOptionPane.showMessageDialog(null, "Não foi inserido um número válido!\n\n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+}
+catch(Exception ex) {
+    JOptionPane.showMessageDialog(null, ex.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+}
+</code>
+</pre>
+
+<p>Como visto acima, podemos ter mais de uma exceção catch no mesmo bloco try catch. Um dos Erros foram planejados (o de verificar dados vazios), o de número só é executado ao passarem um caractere não numérico.</p>
+
+<h3>Limpar Tela de Console em Java e Comandos do Sistema</h3>
+
+<p>Como o Java roda em todos os sistemas operacionais que tenham uma JRE, temos que fazer assim para limpar a tela de console do Java:</p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in, "CP1252"); // Importe
+
+System.out.print("Digite algo: ");
+String texto = teclado.nextLine();
+
+try {
+    if(System.getProperty("os.name").contains("Windows")) { // Windows
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    }
+    else {
+        new ProcessBuilder("clear").inheritIO().start().waitFor();
+    }
+
+}
+catch(IOException | InterruptedException ex) { // Importe
+    System.err.println("ERRO: " + ex.getMessage());
+}
+
+System.out.println(texto);
+</code>
+</pre>
+
+<p>PS: Isso também funciona para outros comandos dos sistemas operacionais especificados, mas os resultados podem não aparecer no console do Netbeans. Como exercício, teste outros comandos desses sistemas.</p>
+
+<!-- Curso extraído do Curso em Vídeo.
+https://www.youtube.com/playlist?list=PLHz_AreHm4dkI2ZdjTwZA4mPMxWTfNSpR
+-->
+
+<ul>
+    <li><a href="tudo-sobre-java-5.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-java-7.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Linux</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Linux</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-linux-1.html">Tudo sobre Linux Parte 1!</a></li>
+                    <li><a href="tudo-sobre-linux-2.html">Tudo sobre Linux Parte 2!</a></li>
+                    <li><a href="tudo-sobre-linux-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Linux Parte 3!</a></li>
+                    <li><a href="tudo-sobre-linux-4.html">Tudo sobre Linux Parte 4!</a></li>
+                    <li><a href="tudo-sobre-linux-5.html">Tudo sobre Linux Parte 5!</a></li>
+                    <li><a href="tudo-sobre-linux-6.html">Tudo sobre Linux Parte 6!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Linux Parte 3</h2>
+
+<h3>Instalação do MySQL no Linux</h3>
+
+<p>Para baixar o MySQL é simples, basta colocar esse comando no terminal:</p>
+
+<pre>
+<code>
+sudo apt-get install mysql-server-5.7
+</code>
+</pre>
+
+<p>Ao instalar, ele pedirá a senha pro banco de dados root (que não é o root do Linux).</p>
+
+<p>Pode ser necessário reiniciar o serviço antes de usar o banco, digitando isso:</p>
+
+<pre>
+<code>
+sudo /etc/init.d/mysql restart
+</code>
+</pre>
+
+<p>O arquivo de configuração do MySQL está localizado em <code>/etc/mysql/my.cnf</code>.</p>
+
+<p>Para entrar no MySQL digite isso:</p>
+
+<pre>
+<code>
+mysql -u root -p
+</code>
+</pre>
+
+<p>PS: Pode ser suprimida a opção -p caso não tenha senha configurada no banco.</p>
+
+<p>Digite dentro do MySQL esses comandos:</p>
+
+<pre>
+<code>
+create database banco
+default character set utf8
+default collate utf8_general_ci;
+
+show databases;
+
+use banco;
+
+create table tbl_teste (
+    id smallint,
+    nome varchar(30)
+)
+default charset = utf8;
+
+insert into tbl_teste (id, nome) values (100, "Teste");
+
+insert into tbl_teste (id, nome) values (101, "Dado");
+
+select * from tbl_teste;
+</code>
+</pre>
+
+<p>Para sair do MySQL, basta digitar exit no terminal.</p>
+
+<h3>Gerenciamento de Pacotes com Aptitude</h3>
+
+<p>Além do famoso apt-get, podemos usar o aptitude para gerenciar pacotes no Linux, esses são os comandos básicos:</p>
+
+<table>
+    <tr>
+        <th>Comando</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>aptitude update</td>
+        <td>Atualiza a lista de pacotes</td>
+    </tr>
+    <tr>
+        <td>aptitude safe-upgrade</td>
+        <td>Atualiza os pacotes</td>
+    </tr>
+    <tr>
+        <td>aptitude install nomedopacote</td>
+        <td>Instala o pacote</td>
+    </tr>
+    <tr>
+        <td>aptitude remove nomedopacote</td>
+        <td>Remove o pacote</td>
+    </tr>
+    <tr>
+        <td>aptitude purge nomedopacote</td>
+        <td>Purga o pacote</td>
+    </tr>
+    <tr>
+        <td>aptitude search nomedopacote</td>
+        <td>Procura pelo pacote</td>
+    </tr>
+
+    <tr>
+        <td>aptitude show nomedopacote</td>
+        <td>Mostra se o pacote está instalado</td>
+    </tr>
+    <tr>
+        <td>aptitude</td>
+        <td>Roda aptitude interativamente, F10 para acessar menu</td>
+    </tr>
+    <tr>
+        <td>aptitude -v(N) moo</td>
+        <td>Easter Egg (repita v N vezes)</td>
+    </tr>
+</table>
+
+<p>PS: Rode como root esses comandos.</p>
+
+<h3>Inicialização, init, runlevels, init.d, inittab e telinit</h3>
+
+<p>Ao se iniciar o Linux, são usados diversos scripts presentes no diretório /etc para configurar o sistema e mudar um nível de execução a outro. Esse processo varia um pouco entre as distribuições.</p>
+
+<p>Temos que entender o processo init, o init é a inicalização do controle de processos. É o pai de todos os processos, criado a partir de um script armazenado em /etc/inittab. O PID dele é 1.</p>
+
+<p>O conceito de runlevels (níveis de execução) especifica as diferentes formas pelas quais um sistema pode ser utilizado e o controle sobre quais serviços rodarão. Os níveis de execução são especificados pelos números inteiros de 0 a 6. O processo init é responsável por levar o sistema ao nível de execução padrão.</p>
+
+<p>Esses são os níveis de execução dos runlevels:</p>
+
+<table>
+    <tr>
+        <th>Runlevel</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>Sistema Desligado</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Modo Monousuário (S,s)</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Multiusuário, Padrão no Debian e Derivados</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Multiusuário, Padrão no Red Hat e Derivados, sem GUI</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Não Usado</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Multiusuário Completo com Login Gráfico (Red Hat e Derivados)</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Reinicialização do Sistema</td>
+    </tr>
+</table>
+
+<p>O diretório /etc/init.d é o diretório que contém scripts de inicialização/encerramento para cada serviço do sistema, por exemplo /etc/init.d/sshd. Esses scripts aceitam argumentos como start, stop, restart, status e reload. Esses scripts não são execuados diretamente pelo processo init. Em vez disso, os diretórios /etc/rc0d a /etc/rc6.d possuem links simbólicos para esses scripts.</p>
+
+<p>Os links desses diretórios são nomeados nos formatos KNNnome e SNNnome, sendo que K é kill (finalizar, serviços que não deverão rodar no runlevel, executados primeiro), S é start (iniciar, serviços que deverão rodar no runlevel), NN (número de sequência, ordem de execução dos scripts) e nome (identificação dos scripts).</p>
+
+<p>O nível de execução padrão pode ser configurado no arquivo /etc/inittab, procure pela linha initdefault (por exemplo, id:2:initdefault:).</p>
+
+<p>Use o comando telinit para mudar o runlevel em tempo de execução, por exemplo, pra desligar o sistema digite <code>telinit 0</code>.</p>
+
+<p>Mais opções:</p>
+
+<ul>
+    <li><code>init 0 enter</code> - Muda runlevel para o número especificado.</li>
+    <li><code>telinit q</code> - Aplica as mudanças realizadas em /etc/inittab</li>
+    <li><code>runlevel</code> - Mostra o runlevel prévio e o atual.</li>
+</ul>
+
+<h3>Comandos Básicos - bash, ls, cd, pwd, encadeamento, clear</h3>
+
+<p>O shell do Linux é um programa que fornece um terminal e que interpreta comandos digitados nele, ele também fornece informações importantes como o usuário e o computador que ele está logado (por exemplo, <code>root@eu</code> significa que está como usuário root no computador eu). Por padrão, ele abre no diretório /home do usuário (ou /root do usuário root), representado pelo símbolo ~. O símbolo # indica que estamos usando o terminal como root, enquanto quando ele está com o símbolo $ significa que estamos logados como usuário comum.</p>
+
+<p>O shell é uma interface entre o usuário e o kernel que nos permite manipular o sistema. O shell padrão no Debian e derivados (Ubuntu, Mint, Kali, etc.) é o bash, localizado em /bin/bash.</p>
+
+<p>O comando <code>ls</code> é usado para listar o conteúdo do diretório atual, com o parâmetro <code>-l</code> ele lista os arquivos e diretórios de forma detalhada (como permissões, tamanho e proprietário). A opção <code>-a</code> lista arquivos ocultos (arquivos ocultos começam com um ou dois pontos). Podemos combinar ambos usando <code>-la</code>. A opção <code>-i</code> mostra o número INOD que identifica o arquivo dentro do sistema.</p>
+
+<p>Para sabermos o diretório atual, usamos <code>pwd</code>, para limpar a tela, usamos <code>clear</code>. Para sabermos caminhos de outros diretórios para, por exemplo usar com o ls, passamos o caminho do diretório nele ou mudamos de diretório usando o comando <code>cd</code>, por exemplo <code>cd /home</code>. Para voltar o diretório anterior usamos <code>cd -</code> e pra irmos à um nível anterior usamos <code>cd ..</code>, pra irmos pra raiz usamos <code>cd /</code>.</p>
+
+<p>Para juntamos dois comandos, colocamos um ponto-e-vírgula após o comando, por exemplo <code>cd /home; ls -l</code>.</p>
+
+<h3>Comandos Básicos - touch, cut, timestamp</h3>
+
+<p>O comando <code>touch</code> permite alterar o registro de data e hora de acesso de um arquivo, veja um exemplo de uso:</p>
+
+<pre>
+<code>
+touch -m -t 201012211400 arquivo
+</code>
+</pre>
+
+<p>O registro é na ordem ano, mês, dia, hora, minuto. Para criar um arquivo vazio digite <code>touch nomedoarquivo</code>.</p>
+
+<p>O comando <code>cut</code> "corta" campos ou colunas selecionados em cada linha de um arquivo (<a href="files/frutas.txt" target="_blank" download="frutas.txt">clique aqui pra baixar um arquivo de texto pra usarmos</a>. Imprime colunas ou campos delimitados por espaços ou outros caracteres especificados pelo usuário. Veja um exemplo:</p>
+
+<pre>
+<code>
+cut -c1-6 arquivo # Imprime as colunas de 1 a 6
+
+cut -c4,8 arquivo # Imprime as colunas 4 e 8
+
+cut -d: -f3 arquivo # Imprime o campo 3 usando o caractere : como delimitador, para usar o espaço use entre aspas simples.
+
+cut -d: -f1 /etc/passwd # Lista os usuários do sistema
+
+cut -d: -f1,6 /etc/passwd # Usuários e seus diretórios padrão
+</code>
+</pre>
+
+<h3>Comandos Básicos - head, sort (classificar), Combinação de Comandos</h3>
+
+<p>O comando <code>head</code> mostra as primeiras linhas de um ou mais arquivos, por exemplo:</p>
+
+<pre>
+<code>
+head arquivo # Mostra as 10 primeiras linhas do arquivo
+
+head -c50 arquivo # Exibe os primeiros 50 bytes de um arquivo (ou k e m para kilobytes e megabytes).
+
+head -n15 arquivo # Mostra as 15 primeiras linhas do arquivo.
+
+head -n8 /etc/group # Mostra as 8 primeiras linhas do arquivo /etc/group
+</code>
+</pre>
+
+<p>Podemos combinar ele com o cut e mostrar somente os nomes das 5 primeiras frutas do arquivo especificado:</p>
+
+<pre>
+<code>
+cut -d' ' -f2 frutas.txt | head -n5
+</code>
+</pre>
+
+<p>O comando <code>sort</code> organiza os dados de acordo com a necessidade dos usuários (de acordo com a primeira coluna de caracteres).</p>
+
+<p>Digite esse comando e veja o resultado no arquivo:</p>
+
+<pre>
+<code>
+cut -c3-5 frutas.txt | sort>frutas-sort.txt
+</code>
+</pre>
+
+<p>Podemos fazer assim também:</p>
+
+<pre>
+<code>
+cut -d' ' -f2 frutas.txt | sort>frutas-sort.txt
+</code>
+</pre>
+
+<h3>Comandos Básicos - split (Dividir Arquivos) e cat (Concatenação).</h3>
+
+<p>O comando <code>split</code> divide um arquivo em várias partes em uma sucessão de arquivos com final aa, ab, ac, etc. A sintaxe dele é <code>split opcoes arq-entrada arq-saida</code>. Por exemplo:</p>
+
+<pre>
+<code>
+split -b 120 arq.conf arq-
+</code>
+</pre>
+
+<p>O comando acima divide o arquivo arq.conf em várias partes com 120 bytes cada, com os nomes arq-aa, arq-ab, arq-ac, e assim sucessivamente.</p>
+
+<p>Para unir novamente as partes do arquivo, use o comando cat, dessa forma:</p>
+
+<pre>
+<code>
+cat arq-aa arq-ab arq-ac>arq.conf
+</code>
+</pre>
+
+<p>Digite esses comandos:</p>
+
+<pre>
+<code>
+cp /etc/passwd ~
+
+cd ~
+
+ls
+
+split -b 200 passwd pass-
+
+ls -l
+
+# Depois digita esses pra unir as partes de novo:
+
+cat pass-*>passwd-2
+
+ls
+
+cat passwd-2
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-linux-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-linux-4.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

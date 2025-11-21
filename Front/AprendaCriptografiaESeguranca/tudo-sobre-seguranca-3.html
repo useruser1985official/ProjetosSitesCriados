@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Criptografia e Segurança</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Criptografia e Segurança</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-seguranca-1.html">Tudo sobre Criptografia e Segurança Parte 1!</a></li>
+                    <li><a href="tudo-sobre-seguranca-2.html">Tudo sobre Criptografia e Segurança Parte 2!</a></li>
+                    <li><a href="tudo-sobre-seguranca-3.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Criptografia e Segurança Parte 3!</a></li>
+                    <li><a href="tudo-sobre-seguranca-4.html">Tudo sobre Criptografia e Segurança Parte 4!</a></li>
+                    <li><a href="tudo-sobre-seguranca-5.html">Tudo sobre Criptografia e Segurança Parte 5!</a></li>
+                    <li><a href="tudo-sobre-seguranca-6.html">Tudo sobre Criptografia e Segurança Parte 6!</a></li>
+                    <li><a href="tudo-sobre-seguranca-7.html">Tudo sobre Criptografia e Segurança Parte 7!</a></li>            
+                    <li><a href="tudo-sobre-seguranca-8.html">Tudo sobre Criptografia e Segurança Parte 8!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Criptografia e Segurança Parte 3</h2>
+
+<h3>Hashes - Resumos de Mensagens</h3>
+
+<p>Um algoritmo de resumo de mensagem recebe uma mensagem de tamanho variável como entrada e produz um resumo de tamanho fixo como saída, totalmente incompreensível. Essa saída é chamada de Message Digest (Digest) ou Hash. E o algoritmo é chamado de One-Way Hash ou simplesmente Algoritmo de Hash.</p>
+
+<p>Para que seja criptograficamente seguro, um algoritmo de hash necessita no mínimo que:</p>
+
+<ul>
+    <li>Deve ser impossível determinar a mensagem de entrada baseado no seu resumo.</li>
+    <li>Deve ser impossível encontrar uma mensagem qualquer que possua um hash em particular ou desejado.</li>
+    <li>Deve ser computacionalmente inviável encontrar duas mensagens que tenham o mesmo resumo (colisão).</li>
+</ul>
+
+<p>Adicionalmente, um algoritmo de hash seguro também tem:</p>
+
+<ul>
+    <li>O mapeamento de um hash para a mensagem deve parecer totalmente aleatório.</li>
+    <li>A alteração de um bit que seja na mensagem original deve produzir um hash absolutamente diferente (efeito avalanche).</li>
+</ul>
+
+<p>Veja alguns algoritmos de hash comuns:</p>
+
+<table>
+    <tr>
+        <th>Algoritmo de Hash</th>
+        <th>Tamanho do Resumo em Bits</th>
+    </tr>
+    <tr>
+        <td>MD2</td>
+        <td>128</td>
+    </tr>
+    <tr>
+        <td>MD4</td>
+        <td>128</td>
+    </tr>
+    <tr>
+        <td>MD5</td>
+        <td>128</td>
+    </tr>
+    <tr>
+        <td>SHA</td>
+        <td>160</td>
+    </tr>
+    <tr>
+        <td>SHA-1</td>
+        <td>160</td>
+    </tr>
+    <tr>
+        <td>SHA-256</td>
+        <td>256</td>
+    </tr>
+    <tr>
+        <td>WHIRLPOOL</td>
+        <td>512</td>
+    </tr>
+</table>
+
+<p>O MD5 tem 128 bits e 32 caracteres hexadecimais. O SHA-1 é bastante parecido, mas tem 160 bits e 40 caracteres, o que torna mais difícil a quebra. O hash SHA-256 tem 256 bits e 64 caracteres hexadecimais, e é mais difícil ainda a quebra.</p>
+
+<p>Veja os hashs da palavra "Teste" em cada um deles:</p>
+
+<table>
+    <tr>
+        <th>Algoritmo</th>
+        <th>Palavra "Teste" Criptografada</th>
+    </tr>
+    <tr>
+        <td>MD5</td>
+        <td>8e6f6f815b50f474cf0dc22d4f400725</td>
+    </tr>
+    <tr>
+        <td>SHA-1</td>
+        <td>6d7082969a0681db6fe658a26ff16198600f0923</td>
+    </tr>
+    <tr>
+        <td>SHA-256</td>
+        <td>89f308210c7c7820bad0974f31e751bfa433d2066a93e808947c3188dedba6e3</td>
+    </tr>
+</table>
+
+<p>Em sistemas Linux, podemos usar o programa HashID para identificar o tipo de hashs, digitando no terminal <code>hashid 86f7e437faa5a7fce15d1ddcb9eaeaea377667b8</code>.</p>
+
+<p>Se quiser ver mais algo sobre HASH, veja nesse site: <a href="https://academy.bit2me.com/pt/que-es-hash/" target="_blank">https://academy.bit2me.com/pt/que-es-hash/</a></p>
+
+<p>Em criptografia, os hashes são usados geralmente para:</p>
+
+<ul>
+    <li>Autenticação.</li>
+    <li>Integridade de Mensagens (com MAC/HMAC).</li>
+    <li>Assinaturas de Mensagens.</li>
+    <li>Detecção de Alteração de Dados.</li>
+    <li>Verificação de Senhas.</li>
+</ul>
+
+<p>PS: MAC (Message Autenticator Code) é um tipo de código de autenticação de mensagem, geralmente adicionada ao final dela. O HMAC utiliza um hash para isso.</p>
+
+<p>Há outros usos, fora da criptografia, como detecção de dados duplicados e verificação de corrupção de arquivos.</p>
+
+<p>Vejamos um exemplo de aplicação de hash: Detecção de alteração de dados.</p>
+
+<p>Geraremos o hash de uma imagem, alteraremos um pixel na imagem e depois geraremos outro hash para comparação.</p>
+
+<p>Usaremos um programa chamado md5sum que existe no Linux, que roda no terminal. Para Windows, ele é disponibilizado no GPG4Win, bastando colocar a pasta <code>C:\Program Files (x86)\Gpg4win\bin</code> no path.</p>
+
+<p>Para gerar o hash do arquivo, digite no prompt <code>md5sum nomedoarquivo.jpg</code>.</p>
+
+<p>Vamos fazer isso com uma imagem, para gerar o hash dela, e mantenha o prompt aberto, edite a imagem com uma pequena alteração num editor (pode ser até o Paint), mudando apenas um pixel (aumentando a foto).</p>
+
+<p>Gere o hash novamente, verificará que o hash é diferente, isso é usado para ver se o arquivo foi alterado.</p>
+
+<p>Nos próprios sites de alguns arquivos (como imagens ISO de sistemas operacionais como o Linux), possuí os números de hash ao lado para isso.</p>
+
+<h3>Autenticação - Paradigmas e Técnicas</h3>
+
+<p>O processo de autenticação fornece garantia sobre a identidade de um usuário, verificando se você é quem diz ser.</p>
+
+<p>Podemos chamar de Reclamante a pessoa (ou sistema) cuja identidade será verificada.</p>
+
+<p>Credenciais são a evidência que um reclamante apresenta para estabelecer sua identidade.</p>
+
+<p>Assim o sistema de autenticação nos fornece proteção contra ataques como man-in-the-middle, mascaramento e spoofing, por exemplo.</p>
+
+<p>Esses são alguns tipos de autenticação:</p>
+
+<ul>
+    <li><b>Autenticação de Entidade: </b>Um usuário afirma ter uma identidade legítima em um sistema.</li>
+    <li><b>Autenticação de Origem de Dados: </b>Fornece evidência de que dados (como um mensagem de e-mail), foram originados de um usuário legítimo.</li>
+</ul>
+
+<p>A autenticação de entidade pode ainda se subdividir em:</p>
+
+<ul>
+    <li><b>Unilateral: </b>Apenas uma das partes envolvidas na comunicação se autentica.</li>
+    <li><b>Mútua: </b>Ambas as partes devem se autenticar.</li>
+</ul>
+
+<p>Esses são alguns dos paradigmas de autenticação:</p>
+
+<ul>
+    <li><b>Algo que você sabe: </b>O reclamante possui uma informação, como uma senha ou um PIN.</li>
+    <li><b>Algo que você possui: </b>O reclamante demonstra a posse de algo, como uma chave física, um crachá, um cartão ou uma chave privada em um smart card.</li>
+    <li><b>Algo que você é: </b>Baseado em alguma característica imutável do reclamante, como impressão digital, voz, padrão de retina ou geometria das mãos.</li>
+</ul>
+
+<h4>Senhas</h4>
+
+<p>Senhas são o mecanismo de autenticação mais usados para autenticar um usuário. Neste modelo, o reclamante prova sua identidade apresentando o conhecimento de uma string de caracteres. As senhas são uma das maiores vulnerabilidades de um sistema de autenticação, pois as pessoas tendem a escolher senhas fáceis de memorizar, e por isso, fáceis de adivinhar.  O PIN também é um tipo de senha, que contém apenas números em uma pequena quantidade, geralmente de 4 a 6 algarismos. As senhas alfanuméricas geralmente são chamadas de passphrase (palavra-passe).</p>
+
+<p>Muitas senhas são muito comuns, fáceis de serem quebradas por invasores, como podem ver nesse link: <a href="https://tecnoblog.net/noticias/2019/12/19/25-piores-senhas-2019-lista-inclui-123456-qwerty-password/" target="_blank">https://tecnoblog.net/noticias/2019/12/19/25-piores-senhas-2019-lista-inclui-123456-qwerty-password/</a></p>
+
+<p>Se quiser testar a força de uma senha, temos esses dois sites pra isso:</p>
+
+<ul>
+    <li><a href="https://www.security.org/how-secure-is-my-password/" target="_blank">https://www.security.org/how-secure-is-my-password/</a></li>
+    <li><a href="http://testedesenha.com.br/" target="_blank">http://testedesenha.com.br/</a></li>
+</ul>
+
+<p>Esses são alguns dos tipos de ataques a senhas:</p>
+
+<ul>
+    <li>Pode ser descoberta se for transmitida sem criptografia em uma rede.</li>
+    <li>Um intruso entra em um sistema e lê o arquivo de senhas.</li>
+    <li>Alguém pode adivinhar facilmente uma senha mal escolhida.</li>
+    <li>Pode ser possível quebrar uma senha usando um ataque de dicionário ou bruteforce.</li>
+    <li>É possível inclusive enganar um usuário fazendo-o revelar sua senha.</li>
+</ul>
+
+<h4>Token</h4>
+
+<p>Um reclamante pode fornecer evidência de sua identidade ao demonstrar a posse de um token.</p>
+
+<p>Um token é um objeto físico, como uma chave, um documento de identidadem um dispositivo eletrônico ou um smart card, por exemplo.</p>
+
+<p>Geralmente os tokens são usados em conjunto com uma senha para fornecer um grau mais elevado de certeza com relação à identidade de um reclamante.</p>
+
+<p>Geradores de números eletrônicos ou um cartão com chip são exemplos disso.</p>
+
+<p>Um smart card é um token do tamanho de um cartão de crédito que contém um microprocessador, memória para armazenar programas e dados, e contato elétricos usados como interface com um leitor de cartões, o qual também fornece energia elétrica ao  dispositivo.</p>
+
+<p>Geralmente o smart card possuí um valor secreto armazenado, como uma chave privada de assinatura digital ou um número secreto, usado para realizar autenticação do portador do cartão.</p>
+
+<p>Smart cards podem também ser os que se "encostam" num painel, como os cartões de ônibus, e qualquer um que tenha chip, inclusive os chips de celulares são um tipo de smart card.</p>
+
+<p>Temos também tokens desconectados, que é um tipo de token que não possui conexão física nem lógica com o computador cliente.</p>
+
+<p>Possuem um display que mostra um código de autenticação que muda, por exemplo, a cada minuto ou outro período.</p>
+
+<p>O código pode ser usado então, para realizar autenticação em um sistema, geralmente online, como um bankline.</p>
+
+<h4>Biometria</h4>
+
+<p>A biometria fornece garantia da identidade de um reclamante baseado em características humanas físicas, comportamentais e morfológicas mensuráveis.</p>
+
+<p>A biometria é usada geralmente em combinação de outros paradgmas de autenticação para obertmos um nível mais alto de segurança.</p>
+
+<p>Esses são uns exemplos de biometria:</p>
+
+<ul>
+    <li><b>Padrões de Retina: </b>Testa os padrões únicos de vasos sanguíneos no tecido da retina de uma pessoa.</li>
+    <li><b>Impressões Digitais: </b>Padrões únicos de impressão digital do usuário.</li>
+    <li><b>Formato da Mão: </b>Exame das medidas geométricas da mão de uma pessoa.</li>
+    <li><b>Padrões de Voz: </b>O sistema explora os padrões vocais, acústicos, fonéticos ou até mesmo linguísticos.</li>
+    <li><b>Assinatura: </b>Padrões únicos de uma assinatura convencional.</li>
+</ul>
+
+<h3>O que são Assinaturas Digitais?</h3>
+
+<p>Um esquema de assinatura digital é um esquema matemático utilizado para provar a autenticidade de uma mensagem ou documento digital. Podemos usar assinaturas digitais com qualquer tipo de documento, mesmo criptografados, assim o destinatário da mensagem pode ter a certeza da identidade do remetente e também confiar que a mensagem chegou ao destino intacta.</p>
+
+<p>Uma assinatura digital precisa ter algumas características, como:</p>
+
+<ul>
+    <li>Deve ser simples de produzir para o assinante.</li>
+    <li>Verificável com facilidade.</li>
+    <li>Extremamente difícil de ser falsificada.</li>
+    <li>Quem a usa não pode negar que assinou o documento.</li>
+</ul>
+
+<p>Usa-se então uma assinatura digital quando você envia uma mensagem a alguém e, embora possa não ser importante que a mensagem seja mantida em segredo, é muito importante que o destinatário da mensagem tenha certeza de que essa mensagem realmente partiu de você.</p>
+
+<p>Nesse caso, você pode criptografar a mensagem com sua chave privada, envá-la, e o destinatário só será capaz de decriptá-la com a sua chave pública (não a dele nem de mais ninguém), provando a autenticidade da mensagem. Sendo assim, uma assinatura digital utiliza alguma forma de criptografia assimétrica para operar.</p>
+
+<p>Porém, uma forma mais eficiente de obter esse mesmo resultado é criptografar um pequeno bloco de bits que seja uma função do documento, e não o documento inteiro. Este bloco é chamado de autenticador (autenticator) possui a propriedade de que é impossível alterar um bit que seja no documento sem desfigurar totalmente o autenticados. Criptografamos então o autenticador com a chave privada do remetente , e ele servirá para verificar a autenticidade do documento todo. Podemos usar um hash como o SHA-1 para essa função.</p>
+
+<p>Veja o esquema das assinaturas abaixo:</p>
+
+<img src="imagens/assinaturas.jpg" alt="Assinaturas"/>
+
+<p>Dessa forma, a assinatura digital é enviada anexada à própria mensagem e o conjunto é enviado ao destinatário. O destinatário então calcula o hash da mensagem, decripta a assinatura digital, e compara os dois valores, se forem idênticos, a mensagem é autêntica.</p>
+
+<p>Mas há um problema com esse esquema de assinatura digitais: Como podemos ter certeza de que um documento assinado foi realmente assinado pelo remetente correto? Em outras palavras, como podemos garantir que um intruso não consiga gerar e assinar um documento em nome de outra pessoa? Para resolver esse problema devemos utilizar um certificado digital, que pode ser usado para atestar e verificar a validade de uma assinatura digital.</p>
+
+<p>Alguns dos algoritmos mais comuns usados para assinar digitalmente um documento são RSA, DSA, ElGamal e HMAC.</p>
+
+<h3>Hash MD5 - Usando no Windows e no Linux</h3>
+
+<p>O MD5 (Message Digest 5) é uma função de hash criptográfico muito usada. Produz um valor de hash de 32 caracteres hexadecimais (128 bits).</p>
+
+<p>Um hash MD5 pode ser usado em aplicações como:</p>
+
+<ul>
+    <li>Verificar se um arquivo transferido chegou intacto ao destino ("checksum" - MD5sum).</li>
+    <li>Armazenar hashes de senhas ("one-way hash").</li>
+</ul>
+
+<p>PS: No mundo real as duas aplicações não são recomendadas com o MD5.</p>
+
+<p>Uma minúscula mudança no texto original produz uma mudança brutal no resultado computado pelo hash, por exemplo:</p>
+
+<ul>
+    <li>raio = <code>320652e3afe3d17415897504813abf7b</code></li>
+    <li>Raio = <code>93a6ff559b4a143ff1b6f77c57145951</code></li>
+</ul>
+
+<p>A segurança do hash MD5 está fortemente comprometida. Ele é vulnerável a ataques de colisão, mesmo usando máquinas comuns com poder de processamento médio.</p>
+
+<p>Um ataque de colisão em um hash criptográfico é um tipo de ataque onde se tenta encontrar duas entradas que produzam o mesmo valor de hash na saída. Outro problema grave, relativo ao uso de hashes MD5 para armazenar senhas, é o uso de rainbow tables para reverter um hash e descobrir a string que o originou. Também não é recomendado usar isso com SHA-1.</p>
+
+<p>No Linux, o gerador de hash já existe (md5sum, sha1sum e sha256sum), já no Windows, precisaremos usar os programas do GPG4Win.</p>
+
+<p>Para gerar o hash de um arquivo qualquer, usamos o comando <code>md5sum NomedoArquivo.extensao</code>. Se quisermos gerar um arquivo com o hash MD5 dele, podemos usar <code>md5sum NomedoArquivo.extensao&gt;"NomedoArquivo.md5"</code>. No Linux, usamos a mesma lógica com hashs sha1 e sha256, mudando o comando para <code>sha1sum</code> e <code>sha256sum</code>, respectivamente.</p>
+
+<p>O gerador de hashs do GPG4Win também tem opção para SHA-1 e SHA-256.</p>
+
+<p>PS: Independente do arquivo o hash sempre terá um tamanho pequeno.</p>
+
+<p>Pra quem usa Windows, o 7-Zip, programa de compactação e descompactação, também oferece um utilitário para verificar hashs SHA-1 e SHA-256, basta clicar com o botão direito no arquivo e verificar.</p>
+
+<h3>Hashes e Rainbow Tables - Descobrindo Senhas</h3>
+
+<p>Existem algumas técnicas de ataques à hashes, sendo as mais comuns as seguintes:</p>
+
+<ul>
+    <li>Força Bruta</li>
+    <li>Dicionário</li>
+    <li>Colisão</li>
+    <li>Aniversário</li>
+    <li>Rainbow Tables</li>
+</ul>
+
+<p>Os dois primeiros métodos não são muito efetivos, devido à imensa quantidade de valores que precisam ser testados, principalmente com senhas longas.</p>
+
+<p>Os ataques de força bruta consistem no uso de um programa que tenta várias combinações aleatórias até achar a senha certa. O dicionário age de forma parecida, mas usando um dicionário de palavras num arquivo txt comum, que pode ser feito especialmente para um determinado usuário (um com palavras da Bíblia para obter senha de alguém religioso ou um com nomes de bebês para obter a senha de uma grávida, por exemplo).</p>
+
+<p>O ataque de colisão é quando encontramos dois textos planos diferentes que tem o mesmo hash, inclusive já chega a comprometer os algoritmos MD5 e SHA-1. Já o ataque de aniversário baseia nas probabilidades matemáticas de encontrar determinada senha.</p>
+
+<p>Uma Rainbow Table é uam espécie de table que contém milhões (ou bilhões) de hashes pré-calculados e as strings ("senhas") que os originaram. Uma rainbow table é otimizada para armazenar hashes e senhas, permitindo pesquisar entradas de forma muito veloz. São usadas basicamente para quebrar hashes de senhas.</p>
+
+<p>Uma função de hash mapeia textos planos (dados não criptografados) em hashes de forma que não podemos discernir qual texto plano originou qual hash. Para que seja possível descobrir o texto plano a partir de um hash, devemos aplicar a função de hash em cada texto plano possível até encontrarmos o hash idêntico ao procurado. Podemos também armazenar cada hash gerado em uma tabela, de modo que podemos consultá-la mais tarde semprecisarmos efetuar o cálculo de hash outra vez.</p>
+
+<p>Uma forma comum de proteger o hash de nossas senhas contra ataques de rainbow tables é o uso de uma técnica conhecida como salt ("salgar a senha"). Um salt é uma informação aleatória adiciona à entrada da função de hash, tornando a saída da função única, e imune às rainbow tables. Seria algo tipo <code>FuncaoHash(TextoPlano + Salt)</code>. O "salt" pode ser o nome de usuário, um PIN, um valor aleatório, etc.</p>
+
+<p>Para vermos na prática um funcionamento de um Rainbow Table, podemos utilizar sites para isso:</p>
+
+<ul>
+    <li>Esse site encripta e tem vários hashs para consultar: <a href="http://hashtoolkit.com/generate-hash/" target="_blank">http://hashtoolkit.com/generate-hash/</a></li>
+    <li>Esse site desencripta vários algoritmos e outros recursos, como identificar o algoritmo de um hash: <a href="https://hashes.com/" target="_blank">https://hashes.com/</a></li>
+</ul>
+
+<p>No primeiro site, coloque uma senha simples como "laranja" (cujo hash é <code>cf75ceb29197f57b19dcb8b4757368e8</code>), e pegue o hash dela e jogue no segundo site, pra ver se ele encontra algo. Da mesma forma, teste senhas de todo tipo, das mais fáceis até as mais complexas.</p>
+
+<p>Isso é útil para sabermos se uma senha é fraca ou mais forte.</p>
+
+<p>Além do MD5, o Rainbow Table também pode quebrar outros tipos de senhas, como SHA-1.</p>
+
+<h3>O que são Cifras de Feistel?</h3>
+
+<p>A maioria dos algoritmos de criptografia simétrica de bloco possuem uma estrutura descrita por Horst Feistel, da IBM, m 1973. As entradas do algoritmo são blocos de texto plano de comprimento 2x bits e um chave K. O bloco de texto plano é dividido em duas metades, L<sub>0</sub> e R<sub>0</sub>. Essas duas metades passam por n rodades de processamento e então se combinam para produzir o bloco de texto cifrado.</p>
+
+<p>Cada rodada r recebe como entrada L<sub>r-1</sub> e R<sub>r-1</sub>, derivadas da rodada anterior, assim como uma subchave K<sub>r</sub>, derivada da chave geral K. Essas subchaves são diferentes de K entre si pois são geradas a partir de K com um algoritmo de geração de chaves. As interações possuem todas a mesma estrutura. Uma substituição é realizada na metade esquerda dos dados, por meio da aplicação de uma função F na metade direita dos dados com a chave e então obtendo-se o XOR da saíde desta função e da metade esquerda dos dados.</p>
+
+<p>Veja abaixo a representação da permuta básica Feistel:</p>
+
+<img src="imagens/permuta-feistel.jpg" alt="Permuta Feistel"/>
+
+<p>Em outras palavras, o texto plano é dividido em dois, o que está no lado direito (o -1 é o bloco anterior de ambos) na função f que é aplicada a criptografia com uma chave, a saída recebe o que está do lado esquerdo e a saída vai pro lado direito, e o que estava no lado direito vai pro esquerdo. Isso é feito várias vezes, formando uma rede Feistel.</p>
+
+<p>Veja abaixo um exemplo de rede Feistel dessa forma:</p>
+
+<img src="imagens/rede-feistel.jpg" alt="Rede Feistel"/>
+
+<p>Muito algoritmos de criptografia utilizam uma ideia baseada em redes Feistel.</p>
+
+<p>Como a cifra de Feistel será aplicada depende da escolha de alguns parâmetros, como:</p>
+
+<ul>
+    <li><b>Tamanho do bloco:</b> Geralmente 64 bits.</li>
+    <li><b>Tamanho da chave:</b> Chaves maiores significam maior segurança, porém menor velocidade de execução do algoritmo.</li>
+    <li><b>Número de rodadas:</b> Tamanho típico 16.</li>
+    <li><b>Algoritmo de geração de subchaves:</b> Quanto mais complexo, melhor.</li>
+    <li><b>Função F (função principal do algoritmo):</b> Quanto mais complexa, melhor.</li>
+</ul>
+
+<p>O processo de descriptografia de uma cifra de Feistel é igual a criptografia. Usa-se, nesse caso, o texto cifrado como entrada do algoritmo, e as suchaves K<sub>n</sub> em ordem reversa.</p>
+
+<p>As cifras de Feistel são usadas nos algoritmos de criptografia DES, Blowfish, RC5, Twofish, 3DES, entre outros.</p>
+
+<ul>
+    <li><a href="tudo-sobre-seguranca-2.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-seguranca-4.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

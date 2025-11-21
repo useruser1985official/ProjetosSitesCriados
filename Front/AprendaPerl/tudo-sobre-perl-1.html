@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Perl</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Perl</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-perl-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Perl Parte 1!</a></li>
+                    <li><a href="tudo-sobre-perl-2.html">Tudo sobre Perl Parte 2!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre Perl Parte 1</h2>
+
+<h3>Primeiro Script</h3>
+
+<p>Um script Perl começa primeiramente com um shebang, que é formado pelos caracteres #!, e deve ser seguido do path onde o Perl está instalado.</p>
+
+<p>O comando de saída do Perl é o print, que, assim como outros comandos na linguagem, deve ser finalizado por um ponto-e-vírgula. Um script Perl (com extensão .pl) seria assim:</p>
+
+<pre>
+<code>
+#!/usr/bin/perl
+
+print "Meu Primeiro Script Perl!\n";
+</code>
+</pre>
+
+<p>Para executar o Perl, vá na linha de comando e digite <code>perl nomedoscript.pl</code> (podendo até chamar diretamente o script, sem colocar perl antes). Em Linux pode ser necessário dar um chmod +x pra isso, em Windows não é necessário.</p>
+
+<p>PS: Para escrever comentários em Perl, coloque o <code>#</code> antes deles. Veja como usar comentários de uma e várias linhas:</p>
+
+<pre>
+<code>
+# Comentário de uma linha
+
+=begin
+Comentário
+de
+várias
+linhas! 
+=cut
+</code>
+</pre>
+
+<h3>Variáveis</h3>
+
+<p>Teoricamente falando, uma variável é um nome pelo qual um programador pode se referir a um espaço na memória do computador que deve armazenar um determinado valor. Esse valor pode ser numérico, um conjunto de caracteres (sempre entre aspas) ou um arquivo (valores booleanos são identificados como 0 e 1).</p>
+
+<p>No Perl, as variáveis começam com cifrão, igual no PHP (que tem influências do Perl), veja um exemplo simples de como elas são declaradas:</p>
+
+<pre>
+<code>
+#!/usr/bin/perl
+
+my $nome = "Exemplo de String!";
+
+print $nome;
+</code>
+</pre>
+
+<p>Com números:</p>
+
+<pre>
+<code>
+#!/usr/bin/perl
+
+my $num1 = 5;
+my $num2 = 10;
+
+my $res = $num1 + $num2;
+
+print "$res\n";
+</code>
+</pre>
+
+<p>Outro exemplo:</p>
+
+<pre>
+<code>
+#!/usr/bin/perl
+
+my $num1 = 7;
+my $num2 = 2;
+
+my $res = $num1 * $num2;
+
+print "$res\n";
+</code>
+</pre>
+
+<p>Veja um exemplo de uso de tipos primitivos:</p>
+
+<pre>
+<code>
+my $num = 50;
+my $real = 9.85;
+my $frase = "Isso é uma String";
+my $logico = true;
+</code>
+</pre>
+
+<p>As variáveis podem sofrer alterações nos valores dentro de um mesmo programa.</p>
+
+<p>Tal como o C, podemos também usar printf (print formatado), dessa forma, ligeiramente diferente:</p>
+
+<pre>
+<code>
+printf "Inteiro: %d\n", $num;
+printf "Real: %.2f\n", $real;
+printf "String: %s\n", $frase;
+printf "Lógico: %s\n", $logico;
+</code>
+</pre>
+
+<h3>Constantes</h3>
+
+<p>As variáveis são importantes quando temos que processar diversos dados diferentes mas não ao mesmo tempo. Dessa forma podemos economizar espaço na memória do computador em vez de criar uma variável para cada valor que deve ser processado.</p>
+
+<p>As constantes, por sua vez, são valores que, uma vez definidos, não podem ser alterados.</p>
+
+<p>As constantes são definidas com as palavras <code>use constant</code> e a atribuição (obrigatória) é feita com <code>=&gt;</code>, dessa forma:</p>
+
+<pre>
+<code>
+#!/usr/bin/perl
+
+use constant PI => 4 * atan2(1, 1);
+use constant FRASE => "Exemplo de Constante!\n";
+
+print "O valor de PI é: ", PI, "\n";
+print FRASE;
+</code>
+</pre>
+
+<p>PS: Como visto acima, a concatenação de dados no Perl é feita por vírgulas, mas não é necessária em variáveis porque ela são diferenciadas pelo símbolo $ ou outros.</p>
+
+<p>Se tentarmos atribuir outro valor à constante, dará erro.</p>
+
+<h3>Tipos de Dados</h3>
+
+<p>No Perl existe três tipos básicos de dados, os escalares, os arrays e os hashes.</p>
+
+<p>Os escalares são especialmente elaborados para armazenar números, sejam eles inteiros, racionais, positivos ou negativos, etc., e textos, seja um simples caractere ou um texto longo.</p>
+
+<p>O Perl identifica o tipo escalar pelo prefixo $ que antecede o nome da variável. Pense no $ como o s de escalar.</p>
+
+<p>Veja abaixo um exemplo cujo resultado é um número real:</p>
+
+<pre>
+<code>
+#!/usr/bin/perl
+
+my $var1, $var2, $res;
+
+$var1 = 7;
+$var2 = 2;
+
+$res = $var1 / $var2;
+
+print $res;
+</code>
+</pre>
+
+<p>Como o Perl é dinamicamente tipado, não precisamos especificar o tipo de dados das variáveis.</p>
+
+<p>Para identificar o tipo de dados de uma variável, use o <code>ref</code>, assim:</p>
+
+<pre>
+<code>
+print ref \$res, "\n"; # Não esqueça da contrabarra.
+</code>
+</pre>
+
+<h3>Operadores Aritméticos</h3>
+
+<p>Os operadores aritméticos em Perl são os mesmos de outras linguagens, o que permite fazermos contas com ele, por exemplo:</p>
+
+<pre>
+<code>
+my $num1, $num2;
+
+$num1 = 10;
+$num2 = 5;
+
+printf "A soma de %d e %d é %d.\n", $num1, $num2, $num1 + $num2;
+printf "A subtração de %d e %d é %d.\n", $num1, $num2, $num1 - $num2;
+printf "A multiplicação de %d e %d é %d.\n", $num1, $num2, $num1 * $num2;
+printf "A divisão de %d e %d é %d ", $num1, $num2, $num1 / $num2;
+printf "com resto de %d.\n", $num1 % $num2;
+</code>
+</pre>
+
+<p>Os operadores lógicos (AND, OR e NOT) e os relacionais (menor, maior, igual, diferente, etc.) são os mesmos das outras linguagens.</p>
+
+<h3>Pegar Dados do Teclado</h3>
+
+<p>Para pegar dados do teclado, basta usarmos o my e as tags, dessa forma:</p>
+
+<pre>
+<code>
+print "Entre com seu nome: ";
+my $nome = &lt;&gt;;
+
+print "Seu nome é $nome\n";
+</code>
+</pre>
+
+<p>Podemos assim fazer, por exemplo, um programa que identifique se um número inteiro é par ou ímpar:</p>
+
+<pre>
+<code>
+print "Entre com um número: ";
+my $num = &lt;&gt;;
+
+print $num % 2 == 0 ? "Par" : "Ímpar";
+</code>
+</pre>
+
+<h3>Condicionais IF e ELSE</h3>
+
+<p>Basicamente o IF e ELSE é usado igual à qualquer outra linguagem, por exemplo:</p>
+
+<pre>
+<code>
+my $num = 20;
+
+if($num % 2 == 0) {
+    print "É Par\n";
+}
+else {
+    print "É Ímpar\n";
+}
+</code>
+</pre>
+
+<p>Mas o else if, diferente da maioria das linguagens, no Perl é chamado de elsif, por exemplo:</p>
+
+<pre>
+<code>
+print "Entre com sua idade: ";
+my $idade = &lt;&gt;;
+
+if($idade >= 18 && $idade < 70) {
+    print "Voto Obrigatório!\n";
+}
+elsif(($idade >= 16 && $idade < 18) || $idade >= 70) {
+    print "Voto Opcional!\n";
+}
+else {
+    print "Não Vota!\n";
+}
+</code>
+</pre>
+
+<h3>Laços de Repetição</h3>
+
+<p>Basicamente, existem três tipos de laços no Perl.</p>
+
+<p>While, usado quando não sabemos quantas vezes precisará repetir um laço:</p>
+
+<pre>
+<code>
+my $num = 0;
+
+while($num < 10) {
+    print "$num\n";
+    $num++;
+}
+</code>
+</pre>
+
+<p>Do While, igual o While, só que ele garante pelo menos uma execução mesmo se a condição for falsa:</p>
+
+<pre>
+<code>
+my $num = 20;
+
+do {
+    print "$num\n";
+    $num++;
+}
+while($num < 10);
+</code>
+</pre>
+
+<p>Podemos usar o <code>last</code> (equivalente ao break) e o <code>next</code> (equivalente ao continue) para interromper e continuar (ao encontrar algum dado que não deve ser executado) uma estrutura while, respectivamente, mas esses códigos são pouco usados. Veja um exemplo:</p>
+
+<pre>
+<code>
+my $volta = 0;
+
+while(true) {
+    $volta++;
+
+    if($volta == 13 || $volta == 16) {
+        next;
+    }
+    elsif($volta == 24) {
+        last;
+    }
+
+    print "Volta Nº $volta.\n";
+}
+</code>
+</pre>
+
+<p>E o For, usado quando sabemos quantas vezes um laço se repetirá:</p>
+
+<pre>
+<code>
+for(my $i = 0; $i < 20; $i++) {
+    print "$i\n";
+}
+</code>
+</pre>
+
+<h3>Funções</h3>
+
+<p>As funções em Perl são definidas com a palavra sub, e diferente de outras linguagens, não usa parênteses na criação, só na invocação, por exemplo:</p>
+
+<pre>
+<code>
+sub imprime {
+    print "Frase Chamada pela Função\n";
+}
+
+imprime(); # Invocação da Função.
+</code>
+</pre>
+
+<p>No caso de passarmos parâmetros, definimos no começo da função com o <code>$_[]</code> e a posição do parâmetro, contada a partir do zero.</p>
+
+<p>Veja um exemplo disso com retorno de valores:</p>
+
+<pre>
+<code>
+sub soma {
+    my $n1 = $_[0];
+    my $n2 = $_[1];
+    
+    return $n1 + $n2;
+}
+
+print soma(10, 5);
+</code>
+</pre>
+
+<h3>Arrays</h3>
+
+<p>Os arrays também conhecidos como vetores, listas ou arranjos, armazenam um grupo de escalares organizados por índice numérico iniciado por zero. Os arrays são identificados pelo Perl através do prefixo @.</p>
+
+<p>Veja abaixo como se utiliza arrays em Perl:</p>
+
+<pre>
+<code>
+#!/usr/bin/perl
+
+my @numeros = (1, 2, 3, 4, 5);
+
+my @sonhos = ("casa", "carro", "apartamento");
+
+print "Os números são @numeros\n";
+print "Meus sonhos são @sonhos\n";
+</code>
+</pre>
+
+<p>Podemos pegar o índice específico de cada um deles (usando $):</p>
+
+<pre>
+<code>
+#!/usr/bin/perl
+
+my @numeros = (1, 2, 3, 4, 5);
+
+my @sonhos = ("casa", "carro", "apartamento");
+
+print "Os números são @numeros\n";
+print "Meus sonhos são @sonhos\n";
+
+print "$sonhos[2] vale $numeros[3]\n";
+print "Soma de $numeros[2] com $numeros[4] vale ", $numeros[2] + $numeros[4], "\n";
+</code>
+</pre>
+
+<p>Pra correr os dados do array com um for fazemos assim:</p>
+
+<pre>
+<code>
+my @numeros = (1, 2, 3, 4, 5);
+
+my @sonhos = ("casa", "carro", "apartamento");
+
+my $numeros_size = @numeros; # Isso pega a quantidade de elementos dum array
+
+for(my $i = 0; $i < $numeros_size; $i++) {
+    printf "O número: é %d.\n", $numeros[$i];
+}
+
+my $sonhos_size = @sonhos;
+
+for(my $i = 0; $i < $sonhos_size; $i++) {
+    printf "O sonho é: %s.\n", $sonhos[$i];
+}
+</code>
+</pre>
+
+<p>Podemos também usar o Foreach para correr todos os dados do Array, assim:</p>
+
+<pre>
+<code>
+my @numeros = (1, 2, 3, 4, 5);
+
+my @sonhos = ("casa", "carro", "apartamento");
+
+foreach $n(@numeros) {
+   print "O número é: $n.\n";
+}
+
+foreach $s(@sonhos) {
+   print "O sonho é: $s.\n";
+}
+</code>
+</pre>
+
+<h3>Hashes</h3>
+
+<p>Os hashes são um tipo bem especial de variável. Também conhecidos como dicionários ou tabelas, são similares aos arrays, porém seus índices são chaves e podem ser textos ou números. O prefixo de um hashe é o símbolo da porcentagem %.</p>
+
+<p>Para definir uma hashe colocamos o nome desejado (sem aspas), a atribuição com a seta e o valor desejado, assim:</p>
+
+<pre>
+<code>
+#!/usr/bin/perl
+
+my %tabela_hosts = (servidor => "192.168.0.11",
+                 computador1 => "192.168.0.22",
+                 computador2 => "192.168.0.24",
+                 roteador => "192.168.0.1");
+			
+			
+print "$tabela_hosts{servidor}\n";
+print "$tabela_hosts{roteador}\n";
+</code>
+</pre>
+
+<p>Observe que pra exibir os dados num índice, usamos chaves ao invés de colchetes.</p>
+
+<p>Podemos também usar o Foreach para correr todos os dados do hashe, assim:</p>
+
+<pre>
+<code>
+my %tabela_hosts = (servidor => "192.168.0.11",
+                 computador1 => "192.168.0.22",
+                 computador2 => "192.168.0.24",
+                 roteador => "192.168.0.1");
+				 
+foreach $t(keys %tabela_hosts) {
+   print "O $t tem o valor ", $tabela_hosts{$t}, "\n";
+}
+</code>
+</pre>
+
+<ul>
+    <li><a href="tudo-sobre-perl-2.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,503 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C++</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C++</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-cpp-1.html">Tudo sobre C++ Parte 1!</a></li>
+                    <li><a href="tudo-sobre-cpp-2.html">Tudo sobre C++ Parte 2!</a></li>
+                    <li><a href="tudo-sobre-cpp-3.html">Tudo sobre C++ Parte 3!</a></li>
+                    <li><a href="tudo-sobre-cpp-4.html">Tudo sobre C++ Parte 4!</a></li>
+                    <li><a href="tudo-sobre-cpp-5.html">Tudo sobre C++ Parte 5!</a></li>
+                    <li><a href="tudo-sobre-cpp-6.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre C++ Parte 6!</a></li>
+                    <li><a href="tudo-sobre-cpp-7.html">Tudo sobre C++ Parte 7!</a></li>
+                    <li><a href="tudo-sobre-cpp-8.html">Tudo sobre C++ Parte 8!</a></li>
+                    <li><a href="tudo-sobre-cpp-9.html">Tudo sobre C++ Parte 9!</a></li>
+                    <li><a href="tudo-sobre-cpp-10.html">Tudo sobre C++ Parte 10!</a></li>
+                    <li><a href="tudo-sobre-cpp-11.html">Tudo sobre C++ Parte 11!</a></li>
+                    <li><a href="tudo-sobre-cpp-12.html">Tudo sobre C++ Parte 12!</a></li>
+                    <li><a href="tudo-sobre-cpp-13.html">Tudo sobre C++ Parte 13!</a></li>
+                    <li><a href="tudo-sobre-cpp-14.html">Tudo sobre C++ Parte 14!</a></li>
+                    <li><a href="tudo-sobre-cpp-15.html">Tudo sobre C++ Parte 15!</a></li>
+                    <li><a href="tudo-sobre-cpp-16.html">Tudo sobre C++ Parte 16!</a></li>
+                </menu>
+            </header>
+            
+<h2>Tudo sobre C++ Parte 6</h2>
+
+<h3>Omissão de Argumentos e Argumentos Padrão</h3>
+
+<p>Em C++, podemos criar uma função na qual podemos otimir o argumento, mesmo tendo um argumento de entrada.</p>
+
+<p>Crie no código-fonte, uma função com entrada em string, assim:</p>
+
+<pre>
+<code>
+void imp(string txt) {
+    cout << "\n" << txt << "\n";
+}
+</code>
+</pre>
+
+<p>E chame a função no método principal, da mesma forma:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+void imp(string txt);
+
+int main() {
+    imp("Teste");
+
+    return 0;
+}
+
+void imp(string txt) {
+    cout << txt << "\n";
+}
+
+</code>
+</pre>
+
+<p>Até o momento, nada de novidade. Mas se tirar o argumento, vai dar erro. Para resolver isso, basta colocar na indicação um valor default (apenas na indicação, não na função em si, exceto quando ela vir antes do main), assim:</p>
+
+<pre>
+<code>
+void imp(string txt = "");
+</code>
+</pre>
+
+<p>PS: O valor pode ser qualquer um, desde que seja do mesmo tipo da variável.</p>
+
+<p>Se passarmos outro argumento, ele será exibido normalmente.</p>
+
+<h3>Funções Recursivas (Recursividade)</h3>
+
+<p>A recursividade é quando uma função chama a si mesma, para entendermos, crie um programa com uma função normalmente, dessa forma:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+void contador(int num);
+
+int main() {
+    contador(10);
+
+    return 0;
+}
+
+void contador(int num) {
+    for(int i = 1; i <= num; i++) {
+        cout << i << "\n";
+    }
+}
+</code>
+</pre>
+
+<p>Como no caso, a função vai chamar ela mesmo, não vamos usar laço for, no caso. Vamos alterar para ela receber dois parâmetros também. Esse é o código da função:</p>
+
+
+<pre>
+<code>
+void contador(int num, int cont) {
+    cout << cont << "\n";
+
+    if(num > cont) {
+        contador(num, ++cont);
+    }
+}
+</code>
+</pre>
+
+<p>PS: Não esqueça de alterar a indicação também, o cont pode até ser inicializado:</p>
+
+<pre>
+<code>
+void contador(int num, int cont = 1);
+</code>
+</pre>
+
+<h3>Resolução de Exercícios</h3>
+
+<p>Como exercício, propomos a criação de fatoriais e fibonacci em C++.</p>
+
+<p>Fatorial em C++:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+int fatorial(int n);
+
+int main() {
+    int val, res;
+
+    cout << "Insira o número do fatorial: ";
+    cin >> val;
+    res = fatorial(val);
+
+    cout << endl << "Fatorial de " << val << ": " << res << endl << endl;
+
+    for(int f = val; f >= 1; f--) {
+        if(f > 1) {
+            cout << f << " x ";
+        }
+        else {
+            cout << f << " = ";
+        }
+    }
+
+    cout << res << endl;
+
+    return 0;
+}
+
+int fatorial(int n) {
+    if(n == 0) {
+        return 1;
+    }
+    return n * fatorial(n - 1); // Função chamando ela mesma (recursividade).
+}
+</code>
+</pre>
+
+<p>E a de fibonacci:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+int fibonacci(int n);
+
+int main() {
+    int val, res;
+
+    cout << "Insira o número de valores desejados no fibonacci: ";
+    cin >> val;
+
+    cout << endl << "Fibonacci com " << val << " valores: ";
+
+    for(int i = 0; i < val; i++) {
+        cout << fibonacci(i + 1) << "... ";
+    }
+
+    cout << endl;
+
+    return 0;
+}
+
+int fibonacci(int n) {
+    if(n == 1 || n == 2) {
+        return 1;
+    }
+    else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+}
+</code>
+</pre>
+
+<h3>Enum</h3>
+
+<p>Enum é um conjunto de constantes inteiras que definem os valores que elas podem ter. Apesar de inserirmos identificadores com nomes, elas só armazenam números inteiros.</p>
+
+<p>Veja um exemplo que pode ser usada para jogos, com uma munição de arma:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+
+using namespace std;
+
+enum Armas {fuzil, revolver, rifle, escopeta};
+
+int main() {
+    Armas armaSel; // Essa é uma variável do tipo definido pelo enum.
+    int num;
+
+    armaSel = fuzil;
+
+    cout << armaSel; // Imprime o valor definido no enum.
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Por padrão, cada valor do enum adiciona um valor inteiro para cada item, contado a partir do zero (tal como os arrays).</p>
+
+<p>Mas no caso de nós colocarmos um valor (por exemplo, 100 em fuzil), ele vai contar a partir do número pré-definido (101, 102, etc.):</p>
+
+<pre>
+<code>
+enum Armas {fuzil = 100, revolver, rifle, escopeta};
+</code>
+</pre>
+
+<p>Podemos também correr os dados de um enum num vetor, assim:</p>
+
+<pre>
+<code>
+for(int i = fuzil; i <= escopeta; i++) {
+    cout << i << endl;
+}
+</code>
+</pre>
+
+<h3>Pilha/Stack - Parte 1</h3>
+
+<p>As pilhas em C++ são como um vetor, só que ele tem controles específicos, imagine ela como um tubo de um lado aberto e outro fechado onde inserimos "bolinhas", onde o primeiro elemento a ser inserido é o último a ser trabalhado e o último é o primeiro. Vamos supor os elementos 0, 1 e 2, colocados nessa ordem, o primeiro a ser retirado é o 2, depois o 1 e por último o 0.</p>
+
+<p>Alguns dos exemplos em que uma pilha pode ser usada é em mecanismos de desfazer/refazer de editores, navegação entre páginas web, etc.</p>
+
+<p>Para trabalharmos com pilhas, precisamos importar a biblioteca <code>stack</code>.</p>
+
+<p>Veja um exemplo básico de criação de pilhas, no caso, pilhas de strings:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;stack&gt; // Importe para trabalharmos com pilhas
+
+using namespace std;
+
+int main() {
+    stack&lt;string&gt; cartas;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>PS: As pilhas tem tamanhos dinâmicos, que se alteram ao adicionar ou remover, por isso não precisa ser informado.</p>
+
+<p>Para adicionar elementos na pilha, usamos o método push (vindo de POO), e para exibir a quantidade elementos, o método size, dessa forma:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;stack&gt; // Importe para trabalharmos com pilhas
+
+using namespace std;
+
+int main() {
+    stack&lt;string&gt; cartas;
+    
+    cartas.push("Rei de Copas"); // Isso é uma chamada de objeto, que adiciona elementos.
+    cartas.push("Rei de Espadas");
+    cartas.push("Rei de Ouros");
+    cartas.push("Rei de Paus");
+	
+    cout << "Tamanho da pilha: " << cartas.size() << endl; // Isso exibe o tamanho da pilha
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>No caso, o último elemento a ser adicionado foi o Rei de Paus, e o primeiro, é o Rei de Copas.</p>
+
+<p>Para retirar o último elemento de uma pilha, usamos o método pop, dessa forma:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;stack&gt; // Importe para trabalharmos com pilhas
+
+using namespace std;
+
+int main() {
+    stack&lt;string&gt; cartas;
+    
+    cartas.push("Rei de Copas"); // Isso é uma chamada de objeto, que adiciona elementos.
+    cartas.push("Rei de Espadas");
+    cartas.push("Rei de Ouros");
+    cartas.push("Rei de Paus");
+	
+    cout << "Tamanho da pilha: " << cartas.size() << endl; // Isso exibe os dados da pilha
+
+    cout << "Última carta da pilha: " << cartas.top() << endl; // Isso mostra o último elemento da pilha.
+
+    cartas.pop();
+
+    cout << "Tamanho da pilha: " << cartas.size() << endl;
+
+    cout << "Última carta da pilha: " << cartas.top() << endl
+	
+    return 0;
+}
+</code>
+</pre>
+
+<p>Como visto acima, o método top mostra o elemento do topo da pilha (o último adicionado).</p>
+
+<h3>Pilha/Stack - Parte 2</h3>
+
+<p>Para trabalharmos com pilhas, também temos o método empty, que verifica se a pilha está vazia, caso esteja, ele retorna true, senão retorna false.</p>
+
+<p>Veja um exemplo abaixo:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;stack&gt; // Importe para trabalharmos com pilhas
+
+using namespace std;
+
+int main() {
+    stack&lt;string&gt; cartas;
+
+    if(cartas.empty()) {
+        cout << "Pilha vazia!" << endl;
+    }
+    else {
+        cout << "Pilha com cartas!" << endl;
+    }
+
+    cartas.push("Rei de Copas"); // Isso é uma chamada de objeto, que adiciona elementos.
+    cartas.push("Rei de Espadas");
+    cartas.push("Rei de Ouros");
+    cartas.push("Rei de Paus");
+
+    if(cartas.empty()) {
+        cout << "Pilha vazia!" << endl;
+    }
+    else {
+        cout << "Pilha com cartas!" << endl;
+    }
+
+    cout << "Tamanho da pilha: " << cartas.size() << endl; // Isso exibe os dados da pilha
+
+    cout << "Última carta da pilha: " << cartas.top() << endl; // Isso mostra o último elemento da pilha.
+
+    cartas.pop();
+
+    cout << "Tamanho da pilha: " << cartas.size() << endl;
+
+    cout << "Última carta da pilha: " << cartas.top() << endl;
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>No código acima, no primeiro condicional com empty, ele retorna vazio, já que a pilha não teve conteúdos adicionados, já no segundo, retorna que tem cartas.</p>
+
+<p>Em vez do empty, podemos usar o size também, dessa forma:</p>
+
+<pre>
+<code>
+if(cartas.size() == 0) {
+    cout << "Pilha vazia!" << endl;
+}
+else {
+    cout << "Pilha com cartas!" << endl;
+}
+</code>
+</pre>
+
+<p>Dessa forma, podemos usar um while para excluir todos os elementos da pilha, assim:</p>
+
+<pre>
+<code>
+while(!cartas.empty()) {
+    cartas.pop();
+}
+</code>
+</pre>
+
+<p>Código completo abaixo:</p>
+
+<pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;stack&gt; // Importe para trabalharmos com pilhas
+
+using namespace std;
+
+int main() {
+    stack&lt;string&gt; cartas;
+
+    if(cartas.size() == 0) {
+        cout << "Pilha vazia!" << endl;
+    }
+    else {
+        cout << "Pilha com cartas!" << endl;
+    }
+
+    cartas.push("Rei de Copas"); // Isso é uma chamada de objeto, que adiciona elementos.
+    cartas.push("Rei de Espadas");
+    cartas.push("Rei de Ouros");
+    cartas.push("Rei de Paus");
+
+    while(!cartas.empty()) {
+        cartas.pop();
+    }
+
+    if(cartas.empty()) {
+        cout << "Pilha vazia!" << endl;
+    }
+    else {
+        cout << "Pilha com cartas!" << endl;
+    }
+
+    return 0;
+}
+</code>
+</pre>
+
+<p>Esses são os métodos básicos das pilhas:</p>
+
+<table>
+    <tr>
+        <th>Método</th>
+        <th>Funcionalidade</th>
+    </tr>
+    <tr>
+        <td>push()</td>
+        <td>Adiciona um elemento à pilha</td>
+    </tr>
+    <tr>
+        <td>pop()</td>
+        <td>Remove um elemento da pilha</td>
+    </tr>
+    <tr>
+        <td>size()</td>
+        <td>Exibe o tamanho da pilha</td>
+    </tr>
+    <tr>
+        <td>top()</td>
+        <td>Exibe o último elemento da pilha</td>
+    </tr>
+    <tr>
+        <td>empty()</td>
+        <td>Verifica se a pilha está vazia</td>
+    </tr>
+</table>
+
+<ul>
+    <li><a href="tudo-sobre-cpp-5.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="tudo-sobre-cpp-7.html">Continuação da Matéria!</a></li>
+</ul>
+        </div>
+    </body>
+</html>

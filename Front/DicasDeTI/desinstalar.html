@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script></script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+
+<h2>Desinstalar programas pelo CMD</h2>
+
+<p>Clique no botão <b>Iniciar</b><img src="imagens/windows.png" id="iPng" alt="Windows"/> do botão Iniciar e pesquise no campo “pesquisar programas e arquivos” pelo nome <b>CMD</b>. Ao achar, clique nele com o botão direito do mouse e escolha a opção <b>"Executar como administrador</b>":</p>
+
+<img src="imagens/iniciar.jpg" alt="Iniciar"/>
+
+<p>Ao abrir o CMD, agora digite <code>wmic</code>. Depois digite <code>product get name, version</code> (pode ser necessário colocar <code>/value</code> após o name e o version). Observe que aparecerá os produtos e versões instalados na sua estação:</p>
+
+<p>Caso você queira que gere um arquivo de texto, ou um XML, podemos usar <code>/output:nomedoarquivo.txt product get name, version /value</code> ou <code>/output:nomedoarquivo.xml product get name, version /value /format:xml</code> (o arquivo será gerado na pasta onde o CMD está navegando.</p>
+
+<img src="imagens/versoes.jpg" alt="Versões"/>
+
+<p>Iremos desinstalar o programa Adobe Reader XI. (Última Linha).</p>
+
+<p>Para isso, precisamos digitar o comando <code>product where name="nomedoproduto" call uninstall /nointeractive</code>. No caso, fica assim:</p>
+
+<p><code>product where name="Adobe Reader XI (11.0.10)" call uninstall /nointeractive</code></p>
+
+<img src="imagens/comando.jpg" alt="Comando"/>
+
+<p><b>Importante:</b> Para desinstalar o programa, você deve colocar <b>como aparece o nome</b>. No exemplo, observamos que aparece o nome Adobe Reader XI seguido de um espaço e (11.0.10). Já vi casos que colocando só parte do nome não acha o produto e assim, não desinstala. Então, coloque. Logo depois o programa será desinstalado, conforme figura abaixo:</p>
+
+<img src="imagens/desinstalado.jpg" alt="Desinstalado"/>
+
+<p>Caso ainda tenha dúvidas se foi desinstalado, poderá dar o comando <code>product get name, version</code> e verificar os produtos instalados.</p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>
