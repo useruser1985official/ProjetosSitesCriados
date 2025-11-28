@@ -45,6 +45,10 @@ public class PrimeiroPrograma {
 
 <p>Por padrão, o Java já vem com a biblioteca padrão java.lang, que é responsável por funcionalidades básicas como a saída de dados, e não necessita ser importada, mas outras coisas precisaremos importar para utilizarmos no Java.</p>
 
+<p>O processo de compilação do Java é um pouco diferente de outras linguagens como o C e o C++. Um código-fonte em Java é compilado pelo JDK num arquivo chamado <q>bytecode</q>, que não é um executável e só é lido pela máquina virtual (no caso do Java, é a Java Virtual Machine, ou JVM), que executará o código.</p>
+
+<p>O Java não é usado só em computador, o System.out pode ser qualquer saída. O Java é utilizado também em celulares (principalmente os mais antigos), placares, letreiros, decodificadores de sinais, velocímetros eletrônicos ou relógios compatíveis, além de poder rodar em qualquer sistema operacional. Teoricamente, qualquer sistema que tenha uma Java Virtual Machine rodaria os programas Java (pacotes com extensão <q>.jar</q> contendo classes compiladas <q>.class</q>), o que possibilita criarmos um programa Java em Windows e ele poder rodar num Linux ou num Mac, por exemplo. O próprio Android tem seus aplicativos feitos em Java (só que nesse caso ele gera um pacote de extensão apk com classes compiladas dex, e é interpretado na máquina virtual do Android Dalvik) e possuí outras bibliotecas.</p>
+
 <p>Cuidado com os usos de minúsculas e maiúsculas no Java, pois determinadas coisas já são diferenciadas por isso, por exemplo:</p>
 
 <ul>
@@ -178,8 +182,6 @@ java -jar OlaMundo.jar
 </pre>
 
 <p>Lembrando que essa não é a única forma de criar programas Java.</p>
-
-<p>O Java não é usado só em computador, o System.out pode ser qualquer saída. O Java é utilizado também em celulares (principalmente os mais antigos), placares, letreiros, decodificadores de sinais, velocímetros eletrônicos ou relógios compatíveis, além de poder rodar em qualquer sistema operacional. Teoricamente, qualquer sistema que tenha uma Java Virtual Machine rodaria os programas Java (pacotes com extensão jar contendo classes compiladas class), o que possibilita criarmos um programa Java em Windows e ele poder rodar num Linux ou num Mac, por exemplo. O próprio Android tem seus aplicativos feitos em Java (só que nesse caso ele gera um pacote de extensão apk com classes compiladas dex, e é interpretado na máquina virtual do Android Dalvik) e possuí outras bibliotecas.</p>
 
 <p>PS: Você pode criar arquivos de classe java numa pasta (pacote) e compilar sem IDE. Para isso, crie uma pasta, que será o pacote, e um arquivo java que será a classe (como Teste.java). Vá até ao diretório da pasta e digite o comando <code>javac teste/Teste.java</code> (substituindo pelo nome do pacote e da classe, caso tenha mais de um arquivo no mesmo pacote, execute apenas o que tiver o método main), ele compilará para um arquivo CLASS que pode ser executado diretamente via terminal, usando algo tipo <code>java teste/Teste</code>, e para isso devemos configurar o path corretamente. Para gerar o Jar dessa classe, digite <code>jar cfe Teste.jar teste/Teste teste/Teste.class</code>. Para ver a versão do Java instalada, digite <code>java -version</code>.</p>
 

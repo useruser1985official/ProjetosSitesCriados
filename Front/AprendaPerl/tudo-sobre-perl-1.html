@@ -399,15 +399,15 @@ my @numeros = (1, 2, 3, 4, 5);
 
 my @sonhos = ("casa", "carro", "apartamento");
 
-my $numeros_size = @numeros; # Isso pega a quantidade de elementos dum array
+my $numerosSize = @numeros; # Isso pega a quantidade de elementos dum array
 
-for(my $i = 0; $i < $numeros_size; $i++) {
+for(my $i = 0; $i < $numerosSize; $i++) {
     printf "O número: é %d.\n", $numeros[$i];
 }
 
-my $sonhos_size = @sonhos;
+my $sonhosSize = @sonhos;
 
-for(my $i = 0; $i < $sonhos_size; $i++) {
+for(my $i = 0; $i < $sonhosSize; $i++) {
     printf "O sonho é: %s.\n", $sonhos[$i];
 }
 </code>
@@ -441,14 +441,14 @@ foreach $s(@sonhos) {
 <code>
 #!/usr/bin/perl
 
-my %tabela_hosts = (servidor => "192.168.0.11",
+my %tabelaHosts = (servidor => "192.168.0.11",
                  computador1 => "192.168.0.22",
                  computador2 => "192.168.0.24",
                  roteador => "192.168.0.1");
 			
 			
-print "$tabela_hosts{servidor}\n";
-print "$tabela_hosts{roteador}\n";
+print "$tabelaHosts{servidor}\n";
+print "$tabelaHosts{roteador}\n";
 </code>
 </pre>
 
@@ -458,13 +458,13 @@ print "$tabela_hosts{roteador}\n";
 
 <pre>
 <code>
-my %tabela_hosts = (servidor => "192.168.0.11",
+my %tabelaHosts = (servidor => "192.168.0.11",
                  computador1 => "192.168.0.22",
                  computador2 => "192.168.0.24",
                  roteador => "192.168.0.1");
 				 
-foreach $t(keys %tabela_hosts) {
-   print "O $t tem o valor ", $tabela_hosts{$t}, "\n";
+foreach $t(keys %tabelaHosts) {
+   print "O $t tem o valor ", $tabelaHosts{$t}, "\n";
 }
 </code>
 </pre>

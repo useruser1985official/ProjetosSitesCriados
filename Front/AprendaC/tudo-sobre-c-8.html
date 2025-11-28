@@ -345,17 +345,20 @@ void criarLista(struct lista *l) {
 }
 
 void inserirLista(struct lista *l, float v) {
-    struct nodo *novo = (struct nodo*) malloc(sizeof(struct nodo));
+    struct nodo *novo = (struct nodo*)malloc(sizeof(struct nodo));
     novo->valor = v;
     novo->prox = NULL;
 
     if(l->inicio == NULL) {
         l->inicio = novo;
-    } else {
+    }
+    else {
         struct nodo *aux = l->inicio;
+
         while(aux->prox != NULL) {
             aux = aux->prox;
         }
+
         aux->prox = novo;
     }
 }
@@ -369,7 +372,9 @@ float removerLista(struct lista *l) {
     struct nodo *temp = l->inicio;
     float valor = temp->valor;
     l->inicio = l->inicio->prox;
+
     free(temp);
+
     return valor;
 }
 
@@ -379,10 +384,12 @@ int estaVaziaLista(struct lista *l) {
 
 void mostrarLista(struct lista *l) {
     struct nodo *aux = l->inicio;
+
     while(aux != NULL) {
         printf("%.2f\t", aux->valor);
         aux = aux->prox;
     }
+
     printf("\n\n");
 }
 </code>
@@ -411,26 +418,33 @@ int main() {
             case 1: // push
                 printf("\nValor? ");
                 scanf("%f", &valor);
+
                 inserirLista(&lst, valor);
+
                 break;
             case 2: // pop
                 if(estaVaziaLista(&lst)) {
                     printf("\nLISTA VAZIA!\n");
-                } else {
+                }
+                else {
                     valor = removerLista(&lst);
                     printf("\n%.1f removido!\n", valor);
                 }
+
                 break;
             case 3: // show
                 if(estaVaziaLista(&lst)) {
                     printf("\nLISTA VAZIA!\n");
-                } else {
+                }
+                else {
                     printf("\nConteúdo da lista: ");
                     mostrarLista(&lst);
                 }
+
                 break;
             case 4:
                 exit(0);
+                break;
             default:
                 printf("\nOPÇÃO INVÁLIDA!\n");
                 break;
@@ -443,8 +457,6 @@ int main() {
 </pre>
 
 <p>PS: Podemos mudar o tipo de float para qualquer outro.</p>
-
-
 
 <ul>
     <li><a href="tudo-sobre-c-7.html">Parte Anterior da Matéria!</a></li>

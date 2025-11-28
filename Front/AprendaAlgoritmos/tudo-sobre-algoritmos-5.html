@@ -233,7 +233,7 @@ programa {
 
 <ul>
     <li><b>Caso Base: </b>Quando a função deve parar.</li>
-    <li><b>Chamado Recursivo:</b>Quando a função chama ela mesma.</li>
+    <li><b>Chamado Recursivo: </b>Quando a função chama ela mesma.</li>
 </ul>
 
 <p>Veja esse exemplo de uso, pra calcular o fatorial de um número:</p>
@@ -249,7 +249,7 @@ programa {
         
         fat = fatorial(num) // Invocando a função
         
-        escreva("Fatorial de 5 é: ", fat)
+        escreva("Fatorial de ", num, " é: ", fat, ".\n")
     }
     
     funcao inteiro fatorial(inteiro n) {
@@ -270,7 +270,7 @@ programa {
 
 <h3>Considerações Finais e Exemplos de Exercícios</h3>
 
-<p>As dicas daqui, são basicamente para linguagens imperativas e estruturadas, e podem ser adaptadas para qualquer linguagem que sigam e suportem esses paradigmas, como por exemplo:</p>
+<p>As dicas daqui, são basicamente para linguagens imperativas, e podem ser adaptadas para qualquer linguagem que sigam e suportem esses paradigmas, como por exemplo:</p>
 
 <ul>
     <li>Javascript.</li>
@@ -279,6 +279,12 @@ programa {
     <li>C/C++.</li>
     <li>C#.</li>
     <li>Python.</li>
+    <li>Pascal.</li>
+    <li>Perl.</li>
+    <li>Ruby.</li>
+    <li>Kotlin.</li>
+    <li>Objective-C.</li>
+    <li>Swift.</li>
 </ul>
 
 <p>Essas linguagens dizem ao computador como fazer algo, passo a passo, como executar comandos em ordem, usar variáveis, condições, laços, funções, etc., da seguinte forma:</p>
@@ -290,7 +296,11 @@ programa {
     <li>Se isso acontecer, faça aquilo.</li>
 </ul>
 
-<p>As linguagens estruturadas são as que usam estruturas de controles claras, como estruturas condicionais (<code>se</code> e <code>senao</code>, <code>escolha</code>), de repetição (<code>enquanto</code>, <code>para</code>), além de funções e procedimentos.</p>
+<p>As linguagens imperativas se dividem em duas: Linguagens estruturadas e linguagens orientadas a objetos.</p>
+
+<p>As linguagens estruturadas são as que usam estruturas de controles claras, como estruturas condicionais (<code>se</code> e <code>senao</code>, <code>escolha</code>), de repetição (<code>enquanto</code>, <code>para</code>), além de funções e procedimentos. Basicamente o que vimos aqui foram os fundamentos da programação estruturada, que veio basicamente da programação procedural.</p>
+
+<p>As linguagens orientadas a objetos seguem um estilo de programação que organiza o código de forma a torná-lo mais fácil de entender e de manter, usando classes com atributos e métodos pra manipular objetos. Muitos iniciantes se confundem achando que orientação a objetos tem a ver com criar interfaces gráficas ou arranjar componentes na tela, mas não tem nada a ver uma coisa com a outra.</p>
 
 <p>Veja alguns exemplos de exercícios que podemos fazer com esses algoritmos:</p>
 
@@ -299,12 +309,12 @@ programa {
     <li><b>Inverter um Vetor: </b>Ler 10 valores em um vetor e depois exibir o vetor invertido sem usar funções prontas.</li> 
     <li><b>Soma dos Dígitos de um Número: </b>Ler um número inteiro grande e somar todos os seus dígitos (por exemplo: <q>257 -> 2 + 5 + 7 = 14</q>).</li> 
     <li><b>Estatísticas de Turma: </b>Ler várias notas até que o usuário digite um valor sentinela (por exemplo: -1). Calcular maior, menor, média e quantidade de alunos.</li>
-    <li><b>Cálculo de Potência sem usar operador de potência: </b>Calcular 2 ^ 10 usando apenas multiplicações em laço.</li>
+    <li><b>Cálculo de Potência sem Usar Operador de Potência: </b>Calcular 2 ^ 10 usando apenas multiplicações em laço.</li>
     <li><b>Matriz 3 × 3, Soma das Diagonais: </b>Pedir valores, armazenar na matriz e somar diagonal principal e secundária.</li>
     <li><b>Frequência de Números: </b>Ler vários números e dizer quantas vezes cada um aparece. Pode ser com vetor ou com lógica própria.</li>
     <li><b>Cálculo de Fatorial com Laço: </b>Sem recursão, usando apenas <code>enquanto</code> ou <code>para</code>.</li>
-    <li><b>Calculadora com Menu Repetitivo: </b>Criar um menu com opções (somar, subtrair, dividir...) que só termina quando o usuário escolher <q>sair</q>.</li>
-    <li><b>Algoritmo de Fibonacci até N (sem recursão): </b>Gerar toda a sequência até chegar ao valor máximo escolhido pelo usuário.</li> 
+    <li><b>Calculadora com Menu Repetitivo: </b>Criar um menu com opções (somar, subtrair, dividir, etc.) que só termina quando o usuário escolher <q>sair</q>.</li>
+    <li><b>Algoritmo de Fibonacci até N (Sem Recursão): </b>Gerar toda a sequência até chegar ao valor máximo escolhido pelo usuário.</li> 
 </ul>
 
 <p>Podemos também criar funcionalidades para coisas comuns nas linguagens de programação que não existem em Portugol, como por exemplo:</p>
@@ -403,6 +413,8 @@ print("Idade: {}.".format(idade))
 
 <img src="imagens/processo-compilacao.png" alt="Processo de Compilação" style="max-width: 650px"/>
 
+<p>PS: Não confunda código-objeto com o paradigma orientado a objetos. O código-objeto é um tipo de código gerado durante o processo de compilação. Ele é um formato intermediário que o compilador cria e que será convertido em um programa executável pelo montador (no caso do Windows, convertido pra <q>.exe</q>).</p>
+
 <h4>Linguagens Interpretadas</h4>
 
 <p>O código é lido e executado linha por linha, enquanto o programa está rodando. Quem faz isso é um interpretador.</p>
@@ -440,7 +452,7 @@ print("Idade: {}.".format(idade))
 
 <p>Como citado, no curso de algoritmos nós vimos a programação básica, que foca nos paradigmas imperativo e estruturado. No entanto, existem outros paradigmas que podemos encontrar nas linguagens de programação, veja abaixo os principais:</p>
 
-<h4>Paradigma Estruturado/Imperativo</h4>
+<h4>Paradigma Estruturado</h4>
 
 <p>Organiza o programa em blocos lógicos usando sequência, decisão e repetição. Foca em passo a passo, parecido com algoritmos.</p>
 
@@ -455,10 +467,8 @@ print("Idade: {}.".format(idade))
 
 <ul>
     <li><b>Resumo: </b>Programa é organizado como um conjunto de objetos que interagem entre si.</li>
-    <li><b>Exemplos: </b>Java, C#, C++, Python, PHP (suporta mas não é totalmente OO), Javascript (OO baseada em protótipos), Kotlin, Objective-C, Swift, Smalltalk.</li>
+    <li><b>Exemplos: </b>Java, C#, C++, Python, PHP (suporta mas não é totalmente OO), Javascript (OO baseada em protótipos), Kotlin, Objective-C, Swift, Ruby, Smalltalk.</li>
 </ul>
-
-<p>PS: O paradigma orientado a objetos não tem nada a ver com o código-objeto gerado na compilação de programas, é apenas uma forma diferente de codificar. Não confunda as coisas.</p>
 
 <h4>Paradigma Funcional</h4>
 

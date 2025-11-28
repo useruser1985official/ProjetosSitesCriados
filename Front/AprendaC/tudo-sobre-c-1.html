@@ -120,7 +120,11 @@ int main(void) {
 
 <p>Também pode ser usado <code>puts</code> no lugar do printf, mas ele não permitirá usar máscaras de formatação, por isso caiu em desuso.</p>
 
-<p>PS: Caso você tenha configurado corretamente o path do Mingw no seu Windows, você pode criar diretamente arquivos com extensão c e compilar ele usando os comandos <code>gcc main.c -o nomedoprograma</code> (no Linux é o mesmo processo, apenas omitindo a extensão ou usando alguma extensão genérica, pode ser necessário usar o parâmetro <code>-no-pie</code> para gerar um executável, sendo que o padrão de algumas distribuições são <code>-pie</code> que gera a biblioteca compartilhada). Caso tenha mais de um arquivo do mesmo projeto, execute o comando <code>gcc -c nomedoarquivo.c</code> nos outros arquivos pra compilá-los e depois <code>gcc main.c nomedoarquivo.o -o nomedoprograma</code> no main pra montar. Pode ser necessário colocar o parâmetro <code>-lm</code> para forçar inclusão de bibliotecas, como as de operações matemáticas. Caso esteja num sistema 64 bits e queira compilar para 32 bits, use o parâmetro <code>-m32</code> (o default é <code>-m64</code>). Pode ser necessário instalar as dependências (instale o gcc-multilib).</p>
+<p>PS: Caso você tenha configurado corretamente o path do Mingw no seu Windows, você pode criar diretamente arquivos com extensão cpp e compilar ele usando os comandos <code>gcc main.c -o nomedoprograma</code> (no Linux é o mesmo processo, apenas omitindo a extensão ou usando alguma extensão genérica, pode ser necessário usar o parâmetro <code>-no-pie</code> para gerar um executável, sendo que o padrão de algumas distribuições são <code>-pie</code> que gera a biblioteca compartilhada).</p>
+
+<p>Caso tenha mais de um arquivo do mesmo projeto, execute o comando <code>gcc -c nomedoarquivo.c</code> nos outros arquivos pra compilá-los e depois <code>gcc main.c nomedoarquivo.o -o nomedoprograma</code> no main pra montar o executável. Pode ser necessário colocar o parâmetro <code>-lm</code> para forçar inclusão de bibliotecas, como as de operações matemáticas. Caso esteja num sistema 64 bits e queira compilar para 32 bits, use o parâmetro <code>-m32</code> (o default é <code>-m64</code>). Pode ser necessário instalar as dependências (instale o gcc-multilib).</p>
+
+<p>Basicamente, o código-fonte é compilado pelo compilador e gera um código-objeto (com extensão <q>.o</q> ou <q>.obj</q>), este será montado pelo montador pra gerar um executável pro sistema correspondente (no caso do Windows, gera um <q>.exe</q>, no Linux gera um executável sem extensão que é identificado como ELF).</p>
 
 <p>Para resolver problemas com acentuações em programas utilizamos o setlocale, dessa forma:</p>
 
@@ -345,8 +349,7 @@ char letra;
 float valor, aumento;
 double patrimonio;
 int x = 0;
-typedef enum {false = 0, true = 1} bool;
-bool ferias = false;
+bool ferias = false; // Inclua stdbool.h
 float salario, juros = 0.08;
 </code>
 </pre>
