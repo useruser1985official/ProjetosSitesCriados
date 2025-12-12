@@ -45,25 +45,25 @@ void MainWindow::on_btnVerif_clicked() {
 
     // Grupo 1:
 
-    if(ui->radVerm->isChecked()) {
+    if(ui-&gt;radVerm-&gt;isChecked()) {
         cor = "Vermelho";
     }
-    else if(ui->radVerd->isChecked()) {
+    else if(ui-&gt;radVerd-&gt;isChecked()) {
         cor = "Verde";
     }
-    else if(ui->radAzul->isChecked()) {
+    else if(ui-&gt;radAzul-&gt;isChecked()) {
         cor = "Azul";
     }
 
     // Grupo 2:
 
-    if(ui->radAv->isChecked()) {
+    if(ui-&gt;radAv-&gt;isChecked()) {
         numTr = 1;
     }
-    else if(ui->radCar->isChecked()) {
+    else if(ui-&gt;radCar-&gt;isChecked()) {
         numTr = 2;
     }
-    else if(ui->radNav->isChecked()) {
+    else if(ui-&gt;radNav-&gt;isChecked()) {
         numTr = 3;
     }
 
@@ -86,9 +86,9 @@ void MainWindow::on_btnVerif_clicked() {
 
     QVector&lt;bool&gt; lings; // Inclua QVector
 
-    lings.push_back(ui->radCpp->isChecked());
-    lings.push_back(ui->radCsh->isChecked());
-    lings.push_back(ui->radJav->isChecked());
+    lings.push_back(ui-&gt;radCpp-&gt;isChecked());
+    lings.push_back(ui-&gt;radCsh-&gt;isChecked());
+    lings.push_back(ui-&gt;radJav-&gt;isChecked());
 
     if(lings[0]) {
         prog = "C++";
@@ -120,11 +120,11 @@ void MainWindow::on_btnVerif_clicked() {
 <pre>
 <code>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
     
     QPixmap logo("C:\\Users\\imagem.jpg"); // Inclua QPixmap, cuidado com a barra, coloque seu caminho.
     
-    ui->lblImg->setPixmap(logo);
+    ui-&gt;lblImg-&gt;setPixmap(logo);
 }
 </code>
 </pre>
@@ -133,7 +133,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 <pre>
 <code>
-ui->lblImg->setPixmap(logo.scaled(100, 100, Qt::KeepAspectRatio));
+ui-&gt;lblImg-&gt;setPixmap(logo.scaled(100, 100, Qt::KeepAspectRatio));
 </code>
 </pre>
 
@@ -144,7 +144,7 @@ ui->lblImg->setPixmap(logo.scaled(100, 100, Qt::KeepAspectRatio));
 void MainWindow::on_btnImg_clicked() {
     QPixmap img("C:\\Users\\picture.jpg"); // Inclua QPixmap, cuidado com a barra coloque tem caminho.
 
-    ui->lblImg->setPixmap(img.scaled(100, 100, Qt::KeepAspectRatio));    
+    ui-&gt;lblImg-&gt;setPixmap(img.scaled(100, 100, Qt::KeepAspectRatio));    
 }
 </code>
 </pre>
@@ -188,7 +188,7 @@ void MainWindow::on_itNov_triggered() {
 void MainWindow::on_itNov_triggered() {
     NovoForm *formulario = new NovoForm(this);
     
-    formulario->show();
+    formulario-&gt;show();
 }
 </code>
 </pre>
@@ -226,7 +226,7 @@ void MainWindow::on_itSair_triggered() {
 <pre>
 <code>
 void MainWindow::on_btnClick_clicked() {
-    QMessageBox::about(this, "Cursos", ui->cxItens->currentText()); // Inclua QMessageBox
+    QMessageBox::about(this, "Cursos", ui-&gt;cxItens-&gt;currentText()); // Inclua QMessageBox
 }
 </code>
 </pre>
@@ -238,12 +238,12 @@ void MainWindow::on_btnClick_clicked() {
 <pre>
 <code>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
     
-    ui->cxItens->addItem("C++");
-    ui->cxItens->addItem("PHP");
-    ui->cxItens->addItem("C#");
-    ui->cxItens->addItem("Javascript");   
+    ui-&gt;cxItens-&gt;addItem("C++");
+    ui-&gt;cxItens-&gt;addItem("PHP");
+    ui-&gt;cxItens-&gt;addItem("C#");
+    ui-&gt;cxItens-&gt;addItem("Javascript");   
 }
 </code>
 </pre>
@@ -253,12 +253,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 <pre>
 <code>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
     
     QString cursos[4] = {"C++", "PHP", "C#", "Javascript"};
 
     for(int i = 0; i < 4; i++) {
-        ui->cxItens->addItem(cursos[i]);
+        ui-&gt;cxItens-&gt;addItem(cursos[i]);
     }
 }
 </code>
@@ -271,13 +271,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 <pre>
 <code>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
 
     QString cursos[4] = {"C++", "PHP", "C#", "Javascript"};
     QString icones[4] = {":/icons/files/cpp.png", ":/icons/files/php.png", ":/icons/files/csharp.png", ":/icons/files/js.png"}; // Inclua QIcon
 
     for(int i = 0; i < 4; i++) {
-        ui->cxItens->addItem(QIcon(icones[i]), cursos[i]);
+        ui-&gt;cxItens-&gt;addItem(QIcon(icones[i]), cursos[i]);
     }
 }
 </code>
@@ -287,8 +287,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 <pre>
 <code>
-ui->cxItens->insertItem(3, "HTML");
-// Com ícones: ui->cxItens->insertItem(3, QIcon(":/icons/files/html.png"), "HTML");
+ui-&gt;cxItens-&gt;insertItem(3, "HTML");
+// Com ícones: ui-&gt;cxItens-&gt;insertItem(3, QIcon(":/icons/files/html.png"), "HTML");
 </code>
 </pre>
 

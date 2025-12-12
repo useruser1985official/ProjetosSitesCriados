@@ -65,9 +65,9 @@ require_once "Visitante.php";
 
 $v1 = new Visitante();
 
-$v1->setNome("Juvenal");
-$v1->setIdade(33);
-$v1->setSexo("M");
+$v1-&gt;setNome("Juvenal");
+$v1-&gt;setIdade(33);
+$v1-&gt;setSexo("M");
 
 print_r($v1);
 </code>
@@ -80,7 +80,7 @@ print_r($v1);
 <pre>
 <code>
 public function pagarMensal() {
-    echo "&lt;p&gt;Pagando Mensalidade do aluno $this->nome.&lt;/p&gt;";
+    echo "&lt;p&gt;Pagando Mensalidade do aluno $this-&gt;nome.&lt;/p&gt;";
 }
 </code>
 </pre>
@@ -95,13 +95,13 @@ require_once "Aluno.php";
     
 $a1 = new Aluno();
     
-$a1->setNome("Sérgio");
-$a1->setIdade(16);
-$a1->setSexo("M");
-$a1->setMatr(1111);
-$a1->setCurso("Informática");
+$a1-&gt;setNome("Sérgio");
+$a1-&gt;setIdade(16);
+$a1-&gt;setSexo("M");
+$a1-&gt;setMatr(1111);
+$a1-&gt;setCurso("Informática");
 
-$a1->pagarMensal();
+$a1-&gt;pagarMensal();
 
 print_r($a1);
 </code>
@@ -126,15 +126,15 @@ class Bolsista extends Aluno {
     
     // Esse método substituirá o da classe Aluno somente nesse caso:
     public function pagarMensal() {
-        echo "&lt;p&gt;$this->nome é bolsista, então paga com desconto!&lt;/p&gt;;
+        echo "&lt;p&gt;$this-&gt;nome é bolsista, então paga com desconto!&lt;/p&gt;;
     }
     
     public function getBolsa() {
-        return $this->bolsa;
+        return $this-&gt;bolsa;
     }
 
     public function setBolsa($bolsa) {
-        $this->bolsa = $bolsa;
+        $this-&gt;bolsa = $bolsa;
     }
 }
 </code>
@@ -148,15 +148,15 @@ require_once "Bolsista.php";
     
 $b1 = new Bolsista();
     
-$b1->setNome("Jubileu");
-$b1->setIdade(17);
-$b1->setSexo("M");
-$b1->setMatr(1112);
-$b1->setCurso("Administrador");
-$b1->setBolsa(12.5);
+$b1-&gt;setNome("Jubileu");
+$b1-&gt;setIdade(17);
+$b1-&gt;setSexo("M");
+$b1-&gt;setMatr(1112);
+$b1-&gt;setCurso("Administrador");
+$b1-&gt;setBolsa(12.5);
 
-$b1->pagarMensal();
-$b1->renovarBolsa();
+$b1-&gt;pagarMensal();
+$b1-&gt;renovarBolsa();
 
 print_r($b1);
 </code>
@@ -169,7 +169,7 @@ print_r($b1);
 <pre>
 <code>
 public final function pagarMensal() {
-    echo "&lt;p&gt;Pagando Mensalidade do aluno $this->nome.&lt;/p&gt;";
+    echo "&lt;p&gt;Pagando Mensalidade do aluno $this-&gt;nome.&lt;/p&gt;";
 }
 </code>
 </pre>
@@ -222,27 +222,27 @@ abstract class Animal {
     public abstract function emitirSom();
     
     public function getPeso() {
-        return $this->peso;
+        return $this-&gt;peso;
     }
 
     public function getIdade() {
-        return $this->idade;
+        return $this-&gt;idade;
     }
 
     public function getMembros() {
-        return $this->membros;
+        return $this-&gt;membros;
     }
 
     public function setPeso($peso) {
-        $this->peso = $peso;
+        $this-&gt;peso = $peso;
     }
 
     public function setIdade($idade) {
-        $this->idade = $idade;
+        $this-&gt;idade = $idade;
     }
 
     public function setMembros($membros) {
-        $this->membros = $membros;
+        $this-&gt;membros = $membros;
     }
 }
 </code>
@@ -272,11 +272,11 @@ class Mamifero extends Animal {
     }  
     
     public function getCorPelo() {
-        return $this->corPelo;
+        return $this-&gt;corPelo;
     }
 
     public function setCorPelo($corPelo) {
-        $this->corPelo = $corPelo;
+        $this-&gt;corPelo = $corPelo;
     }
 }
 </code>
@@ -306,11 +306,11 @@ class Reptil extends Animal {
     }
     
     public function getCorEscama() {
-        return $this->corEscama;
+        return $this-&gt;corEscama;
     }
 
     public function setCorEscama($corEscama) {
-        $this->corEscama = $corEscama;
+        $this-&gt;corEscama = $corEscama;
     }
 }
 </code>
@@ -338,11 +338,11 @@ class Peixe extends Animal {
     }
     
     public function getCorEscama() {
-        return $this->corEscama;
+        return $this-&gt;corEscama;
     }
 
     public function setCorEscama($corEscama) {
-        $this->corEscama = $corEscama;
+        $this-&gt;corEscama = $corEscama;
     }
 }
 </code>
@@ -374,11 +374,11 @@ class Ave extends Animal {
     }
     
     public function getCorPena() {
-        return $this->corPena;
+        return $this-&gt;corPena;
     }
 
     public function setCorPena($corPena) {
-        $this->corPena = $corPena;
+        $this-&gt;corPena = $corPena;
     }
 }
 </code>
@@ -397,12 +397,12 @@ require_once "Ave.php";
 
 $m = new Mamifero();
 
-$m->setPeso(33.5);
-$m->locomover();
+$m-&gt;setPeso(33.5);
+$m-&gt;locomover();
 
 $a = new Ave();
 
-$a->locomover();
+$a-&gt;locomover();
 </code>
 </pre>
 
@@ -471,20 +471,20 @@ require_once "Tartaruga.php";
 // $a = new Animal(); // Dará erro por ser abstrata.
 
 $m = new Mamifero();
-$m->locomover();
-$m->emitirSom();
+$m-&gt;locomover();
+$m-&gt;emitirSom();
 
 $c = new Canguru();
-$c->locomover();
+$c-&gt;locomover();
 
 $d = new Cachorro();
-$d->emitirSom();
+$d-&gt;emitirSom();
 
 $r = new Reptil();
-$r->locomover();
+$r-&gt;locomover();
 
 $t = new Tartaruga();
-$t->locomover();
+$t-&gt;locomover();
 </code>
 </pre>
 

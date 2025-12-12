@@ -72,7 +72,7 @@ try {
     $conexao = new PDO($hostname, $username, $password);
 }
 catch(PDOException $ex) {
-    echo "ERRO: {$ex->getMessage()}";
+    echo "ERRO: {$ex-&gt;getMessage()}";
 }
 </code>
 </pre>
@@ -96,7 +96,7 @@ function getConnection() {
         return $conexao; // Não esqueça do retorno
     }
     catch(PDOException $ex) {
-        echo "ERRO: {$ex->getMessage()}";
+        echo "ERRO: {$ex-&gt;getMessage()}";
     }
 }
 </code>
@@ -114,13 +114,13 @@ $conn = getConnection(); // Isso cria a conexão.
 
 $sql = "insert into produto (descricao, qtd, valor) values (?, ?, ?)";
 
-$stmt = $conn->prepare($sql); // Isso pega os dados da variável
+$stmt = $conn-&gt;prepare($sql); // Isso pega os dados da variável
 
-$stmt->bindValue(1, "Arroz"); // Isso substitui os ? na ordem numérica
-$stmt->bindValue(2, 10);
-$stmt->bindValue(3, 4.50);
+$stmt-&gt;bindValue(1, "Arroz"); // Isso substitui os ? na ordem numérica
+$stmt-&gt;bindValue(2, 10);
+$stmt-&gt;bindValue(3, 4.50);
 
-if($stmt->execute()) { // Isso executa o SQL
+if($stmt-&gt;execute()) { // Isso executa o SQL
     echo "Salvo com Sucesso!";
 }
 else {
@@ -137,11 +137,11 @@ $descricao = "Farinha";
 $qtd = 10;
 $valor = 10.80;
 
-$stmt = $conn->prepare($sql); // Isso pega os dados da variável
+$stmt = $conn-&gt;prepare($sql); // Isso pega os dados da variável
 
-$stmt->bindValue(1, $descricao); // Isso substitui os ? na ordem numérica
-$stmt->bindValue(2, $qtd);
-$stmt->bindValue(3, $valor);
+$stmt-&gt;bindValue(1, $descricao); // Isso substitui os ? na ordem numérica
+$stmt-&gt;bindValue(2, $qtd);
+$stmt-&gt;bindValue(3, $valor);
 </code>
 </pre>
 
@@ -155,11 +155,11 @@ $descricao = "Farinha";
 $qtd = 10;
 $valor = 10.80;
 
-$stmt = $conn->prepare($sql); // Isso pega os dados da variável
+$stmt = $conn-&gt;prepare($sql); // Isso pega os dados da variável
 
-$stmt->bindValue(":desc", $descricao); // Isso substitui os ? na ordem numérica
-$stmt->bindValue(":qtd", $qtd);
-$stmt->bindValue(":val", $valor);
+$stmt-&gt;bindValue(":desc", $descricao); // Isso substitui os ? na ordem numérica
+$stmt-&gt;bindValue(":qtd", $qtd);
+$stmt-&gt;bindValue(":val", $valor);
 </code>
 </pre>
 
@@ -175,7 +175,7 @@ $conn = getConnection(); // Isso cria a conexão.
 
 $sql = "insert into produto (descricao, qtd, valor) values ('Sal', 10, 2.50)";
 
-if($conn->exec($sql)) { // Isso executa o SQL
+if($conn-&gt;exec($sql)) { // Isso executa o SQL
     echo "Salvo com Sucesso!";
 }
 else {
@@ -198,11 +198,11 @@ $conn = getConnection(); // Isso cria a conexão.
 
 $sql = "select * from produto";
 
-$stmt = $conn->prepare($sql); // Isso pega os dados da variável
+$stmt = $conn-&gt;prepare($sql); // Isso pega os dados da variável
 
-$stmt->execute(); // Isso executa o SQL
+$stmt-&gt;execute(); // Isso executa o SQL
 
-$result = $stmt->fetchAll(); // Isso retorna o array com os dados do banco
+$result = $stmt-&gt;fetchAll(); // Isso retorna o array com os dados do banco
 
 var_dump($result);
 </code>
@@ -226,11 +226,11 @@ foreach($result as $value) {
 <code>
 $sql = "select * from produto where id = :id";
 
-$stmt = $conn->prepare($sql);
+$stmt = $conn-&gt;prepare($sql);
 
-$stmt->bindValue(":id", 1);
+$stmt-&gt;bindValue(":id", 1);
 
-$stmt->execute();
+$stmt-&gt;execute();
 </code>
 </pre>
 
@@ -251,14 +251,14 @@ $qtd = 10;
 $valor = 10.80;
 $id = 2;
 
-$stmt = $conn->prepare($sql); // Isso pega os dados da variável
+$stmt = $conn-&gt;prepare($sql); // Isso pega os dados da variável
 
-$stmt->bindValue(":desc", $descricao); // Isso substitui os ? na ordem numérica
-$stmt->bindValue(":qtd", $qtd);
-$stmt->bindValue(":val", $valor);
-$stmt->bindValue(":id", $id);
+$stmt-&gt;bindValue(":desc", $descricao); // Isso substitui os ? na ordem numérica
+$stmt-&gt;bindValue(":qtd", $qtd);
+$stmt-&gt;bindValue(":val", $valor);
+$stmt-&gt;bindValue(":id", $id);
 
-if($stmt->execute()) {
+if($stmt-&gt;execute()) {
     echo "Atualizado com Sucesso!";
 }
 else {
@@ -283,11 +283,11 @@ $sql = "delete from produto where id = :id";
 
 $id = 1;
 
-$stmt = $conn->prepare($sql); // Isso pega os dados da variável
+$stmt = $conn-&gt;prepare($sql); // Isso pega os dados da variável
 
-$stmt->bindValue(":id", $id); // Isso substitui os ? na ordem numérica
+$stmt-&gt;bindValue(":id", $id); // Isso substitui os ? na ordem numérica
 
-if($stmt->execute()) {
+if($stmt-&gt;execute()) {
     echo "Deletado com Sucesso!";
 }
 else {

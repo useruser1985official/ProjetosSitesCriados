@@ -47,7 +47,7 @@
 int num1 = 8;
 
 if(num1 > 10) {
-    cout << "O valor é maior que 10" << "\n";
+    cout &lt;&lt; "O valor é maior que 10" &lt;&lt; "\n";
 }
 </code>
 </pre>
@@ -62,10 +62,10 @@ int num1 = 100;
 int num2 = 50;
 
 if(num1 < num2) {
-    cout << "O valor de " << num1 << " é menor que " << num2 << "\n";
+    cout &lt;&lt; "O valor de " &lt;&lt; num1 &lt;&lt; " é menor que " &lt;&lt; num2 &lt;&lt; "\n";
 }
 else {
-    cout << "O valor de " << num1 << " é maior que " << num2 << "\n";
+    cout &lt;&lt; "O valor de " &lt;&lt; num1 &lt;&lt; " é maior que " &lt;&lt; num2 &lt;&lt; "\n";
 }
 </code>
 </pre>
@@ -80,13 +80,13 @@ int num1 = 100;
 int num2 = 50;
 
 if(num1 < num2) {
-    cout << "O valor de " << num1 << " é menor que " << num2 << "\n";
+    cout &lt;&lt; "O valor de " &lt;&lt; num1 &lt;&lt; " é menor que " &lt;&lt; num2 &lt;&lt; "\n";
 }
 else if(num1 > num2) {
-    cout << "O valor de " << num1 << " é maior que " << num2 << ".\n";
+    cout &lt;&lt; "O valor de " &lt;&lt; num1 &lt;&lt; " é maior que " &lt;&lt; num2 &lt;&lt; ".\n";
 }
 else {
-    cout << "Os valores " << num1 << " e " << num2 << " são iguais.\n";
+    cout &lt;&lt; "Os valores " &lt;&lt; num1 &lt;&lt; " e " &lt;&lt; num2 &lt;&lt; " são iguais.\n";
 }
 </code>
 </pre>
@@ -98,10 +98,10 @@ else {
 int sol = 1;
 
 if(sol) {
-    cout << "Vou ao clube!";
+    cout &lt;&lt; "Vou ao clube!";
 }
 else {
-    cout << "Vou ao cinema!";
+    cout &lt;&lt; "Vou ao cinema!";
 }
 </code>
 </pre>
@@ -114,19 +114,19 @@ else {
 <code>
 int n1, n2, res;
 
-cout << "Digite a primeira nota: ";
-cin >> n1;
+cout &lt;&lt; "Digite a primeira nota: ";
+cin &gt;&gt; n1;
 
-cout << "Digite a segunda nota: ";
-cin >> n2;
+cout &lt;&lt; "Digite a segunda nota: ";
+cin &gt;&gt; n2;
 
 res = (n1 + n2) / 2;
 
 if(res >= 6) {
-    cout << "\nAprovado!\n";
+    cout &lt;&lt; "\nAprovado!\n";
 }
 else {
-    cout << "\nReprovado\n";
+    cout &lt;&lt; "\nReprovado\n";
 } 
 </code>
 </pre>
@@ -137,22 +137,22 @@ else {
 <code>
 int n1, n2, res;
 
-cout << "Digite a primeira nota: ";
-cin >> n1;
+cout &lt;&lt; "Digite a primeira nota: ";
+cin &gt;&gt; n1;
 
-cout << "Digite a segunda nota: ";
-cin >> n2;
+cout &lt;&lt; "Digite a segunda nota: ";
+cin &gt;&gt; n2;
 
 res = (n1 + n2) / 2;
 
 if(res >= 6) {
-    cout << "\nAprovado!\n";
+    cout &lt;&lt; "\nAprovado!\n";
 }
 else if(res >= 4 && res < 6) {
-    cout << "\nRecuperação\n";
+    cout &lt;&lt; "\nRecuperação\n";
 }
 else {
-    cout << "\nReprovado\n";
+    cout &lt;&lt; "\nReprovado\n";
 } 
 </code>
 </pre>
@@ -170,26 +170,26 @@ inicio: // Label, indicado com dois pontos.
 
 system("cls"); // Adicione cstdlib ou stdlib.h, são os comandos do terminal do sistema operacional à ser compilado.
 
-cout << "Digite a primeira nota: ";
-cin >> n1;
+cout &lt;&lt; "Digite a primeira nota: ";
+cin &gt;&gt; n1;
 
-cout << "Digite a segunda nota: ";
-cin >> n2;
+cout &lt;&lt; "Digite a segunda nota: ";
+cin &gt;&gt; n2;
 
 res = (n1 + n2) / 2;
 
 if(res >= 6) {
-    cout << "\nAprovado!\n";
+    cout &lt;&lt; "\nAprovado!\n";
 }
 else if(res >= 4 && res < 6) {
-    cout << "\nRecuperação\n";
+    cout &lt;&lt; "\nRecuperação\n";
 }
 else {
-    cout << "\nReprovado\n";
+    cout &lt;&lt; "\nReprovado\n";
 }
 
-cout << "\nDeseja Digitar Outras Notas? [S/N]: ";
-cin >> opc;
+cout &lt;&lt; "\nDeseja Digitar Outras Notas? [S/N]: ";
+cin &gt;&gt; opc;
 
 if((char)toupper(opc) == 'S') { // Inclua cctype pro toupper
     goto inicio; // Indicação do Label.
@@ -213,22 +213,22 @@ if((char)toupper(opc) == 'S') { // Inclua cctype pro toupper
 <code>
 int val;
 
-cout << "Selecione uma cor:\n";
-cout << "1 - Verde\n2 - Azul\n3 - Vermelho\n\n";
-cin >> val;
+cout &lt;&lt; "Selecione uma cor:\n";
+cout &lt;&lt; "1 - Verde\n2 - Azul\n3 - Vermelho\n\n";
+cin &gt;&gt; val;
 
 switch(val) {
     case 1:
-        cout << "Cor selecionada: Verde\n";
+        cout &lt;&lt; "Cor selecionada: Verde\n";
         break;
     case 2:
-        cout << "Cor selecionada: Azul\n";
+        cout &lt;&lt; "Cor selecionada: Azul\n";
         break;
     case 3:
-        cout << "Cor selecionada: Vermelho\n";
+        cout &lt;&lt; "Cor selecionada: Vermelho\n";
         break;
     default:
-        cout << "Valor inválido\n";
+        cout &lt;&lt; "Valor inválido\n";
         break;
 }
 </code>
@@ -240,23 +240,23 @@ switch(val) {
 <code>
 int val;
 
-cout << "Selecione uma cor:\n";
-cout << "1 a 3- Verde\n4 a 6 - Azul\n\n";
-cin >> val;
+cout &lt;&lt; "Selecione uma cor:\n";
+cout &lt;&lt; "1 a 3- Verde\n4 a 6 - Azul\n\n";
+cin &gt;&gt; val;
 
 switch(val) {
     case 1:
     case 2:
     case 3:
-        cout << "Cor selecionada: Verde\n";
+        cout &lt;&lt; "Cor selecionada: Verde\n";
         break;
     case 4:
     case 5:
     case 6:
-        cout << "Cor selecionada: Azul\n";
+        cout &lt;&lt; "Cor selecionada: Azul\n";
         break;
     default:
-        cout << "Valor inválido\n";
+        cout &lt;&lt; "Valor inválido\n";
         break;
 }
 </code>
@@ -268,37 +268,37 @@ switch(val) {
 <code>
 int val;
 
-cout << "Selecione um transporte:\n";
-cout << "1 - Carro\n2 - Moto\n3 - Avião\n4 - Helicóptero\n\n";
-cin >> val;
+cout &lt;&lt; "Selecione um transporte:\n";
+cout &lt;&lt; "1 - Carro\n2 - Moto\n3 - Avião\n4 - Helicóptero\n\n";
+cin &gt;&gt; val;
 
 switch(val) {
     case 1:
     case 2:
-        cout << "Transporte Terrestre.\n";
+        cout &lt;&lt; "Transporte Terrestre.\n";
         switch(val) {
             case 1:
-                cout << "Carro Selecionado.";
+                cout &lt;&lt; "Carro Selecionado.";
                 break;
             case 2:
-                cout << "Moto Selecionada.";
+                cout &lt;&lt; "Moto Selecionada.";
                 break;
         }
         break;
     case 3:
     case 4:
-        cout << "Transporte Aéreo.\n";
+        cout &lt;&lt; "Transporte Aéreo.\n";
         switch(val) {
             case 3:
-                cout << "Avião Selecionado.";
+                cout &lt;&lt; "Avião Selecionado.";
                 break;
             case 4:
-                cout << "Helicóptero Selecionado.";
+                cout &lt;&lt; "Helicóptero Selecionado.";
                 break;
         }
         break;
     default:
-        cout << "Transporte Desconhecido.\nNenhum Selecionado.\n";
+        cout &lt;&lt; "Transporte Desconhecido.\nNenhum Selecionado.\n";
         break;
 }
 </code>

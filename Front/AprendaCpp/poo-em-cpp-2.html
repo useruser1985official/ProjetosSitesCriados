@@ -53,19 +53,19 @@ class Aviao {
 
 Aviao::Aviao(int tp) {
     if(tp == 1) {
-        this->velMax = 800;
-        this->tipo = "Jato";
+        this-&gt;velMax = 800;
+        this-&gt;tipo = "Jato";
     }
     else if(tp == 2) {
-        this->velMax = 350;
-        this->tipo = "Monomotor";
+        this-&gt;velMax = 350;
+        this-&gt;tipo = "Monomotor";
     }
     else if(tp == 3) {
-        this->velMax = 180;
-        this->tipo = "Planador";
+        this-&gt;velMax = 180;
+        this-&gt;tipo = "Planador";
     }
    
-    this->velocidade = 0;
+    this-&gt;velocidade = 0;
 }
 </code>
 </pre>
@@ -118,26 +118,26 @@ class Aviao {
 
 Aviao::Aviao(int tp) {
     if(tp == 1) {
-        this->velMax = 800;
-        this->tipo = "Jato";
+        this-&gt;velMax = 800;
+        this-&gt;tipo = "Jato";
     }
     else if(tp == 2) {
-        this->velMax = 350;
-        this->tipo = "Monomotor";
+        this-&gt;velMax = 350;
+        this-&gt;tipo = "Monomotor";
     }
     else if(tp == 3) {
-        this->velMax = 180;
-        this->tipo = "Planador";
+        this-&gt;velMax = 180;
+        this-&gt;tipo = "Planador";
     }
 
-    this->velocidade = 0;
+    this-&gt;velocidade = 0;
 }
 
 void Aviao::imprimir() {
-    std::cout << "Tipo: " << tipo << std::endl;
-    std::cout << "Velocidade Máxima: " << velMax << std::endl;
-    std::cout << "Velocidade atual: " << velocidade << std::endl;
-    std::cout << "-----------------------" << std::endl;
+    std::cout &lt;&lt; "Tipo: " &lt;&lt; tipo &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Velocidade Máxima: " &lt;&lt; velMax &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Velocidade atual: " &lt;&lt; velocidade &lt;&lt; std::endl;
+    std::cout &lt;&lt; "-----------------------" &lt;&lt; std::endl;
 }
 
 #endif // AVIAO_H_INCLUDED
@@ -162,9 +162,9 @@ int main() {
     av[1] = new Aviao(2);
     av[2] = new Aviao(3);
 
-    av[0]->imprimir();
-    av[1]->imprimir();
-    av[2]->imprimir();
+    av[0]-&gt;imprimir();
+    av[1]-&gt;imprimir();
+    av[2]-&gt;imprimir();
 
     delete *av;
 
@@ -210,26 +210,26 @@ class Aviao {
 
 Aviao::Aviao(int tp) {
     if(tp == 1) {
-        this->velMax = 800;
-        this->tipo = "Jato";
+        this-&gt;velMax = 800;
+        this-&gt;tipo = "Jato";
     }
     else if(tp == 2) {
-        this->velMax = 350;
-        this->tipo = "Monomotor";
+        this-&gt;velMax = 350;
+        this-&gt;tipo = "Monomotor";
     }
     else if(tp == 3) {
-        this->velMax = 180;
-        this->tipo = "Planador";
+        this-&gt;velMax = 180;
+        this-&gt;tipo = "Planador";
     }
 
-    this->velocidade = 0;
+    this-&gt;velocidade = 0;
 }
 
 void Aviao::imprimir() {
-    std::cout << "Tipo: " << tipo << std::endl;
-    std::cout << "Velocidade Máxima: " << velMax << std::endl;
-    std::cout << "Velocidade atual: " << velocidade << std::endl;
-    std::cout << "-----------------------" << std::endl;
+    std::cout &lt;&lt; "Tipo: " &lt;&lt; tipo &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Velocidade Máxima: " &lt;&lt; velMax &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Velocidade atual: " &lt;&lt; velocidade &lt;&lt; std::endl;
+    std::cout &lt;&lt; "-----------------------" &lt;&lt; std::endl;
 }
 </code>
 </pre>
@@ -247,7 +247,7 @@ void Aviao::imprimir() {
 <pre>
 <code>
 Aviao::~Aviao() {
-    std::cout << "Objeto Destruído" << std::endl; // A mensagem é opcional
+    std::cout &lt;&lt; "Objeto Destruído" &lt;&lt; std::endl; // A mensagem é opcional
 }
 </code>
 </pre>
@@ -273,12 +273,12 @@ for(auto a: av) { // Nome do objeto no lugar do av, o a é o que será iterado.
 
 <p>Isso é usado para destruir um objeto no meio da execução do programa, pra não sobrecarregar a memória. Diferente de outras linguagens POO surgidas posteriormente, o C++ não faz a coleta de lixo, por isso é necessário usar o delete pra destruir objetos (objetos agregados em outros objetos são destruídos automaticamente, mas o principal não), na verdade, no C++ a POO é mais primitiva, por ter sido uma das primeiras linguagens a usar esse paradigma. Sempre mantenha o hábito de usar o delete em objetos em C++ por esse motivo.</p>
 
-<p>Lembrando que, caso tenha agregação de objetos, é recomendado usar o <code>delete this->nomeDoObjeto</code> desses objetos dentro do destrutor da classe, dessa forma:</p>
+<p>Lembrando que, caso tenha agregação de objetos, é recomendado usar o <code>delete this-&gt;nomeDoObjeto</code> desses objetos dentro do destrutor da classe, dessa forma:</p>
 
 <pre>
 <code>
 Aeroporto::~Aeroporto() {
-    delete this->avi;
+    delete this-&gt;avi;
 }
 </code>
 </pre>
@@ -291,13 +291,13 @@ Aeroporto::~Aeroporto() {
 <code>
 Aviao *av = new Aviao(1);
 
-av->imprimir();
+av-&gt;imprimir();
 
 delete av;
 
 av = new Aviao(2); // Na nova atribuição é sem ponteiro mesmo.
 
-av->imprimir();
+av-&gt;imprimir();
 
 delete av;
 </code>
@@ -338,12 +338,12 @@ void Lampada::custo() {
 }
 
 void Lampada::acender() {
-    cout << "A lâmpada está acesa!" << endl;
+    cout &lt;&lt; "A lâmpada está acesa!" &lt;&lt; endl;
     acesa = true;
 }
 
 void Lampada::apagar() {
-    cout << "A lâmpada está apagada!" << endl;
+    cout &lt;&lt; "A lâmpada está apagada!" &lt;&lt; endl;
     acesa = false;
 }
 </code>

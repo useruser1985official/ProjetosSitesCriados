@@ -79,7 +79,7 @@ class Caixa : public Estoque {
 };
 
 void Caixa::defineLado(int l) {
-    this->lado = l;
+    this-&gt;lado = l;
 }
 
 double Caixa::volume() {
@@ -91,7 +91,7 @@ const double Caixa::getLado() {
 }
 
 void Caixa::setLado(double lado) {
-    this->lado = lado;
+    this-&gt;lado = lado;
 }
 </code>
 </pre>
@@ -102,9 +102,9 @@ void Caixa::setLado(double lado) {
 <code>
 Estoque *cx = new Caixa();
 
-cx->defineLado(5);
+cx-&gt;defineLado(5);
 
-cout << cx->volume() << endl;
+cout &lt;&lt; cx-&gt;volume() &lt;&lt; endl;
 
 delete cx;
 </code>
@@ -117,12 +117,12 @@ delete cx;
 Estoque *cx = new Caixa();
 
 if(typeid(cx) == typeid(Estoque*)) { // inclua typeinfo
-    cx->defineLado(5);
+    cx-&gt;defineLado(5);
 
-    cout << cx->volume() << endl;
+    cout &lt;&lt; cx-&gt;volume() &lt;&lt; endl;
 }
 else {
-    cerr << "Classe Estoque Não Implementada!" << endl;
+    cerr &lt;&lt; "Classe Estoque Não Implementada!" &lt;&lt; endl;
 }
 
 delete cx;
@@ -149,7 +149,7 @@ int main() {
 
     defLado(cx, 5);
 
-    cout << verVol(cx) << endl;
+    cout &lt;&lt; verVol(cx) &lt;&lt; endl;
 
     return 0;
 }
@@ -173,11 +173,11 @@ template&lt;class E&gt; class Generico {
 };
 
 template&lt;class E&gt; const E Generico&lt;E&gt;::getEntidade() {
-    return this->entidade;
+    return this-&gt;entidade;
 }
 
 template&lt;class E&gt; void Generico&lt;E&gt;::setEntidade(E entidade) {
-    this->entidade = entidade;
+    this-&gt;entidade = entidade;
 }
 </code>
 </pre>
@@ -195,13 +195,13 @@ int main() {
 
     texto.setEntidade("Exemplo de String!"); // Utilizamos ponto pelo objeto não ser criado com new.
 
-    cout << texto.getEntidade() << endl; // Idem
+    cout &lt;&lt; texto.getEntidade() &lt;&lt; endl; // Idem
 
     Generico&lt;int&gt; numero;
 
     numero.setEntidade(50);
 
-    cout << numero.getEntidade() << endl;
+    cout &lt;&lt; numero.getEntidade() &lt;&lt; endl;
 
     return 0;
 }
@@ -215,15 +215,15 @@ int main() {
 int main() {
     Generico&lt;string&gt; *texto = new Generico&lt;string&gt;(); // Não esqueça do ponteiro
 
-    texto->setEntidade("Exemplo de String!"); // Utilizamos seta pelo objeto ser criado com new.
+    texto-&gt;setEntidade("Exemplo de String!"); // Utilizamos seta pelo objeto ser criado com new.
 
-    cout << texto->getEntidade() << endl; // Idem
+    cout &lt;&lt; texto-&gt;getEntidade() &lt;&lt; endl; // Idem
 
     Generico&lt;int&gt; *numero = new Generico&lt;int&gt;();
 
-    numero->setEntidade(50);
+    numero-&gt;setEntidade(50);
 
-    cout << numero->getEntidade() << endl;
+    cout &lt;&lt; numero-&gt;getEntidade() &lt;&lt; endl;
 
     delete texto;
     delete numero;

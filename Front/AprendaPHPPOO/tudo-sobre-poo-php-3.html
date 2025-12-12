@@ -35,24 +35,24 @@
     </tr>
     <tr>
         <td>
-            - nome<br/>
-            - nacionalidade<br/>
-            - idade<br/>
-            - altura<br/>
-            - peso<br/>
-            - categoria<br/>
-            - vitórias<br/>
-            - derrotas<br/>
-            - empates<br/>
+            - nome: String<br/>
+            - nacionalidade: String<br/>
+            - idade: int<br/>
+            - altura: float<br/>
+            - peso: float<br/>
+            - categoria: String<br/>
+            - vitórias: int<br/>
+            - derrotas: int<br/>
+            - empates: int<br/>
         </td>
     </tr>
     <tr>
         <td>
-            + apresentar()<br/>
-            + status()<br/>
-            + ganharLuta()<br/>
-            + perderLuta()<br/>
-            + empatarLuta()<br/>
+            + apresentar(): void<br/>
+            + status(): void<br/>
+            + ganharLuta(): void<br/>
+            + perderLuta(): void<br/>
+            + empatarLuta(): void<br/>
         </td>
     </tr>
 </table>
@@ -74,126 +74,126 @@ class Lutador {
     
     public function apresentar() {
         echo "&lt;p&gt;-------------------------------&lt;/p&gt;";
-        echo "&lt;p&gt;CHEGOU A HORA! O lutador " . $this->getNome();
-        echo " veio diretamente de " . $this->getNacionalidade();
-        echo ", tem " . $this->getIdade() . " anos e pesa " . $this->getPeso() . "Kg.";
-        echo "&lt;br/&gt;Ele tem " . $this->getVitorias() . " vitórias, ";
-        echo $this->getDerrotas() . " derrotas e " . $this->getEmpates() . " empates.&lt;/p&gt;";
+        echo "&lt;p&gt;CHEGOU A HORA! O lutador " . $this-&gt;getNome();
+        echo " veio diretamente de " . $this-&gt;getNacionalidade();
+        echo ", tem " . $this-&gt;getIdade() . " anos e pesa " . $this-&gt;getPeso() . "Kg.";
+        echo "&lt;br/&gt;Ele tem " . $this-&gt;getVitorias() . " vitórias, ";
+        echo $this-&gt;getDerrotas() . " derrotas e " . $this-&gt;getEmpates() . " empates.&lt;/p&gt;";
     }
     public function status() {
         echo "&lt;p&gt;-------------------------------&lt;/p&gt;";
-        echo "&lt;p&gt;" . $this->getNome() . " é um peso " . $this->getCategoria();
-        echo " e já ganhou " . $this->getVitorias() . " vezes, ";
-        echo " perdeu " . $this->getDerrotas() . " vezes e ";
-        echo " empatou " . $this->getEmpates() . " vezes.&lt;/p&gt;";
+        echo "&lt;p&gt;" . $this-&gt;getNome() . " é um peso " . $this-&gt;getCategoria();
+        echo " e já ganhou " . $this-&gt;getVitorias() . " vezes, ";
+        echo " perdeu " . $this-&gt;getDerrotas() . " vezes e ";
+        echo " empatou " . $this-&gt;getEmpates() . " vezes.&lt;/p&gt;";
         
     }
     public function ganharLuta() {
-        $this->setVitorias($this->getVitorias() + 1);
-        // $this->vitorias = $this->vitorias + 1;
+        $this-&gt;setVitorias($this-&gt;getVitorias() + 1);
+        // $this-&gt;vitorias = $this-&gt;vitorias + 1;
     }
     public function perderLuta() {
-        $this->setDerrotas($this->getDerrotas() + 1);
+        $this-&gt;setDerrotas($this-&gt;getDerrotas() + 1);
     }
     public function empatarLuta() {
-        $this->setEmpates($this->getEmpates() + 1);
+        $this-&gt;setEmpates($this-&gt;getEmpates() + 1);
     }
     
     public function __construct($no, $na, $id, $al, $pe, $vi, $de, $em) {
-        $this->nome = $no;
-        $this->nacionalidade = $na;
-        $this->idade = $id;
-        $this->altura = $al;
-        $this->setPeso($pe);
-        $this->vitorias = $vi;
-        $this->derrotas = $de;
-        $this->empates = $em;
+        $this-&gt;nome = $no;
+        $this-&gt;nacionalidade = $na;
+        $this-&gt;idade = $id;
+        $this-&gt;altura = $al;
+        $this-&gt;setPeso($pe);
+        $this-&gt;vitorias = $vi;
+        $this-&gt;derrotas = $de;
+        $this-&gt;empates = $em;
     }
     public function getNome() {
-        return $this->nome;
+        return $this-&gt;nome;
     }
 
     public function getNacionalidade() {
-        return $this->nacionalidade;
+        return $this-&gt;nacionalidade;
     }
 
     public function getIdade() {
-        return $this->idade;
+        return $this-&gt;idade;
     }
 
     public function getAltura() {
-        return $this->altura;
+        return $this-&gt;altura;
     }
 
     public function getPeso() {
-        return $this->peso;
+        return $this-&gt;peso;
     }
 
     public function getCategoria() {
-        return $this->categoria;
+        return $this-&gt;categoria;
     }
 
     public function getVitorias() {
-        return $this->vitorias;
+        return $this-&gt;vitorias;
     }
 
     public function getDerrotas() {
-        return $this->derrotas;
+        return $this-&gt;derrotas;
     }
 
     public function getEmpates() {
-        return $this->empates;
+        return $this-&gt;empates;
     }
 
     public function setNome($nome) {
-        $this->nome = $nome;
+        $this-&gt;nome = $nome;
     }
 
     public function setNacionalidade($nacionalidade) {
-        $this->nacionalidade = $nacionalidade;
+        $this-&gt;nacionalidade = $nacionalidade;
     }
 
     public function setIdade($idade) {
-        $this->idade = $idade;
+        $this-&gt;idade = $idade;
     }
 
     public function setAltura($altura) {
-        $this->altura = $altura;
+        $this-&gt;altura = $altura;
     }
 
     public function setPeso($peso) {
-        $this->peso = $peso;
-        $this->setCategoria();
+        $this-&gt;peso = $peso;
+        $this-&gt;setCategoria();
     }
 
     private function setCategoria() { // Esse não tem parâmetros
-        if($this->peso <= 52.2) {
-            $this->categoria = "Inválido";
+        if($this-&gt;peso &lt;= 52.2) {
+            $this-&gt;categoria = "Inválido";
         }
-        else if($this->peso > 52.2 && $this->peso <= 70.3) {
-            $this->categoria = "Leve";
+        else if($this-&gt;peso &gt; 52.2 && $this-&gt;peso &lt;= 70.3) {
+            $this-&gt;categoria = "Leve";
         }
-        else if($this->peso > 70.3 && $this->peso <= 83.9) {
-            $this->categoria = "Médio";
+        else if($this-&gt;peso &gt; 70.3 && $this-&gt;peso &lt;= 83.9) {
+            $this-&gt;categoria = "Médio";
         }
-        else if($this->peso > 83.9 && $this->peso <= 120.2) {
-            $this->categoria = "Pesado";
+        else if($this-&gt;peso &gt; 83.9 && $this-&gt;peso &lt;= 120.2) {
+            $this-&gt;categoria = "Pesado";
         }
         else {
-            $this->categoria = "Inválido";
+            $this-&gt;categoria = "Inválido";
         }
     }
 
     public function setVitorias($vitorias) {
-        $this->vitorias = $vitorias;
+        $this-&gt;vitorias = $vitorias;
     }
 
     public function setDerrotas($derrotas) {
-        $this->derrotas = $derrotas;
+        $this-&gt;derrotas = $derrotas;
     }
 
     public function setEmpates($empates) {
-        $this->empates = $empates;
+        $this-&gt;empates = $empates;
     }
 }
 </code>
@@ -216,9 +216,9 @@ $l[3] = new Lutador("Dead Code", "Austrália", 28, 1.93, 81.6, 13, 0, 2);
 $l[4] = new Lutador("UFOCobol", "Brasil", 37, 1.70, 119.3, 5, 4, 3);
 $l[5] = new Lutador("Nerdaart", "EUA", 30, 1.81, 105.7, 12, 2, 4);
 
-$l[0]->perderLuta();
-$l[0]->apresentar();
-$l[0]->status();
+$l[0]-&gt;perderLuta();
+$l[0]-&gt;apresentar();
+$l[0]-&gt;status();
 </code>
 </pre>
 
@@ -236,16 +236,16 @@ $l[0]->status();
     </tr>
     <tr>
         <td>
-        - desafiado<br/>
-        - desafiante<br/>
-        - rounds<br/>
-        - aprovada<br/>
+        - desafiado: Lutador<br/>
+        - desafiante: Lutador<br/>
+        - rounds: int<br/>
+        - aprovada: boolean<br/>
         </td>
     </tr>
     <tr>
         <td> 
-        + marcarLuta(l1, l2)<br/>
-        + lutar()<br/>
+        + marcarLuta(l1: Lutador, l2: Lutador): void<br/>
+        + lutar(): void<br/>
         </td>
     </tr>
 </table>
@@ -269,43 +269,43 @@ class Luta {
     private $aprovada;
     
     public function marcarLuta($l1, $l2) {
-        if($l1->getCategoria() === $l2->getCategoria() && $l1 != $l2) {
-            $this->aprovada = true;
-            $this->desafiado = $l1;
-            $this->desafiante = $l2;
+        if($l1-&gt;getCategoria() === $l2-&gt;getCategoria() && $l1 != $l2) {
+            $this-&gt;aprovada = true;
+            $this-&gt;desafiado = $l1;
+            $this-&gt;desafiante = $l2;
         }
         else {
-            $this->aprovada = false;
-            $this->desafiado = null;
-            $this->desafiante = null;
+            $this-&gt;aprovada = false;
+            $this-&gt;desafiado = null;
+            $this-&gt;desafiante = null;
         }
     }
     public function lutar() {
-        if($this->aprovada) {
+        if($this-&gt;aprovada) {
             echo "&lt;### DESAFIADO ###&gt;";
-            $this->desafiado->apresentar();
+            $this-&gt;desafiado-&gt;apresentar();
             echo "&lt;### DESAFIANTE ###&gt;";
-            $this->desafiante->apresentar();
+            $this-&gt;desafiante-&gt;apresentar();
             $vencedor = rand(0, 2);
             
             switch($vencedor) {
                 case 0:
                     // Empate
                     echo "&lt;p&gt;Empate!&lt;/p&gt;";
-                    $this->desafiado->empatarLuta();
-                    $this->desafiante->empatarLuta();
+                    $this-&gt;desafiado-&gt;empatarLuta();
+                    $this-&gt;desafiante-&gt;empatarLuta();
                     break;
                 case 1:
                     // Desafiado Vence
-                    echo "&lt;p&gt;" . $this->desafiado->getNome() . " vence!&lt;/p&gt;";
-                    $this->desafiado->ganharLuta();
-                    $this->desafiante->perderLuta();
+                    echo "&lt;p&gt;" . $this-&gt;desafiado-&gt;getNome() . " vence!&lt;/p&gt;";
+                    $this-&gt;desafiado-&gt;ganharLuta();
+                    $this-&gt;desafiante-&gt;perderLuta();
                     break;
                 case 2:
                     // Desafiante Vence
-                    echo "&lt;p&gt;" . $this->desafiante->getNome() . " vence!&lt;/p&gt;";
-                    $this->desafiado->perderLuta();
-                    $this->desafiante->ganharLuta();
+                    echo "&lt;p&gt;" . $this-&gt;desafiante-&gt;getNome() . " vence!&lt;/p&gt;";
+                    $this-&gt;desafiado-&gt;perderLuta();
+                    $this-&gt;desafiante-&gt;ganharLuta();
                     break;
                 
             }
@@ -316,35 +316,35 @@ class Luta {
     }
     
     public function getDesafiado() {
-        return $this->desafiado;
+        return $this-&gt;desafiado;
     }
 
     public function getDesafiante() {
-        return $this->desafiante;
+        return $this-&gt;desafiante;
     }
 
     public function getRounds() {
-        return $this->rounds;
+        return $this-&gt;rounds;
     }
 
     public function getAprovada() {
-        return $this->aprovada;
+        return $this-&gt;aprovada;
     }
 
     public function setDesafiado($desafiado) {
-        $this->desafiado = $desafiado;
+        $this-&gt;desafiado = $desafiado;
     }
 
     public function setDesafiante($desafiante) {
-        $this->desafiante = $desafiante;
+        $this-&gt;desafiante = $desafiante;
     }
 
     public function setRounds($rounds) {
-        $this->rounds = $rounds;
+        $this-&gt;rounds = $rounds;
     }
 
     public function setAprovada($aprovada) {
-        $this->aprovada = $aprovada;
+        $this-&gt;aprovada = $aprovada;
     }
 }
 </code>
@@ -367,11 +367,11 @@ $l[5] = new Lutador("Nerdaart", "EUA", 30, 1.81, 105.7, 12, 2, 4);
 
 $uec01 = new Luta();
 
-$uec01->marcarLuta($l[0], $l[1]);
-$uec01->lutar();
+$uec01-&gt;marcarLuta($l[0], $l[1]);
+$uec01-&gt;lutar();
 
-$uec01->getDesafiado()->status();
-$uec01->getDesafiante()->status();
+$uec01-&gt;getDesafiado()-&gt;status();
+$uec01-&gt;getDesafiante()-&gt;status();
 </code>
 </pre>
 

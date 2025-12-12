@@ -57,9 +57,9 @@ int main() {
 
     string semana[7] = {"Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"};
 
-    cout << data << endl;
-    cout << hora << endl;
-    cout << semana[stoi(ds)] << endl;
+    cout &lt;&lt; data &lt;&lt; endl;
+    cout &lt;&lt; hora &lt;&lt; endl;
+    cout &lt;&lt; semana[stoi(ds)] &lt;&lt; endl;
 
     return 0;
 }
@@ -106,33 +106,33 @@ string Date::manip(int quant, const char* tex) {
 }
 
 string Date::week() {
-    ds = stoi(this->manip(1, "%w"));
+    ds = stoi(this-&gt;manip(1, "%w"));
 
     return semana[ds];
 }
 
 int Date::day() {
-    return stoi(this->manip(2, "%d"));
+    return stoi(this-&gt;manip(2, "%d"));
 }
 
 int Date::month() {
-    return stoi(this->manip(2, "%m"));
+    return stoi(this-&gt;manip(2, "%m"));
 }
 
 int Date::year() {
-    return stoi(this->manip(4, "%Y"));
+    return stoi(this-&gt;manip(4, "%Y"));
 }
 
 int Date::hours() {
-    return stoi(this->manip(2, "%H"));
+    return stoi(this-&gt;manip(2, "%H"));
 }
 
 int Date::minutes() {
-    return stoi(this->manip(2, "%M"));
+    return stoi(this-&gt;manip(2, "%M"));
 }
 
 int Date::seconds() {
-    return stoi(this->manip(2, "%S"));
+    return stoi(this-&gt;manip(2, "%S"));
 }
 </code>
 </pre>
@@ -143,13 +143,13 @@ int Date::seconds() {
 <code>
 Date dataAtual;
 
-cout << "O dia da semana é: " << dataAtual.week() << endl;
+cout &lt;&lt; "O dia da semana é: " &lt;&lt; dataAtual.week() &lt;&lt; endl;
 
-cout << "O dia de hoje é: ";
-cout << dataAtual.day() << "/" << dataAtual.month() << "/" << dataAtual.year() << endl;
+cout &lt;&lt; "O dia de hoje é: ";
+cout &lt;&lt; dataAtual.day() &lt;&lt; "/" &lt;&lt; dataAtual.month() &lt;&lt; "/" &lt;&lt; dataAtual.year() &lt;&lt; endl;
 
-cout << "A hora atual é: ";
-cout << dataAtual.hours() << ":" << dataAtual.minutes() << ":" << dataAtual.seconds() << endl;
+cout &lt;&lt; "A hora atual é: ";
+cout &lt;&lt; dataAtual.hours() &lt;&lt; ":" &lt;&lt; dataAtual.minutes() &lt;&lt; ":" &lt;&lt; dataAtual.seconds() &lt;&lt; endl;
 </code>
 </pre>
 
@@ -167,8 +167,8 @@ int num; // Variável do mesmo tipo
 num = 10; // Atribuição de valor à variável
 pont = &amp;num; // Atribuição do endereço de num à variável
 
-cout << "Conteúdo..: " << *pont << endl; // Conteúdo de num
-cout << "Endereço..: " << pont << endl; // Endereço de num
+cout &lt;&lt; "Conteúdo..: " &lt;&lt; *pont &lt;&lt; endl; // Conteúdo de num
+cout &lt;&lt; "Endereço..: " &lt;&lt; pont &lt;&lt; endl; // Endereço de num
 
 delete pont;
 </code>
@@ -182,8 +182,8 @@ int *pont = new int();
 
 *pont = 10;
 
-cout << "Conteúdo..: " << *pont << endl; // Conteúdo de pont
-cout << "Endereço..: " << &pont << endl; // Endereço de pont
+cout &lt;&lt; "Conteúdo..: " &lt;&lt; *pont &lt;&lt; endl; // Conteúdo de pont
+cout &lt;&lt; "Endereço..: " &lt;&lt; &pont &lt;&lt; endl; // Endereço de pont
 
 delete pont;
 </code>
@@ -199,8 +199,8 @@ unique_ptr&lt;int&gt; pont(new int());
 
 *pont = 10;
 
-cout << "Conteúdo..: " << *pont << endl; // Conteúdo de pont
-cout << "Endereço..: " << &pont << endl; // Endereço de pont
+cout &lt;&lt; "Conteúdo..: " &lt;&lt; *pont &lt;&lt; endl; // Conteúdo de pont
+cout &lt;&lt; "Endereço..: " &lt;&lt; &pont &lt;&lt; endl; // Endereço de pont
 </code>
 </pre>
 
@@ -232,8 +232,8 @@ shared_ptr&lt;int&gt; pont2 = pont;
 <code>
 string *pal = new string("Cursos");
 
-cout << "Palavra: " << *pal << endl;
-cout << "Tamanho: " << pal->size() << endl;
+cout &lt;&lt; "Palavra: " &lt;&lt; *pal &lt;&lt; endl;
+cout &lt;&lt; "Tamanho: " &lt;&lt; pal-&gt;size() &lt;&lt; endl;
 </code>
 </pre>
 
@@ -243,8 +243,8 @@ cout << "Tamanho: " << pal->size() << endl;
 <code>
 unique_ptr&lt;string&gt; pal(new string("Cursos"));
 
-cout << "Palavra: " << *pal << endl;
-cout << "Tamanho: " << pal->size() << endl;
+cout &lt;&lt; "Palavra: " &lt;&lt; *pal &lt;&lt; endl;
+cout &lt;&lt; "Tamanho: " &lt;&lt; pal-&gt;size() &lt;&lt; endl;
 </code>
 </pre>
 
@@ -260,7 +260,7 @@ class Carro {
             return vel;
         }
         void setVel(int v) {
-            this->vel = v;
+            this-&gt;vel = v;
         }
 };
 </code>
@@ -272,9 +272,9 @@ class Carro {
 <code>
 Carro *c1 = new Carro();
 
-c1->setVel(100);
+c1-&gt;setVel(100);
 
-cout << "Velocidade: " << c1->getVel() << endl;
+cout &lt;&lt; "Velocidade: " &lt;&lt; c1-&gt;getVel() &lt;&lt; endl;
 
 delete c1;
 </code>
@@ -286,9 +286,9 @@ delete c1;
 <code>
 unique_ptr&lt;Carro&gt; c1(new Carro());
 
-c1->setVel(100);
+c1-&gt;setVel(100);
 
-cout << "Velocidade: " << c1->getVel() << endl;
+cout &lt;&lt; "Velocidade: " &lt;&lt; c1-&gt;getVel() &lt;&lt; endl;
 </code>
 </pre>
 
@@ -299,11 +299,11 @@ cout << "Velocidade: " << c1->getVel() << endl;
 shared_ptr&lt;Carro&gt; c1(new Carro());
 shared_ptr&lt;Carro&gt; c2 = c1;
 
-c1->setVel(100);
-c2->setVel(80);
+c1-&gt;setVel(100);
+c2-&gt;setVel(80);
     
-cout << "Velocidade: " << c1->getVel() << endl;
-cout << "Velocidade: " << c2->getVel() << endl;
+cout &lt;&lt; "Velocidade: " &lt;&lt; c1-&gt;getVel() &lt;&lt; endl;
+cout &lt;&lt; "Velocidade: " &lt;&lt; c2-&gt;getVel() &lt;&lt; endl;
 </code>
 </pre>
 
@@ -316,11 +316,11 @@ cout << "Velocidade: " << c2->getVel() << endl;
 unique_ptr&lt;Carro&gt; c1(new Carro());
 unique_ptr&lt;Carro&gt; c2(new Carro());
 
-c1->setVel(100);
-c2->setVel(80);
+c1-&gt;setVel(100);
+c2-&gt;setVel(80);
 
-cout << "Velocidade: " << c1->getVel() << endl;
-cout << "Velocidade: " << c2->getVel() << endl;
+cout &lt;&lt; "Velocidade: " &lt;&lt; c1-&gt;getVel() &lt;&lt; endl;
+cout &lt;&lt; "Velocidade: " &lt;&lt; c2-&gt;getVel() &lt;&lt; endl;
 </code>
 </pre>
 
@@ -340,7 +340,7 @@ vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 vector&lt;int&gt;::iterator it;
 
 for(it = n.begin(); it != n.end(); it++) {
-    cout << *it << endl;
+    cout &lt;&lt; *it &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -352,7 +352,7 @@ for(it = n.begin(); it != n.end(); it++) {
 vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
 for(auto it = n.begin(); it != n.end(); it++) {
-    cout << *it << endl;
+    cout &lt;&lt; *it &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -364,7 +364,7 @@ for(auto it = n.begin(); it != n.end(); it++) {
 vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
 for(auto it: n) {
-    cout << it << endl;
+    cout &lt;&lt; it &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -377,7 +377,7 @@ for(auto it: n) {
 <code>
 vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-for_each(n.begin(), n.end(), [](int num){cout << num << endl;}); // Inclua algorithm
+for_each(n.begin(), n.end(), [](int num){cout &lt;&lt; num &lt;&lt; endl;}); // Inclua algorithm
 </code>
 </pre>
 
@@ -391,7 +391,7 @@ vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
 for_each(n.begin(), n.end(), [](int num) {
     num += 10;
-    cout << num << endl;
+    cout &lt;&lt; num &lt;&lt; endl;
 });
 </code>
 </pre>
@@ -404,13 +404,13 @@ vector&lt;int&gt; n{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
 for_each(n.begin(), n.end(), [](int num) {
     num += 10;
-    cout << num << endl;
+    cout &lt;&lt; num &lt;&lt; endl;
 });
 
-cout << endl;
+cout &lt;&lt; endl;
 
 for_each(n.begin(), n.end(), [](int num) {
-    cout << num << endl;
+    cout &lt;&lt; num &lt;&lt; endl;
 });
 </code>
 </pre>

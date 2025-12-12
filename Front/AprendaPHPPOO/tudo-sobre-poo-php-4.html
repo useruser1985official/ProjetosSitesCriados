@@ -35,13 +35,13 @@
     </tr>
     <tr>
         <td>
-            - nome<br/>
-            - idade<br/>
-            - sexo<br/>
+            - nome: String<br/>
+            - idade: int<br/>
+            - sexo: String<br/>
         </td>
     </tr>
     <tr>
-        <td>+ fazerAniver()</td>
+        <td>+ fazerAniver(): void</td>
     </tr>
 </table>
 
@@ -51,17 +51,17 @@
     </tr>
     <tr>
         <td>
-            - titulo<br/>
-            - autor<br/>
-            - totPaginas<br/>
-            - pagAtual<br/>
-            - aberto<br/>
-            - leitor<br/>
+            - titulo: String<br/>
+            - autor: String<br/>
+            - totPaginas: int<br/>
+            - pagAtual: int<br/>
+            - aberto: boolean<br/>
+            - leitor: Pessoa<br/>
         </td>
     </tr>
     <tr>
         <td>
-            + detalhes()<br/>
+            + detalhes(): void<br/>
         </td>
     </tr>
 </table>
@@ -75,11 +75,11 @@
     </tr>
     <tr>
         <td>
-            + abrir()<br/>
-            + fechar()<br/>
-            + folhear(p)<br/>
-            + avancarPag()<br/>
-            + voltarPag()<br/>
+            + abrir(): void<br/>
+            + fechar(): void<br/>
+            + folhear(p: int): void<br/>
+            + avancarPag(): void<br/>
+            + voltarPag(): void<br/>
         </td>
     </tr>
 </table>
@@ -113,13 +113,13 @@ class Pessoa {
     private $sexo;
     
     public function fazerAniver() {
-        $this->idade++;
+        $this-&gt;idade++;
     }
     
     public function __construct($nome, $idade, $sexo) {
-        $this->nome = $nome;
-        $this->idade = $idade;
-        $this->sexo = $sexo;
+        $this-&gt;nome = $nome;
+        $this-&gt;idade = $idade;
+        $this-&gt;sexo = $sexo;
     }
     
     public function __destruct() {
@@ -127,27 +127,27 @@ class Pessoa {
     }
 
     public function getNome() {
-        return $this->nome;
+        return $this-&gt;nome;
     }
 
     public function getIdade() {
-        return $this->idade;
+        return $this-&gt;idade;
     }
 
     public function getSexo() {
-        return $this->sexo;
+        return $this-&gt;sexo;
     }
 
     public function setNome($nome) {
-        $this->nome = $nome;
+        $this-&gt;nome = $nome;
     }
 
     public function setIdade($idade) {
-        $this->idade = $idade;
+        $this-&gt;idade = $idade;
     }
 
     public function setSexo($sexo) {
-        $this->sexo = $sexo;
+        $this-&gt;sexo = $sexo;
     }
 }
 </code>
@@ -169,13 +169,13 @@ class Livro implements Publicacao {
     private $leitor;
 
     public function detalhes() {
-        echo "Livro " . $this->titulo . " escrito por " . $this->autor . ".";
-        if($this->aberto == true) {
+        echo "Livro " . $this-&gt;titulo . " escrito por " . $this-&gt;autor . ".";
+        if($this-&gt;aberto == true) {
             echo "&lt;br/&gt;O livro está aberto!";
-            echo "&lt;br/&gt;Páginas: " . $this->totPaginas . ", página atual " . $this->pagAtual . ".";
-            echo "&lt;br/&gt;Sendo lido por " . $this->leitor->getNome() . ".";
-            echo "&lt;br/&gt;De idade de " . $this->leitor->getIdade() . " anos.";
-            echo "&lt;br/&gt;E de sexo " . $this->leitor->getSexo() . ".";
+            echo "&lt;br/&gt;Páginas: " . $this-&gt;totPaginas . ", página atual " . $this-&gt;pagAtual . ".";
+            echo "&lt;br/&gt;Sendo lido por " . $this-&gt;leitor-&gt;getNome() . ".";
+            echo "&lt;br/&gt;De idade de " . $this-&gt;leitor-&gt;getIdade() . " anos.";
+            echo "&lt;br/&gt;E de sexo " . $this-&gt;leitor-&gt;getSexo() . ".";
         }
         else {
             echo "&lt;br/&gt;O livro está fechado no momento!";
@@ -183,104 +183,104 @@ class Livro implements Publicacao {
     }
     
     public function abrir() {
-        $this->aberto = true;
+        $this-&gt;aberto = true;
     }
 
     public function avancarPag() {
-        if($this->getAberto() == true) {
-            if($this->getPagAtual() < $this->getTotPaginas()) {
-                $this->setPagAtual($this->getPagAtual() + 1);
+        if($this-&gt;getAberto() == true) {
+            if($this-&gt;getPagAtual() &lt; $this-&gt;getTotPaginas()) {
+                $this-&gt;setPagAtual($this-&gt;getPagAtual() + 1);
             } 
         }
     }
 
     public function fechar() {
-        $this->aberto = false;
+        $this-&gt;aberto = false;
     }
 
     public function folhear($p) {
-        if($this->getAberto() == true) {
-            if($p > $this->totPaginas) {
-                $this->setPagAtual($this->getTotPaginas());
+        if($this-&gt;getAberto() == true) {
+            if($p &gt; $this-&gt;totPaginas) {
+                $this-&gt;setPagAtual($this-&gt;getTotPaginas());
             }
-            else if($p < 0) {
-                $this->setPagAtual(0);
+            else if($p &lt; 0) {
+                $this-&gt;setPagAtual(0);
             }
             else {
-                $this->pagAtual = $p;
+                $this-&gt;pagAtual = $p;
             }
         }
     }
 
     public function voltarPag() {
-        if($this->getAberto() == true) {
-            if($this->getPagAtual() > 0) {
-                $this->setPagAtual($this->getPagAtual() - 1);
+        if($this-&gt;getAberto() == true) {
+            if($this-&gt;getPagAtual() &gt; 0) {
+                $this-&gt;setPagAtual($this-&gt;getPagAtual() - 1);
             } 
         }
     }
     
     public function __construct($titulo, $autor, $totPaginas, $leitor) {
-        $this->titulo = $titulo;
-        $this->autor = $autor;
-        $this->totPaginas = $totPaginas;
-        $this->leitor = $leitor;
-        $this->aberto = false;
-        $this->pagAtual = 0;
+        $this-&gt;titulo = $titulo;
+        $this-&gt;autor = $autor;
+        $this-&gt;totPaginas = $totPaginas;
+        $this-&gt;leitor = $leitor;
+        $this-&gt;aberto = false;
+        $this-&gt;pagAtual = 0;
     }
     
     public function __destruct() {
-        unset($this->leitor); // Destruindo objeto no destrutor
+        unset($this-&gt;leitor); // Destruindo objeto no destrutor
 
         echo "Objeto Livro Destruído!&lt;br/&gt;";
     }
 
     public function getTitulo() {
-        return $this->titulo;
+        return $this-&gt;titulo;
     }
 
     public function getAutor() {
-        return $this->autor;
+        return $this-&gt;autor;
     }
 
     public function getTotPaginas() {
-        return $this->totPaginas;
+        return $this-&gt;totPaginas;
     }
 
     public function getPagAtual() {
-        return $this->pagAtual;
+        return $this-&gt;pagAtual;
     }
 
     public function getAberto() {
-        return $this->aberto;
+        return $this-&gt;aberto;
     }
 
     public function getLeitor() {
-        return $this->leitor;
+        return $this-&gt;leitor;
     }
 
     public function setTitulo($titulo) {
-        $this->titulo = $titulo;
+        $this-&gt;titulo = $titulo;
     }
 
     public function setAutor($autor) {
-        $this->autor = $autor;
+        $this-&gt;autor = $autor;
     }
 
     public function setTotPaginas($totPaginas) {
-        $this->totPaginas = $totPaginas;
+        $this-&gt;totPaginas = $totPaginas;
     }
 
     public function setPagAtual($pagAtual) {
-        $this->pagAtual = $pagAtual;
+        $this-&gt;pagAtual = $pagAtual;
     }
 
     public function setAberto($aberto) {
-        $this->aberto = $aberto;
+        $this-&gt;aberto = $aberto;
     }
 
     public function setLeitor($leitor) {
-        $this->leitor = $leitor;
+        $this-&gt;leitor = $leitor;
     }
 }
 </code>
@@ -299,10 +299,10 @@ $l[0] = new Livro("PHP Básico", "José da Silva", 300, $p[0]);
 $l[1] = new Livro("POO com PHP", "Maria de Souza", 500, $p[0]);
 $l[2] = new Livro("PHP Avançado", "Ana Paula", 800, $p[1]);
 
-$l[2]->abrir();
-$l[2]->folhear(305); // Aqui se passa parâmetros;
-$l[2]->avancarPag();
-$l[2]->detalhes();
+$l[2]-&gt;abrir();
+$l[2]-&gt;folhear(305); // Aqui se passa parâmetros;
+$l[2]-&gt;avancarPag();
+$l[2]-&gt;detalhes();
 
 unset($p);
 unset($l);
@@ -332,13 +332,13 @@ unset($l);
     </tr>
     <tr>
         <td>
-            - nome<br/>
-            - idade<br/>
-            - sexo<br/>
+            - nome: String<br/>
+            - idade: int<br/>
+            - sexo: String<br/>
         </td>
     </tr>
     <tr>
-        <td> + fazerAniver()</td>
+        <td> + fazerAniver(): void</td>
     </tr>
 </table>
 
@@ -350,12 +350,12 @@ unset($l);
     </tr>
     <tr>
         <td>
-            - matr<br/>
-            - curso<br/>
+            - matr: int<br/>
+            - curso: String<br/>
         </td>
     </tr>
     <tr>
-        <td>+cancelarMatr()</td>
+        <td>+cancelarMatr(): void</td>
     </tr>
 </table>
 
@@ -365,12 +365,12 @@ unset($l);
     </tr>
     <tr>
         <td>
-            - especialidade<br/>
-            - salario<br/>
+            - especialidade: String<br/>
+            - salario: float<br/>
         </td>
     </tr>
     <tr>
-        <td>+ receberAumento(aum)</td>
+        <td>+ receberAumento(aum: float): void</td>
     </tr>
 </table>
 
@@ -380,12 +380,12 @@ unset($l);
     </tr>
     <tr>
         <td>
-            - setor<br/>
-            - trabalhando<br/>
+            - setor: String<br/>
+            - trabalhando: boolean<br/>
         </td>
     </tr>
     <tr>
-        <td>+ mudarTrabalho()</td>
+        <td>+ mudarTrabalho(): void</td>
     </tr>
 </table>
 
@@ -406,17 +406,17 @@ class Aluno extends Pessoa {
     }
 
     public function getMatr() {
-        return $this->matr;
+        return $this-&gt;matr;
     }
     public function getCurso() {
-        return $this->curso;
+        return $this-&gt;curso;
     }
     public function setMatr($matr) {
-        $this->matr = $matr;
+        $this-&gt;matr = $matr;
     }
 
     public function setCurso($curso) {
-        $this->curso = $curso;
+        $this-&gt;curso = $curso;
     }
 }
 </code>
@@ -433,23 +433,23 @@ class Professor extends Pessoa {
     private $salario;
     
     public function receberAumento($aum) {
-        $this->salario += $aum;
+        $this-&gt;salario += $aum;
     }
     
     public function getEspecialidade() {
-        return $this->especialidade;
+        return $this-&gt;especialidade;
     }
 
     public function getSalario() {
-        return $this->salario;
+        return $this-&gt;salario;
     }
 
     public function setEspecialidade($especialidade) {
-        $this->especialidade = $especialidade;
+        $this-&gt;especialidade = $especialidade;
     }
 
     public function setSalario($salario) {
-        $this->salario = $salario;
+        $this-&gt;salario = $salario;
     }
 }
 </code>
@@ -466,23 +466,23 @@ class Funcionario extends Pessoa {
     private $trabalhando;
     
     public function mudarTrabalho() {
-        $this->trabalhando = !$this->trabalhando;
+        $this-&gt;trabalhando = !$this-&gt;trabalhando;
     }
     
     public function getSetor() {
-        return $this->setor;
+        return $this-&gt;setor;
     }
 
     public function getTrabalhando() {
-        return $this->trabalhando;
+        return $this-&gt;trabalhando;
     }
 
     public function setSetor($setor) {
-        $this->setor = $setor;
+        $this-&gt;setor = $setor;
     }
 
     public function setTrabalhando($trabalhando) {
-        $this->trabalhando = $trabalhando;
+        $this-&gt;trabalhando = $trabalhando;
     }
 }
 </code>
@@ -501,23 +501,23 @@ $p2 = new Aluno();
 $p3 = new Professor();
 $p4 = new Funcionario();
 
-$p1->setNome("Sérgio");
-$p2->setNome("Maria");
-$p3->setNome("Cláudio");
-$p4->setNome("Fabiana");
+$p1-&gt;setNome("Sérgio");
+$p2-&gt;setNome("Maria");
+$p3-&gt;setNome("Cláudio");
+$p4-&gt;setNome("Fabiana");
 
-$p1->setSexo("M");
-$p4->setSexo("F");
+$p1-&gt;setSexo("M");
+$p4-&gt;setSexo("F");
 
-$p2->setCurso("Informática");
-$p3->setSalario(2500.75);
-$p4->setSetor("Estoque");
+$p2-&gt;setCurso("Informática");
+$p3-&gt;setSalario(2500.75);
+$p4-&gt;setSetor("Estoque");
 
 // Esses métodos não funcionarão, apenas nos objetos especificados, altere os objetos associados:
 
-$p1->receberAumento(550.20);
-$p2->mudarTrabalho();
-$p4->cancelarMatr();
+$p1-&gt;receberAumento(550.20);
+$p2-&gt;mudarTrabalho();
+$p4-&gt;cancelarMatr();
 
 print_r($p1);
 print_r($p2);

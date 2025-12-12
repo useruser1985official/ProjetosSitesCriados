@@ -35,15 +35,15 @@
     </tr>
     <tr>
         <td>
-            - espectador<br/>
-            - filme
+            - espectador: Gafanhoto<br/>
+            - filme: Video
         </td>
     </tr>
     <tr>
         <td>
-            + avaliar()<br/>
-            + avaliar(nota)<br/>
-            + avaliar(porc)
+            + avaliar(): void<br/>
+            + avaliar(nota: int): void<br/>
+            + avaliar(porc: float): void
         </td>
     </tr>
 </table>
@@ -62,33 +62,33 @@ class Visualizacao {
     private $filme;
     
     public function __construct($espectador, $filme) {
-        $this->espectador = $espectador;
-        $this->filme = $filme;
-        $this->filme->setViews($this->filme->getViews() + 1);
-        $this->espectador->setTotAssistido($this->espectador->getTotAssistido() + 1);
+        $this-&gt;espectador = $espectador;
+        $this-&gt;filme = $filme;
+        $this-&gt;filme-&gt;setViews($this-&gt;filme-&gt;getViews() + 1);
+        $this-&gt;espectador-&gt;setTotAssistido($this-&gt;espectador-&gt;getTotAssistido() + 1);
     }
     
     public function __destruct() {
-        unset($this->espectador);
-        unset($this->filme);
+        unset($this-&gt;espectador);
+        unset($this-&gt;filme);
 
         echo "Objeto Visualizacao Destruído!&lt;br/&gt;";
     }
 
     public function getEspectador() {
-        return $this->espectador;
+        return $this-&gt;espectador;
     }
 
     public function getFilme() {
-        return $this->filme;
+        return $this-&gt;filme;
     }
 
     public function setEspectador($espectador) {
-        $this->espectador = $espectador;
+        $this-&gt;espectador = $espectador;
     }
 
     public function setFilme($filme) {
-        $this->filme = $filme;
+        $this-&gt;filme = $filme;
     }
 }
 </code>
@@ -132,28 +132,28 @@ unset($vis);
 <pre>
 <code>
 public function avaliar() {
-    $this->filme->setAvaliacao(5);
+    $this-&gt;filme-&gt;setAvaliacao(5);
 }
 
 public function avaliarNota($nota) {
-    $this->filme->setAvaliacao($nota);
+    $this-&gt;filme-&gt;setAvaliacao($nota);
 }
 
 public function avaliarPorc($porc) {
     $nova = 0;
-    if($porc <= 20) {
+    if($porc &lt;= 20) {
         $nova = 3;
     }
-    else if($porc > 20 && $porc <= 50) {
+    else if($porc &gt; 20 && $porc &lt;= 50) {
         $nova = 5;
     }
-    else if($porc > 50 && $porc <= 90) {
+    else if($porc &gt; 50 && $porc &lt;= 90) {
         $nova = 8;
     }
     else {
         $nova = 10;
     }
-    $this->filme->setAvaliacao($nova);
+    $this-&gt;filme-&gt;setAvaliacao($nova);
 }
 </code>
 </pre>
@@ -165,8 +165,8 @@ public function avaliarPorc($porc) {
 <pre>
 <code>
 public function setAvaliacao($avaliacao) {
-    $media = ($this->avaliacao + $avaliacao) / $this->views;
-    $this->avaliacao = $media;
+    $media = ($this-&gt;avaliacao + $avaliacao) / $this-&gt;views;
+    $this-&gt;avaliacao = $media;
 }
 </code>
 </pre>
@@ -195,8 +195,8 @@ $vis = array();
 array_push($vis, new Visualizacao($g[0], $v[2]));
 array_push($vis, new Visualizacao($g[0], $v[1]));
 
-$vis[0]->avaliar();
-$vis[1]->avaliarPorc(85.0);
+$vis[0]-&gt;avaliar();
+$vis[1]-&gt;avaliarPorc(85.0);
 
 print_r($vis[0]);
 print_r($vis[1]);

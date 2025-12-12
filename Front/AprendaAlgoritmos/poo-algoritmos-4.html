@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Algoritmos</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Algoritmos</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-1.html">Tudo sobre Algoritmos Parte 1!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-2.html">Tudo sobre Algoritmos Parte 2!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-3.html">Tudo sobre Algoritmos Parte 3!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-4.html">Tudo sobre Algoritmos Parte 4!</a></li>
+                    <li><a href="tudo-sobre-algoritmos-5.html">Tudo sobre Algoritmos Parte 5!</a></li>
+                </menu>
+            </header>
+
+<h2>Orientação a Objetos - Parte 4</h2>
+
+<h3>Classes Genéricas</h3>
+
+<p>Em linguagens como o Java, C# e C++, podemos usar classes genéricas também.</p>
+
+<p>Classes genéricas são classes que recebem um tipo como parâmetro, permitindo criar estruturas reutilizáveis que funcionam para qualquer tipo de dado, sem precisar repetir código.</p>
+
+<p>Você usa um parâmetro de tipo, como <code>&lt;E&gt;</code> ou <code>&lt;E, D&gt;</code>, para dizer que aquele tipo será decidido quando o objeto for criado. É como se a classe fosse um <q>molde</q> que pode trabalhar com qualquer tipo, definido depois.</p>
+
+<p>Exemplo simples:</p>
+
+<pre>
+<code>
+public class Caixa&lt;E&gt; { // O E será substituído pela classe/interface.
+    private E conteudo;
+
+    public void guardar(E valor) {
+        conteudo = valor;
+    }
+
+    public E abrir() {
+        return conteudo;
+    }
+}
+</code>
+</pre>
+
+<p>Código principal:</p>
+
+<pre>
+<code>
+Caixa&lt;String&gt; texto = new Caixa&lt;&gt;();
+
+texto.guardar("Olá");
+System.out.println(texto.abrir());
+
+Caixa&lt;Integer&gt; numero = new Caixa&lt;&gt;();
+
+numero.guardar(42);
+System.out.println(numero.abrir());
+
+Caixa&lt;Character&gt; letra = new Caixa&lt;&gt;();
+
+letra.guardar('A');
+System.out.println(letra.abrir());
+
+Caixa&lt;Boolean&gt; logico = new Caixa&lt;&gt;();
+
+logico.guardar(true);
+System.out.println(logico.abrir());
+</code>
+</pre>
+
+<p>No caso do Java, devemos usar sempre as classes invólucros, não os tipos primitivos comuns.</p>
+
+<p>Da mesma forma, podemos ter interfaces genéricas, usando a mesma lógica, assim como implementação das mesmas, e também heranças entre classes. Por exemplo, a interface pode ser algo como <code>public interface NomeDaInterface&lt;E&gt;</code>, e ser implementada assim:</p>
+
+<table>
+    <tr>
+        <th>Implementação da Interface Genérica na Classe</th>
+        <th>Instância no Código Principal</th>
+    </tr>
+    <tr>
+        <td><code>public class NomeDaClasse implements NomeDaInterface&lt;ClasseInvolucro&gt;</code></td>
+        <td><code>NomeDaInterface objeto = new NomeDaClasse()</code></td>
+    </tr>
+    <tr>
+        <td><code>public class NomeDaClasse&lt;E&gt; implements NomeDaInterface&lt;E&gt;</code></td>
+        <td><code>NomeDaInterface&lt;ClasseInvolucro&gt; objeto = new NomeDaClasse&lt;&gt;()</code></td>
+    </tr>
+</table>
+
+<h3>Sugestão de Exercícios</h3>
+
+<p>Baseado nesses conceitos, crie os seguintes projetos usando POO:</p>
+
+<ul>
+    <li>Crie uma classe Livro com atributos titulo, autor e paginas, todos públicos. Crie métodos abrir() e fechar(). Depois, instancie dois objetos e chame seus métodos.</li>
+    <li>Reescreva a classe Livro usando atributos privados, getters e setters.</li>
+    <li>Adicione um construtor à classe Livro recebendo como argumento titulo, autor e paginas.</li>
+    <li>Crie uma classe matemática com atributos e métodos estáticos, como a constante PI, métodos areaCirculo(), areaRetangulo(), potencia(), raizQuadrada() e raizCubica().</li>
+    <li>Crie uma interface Carregavel com o método carregar, e implemente essa interface em Celular, Notebook e Lanterna, mostrando mensagens diferentes ao carregar.</li>
+    <li>Crie a classe Caneta e a classe Estojo, esta última deve ter uma Caneta que já exista.</li>
+    <li>Crie uma classe Pessoa e duas subclasses, Aluno e Professor, com os métodos estudar() pra Aluno e ensinar() pra Professor.</li>
+    <li>Adicione um construtor à classe Pessoa, e use o super (ou equivalente) para que Aluno e Professor chame o construtor da classe mãe.</li>
+    <li>Crie a classe Animal com o método comer(), crie diferentes animais onde cada um tenha sua forma de comer. Tente com um método comer genérico e depois faça o mesmo método em Animal abstrato.</li>
+    <li>Melhore a classe Microondas, fazendo validações mais precisas de dados e crie mais versões do método ligar().</li>
+    <li>Crie uma classe Caixa&lt;T&gt; que armazena qualquer objeto, e ela terá que implementar a interface Embalagem&lt;T&gt;.</li>
+    <li>Crie uma classe Carro que tenha um Motor criado dentro do próprio carro. Mostre que, se o objeto Carro deixa de existir, o Motor também deixa, pois é parte interna dele.</li>
+    <li>Teste métodos de entrada para criar objetos personalizados, que podem ter entradas de dados pela linha de comando.</li>
+    <li>Use outros recursos de entrada e saída em outros formatos, como interfaces gráficas, por exemplo, caso a linguagem permita.</li>
+    <li>Procure recursos na linguagem que permitam trabalhar com classes nativas para criptografia de dados, manipulação de redes, conexão com banco de dados, etc.</li>
+</ul>
+
+<ul>
+    <li><a href="poo-algoritmos-3.html">Parte Anterior da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

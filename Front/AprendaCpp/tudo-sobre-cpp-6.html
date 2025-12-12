@@ -43,7 +43,7 @@
 <pre>
 <code>
 void imp(string txt) {
-    cout << "\n" << txt << "\n";
+    cout &lt;&lt; "\n" &lt;&lt; txt &lt;&lt; "\n";
 }
 </code>
 </pre>
@@ -65,7 +65,7 @@ int main() {
 }
 
 void imp(string txt) {
-    cout << txt << "\n";
+    cout &lt;&lt; txt &lt;&lt; "\n";
 }
 
 </code>
@@ -103,7 +103,7 @@ int main() {
 
 void contador(int num) {
     for(int i = 1; i <= num; i++) {
-        cout << i << "\n";
+        cout &lt;&lt; i &lt;&lt; "\n";
     }
 }
 </code>
@@ -115,7 +115,7 @@ void contador(int num) {
 <pre>
 <code>
 void contador(int num, int cont) {
-    cout << cont << "\n";
+    cout &lt;&lt; cont &lt;&lt; "\n";
 
     if(num > cont) {
         contador(num, ++cont);
@@ -149,22 +149,22 @@ int fatorial(int n);
 int main() {
     int val, res;
 
-    cout << "Insira o número do fatorial: ";
-    cin >> val;
+    cout &lt;&lt; "Insira o número do fatorial: ";
+    cin &gt;&gt; val;
     res = fatorial(val);
 
-    cout << endl << "Fatorial de " << val << ": " << res << endl << endl;
+    cout &lt;&lt; endl &lt;&lt; "Fatorial de " &lt;&lt; val &lt;&lt; ": " &lt;&lt; res &lt;&lt; endl &lt;&lt; endl;
 
     for(int f = val; f >= 1; f--) {
         if(f > 1) {
-            cout << f << " x ";
+            cout &lt;&lt; f &lt;&lt; " x ";
         }
         else {
-            cout << f << " = ";
+            cout &lt;&lt; f &lt;&lt; " = ";
         }
     }
 
-    cout << res << endl;
+    cout &lt;&lt; res &lt;&lt; endl;
 
     return 0;
 }
@@ -191,16 +191,16 @@ int fibonacci(int n);
 int main() {
     int val, res;
 
-    cout << "Insira o número de valores desejados no fibonacci: ";
-    cin >> val;
+    cout &lt;&lt; "Insira o número de valores desejados no fibonacci: ";
+    cin &gt;&gt; val;
 
-    cout << endl << "Fibonacci com " << val << " valores: ";
+    cout &lt;&lt; endl &lt;&lt; "Fibonacci com " &lt;&lt; val &lt;&lt; " valores: ";
 
     for(int i = 0; i < val; i++) {
-        cout << fibonacci(i + 1) << "... ";
+        cout &lt;&lt; fibonacci(i + 1) &lt;&lt; "... ";
     }
 
-    cout << endl;
+    cout &lt;&lt; endl;
 
     return 0;
 }
@@ -236,7 +236,7 @@ int main() {
 
     armaSel = fuzil;
 
-    cout << armaSel; // Imprime o valor definido no enum.
+    cout &lt;&lt; armaSel; // Imprime o valor definido no enum.
 
     return 0;
 }
@@ -258,7 +258,7 @@ enum Armas {fuzil = 100, revolver, rifle, escopeta};
 <pre>
 <code>
 for(int i = fuzil; i <= escopeta; i++) {
-    cout << i << endl;
+    cout &lt;&lt; i &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -307,7 +307,7 @@ int main() {
     cartas.push("Rei de Ouros");
     cartas.push("Rei de Paus");
 	
-    cout << "Tamanho da pilha: " << cartas.size() << endl; // Isso exibe o tamanho da pilha
+    cout &lt;&lt; "Tamanho da pilha: " &lt;&lt; cartas.size() &lt;&lt; endl; // Isso exibe o tamanho da pilha
     
     return 0;
 }
@@ -333,15 +333,15 @@ int main() {
     cartas.push("Rei de Ouros");
     cartas.push("Rei de Paus");
 	
-    cout << "Tamanho da pilha: " << cartas.size() << endl; // Isso exibe os dados da pilha
+    cout &lt;&lt; "Tamanho da pilha: " &lt;&lt; cartas.size() &lt;&lt; endl; // Isso exibe os dados da pilha
 
-    cout << "Última carta da pilha: " << cartas.top() << endl; // Isso mostra o último elemento da pilha.
+    cout &lt;&lt; "Última carta da pilha: " &lt;&lt; cartas.top() &lt;&lt; endl; // Isso mostra o último elemento da pilha.
 
     cartas.pop();
 
-    cout << "Tamanho da pilha: " << cartas.size() << endl;
+    cout &lt;&lt; "Tamanho da pilha: " &lt;&lt; cartas.size() &lt;&lt; endl;
 
-    cout << "Última carta da pilha: " << cartas.top() << endl
+    cout &lt;&lt; "Última carta da pilha: " &lt;&lt; cartas.top() &lt;&lt; endl
 	
     return 0;
 }
@@ -367,10 +367,10 @@ int main() {
     stack&lt;string&gt; cartas;
 
     if(cartas.empty()) {
-        cout << "Pilha vazia!" << endl;
+        cout &lt;&lt; "Pilha vazia!" &lt;&lt; endl;
     }
     else {
-        cout << "Pilha com cartas!" << endl;
+        cout &lt;&lt; "Pilha com cartas!" &lt;&lt; endl;
     }
 
     cartas.push("Rei de Copas"); // Isso é uma chamada de objeto, que adiciona elementos.
@@ -379,21 +379,21 @@ int main() {
     cartas.push("Rei de Paus");
 
     if(cartas.empty()) {
-        cout << "Pilha vazia!" << endl;
+        cout &lt;&lt; "Pilha vazia!" &lt;&lt; endl;
     }
     else {
-        cout << "Pilha com cartas!" << endl;
+        cout &lt;&lt; "Pilha com cartas!" &lt;&lt; endl;
     }
 
-    cout << "Tamanho da pilha: " << cartas.size() << endl; // Isso exibe os dados da pilha
+    cout &lt;&lt; "Tamanho da pilha: " &lt;&lt; cartas.size() &lt;&lt; endl; // Isso exibe os dados da pilha
 
-    cout << "Última carta da pilha: " << cartas.top() << endl; // Isso mostra o último elemento da pilha.
+    cout &lt;&lt; "Última carta da pilha: " &lt;&lt; cartas.top() &lt;&lt; endl; // Isso mostra o último elemento da pilha.
 
     cartas.pop();
 
-    cout << "Tamanho da pilha: " << cartas.size() << endl;
+    cout &lt;&lt; "Tamanho da pilha: " &lt;&lt; cartas.size() &lt;&lt; endl;
 
-    cout << "Última carta da pilha: " << cartas.top() << endl;
+    cout &lt;&lt; "Última carta da pilha: " &lt;&lt; cartas.top() &lt;&lt; endl;
 
     return 0;
 }
@@ -407,10 +407,10 @@ int main() {
 <pre>
 <code>
 if(cartas.size() == 0) {
-    cout << "Pilha vazia!" << endl;
+    cout &lt;&lt; "Pilha vazia!" &lt;&lt; endl;
 }
 else {
-    cout << "Pilha com cartas!" << endl;
+    cout &lt;&lt; "Pilha com cartas!" &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -438,10 +438,10 @@ int main() {
     stack&lt;string&gt; cartas;
 
     if(cartas.size() == 0) {
-        cout << "Pilha vazia!" << endl;
+        cout &lt;&lt; "Pilha vazia!" &lt;&lt; endl;
     }
     else {
-        cout << "Pilha com cartas!" << endl;
+        cout &lt;&lt; "Pilha com cartas!" &lt;&lt; endl;
     }
 
     cartas.push("Rei de Copas"); // Isso é uma chamada de objeto, que adiciona elementos.
@@ -454,10 +454,10 @@ int main() {
     }
 
     if(cartas.empty()) {
-        cout << "Pilha vazia!" << endl;
+        cout &lt;&lt; "Pilha vazia!" &lt;&lt; endl;
     }
     else {
-        cout << "Pilha com cartas!" << endl;
+        cout &lt;&lt; "Pilha com cartas!" &lt;&lt; endl;
     }
 
     return 0;

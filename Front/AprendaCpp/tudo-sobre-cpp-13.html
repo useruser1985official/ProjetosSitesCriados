@@ -55,13 +55,13 @@ int main() {
     char *cPtr;
     double *dPtr;
 
-    iPtr = &inteiro;
-    cPtr = &caractere;
-    dPtr = &duplo;
+    iPtr = &amp;inteiro;
+    cPtr = &amp;caractere;
+    dPtr = &amp;duplo;
 
-    cout << "Tamanho de um ponteiro de inteiro = " << sizeof(iPtr) << ", valor = " << iPtr << endl;
-    cout << "Tamanho de um ponteiro de char = " << sizeof(cPtr) << ", valor = " << cPtr << endl;
-    cout << "Tamanho de um ponteiro de double = " << sizeof(dPtr) << ", valor = " << dPtr << endl;
+    cout &lt;&lt; "Tamanho de um ponteiro de inteiro = " &lt;&lt; sizeof(iPtr) &lt;&lt; ", valor = " &lt;&lt; iPtr &lt;&lt; endl;
+    cout &lt;&lt; "Tamanho de um ponteiro de char = " &lt;&lt; sizeof(cPtr) &lt;&lt; ", valor = " &lt;&lt; cPtr &lt;&lt; endl;
+    cout &lt;&lt; "Tamanho de um ponteiro de double = " &lt;&lt; sizeof(dPtr) &lt;&lt; ", valor = " &lt;&lt; dPtr &lt;&lt; endl;
     
 }
 </code>
@@ -78,17 +78,17 @@ int main() {
     a = 30;
     int *pont1;
 
-    pont1 = &a;
-    cout << "Endereço de a: " << pont1 << endl;
+    pont1 = &amp;a;
+    cout &lt;&lt; "Endereço de a: " &lt;&lt; pont1 &lt;&lt; endl;
 
     pont1++;
-    cout << "Endereço do ponteiro incrementado: " << pont1 << endl;
+    cout &lt;&lt; "Endereço do ponteiro incrementado: " &lt;&lt; pont1 &lt;&lt; endl;
 
     pont1 = pont1 + 10;
-    cout << "Somando 40 ao ponteiro pont1: " << pont1 << endl;
+    cout &lt;&lt; "Somando 40 ao ponteiro pont1: " &lt;&lt; pont1 &lt;&lt; endl;
 
     pont1--;
-    cout << "Decrementando o ponteiro: " << pont1 << endl;
+    cout &lt;&lt; "Decrementando o ponteiro: " &lt;&lt; pont1 &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -104,10 +104,10 @@ int main() {
     int *p2 = vetor + 2;
     int *p3 = p2;
 
-    cout << "p2 > p0: " << (p2 > p0) << endl;
-    cout << "p0 > p1: " << (p0 > p1) << endl;
-    cout << "p2 < p0: " << (p2 < p0) << endl;
-    cout << "p3 == p2: " << (p3 == p2) << endl;
+    cout &lt;&lt; "p2 > p0: " &lt;&lt; (p2 > p0) &lt;&lt; endl;
+    cout &lt;&lt; "p0 > p1: " &lt;&lt; (p0 > p1) &lt;&lt; endl;
+    cout &lt;&lt; "p2 < p0: " &lt;&lt; (p2 < p0) &lt;&lt; endl;
+    cout &lt;&lt; "p3 == p2: " &lt;&lt; (p3 == p2) &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -121,24 +121,24 @@ int *ponteiro;
 
 ponteiro = pares; // O mesmo que &pares[0]
 
-cout << "Endereço do vetor: " << pares << endl;
+cout &lt;&lt; "Endereço do vetor: " &lt;&lt; pares &lt;&lt; endl;
 
 for(int i = 0; i < sizeof(pares) / sizeof(int); i++) {
-    cout << "Conteúdo do " << (i + 1) << "º índice do vetor: " << pares[i] << endl;
+    cout &lt;&lt; "Conteúdo do " &lt;&lt; (i + 1) &lt;&lt; "º índice do vetor: " &lt;&lt; pares[i] &lt;&lt; endl;
 }
 
 for(int i = 0; i < sizeof(pares) / sizeof(int); i++) {
-    cout << "Endereço do " << (i + 1) << "º índice do vetor: " << &pares[i] << endl;
+    cout &lt;&lt; "Endereço do " &lt;&lt; (i + 1) &lt;&lt; "º índice do vetor: " &lt;&lt; &pares[i] &lt;&lt; endl;
 }
 
 for(int i = 0; i < sizeof(pares) / sizeof(int); i++) {
-    cout << "Endereço apontado pelo " << (i + 1) << "º incremento do ponteiro: " << ponteiro++ << endl;
+    cout &lt;&lt; "Endereço apontado pelo " &lt;&lt; (i + 1) &lt;&lt; "º incremento do ponteiro: " &lt;&lt; ponteiro++ &lt;&lt; endl;
 }
 
 for(int i = 0; i < sizeof(pares) / sizeof(int); i++) {
     ponteiro = &pares[i];
 
-    cout << "Conteúdo apontado pelo " << (i + 1) << "º incremento do ponteiro: " << *ponteiro << endl;
+    cout &lt;&lt; "Conteúdo apontado pelo " &lt;&lt; (i + 1) &lt;&lt; "º incremento do ponteiro: " &lt;&lt; *ponteiro &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -160,7 +160,7 @@ int main() {
     p = gerarRandomico();
 
     for(i = 0; i < 10; i++) {
-        cout << "p[" << i << "] = " << p[i] << "." << endl;
+        cout &lt;&lt; "p[" &lt;&lt; i &lt;&lt; "] = " &lt;&lt; p[i] &lt;&lt; "." &lt;&lt; endl;
     }
 
     return 0;
@@ -173,7 +173,7 @@ int *gerarRandomico() {
     for(a = 0; a < 10; a++) {
         r[a] = rand() % 100;
 
-        cout << "r[" << a << "] = " << r[a] << "." << endl;
+        cout &lt;&lt; "r[" &lt;&lt; a &lt;&lt; "] = " &lt;&lt; r[a] &lt;&lt; "." &lt;&lt; endl;
     }
 
     return r;
@@ -202,13 +202,13 @@ int main() {
 }
 
 void procedimento(int *param) {
-    cout << "Endereço de 1: " << param << endl;
-    cout << "Conteúdo de 1: " << *param << endl;
+    cout &lt;&lt; "Endereço de 1: " &lt;&lt; param &lt;&lt; endl;
+    cout &lt;&lt; "Conteúdo de 1: " &lt;&lt; *param &lt;&lt; endl;
 }
 
 void procedimento(int param) {
-    cout << "Endereço de 2: " << &amp;param << endl;
-    cout << "Conteúdo de 2: " << param << endl;
+    cout &lt;&lt; "Endereço de 2: " &lt;&lt; &amp;param &lt;&lt; endl;
+    cout &lt;&lt; "Conteúdo de 2: " &lt;&lt; param &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -240,9 +240,9 @@ class Random {
 };
 
 int Random::nextInt(int mini, int maxi) {
-    this->rd = mini + (rand() % (maxi - (mini - 1)));
+    this-&gt;rd = mini + (rand() % (maxi - (mini - 1)));
 
-    return this->rd;
+    return this-&gt;rd;
 }
 
 Random::Random() {
@@ -257,8 +257,8 @@ Random::Random() {
 <code>
 Random ale;
 
-cout << ale.nextInt(15, 20) << endl; // Gera de 15 a 20
-cout << ale.nextInt(1, 5) << endl; // Gera de 1 a 5
+cout &lt;&lt; ale.nextInt(15, 20) &lt;&lt; endl; // Gera de 15 a 20
+cout &lt;&lt; ale.nextInt(1, 5) &lt;&lt; endl; // Gera de 1 a 5
 </code>
 </pre>
 
@@ -307,14 +307,14 @@ int cubo(int x) {
 using namespace std;
 
 int main() {
-    cout << "Usando headers: " << endl;
+    cout &lt;&lt; "Usando headers: " &lt;&lt; endl;
     int y = 5;
     int quadr = quadrado(y);
     int cub = cubo(y);
 
-    cout << "Quadrado de " << y << ": " << quadr << endl;
-    cout << "Cubo de " << y << ": " << cub << endl;
-    cout << "Valor da constante PI : " << _PI << endl;
+    cout &lt;&lt; "Quadrado de " &lt;&lt; y &lt;&lt; ": " &lt;&lt; quadr &lt;&lt; endl;
+    cout &lt;&lt; "Cubo de " &lt;&lt; y &lt;&lt; ": " &lt;&lt; cub &lt;&lt; endl;
+    cout &lt;&lt; "Valor da constante PI : " &lt;&lt; _PI &lt;&lt; endl;
 
     return 0;
 }
@@ -357,7 +357,7 @@ string entrada = "Apenas uma frase!";
 
 replace(entrada.begin(), entrada.end(), ' ',  '_'); // Inclua algorithm
 
-cout << entrada << endl;
+cout &lt;&lt; entrada &lt;&lt; endl;
 </code>
 </pre>
 
@@ -371,7 +371,7 @@ string entrada = "Apenas uma frase!";
 
 entrada.replace(entrada.find("frase"), 5, "string"); // Na ordem palavra a ser substituída, quantidade de caracteres da mesma e palavra substituta
     
-cout << entrada << endl;
+cout &lt;&lt; entrada &lt;&lt; endl;
 </code>
 </pre>
 
@@ -386,7 +386,7 @@ int main() {
 
     entrada = substituir(entrada, "frase", "string"); // Na ordem palavra a ser substituída, palavra a substituir e palavra substituta
     
-    cout << entrada << endl;
+    cout &lt;&lt; entrada &lt;&lt; endl;
 
     return 0;
 }
@@ -412,10 +412,10 @@ string entrada = "Apenas uma frase!";
 size_t posicao = entrada.find("frase");
 
 if(posicao != string::npos) {
-    cout << "Palavra encontrada." << endl;
+    cout &lt;&lt; "Palavra encontrada." &lt;&lt; endl;
 }
 else {
-    cout << "Palavra não encontrada." << endl;
+    cout &lt;&lt; "Palavra não encontrada." &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -428,7 +428,7 @@ string entrada = "Apenas uma frase!";
 
 transform(entrada.begin(), entrada.end(), entrada.begin(), ::toupper); // Inclua algorithm e cctype
 
-cout << entrada << endl;
+cout &lt;&lt; entrada &lt;&lt; endl;
 </code>
 </pre>
 
@@ -442,7 +442,7 @@ string entrada = "Apenas uma frase!";
     
 reverse(entrada.begin(), entrada.end()); // Inclua algorithm
     
-cout << entrada << endl;
+cout &lt;&lt; entrada &lt;&lt; endl;
 </code>
 </pre>
 
@@ -454,7 +454,7 @@ string entrada = "Apenas uma frase!";
     
 entrada.append(" E ela foi concatenada!");
     
-cout << entrada << endl;
+cout &lt;&lt; entrada &lt;&lt; endl;
 </code>
 </pre>
 
@@ -468,7 +468,7 @@ regex reg(" "); // Inclua regex, aqui vai o caractere para dividir
 vector&lt;string&gt; saida(sregex_token_iterator(entrada.begin(), entrada.end(), reg, -1), sregex_token_iterator()); // Inclua cstring e vector
 
 for(string s: saida) {
-    cout << s << endl;
+    cout &lt;&lt; s &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -480,7 +480,7 @@ for(string s: saida) {
 string entrada = "Apenas uma frase!";
 const char* novo = entrada.c_str();
     
-cout << novo << endl;
+cout &lt;&lt; novo &lt;&lt; endl;
 </code>
 </pre>
 
@@ -494,7 +494,7 @@ int num = 50;
 
 string tex = to_string(num); // Inclua cstring
 
-cout << tex << endl;
+cout &lt;&lt; tex &lt;&lt; endl;
 </code>
 </pre>
 
@@ -506,7 +506,7 @@ string tex = "50";
 
 int num = stoi(tex); // Inclua cstdlib
 
-cout << num << endl;
+cout &lt;&lt; num &lt;&lt; endl;
 </code>
 </pre>
 

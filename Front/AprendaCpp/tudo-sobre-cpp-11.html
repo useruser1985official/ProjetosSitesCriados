@@ -407,9 +407,9 @@ int main() {
     
     arquivo.open("arquivo.txt");
     
-    arquivo << "Texto que será armazenado no arquivo!\n";
+    arquivo &lt;&lt; "Texto que será armazenado no arquivo!\n";
 	
-    cout << "Arquivo Escrito com Sucesso!" << endl
+    cout &lt;&lt; "Arquivo Escrito com Sucesso!" &lt;&lt; endl
 
     return 0;
 }
@@ -425,11 +425,11 @@ int main() {
 
     arquivo.open("arquivo.txt");
 
-    arquivo << "Texto que será armazenado no arquivo!\n";
+    arquivo &lt;&lt; "Texto que será armazenado no arquivo!\n";
     
     arquivo.close();
 	
-    cout << "Arquivo Escrito com Sucesso!" << endl
+    cout &lt;&lt; "Arquivo Escrito com Sucesso!" &lt;&lt; endl
 
     return 0;
 }
@@ -455,13 +455,13 @@ int main() {
 
     arquivo.open("arquivo.txt");
 
-    arquivo << "Linha 1!\n";
-    arquivo << "Linha 2!\n";
-    arquivo << "Linha 3!\n";
+    arquivo &lt;&lt; "Linha 1!\n";
+    arquivo &lt;&lt; "Linha 2!\n";
+    arquivo &lt;&lt; "Linha 3!\n";
 
     arquivo.close();
 	
-    cout << "Arquivo Escrito com Sucesso!" << endl
+    cout &lt;&lt; "Arquivo Escrito com Sucesso!" &lt;&lt; endl;
 
     return 0;
 }
@@ -482,12 +482,12 @@ int main() {
     
     if(entrada.is_open()) {
         while(getline(entrada, linha)) {
-            cout << linha << endl;
+            cout &lt;&lt; linha &lt;&lt; endl;
         }
         entrada.close();
     }
     else {
-        cout << "Não foi possível abrir o arquivo!" << endl;
+        cout &lt;&lt; "Não foi possível abrir o arquivo!" &lt;&lt; endl;
     }
 
     return 0;
@@ -511,13 +511,13 @@ int main() {
     arquivo.open("arquivo.txt", ios::out); // Saída do programa pro arquivo.
     
     do {
-        cout << "Digite um nome: ";
-        cin >> nome;
+        cout &lt;&lt; "Digite um nome: ";
+        cin &gt;&gt; nome;
         
-        arquivo << nome << "\n";
+        arquivo &lt;&lt; nome &lt;&lt; "\n";
         
-        cout << "Deseja digitar mais nomes? [S/N] ";
-        cin >> opc;
+        cout &lt;&lt; "Deseja digitar mais nomes? [S/N] ";
+        cin &gt;&gt; opc;
         
         system("cls"); // Importe cstdlib, use clear no Linux
     }
@@ -547,15 +547,15 @@ arquivo.open("arquivo.txt", ios::out | ios::app);
 arquivo.open("arquivo.txt", ios::in); // Entrada do arquivo pro programa.
 
 if(arquivo.is_open()) {
-    cout << "Nomes digitados: " << endl << endl;
+    cout &lt;&lt; "Nomes digitados: " &lt;&lt; endl &lt;&lt; endl;
 
     while(getline(arquivo, linha)) {
-        cout << linha << endl;
+        cout &lt;&lt; linha &lt;&lt; endl;
     }
     arquivo.close();
 }
 else {
-    cout << "Não foi Possível Abrir o Arquivo!" << endl;
+    cout &lt;&lt; "Não foi Possível Abrir o Arquivo!" &lt;&lt; endl;
 }
 </code>
 </pre>

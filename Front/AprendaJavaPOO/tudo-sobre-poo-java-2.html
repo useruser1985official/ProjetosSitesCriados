@@ -35,20 +35,20 @@
     </tr>
     <tr>
         <td>
-            + numConta<br/>
-            # tipo<br/>
-            - dono<br/>
-            - saldo<br/>
-            - status<br/>
+            + numConta: int<br/>
+            # tipo: String<br/>
+            - dono: String<br/>
+            - saldo: float<br/>
+            - status: boolean<br/>
         </td>
     </tr>
     <tr>
         <td>
-            + abrirConta(t)<br/>
-            + fecharConta()<br/>
-            + depositar(v)<br/>
-            + sacar(v)<br/>
-            + pagarMensal()<br/>
+            + abrirConta(t: String): void<br/>
+            + fecharConta(): void<br/>
+            + depositar(v: float): void<br/>
+            + sacar(v: float): void<br/>
+            + pagarMensal(): void<br/>
         </td>
     </tr>
 </table>
@@ -87,10 +87,10 @@ public class ContaBanco {
         System.out.println("Conta aberta com sucesso!");
     }
     public void fecharConta() {
-        if(this.getSaldo() > 0) {
+        if(this.getSaldo() &gt; 0) {
             System.out.println("Conta não pode ser fechada porque ainda tem dinheiro!");
         }
-        else if(this.getSaldo() < 0) {
+        else if(this.getSaldo() &lt; 0) {
             System.out.println("Conta não pode ser fechada pois tem débido!");
         }
         else {
@@ -110,7 +110,7 @@ public class ContaBanco {
     }
     public void sacar(float v) {
         if(this.getStatus() == true) {
-            if(this.getSaldo() >= v) {
+            if(this.getSaldo() &gt;= v) {
                 this.setSaldo(this.getSaldo() - v);
                 // this.saldo = this.saldo - v;
                 System.out.println("Saque de R$" + v + " realizado na conta de " + this.getDono());
@@ -258,10 +258,10 @@ public class Ventilador {
     public static void ligar(int vel) {
         ligado = true;
 
-        if(vel < 1) {
+        if(vel &lt; 1) {
             vel = 1;
         }
-        else if(vel > 3) {
+        else if(vel &gt; 3) {
             vel = 3;
         }
 
@@ -337,16 +337,16 @@ System.out.println(Ventilador.getLigado());
     </tr>
     <tr>
         <td>
-            + ligar()<br/>
-            + desligar()<br/>
-            + abrirMenu()<br/>
-            + fecharMenu()<br/>
-            + maisVolume()<br/>
-            + menosVolume()<br/>
-            + ligarMudo()<br/>
-            + desligarMudo()<br/>
-            + play()<br/>
-            + pause()<br/>
+            + ligar(): void<br/>
+            + desligar(): void<br/>
+            + abrirMenu(): void<br/>
+            + fecharMenu(): void<br/>
+            + maisVolume(): void<br/>
+            + menosVolume(): void<br/>
+            + ligarMudo(): void<br/>
+            + desligarMudo(): void<br/>
+            + play(): void<br/>
+            + pause(): void<br/>
         </td>
     </tr>
 </table>
@@ -357,20 +357,20 @@ System.out.println(Ventilador.getLigado());
     </tr>
     <tr>
         <td>
-            - volume<br/>
-            - ligado<br/>
-            - tocando<br/>
+            - volume: int<br/>
+            - ligado: boolean<br/>
+            - tocando: boolean<br/>
         </td>
     </tr>
     <tr>
         <td>
             (Receberá elementos do controlador)<br/>
-            - setVolume(volume)<br/>
-            - getVolume()<br/>
-            - setLigado(ligado)<br/>
-            - getLigado()<br/>
-            - setTocando(tocando)<br/>
-            - getTocando()<br/>
+            - setVolume(volume: int): void<br/>
+            - getVolume(): int<br/>
+            - setLigado(ligado: boolean): void<br/>
+            - getLigado(): boolean<br/>
+            - setTocando(tocando: boolean): void<br/>
+            - getTocando(): boolean<br/>
         </td>
     </tr>
 </table>
@@ -430,7 +430,7 @@ public class ControleRemoto implements Controlador {
         System.out.println("Está Ligado? " + this.getLigado());
         System.out.println("Está Tocando? " + this.getTocando());
         System.out.print("Volume: " + this.getVolume());
-        for(int i = 0; i < this.getVolume(); i += 2) {
+        for(int i = 0; i &lt; this.getVolume(); i += 2) {
             System.out.print("|");
         }
         System.out.println("");
@@ -444,7 +444,7 @@ public class ControleRemoto implements Controlador {
     @Override
     public void maisVolume() {
         if(this.getLigado()) {
-            if(this.getVolume() < 100) {
+            if(this.getVolume() &lt; 100) {
                 this.setVolume(this.getVolume() + 2);
             }
         }
@@ -456,7 +456,7 @@ public class ControleRemoto implements Controlador {
     @Override
     public void menosVolume() {
         if(this.getLigado()) {
-            if(this.getVolume() > 0) {
+            if(this.getVolume() &gt; 0) {
                 this.setVolume(this.getVolume() - 2);
             }
         }
@@ -467,7 +467,7 @@ public class ControleRemoto implements Controlador {
 
     @Override
     public void ligarMudo() {
-        if(this.getLigado() && this.getVolume() > 0) {
+        if(this.getLigado() && this.getVolume() &gt; 0) {
             this.setVolume(0);
         }
     }

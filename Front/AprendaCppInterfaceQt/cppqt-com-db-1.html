@@ -67,19 +67,19 @@ QT       += core gui sql
 
 <pre>
 <code>
-ui->setupUi(this);
+ui-&gt;setupUi(this);
 
 QSqlDatabase bancoDeDados = QSqlDatabase::addDatabase("QSQLITE");
 
-QString caminho = qApp->applicationDirPath();
+QString caminho = qApp-&gt;applicationDirPath();
 
 bancoDeDados.setDatabaseName(caminho + "/bancos/dbagenda.db3"); // Link do arquivo, melhor colocar este na pasta do projeto
 
 if(!bancoDeDados.open()) {
-    ui->lblCon->setText("Não foi Possível Conectar ao Banco!");
+    ui-&gt;lblCon-&gt;setText("Não foi Possível Conectar ao Banco!");
 }
 else {
-    ui->lblCon->setText("Banco de Dados Aberto com Sucesso!");
+    ui-&gt;lblCon-&gt;setText("Banco de Dados Aberto com Sucesso!");
 }
 </code>
 </pre>
@@ -91,12 +91,12 @@ else {
 if(!bancoDados.open()) {
     QPixmap led(":/imgs/imagens/led-red.png");
     
-    ui->lblImg->setPixmap(led);
+    ui-&gt;lblImg-&gt;setPixmap(led);
 }
 else {
     QPixmap led(":/imgs/imagens/led-green.png");
     
-    ui->lblImg->setPixmap(led);
+    ui-&gt;lblImg-&gt;setPixmap(led);
 }
 </code>
 </pre>
@@ -131,7 +131,7 @@ bancoDeDados.setDatabaseName("C:/Meus Projetos/QT/AgendaComDB/bancos/dbagenda.db
 <pre>
 <code>
 JanelaLogin::JanelaLogin(QWidget *parent) : QMainWindow(parent), ui(new Ui::JanelaLogin) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
     
     QSqlDatabase bancoDeDados = QSqlDatabase::addDatabase("QMYSQL");
 
@@ -141,10 +141,10 @@ JanelaLogin::JanelaLogin(QWidget *parent) : QMainWindow(parent), ui(new Ui::Jane
     bancoDeDados.setDatabaseName("dbagenda");
 
     if(!bancoDeDados.open()) {
-        ui->lblCon->setText("Não foi Possível Conectar ao Banco!");
+        ui-&gt;lblCon-&gt;setText("Não foi Possível Conectar ao Banco!");
     }
     else {
-        ui->lblCon->setText("Banco de Dados Aberto com Sucesso!");   
+        ui-&gt;lblCon-&gt;setText("Banco de Dados Aberto com Sucesso!");   
     }
 }
 </code>
@@ -161,11 +161,11 @@ JanelaLogin::JanelaLogin(QWidget *parent) : QMainWindow(parent), ui(new Ui::Jane
 <pre>
 <code>
 void JanelaLogin::on_btnEntr_clicked() {
-    QString username = ui->txtLogin->text().trimmed();
-    QString senha = ui->txtSenha->text().trimmed();
+    QString username = ui-&gt;txtLogin-&gt;text().trimmed();
+    QString senha = ui-&gt;txtSenha-&gt;text().trimmed();
 
     if(!bancoDeDados.isOpen()) { // Recorte a declaração da variável bancoDeDados e coloque como global, na classe JanelaLogin, deixando a inicialização no construtor.
-        qDebug() << "Banco de Dados Não está Aberto!";
+        qDebug() &lt;&lt; "Banco de Dados Não está Aberto!";
 
         return;
     }
@@ -187,7 +187,7 @@ void JanelaLogin::on_btnEntr_clicked() {
         }
 
         if(cont == 1) {
-            this->close();
+            this-&gt;close();
 
             FormPrincipal princ;
 
@@ -199,16 +199,16 @@ void JanelaLogin::on_btnEntr_clicked() {
 
             FormPrincipal *princ = new FormPrincipal(this);
 
-            princ->show();
+            princ-&gt;show();
             */
         }
         else {
-            ui->lblCon->setText("Login não Efetuado!");
+            ui-&gt;lblCon-&gt;setText("Login não Efetuado!");
 
-            ui->txtLogin->clear();
-            ui->txtSenha->clear();
+            ui-&gt;txtLogin-&gt;clear();
+            ui-&gt;txtSenha-&gt;clear();
 
-            ui->txtLogin->setFocus();
+            ui-&gt;txtLogin-&gt;setFocus();
         }
     }
 }
@@ -221,8 +221,8 @@ void JanelaLogin::on_btnEntr_clicked() {
 
 <pre>
 <code>
-QString username = ui->txtLogin->text().trimmed();
-QString senha = ui->txtSenha->text().trimmed();
+QString username = ui-&gt;txtLogin-&gt;text().trimmed();
+QString senha = ui-&gt;txtSenha-&gt;text().trimmed();
 
 QString encripta = QString(QCryptographicHash::hash(senha.toStdString().c_str(), QCryptographicHash::Md5).toHex()); // Inclua QCryptographicHash
 </code>
@@ -274,7 +274,7 @@ novoCont.exec();
 <code>
 NovoContato *novoCont = new NovoContato(this);
     
-novoCont->show();
+novoCont-&gt;show();
 </code>
 </pre>
 
@@ -285,9 +285,9 @@ novoCont->show();
 <pre>
 <code>
 void NovoContato::on_btnGrav_clicked() {
-    QString nome = ui->txtNome->text().trimmed();
-    QString tel = ui->txtTel->text().trimmed();
-    QString mail = ui->txtMail->text().trimmed();
+    QString nome = ui-&gt;txtNome-&gt;text().trimmed();
+    QString tel = ui-&gt;txtTel-&gt;text().trimmed();
+    QString mail = ui-&gt;txtMail-&gt;text().trimmed();
 
     QSqlQuery query; // Inclua QtSql
     
@@ -302,14 +302,14 @@ void NovoContato::on_btnGrav_clicked() {
     if(query.exec()) {
         QMessageBox::information(this, "Info", "Registro Gravado com Sucesso!"); // Inclua QMessageBox
 
-        ui->txtNome->clear();
-        ui->txtTel->clear();
-        ui->txtMail->clear();
+        ui-&gt;txtNome-&gt;clear();
+        ui-&gt;txtTel-&gt;clear();
+        ui-&gt;txtMail-&gt;clear();
 
-        ui->txtNome->setFocus();
+        ui-&gt;txtNome-&gt;setFocus();
     }
     else {
-        qDebug() << "Erro ao Inserir Registro"; // Inclua QDebug
+        qDebug() &lt;&lt; "Erro ao Inserir Registro"; // Inclua QDebug
     }
 }
 </code>
@@ -340,7 +340,7 @@ void FormPrincipal::on_btnPesq_clicked() {
 void FormPrincipal::on_btnPesq_clicked() {
     PesquisaContatos *novoPesq = new PesquisaContatos(this); // Inclua o header de pesquisacontatos
     
-    novoPesq->show();
+    novoPesq-&gt;show();
 }
 </code>
 </pre>
@@ -350,7 +350,7 @@ void FormPrincipal::on_btnPesq_clicked() {
 <pre>
 <code>
 PesquisaContatos::PesquisaContatos(QWidget *parent) : QDialog(parent), ui(new Ui::PesquisaContatos) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
 
     QSqlQuery query; // Inclua QtSql
     QString sql = "select * from contato";
@@ -360,16 +360,16 @@ PesquisaContatos::PesquisaContatos(QWidget *parent) : QDialog(parent), ui(new Ui
     if(query.exec()) {
         int linha = 0; // Contador de linhas, a partir do zero
 
-        ui->tbList->setColumnCount(4); // Quantidade de Colunas exibidas
+        ui-&gt;tbList-&gt;setColumnCount(4); // Quantidade de Colunas exibidas
 
         while(query.next()) {
-            ui->tbList->insertRow(linha); // Contador vai dentro do método
-            ui->tbList->setItem(linha, 0, new QTableWidgetItem(query.value(0).toString())); // Números das colunas, a partir do zero
-            ui->tbList->setItem(linha, 1, new QTableWidgetItem(query.value(1).toString()));
-            ui->tbList->setItem(linha, 2, new QTableWidgetItem(query.value(2).toString()));
-            ui->tbList->setItem(linha, 3, new QTableWidgetItem(query.value(3).toString()));
+            ui-&gt;tbList-&gt;insertRow(linha); // Contador vai dentro do método
+            ui-&gt;tbList-&gt;setItem(linha, 0, new QTableWidgetItem(query.value(0).toString())); // Números das colunas, a partir do zero
+            ui-&gt;tbList-&gt;setItem(linha, 1, new QTableWidgetItem(query.value(1).toString()));
+            ui-&gt;tbList-&gt;setItem(linha, 2, new QTableWidgetItem(query.value(2).toString()));
+            ui-&gt;tbList-&gt;setItem(linha, 3, new QTableWidgetItem(query.value(3).toString()));
 
-            ui->tbList->setRowHeight(linha, 20); // Altura da linha
+            ui-&gt;tbList-&gt;setRowHeight(linha, 20); // Altura da linha
 
             linha++;
         }
@@ -387,17 +387,17 @@ PesquisaContatos::PesquisaContatos(QWidget *parent) : QDialog(parent), ui(new Ui
 
 <pre>
 <code>
-ui->tbList->setColumnWidth(0, 30); // Os parâmetros são coluna e tamanho
-ui->tbList->setColumnWidth(1, 150);
-ui->tbList->setColumnWidth(3, 250);
+ui-&gt;tbList-&gt;setColumnWidth(0, 30); // Os parâmetros são coluna e tamanho
+ui-&gt;tbList-&gt;setColumnWidth(1, 150);
+ui-&gt;tbList-&gt;setColumnWidth(3, 250);
 
 QStringList cabecalhos = {"ID", "Nome", "Telefone", "E-mail"}; // Tipo um array
 
-ui->tbList->setHorizontalHeaderLabels(cabecalhos); // Define os cabecalhos da tabela
-ui->tbList->setEditTriggers(QAbstractItemView::NoEditTriggers); // Bloqueia a edição
-ui->tbList->setSelectionBehavior(QAbstractItemView::SelectRows); // Seleciona a linha inteira ao clicar
-ui->tbList->verticalHeader()->setVisible(false); // Oculta os números da esquerda
-ui->tbList->setStyleSheet("QTableView {selection-background-color: blue}"); // Muda a cor do item selecionado, em CSS.
+ui-&gt;tbList-&gt;setHorizontalHeaderLabels(cabecalhos); // Define os cabecalhos da tabela
+ui-&gt;tbList-&gt;setEditTriggers(QAbstractItemView::NoEditTriggers); // Bloqueia a edição
+ui-&gt;tbList-&gt;setSelectionBehavior(QAbstractItemView::SelectRows); // Seleciona a linha inteira ao clicar
+ui-&gt;tbList-&gt;verticalHeader()-&gt;setVisible(false); // Oculta os números da esquerda
+ui-&gt;tbList-&gt;setStyleSheet("QTableView {selection-background-color: blue}"); // Muda a cor do item selecionado, em CSS.
 </code>
 </pre>
 
@@ -406,8 +406,8 @@ ui->tbList->setStyleSheet("QTableView {selection-background-color: blue}"); // M
 <pre>
 <code>
 void PesquisaContatos::on_btnExcl_clicked() {
-    int linha = ui->tbList->currentRow(); // Pega a linha atual (selecionada), retorna -1 com nenhuma selecionada
-    int id = ui->tbList->item(linha, 0)->text().toInt(); // Número da coluna, no caso, a zero. Atenção as conversões
+    int linha = ui-&gt;tbList-&gt;currentRow(); // Pega a linha atual (selecionada), retorna -1 com nenhuma selecionada
+    int id = ui-&gt;tbList-&gt;item(linha, 0)-&gt;text().toInt(); // Número da coluna, no caso, a zero. Atenção as conversões
     
     QSqlQuery query; // Inclua QtSql
     QString sql = "delete from contato where id = ?";
@@ -417,7 +417,7 @@ void PesquisaContatos::on_btnExcl_clicked() {
     query.bindValue(0, id);
     
     if(query.exec()) {
-        ui->tbList->removeRow(linha);
+        ui-&gt;tbList-&gt;removeRow(linha);
 
         QMessageBox::information(this, "Info", "Contato Excluído!"); // Inclua QMessageBox
     }

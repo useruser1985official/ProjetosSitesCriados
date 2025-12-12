@@ -51,7 +51,7 @@ int main() {
     produtos.push_back("gabinete");
     produtos.push_back("caixa");
     
-    cout << produtos[0] << endl;
+    cout &lt;&lt; produtos[0] &lt;&lt; endl;
 
     return 0;
 }
@@ -73,7 +73,7 @@ int main() {
 
     vector&lt;string&gt;::iterator it; // Iterator
 
-    cout << produtos[0] << endl;
+    cout &lt;&lt; produtos[0] &lt;&lt; endl;
 
     return 0;
 }
@@ -97,7 +97,7 @@ int main() {
     
     it = produtos.begin(); // Retorna o primeiro elemento do vector
 
-    cout << *it << endl; // Não esqueça do ponteiro
+    cout &lt;&lt; *it &lt;&lt; endl; // Não esqueça do ponteiro
 
     return 0;
 }
@@ -119,7 +119,7 @@ it = produtos.end() - 1;
 it = produtos.begin();
 advance(it, 3); // Imprime o índice 3
 
-cout << *it << endl; // Não esqueça do ponteiro
+cout &lt;&lt; *it &lt;&lt; endl; // Não esqueça do ponteiro
 </code>
 </pre>
 
@@ -129,7 +129,7 @@ cout << *it << endl; // Não esqueça do ponteiro
 <code>
 it = produtos.begin();
 
-cout << *next(it, 2) << endl; // Não esqueça do ponteiro
+cout &lt;&lt; *next(it, 2) &lt;&lt; endl; // Não esqueça do ponteiro
 </code>
 </pre>
 
@@ -139,7 +139,7 @@ cout << *next(it, 2) << endl; // Não esqueça do ponteiro
 <code>
 it = produtos.end();
 
-cout << *prev(it, 1) << endl; // Não esqueça do ponteiro
+cout &lt;&lt; *prev(it, 1) &lt;&lt; endl; // Não esqueça do ponteiro
 </code>
 </pre>
 
@@ -159,7 +159,7 @@ int main() {
     vector&lt;string&gt;::iterator it; // Iterator
 
     for(it = produtos.begin(); it != produtos.end(); it++) {
-        cout << *it << endl;
+        cout &lt;&lt; *it &lt;&lt; endl;
     }
 
     return 0;
@@ -182,7 +182,7 @@ int main() {
 
     num.at(7) = 10; // Teste posições existentes e inexistentes.
     
-    cout << num[0] << endl;
+    cout &lt;&lt; num[0] &lt;&lt; endl;
     
     try {// Importe stdexcept
         
@@ -208,7 +208,7 @@ int main() {
     try {// Importe stdexcept
         num.at(7) = 10;
 
-        cout << num[0] << endl;
+        cout &lt;&lt; num[0] &lt;&lt; endl;
     }
     catch(exception &ex) {
 
@@ -229,10 +229,10 @@ int main() {
     try {// Importe stdexcept
         num.at(7) = 10;
 
-        cout << num[0] << endl;
+        cout &lt;&lt; num[0] &lt;&lt; endl;
     }
     catch(exception &ex) {
-        cerr << "ERRO: " << ex.what() << endl; // cerr é usado para exibir erros, nesse caso import fstream
+        cerr &lt;&lt; "ERRO: " &lt;&lt; ex.what() &lt;&lt; endl; // cerr é usado para exibir erros, nesse caso import fstream
     }
 
     return 0;
@@ -253,12 +253,12 @@ double dividir(double num, double dem); // Não esqueça do protótipo da funç�
 int main() {
     double n1, n2;
 
-    cout << "Digite o numerador: ";
-    cin >> n1;
-    cout << "Digite o denominador: ";
-    cin >> n2;
+    cout &lt;&lt; "Digite o numerador: ";
+    cin &gt;&gt; n1;
+    cout &lt;&lt; "Digite o denominador: ";
+    cin &gt;&gt; n2;
 
-    cout << dividir(n1, n2) << endl;
+    cout &lt;&lt; dividir(n1, n2) &lt;&lt; endl;
 
     return 0;
 }
@@ -276,18 +276,18 @@ double dividir(double num, double dem) {
 int main() {
     double n1, n2;
 
-    cout << "Digite o numerador: ";
-    cin >> n1;
-    cout << "Digite o denominador: ";
-    cin >> n2;
+    cout &lt;&lt; "Digite o numerador: ";
+    cin &gt;&gt; n1;
+    cout &lt;&lt; "Digite o denominador: ";
+    cin &gt;&gt; n2;
 
-    cout << endl;
+    cout &lt;&lt; endl;
 
     try {
-        cout << dividir(n1, n2) << endl;
+        cout &lt;&lt; dividir(n1, n2) &lt;&lt; endl;
     }
     catch(exception &ex) {
-        cerr << "ERRO: " << ex.what() << endl;
+        cerr &lt;&lt; "ERRO: " &lt;&lt; ex.what() &lt;&lt; endl;
     }
 
     return 0;
@@ -314,10 +314,10 @@ double dividir(double num, double dem) {
 <pre>
 <code>
 try {
-    cout << dividir(n1, n2) << endl;
+    cout &lt;&lt; dividir(n1, n2) &lt;&lt; endl;
 }
 catch(const char* msg) {
-    cerr << "ERRO: " << msg << endl;
+    cerr &lt;&lt; "ERRO: " &lt;&lt; msg &lt;&lt; endl;
 }
 </code>
 </pre>

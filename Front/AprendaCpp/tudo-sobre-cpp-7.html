@@ -94,7 +94,7 @@ int main() {
     cartas.push("Rei de Ouros");
     cartas.push("Rei de Paus");
 
-    cout << "Tamanho da fila: " << cartas.size() << endl; // Isso exibe os dados da fila
+    cout &lt;&lt; "Tamanho da fila: " &lt;&lt; cartas.size() &lt;&lt; endl; // Isso exibe os dados da fila
 
     while(!cartas.empty()) {
         cartas.pop();
@@ -112,8 +112,8 @@ int main() {
 <pre>
 <code>
 while(!cartas.empty()) {
-    cout << "Primeira carta: " << cartas.front() << endl;
-    cout << "Última carta: " << cartas.back() << endl << endl;
+    cout &lt;&lt; "Primeira carta: " &lt;&lt; cartas.front() &lt;&lt; endl;
+    cout &lt;&lt; "Última carta: " &lt;&lt; cartas.back() &lt;&lt; endl &lt;&lt; endl;
     cartas.pop();
 }
 </code>
@@ -180,12 +180,12 @@ int main() {
         aula.push_front(i);
     }
 
-    cout << "Tamanho da lista: " << aula.size() << endl;
+    cout &lt;&lt; "Tamanho da lista: " &lt;&lt; aula.size() &lt;&lt; endl;
 
     tam = aula.size();
 
     for(int i = 0; i < tam; i++) {
-        cout << aula.front() << endl;
+        cout &lt;&lt; aula.front() &lt;&lt; endl;
         aula.pop_front();
     }
 
@@ -200,7 +200,7 @@ int main() {
 <pre>
 <code>
 for(int i = 0; i < tam; i++) {
-    cout << aula.back() << endl;
+    cout &lt;&lt; aula.back() &lt;&lt; endl;
     aula.pop_back();
 }
 </code>
@@ -252,12 +252,12 @@ int main() {
 
     aula.insert(it, 0); // Aqui insere o valor desejado.
 
-    cout << "Tamanho da lista: " << aula.size() << endl;
+    cout &lt;&lt; "Tamanho da lista: " &lt;&lt; aula.size() &lt;&lt; endl;
 
     tam = aula.size();
 
     for(int i = 0; i < tam; i++) {
-        cout << aula.front() << endl;
+        cout &lt;&lt; aula.front() &lt;&lt; endl;
         aula.pop_front();
     }
 
@@ -305,16 +305,16 @@ int main() {
         aula.push_front(i);
     }
 
-    cout << "Tamanho da lista: " << aula.size() << endl;
+    cout &lt;&lt; "Tamanho da lista: " &lt;&lt; aula.size() &lt;&lt; endl;
 
     tam = aula.size();
 
     for(int i = 0; i < tam; i++) {
-        cout << aula.front() << endl;
+        cout &lt;&lt; aula.front() &lt;&lt; endl;
         aula.pop_front();
     }
 	
-    cout << "Tamanho da lista: " << aula.size() << endl;
+    cout &lt;&lt; "Tamanho da lista: " &lt;&lt; aula.size() &lt;&lt; endl;
 
     return 0;
 }

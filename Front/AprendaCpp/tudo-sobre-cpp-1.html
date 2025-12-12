@@ -133,7 +133,7 @@ using namespace std;
 
 int main() {
     setlocale(LC_ALL, "portuguese"); // Inclua clocale
-    cout << "Essa é uma frase com acentuação!" << endl;
+    cout &lt;&lt; "Essa é uma frase com acentuação!" &lt;&lt; endl;
    
     return 0;
 }
@@ -159,11 +159,11 @@ float decimal2 = 5.2; // Existem casos que deverá ter um f no float, no caso, 5
 bool vivo = true;
 string nome = "Nome";
 
-cout << vidas << "\n";
-cout << letra << "\n";
-cout << decimal << "\n";
-cout << vivo << "\n";
-cout << nome << "\n";
+cout &lt;&lt; vidas &lt;&lt; "\n";
+cout &lt;&lt; letra &lt;&lt; "\n";
+cout &lt;&lt; decimal &lt;&lt; "\n";
+cout &lt;&lt; vivo &lt;&lt; "\n";
+cout &lt;&lt; nome &lt;&lt; "\n";
 </code>
 </pre>
 
@@ -174,7 +174,7 @@ cout << nome << "\n";
 
 <pre>
 <code>
-cout << vidas << "\n" << letra << "\n" << decimal << "\n" << vivo << "\n" << nome << "\n";
+cout &lt;&lt; vidas &lt;&lt; "\n" &lt;&lt; letra &lt;&lt; "\n" &lt;&lt; decimal &lt;&lt; "\n" &lt;&lt; vivo &lt;&lt; "\n" &lt;&lt; nome &lt;&lt; "\n";
 </code>
 </pre>
 
@@ -192,20 +192,20 @@ double decimal;
 bool vivo = true;
 string nome;
 
-cout << "Digite o número de vidas: ";
-cin >> vidas;
-cout << "Digite uma letra: ";
-cin >> letra;
-cout << "Dinheiro: ";
-cin >> decimal;
-cout << "Digite seu Nome: ";
-cin >> nome;
+cout &lt;&lt; "Digite o número de vidas: ";
+cin &gt;&gt; vidas;
+cout &lt;&lt; "Digite uma letra: ";
+cin &gt;&gt; letra;
+cout &lt;&lt; "Dinheiro: ";
+cin &gt;&gt; decimal;
+cout &lt;&lt; "Digite seu Nome: ";
+cin &gt;&gt; nome;
 
-cout << "Vidas: " << vidas << "\n";
-cout << "Letra: " << letra << "\n";
-cout << "Dinheiro: " << decimal << "\n";
-cout << "Vivo: " << vivo << "\n";
-cout << "Nome: " << nome << "\n";
+cout &lt;&lt; "Vidas: " &lt;&lt; vidas &lt;&lt; "\n";
+cout &lt;&lt; "Letra: " &lt;&lt; letra &lt;&lt; "\n";
+cout &lt;&lt; "Dinheiro: " &lt;&lt; decimal &lt;&lt; "\n";
+cout &lt;&lt; "Vivo: " &lt;&lt; vivo &lt;&lt; "\n";
+cout &lt;&lt; "Nome: " &lt;&lt; nome &lt;&lt; "\n";
 </code>
 </pre>
 
@@ -213,7 +213,7 @@ cout << "Nome: " << nome << "\n";
 
 <pre>
 <code>
-cout << "Digite seu Nome: ";
+cout &lt;&lt; "Digite seu Nome: ";
 cin.ignore();
 getline(cin, nome);
 </code>
@@ -315,10 +315,10 @@ char *letra = new char('A');
 string *palavra = new string("Texto");
 bool *logico = new bool(true);
 	
-cout << *num << endl;
-cout << *letra << endl;
-cout << *palavra << endl;
-cout << *logico << endl;
+cout &lt;&lt; *num &lt;&lt; endl;
+cout &lt;&lt; *letra &lt;&lt; endl;
+cout &lt;&lt; *palavra &lt;&lt; endl;
+cout &lt;&lt; *logico &lt;&lt; endl;
 </code>
 </pre>
 
@@ -330,7 +330,7 @@ string texto = "abc";
 
 string completo = texto + "def";
 
-cout << completo;
+cout &lt;&lt; completo;
 </code>
 </pre>
 
@@ -341,17 +341,17 @@ cout << completo;
 string login;
 string senha;
 
-cout << "Digite o login: ";
-cin >> login;
+cout &lt;&lt; "Digite o login: ";
+cin &gt;&gt; login;
 
-cout << "Digite a senha: ";
-cin >> senha;
+cout &lt;&lt; "Digite a senha: ";
+cin &gt;&gt; senha;
 
 if(!login.compare("admin") && !senha.compare("123")) { // Inclua cstring
-    cout << "Bem-Vindo!" << endl;
+    cout &lt;&lt; "Bem-Vindo!" &lt;&lt; endl;
 }
 else {
-    cout << "Acesso Negado!" << endl;
+    cout &lt;&lt; "Acesso Negado!" &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -362,7 +362,7 @@ else {
 <code>
 string nome = "";
 
-cout << "Nome está vazio? " << (nome.empty() ? "true" : "false") << endl;
+cout &lt;&lt; "Nome está vazio? " &lt;&lt; (nome.empty() ? "true" : "false") &lt;&lt; endl;
 </code>
 </pre>
 
@@ -372,7 +372,7 @@ cout << "Nome está vazio? " << (nome.empty() ? "true" : "false") << endl;
 <code>
 string frase = "Exemplo de String";
     
-cout << "Quantidade de caracteres: " << frase.length() << endl;
+cout &lt;&lt; "Quantidade de caracteres: " &lt;&lt; frase.length() &lt;&lt; endl;
 </code>
 </pre>
 
@@ -424,7 +424,7 @@ int vidas = 3, tiros = 500, life = 100;
 using namespace std;
 
 int main(void) {
-    cout << PI << "\n\n";
+    cout &lt;&lt; PI &lt;&lt; "\n\n";
     
     return 0;
 }
@@ -437,12 +437,12 @@ int main(void) {
 <code>
 #include &lt;iostream&gt;
 #define PI 3.141592653589793
-#define FRASE cout << "Esse é um Texto" // Não será executado aqui.
+#define FRASE cout &lt;&lt; "Esse é um Texto" // Não será executado aqui.
 
 using namespace std;
 
 int main(void) {
-    cout << PI << "\n\n";
+    cout &lt;&lt; PI &lt;&lt; "\n\n";
     FRASE; // Só aqui que a constante será executada.
     
     return 0;
@@ -471,7 +471,7 @@ int main(void) {
     
     res = n1 + n2 + n3 + n4;
     
-    cout << "A soma de todas as variáveis é " << res << ".\n\n";
+    cout &lt;&lt; "A soma de todas as variáveis é " &lt;&lt; res &lt;&lt; ".\n\n";
     
     return 0;
 }
@@ -504,19 +504,19 @@ res = (n1 + n2 + n3 + n4) / 4;
 <code>
 int n1, n2;
 
-cout << "Digite o 1º número: ";
-cin >> n1;
-cout << "Digite o 2º número: ";
-cin >> n2;
+cout &lt;&lt; "Digite o 1º número: ";
+cin &gt;&gt; n1;
+cout &lt;&lt; "Digite o 2º número: ";
+cin &gt;&gt; n2;
 
-cout << "O valor absoluto de " << n1 << " é " << abs(n1) << endl;
-cout << n1 << " elevado ao quadrado é " << pow(n1, 2) << endl;
-cout << n1 << " elevado ao cubo é " << pow(n1, 3) << endl;
-cout << n1 << " elevado à " << n2 << " é " << pow(n1, n2) << endl;
-cout << "A raiz quadrada de " << n1 << " é " << sqrt(n1) << endl;
-cout << "A raiz cúbica de " << n1 << " é " << cbrt(n1) << endl;
-cout << "Menor valor entre " << n1 << " e " << n2 << ": " << min(n1, n2) << endl;
-cout << "Maior valor entre " << n1 << " e " << n2 << ": " << max(n1, n2) << endl;
+cout &lt;&lt; "O valor absoluto de " &lt;&lt; n1 &lt;&lt; " é " &lt;&lt; abs(n1) &lt;&lt; endl;
+cout &lt;&lt; n1 &lt;&lt; " elevado ao quadrado é " &lt;&lt; pow(n1, 2) &lt;&lt; endl;
+cout &lt;&lt; n1 &lt;&lt; " elevado ao cubo é " &lt;&lt; pow(n1, 3) &lt;&lt; endl;
+cout &lt;&lt; n1 &lt;&lt; " elevado à " &lt;&lt; n2 &lt;&lt; " é " &lt;&lt; pow(n1, n2) &lt;&lt; endl;
+cout &lt;&lt; "A raiz quadrada de " &lt;&lt; n1 &lt;&lt; " é " &lt;&lt; sqrt(n1) &lt;&lt; endl;
+cout &lt;&lt; "A raiz cúbica de " &lt;&lt; n1 &lt;&lt; " é " &lt;&lt; cbrt(n1) &lt;&lt; endl;
+cout &lt;&lt; "Menor valor entre " &lt;&lt; n1 &lt;&lt; " e " &lt;&lt; n2 &lt;&lt; ": " &lt;&lt; min(n1, n2) &lt;&lt; endl;
+cout &lt;&lt; "Maior valor entre " &lt;&lt; n1 &lt;&lt; " e " &lt;&lt; n2 &lt;&lt; ": " &lt;&lt; max(n1, n2) &lt;&lt; endl;
 </code>
 </pre>
 

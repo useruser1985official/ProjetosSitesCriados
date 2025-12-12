@@ -53,7 +53,7 @@ int main() {
 
     somar(num, 15);
 
-    cout << num << endl; // Não será alterado
+    cout &lt;&lt; num &lt;&lt; endl; // Não será alterado
 
     return 0;
 }
@@ -81,7 +81,7 @@ int main() {
 
     somar(&num, 15);
 
-    cout << num << endl;
+    cout &lt;&lt; num &lt;&lt; endl;
 
     return 0;
 }
@@ -110,7 +110,7 @@ int main() {
     iniVet(vetor);
 
     for(int i = 0; i < 5; i++) {
-        cout << vetor[i] << endl;
+        cout &lt;&lt; vetor[i] &lt;&lt; endl;
     }
 
     return 0;
@@ -143,13 +143,13 @@ int main() {
     int n1 = 10;
     int n2 = 20;
 
-    cout << "Valores antes de chamar a função: ";
-    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+    cout &lt;&lt; "Valores antes de chamar a função: ";
+    cout &lt;&lt; "n1 = " &lt;&lt; n1 &lt;&lt; " e n2 = " &lt;&lt; n2 &lt;&lt; endl;
 
     testar(n1, n2);
 
-    cout << "Valores depois de chamar a função: ";
-    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+    cout &lt;&lt; "Valores depois de chamar a função: ";
+    cout &lt;&lt; "n1 = " &lt;&lt; n1 &lt;&lt; " e n2 = " &lt;&lt; n2 &lt;&lt; endl;
 
     return 0;
 }
@@ -158,8 +158,8 @@ void testar(int n1, int n2) {
     n1 = -1;
     n2 = -2;
 
-    cout << "Valores dentro da função testar: " << endl;
-    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+    cout &lt;&lt; "Valores dentro da função testar: " &lt;&lt; endl;
+    cout &lt;&lt; "n1 = " &lt;&lt; n1 &lt;&lt; " e n2 = " &lt;&lt; n2 &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -176,13 +176,13 @@ int main() {
     int n1 = 10;
     int n2 = 20;
 
-    cout << "Valores antes de chamar a função: ";
-    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+    cout &lt;&lt; "Valores antes de chamar a função: ";
+    cout &lt;&lt; "n1 = " &lt;&lt; n1 &lt;&lt; " e n2 = " &lt;&lt; n2 &lt;&lt; endl;
 
     testar(&n1, &n2);
 
-    cout << "Valores depois de chamar a função: ";
-    cout << "n1 = " << n1 << " e n2 = " << n2 << endl;
+    cout &lt;&lt; "Valores depois de chamar a função: ";
+    cout &lt;&lt; "n1 = " &lt;&lt; n1 &lt;&lt; " e n2 = " &lt;&lt; n2 &lt;&lt; endl;
 
     return 0;
 }
@@ -191,8 +191,8 @@ int testar(int *n1, int *n2) {
     *n1 = -1;
     *n2 = -2;
 
-    cout << "Valores dentro da função testar: " << endl;
-    cout << "n1 = " << *n1 << " e n2 = " << *n2 << endl;
+    cout &lt;&lt; "Valores dentro da função testar: " &lt;&lt; endl;
+    cout &lt;&lt; "n1 = " &lt;&lt; *n1 &lt;&lt; " e n2 = " &lt;&lt; *n2 &lt;&lt; endl;
 
     return 0;
 }
@@ -210,15 +210,15 @@ int **duplPont; // Ponteiro de ponteiro
 pont = &amp;num; // Aponta pra num
 duplPont = &amp;pont; // Aponta pra pont, que aponta pra num, ele não aponta diretamente pra num.
 
-cout << "Endereço de num.........................................: " << &num << endl;
-cout << "Conteúdo de num.........................................: " << num << endl;
-cout << "Endereço de pont........................................: " << &pont << endl;
-cout << "Endereço apontado por pont..............................: " << pont << endl;
-cout << "Conteúdo apontado por pont..............................: " << *pont << endl;
-cout << "Endereço de duplPont....................................: " << &duplPont << endl;
-cout << "Endereço apontado por duplPont..........................: " << duplPont << endl;
-cout << "Endereço apontado por pont que é apontado por duplPont..: " << *duplPont << endl;
-cout << "Conteúdo apontado por pont que é apontado por duplPont..: " << **duplPont << endl;
+cout &lt;&lt; "Endereço de num.........................................: " &lt;&lt; &num &lt;&lt; endl;
+cout &lt;&lt; "Conteúdo de num.........................................: " &lt;&lt; num &lt;&lt; endl;
+cout &lt;&lt; "Endereço de pont........................................: " &lt;&lt; &pont &lt;&lt; endl;
+cout &lt;&lt; "Endereço apontado por pont..............................: " &lt;&lt; pont &lt;&lt; endl;
+cout &lt;&lt; "Conteúdo apontado por pont..............................: " &lt;&lt; *pont &lt;&lt; endl;
+cout &lt;&lt; "Endereço de duplPont....................................: " &lt;&lt; &duplPont &lt;&lt; endl;
+cout &lt;&lt; "Endereço apontado por duplPont..........................: " &lt;&lt; duplPont &lt;&lt; endl;
+cout &lt;&lt; "Endereço apontado por pont que é apontado por duplPont..: " &lt;&lt; *duplPont &lt;&lt; endl;
+cout &lt;&lt; "Conteúdo apontado por pont que é apontado por duplPont..: " &lt;&lt; **duplPont &lt;&lt; endl;
 
 delete pont;
 delete duplPont;
@@ -240,9 +240,9 @@ using namespace std;
 int main() {
     char nome[50];
 
-    cout << "Digite o nome: ";
-    cin >> nome;
-    cout << nome;
+    cout &lt;&lt; "Digite o nome: ";
+    cin &gt;&gt; nome;
+    cout &lt;&lt; nome;
 
     return 0;
 }
@@ -258,7 +258,7 @@ int main() {
 int main() {
     char nome[50];
 
-    cout << "Digite o nome: ";
+    cout &lt;&lt; "Digite o nome: ";
     fgets(nome, 50, stdin); // Importe cstdio
 
     // Isso é pra remover a quebra de linha:
@@ -267,7 +267,7 @@ int main() {
 
     if(nome[len - 1] == '\n') nome[--len] = 0;
 
-    cout << nome;
+    cout &lt;&lt; nome;
 
     return 0;
 }
@@ -293,7 +293,7 @@ int main() {
     char *nome;
     nome = (char*)malloc(sizeof(char));
 
-    cout << "Digite o nome: ";
+    cout &lt;&lt; "Digite o nome: ";
     scanf("\n"); // Isso é apenas para evitar que os dados inseridos não sejam lidos, pode funcionar também colocando no lugar fflush(stdin).
     fgets(nome, sizeof(nome), stdin);
 
@@ -303,7 +303,7 @@ int main() {
 
     if(nome[len - 1] == '\n') nome[--len] = 0;
 
-    cout << nome;
+    cout &lt;&lt; nome;
 
     return 0;
 }
@@ -383,8 +383,8 @@ struct estrutura02 {
 
 <pre>
 <code>
-cout << "União: " << sizeof(estrutura01) << endl;
-cout << "Estrutura: " << sizeof(estrutura02) << endl;
+cout &lt;&lt; "União: " &lt;&lt; sizeof(estrutura01) &lt;&lt; endl;
+cout &lt;&lt; "Estrutura: " &lt;&lt; sizeof(estrutura02) &lt;&lt; endl;
 </code>
 </pre>
 
@@ -413,10 +413,10 @@ int main() {
     caractere letra = 'A';
     texto frase = "Introdução à Typedef em C++";
 
-    cout << num << endl;
-    cout << real << endl;
-    cout << letra << endl;
-    cout << frase << endl;
+    cout &lt;&lt; num &lt;&lt; endl;
+    cout &lt;&lt; real &lt;&lt; endl;
+    cout &lt;&lt; letra &lt;&lt; endl;
+    cout &lt;&lt; frase &lt;&lt; endl;
 
     return 0;
 }

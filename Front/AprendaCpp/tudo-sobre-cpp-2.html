@@ -45,11 +45,11 @@ int n1, n2;
 n1 = 0;
 n2 = 10;
 
-cout << n1 << "\n";
+cout &lt;&lt; n1 &lt;&lt; "\n";
     
 n1 = n1 + 5;
     
-cout << n1 << "\n";
+cout &lt;&lt; n1 &lt;&lt; "\n";
 </code>
 </pre>
 
@@ -79,8 +79,8 @@ n2--;
 
 <pre>
 <code>
-cout << ++n1 << "\n";
-cout << n1 << "\n"; // Aqui ele já está incrementado.
+cout &lt;&lt; ++n1 &lt;&lt; "\n";
+cout &lt;&lt; n1 &lt;&lt; "\n"; // Aqui ele já está incrementado.
 </code>
 </pre>
 
@@ -96,11 +96,11 @@ cout << n1 << "\n"; // Aqui ele já está incrementado.
 <code>
 int num = 10;
     
-cout << num << "\n\n";
+cout &lt;&lt; num &lt;&lt; "\n\n";
     
 num = num * -1;
     
-cout << num << "\n\n";
+cout &lt;&lt; num &lt;&lt; "\n\n";
 </code>
 </pre>
 
@@ -110,7 +110,7 @@ cout << num << "\n\n";
 <code>
 int num = 10;
     
-cout << -num << "\n\n";
+cout &lt;&lt; -num &lt;&lt; "\n\n";
 </code>
 </pre>
 
@@ -124,13 +124,13 @@ cout << -num << "\n\n";
 <code>
 int num = 10;
 
-cout << num << "\n\n"; // Valor original.
+cout &lt;&lt; num &lt;&lt; "\n\n"; // Valor original.
 
 num = num * -1;
 
-cout << -num << "\n\n"; // Retornará positivo, - com - retorna + e a variável foi alterada antes.
+cout &lt;&lt; -num &lt;&lt; "\n\n"; // Retornará positivo, - com - retorna + e a variável foi alterada antes.
 
-cout << num << "\n\n"; // Retornará negativo, já que a variável foi alterada.
+cout &lt;&lt; num &lt;&lt; "\n\n"; // Retornará negativo, já que a variável foi alterada.
 </code>
 </pre>
 
@@ -201,15 +201,15 @@ cout << num << "\n\n"; // Retornará negativo, já que a variável foi alterada.
 <code>
 int num;
 
-cout << "Digite um número entre 4 e 7:\n";
+cout &lt;&lt; "Digite um número entre 4 e 7:\n";
 
-cin >> num;
+cin &gt;&gt; num;
 
 if(num >= 4 && num <= 7) {
-    cout << "\nValor aceito!\n";
+    cout &lt;&lt; "\nValor aceito!\n";
 }
 else {
-    cout << "\nValor não aceito!\n";
+    cout &lt;&lt; "\nValor não aceito!\n";
 }
 </code>
 </pre>
@@ -250,15 +250,15 @@ else {
 <code>
 int num;
 
-cout << "Digite um número entre 3 e 8:\n";
+cout &lt;&lt; "Digite um número entre 3 e 8:\n";
 
-cin >> num;
+cin &gt;&gt; num;
 
 if(num < 3 || num > 8) {
-    cout << "\nFora do intervalo!\n";
+    cout &lt;&lt; "\nFora do intervalo!\n";
 }
 else {
-    cout << "\nDentro do intervalo!\n";
+    cout &lt;&lt; "\nDentro do intervalo!\n";
 }
 </code>
 </pre>
@@ -268,7 +268,7 @@ else {
 <pre>
 <code>
 if((num >= 3 && num <= 6) || (num > 9 && num < 15) || (num > 15 && num < 20)) {
-    cout << "\nValor aceito!\n";
+    cout &lt;&lt; "\nValor aceito!\n";
 }
 </code>
 </pre>
@@ -300,10 +300,10 @@ int num;
 num = 1;
 
 if(!num) {
-    cout << "\nVou ao clube!\n";
+    cout &lt;&lt; "\nVou ao clube!\n";
 }
 else {
-    cout << "\nVou ao cinema!\n";
+    cout &lt;&lt; "\nVou ao cinema!\n";
 }
 </code>
 </pre>
@@ -319,11 +319,11 @@ num2 = 30;
 
 numero = !(num1 != num2);
 
-cout << numero << "\n";
+cout &lt;&lt; numero &lt;&lt; "\n";
 
 numero = !(num1 == num2);
 
-cout << numero << "\n";
+cout &lt;&lt; numero &lt;&lt; "\n";
 </code>
 </pre>
 
@@ -338,17 +338,17 @@ cout << numero << "\n";
 int n1, n2, nota;
 string res;
 
-cout << "Digite a primeira nota: ";
-cin >> n1;
+cout &lt;&lt; "Digite a primeira nota: ";
+cin &gt;&gt; n1;
 
-cout << "Digite a segunda nota: ";
-cin >> n2;
+cout &lt;&lt; "Digite a segunda nota: ";
+cin &gt;&gt; n2;
 
 nota = (n1 + n2) / 2;
 
 (nota >= 6) ? res = "Aprovado" : res = "Reprovado";
 
-cout << "\nSituação do aluno: " << res << "\n";
+cout &lt;&lt; "\nSituação do aluno: " &lt;&lt; res &lt;&lt; "\n";
 </code>
 </pre>
 
@@ -368,12 +368,12 @@ res = (nota >= 6) ? "Aprovado" : "Reprovado";
 <code>
 int n1;
 
-cout << "Digite um valor: ";
-cin >> n1;
+cout &lt;&lt; "Digite um valor: ";
+cin &gt;&gt; n1;
 
 (n1 >= 10) ? n1++ : n1--; 
 
-cout << "\nNovo Valor de N1: " << n1 << "\n";
+cout &lt;&lt; "\nNovo Valor de N1: " &lt;&lt; n1 &lt;&lt; "\n";
 </code>
 </pre>
 

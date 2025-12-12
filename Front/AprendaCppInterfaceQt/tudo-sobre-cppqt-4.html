@@ -36,11 +36,11 @@
 <pre>
 <code>
 void MainWindow::on_btnAdd_clicked() {
-    if(ui->txtItem->text().trimmed().compare("")) { // Inverso da comparação
-        ui->lstItens->addItem(ui->txtItem->text().trimmed());
+    if(ui-&gt;txtItem-&gt;text().trimmed().compare("")) { // Inverso da comparação
+        ui-&gt;lstItens-&gt;addItem(ui-&gt;txtItem-&gt;text().trimmed());
         
-        ui->txtItem->clear();
-        ui->txtItem->setFocus();
+        ui-&gt;txtItem-&gt;clear();
+        ui-&gt;txtItem-&gt;setFocus();
     }
 }
 </code>
@@ -60,11 +60,11 @@ void MainWindow::on_btnAdAs_clicked() {
     QListWidgetItem *item5 = new QListWidgetItem("Python");
     
     
-    ui->lstItens->addItem(item1);
-    ui->lstItens->addItem(item2);
-    ui->lstItens->addItem(item3);
-    ui->lstItens->addItem(item4);
-    ui->lstItens->addItem(item5);    
+    ui-&gt;lstItens-&gt;addItem(item1);
+    ui-&gt;lstItens-&gt;addItem(item2);
+    ui-&gt;lstItens-&gt;addItem(item3);
+    ui-&gt;lstItens-&gt;addItem(item4);
+    ui-&gt;lstItens-&gt;addItem(item5);    
 }
 </code>
 </pre>
@@ -74,8 +74,8 @@ void MainWindow::on_btnAdAs_clicked() {
 <pre>
 <code>
 void MainWindow::on_btnMarc_clicked() {
-    ui->lstItens->currentItem()->setForeground(Qt::lightGray);
-    ui->lstItens->currentItem()->setBackground(Qt::darkGreen);    
+    ui-&gt;lstItens-&gt;currentItem()-&gt;setForeground(Qt::lightGray);
+    ui-&gt;lstItens-&gt;currentItem()-&gt;setBackground(Qt::darkGreen);    
 }
 </code>
 </pre>
@@ -87,8 +87,8 @@ void MainWindow::on_btnMarc_clicked() {
 <pre>
 <code>
 void MainWindow::on_btnDesm_clicked() {
-    ui->lstItens->currentItem()->setForeground(Qt::black);
-    ui->lstItens->currentItem()->setBackground(Qt::white);
+    ui-&gt;lstItens-&gt;currentItem()-&gt;setForeground(Qt::black);
+    ui-&gt;lstItens-&gt;currentItem()-&gt;setBackground(Qt::white);
 }
 </code>
 </pre>
@@ -106,27 +106,27 @@ QVector&lt;int&gt; marcados; // Inclua QVector
 <pre>
 <code>
 void MainWindow::on_btnMarc_clicked() {
-    if(ui->lstItens->currentRow() != -1) {
-        if(marcados.indexOf(ui->lstItens->currentRow()) == -1) {
-            ui->lstItens->currentItem()->setForeground(Qt::lightGray);
-            ui->lstItens->currentItem()->setBackground(Qt::darkGreen);
+    if(ui-&gt;lstItens-&gt;currentRow() != -1) {
+        if(marcados.indexOf(ui-&gt;lstItens-&gt;currentRow()) == -1) {
+            ui-&gt;lstItens-&gt;currentItem()-&gt;setForeground(Qt::lightGray);
+            ui-&gt;lstItens-&gt;currentItem()-&gt;setBackground(Qt::darkGreen);
 
-            marcados.push_back(ui->lstItens->currentRow());
+            marcados.push_back(ui-&gt;lstItens-&gt;currentRow());
 
-            qDebug() << "Marcados: " << marcados; // Inclua QDebug
+            qDebug() &lt;&lt; "Marcados: " &lt;&lt; marcados; // Inclua QDebug
         }
     }
 }
 
 void MainWindow::on_btnDesm_clicked() {
-    if(ui->lstItens->currentRow() != -1) {
-        if(marcados.indexOf(ui->lstItens->currentRow()) >= 0) {
-            ui->lstItens->currentItem()->setForeground(Qt::black);
-            ui->lstItens->currentItem()->setBackground(Qt::white);
+    if(ui-&gt;lstItens-&gt;currentRow() != -1) {
+        if(marcados.indexOf(ui-&gt;lstItens-&gt;currentRow()) >= 0) {
+            ui-&gt;lstItens-&gt;currentItem()-&gt;setForeground(Qt::black);
+            ui-&gt;lstItens-&gt;currentItem()-&gt;setBackground(Qt::white);
 
-            marcados.erase(marcados.begin() + marcados.indexOf(ui->lstItens->currentRow()));
+            marcados.erase(marcados.begin() + marcados.indexOf(ui-&gt;lstItens-&gt;currentRow()));
 
-            qDebug() << "Marcados: " << marcados;
+            qDebug() &lt;&lt; "Marcados: " &lt;&lt; marcados;
         }
     }
 }
@@ -141,9 +141,9 @@ void MainWindow::on_btnDesm_clicked() {
 <code>
 void MainWindow::on_btnDesmTod_clicked() {
     while(!marcados.empty()) {
-        ui->lstItens->setCurrentRow(marcados.last());
-        ui->lstItens->currentItem()->setForeground(Qt::black);
-        ui->lstItens->currentItem()->setBackground(Qt::white);
+        ui-&gt;lstItens-&gt;setCurrentRow(marcados.last());
+        ui-&gt;lstItens-&gt;currentItem()-&gt;setForeground(Qt::black);
+        ui-&gt;lstItens-&gt;currentItem()-&gt;setBackground(Qt::white);
         marcados.pop_back();
     }
 }
@@ -159,7 +159,7 @@ void MainWindow::on_btnDesmTod_clicked() {
 <pre>
 <code>
 void MainWindow::on_tbAbas_tabCloseRequested(int index) {
-    ui->tbAbas->removeTab(index); // O número passado é o referente da aba, começando do 0.
+    ui-&gt;tbAbas-&gt;removeTab(index); // O número passado é o referente da aba, começando do 0.
 }
 </code>
 </pre>
@@ -169,7 +169,7 @@ void MainWindow::on_tbAbas_tabCloseRequested(int index) {
 <pre>
 <code>
 void MainWindow::on_btnAdd_clicked() {
-    ui->tbAbas->addTab(new QWidget(), "Nova Aba: " + QString::number(ui->tbAbas->count() + 1));
+    ui-&gt;tbAbas-&gt;addTab(new QWidget(), "Nova Aba: " + QString::number(ui-&gt;tbAbas-&gt;count() + 1));
 }
 </code>
 </pre>
@@ -179,9 +179,9 @@ void MainWindow::on_btnAdd_clicked() {
 <pre>
 <code>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
     
-    i = ui->tbAbas->count(); // Coloque a variável i estática do tipo int na classe MainWindow em mainwindow.h
+    i = ui-&gt;tbAbas-&gt;count(); // Coloque a variável i estática do tipo int na classe MainWindow em mainwindow.h
 }
 </code>
 </pre>
@@ -191,7 +191,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 <pre>
 <code>
 void MainWindow::on_tbAbas_tabCloseRequested(int index) {
-    ui->tbAbas->removeTab(index); // O número passado é o referente da aba, começando do 0.
+    ui-&gt;tbAbas-&gt;removeTab(index); // O número passado é o referente da aba, começando do 0.
     i--;
 }
 </code>
@@ -203,7 +203,7 @@ void MainWindow::on_tbAbas_tabCloseRequested(int index) {
 <code>
 void MainWindow::on_btnAdd_clicked() {
     i++;
-    ui->tbAbas->addTab(new QWidget(), "Nova Aba: " + QString::number(i));
+    ui-&gt;tbAbas-&gt;addTab(new QWidget(), "Nova Aba: " + QString::number(i));
 }
 </code>
 </pre>
@@ -213,7 +213,7 @@ void MainWindow::on_btnAdd_clicked() {
 <pre>
 <code>
 void MainWindow::on_btnRem_clicked() {
-    ui->tbAbas->removeTab(ui->tbAbas->currentIndex());
+    ui-&gt;tbAbas-&gt;removeTab(ui-&gt;tbAbas-&gt;currentIndex());
     i--;
 }
 </code>
@@ -237,7 +237,7 @@ void MainWindow::on_btnRem_clicked() {
 <code>
 void MainWindow::on_btnCads_clicked() {
     i++;
-    ui->tbAbas->addTab(new FormTab(), "Novo Cadastro"); // Inclua formtab.h
+    ui-&gt;tbAbas-&gt;addTab(new FormTab(), "Novo Cadastro"); // Inclua formtab.h
 }
 </code>
 </pre>
@@ -257,12 +257,12 @@ void MainWindow::on_btnCads_clicked() {
 QString MainWindow::local = "C:/Meus Projetos/C++ Qt/TrabalhandoComDiretorios/"; // Caminho desejado, global, coloque na classe como static
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
 
     QDir unidades;// Inclua QDir
 
     foreach(QFileInfo qfi, unidades.drives()) {
-        ui->cbUnid->addItem(qfi.absoluteFilePath());
+        ui-&gt;cbUnid-&gt;addItem(qfi.absoluteFilePath());
     }
 }
 </code>
@@ -275,15 +275,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 <pre>
 <code>
 void MainWindow::on_cbUnid_currentTextChanged(const QString &amp;arg1) {
-    ui->lstDir->clear();  
+    ui-&gt;lstDir-&gt;clear();  
     QDir conteudo(arg1);
     
     foreach(QFileInfo qfi, conteudo.entryInfoList()) {
         if(qfi.isDir()) {
-            ui->lstDir->addItem("Pasta: " + qfi.absoluteFilePath());
+            ui-&gt;lstDir-&gt;addItem("Pasta: " + qfi.absoluteFilePath());
         }
         else if(qfi.isFile()) {
-            ui->lstDir->addItem("Arquivo: " + qfi.absoluteFilePath());
+            ui-&gt;lstDir-&gt;addItem("Arquivo: " + qfi.absoluteFilePath());
         }
     }
 }
@@ -296,7 +296,7 @@ void MainWindow::on_cbUnid_currentTextChanged(const QString &amp;arg1) {
 <code>
 QDir::setCurrent(QDir::homePath() + "/Desktop"); // Vai até a área de trabalho
 
-qDebug() << QDir::currentPath(); // Mostra diretório atual.
+qDebug() &lt;&lt; QDir::currentPath(); // Mostra diretório atual.
 </code>
 </pre>
 

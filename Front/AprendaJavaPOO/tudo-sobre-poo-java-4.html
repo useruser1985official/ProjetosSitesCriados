@@ -35,13 +35,13 @@
     </tr>
     <tr>
         <td>
-            - nome<br/>
-            - idade<br/>
-            - sexo<br/>
+            - nome: String<br/>
+            - idade: int<br/>
+            - sexo: String<br/>
         </td>
     </tr>
     <tr>
-        <td>+ fazerAniver()</td>
+        <td>+ fazerAniver(): void</td>
     </tr>
 </table>
 
@@ -51,17 +51,17 @@
     </tr>
     <tr>
         <td>
-            - titulo<br/>
-            - autor<br/>
-            - totPaginas<br/>
-            - pagAtual<br/>
-            - aberto<br/>
-            - leitor<br/>
+            - titulo: String<br/>
+            - autor: String<br/>
+            - totPaginas: int<br/>
+            - pagAtual: int<br/>
+            - aberto: boolean<br/>
+            - leitor: Pessoa<br/>
         </td>
     </tr>
     <tr>
         <td>
-            + detalhes()<br/>
+            + detalhes(): void<br/>
         </td>
     </tr>
 </table>
@@ -75,11 +75,11 @@
     </tr>
     <tr>
         <td>
-            + abrir()<br/>
-            + fechar()<br/>
-            + folhear(p)<br/>
-            + avancarPag()<br/>
-            + voltarPag()<br/>
+            + abrir(): void<br/>
+            + fechar(): void<br/>
+            + folhear(p: int): void<br/>
+            + avancarPag(): void<br/>
+            + voltarPag(): void<br/>
         </td>
     </tr>
 </table>
@@ -195,10 +195,10 @@ public class Livro implements Publicacao {
     @Override
     public void folhear(int p) {
         if(this.getAberto() == true) {
-            if(p > this.totPaginas) {
+            if(p &gt; this.totPaginas) {
                 this.setPagAtual(this.getTotPaginas());
             }
-            else if(p < 0) {
+            else if(p &lt; 0) {
                 this.setPagAtual(0);
             }
             else {
@@ -210,7 +210,7 @@ public class Livro implements Publicacao {
     @Override
     public void avancarPag() {
         if(this.getAberto() == true) {
-            if(this.getPagAtual() < this.getTotPaginas()) {
+            if(this.getPagAtual() &lt; this.getTotPaginas()) {
                 this.setPagAtual(this.getPagAtual() + 1);
             } 
         }
@@ -219,7 +219,7 @@ public class Livro implements Publicacao {
     @Override
     public void voltarPag() {
         if(this.getAberto() == true) {
-            if(this.getPagAtual() > 0) {
+            if(this.getPagAtual() &gt; 0) {
                 this.setPagAtual(this.getPagAtual() - 1);
             } 
         }
@@ -335,13 +335,13 @@ public class ProjetoLeitura {
     </tr>
     <tr>
         <td>
-            - nome<br/>
-            - idade<br/>
-            - sexo<br/>
+            - nome: String<br/>
+            - idade: int<br/>
+            - sexo: String<br/>
         </td>
     </tr>
     <tr>
-        <td> + fazerAniver()</td>
+        <td> + fazerAniver(): void</td>
     </tr>
 </table>
 
@@ -353,12 +353,12 @@ public class ProjetoLeitura {
     </tr>
     <tr>
         <td>
-            - matr<br/>
-            - curso<br/>
+            - matr: int<br/>
+            - curso: String<br/>
         </td>
     </tr>
     <tr>
-        <td>+cancelarMatr()</td>
+        <td>+cancelarMatr(): void</td>
     </tr>
 </table>
 
@@ -368,12 +368,12 @@ public class ProjetoLeitura {
     </tr>
     <tr>
         <td>
-            - especialidade<br/>
-            - salario<br/>
+            - especialidade: String<br/>
+            - salario: float<br/>
         </td>
     </tr>
     <tr>
-        <td>+ receberAumento(aum)</td>
+        <td>+ receberAumento(aum: float): void</td>
     </tr>
 </table>
 
@@ -383,12 +383,12 @@ public class ProjetoLeitura {
     </tr>
     <tr>
         <td>
-            - setor<br/>
-            - trabalhando<br/>
+            - setor: String<br/>
+            - trabalhando: boolean<br/>
         </td>
     </tr>
     <tr>
-        <td>+ mudarTrabalho()</td>
+        <td>+ mudarTrabalho(): void</td>
     </tr>
 </table>
 

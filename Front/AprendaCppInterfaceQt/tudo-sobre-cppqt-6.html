@@ -48,9 +48,9 @@
 // Coloque as importações para QMessageBox, QFile, QFileDialog e QTextStream
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
 
-    this->setCentralWidget(ui->textEdit); // Isso fará o Text Edit ocupar todo o frame.
+    this-&gt;setCentralWidget(ui-&gt;textEdit); // Isso fará o Text Edit ocupar todo o frame.
 }
 
 MainWindow::~MainWindow() {
@@ -73,8 +73,8 @@ QString localArquivo;
 <code>
 void MainWindow::on_actionNovo_triggered() {
     localArquivo = "";
-    ui->textEdit->clear();
-    ui->textEdit->setFocus();
+    ui-&gt;textEdit-&gt;clear();
+    ui-&gt;textEdit-&gt;setFocus();
 }
 </code>
 </pre>
@@ -100,7 +100,7 @@ void MainWindow::on_actionAbrir_triggered() {
     QTextStream entrada(&arquivo); // Importe QTextStream
     QString texto = entrada.readAll();
 
-    ui->textEdit->setText(texto);
+    ui-&gt;textEdit-&gt;setText(texto);
 
     arquivo.close();
 }
@@ -125,9 +125,9 @@ void MainWindow::on_actionSalvar_Como_triggered() {
     }
 
     QTextStream saida(&arquivo); // Importe QTextStream
-    QString texto = ui->textEdit->toPlainText();
+    QString texto = ui-&gt;textEdit-&gt;toPlainText();
 
-    saida << texto;
+    saida &lt;&lt; texto;
 
     arquivo.flush();
 
@@ -149,9 +149,9 @@ void MainWindow::on_actionSalvar_triggered() {
     }
 
     QTextStream saida(&arquivo); // Importe QTextStream
-    QString texto = ui->textEdit->toPlainText();
+    QString texto = ui-&gt;textEdit-&gt;toPlainText();
 
-    saida << texto;
+    saida &lt;&lt; texto;
 
     arquivo.flush();
 
@@ -169,15 +169,15 @@ void MainWindow::on_actionFechar_triggered() {
 }
 
 void MainWindow::on_actionCopiar_triggered() {
-    ui->textEdit->copy();
+    ui-&gt;textEdit-&gt;copy();
 }
 
 void MainWindow::on_actionRecortar_triggered() {
-    ui->textEdit->cut();
+    ui-&gt;textEdit-&gt;cut();
 }
 
 void MainWindow::on_actionColar_triggered() {
-    ui->textEdit->paste();
+    ui-&gt;textEdit-&gt;paste();
 }
 </code>
 </pre>
@@ -187,11 +187,11 @@ void MainWindow::on_actionColar_triggered() {
 <pre>
 <code>
 void MainWindow::on_actionDesfazer_triggered() {
-    ui->textEdit->undo();
+    ui-&gt;textEdit-&gt;undo();
 }
 
 void MainWindow::on_actionRefazer_triggered() {
-    ui->textEdit->redo();
+    ui-&gt;textEdit-&gt;redo();
 }
 </code>
 </pre>
@@ -211,7 +211,7 @@ void MainWindow::on_actionFonte_triggered() {
     QFont fonte = QFontDialog::getFont(&fonteOk, this); // inclua QFont e QFontDialog
 
     if(fonteOk) {
-        ui->textEdit->setFont(fonte);
+        ui-&gt;textEdit-&gt;setFont(fonte);
     }
     else {
         return;
@@ -228,7 +228,7 @@ void MainWindow::on_actionCor_triggered() {
     QColor cor = QColorDialog::getColor(Qt::black, this, "Escolha uma Cor"); // inclua QColor e QColorDialog
 
     if(cor.isValid()) {
-        ui->textEdit->setTextColor(cor);
+        ui-&gt;textEdit-&gt;setTextColor(cor);
     }
     else {
         return;
@@ -245,7 +245,7 @@ void MainWindow::on_actionCor_de_Fundo_triggered() {
     QColor cor = QColorDialog::getColor(Qt::white, this, "Escolha uma Cor"); // inclua QColor e QColorDialog
 
     if(cor.isValid()) {
-        ui->textEdit->setTextBackgroundColor(cor);
+        ui-&gt;textEdit-&gt;setTextBackgroundColor(cor);
     }
     else {
         return;
@@ -281,7 +281,7 @@ void MainWindow::on_actionImprimir_triggered() {
         return;
     }
     
-    ui->textEdit->print(&imp);
+    ui-&gt;textEdit-&gt;print(&imp);
 }
 </code>
 </pre>
@@ -326,12 +326,12 @@ class MainWindow : public QMainWindow {
 int MainWindow::cont = 0;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
 
     tempo = new QTimer(this); // Variável global criada.
     connect(tempo, SIGNAL(timeout()), this, SLOT(minhaFuncao()));
 
-    tempo->start(1000); // Tempo em milissegundos que define o tempo que a função é executada
+    tempo-&gt;start(1000); // Tempo em milissegundos que define o tempo que a função é executada
 }
 
 MainWindow::~MainWindow() {
@@ -340,7 +340,7 @@ MainWindow::~MainWindow() {
 
 void MainWindow::minhaFuncao() {
     cont++;
-    qDebug() << "Timer: " << cont; // Inclua QDebug
+    qDebug() &lt;&lt; "Timer: " &lt;&lt; cont; // Inclua QDebug
 }
 </code>
 </pre>
@@ -375,12 +375,12 @@ class MainWindow : public QMainWindow {
 <pre>
 <code>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
 
     tempo = new QTimer(this); // Variável global criada.
     connect(tempo, SIGNAL(timeout()), this, SLOT(atualizaRelogio()));
 
-    tempo->start(1000); // Tempo em milissegundos que define o tempo que a função é executada
+    tempo-&gt;start(1000); // Tempo em milissegundos que define o tempo que a função é executada
 }
 
 MainWindow::~MainWindow() {
@@ -391,7 +391,7 @@ void MainWindow::atualizaRelogio() {
     QTime tempoAtual = QTime::currentTime(); // Retorna o horário atual, é QTime mesmo, inclua QDateTime
     QString tempoTexto = tempoAtual.toString("hh:mm:ss");  // Formatação da hora
 
-    ui->lblRelogio->setText(tempoTexto);
+    ui-&gt;lblRelogio-&gt;setText(tempoTexto);
 }
 </code>
 </pre>

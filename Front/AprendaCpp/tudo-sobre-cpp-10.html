@@ -103,9 +103,9 @@ using namespace std;
 int main() {
     int num = 15;
 
-    cout << "Valor de Num em decimal: " << num << endl;
-    cout << "Valor de Num em hexadecimal: " << hex << num << endl;
-    cout << "Valor de Num em octal: " << oct << num << endl;
+    cout &lt;&lt; "Valor de Num em decimal: " &lt;&lt; num &lt;&lt; endl;
+    cout &lt;&lt; "Valor de Num em hexadecimal: " &lt;&lt; hex &lt;&lt; num &lt;&lt; endl;
+    cout &lt;&lt; "Valor de Num em octal: " &lt;&lt; oct &lt;&lt; num &lt;&lt; endl;
 
     return 0;
 }
@@ -127,9 +127,9 @@ using namespace std;
 int main() {
     int num = 15;
 
-    cout << "Valor de Num em decimal: " << num << endl;
-    cout << "Valor de Num em hexadecimal: " << setbase(16) << num << endl;
-    cout << "Valor de Num em octal: " << setbase(8) << num << endl;
+    cout &lt;&lt; "Valor de Num em decimal: " &lt;&lt; num &lt;&lt; endl;
+    cout &lt;&lt; "Valor de Num em hexadecimal: " &lt;&lt; setbase(16) &lt;&lt; num &lt;&lt; endl;
+    cout &lt;&lt; "Valor de Num em octal: " &lt;&lt; setbase(8) &lt;&lt; num &lt;&lt; endl;
 
 
     return 0;
@@ -154,7 +154,7 @@ int main() {
 
     cout.precision(3);
 
-    cout << "Valor de PI: " << pi << endl;
+    cout &lt;&lt; "Valor de PI: " &lt;&lt; pi &lt;&lt; endl;
 
     return 0;
 }
@@ -176,7 +176,7 @@ using namespace std;
 int main() {
     float pi = M_PI;
 
-    cout << "Valor de PI: " << scientific << pi << endl;
+    cout &lt;&lt; "Valor de PI: " &lt;&lt; scientific &lt;&lt; pi &lt;&lt; endl;
 
     return 0;
 }
@@ -195,7 +195,7 @@ using namespace std;
 int main() {
     int num = 30;
 
-    cout << "Valor de num: " << setw(10) << num << endl;
+    cout &lt;&lt; "Valor de num: " &lt;&lt; setw(10) &lt;&lt; num &lt;&lt; endl;
 
     return 0;
 }
@@ -206,7 +206,7 @@ int main() {
 
 <pre>
 <code>
-cout << "Valor de num: " << setw(10) << setfill('0') << num << endl;
+cout &lt;&lt; "Valor de num: " &lt;&lt; setw(10) &lt;&lt; setfill('0') &lt;&lt; num &lt;&lt; endl;
 </code>
 </pre>
 
@@ -317,10 +317,10 @@ int main() {
 
     tam = num.size();
 
-    cout << "Tamanho do vector: " << tam << endl;
+    cout &lt;&lt; "Tamanho do vector: " &lt;&lt; tam &lt;&lt; endl;
     
     for(i = 0; i < tam; i++) {
-        cout << num[i] << endl;
+        cout &lt;&lt; num[i] &lt;&lt; endl;
     }
 
     return 0;
@@ -361,13 +361,13 @@ int main() {
     tam = num1.size();
 
     for(i = 0; i < tam; i++) {
-        cout << num1[i] << endl;
+        cout &lt;&lt; num1[i] &lt;&lt; endl;
     }
 
-    cout << endl;
+    cout &lt;&lt; endl;
 
     for(i = 0; i < tam; i++) {
-        cout << num2[i] << endl;
+        cout &lt;&lt; num2[i] &lt;&lt; endl;
     }
 
     return 0;
@@ -406,13 +406,13 @@ int main() {
     tam = num1.size();
 
     for(i = 0; i < tam; i++) {
-        cout << num1[i] << endl;
+        cout &lt;&lt; num1[i] &lt;&lt; endl;
     }
 
-    cout << endl;
+    cout &lt;&lt; endl;
 
     for(i = 0; i < tam; i++) {
-        cout << num2[i] << endl;
+        cout &lt;&lt; num2[i] &lt;&lt; endl;
     }
 
     return 0;
@@ -426,8 +426,8 @@ int main() {
 
 <pre>
 <code>
-cout << "Primeiro valor de num1: " << num1.front() << endl;
-cout << "Último valor de num1..: " << num1.back() << endl;
+cout &lt;&lt; "Primeiro valor de num1: " &lt;&lt; num1.front() &lt;&lt; endl;
+cout &lt;&lt; "Último valor de num1..: " &lt;&lt; num1.back() &lt;&lt; endl;
 </code>
 </pre>
 
@@ -461,20 +461,20 @@ int main() {
     num2.push_back(9);
     num2.push_back(10);
 
-    cout << "Primeiro valor de num1: " << num1.front() << endl;
-    cout << "Último valor de num1..: " << num1.back() << endl;
-    cout << "Valor do meio.........: " << num1.at(num1.size() / 2) << endl;
+    cout &lt;&lt; "Primeiro valor de num1: " &lt;&lt; num1.front() &lt;&lt; endl;
+    cout &lt;&lt; "Último valor de num1..: " &lt;&lt; num1.back() &lt;&lt; endl;
+    cout &lt;&lt; "Valor do meio.........: " &lt;&lt; num1.at(num1.size() / 2) &lt;&lt; endl;
 
     tam = num1.size();
 
     for(i = 0; i < tam; i++) {
-        cout << num1[i] << endl;
+        cout &lt;&lt; num1[i] &lt;&lt; endl;
     }
 
-    cout << endl;
+    cout &lt;&lt; endl;
 
     for(i = 0; i < tam; i++) {
-        cout << num2[i] << endl;
+        cout &lt;&lt; num2[i] &lt;&lt; endl;
     }
 
     return 0;
@@ -512,21 +512,21 @@ int main() {
     num2.push_back(9);
     num2.push_back(10);
 
-    cout << "Primeiro valor de num1: " << num1.front() << endl;
-    cout << "Último valor de num1..: " << num1.back() << endl;
-    cout << "Valor do meio.........: " << num1.at(num1.size() / 2) << endl;
+    cout &lt;&lt; "Primeiro valor de num1: " &lt;&lt; num1.front() &lt;&lt; endl;
+    cout &lt;&lt; "Último valor de num1..: " &lt;&lt; num1.back() &lt;&lt; endl;
+    cout &lt;&lt; "Valor do meio.........: " &lt;&lt; num1.at(num1.size() / 2) &lt;&lt; endl;
 
     tam1 = num1.size();
     tam2 = num2.size();
 
     for(i = 0; i < tam1; i++) {
-        cout << num1[i] << endl;
+        cout &lt;&lt; num1[i] &lt;&lt; endl;
     }
 
-    cout << endl;
+    cout &lt;&lt; endl;
 
     for(i = 0; i < tam2; i++) {
-        cout << num2[i] << endl;
+        cout &lt;&lt; num2[i] &lt;&lt; endl;
     }
 
     return 0;
@@ -566,7 +566,7 @@ while(!num1.empty()) {
     num1.pop_back();
 }
     
-cout << "Novo tamanho de num1: " << num1.size() << endl;
+cout &lt;&lt; "Novo tamanho de num1: " &lt;&lt; num1.size() &lt;&lt; endl;
 
 num2.clear();
 </code>
@@ -596,7 +596,7 @@ reverse(num1.begin(), num1.end());
 <pre>
 <code>
 for(int n: num1) {
-    cout << n << endl;
+    cout &lt;&lt; n &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -613,10 +613,10 @@ num.push_back(1);
 int item = 1;
 
 if(find(num.begin(), num.end(), item) != num.end()) { // No lugar do item, coloque o item que você deseja verificar, inclua algorithm
-    cout << "O número " << item << " está no vector!" << endl;
+    cout &lt;&lt; "O número " &lt;&lt; item &lt;&lt; " está no vector!" &lt;&lt; endl;
 }
 else {
-    cout << "Número " << item << " não encontrado!" << endl;
+    cout &lt;&lt; "Número " &lt;&lt; item &lt;&lt; " não encontrado!" &lt;&lt; endl;
 }
 </code>
 </pre>

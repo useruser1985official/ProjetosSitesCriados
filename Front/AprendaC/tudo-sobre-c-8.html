@@ -57,13 +57,13 @@ float retornaTopo(struct pilha *p);
 <pre>
 <code>
 void criarPilha(struct pilha *p, int c) {
-    p->topo = -1;
-    p->capa = c;
-    p->prElem = (float*)malloc(c * sizeof(float));
+    p-&gt;topo = -1;
+    p-&gt;capa = c;
+    p-&gt;prElem = (float*)malloc(c * sizeof(float));
 }
 
 int estaVazia(struct pilha *p) {
-    if(p->topo == -1) {
+    if(p-&gt;topo == -1) {
         return 1;
     }
 
@@ -71,7 +71,7 @@ int estaVazia(struct pilha *p) {
 }
 
 int estaCheia(struct pilha *p) {
-    if(p->topo == p->capa - 1) {
+    if(p-&gt;topo == p-&gt;capa - 1) {
         return 1;
     }
 
@@ -79,19 +79,19 @@ int estaCheia(struct pilha *p) {
 }
 
 void empilhar(struct pilha *p, float v) {
-    p->topo++;
-    p->prElem[p->topo] = v;
+    p-&gt;topo++;
+    p-&gt;prElem[p-&gt;topo] = v;
 }
 
 float desempilhar(struct pilha *p) {
-    float aux = p->prElem[p->topo];
-    p->topo--;
+    float aux = p-&gt;prElem[p-&gt;topo];
+    p-&gt;topo--;
 
     return aux;
 }
 
 float retornaTopo(struct pilha *p) {
-    return p->prElem[p->topo];
+    return p-&gt;prElem[p-&gt;topo];
 }
 </code>
 </pre>
@@ -192,50 +192,50 @@ void mostrarFila(struct fila *f);
 <pre>
 <code>
 void criarFila(struct fila *f, int c) {
-    f->capac = c;
-    f->dados = (float*)malloc(f->capac * sizeof(float));
-    f->prim = 0;
-    f->ult = -1;
-    f->itens = 0;
+    f-&gt;capac = c;
+    f-&gt;dados = (float*)malloc(f-&gt;capac * sizeof(float));
+    f-&gt;prim = 0;
+    f-&gt;ult = -1;
+    f-&gt;itens = 0;
 }
 
 void inserir(struct fila *f, int v) {
-    if(f->ult == f->capac - 1) {
-        f->ult = -1;
+    if(f-&gt;ult == f-&gt;capac - 1) {
+        f-&gt;ult = -1;
     }
 
-    f->ult++;
-    f->dados[f->ult] = v;
-    f->itens++; // Item inserido
+    f-&gt;ult++;
+    f-&gt;dados[f-&gt;ult] = v;
+    f-&gt;itens++; // Item inserido
 }
 
 int remover(struct fila *f) {
-    int temp = f->dados[f->prim++];
+    int temp = f-&gt;dados[f-&gt;prim++];
 
-    if(f->prim == f->capac) {
-        f->prim = 0;
+    if(f-&gt;prim == f-&gt;capac) {
+        f-&gt;prim = 0;
     }
 
-    f->itens--; // Item retirado
+    f-&gt;itens--; // Item retirado
 
     return temp;
 }
 
 int estaVazia(struct fila *f) {
-    return f->itens == 0;
+    return f-&gt;itens == 0;
 }
 
 int estaCheia(struct fila *f) {
-    return f->itens == f->capac;
+    return f-&gt;itens == f-&gt;capac;
 }
 
 void mostrarFila(struct fila *f) {
     int cont, i;
 
-    for(cont = 0, i = f->prim; cont < f->itens; cont++) {
-        printf("%.2f\t", f->dados[i++]);
+    for(cont = 0, i = f-&gt;prim; cont < f-&gt;itens; cont++) {
+        printf("%.2f\t", f-&gt;dados[i++]);
 
-        if(i == f->capac) {
+        if(i == f-&gt;capac) {
             i = 0;
         }
     }
@@ -341,37 +341,37 @@ void mostrarLista(struct lista *l);
 <pre>
 <code>
 void criarLista(struct lista *l) {
-    l->inicio = NULL;
+    l-&gt;inicio = NULL;
 }
 
 void inserirLista(struct lista *l, float v) {
     struct nodo *novo = (struct nodo*)malloc(sizeof(struct nodo));
-    novo->valor = v;
-    novo->prox = NULL;
+    novo-&gt;valor = v;
+    novo-&gt;prox = NULL;
 
-    if(l->inicio == NULL) {
-        l->inicio = novo;
+    if(l-&gt;inicio == NULL) {
+        l-&gt;inicio = novo;
     }
     else {
-        struct nodo *aux = l->inicio;
+        struct nodo *aux = l-&gt;inicio;
 
-        while(aux->prox != NULL) {
-            aux = aux->prox;
+        while(aux-&gt;prox != NULL) {
+            aux = aux-&gt;prox;
         }
 
-        aux->prox = novo;
+        aux-&gt;prox = novo;
     }
 }
 
 float removerLista(struct lista *l) {
-    if(l->inicio == NULL) {
+    if(l-&gt;inicio == NULL) {
         printf("Lista vazia!\n");
         return -1; // valor de erro
     }
 
-    struct nodo *temp = l->inicio;
-    float valor = temp->valor;
-    l->inicio = l->inicio->prox;
+    struct nodo *temp = l-&gt;inicio;
+    float valor = temp-&gt;valor;
+    l-&gt;inicio = l-&gt;inicio-&gt;prox;
 
     free(temp);
 
@@ -379,15 +379,15 @@ float removerLista(struct lista *l) {
 }
 
 int estaVaziaLista(struct lista *l) {
-    return l->inicio == NULL;
+    return l-&gt;inicio == NULL;
 }
 
 void mostrarLista(struct lista *l) {
-    struct nodo *aux = l->inicio;
+    struct nodo *aux = l-&gt;inicio;
 
     while(aux != NULL) {
-        printf("%.2f\t", aux->valor);
-        aux = aux->prox;
+        printf("%.2f\t", aux-&gt;valor);
+        aux = aux-&gt;prox;
     }
 
     printf("\n\n");

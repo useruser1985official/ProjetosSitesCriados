@@ -50,13 +50,13 @@ class Carro {
 
         Carro(const char* n, int p): nome(n), potencia(p) { // Lista de inicialização, substituí o uso de this
             if(p < 100) {
-                this->velMax = 120;
+                this-&gt;velMax = 120;
             }
             else if(p < 200) {
-                this->velMax = 220;
+                this-&gt;velMax = 220;
             }
             else {
-                this->velMax = 350;
+                this-&gt;velMax = 350;
             }
         }
 };
@@ -72,7 +72,7 @@ class Carro {
 int main() {
     Carro c1{"Corsa", 90}; // Sempre na ordem dos atributos na classe
 
-    cout << c1.nome << " - " << c1.potencia << " - " << c1.velMax << endl;
+    cout &lt;&lt; c1.nome &lt;&lt; " - " &lt;&lt; c1.potencia &lt;&lt; " - " &lt;&lt; c1.velMax &lt;&lt; endl;
 
     // Não se usa delete para excluir esse tipo de objeto
 
@@ -92,7 +92,7 @@ int main() {
 
     // Nesse caso usamos seta por usar new
 
-    cout << c1->nome << " - " << c1->potencia << " - " << c1->velMax << endl;
+    cout &lt;&lt; c1-&gt;nome &lt;&lt; " - " &lt;&lt; c1-&gt;potencia &lt;&lt; " - " &lt;&lt; c1-&gt;velMax &lt;&lt; endl;
 
     return 0;
 }
@@ -111,9 +111,9 @@ car.emplace_back(new Carro("Corsa", 90)); // Note que nesse caso usamos emplace_
 car.emplace_back(new Carro("Vectra", 135));
 car.emplace_back(new Carro("Camaro", 200));
 
-cout << car[0]->nome << " - " << car[0]->potencia << " - " << car[0]->velMax << endl;
-cout << car[1]->nome << " - " << car[1]->potencia << " - " << car[1]->velMax << endl;
-cout << car[2]->nome << " - " << car[2]->potencia << " - " << car[2]->velMax << endl;
+cout &lt;&lt; car[0]-&gt;nome &lt;&lt; " - " &lt;&lt; car[0]-&gt;potencia &lt;&lt; " - " &lt;&lt; car[0]-&gt;velMax &lt;&lt; endl;
+cout &lt;&lt; car[1]-&gt;nome &lt;&lt; " - " &lt;&lt; car[1]-&gt;potencia &lt;&lt; " - " &lt;&lt; car[1]-&gt;velMax &lt;&lt; endl;
+cout &lt;&lt; car[2]-&gt;nome &lt;&lt; " - " &lt;&lt; car[2]-&gt;potencia &lt;&lt; " - " &lt;&lt; car[2]-&gt;velMax &lt;&lt; endl;
 </code>
 </pre>
 
@@ -127,11 +127,11 @@ cout << car[2]->nome << " - " << car[2]->potencia << " - " << car[2]->velMax << 
 <code>
 Aviao *av = new Aviao(1);
 
-av->imprimir();
+av-&gt;imprimir();
 
-av->velMax = 150;
+av-&gt;velMax = 150;
 
-av->imprimir();
+av-&gt;imprimir();
 
 delete av;
 </code>
@@ -175,7 +175,7 @@ const int Aviao::getVelMax() {
     return velMax;
 }
 void Aviao::setVelMax(int velMax) {
-    this->velMax = velMax;
+    this-&gt;velMax = velMax;
 }
 </code>
 </pre>
@@ -186,9 +186,9 @@ void Aviao::setVelMax(int velMax) {
 <code>
 Aviao *av = new Aviao(1);
 
-av->imprimir();
+av-&gt;imprimir();
 
-cout << av->getVelMax() << endl;
+cout &lt;&lt; av-&gt;getVelMax() &lt;&lt; endl;
 
 delete av;
 </code>
@@ -202,11 +202,11 @@ delete av;
 <code>
 Aviao *av = new Aviao(1);
 
-av->imprimir();
+av-&gt;imprimir();
 
-av->setVelMax(150);
+av-&gt;setVelMax(150);
 
-av->imprimir();
+av-&gt;imprimir();
 
 delete av;
 </code>
@@ -236,16 +236,16 @@ class Violao {
 };
 
 void Violao::quantCordas() {
-    std::cout << "Violão tem " << this->cordas << " Cordas!" << std::endl;
+    std::cout &lt;&lt; "Violão tem " &lt;&lt; this-&gt;cordas &lt;&lt; " Cordas!" &lt;&lt; std::endl;
 }
 
 void Violao::amplificacao() {
-    std::cout << "Violão tem Amplificação " << this->tipoAmpli << "!" << std::endl;
+    std::cout &lt;&lt; "Violão tem Amplificação " &lt;&lt; this-&gt;tipoAmpli &lt;&lt; "!" &lt;&lt; std::endl;
 }
 
 Violao::Violao() {
-    this->cordas = 6;
-    this->tipoAmpli = "Acústica";
+    this-&gt;cordas = 6;
+    this-&gt;tipoAmpli = "Acústica";
 }
 </code>
 </pre>
@@ -265,16 +265,16 @@ class Cavaquinho : public Violao {
 };
 
 void Cavaquinho::quantCordas() {
-    std::cout << "Cavaquinho tem " << this->cordas << " Cordas!" << std::endl;
+    std::cout &lt;&lt; "Cavaquinho tem " &lt;&lt; this-&gt;cordas &lt;&lt; " Cordas!" &lt;&lt; std::endl;
 }
 
 void Cavaquinho::amplificacao() {
-    std::cout << "Cavaquinho tem Amplificação " << this->tipoAmpli << "!" << std::endl;
+    std::cout &lt;&lt; "Cavaquinho tem Amplificação " &lt;&lt; this-&gt;tipoAmpli &lt;&lt; "!" &lt;&lt; std::endl;
 }
 
 Cavaquinho::Cavaquinho() {
-    this->cordas = 4;
-    this->tipoAmpli= "Acústica";
+    this-&gt;cordas = 4;
+    this-&gt;tipoAmpli= "Acústica";
 }
 </code>
 </pre>
@@ -292,16 +292,16 @@ class Guitarra : public Violao {
 };
 
 void Guitarra::quantCordas() {
-    std::cout << "Guitarra tem " << this->cordas << " Cordas!" << std::endl;
+    std::cout &lt;&lt; "Guitarra tem " &lt;&lt; this-&gt;cordas &lt;&lt; " Cordas!" &lt;&lt; std::endl;
 }
 
 void Guitarra::amplificacao() {
-    std::cout << "Guitarra tem Amplificação " << this->tipoAmpli << "!" << std::endl;
+    std::cout &lt;&lt; "Guitarra tem Amplificação " &lt;&lt; this-&gt;tipoAmpli &lt;&lt; "!" &lt;&lt; std::endl;
 }
 
 Guitarra::Guitarra() {
-    this->cordas = 6;
-    this->tipoAmpli = "Elétrica";
+    this-&gt;cordas = 6;
+    this-&gt;tipoAmpli = "Elétrica";
 }
 </code>
 </pre>
@@ -322,18 +322,18 @@ using namespace std;
 int main() {
     Violao *v = new Violao();
 
-    v->quantCordas();
-    v->amplificacao();
+    v-&gt;quantCordas();
+    v-&gt;amplificacao();
 
     Guitarra *g = new Guitarra();
 
-    g->quantCordas();
-    g->amplificacao();
+    g-&gt;quantCordas();
+    g-&gt;amplificacao();
 
     Cavaquinho *c = new Cavaquinho();
 
-    c->quantCordas();
-    c->amplificacao();
+    c-&gt;quantCordas();
+    c-&gt;amplificacao();
 
     delete v;
     delete g;
@@ -359,47 +359,47 @@ class Pessoa {
 
 
 void Pessoa::levantar() {
-    std::cout << "Vou Levantar da Cama!" << std::endl;
+    std::cout &lt;&lt; "Vou Levantar da Cama!" &lt;&lt; std::endl;
 }
 
 void Pessoa::levantar(const char* tempo) {
     std::string verif = (std::string)tempo;
 
     if(!verif.compare("Chuva") || !verif.compare("Tempestade")) {
-        std::cout << "Não vou Levantar pra Sair, está Chovendo!" << std::endl;
+        std::cout &lt;&lt; "Não vou Levantar pra Sair, está Chovendo!" &lt;&lt; std::endl;
     }
     else {
-        std::cout << "Estou Levantando, o Tempo tá Bom!" << std::endl;
+        std::cout &lt;&lt; "Estou Levantando, o Tempo tá Bom!" &lt;&lt; std::endl;
     }
 }
 
 void Pessoa::levantar(int hora, int minuto) {
     if(hora >= 10) {
-        std::cout << "Acordei muito tarde!" << std::endl;
+        std::cout &lt;&lt; "Acordei muito tarde!" &lt;&lt; std::endl;
     }
     else if(hora < 8) {
-        std::cout << "Acordei muito cedo!" << std::endl;
+        std::cout &lt;&lt; "Acordei muito cedo!" &lt;&lt; std::endl;
     }
     else {
-        std::cout << "Acordei na hora certa!" << std::endl;
+        std::cout &lt;&lt; "Acordei na hora certa!" &lt;&lt; std::endl;
     }
 }
 
 void Pessoa::levantar(bool folga) {
     if(folga == true) {
-        std::cout << "Vou dormir mais porque é folga!" << std::endl;
+        std::cout &lt;&lt; "Vou dormir mais porque é folga!" &lt;&lt; std::endl;
     }
     else {
-        std::cout << "Vou levantar pra trabalhar!" << std::endl;
+        std::cout &lt;&lt; "Vou levantar pra trabalhar!" &lt;&lt; std::endl;
     }
 }
 
 void Pessoa::levantar(float temperatura) {
     if(temperatura < 21) {
-        std::cout << "Tá frio demais pra levantar!" << std::endl;
+        std::cout &lt;&lt; "Tá frio demais pra levantar!" &lt;&lt; std::endl;
     }
     else {
-        std::cout << "A temperatura tá boa, vou levantar!" << std::endl;
+        std::cout &lt;&lt; "A temperatura tá boa, vou levantar!" &lt;&lt; std::endl;
     }
 }
 </code>
@@ -417,20 +417,20 @@ using namespace std;
 int main(){
     Pessoa *p = new Pessoa();
 
-    p->levantar();
+    p-&gt;levantar();
     
-    p->levantar("Chuva");
-    p->levantar("Sol");
+    p-&gt;levantar("Chuva");
+    p-&gt;levantar("Sol");
     
-    p->levantar(10, 30);
-    p->levantar(9, 00);
-    p->levantar(7, 15);
+    p-&gt;levantar(10, 30);
+    p-&gt;levantar(9, 00);
+    p-&gt;levantar(7, 15);
     
-    p->levantar(true);
-    p->levantar(false);
+    p-&gt;levantar(true);
+    p-&gt;levantar(false);
     
-    p->levantar(19.5f);
-    p->levantar(23.7f);
+    p-&gt;levantar(19.5f);
+    p-&gt;levantar(23.7f);
 
     delete p;
 

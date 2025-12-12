@@ -38,7 +38,7 @@
 
 <p>As funções Lambda são funções anônimas, que não tem nome e pode ser anexada à uma variável ou outra função, e podem ser declaradas em qualquer parte do código e a partir desse ponto, pode ser usada quantas vezes for necessárias, e podemos passar uma lista de variáveis externas que queremos trabalhar dentro da nossa função. E elas também não precisam ser prototipadas (declaradas) inicialmente no código, antes do main.</p>
 
-<p>As funções Lambda tem essa estrutura: <code>[capturaDeVariaveis](parâmetros)->tipoDeRetorno {corpoDaFuncao};</code>.</p>
+<p>As funções Lambda tem essa estrutura: <code>[capturaDeVariaveis](parâmetros)-&gt;tipoDeRetorno {corpoDaFuncao};</code>.</p>
 
 <p>Basicamente, criamos uma declaração Lambda assim:</p>
 
@@ -57,7 +57,7 @@ int main() {
 <pre>
 <code>
 int main() {
-    auto mensagem = [](){cout << "Introdução às Lambdas em C++!" << endl;};
+    auto mensagem = [](){cout &lt;&lt; "Introdução às Lambdas em C++!" &lt;&lt; endl;};
 
     mensagem();
 
@@ -71,9 +71,9 @@ int main() {
 <pre>
 <code>
 int main() {
-    auto maior = [](int n1, int n2)->int{return (n1 > n2) ? n1 : n2;};
+    auto maior = [](int n1, int n2)-&gt;int{return (n1 > n2) ? n1 : n2;};
 
-    cout << maior(2, 6) << endl;
+    cout &lt;&lt; maior(2, 6) &lt;&lt; endl;
 
     return 0;
 }
@@ -87,7 +87,7 @@ int main() {
 <pre>
 <code>
 int main() {
-    auto maior = [](vector&lt;int&gt; n)->int { // Importe vector
+    auto maior = [](vector&lt;int&gt; n)-&gt;int { // Importe vector
         auto m = 0;
 
         for(int x: n) {
@@ -97,7 +97,7 @@ int main() {
         return m;
     };
 
-    cout << maior({9, 8, 2, 10, 45, 20, 5, 34, 12}) << endl;
+    cout &lt;&lt; maior({9, 8, 2, 10, 45, 20, 5, 34, 12}) &lt;&lt; endl;
 
     return 0;
 }
@@ -117,9 +117,9 @@ int main() {
     x3 = 2;
     x4 = 12;
 
-    auto soma = [x1, x2, x3, x4]()->int{return x1 + x2 + x3 + x4;};
+    auto soma = [x1, x2, x3, x4]()-&gt;int{return x1 + x2 + x3 + x4;};
 
-    cout << soma() << endl;
+    cout &lt;&lt; soma() &lt;&lt; endl;
 
     return 0;
 }
@@ -137,9 +137,9 @@ int main() {
     x3 = 2;
     x4 = 12;
 
-    auto soma = [=]()->int{return x1 + x2 + x3 + x4;};
+    auto soma = [=]()-&gt;int{return x1 + x2 + x3 + x4;};
 
-    cout << soma() << endl;
+    cout &lt;&lt; soma() &lt;&lt; endl;
 
     return 0;
 }
@@ -157,7 +157,7 @@ int main() {
     x3 = 2;
     x4 = 12;
 
-    auto maior = [=](vector&lt;int&gt; n)->int { // Importe vector
+    auto maior = [=](vector&lt;int&gt; n)-&gt;int { // Importe vector
         auto m = 0;
 
         for(int x: n) {
@@ -167,7 +167,7 @@ int main() {
         return m;
     };
 
-    cout << maior({1, 2, 3, 4, 5, 6, 7, 8, 9}) << endl;
+    cout &lt;&lt; maior({1, 2, 3, 4, 5, 6, 7, 8, 9}) &lt;&lt; endl;
 
     return 0;
 }
@@ -179,7 +179,7 @@ int main() {
 <pre>
 <code>
 int main() {
-    auto soma = [](vector&lt;int&gt; n)->int { // Importe vector
+    auto soma = [](vector&lt;int&gt; n)-&gt;int { // Importe vector
         auto s = 0;
 
         for(int x: n) {
@@ -189,7 +189,7 @@ int main() {
         return s;
     };
 
-    cout << soma({1, 2, 3, 4, 5, 6, 7, 8, 9}) << endl;
+    cout &lt;&lt; soma({1, 2, 3, 4, 5, 6, 7, 8, 9}) &lt;&lt; endl;
 
     return 0;
 }
@@ -208,7 +208,7 @@ int main() {
 using namespace std;
 
 int main() {
-    cout << PI << endl;
+    cout &lt;&lt; PI &lt;&lt; endl;
 
     return 0;
 }
@@ -226,7 +226,7 @@ using namespace std;
 int main() {
     const double PI = 3.141592;
 
-    cout << PI << endl;
+    cout &lt;&lt; PI &lt;&lt; endl;
 
     return 0;
 }
@@ -245,7 +245,7 @@ int main() {
 <code>
 pair&lt;int, string&gt; par(10, "Teste"); // Inclua utility
 
-cout << par.first << " - " << par.second << endl;
+cout &lt;&lt; par.first &lt;&lt; " - " &lt;&lt; par.second &lt;&lt; endl;
 </code>
 </pre>
 
@@ -260,7 +260,7 @@ pair&lt;int, string&gt; par;
 par.first = 100;
 par.second = "Cursos";
 
-cout << par.first << " - " << par.second << endl;
+cout &lt;&lt; par.first &lt;&lt; " - " &lt;&lt; par.second &lt;&lt; endl;
 </code>
 </pre>
 
@@ -298,7 +298,7 @@ pares[1] = make_pair(200, "C++");
 pares[2] = make_pair(300, "Pair");
 
 for(int i = 0; i < 3; i++) {
-    cout << pares[i].first << " - " << pares[i].second << endl;
+    cout &lt;&lt; pares[i].first &lt;&lt; " - " &lt;&lt; pares[i].second &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -314,7 +314,7 @@ produtos[1] = make_pair(20, make_pair("Teclado", 50.49));
 produtos[2] = make_pair(30, make_pair("Monitor", 399.98));
 
 for(int i = 0; i < 3; i++) {
-    cout << produtos[i].first << " - " << produtos[i].second.first << " - " << produtos[i].second.second << endl;
+    cout &lt;&lt; produtos[i].first &lt;&lt; " - " &lt;&lt; produtos[i].second.first &lt;&lt; " - " &lt;&lt; produtos[i].second.second &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -332,7 +332,7 @@ prod.push_back(make_pair(20, "Teclado"));
 prod.push_back(make_pair(30, "Monitor"));
 
 for(int i = 0; i < prod.size(); i++) {
-    cout << prod[i].first << " - " << prod[i].second << endl;
+    cout &lt;&lt; prod[i].first &lt;&lt; " - " &lt;&lt; prod[i].second &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -342,7 +342,7 @@ for(int i = 0; i < prod.size(); i++) {
 <pre>
 <code>
 for(auto i: prod) {
-    cout << i.first << " - " << i.second << endl;
+    cout &lt;&lt; i.first &lt;&lt; " - " &lt;&lt; i.second &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -373,7 +373,7 @@ prod[2] = "Monitor";
 prod[3] = "Caixa";
 
 for(int i = 0; i < 4; i++) {
-    cout << prod[i] << endl;
+    cout &lt;&lt; prod[i] &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -392,7 +392,7 @@ prod[2] = "Monitor";
 prod[3] = "Caixa";
 
 for(auto it = prod.begin(); it != prod.end(); it++) {
-    cout << it->first << " - " << it->second << endl;
+    cout &lt;&lt; it-&gt;first &lt;&lt; " - " &lt;&lt; it-&gt;second &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -404,7 +404,7 @@ for(auto it = prod.begin(); it != prod.end(); it++) {
 <pre>
 <code>
 for(auto it: prod) {
-    cout << it.first << " - " << it.second << endl;
+    cout &lt;&lt; it.first &lt;&lt; " - " &lt;&lt; it.second &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -421,7 +421,7 @@ prod.insert(pair&lt;int, string&gt;(2, "Monitor"));
 prod.insert(pair&lt;int, string&gt;(3, "Caixa"));
 
 for(auto it: prod) {
-    cout << it.first << " - " << it.second << endl;
+    cout &lt;&lt; it.first &lt;&lt; " - " &lt;&lt; it.second &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -462,13 +462,13 @@ prod.insert(pair&lt;int, string&gt;(70, "Câmera"));
 itmap = prod.find(30);
 
 if(itmap == prod.end()) {
-    cout << "Produto não Encontrado!" << endl;
+    cout &lt;&lt; "Produto não Encontrado!" &lt;&lt; endl;
 }
 else {
-    cout << "Produto em Estoque: " << endl;
-    cout << "Código: " << itmap->first << endl;
-    cout << "Produto: " << itmap->second << endl;
-    cout << "----------------------------------" << endl;
+    cout &lt;&lt; "Produto em Estoque: " &lt;&lt; endl;
+    cout &lt;&lt; "Código: " &lt;&lt; itmap-&gt;first &lt;&lt; endl;
+    cout &lt;&lt; "Produto: " &lt;&lt; itmap-&gt;second &lt;&lt; endl;
+    cout &lt;&lt; "----------------------------------" &lt;&lt; endl;
 }
 </code>
 </pre>

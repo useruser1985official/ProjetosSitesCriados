@@ -35,15 +35,15 @@
     </tr>
     <tr>
         <td>
-            - espectador<br/>
-            - filme
+            - espectador: Gafanhoto<br/>
+            - filme: Video
         </td>
     </tr>
     <tr>
         <td>
-            + avaliar()<br/>
-            + avaliar(nota)<br/>
-            + avaliar(porc)
+            + avaliar(): void<br/>
+            + avaliar(nota: int): void<br/>
+            + avaliar(porc: float): void
         </td>
     </tr>
 </table>
@@ -140,13 +140,13 @@ public void avaliar(int nota) {
 
 public void avaliar(float porc) {
     int nova = 0;
-    if(porc <= 20) {
+    if(porc &lt;= 20) {
         nova = 3;
     }
-    else if(porc > 20 && porc <= 50) {
+    else if(porc &gt; 20 && porc &lt;= 50) {
         nova = 5;
     }
-    else if(porc > 50 && porc <= 90) {
+    else if(porc &gt; 50 && porc &lt;= 90) {
         nova = 8;
     }
     else {

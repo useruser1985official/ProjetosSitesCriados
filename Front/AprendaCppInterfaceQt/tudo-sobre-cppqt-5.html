@@ -32,15 +32,15 @@
 <pre>
 <code>
 void MainWindow::on_cbUnid_currentTextChanged(const QString &arg1) {
-    ui->lstDir->clear();
+    ui-&gt;lstDir-&gt;clear();
     
-    ui->lstDir->addItem(arg1);
+    ui-&gt;lstDir-&gt;addItem(arg1);
     
     QDir conteudo(arg1);
 
     foreach(QFileInfo qfi, conteudo.entryInfoList()) {
         if(qfi.isDir()) {
-            ui->lstDir->addItem("Pasta: " + qfi.absoluteFilePath());
+            ui-&gt;lstDir-&gt;addItem("Pasta: " + qfi.absoluteFilePath());
         }
     }
 }
@@ -54,9 +54,9 @@ void MainWindow::on_cbUnid_currentTextChanged(const QString &arg1) {
 <pre>
 <code>
 void MainWindow::on_btnAdd_clicked() {
-    local = ui->lstDir->currentItem()->text();
+    local = ui-&gt;lstDir-&gt;currentItem()-&gt;text();
 
-    QString nome = ui->txtDir->text().trimmed();
+    QString nome = ui-&gt;txtDir-&gt;text().trimmed();
 
     QDir novodir(local + "/" + nome);
 
@@ -66,19 +66,19 @@ void MainWindow::on_btnAdd_clicked() {
     else {
         novodir.mkdir(local + "/" + nome);
 
-        ui->lstDir->clear();
+        ui-&gt;lstDir-&gt;clear();
 
-        ui->lstDir->addItem(ui->cbUnid->currentText());
+        ui-&gt;lstDir-&gt;addItem(ui-&gt;cbUnid-&gt;currentText());
 
-        QDir conteudo(ui->cbUnid->currentText());
+        QDir conteudo(ui-&gt;cbUnid-&gt;currentText());
 
         foreach(QFileInfo qfi, conteudo.entryInfoList()) {
             if(qfi.isDir()) {
-                ui->lstDir->addItem("Pasta: " + qfi.absoluteFilePath());
+                ui-&gt;lstDir-&gt;addItem("Pasta: " + qfi.absoluteFilePath());
             }
         }
     }
-    ui->txtDir->clear();
+    ui-&gt;txtDir-&gt;clear();
 }
 </code>
 </pre>
@@ -88,9 +88,9 @@ void MainWindow::on_btnAdd_clicked() {
 <pre>
 <code>
 void MainWindow::on_btnRem_clicked() {
-    local = ui->lstDir->currentItem()->text();
+    local = ui-&gt;lstDir-&gt;currentItem()-&gt;text();
 
-    QString nome = ui->txtDir->text().trimmed();
+    QString nome = ui-&gt;txtDir-&gt;text().trimmed();
 
     QDir excldir(local + "/" + nome);
 
@@ -100,15 +100,15 @@ void MainWindow::on_btnRem_clicked() {
     else {
         excldir.rmdir(local + "/" + nome);
 
-        ui->lstDir->clear();
+        ui-&gt;lstDir-&gt;clear();
 
-        ui->lstDir->addItem(ui->cbUnid->currentText());
+        ui-&gt;lstDir-&gt;addItem(ui-&gt;cbUnid-&gt;currentText());
 
-        QDir conteudo(ui->cbUnid->currentText());
+        QDir conteudo(ui-&gt;cbUnid-&gt;currentText());
 
         foreach(QFileInfo qfi, conteudo.entryInfoList()) {
             if(qfi.isDir()) {
-                ui->lstDir->addItem("Pasta: " + qfi.absoluteFilePath());
+                ui-&gt;lstDir-&gt;addItem("Pasta: " + qfi.absoluteFilePath());
             }
         }
     }
@@ -127,7 +127,7 @@ void MainWindow::on_btnRem_clicked() {
 QProcess cons; // Inclua QProcess
 
 cons.start("cmd.exe");
-cons.write("echo Exemplo de Uso de linhas de comando no QT>>%userprofile%\\Desktop\\teste2.txt\n\r"); // Não esqueça do \n\r no final do write
+cons.write("echo Exemplo de Uso de linhas de comando no QT&gt;&gt;%userprofile%\\Desktop\\teste2.txt\n\r"); // Não esqueça do \n\r no final do write
 cons.write("exit\n\r");
 
 cons.waitForFinished();
@@ -146,7 +146,7 @@ cons.close();
 QProcess cons; // Inclua QProcess
 
 cons.start("bash");
-cons.write("echo \"Exemplo de Uso de linhas de comando no QT\">>~/teste2.txt\n\r"); // Não esqueça do \n\r no final do write
+cons.write("echo \"Exemplo de Uso de linhas de comando no QT\"&gt;&gt;~/teste2.txt\n\r"); // Não esqueça do \n\r no final do write
 cons.write("exit\n\r");
 
 cons.waitForFinished();
@@ -190,7 +190,7 @@ RC_FILE = arquivo.rc
 
 <pre>
 <code>
-QString senha = ui->txtSenha->text().trimmed();
+QString senha = ui-&gt;txtSenha-&gt;text().trimmed();
     
 QString encripta = QString(QCryptographicHash::hash(senha.toStdString().c_str(), QCryptographicHash::Md5).toHex()); // Inclua QCryptographicHash
 
@@ -243,14 +243,14 @@ void MainWindow::on_btnGrav_clicked() {
     }
     
     QTextStream saida(&arquivo); // Inclua QTextStream
-    QString texto = ui->plArq->toPlainText();
+    QString texto = ui-&gt;plArq-&gt;toPlainText();
     
-    saida << texto;
+    saida &lt;&lt; texto;
     
     arquivo.flush();
     arquivo.close();
 
-    ui->plArq->clear();
+    ui-&gt;plArq-&gt;clear();
 }
 </code>
 </pre>
@@ -269,7 +269,7 @@ void MainWindow::on_btnLer_clicked() {
     QTextStream entrada(&arquivo); // Inclua QTextStream
     QString texto = entrada.readAll();
 
-    ui->plArq->setPlainText(texto);
+    ui-&gt;plArq-&gt;setPlainText(texto);
 
     arquivo.close();
 }
@@ -295,7 +295,7 @@ void MainWindow::on_btnAbr_clicked() {
     QTextStream entrada(&arquivo); // Inclua QTextStream
     QString texto = entrada.readAll();
 
-    ui->plArq->setPlainText(texto);
+    ui-&gt;plArq-&gt;setPlainText(texto);
 
     arquivo.close();
 }

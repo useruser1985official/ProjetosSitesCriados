@@ -36,7 +36,7 @@
 <pre>
 <code>
 void MainWindow::on_btnClick_clicked() {
-    ui->statusBar->showMessage("Mensagem Exibida no Status!");
+    ui-&gt;statusBar-&gt;showMessage("Mensagem Exibida no Status!");
 }
 </code>
 </pre>
@@ -48,7 +48,7 @@ void MainWindow::on_btnClick_clicked() {
 <pre>
 <code>
 void MainWindow::on_btnClick_clicked() {
-    ui->statusBar->showMessage("Nome: " + ui->txtNome->text().trimmed() + " | E-mail: " + ui->txtMail->text().trimmed());
+    ui-&gt;statusBar-&gt;showMessage("Nome: " + ui-&gt;txtNome-&gt;text().trimmed() + " | E-mail: " + ui-&gt;txtMail-&gt;text().trimmed());
 }
 </code>
 </pre>
@@ -58,8 +58,8 @@ void MainWindow::on_btnClick_clicked() {
 <pre>
 <code>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
-    ui->statusBar->addPermanentWidget(ui->btnStat);
+    ui-&gt;setupUi(this);
+    ui-&gt;statusBar-&gt;addPermanentWidget(ui-&gt;btnStat);
 }
 </code>
 </pre>
@@ -70,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 <code>
 void MainWindow::on_btnStat_clicked() {
     QString msg = "Mensagem do Status";
-    ui->statusBar->showMessage(msg);
+    ui-&gt;statusBar-&gt;showMessage(msg);
     QMessageBox::about(this, "Canal", msg); // Inclua QMessageBox
 }
 </code>
@@ -85,7 +85,7 @@ void MainWindow::on_btnStat_clicked() {
 <pre>
 <code>
 void MainWindow::on_btnVerif_clicked() {
-    int num = ui->numEntr->value();
+    int num = ui-&gt;numEntr-&gt;value();
 
     int dobro = num * 2;
 
@@ -100,7 +100,7 @@ void MainWindow::on_btnVerif_clicked() {
 <pre>
 <code>
 void MainWindow::on_sliNum_actionTriggered(int action) {
-    ui->lblNum->setText(QString::number(ui->sliNum->value()));
+    ui-&gt;lblNum-&gt;setText(QString::number(ui-&gt;sliNum-&gt;value()));
 }
 </code>
 </pre>
@@ -126,9 +126,9 @@ void MainWindow::on_sliNum_actionTriggered(int action) {
 <pre>
 <code>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
     QPixmap logo(":/img/imagens/nomedaimagen.png"); // Importe QPixmap, para pegar o caminho da imagem, vá em copy path
-    ui->lblImg->setPixmap(logo);
+    ui-&gt;lblImg-&gt;setPixmap(logo);
 }
 </code>
 </pre>
@@ -144,8 +144,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 <pre>
 <code>
 void MainWindow::on_btnEntr_clicked() {
-    QString login = ui->txtLogin->text().trimmed();
-    QString senha = ui->txtSenha->text().trimmed();
+    QString login = ui-&gt;txtLogin-&gt;text().trimmed();
+    QString senha = ui-&gt;txtSenha-&gt;text().trimmed();
 
     if(!login.compare("admin") && !senha.compare("123")) {
         QMessageBox::information(this, "Login", "Bem-vindo ao Sistema!"); // inclua QMessageBox
@@ -215,9 +215,9 @@ font-size: 13pt;
 void MainWindow::on_btnVerif_clicked() {
     bool cb1, cb2, cb3;
 
-    cb1 = ui->cxVerif1->isChecked();
-    cb2 = ui->cxVerif2->isChecked();
-    cb3 = ui->cxVerif3->isChecked();
+    cb1 = ui-&gt;cxVerif1-&gt;isChecked();
+    cb2 = ui-&gt;cxVerif2-&gt;isChecked();
+    cb3 = ui-&gt;cxVerif3-&gt;isChecked();
 
     /*
     A variável msg é estática do tipo QString e é declarada
@@ -262,9 +262,9 @@ void MainWindow::on_btnVerif_clicked() {
 void MainWindow::on_btnVerif2_clicked() {
     bool cb[3];
 
-    cb[0] = ui->cxVerif1->isChecked();
-    cb[1] = ui->cxVerif2->isChecked();
-    cb[2] = ui->cxVerif3->isChecked();
+    cb[0] = ui-&gt;cxVerif1-&gt;isChecked();
+    cb[1] = ui-&gt;cxVerif2-&gt;isChecked();
+    cb[2] = ui-&gt;cxVerif3-&gt;isChecked();
 
     msg = "";
 

@@ -59,16 +59,16 @@ class Veiculo {
 
 Veiculo::Veiculo(int tp) {
     if(tp == 1) {
-        this->velMax = 200;
-        this->nome = "Carro";
+        this-&gt;velMax = 200;
+        this-&gt;nome = "Carro";
     }
     else if(tp == 2) {
-        this->velMax = 250;
-        this->nome = "Moto";
+        this-&gt;velMax = 250;
+        this-&gt;nome = "Moto";
     }
     else if(tp == 3) {
-        this->velMax = 150;
-        this->nome = "Caminhão";
+        this-&gt;velMax = 150;
+        this-&gt;nome = "Caminhão";
     }
 }
 
@@ -89,9 +89,9 @@ using namespace std;
 int main() {
     Veiculo *v1 = new Veiculo(1);
     
-    v1->velMax = 250; // Não é possível alterar por ser privado.
+    v1-&gt;velMax = 250; // Não é possível alterar por ser privado.
 
-    cout << v1->velMax; // Não é possível executar por ser privado.
+    cout &lt;&lt; v1-&gt;velMax; // Não é possível executar por ser privado.
 
     delete v1;
 
@@ -134,9 +134,9 @@ using namespace std;
 int main() {
     Veiculo *v1 = new Veiculo(1);
 
-    v1->setVelMax(250);
+    v1-&gt;setVelMax(250);
 
-    cout << v1->getVelMax();
+    cout &lt;&lt; v1-&gt;getVelMax();
 
     delete v1;
 
@@ -163,9 +163,9 @@ int main() {
     Veiculo *v2 = new Veiculo(2);
     Veiculo *v3 = new Veiculo(3);
 
-    cout << v1->getVelMax() << endl;
-    cout << v2->getVelMax() << endl;
-    cout << v3->getVelMax() << endl;
+    cout &lt;&lt; v1-&gt;getVelMax() &lt;&lt; endl;
+    cout &lt;&lt; v2-&gt;getVelMax() &lt;&lt; endl;
+    cout &lt;&lt; v3-&gt;getVelMax() &lt;&lt; endl;
 
     delete v1;
     delete v2;
@@ -210,11 +210,11 @@ void setLigado(int l);
 <pre>
 <code>
 void Veiculo::estado() {
-    if(this->getLigado()) {
-        std::cout << "Veículo " << nome << " está ligado!" << std::endl;
+    if(this-&gt;getLigado()) {
+        std::cout &lt;&lt; "Veículo " &lt;&lt; nome &lt;&lt; " está ligado!" &lt;&lt; std::endl;
     }
     else {
-        std::cout << "Veículo " << nome << " está desligado!" << std::endl;
+        std::cout &lt;&lt; "Veículo " &lt;&lt; nome &lt;&lt; " está desligado!" &lt;&lt; std::endl;
     }
 }
 </code>
@@ -234,17 +234,17 @@ int main() {
     Veiculo *v2 = new Veiculo(2);
     Veiculo *v3 = new Veiculo(3);
 
-    v1->setLigado(1);
-    v2->setLigado(0);
-    v3->setLigado(1);
+    v1-&gt;setLigado(1);
+    v2-&gt;setLigado(0);
+    v3-&gt;setLigado(1);
 
-    cout << v1->getVelMax() << endl;
-    cout << v2->getVelMax() << endl;
-    cout << v3->getVelMax() << endl;
+    cout &lt;&lt; v1-&gt;getVelMax() &lt;&lt; endl;
+    cout &lt;&lt; v2-&gt;getVelMax() &lt;&lt; endl;
+    cout &lt;&lt; v3-&gt;getVelMax() &lt;&lt; endl;
 
-    v1->estado();
-    v2->estado();
-    v3->estado();
+    v1-&gt;estado();
+    v2-&gt;estado();
+    v3-&gt;estado();
 
     delete v1;
     delete v2;
@@ -358,7 +358,7 @@ using namespace std;
 int main() {
     Veiculo *v1 = new Moto();
     
-    cout << v1->rodas << endl;
+    cout &lt;&lt; v1-&gt;rodas &lt;&lt; endl;
 
     delete v1;
 
@@ -388,12 +388,12 @@ class Veiculo {
 };
 
 void Veiculo::imp() {
-    std::cout << "Tipo de veículo: " << tipo << std::endl;
-    std::cout << "Velocidade máxima: " << velMax << std::endl;
-    std::cout << "Quantidade de rodas: " << rodas << std::endl;
-    std::cout << "Blindagem: " << blind << std::endl;
-    std::cout << "Armamento: " << arma << std::endl;
-    std::cout << "------------------------" << std::endl;
+    std::cout &lt;&lt; "Tipo de veículo: " &lt;&lt; tipo &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Velocidade máxima: " &lt;&lt; velMax &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Quantidade de rodas: " &lt;&lt; rodas &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Blindagem: " &lt;&lt; blind &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Armamento: " &lt;&lt; arma &lt;&lt; std::endl;
+    std::cout &lt;&lt; "------------------------" &lt;&lt; std::endl;
 }
 
 void Veiculo::setTipo(int tp) {
@@ -440,7 +440,7 @@ using namespace std;
 int main() {
     Veiculo *v1 = new Moto();
 
-    v1->imp();
+    v1-&gt;imp();
 
     delete v1;
 
@@ -503,9 +503,9 @@ int main() {
     Veiculo *v2 = new Carro();
     Veiculo *v3 = new Tanque();
 
-    v1->imp();
-    v2->imp();
-    v3->imp();
+    v1-&gt;imp();
+    v2-&gt;imp();
+    v3-&gt;imp();
 
     delete v1;
     delete v2;
@@ -531,7 +531,7 @@ class Herdeira : public Classe1, public Classe2 {
 <pre>
 <code>
 Classe2::Classe2(int n1, int n2, int n3) : Classe1(n1, n2) { // Indica a classe pai, no segundo parenteses são só os parâmetros do construtor da classe pai sem declaração de tipo.
-    this->num3 = n3;
+    this-&gt;num3 = n3;
 }
 </code>
 </pre>

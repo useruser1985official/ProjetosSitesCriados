@@ -101,9 +101,9 @@ require_once "Caneta.php";
 
 $c1 = new Caneta();
 
-$c1->cor = "Azul";
-$c1->ponta = 0.5;
-$c1->tampada = false;
+$c1-&gt;cor = "Azul";
+$c1-&gt;ponta = 0.5;
+$c1-&gt;tampada = false;
 
 var_dump($c1);
 </code>
@@ -131,11 +131,11 @@ require_once "Caneta.php";
 
 $c1 = new Caneta();
 
-$c1->cor = "Azul";
-$c1->ponta = 0.5;
-$c1->tampada = false;
+$c1-&gt;cor = "Azul";
+$c1-&gt;ponta = 0.5;
+$c1-&gt;tampada = false;
 
-$c1->rabiscar();
+$c1-&gt;rabiscar();
 
 // var_dump($c1);
 </code>
@@ -146,7 +146,7 @@ $c1->rabiscar();
 <pre>
 <code>
 function rabiscar() {
-    if($this->tampada == true) {
+    if($this-&gt;tampada == true) {
         echo "&lt;p&gt;ERRO! Não posso rabiscar!&lt;/p&gt;";
     }
     else {
@@ -167,11 +167,11 @@ function rabiscar() {
 <pre>
 <code>
 function tampar() {
-    $this->tampada = true;
+    $this-&gt;tampada = true;
 }
 
 function destampar() {
-    $this->tampada = false;
+    $this-&gt;tampada = false;
 } 
 </code>
 </pre>
@@ -184,10 +184,10 @@ require_once "Caneta.php";
 
 $c1 = new Caneta();
 
-$c1->cor = "Azul";
-$c1->ponta = 0.5;
-$c1->tampada = false;
-$c1->tampar();
+$c1-&gt;cor = "Azul";
+$c1-&gt;ponta = 0.5;
+$c1-&gt;tampada = false;
+$c1-&gt;tampar();
 
 var_dump($c1);
 </code>
@@ -198,9 +198,9 @@ var_dump($c1);
 <pre>
 <code>
 $c2 = new Caneta();
-$c2->cor = "Verde";
-$c2->carga = 50;
-$c2->tampar();
+$c2-&gt;cor = "Verde";
+$c2-&gt;carga = 50;
+$c2-&gt;tampar();
 
 var_dump($c2);
 </code>
@@ -224,20 +224,20 @@ var_dump($c2);
     </tr>
     <tr>
         <td>
-            + modelo<br/>
-            + cor<br/>
-            - ponta<br/>
-            # carga<br/>
-            # tampada<br/>
+            + modelo: String<br/>
+            + cor: String<br/>
+            - ponta: float<br/>
+            # carga: int<br/>
+            # tampada: boolean<br/>
         </td>
     </tr>
     <tr>
         <td>
-            + escrever()<br/>
-            + rabiscar()<br/>
-            + pintar()<br/>
-            - tampar()<br/>
-            - destampar()<br/>
+            + escrever(): void<br/>
+            + rabiscar(): void<br/>
+            + pintar(): void<br/>
+            - tampar(): void<br/>
+            - destampar(): void<br/>
         </td>
     </tr>
 </table>
@@ -283,7 +283,7 @@ protected $tampada;
 <pre>
 <code>
 public function rabiscar() {
-    if($this->tampada == true) {
+    if($this-&gt;tampada == true) {
         echo "&lt;p&gt;ERRO! Não posso rabiscar!&lt;/p&gt;";
     }
     else {
@@ -291,11 +291,11 @@ public function rabiscar() {
     }
 }
 private function tampar() {
-    $this->tampada = true;
+    $this-&gt;tampada = true;
 }
 
 private function destampar() {
-    $this->tampada = false;
+    $this-&gt;tampada = false;
 } 
 </code>
 </pre>
@@ -308,11 +308,11 @@ require_once "Caneta.php";
 
 $c1 = new Caneta();
 
-$c1->modelo = "Bic Cristal";
-$c1->cor = "Azul";
-// $c1->ponta = 0.6;
-// $c1->carga = 50;
-// $c1->tampada = true;
+$c1-&gt;modelo = "Bic Cristal";
+$c1-&gt;cor = "Azul";
+// $c1-&gt;ponta = 0.6;
+// $c1-&gt;carga = 50;
+// $c1-&gt;tampada = true;
     
 print_r($c1);
 </code>
@@ -348,16 +348,16 @@ print_r($c1);
     </tr>
     <tr>
         <td>
-            + modelo<br/>
-            - ponta<br/>
+            + modelo: String<br/>
+            - ponta: float<br/>
         </td>
     </tr>
     <tr>
         <td>
-            + getModelo()<br/>
-            + setModelo(m)<br/>
-            + getPonta()<br/>
-            + setPonta(p)<br/>
+            + getModelo(): String<br/>
+            + setModelo(m: String): void<br/>
+            + getPonta(): float<br/>
+            + setPonta(p: float): void<br/>
         </td>
     </tr>
 </table>
@@ -371,16 +371,16 @@ class Caneta {
     private $ponta;
     
     public function getModelo() {
-        return $this->modelo;
+        return $this-&gt;modelo;
     }
     public function setModelo($m) {
-        $this->modelo = $m;
+        $this-&gt;modelo = $m;
     }
     public function getPonta() {
-        return $this->ponta;
+        return $this-&gt;ponta;
     }
     public function setPonta($p) {
-        $this->ponta = $p;
+        $this-&gt;ponta = $p;
     }
 }
 </code>
@@ -403,10 +403,10 @@ print_r($c1);
 <pre>
 <code>
 $c1 = new Caneta();
-$c1->setModelo("BIC");
-// $c1->modelo = "MontBlanc";
-$c1->setPonta(0.5);
-// $c1->ponta = 0.4;
+$c1-&gt;setModelo("BIC");
+// $c1-&gt;modelo = "MontBlanc";
+$c1-&gt;setPonta(0.5);
+// $c1-&gt;ponta = 0.4;
     
 print_r($c1);
 </code>
@@ -418,7 +418,7 @@ print_r($c1);
 
 <pre>
 <code>
-echo "Eu tenho uma caneta {$c1->getModelo()} de ponta {$c1->getPonta()}.";
+echo "Eu tenho uma caneta {$c1-&gt;getModelo()} de ponta {$c1-&gt;getPonta()}.";
 </code>
 </pre>
 
@@ -431,7 +431,7 @@ echo "Eu tenho uma caneta {$c1->getModelo()} de ponta {$c1->getPonta()}.";
 <pre>
 <code>
 public function __construct() {
-    $this->cor = "Azul";
+    $this-&gt;cor = "Azul";
 }
 </code>
 </pre>
@@ -447,27 +447,27 @@ class Caneta {
     private $tampada;
     
     public function __construct() {
-        $this->cor = "Azul";
-        $this->tampar();
+        $this-&gt;cor = "Azul";
+        $this-&gt;tampar();
     }
     public function tampar() {
-        $this->tampada = true;
+        $this-&gt;tampada = true;
     }
     public function destampar() {
-        $this->tampada = false;
+        $this-&gt;tampada = false;
     }
     
     public function getModelo() {
-        return $this->modelo;
+        return $this-&gt;modelo;
     }
     public function setModelo($m) {
-        $this->modelo = $m;
+        $this-&gt;modelo = $m;
     }
     public function getPonta() {
-        return $this->ponta;
+        return $this-&gt;ponta;
     }
     public function setPonta($p) {
-        $this->ponta = $p;
+        $this-&gt;ponta = $p;
     }
 }
 </code>
@@ -492,10 +492,10 @@ print_r($c1);
 <pre>
 <code>
 public function __construct($m, $c, $p) {
-    $this->modelo = $m;
-    $this->cor = $c;
-    $this->ponta = $p;
-    $this->tampar();
+    $this-&gt;modelo = $m;
+    $this-&gt;cor = $c;
+    $this-&gt;ponta = $p;
+    $this-&gt;tampar();
 }
 </code>
 </pre>
@@ -544,7 +544,7 @@ unset($c1);
 
 <p>No PHP é possível criar métodos estáticos, que é quando podemos chamar um método de uma classe sem precisar criar um objeto, sem usar o new, apenas chamando o nome da classe seguido do método, na sintaxe <code>NomeDaClasse::nomeDoMetodo()</code>.</p>
 
-<p>No código, apenas coloque <code>static</code> antes do tipo da função que deseja ser acessada de tal forma, dentro da classe. O static pode também ser usado em atributos (sempre inicializados dentro da classe), e no código principal chamamos diretamente junto com o nome da classe, como por exemplo <code>NomeDaClasse::$nomeDoAtributo = $conteudo</code>. (lembrando que nesse caso, mudaremos o conteúdo do atributo da classe e todos os objetos criados por ela serão alterados, por compartilhamento, independente da alteração ser dentro ou fora da classe). Nesse caso, dentro da classe, ao invés do $this->, usamos <code>self::</code> nos atributos estáticos.</p>
+<p>No código, apenas coloque <code>static</code> antes do tipo da função que deseja ser acessada de tal forma, dentro da classe. O static pode também ser usado em atributos (sempre inicializados dentro da classe), e no código principal chamamos diretamente junto com o nome da classe, como por exemplo <code>NomeDaClasse::$nomeDoAtributo = $conteudo</code>. (lembrando que nesse caso, mudaremos o conteúdo do atributo da classe e todos os objetos criados por ela serão alterados, por compartilhamento, independente da alteração ser dentro ou fora da classe). Nesse caso, dentro da classe, ao invés do $this-&gt;, usamos <code>self::</code> nos atributos estáticos.</p>
 
 <p>Veja um exemplo de uso de métodos e atributos estáticos numa classe denominada Lampada:</p>
 

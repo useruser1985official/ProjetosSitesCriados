@@ -72,13 +72,13 @@ class Cachorro extends Lobo {
 require_once "Cachorro.php";
 
 $m = new Mamifero();
-$m->emitirSom();
+$m-&gt;emitirSom();
 
 $l = new Lobo();
-$l->emitirSom();
+$l-&gt;emitirSom();
 
 $c = new Cachorro();
-$c->emitirSom();
+$c-&gt;emitirSom();
 </code>
 </pre>
 
@@ -149,10 +149,10 @@ class Cachorro extends Lobo {
     }
     
     public function reagirHora($hora, $min) {
-        if($hora < 12) {
+        if($hora &lt; 12) {
             echo "&lt;p&gt;Abanar&lt;/p&gt;";
         }
-        else if($hora >= 18) {
+        else if($hora &gt;= 18) {
             echo "&lt;p&gt;Ignorar&lt;/p&gt;";
         }
         else {
@@ -169,8 +169,8 @@ class Cachorro extends Lobo {
     }
     
     public function reagirIdadePeso($idade, $peso) {
-        if($idade < 5) {
-            if($peso < 10) {
+        if($idade &lt; 5) {
+            if($peso &lt; 10) {
                 echo "&lt;p&gt;Abanar&lt;/p&gt;";
             }
             else {
@@ -178,7 +178,7 @@ class Cachorro extends Lobo {
             }
         }
         else {
-            if($peso < 10) {
+            if($peso &lt; 10) {
                 echo "&lt;p&gt;Rosnar&lt;/p&gt;";
             }
             else {
@@ -198,17 +198,17 @@ require_once "Cachorro.php";
 
 $c = new Cachorro();
 
-$c->reagirFrase("Olá");
-$c->reagirFrase("Vai Apanhar");
+$c-&gt;reagirFrase("Olá");
+$c-&gt;reagirFrase("Vai Apanhar");
 
-$c->reagirHora(11, 45);
-$c->reagirHora(20, 00);
+$c-&gt;reagirHora(11, 45);
+$c-&gt;reagirHora(20, 00);
 
-$c->reagirDono(true);
-$c->reagirDono(false);
+$c-&gt;reagirDono(true);
+$c-&gt;reagirDono(false);
 
-$c->reagirIdadePeso(2, 12.5);
-$c->reagirIdadePeso(17, 4.5);
+$c-&gt;reagirIdadePeso(2, 12.5);
+$c-&gt;reagirIdadePeso(17, 4.5);
 </code>
 </pre>
 
@@ -254,11 +254,11 @@ class Video implements AcoesVideo {
     private $reproduzindo;
     
     public function __construct($titulo) {
-        $this->titulo = $titulo;
-        $this->avaliacao = 1;
-        $this->views = 0;
-        $this->curtidas = 0;
-        $this->reproduzindo = false;
+        $this-&gt;titulo = $titulo;
+        $this-&gt;avaliacao = 1;
+        $this-&gt;views = 0;
+        $this-&gt;curtidas = 0;
+        $this-&gt;reproduzindo = false;
     }
 
     public function __destruct() {
@@ -266,54 +266,54 @@ class Video implements AcoesVideo {
     }
     
     public function like() {
-        $this->curtidas++;
+        $this-&gt;curtidas++;
     }
 
     public function pause() {
-        $this->reproduzindo = false;
+        $this-&gt;reproduzindo = false;
     }
 
     public function play() {
-        $this->reproduzindo = true;
+        $this-&gt;reproduzindo = true;
     }
     public function getTitulo() {
-        return $this->titulo;
+        return $this-&gt;titulo;
     }
 
     public function getAvaliacao() {
-        return $this->avaliacao;
+        return $this-&gt;avaliacao;
     }
 
     public function getViews() {
-        return $this->views;
+        return $this-&gt;views;
     }
 
     public function getCurtidas() {
-        return $this->curtidas;
+        return $this-&gt;curtidas;
     }
 
     public function getReproduzindo() {
-        return $this->reproduzindo;
+        return $this-&gt;reproduzindo;
     }
 
     public function setTitulo($titulo) {
-        $this->titulo = $titulo;
+        $this-&gt;titulo = $titulo;
     }
 
     public function setAvaliacao($avaliacao) {
-        $this->avaliacao = $avaliacao;
+        $this-&gt;avaliacao = $avaliacao;
     }
 
     public function setViews($views) {
-        $this->views = $views;
+        $this-&gt;views = $views;
     }
 
     public function setCurtidas($curtidas) {
-        $this->curtidas = $curtidas;
+        $this-&gt;curtidas = $curtidas;
     }
 
     public function setReproduzindo($reproduzindo) {
-        $this->reproduzindo = $reproduzindo;
+        $this-&gt;reproduzindo = $reproduzindo;
     }
 }
 </code>
@@ -350,10 +350,10 @@ abstract class Pessoa {
     protected $experiencia;
     
     public function __construct($nome, $idade, $sexo) {
-        $this->nome = $nome;
-        $this->idade = $idade;
-        $this->sexo = $sexo;
-        $this->experiencia = 0;
+        $this-&gt;nome = $nome;
+        $this-&gt;idade = $idade;
+        $this-&gt;sexo = $sexo;
+        $this-&gt;experiencia = 0;
     }
 
     public function __destruct() {
@@ -361,39 +361,39 @@ abstract class Pessoa {
     }
 
     protected function ganharExp($n){
-        $this->experiencia += $n;       
+        $this-&gt;experiencia += $n;       
     }
     
     public function getNome() {
-        return $this->nome;
+        return $this-&gt;nome;
     }
 
     public function getIdade() {
-        return $this->idade;
+        return $this-&gt;idade;
     }
 
     public function getSexo() {
-        return $this->sexo;
+        return $this-&gt;sexo;
     }
 
     public function getExperiencia() {
-        return $this->experiencia;
+        return $this-&gt;experiencia;
     }
 
     public function setNome($nome) {
-        $this->nome = $nome;
+        $this-&gt;nome = $nome;
     }
 
     public function setIdade($idade) {
-        $this->idade = $idade;
+        $this-&gt;idade = $idade;
     }
 
     public function setSexo($sexo) {
-        $this->sexo = $sexo;
+        $this-&gt;sexo = $sexo;
     }
 
     public function setExperiencia($experiencia) {
-        $this->experiencia = $experiencia;
+        $this-&gt;experiencia = $experiencia;
     }
 }
 </code>
@@ -413,8 +413,8 @@ class Gafanhoto extends Pessoa {
     
     public function __construct($nome, $idade, $sexo, $login) {
         parent::__construct($nome, $idade, $sexo); // Isso chama o construtor da classe Pessoa e permite adicionar seus dados ao Gafanhoto
-        $this->login = $login;
-        $this->totAssistido = 0;
+        $this-&gt;login = $login;
+        $this-&gt;totAssistido = 0;
     }
    
     public function __destruct() {
@@ -422,23 +422,23 @@ class Gafanhoto extends Pessoa {
     }
 
     public function assistirMaisUm() {
-        $this->totAssistido++;
+        $this-&gt;totAssistido++;
     }
     
     public function getLogin() {
-        return $this->login;
+        return $this-&gt;login;
     }
 
     public function getTotAssistido() {
-        return $this->totAssistido;
+        return $this-&gt;totAssistido;
     }
 
     public function setLogin($login) {
-        $this->login = $login;
+        $this-&gt;login = $login;
     }
 
     public function setTotAssistido($totAssistido) {
-        $this->totAssistido = $totAssistido;
+        $this-&gt;totAssistido = $totAssistido;
     }
 }
 </code>

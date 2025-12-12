@@ -235,7 +235,7 @@ liv2 = liv1;
 
 <p>PS: Não são permitidos métodos em estruturas em C.</p>
 
-<p>Caso as estruturas sejam ponteiros, use a seta (->) ao invés do ponto. Compare os dois exemplos abaixo.</p>
+<p>Caso as estruturas sejam ponteiros, use a seta (-&gt;) ao invés do ponto. Compare os dois exemplos abaixo.</p>
 
 <p>Exemplo sem ponteiros:</p>
 
@@ -287,12 +287,12 @@ int main() {
     setlocale(LC_ALL, "portuguese");
     struct livro *liv2 = &amp;liv1; // Atribuindo ponteiro a endereço da outra variável
 
-    liv2->nome = "Tudo sobre Linguagem C";
-    liv2->autor = "Fulano da Silva";
-    liv2->paginas = 400;
-    liv2->preco = 49.99;
+    liv2-&gt;nome = "Tudo sobre Linguagem C";
+    liv2-&gt;autor = "Fulano da Silva";
+    liv2-&gt;paginas = 400;
+    liv2-&gt;preco = 49.99;
 
-    printf("O livro %s possuí %d páginas e custa R$%4.2f.", liv2->nome, liv2->paginas, liv2->preco);
+    printf("O livro %s possuí %d páginas e custa R$%4.2f.", liv2-&gt;nome, liv2-&gt;paginas, liv2-&gt;preco);
 
     free(liv2); // Excluindo ponteiro pra liberar memória
 

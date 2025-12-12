@@ -44,7 +44,7 @@
 <pre>
 <code>
 void MainWindow::on_btnClick_clicked() {
-    ui->lblText->setText("Olá Mundo!");
+    ui-&gt;lblText-&gt;setText("Olá Mundo!");
 }
 </code>
 </pre>
@@ -58,9 +58,9 @@ void MainWindow::on_btnClick_clicked() {
 <pre>
 <code>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
 
-    move(screen()->geometry().center() - frameGeometry().center()); // Inclua QScreen
+    move(screen()-&gt;geometry().center() - frameGeometry().center()); // Inclua QScreen
 }
 </code>
 </pre>
@@ -80,9 +80,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 <pre>
 <code>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
     
-    connect(ui->btnClose, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui-&gt;btnClose, SIGNAL(clicked()), this, SLOT(close()));
 }
 </code>
 </pre>
@@ -116,7 +116,7 @@ color: #ffffff;
 <code>
 void MainWindow::on_btnColor_clicked() {
     QString css = "background-color: #ff0000; color:#000000";
-    ui->lblText->setStyleSheet(css);
+    ui-&gt;lblText-&gt;setStyleSheet(css);
 }
 </code>
 </pre>
@@ -220,7 +220,7 @@ public slots:
 <pre>
 <code>
 void MainWindow::mudaTexto() {
-    ui->lblText->setText("Texto Modificado!");
+    ui-&gt;lblText-&gt;setText("Texto Modificado!");
 }
 </code>
 </pre>
@@ -230,9 +230,9 @@ void MainWindow::mudaTexto() {
 <pre>
 <code>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
+    ui-&gt;setupUi(this);
     
-    connect(ui->btnClick, SIGNAL(clicked()), this, SLOT(mudaTexto()));
+    connect(ui-&gt;btnClick, SIGNAL(clicked()), this, SLOT(mudaTexto()));
 }
 </code>
 </pre>
@@ -296,7 +296,7 @@ void MainWindow::on_btnAbrir_clicked() {
 void MainWindow::on_btnAbrir_clicked() {
     Janela2 *form2 = new Janela2(this); // inclua janela2.h com aspas 
 
-    form2->show();
+    form2-&gt;show();
 }
 </code>
 </pre>
@@ -324,7 +324,7 @@ private:
 void MainWindow::on_btnAbrir_clicked() {
     form2 = new Janela2(this);
 
-    form2->show();
+    form2-&gt;show();
 }
 </code>
 </pre>
@@ -342,9 +342,9 @@ void MainWindow::on_btnAbrir_clicked() {
 <pre>
 <code>
 void MainWindow::on_btnMost_clicked() {
-    QString nome = ui->txtNome->text();
-    QString fone = ui->txtTel->text();
-    QString mail = ui->txtMail->text();
+    QString nome = ui-&gt;txtNome-&gt;text();
+    QString fone = ui-&gt;txtTel-&gt;text();
+    QString mail = ui-&gt;txtMail-&gt;text();
     
     QMessageBox::information(this, "Dados Digitados", "Nome: " + nome + "\nTelefone: " + fone + "\nE-mail: " + mail); // Importe QMessageBox
 }
@@ -358,11 +358,11 @@ void MainWindow::on_btnMost_clicked() {
 <pre>
 <code>
 void MainWindow::on_btnLimp_clicked() {
-    ui->txtNome->clear();
-    ui->txtTel->clear();
-    ui->txtMail->clear();
+    ui-&gt;txtNome-&gt;clear();
+    ui-&gt;txtTel-&gt;clear();
+    ui-&gt;txtMail-&gt;clear();
     
-    ui->txtNome->setFocus();
+    ui-&gt;txtNome-&gt;setFocus();
 }
 </code>
 </pre>
@@ -371,9 +371,9 @@ void MainWindow::on_btnLimp_clicked() {
 
 <pre>
 <code>
-QString nome = ui->txtNome->text().trimmed();
-QString fone = ui->txtTel->text().trimmed();
-QString mail = ui->txtMail->text().trimmed();
+QString nome = ui-&gt;txtNome-&gt;text().trimmed();
+QString fone = ui-&gt;txtTel-&gt;text().trimmed();
+QString mail = ui-&gt;txtMail-&gt;text().trimmed();
 </code>
 </pre>
 

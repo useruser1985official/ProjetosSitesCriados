@@ -49,11 +49,11 @@ int n;
 n = 1;
 
 while(n <= 10) {
-    cout << n << "\n";
+    cout &lt;&lt; n &lt;&lt; "\n";
     n++;
 }
 
-cout << "\nRotina Finalizada.\n";
+cout &lt;&lt; "\nRotina Finalizada.\n";
 </code>
 </pre>
 
@@ -68,11 +68,11 @@ int cont;
 cont = 0;
 
 while(cont <= 9) {
-    cout << "Texto que será Repetido.\n";
+    cout &lt;&lt; "Texto que será Repetido.\n";
     cont++;
 }
 
-cout << "\nRotina Finalizada.\n";
+cout &lt;&lt; "\nRotina Finalizada.\n";
 </code>
 </pre>
 
@@ -85,11 +85,11 @@ int cont;
 cont = 20;
 
 while(cont >= 0) {
-    cout << "Texto que será Repetido - " << cont << "\n";
+    cout &lt;&lt; "Texto que será Repetido - " &lt;&lt; cont &lt;&lt; "\n";
     cont--;
 }
 
-cout << "\nRotina Finalizada.\n";
+cout &lt;&lt; "\nRotina Finalizada.\n";
 </code>
 </pre>
 
@@ -102,10 +102,10 @@ int cont;
 cont = 0;
 
 while(cont ++< 20) {
-    cout << "Texto que será Repetido - " << cont << "\n";
+    cout &lt;&lt; "Texto que será Repetido - " &lt;&lt; cont &lt;&lt; "\n";
 }
 
-cout << "\nRotina Finalizada.\n";
+cout &lt;&lt; "\nRotina Finalizada.\n";
 </code>
 </pre>
 
@@ -118,11 +118,11 @@ int cont;
 cont = 0;
 
 while(cont <= 20) {
-    cout << "Texto que será Repetido - " << cont << "\n";
+    cout &lt;&lt; "Texto que será Repetido - " &lt;&lt; cont &lt;&lt; "\n";
     cont += 2;
 }
 
-cout << "\nRotina Finalizada.\n";
+cout &lt;&lt; "\nRotina Finalizada.\n";
 </code>
 </pre>
 
@@ -135,14 +135,14 @@ int cont;
 cont = 0;
 
 while(true) {
-    cout << "Texto que será Repetido - " << cont << "\n";
+    cout &lt;&lt; "Texto que será Repetido - " &lt;&lt; cont &lt;&lt; "\n";
     if(cont == 10) {
         break; // Ao chegar no 10, ele parará antes.
     }
     cont++;
 }
 
-cout << "\nRotina Finalizada.\n";
+cout &lt;&lt; "\nRotina Finalizada.\n";
 </code>
 </pre>
 
@@ -167,10 +167,10 @@ int main() {
         else if(cont == 15) {
             break;
         }
-        cout << cont << " - Texto que será repetido!" << endl;
+        cout &lt;&lt; cont &lt;&lt; " - Texto que será repetido!" &lt;&lt; endl;
     }
 
-    cout << endl << "Rotina Finalizada!" << endl;
+    cout &lt;&lt; endl &lt;&lt; "Rotina Finalizada!" &lt;&lt; endl;
 
     return 0;
 }
@@ -190,12 +190,12 @@ int cont;
 cont = 22;
 
 do {
-    cout << "Texto que será Repetido - " << cont << "\n";
+    cout &lt;&lt; "Texto que será Repetido - " &lt;&lt; cont &lt;&lt; "\n";
     cont++;
 }
 while(cont <= 20);
 
-cout << "\nRotina Finalizada.\n";
+cout &lt;&lt; "\nRotina Finalizada.\n";
 </code>
 </pre>
 
@@ -212,7 +212,7 @@ cout << "\nRotina Finalizada.\n";
 int x;
 
 for(x = 0; x < 10; x++) {
-    cout << x << "\n";
+    cout &lt;&lt; x &lt;&lt; "\n";
 }
 </code>
 </pre>
@@ -224,7 +224,7 @@ for(x = 0; x < 10; x++) {
 int x, y, z;
 
 for(x = 0, y = 1, z = 0; x < 10; x++, y += 2, z += 2) {
-    cout << x << " - " << y << " - " << z << "\n";
+    cout &lt;&lt; x &lt;&lt; " - " &lt;&lt; y &lt;&lt; " - " &lt;&lt; z &lt;&lt; "\n";
 }
 </code>
 </pre>
@@ -236,7 +236,7 @@ for(x = 0, y = 1, z = 0; x < 10; x++, y += 2, z += 2) {
 int x, y, z;
 
 for(x = 0, y = 1, z = 0; x < 10 && z <= 6; x++, y += 2, z += 2) {
-    cout << x << " - " << y << " - " << z << "\n";
+    cout &lt;&lt; x &lt;&lt; " - " &lt;&lt; y &lt;&lt; " - " &lt;&lt; z &lt;&lt; "\n";
 }
 </code>
 </pre>
@@ -263,7 +263,7 @@ vetor[2] = 30;
 vetor[3] = 40;
 vetor[4] = 50;
 
-cout << vetor[0] << "\n"; // Exibirá somente o valor da posição 5 do vetor.
+cout &lt;&lt; vetor[0] &lt;&lt; "\n"; // Exibirá somente o valor da posição 5 do vetor.
 </code>
 </pre>
 
@@ -283,7 +283,7 @@ vetor[3] = 40;
 vetor[4] = 50;
 
 for(i = 0; i < 5; i++) {
-    cout << vetor[i] << "\n";
+    cout &lt;&lt; vetor[i] &lt;&lt; "\n";
 }
 </code>
 </pre>
@@ -303,7 +303,7 @@ vetor[3] = 40;
 vetor[4] = 50;
 
 for(i = 0; i < tam; i++) {
-    cout << vetor[i] << "\n";
+    cout &lt;&lt; vetor[i] &lt;&lt; "\n";
 }
 </code>
 </pre>
@@ -316,7 +316,7 @@ int vetor[5] = {10, 20, 30, 40, 50};
 int i;
 
 for(i = 0; i < 5; i++) {
-    cout << vetor[i] << "\n";
+    cout &lt;&lt; vetor[i] &lt;&lt; "\n";
 }
 </code>
 </pre>
@@ -331,7 +331,7 @@ int i;
 int tam = sizeof(vetor) / sizeof(int);
 
 for(i = 0; i < tam; i++) {
-    cout << vetor[i] << endl;
+    cout &lt;&lt; vetor[i] &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -343,7 +343,7 @@ for(i = 0; i < tam; i++) {
 int vetor[5] = {10, 20, 30, 40, 50};
 
 for(int i: vetor) {
-    cout << i << endl;
+    cout &lt;&lt; i &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -368,10 +368,10 @@ for(int cont = 1; cont < tam; cont++) {
     }
 }
 
-cout << "Elementos do array em ordem crescente:" << endl;
+cout &lt;&lt; "Elementos do array em ordem crescente:" &lt;&lt; endl;
 
 for(int i = 0; i < tam; i++) {
-    cout << numeros[i] << endl;
+    cout &lt;&lt; numeros[i] &lt;&lt; endl;
 }
 </code>
 </pre>
@@ -429,9 +429,9 @@ matriz[2][3] = 2;
 
 for(l = 0; l < 3; l++) {
     for(c = 0; c < 4; c++) {
-        cout << matriz[l][c] << " ";
+        cout &lt;&lt; matriz[l][c] &lt;&lt; " ";
     }
-    cout << "\n";
+    cout &lt;&lt; "\n";
 }
 </code>
 </pre>
@@ -461,9 +461,9 @@ for(l = 0; l < 3; l++) {
 
 for(l = 0; l < 3; l++) {
     for(c = 0; c < 4; c++) {
-        cout << matriz[l][c] << " ";
+        cout &lt;&lt; matriz[l][c] &lt;&lt; " ";
     }
-    cout << "\n";
+    cout &lt;&lt; "\n";
 }
 </code>
 </pre>
@@ -472,8 +472,8 @@ for(l = 0; l < 3; l++) {
 
 <pre>
 <code>
-cout << "Digite um valor para a posição da linha " << l << ", coluna " << c << ": ";
-cin >> matriz[l][c];
+cout &lt;&lt; "Digite um valor para a posição da linha " &lt;&lt; l &lt;&lt; ", coluna " &lt;&lt; c &lt;&lt; ": ";
+cin &gt;&gt; matriz[l][c];
 </code>
 </pre>
 

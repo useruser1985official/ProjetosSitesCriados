@@ -65,26 +65,26 @@ class Veiculo {
 <pre>
 <code>
 void Veiculo::imp() {
-    std::cout << "Nome...: " << this->nome << std::endl;
-    std::cout << "Cor....: " << this->cor << std::endl;
-    std::cout << "Rodas..: " << this->rodas << std::endl;
-    std::cout << "Vel Máx: " << this->velMax << std::endl << std::endl;
+    std::cout &lt;&lt; "Nome...: " &lt;&lt; this-&gt;nome &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Cor....: " &lt;&lt; this-&gt;cor &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Rodas..: " &lt;&lt; this-&gt;rodas &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Vel Máx: " &lt;&lt; this-&gt;velMax &lt;&lt; std::endl &lt;&lt; std::endl;
 }
 
 const char* Veiculo::getNome() {
-    return this->nome;
+    return this-&gt;nome;
 }
 
 void Veiculo::setNome(const char* nome) {
-    this->nome = nome;
+    this-&gt;nome = nome;
 }
 
 const char* Veiculo::getCor() {
-    return this->cor;
+    return this-&gt;cor;
 }
 
 void Veiculo::setCor(const char* cor) {
-    this->cor = cor;
+    this-&gt;cor = cor;
 }
 </code>
 </pre>
@@ -107,10 +107,10 @@ class Carro : public Veiculo {
 <pre>
 <code>
 Carro::Carro() {
-    this->velMax = 160;
-    this->rodas = 4;
-    this->setNome("Carro");
-    this->setCor("Branco");
+    this-&gt;velMax = 160;
+    this-&gt;rodas = 4;
+    this-&gt;setNome("Carro");
+    this-&gt;setCor("Branco");
 }
 </code>
 </pre>
@@ -133,10 +133,10 @@ class Moto : public Veiculo {
 <pre>
 <code>
 Moto::Moto() {
-    this->velMax = 200;
-    this->rodas = 2;
-    this->setNome("Moto");
-    this->setCor("Preta");
+    this-&gt;velMax = 200;
+    this-&gt;rodas = 2;
+    this-&gt;setNome("Moto");
+    this-&gt;setCor("Preta");
 }
 </code>
 </pre>
@@ -159,18 +159,18 @@ class Militar : public Veiculo {
 <pre>
 <code>
 Militar::Militar(bool arma, int municao) {
-    this->velMax = 150;
-    this->rodas = 6;
+    this-&gt;velMax = 150;
+    this-&gt;rodas = 6;
 
-    this->armamento = arma;
-    this->setNome("Tanque");
-    this->setCor("Verde");
+    this-&gt;armamento = arma;
+    this-&gt;setNome("Tanque");
+    this-&gt;setCor("Verde");
 
     if(arma) {
-        this->municao = municao;
+        this-&gt;municao = municao;
     }
     else {
-        this->municao = 0;
+        this-&gt;municao = 0;
     }
 }
 </code>
@@ -218,12 +218,12 @@ class Militar : public Veiculo {
 <pre>
 <code>
 void Militar::imp() {
-    std::cout << "Nome.......: " << this->getNome() << std::endl; // Use o getter devido ao encapsulamento
-    std::cout << "Cor........: " << this->getCor() << std::endl;
-    std::cout << "Rodas......: " << this->rodas << std::endl;
-    std::cout << "Vel Máx....: " << this->velMax << std::endl;
-    std::cout << "Armamento..: " << this->armamento << std::endl;
-    std::cout << "Municao....: " << this->municao << std::endl << std::endl;
+    std::cout &lt;&lt; "Nome.......: " &lt;&lt; this-&gt;getNome() &lt;&lt; std::endl; // Use o getter devido ao encapsulamento
+    std::cout &lt;&lt; "Cor........: " &lt;&lt; this-&gt;getCor() &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Rodas......: " &lt;&lt; this-&gt;rodas &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Vel Máx....: " &lt;&lt; this-&gt;velMax &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Armamento..: " &lt;&lt; this-&gt;armamento &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Municao....: " &lt;&lt; this-&gt;municao &lt;&lt; std::endl &lt;&lt; std::endl;
 }
 </code>
 </pre>
@@ -235,8 +235,8 @@ void Militar::imp() {
 void Militar::imp() {
     Veiculo::imp(); // Chamada do método da classe pai
 
-    std::cout << "Armamento..: " << this->armamento << std::endl;
-    std::cout << "Municao....: " << this->municao << std::endl << std::endl;
+    std::cout &lt;&lt; "Armamento..: " &lt;&lt; this-&gt;armamento &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Municao....: " &lt;&lt; this-&gt;municao &lt;&lt; std::endl &lt;&lt; std::endl;
 }
 </code>
 </pre>
@@ -251,15 +251,15 @@ void Militar::imp() {
 <code>
 Carro *c = new Carro();
 
-c->imp();
+c-&gt;imp();
 
 Moto *m = new Moto();
 
-m->imp();
+m-&gt;imp();
 
 Militar *t = new Militar(true, 500);
 
-t->imp();
+t-&gt;imp();
 
 delete c;
 delete m;
@@ -273,15 +273,15 @@ delete t;
 <code>
 Veiculo *c = new Carro();
 
-c->imp();
+c-&gt;imp();
 
 Veiculo *m = new Moto();
 
-m->imp();
+m-&gt;imp();
 
 Veiculo *t = new Militar(true, 500);
 
-t->imp();
+t-&gt;imp();
 
 delete c;
 delete m;
@@ -335,12 +335,12 @@ class Carro : public Veiculo {
 <pre>
 <code>
 Carro::Carro() {
-    this->velMax = 100; // Não podemos acessar
-    this->potencia = 150; // Não podemos acessar
-    this->rodas = 4;
-    this->nome = "Carro";
-    this->portas = 4;
-    this->cor = "Branco";
+    this-&gt;velMax = 100; // Não podemos acessar
+    this-&gt;potencia = 150; // Não podemos acessar
+    this-&gt;rodas = 4;
+    this-&gt;nome = "Carro";
+    this-&gt;portas = 4;
+    this-&gt;cor = "Branco";
 }
 </code>
 </pre>

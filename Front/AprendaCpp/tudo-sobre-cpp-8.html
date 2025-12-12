@@ -84,10 +84,10 @@ int main() {
     car1.pot = 450;
     car1.velMax = 350;
 
-    cout << car1.nome << endl;
-    cout << car1.cor << endl;
-    cout << car1.pot << endl;
-    cout << car1.velMax << endl;
+    cout &lt;&lt; car1.nome &lt;&lt; endl;
+    cout &lt;&lt; car1.cor &lt;&lt; endl;
+    cout &lt;&lt; car1.pot &lt;&lt; endl;
+    cout &lt;&lt; car1.velMax &lt;&lt; endl;
 
     return 0;
 }
@@ -122,11 +122,11 @@ struct carro {
     }
     
     void mostra() {
-        cout << "Nome.............: " << nome << endl;
-        cout << "Cor..............: " << cor << endl;
-        cout << "Potência.........: " << pot << endl;
-        cout << "Velocidade Atual.: " << vel << endl;
-        cout << "Velocidade Máxima: " << velMax << endl << endl;
+        cout &lt;&lt; "Nome.............: " &lt;&lt; nome &lt;&lt; endl;
+        cout &lt;&lt; "Cor..............: " &lt;&lt; cor &lt;&lt; endl;
+        cout &lt;&lt; "Potência.........: " &lt;&lt; pot &lt;&lt; endl;
+        cout &lt;&lt; "Velocidade Atual.: " &lt;&lt; vel &lt;&lt; endl;
+        cout &lt;&lt; "Velocidade Máxima: " &lt;&lt; velMax &lt;&lt; endl &lt;&lt; endl;
     }
     
     void mudaVel(int mv) {
@@ -243,8 +243,8 @@ int num = 4;
 int *pn; // Criação do ponteiro.
 pn = &amp;num; // Atribui o endereço de num à pn (e não o valor).
 
-cout << pn << endl; // Imprimirá o endereço de memória da variável apontada, e não o valor.
-cout << *pn << endl; // Imprime o valor armazenado no endereço da variável apontada (num).
+cout &lt;&lt; pn &lt;&lt; endl; // Imprimirá o endereço de memória da variável apontada, e não o valor.
+cout &lt;&lt; *pn &lt;&lt; endl; // Imprime o valor armazenado no endereço da variável apontada (num).
 </code>
 </pre>
 
@@ -264,7 +264,7 @@ int main() {
     string veiculo = "Carro";
     string *pv;
 
-    cout << veiculo << endl;
+    cout &lt;&lt; veiculo &lt;&lt; endl;
 
     return 0;
 }
@@ -285,8 +285,8 @@ int main() {
     
     pv = &amp;veiculo; // Ele recebe o endereço da variavel veículo, que é indicada pelo e comercial, não os valores.
 
-    cout << pv << endl; // Imprime o endereço, não o valor da variável apontada
-    cout << &amp;veiculo << endl; // É o mesmo endereço acima.
+    cout &lt;&lt; pv &lt;&lt; endl; // Imprime o endereço, não o valor da variável apontada
+    cout &lt;&lt; &amp;veiculo &lt;&lt; endl; // É o mesmo endereço acima.
 
     return 0;
 }
@@ -305,13 +305,13 @@ int main() {
 
     pv = &amp;veiculo;
 	
-    cout << veiculo << endl; // Imprime o valor de veiculo.
-    cout << *pv << endl; // Imprime também o valor de veiculo.
+    cout &lt;&lt; veiculo &lt;&lt; endl; // Imprime o valor de veiculo.
+    cout &lt;&lt; *pv &lt;&lt; endl; // Imprime também o valor de veiculo.
 
     *pv = "Moto"; // Ele adicionará esse valor ao endereço apontado (no caso, veiculo).
 
-    cout << veiculo << endl; // Imprimiu o novo valor.
-    cout << *pv << endl; // Imprime também o valor de veiculo já alterado.
+    cout &lt;&lt; veiculo &lt;&lt; endl; // Imprimiu o novo valor.
+    cout &lt;&lt; *pv &lt;&lt; endl; // Imprime também o valor de veiculo já alterado.
 
     return 0;
 }
@@ -331,11 +331,11 @@ int *pont;
 
 pont = &amp;num;
 
-cout << "Endereço de num............: " << &num << endl;
-cout << "Conteúdo de num............: " << num << endl;
-cout << "Endereço de pont...........: " << &pont << endl;
-cout << "Endereço apontado por pont.: " << pont << endl;
-cout << "Conteúdo apontado por pont.: " << *pont << endl;
+cout &lt;&lt; "Endereço de num............: " &lt;&lt; &num &lt;&lt; endl;
+cout &lt;&lt; "Conteúdo de num............: " &lt;&lt; num &lt;&lt; endl;
+cout &lt;&lt; "Endereço de pont...........: " &lt;&lt; &pont &lt;&lt; endl;
+cout &lt;&lt; "Endereço apontado por pont.: " &lt;&lt; pont &lt;&lt; endl;
+cout &lt;&lt; "Conteúdo apontado por pont.: " &lt;&lt; *pont &lt;&lt; endl;
 </code>
 </pre>
 
@@ -351,8 +351,8 @@ delete pont;
 
 <pre>
 <code>
-cout << sizeof(num) << endl;
-cout << sizeof(pont) << endl;
+cout &lt;&lt; sizeof(num) &lt;&lt; endl;
+cout &lt;&lt; sizeof(pont) &lt;&lt; endl;
 </code>
 </pre>
 
@@ -396,7 +396,7 @@ int main() {
 
     p = &amp;vetor[0];
 
-    cout << p << endl;
+    cout &lt;&lt; p &lt;&lt; endl;
 
     return 0;
 }
@@ -413,15 +413,15 @@ int main() {
 
     p = &vetor[0];
 
-    cout << p << endl;
+    cout &lt;&lt; p &lt;&lt; endl;
 
     p = &vetor[1];
 
-    cout << p << endl;
+    cout &lt;&lt; p &lt;&lt; endl;
 
     p = &vetor[2];
 
-    cout << p << endl;
+    cout &lt;&lt; p &lt;&lt; endl;
 
     return 0;
 }
@@ -440,19 +440,19 @@ int main() {
 
     p = &vetor[0];
 
-    cout << p << endl;
+    cout &lt;&lt; p &lt;&lt; endl;
 
     *(p++);
-    cout << p << endl;
+    cout &lt;&lt; p &lt;&lt; endl;
 
     *(p++);
-    cout << p << endl;
+    cout &lt;&lt; p &lt;&lt; endl;
 
     *(p++);
-    cout << p << endl;
+    cout &lt;&lt; p &lt;&lt; endl;
 
     *(p++);
-    cout << p << endl;
+    cout &lt;&lt; p &lt;&lt; endl;
 
     return 0;
 }
@@ -473,7 +473,7 @@ int main() {
 
     p = &vetor[0];
     *p = 10; // Atribui o valor à posição 0 do vetor.
-    cout << vetor[0] << endl; // Exibe o valor atribuído pelo ponteiro.
+    cout &lt;&lt; vetor[0] &lt;&lt; endl; // Exibe o valor atribuído pelo ponteiro.
 
     return 0;
 }
@@ -492,11 +492,11 @@ int main() {
 
     p = &vetor[0];
     *p = 10;
-    cout << vetor[0] << endl;
+    cout &lt;&lt; vetor[0] &lt;&lt; endl;
 
     *(p++);
     *p = 20;
-    cout << vetor[1] << endl;
+    cout &lt;&lt; vetor[1] &lt;&lt; endl;
 
     return 0;
 }

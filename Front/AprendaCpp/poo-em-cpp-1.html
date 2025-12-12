@@ -56,16 +56,16 @@ class Aviao {
 
 void Aviao::ini(int tp) { // Referência a classe e o nome do método.
     if(tp == 1) {
-        this->velMax = 800;
-        this->tipo = "Jato";
+        this-&gt;velMax = 800;
+        this-&gt;tipo = "Jato";
     }
     else if(tp == 2) {
-        this->velMax = 350;
-        this->tipo = "Monomotor";
+        this-&gt;velMax = 350;
+        this-&gt;tipo = "Monomotor";
     }
     else if(tp == 3) {
-        this->velMax = 180;
-        this->tipo = "Planador";
+        this-&gt;velMax = 180;
+        this-&gt;tipo = "Planador";
     }
 }
 </code>
@@ -85,16 +85,16 @@ class Aviao {
 
         void ini(int tp) {
             if(tp == 1) {
-                this->velMax = 800;
-                this->tipo = "Jato";
+                this-&gt;velMax = 800;
+                this-&gt;tipo = "Jato";
             }
             else if(tp == 2) {
-                this->velMax = 350;
-                this->tipo = "Monomotor";
+                this-&gt;velMax = 350;
+                this-&gt;tipo = "Monomotor";
             }
             else if(tp == 3) {
-                this->velMax = 180;
-                this->tipo = "Planador";
+                this-&gt;velMax = 180;
+                this-&gt;tipo = "Planador";
             }
         }
     private:
@@ -109,9 +109,9 @@ class Aviao {
 int main() {
     Aviao *av1 = new Aviao();
 
-    av1->ini(3);
+    av1-&gt;ini(3);
 
-    cout << av1->velMax;
+    cout &lt;&lt; av1-&gt;velMax;
 
     delete av1;
 
@@ -137,13 +137,13 @@ int main() {
     av[1] = new Aviao();
     av[2] = new Aviao();
 
-    av[0]->ini(1);
-    av[1]->ini(2);
-    av[2]->ini(3);
+    av[0]-&gt;ini(1);
+    av[1]-&gt;ini(2);
+    av[2]-&gt;ini(3);
 
-    cout << av[0]->velMax << endl;
-    cout << av[1]->velMax << endl;
-    cout << av[2]->velMax << endl;
+    cout &lt;&lt; av[0]-&gt;velMax &lt;&lt; endl;
+    cout &lt;&lt; av[1]-&gt;velMax &lt;&lt; endl;
+    cout &lt;&lt; av[2]-&gt;velMax &lt;&lt; endl;
 
     delete *av; // Destruindo array com ponteiro
 
@@ -162,9 +162,9 @@ av.push_back(new Aviao());
 av.push_back(new Aviao());
 av.push_back(new Aviao());
 
-av[0]->ini(1);
-av[1]->ini(2);
-av[2]->ini(3);
+av[0]-&gt;ini(1);
+av[1]-&gt;ini(2);
+av[2]-&gt;ini(3);
 </code>
 </pre>
 
@@ -191,16 +191,16 @@ class Aviao {
 
 void Aviao::ini(int tp) { // Referência a classe e o nome do método.
     if(tp == 1) {
-        this->velMax = 800;
-        this->tipo = "Jato";
+        this-&gt;velMax = 800;
+        this-&gt;tipo = "Jato";
     }
     else if(tp == 2) {
-        this->velMax = 350;
-        this->tipo = "Monomotor";
+        this-&gt;velMax = 350;
+        this-&gt;tipo = "Monomotor";
     }
     else if(tp == 3) {
-        this->velMax = 180;
-        this->tipo = "Planador";
+        this-&gt;velMax = 180;
+        this-&gt;tipo = "Planador";
     }
 }
 
@@ -211,13 +211,13 @@ int main() {
     av[1] = new Aviao();
     av[2] = new Aviao();
 
-    av[0]->ini(1);
-    av[1]->ini(2);
-    av[2]->ini(3);
+    av[0]-&gt;ini(1);
+    av[1]-&gt;ini(2);
+    av[2]-&gt;ini(3);
 
-    cout << av[0]->velMax << endl;
-    cout << av[1]->velMax << endl;
-    cout << av[2]->velMax << endl;
+    cout &lt;&lt; av[0]-&gt;velMax &lt;&lt; endl;
+    cout &lt;&lt; av[1]-&gt;velMax &lt;&lt; endl;
+    cout &lt;&lt; av[2]-&gt;velMax &lt;&lt; endl;
 
     delete *av;
 
@@ -248,8 +248,8 @@ av.ini(1); // Usa pontos por não ser criado com new, também não usa delete
 Aviao av;
 Aviao *av2 = new Aviao();
 
-cout << sizeof(av) << endl;
-cout << sizeof(av2) << endl;
+cout &lt;&lt; sizeof(av) &lt;&lt; endl;
+cout &lt;&lt; sizeof(av2) &lt;&lt; endl;
 
 delete av2;
 </code>
@@ -272,11 +272,11 @@ class Aeroporto {
 };
 
 const Aviao *Aeroporto::getAvi() { // Não esqueça do ponteiro
-    return this->avi;
+    return this-&gt;avi;
 }
 
 void Aeroporto::setAvi(Aviao *avi) { // Não esqueça do ponteiro
-    this->avi = avi;
+    this-&gt;avi = avi;
 }
 </code>
 </pre>
@@ -291,12 +291,12 @@ void Aeroporto::setAvi(Aviao *avi) { // Não esqueça do ponteiro
 <code>
 Aviao *av = new Aviao();
 
-av->ini(1);
+av-&gt;ini(1);
 
 Aeroporto *aero = new Aeroporto();
 
-aero->setAvi(av);
-cout << aero->getAvi()->tipo << endl;
+aero-&gt;setAvi(av);
+cout &lt;&lt; aero-&gt;getAvi()-&gt;tipo &lt;&lt; endl;
 
 delete av;
 delete aero;
@@ -316,7 +316,7 @@ int main() {
     Aeroporto aero;
 
     aero.setAvi(&av); // Não esqueça do &amp; comercial
-    cout << aero.getAvi()->tipo << endl; // O tipo usa seta
+    cout &lt;&lt; aero.getAvi()-&gt;tipo &lt;&lt; endl; // O tipo usa seta
 
     return 0;
 }
