@@ -226,7 +226,7 @@ public interface FonteEnergia {
 </code>
 </pre>
 
-<p>PS: Os métodos nem sempre precisam ser void, pode ser qualquer tipo, inclusive outras classes/interfaces. Também podem ter parâmetros normalmente</p>
+<p>PS: Os métodos nem sempre precisam ser void, pode ser qualquer tipo (como <code>int</code>, <code>char</code> ou <code>boolean</code>), inclusive outras classes/interfaces. Também podem ter parâmetros normalmente. Como citado, ao exibir valores, prefira os retornar ao invés de usar métodos padrões de exibição (como o <code>System.out.println</code> do Java), usaremos aqui apenas por questões didáticas.</p>
 
 <p>E implementando essa interface, podemos ter várias classes cada uma implementando da sua forma:</p>
 
@@ -400,7 +400,7 @@ public class Mouse {
 public class Computador {
     private String marca;
     private int gb;
-    private Mouse ms; // Agregação: Computador usa um mouse externo, o "tipo" é o objeto Mouse.
+    private Mouse ms; // Agregação: Computador usa um mouse externo, o "tipo" é a classe Mouse.
 
     public Computador(String marca, int gb) {
         this.marca = marca;

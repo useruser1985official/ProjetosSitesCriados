@@ -92,6 +92,8 @@ public class Carro {
 
 <p>Dentro de qualquer método, o <code>this</code> aponta para o próprio objeto em memória. Ele é usado principalmente para diferenciar atributos do objeto de variáveis locais ou parâmetros que têm o mesmo nome. Na maioria das vezes você não precisa usá-lo, mas ele é útil quando existe ambiguidade (nome de variável local igual ao nome de atributo). Dentro de métodos numa classe, o this funciona como <q>eu, o próprio objeto</q>.</p>
 
+<p>PS: Assim como na programação estruturada, não use comandos de saída em métodos <q>void</q> para exibir dados, prefira retornar valores para não ficar <q>engessado</q> no formato de exibição da linguagem (como o console ou uma interface gráfica). Nesse caso a função deverá ter, ao invés do void, o tipo primitivo retornado, como <code>int</code>, <code>char</code> ou mesmo outros objetos (incluindo a <code>String</code>). Prefira o void para tratar dados que não são exibidos ou retornados no método especificado. Usaremos alguns prints de console em alguns métodos void aqui, mas são pra questões puramente didáticas.</p>
+
 <p>O diagrama dessa classe é esse:</p>
 
 <table>
@@ -181,7 +183,7 @@ System.out.println("Velocidade atual: " + cr2.velocidade);
 </code>
 </pre>
 
-<p>Observe que, mesmo os dois objetos sendos oriundos da mesma classe, cada objeto tem suas características e comportamentos distintos entre si.</p>
+<p>Observe que, mesmo os dois objetos sendos oriundos da mesma classe, cada objeto tem suas características e comportamentos distintos, e funcionam isoladamente entre si.</p>
 
 <p>Utilizando a mesma classe, podemos fazer por exemplo assim no código principal, utilizando arrays:</p>
 
@@ -274,7 +276,7 @@ for(int i = 0; i &lt; listaCarros.size(); i++) {
 </code>
 </pre>
 
-<p>Como visto, a orientação a objetos facilita o reuso de código, já que, uma vez pronta a classe, podemos utilizar para criarmos quantos objetos precisarmos, e o programa principal fica mais simples e natural.</p>
+<p>Como visto, a orientação a objetos facilita o reuso de código, já que, uma vez pronta a classe (mesmo que tenhamos que escrever muito pra criar tudo que precisarmos), podemos utilizar ela pra criarmos quantos objetos precisarmos, e o programa principal fica mais simples, natural e muitas vezes menor. Cada objeto funciona isolado do outro, mas eles podem se comunicar, se preciso.</p>
 
 <h3>Encapsulamento</h3>
 

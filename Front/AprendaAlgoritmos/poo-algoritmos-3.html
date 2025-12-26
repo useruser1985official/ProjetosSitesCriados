@@ -143,7 +143,7 @@ gat.miar(); // Próprio de Gato.
     </tr>
 </table>
 
-<p>Para trabalhar com construtores em heranças, temos métodos especiais para isso. No caso do Java, é o <code>super()</code>, mas outras linguagens podem ter outros nomes (no PHP é o <code>parent::__construct()</code>, no C# é o <code>base()</code>, C++ e outras linguagens chamam a classe mãe diretamente).</p>
+<p>Para trabalhar com construtores em heranças, temos métodos especiais para isso. No caso do Java, é o <code>super()</code>, mas outras linguagens podem ter outros nomes (no PHP é o <code>parent::__construct()</code>, no C# é o <code>base()</code>, C++ e outras linguagens chamam a classe mãe diretamente, como <code>Animal()</code>).</p>
 
 <p>Independente do nome, esses métodos são usados para:</p>
 
@@ -277,6 +277,8 @@ public class Verdura extends Alimento {
 }
 </code>
 </pre>
+
+<p>Para trabalhar com métodos de classes mães em heranças, temos métodos especiais para isso. Da mesma forma que usamos nos construtores, podemos usar o super como citado acima no Java (no caso ficou <code>super.consumir()</code>, no PHP ficaria algo como <code>parent::consumir()</code>, e no C# <code>base.consumir()</code>, C++ e outras linguagens chamam a classe mãe diretamente (como <code>Alimento::consumir()</code>).</p>
 
 <p>Como acontecia com as interfaces em Java, devemos colocar a notação <code>@Override</code> em métodos sobrepostos de outras classes.</p>
 

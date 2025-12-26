@@ -144,6 +144,7 @@ abstract class Mamifero {
 <pre>
 <code>
 public override void lutar() { // Método sobreescrito
+    base.lutar(); // Chamará o método da classe mãe, Mamifero, mas só pode ser usado caso não seja abstrato.
     Console.WriteLine("Humanos Lutam com Armas!");
 }
 </code>
@@ -154,7 +155,7 @@ public override void lutar() { // Método sobreescrito
 <pre>
 <code>
 public override void lutar() {
-    Console.WriteLine("Gatos Lutam Arranhando!");
+    base.lutar(); // Chamará o método da classe mãe, Mamifero, mas só pode ser usado caso não seja abstrato.    Console.WriteLine("Gatos Lutam Arranhando!");
 }
 </code>
 </pre>
