@@ -25,6 +25,153 @@
 
 <h2>Programção Orientada a Objetos em Python - Parte 1</h2>
 
+<h3>Criando Classes e Objetos na Prática</h3>
+
+<p>Como sabemos, uma variável simples é um espaço na memória, um local que fica reservado para <q>guardar</q> alguma coisa, como uma caixinha de papelão, vamos supor que esta caixinha tenha a etiqueta <q>estado</q>, e dentro dela colocamos um valor como <q>SP</q> (São Paulo), se tentarmos colocar outro valor (como <q>RJ</q>), o SP sai e dá lugar ao RJ. Exemplo:</p>
+
+<pre>
+<code>
+estado = "SP"
+estado = "RJ" # SP sai e entra RJ
+
+print(estado) # Exibe RJ
+</code>
+</pre>
+
+<p>Para guardarmos vários valores usamos variáveis compostas (como uma sequência de caixinhas com o nome <q>estados</q>), onde podemos colocar em cada uma delas um valor, com índices numerados a partir do 0 (como RJ, SP e CE), e ao acessar algo como <code>estados[2]</code> acessaremos o valor na <q>caixinha</q> 2 (no caso, CE), e podemos substituir esses valores também, isso no Python é o princípio de lista. Também temos os dicionários, onde podemos ter índices de nomes literais (como uma sequência de caixinhas com o nome <q>aluno</q> e índices como <q>nome</q>, <q>turma</q>, <q>nota</q> e <q>ativo</q>. Tanto em listas quanto em dicionários podemos ter valores de vários tipos numa mesma lista ou dicionário. Exemplos:</p>
+
+<pre>
+<code>
+estados = ["RJ", "SP", "CE"]
+
+estados[1] = "RS" # Substitui SP por RS
+
+print(estados[2]) # Exibe CE
+
+aluno = {"nome": "José", "turma": 301, "nota": 8.5, "ativo": True}
+
+print(aluno["nome"]) # Exibe José
+</code>
+</pre>
+
+<p>O maior problema em tudo isso é a separação entre dados e funções. Variáveis, tanto simples como compostas, só guardam dados. Para usar esses mesmos dados em funcionalidades, precisaríamos criar funções separadas pra isso.</p>
+
+<p>O ideal seria permitir que a variável execute funcionalidades internas, por isso que surgiu a programação orientada a objetos, que permite que a variável guarde funções também. De certa forma, um objeto é uma variável evoluída, que além de dados, guarda funcionalidades em métodos. Em outras palavras, objetos são variáveis que, além de guardar dados, podem fazer coisas com esses dados.</p>
+
+<p>PS: No Python, qualquer variável é considerada um objeto, isso geralmente acontece em muitas linguagens orientadas a objetos, mas não em todas.</p>
+
+<p>Em uma classe, devemos delimitar, por organização, as partes que colocamos os atributos, que geralmente vem primeiro, e depois os métodos. Para criar uma classe usamos a palavra <code>class</code> e por organização, deve ter a primeira letra maiúscula, com PascalCase permitido (como <code>class MinhaClasse</code>, e a tabulação é importante também, algo assim:</p>
+
+<pre>
+<code>
+class MinhaClasse:
+    # Atributos
+
+    # Métodos
+    
+obj = MinhaClasse() # Criação do objeto (instância).
+</code>
+</pre>
+
+<p>PS: Não confunda a instânciação de uma classe com a invocação de uma função, apesar dela também usar parênteses. Ela é a instanciação sim de um método, que é o construtor.</p>
+
+<p>Crie um arquivo Python e coloque esse código:</p>
+
+<pre>
+<code>
+# Declaração de classe:
+class Gafanhoto:
+    # Método construtor, onde ficará nossos atributos
+    def __init__(self):
+        # Atributos de instância
+        self.nome = ""
+        self.idade = 0
+
+    # Métodos de instância, que manipularão os atributos
+    def aniversario(self):
+        self.idade = self.idade + 1
+
+    def mensagem(self):
+        return f"{self.nome} é Gafanhoto(a) e tem {self.idade} anos de idade."
+
+# Declaração de objetos:
+</code>
+</pre>
+
+<p>O <code>self</code> será substituído pelo objeto a ser criado, e ele também deve estar em todo método da classe, inclusive o construtor.</p>
+
+<p>No caso acima, a classe é apenas um <q>molde</q> para criar os objetos, mas eles ainda não foram criados. Abaixo do comentário, crie um objeto, fora de qualquer tabulação, assim:</p>
+
+<pre>
+<code>
+# Declaração de objetos:
+g1 = Gafanhoto()
+
+print(g1.mensagem())
+</code>
+</pre>
+
+<p>No caso acima, a variável <q>g1</q> é um objeto que foi instanciado da classe Gafanhoto (que chamará automaticamente o método <code>__init__</code>, que é o construtor).</p>
+
+<p>Para chamar os atributos e métodos de um objeto, usamos o ponto, e os atributos não usam parênteses, apenas os métodos (sem o self, nesse caso).</p>
+
+<p>Claro, que como não colocamos nada nos atributos dele, ele vai mostrar uma string vazia pro nome e 0 anos de idade. Esses foram os valores iniciados dentro do construtor. Para colocar dados no objeto, fazemos assim, de forma básica:</p>
+
+<pre>
+<code>
+# Declaração de objetos:
+g1 = Gafanhoto()
+
+g1.nome = "Maria"
+g1.idade = 17
+
+print(g1.mensagem())
+</code>
+</pre>
+
+<p>Podemos utilizar os métodos assim:</p>
+
+<pre>
+<code>
+# Declaração de objetos:
+g1 = Gafanhoto()
+
+g1.nome = "Maria"
+g1.idade = 17
+
+g1.aniversario() # Adicionará 1 na idade
+
+print(g1.mensagem())
+</code>
+</pre>
+
+<p>Podemos criar outros objetos, onde um não terá vínculo com o outro, apesar de vierem da mesma classe:</p>
+
+<pre>
+<code>
+# Declaração de objetos:
+g1 = Gafanhoto()
+
+g1.nome = "Maria"
+g1.idade = 17
+
+g1.aniversario()
+
+print(g1.mensagem())
+
+g2 = Gafanhoto()
+
+g2.nome = "Mauro"
+g2.idade = 53
+
+print(g2.mensagem())
+</code>
+</pre>
+
+<p>No caso acima, os atributos e métodos serão manipulados apenas nos objetos que os chamaram, onde um não interfere no outro. Por isso que na classe têm o <code>self</code>, que significa <q>si mesmo</q>, ou seja, o próprio objeto que o chama.</p>
+
+<p>PS: Podemos criar as classes em módulos separados também.</p>
+
 <ul>
     <li><a href="poo-em-python-2.html">Continuação da Matéria!</a></li>
 </ul>
