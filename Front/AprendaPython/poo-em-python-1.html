@@ -172,6 +172,329 @@ print(g2.mensagem())
 
 <p>PS: Podemos criar as classes em módulos separados também.</p>
 
+<h3>Melhorando Classes e Criando uma Conta Bancária na Prática</h3>
+
+<p>Vamos salvar o código anterior num novo arquivo Python, e vamos melhorar esse código.</p>
+
+<p>Uma das melhorias vai ser usar métodos para manipular os atributos, pois o ideal é utilizar eles, ao invés de manipular os atributos diretamente.</p>
+
+<p>A primeira melhoria é no método construtor da classe Gafanhoto (__init__), no qual passaremos parâmetros para definir os atributos automaticamente, ao criar o objeto, assim:</p>
+
+<pre>
+<code>
+def __init__(self, n, i):
+    # Atributos de instância
+    self.nome = n
+    self.idade = i
+</code>
+</pre>
+
+<p>Nesse caso, podemos passar diretamente os atributos a serem configurados na criação do objeto, assim:</p>
+
+<pre>
+<code>
+g1 = Gafanhoto("Maria", 17)
+
+g1.aniversario()
+
+print(g1.mensagem())
+
+g2 = Gafanhoto("Mauro", 53)
+
+print(g2.mensagem())
+</code>
+</pre>
+
+<p>Com isso, ele criará os objetos da mesma forma, mas com menos linhas e mais segurança.</p>
+
+<p>No caso acima, os parâmetros no construtor são obrigatório, mas eles podem ser opcionais também, pra isso, altere o construtor assim:</p>
+
+<pre>
+<code>
+def __init__(self, n = "vazio", i = 0):
+    # Atributos de instância
+    self.nome = n
+    self.idade = i
+</code>
+</pre>
+
+<p>Dessa forma, caso não passe valores, ele receberá os valores predefinido no método construtor (no caso, a string <q>vazio</q> pra <q>n</q> e 0 para <q>i</q>.</p>
+
+<p>Podemos ver que, a alteração na classe já atualiza as características de todos os objetos oriundos do mesmo.</p>
+
+<p>Os parâmetros do construtor pode ter os mesmo nomes dos atributos da classe, assim:</p>
+
+<pre>
+<code>
+def __init__(self, nome = "vazio", idade = 0):
+    # Atributos de instância
+    self.nome = nome
+    self.idade = idade
+</code>
+</pre>
+
+<p>No caso acima, o <q>nome</q> e <q>idade</q> dos parâmetros estão <q>sozinhos</q>, e não devem ser confundidos com o nome e idade atributos da classe (estes contém o <q>self</q> antes).</p>
+
+<p>PS: Para descobrir o nome da classe, podemos fazer isso:</p>
+
+<pre>
+<code>
+print(int)
+</code>
+</pre>
+
+<p>E para ver a documentação da classe especificada, basta colocar <code>__doc__</code> na frente dela:</p>
+
+<pre>
+<code>
+print(int.__doc__)
+</code>
+</pre>
+
+<p>No entanto, isso só vale pra classes nativas do Python, por exemplo, int, str, tuple, list, e outras. Nos objetos e classes criados por nós (como a Gafanhoto), ele retornará <q>None</q>, dizendo que não tem manual, que deverá ser criados por nós mesmos. Para isso, basta colocar entre três aspas o código, nas primeiras linhas da classe, antes do restante do código, como se fazia pra documentar as funções, assim:</p>
+
+<pre>
+<code>
+class Gafanhoto:
+    """
+    Essa classe cria um Gafanhoto com nome e idade
+    
+    Para criar uma nova pessoa, use:
+    variavel = Gafanhoto(nome, idade)
+    """
+</code>
+</pre>
+
+<p>Ao mostrar um objeto puro, ele retorna o nome da classe e o endereço de memória dele, assim:</p>
+
+<pre>
+<code>
+print(g1)
+</code>
+</pre>
+
+<p>E ele mostrará algo tipo assim:</p>
+
+<pre>
+<code>
+&lt;__main__.Gafanhoto object at 0x00000291C1876E40&gt;
+</code>
+</pre>
+
+<p>Podemos personalizar a mensagem sobrescrevendo o método padrão das classes <code>__str__</code>, assim:</p>
+
+<pre>
+<code>
+def __str__(self):
+    return "Vou te mostrar uma coisa."
+</code>
+</pre>
+
+<p>No caso, por padrão, o método __str__ mostra o nome e o endereço do objeto, mas no código acima sobrescrevemos o método e escrevemos a frase especificada acima. Aí, ao executar <code>print(g1)</code> novamente, ele exibirá essa frase escrita. Sabendo isso, podemos colocar os dados do objeto nesse mesmo método, pra serem exibidos por padrão:</p>
+
+<pre>
+<code>
+def __str__(self):
+    return f"{self.nome} é Gafanhoto(a) e tem {self.idade} anos de idade."
+</code>
+</pre>
+
+<p>Assim, podemos remover tudo referente ao método mensagem, tanto na classe quanto nos objetos, e deixar o código assim:</p>
+
+<pre>
+<code>
+# Declaração de classe:
+class Gafanhoto:
+    """
+    Essa classe cria um Gafanhoto com nome e idade
+
+    Para criar uma nova pessoa, use:
+    variavel = Gafanhoto(nome, idade)
+    """
+    # Método Construtor, onde ficará nossos atributos
+    def __init__(self, nome = "vazio", idade = 0):
+        # Atributos de instância
+        self.nome = nome
+        self.idade = idade
+
+    # Métodos de Instância
+    def aniversario(self):
+        self.idade = self.idade + 1
+
+    # Métodos Sobrescritos
+    def __str__(self):
+        return f"{self.nome} é Gafanhoto(a) e tem {self.idade} anos de idade."
+
+# Declaração de objetos:
+g1 = Gafanhoto("Maria", 17)
+
+g1.aniversario()
+
+print(g1)
+
+g2 = Gafanhoto("Mauro", 53)
+
+print(g2)
+
+g3 = Gafanhoto()
+
+print(g3)
+</code>
+</pre>
+
+<p>Podemos mostrar os atributos do objeto em um dicionário, usando o atributo <code>__dict__</code>, assim:</p>
+
+<pre>
+<code>
+print(g1.__dict__)
+</code>
+</pre>
+
+<p>PS: Podemos usar o método <code>__getstate__()</code>, que funciona da mesma forma, só que este último é um método e pode ser sobrescrito na classe, assim:</p>
+
+<pre>
+<code>
+def __getstate__(self):
+    return f"Estado:\n\nnome = {self.nome}\nidade = {self.idade}"
+</code>
+</pre>
+
+<p>E assim, isso é adicionado em todos os objetos oriundos dessa classe:</p>
+
+<pre>
+<code>
+# Declaração de objetos:
+g1 = Gafanhoto("Maria", 17)
+
+g1.aniversario()
+
+print(g1.__getstate__())
+
+g2 = Gafanhoto("Mauro", 53)
+
+print(g2.__getstate__())
+
+g3 = Gafanhoto()
+
+print(g3.__getstate__())
+</code>
+</pre>
+
+<p>Para saber o nome da classe da qual um objeto se origina, coloque o atributo <code>__class__</code>, assim:</p>
+
+<pre>
+<code>
+print(g1.__class__)
+</code>
+</pre>
+
+<p>Para exemplificar o que foi aprendido até agora, vamso criar uma classe simulando uma conta bancária, para isso, crie um novo arquivo para exercício e faça assim:</p>
+
+<pre>
+<code>
+class ContaBancaria:
+    """
+    Cria uma conta bancária e permite fazer saques e depósitos
+    """
+
+    # Construtor
+    def __init__(self, id, nome, saldo = 0): # Apenas saldo é opcional, os outros são obrigatórios
+        self.id = id
+        self.titular = nome
+        self.saldo = saldo
+        print(f"Conta {self.id} criada com sucesso. Saldo atual de R${saldo:.2f}.")
+
+c1 = ContaBancaria(112, "Gustavo", 3000)
+
+print(c1)
+</code>
+</pre>
+
+<p>No caso acima, ele exibirá a classe e o endereço de memória do objeto, para ele exibir os dados do mesmo, sobrescreva na classe o método __str__ assim:</p>
+
+<pre>
+<code>
+def __str__(self):
+    return f"A conta {self.id} de {self.titular} tem R${self.saldo:.2f} de saldo."
+</code>
+</pre>
+
+<p>Podemos exibir o __doc__ assim:</p>
+
+<pre>
+<code>
+print(c1.__doc__)
+</code>
+</pre>
+
+<p>Agora, defina esses métodos de instância na classe, que por enquanto ficarão com o bloco vazio (que pro Python, deverão ter dentro apenas a palavra <code>pass</code>), assim:</p>
+
+<pre>
+<code>
+# Métodos de Instância:
+def depositar(self, valor):
+    pass
+
+def sacar(self, valor):
+    pass
+</code>
+</pre>
+
+<p>Aí, pra chamar os métodos, fazemos assim:</p>
+
+<pre>
+<code>
+c1 = ContaBancaria(112, "Gustavo", 3000)
+
+c1.depositar(500)
+c1.sacar(2000)
+
+print(c1)
+</code>
+</pre>
+
+<p>Só que, claro, ele não fará nada, para ele depositar o valor, fazemos assim no método depositar e sacar:</p>
+
+<pre>
+<code>
+def depositar(self, valor):
+    self.saldo += valor
+    print(f"Depósito de R${valor:.2f} autorizado na conta {self.id}.")
+
+def sacar(self, valor):
+    self.saldo -= valor
+    print(f"Saque de R${valor:.2f} autorizado na conta {self.id}.")
+</code>
+</pre>
+
+<p>Claro que isso é um código básico, ainda necessita várias melhorias, um exemplo é de sacar mais dinheiro do que tem na conta, por exemplo:</p>
+
+<pre>
+<code>
+c1 = ContaBancaria(112, "Gustavo", 3000)
+
+c1.depositar(500)
+c1.sacar(2_000_000) # É o mesmo que 2000000
+
+print(c1)
+</code>
+</pre>
+
+<p>No caso acima, ele sacará e ficará com um saldo negativo, mas não é assim que as contas funcionam na prática. Para isso, deveremos fazer métodos mais robustos. Veja como ficaria o método sacar, com a correção:</p>
+
+<pre>
+<code>
+def sacar(self, valor):
+    if valor > self.saldo:
+        print(f"Saque de R${valor:.2f} negado na conta {self.id}. Saldo insuficiente.")
+    else:
+        self.saldo -= valor
+        print(f"Saque de R${valor:.2f} autorizado na conta {self.id}.")
+</code>
+</pre>
+
+<p>PS: Podemos fazer outras melhorias, como colocar cores, por exemplo.</p>
+
 <ul>
     <li><a href="poo-em-python-2.html">Continuação da Matéria!</a></li>
 </ul>

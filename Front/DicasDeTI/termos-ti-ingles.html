@@ -5,7 +5,29 @@
         <link rel="icon" href="imagens/favicon.ico"/>
         <title>Tudo sobre Tecnologia da Informação</title>
         <link rel="stylesheet" href="css/estilo.css"/>
-        <script></script>
+        <script>
+            let trad = new Array();
+
+            function mostraOcultaTraducao() {
+                let tag = document.getElementsByTagName("i");
+                let bot = document.getElementById("trad");
+
+                for(let i = 0; i < tag.length; i++) {
+                    trad.push(tag[i].innerText);
+
+                    if(tag[i].innerText != "<<< TRADUÇÃO OCULTA >>>") {
+                        tag[i].innerText = "<<< TRADUÇÃO OCULTA >>>";
+
+                        bot.value = "Mostrar Traduções";
+                    }
+                    else {
+                        tag[i].innerText = trad[i];
+
+                        bot.value = "Ocultar Traduções";
+                    }
+                }
+            }
+        </script>
     </head>
     <body>
         <div id="interface">
@@ -17,8 +39,40 @@
 
 <p>Veja a tradução literal de alguns termos de programação, redes, criptografia e sistemas operacionais, em inglês:</p>
 
+<input type="button" value="Ocultar Traduções" onclick="mostraOcultaTraducao()" id="trad" style="padding: 10px"/>
+
+<h3>Menu</h3>
+
+<ul style="line-height: 0.6;">
+    <li><a href="#A">A</a></li>
+    <li><a href="#B">B</a></li>
+    <li><a href="#C">C</a></li>
+    <li><a href="#D">D</a></li>
+    <li><a href="#E">E</a></li>
+    <li><a href="#F">F</a></li>
+    <li><a href="#G">G</a></li>
+    <li><a href="#H">H</a></li>
+    <li><a href="#I">I</a></li>
+    <li><a href="#J">J</a></li>
+    <li><a href="#K">K</a></li>
+    <li><a href="#L">L</a></li>
+    <li><a href="#M">M</a></li>
+    <li><a href="#N">N</a></li>
+    <li><a href="#O">O</a></li>
+    <li><a href="#P">P</a></li>
+    <li><a href="#Q">Q</a></li>
+    <li><a href="#R">R</a></li>
+    <li><a href="#S">S</a></li>
+    <li><a href="#T">T</a></li>
+    <li><a href="#U">U</a></li>
+    <li><a href="#V">V</a></li>
+    <li><a href="#W">W</a></li>
+    <li><a href="#Y">Y</a></li>
+    <li><a href="#Cores">Cores</a></li>
+</ul>
+
 <ul>
-    <li><b>A</b></li>
+    <li id="A"><b>A</b></li>
     <ul>
         <!--
         <li><b></b>: <i></i>.</li>
@@ -40,6 +94,7 @@
         <li><b>AGAIN</b>: <i>De Novo</i>.</li>
         <li><b>ALERT</b>: <i>Alerta</i>.</li>
         <li><b>ALIGN</b>: <i>Alinhar</i>.</li>
+        <li><b>ALL</b>: <i>Tudo/Todos</i>.</li>
         <li><b>ALLOW</b>: <i>Permitir/Habilitar</i>.</li>
         <li><b>ALTER</b>: <i>Alterar</i>.</li>
         <li><b>ALTERNATE</b>: <i>Alternar</i>.</li>
@@ -71,7 +126,7 @@
         <li><b>AVERAGE</b>: <i>Média</i>.</li>
         <li><b>AXIS</b>: <i>Eixo</i>.</li>
     </ul>
-    <li><b>B</b></li>
+    <li id="B"><b>B</b></li>
     <ul>
         <li><b>BACK</b>: <i>Fundo</i>.</li>
         <li><b>BAR</b>: <i>Barra</i>.</li>
@@ -85,7 +140,7 @@
         <li><b>BLANK</b>: <i>Em Branco</i>.</li>
         <li><b>BLOCK</b>: <i>Bloco/Bloquear</i>.</li>
         <li><b>BODY</b>: <i>Corpo</i>.</li>
-        <li><b>BOLD</b>: <i>Negrito (Grosso)</i>.</li>
+        <li><b>BOLD</b>: <i>Negrito/Grosso</i>.</li>
         <li><b>BOOLEAN</b>: <i>Lógico</i>.</li>
         <li><b>BORDER</b>: <i>Borda</i>.</li>
         <li><b>BOOT</b>: <i>Pontapé</i>.</li>
@@ -104,7 +159,7 @@
         <li><b>BUTTON</b>: <i>Botão</i>.</li>
         <li><b>BY</b>: <i>Por</i>.</li>
     </ul>
-    <li><b>C</b></li>
+    <li id="C"><b>C</b></li>
     <ul>
         <li><b>CACHE</b>: <i>Provisões</i>.</li>
         <li><b>CALL</b>: <i>Chamar</i>.</li>
@@ -165,7 +220,7 @@
         <li><b>CURRENT</b>: <i>Atual</i>.</li>
         <li><b>CUT</b>: <i>Recortar</i>.</li>
     </ul>
-    <li><b>D</b></li>
+    <li id="D"><b>D</b></li>
     <ul>
         <li><b>DARK</b>: <i>Escuro</i>.</li> 
         <li><b>DATA</b>: <i>Dados</i>.</li>
@@ -184,6 +239,7 @@
         <li><b>DELEGATE</b>: <i>Delegar/Conceder Algo</i>.</li>
         <li><b>DELETE</b>: <i>Excluir</i>.</li>
         <li><b>DELIMITER</b>: <i>Delimitador</i>.</li>
+        <li><b>DEMODULATE</b>: <i>Demodular</i>.</li>
         <li><b>DESCENDING</b>: <i>Descendente</i>.</li>
         <li><b>DESCRIBE</b>: <i>Descrever</i>.</li>
         <li><b>DESK</b>: <i>Mesa</i>.</li>
@@ -220,7 +276,7 @@
         <li><b>DUMP</b>: <i>Despejar</i>.</li>
         <li><b>DYNAMIC</b>: <i>Dinâmico</i>.</li>
     </ul>
-    <li><b>E</b></li>
+    <li id="E"><b>E</b></li>
     <ul>
         <li><b>EACH</b>: <i>Cada</i>.</li>
         <li><b>ECHO</b>: <i>Eco</i>.</li>
@@ -260,7 +316,7 @@
         <li><b>EXTENSION</b>: <i>Extensão</i>.</li>
         <li><b>EXTRACT</b>: <i>Extrair</i>.</li>
     </ul>
-    <li><b>F</b></li>
+    <li id="F"><b>F</b></li>
     <ul>
         <li><b>FACTORY</b>: <i>Fábrica</i>.</li>
         <li><b>FADE</b>: <i>Desaparecer</i>.</li>
@@ -310,7 +366,7 @@
         <li><b>FULL</b>: <i>Cheio/Completo</i>.</li>
         <li><b>FUNCTION</b>: <i>Função</i>.</li>
     </ul>
-    <li><b>G</b></li>
+    <li id="G"><b>G</b></li>
     <ul>
         <li><b>GET</b>: <i>Pegar</i>.</li>
         <li><b>GLOBAL</b>: <i>Global</i>.</li>
@@ -322,7 +378,7 @@
         <li><b>GROUND</b>: <i>Base</i>.</li>
         <li><b>GROUP</b>: <i>Grupo</i>.</li>
     </ul>
-    <li><b>H</b></li>
+    <li id="H"><b>H</b></li>
     <ul>
         <li><b>HALF</b>: <i>Metade/Meio</i>.</li>
         <li><b>HARD</b>: <i>Duro/Pesado</i>.</li>
@@ -345,8 +401,9 @@
         <li><b>HOUR</b>: <i>Hora</i>.</li>
         <li><b>HOVER</b>: <i>Pairar/Mover Sobre</i>.</li>
         <li><b>HOW</b>: <i>Como</i>.</li>
+        <li><b>HUB</b>: <i>Eixo/Ponto Central</i>.</li>
     </ul>
-    <li><b>I</b></li>
+    <li id="I"><b>I</b></li>
     <ul>
         <li><b>ICON</b>: <i>Ícone</i>.</li>
         <li><b>IDENTIFICATION</b>: <i>Identificação</i>.</li>
@@ -382,16 +439,16 @@
         <li><b>INTO</b>: <i>Em/Para Dentro</i>.</li>
         <li><b>IS</b>: <i>É</i>.</li>
         <li><b>ISSUE</b>: <i>Problema/Emitir</i>.</li>
-        <li><b>ITALIC</b>: <i>Itálico (Inclinado)</i>.</li>
+        <li><b>ITALIC</b>: <i>Itálico/Inclinado</i>.</li>
         <li><b>ITEM</b>: <i>Item</i>.</li>
         <li><b>ITERATE</b>: <i>Iterar/Fazer Outra Vez</i>.</li>
     </ul>
-    <li><b>J</b></li>
+    <li id="J"><b>J</b></li>
     <ul>
         <li><b>JOIN</b>: <i>Juntar</i>.</li>
         <li><b>JUSTIFY</b>: <i>Justificar</i>.</li>
     </ul>
-    <li><b>K</b></li>
+    <li id="K"><b>K</b></li>
     <ul>
         <li><b>KEEP</b>: <i>Manter</i>.</li>
         <li><b>KEY</b>: <i>Chave</i>.</li>
@@ -399,7 +456,7 @@
         <li><b>KILL</b>: <i>Matar</i>.</li>
         <li><b>KIT</b>: <i>Conjunto/Coleção</i>.</li>
     </ul>
-    <li><b>L</b></li>
+    <li id="L"><b>L</b></li>
     <ul>
         <li><b>LABEL</b>: <i>Rótulo</i>.</li>
         <li><b>LANDSCAPE</b>: <i>Paisagem</i>.</li>
@@ -437,7 +494,7 @@
         <li><b>LOW</b>: <i>Baixo</i>.</li>
         <li><b>LOWER</b>: <i>Inferior</i>.</li>
     </ul>
-    <li><b>M</b></li>
+    <li id="M"><b>M</b></li>
     <ul>
         <li><b>MAIL</b>: <i>Correio</i>.</li>
         <li><b>MAIN</b>: <i>Principal</i>.</li>
@@ -464,13 +521,15 @@
         <li><b>MISTAKE</b>: <i>Erro</i>.</li>
         <li><b>MODEL</b>: <i>Modelo</i>.</li>
         <li><b>MODIFY</b>: <i>Modificar</i>.</li>
+        <li><b>MODULATE</b>: <i>Modular</i>.</li>
+        <li><b>MODULE</b>: <i>Módulo (Algo Organizado ou Resto de Divisão)</i>.</li>
         <li><b>MONTH</b>: <i>Mês</i>.</li>
         <li><b>MORE</b>: <i>Mais</i>.</li>
         <li><b>MOVE</b>: <i>Mover</i>.</li>
         <li><b>MULTIPLICATION</b>: <i>Multiplicação</i>.</li>
         <li><b>MUTED</b>: <i>Mudo</i>.</li>
     </ul>
-    <li><b>N</b></li>
+    <li id="N"><b>N</b></li>
     <ul>
         <li><b>NAME</b>: <i>Nome</i>.</li>
         <li><b>NAV</b>: <i>Navegação</i>.</li>
@@ -484,7 +543,7 @@
         <li><b>NULL</b>: <i>Nulo</i>.</li>
         <li><b>NUMBER</b>: <i>Número</i>.</li>
     </ul>
-    <li><b>O</b></li>
+    <li id="O"><b>O</b></li>
     <ul>
         <li><b>OBJECT</b>: <i>Objeto</i>.</li>
         <li><b>ODD</b>: <i>Ímpar</i>.</li>
@@ -511,7 +570,7 @@
         <li><b>OVERRIDE</b>: <i>Sobrepôr</i>.</li>
         <li><b>OWNER</b>: <i>Proprietário</i>.</li>
     </ul>
-    <li><b>P</b></li>
+    <li id="P"><b>P</b></li>
     <ul>
         <li><b>PACKAGE/PACKET</b>: <i>Pacote</i>.</li>
         <li><b>PADDING</b>: <i>Preenchimento</i>.</li>
@@ -571,7 +630,7 @@
         <li><b>PURGE</b>: <i>Purgar/Purificar</i>.</li>
         <li><b>PUSH</b>: <i>Empurrar</i>.</li>
     </ul>
-    <li><b>Q</b></li>
+    <li id="Q"><b>Q</b></li>
     <ul>
         <li><b>QUERY</b>: <i>Consulta</i>.</li>
         <li><b>QUESTION</b>: <i>Pergunta</i>.</li>
@@ -579,9 +638,9 @@
         <li><b>QUIT</b>: <i>Desistir</i>.</li>
         <li><b>QUOTE</b>: <i>Citar</i>.</li>
     </ul>
-    <li><b>R</b></li>
+    <li id="R"><b>R</b></li>
     <ul>
-        <li><b>RADIAL</b>: <i>Radial</i>.</li>
+        <li><b>RADIAL</b>: <i>Radial/Relativo a Raio (Círculo)</i>.</li>
         <li><b>RADIO</b>: <i>Rádio</i>.</li>
         <li><b>RADIUS</b>: <i>Raio (Círculo)</i>.</li>
         <li><b>RAISE</b>: <i>Levantar</i>.</li>
@@ -612,7 +671,7 @@
         <li><b>REPOSITORY</b>: <i>Repositório</i>.</li>
         <li><b>REQUEST</b>: <i>Solicitar</i>.</li> 
         <li><b>REQUIRE</b>: <i>Exigir</i>.</li>
-        <li><b>RESET</b>: <i>Resetar</i>.</li>
+        <li><b>RESET</b>: <i>Resetar/Reinicializar</i>.</li>
         <li><b>RESOURCE</b>: <i>Recurso</i>.</li>
         <li><b>REST</b>: <i>Resto</i>.</li>
         <li><b>RESULT</b>: <i>Resultado</i>.</li>
@@ -629,7 +688,7 @@
         <li><b>ROW</b>: <i>Linha</i>.</li>
         <li><b>RUN</b>: <i>Correr/Executar</i>.</li>
     </ul>
-    <li><b>S</b></li>
+    <li id="S"><b>S</b></li>
     <ul>
         <li><b>SAFE</b>: <i>Seguro</i>.</li>
         <li><b>SAME</b>: <i>Mesmo</i>.</li>
@@ -722,7 +781,7 @@
         <li><b>SYNCHRONIZE</b>: <i>Sincronizar</i>.</li>
         <li><b>SYSTEM</b>: <i>Sistema</i>.</li>
     </ul>
-    <li><b>T</b></li>
+    <li id="T"><b>T</b></li>
     <ul>
         <li><b>TABLE</b>: <i>Tabela</i>.</li>
         <li><b>TAP</b>: <i>Tocar</i>.</li>
@@ -762,13 +821,14 @@
         <li><b>TUPLE</b>: <i>Tupla</i>.</li>
         <li><b>TYPE</b>: <i>Tipo</i>.</li>
     </ul>
-    <li><b>U</b></li>
+    <li id="U"><b>U</b></li>
     <ul>
         <li><b>UN</b>: <i>Não</i>.</li>
         <li><b>UNDER</b>: <i>Sob</i>.</li>
         <li><b>UNDO</b>: <i>Desfazer</i>.</li>
         <li><b>UNION</b>: <i>União</i>.</li>
         <li><b>UNIQUE</b>: <i>Único</i>.</li>
+        <li><b>UNIT</b>: <i>Unidade</i>.</li>
         <li><b>UNTIL</b>: <i>Até</i>.</li>
         <li><b>UP</b>: <i>Acima</i>.</li>
         <li><b>UPDATE/UPGRADE</b>: <i>Atualizar</i>.</li>
@@ -778,7 +838,7 @@
         <li><b>USER</b>: <i>Usuário</i>.</li>
         <li><b>USING</b>: <i>Usando</i>.</li>
     </ul>
-    <li><b>V</b></li>
+    <li id="V"><b>V</b></li>
     <ul>
         <li><b>VALUE</b>: <i>Valor</i>.</li>
         <li><b>VARIABLE</b>: <i>Variável</i>.</li>
@@ -795,7 +855,7 @@
         <li><b>VOID</b>: <i>Vazio</i>.</li>
         <li><b>VOLUME</b>: <i>Volume</i>.</li>
     </ul>
-    <li><b>W</b></li>
+    <li id="W"><b>W</b></li>
     <ul>
         <li><b>WAIT</b>: <i>Espere</i>.</li>
         <li><b>WALLET</b>: <i>Carteira</i>.</li>
@@ -814,14 +874,14 @@
         <li><b>WRITE</b>: <i>Escrever</i>.</li>
         <li><b>WRONG</b>: <i>Errado</i>.</li>
     </ul>
-    <li><b>Y</b></li>
+    <li id="Y"><b>Y</b></li>
     <ul>
         <li><b>YEAR</b>: <i>Ano</i>.</li>
         <li><b>YES</b>: <i>Sim</i>.</li>
     </ul>
 </ul>
 
-<p>Veja também alguns significados de cores, que podem ser usados em CSS:</p>
+<p id="Cores">Veja também alguns significados de cores, que podem ser usados em CSS:</p>
 
 <ul>
     <li><b>A</b></li>
