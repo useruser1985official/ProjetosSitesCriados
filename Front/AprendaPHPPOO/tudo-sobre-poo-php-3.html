@@ -379,6 +379,8 @@ $uec01-&gt;getDesafiante()-&gt;status();
 
 <p>PS: Se houver uma agregação de objetos em classes, use o <code>unset</code> no objeto agregado dentro do destrutor (no caso o objeto Lutador seria destruído no destrutor da classe Luta).</p>
 
+<p>Lembrando que, quando a gente inicia um objeto criado dentro da classe, na verdade se chama composição. No caso acima, caso a classe Luta fizesse a composição de Lutador, ela teria algo como <code>private $desafiado = new Lutador("Pretty Boy", "França", 30, 1.75, 68.9, 11, 2, 1);</code> dentro da classe Luta.</p>
+
 <ul>
     <li><a href="tudo-sobre-poo-php-2.html">Parte Anterior da Matéria!</a></li>
     <li><a href="tudo-sobre-poo-php-4.html">Continuação da Matéria!</a></li>

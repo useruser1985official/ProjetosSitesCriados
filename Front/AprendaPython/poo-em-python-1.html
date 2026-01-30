@@ -20,6 +20,7 @@
                     <li><a href="tudo-sobre-python-5.html">Tudo sobre Python Parte 5!</a></li>
                     <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
                     <li><a href="tudo-sobre-python-7.html">Tudo sobre Python Parte 7!</a></li>
+                    <li><a href="tudo-sobre-python-8.html">Tudo sobre Python Parte 8!</a></li>
                 </menu>
             </header>
 
@@ -494,6 +495,29 @@ def sacar(self, valor):
 </pre>
 
 <p>PS: Podemos fazer outras melhorias, como colocar cores, por exemplo.</p>
+
+<h3>Rich no Python: Colocando a Biblioteca na Nossa Classe</h3>
+
+<p>Na classe ContaBancaria, coloque as importações da biblioteca Rich assim:</p>
+
+<pre>
+<code>
+from rich import print
+from rich import inspect
+</code>
+</pre>
+
+<p>E depois crie um objeto assim, e exiba ele com o inspect:</p>
+
+<pre>
+<code>
+c = ContaBancaria(111, "José", 500)
+
+inspect(c) # É melhor visualmente do que print(c.__getstate__())
+</code>
+</pre>
+
+<p>Ele mostrará todos os dados que colocamos anteriormente na classe, incluindo a documentação. Não esqueça de colocar a opção Emulate Terminal no Run With Parameters.</p>
 
 <ul>
     <li><a href="poo-em-python-2.html">Continuação da Matéria!</a></li>

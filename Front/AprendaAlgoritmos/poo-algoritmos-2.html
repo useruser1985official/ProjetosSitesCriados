@@ -202,6 +202,14 @@ System.out.println("Valor de PI: " + UtilMath.PI);
     <li>Um método estático não pode acessar atributos e métodos não estáticos, a menos que você crie um objeto primeiro, porque métodos estáticos pertencem à classe, e métodos não estáticos pertencem ao objeto.</li>
 </ul>
 
+<h3>Relacionamentos UML</h3>
+
+<p>Até agora, vimos os diagramas, mas como futuramente vamos ter que trabalhar com interfaces, heranças e agregações, veja as setinhas de relacionamento UML para todos esses casos:</p>
+
+<img src="imagens/relacionamentos-uml.png" alt="Relacionamentos UML" style="max-width: 400px"/>
+
+<p>No caso, a seta fica apontada para a interface ou para a classe mãe. Já o losango fica no lado da classe que agrega a outra (o todo), basicamente o contrário das setas. Em outras palavras, quem implementa ou herda aponta para quem é mais genérico, já quem tem o losango é o todo.</p>
+
 <h3>Abstração com Interfaces</h3>
 
 <p>Uma interface é como um contrato que diz quais métodos uma classe deve ter, mas sem dizer como eles funcionam. Ela não tem código dentro dos métodos, apenas a assinatura deles, sem bloco. Em resumo:</p>
@@ -529,7 +537,15 @@ pc.exibirInfo();
 </code>
 </pre>
 
-<p>PS: No lugar da classe agregada (no caso, Mouse) também pode estar uma interface, usando a mesma lógica.</p>
+<p>PS: No lugar da classe agregada (no caso, Mouse) também pode estar uma interface, usando a mesma lógica. Lembrando que, caso o Mouse fosse iniciado com new dentro da classe computador, seria composição, e não agregação, representado com o losango preto. Por exemplo:</p>
+
+<pre>
+<code>
+private Mouse ms = new Mouse("Óptico", false);
+</code>
+</pre>
+
+<p>Resumindo: Objeto criado fora da classe é agregação, objeto criado dentro da classe é composição.</p>
 
 <ul>
     <li><a href="poo-algoritmos-1.html">Parte Anterior da Matéria!</a></li>
