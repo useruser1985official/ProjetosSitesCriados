@@ -34,6 +34,100 @@
             
 <h2>Tudo sobre C++ Parte 2</h2>
 
+<h3>Variáveis Globais e Locais, e Operadores Aritméticos</h3>
+
+<p>Quando uma variável é declarada fora de uma função, ela é global e pode ser usada em qualquer parte do programa. Quando ela é declarada dentro de uma função (incluindo a principal), ela é local.</p>
+
+<p>Veja uma aplicação prática de variáveis:</p>
+
+<pre>
+<code>
+int n1, n2; // Variáveis globais.
+
+int main(void) {
+    int n3, n4; // Variáveis locais.
+    int res;
+    
+    n1 = 11;
+    n2 = 3;
+    n3 = 5;
+    n4 = 2;
+    
+    res = n1 + n2 + n3 + n4;
+    
+    cout &lt;&lt; "A soma de todas as variáveis é " &lt;&lt; res &lt;&lt; ".\n\n";
+    
+    return 0;
+}
+</code>
+</pre>
+
+<p>Teste o código acima com essa modificação na operação, para tirar médias:</p>
+
+<pre>
+<code>
+res = (n1 + n2 + n3 + n4) / 4;
+</code>
+</pre>
+
+<p>Teste outros operadores aritméticos e parênteses. Os operadores são os mesmos de outras linguagens de programação (<code>*</code>, <code>/</code>, <code>%</code>, <code>+</code> e <code>-</code>, nessa ordem de precedência). Por exemplo:</p>
+
+<pre>
+<code>
+int n1, n2;
+int soma, subs, mult, divi, rest;
+
+cout &lt;&lt; "Digite o 1º número: ";
+cin &gt;&gt; n1;
+cout &lt;&lt; "Digite o 2º número: ";
+cin &gt;&gt; n2;
+
+soma = n1 + n2;
+subs = n1 - n2;
+mult = n1 * n2;
+divi = n1 / n2;
+rest = n1 % n2;
+
+cout &lt;&lt; "Soma: " &lt;&lt; soma &lt;&lt; endl;
+cout &lt;&lt; "Subtração: " &lt;&lt; subs &lt;&lt; endl;
+cout &lt;&lt; "Multiplicação: " &lt;&lt; mult &lt;&lt; endl;
+cout &lt;&lt; "Divisão Inteira: " &lt;&lt; divi &lt;&lt; endl;
+cout &lt;&lt; "Resto: " &lt;&lt; rest &lt;&lt; endl;
+</code>
+</pre>
+
+<p>Também podemos fazer operações aritméricas, mas é necessário adicionar a biblioteca <code>cmath</code>. Veja algumas dessas funções abaixo:</p>
+
+<ul>
+    <li><code>abs()</code> para pegar o valor absoluto de um número.</li>
+    <li><code>pow()</code> para criar uma potencialização entre dois números.</li>
+    <li><code>sqrt()</code> para mostrar a raiz quadrada.</li>
+    <li><code>cbrt()</code> para mostrar a raiz cúbica.</li>
+    <li><code>round()</code> para mostrar o número arredondado para o inteiro mais próximo. Para cima se usa <code>ceil()</code> e para baixo <code>floor()</code>.</li>
+</ul>
+
+<p>Veja o uso de algumas delas abaixo:</p>
+
+<pre>
+<code>
+int n1, n2;
+
+cout &lt;&lt; "Digite o 1º número: ";
+cin &gt;&gt; n1;
+cout &lt;&lt; "Digite o 2º número: ";
+cin &gt;&gt; n2;
+
+cout &lt;&lt; "O valor absoluto de " &lt;&lt; n1 &lt;&lt; " é " &lt;&lt; abs(n1) &lt;&lt; endl;
+cout &lt;&lt; n1 &lt;&lt; " elevado ao quadrado é " &lt;&lt; pow(n1, 2) &lt;&lt; endl;
+cout &lt;&lt; n1 &lt;&lt; " elevado ao cubo é " &lt;&lt; pow(n1, 3) &lt;&lt; endl;
+cout &lt;&lt; n1 &lt;&lt; " elevado à " &lt;&lt; n2 &lt;&lt; " é " &lt;&lt; pow(n1, n2) &lt;&lt; endl;
+cout &lt;&lt; "A raiz quadrada de " &lt;&lt; n1 &lt;&lt; " é " &lt;&lt; sqrt(n1) &lt;&lt; endl;
+cout &lt;&lt; "A raiz cúbica de " &lt;&lt; n1 &lt;&lt; " é " &lt;&lt; cbrt(n1) &lt;&lt; endl;
+cout &lt;&lt; "Menor valor entre " &lt;&lt; n1 &lt;&lt; " e " &lt;&lt; n2 &lt;&lt; ": " &lt;&lt; min(n1, n2) &lt;&lt; endl;
+cout &lt;&lt; "Maior valor entre " &lt;&lt; n1 &lt;&lt; " e " &lt;&lt; n2 &lt;&lt; ": " &lt;&lt; max(n1, n2) &lt;&lt; endl;
+</code>
+</pre>
+
 <h3>Incremento e Decremento de Variáveis</h3>
 
 <p>Incremento nada mais é do que somar valores em uma variável numérica, e decremento é subtrair valores do mesmo. Por exemplo:</p>

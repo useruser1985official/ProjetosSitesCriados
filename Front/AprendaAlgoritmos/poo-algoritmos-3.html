@@ -103,47 +103,9 @@ gat.miar(); // Próprio de Gato.
 
 <p>Veja os diagramas dessas classes:</p>
 
-<table style="float: left">
-    <tr>
-        <th>Animal</th>
-    </tr>
-    <tr>
-        <td>
-            # nome: String
-        </td>
-    </tr>
-    <tr>
-        <td>
-            + dormir(): void
-        </td>
-    </tr>
-</table>
+<img src="imagens/diagrama-heranca.png" alt="Diagrama Herança" style="max-width: 600px"/>
 
-<table style="float: left; margin-left: 25px">
-    <tr>
-        <th>Cachorro</th>
-    </tr>
-    <tr>
-        <td>
-            (receberá elementos de Animal)<br/>
-            + latir(): void
-        </td>
-    </tr>
-</table>
-
-<table style="margin: auto auto 75px 425px">
-    <tr>
-        <th>Gato</th>
-    </tr>
-    <tr>
-        <td>
-            (receberá elementos de Animal)<br/>
-            + miar(): void
-        </td>
-    </tr>
-</table>
-
-<p>Para trabalhar com construtores em heranças, temos métodos especiais para isso. No caso do Java, é o <code>super()</code>, mas outras linguagens podem ter outros nomes (no PHP é o <code>parent::__construct()</code>, no C# é o <code>base()</code>, C++ e outras linguagens chamam a classe mãe diretamente, como <code>Animal()</code>).</p>
+<p>Para trabalhar com construtores em heranças, temos métodos especiais para isso. No caso do Java, é o <code>super()</code>, mas outras linguagens podem ter outros nomes (no PHP é o <code>parent::__construct()</code>, no C# é o <code>base()</code>, C++ e outras linguagens chamam a classe mãe diretamente, como <code>Animal()</code>). Nem sempre é necessário chamar o construtor da classe mãe, mas muitas vezes precisaremos fazer isso.</p>
 
 <p>Independente do nome, esses métodos são usados para:</p>
 
@@ -278,46 +240,15 @@ public class Verdura extends Alimento {
 </code>
 </pre>
 
-<p>Para trabalhar com métodos de classes mães em heranças, temos métodos especiais para isso. Da mesma forma que usamos nos construtores, podemos usar o super como citado acima no Java (no caso ficou <code>super.consumir()</code>, no PHP ficaria algo como <code>parent::consumir()</code>, e no C# <code>base.consumir()</code>, C++ e outras linguagens chamam a classe mãe diretamente (como <code>Alimento::consumir()</code>).</p>
+<p>Para trabalhar com métodos de classes mães em heranças, temos métodos especiais para isso. Da mesma forma que usamos nos construtores, podemos usar o super como citado acima no Java (no caso ficou <code>super.consumir()</code>, no PHP ficaria algo como <code>parent::consumir()</code>, e no C# <code>base.consumir()</code>, C++ e outras linguagens chamam a classe mãe diretamente (como <code>Alimento::consumir()</code>). Não é obrigatório o uso deles, na maioria dos casos.</p>
 
 <p>Como acontecia com as interfaces em Java, devemos colocar a notação <code>@Override</code> em métodos sobrepostos de outras classes.</p>
 
 <p>No C# não colocávamos <code>override</code> nos métodos sobrescritos da interface, mas no caso de métodos de classes é necessário.</p>
 
-<p>Veja os diagramas das classes acima:</p>
+<p>Veja o diagrama das classes acima:</p>
 
-<table style="float: left">
-    <tr>
-        <th>Alimento</th>
-    </tr>
-    <tr>
-        <td>
-            + consumir(): void
-        </td>
-    </tr>
-</table>
-
-<table style="float: left; margin-left: 25px">
-    <tr>
-        <th>Fruta</th>
-    </tr>
-    <tr>
-        <td>
-            (receberá elementos de Alimento)
-        </td>
-    </tr>
-</table>
-
-<table style="margin: auto auto 75px 450px">
-    <tr>
-        <th>Verdura</th>
-    </tr>
-    <tr>
-        <td>
-            (receberá elementos de Alimento)
-        </td>
-    </tr>
-</table>
+<img src="imagens/diagrama-sobreposicao.png" alt="Diagrama Sobreposição" style="max-width: 600px"/>
 
 <p>Código principal:</p>
 
@@ -333,7 +264,9 @@ a2.consumir();  // chama o método da classe Verdura.
 
 <p>PS: Lembrando que, assim como acontecia com as interfaces, poderemos usar apenas métodos definidos na classe mãe, no caso, a Alimento.</p>
 
-<p>Por padrão, no Java, assim como no PHP, todo método pode ser sobreposto, no caso da classe acima, para bloquear a sobreposição de um método, devemos colocar o final no método, de forma semelhante com as constantes. Na classe Alimento ficaria assim:</p>
+<p>O fato de usar uma classe base na <q>tipagem</q> e depois criar o objeto com uma classe que herda a mesma, como ocorrido com Alimento e suas classes descendentes, é o polimorfismo de inclusão. Esse tipo de polimorfismo também acontece quando fazemos o mesmo com interfaces.</p>
+
+<p>Por padrão, no Java, assim como no PHP, todo método pode ser sobreposto, no caso da classe acima, para bloquear a sobreposição de um método, devemos colocar o <code>final</code> no método, de forma semelhante com as constantes. Na classe Alimento ficaria assim:</p>
 
 <pre>
 <code>
@@ -407,7 +340,7 @@ Alimento::~Alimento() { // Bloco vazio mesmo, padrão no C++.
 </code>
 </pre>
 
-<p>Daí, nas classes filhas podemos manter a implementação dos métodos normalmente:</p>
+<p>Daí, nas classes filhas podemos manter a implementação dos métodos normalmente (mas sem usar o super ou equivalente):</p>
 
 <p>Classe filha 1:</p>
 
@@ -510,19 +443,7 @@ public class Microondas {
 
 <p>Diagrama da classe acima:</p>
 
-<table>
-    <tr>
-        <th>Microondas</th>
-    </tr>
-    <tr>
-        <td>
-            + ligar(): void<br/>
-            + ligar(minutos: int, segundos: int): void<br/>
-            + ligar(aquecer: boolean): void<br/>
-            + ligar(programa: String): void
-        </td>
-    </tr>
-</table>
+<img src="imagens/diagrama-sobrecarga.png" alt="Diagrama Sobrecarga"/>
 
 <p>E na implementação:</p>
 
@@ -542,7 +463,7 @@ micro.ligar("Pizza"); // Programa Pizza.
 
 <p>No caso do polimorfismo de sobrecarga, o método tem assinaturas diferentes na mesma classe.</p>
 
-<p>PS: O polimorfismo de sobrecarga só é possível em linguagens estaticamente tipadas como o Java, C# e C++, mas não em todas (Objective-C, por exemplo, não o têm). Em linguagens dinamicamente tipadas como o PHP, Python e Javascript, não é possível implementá-lo.</p>
+<p>PS: O polimorfismo de sobrecarga só é possível em linguagens estaticamente tipadas como o Java, C# e C++, mas não em todas (Objective-C, por exemplo, não o têm). Em linguagens dinamicamente tipadas como o PHP, Python e Javascript, não é possível implementá-lo, tendo que ter métodos com nomes diferentes, nem que seja por um caractere.</p>
 
 
 

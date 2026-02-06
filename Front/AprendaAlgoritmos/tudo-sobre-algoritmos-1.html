@@ -190,7 +190,7 @@ total_vendas
 <p>Também, para identificação e leitura mais precisa, é ideal seguir também essas regras:</p>
 
 <ul>
-    <li>Deve ser tudo em minúscula, podendo identificar palavras compostas com a primeira maiúscula (técnica conhecida como CamelCase) ou dividir por underlines, como por exemplo <code>soma_total</code> ou <code>somaTotal</code>.</li>
+    <li>Deve ser tudo em minúscula, podendo identificar palavras compostas com a primeira maiúscula (técnica conhecida como CamelCase) ou dividir por underlines (conhecida como snake_case), como por exemplo <code>soma_total</code> ou <code>somaTotal</code>.</li>
     <li>Constantes devem estar todas em maiúsculas para melhor identificação, podendo também ter palavras compostas divididas por underlines, como por exemplo <code>CPF</code> ou <code>TAXA_DESCONTO</code>.</li>
     <li>Deve ter nomes coerentes com a utilização delas (por exemplo, guardar a idade de uma pessoa numa variável de nome <code>idade</code> faz mais sentido do que uma variável com o nome <code>x</code>).</li>
 </ul>
@@ -219,7 +219,7 @@ programa {
 </code>
 </pre>
 
-<p>Note que, no Portugol, para atribuir um valor a uma variável, devemos usar um símbolo de igual (<q>=</q>), no entanto, ele significa <q>atribuição</q>, pra comparar igualdade usamos outra forma que veremos mais pra frente. O <q>+</q> é para concatenar (juntar) dois valores numa só saída. A palavra-chave <q>const</q> define uma constante.</p>
+<p>Note que, no Portugol, para atribuir um valor a uma variável, devemos usar um símbolo de igual (<code>=</code>), no entanto, ele significa <q>atribuição</q>, pra comparar igualdade usamos outra forma que veremos mais pra frente. O <code>+</code> é para concatenar (juntar) dois valores numa só saída (exceto com números, nesse caso ele faz a soma). A palavra-chave <q>const</q> define uma constante.</p>
 
 <p>Veja o fluxograma do código acima:</p>
 
@@ -236,6 +236,43 @@ programa {
 }
 </code>
 </pre>
+
+<p>Veja algumas das sequências mais usadas:</p>
+
+<table>
+    <tr>
+        <th>Sequência de Escape</th>
+        <th>Representa</th>
+    </tr>
+    <tr>
+        <td>\n</td>
+        <td>Coloca o Cursor numa Nova Linha</td>
+    </tr>
+    <tr>
+        <td>\r</td>
+        <td>Coloca o Cursor no Início da Linha Atual</td>
+    </tr>
+    <tr>
+        <td>\t</td>
+        <td>Inserir Tabulação</td>
+    </tr>
+    <tr>
+        <td>\'</td>
+        <td>Aspas Simples</td>
+    </tr>
+    <tr>
+        <td>\"</td>
+        <td>Aspas Duplas</td>
+    </tr>
+    <tr>
+        <td>\\</td>
+        <td>Barra Invertida</td>
+    </tr>
+    <tr>
+        <td>\0</td>
+        <td>Caractere Delimitador de Final de Cadeia</td>
+    </tr>
+</table>
 
 <p>Também podemos exibir os valores diretamente na função escreva, veja os mesmos valores acima, sem estarem atribuídos a variáveis:</p>
 
@@ -355,7 +392,7 @@ programa {
 
 <p>Note que no código acima, as variáveis foram declaradas sem serem inicializadas, elas só passam a ter um valor atribuído ao lerem os dados de entrada preenchidos pelo usuário, com a função <code>leia</code>.</p>
 
-<p>Lembrando que o número real deve ser digitado com ponto, e não com vírgula. Note também que usamos a vírgula pra concatenar (juntar) os dados, ela é um opção mais recomendada que o <q>+</q>, pra evitar confusão com o operador de soma (que veremos mais pra frente).</p>
+<p>Lembrando que o número real deve ser digitado com ponto, e não com vírgula. Note também que usamos a vírgula pra concatenar (juntar) os dados, ela é um opção mais recomendada que o <q>+</q>, pra evitar confusão com o operador de soma (que veremos mais pra frente). Cada linguagem tem suas formas específicas de concatenas dados.</p>
 
 <p>Veja o fluxograma do código acima:</p>
 

@@ -134,13 +134,13 @@ System.out.println("Velocidade atual: " + cr.getVelocidade());
 
 <pre>
 <code>
-~Carro() {
+Carro::~Carro() {
     cout &lt;&lt; "Carro Destruído: " &lt;&lt; this-&gt;modelo &lt;&lt; endl;
 }
 </code>
 </pre>
 
-<p>E aí para destruir o objeto, basta chamar no código principal <code>delete</code> seguido do nome dele, no caso, <code>delete carro;</code>. Faça isso no final do código.</p>
+<p>E aí para destruir o objeto, basta chamar no código principal <code>delete</code> seguido do nome dele, no caso, <code>delete carro;</code>. Faça isso no final do código principal.</p>
 
 <h3>Atributos e Métodos Estáticos</h3>
 
@@ -294,55 +294,9 @@ public class BateriaLitio implements FonteEnergia {
 
 <p>PS: Note que o Java adiciona a notação <code>@Override</code> em métodos sobreescritos. Isso também é visto com métodos abstratos de classes abstratas (virtuais puras) e virtuais, que veremos mais pra frente. As interfaces também são parte da abstração. No PHP a notação <q>override</q> não existe, já no C# e C++ eles são usados em métodos abstratos e virtuais, de forma ligeiramente diferente.</p>
 
-<p>Veja os diagramas dessa interface e dessas classes:</p>
+<p>Veja o diagrama dessa interface e dessas classes:</p>
 
-<table style="float: left">
-    <tr>
-        <th>
-            <span style="font-weight: lighter;">&lt;&lt; interface &gt;&gt;</span><br/>
-            FonteEnergia
-        </th>
-    </tr>
-    <tr>
-        <td>
-            + fornecerEnergia(): void<br/>
-            + recarregar(): void
-        </td>
-    </tr>
-</table>
-
-<table style="float: left; margin-left: 25px;">
-    <tr>
-        <th>PilhaComum</th>
-    </tr>
-    <tr>
-        <td>
-            (receberá elementos de FonteEnergia)
-        </td>
-    </tr>
-</table>
-
-<table style="float: left; margin-left: 25px;">
-    <tr>
-        <th>PilhaRecarregavel</th>
-    </tr>
-    <tr>
-        <td>
-            (receberá elementos de FonteEnergia)
-        </td>
-    </tr>
-</table>
-
-<table style="margin: auto auto 75px 810px">
-    <tr>
-        <th>BateriaLitio</th>
-    </tr>
-    <tr>
-        <td>
-            (receberá elementos de FonteEnergia)
-        </td>
-    </tr>
-</table>
+<img src="imagens/diagrama-interface.png" alt="Diagrama Interface" style="max-width: 600px"/>
 
 <p>E aí, no código principal:</p>
 
@@ -363,7 +317,7 @@ p3.recarregar();
 </code>
 </pre>
 
-<p>Em resumo, a interface <code>FonteEnergia</code> diz apenas que algo deve fornecer energia, cada tipo de pilha/bateria fornece energia do seu jeito. Podemos trocar os objetos livremente e todos funcionam da mesma forma (fazendo parte também do polimorfismo).</p>
+<p>Em resumo, a interface <code>FonteEnergia</code> diz apenas que algo deve fornecer energia, cada tipo de pilha/bateria fornece energia do seu jeito. Podemos trocar os objetos livremente e todos funcionam da mesma forma (fazendo parte também do polimorfismo, no caso, o polimorfismo de inclusão).</p>
 
 <p>Ao usar uma interface, só poderemos usar os métodos descritos nela, mesmo se a classe implementadora tiver outros métodos, eles não estarão acessíveis por não estarem na interface, o que garante também o encapsulamento.</p>
 
@@ -438,42 +392,7 @@ public class Computador {
 
 <p>Diagrama das duas classes:</p>
 
-<table style="float: left">
-    <tr>
-        <th>Mouse</th>
-    </tr>
-    <tr>
-        <td>
-            - tipo: String<br/>
-            - semFio: boolean
-        </td>
-    </tr>
-    <tr>
-        <td>
-            + getTipo(): String<br/>
-            + getSemFio(): boolean
-        </td>
-    </tr>
-</table>
-
-<table style="margin-left: 215px;">
-    <tr>
-        <th>Computador</th>
-    </tr>
-    <tr>
-        <td>
-            - marca: String<br/>
-            - gb: int<br/>
-            - ms: Mouse
-        </td>
-    </tr>
-    <tr>
-        <td>
-            + conectarMouse(): void<br/>
-            + exibirInfo(): void
-        </td>
-    </tr>
-</table>
+<img src="imagens/diagrama-agregacao.png" alt="Diagrama Agregação" style="max-width: 600px"/>
 
 <p>E no código principal:</p>
 
@@ -546,6 +465,19 @@ private Mouse ms = new Mouse("Óptico", false);
 </pre>
 
 <p>Resumindo: Objeto criado fora da classe é agregação, objeto criado dentro da classe é composição.</p>
+
+<p>PS: Em linguagens com destrutores, como o C++, deveremos destruir o objeto agregado ou composto dentro do destrutor, como por exemplo:</p>
+
+<pre>
+<code>
+Computador::~Computador() {
+    cout &lt;&lt; "Computador Destruído: " &lt;&lt; this-&gt;marca &lt;&lt; endl;
+
+    delete this->ms; // Destruindo objeto Mouse
+}
+</code>
+</pre>
+
 
 <ul>
     <li><a href="poo-algoritmos-1.html">Parte Anterior da Matéria!</a></li>

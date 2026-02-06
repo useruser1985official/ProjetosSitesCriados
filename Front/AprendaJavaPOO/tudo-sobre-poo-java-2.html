@@ -324,7 +324,7 @@ System.out.println(Ventilador.getLigado());
 
 <p>Em outras palavras, encapsular é ocultar partes independentes da implementação, permitindo construir partes invisíveis ao mundo exterior.</p>
 
-<p>Basicamente, o uso de atributos privados e o acesso a eles ser feito através de métodos (como os getters e setters), já é o encapsulamento. Mas podemos fazer isso a nível de classe, usando uma interface, que obrigará a classe a ter todos os métodos descritos nela, além de proteger os atributos da classe implementadora do programa principal.</p>
+<p>Basicamente, o uso de atributos privados e o acesso a eles ser feito através de métodos (como os getters e setters), já é o encapsulamento. Mas podemos fazer isso a nível de classe, usando uma interface, que obrigará a classe a ter todos os métodos descritos nesta interface e usar somente eles, além de proteger os atributos da classe implementadora do programa principal.</p>
 
 <p>Para criar um exemplo disso com um controle remoto, temos que definir uma interface (seria a "cápsula" do controle com os botões), de forma parecida com uma classe, mas sem atributos, e todos os métodos são públicos. E a classe ControleRemoto (como os circuitos encapsulados pela interface) terá os atributos e os métodos getters e setters privados (é o passo principal pra encapsular). Veja o que faremos no Java:</p>
 
@@ -519,6 +519,8 @@ public class ControleRemoto implements Controlador {
 }
 </code>
 </pre>
+
+<p>Lembrando que, como poderemos usar apenas os métodos descritos na interface Controlador, os getters e setters de ControleRemoto não estariam acessíveis no programa principal, mesmo se estiverem públicos, isso garante o encapsulamento à nível de classe (usando a <q>tipagem</q> como Controlador).</p>
 
 <p>PS: Usamos <code>implements</code> quando precisamos implementar uma interface, sendo obrigado executar todos os métodos descritos nela, é possível uma classe implementar mais de uma interface, com os nomes separados por vírgulas, usando algo como <code>public class NomeDaClasse implements NomeDaInterface1, NomeDaInterface2</code>.</p>
 

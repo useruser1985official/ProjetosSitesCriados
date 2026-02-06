@@ -393,8 +393,8 @@ drop view vis_users;
 
 <pre>
 <code>
-create view alunos_2018 as select g.nome as user, c.nome as cursos from gafanhotos g
-join cursos c
+create view alunos_2018 as select g.nome as user, c.nome as curso from gafanhotos g
+inner join cursos c
 on g.cursopreferido = c.idcurso where c.ano = 2018
 order by g.nome;
 </code>

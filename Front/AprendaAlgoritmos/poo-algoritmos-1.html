@@ -64,7 +64,7 @@
 
 <p>Muitos consideram como a primeira linguagem orientada a objetos o Simula 67, mas os conceitos amadureceram mesmo com a linguagem Smalltalk.</p>
 
-<p>Para aprender a programação orientada a objetos, deve-se saber a programação básica (estruturada) primeiro, pois praticamente tudo delas pode ser usados em programas orientados a objetos (como estruturas condicionais e de repetição, além do conceito de variáveis e funções/procedimentos, que são equivalentes aos atributos e métodos em POO). O ideal é saber o básico de uma linguagem que suporte POO para estudar esse paradigma, como o Java ou o C#. A maioria dos exercícios aqui usaremos o Java como base, mas mostraremos códigos de outras linguagens também.</p>
+<p>Para aprender a programação orientada a objetos, deve-se saber a programação básica (estruturada) primeiro, pois praticamente tudo delas pode ser usados em programas orientados a objetos (como estruturas condicionais e de repetição, além do conceito de variáveis e funções/procedimentos, que são equivalentes aos atributos e métodos em POO). O ideal é saber o básico de uma linguagem que suporte POO para estudar esse paradigma, como o Java ou o C#. A maioria dos exercícios aqui usaremos o Java como base, mas mostraremos códigos de outras linguagens também, e as lições aqui podem ser adaptadas pras principais linguagens orientadas a objetos.</p>
 
 <h3>Primeiro Exemplo de Programa Orientado a Objetos</h3>
 
@@ -96,24 +96,7 @@ public class Carro {
 
 <p>O diagrama dessa classe é esse:</p>
 
-<table>
-    <tr>
-        <th>Carro</th>
-    </tr>
-    <tr>
-        <td>
-            cor: String<br/>
-            modelo: String<br/>
-            velocidade: int
-        </td>
-    </tr>
-    <tr>
-        <td>
-            acelerar(): void<br/>
-            frear(): void
-        </td>
-    </tr>
-</table>
+<img src="imagens/diagrama-carro.png" alt="Diagrama Carro"/>
 
 <p>PS: O uso desse tipo de diagrama em POO, se chama UML.</p>
 
@@ -349,30 +332,7 @@ public class Carro {
 
 <p>O diagrama dessa classe fica assim, com o <q>+</q> representando o que é público e <q>-</q> representando o que é privado:</p>
 
-<table>
-    <tr>
-        <th>Carro</th>
-    </tr>
-    <tr>
-        <td>
-            - cor: String<br/>
-            - modelo: String<br/>
-            - velocidade: int
-        </td>
-    </tr>
-    <tr>
-        <td>
-            + acelerar(): void<br/>
-            + frear(): void<br/>
-            + getCor(): String<br/>
-            + setCor(cor: String): void<br/>
-            + getModelo(): String<br/>
-            + setModelo(modelo: String): void<br/>
-            + getVelocidade(): int<br/>
-            + setVelocidade(velocidade: int): void
-        </td>
-    </tr>
-</table>
+<img src="imagens/diagrama-carro-completo.png" alt="Diagrama Carro Completo"/>
 
 <p>Aí, no código principal, não poderemos usar os atributos definidos como <q>private</q>, então deveremos usar os getters e setters para manipular os mesmos fora da classe:</p>
 
