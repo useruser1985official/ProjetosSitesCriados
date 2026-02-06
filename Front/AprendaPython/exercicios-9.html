@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda Python</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda Python</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-python-1.html">Tudo sobre Python Parte 1!</a></li>
+                    <li><a href="tudo-sobre-python-2.html">Tudo sobre Python Parte 2!</a></li>
+                    <li><a href="tudo-sobre-python-3.html">Tudo sobre Python Parte 3!</a></li>
+                    <li><a href="tudo-sobre-python-4.html">Tudo sobre Python Parte 4!</a></li>
+                    <li><a href="tudo-sobre-python-5.html">Tudo sobre Python Parte 5!</a></li>
+                    <li><a href="tudo-sobre-python-6.html">Tudo sobre Python Parte 6!</a></li>
+                    <li><a href="tudo-sobre-python-7.html">Tudo sobre Python Parte 7!</a></li>
+                    <li><a href="tudo-sobre-python-8.html">Tudo sobre Python Parte 8!</a></li>
+                </menu>
+            </header>
+
+<h2>Exercícios - Parte 9</h2>
+
+<h3>Desafios em Python</h3>
+
+<p>Crie a classe Funcionário, onde podemos cadastrar nome, setor e cargo. Crie também um método que permita ao funcionário se apresentar.</p>
+
+<p>Classe:</p>
+
+<pre>
+<code>
+from rich import print
+
+class Funcionario:
+    empresa = "Curso em Vídeo"
+
+    def __init__(self, nome, setor, cargo):
+        self.nome = nome
+        self.setor = setor
+        self.cargo = cargo
+
+    def apresentacao(self):
+        return f":handshake: Olá, sou [blue]{self.nome}[/] e sou {self.cargo.lower()} do setor de {self.setor.lower()} da empresa {Funcionario.empresa}."
+</code>
+</pre>
+
+<p>Programa principal:</p>
+
+<pre>
+<code>
+c1 = Funcionario("Maria", "Administração", "Diretora")
+print(c1.apresentacao())
+
+c2 = Funcionario("Sérgio", "TI", "Programador")
+print(c2.apresentacao())
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie a classe Produto, onde podemos cadastrar nome e o preço. Crie também um método que mostre uma etiqueta de preço do produto.</p>
+
+<p>Classe:</p>
+
+<pre>
+<code>
+from rich import print
+from rich.panel import Panel
+
+class Produto:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self.preco = f"R${preco:.2f}".replace(".", ",")
+
+    def etiqueta(self):
+        caixa = Panel(f"{self.nome:^30}\n{"":-^30}\n{self.preco:.^30}", title = "Produto", width = 35)
+
+        print(caixa)
+</code>
+</pre>
+
+<p>Programa principal:</p>
+
+<pre>
+<code>
+p1 = Produto("IPhone 17 Pro Max", 25_000.85)
+p2 = Produto("Notebook Gamer", 8_000)
+
+p1.etiqueta()
+p2.etiqueta()
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie a classe Churrasco, onde seja possível informar quantas pessoas vão participar e mostre quanbto de carne deve ser comprado, o custo total do churrasco e o preço por pessoa.</p>
+
+<p>Classe:</p>
+
+<pre>
+<code>
+from rich import print
+from rich.panel import Panel
+
+class Churrasco:
+    def __init__(self, titulo, quant):
+        self.titulo = titulo
+        self.quant = quant
+
+    def analisar(self):
+        caixa = Panel(f"Analisando [green]{self.titulo}[/] com [blue]{self.quant} convidados[/]\nCada participante comerá 0,4Kg e cada quilo custa R$82,40/Kg\nRecomendo [blue]comprar {self.quant * 0.4:.1f}Kg[/] de carne\nO custo total será [green]R${self.quant * 0.4 * 82.40:.2f}[/]\nCada pessoa pagará [yellow]R${82.40 * 0.4:.2f}[/] para participar".replace(".", ","), title = self.titulo, width = 75)
+
+        print(caixa)
+</code>
+</pre>
+
+<p>Programa principal:</p>
+
+<pre>
+<code>
+c1 = Churrasco("Churras dos Amigos", 15)
+c1.analisar()
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie a classe Livro, que vai simular a passagem de páginas de um livro, considerando também se o usuário chegou ao fim da leitura.</p>
+
+<p>Classe:</p>
+
+<pre>
+<code>
+from rich import print
+
+class Livro:
+    def __init__(self, titulo, paginas):
+        self.titulo = titulo
+        self.paginas = paginas
+        self.pagAtual = 1
+        print(f"[blue]:book: Você acabou de abrir o livro [red]{self.titulo}[/] que tem [green]{self.paginas} páginas[/] no total. Você agora está na [green]página {self.pagAtual}[/].[/]")
+
+    def avancarPaginas(self, pag):
+        if pag > self.paginas:
+            pag = self.paginas - self.pagAtual
+
+        for p in range(self.pagAtual, self.pagAtual + pag):
+            self.pagAtual += 1
+            print(f"Pág [white]{self.pagAtual}[/] ->", end = " ")
+
+        print(f"[blue]Você avançou {pag} páginas e agora está na [green]página {self.pagAtual}[/].[/]")
+
+        if self.pagAtual == self.paginas:
+            print(f"[red]:rotating_light: Você chegou ao final do livro {self.titulo}.[/]")
+</code>
+</pre>
+
+<p>Programa principal:</p>
+
+<pre>
+<code>
+l1 = Livro("10 Coisas que Aprendi", 20)
+
+l1.avancarPaginas(5)
+l1.avancarPaginas(10)
+l1.avancarPaginas(100)
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie a classe Gamer, onde podemos cadastrar nome, nick e os jogos favoritos de uma pessoa. Crie também um método que permite mostrar a ficha desse gamer.</p>
+
+<p>Classe:</p>
+
+<pre>
+<code>
+from rich import print
+from rich.panel import Panel
+
+class Gamer:
+    def __init__(self, nome, nick):
+        self.nome = nome
+        self.nick = nick
+        self.jogos = list()
+
+    def addFavoritos(self, jogo):
+        self.jogos.append(jogo)
+        self.jogos.sort()
+
+    def ficha(self):
+        jogosFavoritos = ""
+
+        for j in self.jogos:
+            jogosFavoritos += "\n:video_game: "
+            jogosFavoritos += j
+
+        caixa = Panel(f"Nome real: [black on blue]{self.nome}[/]\nJogos favoritos: [blue]{jogosFavoritos}[/]", title = f"Jogador <{self.nick}>", width = 45)
+
+        print(caixa)
+</code>
+</pre>
+
+<p>Programa principal:</p>
+
+<pre>
+<code>
+j1 = Gamer("Fabrício da Silva", "detonator2025")
+
+j1.addFavoritos("Mario Bros.")
+j1.addFavoritos("Sonic")
+j1.addFavoritos("God of War")
+j1.addFavoritos("Fortnite")
+j1.ficha()
+
+j2 = Gamer("Olívia Souza", "peach_raivosa")
+
+j2.addFavoritos("Mario Bros")
+j2.addFavoritos("Call of Duty")
+j2.ficha()
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie a classe Caneta, que simule o funcionamento de uma caneta colorida, podendo escrever frases na cor relativa.</p>
+
+<p>Classe:</p>
+
+<pre>
+<code>
+from rich import print
+
+class Caneta:
+    def __init__(self, cor):
+        self.cor = cor.lower()
+        self.tampada = True
+
+    def destampar(self):
+        if self.tampada:
+            self.tampada = False
+
+    def escrever(self, texto):
+        cores = {"vermelha": "red", "verde": "green", "azul": "blue"}
+
+        if not self.tampada:
+            if self.cor in cores:
+                print(f"[{cores[self.cor]}]{texto}[/]", end = "")
+            else:
+                print(texto, end = "")
+        else:
+            print(":prohibited: A [blue]caneta[/] está tampada!")
+
+    def quebrarLinha(self, quant):
+        for q in range(0, quant):
+            print("")
+</code>
+</pre>
+
+<p>Programa principal:</p>
+
+<pre>
+<code>
+c1 = Caneta("Azul")
+c2 = Caneta("Vermelha")
+c3 = Caneta("Verde")
+
+c1.destampar()
+c2.destampar()
+c3.destampar()
+
+c1.escrever("Olá, tudo bem? ")
+c1.quebrarLinha(2)
+c2.escrever("Olá, Gafanhoto! ")
+c3.escrever("Vamos exercitar!")
+</code>
+</pre>
+
+<hr/>
+
+<p>Crie a classe ControleRemoto, onde vamos simular o funcionamento de um controle simples (canal, volume e liga/desliga).</p>
+
+<p>Classe:</p>
+
+<pre>
+<code>
+from rich import print
+from rich.panel import Panel
+import os
+
+class ControleRemoto:
+    def __init__(self):
+        self.ligado = False
+        self.canalAtual = 2
+        self.canalTotal = 13
+        self.volumeAtual = 0
+        self.volumeTotal = 50
+
+        self.caixa = Panel(":prohibited: [red]A TV está desligada![/]", title = "[TV]", width = 30)
+
+        print(self.caixa)
+
+    def mostrarTela(self):
+        if self.ligado:
+            texto = ""
+
+            for i in range(2, self.canalTotal + 1):
+                if i == self.canalAtual:
+                    texto += f"[on yellow] {i} [/]"
+                else:
+                    texto += f" {i} "
+
+            self.caixa = Panel(f":tv: A TV está ligada!\nCANAL = {texto}\nVOLUME = [on spring_green4]{" " * self.volumeAtual}[/][on bright_black]{" " * (self.volumeTotal - self.volumeAtual)}[/]", title = "[TV]", width = 60)
+        else:
+            self.caixa = Panel(":prohibited: [red]A TV está desligada![/]", title="[TV]", width=30)
+
+        print(self.caixa)
+
+    def ligarOuDesligar(self):
+        if self.ligado:
+            self.ligado = False
+
+            self.caixa = Panel(":prohibited: [red]A TV está desligada![/]", title = "[TV]", width = 30)
+
+            print(self.caixa)
+
+            return
+        else:
+            self.ligado = True
+
+            self.mostrarTela()
+
+            print("Ligou!")
+
+    def aumentarOuDiminuirVolume(self, botao):
+        if self.ligado:
+            if botao == "+":
+                if self.volumeAtual >= self.volumeTotal:
+                    self.mostrarTela()
+
+                    return
+
+                self.volumeAtual += 1
+                self.mostrarTela()
+            elif botao == "-":
+                if self.volumeAtual <= 0:
+                    self.mostrarTela()
+
+                    return
+
+                self.volumeAtual -= 1
+                self.mostrarTela()
+            else:
+                self.mostrarTela()
+        else:
+            self.mostrarTela()
+
+    def mudarCanal(self, botao):
+        if self.ligado:
+            if botao == ">":
+                if self.canalAtual >= self.canalTotal:
+                    self.canalAtual = 2
+                    self.mostrarTela()
+
+                    return
+
+                self.canalAtual += 1
+                self.mostrarTela()
+            elif botao == "<":
+                if self.canalAtual <= 2:
+                    self.canalAtual = self.canalTotal
+                    self.mostrarTela()
+
+                    return
+
+                self.canalAtual -= 1
+                self.mostrarTela()
+            else:
+                self.mostrarTela()
+        else:
+            self.mostrarTela()
+</code>
+</pre>
+
+<p>Programa principal:</p>
+
+<pre>
+<code>
+tv = ControleRemoto()
+
+controle = str(input("< CH > - VOL + ")).strip()[0]
+
+while True:
+    os.system("cls" if os.name == "nt" else "clear")
+
+    if controle == "0":
+        break
+    elif controle == "@":
+        tv.ligarOuDesligar()
+    elif controle == "-" or controle == "+":
+        tv.aumentarOuDiminuirVolume(controle)
+    elif controle == "<" or controle == ">":
+        tv.mudarCanal(controle)
+
+    controle = str(input("< CH > - VOL + ")).strip()[0]
+</code>
+</pre>
+
+<ul>
+    <li><a href="exercicios-8.html">Parte Anterior da Matéria!</a></li>
+    <li><a href="exercicios-10.html">Continuação da Matéria!</a></li>
+</ul>
+
+        </div>
+    </body>
+</html>

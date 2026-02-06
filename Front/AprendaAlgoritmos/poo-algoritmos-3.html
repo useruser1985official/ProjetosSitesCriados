@@ -244,7 +244,7 @@ public class Verdura extends Alimento {
 
 <p>Como acontecia com as interfaces em Java, devemos colocar a notação <code>@Override</code> em métodos sobrepostos de outras classes.</p>
 
-<p>No C# não colocávamos <code>override</code> nos métodos sobrescritos da interface, mas no caso de métodos de classes é necessário.</p>
+<p>No C# não colocávamos <code>override</code> nos métodos sobrescritos da interface, mas no caso de métodos virtuais ou abstratos de classes é necessário.</p>
 
 <p>Veja o diagrama das classes acima:</p>
 
@@ -300,7 +300,7 @@ class Alimento {
 </code>
 </pre>
 
-<p>E no método que o sobrescrever na classe filha, colocamos <code>public override void consumir()</code> e o bloco de implementação do mesmo.</p>
+<p>E no método que o sobrescrever na classe filha, colocamos <code>override</code> no C# e C++, assim como no Java, na sintaxe <code>public override void consumir()</code> (em C#) e o bloco de implementação do mesmo.</p>
 
 <p>No caso do C#, podemos fazer com que um atributo ou método não seja sobrescrito com o <code>sealed</code> também.</p>
 
@@ -368,7 +368,7 @@ class Verdura extends Alimento {
 </code>
 </pre>
 
-<p>No caso do C#, o <code>override</code> também é obrigatório na sobreposição de métodos abstratos, assim como acontece no Java, visto acima.</p>
+<p>No caso do C#, o <code>override</code> também é obrigatório na sobreposição de métodos abstratos, assim como acontece no Java, visto acima, e no C++ com os métodos virtuais puros.</p>
 
 <p>Aí no código principal, podemos chamar os objetos tipando eles com a classe abstrata:</p>
 
@@ -464,8 +464,6 @@ micro.ligar("Pizza"); // Programa Pizza.
 <p>No caso do polimorfismo de sobrecarga, o método tem assinaturas diferentes na mesma classe.</p>
 
 <p>PS: O polimorfismo de sobrecarga só é possível em linguagens estaticamente tipadas como o Java, C# e C++, mas não em todas (Objective-C, por exemplo, não o têm). Em linguagens dinamicamente tipadas como o PHP, Python e Javascript, não é possível implementá-lo, tendo que ter métodos com nomes diferentes, nem que seja por um caractere.</p>
-
-
 
 <ul>
     <li><a href="poo-algoritmos-2.html">Parte Anterior da Matéria!</a></li>

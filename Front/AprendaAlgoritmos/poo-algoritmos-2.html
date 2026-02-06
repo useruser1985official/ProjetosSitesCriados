@@ -111,7 +111,7 @@ System.out.println("Velocidade atual: " + cr.getVelocidade());
 </code>
 </pre>
 
-<p>PS: Se uma classe não tiver um construtor definido, a linguagem cria automaticamente um construtor padrão, que é vazio e não faz nada. Quando criamos nosso próprio construtor, esse passa a ser o construtor usado ao criar objetos. Em linguagens como Java, é possível ter vários construtores na mesma classe, desde que eles tenham listas de parâmetros diferentes. Um deles pode ser vazio se quisermos.</p>
+<p>PS: Se uma classe não tiver um construtor definido, a linguagem cria automaticamente um construtor padrão, que é vazio e não faz nada. Quando criamos nosso próprio construtor, esse passa a ser o construtor usado ao criar objetos. Em linguagens como Java, é possível ter vários construtores na mesma classe, desde que eles tenham listas de parâmetros diferentes (conceito conhecido como polimorfismo de sobrecarga, que veremos mais pra frente). Um deles pode ser vazio se quisermos.</p>
 
 <h3>Método Destrutor</h3>
 
@@ -456,7 +456,7 @@ pc.exibirInfo();
 </code>
 </pre>
 
-<p>PS: No lugar da classe agregada (no caso, Mouse) também pode estar uma interface, usando a mesma lógica. Lembrando que, caso o Mouse fosse iniciado com new dentro da classe computador, seria composição, e não agregação, representado com o losango preto. Por exemplo:</p>
+<p>PS: No lugar da classe agregada (no caso, Mouse) também pode estar uma interface, usando a mesma lógica. Lembrando que, caso o Mouse fosse iniciado com new dentro da classe Computador, seria composição, e não agregação, representado com o losango preto. Por exemplo:</p>
 
 <pre>
 <code>
