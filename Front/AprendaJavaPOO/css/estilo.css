@@ -61,3 +61,7 @@ iframe {
     width: 480px;
     height: 270px;
 }
+img {
+    max-height: 350px;
+    max-width: 500px;
+}

@@ -222,6 +222,7 @@ print(f"A fora vale {a}.")
 </pre>
 
 <p>No caso acima, o a global é alterado para 8 ao chamar a função. O b recebeu o parâmetro antes do a ser alterado.</p>
+
 <p>Outro exemplo:</p>
 
 <pre>
@@ -266,7 +267,19 @@ print(somar(3, 2, 5))
 
 <p>Aí, a função receberá um valor de retorno, e pode ser usada como uma variável, sendo atribuída a uma variável comum ou colocada no print.</p>
 
-<p>PS: Qualquer tipo de valor pode ser retornado, como string, inteiro, booleano, listas, dicionários, objetos, etc.</p>
+<p>PS: Qualquer tipo de valor pode ser retornado, como string (str), inteiro (int), real (float), booleano (bool), listas, dicionários, objetos, etc. Um procedimento que não retorna nada é considerado <q>None</q>.</p>
+
+<p>Podemos também indicar o tipo de retorno também assim:</p>
+
+<pre>
+<code>
+def somar(a = 0, b = 0, c = 0) -> int:
+    s = a + b + c
+    return s
+
+print(somar(3, 2, 5))
+</code>
+</pre>
 
 <p>Outro exemplo:</p>
 

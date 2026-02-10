@@ -37,6 +37,7 @@
 from rich import print
 
 class Funcionario:
+    # Atributos de classe
     empresa = "Curso em Vídeo"
 
     def __init__(self, nome, setor, cargo):
@@ -44,8 +45,8 @@ class Funcionario:
         self.setor = setor
         self.cargo = cargo
 
-    def apresentacao(self):
-        return f":handshake: Olá, sou [blue]{self.nome}[/] e sou {self.cargo.lower()} do setor de {self.setor.lower()} da empresa {Funcionario.empresa}."
+    def apresentacao(self) -> str: # Definindo tipo de retorno
+        return f":handshake: Olá, sou [blue]{self.nome}[/] e sou {self.cargo.lower()} do setor de {self.setor.lower()} da empresa {self.__class__.empresa}."
 </code>
 </pre>
 
@@ -54,6 +55,8 @@ class Funcionario:
 <pre>
 <code>
 c1 = Funcionario("Maria", "Administração", "Diretora")
+c1.empresa = "Estudonauta" # Apenas criará um atributo empresa nesse objeto, sem alterar o empresa original da classe
+print(c1.empresa) # Usando nome do objeto, para atributo da classe use o nome dela
 print(c1.apresentacao())
 
 c2 = Funcionario("Sérgio", "TI", "Programador")

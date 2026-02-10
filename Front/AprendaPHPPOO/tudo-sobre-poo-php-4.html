@@ -29,62 +29,7 @@
 
 <p>Para esse exercício, faremos um encapsulamento com a classe Pessoa, uma agregação entre essa classe e a classe Livro, e uma interface. Veja o diagrama abaixo:</p>
 
-<table style="float: left">
-    <tr>
-        <th>Pessoa</th>
-    </tr>
-    <tr>
-        <td>
-            - nome: String<br/>
-            - idade: int<br/>
-            - sexo: String<br/>
-        </td>
-    </tr>
-    <tr>
-        <td>+ fazerAniver(): void</td>
-    </tr>
-</table>
-
-<table style="float: left; margin-left: 10px">
-    <tr>
-        <th>Livro</th>
-    </tr>
-    <tr>
-        <td>
-            - titulo: String<br/>
-            - autor: String<br/>
-            - totPaginas: int<br/>
-            - pagAtual: int<br/>
-            - aberto: boolean<br/>
-            - leitor: Pessoa<br/>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            + detalhes(): void<br/>
-        </td>
-    </tr>
-</table>
-
-<table style="margin: auto auto 50px 250px">
-    <tr>
-        <th>
-            &lt;&lt;interface&gt;&gt;<br/>
-            Publicacao
-        </th>
-    </tr>
-    <tr>
-        <td>
-            + abrir(): void<br/>
-            + fechar(): void<br/>
-            + folhear(p: int): void<br/>
-            + avancarPag(): void<br/>
-            + voltarPag(): void<br/>
-        </td>
-    </tr>
-</table>
-
-<br/>
+<img src="imagens/livro.jpg" alt="Livro"/>
 
 <p>Crie os arquivos de classes Pessoa.php, Livro.php e o de interface Publicacao.php.</p>
 
@@ -325,69 +270,7 @@ unset($l);
 
 <p>Vamos supor que temos três pessoas, um aluno, um professor e um funcionário. Alguns atributos e métodos em comum entre eles colocaremos numa classe separada, que será a superclasse (progenitora ou mãe), e o Aluno, Professor e Funcionario serão subclasses (filhas). Veja o diagrama delas abaixo:</p>
 
-<table>
-    <caption>Classe Mãe</caption>
-    <tr>
-        <th>Pessoa</th>
-    </tr>
-    <tr>
-        <td>
-            - nome: String<br/>
-            - idade: int<br/>
-            - sexo: String<br/>
-        </td>
-    </tr>
-    <tr>
-        <td> + fazerAniver(): void</td>
-    </tr>
-</table>
-
-<p>Classes filhas:</p>
-
-<table style="float: left">
-    <tr>
-        <th>Aluno</th>
-    </tr>
-    <tr>
-        <td>
-            - matr: int<br/>
-            - curso: String<br/>
-        </td>
-    </tr>
-    <tr>
-        <td>+cancelarMatr(): void</td>
-    </tr>
-</table>
-
-<table style="float: left; margin-left: 10px">
-    <tr>
-        <th>Professor</th>
-    </tr>
-    <tr>
-        <td>
-            - especialidade: String<br/>
-            - salario: float<br/>
-        </td>
-    </tr>
-    <tr>
-        <td>+ receberAumento(aum: float): void</td>
-    </tr>
-</table>
-
-<table style="margin: auto auto 50px 250px">
-    <tr>
-        <th>Funcionario</th>
-    </tr>
-    <tr>
-        <td>
-            - setor: String<br/>
-            - trabalhando: boolean<br/>
-        </td>
-    </tr>
-    <tr>
-        <td>+ mudarTrabalho(): void</td>
-    </tr>
-</table>
+<img src="imagens/heranca-simples.jpg" alt="Herança Simples"/>
 
 <p>Vamos usar a classe Pessoa que criamos na aula anterior para isso. Mas elimine o método construtor dela.</p>
 

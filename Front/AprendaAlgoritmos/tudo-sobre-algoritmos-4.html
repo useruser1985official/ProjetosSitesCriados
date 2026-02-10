@@ -305,7 +305,7 @@ programa {
 
 <h3>Procedimentos sem Retorno</h3>
 
-<p>Até agora, usamos apenas procedimentos e funções internas do próprio Portugol Studio, como a <code>escreva</code>, <code>leia</code> e a função <code>inicio</code>, que conforme explicado, é a função padrão que o interpretador executa primeiro por padrão. No entanto, podemos criar nossos próprios procedimentos e funções.</p>
+<p>Até agora, usamos apenas procedimentos e funções internas do próprio Portugol Studio, como a <code>escreva</code>, <code>leia</code> e a função <code>inicio</code>, que conforme explicado, é a função padrão que o interpretador executa primeiro por padrão. No entanto, podemos criar nossos próprios procedimentos e funções (também chamados de rotinas).</p>
 
 <p>Um procedimento serve para organizar o código e evitar repetições. Você chama o procedimento, ele faz alguma coisa (mostrar uma mensagem, calcular algo, limpar a tela, etc.) e termina ali, sem retornar resultado.</p>
 
@@ -385,6 +385,8 @@ programa {
 
 <p>Por padrão, um procedimento não retorna nada, por isso é considerado uma função <q>vazia</q>.</p>
 
+<p>Procedimentos (rotinas sem retorno) devem ser preferidos quando a finalidade for apenas executar uma ação ou tratar dados internamente, sem a necessidade de produzir um valor para uso posterior, como inicializações, validações ou atualizações de estado.</p>
+
 <p>A nomeação de procedimentos e funções seguem basicamenteas mesmas regras de variáveis e constantes (e consequentemente, parâmetros):</p>
 
 <ul>
@@ -392,7 +394,7 @@ programa {
     <li>Não pode ter espaços.</li>
     <li>Não pode usar acentos ou caracteres especiais como <q>#</q>, <q>@</q>, <q>!</q>, etc.</li>
     <li>Não pode usar palavras reservadas da linguagem (no caso do Portugol, são palavras como <code>funcao</code>, <code>escreva</code>, <code>se</code>, <code>enquanto</code> e outras que veremos mais pra frente, incluindo as palavras já vistas como <code>inteiro</code>, <code>caracter</code> e <code>logico</code>).</li>
-    <li>Devem ser sempre usadas com parênteses no final do nome, sem espaços, independente de terem ou não parâmetros, como por exemplo <code>enviar()</code>.</p>
+    <li>Devem ser sempre usadas com parênteses no final do nome, sem espaços, independente de terem ou não parâmetros, como por exemplo <code>enviar()</code>.</li>
 </ul>
 
 <p>Também, para identificação e leitura mais precisa, é ideal seguir também essas regras:</p>

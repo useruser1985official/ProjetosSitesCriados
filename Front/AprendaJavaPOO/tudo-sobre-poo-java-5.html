@@ -211,7 +211,7 @@ public final class Aluno extends Pessoa {
 </code>
 </pre>
 
-<p>Mas em ambos os casos, o final dará erro caso tentemos substituí-los nas subclasses. Por isso só use o final em classes folhas (que não terão filhas). O final também é usado em atributos no Java (como por exemplo <code>final String CONSTANTE = "Dados"</code>, para exibir faça do mesmo modo, como por exemplo <code>objeto.CONSTANTE</code> e quando dentro da mesma classe, <code>CONSTANTE</code> sozinho).</p>
+<p>Mas em ambos os casos, o final dará erro caso tentemos substituí-los nas subclasses. Por isso só use o final em classes folhas (que não terão filhas). O final também é usado em atributos no Java (nesse caso use <code>static final</code>), e nesse caso deve ser inicializada, como por exemplo <code>static final String CONSTANTE = "Dados"</code>, para exibir faça do mesmo modo, como por exemplo <code>objeto.CONSTANTE</code>, quando chamar diretamente pela classe use <code>NomeDaClasse.CONSTANTE</code> e quando dentro da mesma classe, <code>CONSTANTE</code> sozinho).</p>
 
 <p>Façam também, como exercício, as classes Professor, Técnico e as especializações de ambos.</p>
 
@@ -482,6 +482,10 @@ a.locomover();
 package projetozoo;
 
 public class Canguru extends Mamifero {
+    public void usarBolsa() {
+        System.out.println("Canguru Usando Bolsa");
+    }
+
     @Override
     public void locomover() {
         System.out.println("Saltando");
@@ -497,6 +501,10 @@ public class Canguru extends Mamifero {
 package projetozoo;
 
 public class Cachorro extends Mamifero {
+    public void enterrarOsso() {
+        System.out.println("Cachorro Enterrando Osso");
+    }
+
     @Override
     public void emitirSom() {
         System.out.println("Au! Au! Au!");
@@ -530,31 +538,35 @@ public class ProjetoZoo {
     public static void main(String[] args) {
         // Animal a = new Animal(); // Dará erro por ser abstrata.
 
-        Animal m = new Mamifero();
+        Mamifero m = new Mamifero();
         m.locomover();
         m.emitirSom();
 
-        Animal c = new Canguru();
+        Canguru c = new Canguru();
         c.locomover();
+        c.usarBolsa(); // Não é possível acessar com a "tipagem" Animal nem Mamifero, somente com a "tipagem" Canguru
 
-        Animal d = new Cachorro();
+        Cachorro d = new Cachorro();
         d.emitirSom();
+        d.enterrarOsso(); // Não é possível acessar com a "tipagem" Animal nem Mamifero, somente com a "tipagem" Cachorro
 
-        Animal r = new Reptil();
+        Reptil r = new Reptil();
         r.locomover();
 
-        Animal t = new Tartaruga();
+        Tartaruga t = new Tartaruga();
         t.locomover();
     }
 }
 </code>
 </pre>
 
+<p>Para ver como funcionam os acessos, tente colocar a <q>tipagem</q> dos objetos acima com as classes mães Mamifero e Reptil, e todas com a Animal, como <code>Animal c = new Canguru();</code> (nesse caso, o método <code>usarBolsa()</code> não estará disponível por ser exclusivo de Canguru).</p>
+
 <p>No polimorfismo, podemos sobreescrever um método numa subclasse caso ele tenha a mesma assinatura (por isso, no polimorfismo de sobreposição a herança é necessária).</p>
 
 <p>Termine as outras classes, que serão usadas na próxima aula.</p>
 
-<p>PS: Construtores também podem ser sobrepostos, usamos o <code>super()</code> dentro do construtor da classe filha para chamar o construtor da classe pai. E métodos e atributos estáticos de classes abstratas podem ser acessados, desde que estes sejam públicos e também não sejam abstratos, basta colocar algo tipo <code>super.nomeDoMetodo()</code>.</p>
+<p>PS: Construtores também podem ser sobrepostos, usamos o <code>super()</code> dentro do construtor da classe filha para chamar o construtor da classe pai. E métodos e atributos estáticos de classes abstratas podem ser acessados, desde que estes sejam públicos e também não sejam abstratos (coisa que nem é permitida). Para acessar um método (não abstrato) de uma classe ascendente abstrata, basta colocar algo tipo <code>super.nomeDoMetodo()</code>.</p>
 
 <ul>
     <li><a href="tudo-sobre-poo-java-4.html">Parte Anterior da Matéria!</a></li>

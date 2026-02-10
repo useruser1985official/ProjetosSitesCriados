@@ -281,12 +281,14 @@ print("Olá! Muito prazer em te conhecer, {}{}{}!".format(cores["negativo"], nom
 <pre>
 <code>
 nome = str(input("Qual é o seu nome? "))
+
 if nome == "Gustavo":
     print("Você é o Gustavo!")
 elif nome == "José" or nome == "Maria" or nome = "Paulo":
     print("Seu nome é bem popular no Brasil!")
 else:
     print("Seu nome é bem normal!")
+    
 print("Bom dia, {}.".format(nome))
 </code>
 </pre>
@@ -296,6 +298,7 @@ print("Bom dia, {}.".format(nome))
 <pre>
 <code>
 nome = str(input("Qual é o seu nome? "))
+
 if nome == "Gustavo":
     print("Você é o Gustavo!")
 elif nome == "José" or nome == "Maria" or nome = "Paulo":
@@ -304,11 +307,32 @@ elif nome in "Ana Cláudia Jéssica Juliana":
     print("Belo nome feminino!")
 else:
     print("Seu nome é bem normal!")
+
 print("Bom dia, {}.".format(nome))
 </code>
 </pre>
 
 <p>PS: O <code>in</code> procura uma palavra qualquer dentro das aspas.</p>
+
+<p>Adaptando com a estrutura match case, que pode ser usada em Python 3.10 e posteriores:</p>
+
+<pre>
+<code>
+nome = str(input("Qual é o seu nome? "))
+
+match nome:
+    case "Gustavo":
+        print("Você é o Gustavo!")
+    case "José" | "Maria" | "Paulo":
+        print("Seu nome é bem popular no Brasil!")
+    case "Ana" | "Cláudia" | "Jéssica" | "Juliana":
+        print("Belo nome feminino!")
+    case _:
+        print("Seu nome é bem normal!")
+    
+print("Bom dia, {}.".format(nome))
+</code>
+</pre>
 
 <h3>Estrutura de Repetição For</h3>
 

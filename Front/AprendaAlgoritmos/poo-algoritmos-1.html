@@ -68,6 +68,53 @@
 
 <h3>Primeiro Exemplo de Programa Orientado a Objetos</h3>
 
+<p>Primeiro, veremos as regras pra nomeação de classes, interfaces, assim como seus atributos e métodos, e os objetos criados, que são essas:</p>
+
+<ul>
+    <li>As classes e interfaces devem ser nomeadas usando PascalCase, ou seja, a primeira letra de cada palavra deve ser maiúscula, como em <code>Carro</code> ou <code>CarroEletrico</code>.</li>
+    <li>Objetos, atributos, métodos, rotinas e variáveis devem usar CamelCase, começando com letra minúscula e com as palavras seguintes iniciando com letra maiúscula, como por exemplo <code>car</code>, <code>modelo</code> ou <code>acenderFarol()</code>.</li>
+    <li>Os métodos devem ser sempre chamados com parênteses no final do nome, com ou sem parâmetros, como <code>exibirDados()</code>.</li>
+    <li>Constantes devem ser escritas com todas as letras maiúsculas, utilizando underline (<q>_</q>) para separar palavras, como <code>CPF</code> ou <code>TAXA_JUROS</code>.</li>
+    <li>Os identificadores podem conter apenas letras, números e underline (<q>_</q>), não podendo começar com número, devendo sempre iniciar com uma letra.</li>
+    <li>Não é permitido o uso de espaços em nomes de classes, métodos, atributos, métodos, variáveis e constantes.</li>
+    <li>Não devem ser utilizados acentos ou caracteres especiais, como <q>ç</q>, <q>@</q>, <q>#</q>, <q>!</q> etc.</li>
+    <li>Não é permitido utilizar palavras reservadas da linguagem (como no Java, palavras como <code>if</code>, <code>while</code>, <code>class</code>, entre outras). Nomes de classes padrões da linguagem (como no Java, <code>System</code>, <code>String</code> e <code>Exception</code>) também devem ser evitados.</li>
+    <li>Os nomes devem ser claros e coerentes com sua finalidade, por exemplo, um atributo que armazena a idade numa classe Pessoa deve se chamar <code>idade</code>, e não <code>x</code>.</li>
+</ul>
+
+<p>Resumindo:</p>
+
+<table>
+    <tr>
+        <th>Dado</th>
+        <th>Regra de Escrita</th>
+    </tr>
+    <tr>
+        <td><code>MinhaClasse</code></td>
+        <td>Primeira maiúscula (CamelCase permitido)</td>
+    </tr>
+    <tr>
+        <td><code>MinhaInterface</code></td>
+        <td>Primeira maiúscula (CamelCase permitido)</td>
+    </tr>
+    <tr>
+        <td><code>meuAtributo</code></td>
+        <td>Primeira e restantes minúsculas (CamelCase permitido).</td>
+    </tr>
+    <tr>
+        <td><code>meuMetodo</code></td>
+        <td>Primeira e restantes minúsculas (CamelCase permitido).</td>
+    </tr>
+    <tr>
+        <td><code>meuObjeto</code></td>
+        <td>Primeira e restantes minúsculas (CamelCase permitido).</td>
+    </tr>
+    <tr>
+        <td><code>MINHA_CONSTANTE</code></td>
+        <td>Tudo maiúscula (palavras divididas por underlines)</td>
+    </tr>
+</table>
+
 <p>Veja um exemplo em Java da classe Carro, que escreve como um carro é e o que ele pode fazer:</p>
 
 <pre>

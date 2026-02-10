@@ -184,7 +184,7 @@ final class Aluno extends Pessoa {
 </code>
 </pre>
 
-<p>Mas em ambos os casos, o final dará erro caso tentemos substituí-los nas subclasses. Por isso só use o final em classes folhas (que não terão filhas). O final não é usado em atributos no PHP (nesse caso use <code>const</code> e escreva o atributo sem cifrão, nesse caso deve ser inicializada, como por exemplo <code>const CONSTANTE = "Dados"</code>, para exibir use ::, como por exemplo <code>$objeto::CONSTANTE</code>, e quando dentro da mesma classe, <code>self::CONSTANTE</code>).</p>
+<p>Mas em ambos os casos, o final dará erro caso tentemos substituí-los nas subclasses. Por isso só use o final em classes folhas (que não terão filhas). O final não é usado em atributos no PHP (nesse caso use <code>const</code> e escreva o atributo sem cifrão, nesse caso deve ser inicializada, como por exemplo <code>const CONSTANTE = "Dados"</code>, para exibir use ::, como por exemplo <code>$objeto::CONSTANTE</code>, quando chamar diretamente pela classe use <code>NomeDaClasse::CONSTANTE</code> e quando dentro da mesma classe, <code>self::CONSTANTE</code>).</p>
 
 <p>Façam também, como exercício, as classes Professor, Técnico e as especializações de ambos.</p>
 
@@ -421,6 +421,10 @@ $a-&gt;locomover();
 require_once "Mamifero.php";
 
 class Canguru extends Mamifero {
+    public function usarBolsa() {
+        echo "&lt;p&gt;Canguru Usando Bolsa&lt;/p&gt;";
+    }
+
     public function locomover() {
         echo "&lt;p&gt;Saltando&lt;/p&gt;";
     }
@@ -435,6 +439,10 @@ class Canguru extends Mamifero {
 require_once "Mamifero.php";
 
 class Cachorro extends Mamifero {
+    public function enterrarOsso() {
+        echo "&lt;p&gt;Cachorro Enterrando Osso&lt;/p&gt;";
+    }
+
     public function emitirSom() {
         echo "&lt;p&gt;Au! Au! Au!&lt;/p&gt;";
     }
@@ -476,9 +484,11 @@ $m-&gt;emitirSom();
 
 $c = new Canguru();
 $c-&gt;locomover();
+$c-&gt;usarBolsa();
 
 $d = new Cachorro();
 $d-&gt;emitirSom();
+$d-&gt;enterrarOsso();
 
 $r = new Reptil();
 $r-&gt;locomover();
@@ -492,7 +502,7 @@ $t-&gt;locomover();
 
 <p>Termine as outras classes, que serão usadas na próxima aula.</p>
 
-<p>PS: Construtores e destrutores também podem ser sobrepostos, só que no caso de construtores usamos o <code>parent::__construct()</code> dentro do construtor da classe filha para chamar o construtor da classe pai. E o mesmo vale pros destrutores, usando <code>parent::__destruct()</code>, mas neste caso, não é obrigatório. E métodos e atributos estáticos de classes abstratas podem ser acessados, desde que estes sejam públicos e também não sejam abstratos, basta colocar algo tipo <code>parent::nomeDoMetodo()</code>.</p>
+<p>PS: Construtores e destrutores também podem ser sobrepostos, só que no caso de construtores usamos o <code>parent::__construct()</code> dentro do construtor da classe filha para chamar o construtor da classe pai. E o mesmo vale pros destrutores, usando <code>parent::__destruct()</code>, mas neste caso, não é obrigatório. E métodos e atributos estáticos de classes abstratas podem ser acessados, desde que estes sejam públicos e também não sejam abstratos (coisa que nem é permitida). Para acessar um método (não abstrato) de uma classe ascendente abstrata, basta colocar algo tipo <code>parent::nomeDoMetodo()</code>.</p>
 
 <ul>
     <li><a href="tudo-sobre-poo-php-4.html">Parte Anterior da Matéria!</a></li>

@@ -140,6 +140,8 @@ programa {
 </code>
 </pre>
 
+<p>É recomendado utilizar funções com retorno sempre que for necessário obter um valor que possa ser reutilizado em diferentes contextos do programa. Dessa forma, a lógica de cálculo ou processamento fica desacoplada da forma de exibição, permitindo que o valor retornado seja tratado ou apresentado da maneira mais adequada no programa principal, seja no console, em uma interface gráfica ou em outro meio.</p>
+
 <p>PS: Um procedimento vazio também pode ter a instrução <code>retorne</code> sem nada. Nesse caso, ele só termina a execução do procedimento naquele ponto que a instrução é encontrada. Veja um exemplo simples:</p>
 
 <pre>
@@ -197,11 +199,11 @@ programa {
 </code>
 </pre>
 
-<p>Ou seja, a variável <code>contGlobal</code> pode ser usada tanto na função principal <code>inicio</code> quanto em <code>mostrarContador</code>, além de qualquer outra que poderia ser criada dentro desse mesmo programa.</p>
+<p>Ou seja, a variável <code>contGlobal</code> pode ser usada tanto na função principal <code>inicio</code> quanto no procedimento <code>mostrarContador</code>, além de qualquer outra que poderia ser criada dentro desse mesmo programa.</p>
 
 <h4>Variáveis Locais</h4>
 
-<p>São variáveis criados dentro de uma função ou procedimento. Só podem ser usadas dentro dessa função e não existem fora dela. Por exemplo:</p>
+<p>São variáveis criados dentro de uma função ou procedimento. Só podem ser usadas dentro dessa rotina e não existem fora dela. Por exemplo:</p>
 
 <pre>
 <code>
@@ -223,7 +225,7 @@ programa {
 </code>
 </pre>
 
-<p>A variável <code>numero</code> criada dentro de <code>inicio</code> só existe ali. O <code>numero</code> dentro de <code>exemplo</code> é uma variável diferente, mesmo tendo o mesmo nome. Uma função não consegue acessar a variável local da outra.</p>
+<p>A variável <code>numero</code> criada dentro de <code>inicio</code> só existe ali. O <code>numero</code> dentro de <code>exemplo</code> é uma variável diferente, mesmo tendo o mesmo nome. Uma rotina não consegue acessar a variável local da outra.</p>
 
 <h3>Funções Recursivas</h3>
 
@@ -481,7 +483,7 @@ print("Idade: {}.".format(idade))
 
 <h4>Paradigma Linear</h4>
 
-<p>Foram as primeiras linguagens ditas de alto nível a serem criadas. Seguem comandos lidos de cima pra baixo, de esquerda pra direita, de forma semelhante a uma lista, podendo ter alguns poucos desvios.</p>
+<p>Foram as primeiras linguagens ditas de alto nível a serem criadas. Seguem comandos lidos de cima pra baixo, de esquerda pra direita, de forma semelhante a uma lista, podendo ter alguns poucos desvios. Não é classificada como um paradigma <q>oficial</q>.</p>
 
 <ul>
     <li><b>Resumo: </b>Tudo é lido de cima pra baixo, da esquerda pra direita, sem muito desvio.</li>
@@ -507,6 +509,16 @@ print("Idade: {}.".format(idade))
     <li><b>Estruturada: </b>Algol.</li>
     <li><b>Funcional: </b>Lisp.</li>
     <li><b>Orientada a Objetos: </b>Simula 67, amadureceu com Smalltalk.</li>
+</ul>
+
+<p>Já as principais nem sempre seguem as regras acima:</p>
+
+<ul>
+    <li><b>Baixo Nível: </b>Assembly.</li>
+    <li><b>Linear: </b>Fortran.</li>
+    <li><b>Estruturada: </b>C, Pascal.</li>
+    <li><b>Funcional: </b>Lisp, Haskell.</li>
+    <li><b>Orientada a Objetos: </b>C++, Java.</li>
 </ul>
 
 <ul>

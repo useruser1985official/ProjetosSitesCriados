@@ -325,52 +325,7 @@ echo (Ventilador::getLigado() ? "true" : "false") . "&lt;br/&gt;";
 
 <p>Para criar um exemplo disso com um controle remoto, temos que definir uma interface (seria a "cápsula" do controle com os botões), de forma parecida com uma classe, mas sem atributos, e todos os métodos são públicos. E a classe ControleRemoto (como os circuitos encapsulados pela interface) terá os atributos e os métodos getters e setters privados (é o passo principal pra encapsular). Veja o que faremos no PHP:</p>
 
-<table style="float: left">
-    <tr>
-        <th>
-            <span style="font-weight: lighter">&lt;&lt;interface&gt;&gt;</span><br/>
-            Controlador
-        </th>
-    </tr>
-    <tr>
-        <td>
-            + ligar(): void<br/>
-            + desligar(): void<br/>
-            + abrirMenu(): void<br/>
-            + fecharMenu(): void<br/>
-            + maisVolume(): void<br/>
-            + menosVolume(): void<br/>
-            + ligarMudo(): void<br/>
-            + desligarMudo(): void<br/>
-            + play(): void<br/>
-            + pause(): void<br/>
-        </td>
-    </tr>
-</table>
-
-<table style="margin-left: 150px">
-    <tr>
-        <th>ControleRemoto</th>
-    </tr>
-    <tr>
-        <td>
-            - volume: int<br/>
-            - ligado: boolean<br/>
-            - tocando: boolean<br/>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            (Receberá elementos do controlador)<br/>
-            - setVolume(volume: int): void<br/>
-            - getVolume(): int<br/>
-            - setLigado(ligado: boolean): void<br/>
-            - getLigado(): boolean<br/>
-            - setTocando(tocando: boolean): void<br/>
-            - getTocando(): boolean<br/>
-        </td>
-    </tr>
-</table>
+<img src="imagens/encapsulamento.jpg" alt="Encapsulamento"/>
 
 <p>Crie uma nova Interface em PHP com o nome Controlador.php com esse código:</p>
 

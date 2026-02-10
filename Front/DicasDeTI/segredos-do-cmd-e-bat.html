@@ -640,6 +640,7 @@ net localgroup administradores
     <li><code>set variavel=dados</code> - Cria variáveis. As variáveis são utilizadas entre dois símbolos de porcentagem, na forma <code>%variavel%</code>. Para cálculos aritméticos use o parâmetro <code>/a</code>.</li>
     <li><code>rem</code> - Para comentários (Pode utilizar <code>::</code> no lugar dele).</li>
     <li><code>pause</code> - Isso pausará o prompt até uma tecla ser clicada (ao usar <code>pause&gt;nul</code>, a mensagem pressione qualquer tecla é oculta).</li>
+    <li><code>timeout /t 5</code> - Pausa o prompt por 5 segundos (podendo escolher entre -1 a 99999) ou até uma tecla ser pressionada (com -1 ele espera por tempo indefinido). Com a opção <code>/nobreak</code> ele exige que tecle Ctrl C para interromper.</li>
     <li><code>start</code> - Usada para abrir um programa, pasta ou site (incluindo coisas como <code>start chrome.exe www.google.com.br</code>).</li>
     <li><code>move "origem" "destino"</code> - Para mover arquivos.</li>
     <li><code>copy "origem" "destino"</code> - Para copiar arquivos (ao usar <code>copy con arquivo.tipo</code>, criará um arquivo novo), aí você insere os dados e tecla Ctrl Z e Enter pra copiar.</li>
