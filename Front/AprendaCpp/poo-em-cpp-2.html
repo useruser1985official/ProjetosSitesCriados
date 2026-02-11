@@ -194,7 +194,6 @@ class Aviao {
 
         Aviao(int tp);
         void imprimir();
-    private:
 };
 
 #endif // AVIAO_H_INCLUDED
@@ -238,7 +237,14 @@ void Aviao::imprimir() {
 
 <p>Caso seja necessário chamar um método de uma classe pai dentro de outro método em uma classe filha, chame usando uma sintaxe tipo <code>ClassePai::metodoDela()</code>.</p>
 
-<p>E também podemos fazer sobrecarga de mais de um construtor, colocando na mesma classe dois ou mais construtores, todos com o nome igual da classe e sem tipo, mas com parâmetros diferentes.</p>
+<p>E também podemos fazer sobrecarga de mais de um construtor, colocando na mesma classe dois ou mais construtores, todos com o nome igual da classe e sem tipo, mas com parâmetros diferentes. Podemos também chamar um construtor dentro do outro, fazendo o encadeamento, com algo assim:</p>
+<pre>
+<code>
+NomeDaClasse::NomeDaClasse(int param1, int param2) : NomeDaClasse(param1) { // Indica a própria classe, somente aqui, não na declaração da classe.
+    // Aqui dentro pode ficar vazio
+}
+</code>
+</pre>
 
 <p>PS: Caso num construtor precise inicializar um atributo como nulo, use <code>NULL</code> e inclua a bibioteca <code>&lt;cstddef&gt;</code>. Lembrando que apenas ponteiros podem usar NULL.</p>
 

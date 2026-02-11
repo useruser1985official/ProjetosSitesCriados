@@ -111,7 +111,57 @@ System.out.println("Velocidade atual: " + cr.getVelocidade());
 </code>
 </pre>
 
-<p>PS: Se uma classe não tiver um construtor definido, a linguagem cria automaticamente um construtor padrão, que é vazio e não faz nada. Quando criamos nosso próprio construtor, esse passa a ser o construtor usado ao criar objetos. Em linguagens como Java, é possível ter vários construtores na mesma classe, desde que eles tenham listas de parâmetros diferentes (conceito conhecido como polimorfismo de sobrecarga, que veremos mais pra frente). Um deles pode ser vazio se quisermos.</p>
+<p>PS: Se uma classe não tiver um construtor definido, a linguagem cria automaticamente um construtor padrão, que é vazio e não faz nada. Quando criamos nosso próprio construtor, esse passa a ser o construtor usado ao criar objetos. Em linguagens como Java, C# e C++, é possível ter vários construtores na mesma classe, desde que eles tenham listas de parâmetros diferentes (conceito conhecido como polimorfismo de sobrecarga, que veremos mais pra frente). Um deles pode ser vazio se quisermos. Por exemplo:</p>
+
+<pre>
+<code>
+// Sobrecarga de construtores:
+
+// Passando velocidade:
+public Carro(String cor, String modelo, int velocidade) {
+    this.cor = cor;
+    this.modelo = modelo;
+    this.velocidade = velocidade;
+}
+
+// Sem passar velocidade:
+public Carro(String cor, String modelo) {
+    this.cor = cor;
+    this.modelo = modelo;
+    this.velocidade = 0;
+}
+
+// Construtor vazio:
+public Carro() {
+
+}
+</code>
+</pre>
+
+<p>Aí, no caso acima, podemos passar ou não a velocidade, ou mesmo criar um objeto sem atribuir nada, a diferença de parâmetros definirá qual construtor será chamado pelo objeto. Podemos chamar construtores consecutivos assim, fazendo o encadeamento:</p>
+
+<pre>
+<code>
+// Sobrecarga de construtores:
+
+// Passando velocidade:
+public Carro(String cor, String modelo, int velocidade) {
+    this.cor = cor;
+    this.modelo = modelo;
+    this.velocidade = velocidade;
+}
+
+// Sem passar velocidade:
+public Carro(String cor, String modelo) {
+    this(cor, modelo, 0);
+}
+
+// Construtor vazio:
+public Carro() {
+    this(null, null, 0);
+}
+</code>
+</pre>
 
 <h3>Método Destrutor</h3>
 
@@ -326,160 +376,6 @@ p3.recarregar();
 <p>PS: Uma classe pode implementar mais de uma interface, nesse caso, separe elas por vírgulas, com algo como <code>public class NomeClasse implements NomeInterface1, NomeInterface2</code>, mas nesse caso deveremos iniciar o objeto com o nome da classe implementadora ao invés de uma das interfaces.</p>
 
 <p>Lembrando que algumas linguagens POO não usam interfaces, como o Python e o C++, podemos simular uma com uma classe puramente abstrata/virtual pura, no entanto, isso não significa que elas são exatamente equivalentes.</p>
-
-<h3>Agregação de Objetos</h3>
-
-<p>Agregação é um tipo de relacionamento entre classes onde um objeto é formado por outros objetos, mas esses objetos podem existir separadamente.Ou seja: A classe <q>dona</q> usa outros objetos, mas não é dona deles.</p>
-
-<p>PS: Não confunda agregação com herança, são conceitos diferentes.</p>
-
-<p>Veja um exemplo de agregação abaixo, com a classe Mouse:</p>
-
-<pre>
-<code>
-public class Mouse {
-    private String tipo;
-    private boolean semFio;
-
-    public Mouse(String tipo, boolean semFio) {
-        this.tipo = tipo;
-        this.semFio = semFio;
-    }
-
-    public String getTipo() {
-        return this.tipo;
-    }
-
-    public boolean getSemFio() {
-        return this.semFio;
-    }
-}
-</code>
-</pre>
-
-<p>E a classe Computador que a agrega:</p>
-
-<pre>
-<code>
-public class Computador {
-    private String marca;
-    private int gb;
-    private Mouse ms; // Agregação: Computador usa um mouse externo, o "tipo" é a classe Mouse.
-
-    public Computador(String marca, int gb) {
-        this.marca = marca;
-        this.gb = gb;
-    }
-
-    // Passando objeto criado como parâmetro
-    public void conectarMouse(Mouse ms) {
-        this.ms = ms;
-    }
-
-    public void exibirInfo() {
-        System.out.println("Marca do computador: " + this.marca);
-        System.out.println("Capacidade em GB: " + this.gb);
-
-        if(ms != null) {
-            System.out.println("Mouse conectado: " + ms.getTipo());
-            System.out.println("O mouse é sem fio? " + ms.getSemFio());
-        }
-        else {
-            System.out.println("Nenhum mouse conectado.");
-        }
-    }
-}
-</code>
-</pre>
-
-<p>Diagrama das duas classes:</p>
-
-<img src="imagens/diagrama-agregacao.png" alt="Diagrama Agregação" style="max-width: 600px"/>
-
-<p>E no código principal:</p>
-
-<pre>
-<code>
-// O mouse existe sozinho.
-Mouse mou = new Mouse("Óptico", false);
-
-// O computador também existe sozinho.
-Computador pc = new Computador("Dell", 1);
-
-// O computador apenas usa (agrega) o mouse
-pc.conectarMouse(mou);
-
-pc.exibirInfo();
-</code>
-</pre>
-
-<p>Um computador pode usar um mouse, mas o mouse existe sozinho e não depende do computador para existir. No entanto, podemos fazer com que ele receba um objeto agregado no construtor também (no caso, exigindo que o computador tenha o mouse), alterando a classe Computador assim:</p>
-
-<pre>
-<code>
-public class Computador {
-    private String marca;
-    private int gb;
-    private Mouse ms; // Agregação: Computador usa um mouse externo, o "tipo" é o objeto Mouse.
-
-    public Computador(String marca, int gb, Mouse ms) { // Aí elimina o método conectaMouse.
-        this.marca = marca;
-        this.gb = gb;
-        this.ms = ms;
-    }
-
-    public void exibirInfo() {
-        System.out.println("Marca do computador: " + this.marca);
-        System.out.println("Capacidade em GB: " + this.gb);
-
-        if(ms != null) {
-            System.out.println("Mouse conectado: " + ms.getTipo());
-            System.out.println("O mouse é sem fio? " + ms.getSemFio());
-        }
-        else {
-            System.out.println("Nenhum mouse conectado.");
-        }
-    }
-}
-</code>
-</pre>
-
-<p>E no código principal deixe assim:</p>
-
-<pre>
-<code>
-// O mouse existe sozinho.
-Mouse mou = new Mouse("Óptico", false);
-
-// O computador depende do mouse, nesse caso.
-Computador pc = new Computador("Dell", 1, mou);
-
-pc.exibirInfo();
-</code>
-</pre>
-
-<p>PS: No lugar da classe agregada (no caso, Mouse) também pode estar uma interface, usando a mesma lógica. Lembrando que, caso o Mouse fosse iniciado com new dentro da classe Computador, seria composição, e não agregação, representado com o losango preto. Por exemplo:</p>
-
-<pre>
-<code>
-private Mouse ms = new Mouse("Óptico", false);
-</code>
-</pre>
-
-<p>Resumindo: Objeto criado fora da classe é agregação, objeto criado dentro da classe é composição.</p>
-
-<p>PS: Em linguagens com destrutores, como o C++, deveremos destruir o objeto agregado ou composto dentro do destrutor, como por exemplo:</p>
-
-<pre>
-<code>
-Computador::~Computador() {
-    cout &lt;&lt; "Computador Destruído: " &lt;&lt; this-&gt;marca &lt;&lt; endl;
-
-    delete this->ms; // Destruindo objeto Mouse
-}
-</code>
-</pre>
-
 
 <ul>
     <li><a href="poo-algoritmos-1.html">Parte Anterior da Matéria!</a></li>

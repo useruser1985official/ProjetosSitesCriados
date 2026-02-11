@@ -28,6 +28,158 @@
                            
 <h2>Orientação a Objetos em C# - Parte 2</h2>
 
+<h3>Classes - Atributos e Métodos Estáticos</h3>
+
+<p>Nem todo método pertence naturalmente a uma instância de classe, e podemos utilizar alguns métodos sem ter que instânciar as classes (sem criar objetos), isso é possível graças ao static. Ou seja, o método static acessa campos marcados como estáticos.</p>
+
+<p>Crie esse método na classe Caixa:</p>
+
+<pre>
+<code>
+public static int caixaLado2() {
+    int lat = 2;
+    int vol = lat * lat * lat;
+
+    return vol;
+}
+</code>
+</pre>
+
+<p>E no programa principal, podemos chamar o método estático sem ter que instanciar a classe onde ela está:</p>
+
+<pre>
+<code>
+Console.WriteLine(Caixa.caixaLado2());
+</code>
+</pre>
+
+<p>Veja um exemplo de uso de métodos e atributos estáticos numa classe denominada Lampada:</p>
+
+<pre>
+<code>
+class Lampada {
+    private static float preco = 9.50f;
+    private static bool acesa = false;
+
+    public static void custo() {
+        Console.WriteLine("A lâmpada custa R$ {0:0.00}.", preco);
+
+        // Note que não usamos this para exibir atributos estáticos.
+    }
+
+    public static void acender() {
+        Console.WriteLine("A lâmpada está acesa!");
+        acesa = true;
+    }
+
+    public static void apagar() {
+        Console.WriteLine("A lâmpada está apagada!");
+        acesa = false;
+    }
+}
+</code>
+</pre>
+
+<p>E no código principal:</p>
+
+<pre>
+<code>
+static void Main(string[] args) {
+    Lampada.custo(); // Método estático.
+
+    Lampada.acender();
+    Lampada.apagar();
+}
+</code>
+</pre>
+
+<p>PS: Não é recomendado chamar atributos e métodos estáticos através de objetos (tanto que algumas linguagens nem permitem isso), pois são atributos e métodos da classe, por isso devem ser chamados diretamente através dela.</p>
+
+<p>Também podemos fazer novas atribuições em atributos estáticos no código principal, desde que sejam públicos, e toda instância feita por ele também é alterada, por exemplo:</p>
+
+<pre>
+<code>
+Lampada.preco = 7.25f; // Atributo estático, deixe ele público
+</code>
+</pre>
+
+<p>O static, teoricamente, significa que só uma alocação de memória é criada para esse atributo ou método, não tendo duas cópias na memória em simultâneo.</p>
+
+<p>Em outras palavras, o static manipula os atributos e métodos na classe toda, não apenas em uma instância, e todo objeto criado com ela também terá essa alteração. São atributos e métodos globais.</p>
+
+<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados.</p>
+
+<h3>Classes - Campos Compartilhados</h3>
+
+<p>Como visto, podemos criar métodos estáticos, que são compartilhadas com todos objetos instânciados pela mesma classe. Também podemos criar atributos estáticos.</p>
+
+<p>Crie uma nova classe com o nome Acumula, e esse código aqui:</p>
+
+<pre>
+<code>
+class Acumula {
+    public static int soma;
+
+    public Acumula() {
+        soma = 0;
+    }
+
+    public void incrementa() {
+        soma++;
+    }
+
+    public void incrementa(int valor) {
+        soma += valor;
+    }
+}
+</code>
+</pre>
+
+<p>Note que ele tem um atributo estático (que também pode ser chamado pela classe, sem criar um objeto). Também tem um polimorfismo de sobrecarga com incremento, onde escolhemos o incremento do número.</p>
+
+<p>No programa principal, coloque isso:</p>
+
+<pre>
+<code>
+Acumula[] obj = new Acumula[2];
+
+obj[0] = new Acumula();
+obj[1] = new Acumula();
+
+obj[0].incrementa();
+Console.WriteLine("O valor é {0}.",  Acumula.soma.ToString());
+
+obj[1].incrementa(8);
+Console.WriteLine("O valor é {0}.",  Acumula.soma.ToString());
+</code>
+</pre>
+
+<p>Como o campo é compartilhado, ele altera o valor do atributo na classe, e todas as instâncias serão alteradas dessa mesma forma.</p>
+
+<p>PS: Métodos getters e setters de atributos estáticos também devem ser estáticos, e não se utiliza o this dentro deles. Lembre-se também que qualquer método estático só pode trabalhar com atributos e métodos que também sejam estáticos. E atributos estáticos é recomendável os iniciar dentro da classe. Métodos estáticos não podem ser sobrepostos.</p>
+
+<p>Também é melhor usarmos listas ao invés de arrays, quando estamos trabalhando com objetos, dessa forma:</p>
+
+<pre>
+<code>
+List&lt;Acumula&gt; obj = new List&lt;Acumula&gt;();
+
+obj.Add(new Acumula());
+obj.Add(new Acumula());
+</code>
+</pre>
+            
+<p>Ou assim, mais simplificado:</p>
+
+<pre>
+<code>
+List&lt;Acumula&gt; obj = new List&lt;Acumula&gt; {
+    new Acumula(),
+    new Acumula()
+};
+</code>
+</pre>
+
 <h3>Herança - Parte 1</h3>
 
 <p>Herança é um conceito extremamente importante em orientação a objetos. Usamos a herança, por exemplo, para evitar repetição ao definirmos classes com características em comum e são relacionadas entre si. A herança é um relacionamento entre classes, que permite que uma classe adquira os membros de outra classe.</p>
@@ -126,7 +278,7 @@ public virtual void lutar() { // Método virtual
 <code>
 abstract class Mamifero {
     public abstract void lutar();
-	
+    
     public void respirar() {
         Console.WriteLine("Eu Respiro!");
     }
@@ -266,184 +418,9 @@ carro.mostraChassis();
 
 <p>PS: Além de public, private e protected, um atributo ou método em C# pode ser declarado como <code>internal</code> (disponível para classes dentro do mesmo Assembly) e <code>private protected</code> (disponível para a mesma classe e derivadas dentro do mesmo Assembly).</p>
 
-<h3>Polimorfismo</h3>
-
-<p>Basicamente, existem dois tipos de polimorfismo em C#, o de sobreposição e o de sobrecarga.</p>
-
-<p>O de sobreposição, visto anteriormente, é quando um método, indicado como virtual, é substituído em uma classe descendente, onde ele tem o mesmo nome e é indicado por override.</p>
-
-<p>E como visto nos construtores e nos campos compartilhados, podemos criar métodos comuns usando o mesmo nome, desde que os parâmetros sejam diferentes, isso é o polimorfismo de sobrecarga, como nesse exemplo:</p>
-
-<pre>
-<code>
-class Microondas {
-    public void ligar(int minuto, int segundo) {
-        if(minuto > 0 || segundo > 0) {
-            Console.WriteLine("A comida estará pronta em {0}:{1:00}M.", minuto, segundo);
-        }
-        else {
-            Console.WriteLine("Escolha um tempo maior que 0:00.");
-        }
-    }
-
-    public void ligar(string alimento) {
-        if(alimento.ToLower().Equals("pipoca")) {
-            Console.WriteLine("Vamos estourar pipoca!");
-        }
-        else if(alimento.ToLower().Equals("bolo de caneca")) {
-            Console.WriteLine("Vamos fazer bolo de caneca!");
-        }
-        else {
-            Console.WriteLine("ERRO! Alimento desconhecido!");
-        }
-    }
-
-    public void ligar(bool descongelar) {
-        if(descongelar) {
-            Console.WriteLine("Vamos descongelar o alimento!");
-        }
-        else {
-            Console.WriteLine("ERRO! Não poderei descongelar o alimento!");
-        }
-    }
-</code>
-</pre>
-	
-<p>Na invocação no método principal, ele será diferenciado pelo tipo de parâmetro:</p>
-
-<pre>
-<code>
-Microondas micro = new Microondas();
-
-micro.ligar(3, 30);
-micro.ligar("Pipoca");
-micro.ligar(true);
-</code>
-</pre>
-
-<h3>Agregação de Objetos</h3>
-
-<p>Vamos supor essa classe:</p>
-
-<pre>
-<code>
-class Pilha {
-    private string marca;
-    private int carga;
-
-    public Pilha(string marca) {
-         this.marca = marca;
-         this.carga = 100;
-    }
-
-    public void apresentacao() {
-         Console.WriteLine($"A marca da pilha é {this.marca}.");
-         Console.WriteLine($"A carga da pilha é {this.carga}%.");
-    }
-
-    public string Marca {
-        get => marca;
-        set => marca = value;
-    }
-
-    public int Carga {
-        get => carga;
-        set => carga = value;
-    }
-}
-</code>
-</pre>
-
-<p>Nós podemos fazer relacionamentos entre classes diferentes, veja por exemplo a classe abaixo, que tem um atributo do "tipo" da classe acima:</p>
-
-<pre>
-<code>
-class Aparelho {
-    private Pilha pl;
-
-    public Aparelho(Pilha pl) {
-        this.pl = pl;
-    }
-
-    public void ligado() {
-        if(this.pl.Carga > 0) { // Getter do objeto Pilha
-            Console.WriteLine($"O aparelho está ligado e a carga da pilha é de {this.pl.Carga}%!");
-        }
-        else {
-            Console.WriteLine($"A pilha do aparelho está sem carga!");
-        }
-    }
-
-    public Pilha Pl {
-        get => pl;
-        set => pl = value;
-    }
-}
-</code>
-</pre>
-
-<p>Aí podemos chamar os objetos assim:</p>
-
-<pre>
-<code>
-Pilha ray = new Pilha("Rayovac");
-
-ray.apresentacao();
-
-Aparelho controle = new Aparelho(ray);
-
-controle.ligado();
-
-Console.WriteLine($"A carga da pilha é de {controle.Pl.Carga}%!");
-</code>
-</pre>
-
-<p>PS: Quando a gente inicia um objeto criado dentro da classe, na verdade se chama composição. No caso acima, caso a classe Aparelho fizesse a composição de Pilha, ela teria algo como <code>private Pilha pl = new Pilha("Rayovac");</code> dentro da classe Aparelho.</p>
-
-<h3>Criando Tipos Genéricos</h3>
-
-<p>Podemos criar também "tipos genéricos" em C#, usando apenas uma letra maiúscula, que nos permite configurar os tipos usados.</p>
-
-<p>Veja um exemplo simples de uso:</p>
-
-<pre>
-<code>
-class Program {
-    private class Generico&lt;E&gt; { // Classe interna privada, com parâmetro de tipagem.
-        private E entidade;
-
-        public E Entidade {
-            get => this.entidade;
-            set => this.entidade = value;
-        }
-    }
-
-    static void Main(string[] args) {
-        Generico&lt;string&gt; texto = new Generico&lt;string&gt;();
-
-        texto.Entidade = "Exemplo de String!";
-
-        Console.WriteLine(texto.Entidade);
-
-        Generico&lt;int&gt; numero = new Generico&lt;int&gt;();
-
-        numero.Entidade = 50;
-
-        Console.WriteLine(numero.Entidade);
-
-        Console.Read();
-    }
-}
-</code>
-</pre>
-
-<p>PS: Podemos criar normalmente uma classe externa com tipos genéricos, basta adaptar o código acima.</p>
-
-<p>Caso use mais de um tipo genérico, coloque dentro da mesma tag, separados por vírgulas. Em heranças e implementações, caso a classe a ser herdada ou a interface a ser implementada tenha tipos genéricos, a classe herdeira ou implementadora deverá ter o mesmo tipo (por exemplo, se a interface for <code>interface NomeDaInterface&lt;E&gt;</code>, a classe que a implementa deverá ter o tipo a ser recebido indicado, como por exemplo <code>class NomeDaClasse : NomeDaInterface&lt;Int32&gt;</code>, e nesse caso o objeto criado será <code>NomeDaInterface&lt;Int32&gt; objeto = new NomeDaClasse()</code>. Caso não declare o tipo genérico e queira que ele seja declarado na criação do objeto, coloque a extensão ou implementação (no caso seria <code>class NomeDaClasse&lt;E&gt; : NomeDaInterface&lt;E&gt;</code>), e nesse caso o objeto criado será <code>NomeDaInterface&lt;ClasseInvolucro&gt; objeto = new NomeDaClasse&lt;ClasseInvolucro&gt;()</code>. Esse é o conceito de polimorfismo paramétrico.</p>
-
 <ul>
     <li><a href="poo-em-csharp-1.html">Parte Anterior da Matéria!</a></li>
-    <!--<li><a href="poo-em-csharp-3.html">Continuação da Matéria!</a></li>-->
+    <li><a href="poo-em-csharp-3.html">Continuação da Matéria!</a></li>
 </ul>
 
         </div>

@@ -423,155 +423,17 @@ Console.WriteLine(volume2.ToString());
 
 <p>PS: Podemos ter mais de dois construtores sobrecarregados, desde que não sejam do mesmo tipo de parâmetros. Caso num construtor precise inicializa um atributo como nulo, use <code>null</code>.</p>
 
-<h3>Classes - Atributos e Métodos Estáticos</h3>
-
-<p>Nem todo método pertence naturalmente a uma instância de classe, e podemos utilizar alguns métodos sem ter que instânciar as classes (sem criar objetos), isso é possível graças ao static. Ou seja, o método static acessa campos marcados como estáticos.</p>
-
-<p>Crie esse método na classe Caixa:</p>
+<p>Podemos também chamar um construtor dentro do outro com o <code>this</code>, fazendo o encadeamento, assim:</p>
 
 <pre>
 <code>
-public static int caixaLado2() {
-    int lat = 2;
-    int vol = lat * lat * lat;
-
-    return vol;
+public Caixa() : this(10) { // Chama o construtor abaixo e atribui 10 ao atributo lado
+    // Deixa vazio mesmo, nesse caso
 }
-</code>
-</pre>
 
-<p>E no programa principal, podemos chamar o método estático sem ter que instanciar a classe onde ela está:</p>
-
-<pre>
-<code>
-Console.WriteLine(Caixa.caixaLado2());
-</code>
-</pre>
-
-<p>Veja um exemplo de uso de métodos e atributos estáticos numa classe denominada Lampada:</p>
-
-<pre>
-<code>
-class Lampada {
-    private static float preco = 9.50f;
-    private static bool acesa = false;
-
-    public static void custo() {
-        Console.WriteLine("A lâmpada custa R$ {0:0.00}.", preco);
-
-        // Note que não usamos this para exibir atributos estáticos.
-    }
-
-    public static void acender() {
-        Console.WriteLine("A lâmpada está acesa!");
-        acesa = true;
-    }
-
-    public static void apagar() {
-        Console.WriteLine("A lâmpada está apagada!");
-        acesa = false;
-    }
+public Caixa(double l) {
+    lado = l;
 }
-</code>
-</pre>
-
-<p>E no código principal:</p>
-
-<pre>
-<code>
-static void Main(string[] args) {
-    Lampada.custo(); // Método estático.
-
-    Lampada.acender();
-    Lampada.apagar();
-}
-</code>
-</pre>
-
-<p>PS: Não é recomendado chamar atributos e métodos estáticos através de objetos (tanto que algumas linguagens nem permitem isso), pois são atributos e métodos da classe, por isso devem ser chamados diretamente através dela.</p>
-
-<p>Também podemos fazer novas atribuições em atributos estáticos no código principal, desde que sejam públicos, e toda instância feita por ele também é alterada, por exemplo:</p>
-
-<pre>
-<code>
-Lampada.preco = 7.25f; // Atributo estático, deixe ele público
-</code>
-</pre>
-
-<p>O static, teoricamente, significa que só uma alocação de memória é criada para esse atributo ou método, não tendo duas cópias na memória em simultâneo.</p>
-
-<p>Em outras palavras, o static manipula os atributos e métodos na classe toda, não apenas em uma instância, e todo objeto criado com ela também terá essa alteração. São atributos e métodos globais.</p>
-
-<p>PS: Métodos estáticos só podem trabalhar outros métodos e atributos quando estes também forem estáticos, e não podem ser sobrepostos. E atributos estáticos é recomendável eles serem inicializados.</p>
-
-<h3>Classes - Campos Compartilhados</h3>
-
-<p>Como visto, podemos criar métodos estáticos, que são compartilhadas com todos objetos instânciados pela mesma classe. Também podemos criar atributos estáticos.</p>
-
-<p>Crie uma nova classe com o nome Acumula, e esse código aqui:</p>
-
-<pre>
-<code>
-class Acumula {
-    public static int soma;
-
-    public Acumula() {
-        soma = 0;
-    }
-
-    public void incrementa() {
-        soma++;
-    }
-
-    public void incrementa(int valor) {
-        soma += valor;
-    }
-}
-</code>
-</pre>
-
-<p>Note que ele tem um atributo estático (que também pode ser chamado pela classe, sem criar um objeto). Também tem um polimorfismo de sobrecarga com incremento, onde escolhemos o incremento do número.</p>
-
-<p>No programa principal, coloque isso:</p>
-
-<pre>
-<code>
-Acumula[] obj = new Acumula[2];
-
-obj[0] = new Acumula();
-obj[1] = new Acumula();
-
-obj[0].incrementa();
-Console.WriteLine("O valor é {0}.",  Acumula.soma.ToString());
-
-obj[1].incrementa(8);
-Console.WriteLine("O valor é {0}.",  Acumula.soma.ToString());
-</code>
-</pre>
-
-<p>Como o campo é compartilhado, ele altera o valor do atributo na classe, e todas as instâncias serão alteradas dessa mesma forma.</p>
-
-<p>PS: Métodos getters e setters de atributos estáticos também devem ser estáticos, e não se utiliza o this dentro deles. Lembre-se também que qualquer método estático só pode trabalhar com atributos e métodos que também sejam estáticos. E atributos estáticos é recomendável os iniciar dentro da classe. Métodos estáticos não podem ser sobrepostos.</p>
-
-<p>Também é melhor usarmos listas ao invés de arrays, quando estamos trabalhando com objetos, dessa forma:</p>
-
-<pre>
-<code>
-IList&lt;Acumula&gt; obj = new List&lt;Acumula&gt;();
-
-obj.Add(new Acumula());
-obj.Add(new Acumula());
-</code>
-</pre>
-			
-<p>Ou assim, mais simplificado:</p>
-
-<pre>
-<code>
-IList&lt;Acumula&gt; obj = new List&lt;Acumula&gt; {
-    new Acumula(),
-    new Acumula()
-};
 </code>
 </pre>
 

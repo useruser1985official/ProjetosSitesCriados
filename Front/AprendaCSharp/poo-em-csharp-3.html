@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Aprenda C#</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Aprenda C#</h1>
+                <menu>
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="contato.html">Contato!</a></li>
+                    <li><a href="tudo-sobre-csharp-1.html">Tudo sobre C# Parte 1!</a></li>
+                    <li><a href="tudo-sobre-csharp-2.html">Tudo sobre C# Parte 2!</a></li>
+                    <li><a href="tudo-sobre-csharp-3.html">Tudo sobre C# Parte 3!</a></li>
+                    <li><a href="tudo-sobre-csharp-4.html">Tudo sobre C# Parte 4!</a></li>
+                    <li><a href="tudo-sobre-csharp-5.html">Tudo sobre C# Parte 5!</a></li>
+                    <li><a href="tudo-sobre-csharp-6.html">Tudo sobre C# Parte 6!</a></li>
+                    <li><a href="tudo-sobre-csharp-7.html">Tudo sobre C# Parte 7!</a></li>
+                    <li><a href="tudo-sobre-csharp-8.html">Tudo sobre C# Parte 8!</a></li>
+                    <li><a href="tudo-sobre-csharp-9.html">Tudo sobre C# Parte 9!</a></li>
+                    <li><a href="tudo-sobre-csharp-10.html">Tudo sobre C# Parte 10!</a></li>
+                </menu>
+            </header>
+                           
+<h2>Orientação a Objetos em C# - Parte 3</h2>
+
+<h3>Polimorfismo</h3>
+
+<p>Basicamente, existem dois tipos de polimorfismo em C#, o de sobreposição e o de sobrecarga.</p>
+
+<p>O de sobreposição, visto anteriormente, é quando um método, indicado como virtual, é substituído em uma classe descendente, onde ele tem o mesmo nome e é indicado por override.</p>
+
+<p>E como visto nos construtores e nos campos compartilhados, podemos criar métodos comuns usando o mesmo nome, desde que os parâmetros sejam diferentes, isso é o polimorfismo de sobrecarga, como nesse exemplo:</p>
+
+<pre>
+<code>
+class Microondas {
+    public void ligar(int minuto, int segundo) {
+        if(minuto > 0 || segundo > 0) {
+            Console.WriteLine("A comida estará pronta em {0}:{1:00}M.", minuto, segundo);
+        }
+        else {
+            Console.WriteLine("Escolha um tempo maior que 0:00.");
+        }
+    }
+
+    public void ligar(string alimento) {
+        if(alimento.ToLower().Equals("pipoca")) {
+            Console.WriteLine("Vamos estourar pipoca!");
+        }
+        else if(alimento.ToLower().Equals("bolo de caneca")) {
+            Console.WriteLine("Vamos fazer bolo de caneca!");
+        }
+        else {
+            Console.WriteLine("ERRO! Alimento desconhecido!");
+        }
+    }
+
+    public void ligar(bool descongelar) {
+        if(descongelar) {
+            Console.WriteLine("Vamos descongelar o alimento!");
+        }
+        else {
+            Console.WriteLine("ERRO! Não poderei descongelar o alimento!");
+        }
+    }
+</code>
+</pre>
+	
+<p>Na invocação no método principal, ele será diferenciado pelo tipo de parâmetro:</p>
+
+<pre>
+<code>
+Microondas micro = new Microondas();
+
+micro.ligar(3, 30);
+micro.ligar("Pipoca");
+micro.ligar(true);
+</code>
+</pre>
+
+<h3>Agregação de Objetos</h3>
+
+<p>Vamos supor essa classe:</p>
+
+<pre>
+<code>
+class Pilha {
+    private string marca;
+    private int carga;
+
+    public Pilha(string marca) {
+         this.marca = marca;
+         this.carga = 100;
+    }
+
+    public void apresentacao() {
+         Console.WriteLine($"A marca da pilha é {this.marca}.");
+         Console.WriteLine($"A carga da pilha é {this.carga}%.");
+    }
+
+    public string Marca {
+        get => marca;
+        set => marca = value;
+    }
+
+    public int Carga {
+        get => carga;
+        set => carga = value;
+    }
+}
+</code>
+</pre>
+
+<p>Nós podemos fazer relacionamentos entre classes diferentes, veja por exemplo a classe abaixo, que tem um atributo do "tipo" da classe acima:</p>
+
+<pre>
+<code>
+class Aparelho {
+    private Pilha pl;
+
+    public Aparelho(Pilha pl) {
+        this.pl = pl;
+    }
+
+    public void ligado() {
+        if(this.pl.Carga > 0) { // Getter do objeto Pilha
+            Console.WriteLine($"O aparelho está ligado e a carga da pilha é de {this.pl.Carga}%!");
+        }
+        else {
+            Console.WriteLine($"A pilha do aparelho está sem carga!");
+        }
+    }
+
+    public Pilha Pl {
+        get => pl;
+        set => pl = value;
+    }
+}
+</code>
+</pre>
+
+<p>Aí podemos chamar os objetos assim:</p>
+
+<pre>
+<code>
+Pilha ray = new Pilha("Rayovac");
+
+ray.apresentacao();
+
+Aparelho controle = new Aparelho(ray);
+
+controle.ligado();
+
+Console.WriteLine($"A carga da pilha é de {controle.Pl.Carga}%!");
+</code>
+</pre>
+
+<p>PS: Quando a gente inicia um objeto criado dentro da classe, na verdade se chama composição. No caso acima, caso a classe Aparelho fizesse a composição de Pilha, ela teria algo como <code>private Pilha pl = new Pilha("Rayovac");</code> dentro da classe Aparelho.</p>
+
+<h3>Criando Tipos Genéricos</h3>
+
+<p>Podemos criar também "tipos genéricos" em C#, usando apenas uma letra maiúscula, que nos permite configurar os tipos usados.</p>
+
+<p>Veja um exemplo simples de uso:</p>
+
+<pre>
+<code>
+class Program {
+    private class Generico&lt;E&gt; { // Classe interna privada, com parâmetro de tipagem.
+        private E entidade;
+
+        public E Entidade {
+            get => this.entidade;
+            set => this.entidade = value;
+        }
+    }
+
+    static void Main(string[] args) {
+        Generico&lt;string&gt; texto = new Generico&lt;string&gt;();
+
+        texto.Entidade = "Exemplo de String!";
+
+        Console.WriteLine(texto.Entidade);
+
+        Generico&lt;int&gt; numero = new Generico&lt;int&gt;();
+
+        numero.Entidade = 50;
+
+        Console.WriteLine(numero.Entidade);
+
+        Console.Read();
+    }
+}
+</code>
+</pre>
+
+<p>PS: Podemos criar normalmente uma classe externa com tipos genéricos, basta adaptar o código acima.</p>
+
+<p>Caso use mais de um tipo genérico, coloque dentro da mesma tag, separados por vírgulas. Em heranças e implementações, caso a classe a ser herdada ou a interface a ser implementada tenha tipos genéricos, a classe herdeira ou implementadora deverá ter o mesmo tipo (por exemplo, se a interface for <code>interface NomeDaInterface&lt;E&gt;</code>, a classe que a implementa deverá ter o tipo a ser recebido indicado, como por exemplo <code>class NomeDaClasse : NomeDaInterface&lt;Int32&gt;</code>, e nesse caso o objeto criado será <code>NomeDaInterface&lt;Int32&gt; objeto = new NomeDaClasse()</code>. Caso não declare o tipo genérico e queira que ele seja declarado na criação do objeto, coloque a extensão ou implementação (no caso seria <code>class NomeDaClasse&lt;E&gt; : NomeDaInterface&lt;E&gt;</code>), e nesse caso o objeto criado será <code>NomeDaInterface&lt;ClasseInvolucro&gt; objeto = new NomeDaClasse&lt;ClasseInvolucro&gt;()</code>. Esse é o conceito de polimorfismo paramétrico.</p>
+
+<ul>
+    <li><a href="poo-em-csharp-2.html">Parte Anterior da Matéria!</a></li>
+    <!--<li><a href="poo-em-csharp-4.html">Continuação da Matéria!</a></li>-->
+</ul>
+
+        </div>
+    </body>
+</html>
