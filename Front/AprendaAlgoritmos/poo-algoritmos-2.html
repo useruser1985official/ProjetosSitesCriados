@@ -271,9 +271,11 @@ System.out.println("Valor de PI: " + UtilMath.PI);
 
 <p>Interfaces garantem que diferentes classes tenham comportamentos em comum, mesmo sendo totalmente diferentes entre si.</p>
 
+<p>Lembrando que algumas linguagens POO não usam interfaces, como o Python e o C++, podemos simular uma com uma classe puramente abstrata/virtual pura, no entanto, isso não significa que elas são exatamente equivalentes.</p>
+
 <p>Lembrando que, assim como aconteciam com as classes, as interfaces devem ter a primeira maiúscula e as restantes minúsculas, com CamelCase permitido (como <code>FonteEnergia</code>, que exemplificaremos logo em seguida).</p>
 
-<p>Para uma classe implementar uma interface, podemos usar no Java a palavra <code>implements</code>. A classe que implementar essa interface é obrigada a criar os mesmos métodos.</p>
+<p>Para uma classe implementar uma interface, usamos no Java a palavra <code>implements</code>. A classe que implementar essa interface é obrigada a criar os mesmos métodos.</p>
 
 <p>Veja um exemplo de interface:</p>
 
@@ -374,8 +376,6 @@ p3.recarregar();
 <p>Ao usar uma interface, só poderemos usar os métodos descritos nela, mesmo se a classe implementadora tiver outros métodos, eles não estarão acessíveis por não estarem na interface, o que garante também o encapsulamento.</p>
 
 <p>PS: Uma classe pode implementar mais de uma interface, nesse caso, separe elas por vírgulas, com algo como <code>public class NomeClasse implements NomeInterface1, NomeInterface2</code>, mas nesse caso deveremos iniciar o objeto com o nome da classe implementadora ao invés de uma das interfaces.</p>
-
-<p>Lembrando que algumas linguagens POO não usam interfaces, como o Python e o C++, podemos simular uma com uma classe puramente abstrata/virtual pura, no entanto, isso não significa que elas são exatamente equivalentes.</p>
 
 <ul>
     <li><a href="poo-algoritmos-1.html">Parte Anterior da Matéria!</a></li>

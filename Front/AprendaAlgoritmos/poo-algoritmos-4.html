@@ -23,7 +23,7 @@
 
 <h2>Orientação a Objetos - Parte 4</h2>
 
-<h3>Abstração</h3>
+<h3>Classes e Métodos Abstratos</h3>
 
 <p>Voltando ao Java, podemos, assim como podemos fazer no C#, PHP, Python e outras linguagens, que um método seja abstrato também, para que possa ser sobreposto por classes filhas.</p>
 
@@ -43,11 +43,11 @@ public abstract class Alimento {
 
 <img src="imagens/diagrama-abstrato.png" alt="Diagrama Abstrato"/>
 
-<p>Se uma classe tiver pelo menos um método abstrato, ela obrigatoriamente deve ser declarada como abstrata. Por isso usamos a palavra-chave abstract tanto na classe quanto no método.</p>
+<p>Se uma classe tiver pelo menos um método abstrato, ela obrigatoriamente deve ser declarada como abstrata. Por isso usamos a palavra-chave abstract tanto na classe quanto no método. Um método abstrato também pode ter parâmetros e ter tipo de retorno além do void (como int, bool ou mesmo outro objeto, incluindo o String).</p>
 
-<p>No entanto, uma classe pode ser abstrata mesmo sem ter métodos abstratos, isso acontece quando queremos impedir que ela seja instanciada diretamente ou quando ela serve apenas como modelo para outras classes.</p>
+<p>No entanto, uma classe pode ser abstrata mesmo sem ter métodos abstratos, isso acontece quando queremos impedir que ela seja instanciada diretamente ou quando ela serve apenas como modelo para outras classes. Uma classe abstrata pode ter atributos normalmente e métodos que os manipulem que não sejam abstratos (incluindo getters e setters ou mesmo construtores).</p>
 
-<p>No C++, não existe o <q>abstract</q>, nesse caso usamos métodos virtuais puros, que funcionam basicamente da mesma forma, no qual ele é associado a 0 sem nenhuma implementação, assim:</p>
+<p>PS: No C++, não existe o <q>abstract</q>, nesse caso usamos métodos virtuais puros, que funcionam basicamente da mesma forma, no qual ele é associado a 0 sem nenhuma implementação, assim:</p>
 
 <pre>
 <code>
@@ -62,6 +62,8 @@ Alimento::~Alimento() { // Bloco vazio mesmo, padrão no C++.
 }
 </code>
 </pre>
+
+<p>Uma classe só com métodos virtuais puros em C++ pode até funcionar de forma parecida com uma interface, mas isso não significa que são equivalentes. Abaixo explicaremos melhor, pra todas as linguagens que trabalhamos.</p>
 
 <p>Daí, nas classes filhas podemos manter a implementação dos métodos normalmente (mas sem usar o super ou equivalente):</p>
 
@@ -107,7 +109,7 @@ a2.consumir();  // chama o método da classe Verdura
 
 <p>PS: Lembrando que, assim como acontecia com as interfaces e classes normais, poderemos usar apenas métodos definidos na classe mãe, no caso, a Alimento, no entanto, por esta ser abstrata, não poderá ser instanciada (com <code>new Alimento()</code>).</p>
 
-<p>Lembrando também que mesmo que uma classe tenha apenas métodos abstratos, ela ainda é uma classe, enquanto a interface é um contrato puro. Como visto, uma classe, mesmo abstrata, pode ter tudo que uma normal tem, já as interfaces são puramente contratos de métodos. Mesmo classes abstratas só podem ser herdadas uma vez por classes filhas, exceto no C++ que permite herança múltipla, e nessa linguagem usamos classes virtuais puras (equivalente as abstratas) para simular interfaces por esta não as ter por padrão.</p>
+<p>Lembrando também que mesmo que uma classe tenha apenas métodos abstratos, ela ainda é uma classe, enquanto a interface é um contrato puro. Como visto, uma classe, mesmo abstrata, pode ter tudo que uma normal tem, já as interfaces são puramente contratos de métodos. Mesmo classes abstratas só podem ser herdadas uma vez por classes filhas, exceto no C++ que permite herança múltipla, e nessa linguagem usamos classes exclusivamente com métodos virtuais puros (equivalente as abstratas) para simular interfaces por esta não as ter por padrão.</p>
 
 <p>No caso do polimorfismo de sobreposição, o método tem a mesma assinatura em classes diferentes.</p>
 
@@ -157,8 +159,7 @@ public class Microondas {
         }
         else {
             System.out.println("ERRO! Programa desconhecido!");
-        }
-        
+        }   
     }
 }
 </code>
@@ -188,11 +189,39 @@ micro.ligar("Pizza"); // Programa Pizza.
 
 <p>PS: O polimorfismo de sobrecarga só é possível em linguagens estaticamente tipadas como o Java, C# e C++, mas não em todas (Objective-C, por exemplo, não o têm). Em linguagens dinamicamente tipadas como o PHP, Python e Javascript, não é possível implementá-lo, tendo que ter métodos com nomes diferentes, nem que seja por um caractere.</p>
 
+<p>Lembrando também que, mesmo que dois métodos de mesmo nome com assinatura igual, dará erro por ambiguidade no programa, mesmo se os parâmetros tiverem nomes diferentes, por exemplo:</p>
+
+<pre>
+<code>
+// Não é possível essa sobrecarga:
+public void ligar(boolean aquecer) {
+    if(aquecer) {
+        System.out.println("Microondas ligado no modo aquecer.");
+    }
+    else {
+        System.out.println("ERRO! Não posso aquecer!");
+    }
+}
+
+// Mesma assinatura repetida, dará erro:
+public void ligar(boolean descongelar) {
+    if(descongelar) {
+        System.out.println("Descongelando alimento.");
+    }
+    else {
+        System.out.println("ERRO! Não posso descongelar!");
+    }
+}
+</code>
+</pre>
+
+<p>No caso acima, os dois métodos recebem um booleano, mesmo que tenham nomes diferentes, a assinatura é considerada a mesma. Também isso independe do tipo de retorno do método. Também não é possível dois ou mais métodos de mesmo nome sem parâmetros.</p>
+
 <h3>Polimorfismo Paramétrico com Classes Genéricas</h3>
 
 <p>Em linguagens como o Java, C# e C++, podemos usar classes genéricas também, para que seja feito o polimorfismo paramétrico.</p>
 
-<p>Classes genéricas são classes que recebem um tipo como parâmetro, permitindo criar estruturas reutilizáveis que funcionam para qualquer tipo de dado, sem precisar repetir código.</p>
+<p>Classes genéricas são classes que recebem um tipo (geralmente outra classe ou interface) como parâmetro, permitindo criar estruturas reutilizáveis que funcionam para qualquer tipo de dado, sem precisar repetir código.</p>
 
 <p>Você usa um parâmetro de tipo, como <code>&lt;E&gt;</code> ou <code>&lt;E, D&gt;</code>, para dizer que aquele tipo será decidido quando o objeto for criado. É como se a classe fosse um <q>molde</q> que pode trabalhar com qualquer tipo, definido depois.</p>
 
@@ -204,11 +233,11 @@ public class Caixa&lt;E&gt; { // O E será substituído pela classe/interface.
     private E conteudo;
 
     public void guardar(E valor) {
-        conteudo = valor;
+        this.conteudo = valor;
     }
 
     public E abrir() {
-        return conteudo;
+        return this.conteudo;
     }
 }
 </code>
