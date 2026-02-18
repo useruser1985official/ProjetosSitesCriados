@@ -34,35 +34,35 @@
         <th>Significado</th>
     </tr>
     <tr>
-        <td>==</td>
+        <td><code>==</code></td>
         <td>Igualdade. Não leva em conta os tipos de dados.</td>
     </tr>
     <tr>
-        <td>===</td>
+        <td><code>===</code></td>
         <td>Idêntico. Leva em conta os tipos de dados (sem conversão).</td>
     </tr>
     <tr>
-        <td>!=</td>
+        <td><code>!=</code></td>
         <td>Diferente. Não leva em conta os tipos de dados.</td>
     </tr>
     <tr>
-        <td>!==</td>
+        <td><code>!==</code></td>
         <td>Não Idêntico. Leva em conta os tipos de dados (sem conversão).</td>
     </tr>
     <tr>
-        <td>&gt;</td>
+        <td><code>&gt;</code></td>
         <td>Maior. Não leva em conta os tipos de dados.</td>
     </tr>
     <tr>
-        <td>&lt;</td>
+        <td><code>&lt;</code></td>
         <td>Menor. Não leva em conta os tipos de dados.</td>
     </tr>
     <tr>
-        <td>&gt;=</td>
+        <td><code>&gt;=</code></td>
         <td>Maior ou Igual. Não leva em conta os tipos de dados.</td>
     </tr>
     <tr>
-        <td>&lt;=</td>
+        <td><code>&lt;=</code></td>
         <td>Menor ou Igual. Não leva em conta os tipos de dados.</td>
     </tr>
 </table>
@@ -143,22 +143,22 @@ echo "O aluno está " . (($m &lt; 6) ? "REPROVADO" : "APROVADO") . ".";
         <th>Significado</th>
     </tr>
     <tr>
-        <td>&&</td>
+        <td><code>&&</code></td>
         <td>AND</td>
         <td>E</td>
     </tr>
     <tr>
-        <td>||</td>
+        <td><code>||</code></td>
         <td>OR</td>
         <td>Ou</td>
     </tr>
     <tr>
-        <td>!</td>
+        <td><code>!</code></td>
         <td>NOT</td>
         <td>Não</td>
     </tr>
     <tr>
-        <td>xor ou ^</td>
+        <td><code>xor</code> ou <code>^</code></td>
         <td>XOR</td>
         <td>Ou Exclusivo</td>
     </tr>
@@ -306,7 +306,7 @@ echo date("w"); // Exibe o dia da semana, a partir do 0 (para colocar no array).
 
 <h3>Integrar HTML com PHP</h3>
 
-<p>Para integrar formulários em PHP, você faz assim, escolhendo o método e colocando o action para a página PHP desejada (se quiser que seja processado na mesma página PHP, basta deixar as aspas do action vazias, não precisa colocar a mesma página). Para o PHP pegar os valores do input, ele deverá ter um name (diferentemente do Javascript que pega pela ID ou class).</p>
+<p>Para integrar formulários em PHP, você faz assim, escolhendo o método e colocando o action para a página PHP desejada (se quiser que seja processado na mesma página PHP, basta deixar as aspas do action vazias, não precisa colocar a mesma página). Para o PHP pegar os valores do input, ele deverá ter um name (não confundir com ID ou class).</p>
 
 <p>Usando o mesmo método $_GET (ou $_POST, em alguns formulários mais seguros) que usávamos para obter valores pela URL, nós usaremos com os formulários.</p>
 
@@ -425,7 +425,7 @@ $cor = isset($_GET["cor"]) ? $_GET["cor"] : "black";
 </code>
 </pre>
 
-<p>No CSS você deve colocar assim (só funciona dentro da página PHP, em estilo local em tags style:</p>
+<p>No CSS você deve colocar assim (só funciona dentro da página PHP), em estilo local em tags style:</p>
 <pre>
 <code>
 span.texto {
@@ -453,7 +453,7 @@ $txt = isset($_GET["t"]) ? htmlspecialchars($_GET["t"], ENT_QUOTES) : "Texto Gen
 </code>
 </pre>
 
-<p>Ou podemos usar o <code>filter_input()</code>, dispensando o uso de métodos get/post, assim:</p>
+<p>Ou podemos usar o <code>filter_input()</code>, dispensando o uso das globais get/post, assim:</p>
 
 <pre>
 <code>
@@ -461,7 +461,7 @@ $ini = filter_input(INPUT_GET, "filtro") != null ? (int)filter_input(INPUT_GET, 
 </code>
 </pre>
 
-<p>PS: O filter_input() não aceita o isset(), a comparação deve ser feita com null e não idêntico. Ele substitui os métodos $_GET[], $_POST e outros do tipo, e por isso deverá ficar dentro de outros métodos como trim(), strip_tags() e funções criadas por nós pra tratar dados.</p>
+<p>PS: O filter_input() não aceita o isset(), a comparação deve ser feita com null e não idêntico. Ele substitui as globais $_GET[], $_POST[] e outros do tipo, e por isso deverá ficar dentro de outros métodos como trim(), strip_tags() e funções criadas por nós pra tratar dados.</p>
 
 <p>Isso é usado para evitar que invasores insiram códigos maliciosos entre tags, afim de tentar invadir o site.</p>
 

@@ -111,8 +111,6 @@ a2.consumir();  // chama o método da classe Verdura
 
 <p>Lembrando também que mesmo que uma classe tenha apenas métodos abstratos, ela ainda é uma classe, enquanto a interface é um contrato puro. Como visto, uma classe, mesmo abstrata, pode ter tudo que uma normal tem, já as interfaces são puramente contratos de métodos. Mesmo classes abstratas só podem ser herdadas uma vez por classes filhas, exceto no C++ que permite herança múltipla, e nessa linguagem usamos classes exclusivamente com métodos virtuais puros (equivalente as abstratas) para simular interfaces por esta não as ter por padrão.</p>
 
-<p>No caso do polimorfismo de sobreposição, o método tem a mesma assinatura em classes diferentes.</p>
-
 <h3>Polimorfismo de Sobrecarga</h3>
 
 <p>Polimorfismo de sobrecarga acontece quando uma mesma classe tem vários métodos com o mesmo nome, mas com parâmetros diferentes (quantidade ou tipos). Ou seja, o método se chama igual, mas aceita entradas diferentes e executa ações parecidas. É usado para facilitar a vida do programador, permitindo fazer a mesma ação de maneiras diferentes.</p>
@@ -189,11 +187,11 @@ micro.ligar("Pizza"); // Programa Pizza.
 
 <p>PS: O polimorfismo de sobrecarga só é possível em linguagens estaticamente tipadas como o Java, C# e C++, mas não em todas (Objective-C, por exemplo, não o têm). Em linguagens dinamicamente tipadas como o PHP, Python e Javascript, não é possível implementá-lo, tendo que ter métodos com nomes diferentes, nem que seja por um caractere.</p>
 
-<p>Lembrando também que, mesmo que dois métodos de mesmo nome com assinatura igual, dará erro por ambiguidade no programa, mesmo se os parâmetros tiverem nomes diferentes, por exemplo:</p>
+<p>Lembrando também que, dois métodos de mesmo nome com assinatura igual (mesma quantidade e tipos), dará erro por ambiguidade no programa, mesmo se os parâmetros tiverem nomes diferentes, por exemplo:</p>
 
 <pre>
 <code>
-// Não é possível essa sobrecarga:
+// Assinatura com um booleano:
 public void ligar(boolean aquecer) {
     if(aquecer) {
         System.out.println("Microondas ligado no modo aquecer.");
@@ -203,7 +201,7 @@ public void ligar(boolean aquecer) {
     }
 }
 
-// Mesma assinatura repetida, dará erro:
+// Mesma assinatura repetida, dará erro, assinatura também com um booleano:
 public void ligar(boolean descongelar) {
     if(descongelar) {
         System.out.println("Descongelando alimento.");

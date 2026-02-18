@@ -236,7 +236,7 @@ select * from usuarios;
 
 <p>Vamos ver as databases pelo CMD, usando <code>show databases;</code>, <code>use exemplo;</code>, <code>show tables;</code> e <code>desc amigos;</code>.</p>
 
-<p>Se quiser ver a estrutura criada pra criar a tabela, use o comando <code>show create table amigos;</code> (no CMD). O mesmo vale pra databases (no exemplo, <code>show create database exemplo;</code>.</p>
+<p>Se quiser ver a estrutura criada pra criar a tabela, use o comando <code>show create table amigos;</code> (no CMD). O mesmo vale pra databases (no exemplo, <code>show create database exemplo;</code>).</p>
 
 <p>Voltando a PHPMyAdmin, se quiser mudar algum dado, é só ir em muda, na coluna desejada (por exemplo, mudaremos tel pra telefone e tamanho de 11 pra 15).</p>
 
@@ -357,7 +357,38 @@ order by ano, nome;
 </code>
 </pre>
 
-<p>PS: Além do <code>!=</code>, o diferente pode ser representado por <code>&lt;&gt;</code>.</p>
+<p>PS: Além do <code>!=</code>, o diferente pode ser representado por <code>&lt;&gt;</code>. Os operadores são esses:</p>
+
+<table>
+    <tr>
+        <th>Operador Aritmético</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td><code>==</code></td>
+        <td>Igualdade.</td>
+    </tr>
+    <tr>
+        <td><code>!=</code> ou <code>&lt;&gt;</code></td>
+        <td>Diferente.</td>
+    </tr>
+    <tr>
+        <td><code>&gt;</code></td>
+        <td>Maior.</td>
+    </tr>
+    <tr>
+        <td><code>&lt;</code></td>
+        <td>Menor.</td>
+    </tr>
+    <tr>
+        <td><code>&gt;=</code></td>
+        <td>Maior ou Igual.</td>
+    </tr>
+    <tr>
+        <td><code>&lt;=</code></td>
+        <td>Menor ou Igual.</td>
+    </tr>
+</table>
 
 <p>Caso vá fazer comparações com valores nulos ou booleanos, use <code>is null</code>, <code>is true</code> e <code>is false</code>. O mesmo vale pra negação, usando algo como <code>is not null</code>.</p>
 
