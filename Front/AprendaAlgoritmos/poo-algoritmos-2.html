@@ -163,6 +163,50 @@ public Carro() {
 </code>
 </pre>
 
+<p>E criando os objetos:</p>
+
+<pre>
+<code>
+Carro cr = new Carro("Vermelho", "Uno", 0);
+
+// Usando os métodos
+cr.acelerar();
+System.out.println("Cor: " + cr.getCor());
+System.out.println("Modelo: " + cr.getModelo());
+System.out.println("Velocidade atual: " + cr.getVelocidade());
+
+cr.frear();
+System.out.println("Velocidade atual: " + cr.getVelocidade());
+
+Carro cr2 = new Carro("Preto", "Gol"); // Sem passar velocidade
+
+// Usando os métodos
+cr2.acelerar();
+System.out.println("Cor: " + cr2.getCor());
+System.out.println("Modelo: " + cr2.getModelo());
+System.out.println("Velocidade atual: " + cr2.getVelocidade());
+
+cr2.frear();
+System.out.println("Velocidade atual: " + cr2.getVelocidade());
+
+Carro cr3 = new Carro(); // Sem passar nada
+
+// Definindo valores para os atributos:
+cr3.setCor("Azul");
+cr3.setModelo("Civic");
+cr3.setVelocidade(0);
+
+// Usando os métodos
+cr3.acelerar();
+System.out.println("Cor: " + cr3.getCor());
+System.out.println("Modelo: " + cr3.getModelo());
+System.out.println("Velocidade atual: " + cr3.getVelocidade());
+
+cr3.frear();
+System.out.println("Velocidade atual: " + cr3.getVelocidade());
+</code>
+</pre>
+
 <h3>Método Destrutor</h3>
 
 <p>Um destrutor é um método especial que é executado automaticamente quando um objeto está prestes a ser destruído, ou seja, quando ele sai de uso na memória. Ele serve para limpar recursos, como fechar arquivos, liberar memória, desconectar algo, etc.</p>
@@ -346,7 +390,7 @@ public class BateriaLitio implements FonteEnergia {
 </code>
 </pre>
 
-<p>PS: Note que o Java adiciona a notação <code>@Override</code> em métodos sobreescritos. Isso também é visto com métodos abstratos de classes abstratas (virtuais puras) e virtuais, que veremos mais pra frente. As interfaces também são parte da abstração. No PHP a notação <q>override</q> não existe, já no C# e C++ eles são usados em métodos abstratos e virtuais, de forma ligeiramente diferente.</p>
+<p>PS: Note que o Java adiciona a notação <code>@Override</code> em métodos sobreescritos. Isso também é visto com métodos abstratos de classes abstratas (virtuais puras) e virtuais, que veremos mais pra frente. As interfaces também são parte da abstração. No PHP a notação <q>override</q> não existe, já no C# e C++ eles são usados em métodos abstratos e virtuais, de forma ligeiramente diferente, C# não utiliza essa anotação em métodos implementados de interfaces.</p>
 
 <p>Veja o diagrama dessa interface e dessas classes:</p>
 

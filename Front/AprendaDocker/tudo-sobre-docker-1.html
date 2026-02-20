@@ -20,213 +20,37 @@
             
 <h2>Tudo sobre Docker Parte 1</h2>
 
-<h3>O Que é Docker e Para Que Serve?</h3>
+<h3>Entenda o Docker Agora</h3>
 
-<p>Imagina que você tem um software, como um app web, que está rodando em sua máquina local, e que você está desenvolvendo ele. Essa aplicação web não está disponível para todos por estar apenas no seu computador. Para ele ficar disponível na internet você tem que disponibilizar num servidor remoto onde ele será hospedado e terá um domínio, que poderá ser acessado por qualquer um em qualquer parte do mundo.</p>
+<p>Muitas vezes, quando criamos um programa e ele funciona direitinho na nossa máquina, ele acaba dando problemas ao portar para outros sistemas. Alguns problemas comuns são versões de sistemas, interpretadores (como Node e Python), entre outras. É para isso que o Docker existe.</p>
 
-<p>O processo de disponibilizar um projeto web para uma máquina remota é um processo complexo, porque ele não é só apenas o código que a gente escreve, pois ele vai depender de muitas coisas como compilador/interpretador, banco de dados e várias outras coisas. Versões de software são necessárias e importantes. Vamos supor que temos um site com Node 16, e a máquina remota tem a versão 18, se uma máquina remota é pega do zero, nós teremos que instalar o Node e tudo mais que é necessária pro servidor funcionar, mas a diferença de versões pode dar alguns erros.</p>
+<p>Assim como um navio, que contém conteiners (caixas de aço para guardar coisas como ouro, alimentos, eletrônicos, etc.) para facilitar o transporte desses produtos, para facilitar o transporte, o Docker funciona de forma semelhante. Colocamos tudo que precisamos dentro de um conteiner para que um programa rode perfeitamente como planejado (como por exemplo, uma versão do Python específica).</p>
 
-<p>Para resolver esses problemas, podemos ter um ambiente de desenvolvimento com todas as versões que precisarmos (no caso, o Node 16, e podemos ter outros recursos como o MongoDB na versão 10, etc.), aí ele ficará numa <q>caixinha</q> que pode ser levada pra qualquer lugar, no caso, o app web ficará atrelado a esse ambiente de desenvolvimento.</p>
+<p>Diferente de uma máquina virtual, que a gente emula um sistema operacional completo dentro de outro sistema, e que por isso acaba sendo mais pesado, os conteiners do Docker apenas colocam o que o programa precisa dentro dele, e por isso, é bem mais leve.</p>
 
-<p>Muitas vezes, o servidor não tem esses programas instalados por nós (como o Node e o Mongo DB), por isso pode acabar tendo diferença de versões e consequentemente, de compatibilidade. Quando outra pessoa baixar seu projeto, pode também ter esses problemas.</p>
+<p>Resumindo, o Docker padroniza o ambiente de desenvolvimento e produção, garantindo que a aplicação rode em qualquer lugar.</p>
 
-<p>Podemos também atualizar a versão do nosso software, mas pra atualizar teríamos que atualizar todas as máquinas envolvidas no processo, como o nosso servidor e tudo mais. Para resolver esses problemas que o Docker foi criado.</p>
+<h3>Instalação Completa e Sem Erros</h3>
 
-<p>Essa <q>caixinha</q> que exemplificamos anteriormente vamos chamar de contêiner, ele é como uma <q>mini-máquina</q> com tudo que precisa, um ambiente no qual temos tudo instalado e configurado, como, além dos arquivos, as versões específicas de linguagem back-end, banco de dados e tudo mais. Ela pode ser rodada em qualquer computador sem ele precisar ter esses programas instalados.</p>
+<p>Para usar o Docker no Windows, siga as instruções para instalar o Linux no WSL do Windows e a imagem do Ubuntu nele: <a href="https://learn.microsoft.com/pt-br/windows/wsl/install" target="_blank">https://learn.microsoft.com/pt-br/windows/wsl/install</a></p>
 
-<p>PS: Os contêiners são diferentes de uma máquina virtual, pois esta pega parte dos recursos da máquina principal (como RAM, HD, etc.) e é como um computador isolado (como por exemplo, um Linux numa máquina virtual em um Windows), o que deixa mais pesado o sistema principal. Já o Docker, apesar de semelhante, ele compartilha do kernel apenas os recursos necessários e só instala o que é necessário pra aplicação (no exemplo, o Node e o Mongo, que vão utilizar apenas o que ele precisa da RAM, HD, etc., o que deixa o contêiner mais leve, pois não é um sistema inteiro, apenas tem o que precisamos).</p>
-
-<p>No caso dos contêiners, podemos apenas atualizar o Docker e o que ele precisa, o que torna muito mais fácil. Ele também pega apenas a quantidade de memória e disco que precisa, que não precisa ser pré-configurado como as máquinas virtuais.</p>
-
-<p>Um contêiner é uma instância executável de uma imagem (como o exemplo do app web com Node e Mongo). Você pode criar, iniciar, parar, mover ou excluir um contêiner usando a API Docker ou CLI. Ele pode ser executado em máquinas locais, virtuais ou nuvem. É portátil e pode ser executado em qualquer sistema operacional. Ele também está isolado de outros contêiners e executa seu próprio software, binários e configurações.</p>
-
-<p>Podemos isolar partes de um software em contêiners diferentes, como o app web, onde podemos ter, por exemplo, um contêiner pro front-end, outro pro back-end e outro pro banco de dados.</p>
-
-<p>Para instalar o Docker, siga essas instruções: <a href="https://docs.docker.com/engine/install/" target="_blank">https://docs.docker.com/engine/install/</a></p>
-
-<h3>Criando uma Imagem e um Contêiner Docker para uma API em NodeJS</h3>
-
-<p>Um contêiner em execução usa um sistema de arquivos isolado. Este sistema de arquivos isolado é fornecido por uma imagem, e a imagem deve conter tudo o que é necessários para executar um aplicativo: Todas as dependências, configurações, scripts, binários, etc. A imagem também contém outras configurações para o contêiner, como variáveis de ambiente, um comando padrão para executar e outros metadados.</p>
-
-<p>Aqui podemos ter alguns exemplos de imagens para o Docker: <a href="https://hub.docker.com/" target="_blank">https://hub.docker.com/</a></p>
-
-<p>No caso de usar no Ubuntu, adicione o docker como um usuário com o seguinte comando:</p>
+<p>No caso do Linux, o Docker roda nativamente. Para isso, digite esses comandos na sequência:</p>
 
 <pre>
 <code>
+curl -fsSL https://get.docker.com -o get-docker.sh
+
+sudo sh get-docker.sh 
+
 sudo usermod -aG docker $USER
 </code>
 </pre>
 
-<p>Não esqueça de reiniciar o sistema.</p>
+<p>Depois, baixe e instale o Docker Desktop aqui: <a href="https://docs.docker.com/desktop/" target="_blank">https://docs.docker.com/desktop/</a></p>
 
-<p>Vamos clonar o repositório de um projeto como exemplo com <code>git clone https://github.com/codethi/ThiCodeWallet.git</code>.</p>
+<p>Na linha de comando, digite <code>docker --version</code> na linha de comando pra se tudo está instalado corretamente, visualizando a versão do mesmo. Ao abrir o Docker Desktop no Windows, vá em Settings, Resources e WSL Integration e marque as opções Enable Integration with my Default WSL Distro e Ubuntu.</p>
 
-<p>Entre na pasta clonada, e depois em api (que no caso é o backend), e digite o comando <code>npm run dev</code>.</p>
-
-<p>PS: Caso haja problema com a versão do Node, entre no arquivo Dockerfile e deixe a linha do Node (geralmente a primeira) assim:</p>
-
-<pre>
-<code>
-FROM node:18
-</code>
-</pre>
-
-<p>Usar a opção latest pode dar erros de compatibilidade.</p>
-
-<p>E no mesmo arquivo adicione essa linha, debaixo dos outros RUN:</p>
-
-<pre>
-<code>
-RUN npm install --save-dev nodemon
-</code>
-</pre>
-
-<p>Depois rode esses comandos na ordem:</p>
-
-<pre>
-<code>
-npm install
-
-npm fund
-
-npm update
-</code>
-</pre>
-
-<p>Daí, pra montar e rodar a imagem, a qual chamaremos de <q>backend</q>, basta digitar esses comandos:</p>
-
-<pre>
-<code>
-docker build -t backend . # Não esqueça do ponto
-
-docker run -it backend
-</code>
-</pre>
-
-<p>PS: Para remover um contêiner, basta digitar <code>docker rm nomeouiddoconteiner</code>. Para remover todas as imagens e contêiners não usados, digite isso:</p>
-
-<pre>
-<code>
-docker container prune -f
-
-docker image prune -f
-</code>
-</pre>
-
-<p>Para remover um contêiner e suas imagens, digite isso:</p>
-
-<pre>
-<code>
-docker stop nomeouiddoconteiner
-
-docker kill nomeouiddoconteiner # Use para forçar o fim do processo
-
-docker rm nomeouiddoconteiner
-
-docker rmi nomeouiddoconteiner
-</code>
-</pre>
-
-<p>PS: Pode ser necessário especificar <code>-f</code> em qualquer um deles. Se algum contêiner ou imagem não puder ser deletada, dê um stop ou um kill na imagem conflitante.</p>
-
-<p>Abra um outro terminal, mas na pasta spa, que será nosso front-end.</p>
-
-<p>Para <q>dockerizar</q> um projeto, você colocará um arquivo com o nome Dockerfile, sem extensão nem nada dentro da pasta onde ficará o contêiner.</p>
-
-<p>Aqui vemos algumas dicas oficiais sobre dockerização: <a href="https://docs.docker.com/get-started/workshop/02_our_app/" target="_blank">https://docs.docker.com/get-started/workshop/02_our_app/</a></p>
-
-<p>Dentro da pasta api/src, crie um arquivo Dockerfile e inicialmente, coloque essa sintaxe:</p>
-
-<pre>
-<code>
-FROM node:lts-alpine
-WORKDIR /app
-COPY . .
-
-RUN yarn install --production
-
-CMD ["node", "src/index.js"]
-EXPOSE 3000
-</code>
-</pre>
-
-<p>Altere ele para isso aqui:</p>
-
-<pre>
-<code>
-FROM node:18
-WORKDIR /api
-COPY . .
-
-RUN rm -rf node_modules
-RUN npm install
-
-CMD ["npm", "start"]
-EXPOSE 5002
-</code>
-</pre>
-
-<p>Para ver as imagens de contêiner num diretório, apenas digite <code>docker image ls</code>. Ele costuma ter um contêiner chamado hello-world para testes.</p>
-
-<p>Num contêiner, ele já tem tudo que precisa pra rodar dentro dele, como no caso, a versão específica do Node, o MongoDB e outras coisas.</p>
-
-<p>Na pasta api, digite, numa outra janela, <code>docker run -dp 127.0.0.1:5002:5002 backend</code>. Para ver se ele tá funcionando, digite <code>docker ps</code>.</p>
-
-<p>Um contêiner é como se fosse outro programa que precisa de uma porta para acessar a internet, no caso a porta que escolhemos foi a 5002. No navegador, podemos digitar <code>http://localhost:5002/transactions</code> para acessar a pasta. No caso ele está rodando pelo Docker, e não pelo terminal, especificamente.</p>
-
-<p>Na pasta spa não tem nada rodando, mas ele precisará rodar para mostrar o front-end. Digite <code>npm run dev</code> pra isso. Se ele der erro, edite o Dockerfile dele assim:</p>
-
-<pre>
-<code>
-FROM node:18
-
-WORKDIR /spa
-COPY . .
-
-RUN rm -rf node_modules
-RUN npm i
-RUN npm install --save-dev vite
-
-CMD ["npm", "run", "dev"]
-
-EXPOSE 5173
-</code>
-</pre>
-
-<p>Depois rode esses comandos na ordem:</p>
-
-<pre>
-<code>
-npm install
-
-npm fund
-
-npm update
-</code>
-</pre>
-
-<p>Veja se o arquivo oculto .env está assim:</p>
-
-<pre>
-<code>
-VITE_API_BASE_URL=http://localhost:5002
-</code>
-</pre>
-
-<p>Daí, pra montar e rodar a imagem, a qual chamaremos de <q>frontend</q>, basta digitar esses comandos:</p>
-
-<pre>
-<code>
-docker build -t frontend . # Não esqueça do ponto
-
-docker run -it frontend
-</code>
-</pre>
-
-<p>Na pasta spa, digite, numa outra janela, <code>docker run -dp 127.0.0.1:5173:5173 frontend</code>.</p>
-
-<!-- Corrigir erro do front-end -->
+<p>Abra o Docker Desktop e digite na linha de comando o comando <code>docker run hello-world</code>, ele não vai encontrar o conteiner no computador e vai baixar o conteiner com a imagem indicada (Hello World), que poderá ser visualizado pelo Docker Desktop. O comando run cria um novo conteiner a partir de uma imagem. Caso rode o mesmo comando pela segunda vez, ele já vai identificar a imagem já encontrada, e criará um segundo conteiner com a mesma imagem.</p>
 
 <ul>
     <li><a href="tudo-sobre-docker-2.html">Continuação da Matéria!</a></li>

@@ -62,7 +62,7 @@
     <li>Javascript, apesar de considerada uma linguagem orientada a objetos, ela é baseada em protótipos, em versões mais antigas nem ao menos existiam classes.</li>
 </ul>
 
-<p>Muitos consideram como a primeira linguagem orientada a objetos o Simula 67, mas os conceitos amadureceram mesmo com a linguagem Smalltalk.</p>
+<p>O Simula 67 é considerado a primeira linguagem a suportar orientação a objetos, com classes, objetos e herança, mas POO não era obrigatória, ainda era possível programar de forma procedural. Já o Smalltalk implementou a POO de forma pura, onde tudo é objeto e a comunicação ocorre apenas por mensagens, tornando o paradigma obrigatório.</p>
 
 <p>Para aprender a programação orientada a objetos, deve-se saber a programação básica (estruturada) primeiro, pois praticamente tudo delas pode ser usados em programas orientados a objetos (como estruturas condicionais e de repetição, além do conceito de variáveis e funções/procedimentos, que são equivalentes aos atributos e métodos em POO). O ideal é saber o básico de uma linguagem que suporte POO para estudar esse paradigma, como o Java ou o C#. A maioria dos exercícios aqui usaremos o Java como base, mas mostraremos códigos de outras linguagens também, e as lições aqui podem ser adaptadas pras principais linguagens orientadas a objetos.</p>
 
@@ -91,18 +91,18 @@
     </tr>
     <tr>
         <td><code>MinhaClasse</code></td>
-        <td>Primeira maiúscula (CamelCase permitido)</td>
+        <td>Primeira maiúscula (PascalCase permitido)</td>
     </tr>
     <tr>
         <td><code>MinhaInterface</code></td>
-        <td>Primeira maiúscula (CamelCase permitido)</td>
+        <td>Primeira maiúscula (PascalCase permitido)</td>
     </tr>
     <tr>
         <td><code>meuAtributo</code></td>
         <td>Primeira e restantes minúsculas (CamelCase permitido).</td>
     </tr>
     <tr>
-        <td><code>meuMetodo</code></td>
+        <td><code>meuMetodo()</code></td>
         <td>Primeira e restantes minúsculas (CamelCase permitido).</td>
     </tr>
     <tr>
@@ -323,6 +323,10 @@ for(int i = 0; i &lt; listaCarros.size(); i++) {
 
 <p>Isso evita uso incorreto dos dados e deixa o código mais seguro e organizado.</p>
 
+<p>Um atributo privado só pode ser acessado diretamente dentro da própria classe. Ao criar métodos públicos getters e setters, é possível ler e modificar esse atributo de forma controlada fora da classe. Isso é mais seguro do que permitir acesso direto, pois a classe mantém o controle sobre como o valor é consultado ou alterado.</p>
+
+<p>Uma classe pode ter apenas getters ou apenas setters, conforme a necessidade. Não é obrigatório criar os dois. Usar apenas getters permite acessar um atributo privado sem permitir sua modificação, reforçando o encapsulamento. Pode também existir apenas setter, embora isso seja menos comum.</p>
+
 <p>Veja a classe Carro alterada com o encapsulamento de atributos:</p>
 
 <pre>
@@ -435,6 +439,8 @@ System.out.println("Velocidade atual: " + cr.getVelocidade());
         <td>Protegido</td>
     </tr>
 </table>
+
+<p>Se não for especificado modificador de visibilidade nos atributos e métodos, no Java o padrão é público pra pacote (acesso apenas no mesmo pacote), em C# e C++ é privado, e em PHP é público, sendo recomendável sempre declarar a visibilidade explicitamente, em todas as linguagens.</p>
 
 <ul>
     <li><a href="poo-algoritmos-2.html">Continuação da Matéria!</a></li>
