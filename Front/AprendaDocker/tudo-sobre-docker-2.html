@@ -20,6 +20,19 @@
             
 <h2>Tudo sobre Docker Parte 2</h2>
 
+<h3>Volumes e Mounts</h3>
+
+<p>Para podermos salvar dados, primeiro devemos entender como o Docker funciona. Vamos supor que o Docker é formado por camadas, tipo uma <q>cebola</q>.</p>
+
+<p>As imagens que usamos, que estão nas camadas mais abaixo, são somente-leitura, ou seja, são blindadas, ninguém <q>mexe</q>. Acima delas tem a camada de container, que é leitura e escrita. Quando a gente grava um arquivo, o conteúdo fica na camada do container, e a imagem não é alterada. Enquanto o container existir, os dados que estão dentro dele permanecerão, mesmo se pararmos ele (com o <code>stop</code>), é como deixar um carro na garagem. Já quando o container é removido (com o <code>rm</code>), essa camada é destruída e tudo que estava nela deixará de existir.</p>
+
+<p>Pra gente salvar os dados, devemos <q>furar</q> essa camada do container, pra conseguir gravar diretamente no HD do nosso computador (host). Para isso temos três maneiras:</p>
+
+<ul>
+    <li><b>Bind Mounts: </b>É um mapeamento direto, onde a gente liga uma pasta do nosso host à uma pasta do container. Ótimo para desenvolvimento.</li>
+    <li><b>Volumes: </b>O Docker cria uma área segura no nosso HD e ele gerencia essa área, é mais seguro e performático. É ideal para, por exemplo, banco de dados.</li>
+    <li><b>Tmpfs: </b>Ele grava os dados na memória RAM, bem mais rápido, mas é volátil (desligou, perdeu). É ideal pra dados como senhas.</li>
+</ul>
 
 <ul>
     <li><a href="tudo-sobre-docker-1.html">Parte Anterior da Matéria!</a></li>

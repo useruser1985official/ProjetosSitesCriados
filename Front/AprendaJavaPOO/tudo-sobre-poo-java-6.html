@@ -349,10 +349,10 @@ package projetoyoutube;
 public abstract class Pessoa {
     protected String nome;
     protected int idade;
-    protected String sexo;
+    protected char sexo;
     protected float experiencia;
 
-    public Pessoa(String nome, int idade, String sexo) {
+    public Pessoa(String nome, int idade, char sexo) {
         this.nome = nome;
         this.idade = idade;
         this.sexo = sexo;
@@ -380,11 +380,11 @@ public abstract class Pessoa {
         this.idade = idade;
     }
 
-    public String getSexo() {
+    public char getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(char sexo) {
         this.sexo = sexo;
     }
 
@@ -411,7 +411,7 @@ public class Gafanhoto extends Pessoa {
     private String login;
     private int totAssistido;
     
-    public Gafanhoto(String nome, int idade, String sexo, String login) {
+    public Gafanhoto(String nome, int idade, char sexo, String login) {
         super(nome, idade, sexo); // Isso chama o construtor da classe Pessoa e permite adicionar seus dados ao Gafanhoto
         this.login = login;
         this.totAssistido = 0;
@@ -468,8 +468,8 @@ public class YoutubePoo {
         System.out.println(v.get(0).toString());
         List&lt;Gafanhoto&gt; g = new ArrayList&lt;&gt;();
 
-        g.add(new Gafanhoto("Jubileu", 22, "M", "Jubi"));
-        g.add(new Gafanhoto("Creuza", 12, "F", "Creuzita"));;
+        g.add(new Gafanhoto("Jubileu", 22, 'M', "Jubi"));
+        g.add(new Gafanhoto("Creuza", 12, 'F', "Creuzita"));;
         
         System.out.println(g.get(0).toString());
     }

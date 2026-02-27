@@ -37,7 +37,7 @@
 from rich import print
 
 class Funcionario:
-    # Atributos de classe
+    # Atributo de classe
     empresa = "Curso em Vídeo"
 
     def __init__(self, nome, setor, cargo):
@@ -78,12 +78,19 @@ from rich.panel import Panel
 class Produto:
     def __init__(self, nome, preco):
         self.nome = nome
-        self.preco = f"R${preco:.2f}".replace(".", ",")
+        self.preco = preco
+
+    def __str__(self):
+        return f"{self.nome} custa R${self.preco:.2f}"
 
     def etiqueta(self):
-        caixa = Panel(f"{self.nome:^30}\n{"":-^30}\n{self.preco:.^30}", title = "Produto", width = 35)
+        cont = f"{self.nome.center(30, ' ')}"
+        cont += f"{'-' * 30}"
+        precoF = f"R${self.preco:.2f}".replace(".", ",")
+        cont += f"{precoF.center(30, '.')}"
+        etiq = Panel(cont, title = "Produto", width = 34)
 
-        print(caixa)
+        print(etiq)
 </code>
 </pre>
 
@@ -101,7 +108,7 @@ p2.etiqueta()
 
 <hr/>
 
-<p>Crie a classe Churrasco, onde seja possível informar quantas pessoas vão participar e mostre quanbto de carne deve ser comprado, o custo total do churrasco e o preço por pessoa.</p>
+<p>Crie a classe Churrasco, onde seja possível informar quantas pessoas vão participar e mostre quanto de carne deve ser comprado, o custo total do churrasco e o preço por pessoa.</p>
 
 <p>Classe:</p>
 

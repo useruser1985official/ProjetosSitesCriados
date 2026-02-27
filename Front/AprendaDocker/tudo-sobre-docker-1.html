@@ -24,9 +24,9 @@
 
 <p>Muitas vezes, quando criamos um programa e ele funciona direitinho na nossa máquina, ele acaba dando problemas ao portar para outros sistemas. Alguns problemas comuns são versões de sistemas, interpretadores (como Node e Python), entre outras. É para isso que o Docker existe.</p>
 
-<p>Assim como um navio, que contém conteiners (caixas de aço para guardar coisas como ouro, alimentos, eletrônicos, etc.) para facilitar o transporte desses produtos, para facilitar o transporte, o Docker funciona de forma semelhante. Colocamos tudo que precisamos dentro de um conteiner para que um programa rode perfeitamente como planejado (como por exemplo, uma versão do Python específica).</p>
+<p>Assim como um navio, que contém containers (caixas de aço para guardar coisas como ouro, alimentos, eletrônicos, etc.) para facilitar o transporte desses produtos, o Docker funciona de forma semelhante. Colocamos tudo que precisamos dentro de um container para que um programa rode perfeitamente como planejado (como por exemplo, uma versão do Python específica).</p>
 
-<p>Diferente de uma máquina virtual, que a gente emula um sistema operacional completo dentro de outro sistema, e que por isso acaba sendo mais pesado, os conteiners do Docker apenas colocam o que o programa precisa dentro dele, e por isso, é bem mais leve.</p>
+<p>Diferente de uma máquina virtual, que a gente emula um sistema operacional completo dentro de outro sistema, e que por isso acaba sendo mais pesado, os containers do Docker apenas colocam o que o programa precisa dentro dele, e por isso, é bem mais leve.</p>
 
 <p>Resumindo, o Docker padroniza o ambiente de desenvolvimento e produção, garantindo que a aplicação rode em qualquer lugar.</p>
 
@@ -48,9 +48,353 @@ sudo usermod -aG docker $USER
 
 <p>Depois, baixe e instale o Docker Desktop aqui: <a href="https://docs.docker.com/desktop/" target="_blank">https://docs.docker.com/desktop/</a></p>
 
-<p>Na linha de comando, digite <code>docker --version</code> na linha de comando pra se tudo está instalado corretamente, visualizando a versão do mesmo. Ao abrir o Docker Desktop no Windows, vá em Settings, Resources e WSL Integration e marque as opções Enable Integration with my Default WSL Distro e Ubuntu.</p>
+<p>Na linha de comando, digite <code>docker --version</code> pra se tudo está instalado corretamente, visualizando a versão do mesmo. Ao abrir o Docker Desktop no Windows, vá em Settings, Resources e WSL Integration e marque as opções Enable Integration with my Default WSL Distro e Ubuntu.</p>
 
-<p>Abra o Docker Desktop e digite na linha de comando o comando <code>docker run hello-world</code>, ele não vai encontrar o conteiner no computador e vai baixar o conteiner com a imagem indicada (Hello World), que poderá ser visualizado pelo Docker Desktop. O comando run cria um novo conteiner a partir de uma imagem. Caso rode o mesmo comando pela segunda vez, ele já vai identificar a imagem já encontrada, e criará um segundo conteiner com a mesma imagem.</p>
+<p>Abra o Docker Desktop e digite na linha de comando o comando <code>docker run hello-world</code>, ele não vai encontrar o container no computador e vai baixar o container com a imagem indicada (Hello World), que poderá ser visualizado pelo Docker Desktop. O comando run cria um novo container a partir de uma imagem. Caso rode o mesmo comando pela segunda vez, ele já vai identificar a imagem já encontrada, e criará um segundo container com a mesma imagem.</p>
+
+<h3>Conheça o Poder do docker run</h3>
+
+<p>Vamos primeiramente, excluir os containers criados, e depois a imagem, pelo Docker Desktop mesmo, pra começarmos do zero. Abra a linha de comando e rode novamente o comando <code>docker run hello-world</code>.</p>
+
+<p>Note que, ao executar o comando, primeiro ele exibirá que não conseguiu encontrar a última versão do hello-world localmente, então, a partir daí, ele vai obter essa imagem do Docker Hub e baixará no nosso computador, e mostrará a notificação de download da mesma. O hello-world, tudo que ele faz, é exibir uma mensagem de boas-vindas, que também é exibida. Ao baixar a imagem, ele automaticamente criará um container com essa imagem. Lembrando que o comando run obterá a imagem, caso rode o comando novamente, ele encontrará a imagem no nosso computador e criará um novo container com ela.</p>
+
+<p>PS: Não confunda, o run no comando docker é pra obter imagens e criar containers, não exatamente rodar a imagem.</p>
+
+<p>Lembrando que, caso você tente deletar uma imagem que esteja sendo utilizada por algum container, ele dará erro e não deixará excluir a imagem. Para isso devemos primeiramente excluir todas os containers que utilizam essa imagem primeiro.</p>
+
+<p>Vamos baixar a imagem do Ubuntu digitando <code>docker run ubuntu</code>, ele fará o mesmo processo anterior, mas não executará igual ao hello-world. Ele baixará uma versão simplificada do Ubuntu.</p>
+
+<p>Para usar o Docker no modo interativo, podemos digitar o comando <code>docker run -it ubuntu bash</code>, ele rodará o terminal (Bash) do Ubuntu baixado. Nesse caso, a imagem do Ubuntu estará sendo executada, e deveremos usar o comandos do Linux, e não do Windows, no caso. Ele criará um novo container com a mesma imagem também.</p>
+
+<p>PS: Quando um container está sendo executado, ele ficará com a bolinha verde e com o símbolo de stop no Docker Desktop.</p>
+
+<p>Digite esses comandos do Linux, para exemplificar o uso de comandos no mesmo:</p>
+
+<pre>
+<code>
+ls
+
+touch arquivo.txt
+
+ls
+
+apt update
+
+apt install nano -y
+
+nano arquivo.txt
+
+# Digite algo no arquivo pelo Nano, depois dê Ctrl O e Ctrl X
+
+cat arquivo.txt
+
+exit
+</code>
+</pre>
+
+<p>O comando acima, criará um arquivo de texto dentro da imagem do nosso Linux, esse arquivo não estará no nosso sistema padrão (no caso, o Windows).</p>
+
+<p>Digite o comando <code>docker run -it ubuntu bash</code>, como ele criará um novo container, não encontraremos o arquivo criado, pois ele estará num outro container criado anteriormente, que tem um nome específico (geralmente uns nomes meio doidos criados pelo próprio Docker).</p>
+
+<h3>A Teoria Fundamental (Imagem vs Container)</h3>
+
+<p>Ao rodar <code>docker run -it ubuntu bash</code>, ele criará um novo container com a imagem anteriormente baixada pro Docker, e por isso, não encontraremos os arquivos criados no container anterior. Isso é porque o comando run sempre cria um novo container de uma imagem especificada.</p>
+
+<p>Numa analogia com uma linguagem orientada a objetos, a imagem é como se fosse uma classe de uma linguagem orientada a objetos, ou seja, é como se fosse o <q>molde</q> de alguma coisa, sendo apenas um modelo. O container seria como um objeto, uma instância de uma classe, ao rodar <q>run</q>, é como se ele fosse o <q>new</q>, ou seja, criará um novo objeto (no caso, container), que será independente dos outros, mesmo sendo oriundos da mesma classe (no caso, imagem).</p>
+
+<p>Em outras palavras, a imagem é somente-leitura, e o container é criado a partir de uma imagem. Ao deletar um container, a imagem não é afetada. Uma imagem só pode ser deletada caso nenhum container a esteja utilizando.</p>
+
+<p>Existem formas de persistir os dados em um container, com os volumes, que veremos mais pra frente.</p>
+
+<h3>Aprenda a <q>Domar</q> seus Containers Agora</h3>
+
+<p>Mesmo usando o <q>exit</q>, os containers continuam no Docker. Para listar os containers, usamos o comando <code>docker ps</code>, mas este só mostra os containers que estão rodando. Para visualizar todos os containers independente do status, digite <code>docker ps -a</code>.</p>
+
+<p>Lembrando que, mesmo parados, os containers ocupam espaço no computador, e ao usar o <q>run</q>, ele criará um novo container.</p>
+
+<p>Para criar um container com um nome específico, usaremos o comando <code>docker run -it --name nomedocontainer ubuntu</code>, para criar um container com o nome que você quiser, com a imagem do Ubuntu baixada. Ele inclusive, já entrará no Ubuntu e abrirá o Bash dele, aí digitaremos esses comandos:</p>
+
+<pre>
+<code>
+touch cursodocker.txt
+
+ls
+
+exit
+</code>
+</pre>
+
+<p>Execute o comando <code>docker ps -a</code> novamente, ele mostrará o container que acabou de ser criado junto com os outros.</p>
+
+<p>Para voltar a trabalhar num container criado anteriormente (ou seja, <q>ressuscitar</q> um container), usaremos o comando <code>docker start nomedocontainer</code>, mas este mostrará só o nome dele e executará em segundo plano. Para mostrar o container rodando, digite <code>docker ps</code>, e ao rodar <code>docker ps -a</code> veremos que ele estará rodando. Podemos olhar no Docker Desktop também.</p>
+
+<p>Para entrar num container que está rodando, precisaremos nos <q>anexar</q> nele. Após digitar <code>docker ps</code>, digitaremos <code>docker attach nomedocontainer</code> para entrar nele novamente. Podemos dar um <code>ls</code> pra ver que o arquivo criado anteriormente continua lá, provando que as alterações são salvas nele. Podemos dar <code>exit</code> pra sair do Ubuntu e automaticamente o container será parado.</p>
+
+<p>PS: Só poderemos nos anexar a um container que esteja rodando. Para iniciar e anexar a um container de uma vez só, digite o comando <code>docker start -ai nomedocontainer</code>. Ele já entrará automaticamente.</p>
+
+
+<p>Para parar um container que esteja rodando, use o comando <code>docker stop nomedocontainer</code>. Caso não consiga parar o container e ele não parar, usaremos o comando <q>kill</q>, com o comando <code>docker kill nomedocontainer</code>. Use o kill apenas em emergências, ele seria o equivalente a tirar um container da tomada.</p>
+
+<p>Resumindo:</p>
+
+<ul>
+    <li><code>docker run</code>: Cria um novo container.</li>
+    <li><code>docker start</code>: Liga um container já existente.</li>
+    <li><code>docker attach</code>: Entra (<q>anexa</q>) a um container ligado.</li>
+    <li><code>docker stop</code>: Desliga um container ligado.</li>
+    <li><code>docker kill</code>: <q>Mata</q> um container (use com cautela).</li>  
+</ul>
+
+
+<p>Para renomear um container, principalmente um daqueles com nomes padrões doidos, use o comando <code>docker rename nomeatual novonome</code>.</p>
+
+<h3>Limpe o Lixo do Docker e Ative o Modo Fantasma</h3>
+
+<p>Um container parado não consome processador nem RAM, mas ocupa espaço em disco, por isso é importante limpar os containers e imagens não utilizados.</p>
+
+<p>Liste os containers em execução com <code>docker ps</code> e depois liste todos eles com <code>docker ps -a</code>.</p>
+
+<p>Para remover um container, podemos usar o comando <q>rm</q>, podemos usar o nome ou a ID do container, na sintaxe <code>docker rm nomeouiddocontainer</code>. Ele retornará o nome do container e o removerá. No caso de ID, nem precisamos colocar a ID inteira, apenas os primeiros caracteres, caso se refiram a um container só. Lembrando que só podemos remover container que estão parados.</p>
+
+<p>Para forçar a remoção de um container, use o parâmetro <q>-f</q>, na sintaxe <code>docker rm -f nomeouiddocontainer</code>. Isso só pode ser usado em emergências.</p>
+
+<p>Para remover todos os container que estão parados, digite o comando <code>docker container prune</code>. Ele mostrará os containers excluídos e o espaço recuperado em disco.</p>
+
+<p>Note que, ao excluir os containers, a imagem estará intacta, para deletar a imagem pela linha de comando, primeiramente liste as imagens com o comando <code>docker images</code>, e pra remover uma imagem específica, digite o comando <code>docker rmi nomeouiddaimagem</code>.</p>
+
+<p>Até agora, pra rodarmos os containers, usamos o modo interativo, no qual, ao fechar o prompt/terminal, o container <q>morre</q>. Em casos de, por exemplo, servidores web ou de banco de dados, ele deve continuar funcionando em segundo plano mesmo fechando a linha de comando.</p>
+
+<p>Primeiramente, baixe a imagem do Nginx e já crie um container com um comando só, digitando <code>docker run -it --name servidor nginx</code>. Nesse caso, ele rodará no modo interativo, portanto, ao fechar a linha de comando, ele parará de executar o container.</p>
+
+<p>Para que ele execute o container independente de fechar a linha de comando, vamos remover o container anteriormente criado com <code>docker rm servidor</code>, e criar ele novamente no modo detach, com o comando <code>docker run -d --name servidor nginx</code>. Nesse caso poderemos fechar a linha de comando e ele continuará executando o container criado, para ter certeza, rode <code>docker ps</code> novamente.</p>
+
+<p>Para verificar os logs do servidor, digite o comando <code>docker logs servidor</code>. Para ele mostrar em tempo real, use o comando <code>docker logs -f servidor</code>. Mas ele não ficará preso ao terminal/prompt, portanto poderemos fechá-lo.</p>
+
+<h3>Como Entrar no Container e Monitorar Tudo</h3>
+
+<p>Para listar os containers em execução, digite <code>docker ps</code>, e para listar todos, <code>docker ps -a</code>.</p>
+
+<p>Para criar um container e executar ele no modo detach, digitamos <code>docker run -d --name servidor nginx</code> caso esse servidor não tenha sido criado anteriormente.</p>
+
+<p>Para rodar o container, digite o comando <code>docker start servidor</code>. Ele não se utiliza com o parâmetro <q>-d</q> porque ele já inicia no modo detach por padrão, por isso podemos fechar o prompt que ele continuará executando.</p>
+
+<p>O container é tipo uma caixa preta, ou seja, ele é fechado, e não podemos acessar ele pelo sistema padrão. Não dá pra usar o docker run para executar o terminal porque ele vai criar um novo container com esse comando. Para executar comandos em um container que já existe e esteja rodando, use o comando <code>docker exec -it nomedocontainer comando</code>, como por exemplo, <code>docker exec -it servidor bash</code> pra abrir o Bash dele. Ele deve ser utilizado com um container que esteja rodando.</p>
+
+<p>PS: As imagens Linux do Docker geralmente são minúsculas e simples, portanto, ele pode não ter o bash, nesse caso, basta substituir por sh.</p>
+
+<p>Para acessar o servidor web do Nginx, digite esses comandos:</p>
+
+<pre>
+<code>
+ls
+
+cd /usr/share/nginx/html
+
+ls
+
+cat index.html
+
+exit
+</code>
+</pre>
+
+<p>Ao sair com o exit, nesse caso, ele continuará rodando o container.</p>
+
+<p>Podemos usar outros comandos no lugar do bash, só que ele executará o comando e retornará a saída, por exemplo, <code>docker exec servidor ls</code> ou <code>docker exec servidor ls /usr/share/nginx/html</code>.</p>
+
+<p>Um servidor Nginx, ao receber visitas, gera logs. O Docker captura tudo que o processo joga na saída padrão, e joga nos logs. Para ver esses logs, basta digitar <code>docker logs nomedocontainer</code>. Os logs também podem ser vistos pelo Docker Desktop, clicando no container desejado, assim como o exec pode ser executado diretamente por ele.</p>
+
+<p>Voltando pra linha de comando, para acompanhar os logs em tempo real, usamos o parâmetro <q>-f</q>, no caso, <code>docker logs -f servidor</code>, e para sair use Ctrl C. Para testar, abra um novo prompt e digite o comando <code>docker exec servidor curl localhost</code> pra ele gerar um log. O comando curl é usado para transferir dados para um servidor, usado muito pra testar conexão com um servidor, como um navegador sem interface gráfica.</p>
+
+<h3>Mapeamento de Portas (Port Binding)</h3>
+
+<p>Mesmo se um servidor em um container estiver rodando e a porta (no caso, a 80) estiver aberta, ela não estará acessível fora do container porque o Docker cria um <q>muro</q> em torno do container, por segurança. Para podermos acessar essa porta do container, precisaremos criar um túnel pra isso.</p>
+
+<p>Só que pra abrir uma porta de um container, nós temos que fazer isso ao criar ele, portanto não é possível abrir as portas de um container já existente, mesmo se ele estiver parado. Para isso, digite esses comandos:</p>
+
+<pre>
+<code>
+docker ps
+
+docker stop servidor
+
+docker rm servidor
+
+docker ps -a
+</code>
+</pre>
+
+<p>Para criar um novo container com mapeamento de portas, usaremos o parâmetro <q>-p</q>, e teremos que informar os dispositos que vamos mapear, o da esquerda é o host (nosso computador, que é o que manda), e o da direita é o container. Por padrão, o Nginx roda na porta 80. Para criar um novo container no modo detach, use o comando <code>docker run -d -p 8080:80 --name servidor nginx</code>. Pode ser exibido um aviso do firewall. Aí, no seu computador, podemos rodar no navegador o link <code>http://localhost:8080</code>. Ele abrirá a página que está dentro do container. Dê um <code>docker ps</code> para ver o servidor rodando e as portas mapeadas.</p>
+
+<p>PS: Pode dar erro caso a porta 8080 já esteja em uso. Nesse caso, basta mudar a porta do host, como por exemplo, 8081 ao invés da 8080.</p>
+
+<p>Podemos rodar vários container no mesmo host, mas em portas diferentes, as portas dos containers podem ser as mesmas por serem independentes, apenas a porta do host deve ser diferente. Para exemplificar, digite o comando pra criar um segundo container do mesmo tipo, com outra porta no host, <code>docker run -d -p 8081:80 --name servidor2 nginx</code>.</p>
+
+<p>Com isso, podemos ter vários serviços rodando na mesma máquina, cada um em sua porta e seu container.</p>
+
+<p>PS: Por padrão, ele usa o TCP, caso precise do UDP, coloque algo como <code>8080:80/udp</code>.</p>
+
+<h3>O Segredo das Versões (Tags) no Docker</h3>
+
+<p>As imagens que baixamos do Docker vem do Docker Hub, que funciona de forma mais ou menos parecida com o GitHub. O site é esse: <a href="https://hub.docker.com/" target="_blank">https://hub.docker.com/</a></p>
+
+<p>Lá temos imagens de vários desenvolvedores, mas o recomendado é baixar as imagens dos desenvolvedores oficiais, que geralmente tem um indicador disso. Podemos pesquisar, por exemplo, a do Python, e ir em tags: <a href="https://hub.docker.com/_/python/tags" target="_blank">https://hub.docker.com/_/python/tags</a></p>
+
+<p>Ao baixar uma imagem no Docker, por padrão ele assume a tag <q>latest</q>, ou seja, baixa a última lançada (mais recente). Mas isso pode dar o risco do sistema quebrar, caso a versão seja atualizada posteriormente. O ideal é a gente <q>amarrar</q> as imagens em uma versão específica.</p>
+
+<p>Vamos supor que queremos uma versão do Python como a 3.8, vamos pesquisar ela na página da imagem especificada. Para baixar a imagem, sem criar nenhum container, usamos o comando <code>docker pull nomedaimagem</code>, no caso, especificando a tag, <code>docker pull python:3.8</code>. Só que esse comando vai baixar a versão inteira, que dará uma imagem bem grande por baixar uma imagem com um Linux completo, que podemos verificar usando o comando <code>docker images</code>.</p>
+
+<p>No caso, o que importa é o Python, e assim podemos procurar uma versão <q>alpine</q> disponível no mesmo Docker Hub, por exemplo, <code>docker pull python:3.13-alpine3.23</code>, que baixará uma imagem bem menor, só com o que é necessário. Nesse caso, nós especificamos a versão pra não vir qualquer uma (no caso, a última com o rótulo <q>latest</q>). Baixe novamente a versão 3.8 com o alpine usando <code>docker pull python:3.8-alpine3.20</code>. Para remover a imagem grande, digite o comando <code>docker rmi python:3.8</code>.</p>
+
+<p>Como cada imagem e cada container são independentes entre si, elas não interferem uma na outra, e nem no sistema principal.</p>
+
+<p>Para criar um container com uma das imagens baixadas, usamos o comando, no modo interativo, <code>docker run -it --name python python:3.13-alpine3.23 python</code>, pra ele criar o container e já executar o Python dele. Para criar com a outra imagem, abra outro prompt e use o comando <code>docker run -it --name python38 python:3.8-alpine3.20 python</code>, da mesma forma. Pra sair do Python, use o comando de saída dele (<code>exit()</code>).</p>
+
+<h3>Aprenda a <q>Empacotar</q> seu Projeto/Site/App em uma Imagem Docker</h3>
+
+<p>Podemos empacotar nossos projetos em uma imagem, para isso usaremos um arquivo chamado Dockerfile, o Dockerfile é como uma <q>receita</q>, onde nós descrevemos os ingredientes e o Docker <q>cozinha</q> (faz o build) e o resultado é uma imagem pronta.</p>
+
+<p>Vamos pegar, por exemplo, um arquivo index.html só pra exemplificar um projeto nosso a ser empacotado.</p>
+
+<p>Primeiramente, crie num editor de texto um arquivo com o nome <q>Dockerfile</q>, com a primeira maiúscula e sem extensão, e coloque ele na mesma pasta do projeto, com esse código aqui:</p>
+
+<pre>
+<code>
+FROM nginx:1.28.2
+
+COPY index.html /usr/share/nginx/html/index.html
+</code>
+</pre>
+
+<p>Lembrando que temos que indicar o nome do arquivo a ser copiado com o novo nome, que pode ser o mesmo ou outro.</p>
+
+<p>Para copiar todo o conteúdo de uma pasta (no caso, a pasta onde ele está), use o ponto, nessa sintaxe:</p>
+
+<pre>
+<code>
+COPY . /usr/share/nginx/html
+</code>
+</pre>
+
+<p>Só que nesse caso, ele copiará tudo que estará nele, incluindo pastas ocultas, como as de Git, variáveis ambiente, e outros. Para ignorar esses arquivos, usaremos um arquivo chamado <q>.dockerignore</q> (não esqueça do ponto), para listar os arquivos a serem ignorados. Ele funciona de forma parecida com o Git Ignore. Esse é um exemplo de Docker Ignore, onde ele ignorará arquivos e pastas especificados:</p>
+
+<pre>
+<code>
+.git
+Dockerfile
+README.md
+README.txt
+docker-compose.yml
+</code>
+</pre>
+
+<p>Para construir o projeto, usaremos o comando <code>docker build -t minhaimagem:1.0 .</code> (não esqueça do ponto).</p>
+
+<p>PS: Caso você reconstrua um projeto já construído, ele só construirá caso tenha algo alterado, de forma mais ou menos parecida com os commits do Git.</p>
+
+<p>Para ver se a imagem foi criada, rode o comando <code>docker images</code>. Para criar um container no modo detach e com o mapeamento de portas, digite <code>docker run -d -p 8080:80 --name meusite minhaimagem:1.0</code>, ele rodará o container em segundo plano e poderemos acessar no navegador via <code>http://localhost:8080/</code>.</p>
+
+<p>Crie um novo container com essa mesma imagem, usando o comando <code>docker run -d -p 8090:80 --name meusite2 minhaimagem:1.0</code>, e acesse pela <code>http://localhost:8090/</code> da mesma forma.</p>
+
+<p>Os dois containers funcionam de forma independente, podemos parar um e deixar o outro rodando, e um não interferirá no outro.</p>
+
+<p>Com isso, podemos mandar nosso projeto com tudo configurado, no caso do site, a outra pessoa nem precisaria instalar servidor web para visualizar o site, pois tudo estaria incluído na imagem e no container.</p>
+
+<h3>Aprenda a Profissionalizar suas Imagens</h3>
+
+<p>Podemos melhorar nosso Dockerfile. Nós informaremos uma pasta para transferir nossos arquivos, pois por padrão ele manda pra raiz do Linux. Caso a pasta não exista, ela será criada.</p>
+
+<p>Crie um novo Dockerfile e um arquivo de texto qualquer. Usaremos a diretiva <code>WORKDIR</code> para entrar em uma pasta. E podemos usar a diretiva <code>RUN</code> para rodar comandos do terminal do Linux e instalar o Vim no Ubuntu (não confundir com o run usado no comando do Docker). É necessário instalar algumas coisas pelo Linux do Docker ser bem simples e <q>pelado</q>. Podemos liberar a porta 80 com o comando <code>EXPOSE</code> também. Veja como ele ficaria:</p>
+
+<pre>
+<code>
+FROM ubuntu:24.04
+
+WORKDIR /app
+
+RUN apt update && apt install -y curl vim
+
+COPY app.txt .
+
+EXPOSE 80
+</code>
+</pre>
+
+<p>Aí, na pasta onde estão os arquivos, basta rodar o comando no prompt <code>docker build -t meuubuntu:1.0 .</code> (não esqueça do ponto) pra criar a imagem.</p>
+
+<p>Depois de criar a imagem, rode o comando <code>docker images</code> para ver se ela realmente foi criada, e crie um container com o comando <code>docker run -it --name exemplocontainer meuubuntu:1.0 bash</code> para criar o container no modo interativo e entrar no terminal. Ele já entrará na pasta /app criada. Digite esses comandos:</p>
+
+<pre>
+<code>
+ls
+
+curl --version
+
+vim --version
+
+cat app.txt
+</code>
+</pre>
+
+<p>Lembrando que o RUN do Dockerfile roda no build, o resultado final fica na imagem, já o CMD roda no start, ou seja, pra iniciar o aplicativo.</p>
+
+<h3>CMD ou ENTRYPOINT? Entenda Quando Usar no seu Dockerfile</h3>
+
+<p>Crie um Dockerfile novo com esse código aqui:</p>
+
+<pre>
+<code>
+FROM ubuntu:latest
+
+CMD ["echo", "Olá, sou o comando CMD!"]
+</code>
+</pre>
+
+<p>O comando CMD executará um comando na imagem do Ubuntu criado. Crie a imagem com o comando <code>docker build -t teste-cmd .</code> (não esqueça do ponto).</p>
+
+<p>Após criar a imagem, vamos criar o container com ela, com o comando <code>docker run teste-cmd</code>, ele criará o container e já executará o echo do Dockerfile.</p>
+
+<p>O comando CMD é mais flexível, ele permite que a gente faça mudanças no comando, ou seja, caso a gente passe outra coisa no comando de criação do container, ele substituirá o comando do Dockerfile. Para ver isso, digite no prompt <code>docker run teste-cmd echo "Mudei Tudo!"</code>, ele apenas exibirá essa mensagem.</p>
+
+<p>Agora, altere a linha do Dockerfile que está o CMD, e coloque essa linha no lugar:</p>
+
+<pre>
+<code>
+ENTRYPOINT ["echo", "Olá, sou o comando ENTRYPOINT!"]
+</code>
+</pre>
+
+<p>Agora crie uma nova imagem com o comando <code>docker build -t teste-entry .</code> (não esqueça do ponto).</p>
+
+<p>Após criar a imagem, crie um container com ela usando o comando <code>docker run teste-entry</code>. Ele, ao criar, executará o echo do Dockerfile.</p>
+
+<p>Só que ao rodar o echo na criação do container, ele adicionará o conteúdo ao definido no Dockerfile, por exemplo, <code>docker run teste-entry echo "Mudei Tudo!"</code>. Ele adicionará o texto <q>echo "Mudei Tudo!"</q> e não reconhecerá esse outro echo como comando.</p>
+
+<p>Em outras palavras, o CMD é uma sugestão, ele roda o comando, mas caso o usuário digite outro comando, ele é substituído. O ENTRYPOINT é uma ordem, portanto é executado obrigatoriamente e nada que o usuário digite muda o mesmo, ele é fixo.</p>
+
+<p>Dependendo do caso, é melhor usar um ou outro.</p>
+
+<p>Vamos supor um container pra usar o Ping, por exemplo, deixe o Dockerfile assim:</p>
+
+<pre>
+<code>
+FROM ubuntu:latest
+
+RUN apt update && apt install -y iputils-ping
+
+ENTRYPOINT ["ping", "-c", "4"]
+
+CMD ["google.com"]
+</code>
+</pre>
+
+<p>No caso acima, o ping e seus parâmetros serão executados obrigatoriamente, já o Google é <q>pingado</q> por padrão, mas podemos passar outro servidor como parâmetro.</p>
+
+<p>Digite o comando <code>docker build -t meuping .</code> (não esqueça do ponto) pra criar a imagem.</p>
+
+<p>Depois de criada a imagem, crie um container com o comando <code>docker run meuping</code> e ele criará o container e fará o Ping no Google. Ao rodar <code>docker run meuping youtube.com</code> ele executará o Ping no Youtube ao invés do Google.</p>
+
+<p>Lembrando que, para um controle melhor dos comandos do CMD e ENTRYPOINT, use sempre entre aspas e dentro de colchetes, separados por vírgulas.</p>
 
 <ul>
     <li><a href="tudo-sobre-docker-2.html">Continuação da Matéria!</a></li>
