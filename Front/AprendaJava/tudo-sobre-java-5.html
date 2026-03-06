@@ -107,7 +107,7 @@ n[3] = 2;
 </code>
 </pre>
 
-<p>Como visto acima, pelo fato do array ser um objeto, a variável criada tem que ter dois colchetes ao lado (indicação de variável composta, podendo os colchetes estando no nome do objeto ou no tipo/classe, mas nunca os dois, ou é um ou é outro), e declarada com new int (obviamente foi declarada assim pelo array ser do tipo int, se o array for de outro tipo deve-se colocar, por motivos óbvios, o tipo/classe invólucro da variável criada, como float, char ou String).</p>
+<p>Como visto acima, pelo fato de ser um array, a variável criada tem que ter dois colchetes ao lado (indicação de variável composta, podendo os colchetes estando no nome do objeto ou no tipo/classe, mas nunca os dois, ou é um ou é outro), e declarada com new int (obviamente foi declarada assim pelo array ser do tipo int, se o array for de outro tipo deve-se colocar, por motivos óbvios, o tipo/classe invólucro da variável criada, como float, char ou String). Lembrando que o new indica a criação de um objeto, consequentemente, os arrays sempre são objetos no Java.</p>
 
 <p>Simplificando:</p>
 
@@ -116,6 +116,8 @@ n[3] = 2;
 int n[] = {3, 5, 8, 2};
 </code>
 </pre>
+
+<p>PS: Mesmo da forma acima, o array continua sendo um objeto.</p>
 
 <p>Para exibir, podemos usar um laço de repetição simples, assim:</p>
 
@@ -154,7 +156,8 @@ for(int cont = 0; cont &lt; num.length; cont++) {
 
 <pre>
 <code>
-String mes[] = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",<br/>"Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
+String mes[] = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+"Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
 int tot[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 for(int cont = 0; cont < mes.length; cont++) {
     System.out.println(mes[cont] + " tem " + tot[cont] + " dias.");
@@ -285,7 +288,7 @@ int selec = 0;
 
 <pre>
 <code>
-vet[selec] = Integer.parseInt(numVal.getValue().toString());
+vet[selec] = (int)numVal.getValue();
 lista.removeAllElements();
 for(int cont = 0; cont &lt; vet.length; cont++) {
     lista.addElement(vet[cont]);

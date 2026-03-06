@@ -31,7 +31,7 @@
 
 <p>No caso, para indicar um procedimento em Java, usaremos o void (que é vazio, pra indicar que não terá retorno).</p>
 
-<p>PS: O próprio método principal do Java (public static void main) indica um procedimento.</p>
+<p>PS: O próprio método principal do Java (<code>public static void main</code>) indica um procedimento.</p>
 
 <p>Esse é o código que colocaremos antes ou depois do void principal, ele deverá ter a indicação de que é um método estático com o <code>static</code>, tal como o método principal:</p>
 
@@ -55,7 +55,9 @@ soma(5, 2);
 
 <p>Observe que o método é executado depois, mesmo com o procedimento ter sido antes, pois por regra, o método main é o primeiro a ser executado.</p>
 
-<p>PS: Os parâmetros não são obrigatórios ter em todas as funções e procedimentos, mas caso tenham, tem que ser passados todos eles nas invocações, e não é possível inicializar esses mesmos parâmetros com valores padrão, o melhor é usar a sobrecarga, que veremos mais pra frente.</p>
+<p>Tem casos que a declaração <code>static</code> não é obrigatória num método. No caso acima, é devido ao método main ser estático, e por isso só pode trabalhar com métodos também estáticos. O static permite chamar o método de uma classe sem precisar criar um objeto com o <q>new</q>.</p>
+
+<p>PS: Os parâmetros não são obrigatórios ter em todas as funções e procedimentos, mas caso tenham, tem que ser passados todos eles nas invocações, e não é possível inicializar esses mesmos parâmetros com valores padrão, o melhor é usar a sobrecarga, que veremos mais pra frente. Mesmo métodos sem parâmetros devem ter os parênteses.</p>
 
 <p>Para chamar funções em Java, é de forma parecida com os procedimentos, apenas declarando o tipo primitivo de retorno, no lugar do void (antes ou depois do método principal):</p>
 
@@ -80,9 +82,7 @@ System.out.println("A soma vale: " + sm);
 </code>
 </pre>
 
-<p>Nesse caso, o próprio código verá a melhor maneira de exibir, o método do cálculo só se responsabilizou pelo cálculo mesmo, a exibição foi cuidada apenas pelo método principal.</p>
-
-<p>PS: Tem casos que a declaração static não é obrigatória num método. Nos casos acima, é devido ao método main ser estático, e por isso só pode trabalhar com métodos estáticos.</p>
+<p>Nesse caso, o próprio código verá a melhor maneira de exibir, o método do cálculo só se responsabilizou pelo cálculo mesmo, a exibição foi cuidada apenas pelo método principal. No caso acima, devemos manter o static na função soma também, como explicado acima.</p>
 
 <p>Também podemos fazer sobrecarga de métodos no Java, que é quando temos dois ou mais métodos com o mesmo nome, mas com parâmetros diferentes, por exemplo:</p>
 
@@ -108,9 +108,9 @@ public static void main(String[] args) {
 
 <p>Agora vamos ver uma iniciação em POO, pra isso vamos criar outro projeto com a classe principal.</p>
 
-<p>Vamos criar uma segunda Classe Java com o nome Operacoes, no mesmo pacote Java (essa não terá o public static void main). Ele automaticamente criará uma classe pública com o nome Operacoes, vamos trabalhar dentro dela.</p>
+<p>Vamos criar uma segunda Classe Java com o nome Operacoes, no mesmo pacote Java (essa não terá o <code>public static void main</code>). Ele automaticamente criará uma classe pública com o nome Operacoes, vamos trabalhar dentro dela.</p>
 
-<p>Dentro da classe pública, criaremos um método no qual vai retornar uma string. Veja o código que vai dentro da classe pública Operacoes:</p>
+<p>Dentro da classe pública, criaremos um método no qual vai retornar uma String. Veja o código que vai dentro da classe pública Operacoes:</p>
 
 <pre>
 <code>
@@ -124,7 +124,7 @@ public static String contador(int ini, int fim) {
 </code>
 </pre>
 
-<p>Para chamar o método na primeira classe, colocaremos o nome da classe e o método após o ponto, no método principal da primeira. Veja o código:</p>
+<p>O método acima será chamado diretamente pela classe Operacoes, por isso ele tem que ser estático e público. Para chamar o método na primeira classe, colocaremos o nome da classe e o método após o ponto, no método principal da primeira. Veja o código:</p>
 
 <pre>
 <code>
@@ -132,8 +132,6 @@ System.out.println("Vai começar a Contagem!");
 System.out.println(Operacoes.contador(1, 5));
 </code>
 </pre>
-
-<p>PS: No caso acima, o método contador deverá também ser estático, ou dará erro, e de preferência, público. O static permite chamar a função de uma classe sem precisar criar um objeto.</p>
 
 <p>Vamos criar um programa que mostre fatoriais, para isso criaremos, outro programa com classe principal, e nele vamos criar outra classe chamada Fatorial.</p>
 
@@ -170,7 +168,7 @@ public class Fatorial {
 </code>
 </pre>
 
-<p>E na primeira classe, colocamos apenas isso:</p>
+<p>E na primeira classe, colocamos apenas isso, criando um novo objeto de Fatorial com o new:</p>
 
 <pre>
 <code>
@@ -187,11 +185,11 @@ System.out.println(f.getFatorial());
 
 <p>Para usarmos a classe encapsulada, pegamos a classe Fatorial do primeiro projeto e arrastamos pro pacote java "classes" do segundo projeto (segure o Ctrl pra copiar), clique em refatorar para a classe do segundo projeto.</p>
 
-<p>No frame, colocaremos um objeto giratório, um botão e dois labels para calcular o fatorial. Esse é o código do evento do botão:</p>
+<p>No frame, colocaremos um componente giratório, um botão e dois labels para calcular o fatorial. Esse é o código do evento do botão:</p>
 
 <pre>
 <code>
-int n = Integer.parseInt(numVal.getValue().toString());
+int n = (int)numVal.getValue();
 Fatorial f = new Fatorial();
 f.setValor(n);
 lblCont.setText(f.getFormula());

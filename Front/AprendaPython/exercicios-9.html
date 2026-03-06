@@ -118,14 +118,35 @@ from rich import print
 from rich.panel import Panel
 
 class Churrasco:
+    # Atributos de classe
+    consumoPadrao:float = 0.400 # Cada pessoa come em média 400 g de carne
+    precoKg:float = 82.40 # Cada Kg de carne custa R$ 82,40
+
     def __init__(self, titulo, quant):
         self.titulo = titulo
-        self.quant = quant
+        self.participantes = quant
+
+    def __str__(self):
+        return f"Esse é {self.titulo} com {self.participantes} pessoas participando."
+
+    def calcularQtdCarne(self) -> float:
+        return self.participantes * self.__class__.consumoPadrao
+
+    def calcularCustoTotal(self) -> float:
+        return self.calcularQtdCarne() * self.__class__.precoKg
+
+    def calcularCustoIndividual(self) -> float:
+        return self.calcularCustoTotal() / self.participantes
 
     def analisar(self):
-        caixa = Panel(f"Analisando [green]{self.titulo}[/] com [blue]{self.quant} convidados[/]\nCada participante comerá 0,4Kg e cada quilo custa R$82,40/Kg\nRecomendo [blue]comprar {self.quant * 0.4:.1f}Kg[/] de carne\nO custo total será [green]R${self.quant * 0.4 * 82.40:.2f}[/]\nCada pessoa pagará [yellow]R${82.40 * 0.4:.2f}[/] para participar".replace(".", ","), title = self.titulo, width = 75)
+        conteudo = f"Analisando [green]{self.titulo}[/] com [blue]{self.participantes} convidados.[/]"
+        conteudo += f"\nCada participante comerá {self.__class__.consumoPadrao:.3f} Kg e cada quilo custa R${self.__class__.precoKg:.2f}."
+        conteudo += f"\nRecomendo [blue]comprar {self.calcularQtdCarne():.3f}Kg[/] de carne."
+        conteudo += f"\nO custo total será [green]R${self.calcularCustoTotal():.2f}.[/]"
+        conteudo += f"\nCada pessoa pagará [yellow]R${self.calcularCustoIndividual():.2f}[/] para participar."
 
-        print(caixa)
+        painel = Panel(conteudo, title = self.titulo)
+        print(painel)
 </code>
 </pre>
 
@@ -135,6 +156,9 @@ class Churrasco:
 <code>
 c1 = Churrasco("Churras dos Amigos", 15)
 c1.analisar()
+
+c2 = Churrasco("Festa do Fim de Ano", 80)
+c2.analisar()
 </code>
 </pre>
 

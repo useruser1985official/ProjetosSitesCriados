@@ -373,6 +373,14 @@ search exemplodedominio.net
     <li><b>Firewall:</b> Um dispositivo de segurança que verifica o conteúdo dos pacotes e efetua seu bloqueio, quando nocivo aos serviços disponíveis na rede.</li>
 </ul>
 
+<p>Veja a imagem de um equipamento gateway (que une num mesmo equipamento, modem, roteador, switch de 4 portas e ponto de acesso wi-fi):</p>
+
+<img src="imagens/gateway.jpg" alt="Gateway"/>
+
+<p>Alguns gateways podem operar no modo bridge (ponte). Nesse caso, ele só funciona como modem/ONT e converte o sinal, quem roteia é outro equipamento.</p>
+
+<p>O modo bridge faz o gateway da operadora virar basicamente uma ponte: Ele para de rotear, fazer NAT, DHCP e wi-fi, e passa a entregar o IP público diretamente para outro equipamento, normalmente um roteador próprio. Assim, o gateway deixa de atuar como roteador e apenas encaminha a conexão para que o outro equipamento gerencie a rede, agindo como um modem/ONT comum. Isso é útil pra evitar duplo NAT (técnica que converte o IP público pra IPs privados).</p>
+
 <ul>
     <li><a href="tudo-sobre-redes-2.html">Parte Anterior da Matéria!</a></li>
     <li><a href="tudo-sobre-redes-4.html">Continuação da Matéria</a></li>

@@ -156,7 +156,7 @@ string formataHora = atual.ToString("hh:mm:ss tt");
 
 <p>Um array é uma sequência não-ordenada de itens. Todos os itens de um array são do mesmo tipo. Os itens em um array são armazenados em um bloco contíguo da memória RAM e são acessados por meio de um número de índice. Podemos criar array de qualquer tipo, tanto de valor quanto de referência.</p>
 
-<p>Os arrays são tipos de referência, independentemente do tipo de seus elementos, ou seja, uma variável array faz referência a um bloco de memória que armazenará os elementos do array no heap. Assim como com as variáveis de classe, a memória não é alocada para o array até que criemos uma instância dele usando o operador new (ou seja, o array é um objeto em C#). O array soment recebe espaço na memória quando a instância é criada, e é quanto especificamos o tamanho do array.</p>
+<p>Os arrays são tipos de referência, independentemente do tipo de seus elementos, ou seja, uma variável array faz referência a um bloco de memória que armazenará os elementos do array no heap. Assim como com as variáveis de classe, a memória não é alocada para o array até que criemos uma instância dele usando o operador new (ou seja, o array é um objeto em C#). O array somente recebe espaço na memória quando a instância é criada, e é quanto especificamos o tamanho do array.</p>
 
 <p>PS: Como a memória para a instância do array é alocada dinamicamente, o tamanho do array pode ser calculado pelo tempo de execução.</p>
 
@@ -170,7 +170,7 @@ numerosLoteria = new int[6]; // Criação da quantidade de casas do nosso vetor
 </code>
 </pre>
 
-<p>PS: os colchetes são colocados no tipo, e não no nome da variável. Atenção para isso. E ao declarar as casas, sempre use o new com o tipo dos elementos do array (por exemplo, int, float, string ou classe invólucro).</p>
+<p>PS: os colchetes são colocados no tipo, e não no nome da variável. Atenção para isso. E ao declarar as casas, sempre use o new com o tipo dos elementos do array (por exemplo, int, float, string ou classe invólucro). Independente da forma como são criados, os arrays sempre serão objetos, e por isso tem propriedades e métodos.</p>
 
 <h3>Arrays - Atribuição e Leitura de Valores</h3>
 

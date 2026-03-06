@@ -99,7 +99,7 @@ List&lt;String&gt; pessoas = new ArrayList&lt;&gt;(); // Importe java.util.Array
       
 String nome;
 int cont = 1;
-String opc;
+char opc;
 int indice;
 int posicao = 0;
 
@@ -113,9 +113,9 @@ do {
     pessoas.add(nome); // Isso adiciona elementos à lista, na posição seguinte
     cont++;
     System.out.print("Deseja Continuar? [S/N] ");
-    opc = teclado.next();
+    opc = teclado.next().charAt(0);
 }
-while(opc.toUpperCase().equals("S"));
+while(Character.toUpperCase(opc) == 'S');
 
 System.out.println(pessoas);
 

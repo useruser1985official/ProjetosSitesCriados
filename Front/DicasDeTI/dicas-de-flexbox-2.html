@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script>
+            function mudaBorda() {
+                let bord = document.getElementById("borda").value;
+
+                document.getElementById("margem").style.border = "15px " + bord;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Dicas de FlexBox Parte 2</h2>
+
+<p>Nós podemos controlar o tamanho máximo dos items com a propriedade <code>flex-basis</code>, no caso, o container deverá está com <code>flex-flow: row nowrap</code>. O valor padrão do <code>flex-basis</code> é <code>auto</code>, que a largura de cada item é o tamanho do conteúdo, ao diminuir o container ele espremerá os itens ao máximo, mas se aumentar muito ele não espichará todos os itens. Podemos colocar no <code>flex-basis</code> um tamanho como <code>200px</code>, mas nesse caso ele não se adaptará ao conteúdo e todos os itens terão esse tamanho fixo, independente do conteúdo dos mesmos, mas poderão ser <q>esprimidos</q> também. Os itens podem cada um ter um tamanho definido também, mesmo diferentes. No caso de Flexbox é melhor usar o flex-basis do que o width ou height.</p>
+
+<p>Deixe os itens de A a G no HTML e o CSS assim:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    text-align: center;
+    flex-basis: auto;
+}
+</code>
+</pre>
+
+<p>No lugar da letra de alguns dos itens, coloque um texto maior. Depois tente mudar o valor de flex-basis do item assim:</p>
+
+<pre>
+<code>
+flex-basis: 150px;
+</code>
+</pre>
+
+<p>Tente <q>espremer</q> os conteúdos.</p>
+
+<p>Ao colocar no container o <code>flex-flow: row wrap</code>, ele quebrará ao chegar no limite, ao invés de <q>espremer</q>.</p>
+
+<p>Podemos também controlar o tamanho dos itens, com <code>flex-grow</code> e <code>flex-shrink</code>, sendo que <q>grow</q> significa crescer e <code>shrink</code> significa diminuir. Nesse caso usaremos no container o valor <code>nowrap</code> no <code>flex-flow</code>. O valor padrão de <code>flex-grow</code> é <code>0</code> e o <code>flex-shrink</code> é <code>1</code> (ou seja, não pode crescer e pode encolher, veja o 1 como <q>true</q> e 0 como <q>false</q>). Para os itens ficarem totalmente <q>elásticos</q> (que crescem e aumentam quanto precisar, coloque os dois como <q>1</q>.</p>
+
+<p>Deixe o HTML assim:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;item&quot;&gt;A&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;B&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;C&lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>Com esse CSS:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    text-align: center;
+    flex-basis: 250px;
+}
+</code>
+</pre>
+
+<p>Veja que, por padrão, ele não estica, mas encolhe. Coloque isso no CSS do item:</p>
+
+<pre>
+<code>
+flex-shrink: 0;
+</code>
+</pre>
+
+<p>Aí ele não vai mais encolher, e também não vai quebrar por causa da configuração nowrap no container. Para ele encolher, coloque acima o valor 1. Depois deixe o <code>flex-grow</code> assim, no item:</p>
+
+<pre>
+<code>
+flex-shrink: 1;
+flex-grow: 0;
+</code>
+</pre>
+
+<p>Pra ele ficar totalmente <q>elástico</q>, coloque o valor 1 em ambos acima.</p>
+
+<p>PS: O flex-grow não funciona só com nowrap, podemos fazer a configuração assim, por exemplo:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    text-align: center;
+    flex-basis: 250px;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+</code>
+</pre>
+
+<p>No caso acima, ele vai quebrar normalmente os itens, que podem ser encolhidos ou esticados. Mas o ideal no caso acima é deixar <code>nowrap</code> no container.</p>
+
+<p>Teste colocando, no lugar das letras, textos longos, como o famoso <q>lorem</q>.</p>
+
+<p>As propriedades do flex-shrink e flex-grow não são apenas 0 e 1, podemos, por exemplo, colocar um flex-grow em cada um dos três itens, com os valores 0, 1 e 0. No caso só o do meio crescerá. Num segundo exemplo, teremos os valores 0, 1 e 2, o 0 não estica, o 1 esticará e o 2 esticará o dobro do 1. Mas se nos três exemplos, tivermos 0, 2 e 2, os dois crescerão igual (não o dobro de nada), pois segue a proporção (1 pra 2 é o mesmo que 2 pra 4 ou 3 pra 6).</p>
+
+<p>Da mesma forma, podemos exemplificar com flex-shrink, de forma parecida. Os três itens com valores 0, 1 e 0, apenas o do meio (com 1) encolherá. Se usarmos o exemplo com 2, 0 e 1, o 2 reduzirá o dobro de 1 e o 0 ficará fixo. Da mesma forma, segue proporções (1 pra 2 é igual 2 pra 4 ou 3 pra 6).</p>
+
+<p>PS: Lembrando que as proporções funcionam com valores maiores ou iguais à 1. De 0 pra 1 é o mesmo que 0 pra 4, por exemplo. Sempre trabalhe com proporções como 1 pra 2, 2 pra 4, etc.</p>
+
+<p>Podemos também misturar ambas as propriedades. Lembre-se do exemplo da forma da água. Veja um exemplo disso:</p>
+
+<img src="imagens/flex-grow-shrink.jpg" alt="Flex Grow Shrink" style="max-width: 450px"/>
+
+<p>Para exemplificar, deixe os itens em HTML assim:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;item&quot; id=&quot;cxA&quot;&gt;A&lt;/div&gt;
+    &lt;div class=&quot;item&quot; id=&quot;cxB&quot;&gt;B&lt;/div&gt;
+    &lt;div class=&quot;item&quot; id=&quot;cxC&quot;&gt;C&lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>E o CSS assim:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    text-align: center;
+    flex-basis: 150px;
+}
+
+div#cxA {
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+div#cxB {
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+div#cxC {
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+</code>
+</pre>
+
+<p>Aí, poderemos <q>brincar</q> um pouco com as duas propriedades:</p>
+
+<pre>
+<code>
+div#cxA {
+    flex-shrink: 1;
+    flex-grow: 0;
+}
+
+div#cxB {
+    flex-shrink: 0;
+    flex-grow: 2;
+}
+
+div#cxC {
+    flex-shrink: 2;
+    flex-grow: 1;
+}
+</code>
+</pre>
+
+<p>A propriedade <code>flex</code> se aplica aos itens, e é uma forma de simplificar o uso de flex-grow, flex-shrink e flex-basis, que aliás, é o recomendado, sempre nessa ordem, veja um exemplo abaixo:</p>
+
+<img src="imagens/flex.jpg" alt="Flex" style="max-width: 450px"/>
+
+<p>Deixe o CSS assim:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    text-align: center;
+}
+
+div#cxA {
+    flex-shrink: 1;
+    flex-grow: 0;
+    flex-basis: 150px;
+}
+
+div#cxB {
+    flex-shrink: 0;
+    flex-grow: 2;
+    flex-basis: 150px;
+}
+
+div#cxC {
+    flex-shrink: 2;
+    flex-grow: 1;
+    flex-basis: 150px;
+}
+</code>
+</pre>
+
+<p>Aí, simplificando:</p>
+
+<pre>
+<code>
+div#cxA {
+    flex: 0 1 150px;
+}
+
+div#cxB {
+    flex: 2 0 150px;
+}
+
+div#cxC {
+    flex: 1 2 150px;
+}
+</code>
+</pre>
+
+<p>Em outras palavras, o flex é a união de flex-grow, flex-shrink e flex-basis, nessa ordem. O valor padrão dele é <code>0 1 auto</code>, pode estar <code>flex: initial</code> também, que é a mesma coisa. Para não deixar nada flexível use <code>0 0 auto</code> ou <code>flex: none</code>. Para deixar ele totalmente elástico use <code>1 1 auto</code> ou apenas <code>flex: auto</code>. Se colocarmos um valor só, como <code>flex: 3</code>, ele só definirá o grow (seria o mesmo que <code>3 1 auto</code>, com os dois últimos sendo os padrões).</p>
+
+<p>Para exercitarmos tudo isso, faremos um menu. Este é o HTML básico da página:</p>
+
+<pre>
+<code>
+&lt;header&gt;
+    &lt;h1&gt;Meu Site&lt;/h1&gt;
+
+    &lt;nav&gt;
+        &lt;a href=&quot;#&quot;&gt;Opção 1&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Opção 2&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Opção 3&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Opção 4&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Opção 5&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Opção 6&lt;/a&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+    &lt;h2&gt;Teste de FlexBox&lt;/h2&gt;
+
+    &lt;p&gt;Exemplo de parágrafo (coloque o lorem aqui).&lt;/p&gt;
+
+    &lt;p&gt;Exemplo de parágrafo (coloque o lorem aqui).&lt;/p&gt;
+&lt;/main&gt;
+</code>
+</pre>
+
+<p>Com esse CSS:</p>
+
+<pre>
+<code>
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+</code>
+</pre>
+
+<p>Deixe o CSS depois assim:</p>
+
+<pre>
+<code>
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    background-color: lightgray;
+    height: 100vh;
+    width: 100vw;
+}
+
+header {
+    background-color: gray;
+    color: white;
+    padding: 10px;
+}
+
+header &gt; h1 {
+    border: 1px dotted black;
+}
+
+header &gt; nav {
+    border: 1px dotted black;
+}
+
+header &gt; nav &gt; a {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+header &gt; nav &gt; a:hover {
+    background-color: white;
+    color: black;
+    transition: background-color .5s;
+}
+
+main {
+    background-color: white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+}
+</code>
+</pre>
+
+<p>PS: Os border com dotted devem ser retirados depois, é só pra termos uma ideia da delimitação de cada bloco/tag.</p>
+
+<p>Vamos fazer o header como nosso container, e os itens seria o h1 e o nav (os links a não contam). Deixe a parte do CSS do header assim:</p>
+
+<pre>
+<code>
+header {
+    background-color: gray;
+    color: white;
+    padding: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+</code>
+</pre>
+
+<p>Deixe o do h1 e do nav assim, que também será um container (sim, podemos ter um container FlexBox dentro do outro):</p>
+
+<pre>
+<code>
+header &gt; h1 {
+    border: 1px dotted black;
+    flex: 0 0 200px;
+}
+
+header &gt; nav {
+    border: 1px dotted black;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+}
+</code>
+</pre>
+
+<p>Podemos adicionar os conceitos de medias queries para deixar ele mais responsivo. Adicione no HTML esse link:</p>
+
+<pre>
+<code>
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/mobile.css&quot; media=&quot;screen and (max-width: 575px)&quot;/&gt;
+</code>
+</pre>
+
+<p>E coloque no arquivo criado (mobile.css) esse código aqui, só pra testar:</p>
+
+<pre>
+<code>
+@charset "UTF-8";
+
+body {
+    background-color: red;
+}
+</code>
+</pre>
+
+<p>Depois, caso já esteja funcionando, apague esse red e deixe o código assim:</p>
+
+<pre>
+<code>
+header, header &gt; nav {
+    flex-flow: column nowrap;
+}
+
+header &gt; h1 {
+    flex-basis: 50px;
+}
+
+header &gt; nav &gt; a {
+    width: 95vw;
+}
+</code>
+</pre>
+
+<p>Depois disso, retire os pontilhados (os borders com dotted) do arquivo principal de estilo, e neste, podemos ainda, por exemplo, colocar uma sombra no texto do h1:</p>
+
+<pre>
+<code>
+header &gt; h1 {
+    /* border: 1px dotted black; */
+    flex: 0 0 200px;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+}
+</code>
+</pre>
+
+<p>PS: Podemos colocar o ícone do <q>hamburguinho</q> pra ocultar e mostrar o menu no mobile também.</p>
+
+<p>Vamos fazer um novo projeto, com esse HTML de exemplo:</p>
+
+<pre>
+<code>
+&lt;header class=&quot;normal&quot;&gt;
+    &lt;h1&gt;Exemplo de Conteúdo Flexível&lt;/h1&gt;
+
+    &lt;p&gt;Conteúdo de texto (coloque um lorem).&lt;/p&gt;
+&lt;/header&gt;
+&lt;main&gt;
+    &lt;section class=&quot;flex-content&quot;&gt;
+        &lt;!-- Os dois vêm o texto primeiro e a mídia depois,
+         mas eles serão quebrados de formas diferentes. --&gt;
+        &lt;article class=&quot;media-text&quot;&gt;
+            &lt;div class=&quot;text&quot;&gt;
+                &lt;h2&gt;Elemento Media-&amp;gt;Text&lt;/h2&gt;
+
+                &lt;p&gt;Conteúdo de texto (coloque um lorem).&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;media&quot;&gt;
+                &lt;img src=&quot;imagem/imagem.png&quot; alt=&quot;Minha Imagem&quot;/&gt;
+            &lt;/div&gt;
+        &lt;/article&gt;
+        &lt;article class=&quot;text-media&quot;&gt;
+            &lt;div class=&quot;text&quot;&gt;
+                &lt;h2&gt;Elemento Text-&amp;gt;Media&lt;/h2&gt;
+
+                &lt;p&gt;Conteúdo de texto (coloque um lorem).&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;media&quot;&gt;
+                &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/VBGMnFHRqcY&quot;&gt;&lt;/iframe&gt;
+            &lt;/div&gt;
+        &lt;/article&gt;
+    &lt;/section&gt;
+    &lt;section class=&quot;normal&quot;&gt;
+        &lt;h2&gt;Conteúdo Normal&lt;/h2&gt;
+
+        &lt;p&gt;Conteúdo de texto (coloque um lorem).&lt;/p&gt;
+    &lt;/section&gt;
+&lt;/main&gt;
+</code>
+</pre>
+
+<p>Com esse CSS:</p>
+
+<pre>
+<code>
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
+p, h1, h2 {
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+    line-height: 1.2em;
+    text-align: left;
+}
+
+header, section.normal {
+    padding: 20px;
+}
+
+section.flex-content {
+    padding: 20px;
+    background-color: rgb(156, 156, 156);
+}
+</code>
+</pre>
+
+<p>As partes de cima e de baixo do site não serão flexíveis, apenas o que está no meio (com a classe flex-content).</p>
+
+<p>Faça esse código só pra vermos a divisão de artigos do site, depois retire isso:</p>
+
+<pre>
+<code>
+section &gt; article {
+    border: 2px dashed green;
+}
+</code>
+</pre>
+
+<p>Faremos um container dentro de outro (no caso, o article dentro de section, coloque isso no CSS:</p>
+
+<pre>
+<code>
+section.flex-content {
+    padding: 20px;
+    background-color: rgb(156, 156, 156);
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+article.text-media {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+article.media-text {
+    display: flex;
+    flex-flow: row wrap-reverse;
+}
+
+article &gt; div.text {
+    flex: 1 1 500px;
+    border: 2px dashed blue;
+}
+
+article &gt; div.media {
+    flex: 1 0 400px;
+    border: 2px dashed red;
+}
+</code>
+</pre>
+
+<p>Deixe o CSS dos article assim:</p>
+
+<pre>
+<code>
+article.text-media {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+article.media-text {
+    display: flex;
+    flex-flow: row wrap-reverse;
+    justify-content: space-between;
+}
+</code>
+</pre>
+
+<p>Coloque essas configurações pras divs de media, pra ele as centralizar:</p>
+
+<pre>
+<code>
+div.media &gt; img {
+    display: block;
+    margin: auto;
+    padding: 10px;
+    width: 300px;
+}
+
+div.media &gt; iframe {
+    display: block;
+    margin: auto;
+    padding: 0px 20px;
+    width: 90%;
+}
+</code>
+</pre>
+
+<p>Agora retire todos os pontilhados com dashed.</p>
+
+<p>PS: Podemos usar o site Flexbox Froggy pra praticar o uso de Flexbox, o link do site é esse: <a href="https://flexboxfroggy.com/" target="_blank">https://flexboxfroggy.com/</a></p>
+
+<p><a href="dicas-de-flexbox-1.html">Parte 1 da Matéria</a></p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

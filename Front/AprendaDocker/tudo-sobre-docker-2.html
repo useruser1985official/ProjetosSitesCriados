@@ -34,6 +34,120 @@
     <li><b>Tmpfs: </b>Ele grava os dados na memória RAM, bem mais rápido, mas é volátil (desligou, perdeu). É ideal pra dados como senhas.</li>
 </ul>
 
+<h3>Bind Mounts na Prática</h3>
+
+<p>Vamos supor que temos um arquivo index.html escrito que o site está em manutenção. Nós podemos atualizar o código no Docker sem dar rebuild e colocar ele no nosso container, na pasta html do Nginx.</p>
+
+<p>Pra criar o volume, vamos utilizar a flag <code>-v</code> no prompt. O lado esquerdo representa a pasta do nosso computador e o lado direito representa o diretório do container (no caso, a pasta html do Nginx, de forma parecida com o mapeamento de portas).</p>
+
+<p>Digite esse comando:</p>
+
+<pre>
+<code>
+docker run -d -p 8080:80 -v %cd%:/usr/share/nginx/html --name site-bind nginx
+</code>
+</pre>
+
+<p>PS: O <code>%cd%</code> representa o comando do CMD do Windows que retorna a pasta atual. Se usarmos outro shell, como o do Linux, usaremos <code>$(pwd)</code>. Podemos passar o caminho literal no lugar dele também.</p>
+
+<p>Ao rodar o comando, o container já estará rodando e fará a associação da pasta do nosso computador com o diretório do Nginx. Mas o projeto continuará no nosso computador, mesmo assim, poderemos acessar a URL pelo link <code>http://localhost:8080/</code>.</p>
+
+<p>Dessa forma, podemos até excluir o container que os arquivos do projeto não serão perdidos, pois eles estão no nosso computador, e não no container. Também poderemos alterar o arquivo no nosso computador e ele atualizará o link do localhost também, sem a necessidade de reconstruir o container do Docker.</p>
+
+<p>No entanto, isso tem uma desvantagem: Ele só rodaria sem problemas no nosso computador, podendo dar problemas caso transfira o mesmo pra outro computador. Pra isso usaremos outros recursos.</p>
+
+<h3>Volumes na Prática</h3>
+
+<p>Como visto anteriormente, ao usar o Bind Mounts para ligar uma pasta do nosso computador a um container, de forma que a exclusão do container não afetará nossos arquivos. Mas isso ainda não deixa os arquivos totalmente seguros, já que podemos excluir os mesmos sem querer. Pra resolver isso, usaremos os volumes.</p>
+
+<p>Os volumes gerenciados são criados em uma área segura do Docker, longe dos arquivos do usuário. Basicamente usaremos o mesmo comando do Bind Mounts, mas com algumas diferenças, ao invés de especificar um local no computador, especificaremos um nome para o volume.</p>
+
+<p>Vamos exemplificar com um simples arquivo HTML, e crie o container com o comando <code>docker run -d -p 8080:80 -v meu-volume:/usr/share/nginx/html --name site-vol nginx</code>, no caso, declararemos o nome do volume a ser criado no lugar da pasta do computador. O Docker perceberá que não é um caminho de sistema e criará um volume em uma área segura dentro dele. O container rodará em segundo plano.</p>
+
+<p>Só que, ao criar e rodar o container, o arquivo index não estará lá ainda, podemos conferir acessando <code>http://localhost:8080/</code>. Nós teremos que copiar os arquivos do nosso dispositivo para dentro do volume, pra isso usaremos a opção <q>cp</q>. Digite <code>docker cp . site-vol:/usr/share/nginx/html</code> (o ponto significa todos os arquivos na pasta atual, podemos especificar um arquivo específico). Nesse caso o arquivo exibido em localhost estará dentro do volume, sem nenhum vínculo ao arquivo no nosso computador, já que ele não estará com a pasta associada.</p>
+
+<p>PS: Para atualizar o arquivo já existente, basta fazer um novo cp pro volume, da mesma forma, como <code>docker cp index.html site-vol:/usr/share/nginx/html</code>.</p>
+
+<p>Caso o container seja excluído, o volume criado (no caso meu-volume) ainda estará na área segura do Docker, portanto, poderemos associar um novo container com esse mesmo volume, que os arquivos estarão todos lá intactos. Podemos ver no Docker Desktop os volumes criados. Lembrando que, ao enviar o container pra outro computador, os arquivos só poderão ser acessados caso enviemos também o volume associado.</p>
+
+<p>Vamos fazer um teste com um banco de dados, como o MySQL, e que nós cadastremos vários clientes, por exemplo. Caso o container seja removido, perderemos esses dados, mas podemos persistir os dados com volumes também.</p>
+
+<p>Crie um container com a imagem MySQL, informando a senha root do MySQL, com o comando <code>docker run -d --name mysql-teste -e MYSQL_ROOT_PASSWORD=123 mysql</code>. Ele criará e rodará o container em segundo plano. Caso deseje criar uma senha vazia, passe no parâmetro <q>-e</q> o valor <code>-e MYSQL_ALLOW_EMPTY_PASSWORD=yes</code>.</p>
+
+<p>PS: Como não usaremos mais o container site-vol, podemos parar ele com <code>docker stop site-vol</code>.</p>
+
+<p>Para criar um banco de dados dentro desse container, usaremos o comando <q>exec</q>, na forma <code>docker exec -it mysql-teste mysql -p</code> (atenção que ele pedirá a senha padrão na primeira vez, que é vazia, e espere alguns segundos pro servidor MySQL iniciar totalmente, caso dê erro rode o comando <code>docker exec -it mysql-teste mysqld</code> para iniciar totalmente o MySQL). Ele entrará no MySQL do container, pedirá a senha e já poderemos manipular o banco de dados. Rode esses comandos dentro do MySQL:</p>
+
+<pre>
+<code>
+create database cursos;
+
+use cursos;
+
+create table alunos (
+    nome varchar(50)
+)
+default charset = utf8;
+
+insert into alunos values
+('Fulano'),
+('Beltrano'),
+('Sicrano');
+
+select * from alunos;
+</code>
+</pre>
+
+<p>Agora vamos excluir o container de forma forçada usando o comando <code>docker rm -f mysql-teste</code>, pra simular um container excluído acidentalmente. No caso, todos os dados estariam perdidos.</p>
+
+<p>Ao rodar <code>docker volume ls</code>, veremos todos os volumes que estão no nosso Docker, como o meu-volume criado, e outros com nomes aleatórios.</p>
+
+<p>Vamos rodar novamente o comando pra criar o container da mesma forma, <code>docker run -d --name mysql-teste -e MYSQL_ROOT_PASSWORD=123 mysql</code>. O banco de dados criado anteriormente, assim como seus dados, não estarão mais lá. Podemos entrar no MySQL com o comando <code>docker exec -it mysql-teste mysql -p</code> e rodar dentro do MySQL o comando <code>show databases;</code>.</p>
+
+<p>Pra criar um container com banco de dados persistente com um volume, vamos usar o comando <code>docker run -d --name mysql-pro -e MYSQL_ROOT_PASSWORD=123 -v meus-dados:/var/lib/mysql mysql</code> pra ele criar um volume chamado <q>meus-dados</q> que armazenará nossos dados. A pasta /var/lib/mysql é a pasta padrão do MySQL. Veja se ele criou o volume rodando o comando <code>docker volume ls</code>.</p>
+
+<p>Vamos executar o comando <code>docker exec -it mysql-pro mysql -p</code> e rodar esses comandos no MySQL (lembre-se que pode dar erro caso o servidor não esteja rodando totalmente, então aguarde, e na primeira vez pode pedir a senha padrão, que é vazia). Dentro do MySQL, digite novamente esses comandos:</p>
+
+<pre>
+<code>
+create database cursos;
+
+use cursos;
+
+create table alunos (
+    nome varchar(50)
+)
+default charset = utf8;
+
+insert into alunos values
+('Fulano'),
+('Beltrano'),
+('Sicrano');
+
+select * from alunos;
+</code>
+</pre>
+
+<p>Saia do MySQL e <q>acidentalmente</q> exclua o container com o comando <code>docker rm -f mysql-pro</code>, e depois rode o comando <code>docker ps -a</code> pra ver se o container realmente foi excluído, e depois rode o comando <code>docker volume ls</code> pra ver se o volume <q>meus-dados</q> continua lá.</p>
+
+<p>Crie novamente o container com o comando <code>docker run -d --name mysql-pro -e MYSQL_ROOT_PASSWORD=123 -v meus-dados:/var/lib/mysql mysql</code>, aguarde o banco de dados carregar, rode o comando <code>docker exec -it mysql-pro mysql -p</code> e dentro do MySQL, rode esses comandos:</p>
+
+<pre>
+<code>
+show databases;
+
+use cursos;
+
+select * from alunos;
+</code>
+</pre>
+
+<p>Podemos ver que os dados colocados anteriormente continuaram no volume (incluindo a senha configurada anteriormente), e estarão guardados exatamente o que colocamos no container anteriormente excluído.</p>
+
+<p>Lembrando que o Docker é Linux, e os arquivos do volume estarão lá dentro. Podemos rodar o comando <code>docker volume inspect meus-dados</code> para ver os dados referentes a esse volume que criamos. Os dados estarão no nosso HD, mas dentro do Docker.</p>
+
+<p>Para excluir um volume, use o nome do volume com o rm, como <code>docker volume rm meu-volume</code>. Só poderemos excluir volumes que não estejam sendo usados por nenhum container, nesse caso exclua todos os container que usam esse volume primeiro. Para excluir todos os volumes não utilizados, use o comando <code>docker volume prune</code>.</p>
+
 <ul>
     <li><a href="tudo-sobre-docker-1.html">Parte Anterior da Matéria!</a></li>
     <!--<li><a href="tudo-sobre-docker-3.html">Continuação da Matéria!</a></li>-->

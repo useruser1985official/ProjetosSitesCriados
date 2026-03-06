@@ -25,6 +25,510 @@
             
 <h2>Tudo sobre Java Parte 2</h2>
 
+<h3>Tipos Primitivos e Manipulação de Dados</h3>
+
+<p>Existem três maneiras básicas para fazer declarações de tipos primitivos no Java. Pra atribuir uma idade, por exemplo, fazemos dessas formas:</p>
+
+<p>Maneira mais simples, com a declaração no início:</p>
+
+<pre>
+<code>
+int idade = 3;
+float sal = 1825.54f;
+char letra = 'G';
+boolean casado = false;
+</code>
+</pre>
+
+<p>PS: Observe que números reais tem que ter o <code>f</code> no final, em Java. O <code>char</code> não permite mais de uma letra e tem que usar aspas simples.</p>
+
+<p>Declaração especificando com typecast (para considerar o número como inteiro, número com ponto como real e assim por diante):</p>
+
+<pre>
+<code>
+int idade = (int)3;
+float sal = (float)1825.54;
+char letra = (char)'G';
+boolean casado = (boolean)false;
+</code>
+</pre>
+
+<p>Usando classes (nesse caso eles são objetos, não variáveis comuns):</p>
+
+<pre>
+<code>
+Integer idade = new Integer(3);
+Float sal = new Float(1825.54);
+Character letra = new Character('G');
+Boolean casado = new Boolean(false);
+</code>
+</pre>
+
+<p>Na última, <code>Integer</code>, <code>Float</code>, <code>Character</code> e <code>Boolean</code> não são tipos, são classes. O <code>new</code> indica que o conteúdo não é uma variável, e sim a criação de um objeto. O número será considerado inteiro e colocado dentro do objeto, o mesmo acontece com as outras classes. O nome que se dá a esse tipo de classe é Wrapper Class (wrapper é invólucro).</p>
+
+<p>PS: Evite de criar variáveis com Classes usando o new desnecessariamente, pois caso ele estivesse num loop, ele criará novas instâncias do mesmo objeto em cada repetição, que deixará o programa pesado. Podemos usar a classe invólucro e iniciar como um tipo primitivo comum nesse caso, dessa forma:</p>
+
+<pre>
+<code>
+Integer idade = 3;
+Float sal = 1825.54f;
+Character letra = 'G';
+Boolean casado = false;
+</code>
+</pre>
+
+<p>Veja uma tabela com os tipos suportados pelo Java:</p>
+
+<table>
+    <tr>
+        <th>Família</th>
+        <th>Tipo Primitivo</th>
+        <th>Classe Invólucro</th>
+        <th>Tamanho</th>
+        <th>Exemplo</th>
+    </tr>
+    <tr>
+        <td class="negrito">Lógico</td>
+        <td>boolean</td>
+        <td>Boolean</td>
+        <td>1 bit</td>
+        <td>true</td>
+    </tr>
+    <tr>
+        <td class="negrito" rowspan="2">Literais</td>
+        <td>char</td>
+        <td>Character</td>
+        <td>1 byte</td>
+        <td>'A'</td>
+    </tr>
+    <tr>
+        <td>-</td>
+        <td>String</td>
+        <td>1 byte por letra</td>
+        <td>"Java"</td>
+    </tr>
+    <tr>
+        <td class="negrito" rowspan="4">Inteiros</td>
+        <td>byte</td>
+        <td>Byte</td>
+        <td>1 byte</td>
+        <td>127</td>
+    </tr>
+    <tr>
+        <td>short</td>
+        <td>Short</td>
+        <td>2 bytes</td>
+        <td>32767</td>
+    </tr>
+    <tr>
+        <td>int</td>
+        <td>Integer</td>
+        <td>4 bytes</td>
+        <td>2147483</td>
+    </tr>
+    <tr>
+        <td>long</td>
+        <td>Long</td>
+        <td>8 bytes</td>
+        <td>2<sup>63</sup></td>
+    </tr>
+    <tr>
+        <td class="negrito" rowspan="2">Reais</td>
+        <td>float</td>
+        <td>Float</td>
+        <td>4 bytes</td>
+        <td>3.4e<sup>+38</sup></td>
+    </tr>
+    <tr>
+        <td>double</td>
+        <td>Double</td>
+        <td>8 bytes</td>
+        <td>1.8e<sup>+308</sup></td>
+    </tr>
+</table>
+
+<p>Podem ver que, para guardar strings, não usamos tipos, e sim a classe <code>String</code>, ela não tem limite de tamanho e tem que usar aspas duplas, por isso elas são consideradas objetos. Em tipo <code>byte</code> e classe <code>Byte</code> não dá pra armazenar números maiores que 127, na tabela acima, inclusive, estão os números máximos de todos. Esses vários tipos primitivos existem para o caso de criar aplicativos para pequenos aparelhos (como um pequeno relógio em Java) ou aplicativos maiores, para economizar dados, se preciso.</p>
+
+<p>PS: As classes invólucros devem ser utilizadas em casos como parâmetros de entidades genéricas, quando precisamos de métodos estáticos dessas classes e principalmente quando precisamos atribuir <code>null</code> à variável, já que, por elas serem classes, permitem valores nulos, coisas que os tipos primitivos comuns não permitem.</p>
+
+<p>Agora vamos mostrar saída de dados usando os tipos primitivos, usando o simples método, faça uma aplicação Java nova, assim:</p>
+
+<pre>
+<code>
+public static void main(String[] args) {
+    float nota = 8.5f;
+    System.out.println("A nota é " + nota);
+}
+</code>
+</pre>
+
+<p>Também podemos usar o comando <code>System.out.printf</code> para formatar números, usando o <code>%f</code>, dessa forma:</p>
+
+<pre>
+<code>
+System.out.printf("A nota é %f\n", nota);
+</code>
+</pre>
+
+<p>E também podemos formatar a quantidade de números decimais usando a máscara com o número de casas e a letra f, dessa forma:</p>
+
+<pre>
+<code>
+System.out.printf("A nota é %.2f\n", nota);
+</code>
+</pre>
+
+<p>PS: Esse uso da porcentagem para formatação se chama máscara de formatação. E note também que nesse caso deve se usar vírgulas ao invés de mais, porque não é concatenação e sim formatação. E note que o <code>\n</code> é para quebrar a linha, essas já são chamadas de sequências de escape e podem ser usadas em qualquer situação. Todas são originárias da linguagem C e são usadas em várias outras descendentes, como o próprio Java.</p>
+
+<p>As máscaras também podem ser usadas em outros casos, como nesse:</p>
+
+<pre>
+<code>
+public static void main(String[] args) {
+    String nome = "Gustavo";
+    float nota = 8.5f;
+    System.out.printf("A nota de %s é %.1f\n", nome, nota);
+}
+</code>
+</pre>
+
+<p>Podemos utilizar <code>format</code> no lugar de <code>printf</code>, dessa forma:</p>
+
+<pre>
+<code>
+System.out.format("A nota de %s é %.1f\n", nome, nota);
+</code>
+</pre>
+
+<p>Existe também o <code>String.format()</code>, que funciona do mesmo modo, ele é usado dentro de métodos de componentes Swing, JavaFX, JOptionPane e outros.</p>
+
+<p>Essas são algumas das máscaras aceitas em Java:</p>
+
+<table>
+    <tr>
+        <th>Máscara</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td><code>%d</code></td>
+        <td>Valor decimal (positivo ou negativo)</td>
+    </tr>
+    <tr>
+        <td><code>%u</code></td>
+        <td>Valor decimal sem sinal (só positivo)</td>
+    </tr>
+    <tr>
+        <td><code>%f</code></td>
+        <td>Valor real</td>
+    </tr>
+    <tr>
+        <td><code>%s</code></td>
+        <td>String</td>
+    </tr>
+    <tr>
+        <td><code>%c</code></td>
+        <td>Caractere único</td>
+    </tr>
+    <tr>
+        <td><code>%b</code></td>
+        <td>Valor booleano</td>
+    </tr>
+</table>
+
+<p>PS: Em qualquer situação de uso de Strings, para transformar os caracteres em maiúsculos, usamos o método <code>toUpperCase()</code> do objeto String, da mesma forma para minúsculos usamos o <code>toLowerCase()</code>, como por exemplo:</p>
+
+<pre>
+<code>
+String frase = "Um Texto Qualquer";
+
+System.out.println("Em minúsculas: " + frase.toLowerCase());
+System.out.println("Em maiúsculas: " + frase.toUpperCase());
+</code>
+</pre>
+
+<p>Para fazer o mesmo com char, use os métodos do mesmo nome da classe <code>Character</code>, assim:</p>
+
+<pre>
+<code>
+char letra = 'a';
+        
+letra = Character.toUpperCase(letra); // Convertendo pra maiúsculaa
+        
+System.out.println(letra);
+        
+letra = Character.toLowerCase(letra); // Convertendo novamente pra minúscula
+        
+System.out.println(letra);
+</code>
+</pre>
+
+<p>Agora vamos ver como faz para mostrar entrada de dados, o que não vem por padrão do Java.</p>
+
+<p>Para isso, vamos importar a classe <code>java.util.Scanner</code> e criar um objeto com o comando <code>Scanner</code>. Veja um exemplo na prática:</p>
+
+<pre>
+<code>
+import java.util.Scanner;
+
+public class TiposPrimitivos {
+    public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in, "CP1252");
+        System.out.print("Digite o nome do aluno:");
+        String nome = teclado.nextLine();
+        System.out.print("Digite a nota do aluno:");
+        float nota = teclado.nextFloat();
+        System.out.printf("A nota de %s é %.1f\n", nome, nota);
+    } 
+}
+</code>
+</pre>
+
+<p>PS: Evite carregar todas as classes de um determinado pacote sem necessidade, isso ocorre usando algo como <code>import java.util.*;</code> (asterisco é um coringa pra "todos"), mas isso deixa o programa mais pesado.</p>
+
+<p>Lembre-se dos métodos para ler importações, como descrito na tabelinha acima. Veja alguns exemplos:</p>
+
+<pre>
+<code>
+int idade = teclado.nextInt();
+float salario = teclado.nextFloat();
+String nome = teclado.nextLine();
+String login = teclado.next();
+char letra = teclado.next().charAt(0);
+</code>
+</pre>
+
+<p>O <code>nextLine()</code> pega uma linha inteira, e o <code>next()</code> apenas a primeira palavra. E pode ser necessário colocar como parâmetro do Scanner o charset para mostrar acentos, que pode ser <code>ISO-8859-1</code>, <code>CP850</code> ou <code>CP1252</code>, como por exemplo <code>Scanner(System.in, "CP1252")</code>.</p>
+
+<p>PS: Caso o nextLine() não seja reconhecido, coloque outro nextLine() (não coloque next()) sem atribuir à nenhuma variável, antes do nextLine() da variável que deu erro. Isso é comum acontecer após usar números antes de strings. E se quiser remover espaços desnecessário de uma string, use o método <code>trim()</code> na variável.</p>
+
+<p>Diferente de outras linguagens, o Java tem incompatibilidade entre tipos, principalmente de famílias diferentes, como nos valores numéricos e strings (que não são resolvidos com typecasts). Para resolver isso, convertemos os valores com classes invólucros.</p>
+
+<p>Exemplo que converte int para String:</p>
+
+<pre>
+<code>
+int idade = 30;
+String valor = Integer.toString(idade);
+System.out.println(valor);
+</code>
+</pre>
+
+<p>Outro exemplo, que converte String para int:</p>
+
+<pre>
+<code>
+String valor = "30";
+int idade = Integer.parseInt(valor);
+System.out.println(idade);
+</code>
+</pre>
+
+<p>Terceiro exemplo, que converte String para float:</p>
+
+<pre>
+<code>
+String valor = "30.5";
+float idade = Float.parseFloat(valor);
+System.out.println(idade);
+</code>
+</pre>
+
+<p>Temos também outras opções, como a <code>Float.toString()</code> (que converte float para String), <code>Boolean.parseBoolean()</code> (que converte String para boolean), <code>Boolean.toString()</code> (que converte boolean para String) e outras opções parecidas para double e outros tipos.</p>
+
+<p>Podemos converter uma string de uma moeda para float também, dessa forma:</p>
+
+<pre>
+<code>
+String dinheiro = "R$ 125,94";
+
+float grana = Float.parseFloat(dinheiro.replace(",", ".").replace("R$", "").trim());
+
+System.out.println(grana);
+</code>
+</pre>
+
+<p>PS: O método replace é utilizado basicamente para trocar alguma parte de alguma string por outra. Ele substitui todas as ocorrências de uma string.</p>
+
+<p>Podemos também inverter uma string, dessa forma:</p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in, "CP1252");
+
+System.out.print("Digite o Texto a ser Invertido: ");
+String texto = teclado.nextLine();
+
+StringBuilder frase = new StringBuilder(texto);
+String invertida = frase.reverse().toString();
+
+System.out.println(invertida);
+</code>
+</pre>
+
+<p>Podemos usar o método <code>trim()</code> para remover espaços de strings, assim:</p>
+
+<pre>
+<code>
+Scanner teclado = new Scanner(System.in, "CP1252");
+System.out.print("Digite uma frase: ");
+String texto = teclado.nextLine().trim();
+
+System.out.println(texto);
+</code>
+</pre>
+
+<p>O método <code>substring</code> seleciona determinados caracteres de uma string, contados a partir do zero até um número limite, o <code>indexOf</code> pode determinar esse limite:</p>
+
+<pre>
+<code>
+String frase = "Estude Java! É Muito Legal!";
+
+String selec = frase.substring(0, frase.indexOf("!"));
+
+System.out.println(selec);
+</code>
+</pre>
+
+<p>Para encontrar uma palavra em uma String, use o método <code>contains</code>, assim:</p>
+
+<pre>
+<code>
+String frase = "Estude Java! É Muito Legal!";
+
+if(frase.contains("Java")) {
+    System.out.println("Palavra encontrada.");
+}
+else {
+    System.out.println("Palavra não encontrada.");
+}
+</code>
+</pre>
+
+<p>Para ver se uma string está vazia, use o método <code>isEmpty()</code> do objeto, assim:</p>
+
+<pre>
+<code>
+String nome = "";
+
+System.out.println("Nome está vazio? " + nome.isEmpty());
+</code>
+</pre>
+
+<p>PS: Isso não verifica valores null, para isso use <code>nome == null</code>.</p>
+
+<p>Para ver a quantidade de caracteres de uma string, use o método <code>length()</code> do objeto, assim:</p>
+
+<pre>
+<code>
+String frase = "Exemplo de String";
+
+System.out.println("Quantidade de caracteres: " + frase.length());
+</code>
+</pre>
+
+<p>Podemos concatenar strings usando o método concat, assim:</p>
+
+<pre>
+<code>
+String frase = "Isso é uma String";
+        
+System.out.println(frase.concat(" com mais algo!"));
+</code>
+</pre>
+
+<p>Para converter uma string em array de char, basta usar o método do objeto string <code>toCharArray()</code>, e pro contrário usamos o método <code>String.valueOf</code>, assim:</p>
+
+<pre>
+<code>
+String frase = "Isso é uma String!";
+
+char[] vetor = frase.toCharArray(); // Convertendo pra array de char
+
+String novo = String.valueOf(vetor); // Convertendo array de char em string
+</code>
+</pre>
+
+<p>Para dividir uma string ao encontrar um delimitador, podemos fazer assim:</p>
+
+<pre>
+<code>
+String frase = "Exemplo de Frase";
+String dividido[] = frase.split(" "); // Pode ser qualquer caractere.
+
+System.out.println(dividido[0]);
+</code>
+</pre>
+
+<p>Para criar constantes, basta declarar como uma variável, com <code>static final</code> no começo (que impedirá que ela seja modificada, o static indica que só terá uma cópia dessa variável na memória, o final impede a alteração do atributo) e sempre a coloque inicializada, elas geralmente são escritas em maiúsculas, assim:</p>
+
+<pre>
+<code>
+static final double PI = 3.14159265359;
+</code>
+</pre>
+
+<p>PS: As constantes são declaradas dentro da classe, mas fora do método principal e de qualquer outro método.</p>
+
+<p>Agora vamos fazer um Java Swing, de forma que coloquemos dois números para somar, crie um frame e no botão, vá em Action Permorfed para isso, dessa vez usaremos o método getter, vamos ver um exemplo:</p>
+
+<pre>
+<code>
+private void btnSomaActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    int n1 = Integer.parseInt(txtN1.getText());
+    int n2 = Integer.parseInt(txtN2.getText());
+    int s = n1 + n2;
+    lblResultado.setText(Integer.toString(s));
+} 
+</code>
+</pre>
+
+<p>PS: Lembre-se que <code>get</code> é pra pegar o texto, e <code>set</code> é pra mudar.</p>
+
+<p>Vamos criar uma nova aplicação de Java Swing, para calcular idade (com imagens). Mas ao invés de caixa de texto, vamos usar caixas numéricas.</p>
+
+<p>PS: Caixas numéricas podem ser configuradas, nas propriedades, como o <code>model</code>, que é pra definir o modelo de controle numérico, como data, números e listas, além de valores mínimos e máximos.</p>
+
+<p>No modelo sugerido, colocaremos também uma propriedade que pegue o ano atual do sistema.</p>
+
+<p>Para pegar o ano do sistema, fazemos assim, no construtor:</p>
+
+<pre>
+<code>
+public NovoFrame() {
+    initComponents();
+    Calendar anoSys = Calendar.getInstance();
+    int anoAt = anoSys.get(Calendar.YEAR);
+    lblSys.setText(Integer.toString(anoAt));
+}
+</code>
+</pre>
+
+<p>E apenas isso você colocará no evento do botão:</p>
+
+<pre>
+<code>
+int anoNs = (int)numAn.getValue();
+Calendar anoSys = Calendar.getInstance();
+int anoAt = anoSys.get(Calendar.YEAR);
+int idade = anoAt - anoNs;
+lblIdade.setText(Integer.toString(idade));
+</code>
+</pre>
+
+<p>Não esqueça da importação <code>java.util.Calendar</code>. É só compilar.</p>
+
+<p>PS: Caso queira que, além do botão, ele seja executado ao clicar enter, podemos usar o evento Key e KeyPressed nas caixas de texto, numéricas e outros, e escolher dentro do método a tecla que deverá ser pressionada, assim:</p>
+
+<pre>
+<code>
+private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {                                    
+    if(evt.getKeyCode() == KeyEvent.VK_ENTER) { // Podemos utilizar outra tecla aqui, importe java.awt.event.KeyEvent
+        // Coloque o mesmo código aqui.
+    }
+}  
+</code>
+</pre>
+
 <h3>Operadores Aritmeticos e Classe Math</h3>
 
 <p>No Java, para realizar cálculos matemáticos, usamos a classe <code>Math</code>, que é uma classe para cálculos matemáticos.</p>
@@ -307,231 +811,6 @@ lblRzC.setText(String.format("%.2f", rzC));
 lblAbs.setText(Integer.toString(abs));
 </code>
 </pre>
-
-<h3>Operadores Lógicos e Relacionais</h3>
-
-<p>Assim como o PHP, no Java temos o operador ternário. Veja um exemplo em Java:</p>
-
-<pre>
-<code>
-int n1 = 10;
-int n2 = 5;
-
-int maior = n1 > n2 ? n1 : n2;
-
-System.out.println(maior);
-</code>
-</pre>
-
-<p>O que está antes da interrogação for verdadeiro, receberá o primeiro valor do lado direito, senão receberá o segundo do lado direito.</p>
-
-<p>Vamos criar um projeto novo, no terminal mesmo, criando a classe principal. Criaremos um exemplo assim:</p>
-
-<pre>
-<code>
-int n1, n2, r;
-n1 = 4;
-n2 = 8;
-r = n1 > n2 ? 0 : 1;
-System.out.println(r);
-</code>
-</pre>
-
-<p>Também podemos criar fórmulas com ele, assim:</p>
-
-<pre>
-<code>
-int n1, n2, r;
-n1 = 14;
-n2 = 8;
-r = n1 > n2 ? n1 + n2 : n1 - n2;
-System.out.println(r);
-</code>
-</pre>
-
-<p>Os operadores relacionais são os mesmos da maioria das linguagens:</p>
-
-<table>
-    <tr>
-        <th>Operador Aritmético</th>
-        <th>Significado</th>
-    </tr>
-    <tr>
-        <td>==</td>
-        <td>Igualdade.</td>
-    </tr>
-    <tr>
-        <td>!=</td>
-        <td>Diferente.</td>
-    </tr>
-    <tr>
-        <td>&gt;</td>
-        <td>Maior.</td>
-    </tr>
-    <tr>
-        <td>&lt;</td>
-        <td>Menor.</td>
-    </tr>
-    <tr>
-        <td>&gt;=</td>
-        <td>Maior ou Igual.</td>
-    </tr>
-    <tr>
-        <td>&lt;=</td>
-        <td>Menor ou Igual.</td>
-    </tr>
-</table>
-
-<p>Num novo projeto de terminal com classe, vamos fazer um novo programa, usando alguns desses operadores:</p>
-
-<pre>
-<code>
-String nome1 = "Gustavo";
-String nome2 = "Gustavo";
-String nome3 = new String("Gustavo");
-String res;
-res = nome1 == nome2 ? "igual" : "diferente";
-System.out.println(res);
-</code>
-</pre>
-
-<p>No caso acima, é um código simples em Java, mas tem um porém, se comparar o mesmo código com o nome3, ele declarará como diferente, já que foi declarada como "new String" (tem a estrutura diferente). Para comparar o conteúdo, usamos o método <code>equals</code>, assim:</p>
-
-<pre>
-<code>
-String nome1 = "Gustavo";
-String nome2 = "Gustavo";
-String nome3 = new String("Gustavo");
-String res;
-res = nome1.equals(nome3) ? "igual" : "diferente";
-System.out.println(res);
-</code>
-</pre>
-
-<p>Sempre que a comparação for de classes (incluindo a String), é preferível usar o método equals.</p>
-
-<p>PS: O construtor new String pode ser usado também pra converter arrays de char em uma string, como no caso de pegar valores de campos de senhas (getPassword()).</p>
-
-<p>No Java também temos operadores lógicos. Só pra relembrar:</p>
-
-<table>
-    <tr>
-        <th>Operador</th>
-        <th>Operação</th>
-        <th>Significado</th>
-    </tr>
-    <tr>
-        <td>&&</td>
-        <td>AND</td>
-        <td>E</td>
-    </tr>
-    <tr>
-        <td>||</td>
-        <td>OR</td>
-        <td>Ou</td>
-    </tr>
-    <tr>
-        <td>!</td>
-        <td>NOT</td>
-        <td>Não</td>
-    </tr>
-    <tr>
-        <td>^</td>
-        <td>XOR</td>
-        <td>Ou Exclusivo</td>
-    </tr>
-</table>
-
-<p>Relembrando que o <code>XOR</code> (xor ou ou exclusivo), recebe os mesmos valores do OR, menos quando todas as premissas são verdadeiras (pode ser uma coisa ou outra, mas nunca as duas. Ele retorna false pra iguais e true pra diferentes).</p>
-
-<p>Vamos criar um novo projeto com classe principal pra exemplificar:</p>
-
-<pre>
-<code>
-int x, y, z;
-x = 4;
-y = 7;
-z = 12;
-boolean r;
-r = x &lt; y && y &lt; z ? true : false;
-System.out.println(r);
-</code>
-</pre>
-
-<p>Simplificando:</p>
-
-<pre>
-<code>
-int x, y, z;
-x = 4;
-y = 7;
-z = 12;
-boolean r;
-r = x &lt; y && y &lt; z;
-System.out.println(r);
-</code>
-</pre>
-
-<p>Teste o código acima com outros operadores no lugar dos menores.</p>
-
-<p>Agora faremos uma tela em Swing. Veja o código do Action Perfomed:</p>
-
-<pre>
-<code>
-int ano = (int)numAn.getValue();
-int idade = 2018 - ano; // Prefira pegar o ano do sistema.
-lblIdade.setText(Integer.toString(idade));
-String sit = idade >= 18 ? "Maior" : "Menor";
-lblSit.setText(sit);
-</code>
-</pre>
-
-<p>As expressões lógicas compostas em Java funcionam de forma simples, vejam um exemplo que pode ser substituído no código acima, pra definir se um voto é obrigatório ou opcional:</p>
-
-<pre>
-<code>
-String sit = (idade &gt;= 16 && idade &lt; 18 || idade &gt; 70) ? "Opcional" : "Obrigatório";
-</code>
-</pre>
-
-<p>Mas esse código tem um erro, se colocar uma idade menor que 16, ele mostrará obrigatório, isso será corrigido com estruturas condicionais, que serão vistas mais pra frente.</p>
-
-<p>Vamos fazer um joguinho em Swing, no qual terá um gênio de adivinhação. Ele terá duas imagens, uma com o balão e outra com o gênio, como se ele tivesse falando os resultados.</p>
-
-<p>PS: Para colocar um elemento em cima do outro, clique com o botão direito no layout e em "Definir Layout" e escolha "Layout Absoluto" (o default é Design Livre). Com o botão direito em cima do componente você poderá ver se ele está acima de outro, e podemos escolher quais ficam na frente e atrás, tal como o Photoscape ou outro editor. A frase pode ser colocada entre tags <code>&lt;html&gt;&lt;/html&gt;</code> para encaixar dentro do balãozinho, inclusive, pode ser usados outras tags, como pra deixar em negrito ou itálico.</p>
-
-<p>Esse é o código colocado no método do construtor do frame, logo abaixo do initComponents():</p>
-
-<pre>
-<code>
-initComponents();
-lblFrase.setText("&lt;html&gt;Vou pensar em um valor entre &lt;b&gt;1&lt;/b&gt; e &lt;b&gt;10&lt;/b&gt;.&lt;br/&gt;Tente adivinhar!&lt;/html&gt;");
-</code>
-</pre>
-
-<p>No evento clicar botão, você colocará esse código (não esqueça da importação <code>java.awt.Font</code>):</p>
-
-<pre>
-<code>
-double n = Math.random() * 10 + 1;
-int valor = (int)n;
-int num = Integer.parseInt(numVal.getValue().toString());
-        
-String f1 = "&lt;html&gt;Acertou!!!&lt;/html&gt;";
-String f2 = "&lt;html&gt;Errou! Eu pensei no valor &lt;b&gt;" + valor + "&lt;/b&gt;.&lt;br/&gt;Tente novamente!&lt;/html&gt;";
-String res = valor == num ? f1 : f2;
-
-lblFrase.setFont(new Font("Arial Black", Font.PLAIN, 12)); // Exibirá o resultado com outra formatação! Não esqueça da importação.
-
-lblFrase.setText(res);
-</code>
-</pre>
-
-<p>PS: Antes de testar, pode usar um System.out.print() para ver os números gerados no terminal. Podemos usar outras imagens também.</p>
-
-<p>Como visto acima, podemos também formatar fontes no Java.</p>
-
-<p>Ao compilar o arquivo JAR, veja se não é necessário colocar novamente o layout como "Design Livre", para não ter erros de execução.</p>
 
 <ul>
     <li><a href="tudo-sobre-java-1.html">Parte Anterior da Matéria!</a></li>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script>
+            function mudaBorda() {
+                let bord = document.getElementById("borda").value;
+
+                document.getElementById("margem").style.border = "15px " + bord;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Dicas de FlexBox Parte 1</h2>
+
+<p>O formato da água é algo que varia conforme o recipiente, a água se adapta à garrafa, jarra, copo, etc., da mesma forma, o layout do FlexBox se adapta à tela do dispositivo. Ou seja: O formato do FlexBox se adapta dependendo do container.</p>
+
+<p>O Flexible Box Module trabalha com uma caixa com um tamanho base, mas não exatamente definido. Dentro dessa caixa podemos tem vários itens, e caso usemos coisas como <code>display: block</code> e <code>display: inline-block</code>, pode ser que os itens de dentro não se adaptem caso o container de fora seja redimensionado. Se usarmos o <code>display: flex</code> no container de fora e <code>flex: auto</code> nos itens de dentro, poderemos adaptar os itens de forma melhor pra dispositivos diferentes. O elemento pai é o container (o de fora, que recebe o <code>display: flex</code>) e os elementos filhos são os itens.</p>
+
+<p>Vamos exemplificar com essas divs:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;item&quot;&gt;A&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;B&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;C&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;D&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;E&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;F&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;G&lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>Com esse CSS:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+}
+</code>
+</pre>
+
+<p>Colocando <code>display: flex</code> no container, ele já tentará se adaptar:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+}
+</code>
+</pre>
+
+<p>E ao colocar <code>flex: auto</code> nos itens, eles já ficarão mais adaptáveis, podendo redimensionar o navegador:</p>
+
+<pre>
+<code>
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    flex: auto;
+}
+</code>
+</pre>
+
+<p>No caso acima, ele ocupa o máximo de espaço disponível, ao diminuir e aumentar o navegador, ele vai se adaptando.</p>
+
+<p>A configuração padrão de direção é <q>row</q> (deitado, em linha, da esquerda pra direita). Podemos definir isso explicitamente com <code>flex-direction: row</code>, isso é o padrão do idioma português, inglês, espanhol e outros mais comuns. Para sentido contrário de leitura (como no idioma árabe), colocaremos <code>flex-direction: row-reverse</code>. Podemos também configurar verticalmente com <code>flex-direction: column</code>, lido de cima pra baixo (o padrão), pra reverter usamos <code>flex-direction: column-reverse</code>.</p>
+
+<p>Ao definir ambos teremos a definição dos eixos (axis), e o eixo principal é o <q>main-axis</q>, começando da esquerda pra direita, e o eixo transversal é o <q>cross-axis</q>, de cima pra baixo, ambos com começo (start) e fim (end). Isso na configuração padrão (row), em outras configurações isso muda, como visto abaixo:</p>
+
+<img src="imagens/eixos.jpg" alt="Eixos Flexbox" style="max-width: 450px"/>
+
+<p>Deixe o CSS assim:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-direction: row;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+}
+</code>
+</pre>
+
+<p>Experimente mudar o <code>flex-direction</code> para <code>row-reserve</code>, <code>column</code> e <code>column-reverse</code>.</p>
+
+<p>A propriedade <code>flex-wrap</code> vai configurar o comportamento da <q>cápsula</q> (o container, que é o pai). Com a opção <code>nowrap</code> ele não quebra os itens ao diminuir o container a um tamanho menor que o limite, ele vai os encolher (o <q>nowrap</q> é o padrão). Lembrando que o tamanho mínimo do bloco de item é o tamanho do conteúdo, portanto, não tem como diminuir mais do que o bloco permite. Ao colocar <code>flex-wrap: wrap</code> ele vai quebrar o item pra baixo (ou melhor, no sentido do cross-axis). Se colocarmos <code>flex-wrap: wrap-reverse</code>, ele vai pra cima (ou melhor, pro sentido inverso ao cross-axis).</p>
+
+<p>Deixe o HTML assim:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;item&quot;&gt;Exemplo de bloco A&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;Exemplo de bloco B&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;Exemplo de bloco C&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;Exemplo de bloco D&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;Exemplo de bloco E&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;Exemplo de bloco F&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;Exemplo de bloco G&lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>E o CSS assim:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+}
+</code>
+</pre>
+
+<p>Altere o flex-wrap assim, e ele quebrará os itens:</p>
+
+<pre>
+<code>
+flex-wrap: wrap;
+</code>
+</pre>
+
+<p>E de forma reversa:</p>
+
+<pre>
+<code>
+flex-wrap: wrap-reverse;
+</code>
+</pre>
+
+<p>Faça assim:</p>
+
+<pre>
+<code>
+flex-direction: row-reverse;
+flex-wrap: wrap;
+</code>
+</pre>
+
+<p>E assim:</p>
+
+<pre>
+<code>
+flex-direction: row-reverse;
+flex-wrap: wrap-reverse;
+</code>
+</pre>
+
+<p>Temos também a opção <code>flex-flow</code>, que junta numa mesma declaração, o flex-direction e o flex-wrap, dispensando o uso das duas últimas. Dessa forma aqui:</p>
+
+<pre>
+<code>
+flex-flow: row nowrap;
+</code>
+</pre>
+
+<p>Inclusive, é recomendado usar o flex-flow, pra simplificar aqui.</p>
+
+<p>Lembrando que o <code>flex: auto</code> só funciona nos filhos (itens). Ele é pra não ter espaço em branco no elemento pai. Por exemplo:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+    flex: auto;
+}
+</code>
+</pre>
+
+<p>Pra ver um efeito interessante, coloque <code>flex-flow: row wrap</code> no código acima, deixando o restante sem alterações. Tente também com <code>flex-flow: row wrap-reverse</code>.</p>
+
+<p>PS: Ao colocar algo como <code>flex-flow: column wrap-reverse</code> ele apenas vai empilhar, mas podemos fazer essa configuração, por exemplo:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    height: 150px;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+    flex: auto;
+}
+</code>
+</pre>
+
+<p>Como visto, o container (o pai) define o comportamento dos filhos, para alinhar os itens em relação ao main-axis (no row, seria da esquerda pra direita), do main-start ao main-end. Ao colocar <code>justify-content: flex-start</code> (que é o padrão), o primeiro item ficará grudado no main-start (no caso do row, à esquerda) e o espaço em branco fica no final. Ao colocar <code>flex-end</code>, ele ficará grudado no main-end (no caso do row, à direita), e o espaço em branco fica antes dos itens. Temos também a propriedade <code>center</code> pra centralizar os itens e o espaço fica dividido entre o main-start e o main-end.</p>
+
+<p>Além disso, temos o <code>space-between</code> que coloca o primeiro item grudado no main-start, o último item grudado no main-end, e os outros terão espaço distribuídos entre eles. Para distribuir espaço entre todos os itens incluindo o primeiro e o último (de forma que não fiquem grudados no main-start e main-end) usamos o <code>space-evenly</code>. Já o <code>space-around</code> pega o espaço do container, divide pela quantidade de itens, e distribui o espaço igualmente pra cada um deles (atenção que entre os itens, tem o espaço do final de um item grudado com o espaço do começo de outro. Veja como ficam cada um deles:</p>
+
+<img src="imagens/spaces.jpg" alt="Spaces" style="max-width: 450px"/>
+
+<p>Lembrando que ao mudar o direction (como o <code>column nowrap</code>), o main-axis tem outra posição (no caso seria de cima pra baixo) e o espaço. Veja abaixo:</p>
+
+<img src="imagens/spaces-column.jpg" alt="Spaces Column" style="max-width: 450px"/>
+
+<p>A mesma regra segue com row-reverse e column-reverse.</p>
+
+<p>Deixe o HTML novamente assim:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;item&quot;&gt;A&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;B&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;C&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;D&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;E&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;F&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;G&lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>E o CSS assim:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+}
+</code>
+</pre>
+
+<p>Depois mude a propriedade pro flex-end, assim:</p>
+
+<pre>
+<code>
+justify-content: flex-end;
+</code>
+</pre>
+
+<p>PS: Isso não é a mesma coisa que pôr row-reverse no flex-flow. O flex-end não reverte os itens.</p>
+
+<p>Tente os valores <code>center</code>, <code>space-between</code>, <code>space-evenly</code> e <code>space-around</code>.</p>
+
+<p>Também podemos fazer o alinhamento no cross-axis (no caso do row, é de cima pra baixo). Nesse caso usamos o <code>align-items</code>. Nesse caso, devemos aumentar o container de cima pra baixo (no caso do row). O valor padrão é o <code>stretch</code>, que estica os itens junto com o container, dessa forma aqui:</p>
+
+<pre>
+<code>
+align-items: stretch;
+</code>
+</pre>
+
+<p>As outras opções são <code>flex-start</code>, que gruda os itens no cross-start e deixa o espaço do outro lado. O <code>flex-end</code> gruda os itens no cross-end e deixa espaço do outro lado. O <code>center</code> centraliza os itens no meio.</p>
+
+<p>Deixe o CSS assim, definindo o height do container e colocando o align-items:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    height: 300px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+}
+</code>
+</pre>
+
+<p>Tente mudar as opções para <code>flex-start</code>, <code>flex-end</code> e <code>center</code>.</p>
+
+<p>Vamos fazer um exercício com um item apenas, mas podemos fazer com vários itens também. Nós centralizaremos perfeitamente o item, independente de como redimensionamos a página. Vamos usar a base dos eixos principal (main-axis) e transversal (cross-axis), nos quais usamos para posicionamentos o <code>justify-content</code> e o <code>align-items</code>, respectivamente, com o <code>center</code> em ambos.</p>
+
+<p>Para exemplificar vamos limpar o nosso HTML e CSS totalmente, e vamos usar tags semânticas dessa vez (que é o recomendado). Deixe o HTML assim:</p>
+
+<pre>
+<code>
+&lt;main&gt;
+    &lt;section&gt;
+        &lt;h1&gt;Tela de Login&lt;/h1&gt;
+    &lt;/section&gt;
+&lt;/main&gt;
+</code>
+</pre>
+
+<p>Com esse CSS:</p>
+
+<pre>
+<code>
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightsalmon;
+}
+
+main {
+    background-color: lightgreen;
+    height: 90vh; /* 90vh ocupa 90% da tela */
+    width: 90vw; /* Aqui é vm mesmo */
+}
+
+section {
+    background-color: lightseagreen;
+    height: 200px;
+    width: 200px;
+}
+</code>
+</pre>
+
+<p>Para centralizarmos perfeitamente, vamos considerar que o main é o container principal e o section é o item. No CSS do main, apenas adicione isso:</p>
+
+<pre>
+<code>
+display: flex;
+flex-flow: row nowrap;
+justify-content: center;
+align-items: center;
+</code>
+</pre>
+
+<p>Isso já alinhará o item, mesmo que nós só tenhamos mexido no CSS do container (main).</p>
+
+<p>PS: Evite usar o body como o container (pai).</p>
+
+<p>Caso deseje colocar a área do container preenchendo 100% da tela, deixe o CSS do main assim:</p>
+
+<pre>
+<code>
+height: 100vh;
+width: 100vw;
+</code>
+</pre>
+
+<p>Relembrando, ao colocar <code>flex-flow: row wrap</code>, ele vai jogar os itens pro sentido do cross-end do cross-axis (no caso do row, pra baixo) caso o container fique menor do que o espaço dos itens. Mas caso ele aumente pro sentido do cross-end (pra baixo, no caso do row) ele ficará um espaço em branco. Para podermos definir o que fazer nesse espaço, usamos a propriedade <code>align-content</code>, que alinha os elementos no eixo transversal quando eles estão empacotados. Os valores aceitos nele são <code>stretch</code> (padrão, que estica), <code>flex-start</code> (que gruda os elementos no cross-start), <code>flex-end</code> (que gruda os elementos no cross-end), <code>center</code> (que centraliza com espaços iguais entre o cross-start e cross-end), <code>space-between</code> (que gruda os primeiros no cross-start, os últimos no cross-end e os espaços são divididos igualmente entre os items), <code>space-evenly</code> (com espaços iguais entre o cross-start e o cross-end) e  <code>space-around</code> (que divide os espaços igualmente, e entre os itens tem um espaço de um e do outro).</p>
+
+<p>Vamos voltar pro primeiro exercício, deixando o HTML assim:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;item&quot;&gt;A&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;B&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;C&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;D&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;E&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;F&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;G&lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>Com esse CSS:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-flow: row wrap;
+    height: 400px;
+    align-items: stretch;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    padding: 40px;
+    text-align: center;
+}
+</code>
+</pre>
+
+<p>Por padrão, ele vai esticar, então coloque no container a propriedade <code>align-items: flex-start</code>, aí eles não esticarão e ficarão <q>grudados</q> no cross-start (no caso, em cima). Mas ele continuará quebrando os itens pra baixo.</p>
+
+<p>Deixe o CSS do container assim:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-flow: row wrap;
+    height: 400px;
+    align-content: flex-start;
+}
+</code>
+</pre>
+
+<p>Coloque mais uns itens no HTML, indo até o <q>M</q>, pra formar três linhas ao quebrar. E deixe o align-content do container assim:</p>
+
+<pre>
+<code>
+align-content: stretch;
+</code>
+</pre>
+
+<p>Teste na mesma propriedade, todos as outras opções: <code>flex-end</code>, <code>center</code>, <code>space-between</code>, <code>space-evenly</code> e <code>space-around</code>.</p>
+
+<p>PS: Lembre-se sempre que apenas o container é flex, o que está dentro dele não é flex.</p>
+
+<p>Todo item em Flexbox (que está dentro de um container) tem como padrão o <code>order</code> como <q>0</q> (se tivermos 4 itens, todos eles terão a ordem 0). Caso queiramos mudar a ordem dos elementos, podemos modificar também. Isso é útil para, por exemplo, menus, que podem ter uma ordem diferente no PC e no celular.</p>
+
+<p>No mesmo HTML com os itens de A a G, deixe o CSS assim:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    padding: 20px;
+    text-align: center;
+}
+</code>
+</pre>
+
+<p>Em um dos itens, faça um estilo inline assim:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;item&quot; style=&quot;order: -3&quot;&gt;D&lt;/div&gt;
+</code>
+</pre>
+
+<p>Ao fazer isso, o D acabará vindo primeiro.</p>
+
+<p>Coloque isso em outro elemento:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;item&quot; style=&quot;order: 1&quot;&gt;F&lt;/div&gt;
+</code>
+</pre>
+
+<p>Aí o F ficará por último, já que o D tem valor -3, o F tem valor 1 e todos os outros são 0, por padrão.</p>
+
+<p>Deixe o HTML assim, com as IDs:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;item&quot; id=&quot;i1&quot;&gt;A&lt;/div&gt;
+    &lt;div class=&quot;item&quot; id=&quot;i2&quot;&gt;B&lt;/div&gt;
+    &lt;div class=&quot;item&quot; id=&quot;i3&quot;&gt;C&lt;/div&gt;
+    &lt;div class=&quot;item&quot; id=&quot;i4&quot;&gt;D&lt;/div&gt;
+    &lt;div class=&quot;item&quot; id=&quot;i5&quot;&gt;E&lt;/div&gt;
+    &lt;div class=&quot;item&quot; id=&quot;i6&quot;&gt;F&lt;/div&gt;
+    &lt;div class=&quot;item&quot; id=&quot;i7&quot;&gt;G&lt;/div&gt;
+    &lt;div class=&quot;item&quot; id=&quot;i8&quot;&gt;H&lt;/div&gt;
+    &lt;div class=&quot;item&quot; id=&quot;i9&quot;&gt;I&lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>E coloque o CSS assim, com todos os itens em ordem aleatória no order:</p>
+
+<pre>
+<code>
+div#i1 {
+    order: 0;
+}
+
+div#i2 {
+    order: -2;
+}
+
+div#i3 {
+    order: 4;
+}
+
+div#i4 {
+    order: 8;
+}
+
+div#i5 {
+    order: 2;
+}
+
+div#i6 {
+    order: 0;
+}
+
+div#i7 {
+    order: -4;
+}
+
+div#i8 {
+    order: 5;
+}
+
+div#i9 {
+    order: -2;
+}
+</code>
+</pre>
+
+<p>No caso, o primeiro valor é o menor (no caso, -4), e o último é o maior (no caso, 8). Caso tenha mais de um valor igual (como o 0, que está em dois itens, ele vai colocar o primeiro com esse valor, e depois o segundo e assim por diante).</p>
+
+<p>Temos a propriedade <code>align-self</code> que se aplica a cada um dos itens, os alinhando no sentido do cross-axis (pra baixo, no caso do row). O valor <code>auto</code> herdará a característica de alinhamento configurado no container (pai). O <code>flex-start</code> alinha perto do cross-start, e da mesma forma o <code>flex-end</code> alinha perto do cross-end. O <code>center</code> calcula o meio entre o cross-start e o cross-end. O <code>stretch</code> <q>puxará</q> o item para que ele ocupe todo o espaço do eixo transversal. Isso só será visível ao aumentar o container, dessa forma:</p>
+
+<img src="imagens/align-self.jpg" alt="Align Self" style="max-width: 450px"/>
+
+<p>Retire todos os orders do CSS, deixando só o bloco dos selectores da DIV, assim:</p>
+
+<pre>
+<code>
+div.container {
+    background-color: lightsalmon;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    height: 400px;
+}
+
+div.item {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    padding: 20px;
+    text-align: center;
+}
+
+div#i1 {
+    
+}
+
+div#i2 {
+    
+}
+
+/* Segue igual até o div#i9 */
+</code>
+</pre>
+
+<p>Da forma acima, todos ficarão como flex-start porque é o que foi definido no container, e ao deixar a opção <code>align-self</code> como <code>auto</code>, ele ficará dessa mesma forma porque é o container pai que manda.</p>
+
+<p>O <code>align-self</code> é configurado para cada item individualmente:</p>
+
+<pre>
+<code>
+div#i1 {
+    
+}
+
+div#i2 {
+    align-self: auto; /* Pode ser inherit também, que herda */
+}
+
+div#i3 {
+    align-self: flex-end;
+}
+
+div#i4 {
+    
+}
+
+div#i5 {
+    align-self: center;
+}
+
+div#i6 {
+    align-self: flex-start;
+}
+
+div#i7 {
+    align-self: stretch;
+}
+
+div#i8 {
+    
+}
+
+div#i9 {
+    
+}
+</code>
+</pre>
+
+<p>Agora tente mudar o <code>align-items</code> do container pra outro valor, por exemplo:</p>
+
+<pre>
+<code>
+align-items: center;
+</code>
+</pre>
+
+<p>Podemos também tirar a propriedade acima do container, aí ele assumirá o valor padrão (que é stretch).</p>
+
+<p><a href="dicas-de-flexbox-2.html">Parte 2 da Matéria</a></p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

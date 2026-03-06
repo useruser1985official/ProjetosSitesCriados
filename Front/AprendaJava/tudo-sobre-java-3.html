@@ -25,6 +25,231 @@
             
 <h2>Tudo sobre Java Parte 3</h2>
 
+<h3>Operadores Lógicos e Relacionais</h3>
+
+<p>Assim como o PHP, no Java temos o operador ternário. Veja um exemplo em Java:</p>
+
+<pre>
+<code>
+int n1 = 10;
+int n2 = 5;
+
+int maior = n1 > n2 ? n1 : n2;
+
+System.out.println(maior);
+</code>
+</pre>
+
+<p>O que está antes da interrogação for verdadeiro, receberá o primeiro valor do lado direito, senão receberá o segundo do lado direito.</p>
+
+<p>Vamos criar um projeto novo, no terminal mesmo, criando a classe principal. Criaremos um exemplo assim:</p>
+
+<pre>
+<code>
+int n1, n2, r;
+n1 = 4;
+n2 = 8;
+r = n1 > n2 ? 0 : 1;
+System.out.println(r);
+</code>
+</pre>
+
+<p>Também podemos criar fórmulas com ele, assim:</p>
+
+<pre>
+<code>
+int n1, n2, r;
+n1 = 14;
+n2 = 8;
+r = n1 > n2 ? n1 + n2 : n1 - n2;
+System.out.println(r);
+</code>
+</pre>
+
+<p>Os operadores relacionais são os mesmos da maioria das linguagens:</p>
+
+<table>
+    <tr>
+        <th>Operador Aritmético</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>==</td>
+        <td>Igualdade.</td>
+    </tr>
+    <tr>
+        <td>!=</td>
+        <td>Diferente.</td>
+    </tr>
+    <tr>
+        <td>&gt;</td>
+        <td>Maior.</td>
+    </tr>
+    <tr>
+        <td>&lt;</td>
+        <td>Menor.</td>
+    </tr>
+    <tr>
+        <td>&gt;=</td>
+        <td>Maior ou Igual.</td>
+    </tr>
+    <tr>
+        <td>&lt;=</td>
+        <td>Menor ou Igual.</td>
+    </tr>
+</table>
+
+<p>Num novo projeto de terminal com classe, vamos fazer um novo programa, usando alguns desses operadores:</p>
+
+<pre>
+<code>
+String nome1 = "Gustavo";
+String nome2 = "Gustavo";
+String nome3 = new String("Gustavo");
+String res;
+res = nome1 == nome2 ? "igual" : "diferente";
+System.out.println(res);
+</code>
+</pre>
+
+<p>No caso acima, é um código simples em Java, mas tem um porém, se comparar o mesmo código com o nome3, ele declarará como diferente, já que foi declarada como "new String" (tem a estrutura diferente). Para comparar o conteúdo, usamos o método <code>equals</code>, assim:</p>
+
+<pre>
+<code>
+String nome1 = "Gustavo";
+String nome2 = "Gustavo";
+String nome3 = new String("Gustavo");
+String res;
+res = nome1.equals(nome3) ? "igual" : "diferente";
+System.out.println(res);
+</code>
+</pre>
+
+<p>Sempre que a comparação for de classes (incluindo a String), é preferível usar o método equals.</p>
+
+<p>PS: O construtor new String pode ser usado também pra converter arrays de char em uma string, como no caso de pegar valores de campos de senhas (getPassword()).</p>
+
+<p>No Java também temos operadores lógicos. Só pra relembrar:</p>
+
+<table>
+    <tr>
+        <th>Operador</th>
+        <th>Operação</th>
+        <th>Significado</th>
+    </tr>
+    <tr>
+        <td>&&</td>
+        <td>AND</td>
+        <td>E</td>
+    </tr>
+    <tr>
+        <td>||</td>
+        <td>OR</td>
+        <td>Ou</td>
+    </tr>
+    <tr>
+        <td>!</td>
+        <td>NOT</td>
+        <td>Não</td>
+    </tr>
+    <tr>
+        <td>^</td>
+        <td>XOR</td>
+        <td>Ou Exclusivo</td>
+    </tr>
+</table>
+
+<p>Relembrando que o <code>XOR</code> (xor ou ou exclusivo), recebe os mesmos valores do OR, menos quando todas as premissas são verdadeiras (pode ser uma coisa ou outra, mas nunca as duas. Ele retorna false pra iguais e true pra diferentes).</p>
+
+<p>Vamos criar um novo projeto com classe principal pra exemplificar:</p>
+
+<pre>
+<code>
+int x, y, z;
+x = 4;
+y = 7;
+z = 12;
+boolean r;
+r = x &lt; y && y &lt; z ? true : false;
+System.out.println(r);
+</code>
+</pre>
+
+<p>Simplificando:</p>
+
+<pre>
+<code>
+int x, y, z;
+x = 4;
+y = 7;
+z = 12;
+boolean r;
+r = x &lt; y && y &lt; z;
+System.out.println(r);
+</code>
+</pre>
+
+<p>Teste o código acima com outros operadores no lugar dos menores.</p>
+
+<p>Agora faremos uma tela em Swing. Veja o código do Action Perfomed:</p>
+
+<pre>
+<code>
+int ano = (int)numAn.getValue();
+int idade = 2018 - ano; // Prefira pegar o ano do sistema.
+lblIdade.setText(Integer.toString(idade));
+String sit = idade >= 18 ? "Maior" : "Menor";
+lblSit.setText(sit);
+</code>
+</pre>
+
+<p>As expressões lógicas compostas em Java funcionam de forma simples, vejam um exemplo que pode ser substituído no código acima, pra definir se um voto é obrigatório ou opcional:</p>
+
+<pre>
+<code>
+String sit = (idade &gt;= 16 && idade &lt; 18 || idade &gt; 70) ? "Opcional" : "Obrigatório";
+</code>
+</pre>
+
+<p>Mas esse código tem um erro, se colocar uma idade menor que 16, ele mostrará obrigatório, isso será corrigido com estruturas condicionais, que serão vistas mais pra frente.</p>
+
+<p>Vamos fazer um joguinho em Swing, no qual terá um gênio de adivinhação. Ele terá duas imagens, uma com o balão e outra com o gênio, como se ele tivesse falando os resultados.</p>
+
+<p>PS: Para colocar um elemento em cima do outro, clique com o botão direito no layout e em "Definir Layout" e escolha "Layout Absoluto" (o default é Design Livre). Com o botão direito em cima do componente você poderá ver se ele está acima de outro, e podemos escolher quais ficam na frente e atrás, tal como o Photoscape ou outro editor. A frase pode ser colocada entre tags <code>&lt;html&gt;&lt;/html&gt;</code> para encaixar dentro do balãozinho, inclusive, pode ser usados outras tags, como pra deixar em negrito ou itálico.</p>
+
+<p>Esse é o código colocado no método do construtor do frame, logo abaixo do initComponents():</p>
+
+<pre>
+<code>
+initComponents();
+lblFrase.setText("&lt;html&gt;Vou pensar em um valor entre &lt;b&gt;1&lt;/b&gt; e &lt;b&gt;10&lt;/b&gt;.&lt;br/&gt;Tente adivinhar!&lt;/html&gt;");
+</code>
+</pre>
+
+<p>No evento clicar botão, você colocará esse código (não esqueça da importação <code>java.awt.Font</code>):</p>
+
+<pre>
+<code>
+double n = Math.random() * 10 + 1;
+int valor = (int)n;
+int num = (int)numVal.getValue();
+        
+String f1 = "&lt;html&gt;Acertou!!!&lt;/html&gt;";
+String f2 = "&lt;html&gt;Errou! Eu pensei no valor &lt;b&gt;" + valor + "&lt;/b&gt;.&lt;br/&gt;Tente novamente!&lt;/html&gt;";
+String res = valor == num ? f1 : f2;
+
+lblFrase.setFont(new Font("Arial Black", Font.PLAIN, 12)); // Exibirá o resultado com outra formatação! Não esqueça da importação.
+
+lblFrase.setText(res);
+</code>
+</pre>
+
+<p>PS: Antes de testar, pode usar um System.out.print() para ver os números gerados no terminal. Podemos usar outras imagens também.</p>
+
+<p>Como visto acima, podemos também formatar fontes no Java.</p>
+
+<p>Ao compilar o arquivo JAR, veja se não é necessário colocar novamente o layout como "Design Livre", para não ter erros de execução.</p>
+
 <h3>Estruturas Condicionais - Parte 1</h3>
 
 <p>Como visto antes, o condicional simples é feito apenas com a declaração <code>if</code> (significando "se") é usado para especificar um bloco de código que deverá ser executado, ao retornar true. Veja um exemplo no qual ele exibirá parabéns à uma média de nota maior que 9:</p>
@@ -103,9 +328,9 @@ panRes.setVisible(false);
 
 <pre>
 <code>
-int a = Integer.parseInt(numA.getValue().toString());
-int b = Integer.parseInt(numB.getValue().toString());
-int c = Integer.parseInt(numC.getValue().toString());
+int a = (int)numA.getValue();
+int b = (int)numB.getValue();
+int c = (int)numC.getValue();
 
 double d = Math.pow(b, 2) - 4 * a * c;
 
