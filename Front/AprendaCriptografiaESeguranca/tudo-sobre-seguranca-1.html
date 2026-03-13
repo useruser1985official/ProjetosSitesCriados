@@ -160,6 +160,17 @@ Disallow: /
 
 <p>No caso acima, ambos são coringas para bloquear geral, no User-agent colocamos os sites de busca especificados, e em Disallow, as pastas que não devem ser indexadas.</p>
 
+<p>Podemos encontrar num robots.txt também as opções Allow (que indica páginas ou pastas que os webcrawlers podem acessar) e o sitemap (que lista as páginas do site para ajudar os buscadores a indexá-las). Esse é um exemplo pra permitir tudo:</p>
+
+<pre>
+<code>
+User-agent: *
+Allow: /
+
+Sitemap: http://meusite.com/sitemap.xml
+</code>
+</pre>
+
 <p>Esse site te ajuda a criar robots.txt: <a href="http://www.marketingdebusca.com.br/robots-txt/" target="_blank">http://www.marketingdebusca.com.br/robots-txt/</a></p>
 
 <h3>O que é a Deep Web</h3>

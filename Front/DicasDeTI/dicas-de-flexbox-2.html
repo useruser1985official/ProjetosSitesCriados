@@ -21,7 +21,7 @@
             
 <h2>Dicas de FlexBox Parte 2</h2>
 
-<p>Nós podemos controlar o tamanho máximo dos items com a propriedade <code>flex-basis</code>, no caso, o container deverá está com <code>flex-flow: row nowrap</code>. O valor padrão do <code>flex-basis</code> é <code>auto</code>, que a largura de cada item é o tamanho do conteúdo, ao diminuir o container ele espremerá os itens ao máximo, mas se aumentar muito ele não espichará todos os itens. Podemos colocar no <code>flex-basis</code> um tamanho como <code>200px</code>, mas nesse caso ele não se adaptará ao conteúdo e todos os itens terão esse tamanho fixo, independente do conteúdo dos mesmos, mas poderão ser <q>esprimidos</q> também. Os itens podem cada um ter um tamanho definido também, mesmo diferentes. No caso de Flexbox é melhor usar o flex-basis do que o width ou height.</p>
+<p>Nós podemos controlar o tamanho máximo dos itens com a propriedade <code>flex-basis</code>, no caso, o container deverá está com <code>flex-flow: row nowrap</code>. O valor padrão do <code>flex-basis</code> é <code>auto</code>, que a largura de cada item é o tamanho do conteúdo, ao diminuir o container ele espremerá os itens ao máximo, mas se aumentar muito ele não espichará todos os itens. Podemos colocar no <code>flex-basis</code> um tamanho como <code>200px</code>, mas nesse caso ele não se adaptará ao conteúdo e todos os itens terão esse tamanho fixo, independente do conteúdo dos mesmos, mas poderão ser <q>esprimidos</q> também. Os itens podem cada um ter um tamanho definido também, mesmo diferentes. No caso de Flexbox é melhor usar o flex-basis do que o width ou height.</p>
 
 <p>Deixe os itens de A a G no HTML e o CSS assim:</p>
 
@@ -511,7 +511,7 @@ body {
     line-height: 1.5em;
 }
 
-p, h1, h2 {
+p {
     margin-bottom: 10px;
     text-align: justify;
 }

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script>
+            function mudaBorda() {
+                let bord = document.getElementById("borda").value;
+
+                document.getElementById("margem").style.border = "15px " + bord;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Dicas de Grid Layout Parte 2</h2>
+
+<p>Deixe os itens no HTML de A a H e deixe o CSS assim:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    height: 250px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+    align-items: start;
+    justify-items: center;
+    align-content: space-between;
+    justify-content: end;
+}
+
+div.item {
+    border: 3px solid red;
+    padding: 5px;
+}
+</code>
+</pre>
+
+<p>Simplificando o container:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    height: 250px;
+    display: grid;
+    grid-template: repeat(3, auto) / repeat(3, auto);
+    gap: 10px;
+    place-items: start center;
+    place-content: space-between end;
+}
+</code>
+</pre>
+
+<p>Agora deixe o CSS do container assim:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 80px 80px 80px;
+    gap: 10px;
+    place-items: normal normal;
+    place-content: normal normal;
+}
+</code>
+</pre>
+
+<p>Adicione no HTML o I e o J nos itens, nós veremos que o J ficará espremido, por estar fora do Grid. Para ele ficar igual aos outros, colocamos a opção <code>grid-auto-rows: 80px</code> pra linhas, assim:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: 120px 120px 120px;
+    grid-template-rows: 80px 80px 80px;
+    grid-auto-rows: 80px;
+    gap: 10px;
+    place-items: normal normal;
+    place-content: normal normal;
+}
+</code>
+</pre>
+
+<p>Temos também o <code>grid-auto-flow</code>, que define se os novos itens fora do Grid explícito serão adicionados na linha (com <code>row</code>, que é o padrão) ou na coluna (com <code>colunm</code>). Deixe o CSS assim:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: 120px 120px 120px;
+    grid-template-rows: 80px 80px 80px;
+    grid-auto-flow: column;
+    grid-auto-rows: 80px;
+    grid-auto-columns: 120px;
+    gap: 10px;
+    place-items: normal normal;
+    place-content: normal normal;
+}
+</code>
+</pre>
+
+<p>Deixe agora o CSS assim:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 80px);
+    grid-auto-flow: row;
+    grid-auto-rows: 80px;
+    grid-auto-columns: 120px;
+    gap: 10px;
+    place-items: normal normal;
+    place-content: normal normal;
+}
+</code>
+</pre>
+
+<p>Depois, altere apenas essa propriedade assim:</p>
+
+<pre>
+<code>
+grid-template-columns: 1fr 1fr 1fr;
+</code>
+</pre>
+
+<p>E depois assim:</p>
+
+<pre>
+<code>
+grid-template-columns: 1fr 2fr 1fr;
+</code>
+</pre>
+
+<p>E assim:</p>
+
+<pre>
+<code>
+grid-template-columns: 1fr 4fr 1fr;
+</code>
+</pre>
+
+<p>Depois assim:</p>
+
+<pre>
+<code>
+grid-template-columns: repeat(2, 1fr) 4fr;
+</code>
+</pre>
+
+<p>E assim:</p>
+
+<pre>
+<code>
+grid-template-columns: 4fr repeat(2, 1fr);
+</code>
+</pre>
+
+<p>Depois deixe assim:</p>
+
+<pre>
+<code>
+grid-template-columns: 100px 40% repeat(2, 1fr);
+</code>
+</pre>
+
+<p>Nós temos também propriedades para itens no Grid Layout, que são o <code>grid-row-start</code>, <code>grid-row-end</code>, <code>grid-column-start</code> e <code>grid-column-end</code>. Quem já jogou batalha naval entende mais facilmente o que é o Grid Layout.</p>
+
+<p>Vamos supor um Grid Layout com 3 linhas e 4 colunas (como os itens de A a M), com esse CSS:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-rows: repeat(3, 100px);
+    grid-template-columns: repeat(4, 1fr);
+}
+
+div.item {
+    border: 3px solid red;
+    padding: 5px;
+}
+</code>
+</pre>
+
+<p>Nesse Grid, cabe até 12 itens dentro do Grid explícito. Mas podemos criar itens que ocupem mais áreas, como o espaço de 2 ou 4 itens. No Grid tem 4 grid lines deitadas, que ficam entre os três elementos da linha, e 5 grid lines em pé, que ficam entre os quatro elementos da coluna. Elas são contadas a partir do 1.</p>
+
+<p>Vamos dividir o Grid da seguinte forma mostrada na imagem abaixo:</p>
+
+<img src="imagens/grid-areas.jpg" alt="Grid Areas" style="max-width: 450px"/>
+
+<p>Pra fazer a caixa 1, nós <q>puxaríamos</q> um retângulo do ponto 1-1 até o 2-5, de forma semelhante a um polígono desenhado numa ferramenta como o Photoshop ou Gimp. O CSS ficaria assim:</p>
+
+<pre>
+<code>
+.caixa1 {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+.caixa2 {
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.caixa3 {
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+</code>
+</pre>
+
+<p>Vamos criar um exercício do zero, com esse HTML:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;caixa1&quot;&gt;Caixa 1&lt;/div&gt;
+    &lt;div class=&quot;caixa2&quot;&gt;Caixa 2&lt;/div&gt;
+    &lt;div class=&quot;caixa3&quot;&gt;Caixa 3&lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>Com esse CSS:</p>
+
+<pre>
+<code>
+.container {
+    display: grid;
+    grid-template-rows: repeat(3, 100px);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+}
+</code>
+</pre>
+
+<p>Nós criamos um Grid com 3 &times; 4 itens (ou seja, 12 itens), mas temos três divs com caixas, e cada caixa ocupará o espaço de 4 itens, como descrito na imagem anterior. Essa é a configuração dos itens:</p>
+
+<pre>
+<code>
+.caixa1 {
+    background-color: red;
+}
+
+.caixa2 {
+    background-color: green;
+}
+
+.caixa3 {
+    background-color: blue;
+}
+</code>
+</pre>
+
+<p>Lembrando que podemos ver as caixas pelo Inspecionar Elemento do navegador.</p>
+
+<p>Para criar as caixas, deixe o CSS dos itens assim:</p>
+
+<pre>
+<code>
+.caixa1 {
+    background-color: red;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+.caixa2 {
+    background-color: green;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.caixa3 {
+    background-color: blue;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+</code>
+</pre>
+
+<p>PS: Podemos também colocar números negativos da contagem inversa nos valores, dessa forma:</p>
+
+<pre>
+<code>
+.caixa1 {
+    background-color: red;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: -1;
+}
+
+.caixa2 {
+    background-color: green;
+    grid-row-start: 2;
+    grid-row-end: -1;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.caixa3 {
+    background-color: blue;
+    grid-row-start: 2;
+    grid-row-end: -1;
+    grid-column-start: 3;
+    grid-column-end: -1;
+}
+</code>
+</pre>
+
+<p>PS: Sempre use o Inspecionar Elemento do navegador para ver a numeração da grade antes de definir as áreas do Grid.</p>
+
+<p>Vamos supoer um container Grid, com 12 itens (3 &times; 4), igual ao que fizemos anteriormente, e dentro dele definimos uma área, que ocupa a metade esquerda. Ele teria esse CSS:</p>
+
+<pre>
+<code>
+.caixa {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    grid-row-end: 4;
+    grid-column-end: 3;
+}
+</code>
+</pre>
+
+<p>Podemos colocar o span pra contar a quantidade de lines, sem especificar o número exato dela, assim:</p>
+
+<pre>
+<code>
+.caixa {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    grid-row-end: span 3;
+    grid-column-end: span 2;
+}
+</code>
+</pre>
+
+<p>Podemos simplificar tudo com <code>grid-row</code>, que define o início e o fim da linha numa propriedade só, e o <code>grid-column</code>, que define o início e o fim da coluna da mesma forma, ficando assim:</p>
+
+<pre>
+<code>
+.caixa {
+    grid-row: 1 / 4;
+    grid-column: 1 / 3;
+}
+</code>
+</pre>
+
+<p>PS: Caso uma das propriedades acima tenha um valor só, o segundo será considerado o padrão, que é <q>auto</q>.</p>
+
+<p>Com o mesmo HTML das caixas anteriores, vamos olhar o Grid pelo Inspecionar do navegador, e deixe o CSS assim:</p>
+
+<pre>
+<code>
+.caixa1 {
+    background-color: red;
+    grid-row: 1 / 2;
+    grid-column: 1 / -1;
+}
+
+.caixa2 {
+    background-color: green;
+    grid-row: 2 / -1;
+    grid-column: 1 / 3;
+}
+
+.caixa3 {
+    background-color: blue;
+    grid-row: 2 / -1;
+    grid-column: 3 / -1;
+}
+</code>
+</pre>
+
+<p>Com span:</p>
+
+<pre>
+<code>
+.caixa1 {
+    background-color: red;
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 4;
+}
+
+.caixa2 {
+    background-color: green;
+    grid-row: 2 / span 2;
+    grid-column: 1 / span 2;
+}
+
+.caixa3 {
+    background-color: blue;
+    grid-row: 2 / span 2;
+    grid-column: 3 / span 2;
+}
+</code>
+</pre>
+
+<p>Podemos simplificar ainda mais, substituindo o <code>grid-row</code> e o <code>grid-column</code> por <code>grid-area</code>, na ordem row start, column start, row end e column end, assim:</p>
+
+<pre>
+<code>
+.caixa1 {
+    background-color: red;
+    grid-area: 1 / 1 / 2 / 5;
+}
+
+.caixa2 {
+    background-color: green;
+    grid-area: 2 / 1 / 4 / 3;
+}
+
+.caixa3 {
+    background-color: blue;
+    grid-area: 2 / 3 / 4 / 5;
+}
+</code>
+</pre>
+
+<p>Em qualquer um deles, podemos usar o span, por exemplo:</p>
+
+<pre>
+<code>
+.caixa1 {
+    background-color: red;
+    grid-area: 1 / 1 / span 1 / span 4;
+}
+
+.caixa2 {
+    background-color: green;
+    grid-area: 2 / 1 / span 2 / span 2;
+}
+
+.caixa3 {
+    background-color: blue;
+    grid-area: 2 / 3 / span 2 / span 2;
+}
+</code>
+</pre>
+
+<p>Agora faremos um desafio, que é criar um layout de um site usando Grid Layout, ele ficará dessa forma:</p>
+
+<img src="imagens/desafio-grid.jpg" alt="Desafio Grid" style="max-width: 450px"/>
+
+<p>Vamos colocar esse HTML na página:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;container&quot;&gt;
+    
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>E esse CSS:</p>
+
+<pre>
+<code>
+.container {
+    display: grid;
+    grid-template-rows: 80px 40px 200px 40px;
+    grid-template-columns: 200px 150px;
+}
+</code>
+</pre>
+
+<p>Olhe o Grid com o Inspecionar Elemento do navegador, ele ainda não estará da forma que a gente quer, mas vamos configurar.</p>
+
+<p>Vamos completar o HTML com tags semânticas, assim:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;container&quot;&gt;
+    &lt;header class=&quot;caixa&quot; id=&quot;topo&quot;&gt;
+        Topo
+    &lt;/header&gt;
+    &lt;nav class=&quot;caixa&quot; id=&quot;menu&quot;&gt;
+        Menu
+    &lt;/nav&gt;
+    &lt;main class=&quot;caixa&quot; id=&quot;principal&quot;&gt;
+        Principal
+    &lt;/main&gt;
+    &lt;aside class=&quot;caixa&quot; id=&quot;secundario&quot;&gt;
+        Secundário
+    &lt;/aside&gt;
+    &lt;footer class=&quot;caixa&quot; id=&quot;rodape&quot;&gt;
+        Rodapé
+    &lt;/footer&gt;
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>E deixe o CSS assim:</p>
+
+<pre>
+<code>
+.container {
+    display: grid;
+    grid-template-rows: 80px 40px 200px 40px;
+    grid-template-columns: 200px 150px;
+    gap: 5px;
+}
+
+.caixa {
+    background-color: lightgray;
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+</code>
+</pre>
+
+<p>E complete o CSS com isso:</p>
+
+<pre>
+<code>
+#topo {
+    grid-area: 1 / 1 / 2 / -1;
+}
+
+#menu {
+    grid-area: 2 / 1 / 3 / -1;
+}
+
+#principal {
+    grid-area: 3 / 1 / -2 / 2;
+}
+
+#secundario {
+    grid-area: 3 / -2 / -2 / -1;
+}
+
+#rodape {
+    grid-area: -2 / 1 / -1 / -1;
+}
+</code>
+</pre>
+
+<p>Agora teremos que configurar pra deixar em tela cheia, colocando isso no começo do CSS:</p>
+
+<p></p>
+
+<pre>
+<code>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+</code>
+</pre>
+
+<p>E deixando o container assim:</p>
+
+<pre>
+<code>
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 80px 40px 1fr 40px;
+    grid-template-columns: 1fr 150px;
+    gap: 5px;
+}
+</code>
+</pre>
+
+<p>PS: Podemos usar o site Grid Garden pra praticar o uso de Grid Layout, o link do site é esse: <a href="https://cssgridgarden.com/" target="_blank">https://cssgridgarden.com/</a></p>
+
+<p><a href="dicas-de-grid-layout-1.html">Parte 1 da Matéria</a></p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="icon" href="imagens/favicon.ico"/>
+        <title>Tudo sobre Tecnologia da Informação</title>
+        <link rel="stylesheet" href="css/estilo.css"/>
+        <script>
+            function mudaBorda() {
+                let bord = document.getElementById("borda").value;
+
+                document.getElementById("margem").style.border = "15px " + bord;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="interface">
+            <header>
+                <h1><a href="index.html">Tudo sobre Tecnologia da Informação</a></h1>
+            </header>
+            
+<h2>Dicas de Grid Layout Parte 1</h2>
+
+<p>O Grid Layout é um sistema para criação de layout baseado em uma grade bidimensional e otimizado para design de interfaces de usuário. Nesse modelo de grade, os elementos filhos do container que define a grade podem ser posicionados livremente em espaços criados na estrutura, quer ela tenha sido definida com suas dimensões flexíveis ou fixas.</p>
+
+<p>Basicamente, vamos dividir um site em linhas e colunas, como uma grade, para organizar o mesmo, de forma semelhante a uma matriz. O site, no entanto, pode se adaptar a uma tela menor, como a de um celular.</p>
+
+<p>Em versões mais antigas do HTML, era comum usarmos tabelas pra montar a estrutura de um site. As tabelas existem até hoje no HTML5, mas não é prático usar elas pra estruturar um site, o Grid Layout faz isso de forma muito mais fluída e responsiva.</p>
+
+<p>Vamos supor um grid 6 &times; 6 (6 linhas e 6 colunas), a linha é chamada em inglês de <q>row</q> e a coluna de <q>column</q> (atenção que existe o <q>line</q> também mas ele é usado em algo diferente, no caso, das barras que dividem os itens). Um container é o grid em si (a parte de fora) e cada um elemento dentro dele é chamado de item. Uma linha ou coluna de forma generalizada, é chamada de <q>track</q>, mais especificamente <q>row track</q> e <q>column track</q>. Um grid 6 &times; 6 tem sete lines contadas a partir do 1, a partir da esquerda e de cima, e temos também a numeração inversa, com números negativos, contados a partir da direita e de baixo. Veja essa imagem abaixo:</p>
+
+<img src="imagens/grid.jpg" alt="Grid" style="max-width: 450px"/>
+
+<p>Na imagem acima, temos uma área que vai da line 2 até a -2 (penúltima, que no caso é 6). Uma área pode ter uma quantidade ilimitada delinhas e colunas, e elas podem ter um <q>respiro</q> entre elas, que é o que chamamos de <q>gap</q>, e pode ter tamanho variável, que não interferem no tamanho dos itens.</p>
+
+<p>O container do Grid Layout tem algumas propriedades específicas, que são <code>display</code>, <code>grid-template-columns</code>, <code>grid-template-rows</code> e <code>gap</code>. Existem outras, mas primeiramente vamos focar nessas.</p>
+
+<p>Vamos exemplificar num grid 3 &times; 3, que tem 3 tracks e cada track tem 4 lines. A linha da parte de fora é o grid container, que no caso do Grid, é bidimensional (no FlexBox é unidimensional). Para especificar que é um grid, nós colocamos <code>display: grid</code>.</p>
+
+<p>Vamos supor esse HTML:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;item&quot;&gt;A&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;B&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;C&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;D&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;E&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;F&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;G&lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>Com esse CSS:</p>
+
+<pre>
+<code>
+div.container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 100px 100px 100px;
+    gap: 20px;
+}
+
+div.item {
+    background-color: lightgray;
+}
+</code>
+</pre>
+
+<p>Ao colocar apenas <code>display: grid</code> ele não faz nada praticamente, pois automaticamente ele é um grid de uma coluna e várias linhas. Para isso devemos colocar as outras opções para os configurar. Ao colocar <code>grid-template-columns: auto auto</code> ele criará um grid com duas colunas (se tiver <code>auto auto auto</code> terá três, e assim por diante). A mesma coisa se aplica ao <code>grid-template-rows: 100px 100px 100px</code> para linhas, que no caso, definimos um tamanho padrão. O <code>gap: 20px</code> cria um espacinho definido entre os itens, e podemos ter configurações específicas pra colunas e linhas também.</p>
+
+<p>Para começar, no index.html coloque esse código:</p>
+
+<pre>
+<code>
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;item&quot;&gt;A&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;B&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;C&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;D&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;E&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;F&lt;/div&gt;
+    &lt;div class=&quot;item&quot;&gt;G&lt;/div&gt;
+&lt;/div&gt;
+</code>
+</pre>
+
+<p>Com esse estilo:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    height: 250px;
+    display: grid;
+}
+
+div.item {
+    border: 3px solid red;
+    padding: 5px;
+}
+</code>
+</pre>
+
+<p>Lembrando que, à primeira vista, o container pode não mudar nada, mas ele se torna sim um Grid, mas teremos que colocar outras configurações pra ele funcionar.</p>
+
+<p>Deixe o CSS do container assim:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    height: 250px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    gap: 5px;
+}
+</code>
+</pre>
+
+<p>No caso acima, ele terá um Grid com três linhas e três colunas, de tamanho auto.</p>
+
+<p>Ao abrir o Inspecionar Elemento do navegador, em Inspetor e Layout (pode variar de navegador pra navegador), podemos clicar no elemento HTML, que estará marcado com <q>grid</q>, e ele mostrará os elementos do Grid, onde poderemos ver inclusive a numeração dos container. Podemos <q>brincar</q> um pouco com os elementos ali, como, por exemplo, o tamanho do gap.</p>
+
+<p>Temos várias outras propriedades para usarmos pelo Grid Layout, o <code>align-items</code>, o <code>justify-items</code>, o <code>align-content</code> e o <code>justify-content</code>, onde os <q>align</q> são para alinhamento vertical e o <q>justify</q> são pra alinhamento horizontal.</p>
+
+<p>Usando o mesmo HTML do exemplo anterior, vamos colocar esse CSS:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 100px 100px 100px;
+}
+
+div.item {
+    border: 3px solid red;
+    padding: 5px;
+}
+</code>
+</pre>
+
+<p>No container, vamos deixar o CSS assim:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 100px 100px 100px;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+div.item {
+    border: 3px solid red;
+    padding: 5px;
+}
+</code>
+</pre>
+
+<p>O stretch é o padrão pra <code>align-items</code>, caso não coloquemos nada, ele <q>estica</q> verticalmente. Podemos colocar também os valores <code>start</code>, <code>center</code> e <code>end</code>. <q>Brinque</q> com essas opções, mas vamos trabalhar com o stretch. O mesmo vale pro <code>justify-items</code>, que ajusta horizontalmente.</p>
+
+<p>Agora colocaremos o <code>align-content</code> e o <code>justify-content</code>, ele alinhará todo o conteúdo da grade, sendo o primeiro verticalmente e o segundo horizontalmente. O padrão de ambos é o <code>stretch</code>, mas podemos colocar os valores <code>start</code>, <code>center</code>, <code>end</code>, <code>space-between</code>, <code>space-evenly</code> e <code>space-around</code>, de forma semelhante ao que acontecia no FlexBox. Deixe o CSS assim e depois <q>brinque</q> um pouco com essas opções:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    height: 500px; /* Aumentando o container para vermos o espaçamento */
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 100px 100px 100px;
+    align-items: stretch;
+    justify-items: stretch;
+    align-content: start;
+    justify-content: start;
+}
+</code>
+</pre>
+
+<p>Após terminar de <q>brincar</q>, deixe as opções dos <q>content</q> como <code>stretch</code>.</p>
+
+<p>Com o mesmo HTML dos itens de A a G, deixe o CSS assim:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    height: 500px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+}
+
+div.item {
+    border: 3px solid red;
+    padding: 5px;
+}
+</code>
+</pre>
+
+<p>Deixe o CSS do container assim:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    height: 500px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+    align-items: normal;
+    justify-items: normal;
+    align-content: normal;
+    justify-content: normal;
+}
+</code>
+</pre>
+
+<p>Como visto, o <q>normal</q> é o <code>stretch</code> (esticar).</p>
+
+<p>Tente em cada um dos itens, além do <code>stretch</code>, o <code>start</code>, <code>center</code> e <code>end</code>.</p>
+
+<p>Tente em cada um dos content, além do <code>stretch</code>, <code>start</code>, <code>center</code>, <code>end</code>, <code>space-between</code>, <code>space-evenly</code> e <code>space-around</code>.</p>
+
+<p>Ainda temos mais propriedades de container para o Grid Layout, como o <code>grid-auto-rows</code>, <code>grid-auto-columns</code>, <code>place-items</code>, <code>place-content</code> e <code>grid-template</code>, sendo que os três últimos são simplificações de propriedades vistas anteriormente. Vamos continuar com o HTML de A a G, e coloque o H e o I também, com esse CSS:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 100px 100px 100px;
+}
+
+div.item {
+    border: 3px solid red;
+    padding: 5px;
+}
+</code>
+</pre>
+
+<p>No caso acima, o container terá só 9 itens, se colocarmos um 10º item, ele não ficará encaixado, porque nosso Grid explícito tem três colunas e três linhas (o Grid definido é chamado de Grid explícito), que comporta 9 itens, e o <q>J</q> não seguirá a mesma configuração e ficará <q>espremido</q>. Poderíamos colocar mais um <code>100px</code>, mas caso o <q>J</q> saia, ficará um espaço de 100px vazio. Ao colocar <code>grid-auto-rows: 100px</code>, podemos ter um Grid de 9 colunas sem problemas ao adicionar mais itens que isso implicitamente (os itens fora do Grid são do Grid implícito), deixando o CSS do container assim:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 100px 100px 100px;
+    grid-auto-rows: 100px;
+}
+</code>
+</pre>
+
+<p>Da mesma forma, usamos o <code>grid-auto-columns</code> para as colunas, mas esse costuma ser menos usado.</p>
+
+<p>Deixe as divs de A a I, e deixe o CSS do container assim:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 100px 100px 100px;
+    align-items: stretch;
+    justify-items: center;
+    align-content: start;
+    justify-content: end;
+}
+</code>
+</pre>
+
+<p>O <code>align-items</code> e o <code>justify-items</code> podemos simplificar com o <code>place-items</code>, que configura ambos numa propriedade só. O mesmo vale pro <code>place-content</code>, que simplifica o <code>align-content</code> e <code>justify-content</code>. A configuração de ambos os place configura primeiro o align (vertical) e depois o justify (horizontal). Veja como fica o CSS acima simplificado:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 100px 100px 100px;
+    place-items: stretch center;
+    place-content: start end;
+}
+</code>
+</pre>
+
+<p>Da mesma forma, podemos simplificar o <code>grid-template-rows</code> e o <code>grid-template-columns</code> por simplesmente <code>grid-template</code> que configura os dois juntos, primeiro a linha e depois a coluna. O CSS ficaria assim:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template: 100px 100px 100px / auto auto auto; /* a barra divide a linha da coluna */
+    place-items: stretch center;
+    place-content: start end;
+}
+</code>
+</pre>
+
+<p>Podemos ainda simplificar mais coisas, vamos voltar com os itens de A a G, com esse CSS:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 100px 100px 100px;
+}
+</code>
+</pre>
+
+<p>Podemos usar a função <code>repeat()</code> para repetir valores iguais numa propriedade, dessa forma:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(3, 100px);
+}
+</code>
+</pre>
+
+<p>Simplificando:</p>
+
+<pre>
+<code>
+div.container {
+    border: 3px solid blue;
+    display: grid;
+    grid-template: repeat(3, 100px) / repeat(3, auto);
+}
+</code>
+</pre>
+
+<p>Temos também a <code>fr</code> (fraction, ou fração). Para usar as frações, vamos supor um container bem grande, que tenha 1500px de largura, com a propriedade <code>grid-template-columns: auto auto auto</code> para ele criar três itens em três colunas cada um com a mesma largura (que no caso, é 500px pra cada). Podemos substituir por <code>grid-template-columns: 1fr 1fr 1fr</code> pra dividir de forma melhor do que o <q>auto</q>, independente do tamanho da tela, onde cada <q>1fr</q> é um item. Podemos configurar valores diferentes pra cada célula com as frações, como o valor <code>1fr 2fr 1fr</code>, onde a coluna do meio é o dobro das outras, onde dividimos em três partes, mas quatro frações (de 375px cada, a do meio tem duas partes de 375px, que é 750px).</p>
+
+<p>Vamos supor uma declaração doida no mesmo container, como <code>grid-template-columns: 100px 20% 1fr 1fr</code>, onde o primeiro elemento tem 100px, o segundo tem 20% do tamanho do container (300px), e as duas últimas frações só serão feitas com o que <q>sobrou</q>, que é 1100px, e cada fração ficará com 550px. Isso é menos usado e não é recomendado usar, mas pode ser encontrado em alguns sites. A mesma declaração também pode ter o repeat (no caso ficaria <code>100px 20% repeat(2, 1fr)</code>).</p>
+
+<p><a href="dicas-de-grid-layout-2.html">Parte 2 da Matéria</a></p>
+
+        <footer>
+            <p><a href="contato.html">Entre em Contato Conosco!</a></p>
+        </footer>
+        </div>
+    </body>
+</html>

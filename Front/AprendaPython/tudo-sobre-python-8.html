@@ -218,6 +218,118 @@ except Exception as erro:
 
 <p>PS: É interessante colocar a cor vermelha nas exceções criadas.</p>
 
+<h3>Manipulando Arquivos com a Biblioteca os</h3>
+
+<p>Podemos usar a biblioteca <code>os</code> para limpar a tela de console do Python:</p>
+
+<pre>
+<code>
+import os
+
+texto = str(input("Digite algo: "))
+
+os.system("cls" if os.name == "nt" else "clear") # nt é referente ao Windows
+
+print(texto)
+</code>
+</pre>
+
+<p>Pegar caminho:</p>
+
+<pre>
+<code>
+import os
+
+caminho = os.getcwd()
+
+print(caminho)
+</code>
+</pre>
+
+<p>Mover entre pastas:</p>
+
+<pre>
+<code>
+import os
+
+varAmb = os.environ["USERNAME"] # Pega variável de ambiente com nome do usuário
+
+novo = "C:\\Users\\{}\\Desktop".format(varAmb)
+
+os.chdir(novo) # Muda caminho
+
+print(os.getcwd())
+</code>
+</pre>
+
+<p>Cria diretórios:</p>
+
+<pre>
+<code>
+import os
+
+varAmb = os.environ["USERNAME"] # Pega variável de ambiente com nome do usuário
+
+novo = "C:\\Users\\{}\\Desktop".format(varAmb)
+
+os.chdir(novo)
+
+os.mkdir("teste") # Cria pasta
+
+print(os.listdir()) # Lista arquivos do caminho
+</code>
+</pre>
+
+<p>Abrir arquivo especificado:</p>
+
+<pre>
+<code>
+import os
+
+varAmb = os.environ["USERNAME"] # Pega variável de ambiente com nome do usuário
+
+novo = "C:\\Users\\{}\\Desktop".format(varAmb)
+
+os.chdir(novo)
+
+os.startfile("arquivo.txt") # Abre um arquivo especificado
+</code>
+</pre>
+
+<p>Renomeando arquivos e pastas:</p>
+
+<pre>
+<code>
+import os
+
+varAmb = os.environ["USERNAME"] # Pega variável de ambiente com nome do usuário
+
+novo = "C:\\Users\\{}\\Desktop".format(varAmb)
+
+os.chdir(novo)
+
+os.rename("arquivo.txt", "arq.txt") # Renomeia, na ordem antigo e novo nome
+</code>
+</pre>
+
+<p>Remover arquivos e diretórios:</p>
+
+<pre>
+<code>
+import os
+
+varAmb = os.environ["USERNAME"] # Pega variável de ambiente com nome do usuário
+
+novo = "C:\\Users\\{}\\Desktop".format(varAmb)
+
+os.chdir(novo)
+
+os.remove("arq.txt") # Remove arquivo
+
+os.rmdir("test") # Remove pasta
+</code>
+</pre>
+
 <h3>Rich no Python: Cores, Emojis, Tabelas e Debug Muito Mais Bonitos</h3>
 
 <p>Para facilitar o uso de cores, emojis, tabelas e outros recursos, podemos usar a biblioteca <code>rich</code> pra isso.</p>

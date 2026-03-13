@@ -133,7 +133,7 @@
 &lt;!-- --&gt; - Para comentários (que não aparecem no documento).
 &lt;wbr/&gt; - Para forçar quebra de linha ao ajustar palavras compostas sem criar hífens.
 &lt;hr/&gt; - Para criar uma linha.
-&lt;span&gt;&lt;/span&gt; - Na verdade é uma tag "vazia", que pode ter funções implementadas.
+&lt;span&gt;&lt;/span&gt; - Na verdade é uma tag "vazia", que pode ter funções implementadas, é inline.
 &lt;div&gt;&lt;/div&gt; - Também uma tag "vazia", mais usada em blocos.
 &lt;pre&gt;&lt;/pre&gt; - Usada para pré-formatar textos.
 &lt;code&gt;&lt;/code&gt; - Para exibir códigos, usada geralmente em conjunto com a tag pre.
@@ -473,7 +473,7 @@ input, textarea {
 </code>
 </pre>
 
-<p>PS: Para importar outro arquivo CSS numa folha CSS, use no começo a diretiva <code>@import "folha.css"</code>. Se quiser definir algo como importante (como por exemplo, a cor de fundo, use algo como <code>background-color: red !important</code>.</p>
+<p>PS: Para importar outro arquivo CSS numa folha CSS, use no começo a diretiva <code>@import "folha.css"</code>. Se quiser definir algo como importante (como por exemplo, a cor de fundo), use algo como <code>background-color: red !important</code>.</p>
 
 <p>Apesar da possibilidade de usar a tag <q>i</q> para inclinar textos, podemos fazer isso em CSS com o <code>font-style</code>. Da mesma forma, o <q>b</q> pode ser substituído pelo <code>font-weight</code>. Para sublinhar usamos a tag <code>&lt;ins&gt;&lt;/ins&gt;</code>, ou usamos totalmente o CSS, dessa forma:</p>
 
@@ -564,7 +564,7 @@ width: calc(100% - 44px);
 </code>
 </pre>
 
-<p>No caso accima, o VH ocupará 100/100 da altura da tela. O calc permite cálculos entre proporções. Podemos ver algo como <code>1em</code>, um <q>em</q> equivale à 16px.</p>
+<p>No caso accima, o <code>vh</code> ocupará 100/100 da altura da tela, o equivalente pro width é <code>vw</code>. O calc permite cálculos entre proporções. Podemos ver algo como <code>1em</code>, um <q>em</q> equivale à 16px.</p>
 
 <p><a href="dicas-de-html5-e-css3-2.html">Parte 2 da Matéria</a></p>
 

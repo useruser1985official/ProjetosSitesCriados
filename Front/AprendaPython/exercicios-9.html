@@ -171,26 +171,32 @@ c2.analisar()
 <pre>
 <code>
 from rich import print
+import time
 
 class Livro:
     def __init__(self, titulo, paginas):
         self.titulo = titulo
-        self.paginas = paginas
-        self.pagAtual = 1
-        print(f"[blue]:book: Você acabou de abrir o livro [red]{self.titulo}[/] que tem [green]{self.paginas} páginas[/] no total. Você agora está na [green]página {self.pagAtual}[/].[/]")
+        self.totalPaginas = paginas
+        self.paginaAtual = 1
+        print(f":open_book: [blue]Você acabou de abrir o livro [red]\"{self.titulo}\"[/] que tem [green]{self.totalPaginas} páginas[/] no total. Você agora está na [yellow]página {self.paginaAtual}[/].[/]")
 
-    def avancarPaginas(self, pag):
-        if pag > self.paginas:
-            pag = self.paginas - self.pagAtual
+    def avancarPaginas(self, qtd = 1):
+        cont = 0
 
-        for p in range(self.pagAtual, self.pagAtual + pag):
-            self.pagAtual += 1
-            print(f"Pág [white]{self.pagAtual}[/] ->", end = " ")
+        for pq in range(0, qtd, 1):
+            if not self.fimDoLivro():
+                self.paginaAtual += 1
+                print(f"Pág {self.paginaAtual} :arrow_forward: ", end = "")
+                time.sleep(0.3)
+                cont += 1
 
-        print(f"[blue]Você avançou {pag} páginas e agora está na [green]página {self.pagAtual}[/].[/]")
+        print(f"[blue]Você avançou {cont} páginas agora está na [yellow]página {self.paginaAtual}[/].[/]")
 
-        if self.pagAtual == self.paginas:
-            print(f"[red]:rotating_light: Você chegou ao final do livro {self.titulo}.[/]")
+        if self.fimDoLivro():
+            print(f":closed_book: [red]Você chegou ao final do livro \"{self.titulo}\".[/]")
+
+    def fimDoLivro(self) -> bool:
+        return self.paginaAtual == self.totalPaginas
 </code>
 </pre>
 
@@ -202,7 +208,7 @@ l1 = Livro("10 Coisas que Aprendi", 20)
 
 l1.avancarPaginas(5)
 l1.avancarPaginas(10)
-l1.avancarPaginas(100)
+l1.avancarPaginas(50)
 </code>
 </pre>
 
@@ -234,7 +240,7 @@ class Gamer:
             jogosFavoritos += "\n:video_game: "
             jogosFavoritos += j
 
-        caixa = Panel(f"Nome real: [black on blue]{self.nome}[/]\nJogos favoritos: [blue]{jogosFavoritos}[/]", title = f"Jogador <{self.nick}>", width = 45)
+        caixa = Panel(f"Nome real: [black on blue]{self.nome}[/]\nJogos favoritos: [blue]{jogosFavoritos}[/]", title = f"Jogador &lt;{self.nick}&gt;", width = 45)
 
         print(caixa)
 </code>

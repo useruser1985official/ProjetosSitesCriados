@@ -148,6 +148,30 @@ select * from alunos;
 
 <p>Para excluir um volume, use o nome do volume com o rm, como <code>docker volume rm meu-volume</code>. Só poderemos excluir volumes que não estejam sendo usados por nenhum container, nesse caso exclua todos os container que usam esse volume primeiro. Para excluir todos os volumes não utilizados, use o comando <code>docker volume prune</code>.</p>
 
+<h3>Bridge, Host ou None? Aprenda Sobre as Redes do seu Container Docker</h3>
+
+<p>Vamos pensar no Docker como um condomínio fechado, e os container são as casas do mesmo, e de dentro delas, nós temos saída pras ruas, mas ninguém que tá na rua tem acesso ao condomínio sem a autorização da portaria. Isso tem a ver com o parâmetro <code>-p</code> que usamos na criação do container. Para ver as redes do container, nós usamos o comando <code>docker network</code>, digitando assim, nós listamos as opções do comando, para listar as redes usamos <code>docker network ls</code></p>
+
+<p>Por padrão, ele lista três tipos de redes: Bridge, host e none, com essas diferenças:</p>
+
+<ul>
+    <li><b>Bridge:</b> É o padrão, todo container nascerá com essa rede, caso não mudarmos, como a analogia com o condomínio.</li>
+    <li><b>Host:</b> Remove um pouco o isolamento, nesse caso, ele vai usar a mesma placa de rede e serviço do nosso computador.</li>
+    <li><b>None:</b> Ele isolará o container de tudo, ele não vai ter internet, acesso à rede, nada disso. É uma proteção de segurança máxima contra acesso externo</li>.
+</ul>
+
+<p>Vamos criar dois containers com o Alpine, com os comandos <code>docker run -dit --name container1 alpine</code> e <code>docker run -dit --name container2 alpine</code>. Os dois rodarão em segundo plano e podemos ver isso com o comando <code>docker ps</code>. Para visualizar as configurações de um dos containers, digite o comando <code>docker inspect container1</code>, ele mostrará um JSON com as configurações, e procurando por <q>NetworkSettings</q>, podemos ver o IP privado do container, que será específico dele (algo como <code>172.17.0.2</code>, por exemplo). Faça o mesmo com o segundo container e pegue o IP dele (que deverá ser, no caso, <code>172.17.0.3</code>, portanto estarão na mesma rede os dois containers, como se tivessem ligados a um <q>switch</q> virtual).</p>
+
+<p>Com essas informações, nós podemos acessar um container e acessar ou executar algo do outro container pela rede. Vamos supor que no container1 nós executamos o ping no container2, pelo IP. Pra isso digite o comando <code>docker exec -it container1 ping 172.17.0.3</code>, e nós conseguiremos <q>pingar</q> o outro container. Mas os containers são voláteis, e ao reiniciar o container, ele pode pegar outro IP diferente, nesse caso usamos o DNS (nomes), mas no modo bridge, que é o que usamos agora, o DNS não vai funcionar.</p>
+
+<p>Vamos tentar <q>pingar</q> o container de novo, mas com o nome dele ao invés do IP, com <code>docker exec -it container1 ping container2</code>, ele não conseguirá acessar o outro container e dará erro.</p>
+
+<p>Podemos melhorar o desempenho da rede sem que tenhamos que passar pelo <q>roteador</q> do Docker, nesse caso usaremos o modo host. No modo host, o container <q>rouba</q> o IP da nossa máquina, ele deixa de ter um isolamento por porta. Podemos utilizar por exemplo a imagem no Nginx, que rodará a porta 80 do nosso computador, sem ter que linkarmos as portas com o parâmetro <q>-p</q>. Vamos criar um container no modo host com o comando <code>docker run -dit --network host --name nginx-direto nginx</code>, se a porta 80 não tiver sendo usada por outro processo, poderemos acessar ela. Vamos criar um outro container com o comando <code>docker run -dit --network host --name container3 alpine.</code>, e depois digite o comando <code>docker exec -it container3 ping google.com</code> pra ele <q>pingar</q> o Google, e nesse caso ele usará a placa de rede do nosso computador, sem passar pela rede do Docker.</p>
+
+<p>Vamos criar um quarto container totalmente isolado com o none, com o comando <code>docker run -dit --name container4 --network none alpine</code>, depois tente <q>pingar</q> o Google com o comando <code>docker exec -it container4 ping google.com</code>, ele não conseguirá por estar totalmente isolado de qualquer rede.</p>
+
+<p>No entanto, nós ainda temos um problema, como um container acessar outro sem saber o IP dele? Nesse caso nós usaremos DNS (nomes), que aprenderemos mais pra frente.</p>
+
 <ul>
     <li><a href="tudo-sobre-docker-1.html">Parte Anterior da Matéria!</a></li>
     <!--<li><a href="tudo-sobre-docker-3.html">Continuação da Matéria!</a></li>-->
