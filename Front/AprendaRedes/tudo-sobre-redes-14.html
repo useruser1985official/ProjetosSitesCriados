@@ -71,6 +71,8 @@
 
 <p>Uma vez que ele termine, o peer automaticamente se torna mais um seed, apenas enviando os dados de volta e não baixando mais nada. A lógica por trás do BitTorrent é que quanto mais seeds um arquivo tenha, mais usuários o estão disponibilizando, e logo, o download é mais rápido e eficiente.</p>
 
+<p>O torrent não tem uma porta específica a ser usada, mas geralmente ele utiliza portas altas, entre 50000 e 65535.</p>
+
 <h3>O que é um Roteador</h3>
 
 <p>Um roteador (router, em inglês) é um equipamento de rede que efetua o encaminhamento de pacotes de dados entre redes de computadores distintas. Esses pacotes de dados são encaminhados de um roteador para outro até que atinjam o dispositivo de destino, ou sejam descartados. Os roteadores efetuam a leitura dos pacotes IP, podendo analisar o conteúdo de seus cabeçalhos, e então tomar decisões baseando-se nos dados lidos.</p>
@@ -113,7 +115,7 @@
 <ul>
     <li><b>Endereço Global Unicast:</b> Similar aos endereços públicos no IPv4, esses endereços são roteáveis na internet. Um exemplo é <code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code>.</li>
     <li><b>Endereço Link-Local:</b> Usado para comunicação dentro da mesma rede local (link). Não é roteável e é automaticamente configurado por cada dispositivo. Todos os endereços link-local começam com <code>fe80::</code>. Um exemplo é <code>fe80::1a2b:3c4d:5e6f:7a8b</code>.</li>
-    <li><b>Endereço Unique Local:</b> Semelhante aos endereços privados do IPv4, esses endereços são usados em redes internas e não são roteados na internet. Eles têm o prefixo <code>fc00::</code> ou mais raramente, <code>fd00::</code>. Um exemplo é <code>fc00::1234:5678:9abc</code>.</li>
+    <li><b>Endereço Unique Local:</b> Semelhante aos endereços privados do IPv4, esses endereços são usados em redes internas e não são roteados na internet. Eles têm o prefixo <code>fc00::</code> ou <code>fd00::</code>. Um exemplo é <code>fc00::1234:5678:9abc</code>.</li>
     <li><b>Endereço de Loopback:</b> Usado para testes de diagnóstico no próprio dispositivo. No IPv6, o endereço de loopback é <code>::1</code> (ou <code>0:0:0:0:0:0:0:1</code>).</li>
     <li><b>Endereço de Auto-Configuração:</b> No IPv6, quando um dispositivo não consegue obter um endereço IP a partir de um servidor DHCPv6, ele pode gerar um endereço IPv6 link-local automaticamente. Não há um equivalente exato ao APIPA do IPv4, mas endereços link-local são criados automaticamente.</li>
 </ul>
@@ -127,8 +129,9 @@
     <li>Endereços IPv6 não utilizam um padrão de broadcast. O conceito de broadcast foi substituído por multicast em IPv6, portanto, não existem endereços reservados para tal.</li>
     <li>Endereços com todos os bits ajustados como 0 são usados para a identificação da própria rede ou para endereçamento de grupos (multicast).</li>
     <li>Não se usa um identificador de host com todos os bits ajustados como 0 ou 1 para denotar um endereço específico, pois a abordagem é diferente da usada em IPv4.</li>
-    <li>Com o IPv6, todas as redes locais devem ter prefixos <code>/64</code>, necessário para funcionalidades como a da autoconfiguração. Endereços <code>fe80::</code> tem a máscara <code>/10</code>, endereços <code>fc00::</code>/<code>fd00::</code> tem a máscara <code>/7</code> ou <code>/8</code>, ao passo que o endereço de loopback (<code>::1</code>) tem a máscara <code>/128</code>.</li>
-    <li>Usuários receberão de seus provedores redes <code>/48</code>, mas alguns provedores podem entregar aos usuários domésticos redes com tamanho <code>/56</code>.</li>
+    <li>Com o IPv6, as redes locais normalmente utilizam prefixos <code>/64</code>, pois isso é necessário para funcionalidades como a autoconfiguração (SLAAC), embora existam exceções, como enlaces ponto a ponto que podem usar <code>/127</code>. Endereços <code>fe80::/10</code> são utilizados para link-local, endereços <code>fc00::/7</code> correspondem aos Unique Local Addresses (sendo <code>fd00::/8</code> a faixa mais comumente usada), ao passo que o endereço de loopback (<code>::1</code>) possui prefixo <code>/128</code>.</li>
+    <li>Usuários podem receber de seus provedores redes <code>/48</code>, mas é mais comum que provedores entreguem <code>/56</code> para usuários domésticos. Em casos raros pode ser entregues redes <code>/60</code> ou <code>/64</code>.</li>
+    <li>Em redes que trabalham com IPv4 e IPv6 combinados, podemos converter o IPv4 em IPv6, adicionando o prefixo <code>0000:0000:0000:0000:0000:ffff:</code> e convertendo o endereço em hexa, no caso, o IP <code>172.16.31.55</code> pode virar <code>0000:0000:0000:0000:0000:ffff:ac10:1f37</code>, ou simplificando, <code>0:0:0:0:0:ffff:ac10:1f37</code> ou <code>::ffff:ac10:1f37</code>.</li>
 </ul>
 
 <h3>Proxy Server</h3>
@@ -138,6 +141,39 @@
 <p>A Microsoft possui o Microsoft Proxy Server que, uma vez instalado, funciona como uma barreira (firewall) entre a rede da empresa e a internet.</p>
 
 <p>Além disso, o proxy server pode manter armazenada uma cópia das páginas visitadas (cache), tornando mais rápida a navegação pelos endereços mais acessados da internet.</p>
+
+<h3>SMB Server</h3>
+
+<p>Pensando na troca e no compartilhamento de recursos e arquivos entre computadores de uma rede local, um componente fundamental para um sistema de redes é o SMB (Server Message Block). Ele opera em um modelo cliente-servidor, no qual um servidor de recursos disponibiliza outros recursos compartilhados.</p>
+
+<p>O protocolo SMB é altamente compatível com sistemas Windows e oferece uma integração perfeita com os recursos compartilhados em redes Windows. Além disso, administradores podem configurar permissões detalhadas para controlar quem pode acessar e modificar recursos compartilhados.</p>
+
+<h3>SNMP, NTP e Syslog</h3>
+
+<p>Os protocolos de gerenciamento e monitoramento têm um papel muito importante no mundo da tecnologia da informação. Com o avanço tecnológico e o aumento do uso de computadores e dispositivos em rede, os protocolos servem para, além de garantir a segurança dos usuários, melhorar o desempenho da infraestrutura de rede em geral.</p>
+
+<p>Na sequência, vamos saber um pouco mais sobre alguns desses protocolos.</p> 
+
+<h4>O que é SNMP</h4>
+
+<p>O SNMP (Simple Network Management Protocol) é um protocolo do conjunto TCP/IP que permite monitorar e controlar os dispositivos da rede. Dessa forma, ele auxilia na identificação de possíveis falhas dentro dos equipamentos da rede.</p>
+
+<p>Esse protocolo pode ser usado em:</p>
+
+<ul>
+    <li>Servidores.</li>
+    <li>Storages.</li>
+    <li>Roteadores.</li>
+    <li>Switches.</li>
+</ul>
+
+<h4>Protocolo NTP</h4>
+
+<p>O Network Time Protocol, ou NTP, permite a sincronização dos relógios dos dispositivos de uma rede e define uma série de algoritmos utilizados para consultar os servidores, calcular a diferença de tempo e encontrar algum erro nesse processo.</p>
+
+<h4>Syslog</h4>
+
+<p>O System Logging Protocol é um sistema que registra eventos em log, armazenando mensagens de eventos dentro de uma rede. Dessa forma, é possível que o administrador da rede identifique as possíveis falhas do sistema ou até mesmo tentativas de invasão, garantindo, assim, a segurança da rede.</p>
 
 <ul>
     <li><a href="tudo-sobre-redes-13.html">Parte Anterior da Matéria!</a></li>

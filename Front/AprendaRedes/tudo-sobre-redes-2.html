@@ -48,7 +48,7 @@
 
 <p>Basicamente, o hub funciona de uma forma similar a usar um trio elétrico para dar recado a uma pessoa (o recado vai chegar, mas vai chegar pra todo mundo que está ali).</p>
 
-<p>O switch, no entanto, seria como mandar uma carta (mesmo passando por alguém no caminho, só é entrega ao destinatário).</p>
+<p>O switch, no entanto, seria como mandar uma carta (mesmo passando por alguém no caminho, só é entregue ao destinatário).</p>
 
 <p>No hub, a captura de pacotes é simples, chegam a todos, e é inseguro, pouco comum hoje. Inclusive, ele manda as mensagens para todos os dispositivos sem exceção, inclusive o mesmo que enviou a mensagem.</p>
 
@@ -73,6 +73,18 @@
     <li><b>Extranet:</b> Conhecida popularmente como internet. A diferença é que os recursos só podem ser acessados com autorização de um administrador da rede de uma companhia.</li>
 </ul>
 
+<p>A evolução da internet foi mais ou menos assim:</p>
+
+<ul>
+    <li><b>Década de 1960:</b> O governo dos EUA, por meio da ARPA, criou a arpanet para conectar computadores de universidades e centros de pesquisa, permitindo troca de informações mesmo se parte da rede caísse.</li>
+    <li><b>Anos 70:</b> Surgem os protocolos de comunicação, especialmente o TCP/IP, que padronizaram como os dados são enviados entre redes diferentes.</li>
+    <li><b>Anos 80:</b> A arpanet cresce e começa a se conectar com outras redes, formando a base do que viria a ser a internet.</li>
+    <li><b>Anos 90:</b> Com a criação da World Wide Web por Tim Berners-Lee, a internet se torna acessível ao público, com sites e navegadores.</li>
+    <li><b>2000 até hoje:</b> Expansão global com banda larga, Wi-Fi e smartphones, transformando a internet em algo essencial para comunicação, trabalho e entretenimento.</li>
+</ul>
+
+<p>Em resumo: a internet começou como um projeto militar/acadêmico e evoluiu para uma rede mundial pública que conecta bilhões de dispositivos.</p>
+
 <h3>O Que é Vlan</h3>
 
 <p>Uma vlan permite segmentar um domínio de broadcast.</p>
@@ -85,7 +97,7 @@
 
 <h3>Introdução ao HTTP</h3>
 
-<p>HTTP é a sigla de HyperText Transfer Protocol que em português significa "Protocolo de Transferência de Hipertexto". É um protocolo de comunicação entre sistemas de informação que permite a transferência de dados entre redes de computadores, principalmente na World Wide Web (Internet).</p>
+<p>HTTP é a sigla de HyperText Transfer Protocol que em português significa "Protocolo de Transferência de Hipertexto". É um protocolo de comunicação entre sistemas de informação que permite a transferência de dados entre redes de computadores, principalmente na World Wide Web (Internet). Tim Berners-Lee foi o criador do protocolo HTTP, da linguagem HTML e da World Wide Web.</p>
 
 <p>O HTTP é o protocolo utilizado para transferência de páginas HTML do computador para a Internet. Por isso, os endereços dos websites (URL) utilizam no início a expressão "http://", definindo o protocolo usado. Esta informação é necessária para estabelecer a comunicação entre a URL e o servidor Web que armazena os dados, enviando então a página HTML solicitada pelo usuário.</p>
 
@@ -454,162 +466,6 @@
     <li><b>Half-Duplex: </b>Permite o envio e recebimento de dados, mas não ao mesmo tempo.</li>
     <li><b>Full-Duplex: </b>Permite enviar e receber ao mesmo tempo (como as placas de rede).</li>
 </ul>
-
-<h3>Cabo Par Trançado - Parte 1</h3>
-
-<p>Apesar de muita coisa hoje em dia ser sem fio, ainda é necessário cabeamento em muitas partes da rede, pelo menos até chegar ao roteador, por isso é importante conhecer os tipos diferentes de cabo usados em redes internas.</p>
-
-<p>O cabo par-trançado é um dos tipos de cabo mais utilizados, possuí 4 pares de fios, e cada par possuí uma quantidade de tranças (torções) por metro, e cada par (trança) possuí sinais iguais porém opostos, isso faz com que os pares minimizem interferências entre eles e permitem que os sinais transmitidos e recebidos possam ser comparados.</p>
-
-<p>O cabo UTP (Unshielded Twisted Pair) é o mais utilizado, mas ele não tem nenhuma proteção extra.</p>
-
-<p>O cabo SCTP (Screened Twisted Pair) e o FTP (Foiled Twisted Pair) oferecem proteção para todos os pares usando folha para blindagem.</p>
-
-<p>O cabo S/STP (Screened Shielded Twisted Pair) e o S/FTP (Screened Foiled Twisted Pair) oferecem proteção para o cabo e mais uma proteção que separa cada par dentro do cabo.</p>
-
-<p>PS: O FTP não tem nada a ver com protocolo FTP.</p>
-
-<p>Veja alguns desses cabos abaixo:</p>
-
-<img src="imagens/par-trancado.jpg" alt="Par Trançado"/>
-
-<p>Outras características presentes nos cabos são essas:</p>
-
-<ul>
-    <li><b>CMX: </b>Para instalações residenciais com pouco cabo (casas comuns).</li>
-    <li><b>CM: </b>Para instalações horizontais em lugares com alta ocupação, com fluxo de ar forçado (por exemplo, em prédios que possuem dutos para passar cabos de todos tipos, como ambientes comerciais).</li>
-    <li><b>CMR (Riser): </b>Para instalações verticais como em "shafts" (por exemplo, em prédios com mais de dois andares).</li>
-    <li><b>CMP (Plenum): </b>Aplicação horizontal em locais onde gases tóxicos se espalhando rapidamente poderiam causar danos às pessoas (em espaços livres em locais onde também passam dutos de ar, os cabos não passam dentro desses dutos).</li>
-</ul>
-
-<h3>Cabo Par Trançado - Parte 2</h3>
-
-<p>Para escolhermos bem os cabos, precisamos conhecer bem as categorias deles, que são essas:</p>
-
-<ul>
-    <li><b>Categoria 3: </b>Indicado para redes Ethernet 10 Mbps e Token Ring 4 Mbps (em desuso, substituído pela categoria 5).</li>
-    <li><b>Categoria 5: </b>Indicado para redes Ethernet 100 Mbps.</li>
-    <li><b>Categoria 5e: </b>Indicado para redes Ethernet 1 Gbps.</li>
-    <li><b>Categoria 6: </b>Indicado para redes Ethernet 10 Gbps (até 55 metros).</li>
-    <li><b>Categoria 6a: </b>Indicado para redes Ethernet 10 Gbps (até 100 metros).</li>
-</ul>
-
-<p>A metragem influencia na velocidade, é a distância máxima entre o switch até o computador (incluindo tomadas, filtros e etc.).</p>
-
-<h3>Cabo Par Trançado - Parte 3</h3>
-
-<p>O conector RJ-45 é o conector mais usado em redes com cabo par trançado, mas nem sempre eles são iguais, apesar de semelhantes. Veja ele abaixo:</p>
-
-<img src="imagens/conector-par-trancado.jpg" alt="Conector RJ-45"/>
-
-<p>A maioria dos dispositivos novos detectam automaticamente quem transmite e quem recebe e não depende mais da pinagem do cabo para se comunicar.</p>
-
-<h3>Fibra Óptica - Parte 1</h3>
-
-<p>A fibra óptica é um dos mais importantes meios de transmissão. É recomenada principalmente para alplicações que precisam trafegar altas taxas de dados em longas distâncias. Os dados são transmitidos em forma de luz, por isso é imune a interferência eletromagnética e tem baixa atenuação. Muito usada em tráfego de dados por longas distâncias e alta velocidade.</p>
-
-<p>As fibras ópticas podem ser dividdas em dois modos, fibra multimodo e fibra monomodo.</p>
-
-<p>A fibra multimodo é usada em aplicações onde distâncias menores são consideradas, normalmente utiliza LED e o tamanho do núcleo é maior, por isso, a luz fica "batendo" no tráfego do cabo.</p>
-
-<p>A fibra monomodo é usada em aplicações de longa distâncias, normalmente utiliza laser e o núcleo tem um tamanho menor, por isso trafega por um caminho "reto".</p>
-
-<p>Ambas as fibras tem uma capa, bem semelhante.</p>
-
-<p>Veja como trafega a luz entre os dois tipos de fibra:</p>
-
-<img src="imagens/fibra.png" alt="Fibra Óptica"/>
-
-<h3>Fibra Óptica - Parte 2</h3>
-
-<p>Os conectores mais usados em fibra óptica são os conectores ST, mas atualmente é mais comum os conectores SC.</p>
-
-<p>Outro que é menor e mais simples é o LC, por ter dois conectores integrados (um de transmissão e outro de recepção).</p>
-
-<p>O mais fácil de instalar de todos, no entanto, é o MTRJ, parecido com o RJ-45.</p>
-
-<p>Veja alguns deles abaixo:</p>
-
-<img src="imagens/conectores-fibra.jpg" alt="Conectores Fibra"/>
-
-<h3>Fibra Óptica - Parte 3</h3>
-
-<p>Esses são os padrões da fibra óptica e suas velocidades:</p>
-
-<table>
-    <tr>
-	<th>Tipo de Fibra</th>
-	<th>Padrão Ethernet</th>
-	<th>Velocidade</th>
-	<th>Distância</th>
-    </tr>
-    <tr>
-	<td rowspan="3">Multimodo</td>
-	<td>100 BASE-FX</td>
-	<td>100 Mbit/s</td>
-        <td>2 Km</td>
-    </tr>
-    <tr>
-	<td>1000 BASE-SX</td>
-	<td>1000 Mbit/s</td>
-	<td>200 - 550 m</td>
-    </tr>
-    <tr>
-	<td>10 G BASE-SR</td>
-	<td>10 Gbit/s</td>
-	<td>300 m</td>
-    </tr>
-    <tr>
-	<td rowspan="2">Monomodo</td>
-	<td>1000 BASE-LX</td>
-	<td>1000 Mbit/s</td>
-	<td>2 Km</td>
-    </tr>
-    <tr>
-	<td>10 G BASE-LR</td>
-	<td>10 Gbit/s</td>
-	<td>10 Km</td>
-    </tr>
-</table>
-
-<h3>Cabo Coaxial</h3>
-
-<p>O cabo coaxial é um tipo de cabo usado para transmitir sinais, usado não só em redes (muito raro hoje em dia), mas também em outras aplicações como CFTV (Circuito Fechado) e TV à cabo. Ele tem um condutor central, um isolante em torno dele, em volta dele uma capa metálica ou malha. Os cabos de antena geralmente são esses.</p>
-
-<p>Os tipos mais comuns de cabo coaxial são:</p>
-
-<ul>
-    <li><b>RG-59: </b>Típicamente usado para transmissão de vídeo analógico, especialmente CFTV.</li>
-    <li><b>RG-6: </b>Mais grosso que o RG-59, usado por operadoras de TV à cabo.</li>
-    <li><b>RG-58: </b>Similar ao RG-59, utilizado antigamente em redes 10 BASE 2 Ethernet Networks.</li>
-</ul>
-
-<p>Os conectores mais comuns são o F, muito comum nos cabos de antenas e receptores de TV por assinatura, e o BNC, geralmente usadas em CFTV. Veja o BNC logo abaixo:</p>
-
-<img src="imagens/conector-coaxial-bnc.jpg" alt="Conector BNC"/>
-
-<p>Ainda que alguns cabos não sejam mais utilizados, é comum encontrar referências sobre eles em livros e materiais de estudos. Veja a tabela abaixo:</p>
-
-<table>
-    <tr>
-	<th>Padrão</th>
-	<th>Cabo</th>
-	<th>Capacidade</th>
-	<th>Distância</th>
-    </tr>
-    <tr>
-	<td>10 BASE 5</td>
-	<td>Coax (thicknet ou RG-8/U)</td>
-	<td>10 Mbps</td>
-	<td>500 m</td>
-    </tr>
-    <tr>
-	<td>10 BASE 2</td>
-	<td>Coax (thinnet ou RG-58)</td>
-	<td>10 Mbps</td>
-	<td>185 m</td>
-    </tr>
-</table>
 
 <ul>
     <li><a href="tudo-sobre-redes-1.html">Parte Anterior da Matéria!</a></li>

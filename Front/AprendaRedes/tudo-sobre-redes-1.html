@@ -184,7 +184,7 @@
 
 <h3>Endereço IP</h3>
 
-<p>O endereço IP é o endereço lógico que cada dispositivo na rede deverá ter, por exemplo, computadores, roteadores, tables, smarthphones, etc.</p>
+<p>O endereço IP (Internet Protocol) é o endereço lógico que cada dispositivo na rede deverá ter, por exemplo, computadores, roteadores, tables, smarthphones, etc.</p>
 
 <p>Existe duas formas de colocar o endereço IP na máquina, uma é manualmente, onde entramos na configuração do dispositivo e colocamos o endereço IP, e a outra é através de um servidor DHCP (pode ser uma máquina ou servidor com Windows, Linux, roteador, etc.), que vai atribuir um IP à cada dispositivo que entrar na rede.</p>
 
@@ -418,12 +418,14 @@
     <li><b>SMTP</b> – Simple Mail Transfer Protocol, é utilizado para o transporte de e-mail, sendo que o SMTP é uma aplicação utilizada para transporte e não um meio de transporte. Por isso ele se localiza na camada de Aplicação.</li>
     <li><b>HTTP</b> – Hypertext Transfer Protocol, é utilizado para transportar páginas HTML de servidores web para navegadores. O protocolo é utilizado para realizar a comunicação entre servidores WEB e Navegadores instalados em computadores cliente.</li>
     <li><b>DHCP</b> – Dynamic Host Configuration Protocol, é um método de designar endereços IPs para os computadores conectados na rede. Ele é um serviço baseado no servidor que designa automaticamente endereços IPs para cada computador que entra na rede. Este método não exige que você tenha que entrar em cada computador e informar o IP, facilitando mudanças de redes. O DHCP pode executar todas as funções do BOOTP.</li>
-    <li><b>POP3</b> – Post Office Protocol Version 3, é utilizado por usuários clientes para acessar uma conta de email em um servidor e pegar o e-mail. Como no SMTP, esta não é uma camada de transporte.</li>
-    <li><b>IMAP4</b> – Internet Mail Access Protocol Version 4, é um substituto para o POP3, diferente deste último, o IMAP se mantém conectado a fim de sincronizar as mensagens recebidas em tempo real.</li>
+    <li><b>POP3</b> – Post Office Protocol Version 3, é utilizado por usuários clientes para acessar uma conta de email em um servidor e pegar o e-mail. Como no SMTP, esta não é uma camada de transporte. No POP, a mensagem é excluída do servidor.</li>
+    <li><b>IMAP4</b> – Internet Mail Access Protocol Version 4, é um substituto para o POP3, diferente deste último, o IMAP se mantém conectado a fim de sincronizar as mensagens recebidas em tempo real. No IMAP, a mensagem permanece no servidor.</li>
     <li><b>Telnet</b> - É utilizado para abrir uma sessão remota em outro computador. Ele se baseia em TCP para o transporte e é definido pela RFC854.</li>
 </ul>
 
-<p>Podemos ver a lista de protocolos eaqui: <a href="https://pt.wikipedia.org/wiki/Lista_de_portas_dos_protocolos_TCP_e_UDP" target="_blank">https://pt.wikipedia.org/wiki/Lista_de_portas_dos_protocolos_TCP_e_UDP</a></p>
+<p>Podemos ver a lista de protocolos aqui: <a href="https://pt.wikipedia.org/wiki/Lista_de_portas_dos_protocolos_TCP_e_UDP" target="_blank">https://pt.wikipedia.org/wiki/Lista_de_portas_dos_protocolos_TCP_e_UDP</a></p>
+
+<p>As portas reservadas normalmente são de 1 a 1024, as portas acima disso são consideradas portas altas, escolhidas por determinadas aplicações que não contém uma porta reservada (apesar de algumas portas altas serem usadas comumente por algumas aplicações, como a 3306 do MySQL). Serviços como o Torrent usa portas entre 50000 e 65535.</p>
 
 <p>Abaixo, veja alguns provedores de e-mail e seus respectivos protocolos:</p>
 
@@ -519,13 +521,11 @@
 
 <h3>Endereço MAC</h3>
 
-<p>O MAC Address também é conhecido como "endereço físico" e está gravado em um chip na placa de rede.</p>
+<p>O MAC Address (Media Access Control) também é conhecido como "endereço físico" e está gravado em um chip na placa de rede.</p>
 
-<p>O endereço MAC é um endereço de 48 bits sempre escrito em hexadecimal, como por exemplo <code>00-23-10-35-00-3B</code>.</p>
+<p>O endereço MAC é um endereço de 48 bits sempre escrito em hexadecimal, como por exemplo <code>00-23-10-35-00-3B</code>. Ao invés de traços, às vezes é escrito com dois pontos entre os números, como <code>00:23:10:35:00:3B</code>.</p>
 
-<p>Ao invés de traços, às vezes é esrito com dois pontos entre os números, como <code>00:23:10:35:00:3B</code>.</p>
-
-<p>O endereço MAC é dividido em duas partes, sendo que a primeira identifica o fabricante (podendo até serem substituir pelo nome do mesmo) e a segunda identifica apenas aquela placa de rede.</p>
+<p>O endereço MAC é dividido em duas partes iguais, sendo que a primeira identifica o fabricante (podendo até ser substituída pelo nome do mesmo) e a segunda identifica apenas aquela placa de rede.</p>
 
 <p>As três partes de um quadro MAC, na verdade um frame:</p>
 

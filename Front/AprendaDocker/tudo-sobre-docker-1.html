@@ -15,6 +15,7 @@
                     <li><a href="contato.html">Contato!</a></li>
                     <li><a href="tudo-sobre-docker-1.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Docker Parte 1!</a></li>
                     <li><a href="tudo-sobre-docker-2.html">Tudo sobre Docker Parte 2!</a></li>
+                    <li><a href="tudo-sobre-docker-3.html">Tudo sobre Docker Parte 3!</a></li>
                 </menu>
             </header>
             
@@ -52,6 +53,8 @@ sudo usermod -aG docker $USER
 
 <p>Abra o Docker Desktop e digite na linha de comando o comando <code>docker run hello-world</code>, ele não vai encontrar o container no computador e vai baixar o container com a imagem indicada (Hello World), que poderá ser visualizado pelo Docker Desktop. O comando run cria um novo container a partir de uma imagem. Caso rode o mesmo comando pela segunda vez, ele já vai identificar a imagem já encontrada, e criará um segundo container com a mesma imagem.</p>
 
+<p>PS: Caso precise atualizar o WSL, digite no prompt de comando do Windows o comando <code>wsl --update</code> como administrador.</p>
+
 <h3>Conheça o Poder do docker run</h3>
 
 <p>Vamos primeiramente, excluir os containers criados, e depois a imagem, pelo Docker Desktop mesmo, pra começarmos do zero. Abra a linha de comando e rode novamente o comando <code>docker run hello-world</code>.</p>
@@ -62,7 +65,7 @@ sudo usermod -aG docker $USER
 
 <p>Lembrando que, caso você tente deletar uma imagem que esteja sendo utilizada por algum container, ele dará erro e não deixará excluir a imagem. Para isso devemos primeiramente excluir todas os containers que utilizam essa imagem primeiro.</p>
 
-<p>Vamos baixar a imagem do Ubuntu digitando <code>docker run ubuntu</code>, ele fará o mesmo processo anterior, mas não executará igual ao hello-world. Ele baixará uma versão simplificada do Ubuntu.</p>
+<p>Vamos baixar a imagem do Ubuntu e criar um container digitando <code>docker run ubuntu</code>, ele fará o mesmo processo anterior, mas não executará igual ao hello-world. Ele baixará uma versão simplificada do Ubuntu.</p>
 
 <p>Para usar o Docker no modo interativo, podemos digitar o comando <code>docker run -it ubuntu bash</code>, ele rodará o terminal (Bash) do Ubuntu baixado. Nesse caso, a imagem do Ubuntu estará sendo executada, e deveremos usar o comandos do Linux, e não do Windows, no caso. Ele criará um novo container com a mesma imagem também.</p>
 
@@ -95,6 +98,8 @@ exit
 <p>O comando acima, criará um arquivo de texto dentro da imagem do nosso Linux, esse arquivo não estará no nosso sistema padrão (no caso, o Windows).</p>
 
 <p>Digite o comando <code>docker run -it ubuntu bash</code>, como ele criará um novo container, não encontraremos o arquivo criado, pois ele estará num outro container criado anteriormente, que tem um nome específico (geralmente uns nomes meio doidos criados pelo próprio Docker).</p>
+
+<p>PS: Podemos baixar a imagem sem criar container com <code>docker pull ubuntu</code>, e podemos procurar por uma imagem com o comando <code>docker search ubuntu</code>, substituindo o <q>ubuntu</q> pela imagem desejada.</p>
 
 <h3>A Teoria Fundamental (Imagem vs Container)</h3>
 
@@ -160,7 +165,7 @@ exit
 
 <p>Para remover todos os container que estão parados, digite o comando <code>docker container prune</code>. Ele mostrará os containers excluídos e o espaço recuperado em disco.</p>
 
-<p>Note que, ao excluir os containers, a imagem estará intacta, para deletar a imagem pela linha de comando, primeiramente liste as imagens com o comando <code>docker images</code>, e pra remover uma imagem específica, digite o comando <code>docker rmi nomeouiddaimagem</code>.</p>
+<p>Note que, ao excluir os containers, a imagem estará intacta, para deletar a imagem pela linha de comando, primeiramente liste as imagens com o comando <code>docker images</code>, e pra remover uma imagem específica, digite o comando <code>docker rmi nomeouiddaimagem</code>. Para remover todas as imagens não utilizadas por nenhum container, use o comando <code>docker image prune</code>.</p>
 
 <p>Até agora, pra rodarmos os containers, usamos o modo interativo, no qual, ao fechar o prompt/terminal, o container <q>morre</q>. Em casos de, por exemplo, servidores web ou de banco de dados, ele deve continuar funcionando em segundo plano mesmo fechando a linha de comando.</p>
 
@@ -252,7 +257,7 @@ docker ps -a
 
 <h3>Aprenda a <q>Empacotar</q> seu Projeto/Site/App em uma Imagem Docker</h3>
 
-<p>Podemos empacotar nossos projetos em uma imagem, para isso usaremos um arquivo chamado Dockerfile, o Dockerfile é como uma <q>receita</q>, onde nós descrevemos os ingredientes e o Docker <q>cozinha</q> (faz o build) e o resultado é uma imagem pronta.</p>
+<p>Podemos empacotar nossos projetos em uma imagem, para isso usaremos um arquivo chamado <q>Dockerfile</q>, o Dockerfile é como uma <q>receita</q>, onde nós descrevemos os ingredientes e o Docker <q>cozinha</q> (faz o build) e o resultado é uma imagem pronta.</p>
 
 <p>Vamos pegar, por exemplo, um arquivo index.html só pra exemplificar um projeto nosso a ser empacotado.</p>
 

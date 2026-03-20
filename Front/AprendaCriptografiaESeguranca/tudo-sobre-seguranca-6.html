@@ -285,7 +285,7 @@ gpg --list-keys
 </code>
 </pre>
 
-<p>PS: Se quiser listar apenas as chaves públicas, use <code>--list-public-keys</code>, assim como para listar apenas as privadas, use <code>--list-secret-keys</code></p>
+<p>PS: Se quiser listar apenas as chaves públicas, use <code>--list-public-keys</code>, assim como para listar apenas as privadas, use <code>--list-secret-keys</code>. Podemos também especificar uma chave por ID ou e-mail, como <code>gpg --list-public-keys usuario@email</code>.</p>
 
 <p>Para criar um par de chaves (pública e privada), utilize esse comando:</p>
 
@@ -423,7 +423,7 @@ gpg --edit-key user@email.com
 
 <p>Digite <code>trust</code> para modificar a confiabilidade, para sair do gpg digite <code>save</code> (ou <code>quit</code>) e <code>help</code> para ajuda.</p>
 
-<p>A opção edit-key também pode ser usada pra renovar a data de expiração de uma chave, incluindo as já expiradas, usando os comandos <code>expire</code> para alterar os dados, e depois <code>save</code>.</p>
+<p>A opção edit-key também pode ser usada pra renovar a data de expiração de uma chave, incluindo as já expiradas, usando os comandos <code>expire</code> para alterar os dados, e depois <code>save</code>. Caso tenha que selecionar uma subchave específica, digite <code>key 1</code>, onde 1 é a subchave, contada a partir do zero.</p>
 
 <p>Para listar as chaves, mostrando as assinaturas de cada chave, utilize o comando:</p>
 

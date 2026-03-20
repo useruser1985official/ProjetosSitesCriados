@@ -234,6 +234,44 @@ Icon=folder
 
 <p>Algumas distros como o Ubuntu tem loja de aplicativos, onde podemos baixar diretamente vários programas, podemos procurar por exemplo, o BleachBit (limpador de sistema para Linux) e instalar sem dificuldades.</p>
 
+<p>Para instalar e usar programas no formato Flatpak no Ubuntu, você precisa fazer uma configuração inicial e depois pode instalar apps facilmente. Primeiramente, instale o Flatpak pelo terminal:</p>
+
+<pre>
+<code>
+sudo apt update
+
+sudo apt install flatpak
+</code>
+</pre>
+
+<p>Depois adicione o repositório FlatHub:</p>
+
+<pre>
+<code>
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+</code>
+</pre>
+
+<p>Reinicie, e pra instalar um programa, podemos usar algo assim:</p>
+
+<pre>
+<code>
+flatpak install flathub nomedoaplicativo
+</code>
+</pre>
+
+<p>Pra abrir um aplicativo:</p>
+
+<pre>
+<code>
+flatpak run nomedoaplicativo
+</code>
+</pre>
+
+<p>Pra atualizar todos os aplicativos Flatpak use <code>flatpak update</code>. E pra procurar um programa use <code>flatpak search nomedoaplicativo</code>.</p>
+
+<p>PS: No Ubuntu podemos instalar a integração com a loja do mesmo, de forma gráfica, digitando no terminal <code>sudo apt install gnome-software-plugin-flatpak</code>.</p>
+
 <h4>Adicionando Repositórios</h4>
 
 <p>Para adicionar um repositório, podemos fazer algo assim (esse exemplo é pro Java):</p>

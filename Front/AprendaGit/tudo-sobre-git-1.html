@@ -50,7 +50,7 @@
 
 <h3>Conceitos Básicos do Git</h3>
 
-<p>Essencialmente, Git repositório é um diretório chamado .git (oculto) dentro do seu projeto.</p>
+<p>Essencialmente, Git repositório é um diretório chamado <q>.git</q> (oculto) dentro do seu projeto.</p>
 
 <p>Este repositório rastreia todas as mudanças feitas nos arquivos do seu projeto, construindo um histórico ao longo do tempo.</p>
 
@@ -168,6 +168,10 @@ git log
 </code>
 </pre>
 
+<p>PS: Caso dê um commit com a mensagem errada, podemos corrigir a mensagem do último commit com o comando <code>git commit --amend -m "Mensagem Correta"</code>.</p>
+
+<p>Podemos salvar mudanças no stash sem commitar, com o comando <code>git stash</code>, e pra recuperar os dados salvos, use <code>git stash pop</code>.</p>
+
 <h3>Desfazendo Commit</h3>
 
 <p>Como sabemos, cada commit é um ponto no histórico do seu repositório. Há necessidade de voltar a um commit anterior ao último. Existem três formas de desfazer um commit:</p>
@@ -188,7 +192,7 @@ git log
 
 <h3>Ignorando Arquivos</h3>
 
-<p>Podemos configurar o Git para que ele não monitore determinados arquivos do repositório, isso é feito num arquivo chamado .gitignore dentro dele. Vamos, por exemplo, criar um robots.txt e colocar ele pra ser ignorado.</p>
+<p>Podemos configurar o Git para que ele não monitore determinados arquivos do repositório, isso é feito num arquivo chamado <q>.gitignore</q> dentro dele. Vamos, por exemplo, criar um robots.txt e colocar ele pra ser ignorado.</p>
 
 <p>Para isso, crie o arquivo .gitignore e adicione essas linhas:</p>
 
@@ -214,7 +218,7 @@ dist
 
 <p>Ao digitar <code>git checkout master</code> pra voltar pra branch principal, veremos que nada foi alterado (no caso, não terá arquivos Javascript). Ao dar <code>git log --oneline</code> de novo ele não terá o commit do Javascript.</p>
 
-<p>Para deletar uma branch, digite <code>git branch -d teste</code>, mas caso ela não seja fundida à branch master, ele não deixará excluir. Para forçar exclusão coloque o <q>D</q> maiúsculo, como <code>git branch -D teste</code>.</p>
+<p>Para deletar uma branch, digite <code>git branch -d teste</code>, mas caso ela não seja fundida à branch master, ele não deixará excluir. Para forçar exclusão coloque o <q>D</q> maiúsculo, como <code>git branch -D teste</code>. Para recuperar uma branch excluída, use o comando <code>git reflog</code>.</p>
 
 <p>Crie uma nova branch, por exemplo, <code>git branch mercado-pago</code>, e mais uma com <code>git branch whatsapp</code>, simulando dois funcionários trabalhando em diferentes coisas no mesmo programa. Para trabalharmos com a branch do Mercado Pago digitamos <code>git checkout mercado-pago</code>, e podemos, por exemplo, colocar um Javascript simulando o uso do mesmo, fazendo a adição e o commit. Mude para a branch do Whatsapp com <code>git checkout whatsapp</code> e veremos que nada colocado do Mercado Pago estará ali, crie também um Javascript, adicione e commite também. Volte depois pro Mercado Pago com <code>git checkout mercado-pago</code>, e pra master com <code>git checkout master</code>.</p>
 
@@ -227,6 +231,10 @@ dist
 <p>Para fundir a branch do Whatsapp, é o mesmo processo, na branch master, digite <code>git merge whatsapp</code>. Numa segunda fusão, ele poderá abrir o editor de configurações e nesse caso, basta digitar <code>:q</code>.</p>
 
 <p>Ao dar <code>git log</code> novamente, ele mostrará incorporado à branch master, os commits das outras branches que foram fundidas com ela.</p>
+
+<p>O comando <code>git rebase master</code> reaplica os commits da sua branch atual sobre a branch master, como se você tivesse começado a partir dela. Podemos fazer o mesmo com outras branches.</p>
+
+<p>Diferente do merge, o rebase reescreve o histórico aplicando seus commits <q>por cima</q> da master, enquanto o merge apenas junta as branches criando um novo commit de junção sem alterar o histórico existente.</p>
 
 <h3>Resolvendo Conflitos</h3>
 

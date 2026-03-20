@@ -15,6 +15,7 @@
                     <li><a href="contato.html">Contato!</a></li>
                     <li><a href="tudo-sobre-docker-1.html">Tudo sobre Docker Parte 1!</a></li>
                     <li><a href="tudo-sobre-docker-2.html" onclick="alert('Você já Está na Matéria desse Link!'); return false">Tudo sobre Docker Parte 2!</a></li>
+                    <li><a href="tudo-sobre-docker-3.html">Tudo sobre Docker Parte 3!</a></li>
                 </menu>
             </header>
             
@@ -157,7 +158,7 @@ select * from alunos;
 <ul>
     <li><b>Bridge:</b> É o padrão, todo container nascerá com essa rede, caso não mudarmos, como a analogia com o condomínio.</li>
     <li><b>Host:</b> Remove um pouco o isolamento, nesse caso, ele vai usar a mesma placa de rede e serviço do nosso computador.</li>
-    <li><b>None:</b> Ele isolará o container de tudo, ele não vai ter internet, acesso à rede, nada disso. É uma proteção de segurança máxima contra acesso externo</li>.
+    <li><b>None:</b> Ele isolará o container de tudo, ele não vai ter internet, acesso à rede, nada disso. É uma proteção de segurança máxima contra acesso externo.</li>
 </ul>
 
 <p>Vamos criar dois containers com o Alpine, com os comandos <code>docker run -dit --name container1 alpine</code> e <code>docker run -dit --name container2 alpine</code>. Os dois rodarão em segundo plano e podemos ver isso com o comando <code>docker ps</code>. Para visualizar as configurações de um dos containers, digite o comando <code>docker inspect container1</code>, ele mostrará um JSON com as configurações, e procurando por <q>NetworkSettings</q>, podemos ver o IP privado do container, que será específico dele (algo como <code>172.17.0.2</code>, por exemplo). Faça o mesmo com o segundo container e pegue o IP dele (que deverá ser, no caso, <code>172.17.0.3</code>, portanto estarão na mesma rede os dois containers, como se tivessem ligados a um <q>switch</q> virtual).</p>
@@ -172,9 +173,114 @@ select * from alunos;
 
 <p>No entanto, nós ainda temos um problema, como um container acessar outro sem saber o IP dele? Nesse caso nós usaremos DNS (nomes), que aprenderemos mais pra frente.</p>
 
+<h3>Conecte Container pelo Nome</h3>
+
+<p>Para não termos problemas com mudança de IP ao reinicializar o container, podemos associar os mesmos com um nome.</p>
+
+<p>Primeiramente, digite o comando <code>docker network</code> para vermos as opções para redes disponíveis no Docker. Para criar uma rede com um nome digite o comando <code>docker network create rede-teste</code>. Para listar as redes e vermos a rede criada, digite <code>docker network ls</code></p>
+
+<p>Ao digitar esse comando, nós criamos uma espécie de <q>switch</q> virtual onde nossos container a utilizarão. Vamos criar o container de forma que ele use essa rede, com o comando <code>docker run -dit --name ctrede1 --network rede-teste alpine ash</code> e crie um segundo container com <code>docker run -dit --name ctrede2 --network rede-teste alpine ash</code>.</p>
+
+<p>Vamos pingar o ctrede2 pelo ctrede1. Para isso use o comando <code>docker exec -it ctrede1 ping ctrede2</code>. Ele pingará pelo nome, ao invés do IP. Poderemos reiniciar os containers que, mesmo se o IP mudar, o nome permanecerá o mesmo, e poderemos pingar normalmente, da mesma forma caso o container 2 seja excluído e seja criado outro semelhante com o mesmo nome.</p>
+
+<p>Temos também como associar um container criado anteriormente com a rede que criamos, posteriormente. Para testar isso, crie um container sem indicar a rede, com <code>docker run -dit --name rede-intrusa alpine ash</code>.</p>
+
+<p>Podemos tentar pingar o rede-intrusa com o comando <code>docker exec -it ctrede1 ping rede-intrusa</code>, ele não encontrará o container criado. Para associarmos esse container com a rede que criamos, use o comando <code>docker network connect rede-teste rede-intrusa</code>, e depois disso tente pingar novamente com o mesmo comando anterior, agora podemos conectar com o nome do container, mesmo se o IP mudar.</p>
+
+<p>Para ver os containers que estão usando a nossa rede, digite o comando <code>docker network inspect rede-teste</code>, ele retornará um JSON enorme com todos os container conectados a ele.</p>
+
+<p>No entanto, ainda temos um problema, para subir uma aplicação, como um site ou um banco de dados, se usarmos vários containers diferentes dará muito trabalho e ficará mais propenso a erros, no entanto, poderemos facilitar, escrevendo esses comandos num arquivo de texto, conhecido como Docker Compose, que veremos mais pra frente.</p>
+
+<h3>Docker Compose</h3>
+
+<p>Para facilitar a criação de container, com volume, redes e tudo o que for necessário, podemos usar o Docker Compose. Isso é útil inclusive pra compartilhar os containers. Basicamente, o Docker Compose lê um script e faz um passo-a-passo e vai executar tudo o que precisa ser feito. Para tanto, usaremos um arquivo com o nome <q>docker-compose.yaml</q> (pode ser yml ou yaml).</p>
+
+<p>PS: Para criar um Docker Compose, temos que prestar atenção no espaçamento e na indentação.</p>
+
+<p>Vamos supor uma pasta com algum site (pode ser um simples index.html), vamos colocar ele no nosso projeto. Vamos criar na mesma pasta do projeto (não é dentro da pasta do site) um arquivo com o nome docker-compose.yaml, que terá esse código:</p>
+
+<pre>
+<code>
+services:
+  meusite:
+    image: nginx:latest
+    container_name: meuexemplodesite
+    ports:
+      - "8080:80"
+    volumes:
+      - ./website:/usr/share/nginx/html/
+</code>
+</pre>
+
+<p>O service é obrigatório, e onde está o nome meusite pode ser qualquer nome, e dentro dele definimos a imagem da qual criaremos nosso container, o nome do container e o mapeamento das portas que ele utilizará, sendo a primeira do host (nosso PC) e a segunda do container. Definimos o volume a ligação da pasta do nosso computador à pasta do container.</p>
+
+<p>Para vermos as opções dos comandos do Docker Compose, basta usar o comando <code>docker compose</code>, e pra criar o container com tudo planejado, vá na mesma pasta do arquivo yaml e digite <code>docker compose up</code>. Depois disso, no nosso PC, acesse o link localhost, com <code>http://localhost:8080</code>.</p>
+
+<p>Para criar um container com o modo detach, use o comando <code>docker compose up -d</code>. Ele não dará erro, pois atualizará e iniciará o container criado.</p>
+
+<p>Podemos também usar o Compose pra remover tudo, com o comando <code>docker compose down</code>, sem ter que parar coisa com coisa até remover tudo. O down não remove imagens nem volumes, apenas os containers.</p>
+
+<p>No caso de nós querermos alterar algo no nosso container, como ao adicionar mais serviços, podemos editar no arquivo Docker Compose da mesma forma. Deixe o Docker Compose assim:</p>
+
+<pre>
+<code>
+services:
+  meusite:
+    image: nginx:latest
+    container_name: meuexemplodesite
+    ports:
+      - "8080:80"
+    volumes:
+      - ./website:/usr/share/nginx/html/
+
+  meubanco:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: nomedobanco
+    volumes:
+      - dados-mysql:/var/lib/mysql/
+
+volumes:
+  dados-mysql:
+</code>
+</pre>
+
+<p>Onde está meubanco pode ser qualquer nome também, seguindo a mesma regra do meusite. Mas ainda não execute o Docker Compose, pois podemos exigir a dependência de algo que deverá estar no container (no caso, nosso banco de dados), assim:</p>
+
+<pre>
+<code>
+services:
+  meusite:
+    image: nginx:latest
+    container_name: meuexemplodesite
+    ports:
+      - "8080:80"
+    volumes:
+      - ./website:/usr/share/nginx/html/
+    depends_on:
+      - meubanco
+
+  meubanco:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: nomedobanco
+    volumes:
+      - dados-mysql:/var/lib/mysql/
+
+volumes:
+  dados-mysql:
+</code>
+</pre>
+
+<p>Agora sim digite o comando <code>docker compose up</code>. Podemos rodar também no modo detach, com <code>docker compose up -d</code>, sem precisar parar e reconstruir nada. Depois podemos limpar depois com <code>docker compose down</code>.</p>
+
+<p>PS: O Docker Compose, de certa forma, também é tipo uma documentação do nosso container.</p>
+
 <ul>
     <li><a href="tudo-sobre-docker-1.html">Parte Anterior da Matéria!</a></li>
-    <!--<li><a href="tudo-sobre-docker-3.html">Continuação da Matéria!</a></li>-->
+    <li><a href="tudo-sobre-docker-3.html">Continuação da Matéria!</a></li>
 </ul>
         </div>
     </body>

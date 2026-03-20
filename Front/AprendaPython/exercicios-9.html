@@ -227,22 +227,21 @@ class Gamer:
     def __init__(self, nome, nick):
         self.nome = nome
         self.nick = nick
-        self.jogos = list()
+        self.favoritos = list()
 
-    def addFavoritos(self, jogo):
-        self.jogos.append(jogo)
-        self.jogos.sort()
+    def addFavoritos(self, game):
+        self.favoritos.append(game)
+        self.favoritos = sorted(self.favoritos, key = str.lower)
 
     def ficha(self):
-        jogosFavoritos = ""
+        conteudo = f"Nome real: [black on blue] {self.nome} [/]"
+        conteudo += f"\nJogos favoritos:"
 
-        for j in self.jogos:
-            jogosFavoritos += "\n:video_game: "
-            jogosFavoritos += j
+        for n, g in enumerate(self.favoritos):
+            conteudo += f"\n:video_game: [blue]{g}[/]"
 
-        caixa = Panel(f"Nome real: [black on blue]{self.nome}[/]\nJogos favoritos: [blue]{jogosFavoritos}[/]", title = f"Jogador &lt;{self.nick}&gt;", width = 45)
-
-        print(caixa)
+        painel = Panel(conteudo, title = f"[yellow]Jogador &lt;{self.nick}&gt;[/]", width = 40)
+        print(painel)
 </code>
 </pre>
 
@@ -256,12 +255,14 @@ j1.addFavoritos("Mario Bros.")
 j1.addFavoritos("Sonic")
 j1.addFavoritos("God of War")
 j1.addFavoritos("Fortnite")
+
 j1.ficha()
 
 j2 = Gamer("Olívia Souza", "peach_raivosa")
 
-j2.addFavoritos("Mario Bros")
+j2.addFavoritos("Mario Bros.")
 j2.addFavoritos("Call of Duty")
+
 j2.ficha()
 </code>
 </pre>
