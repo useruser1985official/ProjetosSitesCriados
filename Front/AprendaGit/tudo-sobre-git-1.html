@@ -198,13 +198,14 @@ git log
 
 <pre>
 <code>
+.env
 robots.txt
 *.gif
 dist
 </code>
 </pre>
 
-<p>No caso, o primeiro é um arquivo robots.txt, o segundo pra todos os arquivos GIF no diretório, e o dist no caso seria outro diretório dentro do repositório.</p>
+<p>No caso, o primeiro é um arquivo robots.txt, o segundo pra todos os arquivos GIF no diretório, e o dist no caso seria outro diretório dentro do repositório. Os arquivos e pastas descritos nele também não irão pra repositórios remotos.</p>
 
 <h3>Criando Branches</h3>
 
@@ -235,6 +236,8 @@ dist
 <p>O comando <code>git rebase master</code> reaplica os commits da sua branch atual sobre a branch master, como se você tivesse começado a partir dela. Podemos fazer o mesmo com outras branches.</p>
 
 <p>Diferente do merge, o rebase reescreve o histórico aplicando seus commits <q>por cima</q> da master, enquanto o merge apenas junta as branches criando um novo commit de junção sem alterar o histórico existente.</p>
+
+<p>Podemos também copiar um commit específico de uma branch para outra sem precisar fazer merge ou rebase (ou seja, trazer correções sem afetar código inacabado). Para isso, basta usar, na branch de destino, o comando <code>git cherry-pick 0645fdc</code>.</p>
 
 <h3>Resolvendo Conflitos</h3>
 

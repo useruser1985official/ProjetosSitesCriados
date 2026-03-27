@@ -36,24 +36,31 @@
 
 <p>Um switch é um equipamento de rede que permite interconectar dispositivos em uma rede de computadores, usando comutação de pacotes para receber, processar e encaminhar quadros ao dispositivo de destino.</p>
 
+<p>O switch permite a conexão de dispositivos por meio de suas portas. É possível encontrar switches com a partir de 4 portas até 48 (ou mais em alguns modelos especiais), operando em velocidades que podem variar entre Fast Ethernet (100 Mbps) e 10 Gbps (ou mesmo maior, em modelos muito especializados). É possível também associar alguns modelos de switches para permitir a conexão de mais dispositivos a um mesmo segmento de rede, com maior número de portas.</p>
+
 <p>Vamos entender o que eles fazem:</p>
 
 <ul>
-    <li>Utilizam os endereços de hardware (MAC Adress) para processar e encaminhar dados na camada de enlace (nível 2 no modelo OSI).</li>
+    <li>Utilizam os endereços de hardware (MAC Address) para processar e encaminhar dados na camada de enlace (nível 2 no modelo OSI).</li>
     <li>Alguns modelos também conseguem processar dados do nivel 3 (camada de rede) ou superiores, incorporando assim algumas funcionalidades de roteamento.</li>
     <li>Um switch que pode operar em mais de uma camada é chamado de Switch Multilayer.</li>
     <li>Gerenciam o fluxo de dados na rede transmitindo uma mensagem recebida apenas para os dispositivos para os quais a mensagem foi enviada.</li>
     <li>O segmento de rede formado pelos dispositivos conectados à um switch é considerado um domínio de broadcast.</li>
     <li>Cada porta do switch é um domínio de colisão separado.</li>
+    <li>Há até mesmo switches de camada 4 e camada 7 disponíveis no mercado.</li>
 </ul>
 
 <p>A função principal do switch é conectar os dispositivos que estão dentro de uma rede, não confunda com a funcionalidade do roteador (que conecta redes distintas entre si).</p>
 
 <p>Numa rede, nós ligamos o gateway padrão da rede (como um dispositivo wireless ou o modem integrado da operadora, que costumam ter só 4 portas para conexão) ao switch para que possamos conectar inúmeros dispositivos na nossa rede. Podemos inclusive configurar, por exemplo, um servidor DHCP.</p>
 
+<p>Os switches gerenciam o fluxo de dados através de uma rede transmitindo uma mensagem recebida apenas para um ou mais dispositivos para os quais a mensagem foi enviada. Cada dispositivo de rede conectado a um switch pode ser identificado usando um número de endereço MAC (endereço físico), permitindo assim que o switch controle o fluxo de tráfego. Assim, é possível obter o máximo de eficiência e segurança na rede.</p>
+
+<p>Um switch ainda pode transmitir pacotes para toda a rede, quando uma mensagem é enviada em broadcast, por exemplo. Por conta disso, o segmento de rede formado pelos dispositivos conectados a um switch é considerado ainda um Domínio de Broadcast. Porém, um Domínio de Colisão é criado em cada porta do switch, o que elimina os problemas de colisão de dados que ocorriam ao se usar hubs.</p>
+
 <p>O switch é um equipamento concentrador, que encaminha os pacotes para o dispositivo ou grupo de dispositivos de destino, em vez de simplesmente encaminhar os pacotes para todos os nós da rede, como ocorria com os hubs. Aprende os endereços físicos dos nós e os associa às suas portas para uso posterior. Encaminha os quadros para seus destinos usando técnicas como Store and Forward, Cut-through, Fragment Free e Adaptive Switching.</p>
 
-<p>O switch cria uma tabela na sua memória denominada SAT (Source Address Table) com os endereços MAC das estações, que estão associados à cada porta. Quando um dispositivo transmite um quadro, o endereço de destino é pesquisado na SAT. Se encontrado o quadro será transmitido diretamente para a porta de destino. Se o endereço não for encontrado na SAT, o switch envia um broadcast perguntado em todas as portas sobre o endereço, e o adiciona a essa tabela.</p>
+<p>O switch cria uma tabela na sua memória denominada SAT (Source Address Table) com os endereços MAC das estações, que estão associados à cada porta. Quando um dispositivo transmite um quadro, o endereço de destino é pesquisado na SAT. Se encontrado o quadro será transmitido diretamente para a porta de destino. Se o endereço não for encontrado na SAT, o switch envia um broadcast perguntando em todas as portas sobre o endereço, e o adiciona a essa tabela.</p>
 
 <p>Esses são os métodos de encaminhamento:</p>
 

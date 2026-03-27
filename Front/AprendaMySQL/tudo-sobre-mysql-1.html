@@ -27,7 +27,7 @@
 
 <h3>Criando o primeiro Banco de Dados</h3>
 
-<p>O banco de dados é como um navio com containers, que guardam coisas com características semelhantes (como nomes, senhas, e-mails, etc.). Banco de dados são conjuntos de tabelas, tabelas são conjuntos de registros e registros contém campos.</p>
+<p>O banco de dados é como um navio com containers, que guardam coisas com características semelhantes (como nomes, senhas, e-mails, etc.). Bancos de dados são conjuntos de tabelas, tabelas são conjuntos de registros e registros contém campos.</p>
 
 <p>PS: Os registros também podem ser chamados de linhas ou tuplas.</p>
 
@@ -83,7 +83,7 @@ describe pessoas;
 
 <img src="imagens/tipos-primitivos.jpg" alt="Tipos Primitivos"/>
 
-<p>PS: Os valores booleanos só podem ser representados pelos valores <code>true</code> e <code>false</code>, mas o MySQL os interpreta como inteiros (tinyint(1)), onde o verdadeiro (true) é 1 e o falso (false) é 0. Eles podem ser tipados como <code>boolean</code> ou <code>bool</code>.</p>
+<p>PS: Os valores booleanos só podem ser representados pelos valores <code>true</code> e <code>false</code>, mas o MySQL os interpreta como inteiros (<code>tinyint(1)</code>), onde o verdadeiro (true) é 1 e o falso (false) é 0. Eles podem ser tipados como <code>boolean</code> ou <code>bool</code>.</p>
 
 <h3>Melhorando a Estrutura do Banco de Dados</h3>
 
@@ -109,16 +109,14 @@ default collate utf8_general_ci;
 
 <p>Para atualizar as tabelas, devemos usar campos mais inteligentes, tipos primitivos melhor dimensionados e muito mais. Para economizar espaços em bytes no seu servidor. Veja alguns tipos primitivos que podemos usar:</p>
 
-<p>Para guardar cadeias de caracteres, prefira o <code>varchar</code>, que ocupa menos espaço caso ele receba um valor menor que o predefinido.</p>
+<ul>
+    <li>Para guardar cadeias de caracteres, prefira o <code>varchar</code>, que ocupa menos espaço caso ele receba um valor menor que o predefinido.</li>
+    <li>Para números reais é preferível o <code>decimal</code>.</li>
+    <li>A idade é melhor cadastrar a data de nascimento e calcular usando o <code>date</code> para não ter que atualizar todo ano.</li>
+    <li>Para sexo usaremos uma coleção com valores pré-definidos, com o <code>enum</code>, sempre colocando <code>not null</code>.</li>
+    <li>Para o peso e altura, usaremos o <code>decimal</code>, e os números entre parênteres. O primeiro é a quantidade de caracteres, e o segundo são as casas decimais (o primeiro sempre é maior).</li>
+</ul>
 
-<p>Para números reais é preferível o <code>decimal</code>.</p>
-
-<p>A idade é melhor cadastrar a data de nascimento e calcular usando o <code>date</code> para não ter que atualizar todo ano.</p>
-
-<p>Para sexo usaremos uma coleção com valores pré-definidos, com o <code>enum</code>, sempre colocando <code>not null</code>.</p>
-
-<p>Para o peso e altura, usareamos o <code>decimal</code>, e os números entre parênteres. O primeiro é a quantidade de caracteres, e o segundo são as casas decimais (o primeiro sempre é maior).</p>
-    
 <p>Veja um exemplo:</p>
 
 <pre>

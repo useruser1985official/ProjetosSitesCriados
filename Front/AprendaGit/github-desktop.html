@@ -113,7 +113,18 @@
 
 <p>Para pegar um projeto antigo e versionar ele com Git, abra o GitHub Desktop, clique em File e em New Repository, da mesma forma, coloque o nome do repositório como antes. Caso você tenha uma organização, você pode escolher ela (isso é só pra quem tem empresas cadastradas no GitHub). Daí é só arrastar os códigos para a pasta do repositório e o GitHub Desktop já vai identificar as mudanças.</p>
 
-<p>PS: Caso tenha algum arquivos inútil na pasta, podemos excluir ela no GitHub Desktop, no caso ele vai criar um arquivo oculto com o nome .gitignore onde ele vai ignorar os arquivos especificados. Daí, é só fazer o Commit e o Push pro repositório remoto.</p>
+<p>PS: Caso tenha algum arquivos inútil na pasta, podemos excluir ela no GitHub Desktop, no caso ele vai criar um arquivo oculto com o nome .gitignore onde ele vai ignorar os arquivos especificados, não subindo eles pro servidor do GitHub. Daí, é só fazer o Commit e o Push pro repositório remoto.</p>
+
+<p>Um arquivo .gitignore pode ter a sintaxe assim, descrevendo os arquivos e pastas que devem ser ignorados:</p>
+
+<pre>
+<code>
+.env
+robots.txt
+*.gif
+dist
+</code>
+</pre>
 
 <p>Daí, num outro computador, podemos clonar o repositório como já aprendemos, clicando pra abrir no GitHub Desktop e ele abrirá o programa para clonar. Só lembrando que quando você clona um repositório, ele só é clonado pro repositório local, quando você copia outro projeto pro seu perfil, seria o fork.</p>
 

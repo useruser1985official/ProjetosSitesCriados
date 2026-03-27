@@ -32,28 +32,28 @@
             
 <h2>Tudo sobre Redes Parte 1</h2>
 
-<h3>Componentes de uma rede, LAN, WAN</h3>
+<h3>Componentes de uma Rede, LAN, WAN</h3>
 
 <p>Uma rede é um conjunto de dispositivos ligados que podem trocar informações entre si (não apenas computadores, mas também impressoras, servidores, câmeras de vigilância, smartphones e etc.), além de compartilhar recursos e aplicativos.</p>
 
 <p>Um exemplo é um compartilhamento de impressora, que pode ser acessada diretamente pelos computadores, ou pode ter um computador na rede que vai ser o servidor de impressão. Isso vale pra outras coisas como banco de dados e aplicativos.</p>
 
-<p>Essas são as partes que compões uma rede:</p>
+<p>Essas são as partes que compõem uma rede:</p>
 
 <ul id="lista">
     <li><b>Computadores Cliente:</b> Também chamados de estações de trabalho. É o computador do usuário final.</li>
     <li><b>Servidores:</b> São os computadores que compartilham algum recurso como discos para armazenamentos de dados ou impressoras. Em um servidor normalmente roda um sistema operacional de rede como o Windows Server 2008 ou uma versão de Linux como o Red Hat ou o Ubuntu Enterprise.</li>
-    <li><b>Interfaces de rede:</b> Hoje computadores como desktop e notebook vem de fábrica com uma "placa de rede" incorporada.</li>
+    <li><b>Interfaces de Rede:</b> Hoje computadores como desktop e notebook vem de fábrica com uma "placa de rede" incorporada.</li>
     <li><b>Cabos:</b> A maior parte das redes hoje utilizam um tipo de cabo de rede do tipo UTP, outras opções como cabo coaxial e fibra óptica são encontradas de acordo com a necessidade da rede.</li>
     <li><b>Switches e Roteadores:</b> Switches ligam dispositivos entre si e roteadores conectam redes diferentes. Falaremos sobre eles mais pra frente.</li>
-    <li><b>Redes sem fio:</b> Antenas, placas de rede para redes sem fio, pontos de acesso e outros dispositivos são encontrados facilmente hoje em dia.</li>
+    <li><b>Redes sem Fio:</b> Antenas, placas de rede para redes sem fio, pontos de acesso e outros dispositivos são encontrados facilmente hoje em dia.</li>
 </ul>
 
 <p>PS: Nesses servidores ficam também programas como o Apache Web Server e o Microsoft Exchange.</p>
 
 <p>Quando usamos o conceito de LAN e WAN, não exatamente falamos do tamanho da rede.</p>
 
-<p>Quando falamos de LAN, estamos falando de uma rede de área local, mas não necessariamente uma rede pequena, mas sim uma rede interna (como por exemplo, os computadores de estão numa mesma rede, o roteador e o modem).</p>
+<p>Quando falamos de LAN, estamos falando de uma rede de área local, mas não necessariamente uma rede pequena, mas sim uma rede interna (como por exemplo, os computadores que estão numa mesma rede, o roteador e o modem).</p>
 
 <p>Já a WAN, é uma rede interligada de lugares distantes (por exemplo, uma rede LAN em São Paulo ligada numa rede em Recife), o que permite controlar computadores mesmo por essa distância (como um acesso remoto). A WAN também incluí o acesso a internet à qualquer site (como o seu computador e o servidor do Google, por exemplo).</p>
 
@@ -133,7 +133,7 @@
 
 <table>
     <tr>
-        <th>Camadas</th>
+        <th>Camada</th>
         <th>Protocolos</th>
     </tr>
     <tr>
@@ -162,9 +162,9 @@
 
 <p>Para vermos os IPs abertos no computador, suas respectivas portas e o tipo de protocolo usado (TCP ou UDP), usamos o comando <code>netstat /a /n /b</code> (no Linux use como parâmetro <code>-ane</code>).</p>
 
-<h3>Definições do Protocolo TCP/IP</h3>
+<h3>Definições do TCP/IP</h3>
 
-<p>Para isso, podemos definir a função de cada uma das camadas do protocolo TCP/IP como:</p>
+<p>Para isso, podemos definir a função de cada uma das camadas do TCP/IP como:</p>
 
 <ul>
     <li><b>Aplicação:</b> Nesta camada define-se como os programas vão se comunicar com as diversas aplicações disponíveis nas redes. Ainda é de responsabilidade desta camada efetuar o gerenciamento da interface pela qual o usuário vai interagir com a aplicação.</li>
@@ -173,7 +173,7 @@
     <li><b>Física (Acesso à Rede):</b> Desempenha a mesma função das camadas de enlace e física do modelo de referência OSI. Efetua o monitoramento do tráfego e analisa o endereçamento de hardware antes da transmissão pelo meio físico.</li>
 </ul>
 
-<p>Podemos destacar algumas semelhanças entre o modelo OSI e o protocolo TCP/IP:</p>
+<p>Podemos destacar algumas semelhanças entre o modelo OSI e o TCP/IP:</p>
 
 <ul>
     <li>Divisão em camadas.</li>
@@ -545,7 +545,7 @@
 
 <p>O cabeçalho tem as informações sobre o frame (entre eles, o MAC de origem e o MAC de destino. Os dados informa o que está sendo enviado, e o trailer tem informações de verificação (se ele foi alterado ou não durante o envio).</p>
 
-<p>PS: Você pode ver o endereço MAC digitando <code>ipconfig /all</code> ou <code>getmac /v /fo list</code> no Prompt do Windows, procure por endereço físico. No Linux use <code>ifconfig -a</code>.</p>
+<p>PS: Você pode ver o endereço MAC digitando <code>ipconfig /all</code> ou <code>getmac /v /fo list</code> no Prompt do Windows, procure por endereço físico. No Linux use <code>ip addr show</code>.</p>
 
 <p>Veja a imagem de uma placa de rede:</p>
 

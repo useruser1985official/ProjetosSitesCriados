@@ -278,28 +278,36 @@ j2.ficha()
 from rich import print
 
 class Caneta:
-    def __init__(self, cor):
-        self.cor = cor.lower()
+    def __init__(self, cor = "Azul"):
+        escolha = ""
+
+        match cor.lower().strip():
+            case "azul":
+                escolha = "[blue]"
+            case "vermelho" | "vermelha":
+                escolha = "[red]"
+            case "verde":
+                escolha = "[green]"
+            case _:
+                escolha = "[white]"
+
+        self.cor = escolha
+        self.tampada = True
+
+    def escrever(self, msg):
+        if self.tampada:
+            print(f":prohibited: A {self.cor}caneta[/] está tampada!")
+        else:
+            print(f"{self.cor}{msg}[/]", end = " ")
+
+    def quebrarLinha(self, qtd = 1):
+        print("\n" * qtd, end = "")
+
+    def tampar(self):
         self.tampada = True
 
     def destampar(self):
-        if self.tampada:
-            self.tampada = False
-
-    def escrever(self, texto):
-        cores = {"vermelha": "red", "verde": "green", "azul": "blue"}
-
-        if not self.tampada:
-            if self.cor in cores:
-                print(f"[{cores[self.cor]}]{texto}[/]", end = "")
-            else:
-                print(texto, end = "")
-        else:
-            print(":prohibited: A [blue]caneta[/] está tampada!")
-
-    def quebrarLinha(self, quant):
-        for q in range(0, quant):
-            print("")
+        self.tampada = False
 </code>
 </pre>
 
@@ -315,10 +323,14 @@ c1.destampar()
 c2.destampar()
 c3.destampar()
 
-c1.escrever("Olá, tudo bem? ")
-c1.quebrarLinha(2)
-c2.escrever("Olá, Gafanhoto! ")
-c3.escrever("Vamos exercitar!")
+c1.escrever("Olá, Mundo!")
+c2.escrever("Funciona!")
+c2.quebrarLinha(2)
+c3.escrever("Deu certo!")
+c3.quebrarLinha(5)
+
+# c1.tampar()
+c1.escrever("Será que rola?")
 </code>
 </pre>
 

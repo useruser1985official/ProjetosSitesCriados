@@ -206,7 +206,7 @@ services:
     image: nginx:latest
     container_name: meuexemplodesite
     ports:
-      - "8080:80"
+      - "8080:80" # Isso são arrays, tudo que tiver após a cerquilha é comentário
     volumes:
       - ./website:/usr/share/nginx/html/
 </code>
@@ -277,6 +277,139 @@ volumes:
 <p>Agora sim digite o comando <code>docker compose up</code>. Podemos rodar também no modo detach, com <code>docker compose up -d</code>, sem precisar parar e reconstruir nada. Depois podemos limpar depois com <code>docker compose down</code>.</p>
 
 <p>PS: O Docker Compose, de certa forma, também é tipo uma documentação do nosso container.</p>
+
+<h3>Comunicação entre Containers na Prática</h3>
+
+<p>Para administrar nosso banco de dados MySQL, podemos usar o Adminer, que é semelhante ao PHPMyAdmin, mas bem mais leve. Mas precisaremos configurar ele pra isso. Não poderemos colocar no IP localhost ou 127.0.0.1, nem o IP do container. A configuração vai ser no nosso Docker Compose. Deixe o Docker Compose assim:</p>
+
+<pre>
+<code>
+services:
+  # Vamos deixar só o banco:
+  meubanco:
+    image: mysql:5.7
+    container_name: mysql-curso
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: nomedobanco
+    volumes:
+      - dados-mysql:/var/lib/mysql/
+
+  minhabase:
+    image: adminer
+    container_name: minhabase
+    ports:
+      - "8090:8080"
+    depends_on:
+      - meubanco
+
+volumes:
+  dados-mysql:
+</code>
+</pre>
+
+<p>Para subir o serviço no modo detach, digite <code>docker compose up -d</code>. Ele já vai criar a rede e o volume automaticamente, além dos dois containers. Tudo isso foi descrito no Docker Compose. Ao rodar o mesmo comando novamente, ele vai rodar os container criados, sem precisar recriar tudo de novo do zero.</p>
+
+<p>Para configurar o Adminer, podemos entrar no link <code>http://localhost:8090</code> e lá podemos configurar nosso banco com o sitema de banco, servidor, usuário, senha e banco de dados, tudo isso foi configurado no nosso container. No caso fica assim:</p>
+
+<pre>
+<code>
+Sistema: MySQL/MariaDB.
+Servidor: mysql-curso.
+Usuário: root.
+Senha: 123.
+Base de Dados: (Deixe vazio).
+</code>
+</pre>
+
+<p>PS: Espere ele carregar o servidor completamente antes de tentar logar.</p>
+
+<p>Podemos listar as redes criadas digitando <code>docker network ls</code>, e os volumes com <code>docker volume ls</code>.</p>
+
+<h3>O Guia Definitivo de Variáveis de Ambiente</h3>
+
+<p>No nosso exemplo anterior, o Docker Compose tinha a senha do banco de dados de forma literal, mas podemos usar variáveis de ambiente para <q>mascarar</q> dados sensíveis.</p>
+
+<p>O arquivo deverá se chamar <q>.env</q>, e deverá estar na mesma pasta do Docker Compose, e ser escrito dessa forma (tudo com <q>#</q> é comentário):</p>
+
+<pre>
+<code>
+# Configurações do MySQL
+# As variáveis podem ter qualquer nome:
+
+DB_SENHA=123
+DB_USER=root
+DB_NOME=nomedobanco
+
+# Configuração do Adminer:
+
+PORTA_ADMINER=8090
+</code>
+</pre>
+
+<p>E aí, pra usar as variáveis, basta colocar elas entre <code>${}</code>, dessa forma, no Docker Compose:</p>
+
+<pre>
+<code>
+services:
+  # Vamos deixar só o banco:
+  meubanco:
+    image: mysql:5.7
+    container_name: mysql-curso
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_SENHA}
+      MYSQL_DATABASE: ${DB_NOME}
+    volumes:
+      - dados-mysql:/var/lib/mysql/
+
+  minhabase:
+    image: adminer
+    container_name: minhabase
+    ports:
+      - "${PORTA_ADMINER}:8080"
+    depends_on:
+      - meubanco
+
+volumes:
+  dados-mysql:
+</code>
+</pre>
+
+<p>Agora, exclua os containers anteriores manualmente, e as imagens deles também:</p>
+
+<pre>
+<code>
+docker rm minhabase
+
+docker rm mysql-curso
+
+docker rmi adminer
+
+docker rmi mysql:5.7
+</code>
+</pre>
+
+<p>E aí você digita <code>docker compose config</code> para verificar a configuração dos valores que estão nas variáveis. Depois é só rodar o Docker Compose com <code>docker compose up -d</code>. Ele vai baixar as imagens novamente, criar os containers, redes e tudo mais que ele precisar.</p>
+
+<p>Aí é só entrar no <code>http://localhost:8090</code> novamente, e digitar os mesmos dados anteriormente no Adminer.</p>
+
+<p>PS: O arquivo .env não deve ser compartilhado entre outras pessoas, e nem deve subir para repositórios como o GitHub. Nesse caso podemos colocar um arquivo pra explicar as instruções, que pode ser um arquivo de texto assim:</p>
+
+<pre>
+<code>
+# Salve o arquivo como .env e coloque o nome de usuário e senha:
+
+# Configurações do MySQL
+
+DB_SENHA=COLOQUE_SUA_SENHA
+DB_USER=COLOQUE_SEU_NOME_DE_USUARIO
+DB_NOME=nomedobanco
+
+# Configuração do Adminer:
+
+PORTA_ADMINER=8090
+</code>
+</pre>
 
 <ul>
     <li><a href="tudo-sobre-docker-1.html">Parte Anterior da Matéria!</a></li>

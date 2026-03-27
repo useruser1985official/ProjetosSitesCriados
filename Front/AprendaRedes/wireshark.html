@@ -64,7 +64,7 @@
 
 <p>Podemos filtrar um determinado protocolo usando os comandos como por exemplo <code>tcp.port == 80</code> para filtrar o tráfego HTTP (podendo nesse caso ser diretamente pesquisado apenas <code>http</code> também). Outros filtros podem ser usados (inclusive com negação), para protocolos como FTP, SSH, entre outros.</p>
 
-<p>Clique com o botão direito em um os pacotes e em Follow e TCP Stream, você terá acesso ao código binário do programa. Se permitido, teremos outras opções disponíves, como UDP Stream e TLS Stream.</p>
+<p>Clique com o botão direito em um dos pacotes e em Follow e TCP Stream, você terá acesso ao código binário do programa. Se permitido, teremos outras opções disponíveis, como UDP Stream e TLS Stream.</p>
 
 <h3>Usando o Tshark via Linha de Comandos</h3>
 
@@ -87,6 +87,112 @@ tshark -r arquivo.pcapng # Lê um arquivo no terminal
 <pre>
 <code>
 tshark -r arquivo.pcapng "http"
+</code>
+</pre>
+
+<h3>Filtros Avançados para Wireshark e Tshark</h3>
+
+<p>Veja alguns exemplos de filtros que podemos usar no Wireshark e no Tshark:</p>
+
+<pre>
+<code>
+ip.addr == 192.168.0.1 # Mostra tráfego envolvendo esse IP
+
+tcp # Apenas pacotes TCP
+
+udp # Apenas pacotes UDP
+
+dns # Apenas consultas/respostas DNS
+
+# Filtros por porta:
+
+tcp.port == 80 # Tráfego HTTP
+
+tcp.port == 443 # Tráfego HTTPS
+
+udp.port == 53 # DNS
+
+# Filtros por protocolo:
+
+http # Tráfego HTTP
+
+tls # Tráfego criptografado (HTTPS)
+
+icmp # Ping (ICMP)
+
+# Filtros mais específicos:
+
+ip.src == 192.168.0.10 # Origem específica
+
+ip.dst == 8.8.8.8 # Destino específico
+
+tcp.flags.syn == 1 # Pacotes de início de conexão (SYN)
+
+http.request.method == "GET" # Apenas requisições GET, dá pra fazer com POST também
+
+# Combinar filtros:
+
+tcp.port == 80 && ip.addr == 192.168.0.5
+</code>
+</pre>
+
+<p>Temos alguns filtros mais avançados:</p>
+
+<pre>
+<code>
+# Segurança:
+
+tcp.flags.reset == 1 # Conexões sendo resetadas (possível problema ou bloqueio)
+
+tcp.analysis.retransmission # Pacotes retransmitidos (rede lenta/perda)
+
+dns.flags.response == 0 # Apenas requisições DNS (quem está consultando)
+
+ip.addr == 192.168.0.0/24 # Toda uma sub-rede
+
+# Web e aplicações:
+
+http.response.code == 404 # Erros "não encontrado"
+
+http contains "login" # Pacotes HTTP com "login" no conteúdo
+
+tls.handshake.type == 1 # Client Hello (início de conexão TLS)
+
+tls.record.version == 0x0303 # TLS 1.2
+
+# E-mail e transferência:
+
+smtp # Tráfego de e-mail (SMTP)
+
+ftp # FTP (transferência de arquivos)
+
+imap # Acesso a e-mail via IMAP
+
+# Rede local e dispositivos:
+
+arp # Resolução de IP/MAC (ARP)
+
+bootp # DHCP (atribuição de IP)
+
+eth.addr == aa:bb:cc:dd:ee:ff # Filtrar por MAC
+
+# Diagnóstico avançado:
+
+frame.len > 1000 # Pacotes grandes
+
+tcp.window_size < 100 # Possível gargalo de janela TCP
+
+icmp.type == 3 # Destino inalcançável
+
+icmp.type == 8 # Echo request (ping enviado)
+
+# Combinações úteis
+
+dns && ip.src == 192.168.1.5 # DNS vindo de um host específico
+
+tcp.port == 443 && ip.dst == 172.217.0.0/16 # HTTPS para um range específico
+
+!(arp || dns) # Excluir tráfego comum “ruído”
 </code>
 </pre>
 

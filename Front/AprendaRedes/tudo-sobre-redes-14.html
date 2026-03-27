@@ -77,7 +77,11 @@
 
 <p>Um roteador (router, em inglês) é um equipamento de rede que efetua o encaminhamento de pacotes de dados entre redes de computadores distintas. Esses pacotes de dados são encaminhados de um roteador para outro até que atinjam o dispositivo de destino, ou sejam descartados. Os roteadores efetuam a leitura dos pacotes IP, podendo analisar o conteúdo de seus cabeçalhos, e então tomar decisões baseando-se nos dados lidos.</p>
 
-<p>Os roteadores são conectados em redes distintas, efetuando a conexão entre essas redes, em contraste com um Switch, que efetua a conexão de dispositivos finais, como computadores e notebooks, dentro de uma mesma rede.</p>
+<p>Os roteadores são conectados em redes distintas, efetuando a conexão entre essas redes, em contraste com um switch, que efetua a conexão de dispositivos finais, como computadores e notebooks, dentro de uma mesma rede.</p>
+
+<p>Quando um pacote de dados chega a uma porta do roteador, conectada a uma rede, o equipamento lê a informação de endereçamento IP presente no cabeçalho do pacote para determinar seu destino. Então, usando uma tabela de roteamento (ou regras de roteamento), o roteador direciona o pacote para a próxima rede, conectada ou acessível através de uma outra porta, para que siga viagem até atingir seu destino (ou ser descartado, caso o TTL do pacote seja zerado em algum momento). Desta forma, os roteadores operam na camada de Rede do Modelo OSI (camada 3).</p>
+
+<p>Os roteadores mantém domínios de broadcast separados para cada rede que conectam, desta forma isolando-as. Assim, dados direcionados à rede local por um host qualquer permanecem nesta rede local, não sendo encaminhados para as outras redes que estejam conectadas ao roteador.</p>
 
 <p>Existem diversos tipos de roteadores, classificados de acordo com sua apĺicação e capacidade específicas. Na lista abaixo elencamos alguns dos tipos mais comuns de roteadores existentes:</p>
 
