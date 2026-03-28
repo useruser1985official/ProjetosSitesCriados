@@ -32,6 +32,101 @@
             
 <h2>Tudo sobre Redes Parte 4</h2>
 
+<h3>O que é o MTU</h3>
+
+<p>Existe um limite de tamanho de dados de uma rede que define a quantidade de bytes que pode ser transmitidos dentro de um quadro. Pro padrão Ethernet, o limite de unidade máxima de trasmissão é de 1500 bytes (existe em outros padrões também). É uma característica da camada de enlace conhecida como MTU.</p>
+
+<p>Quando um datagrama a ser enviado em uma rede for maior do que o MTU da camada de enlace, o protocolo IP realizará a fragmentação dos dados, quebrando o datagrama em pedaços menores, chamados de fragmentos, cada um com tamanho menor do que o MTU.</p>
+
+<p>Veja abaixo uns MTUs típicos:</p>
+
+<table>
+    <tr>
+    <th>Rede</th>
+    <th>MTU (em bytes)</th>
+    </tr>
+    <tr>
+    <td>Hyperchannel</td>
+    <td>65535</td>
+    </tr>
+    <tr>
+    <td>WLAN 802.11</td>
+        <td>7981</td>
+    </tr>
+    <tr>
+    <td>Quadros Jumbo Ethernet</td>
+    <td>1501 - 9198</td>
+    </tr>
+    <tr>
+    <td>Tonken Ring 802.5</td>
+    <td>4464</td>
+    </tr>
+    <tr>
+    <td>FDDI</td>
+    <td>4352</td>
+    </tr>
+    <tr>
+    <td>Ethernet</td>
+    <td>1500</td>
+    </tr>
+    <tr>
+    <td>IEEE 802.3/802.2</td>
+    <td>1492</td>
+    </tr>
+    <tr>
+    <td>PPPoE</td>
+    <td>1492</td>
+    </tr>
+    <tr>
+    <td>X.25</td>
+    <td>576</td>
+    </tr>
+</table>
+
+<p>Para descobrir o MTU da interface, abrimos o CMD do Windows e digitamos <code>netsh interface ipv4 show subinterfaces</code>.</p>
+
+<p>O Path MTU (MTU do Caminho) é sobre o maior valor de MTU que pode tragegar em uma rede sem que os pacotes sofram fragmentação (esse valor pode mudar).</p>
+
+<p>Para a máquina saber qual a MTU correta à ser utilizada, tem o Path MTU Discovery (Descoberta do MTU de Caminho), para determinar o caminho MTU ideal entre dois hosts IP para evitar a fragmentação dos datagramas IP. Uma das formas é ligar o bit DF (Don't Fragment) do cabeçalho IP dos datagramas transmitidos. Ou a mensagem ICMP (destino inalcançável, tamanho muito grande).</p>
+
+<p>Para testar o MTU, usamos o Ping (no CMD) com as opções <code>/l tamanho-pacote</code>, que permite ajustar o tamanho (payload) do pacote enviado pelo ping para o valor "tamanho-pacote". E o <code>/f</code>, que habilita o bit DF no pacote transmitido (impedindo a fragmentação do mesmo).</p>
+
+<p>Vamos exemplificar, executando no prompt o comando <code>netsh interface ipv4 show subinterfaces</code>. Se for o caso, coloque ipv6 no lugar.</p>
+
+<p>Agora dê um ping num site qualquer (por exemplo <code>ping bosontreinamentos.com.br</code>)</p>
+
+<p>Agora faça o mesmo, com a opção <code>/l 1500</code>, no caso, <code>ping /l 1500 bosontreinamentos.com.br</code> (ou outro número, esse número é a quantidade de bytes enviados, que pode ser até 65500, o padrão é 32). Se estiver em Linux, use o parâmetro <code>-s</code>.</p>
+
+<p>O MTU típico é de 1500, como já vimos, mas a transmissão pode ser feita com outro número maior, como 8500, nesse caso os pacotes serão fragmentados.</p>
+
+<p>Ao colocar o <code>/f</code>, antes do site, ele não fragmentará os pacotes, o que pode dar erro em tamanhos maiores. Como por exemplo, <code>ping /l 1500 /f bosontreinamentos.com.br</code></p>
+
+<h3>O Que é Um Gateway</h3>
+
+<p>Pode ser traduzido como "portão de entrada". O gateway pode ser um PC com duas (ou mais) placas de rede, ou um dispositivo dedicado, utilizado para unir duas redes (como por exemplo, um roteador, ou geralmente um dispositivo que une as funções de modem e roteador podendo ter também um switch integrado e um access point). Existem vários usos possíveis, desde interligar duas redes que utilizam protocolos diferentes, até compartilhar a conexão com a internet entre várias estações.</p>
+
+<p>O endereço do gateway deve ser informado nas propriedades de rede, mas numa rede onde as estações estão configuradas para obter seus endereços automaticamente é possível configurar o servidor DHCP para enviar o endereço do gateway automaticamente. A estação enviará ao gateway qualquer requisição de endereço que não faça parte da rede local.</p>
+
+<p>A princípio, isso permitiria que apenas um micro acessasse a web, mas é possível compartilhar a conexão entre vários micros via NAT, opção disponível tanto no Windows quanto no Linux. Quando você compartilha a conexão entre vários micros, apenas o servidor que está compartilhando a conexão possui um endereço IP válido, só ele "existe" na internet. Todos os demais acessam através dele.</p>
+
+<p>O default gateway ou gateway padrão é justamente o micro da rede que tem a conexão, é ele que os outros consultarão quando precisarem acessar qualquer coisa na internet. Por exemplo, se você montar uma rede doméstica com 4 PCs, usando os endereços IP <code>192.168.0.1</code>, <code>192.168.0.2</code>, <code>192.168.0.3</code> e <code>192.168.0.4</code>, e o PC <code>192.168.0.1</code> estiver compartilhando o acesso à internet, as outras três estações deverão ser configuradas para utilizar o endereço <code>192.168.0.1</code> como gateway padrão.</p>
+
+<p>O gateway pode ter funções específicas nas redes, dependendo do planejamento do administrador de redes. Entre elas, podemos destacar:</p>
+
+<ul>
+    <li><b>Direcionamento:</b> No qual todas as mensagens são enviadas para o nó da rede, podendo ser roteador ou switch.</li>
+    <li><b>Proxy:</b> Uma lista de sites cujo acesso é ou não permitido por meio dos dispositivos da rede interna.</li>
+    <li><b>Firewall:</b> Um dispositivo de segurança que verifica o conteúdo dos pacotes e efetua seu bloqueio, quando nocivo aos serviços disponíveis na rede.</li>
+</ul>
+
+<p>Existe também um equipamento de redes chamado gateway, que une num mesmo equipamento coisas como modem/ONT, roteador, switch (geralmente de 4 portas) e ponto de acesso wi-fi. Veja a foto de um gateway:</p>
+
+<img src="imagens/gateway.jpg" alt="Gateway"/>
+
+<p>Alguns gateways podem operar no modo bridge (ponte). Nesse caso, ele só funciona como modem/ONT e converte o sinal, quem roteia é outro equipamento.</p>
+
+<p>O modo bridge faz o gateway da operadora virar basicamente uma ponte: Ele para de rotear, fazer NAT, DHCP e wi-fi, e passa a entregar o IP público diretamente para outro equipamento, normalmente um roteador próprio. Assim, o gateway deixa de atuar como roteador e apenas encaminha a conexão para que o outro equipamento gerencie a rede, agindo como um modem/ONT comum. Isso é útil pra evitar duplo NAT (técnica que converte IPs, no caso, IP público pra IP privado).</p>
+
 <h3>Introdução ao Roteamento de Redes</h3>
 
 <p>A internet é uma coleção de redes interconectadas, e os pontos de ligação são os roteadores. Estes, por sua vez, estão organizados de forma hierárquica, onde alguns roteadores são utilizados apenas para trocar dados entre grupos de redes controlados pela mesma autoridade administrativa, enquanto outros roteadores fazem também a comunicação entre as autoridades administrativas. A entidade que controla e administra um grupo de redes e roteadores chama se Sistema Autônomo [RFC 1930].</p>
