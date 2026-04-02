@@ -142,10 +142,60 @@
     <li><b>Secundário: </b>Obtém os dados da zona a partir de outro servidor de nomes autoritativo para a zona, chamado de servidor mestre, que geralmente é o servidor primário (mas nem sempre).</li>
 </ul>
 
+<h3>Resolvedor DNS</h3>
+
+<p>DNS Resolver é o serviço cliente que acessa o servidor DNS. Responsável por iniciar e seguir as consultas que levam à resolução de nomes do recurso procurado. O resolver é responsável por executar uma consulta, interpretar as respostas e retornar a informação ao programa que a requisitou. As consultas DNS podem ser não-recursivas, recursivas, iterativas ou ainda uma combinação desses tipos.</p>
+
+<p>Veja abaixo o mecanismo de resolução de endereços:</p>
+
+<img src="imagens/dns-resolucao.jpg" alt="DNS Resolução"/>
+
+<p>No caso, o resolvedor acessa um site (como o Google) pelo IP, quando digitamos o nome do site, e ele enviará ao servidor DNS Local (ou mais próximo), e se ele tiver a resposta, ele a envia para o resolvedor, senão ele consulta o servidor raiz, que "informa" que ele está no .com, o local volta e pergunta pro servidor .com, volta e ele procura o google.com e assim por diante.</p>
+
+<p>Existem três métodos de consulta que um resolver pode utilizar para executar uma query DNS: Consulta não-recursiva, consulta recursiva e consulta iterativa. Um resolvedor pode utilizar uma combinação dos métodos de consulta se for necessário.</p>
+
+<p>Na consulta não-recursiva, o cliente resolvedor DNS consulta um servidor DNS que fornece um registro para um domínio no qual ele é autoritativo, ou então fornce um resultado parcial sem consultar outros servidores. No caso de uso do Cache DNS, a consulta não-recursiva é feita sobre o cache DNS localda máquina e fornece um resultado sem a necessidade de realizar consultas repetidas a servidores DNS remotos, reduzindo assim a carga sobre esses servidores, durante um período de temp determinado.</p>
+
+<p>Na consulta recursiva, o cliente resolvedor DNS consulta um único servidor DNS, o qual então pode consultar, como se ele fosse um cliente, outros servidores DNS em nome do cliente em si. Um exemplo clássico é o de um roteador banda larga caseiro, que age como servidor DNS (stub resolver) para as máquinas na rede local, e realiza consultas recursivas ao servidor DNS do provedor de internet. Em uma consulta recursiva o servidor DNS fornece uma resposta completa, ou informa um erro, consultando outros servidores DNS conforme necessário.</p>
+
+<p>Na consulta iterativa, o cliente resolvedor DNS consulta uma cadeia de um ou mais servidores DNS. Cada servidor encaminha o cliente ao próximo servidor na cadeia, até que um servidor consiga efetuar a resolução de nomes de forma completa. Por exemplo, uma resolução do endereço https://www.google.com.br/ poderia ocorrer com uma consulta a um servidor raiz global (root), depois consulta a um servidor .br, depois a um servidor .com, até chegar ao servidor google.com.br.</p>
+
+<p>O cache DNS é uma técnica de redução da carga nos servidores DNS por meio do armazenamento local (ou em hosts intermediários) dos resultados das consultas, conhecido como "caching". Todo resultado de uma consulta DNS é associado a um TTL (Time To Live), uma data de expiração após a qual os resultados são descartados ou atualizados. Essa temportiação é configurada pelo admin no servidor autoritativo, e pode variar de segundos a semanas. Assim, alterações nos registros DNS não se propagam imediatamente pela rede, requerendo que os caches expirem e seja atualizados após o prazo do TTL.</p>
+
+<p>Para ver o cache DNS, abra o prompt de comando e digite <code>ipconfig /displaydns</code>. Ele mostrará vários sites visitados.</p>
+
+<p>Para ver dados sobre o servidor do site, usamos o comando <code>nslookup</code> assim: <code>nslookup -q=ns www.google.com.br</code></p>
+
+<p>E também podemos verificar online dados dos servidores, com esse site: <a href="https://www.whoishostingthis.com/" target="_blank">https://www.whoishostingthis.com/</a></p>
+
+<p>PS: Os métodos acima retornam dados diferentes.</p>
+
+<p>Podemos também usar o ApateDNS para vermos os domínos DNS abertos do nosso sistema, incluindo os suspeitos, ele não precisa ser instalado: <a href="https://www.fireeye.com/content/dam/fireeye-www/services/freeware/sdl-apatedns.zip" target="_blank">https://www.fireeye.com/content/dam/fireeye-www/services/freeware/sdl-apatedns.zip</a></p>
+
+<h3>Qual é a Diferença entre Domínio e Hospedagem?</h3>
+
+<p>Grande parte dos usuários possuem bastante dúvida em diferenciar as duas questões, muitos acham que ambas são a mesma coisa, pois alguns serviços para usuários mais leigos oferecem a ligação direta entre o domínio e o servidor de hospedagem.</p>
+
+<h4>O que é Domínio?</h4>
+
+<p>Domínio é o registro de um nome, que é utilizado para conectar seu site à sua hospedagem através de uma palavra ou sequência de caracteres com a finalidade de facilitar o acesso ao seu site através de um navegador de internet.</p>
+ 
+<h4>O que é Hospedagem?</h4>
+
+<p>Diferente do domínio, que faz apenas a ligação de seu site para que ele seja acessado através de uma palavra ou sequência de caracteres, a hospedagem é um como um espaço online reservado para seu site na internet, é por meio dela que você armazena os arquivos que mantém seu site no ar.</p>
+
+<p>Existem diversos tipos de planos para diferentes tipos de questões que você precise hospedar. De acordo com seu projeto ou plano de negócio podem haver vantagens ou desvantagens em cada modelo de contratação, portanto, antes de escolher seu plano de hospedagem, mensure o quanto de servidor você irá precisar e quais compatibilidades ele precisa ter para que o seu funcionamento seja como o esperado.</p>
+
+<p>Desde que você adquirir o registro de um domínio e também um plano de hospedagem, você também pode utilizar esse domínio para poder ter um ou mais e-mails personalizados. Ou seja, se seu domínio é <code>meusite.com.br</code>, você pode ter um e-mail como: <code>contato@meusite.com.br</code>.</p>
+
+<p>Portanto, quando você contrata seu plano de hospedagem, você pode criar um ou mais e-mails, a depender do seu plano, de forma mais profissional, trazendo a própria logomarca, seu próprio domínio. Além disso, para planos de hospedagem que lhe permitem a criação de diversas contas, você pode estar criando e-mails personalizados para setores da sua empresa, ou ainda para cada funcionário, ou colegas de trabalho.</p>
+
+<h3>Detalhes das URLs</h3>
+
 <p>As partes de uma URL são essas:</p>
 
 <ul>
-    <li><b>Protocolo:</b> É o começo da URL, onde é indicado o protocolo usado, geralmente <code>http://</code> ou <code>https://</code>.</li>
+    <li><b>Protocolo:</b> É o começo da URL, onde é indicado o protocolo usado, geralmente <code>http://</code> ou <code>https://</code>, podendo ter outros protocolos no lugar.</li>
     <li><b>Subdomínio:</b> É o que vem antes do domínio, o principal é o <code>www</code>, mas temos vários outros como <code>mail</code>, <code>admin</code>, <code>blog</code> ou mesmo personalizados.</li>
     <li><b>Nome do Domínio:</b> É o nome do site, basicamente, por exemplo, <q>google</q> é o domínio de <code>https://www.google.com/</code>.</li>
     <li><b>Domínios Superiores de Topo Genérico (gTLD):</b> Tem três ou mais letras, é classificado pela utilização do site, como <code>.com</code>, <code>.net</code>, <code>.edu</code>, <code>.gov</code>, <code>.org</code>, entre outros.</li>
@@ -159,7 +209,7 @@
 <table>
     <tr>
         <th>Domínio</th>
-        <th>País / Região</th>
+        <th>País/Região</th>
     </tr>
     <tr>
         <td><code>.br</code></td>
@@ -212,7 +262,7 @@
 <table>
     <tr>
         <th>Domínio</th>
-        <th>Utilidade / Finalidade</th>
+        <th>Utilidade/Finalidade</th>
     </tr>
     <tr>
         <td><code>.com</code></td>
@@ -275,54 +325,6 @@
         <td>Sites de notícias e portais de mídia</td>
     </tr>    
 </table>
-
-<h3>Resolvedor DNS</h3>
-
-<p>DNS Resolver é o serviço cliente que acessa o servidor DNS. Responsável por iniciar e seguir as consultas que levam à resolução de nomes do recurso procurado. O resolver é responsável por executar uma consulta, interpretar as respostas e retornar a informação ao programa que a requisitou. As consultas DNS podem ser não-recursivas, recursivas, iterativas ou ainda uma combinação desses tipos.</p>
-
-<p>Veja abaixo o mecanismo de resolução de endereços:</p>
-
-<img src="imagens/dns-resolucao.jpg" alt="DNS Resolução"/>
-
-<p>No caso, o resolvedor acessa um site (como o Google) pelo IP, quando digitamos o nome do site, e ele enviará ao servidor DNS Local (ou mais próximo), e se ele tiver a resposta, ele a envia para o resolvedor, senão ele consulta o servidor raiz, que "informa" que ele está no .com, o local volta e pergunta pro servidor .com, volta e ele procura o google.com e assim por diante.</p>
-
-<p>Existem três métodos de consulta que um resolver pode utilizar para executar uma query DNS: Consulta não-recursiva, consulta recursiva e consulta iterativa. Um resolvedor pode utilizar uma combinação dos métodos de consulta se for necessário.</p>
-
-<p>Na consulta não-recursiva, o cliente resolvedor DNS consulta um servidor DNS que fornece um registro para um domínio no qual ele é autoritativo, ou então fornce um resultado parcial sem consultar outros servidores. No caso de uso do Cache DNS, a consulta não-recursiva é feita sobre o cache DNS localda máquina e fornece um resultado sem a necessidade de realizar consultas repetidas a servidores DNS remotos, reduzindo assim a carga sobre esses servidores, durante um período de temp determinado.</p>
-
-<p>Na consulta recursiva, o cliente resolvedor DNS consulta um único servidor DNS, o qual então pode consultar, como se ele fosse um cliente, outros servidores DNS em nome do cliente em si. Um exemplo clássico é o de um roteador banda larga caseiro, que age como servidor DNS (stub resolver) para as máquinas na rede local, e realiza consultas recursivas ao servidor DNS do provedor de internet. Em uma consulta recursiva o servidor DNS fornece uma resposta completa, ou informa um erro, consultando outros servidores DNS conforme necessário.</p>
-
-<p>Na consulta iterativa, o cliente resolvedor DNS consulta uma cadeia de um ou mais servidores DNS. Cada servidor encaminha o cliente ao próximo servidor na cadeia, até que um servidor consiga efetuar a resolução de nomes de forma completa. Por exemplo, uma resolução do endereço https://www.google.com.br/ poderia ocorrer com uma consulta a um servidor raiz global (root), depois consulta a um servidor .br, depois a um servidor .com, até chegar ao servidor google.com.br.</p>
-
-<p>O cache DNS é uma técnica de redução da carga nos servidores DNS por meio do armazenamento local (ou em hosts intermediários) dos resultados das consultas, conhecido como "caching". Todo resultado de uma consulta DNS é associado a um TTL (Time To Live), uma data de expiração após a qual os resultados são descartados ou atualizados. Essa temportiação é configurada pelo admin no servidor autoritativo, e pode variar de segundos a semanas. Assim, alterações nos registros DNS não se propagam imediatamente pela rede, requerendo que os caches expirem e seja atualizados após o prazo do TTL.</p>
-
-<p>Para ver o cache DNS, abra o prompt de comando e digite <code>ipconfig /displaydns</code>. Ele mostrará vários sites visitados.</p>
-
-<p>Para ver dados sobre o servidor do site, usamos o comando <code>nslookup</code> assim: <code>nslookup -q=ns www.google.com.br</code></p>
-
-<p>E também podemos verificar online dados dos servidores, com esse site: <a href="https://www.whoishostingthis.com/" target="_blank">https://www.whoishostingthis.com/</a></p>
-
-<p>PS: Os métodos acima retornam dados diferentes.</p>
-
-<p>Podemos também usar o ApateDNS para vermos os domínos DNS abertos do nosso sistema, incluindo os suspeitos, ele não precisa ser instalado: <a href="https://www.fireeye.com/content/dam/fireeye-www/services/freeware/sdl-apatedns.zip" target="_blank">https://www.fireeye.com/content/dam/fireeye-www/services/freeware/sdl-apatedns.zip</a></p>
-
-<h3>Qual é a Diferença entre Domínio e Hospedagem?</h3>
-
-<p>Grande parte dos usuários possuem bastante dúvida em diferenciar as duas questões, muitos acham que ambas são a mesma coisa, pois alguns serviços para usuários mais leigos oferecem a ligação direta entre o domínio e o servidor de hospedagem.</p>
-
-<h4>O que é Domínio?</h4>
-
-<p>Domínio é o registro de um nome, que é utilizado para conectar seu site à sua hospedagem através de uma palavra ou sequência de caracteres com a finalidade de facilitar o acesso ao seu site através de um navegador de internet.</p>
- 
-<h4>O que é Hospedagem?</h4>
-
-<p>Diferente do domínio, que faz apenas a ligação de seu site para que ele seja acessado através de uma palavra ou sequência de caracteres, a hospedagem é um como um espaço online reservado para seu site na internet, é por meio dela que você armazena os arquivos que mantém seu site no ar.</p>
-
-<p>Existem diversos tipos de planos para diferentes tipos de questões que você precise hospedar. De acordo com seu projeto ou plano de negócio podem haver vantagens ou desvantagens em cada modelo de contratação, portanto, antes de escolher seu plano de hospedagem, mensure o quanto de servidor você irá precisar e quais compatibilidades ele precisa ter para que o seu funcionamento seja como o esperado.</p>
-
-<p>Desde que você adquirir o registro de um domínio e também um plano de hospedagem, você também pode utilizar esse domínio para poder ter um ou mais e-mails personalizados. Ou seja, se seu domínio é <code>meusite.com.br</code>, você pode ter um e-mail como: <code>contato@meusite.com.br</code>.</p>
-
-<p>Portanto, quando você contrata seu plano de hospedagem, você pode criar um ou mais e-mails, a depender do seu plano, de forma mais profissional, trazendo a própria logomarca, seu próprio domínio. Além disso, para planos de hospedagem que lhe permitem a criação de diversas contas, você pode estar criando e-mails personalizados para setores da sua empresa, ou ainda para cada funcionário, ou colegas de trabalho.</p>
 
 <h3>Arquivo Hosts</h3>
 

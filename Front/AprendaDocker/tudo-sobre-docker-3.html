@@ -21,6 +21,159 @@
             
 <h2>Tudo sobre Docker Parte 3</h2>
 
+<h3>O Segredo do Cache ao Dockerizar Python e Acelerar seu Build</h3>
+
+<p>Para nós irmos pra parte prática, vamos limpar todos os containers, volumes e imagens de antes.</p>
+
+<p>Vamos supor um projeto que precisa de uma versão especifica de uma biblioteca, como um projeto Python que usa o Pandas versão 1.0, e outro projeto usa outra versão do Pandas como o 2.0, e caso instalemos as duas versões de uma biblioteca no mesmo sistema operacional, o sistema pode quebrar por causa dos conflitos das bibliotecas. No entanto, com o Docker podemos contornar esse problema, onde isolaremos em um container um projeto (no caso em Python) com as bibliotecas necessárias na versão especificada.</p>
+
+<p>Primeiramente, crie um arquivo Python, como app.py, com esse código aqui:</p>
+
+<pre>
+<code>
+from colorama import Fore, Style, init, just_fix_windows_console
+import random
+
+just_fix_windows_console()
+
+print(Fore.BLUE + "- Gerador de Números Aleatórios - " + Style.RESET_ALL)
+numero = random.randint(1, 100)
+
+print(f"Número gerado: {Fore.GREEN}{numero}{Style.RESET_ALL}")
+</code>
+</pre>
+
+<p>A biblioteca Colorama não é uma biblioteca que vem por padrão no Python, pra a utilizarmos precisaremos instalar ela.</p>
+
+<p>Vamos criar um arquivo txt, como dependencias.txt e coloque esse código aqui:</p>
+
+<pre>
+<code>
+colorama==0.4.6
+</code>
+</pre>
+
+<p>E faça o Dockerfile com esse código, pra criarmos a imagem:</p>
+
+<pre>
+<code>
+FROM python:3.9
+
+WORKDIR /app
+
+COPY . .
+
+RUN pip install -r dependencias.txt
+
+CMD ["python", "app.py"]
+</code>
+</pre>
+
+<p>No caso acima, os pontos sequenciais indicam que é pra copiar tudo do diretório do nosso PC (onde está o Dockerfile) para o diretório indicado na imagem (/app).</p>
+
+<p>Para criar a imagem rodamos na linha de comando <code>docker build -t python-color:v1 .</code> (não esqueça do ponto) e veja se ela foi criada com <code>docker images</code>. Depois de criar a imagem, crie o container com ela com o comando <code>docker run python-color:v1</code>, se tudo der certo, ele rodará e exibirá a mensagem colorida pelo Colorama.</p>
+
+<p>No caso, usamos uma biblioteca só pra exemplificar, mas um programa que tem muitas dependências pode dar problemas e ficar pesado. Vamos exemplificar fazendo uma pequena alteração no arquivo Python e gere outra imagem com <code>docker build -t python-color:v2 .</code> (não esqueça do ponto), ele rodará o pip install novamente. Ele só <q>cacheará</q> a pasta /app, mas o pip será executado de novo, mesmo que seja a mesma versão da biblioteca. Para forçar ele a <q>cachear</q> o pip também, adicione uma linha acima do <code>COPY . .</code> indicando o arquivo de dependências assim:</p>
+
+<pre>
+<code>
+FROM python:3.9
+
+WORKDIR /app
+
+COPY dependencias.txt .
+
+RUN pip install -r dependencias.txt
+
+COPY . .
+
+CMD ["python", "app.py"]
+</code>
+</pre>
+
+<p>Aí, vamos deletar todos os containers e imagens e criar tudo novamente. Digite novamente <code>docker build -t python-color:v1 .</code> (não esqueça do ponto) pra gerar a imagem novamente. Faça uma outra alteração no código Python e gere outra imagem com <code>docker build -t python-color:v2 .</code> (olha o ponto). Ele gerará outra imagem, mas usará o cache das bibliotecas, que não foram alteradas. Faça o mesmo com a versão 3, usando <code>docker build -t python-color:v3 .</code> (o ponto).</p>
+
+<p>PS: Isso foi exemplificado com Python, mas podemos usar qualquer linguagem e suas bibliotecas.</p>
+
+<h3>O Jeito Certo de Dockerizar Node.JS</h3>
+
+<p>A pasta node_modules é bastante grande e pesada, e por isso, não é recomendado copiar ela do nosso computador pro container, por demorar muito, além de poder ter incompatibilidade entre versões do Node e os sistemas operacionais. O ideal é criar o Node Modules dentro do próprio container.</p>
+
+<p>Vamos supor esse código em Node (salve num arquivo index.js):</p>
+
+<pre>
+<code>
+const express = require("express");
+const app = express();
+const port = 4000;
+
+app.get("/", (req, res) => {
+    res.json({
+        canal: "Cursos",
+        mensagem: "Rodando liso no Docker",
+        plataforma: process.platform
+    });
+});
+
+app.listen(port, () => {
+    console.log(`API rodando na porta ${port}.`);
+});
+</code>
+</pre>
+
+<p>Na mesma pasta, coloque um arquivo JSON com o nome package.json, com esse código:</p>
+
+<pre>
+<code>
+{
+    "name": "api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "dependencies": {
+        "express": "^5.2.1"
+    },
+
+    "scripts": {
+        "start": "node index.js"
+    }
+}
+</code>
+</pre>
+
+<p>Aí, para instalar as dependências, rode o comando <code>npm install</code> na pasta onde estão os arquivos, pra ele gerar o Node Modules e podermos rodar o aplicativo. Podemos rodar o arquivo JS com <code>npm start</code> e ver no navegador em <code>http://localhost:4000</code>.</p>
+
+<p>Como podemos ver, a pasta node_modules gerada tem muitos arquivos e é bastante pesada. Nós deveremos gerar essa pasta dentro do nosso container, e não a copiar pro mesmo. Para isso criaremos um arquivo .dockerignore com esse código aqui:</p>
+
+<pre>
+<code>
+node_modules
+npm-debug.log
+Dockerfile
+.git
+</code>
+</pre>
+
+<p>E no Dockerfile, colocaremos isso:</p>
+
+<pre>
+<code>
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 4000
+
+CMD ["npm", "start"]
+</code>
+</pre>
+
+<p>E pra criar a imagem basta rodarmos o comando <code>docker build -t api-node:v1 .</code> (não esqueça do ponto). Depois rode <code>docker images</code> pra ver se a imagem foi criada. E depois crie o container no modo detach com <code>docker run -d -p 5000:4000 --name minha-api api-node:v1</code>. Para ver se o JSON está rodando na porta especificada, acesse no navegador <code>http://localhost:5000</code>.</p>
 <ul>
     <li><a href="tudo-sobre-docker-2.html">Parte Anterior da Matéria!</a></li>
     <!--<li><a href="tudo-sobre-docker-4.html">Continuação da Matéria!</a></li>-->

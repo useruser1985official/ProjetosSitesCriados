@@ -344,99 +344,69 @@ c1.escrever("Será que rola?")
 <code>
 from rich import print
 from rich.panel import Panel
-import os
 
 class ControleRemoto:
-    def __init__(self):
-        self.ligado = False
-        self.canalAtual = 2
-        self.canalTotal = 13
-        self.volumeAtual = 0
-        self.volumeTotal = 50
+    canalMin:int = 2
+    canalMax:int = 13
+    volumeMin:int = 0
+    volumeMax:int = 20
 
-        self.caixa = Panel(":prohibited: [red]A TV está desligada![/]", title = "[TV]", width = 30)
+    def __init__(self, canal = 2, volume = 5):
+        self.canalAtual:int = canal
+        self.volumeAtual:int = volume
+        self.ligado:bool = False
 
-        print(self.caixa)
+    def ligaDesliga(self):
+        self.ligado = not self.ligado
 
-    def mostrarTela(self):
+    def canalMais(self):
         if self.ligado:
-            texto = ""
-
-            for i in range(2, self.canalTotal + 1):
-                if i == self.canalAtual:
-                    texto += f"[on yellow] {i} [/]"
-                else:
-                    texto += f" {i} "
-
-            self.caixa = Panel(f":tv: A TV está ligada!\nCANAL = {texto}\nVOLUME = [on spring_green4]{" " * self.volumeAtual}[/][on bright_black]{" " * (self.volumeTotal - self.volumeAtual)}[/]", title = "[TV]", width = 60)
-        else:
-            self.caixa = Panel(":prohibited: [red]A TV está desligada![/]", title="[TV]", width=30)
-
-        print(self.caixa)
-
-    def ligarOuDesligar(self):
-        if self.ligado:
-            self.ligado = False
-
-            self.caixa = Panel(":prohibited: [red]A TV está desligada![/]", title = "[TV]", width = 30)
-
-            print(self.caixa)
-
-            return
-        else:
-            self.ligado = True
-
-            self.mostrarTela()
-
-            print("Ligou!")
-
-    def aumentarOuDiminuirVolume(self, botao):
-        if self.ligado:
-            if botao == "+":
-                if self.volumeAtual >= self.volumeTotal:
-                    self.mostrarTela()
-
-                    return
-
-                self.volumeAtual += 1
-                self.mostrarTela()
-            elif botao == "-":
-                if self.volumeAtual <= 0:
-                    self.mostrarTela()
-
-                    return
-
-                self.volumeAtual -= 1
-                self.mostrarTela()
+            if self.canalAtual == ControleRemoto.canalMax:
+                self.canalAtual = ControleRemoto.canalMin
             else:
-                self.mostrarTela()
-        else:
-            self.mostrarTela()
-
-    def mudarCanal(self, botao):
-        if self.ligado:
-            if botao == ">":
-                if self.canalAtual >= self.canalTotal:
-                    self.canalAtual = 2
-                    self.mostrarTela()
-
-                    return
-
                 self.canalAtual += 1
-                self.mostrarTela()
-            elif botao == "<":
-                if self.canalAtual <= 2:
-                    self.canalAtual = self.canalTotal
-                    self.mostrarTela()
 
-                    return
-
-                self.canalAtual -= 1
-                self.mostrarTela()
+    def canalMenos(self):
+        if self.ligado:
+            if self.canalAtual == ControleRemoto.canalMin:
+                self.canalAtual = ControleRemoto.canalMax
             else:
-                self.mostrarTela()
+                self.canalAtual -= 1
+
+    def volumeMais(self):
+        if self.ligado:
+            if self.volumeAtual != ControleRemoto.volumeMax:
+                self.volumeAtual += 1
+
+    def volumeMenos(self):
+        if self.ligado:
+            if self.volumeAtual != ControleRemoto.volumeMin:
+                self.volumeAtual -= 1
+
+    def mostrarTv(self):
+        conteudo = ""
+
+        if not self.ligado:
+            conteudo = f":prohibited: [red]A TV está desligada[/]"
         else:
-            self.mostrarTela()
+            conteudo = f"CANAL: "
+
+            for c in range(ControleRemoto.canalMin, ControleRemoto.canalMax + 1):
+                if c == self.canalAtual:
+                    conteudo += f"[yellow on yellow] {c} [/]"
+                else:
+                    conteudo += f" {c} "
+
+            conteudo += f"\nVOLUME: "
+
+            for v in range(ControleRemoto.volumeMin + 1, ControleRemoto.volumeMax):
+                if v <= self.volumeAtual:
+                    conteudo += "[black on cyan] [/]"
+                else:
+                    conteudo += "[black on white] [/]"
+
+        tv = Panel(conteudo, title = "[TV]", width = 55)
+        print(tv)
 </code>
 </pre>
 
@@ -444,23 +414,28 @@ class ControleRemoto:
 
 <pre>
 <code>
-tv = ControleRemoto()
-
-controle = str(input("< CH > - VOL + ")).strip()[0]
+c = ControleRemoto()
 
 while True:
-    os.system("cls" if os.name == "nt" else "clear")
+    c.mostrarTv()
 
-    if controle == "0":
-        break
-    elif controle == "@":
-        tv.ligarOuDesligar()
-    elif controle == "-" or controle == "+":
-        tv.aumentarOuDiminuirVolume(controle)
-    elif controle == "<" or controle == ">":
-        tv.mudarCanal(controle)
+    cmd = str(input(f"< CH {c.canalAtual} >      - VOL {c.volumeAtual} + "))
 
-    controle = str(input("< CH > - VOL + ")).strip()[0]
+    match cmd:
+        case "0":
+            break
+        case "@":
+            c.ligaDesliga()
+        case "<":
+            c.canalMenos()
+        case ">":
+            c.canalMais()
+        case "-":
+            c.volumeMenos()
+        case "+":
+            c.volumeMais()
+
+    print("\n" * 15)
 </code>
 </pre>
 
