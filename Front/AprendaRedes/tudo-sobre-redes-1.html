@@ -85,7 +85,7 @@
     <li><b>Sessão:</b> Controle de sessões entre aplicativos (quando acessamos um outro computador remotamente, por exemplo, quando começa e termina a sessão, etc.).</li>
     <li><b>Transporte:</b> Conexão entre hosts/portas (dessas conexões define se estas serão confiáveis, e se usará TCP ou UDP). Já sobre as portas, é o identificador do host do computador ou servidor.</li>
     <li><b>Rede:</b> Endereço lógico e roteamento (endereço lógico nada mais é que o IP, que toda máquina tem). Roteamento é quando acessamos um servidor através de roteadores, não os da nossa LAN.</li>
-    <li><b>Enlace:</b> Endereço Físico (isso é referente ao endereço MAC) e verificação de erros.</li>
+    <li><b>Enlace:</b> Endereço físico (isso é referente ao endereço MAC) e verificação de erros.</li>
     <li><b>Física:</b> Hardware e sinal elétrico (hardware é a placa de rede e os conectores. O sinal elétrico é nada mais que a tensão da rede telefônica).</li>
 </ul>
 
@@ -553,21 +553,21 @@
 
 <h3>Switch L2 - Broadcast</h3>
 
-<p>Anteriormente sobre a camada de enlace, diferente enrtre unicast, multicast e broadcast e MAC, aqui entenderemos como o Switch trabalha numa rede.</p>
+<p>Anteriormente sobre a camada de enlace, diferenças entre unicast, multicast e broadcast e MAC, aqui entenderemos como o switch trabalha numa rede.</p>
 
-<p>Veja um exemplo de rede, com o Switch no meio (não confundir com roteador ou modem) e os computadores, cada um com seu MAC:</p>
+<p>Veja um exemplo de rede, com o switch no meio (não confundir com roteador ou modem) e os computadores, cada um com seu MAC:</p>
 
 <img src="imagens/broadcast.jpg" alt="Broadcast"/>
 
 <p>Vamos supor que cada computador tenha nomes de A, B, C e D, e que o computador A queira conversar com o B e não sabe qual é o tal computador, ele manda pra rede um broadcast usando o protocolo ARP, que pergunta quem é o computador B, que irá responder.</p>
 
-<p>No momento que o computador A entra em contato com o B, o Switch lerá o quadro que tem o endereço MAC de origem e o MAC de destino. Quando ele lê o MAC de origem, imediatamente ele grava o mesmo na memória (chamada CAM), que tem uma tabela que escreve o MAC de origem e associa com a porta no qual o tal computador está. O mesmo ocorre com o computador de destino e seu MAC, que o Switch perguntará para todos na rede qual é o tal MAC até que o B responda.</p>
+<p>No momento que o computador A entra em contato com o B, o switch lerá o quadro que tem o endereço MAC de origem e o MAC de destino. Quando ele lê o MAC de origem, imediatamente ele grava o mesmo na memória (chamada CAM), que tem uma tabela que escreve o MAC de origem e associa com a porta no qual o tal computador está. O mesmo ocorre com o computador de destino e seu MAC, que o switch perguntará para todos na rede qual é o tal MAC até que o B responda.</p>
 
 <p>Vamos supor que o computador C mande um frame unicast para o B, já sabendo o MAC do B, nesse caso ele não precisa perguntar pros outros computadores qual é o B por já saber qual o MAC e a porta dele. Isso evita transmissão de mensagem pros computadores errados e por isso, é mais seguro.</p>
 
-<p>O Domínio de Broadcast é até aonde o broadcast chega, vamos supor que a imagem acima tenha 100 computadores, se qualquer um deles mandar um broadcast pra rede, todos os computadores ligados na rede vão escutar o broadcast. O Domínio de Broadcast é até aonde chega o broadcast (por exemplo, um Switch de 96 portas manda de uma das máquinas para as outras 95 portas).</p>
+<p>O Domínio de Broadcast é até aonde o broadcast chega, vamos supor que a imagem acima tenha 100 computadores, se qualquer um deles mandar um broadcast pra rede, todos os computadores ligados na rede vão escutar o broadcast. O Domínio de Broadcast é até aonde chega o broadcast (por exemplo, um switch de 96 portas manda de uma das máquinas para as outras 95 portas).</p>
 
-<p>Quando um dispositivo quer contatar outro na rede, ele vai usar o protocolo ARP pra perguntar se este dispositivo está na rede. Mesmo se um dos computadores mandar uma mensagem unicast pra outro, o Switch manda um broadcast para descobrir o MAC de destino, caso ele ainda não saiba.</p>
+<p>Quando um dispositivo quer contatar outro na rede, ele vai usar o protocolo ARP pra perguntar se este dispositivo está na rede. Mesmo se um dos computadores mandar uma mensagem unicast pra outro, o switch manda um broadcast para descobrir o MAC de destino, caso ele ainda não saiba.</p>
 
 <ul>
     <li><a href="tudo-sobre-redes-2.html">Continuação da Matéria!</a></li>

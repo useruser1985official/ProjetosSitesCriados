@@ -38,9 +38,9 @@
 
 <p>PS: É provável que a versão do Npcap do Windows que vem com o Wireshark esteja desatualizada, se for o caso baixe aqui: <a href="https://nmap.org/npcap/#download" target="_blank">https://nmap.org/npcap/#download</a></p>
 
-<p>Nele, vemos primeiramente as placas de rede disponíveis no nosso computador. Clique nela, e veremos todas as atividades da nossa rede, abra o navegador com o programa aberto para vermos a atividade.</p>
+<p>Nele, vemos primeiramente as placas de rede disponíveis no nosso computador. Clique numa placa ativa, e veremos todas as atividades da nossa rede, abra o navegador com o programa aberto para vermos a atividade.</p>
 
-<p>A barbatana do tubarão inicia a captura de pacotes, para parar clique no quadrado vermelho. Vemos os IPs de origem (source) e destino, protocolos e outros dados. Abaixo dele tem os dados do pacote, como os MACs de destino e outros dados. Para ver os dados de um determinado IP, clique nele.</p>
+<p>A barbatana do tubarão inicia a captura de pacotes, pra parar clique no quadrado vermelho. Vemos os IPs de origem (source) e destino, protocolos e outros dados. Abaixo dele tem os dados do pacote, como os MACs de destino e outros dados. Para ver os dados de um determinado IP, clique nele.</p>
 
 <p>Podemos ver por exemplo, no filtro, os pacotes de um determinado protocolo, por exemplo, o ARP.</p>
 
@@ -54,17 +54,17 @@
 
 <p>Para pegar apenas informações de um determinado IP, digitamos no filtro <code>ip.addr == 192.168.0.1</code> (substituindo pelo IP desejado), para ver os resultados desse IP de uma cor destacada.</p>
 
-<p>Para vermos apenas resultados com esse determinado IP de origem, digitamos <code>ip.src == 192.168.0.1</code>, e pegar esse IP de destino, digite <code>ip.dst == 192.168.0.1</code>.</p>
+<p>Para vermos apenas resultados com esse determinado IP de origem, digitamos <code>ip.src == 192.168.0.1</code>, e apenas com esse IP de destino, digite <code>ip.dst == 192.168.0.1</code>.</p>
 
 <h3>Filtrando Endereços e Protocolos</h3>
 
-<p>Para colocar algo que queremos que não seja exibido, usamos o mesmo filtro, mas com um ponto de exclamação, que significa negação, por exemplo <code>!(ip.addr == 192.168.0.1)</code>.</p>
+<p>Para colocar algo que não queremos que seja exibido, usamos o mesmo filtro, mas com um ponto de exclamação, que significa negação, por exemplo <code>!(ip.addr == 192.168.0.1)</code>.</p>
 
-<p>Para não mostrar tráfegos de um determinado protocolo, podemos usar por exemplo <code>not tcp</code>, para mais de um podemos ser por exemplo <code>not tcp and not arp</code>. Como visto, podemos colocar operadores como <code>and</code>, <code>or</code> e <code>not</code> também, tanto com o nome literal quanto no padrão C (<code>&&</code>, <code>||</code> e <code>!</code>).</p>
+<p>Para não mostrar tráfegos de um determinado protocolo, podemos usar por exemplo <code>not tcp</code>, para mais de um podemos usar por exemplo <code>not tcp and not arp</code>. Como visto, podemos colocar operadores como <code>and</code>, <code>or</code> e <code>not</code> também, tanto com o nome literal quanto no padrão C (<code>&&</code>, <code>||</code> e <code>!</code>).</p>
 
 <p>Podemos filtrar um determinado protocolo usando os comandos como por exemplo <code>tcp.port == 80</code> para filtrar o tráfego HTTP (podendo nesse caso ser diretamente pesquisado apenas <code>http</code> também). Outros filtros podem ser usados (inclusive com negação), para protocolos como FTP, SSH, entre outros.</p>
 
-<p>Clique com o botão direito em um dos pacotes e em Follow e TCP Stream, você terá acesso ao código binário do programa. Se permitido, teremos outras opções disponíveis, como UDP Stream e TLS Stream.</p>
+<p>Clique com o botão direito em um dos pacotes e em Follow e TCP Stream, você terá acesso ao código binário interceptado pelo Wireshark. Se permitido, teremos outras opções disponíveis, como UDP Stream, HTTP Stream e TLS Stream.</p>
 
 <h3>Usando o Tshark via Linha de Comandos</h3>
 
@@ -178,9 +178,9 @@ eth.addr == aa:bb:cc:dd:ee:ff # Filtrar por MAC
 
 # Diagnóstico avançado:
 
-frame.len > 1000 # Pacotes grandes
+frame.len &gt; 1000 # Pacotes grandes
 
-tcp.window_size < 100 # Possível gargalo de janela TCP
+tcp.window_size &lt; 100 # Possível gargalo de janela TCP
 
 icmp.type == 3 # Destino inalcançável
 
@@ -192,7 +192,7 @@ dns && ip.src == 192.168.1.5 # DNS vindo de um host específico
 
 tcp.port == 443 && ip.dst == 172.217.0.0/16 # HTTPS para um range específico
 
-!(arp || dns) # Excluir tráfego comum “ruído”
+!(arp || dns) # Excluir tráfego comum "ruído"
 </code>
 </pre>
 

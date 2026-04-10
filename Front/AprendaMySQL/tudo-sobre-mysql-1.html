@@ -113,8 +113,8 @@ default collate utf8_general_ci;
     <li>Para guardar cadeias de caracteres, prefira o <code>varchar</code>, que ocupa menos espaço caso ele receba um valor menor que o predefinido.</li>
     <li>Para números reais é preferível o <code>decimal</code>.</li>
     <li>A idade é melhor cadastrar a data de nascimento e calcular usando o <code>date</code> para não ter que atualizar todo ano.</li>
-    <li>Para sexo usaremos uma coleção com valores pré-definidos, com o <code>enum</code>, sempre colocando <code>not null</code>.</li>
-    <li>Para o peso e altura, usaremos o <code>decimal</code>, e os números entre parênteres. O primeiro é a quantidade de caracteres, e o segundo são as casas decimais (o primeiro sempre é maior).</li>
+    <li>Para sexo usaremos uma coleção com valores predefinidos, com o <code>enum</code>, sempre colocando <code>not null</code>.</li>
+    <li>Para o peso e altura, usaremos o <code>decimal</code>, e os números entre parênteres. O primeiro é a quantidade de algarismos, e o segundo são as casas decimais (o primeiro sempre é maior).</li>
 </ul>
 
 <p>Veja um exemplo:</p>
@@ -133,7 +133,7 @@ default charset = utf8;
 </code>
 </pre>
 
-<p>A constraint <code>not null</code> é pra obrigar a preencher os dados exigidos (geralmente é necessária pro enum funcionar, por exemplo). A constraint <code>default</code> é usada pra pré-definir um valor padrão, caso nada seja enviado.</p>
+<p>A constraint <code>not null</code> é pra obrigar a preencher os dados exigidos (geralmente é necessária pro enum funcionar, por exemplo). A constraint <code>default</code> é usada pra predefinir um valor padrão, caso nada seja enviado.</p>
 
 <p>Agora delete a tabela com esse comando:</p>
 

@@ -79,7 +79,7 @@ sudo apt-get install linssid
 
 <p>Quanto mais alta a onda da rede wi-fi, mais forte ela está, e ela não deve estar no mesmo nível de outra, no mesmo canal, pois dá interferência em ambas.</p>
 
-<p>Alguns roteadores costumam mudar de canal para conseguir uma transmissão melhor e sem interferências. Nessa situação ele desconecta todos os dispositivos e os reconecta ao achar um canal livre.</p>
+<p>Alguns access points costumam mudar de canal para conseguir uma transmissão melhor e sem interferências. Nessa situação ele desconecta todos os dispositivos e os reconecta ao achar um canal livre.</p>
 
 <p>Os padrões wi-fi são esses:</p>
 
@@ -114,13 +114,27 @@ sudo apt-get install linssid
     </tr>
 </table>
 
-<p>Sempre escolha no roteador, o melhor padrão para wi-fi, mas o dispositivo também deverá ser compatível com o mesmo padrão, o que pode ter problemas com alguns dispositivos, principalmente os mais antigos, por isso que o padrão em muitos roteadores é o Mixed, mas ele diminui o desempenho.</p>
+<p>Sempre escolha no access point, o melhor padrão para wi-fi, mas o dispositivo também deverá ser compatível com o mesmo padrão, o que pode ter problemas com alguns dispositivos, principalmente os mais antigos, por isso que o padrão em muitos dispositivos é o Mixed, mas ele diminui o desempenho.</p>
 
 <p>Sobre o canal de comunicação, aqui no Brasil tem 13, mas geralmente o melhor é usar o 1, 6 ou 11.</p>
 
+<p>Podemos encontrar dois tipos de padrões para redes wi-fi: 2,4 Ghz e 5 Ghz, que são duas faixas de frequência usadas pelo wi-fi para transmitir dados. Com essas diferenças:</p>
+
+<ul>    
+    <li><b>2,4 GHz:</b> Tem maior alcance e atravessa melhor paredes, porém é mais lenta e sofre mais interferência (de outros aparelhos e redes).</li>
+    <li><b>5 GHz:</b> Tem maior velocidade e menos interferência, mas o alcance é menor e o sinal perde força mais rápido com obstáculos.</li>
+</ul>
+
+<p>Resumindo:</p>
+
+<ul>
+    <li><b>2,4 GHz:</b> Mais longe, menos velocidade.</li>
+    <li><b>5 GHz:</b> Mais rápido, menor alcance.</li>
+</ul>
+
 <h3>Protegendo seu Wi-Fi</h3>
 
-<p>No seu navegador, acesse o IP do seu roteador (indo em ipconfig, no caso do Windows, e pegando o endereço do gateway padrão), como por exemplo <code>192.168.15.1</code>.</p>
+<p>No seu navegador, acesse o IP do seu dispositivo wireless (indo em ipconfig, no caso do Windows, e pegando o endereço do gateway padrão), como por exemplo <code>192.168.15.1</code>.</p>
 
 <p>Na tela de login, acesse usando o login e senha padrões (que é recomendado serem mudados posteriormente). É recomendado também mudar os nomes e senha da rede wi-fi.</p>
 
@@ -132,7 +146,7 @@ sudo apt-get install linssid
 
 <p>Temos também um filtro de MAC na configuração do wi-fi, onde podemos bloquear ou permitir determinados endereços físicos.</p>
 
-<p>Procure também atualizações para o firmware do seu roteador.</p>
+<p>Procure também atualizações para o firmware do seu dispositivo wireless.</p>
 
 <p>Para que alguns programas funcionem corretamente, é necessário deixar algumas portas abertas no roteador, no entanto, quando elas não estão em uso, é recomendado fechá-las para não serem exploradas por invasores.</p>
 
@@ -158,7 +172,6 @@ sudo apt-get install linssid
     <li>As estações que recebem os quadros RTS ou CTS ajustam seu NAV para o valor fornecido.</li>
     <li>Os dados da estação transmissora são enviados até a transmissão receptora.</li>
     <li>AP envia quadro ACK para confirmar fim da transmissão e liberar as transmissões novas.</li>
-    <li></li>
 </ul>
 
 <p>O quadro RTS (20 bytes) contém cinco campos, que são:</p>
@@ -224,6 +237,97 @@ sudo apt-get install linssid
 <p>O WPA3 foi lançado em 2018 para corrigir as vulnerabilidades das versões anteriores. Ele traz um sistema de criptografia chamado Perfect Forward Secrecy e uma série de melhorias, como novos recursos para simplificar a segurança, autenticação mais robusta e maior força criptográfica.</p>
 
 <p>No entanto, esse padrão ainda não foi amplamente adotado. Há roteadores e access points com WPA3 no mercado, mas eles costumam ser mais caros. Além disso, apesar das fabricantes disponibilizarem a atualização que entrega o novo protocolo, nem todos os modelos vendidos oficialmente têm um hardware capaz de suportá-lo. Em outras palavras, o WPA3 não é uma opção para a maioria das pessoas, pelo menos por enquanto.</p>
+
+<h3>Criando uma Rede Única usando WDS</h3>
+
+<p>Podemos usar o WDS (Wireless Distribution System) para estender a rede Wi-Fi usando dois ou mais roteadores wireless (embora o ideal seja usar apenas dois para evitar perda de desempenho).</p>
+
+<p>Conecte o modem (ou o gateway da operadora em modo bridge) ao roteador wireless principal pela porta Internet (WAN). Em seguida, conecte um cabo de uma das portas LAN ao computador para realizar a configuração. Acesse o IP do roteador no navegador (por exemplo, <code>192.168.0.1</code>), faça login e configure DHCP, nome da rede (SSID), senha, criptografia e demais opções.</p>
+
+<p>Para configurar o segundo roteador wireless como repetidor via WDS:</p>
+
+<ul>
+    <li>Conecte o segundo roteador ao computador via cabo.</li>
+    <li>Acesse o IP padrão dele (geralmente algo como <code>192.168.0.1</code>).</li>
+    <li>Altere o IP LAN do segundo roteador para a mesma rede do primeiro, mas com final diferente (por exemplo, se o principal é <code>192.168.0.1</code>, use <code>192.168.0.2</code>).</li>
+    <li>Desative o servidor DHCP no segundo roteador (isso é essencial para evitar conflito).</li>
+    <li>Salve e reinicie o roteador, se necessário.</li>
+</ul>
+
+<p>Depois:</p>
+
+<ul>
+    <li>Acesse novamente o roteador pelo novo IP (Ex: <code>192.168.0.2</code>).</li>
+    <li>Ative a função WDS nas configurações wireless.</li>
+    <li>Procure a rede Wi-Fi do roteador principal e conecte-se a ela.</li>
+    <li>Informe a senha do Wi-Fi principal e salve.</li>
+</ul>
+
+<p>Após a configuração, o segundo roteador poderá ser desconectado do computador e posicionado em um local onde ainda receba sinal do primeiro.</p>
+
+<p>Hoje em dia, WDS é meio ultrapassado. Se possível, prefira:</p>
+
+<ul>
+    <li>Modo Repetidor/Range Extender (mais simples).</li>
+    <li>Access Point com cabo (melhor desempenho).</li>
+    <li>Sistemas mesh Wi-Fi (melhor solução moderna).</li>
+</ul>
+
+<h3>Usando Repetidor Wi-Fi</h3>
+
+<p>Os repetidores podem ser usados para estender uma rede Wi-Fi, devendo ser posicionados em um local onde ainda haja cerca de 50% a 70% do sinal do roteador ou access point principal.</p>
+
+<p>Veja a imagem de um repetidor wireless:</p>
+
+<img src="imagens/repetidor.png" alt="Repetidor"/>
+
+<p>A porta RJ-45 presente no repetidor é usada para configuração, mas pode usar para conexão, se for o caso.</p>
+
+<p>Primeiramente, ligue o repetidor na tomada. Ele exibirá uma rede Wi-Fi padrão (algo como Repeater ou o nome da marca). Conecte-se a essa rede e, no navegador, acesse o endereço de configuração (como <code>192.168.0.1</code>).</p>
+
+<p>Nas configurações do repetidor:</p>
+
+<ul>
+    <li>Procure a opção de modo repetidor (Repeater/Extender).</li>
+    <li>Clique para buscar redes Wi-Fi disponíveis.</li>
+    <li>Selecione a rede do seu dispositivo wireless principal.</li>
+    <li>Digite a senha do Wi-Fi.</li>
+    <li>Salve as configurações e aguarde o reinício.</li>
+</ul>
+
+<p>Após a configuração, finalize e reposicione o repetidor em um local adequado para ampliar o sinal da rede.</p>
+
+<p>PS: É recomendável usar o mesmo nome de rede (SSID) e senha do roteador/AP principal para facilitar a troca automática entre os sinais.</p>
+
+<h3>Diferenças entre Ponto de Acesso e Roteador Wireless</h3>
+
+<p>Muitos confundem as definições de ponto de acesso (AP) e roteador wireless, mas eles não são exatamente a mesma coisa. Veja as diferenças entre os dois:</p>
+
+<h4>Ponto de Acesso (AP)</h4>
+
+<p>O ponto de acesso (access point, ou AP) funciona como uma <q>ponte</q> entre a rede cabeada e os dispositivos sem fio. Ele permite que dispositivos se conectem à rede via wi-fi, normalmente estando ligado a um switch ou roteador por cabo Ethernet. No AP, configuramos parâmetros como o nome da rede (SSID), senha, tipo de criptografia (WPA2/WPA3), entre outros recursos, como WPS (embora este seja pouco recomendado por questões de segurança).</p>
+
+<p>Veja a imagem de um ponto de acesso:</p>
+
+<img src="imagens/access-point.png" alt="Ponto de Acesso"/>
+
+<h4>Roteador Wireless</h4>
+
+<p>O roteador wireless tem como função principal, tal como um roteador padrão, interligar redes distintas, como a rede da operadora (WAN) e a rede local (LAN), realizando o roteamento dos dados. Além disso, ele integra em um único equipamento um ponto de acesso wi-fi e, geralmente, um switch Ethernet (normalmente com 4 portas), permitindo conexões tanto sem fio quanto cabeadas.</p>
+
+<p>Veja a imagem de um roteador wireless:</p>
+
+<img src="imagens/roteador-wireless.jpg" alt="Roteador Wireless"/>
+
+<p>Em ambientes domésticos, um roteador wireless costuma ser suficiente, pois já reúne todas essas funções em um único dispositivo. Já em redes corporativas, é comum que essas funções sejam distribuídas em equipamentos separados (roteadores, switches e pontos de acesso), o que oferece maior escalabilidade, desempenho e controle da rede.</p>
+
+<p>Temos também o gateway, que é um equipamento que integra em um único dispositivo um modem ou ONT (conexão com a operadora) com um roteador wireless (contendo roteador, switch e ponto de acesso wi-fi), sendo comumente fornecido pelas operadoras.</p>
+
+<p>Ele pode operar em modo bridge, no qual desativa funções como NAT, DHCP e wi-fi, passando a atuar apenas como modem/ONT, permitindo que outro equipamento (como um roteador próprio) faça o roteamento da rede e essas funções citadas anteriormente.</p>
+
+<p>Veja a imagem de um gateway:</p>
+
+<img src="imagens/gateway.jpg" alt="Gateway"/>
 
 <ul>
     <li><a href="redes-wireless-1.html">Parte Anterior da Matéria!</a></li>

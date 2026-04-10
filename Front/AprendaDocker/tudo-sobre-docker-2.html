@@ -216,9 +216,11 @@ services:
 
 <p>Para vermos as opções dos comandos do Docker Compose, basta usar o comando <code>docker compose</code>, e pra criar o container com tudo planejado, vá na mesma pasta do arquivo yaml e digite <code>docker compose up</code>. Depois disso, no nosso PC, acesse o link localhost, com <code>http://localhost:8080</code>.</p>
 
+<p>PS: Em sistemas Linux pode ser exigido o comando <code>docker-compose</code> com o tracinho entre as duas palavras, como <code>docker-compose up</code>.</p>
+
 <p>Para criar um container com o modo detach, use o comando <code>docker compose up -d</code>. Ele não dará erro, pois atualizará e iniciará o container criado.</p>
 
-<p>Podemos também usar o Compose pra remover tudo, com o comando <code>docker compose down</code>, sem ter que parar coisa com coisa até remover tudo. O down não remove imagens nem volumes, apenas os containers.</p>
+<p>Podemos também usar o Compose pra remover tudo, com o comando <code>docker compose down</code>, sem ter que parar coisa com coisa até remover tudo. O down não remove imagens nem volumes, apenas os containers. Para remover volumes, use esse comando com o parâmetro <code>-v</code>.</p>
 
 <p>No caso de nós querermos alterar algo no nosso container, como ao adicionar mais serviços, podemos editar no arquivo Docker Compose da mesma forma. Deixe o Docker Compose assim:</p>
 

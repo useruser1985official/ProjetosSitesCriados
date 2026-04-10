@@ -26,6 +26,151 @@
 
 <h2>Programção Orientada a Objetos em Python - Parte 2</h2>
 
+<h3>Herança em Python</h3>
+
+<p>A POO tem 4 pilares: Abstração, Encapsulamento, Herança e Polimorfismo. Agora veremos a herança.</p>
+
+<p>A herança é um relacionamento entre itens gerais (ancestrais) e tipo mais específicos (descendentes) desses itens, que herdam atributos e métodos dos níveis superiores.</p>
+
+<p>As principais vantagens da herança são essas:</p>
+
+<ul>
+    <li>Reutilização de código.</li>
+    <li>Organização hierárquica.</li>
+    <li>Facilita manutenção.</li>
+    <li>Extensibilidade.</li>
+    <li>Suporte a polimorfismo.</li>
+</ul>
+
+<p>Normalmente, quando falamos de herança, lembramos de casos como o de uma pessoa que faleceu e o filho herda tudo que ele tinha. Mas na programação, o sentido de herança é mais parecido com características que os filhos adquirem dos pais, como acontece com uma pessoa ou animal (tipo um filhote de passarinho, que tem características e comportamentos do pai e da mãe), mas os filhos também pode ter características próprias ou alteradas.</p>
+
+<p>A classe de <q>cima</q> (mais generalista) chamaremos de superclasse (ou classe base, ancestral ou classe mãe). A classe de <q>baixo</q> (mais específica), chamaremos de subclasse (ou classe derivada, descendente ou classe filha). Podemos também ter uma hierarquia de heranças. A herança é a generalização com a relação tipo <q>é um</q>.</p>
+
+<p>Vamos supor um exemplo com aluno, professor e funcionário, num sistema de cadastro pra controle de escola. Cada um tem suas características e comportamentos específicos, mas também tem coisas em comum, como nome e idade. Podemos criar uma classe mais generalizada com o nome pessoa com essas características em comum com todos os outros, que herdarão essas características em comum, e cada classe especializada pode adicionar outras características e comportamentos.</p>
+
+<p>Veja a classe Pessoa:</p>
+
+<pre>
+<code>
+class Pessoa:
+    def __init__(self, nome = "", idade = 0):
+        self.nome = nome
+        self.idade = idade
+
+    def fazerAniversario(self):
+        self.idade += 1
+</code>
+</pre>
+
+<p>Para fazer a herança, coloque após o nome da classe filha, entre parênteses, o nome da classe mãe, como vemos na classe Aluno:</p>
+
+<pre>
+<code>
+class Aluno(Pessoa):
+    def __init__(self, nome, idade, curso, turma):
+        super().__init__(nome, idade)
+        self.curso = curso
+        self.turma = turma
+
+    def fazerMatricula(self):
+        print(f"O aluno {self.nome} acabou de fazer matrícula!")
+</code>
+</pre>
+
+<p>Na classe Professor:</p>
+
+<pre>
+<code>
+class Professor(Pessoa):
+    def __init__(self, nome, idade, especialidade, nivel):
+        super().__init__(nome, idade)
+        self.especialidade = especialidade
+        self.nivel = nivel
+
+    def darAula(self):
+        print(f"Prof. {self.nome} começou a dar aula!")
+</code>
+</pre>
+
+<p>E na classe Funcionario:</p>
+
+<pre>
+<code>
+class Funcionario(Pessoa):
+    def __init__(self, nome, idade, cargo, setor):
+        super().__init__(nome, idade)
+        self.cargo = cargo
+        self.setor = setor
+
+    def baterPonto(self):
+        print(f"Prof. {self.nome} começou a dar aula!")
+</code>
+</pre>
+
+<p>PS: Lembre-se que, ao herdar uma superclasse, caso necessário, deveremos fazer a sobreposição do construtor com o <code>super()</code>, no caso ali, é <code>super().__init__(nome, idade)</code>. O super pode ser usado com qualquer método de uma superclasse.</p>
+
+<p>Vamos criar um objeto assim:</p>
+
+<pre>
+<code>
+a1 = Aluno("José", 17, "Informática", "T01")
+
+a1.fazerAniversario()
+a1.fazerMatricula()
+
+inspect(a1, methods = True) # Importe from rich import print, inspect
+</code>
+</pre>
+
+<p>Como vemos, a classe Aluno recebeu todas as características da classe Pessoa (nome, idade e o método fazerAniversario), mas também adicionou características próprias, da mesma forma acontece com Professor e Funcionario.</p>
+
+<p>Da mesma forma, faremos com Professor:</p>
+
+<pre>
+<code>
+p1 = Professor("Samuel", 37, "Biologia", "Mestre")
+
+p1.fazerAniversario()
+p1.darAula()
+
+inspect(p1, methods = True)
+</code>
+</pre>
+
+<p>E com funcionário:</p>
+
+<pre>
+<code>
+f1 = Funcionario("Cláudia", 27, "Secretária", "Secretaria")
+
+f1.fazerAniversario()
+f1.baterPonto()
+
+inspect(f1, methods = True)
+</code>
+</pre>
+
+<p>PS: Podemos colocar as classes em arquivos separados, inclusive, é o recomendado para melhor organização. Podemos colocar a classe num arquivo como Classes.py, e no código principal, onde criamos os objetos, basta colocar a importação assim:</p>
+
+<pre>
+<code>
+from Classes import Aluno, Professor, Funcionario
+</code>
+</pre>
+
+<p>Caso coloque cada classe num arquivo separado, não esqueça da importação da classe Pessoa nas outras classes pra herança funcionar.</p>
+
+<p>Para executar um arquivo no método principal, podemos salvar um arquivo com o nome __main__.py, e colocar o código assim:</p>
+
+<pre>
+<code>
+def main():
+    # Coloque o código principal aqui dentro, no caso, os objetos criados
+
+if __name__ == "__main__":
+    main()
+</code>
+</pre>
 
 <ul>
     <li><a href="poo-em-python-1.html">Parte Anterior da Matéria!</a></li>
