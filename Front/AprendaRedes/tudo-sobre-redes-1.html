@@ -184,13 +184,13 @@
 
 <h3>Endereço IP</h3>
 
-<p>O endereço IP (Internet Protocol) é o endereço lógico que cada dispositivo na rede deverá ter, por exemplo, computadores, roteadores, tables, smarthphones, etc.</p>
+<p>O endereço IP (Internet Protocol) é o endereço lógico que cada dispositivo na rede deverá ter, por exemplo, computadores, roteadores, tablets, smartphones, etc.</p>
 
-<p>Existe duas formas de colocar o endereço IP na máquina, uma é manualmente, onde entramos na configuração do dispositivo e colocamos o endereço IP, e a outra é através de um servidor DHCP (pode ser uma máquina ou servidor com Windows, Linux, roteador, etc.), que vai atribuir um IP à cada dispositivo que entrar na rede.</p>
+<p>Existem duas formas de colocar o endereço IP na máquina, uma é manualmente, onde entramos na configuração do dispositivo e colocamos o endereço IP, e a outra é através de um servidor DHCP (pode ser uma máquina ou servidor com Windows, Linux, roteador, etc.), que vai atribuir um IP a cada dispositivo que entrar na rede.</p>
 
 <p>Um endereço de IP é formado por quatro números, cada um passando de 001 à 255, como por exemplo, <code>192.168.0.2</code>.</p>
 
-<p>Um IP necessita de uma máscara de subrede, como <code>255.255.255.0</code>, no caso, a máscara, os números 255 indica que o número corresponde ao IP no mesmo ponto (com o exemplo acima seria <code>192.168.0</code> no primeiro) seria de endereço de rede, já os últimos números são referentes ao host (dispositivos). Por exemplo, um computador teria o IP <code>192.168.0.2</code>, seria o computador 2 na rede <code>192.168.0</code>, e o três seria <code>192.168.0.3</code>, e assim por diante, se alterar um deles para, por exemplo, <code>192.168.1.2</code>, ele já faria parte de outra rede. Todos usariam a mesma máscara <code>255.255.255.0</code>.</p>
+<p>Um IP necessita de uma máscara de sub-rede, como <code>255.255.255.0</code>, no caso, a máscara, os números 255 indica que o número corresponde ao IP no mesmo ponto (com o exemplo acima seria <code>192.168.0</code> no primeiro) seria de endereço de rede, já os últimos números são referentes ao host (dispositivos). Por exemplo, um computador teria o IP <code>192.168.0.2</code>, seria o computador 2 na rede <code>192.168.0</code>, e o três seria <code>192.168.0.3</code>, e assim por diante, se alterar um deles para, por exemplo, <code>192.168.1.2</code>, ele já faria parte de outra rede. Todos usariam a mesma máscara <code>255.255.255.0</code>.</p>
 
 <p>Pra facilitar a criação de redes, foram estabelecidos alguns padrões, por exemplo, quando tivermos uma rede, ela terá uma classe padrão. Veja as classes logo abaixo:</p>
 
@@ -202,11 +202,11 @@
 
 <p>PS: Note que faltou o 127, ele é usado para loopback, que explicaremos logo abaixo.</p>
 
-<p>Temos também os vários tipos de endereços à serem usados pelo IP:</p>
+<p>Temos também os vários tipos de endereços a serem usados pelo IP:</p>
 
 <ul>
     <li><b>Endereço Público: </b>Endereço IP fornecido pelas operadoras para acesso à internet.</li>
-    <li><b>Endereço Privado: </b>Usados em redes internas, com os padrões de classes acima (classe A de <code>10.0.0.0</code> à <code>10.255.255.255</code>, classe B de <code>172.16.0.0</code> à <code>172.31.255.255</code> e classe C de <code>192.168.0.0</code> à <code>192.168.255.255</code>). Tipo um ramal de telefone.</li>
+    <li><b>Endereço Privado: </b>Usados em redes internas, com os padrões de classes acima (classe A de <code>10.0.0.0</code> a <code>10.255.255.255</code>, classe B de <code>172.16.0.0</code> a <code>172.31.255.255</code> e classe C de <code>192.168.0.0</code> a <code>192.168.255.255</code>). Tipo um ramal de telefone.</li>
     <li><b>Endereço Loopback: </b>Usado para testes de diagnóstico no próprio dispositivo, usando o <code>127.x.x.x</code> (sua máscara é da classe A, <code>255.0.0.0</code>).</li>
     <li><b>Endereço de Auto-Configuração (APIPA): </b>Ele é usado quando o computador não consegue pegar um endereço IP, por exemplo, ao usar um DHCP. Ele usa o <code>169.254.x.x</code> (sua máscara é da classe B, <code>255.255.0.0</code>).</li>
 </ul>

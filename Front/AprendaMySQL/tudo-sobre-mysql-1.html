@@ -25,7 +25,7 @@
             
 <h2>Tudo sobre MySQL Parte 1</h2>
 
-<h3>Criando o primeiro Banco de Dados</h3>
+<h3>Criando o Primeiro Banco de Dados</h3>
 
 <p>O banco de dados é como um navio com containers, que guardam coisas com características semelhantes (como nomes, senhas, e-mails, etc.). Bancos de dados são conjuntos de tabelas, tabelas são conjuntos de registros e registros contém campos.</p>
 
@@ -165,7 +165,7 @@ default charset = utf8;
 
 <h3>Inserindo Dados na Tabela com Insert Into</h3>
 
-<p>Para inserir dados em tabelas, primeiros a gente pega os nomes dos campos do MySQL, separados por vírgula, assim:</p>
+<p>Para inserir dados em tabelas, primeiro a gente pega os nomes dos campos do MySQL, separados por vírgula, assim:</p>
 
 <pre>
 <code>
@@ -176,7 +176,7 @@ values
 </code>
 </pre>
 
-<p>PS: As datas em MySQL são colocadas ao contrário do que estamos acostumandos, no formato ano-mês-dia. E qualquer tipo de dados se coloca entre aspas. Alguns campos não precisam ser específicados, no caso anterior, foi o ID.</p>
+<p>PS: As datas em MySQL são colocadas ao contrário do que estamos acostumados, no formato ano-mês-dia. E qualquer tipo de dados se coloca entre aspas. Alguns campos não precisam ser especificados, no caso anterior, foi o ID.</p>
 
 <p>Também pode colocar default em alguns campos (nesse caso, sem aspas), assim:</p>
 
@@ -296,7 +296,7 @@ change column profissao prof varchar(25) not null default '';
 </code>
 </pre>
 
-<p>PS: Como visto, você deve colocar o nome antigo (a ser alterado) seguido do novo nome. E para manter as constrains e tipos primitivos, deve se colocar novamente elas com os mesmos valores, como também podem ser alteradas.</p>
+<p>PS: Como visto, você deve colocar o nome antigo (a ser alterado) seguido do novo nome. E para manter as constraints e tipos primitivos, deve se colocar novamente elas com os mesmos valores, como também podem ser alteradas.</p>
 
 <p>Para renomear a tabela inteira, você usa o comando <code>rename to</code>, dessa forma:</p>
 
@@ -322,7 +322,7 @@ default charset = utf8;
 </code>
 </pre>
 
-<p>Para adicionar chaves primárias no campo acima, fazemos assim, como por exemplo, pra adicionar um código:</p>
+<p>Para adicionar chaves primárias na tabela acima, fazemos assim, como por exemplo, pra adicionar um código:</p>
 
 <pre>
 <code>
@@ -344,7 +344,7 @@ add primary key(idcurso);
 
 <pre>
 <code>
-alter table gafanhotos
+alter table cursos
 drop primary key;
 </code>
 </pre>
@@ -358,7 +358,7 @@ drop index nome;
 </code>
 </pre>
 
-<p>PS: Não é possível deletar uma chave primária definida com auto-incremento, então use o <code>modify column</code> antes de deletar uma chave primária. O modify também pode ser usado para devolver a constraint unique à uma chave.</p>
+<p>PS: Não é possível deletar uma chave primária definida com auto-incremento, então use o <code>modify column</code> antes de deletar uma chave primária. O modify também pode ser usado para devolver a constraint unique a uma chave.</p>
 
 <p>Para excluir uma tabela, podemos usar o drop assim:</p>
 

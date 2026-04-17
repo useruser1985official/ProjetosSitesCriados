@@ -172,6 +172,130 @@ if __name__ == "__main__":
 </code>
 </pre>
 
+<h3>Abstração</h3>
+
+<p>A abstração é outro pilar importante da Programação Orientada a Objetos, junto com encapsulamento, herança e polimorfismo. Geralmente a abstração é o primeiro pilar. A abstração é a prática de ignorar o irrelevante e se focar estritamente no essencial.</p>
+
+<p>Vamos supor um controle remoto, o que precisamos saber pra usar um desses, é o que cada botão faz, como o de liga-desliga ou o de volume, no entanto, não precisamos saber do funcionamento interno de circuitos, sensores e alimentação, por exemplo. Ou seja, só precisamos saber do que ele faz, e não como ele faz. Isso é um exemplo de abstração. Outro exemplo é um carro, nós temos que saber como dirigir ele, mas não precisamos saber do funcionamento interno do motor, freios, etc. para usar ele. O mesmo vale pro próprio computador, que pra usar um não precisamos saber como funciona cada componente de hardware, basta sabemos o que temos que usar. As coisas descritas, como os botões do controle, o volante e os pedais que usamos pra dirigir um carro, ou o teclado e mouse do computador, seriam a interface pública que temos que interagir para usar os mesmos, sem se preocupar com o que acontece internamente, além de proteger os componentes internos da gente e vice-versa.</p>
+
+<p>As principais vantagens do uso da abstração são essas:</p>
+
+<ul>
+    <li>Maior legibidade.</li>
+    <li>Padronização.</li>
+    <li>Simplificação.</li>
+    <li>Segurança.</li>
+</ul>
+
+<p>Existe a abstração de dados, que acontece quando ignoramos informações desnecessárias para o escopo do projeto (como por exemplo, a classe Aluno, que herda de Pessoa, pra classificar um aluno não precisamos de dados como altura e peso, por exemplo, mesmo que uma pessoa tenha essas características). Existe também a abstração de processos, quando não precisamos saber como um método faz seu trabalho, apenas sabe que ele existe pela interface.</p>
+
+<p>Usando o exemplo do controle remoto, sabemos que existem vários tipos de controles remotos (como por exemplo, pra TVs), com quantidade variada de botões, mas algumas funcionalidades são básicas, como ligar e desligar aparelho, controlar o volume, mudar de canal, entre outros, e todos eles tem isso em comum. Mas controles de marcas e modelos diferentes vão implementar essas funcionalidades de formas diferentes para cada modelo de TV, por exemplo. Então podemos colocar funções abstratas para essas funcionalidades comuns, no caso, as funções abstratas não serão implementadas na classe mãe, e sim nas classes herdeiras da mesma, que cada um implementará da sua forma. Um controle remoto de outro aparelho, como de um ar-condicionado, já não poderá ter essa classe do controle como base, porque tem outros tipos de botões.</p>
+
+<p>Basicamente, os métodos abstratos são definidos na classe, que também é abstrata. As classes abstratas não podem virar objetos, apenas servirão de base para objetos criados por classes herdeiras, que obrigatoriamente terão que implementar todos os métodos abstratos, sem exceção.</p>
+
+<p>Vamos voltar ao exemplo das classes Pessoa e suas herdeiras, Aluno, Professor e Funcionario. Um método da classe Pessoa como o <code>fazerAniversario</code> pode já ser implementado na classe Pessoa porque ela funciona igual pra qualquer classe herdeira. A classe Pessoa no caso será abstrata e não gerará objeto, que serão criados com suas classes herdeiras. As classes que virarão objetos serão chamadas de classes especializadas, e são classes concretas. Podemos criar novas classes baseadas na abstrata Pessoa, como a Colaborador, e ela herdará tudo dela.</p>
+
+<p>No caso, da classe Pessoa, o método <code>fazerAniversario</code> é concreto (ou seja, implementado), mas ela pode ter um método abstrato, como o estudar, e toda classe herdeira obrigatoriamente terá que implementar esse método, e cada um (Aluno, Professor, etc.) estuda de uma forma diferente do outro.</p>
+
+<p>Em resumo, uma classe abstrata numa será instanciada, já que ela será usada apenas como base para as subclasses. Ao definir um conjunto de métodos abstratos, dizemos que estamos criando a interface pública da classe. Uma classe abstratas pode ter métodos abstratos que deverão ser obrigatoriamente implementados nas subclasses. Mas uma classe abstrata pode ter métodos concretos se eles funcionarem da mesma maneira para todas as subclasses (conhecido pela sigla <q>DRY</q>).</p>
+
+<p>Os métodos abstratos não tem corpo, sendo necessário ter um <code>pass</code> para indicar bloco vazio. Para definir uma classe abstrata, devemos importar a biblioteca ABC (Abstract Base Classes), já que a abstração não existe por padrão no Python.</p>
+
+<p>Vamos voltar às classes da aula anterior, vamos criar um objeto com a classe Pessoa, e ele deixará normalmente, assim:</p>
+
+<pre>
+<code>
+x = Pessoa("Gustavo", 48)
+
+x.fazerAniversario()
+
+inspect(x, methods = True)
+</code>
+</pre>
+
+<p>No caso, só poderemos usar os atributos e métodos que estão em Pessoa (como o método <code>fazerAniversario</code>), não poderemos usar métodos de subclasses como o de Aluno e de Professor).</p>
+
+<p>Para tornar a classe Pessoa abstrata, importamos a biblioteca ABC, e fazemos essa classe <q>herdar</q> da classe ABC, assim:</p>
+
+<pre>
+<code>
+from abc import ABC
+
+class Pessoa(ABC):
+    def __init__(self, nome = "", idade = 0):
+        self.nome = nome
+        self.idade = idade
+
+    def fazerAniversario(self):
+        self.idade += 1
+</code>
+</pre>
+
+<p>Dessa forma acima, a classe Pessoa não poderá mais ser usada pra criar objetos, apenas para servir de base pra criação de outras classes (no caso, a Aluno, Professor e Funcionario). Na verdade isso é mais uma sinalização de abstração, diferente de linguagens como o Java que dão erro a tentar instanciar uma classe abstrata.</p>
+
+<p>Quando tornamos uma classe abstrata, podemos definir métodos abstratos, nesse caso importaremos também o abstractmethod de abc, e criaremos o método <code>estudar</code> sem corpo e com essa sinalização, assim:</p>
+
+<pre>
+<code>
+from abc import ABC, abstractmethod
+
+class Pessoa(ABC):
+    def __init__(self, nome = "", idade = 0):
+        self.nome = nome
+        self.idade = idade
+
+    def fazerAniversario(self):
+        self.idade += 1
+        
+    @abstractmethod
+    def estudar(self):
+        pass
+</code>
+</pre>
+
+<p>Agora sim, pode dar erro ao tentar instanciar a classe Pessoa. E todas as classe herdeiras deverão obrigatoriamente implementar os métodos abstratos (no caso, a <code>estudar</code>).</p>
+
+<p>PS: Ao clicar ao lado de uma classe herdeira, podemos ir no Pycharm e pedir para ele implementar os métodos abstratos. E não esqueça de remover a tentativa de instanciar a classe Pessoa, pra não dar erros, que iremos inclusive corrigir agora.</p>
+
+<p>Na classe Aluno, implemente o método <code>estudar</code> assim:</p>
+
+<pre>
+<code>
+def estudar(self):
+    print(f"{self.nome} está estudando {self.curso} na turma {self.turma}.")
+</code>
+</pre>
+
+<p>Em Professor assim:</p>
+
+<pre>
+<code>
+def estudar(self):
+    print(f"{self.nome} é especialista em {self.especialidade} no nível {self.nivel}.")
+</code>
+</pre>
+
+<p>E em Funcionario assim:</p>
+
+<pre>
+<code>
+def estudar(self):
+    print(f"{self.nome} se especializa na área de {self.setor}.")
+</code>
+</pre>
+
+<p>Veja que cada classe implementou o método <code>estudar</code> de uma forma diferente, usando seus próprios atributos, além de um atributo em comum (nome).</p>
+
+<p>Podemos usar o método estudar dos três objetos assim:</p>
+
+<pre>
+<code>
+a1.estudar()
+p1.estudar()
+f1.estudar()
+</code>
+</pre>
+
 <ul>
     <li><a href="poo-em-python-1.html">Parte Anterior da Matéria!</a></li>
     <!--<li><a href="poo-em-python-3.html">Continuação da Matéria!</a></li>-->
