@@ -89,9 +89,9 @@ nomedousuario	ALL=(ALL:ALL) ALL
 </code>
 </pre>
 
-<h4>Instalar Pacotes Tar</h4>
+<h4>Instalar Pacotes Tar Compilados</h4>
 
-<p>Se for instalar programas baixados em arquivos tar:</p>
+<p>Se for instalar programas baixados em arquivos tar, que já estejam compilados, faça assim:</p>
 
 <pre>
 <code>
@@ -113,11 +113,23 @@ rm nomedopacote.tar.gz
 
 <p>O comando ln -s cria um link para a pasta /usr/bin, de forma que possamos abrir ele usando o terminal apenas digitando o nome do programa.</p>
 
-<p>Esse processo pode ser usado para instalar programas (caso já estejam compilados) na pasta <code>/opt</code>, por exemplo, onde ele ficará acessível a todos os usuários.</p>
+<p>Esse processo pode ser usado para instalar programas (nesse caso, que já estejam compilados) na pasta <code>/opt</code>, por exemplo, onde ele ficará acessível a todos os usuários.</p>
 
 <p>PS: Se conter um arquivo install ou readme, olhe ele para ver se a forma de instalar pode ter alguma diferença, como dependências ou comandos específicos. A documentação do desenvolvedor no site oficial também pode ter informações do tipo.</p>
 
 <p>Só lembrando de que o tar é apenas um arquivador, as extensões xz, bz2, gz e etc., são as compactações usadas nos arquivos, que se tiverem em c, cpp e h, e tiverem um makefile, eles não foram compilados (são apenas códigos-fontes). Quanto tiverem arquivos so, sh e executáveis (sem extensões, geralmente), ele já está compilado. Sempre olhe dentro da pasta descompactada para ver os tipos de arquivos dentro dela.</p>
+
+<p>Lembrando também que cada tipo de arquivo TAR tem seu comando específico para descompactar, como podem ver:</p>
+
+<ul>
+    <li><code>tar -xvf nomedoarquivo.tar.xz</code> - Descompacta tar.xz.</li>
+    <li><code>tar -zxvf nomedoarquivo.tar.gz</code> - Descompacta tar.gz e tgz.</li>
+    <li><code>tar -jxvf nomedoarquivo.tar.bz2</code> - Descompacta tar.bz2.</li>
+</ul>
+
+<p>Mais raramente, podem ter programas distribuídos com compactadores mais comuns, como ZIP ou RAR, nesse caso é só usar <code>unzip arquivo.zip</code> e <code>unrar x arquivo.rar</code>, respectivamente.</p>
+
+<h4>Instalar Pacotes Tar com Códigos-Fonte</h4>
 
 <p>Caso o pacote tar venha com os códigos-fonte pra compilar, use esses comandos para compilar o programa (pode demorar um pouco), após mover ele pro diretório definitivo (como o /opt):</p>
 
@@ -146,14 +158,6 @@ sudo make install
 <p>Para deinstalar é só ir no diretório onde ele se localiza e dar <code>make uninstall</code>.</p>
 
 <p>PS: Para compilar corretamente é necessário ter instalado o build-essential, usando um <code>sudo apt-get install build-essential</code>, que contém as ferramentas necessárias, incluindo o gcc e g++. Também é necessário instalar o zlib, com <code> sudo apt-get install zlib</code>, <code> sudo apt-get install zlib-devel</code>, ou já faça tudo com <code> sudo apt-get install build-essential libglib2.0-dev libgtk2.0-dev libxml2-dev openbsd-inetd ckermit libgtk-3-dev checkinstall</code>.</p>
-
-<p>Lembrando que cara tipo de arquivo tem seu comando específico para descompactar, como podem ver:</p>
-
-<ul>
-    <li><code>tar -xvf nomedoarquivo.tar.xz</code> - Descompacta tar.xz</li>
-    <li><code>tar -zxvf nomedoarquivo.tar.gz</code> - Descompacta tar.gz e tgz</li>
-    <li><code>tar -jxvf nomedoarquivo.tar.bz2</code> - Descompacta tar.bz2</li>
-</ul>
 
 <h4>Criar Atalhos</h4>
 

@@ -77,17 +77,17 @@
 
 <p>No caso, ele criará um repositório local onde colocaremos nossos códigos. Nessa mesma pasta criada, tem um diretório oculto com o nome <q>.git</q> onde nós temos os dados do repositório.</p>
 
-<p>PS: Pode ser que tenhamos que configurar o usuário para realizar os commits, nesse caso abrimos o Open Git Settings (ou indo e File e Options) e em Git colocamos o nome e o e-mail do usuário, além do branch principal padrão para novos repositórios (como master ou main).</p>
+<p>PS: Pode ser que tenhamos que configurar o usuário para realizar os commits, nesse caso abrimos o Open Git Settings (ou indo em File e Options) e em Git colocamos o nome e o e-mail do usuário, além do branch principal padrão para novos repositórios (como master ou main).</p>
 
 <p>Ao criar o repositório, ele já fará um commit automaticamente, mas podemos desfazer ele clicando em Undo. Podemos ver em History para ver as alterações feitas no repositório. Para fazer um commit no repositório local, coloque o nome dele e clique em Commit logo abaixo.</p>
 
-<p>Para publicar o repositório remotamente no GitHub, vá na parte de cima do GitHub Desktop e clique em Publish Repository. Ele pedirá o nome e a descrição, e se o repositório sera privado (se quiser ele público, basta desmarcar essa opção). Um repositório privado pode ter até 3 colaboradores, já um público a quantidade de colaboradores é ilimitada.</p>
+<p>Para publicar o repositório remotamente no GitHub, vá na parte de cima do GitHub Desktop e clique em Publish Repository. Ele pedirá o nome e a descrição, e se o repositório será privado (se quiser ele público, basta desmarcar essa opção). Um repositório privado pode ter até 3 colaboradores, já um público a quantidade de colaboradores é ilimitada.</p>
 
 <p>PS: Podemos abrir o repositório local no VS Code ou Sublime Text para editar os códigos dos programas. Outras IDEs também costumam ter integração com o Git.</p>
 
 <p>Abrindo um arquivo, como o ReadMe, podemos editar ele, e o GitHub Desktop já perceberá as alterações e sugerirá fazer um commit, então fazemos o commit colocando o nome dele, e ele já estará atualizado localmente. Para publicar no repositório remoto vinculado, clique em Push Origin.</p>
 
-<p>Podemos alterar os arquivos diretamente no site do GitHub, podemos por exemplo editar o README e clicar em Commit Changes. Coloque o motivo do Commit e escolha a opção Commit Directy to the master Branch. Futuramente podemos criar outras branchs para o mesmo projeto.</p>
+<p>Podemos alterar os arquivos diretamente no site do GitHub, podemos por exemplo editar o README e clicar em Commit Changes. Coloque o motivo do Commit e escolha a opção Commit Directy to the master Branch. Futuramente podemos criar outras branches para o mesmo projeto.</p>
 
 <p>Para atualizar nosso repositório local, que teve alterações, clique em Fetch Origin, e depois que ele terminar, em Pull Origin para ele puxar o que está no repositório remoto para o nosso repositório local.</p>
 
@@ -99,7 +99,7 @@
 
 <p>Para clonar um repositório (que pode ser de outro usuário), nós abrimos a página do GitHub onde está o repositório, como esse aqui: <a href="https://github.com/gustavoguanabara/html-css" target="_blank">https://github.com/gustavoguanabara/html-css</a></p>
 
-<p>Podemos baixar diretamente como ZIP ou usando as linhas de comando, mas como estamos utilizando o GitHub Desktop, podemos copiar o link do Git e colar no programa, em Clone Repository, mas podemos clicar diretamente na opção Open with GitHub Desktop que ele abrirá o repositório para ser clonado pro seu computador. Ele copiará absolutamente tudo que está no repositório especificado.</p>
+<p>Podemos baixar diretamente como ZIP ou usando as linhas de comando, mas como estamos utilizando o GitHub Desktop, podemos copiar o link do repositório e colar no programa, em Clone Repository, mas podemos clicar diretamente na opção Open with GitHub Desktop que ele abrirá o repositório para ser clonado pro seu computador. Ele copiará absolutamente tudo que está no repositório especificado.</p>
 
 <p>Lembrando que nós não podemos alterar diretamente um repositório de outras pessoas, para isso devemos usar Issues, que aprenderemos mais pra frente.</p>
 
@@ -113,7 +113,7 @@
 
 <p>Para pegar um projeto antigo e versionar ele com Git, abra o GitHub Desktop, clique em File e em New Repository, da mesma forma, coloque o nome do repositório como antes. Caso você tenha uma organização, você pode escolher ela (isso é só pra quem tem empresas cadastradas no GitHub). Daí é só arrastar os códigos para a pasta do repositório e o GitHub Desktop já vai identificar as mudanças.</p>
 
-<p>PS: Caso tenha algum arquivos inútil na pasta, podemos excluir ela no GitHub Desktop, no caso ele vai criar um arquivo oculto com o nome .gitignore onde ele vai ignorar os arquivos especificados, não subindo eles pro servidor do GitHub. Daí, é só fazer o Commit e o Push pro repositório remoto.</p>
+<p>PS: Caso tenha algum arquivo inútil na pasta, podemos excluir ele no GitHub Desktop, no caso ele vai criar um arquivo oculto com o nome <q>.gitignore</q> onde ele vai ignorar os arquivos especificados, não subindo eles pro servidor do GitHub. Daí, é só fazer o Commit e o Push pro repositório remoto.</p>
 
 <p>Um arquivo .gitignore pode ter a sintaxe assim, descrevendo os arquivos e pastas que devem ser ignorados:</p>
 
@@ -224,7 +224,7 @@ else:
 
 <p>Na parte de cima podemos escolher qual a branch atual (current), para publicar no repositório remoto, basta ir em Publish Branch.</p>
 
-<p>Num projeto profissional, cada setor de um projeto (como design, front-end e back-end) pode ter sua própria branch pra mexer. Todas as branchs podem ser publicadas no repositório remoto, assim como acontece localmente.</p>
+<p>Num projeto profissional, cada setor de um projeto (como design, front-end e back-end) pode ter sua própria branch pra mexer. Todas as branches podem ser publicadas no repositório remoto, assim como acontece localmente.</p>
 
 <p>PS: Ao mudar a branch no GitHub Desktop, ele automaticamente atualizará o código no Sublime Text ou no VS Code. Outras IDEs também atualizarão seus códigos automaticamente.</p>
 
