@@ -75,7 +75,7 @@ insert into cursos values
 
 <p>Um comando manipula uma linha por vez, mas dentro de uma linha dá pra mexer em várias colunas ao mesmo tempo.</p>
 
-<p>Para modificar algum dado, você usará o comando assim, o <code>update</code> atualiza, o <code>set</code> muda o nome e o campo desejado, e o <code>where</code> identifica a chave primária da linha alterada, dessa forma:</p>
+<p>Para modificar algum dado, você usará o comando assim, o <code>update</code> atualiza, o <code>set</code> muda o campo especificado, e o <code>where</code> identifica a chave primária da linha alterada, dessa forma:</p>
 
 <pre>
 <code>
@@ -95,7 +95,7 @@ where idcurso = '3';
 </code>
 </pre>
 
-<p>Para evitar que a alteração limite a mais de uma linha, coloque o comando <code>limit</code>, mas ele pode ser dispensado caso use correntamente o where. Dessa forma:</p>
+<p>Para evitar que a alteração atinja mais de uma linha, coloque o comando <code>limit</code>, mas ele pode ser dispensado caso use corretamente o where. Dessa forma:</p>
 
 <pre>
 <code>
@@ -141,11 +141,11 @@ truncate table cursos;
 
 <p>Para explicar, vamos primeiramente recolocar os dados na tabela cursos, como descrito anteriormente.</p>
 
-<p>Para exportar banco de dados, é só ir no PHPMyAdmin, em New e exportar os bancos desejados (se faz o mesmo em tabelas, dentro do banco de dado desejado). Lá tem as opções e também o formato desejado. Para importar faz do mesmo modo, em Importar.</p>
+<p>Para exportar banco de dados, é só ir no PHPMyAdmin, em New e exportar os bancos desejados (se faz o mesmo em tabelas, dentro do banco de dados desejado). Lá tem as opções e também o formato desejado. Para importar faz do mesmo modo, em Importar.</p>
 
 <p>PS: É recomendável marcar a opção de exportar personalizada, e marcar as opções drop database ou drop table, para apagar a tabela antiga.</p>
 
-<p>Quando for editar um arquivo SQL, você pode usar <code>--</code> Ao lado das linhas que são comentários, por exemplo:</p>
+<p>Quando for editar um arquivo SQL, você pode usar <code>--</code> ao lado das linhas que são comentários, por exemplo:</p>
 
 <pre>
 <code>

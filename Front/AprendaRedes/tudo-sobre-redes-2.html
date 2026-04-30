@@ -56,7 +56,7 @@
 
 <p>Usando estes conceitos podemos capturar todo ou quase todo tráfego de uma rede LAN, num programa como o Wireshark (num hub acaba sendo mais fácil devido ao fato deste enviar pacotes a todos os hosts, num switch é um pouco mais difícil).</p>
 
-<p>Veja a imagem de um Hub:</p>
+<p>Veja a imagem de um hub:</p>
 
 <img src="imagens/hub.jpg" alt="Hub"/>
 
@@ -80,20 +80,20 @@
     <li><b>Anos 70:</b> Surgem os protocolos de comunicação, especialmente o TCP/IP, que padronizaram como os dados são enviados entre redes diferentes.</li>
     <li><b>Anos 80:</b> A arpanet cresce e começa a se conectar com outras redes, formando a base do que viria a ser a internet.</li>
     <li><b>Anos 90:</b> Com a criação da World Wide Web por Tim Berners-Lee, a internet se torna acessível ao público, com sites e navegadores.</li>
-    <li><b>2000 até hoje:</b> Expansão global com banda larga, Wi-Fi e smartphones, transformando a internet em algo essencial para comunicação, trabalho e entretenimento.</li>
+    <li><b>2000 até hoje:</b> Expansão global com banda larga, wi-fi e smartphones, transformando a internet em algo essencial para comunicação, trabalho e entretenimento.</li>
 </ul>
 
-<p>Em resumo: a internet começou como um projeto militar/acadêmico e evoluiu para uma rede mundial pública que conecta bilhões de dispositivos.</p>
+<p>Em resumo: A internet começou como um projeto militar/acadêmico e evoluiu para uma rede mundial pública que conecta bilhões de dispositivos.</p>
 
-<h3>O Que é Vlan</h3>
+<h3>O Que é VLAN</h3>
 
-<p>Uma vlan permite segmentar um domínio de broadcast.</p>
+<p>Uma VLAN permite segmentar um domínio de broadcast.</p>
 
 <p>Vamos supor que um computador mande uma mensagem pra um switch, e todos os computadores da rede ouçam sua mensagem (supondo que tenham 48), e também o outro switch ligado à ele, também com 48, totalizando 96 hosts, cada computador teria que parar 95 vezes para ouvir o broadcast dos outros pra ver se é dele, o que causaria um problema na rede.</p>
 
-<p>Nesse momento, é bom saber uma quantidade máxima de computadores suportados. Para isso criamos uma vlan (ligando e configurando os switchs), vamos supor que tenhamos vlan 1 e vlan 2 (podendo ter mais, não confundir com os switch, em ambos tem computadores de ambas as vlans), nesse caso, apenas os computadores que estão na mesma vlan que receberão a mensagem. Isso é útil por exemplo, numa empresa, na qual podemos dividir por exemplo, as informações do marketing e do financeiro, onde uma não interfere na outra.</p>
+<p>Nesse momento, é bom saber uma quantidade máxima de computadores suportados. Para isso criamos uma VLAN (ligando e configurando os switchs), vamos supor que tenhamos VLAN 1 e VLAN 2 (podendo ter mais, não confundir com os switch, em ambos tem computadores de ambas as VLANs), nesse caso, apenas os computadores que estão na mesma VLAN que receberão a mensagem. Isso é útil por exemplo, numa empresa, na qual podemos dividir por exemplo, as informações do marketing e do financeiro, onde uma não interfere na outra.</p>
 
-<p>Também temos o protocolo 802.1Q. Vamos supor que temos a vlan 1 e vlan 2, que coloca uma "tag" informando sobre a vlan da qual o dispositivo pertence e envia a mensagem pros dispositivos da mesma vlan. Após a entrega das informações, ele destroí essa tag, que não é recebida pelos computadores.</p>
+<p>Também temos o protocolo 802.1Q. Vamos supor que temos a VLAN 1 e VLAN 2, que coloca uma "tag" informando sobre a VLAN da qual o dispositivo pertence e envia a mensagem pros dispositivos da mesma VLAN. Após a entrega das informações, ele destroí essa tag, que não é recebida pelos computadores.</p>
 
 <h3>Introdução ao HTTP</h3>
 
@@ -451,7 +451,7 @@
 
 <ul>
     <li><b>T - </b>Par trançado.</li>
-    <li><b>C - </b>Coaxial (ou um número 5 indicando que o cabo pode chegar à 500m ou 2 indicando 185m.</li>
+    <li><b>C - </b>Coaxial (ou um número 5 indicando que o cabo pode chegar a 500 M ou 2 indicando 185 M).</li>
     <li><b>F - </b>Fibra Óptica (pode ser S ou L também).</li>
 </ul>
 

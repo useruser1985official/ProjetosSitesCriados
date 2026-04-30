@@ -413,7 +413,7 @@ show ip route
 
 <p>PS: Caso precise excluir uma rota estática num roteador, digite algo como <code>no ip route 192.168.3.0 255.255.255.0 192.168.2.2</code>.</p>
 
-<h3>Firewall: Listas de controle de acesso (ACL) no Cisco Packet Tracer</h3>
+<h3>Firewall: Listas de Controle de Acesso (ACL)</h3>
 
 <p>Coloque um PC com o IP <code>192.168.1.2</code> com o gateway <code>192.168.1.1</code>, e um roteador 2621XM ligado a ele com o IP <code>192.168.1.1</code> e máscara padrão C, mas do outro lado do roteador terá o IP <code>192.168.2.1</code> e a máscara <code>255.255.255.252</code> (outra rede). Coloque ao lado um firewall 5506 e no final, um servidor. No firewall, que será configurado por último, a porta ligada ao roteador terá a mesma máscara e o IP <code>192.168.2.2</code>. Do outro lado, será outra rede, com o IP do firewall sendo <code>192.168.3.1</code> e o servidor com o IP <code>192.168.3.2</code> com o gateway <code>192.168.3.1</code>, ambos com a máscara <code>255.255.255.252</code>.</p>
 
@@ -545,7 +545,8 @@ exit
 <code>
 conf t
 
-access-list permitir-http extended permit tcp 192.168.1.0 255.255.255.0 host 192.168.3.2 eq 80 # Permitindo qualquer requisição TCP na porta 80 ao servidor.
+# Permitindo qualquer requisição TCP na porta 80 ao servidor.
+access-list permitir-http extended permit tcp 192.168.1.0 255.255.255.0 host 192.168.3.2 eq 80
 
 access-group permitir-http in interface cliente
 

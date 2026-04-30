@@ -49,7 +49,7 @@
 
 <p>Podemos ver que temos nos equipamentos (por exemplo, num roteador), temos interface de linha de comando (até porque num equipamento físico geralmente é usado assim), podemos <q>desligar</q> e <q>ligar</q> os equipamentos, trocar placas de rede deles, etc.</p>
 
-<h3>Tipos de Cabos e Como Inteligar Dois Computadores</h3>
+<h3>Tipos de Cabos e Como Interligar Dois Computadores</h3>
 
 <p>Coloque dois PCs na nossa rede.</p>
 
@@ -61,7 +61,7 @@
 
 <p>Ligue os dois PCs com o cabo Cross-Over no nas portas FastEthernet deles.</p>
 
-<p>A porta FastEthernet conecta até 100 mbps, o Ethernet conecta até 10 mbps e o GigaEthernet conecta até 1 gbps.</p>
+<p>A porta FastEthernet conecta até 100 Mbps, o Ethernet conecta até 10 Mbps e o GigaEthernet conecta até 1 Gbps.</p>
 
 <p>PS: Podemos mudar a placa de rede nos PCs desligando eles e trocando as placas, por exemplo a placa FastEthernet por uma Wireless, mas no caso aqui não usaremos isso.</p>
 
@@ -99,7 +99,7 @@
 
 <p>Vamos colocar os IPs nos PCs das duas redes (<code>192.168.1.10</code>, <code>192.168.1.11</code> e <code>192.168.1.12</code> na rede do switch. E <code>192.168.2.10</code>, <code>192.168.2.11</code>, <code>192.168.2.12</code>).</p>
 
-<p>Vá em Simulation e vá clique na cartinha e envie a mensagem do PC 0 ao PC 2 ligados ao switch, e veja que só o PC 2 a recebe. Faça o mesmo na rede com o hub e veja que todos os PCs (inclusive o que enviou a mensagem) recebem a mensagem, que acaba serndo descartada pelos PCs que não são destinatários da mesma.</p>
+<p>Vá em Simulation e vá clique na cartinha e envie a mensagem do PC 0 ao PC 2 ligados ao switch, e veja que só o PC 2 a recebe. Faça o mesmo na rede com o hub e veja que todos os PCs (inclusive o que enviou a mensagem) recebem a mensagem, que acaba sendo descartada pelos PCs que não são destinatários da mesma.</p>
 
 <p>Isso mostra o motivo pelos quais os hubs caíram em desusos, pois com redes com muitos dispositivos eles dariam problemas com o envio das mensagens. O switch já envia para apenas os destinatários, mas ele também pode ser configurado.</p>
 
@@ -351,11 +351,11 @@
 
 <p>Coloque um switch 2960 e coloque dois computadores, no primeiro ligue na porta Fast 1 e o segundo na porta Fast 13. Coloque os IPs <code>192.168.0.1</code> e <code>192.168.0.2</code>. Eles se comunicarão normalmente, podemos fazer o teste da cartinha pra isso.</p>
 
-<p>Vá no Switch, em VLAN Database, você verá que todos os dispositivos estão na VLAN default. Podemos criar nossas próprias VLANS, numeradas entre 1 e 4095. No caso faremos a vlan1 Nº 10 e a vlan2 Nº 11 e adicionar. As portas da VLAN 1 não se comunicação com as da VLAN 2.</p>
+<p>Vá no Switch, em VLAN Database, você verá que todos os dispositivos estão na VLAN default. Podemos criar nossas próprias VLANs, numeradas entre 1 e 4095. No caso faremos a VLAN 1 Nº 10 e a VLAN 2 Nº 11 e adicionar. As portas da VLAN 1 não se comunicação com as da VLAN 2.</p>
 
 <p>Em cada porta, nós selecionamos a VLAN desejada na qual queremos que ela esteja.</p>
 
-<h3>Firewall básico</h3>
+<h3>Firewall Básico</h3>
 
 <p>Colocaremos dois computadores no cenário. O computador terá o IP <code>192.168.0.1</code> e a máscara padrão C. O outro terá o IP <code>192.168.0.2</code> e a mesma máscara. Ligue ambos com um cabo Cross. Mas as configurações no firewall faremos no PC 1.</p>
 

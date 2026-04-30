@@ -1,4 +1,54 @@
-<!DOCTYPE html>
+from abc import ABC, abstractmethod
+import math
+from rich import print, inspect
+
+class Poligono(ABC):
+    def __init__(self, qtdLados):
+        self.qtdLados = qtdLados
+
+    @abstractmethod
+    def perimetro(self) -> float:
+        pass
+
+    @abstractmethod
+    def area(self) -> float:
+        pass
+
+class Quadrado(Poligono):
+    def __init__(self, lado = 1):
+        super().__init__(4)
+        self.lado = lado
+
+    def perimetro(self):
+        return self.lado * 4
+
+    def area(self):
+        return self.lado ** 2
+
+class Circulo(Poligono):
+    def __init__(self, raio = 1):
+        super().__init__(0)
+        self.raio = raio
+
+    def perimetro(self):
+        return 2 * math.pi * self.raio
+
+    def area(self):
+        return math.pi * self.raio ** 2
+
+def main():
+    q = Quadrado(20)
+
+    print(f"Um quadrado de lado {q.lado}CM tem perímetro de {q.perimetro():.1f}CM.")
+    print(f"Um quadrado de lado {q.lado}CM tem área de {q.area():.1f}CM².")
+
+    c = Circulo(12)
+
+    print(f"Um círculo de raio {c.raio}CM tem perímetro de {c.perimetro():.1f}CM.")
+    print(f"Um círculo de raio {c.raio}CM tem área de {c.area():.1f}CM².")
+
+if __name__ == "__main__":
+    main()<!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
@@ -32,7 +82,42 @@
 
 <pre>
 <code>
+from abc import ABC, abstractmethod
+import math
 
+class Poligono(ABC):
+    def __init__(self, qtdLados):
+        self.qtdLados = qtdLados
+
+    @abstractmethod
+    def perimetro(self) -> float:
+        pass
+
+    @abstractmethod
+    def area(self) -> float:
+        pass
+
+class Quadrado(Poligono):
+    def __init__(self, lado = 1):
+        super().__init__(4)
+        self.lado = lado
+
+    def perimetro(self):
+        return self.lado * 4
+
+    def area(self):
+        return self.lado ** 2
+
+class Circulo(Poligono):
+    def __init__(self, raio = 1):
+        super().__init__(0)
+        self.raio = raio
+
+    def perimetro(self):
+        return 2 * math.pi * self.raio
+
+    def area(self):
+        return math.pi * self.raio ** 2
 </code>
 </pre>
 
@@ -40,7 +125,21 @@
 
 <pre>
 <code>
+from rich import print, inspect
 
+def main():
+    q = Quadrado(20)
+
+    print(f"Um quadrado de lado {q.lado}CM tem perímetro de {q.perimetro():.1f}CM.")
+    print(f"Um quadrado de lado {q.lado}CM tem área de {q.area():.1f}CM².")
+
+    c = Circulo(12)
+
+    print(f"Um círculo de raio {c.raio}CM tem perímetro de {c.perimetro():.1f}CM.")
+    print(f"Um círculo de raio {c.raio}CM tem área de {c.area():.1f}CM².")
+
+if __name__ == "__main__":
+    main()
 </code>
 </pre>
 

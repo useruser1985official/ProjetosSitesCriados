@@ -223,7 +223,7 @@
 
 <p>Em redes de computadores, uma porta é um software de aplicação específica ou processo específico servindo de ponto final de comunicações em um sistema operacional hospedeiro de um computador. Uma porta tem associação com o endereço de IP do hospedeiro, assim como o tipo de protocolo usado para comunicação. O propósito das portas é para singularmente identificar aplicações e processos de um único computador e assim possibilitá-los a compartilhar uma única conexão física com uma rede de comutação de pacotes, como a internet.</p>
 
-<p>Imagine que as duas partes do endereço IP (a parte referente à rede e a parte referente ao host) correspondem ao CEP da rua e ao número do prédio. Um carteiro só precisa destas duas informações para entregar uma carta. Mas, dentro do prédio moram várias pessoas. O CEP e número do prédio só vão fazer a carta chegar até a portaria. Daí em diante é preciso saber o número do apartamento. É aqui que entram as famosas portas TCP.</p>
+<p>Imagine que as duas partes do endereço IP (a parte referente à rede e a parte referente ao host) correspondem ao CEP da rua e ao número do prédio. Um carteiro só precisa destas duas informações para entregar uma carta. Mas, dentro do prédio moram várias pessoas. O CEP e número do prédio só vão fazer a carta chegar até a portaria. Daí em diante é preciso saber o número do apartamento. É aqui que entram as famosas portas TCP e UDP.</p>
 
 <p>Ao todo, é possível usar 65536 portas TCP e UDP, começando em 1. Tanto no protocolo TCP como no UDP, é comum o uso das portas de 1 a 1024, já que a aplicação destas é padronizada pela IANA (Internet Assigned Numbers Authority).</p>
 
@@ -296,7 +296,7 @@
     <tr>
         <td>PGSQL</td>
         <td>5432</td>
-        <td>Banco de dados Postgre</td>
+        <td>Banco de dados PostgreSQL</td>
         <td>TCP</td>
     </tr>
     <tr>
@@ -314,7 +314,7 @@
     <tr>
         <td>WHOIS</td>
         <td>43</td>
-        <td>Consulta de whois</td>
+        <td>Consulta de Whois</td>
         <td>TCP</td>
     </tr>
     <tr>
@@ -341,7 +341,7 @@
     <tr>
         <td>TELNET</td>
         <td>23</td>
-        <td>Acesso remoto telnet</td>
+        <td>Acesso remoto Telnet</td>
         <td>TCP/UDP</td>
     </tr>
     <tr>
@@ -354,12 +354,11 @@
         <td rowspan="2">DHCP</td>
         <td>67</td>
         <td>Envio de dados do cliente ao servidor</td>
-        <td>UDP</td>
+        <td rowspan="2">UDP</td>
     </tr>
     <tr>
         <td>68</td>
         <td>Recebimento de dados do servidor ao cliente</td>
-        <td>UDP</td>
     </tr>
     <tr>
         <td>SNMP</td>
@@ -376,7 +375,7 @@
     <tr>
         <td>RDP</td>
         <td>3389</td>
-        <td>Acesso Remoto do Windows</td>
+        <td>Acesso remoto do Windows</td>
         <td>TCP</td>
     </tr>
     <tr>
@@ -388,25 +387,25 @@
     <tr>
         <td>VNC</td>
         <td>5900</td>
-        <td>Acesso Remoto VNC</td>
+        <td>Acesso remoto VNC</td>
         <td>TCP</td>
     </tr>
     <tr>
         <td>RTP</td>
         <td>5004<br/>5005</td>
-        <td>Streaming de Áudio e Vídeo</td>
+        <td>Streaming de áudio e vídeo</td>
         <td>UDP</td>
     </tr>
     <tr>
         <td>SIP</td>
         <td>5060</td>
-        <td>Responsável pelas Sessões de Comunicações</td>
+        <td>Responsável pelas sessões de comunicações</td>
         <td>TCP/UDP</td>
     </tr>
     <tr>
         <td>NTP</td>
         <td>123</td>
-        <td>Responsável pela Sincronização de Horário</td>
+        <td>Responsável pela sincronização de horário</td>
         <td>UDP</td>
     </tr>
 </table>
@@ -414,13 +413,13 @@
 <p>Basicamente, essas são algumas funções mais detalhadas dos protocolos mais usados:</p>
 
 <ul>
-    <li><b>FTP</b> – File Transfer Protocol, permite a transferência de arquivos entre dois computadores através de login e senha.</li>
-    <li><b>SMTP</b> – Simple Mail Transfer Protocol, é utilizado para o transporte de e-mail, sendo que o SMTP é uma aplicação utilizada para transporte e não um meio de transporte. Por isso ele se localiza na camada de Aplicação.</li>
-    <li><b>HTTP</b> – Hypertext Transfer Protocol, é utilizado para transportar páginas HTML de servidores web para navegadores. O protocolo é utilizado para realizar a comunicação entre servidores WEB e Navegadores instalados em computadores cliente.</li>
-    <li><b>DHCP</b> – Dynamic Host Configuration Protocol, é um método de designar endereços IPs para os computadores conectados na rede. Ele é um serviço baseado no servidor que designa automaticamente endereços IPs para cada computador que entra na rede. Este método não exige que você tenha que entrar em cada computador e informar o IP, facilitando mudanças de redes. O DHCP pode executar todas as funções do BOOTP.</li>
-    <li><b>POP3</b> – Post Office Protocol Version 3, é utilizado por usuários clientes para acessar uma conta de email em um servidor e pegar o e-mail. Como no SMTP, esta não é uma camada de transporte. No POP, a mensagem é excluída do servidor.</li>
-    <li><b>IMAP4</b> – Internet Mail Access Protocol Version 4, é um substituto para o POP3, diferente deste último, o IMAP se mantém conectado a fim de sincronizar as mensagens recebidas em tempo real. No IMAP, a mensagem permanece no servidor.</li>
-    <li><b>Telnet</b> - É utilizado para abrir uma sessão remota em outro computador. Ele se baseia em TCP para o transporte e é definido pela RFC854.</li>
+    <li><b>FTP:</b> File Transfer Protocol, permite a transferência de arquivos entre dois computadores através de login e senha.</li>
+    <li><b>SMTP:</b> Simple Mail Transfer Protocol, é utilizado para o transporte de e-mail, sendo que o SMTP é uma aplicação utilizada para transporte e não um meio de transporte. Por isso ele se localiza na camada de Aplicação.</li>
+    <li><b>HTTP:</b> Hypertext Transfer Protocol, é utilizado para transportar páginas HTML de servidores web para navegadores. O protocolo é utilizado para realizar a comunicação entre servidores web e navegadores instalados em computadores cliente.</li>
+    <li><b>DHCP:</b> Dynamic Host Configuration Protocol, é um método de designar endereços IPs para os computadores conectados na rede. Ele é um serviço baseado no servidor que designa automaticamente endereços IPs para cada computador que entra na rede. Este método não exige que você tenha que entrar em cada computador e informar o IP, facilitando mudanças de redes. O DHCP pode executar todas as funções do BOOTP.</li>
+    <li><b>POP3:</b> Post Office Protocol Version 3, é utilizado por usuários clientes para acessar uma conta de email em um servidor e pegar o e-mail. Como no SMTP, esta não é uma camada de transporte. No POP, a mensagem é excluída do servidor.</li>
+    <li><b>IMAP4:</b> Internet Mail Access Protocol Version 4, é um substituto para o POP3, diferente deste último, o IMAP se mantém conectado a fim de sincronizar as mensagens recebidas em tempo real. No IMAP, a mensagem permanece no servidor.</li>
+    <li><b>TELNET:</b> É utilizado para abrir uma sessão remota em outro computador. Ele se baseia em TCP para o transporte e é definido pela RFC854.</li>
 </ul>
 
 <p>Podemos ver a lista de protocolos aqui: <a href="https://pt.wikipedia.org/wiki/Lista_de_portas_dos_protocolos_TCP_e_UDP" target="_blank">https://pt.wikipedia.org/wiki/Lista_de_portas_dos_protocolos_TCP_e_UDP</a></p>
@@ -498,18 +497,18 @@
 
 <p>Um desses métodos é o método Unicast, que um computador se comunica com apenas um outro computador especificamente e estabelece a comunicação apenas com esse dispositivo específico na rede (por exemplo, numa troca de arquivos).</p>
 
-<p>Outra forma de comunicação é a Broadcast, nesse caso a informação é enviada à todos os dispositivos ao mesmo tempo.</p>
+<p>Outra forma de comunicação é a Broadcast, nesse caso a informação é enviada a todos os dispositivos ao mesmo tempo.</p>
 
-<p>Temos também a Multicast, que a informação é enviada para um grupo específico de dispotivos selecionados. Os outros fora do grupo não recebem as informações.</p>
+<p>Temos também a Multicast, que a informação é enviada para um grupo específico de dispositivos selecionados. Os outros fora do grupo não recebem as informações.</p>
 
 <h3>Camada de Enlace</h3>
 
 <p>A camada de Enlace (ou Data Link Layer) é a segunda camada do modelo OSI e, entre outras coisas, é responsável por traduzir as informações da camada de rede em bits para que então sejam enviadas pela camada física.</p>
 
-<p>Essa camada é dividida em duas sub-camadas como podemos ver abaixo:</p>
+<p>Essa camada é dividida em duas subcamadas, como podemos ver abaixo:</p>
 
 <ul>
-    <li>Controle de Link Lógico (LCC).</li>
+    <li>Controle de Link Lógico (LLC).</li>
     <li>Controle de Acesso ao Meio (MAC).</li>
 </ul>
 
@@ -517,7 +516,7 @@
 
 <p>A subcamada MAC (Media Access Control) diz como os dados serão colocados no meio físico e define qual o endereço físico do dispositivo. Outras coisas como notificação de erro, controle de fluxo e a ordem em que os quadros serão enviados podem ser descritos aqui.</p>
 
-<p>A outra subcamada, a LLC (Logical Link Control), deve conhecer qual protocolo estará atuando na camada de rede. Quando o host recebe o quadro, o cabeçalho presente no LLC dirá para onde aquele quadro deverá ser destinado. Essa subcamada também pode fornecer controle de fluxo e sequência de bits de cotrole.</p>
+<p>A outra subcamada, a LLC (Logical Link Control), deve conhecer qual protocolo estará atuando na camada de rede. Quando o host recebe o quadro, o cabeçalho presente no LLC dirá para onde aquele quadro deverá ser destinado. Essa subcamada também pode fornecer controle de fluxo e sequência de bits de controle.</p>
 
 <h3>Endereço MAC</h3>
 
